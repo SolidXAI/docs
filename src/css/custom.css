@@ -78,6 +78,17 @@
   color: var(--color-purple-light) !important;
 }
 
+.navbar__brand{
+  flex: 1 !important;
+}
+
+
+.navbar__items .custom-center-item:nth-of-type(3) {
+  margin: 0 10px;
+  flex: 1 !important;
+}
+
+
 
 
 /* In your custom CSS (e.g., custom.css) */
@@ -239,10 +250,29 @@ code {
   color: #c2b6de !important;
 }
 
+.container-fluid{
+  display: flex !important;
+  flex-direction: row-reverse;
+  justify-content: space-between;
+  gap: 200px;
+}
 
 
+@media (max-width: 997px) {
+  .container-fluid{
+    flex-direction: column-reverse !important;
+    gap: 20px !important;
+  }
+}
 
+.footer__links{
+  width: 100%;
+}
 
+.footer-bottom-icon{
+  display: flex !important;
+  margin: 0px !important;
+}
 
 
 /* Base style for button group buttons */
@@ -264,19 +294,16 @@ code {
 }
 
 ::selection {
-  background: var(--color-icon) !important;
   color: #ffffff !important;
+  background: var(--color-border-light) !important;
+  /* background: var(--color-icon) !important; */
 }
 
 
 
-/* .data-theme=['dark'] .xSvg_y3PF {
-  fill: var(--light);
-} */
 
 
 .sidebarItemLinkActive_I1ZP{
-  /* background-color: red !important; */
   color: white !important;
 }
 

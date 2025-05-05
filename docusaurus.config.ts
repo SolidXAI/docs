@@ -76,16 +76,17 @@ const config: Config = {
         {
           type: 'docSidebar',
           sidebarId: 'tutorialSidebar',
-          position: 'left',
+          position: 'left', // keep this as left
           label: '⏱️  Tutorial',
           className: 'custom-center-item',
         },
         {
           to: '/blog',
           label: '⏱️  Blog',
-          position: 'left',
+          position: 'left', 
           className: 'custom-center-item',
         },
+        
         {
           href: 'https://github.com/facebook/docusaurus',
           label: 'GitHub',
@@ -101,6 +102,11 @@ const config: Config = {
 
     footer: {
       style: 'dark',
+      logo:{
+        src:'img/NavbarLogo.png', 
+        className:'footer-bottom-icon'
+      },
+
       links: [
       
         {

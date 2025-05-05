@@ -78,6 +78,17 @@
   color: var(--color-purple-light) !important;
 }
 
+.navbar__brand{
+  flex: 1 !important;
+}
+
+
+.navbar__items .custom-center-item:nth-of-type(3) {
+  margin: 0 10px;
+  flex: 1 !important;
+}
+
+
 
 
 /* In your custom CSS (e.g., custom.css) */
@@ -149,8 +160,8 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 a {
-  /* color: var(--color-link) !important; */
-  color: var(--color-purple-text) !important;
+  color: var(--color-link) !important;
+  /* color: var(--color-purple-text) !important; */
 
 }
 
@@ -264,19 +275,16 @@ code {
 }
 
 ::selection {
-  background: var(--color-icon) !important;
   color: #ffffff !important;
+  background: var(--color-border-light) !important;
+  /* background: var(--color-icon) !important; */
 }
 
 
 
-/* .data-theme=['dark'] .xSvg_y3PF {
-  fill: var(--light);
-} */
 
 
 .sidebarItemLinkActive_I1ZP{
-  /* background-color: red !important; */
   color: white !important;
 }
 
@@ -286,13 +294,12 @@ code {
 }
 
 .sidebarItemLink_mo7H.sidebarItemLinkActive_I1ZP {
-  /* color: var(--color-purple-text) !important; */
-  color: var(--color-link) !important;
+  color: var(--color-body) !important;
 
 }
 
-
-.backToTopButton_sjWU::after{
-/* background-color: var(--color-heading) !important;
-color: var(--color-link) !important; */
+.pagination-nav__label{
+  color: var(--color-border-light);
 }
+
+
