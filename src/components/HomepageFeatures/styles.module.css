@@ -3,13 +3,48 @@
   align-items: center;
   padding: 2rem 0;
   width: 100%;
-  /* background: linear-gradient(135deg, #0a0120, #070218); */
   background-color: #0a0120;
   color: grey;
-  
+
 }
 
 .featureSvg {
   height: 200px;
-  width: 200px;
+  width: 300px;
+}
+
+.homeCards {
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+  border: 1px solid #4c257a78 !important;
+  margin: auto 2px !important;
+  padding: 3rem 1rem 0 2rem !important;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px #3008614f;
+}
+
+
+.homeCardMain {
+  display: flex !important;
+  justify-content: center !important;
+  gap: 50px;
+}
+
+.moreInfoLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem; 
+  color: #a77aff;
+  text-decoration: none !important;
+  font-weight: 500;
+}
+
+.arrowIcon {
+  flex-shrink: 0;
+}
+
+.moreInfoLink:hover{
+  gap: 0.7rem; 
+  font-size: 1.1rem;
 }

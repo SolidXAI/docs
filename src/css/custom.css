@@ -18,16 +18,17 @@
 }
 
 /* For readability concerns, you should choose a lighter palette in dark mode. */
-/* [data-theme='dark'] {
-  --ifm-color-primary: #25c2a0;
-  --ifm-color-primary-dark: #21af90;
-  --ifm-color-primary-darker: #1fa588;
-  --ifm-color-primary-darkest: #1a8870;
-  --ifm-color-primary-light: #29d5b0;
-  --ifm-color-primary-lighter: #32d8b4;
-  --ifm-color-primary-lightest: #4fddbf;
-  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
-} */
+[data-theme='dark'] {
+  --ifm-color-primary: #0a0120;
+  --ifm-color-primary-dark: #05010f;
+  --ifm-color-primary-darker: #050111;
+  --ifm-color-primary-darkest: #04000c;
+  --ifm-color-primary-light: #0d0327;
+  --ifm-color-primary-lighter: #110431;
+  --ifm-color-primary-lightest: #190842;
+  --ifm-code-font-size: 95%;
+  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
+}
 
 
 /* -----------------------------------------------------------------------------
@@ -62,7 +63,7 @@
   color: #ffffff !important;
 }
 
-.navbar__title {
+.navbar__title:hover{
   color: #a58efb !important;
 }
 
@@ -70,10 +71,18 @@
   color: #e0d8ff !important;
 }
 
+
+
 .navbar__link:hover,
 .navbar__link--active {
   color: var(--color-purple-light) !important;
 }
+
+
+
+/* In your custom CSS (e.g., custom.css) */
+
+
 
 /* === SIDEBAR MENU === */
 
@@ -141,11 +150,13 @@ h1, h2, h3, h4, h5, h6 {
 
 a {
   color: var(--color-link) !important;
+  /* color: var(--color-purple-text) !important; */
+
 }
 
 
 a:hover {
-  color: var(--color-link-hover);
+  color: var(--color-purple);
 }
 
  li, b, time, small, strong, svg, span {
@@ -221,19 +232,16 @@ code {
 }
 
 /* === FOOTER === */
+
 .footer {
-  background-color: var(--color-footer-bg) !important;
+  background-color: var(--ifm-color-primary) !important;
   border-top: 1px solid var(--color-footer-border);
   color: #c2b6de !important;
 }
 
-.footer a {
-  color: #c2b6de !important;
-}
 
-.footer a:hover {
-  color: #ffffff !important;
-}
+
+
 
 
 
@@ -271,3 +279,19 @@ code {
   /* background-color: red !important; */
   color: white !important;
 }
+
+
+.authorSocialLink_owbf {
+  fill: var(--color-heading) !important;
+}
+
+.sidebarItemLink_mo7H.sidebarItemLinkActive_I1ZP {
+  color: var(--color-body) !important;
+
+}
+
+.pagination-nav__label{
+  color: var(--color-border-light);
+}
+
+

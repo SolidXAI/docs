@@ -1,12 +1,16 @@
-import type {ReactNode} from 'react';
+import type { ReactNode } from 'react';
 import clsx from 'clsx';
 import Heading from '@theme/Heading';
 import styles from './styles.module.css';
 
+
 type FeatureItem = {
   title: string;
-  Svg: React.ComponentType<React.ComponentProps<'svg'>>;
   description: ReactNode;
+  Svg?: React.ComponentType<React.ComponentProps<'svg'>>;
+  moreInfo?: string,
+  to?: string,
+
 };
 
 const FeatureList: FeatureItem[] = [
@@ -19,6 +23,9 @@ const FeatureList: FeatureItem[] = [
         used to get your website up and running quickly.
       </>
     ),
+    moreInfo: 'ReadMore',
+    to: 'docs/user-docs/',
+
   },
   {
     title: 'Focus on What Matters',
@@ -29,28 +36,44 @@ const FeatureList: FeatureItem[] = [
         ahead and move your docs into the <code >docs</code> directory.
       </>
     ),
+    moreInfo: 'ReadMore',
+    to: 'docs/user-docs/',
   },
-  {
-    title: 'Powered by React',
-    Svg: require('@site/static/img/undraw_docusaurus_react.svg').default,
-    description: (
-      <>
-        Extend or customize your website layout by reusing React. Docusaurus can
-        be extended while reusing the same header and footer.
-      </>
-    ),
-  },
+  
+ 
 ];
 
-function Feature({title, Svg, description}: FeatureItem) {
+function Feature({ title, description, moreInfo, to, Svg }: FeatureItem) {
   return (
-    <div className={clsx('col col--4')}>
-      <div className="text--center">
-        <Svg className={styles.featureSvg} role="img" />
-      </div>
-      <div className="text--center padding-horiz--md">
-        <Heading as="h3">{title}</Heading>
+    <div className={clsx(`col col--5 ${styles.homeCards}`)}>
+      <div className="text--start padding-horiz--md">
+      <img src="/img/CardIcon2.png" alt="" width={50} height={50} />
+      <Heading as="h1">{title}</Heading>
         <p>{description}</p>
+      
+        <a href={to} className={styles.moreInfoLink}>
+          {moreInfo}
+          <svg
+            className={styles.arrowIcon}
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M5 12H19M19 12L13 6M19 12L13 18"
+              stroke="#a77aff"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
+        </a>
+
+      </div>
+      <div className="text--start">
+        <Svg className={styles.featureSvg} role="img" />
       </div>
     </div>
   );
@@ -60,7 +83,7 @@ export default function HomepageFeatures(): ReactNode {
   return (
     <section className={styles.features}>
       <div className="container">
-        <div className="row">
+        <div className={`row ${styles.homeCardMain} `}>
           {FeatureList.map((props, idx) => (
             <Feature key={idx} {...props} />
           ))}
