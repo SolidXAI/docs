@@ -3,6 +3,10 @@
   align-items: center;
   padding: 2rem 0;
   width: 100%;
+  /* background: linear-gradient(135deg, #0a0120, #070218); */
+  background-color: #0a0120;
+  color: grey;
+  
 }
 
 .featureSvg {
