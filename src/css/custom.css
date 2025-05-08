@@ -88,6 +88,9 @@
   flex: 1 !important;
 }
 
+.colorModeToggle_DEke{
+  display: none !important;
+}
 
 
 
@@ -146,18 +149,30 @@
 }
 
 /* === PAGE CONTENT === */
+
 .main-wrapper,
 .docMainContainer {
-  background-color: var(--color-bg-main);
+  background-color: #0a0120;
   color: var(--color-body);
 }
 
-h1, h2, h3, h4, h5, h6 {
-  background: linear-gradient(180deg, #DF48C3, #953DB4, #3700D4);
+
+h1 {
+  background: linear-gradient(200deg, #8631a5, #ae92b8, #bda1c9);
+  /* background: linear-gradient(200deg, #ffffff, #ae92b8, #953DB4); */
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 
 }
+
+
+/* h1{
+  background: linear-gradient(200deg, #d4cad2, #cfc3d3, #3700D4);
+  -webkit-background-clip: text;
+  background: linear-gradient(180deg, #DF48C3, #953DB4, #3700D4);
+  -webkit-text-fill-color: transparent;
+
+} */
 
 a {
   color: var(--color-link) !important;

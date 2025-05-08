@@ -7,7 +7,8 @@ import styles from './styles.module.css';
 type FeatureItem = {
   title: string;
   description: ReactNode;
-  Svg?: React.ComponentType<React.ComponentProps<'svg'>>;
+  // Svg?: React.ComponentType<React.ComponentProps<'svg'>>;
+  imgs?:string
   moreInfo?: string,
   to?: string,
 
@@ -16,7 +17,7 @@ type FeatureItem = {
 const FeatureList: FeatureItem[] = [
   {
     title: 'Solid Docs',
-    Svg: require('@site/static/img/undraw_docusaurus_mountain.svg').default,
+    imgs: require('@site/static/img/homeImg1.png').default,
     description: (
       <>
         Docusaurus was designed from the ground up to be easily installed and
@@ -29,7 +30,7 @@ const FeatureList: FeatureItem[] = [
   },
   {
     title: 'Solid Docs',
-    Svg: require('@site/static/img/undraw_docusaurus_tree.svg').default,
+    imgs: require('@site/static/img/homeImg1.png').default,
     description: (
       <>
         Docusaurus lets you focus on your docs, and we&apos;ll do the chores. Go
@@ -43,7 +44,7 @@ const FeatureList: FeatureItem[] = [
  
 ];
 
-function Feature({ title, description, moreInfo, to, Svg }: FeatureItem) {
+function Feature({ title, description, moreInfo, to, imgs }: FeatureItem) {
   return (
     <div className={clsx(`col col--5 ${styles.homeCards}`)}>
       <div className="text--start padding-horiz--md">
@@ -73,7 +74,7 @@ function Feature({ title, description, moreInfo, to, Svg }: FeatureItem) {
 
       </div>
       <div className="text--start">
-        <Svg className={styles.featureSvg} role="img" />
+        <img src={imgs} className={styles.featureSvg} role="img" />
       </div>
     </div>
   );

@@ -135,6 +135,8 @@ const config: Config = {
             },
           ],
         },
+        
+        
         {
           title: 'More',
           items: [
@@ -152,10 +154,7 @@ const config: Config = {
       ],
       // copyright: `Copyright © ${new Date().getFullYear()} SOLID Starters, LogicLoop Ventures LLP.`,
     },
-    prism: {
-      theme: prismThemes.github,
-      darkTheme: prismThemes.dracula,
-    },
+ 
   } satisfies Preset.ThemeConfig,
 };
 
