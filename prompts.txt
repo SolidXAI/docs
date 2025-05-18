@@ -1,0 +1,13 @@
+I have a platform called SolidX which is being built as a low code platform.
+It is 90% ready, we are testing / fixing / using it on client projects. 
+I am in the process of creating documentation for this using docusaurus. 
+On the home page of the documentation I have 2 sections 
+
+Developer Docs 
+Admin Docs 
+
+The developer docs will talk a lot more about exactly how a developer can use it. 
+
+The Admin docs will talk about things like how to get started, install it, use its various features to configure an application.
+
+I have 2 cards on the home page representing each of these, can you write a couple of lines about each. 
