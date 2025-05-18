@@ -2,7 +2,7 @@
 sidebar_position: 3
 ---
 
-# Field Management
+# Fields
 
 Fields define the structure of your data within models. SOLID provides a comprehensive set of field types to handle different kinds of data.
 

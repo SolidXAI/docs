@@ -2,7 +2,7 @@
 sidebar_position: 2
 ---
 
-# App Builder
+# Module Builder
 
 The App Builder is a core module of SOLID that enables you to create and manage your application's data models and user interfaces. With the App Builder, you can accelerate development, simplify management, and create responsive applications with minimal coding.
 

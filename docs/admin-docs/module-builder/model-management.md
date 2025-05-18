@@ -2,7 +2,7 @@
 sidebar_position: 2
 ---
 
-# Model Management
+# Models
 
 Models represent the structure of your data within a module. Each model defines a specific type of data and its relationships.
 

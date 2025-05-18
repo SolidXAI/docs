@@ -2,7 +2,7 @@
 sidebar_position: 1
 ---
 
-# Module Management
+# Modules
 
 In SOLID, modules are the fundamental building blocks that help organize your application's functionality into logical units.
 

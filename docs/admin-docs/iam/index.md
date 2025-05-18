@@ -2,7 +2,7 @@
 sidebar_position: 5
 ---
 
-# Identity and Access Management (IAM)
+# IAM
 
 SOLID's IAM system provides comprehensive user, role, and permission management to secure your application.
 
