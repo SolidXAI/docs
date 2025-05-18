@@ -55,6 +55,78 @@ After you click on "Generate Module" in the background SolidX does the following
 
 ## Datasource Configuration
 
+When the SolidX project is bootstrapped by default we expect at-least one data source to be configured. 
+
+This is taken care of when a new project is bootstrapped using `npx @solidstarters/create-solid-app`
+
+As part of this bootstrapping a default data source is pre-configured in the file `<project-root>/solid-api/src/app-default-database.module.ts`
+
+```ts
+import { Module } from '@nestjs/common';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import * as SolidCoreModuleExports from '@solidstarters/solid-core';
+import { DatasourceType, getDynamicModuleNames, ISolidDatabaseModule, SolidDatabaseModule } from '@solidstarters/solid-core';
+import { WINSTON_MODULE_PROVIDER } from 'nest-winston';
+import { join } from 'path';
+import { getMetadataArgsStorage } from 'typeorm';
+import { SnakeNamingStrategy } from 'typeorm-naming-strategies';
+import { Logger } from 'winston';
+import { WinstonTypeORMLogger } from '@solidstarters/solid-core'; // Assuming you have this custom logger
+
+function getEntitiesFromExports(exports: Record&lt;string, any&gt;) {
+    const metadataStorage = getMetadataArgsStorage();
+    return Object.values(exports).filter((item) =>
+      metadataStorage.tables.some((table) => table.target === item)
+    );
+}
+const coreEntities = getEntitiesFromExports(SolidCoreModuleExports);
+
+@Module({
+    imports: [
+        TypeOrmModule.forRootAsync({
+            useFactory: (logger: Logger) => {
+                const dynamicModules = getDynamicModuleNames();
+
+                const entities = [
+                    ...coreEntities,
+                    ...dynamicModules.map(module =>
+                        join(__dirname, `./${module}/entities/*.entity.{ts,js}`)
+                    ),
+                ];
+
+                return {
+                    type: 'postgres',
+                    host: process.env.DEFAULT_DATABASE_HOST,
+                    port: +process.env.DEFAULT_DATABASE_PORT,
+                    username: process.env.DEFAULT_DATABASE_USER,
+                    password: process.env.DEFAULT_DATABASE_PASSWORD,
+                    database: process.env.DEFAULT_DATABASE_NAME,
+                    entities: entities,
+                    synchronize: Boolean(process.env.DEFAULT_DATABASE_SYNCHRONIZE),
+                    logging: Boolean(process.env.DEFAULT_DATABASE_LOGGING),
+                    logger: new WinstonTypeORMLogger(logger),
+                    namingStrategy: new SnakeNamingStrategy(),
+                }
+            },
+            inject: [WINSTON_MODULE_PROVIDER]
+        }),
+    ],
+})
+@SolidDatabaseModule()
+export class DefaultDBModule implements ISolidDatabaseModule {
+    type(): DatasourceType {
+        return DatasourceType.postgres;
+    }
+
+    name(): string {
+        return 'default';
+    }
+}
+```
+
+
+Again in keeping with our design principle of flexibility you can add as many datasources as you like, and have a module use a given datasource as its default datasource. More details on this can be found in the developer docs where we talk about configuring multiple datasources. 
+
 
 <!-- 
 ### Data Source Configuration
