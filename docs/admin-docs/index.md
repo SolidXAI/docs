@@ -12,6 +12,12 @@ SolidX is built on top of standard best practices, it is architected to be as cl
 
 ![SolidX Admin Dashboard](/img/admin-docs/module-landing-page.png)
 
+## Design goals
+
+Before you proceed further we feel it is important to talk about the design goals that are our guiding principles around building thigs in SolidX. 
+
+You can optionally choose to read about our design goals first before proceeding further with the documentation.
+
 
 ## How to begin?:
 
@@ -28,30 +34,37 @@ We recommend going through the documentation in the following order
 
 Below list of cards represent the core features of SolidX, we have arranged them in the order they are best consumed.
 
-### [Module Builder](./module-builder/index.md)
+### [Data Model](./module-builder/index.md)
 Build and customize your applications effortlessly with our intuitive App Builder. Define modules, models and their fields using the resource builder, and design dynamic interfaces with the layout editor to suit your specific needs.
 
-### [Modules](./modules/index.md)
-Easily manage your applications and their RESTful API endpoints through a user-friendly interface, allowing for efficient configuration, updates, and maintenance of all application functionalities.
+### [Layout](./module-builder/index.md)
+Build and customize your applications effortlessly with our intuitive App Builder. Define modules, models and their fields using the resource builder, and design dynamic interfaces with the layout editor to suit your specific needs.
+
+### [IAM](./iam/index.md)
+Identity and Access Management.<br />
+Securely manage users, roles, and permissions directly out of the box to ensure robust access control and compliance with your organizational policies.
+
+### [Notifications](./notifications/index.md)
+Send integrated notifications via email, SMS, and notifications (including Push Notifications and WhatsApp), with customizable templates at your disposal for effective user communication.
 
 ### [Media Library](./media-library/index.md)
 Utilize our comprehensive media library and storage provider options to facilitate easy handling and organization of your digital assets within applications.
 
-### [Identity and Access Management](./iam/index.md)
-Securely manage users, roles, and permissions directly out of the box to ensure robust access control and compliance with your organizational policies.
-
-### [Email & SMS Templates](./notifications/index.md)
+### [Queues](./notifications/index.md)
 Send integrated notifications via email, SMS, and notifications (including Push Notifications and WhatsApp), with customizable templates at your disposal for effective user communication.
 
-### [Other Settings](./settings/index.md)
+### [Other](./settings/index.md)
+Here we talk about other platform features...
+
+### [Settings](./settings/index.md)
 Configure platform settings and features tailored to your needs for optimal performance and usability.
 
-Tips to make the best of the docs
+#### Tips to make the best of the docs
 - If you already know exactly what you're searching for, use the search bar or navigate using the table of content.
 - If you prefer learning more about SolidX while looking at the project code structure, you can use the interactive project structure page.
 - If demos are more your thing, feel free to go through our detailed Tutorial or request a demo with our team.
 
-Information for beginner developers
+#### Information for beginner developers
 Some parts of the CMS documentation (e.g. APIs, Configuration, Development) are mostly intended to developers and assume some prior knowledge of the JavaScript ecosystem.
 
 If you also make your first steps with JavaScript web development while discovering SolidX, we encourage you to read more about JavaScript and npm. 

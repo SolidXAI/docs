@@ -73,18 +73,24 @@ You can now use the below cards to browse through the key functionality exposed 
 ### Model Builder
 Define and manage your data models through an intuitive interface that simplifies the model creation process. This includes:
 
-  - **Module Management**: Organize your application into logical modules to maintain a clean architecture and facilitate easier updates.
-  - **Model Management**: Efficiently define and manage the structure of your application’s data, ensuring it aligns with your business requirements.
-  - **Field Management**: Configure various field types to structure your data, ensuring that it meets your application's needs effectively.
+  - [Modules](./module-management.md): <br />
+    Organize your application into logical modules to maintain a clean architecture and facilitate easier updates.
+  - [Models](./model-management.md): <br />
+    Efficiently define and manage the structure of your application’s data, ensuring it aligns with your business requirements.
+  - [Fields](./field-management.md): <br />
+    Configure various field types to structure your data, ensuring that it meets your application's needs effectively.
 
 ### Layout Editor
 The models & fields used to define your domain can be arranged to generate a very powerful and feature rich metadata driven admin user interface. Which is highly customisable to accomodate a lot of enterprise use-cases. 
 
 Allowing one to create custom views for your data using list, kanban, and form layouts, allowing for tailored user experiences. This includes:
 
-  - **Menu Items**: Define navigational elements and their structure for your application.
-  - **Views**: Create and customize different perspectives for displaying your data, such as List View, Kanban View, and Form View.
-  - **Custom Actions**: Implement additional functionalities that can be triggered by user interactions.
+  - **Menu Items**: <br />
+    Define navigational elements and their structure for your application.
+  - **Views**: <br />
+    Create and customize different perspectives for displaying your data, such as List View, Kanban View, and Form View.
+  - **Custom Actions**: <br />
+    Implement additional functionalities that can be triggered by user interactions.
 
 <!-- 
 ## Getting Started
