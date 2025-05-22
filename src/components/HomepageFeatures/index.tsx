@@ -48,9 +48,9 @@ function Feature({ title, description, moreInfo, to, imgs }: FeatureItem) {
   return (
     <div className={clsx(`col col--5 ${styles.homeCards}`)}>
       <div className="text--start padding-horiz--md">
-      <img src="/img/CardIcon2.png" alt="" width={50} height={50} />
+      <img src="/img/CardIcon2.png" alt="" width={40} height={40} />
       <Heading as="h1">{title}</Heading>
-        <p>{description}</p>
+        <p className='home-card-desc'>{description}</p>
       
         <a href={to} className={styles.moreInfoLink}>
           {moreInfo}

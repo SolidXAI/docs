@@ -33,7 +33,7 @@ Comprehensive API documentation with Swagger/OpenAPI integration.
 
 ## Best Practices
 
-1. **App Organization**
+<!-- 1. **App Organization**
    - Keep apps focused and single-purpose
    - Follow consistent naming conventions
    - Document dependencies clearly
@@ -55,4 +55,57 @@ Comprehensive API documentation with Swagger/OpenAPI integration.
    - Optimize database queries
    - Implement caching where appropriate
    - Monitor API usage
-   - Handle rate limiting
+   - Handle rate limiting -->
+
+
+<div className="feature-grid">
+
+  <div className="feature-card">
+    <h4 className="card-title">
+    1  App Organization
+    </h4>
+    <ul className="card-desc">
+      <li>Keep apps focused and single-purpose</li>
+      <li>Follow consistent naming conventions</li>
+      <li>Document dependencies clearly</li>
+      <li>Maintain clear boundaries between apps</li>
+    </ul>
+  </div>
+
+  <div className="feature-card">
+    <h4 className="card-title">
+    2  API Design
+    </h4>
+    <ul className="card-desc">
+      <li>Follow RESTful principles</li>
+      <li>Version your APIs</li>
+      <li>Implement proper error handling</li>
+      <li>Include comprehensive documentation</li>
+    </ul>
+  </div>
+
+  <div className="feature-card">
+    <h4 className="card-title">
+    3  Security
+    </h4>
+    <ul className="card-desc">
+      <li>Implement proper authentication</li>
+      <li>Define granular permissions</li>
+      <li>Validate all inputs</li>
+      <li>Log security events</li>
+    </ul>
+  </div>
+
+  <div className="feature-card">
+    <h4 className="card-title">
+    4  Performance
+    </h4>
+    <ul className="card-desc">
+      <li>Optimize database queries</li>
+      <li>Implement caching where appropriate</li>
+      <li>Monitor API usage</li>
+      <li>Handle rate limiting</li>
+    </ul>
+  </div>
+
+</div>

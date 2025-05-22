@@ -17,7 +17,7 @@ The notification system offers:
 
 ## Components
 
-### [Email Templates](./email-templates.md)
+<!-- ### [Email Templates](./email-templates.md)
 - HTML/Text templates
 - Dynamic placeholders
 - Static attachments
@@ -28,11 +28,43 @@ The notification system offers:
 - Text templates
 - Dynamic placeholders
 - Link shortening
-- Provider abstraction (Twilio, Msg91, Gupshup)
+- Provider abstraction (Twilio, Msg91, Gupshup) -->
+
+
+### [Email Templates](./email-templates.md)
+
+<div className="feature-grid">
+  <div className="feature-card">
+    <ul className="card-desc">
+      <li>HTML/Text templates</li>
+      <li>Dynamic placeholders</li>
+      <li>Static attachments</li>
+      <li>Dynamic attachments (Reports)</li>
+      <li>Provider abstraction (SMTP, Amazon SES)</li>
+    </ul>
+  </div>
+</div>
+
+### [SMS Templates](./sms-templates.md)
+
+<div className="feature-grid">
+  <div className="feature-card">
+    <ul className="card-desc">
+      <li>Text templates</li>
+      <li>Dynamic placeholders</li>
+      <li>Link shortening</li>
+      <li>Provider abstraction (Twilio, Msg91, Gupshup)</li>
+    </ul>
+  </div>
+</div>
+
+
+
+
 
 ## Features
 
-### Template Management
+<!-- ### Template Management
 - Version control
 - Preview functionality
 - Test sending
@@ -51,25 +83,89 @@ The notification system offers:
 - Retry handling
 - Delivery tracking
 - Bounce handling
-- Analytics
+- Analytics -->
+
+
+<div className="feature-grid">
+
+  <div className="feature-card">
+    <h4 className="card-title">1 Template Management</h4>
+    <ul className="card-desc">
+      <li>Version control</li>
+      <li>Preview functionality</li>
+      <li>Test sending</li>
+      <li>Template variables</li>
+      <li>Template inheritance</li>
+    </ul>
+  </div>
+
+  <div className="feature-card">
+    <h4 className="card-title">2 Content Features</h4>
+    <ul className="card-desc">
+      <li>Rich text editing</li>
+      <li>Variable validation</li>
+      <li>Conditional content</li>
+      <li>Multi-language support</li>
+      <li>Template categories</li>
+    </ul>
+  </div>
+
+  <div className="feature-card">
+    <h4 className="card-title">3 Delivery Features</h4>
+    <ul className="card-desc">
+      <li>Queue management</li>
+      <li>Retry handling</li>
+      <li>Delivery tracking</li>
+      <li>Bounce handling</li>
+      <li>Analytics</li>
+    </ul>
+  </div>
+
+</div>
+
 
 ## Provider Support
 
 ### Email Providers
-1. **Amazon SES**
-   - High deliverability
-   - Detailed analytics
-   - Bounce management
-   - Reputation monitoring
+  <!-- 1. **Amazon SES**
+    - High deliverability
+    - Detailed analytics
+    - Bounce management
+    - Reputation monitoring
 
-2. **SMTP**
-   - Standard protocol
-   - Wide compatibility
-   - Custom server support
-   - TLS encryption
+  2. **SMTP**
+    - Standard protocol
+    - Wide compatibility
+    - Custom server support
+    - TLS encryption -->
+
+<div className="feature-grid">
+
+  <div className="feature-card">
+    <h4 className="card-title">1 Amazon SES</h4>
+    <ul className="card-desc">
+      <li>High deliverability</li>
+      <li>Detailed analytics</li>
+      <li>Bounce management</li>
+      <li>Reputation monitoring</li>
+    </ul>
+  </div>
+
+  <div className="feature-card">
+    <h4 className="card-title">2 SMTP</h4>
+    <ul className="card-desc">
+      <li>Standard protocol</li>
+      <li>Wide compatibility</li>
+      <li>Custom server support</li>
+      <li>TLS encryption</li>
+    </ul>
+  </div>
+
+</div>
+
 
 ### SMS Providers
-1. **Twilio**
+<!-- 1. **Twilio**
    - Global coverage
    - High reliability
    - Delivery tracking
@@ -78,10 +174,34 @@ The notification system offers:
 2. **Additional Providers**
    - Msg91
    - Gupshup
-   - Custom providers
+   - Custom providers -->
+
+<div className="feature-grid">
+
+  <div className="feature-card">
+    <h4 className="card-title">1 Twilio</h4>
+    <ul className="card-desc">
+      <li>Global coverage</li>
+      <li>High reliability</li>
+      <li>Delivery tracking</li>
+      <li>Two-way messaging</li>
+    </ul>
+  </div>
+
+  <div className="feature-card">
+    <h4 className="card-title">2 Additional Providers</h4>
+    <ul className="card-desc">
+      <li>Msg91</li>
+      <li>Gupshup</li>
+      <li>Custom providers</li>
+    </ul>
+  </div>
+
+</div>
+
 
 ## Best Practices
-
+<!-- 
 1. **Template Design**
    - Use clear layouts
    - Test responsiveness
@@ -105,7 +225,55 @@ The notification system offers:
    - Regular updates
    - Clean old templates
    - Update providers
-   - Review analytics
+   - Review analytics -->
+
+
+<div className="feature-grid">
+
+  <div className="feature-card">
+    <h4 className="card-title">1 Template Design</h4>
+    <ul className="card-desc">
+      <li>Use clear layouts</li>
+      <li>Test responsiveness</li>
+      <li>Include plain text</li>
+      <li>Follow email standards</li>
+      <li>Optimize for mobile</li>
+    </ul>
+  </div>
+
+  <div className="feature-card">
+    <h4 className="card-title">2 Content Management</h4>
+    <ul className="card-desc">
+      <li>Document variables</li>
+      <li>Version templates</li>
+      <li>Test thoroughly</li>
+      <li>Monitor performance</li>
+    </ul>
+  </div>
+
+  <div className="feature-card">
+    <h4 className="card-title">3 Delivery</h4>
+    <ul className="card-desc">
+      <li>Configure SPF/DKIM</li>
+      <li>Monitor bounces</li>
+      <li>Track engagement</li>
+      <li>Handle failures</li>
+    </ul>
+  </div>
+
+  <div className="feature-card">
+    <h4 className="card-title">4 Maintenance</h4>
+    <ul className="card-desc">
+      <li>Regular updates</li>
+      <li>Clean old templates</li>
+      <li>Update providers</li>
+      <li>Review analytics</li>
+    </ul>
+  </div>
+
+</div>
+
+
 
 ## Provider Abstraction
 

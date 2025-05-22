@@ -16,7 +16,7 @@ The Media Library offers:
 
 ## Components
 
-### [Media View](./media-view.md)
+<!-- ### [Media View](./media-view.md)
 A powerful interface for:
 - Browsing media files
 - Organizing assets
@@ -30,10 +30,40 @@ Flexible storage options including:
 - Future support for:
   - Azure Blob Storage
   - Google Cloud Storage
-  - SFTP
+  - SFTP -->
+
+### [Storage Providers](./storage-providers.md)
+<div className="feature-grid">
+  <div className="feature-card">
+    <h4 className="card-title">Flexible storage options including:</h4>
+    <ul className="card-desc">
+      <li>Browsing media files</li>
+      <li>Organizing assets</li>
+      <li>Managing metadata</li>
+      <li>Performing bulk operations</li>
+    </ul>
+  </div>
+</div>
+
+### [Media View](./media-view.md)
+<div className="feature-grid">
+  <div className="feature-card">
+    <h4 className="card-title">A powerful interface for:</h4>
+    - Local filesystem
+    - Amazon S3
+    - Future support for:
+      - Azure Blob Storage
+      - Google Cloud Storage
+      - SFTP
+  </div>
+</div>
+
+
+
+
 
 ## Features
-
+<!-- 
 ### Asset Management
 - Upload multiple files
 - Create folders
@@ -58,11 +88,68 @@ Flexible storage options including:
 - Role-based permissions
 - Folder-level access
 - Share links
-- Download controls
+- Download controls -->
+
+<div className="feature-grid">
+
+  <div className="feature-card">
+    <h4 className="card-title">
+     1 Asset Management
+    </h4>
+    <ul className="card-desc">
+      <li>Upload multiple files</li>
+      <li>Create folders</li>
+      <li>Move/copy files</li>
+      <li>Delete assets</li>
+      <li>Rename files</li>
+    </ul>
+  </div>
+
+  <div className="feature-card">
+    <h4 className="card-title">
+     2 Organization
+    </h4>
+    <ul className="card-desc">
+      <li>Folder structure</li>
+      <li>Tags and categories</li>
+      <li>Search functionality</li>
+      <li>Filter by type</li>
+      <li>Sort options</li>
+    </ul>
+  </div>
+
+  <div className="feature-card">
+    <h4 className="card-title">
+     3 Image Processing
+    </h4>
+    <ul className="card-desc">
+      <li>Automatic thumbnail generation</li>
+      <li>Image resizing</li>
+      <li>Format conversion</li>
+      <li>Metadata extraction</li>
+    </ul>
+  </div>
+
+  <div className="feature-card">
+    <h4 className="card-title">
+     4 Access Control
+    </h4>
+    <ul className="card-desc">
+      <li>Role-based permissions</li>
+      <li>Folder-level access</li>
+      <li>Share links</li>
+      <li>Download controls</li>
+    </ul>
+  </div>
+
+</div>
+
+
+
 
 ## Best Practices
 
-1. **Organization**
+<!-- 1. **Organization**
    - Use consistent naming
    - Create logical folders
    - Apply relevant tags
@@ -84,4 +171,57 @@ Flexible storage options including:
    - Regular cleanup
    - Version management
    - Backup strategy
-   - Usage monitoring
+   - Usage monitoring -->
+
+
+<div className="feature-grid">
+
+  <div className="feature-card">
+    <h4 className="card-title">
+    1  Organization
+    </h4>
+    <ul className="card-desc">
+      <li>Use consistent naming</li>
+      <li>Create logical folders</li>
+      <li>Apply relevant tags</li>
+      <li>Document usage guidelines</li>
+    </ul>
+  </div>
+
+  <div className="feature-card">
+    <h4 className="card-title">
+    2  Performance
+    </h4>
+    <ul className="card-desc">
+      <li>Optimize file sizes</li>
+      <li>Use appropriate formats</li>
+      <li>Configure caching</li>
+      <li>Monitor storage usage</li>
+    </ul>
+  </div>
+
+  <div className="feature-card">
+    <h4 className="card-title">
+    3  Security
+    </h4>
+    <ul className="card-desc">
+      <li>Set proper permissions</li>
+      <li>Regular access audits</li>
+      <li>Secure share links</li>
+      <li>Monitor usage</li>
+    </ul>
+  </div>
+
+  <div className="feature-card">
+    <h4 className="card-title">
+    4 Maintenance
+    </h4>
+    <ul className="card-desc">
+      <li>Regular cleanup</li>
+      <li>Version management</li>
+      <li>Backup strategy</li>
+      <li>Usage monitoring</li>
+    </ul>
+  </div>
+
+</div>

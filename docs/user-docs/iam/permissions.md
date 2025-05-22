@@ -29,7 +29,7 @@ Examples:
 
 ### Resource Permissions
 
-1. **CRUD Operations**
+<!-- 1. **CRUD Operations**
    - Create: `resource:create`
    - Read: `resource:read`
    - Update: `resource:update`
@@ -39,11 +39,36 @@ Examples:
    - Import: `resource:import`
    - Export: `resource:export`
    - Archive: `resource:archive`
+   - Restore: `resource:restore` -->
+
+
+<div className="feature-grid">
+
+  <div className="feature-card">
+    <h4 className="card-title">1 CRUD Operations</h4>
+    - Create: `resource:create`
+   - Read: `resource:read`
+   - Update: `resource:update`
+   - Delete: `resource:delete`
+  </div>
+
+  <div className="feature-card">
+    <h4 className="card-title">2 Special Operations</h4>
+    - Import: `resource:import`
+   - Export: `resource:export`
+   - Archive: `resource:archive`
    - Restore: `resource:restore`
+
+  </div>
+
+</div>
+
+
+
 
 ### Administrative Permissions
 
-1. **User Management**
+<!-- 1. **User Management**
    - Create users: `users:create`
    - Manage roles: `roles:manage`
    - Assign permissions: `permissions:assign`
@@ -51,11 +76,34 @@ Examples:
 2. **System Settings**
    - Configure system: `settings:manage`
    - Manage modules: `modules:manage`
+   - View logs: `logs:read` -->
+
+
+
+<div className="feature-grid">
+
+  <div className="feature-card">
+    <h4 className="card-title">1 User Management</h4>
+    - Create users: `users:create`
+   - Manage roles: `roles:manage`
+   - Assign permissions: `permissions:assign`
+  </div>
+
+  <div className="feature-card">
+    <h4 className="card-title">2 System Settings</h4>
+      - Configure system: `settings:manage`
+   - Manage modules: `modules:manage`
    - View logs: `logs:read`
+
+
+  </div>
+
+</div>
+
 
 ### Feature Permissions
 
-1. **Module Access**
+<!-- 1. **Module Access**
    - Access module: `module:access`
    - Configure module: `module:configure`
    - Manage module data: `module:manage`
@@ -63,7 +111,29 @@ Examples:
 2. **Tool Access**
    - Use import tool: `tools:import:use`
    - Use export tool: `tools:export:use`
+   - Use admin tools: `tools:admin:use` -->
+
+
+<div className="feature-grid">
+
+  <div className="feature-card">
+    <h4 className="card-title">1 Module Access</h4>
+  - Access module: `module:access`
+   - Configure module: `module:configure`
+   - Manage module data: `module:manage`
+  </div>
+
+  <div className="feature-card">
+    <h4 className="card-title">2 Tool Access</h4>
+     - Use import tool: `tools:import:use`
+   - Use export tool: `tools:export:use`
    - Use admin tools: `tools:admin:use`
+
+
+  </div>
+
+</div>
+
 
 ## Permission Management
 
@@ -133,7 +203,7 @@ Permissions can be grouped for easier management:
 
 ## Best Practices
 
-1. **Permission Design**
+<!-- 1. **Permission Design**
    - Use clear, descriptive names
    - Follow naming conventions
    - Document permission purposes
@@ -155,7 +225,55 @@ Permissions can be grouped for easier management:
    - Clean up unused permissions
    - Update documentation
    - Review dependencies
-   - Monitor performance
+   - Monitor performance -->
+
+<div className="feature-grid">
+
+  <div className="feature-card">
+    <h4 className="card-title">1 Permission Design</h4>
+    <ul className="card-desc">
+      <li>Use clear, descriptive names</li>
+      <li>Follow naming conventions</li>
+      <li>Document permission purposes</li>
+      <li>Consider dependencies</li>
+    </ul>
+  </div>
+
+  <div className="feature-card">
+    <h4 className="card-title">2 Permission Assignment</h4>
+    <ul className="card-desc">
+      <li>Follow least privilege principle</li>
+      <li>Group related permissions</li>
+      <li>Regular permission audits</li>
+      <li>Document assignments</li>
+    </ul>
+  </div>
+
+  <div className="feature-card">
+    <h4 className="card-title">3 Security</h4>
+    <ul className="card-desc">
+      <li>Validate permission checks</li>
+      <li>Log permission changes</li>
+      <li>Monitor usage patterns</li>
+      <li>Regular security reviews</li>
+    </ul>
+  </div>
+
+  <div className="feature-card">
+    <h4 className="card-title">4 Maintenance</h4>
+    <ul className="card-desc">
+      <li>Clean up unused permissions</li>
+      <li>Update documentation</li>
+      <li>Review dependencies</li>
+      <li>Monitor performance</li>
+    </ul>
+  </div>
+
+</div>
+
+
+
+
 
 ## Common Operations
 

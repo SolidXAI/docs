@@ -16,7 +16,7 @@ Report Templates enable:
 - Automated generation
 
 ## Features
-
+<!-- 
 ### Template Design
 - HTML-based templates
 - CSS styling support
@@ -36,7 +36,46 @@ Report Templates enable:
 - Multiple paper sizes
 - Custom margins
 - Orientation options
-- Quality settings
+- Quality settings -->
+
+<div className="feature-grid">
+
+  <div className="feature-card">
+    <h4 className="card-title">1. Template Design</h4>
+    <ul className="card-desc">
+      <li>HTML-based templates</li>
+      <li>CSS styling support</li>
+      <li>Dynamic content areas</li>
+      <li>Header and footer</li>
+      <li>Page numbering</li>
+    </ul>
+  </div>
+
+  <div className="feature-card">
+    <h4 className="card-title">2. Data Integration</h4>
+    <ul className="card-desc">
+      <li>Dynamic data binding</li>
+      <li>Multiple data sources</li>
+      <li>Conditional sections</li>
+      <li>Calculated fields</li>
+      <li>Aggregations</li>
+    </ul>
+  </div>
+
+  <div className="feature-card">
+    <h4 className="card-title">3. Output Options</h4>
+    <ul className="card-desc">
+      <li>PDF generation</li>
+      <li>Multiple paper sizes</li>
+      <li>Custom margins</li>
+      <li>Orientation options</li>
+      <li>Quality settings</li>
+    </ul>
+  </div>
+
+</div>
+
+
 
 ## Template Creation
 
@@ -200,7 +239,7 @@ const report = await generateReport({
 
 ## Best Practices
 
-1. **Template Design**
+<!-- 1. **Template Design**
    - Use responsive layouts
    - Optimize for printing
    - Consider page breaks
@@ -226,7 +265,59 @@ const report = await generateReport({
    - Optimize file size
    - Test across viewers
    - Implement compression
-   - Secure storage
+   - Secure storage -->
+
+
+
+<div className="feature-grid">
+
+  <div className="feature-card">
+    <h4 className="card-title">1. Template Design</h4>
+    <ul className="card-desc">
+      <li>Use responsive layouts</li>
+      <li>Optimize for printing</li>
+      <li>Consider page breaks</li>
+      <li>Test with various data</li>
+      <li>Include proper margins</li>
+    </ul>
+  </div>
+
+  <div className="feature-card">
+    <h4 className="card-title">2. Data Handling</h4>
+    <ul className="card-desc">
+      <li>Validate input data</li>
+      <li>Handle missing values</li>
+      <li>Format numbers/dates</li>
+      <li>Consider large datasets</li>
+      <li>Implement timeouts</li>
+    </ul>
+  </div>
+
+  <div className="feature-card">
+    <h4 className="card-title">3. Performance</h4>
+    <ul className="card-desc">
+      <li>Optimize images</li>
+      <li>Minimize CSS</li>
+      <li>Cache templates</li>
+      <li>Batch processing</li>
+      <li>Monitor memory usage</li>
+    </ul>
+  </div>
+
+  <div className="feature-card">
+    <h4 className="card-title">4. Output</h4>
+    <ul className="card-desc">
+      <li>Set appropriate DPI</li>
+      <li>Optimize file size</li>
+      <li>Test across viewers</li>
+      <li>Implement compression</li>
+      <li>Secure storage</li>
+    </ul>
+  </div>
+
+</div>
+
+
 
 ## Common Use Cases
 

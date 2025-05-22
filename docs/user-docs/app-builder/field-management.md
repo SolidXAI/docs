@@ -58,7 +58,7 @@ Fields define the structure of your data within models. SOLID provides a compreh
 
 ### Type-Specific Options
 
-#### Text Field
+<!-- #### Text Field
 - Minimum/Maximum length
 - Regular expression validation
 - Case sensitivity
@@ -75,13 +75,55 @@ Fields define the structure of your data within models. SOLID provides a compreh
 - Maximum file size
 - Storage provider
 - Image dimensions
-- Thumbnail generation
+- Thumbnail generation -->
+
+<div className="feature-grid">
+
+  <div className="feature-card">
+    <h4 className="card-title">
+      #### 1 Text Field
+    </h4>
+    <ul className="card-desc">
+      <li>Minimum/Maximum length</li>
+      <li>Regular expression validation</li>
+      <li>Case sensitivity</li>
+      <li>Trim whitespace</li>
+    </ul>
+  </div>
+
+  <div className="feature-card">
+    <h4 className="card-title">
+      #### 2 Number Field
+    </h4>
+    <ul className="card-desc">
+      <li>Minimum/Maximum value</li>
+      <li>Decimal places</li>
+      <li>Currency format</li>
+      <li>Thousand separator</li>
+    </ul>
+  </div>
+
+  <div className="feature-card">
+    <h4 className="card-title">
+      #### 3 Media Field
+    </h4>
+    <ul className="card-desc">
+      <li>Allowed file types</li>
+      <li>Maximum file size</li>
+      <li>Storage provider</li>
+      <li>Image dimensions</li>
+      <li>Thumbnail generation</li>
+    </ul>
+  </div>
+
+</div>
+
 
 ## Validation Rules
 
 Fields can have multiple validation rules:
 
-1. **Built-in Validation**
+<!-- 1. **Built-in Validation**
    - Required field
    - Unique value
    - Minimum/Maximum values
@@ -91,11 +133,42 @@ Fields can have multiple validation rules:
    - Regular expressions
    - Custom functions
    - Complex conditions
-   - Cross-field validation
+   - Cross-field validation -->
+
+
+<div className="feature-grid">
+
+  <div className="feature-card">
+    <h4 className="card-title">
+         **1 Built-in Validation**
+     </h4>
+    <ul className="card-desc">
+      <li>Required field</li>
+      <li>Unique value</li>
+      <li>Minimum/Maximum values</li>
+      <li>Format validation</li>
+    </ul>
+  </div>
+
+  <div className="feature-card">
+    <h4 className="card-title">
+      **2 Custom Validation**
+    </h4>
+    <ul className="card-desc">
+      <li>Regular expressions</li>
+      <li>Custom functions</li>
+      <li>Complex conditions</li>
+      <li>Cross-field validation</li>
+    </ul>
+  </div>
+
+</div>
+
+
 
 ## Best Practices
 
-1. **Field Selection**
+<!-- 1. **Field Selection**
    - Choose specific field types over generic ones
    - Consider validation requirements
    - Plan for future data needs
@@ -113,4 +186,53 @@ Fields can have multiple validation rules:
 4. **User Experience**
    - Provide helpful descriptions
    - Group related fields
-   - Use appropriate default values
+   - Use appropriate default values -->
+
+
+<div className="feature-grid">
+
+  <div className="feature-card">
+    <h4 className="card-title">
+      **1 Field Selection**
+    </h4>
+    <ul className="card-desc">
+      <li>Choose specific field types over generic ones</li>
+      <li>Consider validation requirements</li>
+      <li>Plan for future data needs</li>
+    </ul>
+  </div>
+
+  <div className="feature-card">
+    <h4 className="card-title">
+      **2 Naming Conventions**
+    </h4>
+    <ul className="card-desc">
+      <li>Use clear, descriptive names</li>
+      <li>Follow consistent patterns</li>
+      <li>Consider API usage</li>
+    </ul>
+  </div>
+
+  <div className="feature-card">
+    <h4 className="card-title">
+     **3 Performance**
+    </h4>
+    <ul className="card-desc">
+      <li>Limit number of fields</li>
+      <li>Use appropriate indexes</li>
+      <li>Consider query patterns</li>
+    </ul>
+  </div>
+
+  <div className="feature-card">
+    <h4 className="card-title">
+     **4 User Experience**
+    </h4>
+    <ul className="card-desc">
+      <li>Provide helpful descriptions</li>
+      <li>Group related fields</li>
+      <li>Use appropriate default values</li>
+    </ul>
+  </div>
+
+</div>

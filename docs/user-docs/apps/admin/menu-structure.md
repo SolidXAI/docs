@@ -75,7 +75,7 @@ You can customize the menu structure through configuration:
 
 ## Features
 
-### Dynamic Updates
+<!-- ### Dynamic Updates
 - Menu updates automatically when modules/resources change
 - Real-time permission checks
 - Responsive to user role changes
@@ -91,11 +91,54 @@ You can customize the menu structure through configuration:
 - Custom icons
 - Custom ordering
 - Custom labels
-- Nested menu structures
+- Nested menu structures -->
+
+
+<div className="feature-grid">
+
+  <div className="feature-card">
+    <h4 className="card-title">
+    1  Dynamic Updates
+    </h4>
+    <ul className="card-desc">
+      <li>Menu updates automatically when modules/resources change</li>
+      <li>Real-time permission checks</li>
+      <li>Responsive to user role changes</li>
+      <li>Support for dynamic sub-menus</li>
+    </ul>
+  </div>
+
+  <div className="feature-card">
+    <h4 className="card-title">
+    2  Access Control
+    </h4>
+    <ul className="card-desc">
+      <li>Menu items respect user permissions</li>
+      <li>Role-based visibility</li>
+      <li>Resource-level access control</li>
+      <li>Custom permission rules</li>
+    </ul>
+  </div>
+
+  <div className="feature-card">
+    <h4 className="card-title">
+    3  Customization
+    </h4>
+    <ul className="card-desc">
+      <li>Custom icons</li>
+      <li>Custom ordering</li>
+      <li>Custom labels</li>
+      <li>Nested menu structures</li>
+    </ul>
+  </div>
+
+</div>
+
+
 
 ## Best Practices
 
-1. **Organization**
+<!-- 1. **Organization**
    - Group related items together
    - Use clear, descriptive labels
    - Keep menu depth manageable
@@ -117,4 +160,56 @@ You can customize the menu structure through configuration:
    - Regular menu audits
    - Update outdated labels
    - Remove unused items
-   - Monitor access patterns
+   - Monitor access patterns -->
+
+<div className="feature-grid">
+
+  <div className="feature-card">
+    <h4 className="card-title">
+    1  Organization
+    </h4>
+    <ul className="card-desc">
+      <li>Group related items together</li>
+      <li>Use clear, descriptive labels</li>
+      <li>Keep menu depth manageable</li>
+      <li>Consider user workflow</li>
+    </ul>
+  </div>
+
+  <div className="feature-card">
+    <h4 className="card-title">
+    2  Permissions
+    </h4>
+    <ul className="card-desc">
+      <li>Set appropriate access levels</li>
+      <li>Group similar permissions</li>
+      <li>Document permission requirements</li>
+      <li>Regular permission audits</li>
+    </ul>
+  </div>
+
+  <div className="feature-card">
+    <h4 className="card-title">
+    3  User Experience
+    </h4>
+    <ul className="card-desc">
+      <li>Use meaningful icons</li>
+      <li>Maintain consistent naming</li>
+      <li>Optimize menu depth</li>
+      <li>Consider mobile users</li>
+    </ul>
+  </div>
+
+  <div className="feature-card">
+    <h4 className="card-title">
+    4  Maintenance
+    </h4>
+    <ul className="card-desc">
+      <li>Regular menu audits</li>
+      <li>Update outdated labels</li>
+      <li>Remove unused items</li>
+      <li>Monitor access patterns</li>
+    </ul>
+  </div>
+
+</div>

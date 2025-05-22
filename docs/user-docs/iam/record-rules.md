@@ -137,7 +137,7 @@ Rules are evaluated in priority order:
 
 ## Best Practices
 
-1. **Rule Design**
+<!-- 1. **Rule Design**
    - Keep rules simple and focused
    - Use meaningful names
    - Document rule purpose
@@ -159,7 +159,54 @@ Rules are evaluated in priority order:
    - Test edge cases
    - Verify rule combinations
    - Check rule priorities
-   - Validate performance
+   - Validate performance -->
+
+
+<div className="feature-grid">
+
+  <div className="feature-card">
+    <h4 className="card-title">1 Rule Design</h4>
+    <ul className="card-desc">
+      <li>Keep rules simple and focused</li>
+      <li>Use meaningful names</li>
+      <li>Document rule purpose</li>
+      <li>Consider performance impact</li>
+    </ul>
+  </div>
+
+  <div className="feature-card">
+    <h4 className="card-title">2 Security</h4>
+    <ul className="card-desc">
+      <li>Test rule combinations</li>
+      <li>Validate rule logic</li>
+      <li>Monitor rule effectiveness</li>
+      <li>Regular security audits</li>
+    </ul>
+  </div>
+
+  <div className="feature-card">
+    <h4 className="card-title">3 Maintenance</h4>
+    <ul className="card-desc">
+      <li>Regular rule review</li>
+      <li>Update documentation</li>
+      <li>Clean up unused rules</li>
+      <li>Monitor performance</li>
+    </ul>
+  </div>
+
+  <div className="feature-card">
+    <h4 className="card-title">4 Testing</h4>
+    <ul className="card-desc">
+      <li>Test edge cases</li>
+      <li>Verify rule combinations</li>
+      <li>Check rule priorities</li>
+      <li>Validate performance</li>
+    </ul>
+  </div>
+
+</div>
+
+
 
 ## Common Scenarios
 

@@ -231,7 +231,7 @@ The Settings module includes:
 
 ## Best Practices
 
-1. **List of Values**
+<!-- 1. **List of Values**
    - Use meaningful names
    - Document purpose
    - Consider translations
@@ -257,7 +257,57 @@ The Settings module includes:
    - Document purpose
    - Regular cleanup
    - Test performance
-   - Review permissions
+   - Review permissions -->
+
+
+  <div className="feature-grid">
+
+  <div className="feature-card">
+    <h4 className="card-title">1. List of Values</h4>
+    <ul className="card-desc">
+      <li>Use meaningful names</li>
+      <li>Document purpose</li>
+      <li>Consider translations</li>
+      <li>Regular reviews</li>
+      <li>Version control</li>
+    </ul>
+  </div>
+
+  <div className="feature-card">
+    <h4 className="card-title">2. Logging</h4>
+    <ul className="card-desc">
+      <li>Set retention periods</li>
+      <li>Monitor storage</li>
+      <li>Regular cleanup</li>
+      <li>Error alerts</li>
+      <li>Performance monitoring</li>
+    </ul>
+  </div>
+
+  <div className="feature-card">
+    <h4 className="card-title">3. Import/Export</h4>
+    <ul className="card-desc">
+      <li>Validate data</li>
+      <li>Handle errors gracefully</li>
+      <li>Schedule off-peak</li>
+      <li>Monitor resources</li>
+      <li>Backup data</li>
+    </ul>
+  </div>
+
+  <div className="feature-card">
+    <h4 className="card-title">4. Saved Views</h4>
+    <ul className="card-desc">
+      <li>Clear naming</li>
+      <li>Document purpose</li>
+      <li>Regular cleanup</li>
+      <li>Test performance</li>
+      <li>Review permissions</li>
+    </ul>
+  </div>
+
+</div>
+
 
 ## Common Operations
 

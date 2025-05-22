@@ -9,7 +9,8 @@ The Form View provides a comprehensive interface for creating and editing indivi
 ## Core Features
 
 ### Form Layout
-- **Section Management**:
+
+<!-- - **Section Management**:
   - Logical grouping of fields
   - Collapsible sections
   - Conditional visibility
@@ -18,10 +19,36 @@ The Form View provides a comprehensive interface for creating and editing indivi
   - Responsive grid layout
   - Field sizing and spacing
   - Label positioning
-  - Help text support
+  - Help text support -->
+
+<div className="feature-grid">
+
+  <div className="feature-card">
+    <h4 className="card-title">1 Section Management</h4>
+    <ul className="card-desc">
+      <li>Logical grouping of fields</li>
+      <li>Collapsible sections</li>
+      <li>Conditional visibility</li>
+      <li>Custom styling</li>
+    </ul>
+  </div>
+
+  <div className="feature-card">
+    <h4 className="card-title">2 Field Arrangement</h4>
+    <ul className="card-desc">
+      <li>Responsive grid layout</li>
+      <li>Field sizing and spacing</li>
+      <li>Label positioning</li>
+      <li>Help text support</li>
+    </ul>
+  </div>
+
+</div>
+
+
 
 ### Data Entry
-- **Field Types**:
+<!-- - **Field Types**:
   - All supported field types
   - Custom field components
   - Rich text editing
@@ -30,10 +57,36 @@ The Form View provides a comprehensive interface for creating and editing indivi
   - Real-time validation
   - Custom validation rules
   - Cross-field validation
-  - Error messaging
+  - Error messaging -->
+
+<div className="feature-grid">
+
+  <div className="feature-card">
+    <h4 className="card-title">1 Field Types</h4>
+    <ul className="card-desc">
+      <li>All supported field types</li>
+      <li>Custom field components</li>
+      <li>Rich text editing</li>
+      <li>File uploads</li>
+    </ul>
+  </div>
+
+  <div className="feature-card">
+    <h4 className="card-title">2 Validation</h4>
+    <ul className="card-desc">
+      <li>Real-time validation</li>
+      <li>Custom validation rules</li>
+      <li>Cross-field validation</li>
+      <li>Error messaging</li>
+    </ul>
+  </div>
+
+</div>
+
+
 
 ### Advanced Features
-- **Audit Trail**:
+<!-- - **Audit Trail**:
   - Change history
   - User tracking
   - Timestamp logging
@@ -47,7 +100,43 @@ The Form View provides a comprehensive interface for creating and editing indivi
   - Threaded discussions
   - @mentions
   - File attachments
-  - Activity log
+  - Activity log -->
+
+<div className="feature-grid">
+
+  <div className="feature-card">
+    <h4 className="card-title">1 Audit Trail</h4>
+    <ul className="card-desc">
+      <li>Change history</li>
+      <li>User tracking</li>
+      <li>Timestamp logging</li>
+      <li>Change comments</li>
+    </ul>
+  </div>
+
+  <div className="feature-card">
+    <h4 className="card-title">2 Workflow Integration</h4>
+    <ul className="card-desc">
+      <li>Status management</li>
+      <li>Stage transitions</li>
+      <li>Approval processes</li>
+      <li>Action triggers</li>
+    </ul>
+  </div>
+
+  <div className="feature-card">
+    <h4 className="card-title">3 Chatter/Comments</h4>
+    <ul className="card-desc">
+      <li>Threaded discussions</li>
+      <li>@mentions</li>
+      <li>File attachments</li>
+      <li>Activity log</li>
+    </ul>
+  </div>
+
+</div>
+
+
 
 ## Form Configuration
 
@@ -138,8 +227,11 @@ Customize form layout and behavior through JSON configuration:
 - Conditional visibility
 - Validation feedback
 
+
+
+
 ### Sidebar Components
-1. **Workflow Ribbon**:
+<!-- 1. **Workflow Ribbon**:
    - Current status
    - Available transitions
    - Stage history
@@ -155,7 +247,50 @@ Customize form layout and behavior through JSON configuration:
    - Discussion threads
    - File attachments
    - User mentions
-   - Activity feed
+   - Activity feed -->
+
+<div className="feature-grid">
+
+  <div className="feature-card">
+    <h4 className="card-title">
+    1 Workflow Ribbon 
+    </h4>
+    <ul className="card-desc">
+      <li>Current status</li>
+      <li>Available transitions</li>
+      <li>Stage history</li>
+      <li>Action buttons</li>
+    </ul>
+  </div>
+
+  <div className="feature-card">
+    <h4 className="card-title">
+    2 Audit Trail 
+    </h4>
+    <ul className="card-desc">
+      <li>Change history</li>
+      <li>User actions</li>
+      <li>Timestamps</li>
+      <li>Field changes</li>
+    </ul>
+  </div>
+
+  <div className="feature-card">
+    <h4 className="card-title">
+   3 Chatter/Comments 
+    </h4>
+    <ul className="card-desc">
+      <li>Discussion threads</li>
+      <li>File attachments</li>
+      <li>User mentions</li>
+      <li>Activity feed</li>
+    </ul>
+  </div>
+
+</div>
+
+
+
 
 ### Action Bar
 - Primary actions (Save, Delete)
@@ -165,7 +300,7 @@ Customize form layout and behavior through JSON configuration:
 
 ## Best Practices
 
-1. **Layout Design**
+<!-- 1. **Layout Design**
    - Group related fields
    - Use logical sections
    - Consider field dependencies
@@ -193,4 +328,83 @@ Customize form layout and behavior through JSON configuration:
    - Clear status indicators
    - Intuitive transitions
    - Proper validations
-   - Audit trail tracking
+   - Audit trail tracking -->
+
+
+
+<div className="feature-grid">
+
+  <div className="feature-card">
+    <h4 className="card-title">
+    1  Layout Design
+    </h4>
+    <ul className="card-desc">
+      <li>Group related fields</li>
+      <li>Use logical sections</li>
+      <li>Consider field dependencies</li>
+      <li>Optimize for readability</li>
+    </ul>
+  </div>
+
+  <div className="feature-card">
+    <h4 className="card-title">
+    2  Validation
+    </h4>
+    <ul className="card-desc">
+      <li>Provide clear error messages</li>
+      <li>Validate in real-time</li>
+      <li>Handle edge cases</li>
+      <li>Consider field relationships</li>
+    </ul>
+  </div>
+
+  <div className="feature-card">
+    <h4 className="card-title">
+     3 Performance
+    </h4>
+    <ul className="card-desc">
+      <li>Load data efficiently</li>
+      <li>Cache form state</li>
+      <li>Optimize validations</li>
+      <li>Handle large forms</li>
+    </ul>
+  </div>
+
+  <div className="feature-card">
+    <h4 className="card-title">
+    4  User Experience
+    </h4>
+    <ul className="card-desc">
+      <li>Clear navigation</li>
+      <li>Consistent styling</li>
+      <li>Helpful tooltips</li>
+      <li>Keyboard shortcuts</li>
+    </ul>
+  </div>
+
+  <div className="feature-card">
+    <h4 className="card-title">
+    5  Workflow Integration
+    </h4>
+    <ul className="card-desc">
+      <li>Clear status indicators</li>
+      <li>Intuitive transitions</li>
+      <li>Proper validations</li>
+      <li>Audit trail tracking</li>
+    </ul>
+  </div>
+
+  <div className="feature-card">
+    <h4 className="card-title">
+    6  Chatter/Comments
+    </h4>
+    <ul className="card-desc">
+      <li>Discussion threads</li>
+      <li>File attachments</li>
+      <li>User mentions</li>
+      <li>Activity feed</li>
+    </ul>
+  </div>
+
+</div>
+

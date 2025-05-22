@@ -64,7 +64,7 @@
 
 [Link Shortener Module	9](#link-shortener-module)
 
-[Other Settings	9](#other-settings)
+<!-- [Other Settings	9](#other-settings) -->
 
 [Plugin Architecture	9](#plugin-architecture)
 
