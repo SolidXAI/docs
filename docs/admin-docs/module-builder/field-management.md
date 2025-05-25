@@ -4,11 +4,131 @@ sidebar_position: 3
 
 # Fields
 
-Fields define the structure of your data within models. SOLID provides a comprehensive set of field types to handle different kinds of data.
+Every SolidX model is composed of fields. Fields in SolidX go over and above the standard fields one expects, instead we treat fields as semantic attributes with relevance to how the users interact with that data in our admin interface. 
 
-## Field Types
+## Creating New Fields 
 
-### Basic Fields
+Fields are created from the model creation form.
+
+To create a new field:
+
+1. Navigate to the App Builder, then click on the "Model" menu item.
+2. This will show a list of existing models in the system.
+3. Find the model in which you would like to add a new field.
+4. Click on the model to open it in the form view. 
+5. Click on the "Fields" tab, and then click on the "Add" button inside the Fields tab.
+
+This will open up the "Add New Field" popup. Adding a field involves first selecting the type of field you want to add, and then providing field specific metadata. 
+
+![Choose Field Type](/img/admin-docs/module-builder/add-field-choose-field-type.png)
+
+The metadata you provide is itself split into 2 parts Basic & Advanced. Basic metadata is common for all fields, while the Advanced metadata varies based on the field type.
+
+![Choose Field Type](/img/admin-docs/module-builder/add-field-metadata.png)
+
+Below you will find detailed documentation for each field type
+
+### Basic Config
+
+All fields need to at the minimum specify the following fields. 
+
+- Display Name: This is used on all SolidX views as a label wherever the field is used. 
+- Name: This is the internal name of this field.
+- Description: Whatever you write here will be used as help text tooltip on all SolidX views. 
+- Set Column Name: By default SolidX generates the column name for you, if you want to control the column name then enable this option and specify the column name.
+
+### Advanced Config
+
+This section allows you to add metadata specific to each field type. 
+
+#### Integer
+
+![Integer Field](/img/admin-docs/module-builder/integer-field.png)
+
+
+#### Big Integer
+
+![Big Integer](/img/admin-docs/module-builder/big-integer-field.png)
+
+
+#### Decimal
+
+![Decimal](/img/admin-docs/module-builder/decimal-field.png)
+
+
+#### Short Text
+
+![Short Text](/img/admin-docs/module-builder/short-text-field.png)
+
+
+#### Long Text
+
+![Long Text](/img/admin-docs/module-builder/long-text-field.png)
+
+
+#### Rich Text
+
+![Rich Text](/img/admin-docs/module-builder/rich-text-field.png)
+
+
+#### JSON
+
+![JSON](/img/admin-docs/module-builder/json-field.png)
+
+
+#### Boolean
+
+![Boolean](/img/admin-docs/module-builder/boolean-field.png)
+
+
+#### Date
+
+![Date](/img/admin-docs/module-builder/date-field.png)
+
+
+#### Datetime
+
+![Datetime](/img/admin-docs/module-builder/datetime-field.png)
+
+
+#### Time
+
+![Datetime](/img/admin-docs/module-builder/time-field.png)
+
+
+#### Relation
+
+##### Many to one
+
+![Datetime](/img/admin-docs/module-builder/relation-field-many-to-one.png)
+
+##### Many to many
+
+![Datetime](/img/admin-docs/module-builder/relation-field-many-to-many.png)
+
+##### One to many
+
+![Datetime](/img/admin-docs/module-builder/relation-field-one-to-many.png)
+
+#### Single Media
+
+![Datetime](/img/admin-docs/module-builder/single-media-field.png)
+
+#### Multiple Media
+
+#### Email
+
+#### Password
+
+#### Static Selection
+
+#### Dynamic Selection
+
+#### Computed 
+
+#### UUID
+
+#### Basic Fields
 
 | Type | Description | Use Case |
 |------|-------------|----------|

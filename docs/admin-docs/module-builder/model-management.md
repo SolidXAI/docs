@@ -80,6 +80,13 @@ They support rich semantic types that allow for expressive and dynamic user inte
 - richText / markdown / json / expression: Provide advanced content editing, structured data input, or script-based values.
 
 
+## Impact On Code: 
+
+When a new model is created SolidX generates a bunch of boilerplate code linked to this model. 
+
+To see the impact of what happens when we generate the code linked to a model metadata you can visit this page. TODO: Create the structure of the developer documentation and provide link here. 
+
+
 ## Related Recipes: 
 
 1. [Additional Datasources](../../recipes/): <br />
