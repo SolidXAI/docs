@@ -93,40 +93,60 @@ This section allows you to add metadata specific to each field type.
 
 #### Time
 
-![Datetime](/img/admin-docs/module-builder/time-field.png)
+![Time](/img/admin-docs/module-builder/time-field.png)
 
 
 #### Relation
 
 ##### Many to one
 
-![Datetime](/img/admin-docs/module-builder/relation-field-many-to-one.png)
+![Many to one](/img/admin-docs/module-builder/relation-field-many-to-one.png)
 
 ##### Many to many
 
-![Datetime](/img/admin-docs/module-builder/relation-field-many-to-many.png)
+![Many to many](/img/admin-docs/module-builder/relation-field-many-to-many.png)
 
 ##### One to many
 
-![Datetime](/img/admin-docs/module-builder/relation-field-one-to-many.png)
+![One to many](/img/admin-docs/module-builder/relation-field-one-to-many.png)
 
 #### Single Media
 
-![Datetime](/img/admin-docs/module-builder/single-media-field.png)
+![Single Media](/img/admin-docs/module-builder/single-media-field.png)
 
 #### Multiple Media
 
+![Multiple Media](/img/admin-docs/module-builder/multiple-media-field.png)
+
+
 #### Email
+
+![Email](/img/admin-docs/module-builder/email-field.png)
+
 
 #### Password
 
+![Password](/img/admin-docs/module-builder/password-field.png)
+
+
 #### Static Selection
+
+![Static Selection](/img/admin-docs/module-builder/static-selection-field.png)
+
 
 #### Dynamic Selection
 
+![Static Selection](/img/admin-docs/module-builder/dynamic-selection-field.png)
+
+
 #### Computed 
 
+![Static Selection](/img/admin-docs/module-builder/computed-field.png)
+
+
 #### UUID
+
+<!-- 
 
 #### Basic Fields
 
@@ -234,3 +254,4 @@ Fields can have multiple validation rules:
    - Provide helpful descriptions
    - Group related fields
    - Use appropriate default values
+ -->
