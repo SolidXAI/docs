@@ -368,6 +368,17 @@ TODO: Maybe we remove and replace with a computed field only...
 ## Generated Code
 
 ## Related Recipes
+- [Dynamic Selection Provider](../../recipes/): <br />
+   This recipe talks about how you can create your own dynamic selection provider.
+- [Basic Computed Field](../../recipes/): <br />
+   This recipe talks about how you can create a basic computed field, viz. a computed field whose value depends on the same record.
+- [Advanced Computed Field](../../recipes/): <br />
+   This recipe talks about how you can create an advanced computed field viz. a computed field whose value depends on other records of other models or even other records of the same model.
+- [Fixed Filter With Many-To-One](../../recipes/): <br />
+   Here we explain with an example how to use a fixed filter.
+- [Storage Provider](../../recipes/): <br />
+   This recipe talks about how you can add a new media storage provider, we will create a storage provider to store files to the Azure Blob storage. 
+
 
 <!-- 
 
