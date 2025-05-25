@@ -8,6 +8,8 @@ When creating a new module in SolidX, you're defining a core building block of y
 
 ## Creating a Module
 
+![Module Create Form](/img/admin-docs/module-builder/module-create-form-zoomed.png)
+
 To create a new module:
 
 1. Navigate to the App Builder, then click on the "Module" menu item.
@@ -126,6 +128,14 @@ export class DefaultDBModule implements ISolidDatabaseModule {
 
 
 Again in keeping with our design principle of flexibility you can add as many datasources as you like, and have a module use a given datasource as its default datasource. More details on this can be found in the developer docs where we talk about configuring multiple datasources. 
+
+
+## Related Recipes
+
+Below is a list of recipes that are relevant to module management. 
+
+1. [Additional Datasources](../../recipes/): <br />
+   This recipe talks about how you can add additional data sources to your application.
 
 
 <!-- 
