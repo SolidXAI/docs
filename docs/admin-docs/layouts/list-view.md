@@ -4,10 +4,248 @@ sidebar_position: 1
 
 # List View
 
-The List View provides a powerful tabular interface for viewing and managing your data records with comprehensive features for data manipulation and visualization.
+The List View in SolidX is a powerful, metadata-driven interface that presents model records in a tabular format. It is auto-generated based on the model and field definitions and is fully configurable through a structured JSON layout.
 
-## Core Features
+This view supports robust features such as searching, filtering, sorting, pagination, data import/export, and custom actions—making it ideal for managing large collections of data with ease and flexibility.
 
+## JSON Layout
+
+The List View is defined using a JSON layout that is automatically generated when a new model is created. This layout describes how fields should be displayed and interacted with on the List View interface.
+
+Here's an example layout for a model named Book:
+
+```
+{
+  "type": "list",
+  "attrs": {
+    "pagination": true,
+    "pageSizeOptions": [10, 25, 50],
+    "enableGlobalSearch": true,
+    "create": true,
+    "edit": true,
+    "delete": true,
+    "allowedViews": ["list", "kanban"]
+  },
+  "children": [
+    {
+      "type": "field",
+      "attrs": {
+        "name": "id",
+        "label": "Id",
+        "sortable": true,
+        "isSearchable": true
+      }
+    },
+    {
+      "type": "field",
+      "attrs": {
+        "name": "bannerImage",
+        "sortable": true,
+        "isSearchable": true
+      }
+    },
+    {
+      "type": "field",
+      "attrs": {
+        "name": "bookUserKey",
+        "sortable": true,
+        "isSearchable": true
+      }
+    },
+    {
+      "type": "field",
+      "attrs": {
+        "name": "title",
+        "sortable": true,
+        "isSearchable": true
+      }
+    },
+    {
+      "type": "field",
+      "attrs": {
+        "name": "publisher",
+        "sortable": true,
+        "isSearchable": true
+      }
+    },
+    {
+      "type": "field",
+      "attrs": {
+        "name": "authors",
+        "sortable": true,
+        "isSearchable": true
+      }
+    }
+  ]
+}
+```
+
+As you can see from the above the json array under children controls the sequence in which the fields are displayed.
+
+## Key Features 
+
+### Global Search 
+
+Enabled via enableGlobalSearch: true, this allows users to search across multiple searchable fields quickly. Fields marked with isSearchable: true participate in this feature.
+
+More details can be found on the [Modules List View](../modules/list-view.md) page.
+
+<!-- ![Global Search](/img/admin-docs/layouts/list-view-global-search.png) -->
+
+### Filtering
+
+Each field type supports type-specific filters:
+
+Eg. 
+- Numeric: greater than, less than, between
+- Date/Time: before, after, between, today, last X days
+- Selection: is one of, is not one of
+- Boolean: is true, is false
+- Text: contains, does not contain
+
+More details can be found on the [Modules List View](../modules/list-view.md) page.
+
+### Sorting
+
+Enable sorting per field using sortable: true. Clicking column headers toggles ascending/descending order.
+
+More details can be found on the [Modules List View](../modules/list-view.md) page.
+
+### Pagination
+
+Paginate large datasets efficiently with options to set default and allowed pageSizeOptions. Server-side pagination is supported for performance on large datasets.
+
+### Export
+
+Data can be exported in standard formats such as CSV or Excel. This allows external analysis or record-keeping.
+
+### Import
+
+Users can import records in bulk via structured files. Field mapping, validations, and error handling are supported out of the box.
+
+### Action Buttons 
+
+Standard CRUD actions (create, edit, delete) can be enabled per model via layout attributes. You can also add custom action buttons tied to server-side logic, workflows, or external integrations.
+
+These custom buttons can be added to the list view header or against each row. 
+
+### Impact of Roles
+
+Roles can be used to control the display of columns and action buttons on the list view. 
+
+The default buttons viz. create, edit & delete aswell as custom header or row actions can be controlled such that they are rendered only if the currently logged in user has that role.
+
+For example in the below layout, the column "publisher" will be visible only to users who have the role admin or super-admin.
+
+```
+{
+  "type": "list",
+  "attrs": {
+    "pagination": true,
+    "pageSizeOptions": [10, 25, 50],
+    "enableGlobalSearch": true,
+    "create": true,
+    "edit": true,
+    "delete": true,
+    "allowedViews": ["list", "kanban"]
+  },
+  "children": [
+    ...
+    ...
+    ...
+    {
+      "type": "field",
+      "attrs": {
+        "name": "title",
+        "sortable": true,
+        "isSearchable": true
+      }
+    },
+    {
+      "type": "field",
+      "attrs": {
+        "name": "publisher",
+        "sortable": true,
+        "isSearchable": true,
+        "roles": ["admin", "super-admin"]
+      }
+    },
+    ...
+    ...
+    ...
+  ]
+}
+
+```
+
+## Field Rendering
+
+Each element of type: "field" in the List View layout can be extensively customized through its attrs object.
+
+### Custom Cell Templates
+
+One of the most powerful customization points is the ability to control how a field's cell is rendered using a custom view widget.
+
+```
+{
+  "type": "field",
+  "attrs": {
+    "name": "title",
+    "label": "Title",
+    "sortable": true,
+    "isSearchable": true,
+    "viewWidget": "CustomTitleRenderer"
+  }
+}
+```
+
+- viewWidget refers to a React component.
+- This component must conform to a predefined interface (props, value, rowData, etc.).
+- You can use this to render:
+  - Images
+  - Icons
+  - Tags
+  - Links
+  - Badges
+  - Custom logic or formatting
+
+SolidX provides a default widget for each field type (e.g., Boolean → toggle icon, Media → image preview). Developers can override these defaults globally or per field.
+
+TODO: More on this in the developer documentation & recipes.
+
+## Metadata Driven
+
+The List View automatically adapts to each field's semantic metadata. 
+
+For example:
+
+- Password fields are masked
+- Relation fields display the userkey field of the related record.
+- Audit-tracked fields may have change indicators or badges.
+- Private fields are excluded from the view entirely unless specifically enabled.
+
+Changing the JSON layout changes the list view.
+
+This means that without writing a single line of code, your List View remains consistent, secure, and tailored to your data model.
+
+- The JSON layout is editable via the Layout Designer or programmatically.
+- Developers can extend core behavior via plugin hooks or lifecycle methods.
+- Actions, filters, and UI components can be customized per project or reused across modules.
+
+
+## Generated Code
+
+When a new model is created, SolidX automatically creates a new layout JSON that is stored in the ss_view_metadata table. 
+
+TODO: More details on this can be found in the developer documentation section.
+
+## Related Recipes
+- [Adding Custom Action Buttons](../../recipes/): <br />
+   This recipe talks about how you can add custom action buttons to the list view header and rows.
+- [Custom View Widget](../../recipes/): <br />
+   This recipe talks about how you can create a custom view widget to control how a field is rendered in the list view.
+
+<!-- 
 ### Search and Filter
 - **Global Search**: Quick search across all searchable fields
 - **Advanced Filters**: 
@@ -134,3 +372,4 @@ The list view layout is customizable through JSON configuration:
    - Validate bulk operations
    - Secure sensitive data columns
    - Log important actions
+ -->

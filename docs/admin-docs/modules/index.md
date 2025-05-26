@@ -2,7 +2,7 @@
 sidebar_position: 3
 ---
 
-# Apps
+# Modules
 
 Apps in SOLID are modular units that encapsulate specific functionality and expose RESTful API endpoints, services, and user interfaces. Each app represents a logical unit of functionality that can be managed independently.
 
