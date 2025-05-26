@@ -84,7 +84,7 @@ As you can see from the above the json array under children controls the sequenc
 
 ## Key Features 
 
-### Global Search 
+### Search 
 
 Enabled via enableGlobalSearch: true, this allows users to search across multiple searchable fields quickly. Fields marked with isSearchable: true participate in this feature.
 
@@ -115,19 +115,27 @@ More details can be found on the [Modules List View](../modules/list-view.md) pa
 
 Paginate large datasets efficiently with options to set default and allowed pageSizeOptions. Server-side pagination is supported for performance on large datasets.
 
+More details can be found on the [Modules List View](../modules/list-view.md) page.
+
 ### Export
 
 Data can be exported in standard formats such as CSV or Excel. This allows external analysis or record-keeping.
 
+More details can be found on the [Modules List View](../modules/list-view.md) page.
+
 ### Import
 
 Users can import records in bulk via structured files. Field mapping, validations, and error handling are supported out of the box.
+
+More details can be found on the [Modules List View](../modules/list-view.md) page.
 
 ### Action Buttons 
 
 Standard CRUD actions (create, edit, delete) can be enabled per model via layout attributes. You can also add custom action buttons tied to server-side logic, workflows, or external integrations.
 
 These custom buttons can be added to the list view header or against each row. 
+
+More details can be found on the [Action Buttons Recipe](../../recipes/) page.
 
 ### Impact of Roles
 
@@ -178,6 +186,9 @@ For example in the below layout, the column "publisher" will be visible only to 
 
 ```
 
+More details can be found on the [Controlling List View With Roles](../../recipes/) page.
+
+
 ## Field Rendering
 
 Each element of type: "field" in the List View layout can be extensively customized through its attrs object.
@@ -211,7 +222,7 @@ One of the most powerful customization points is the ability to control how a fi
 
 SolidX provides a default widget for each field type (e.g., Boolean → toggle icon, Media → image preview). Developers can override these defaults globally or per field.
 
-TODO: More on this in the developer documentation & recipes.
+TODO: More on this in the developer documentation & recipes [Custom View Widget](../../recipes/).
 
 ## Metadata Driven
 
@@ -244,6 +255,8 @@ TODO: More details on this can be found in the developer documentation section.
    This recipe talks about how you can add custom action buttons to the list view header and rows.
 - [Custom View Widget](../../recipes/): <br />
    This recipe talks about how you can create a custom view widget to control how a field is rendered in the list view.
+- [Controlling List View With Roles](../../recipes/): <br />
+   This recipe talks about how you can control various visual aspects of the list view by using roles.
 
 <!-- 
 ### Search and Filter
