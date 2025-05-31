@@ -1,5 +1,5 @@
 ---
-sidebar_position: 3
+sidebar_position: 1
 ---
 
 # List View
@@ -55,25 +55,76 @@ TODO: Below table summarises the different operators available against each fiel
 
 Enable sorting per field using sortable: true. Clicking column headers toggles ascending/descending order.
 
-More details can be found on the [Modules List View](../modules/list-view.md) page.
-
 ### Pagination
 
 Paginate large datasets efficiently with options to set default and allowed pageSizeOptions. Server-side pagination is supported for performance on large datasets.
 
-More details can be found on the [Modules List View](../modules/list-view.md) page.
-
 ### Export
 
-Data can be exported in standard formats such as CSV or Excel. This allows external analysis or record-keeping.
+Data can be exported in standard formats such as CSV or Excel. This allows external analysis or record-keeping. The export functionality is completely dynamic and metadata driven based on how you have configured your model & fields.
 
-More details can be found on the [Modules List View](../modules/list-view.md) page.
+#### Step 1: 
+One can access the export functionality from the cog wheel on the list view 
+
+![Export Step 1](/img/admin-docs/layouts/export-0.png)
+
+DEV TODO: Make export button access controlled by roles & permissions. We should have a custom permission called export in all models I believe?
+
+#### Step 2: 
+Based on the models metadata the user can select the fields that they would like to include in the export. This screen has 2 sections Available and Selected. The Selected fields are based on the currently configured list view, so the columns displayed in the list view are by default included in the export. 
+
+Also note that all fields are exportable except for media fields. Media fields are skipped as part of the export.
+
+![Export Step 2](/img/admin-docs/layouts/export-1.png)
+
+#### Step 3: 
+One can choose to save this export configuration as a named template to be re-used later. 
+
+![Export Step 3](/img/admin-docs/layouts/export-2.png)
+
+![Export Step 4](/img/admin-docs/layouts/export-3.png)
+
+#### Step 4:
+All exports in SolidX run in the background (either as a NodeJS async process) or as a message on a Queue, more on this in the recipes section. After the export is completed the export is available on the export transactions screen.
+
+![Export Step 5](/img/admin-docs/layouts/export-4.png)
+
+TODO: Show a screenshot of the export transactions screen and how the user can download it.
+
 
 ### Import
 
-Users can import records in bulk via structured files. Field mapping, validations, and error handling are supported out of the box.
+Users can import records in bulk via structured files. Field mapping, validations, and error handling are supported out of the box. The import functionality is completely dynamic and metadata driven based on how you have configured your model & fields.
 
-More details can be found on the [Modules List View](../modules/list-view.md) page.
+#### Step 1: 
+One can access the import functionality from the cog wheel on the list view. 
+
+![Import Step 1](/img/admin-docs/layouts/import-0.png)
+
+DEV TODO: Make import button access controlled by roles & permissions. We should have a custom permission called export in all models I believe?
+
+#### Step 2: 
+As the first step of the import process SolidX provides a pre-built excel template that can be used to import the data. This template is automatically generated based on the model & field metadata.
+This screen also displays other instructions around validations etc that will be applied when the excel is imported.
+
+![Import Step 2](/img/admin-docs/layouts/import-1.png)
+![Import Step 3](/img/admin-docs/layouts/import-2.png)
+
+#### Step 3: 
+Here we upload the actual file which is to be imported. 
+![Import Step 4](/img/admin-docs/layouts/import-3.png)
+
+#### Step 4: 
+Here we provide the mapping for the import, basically fields from the excel header are mapped against fields from SolidX field metadata for this model. 
+
+TODO: Mapping screen screenshot is pending.
+
+#### Step 5: 
+All imports in SolidX run in the background (either as a NodeJS async process) or as a message on a Queue, more on this in the recipes section. After the import is completed the export is available on the import transactions screen.
+![Import Step 5](/img/admin-docs/layouts/import-4.png)
+
+TODO: Show a screenshot of the import transactions screen and how the user can download it.
+
 
 ### Action Buttons 
 
@@ -83,10 +134,55 @@ These custom buttons can be added to the list view header or against each row.
 
 More details can be found on the [Action Buttons Recipe](../../recipes/) page.
 
+TODO: Screenshots pending from Sapphire or anywhere we have action buttons on the list view.
+
 ### Saved Filters
+
+The SolidX list view lets you apply custom filters and then save them using saved filters. 
+
+#### Step 1:
+
+Start with choosing a custom filter (or search based filter)
+![Saved Filter Step 1](/img/admin-docs/layouts/saved-filter-custom-filter.png)
+
+
+#### Step 2: 
+
+Next we click on the cogwheel on the upper right corner, choose "Save Custom Filter", and in the popup that opens give it a name and decide if this is going to be private or not. If marked as private this saved filter is visible only to the user who is creating it. 
+
+![Saved Filter Step 2](/img/admin-docs/layouts/saved-filter-cog-wheel.png)
+
+![Saved Filter Step 3](/img/admin-docs/layouts/saved-filter-create.png)
+
+
+#### Step 3: 
+
+After you save the filter it is now available to be applied in the list of saved filters in the dropdown that opens under the search area. 
+
+![Saved Filter Step 4](/img/admin-docs/layouts/saved-filter-apply-and-view.png)
+
 
 ### Change Layout 
 
+You can use the cog wheel in the upper right corner to change which all columns are currently displayed in the list view. 
+
+![Saved Filter Step 4](/img/admin-docs/layouts/switch-views.png)
+
 ### Switch Layout 
 
-### Custom View Widget
+When configured you can switch between the 2 collection views currently supported by SolidX viz. List & Kanban.
+
+If enabled you will see this option enabled in the "Customize Layout" option that opens after clicking on the cog wheel in the upper right corner. 
+
+![Saved Filter Step 4](/img/admin-docs/layouts/switch-views.png)
+
+
+## Related Recipes
+
+1. [Configure Redis Based Exports](../../recipes/): <br />
+   All exports in SolidX run in the background, we also have the provision to run large exports as a background job on a queue using our queues abstraction. This recipe talks about how to do this with Redis as the message broker.
+2. [Configure Custom Import Instructions](../../recipes/): <br />
+3. [Configure A Custom Widget](../../recipes/): <br />
+   In this recipe we will see how we can customize the display and behavior of a column in the list view.
+4. [Configure Switch Layout](../../recipes/): <br />
+   In this recipe we will see how we can enable the list view to enable view switching.
