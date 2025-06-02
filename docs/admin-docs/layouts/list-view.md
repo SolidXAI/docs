@@ -4,6 +4,8 @@ sidebar_position: 1
 
 # List View
 
+![List View](/img/admin-docs/layouts/list-view.png)
+
 The List View in SolidX is a powerful, metadata-driven interface that presents model records in a tabular format. It is auto-generated based on the model and field definitions and is fully configurable through a structured JSON layout.
 
 This view supports robust features such as searching, filtering, sorting, pagination, data import/export, and custom actions—making it ideal for managing large collections of data with ease and flexibility.
@@ -82,6 +84,8 @@ Here's an example layout for a model named Book:
 
 As you can see from the above the json array under children controls the sequence in which the fields are displayed.
 
+TODO: More details on all the different layout elements one can use in the List View can be found in the developer documentation. Create a table explaining each attribute in detail.
+
 ## Key Features 
 
 ### Search 
@@ -135,15 +139,15 @@ Standard CRUD actions (create, edit, delete) can be enabled per model via layout
 
 These custom buttons can be added to the list view header or against each row. 
 
-More details can be found on the [Action Buttons Recipe](../../recipes/) page.
+TODO: More details can be found on the [Action Buttons Recipe](../../recipes/) page.
 
 ### Impact of Roles
 
-Roles can be used to control the display of columns and action buttons on the list view. 
+Just like on the list view Roles can be used to control the display of columns and action buttons on the kanban view also.
 
 The default buttons viz. create, edit & delete aswell as custom header or row actions can be controlled such that they are rendered only if the currently logged in user has that role.
 
-For example in the below layout, the column "publisher" will be visible only to users who have the role admin or super-admin.
+For example in the below layout, the column "id" will be visible only to users who have the role admin or super-admin.
 
 ```
 {
@@ -158,21 +162,11 @@ For example in the below layout, the column "publisher" will be visible only to 
     "allowedViews": ["list", "kanban"]
   },
   "children": [
-    ...
-    ...
-    ...
     {
       "type": "field",
       "attrs": {
-        "name": "title",
-        "sortable": true,
-        "isSearchable": true
-      }
-    },
-    {
-      "type": "field",
-      "attrs": {
-        "name": "publisher",
+        "name": "id",
+        "label": "Id",
         "sortable": true,
         "isSearchable": true,
         "roles": ["admin", "super-admin"]
@@ -181,17 +175,33 @@ For example in the below layout, the column "publisher" will be visible only to 
     ...
     ...
     ...
+    ...
+    {
+      "type": "field",
+      "attrs": {
+        "name": "publisher",
+        "sortable": true,
+        "isSearchable": true
+      }
+    },
+    {
+      "type": "field",
+      "attrs": {
+        "name": "authors",
+        "sortable": true,
+        "isSearchable": true
+      }
+    }
   ]
 }
-
 ```
 
-More details can be found on the [Controlling List View With Roles](../../recipes/) page.
+TODO: More details can be found on the [Controlling Kanban View With Roles](../../recipes/) page.
 
 
 ## Field Rendering
 
-Each element of type: "field" in the List View layout can be extensively customized through its attrs object.
+TODO: Point to developer documentation, each element of type: "field" in the List View layout can be extensively customized through its attrs object. Please refer the developer documentation to view details about each attribute.
 
 ### Custom Cell Templates
 
