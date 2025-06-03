@@ -14,11 +14,11 @@ This view supports robust features such as searching, filtering, sorting, pagina
 
 Enabled via enableGlobalSearch: true, this allows users to search across multiple searchable fields quickly. Fields marked with isSearchable: true participate in this feature.
 
-![Global Search](/img/admin-docs/layouts/list-view-global-search.png)
+![Global Search](/img/admin-docs/modules/list-view-global-search.png)
 
 After applying the search it is visible in the search box, if search is applied on multiple fields then this results in an automatic AND clause being applied between the fields on which the search was applied.
 
-![Search Applied](/img/admin-docs/layouts/list-view-global-search-applied.png)
+![Search Applied](/img/admin-docs/modules/list-view-global-search-applied.png)
 
 ### Filtering
 
@@ -35,7 +35,7 @@ To open the filter dialog you need to click on "Custom Filter" in the drop down 
 
 You can form an arbitrarily complex filter using the available fields.
 
-![Filter Applied](/img/admin-docs/layouts/list-view-filters.png)
+![Filter Applied](/img/admin-docs/modules/list-view-filters.png)
 
 
 TODO: Below table summarises the different operators available against each field type.
@@ -66,7 +66,7 @@ Data can be exported in standard formats such as CSV or Excel. This allows exter
 #### Step 1: 
 One can access the export functionality from the cog wheel on the list view 
 
-![Export Step 1](/img/admin-docs/layouts/export-0.png)
+![Export Step 1](/img/admin-docs/modules/export-0.png)
 
 DEV TODO: Make export button access controlled by roles & permissions. We should have a custom permission called export in all models I believe?
 
@@ -75,19 +75,19 @@ Based on the models metadata the user can select the fields that they would like
 
 Also note that all fields are exportable except for media fields. Media fields are skipped as part of the export.
 
-![Export Step 2](/img/admin-docs/layouts/export-1.png)
+![Export Step 2](/img/admin-docs/modules/export-1.png)
 
 #### Step 3: 
 One can choose to save this export configuration as a named template to be re-used later. 
 
-![Export Step 3](/img/admin-docs/layouts/export-2.png)
+![Export Step 3](/img/admin-docs/modules/export-2.png)
 
-![Export Step 4](/img/admin-docs/layouts/export-3.png)
+![Export Step 4](/img/admin-docs/modules/export-3.png)
 
 #### Step 4:
 All exports in SolidX run in the background (either as a NodeJS async process) or as a message on a Queue, more on this in the recipes section. After the export is completed the export is available on the export transactions screen.
 
-![Export Step 5](/img/admin-docs/layouts/export-4.png)
+![Export Step 5](/img/admin-docs/modules/export-4.png)
 
 TODO: Show a screenshot of the export transactions screen and how the user can download it.
 
@@ -99,7 +99,7 @@ Users can import records in bulk via structured files. Field mapping, validation
 #### Step 1: 
 One can access the import functionality from the cog wheel on the list view. 
 
-![Import Step 1](/img/admin-docs/layouts/import-0.png)
+![Import Step 1](/img/admin-docs/modules/import-0.png)
 
 DEV TODO: Make import button access controlled by roles & permissions. We should have a custom permission called export in all models I believe?
 
@@ -107,12 +107,12 @@ DEV TODO: Make import button access controlled by roles & permissions. We should
 As the first step of the import process SolidX provides a pre-built excel template that can be used to import the data. This template is automatically generated based on the model & field metadata.
 This screen also displays other instructions around validations etc that will be applied when the excel is imported.
 
-![Import Step 2](/img/admin-docs/layouts/import-1.png)
-![Import Step 3](/img/admin-docs/layouts/import-2.png)
+![Import Step 2](/img/admin-docs/modules/import-1.png)
+![Import Step 3](/img/admin-docs/modules/import-2.png)
 
 #### Step 3: 
 Here we upload the actual file which is to be imported. 
-![Import Step 4](/img/admin-docs/layouts/import-3.png)
+![Import Step 4](/img/admin-docs/modules/import-3.png)
 
 #### Step 4: 
 Here we provide the mapping for the import, basically fields from the excel header are mapped against fields from SolidX field metadata for this model. 
@@ -121,7 +121,7 @@ TODO: Mapping screen screenshot is pending.
 
 #### Step 5: 
 All imports in SolidX run in the background (either as a NodeJS async process) or as a message on a Queue, more on this in the recipes section. After the import is completed the export is available on the import transactions screen.
-![Import Step 5](/img/admin-docs/layouts/import-4.png)
+![Import Step 5](/img/admin-docs/modules/import-4.png)
 
 TODO: Show a screenshot of the import transactions screen and how the user can download it.
 
@@ -143,30 +143,30 @@ The SolidX list view lets you apply custom filters and then save them using save
 #### Step 1:
 
 Start with choosing a custom filter (or search based filter)
-![Saved Filter Step 1](/img/admin-docs/layouts/saved-filter-custom-filter.png)
+![Saved Filter Step 1](/img/admin-docs/modules/saved-filter-custom-filter.png)
 
 
 #### Step 2: 
 
 Next we click on the cogwheel on the upper right corner, choose "Save Custom Filter", and in the popup that opens give it a name and decide if this is going to be private or not. If marked as private this saved filter is visible only to the user who is creating it. 
 
-![Saved Filter Step 2](/img/admin-docs/layouts/saved-filter-cog-wheel.png)
+![Saved Filter Step 2](/img/admin-docs/modules/saved-filter-cog-wheel.png)
 
-![Saved Filter Step 3](/img/admin-docs/layouts/saved-filter-create.png)
+![Saved Filter Step 3](/img/admin-docs/modules/saved-filter-create.png)
 
 
 #### Step 3: 
 
 After you save the filter it is now available to be applied in the list of saved filters in the dropdown that opens under the search area. 
 
-![Saved Filter Step 4](/img/admin-docs/layouts/saved-filter-apply-and-view.png)
+![Saved Filter Step 4](/img/admin-docs/modules/saved-filter-apply-and-view.png)
 
 
 ### Change Layout 
 
 You can use the cog wheel in the upper right corner to change which all columns are currently displayed in the list view. 
 
-![Saved Filter Step 4](/img/admin-docs/layouts/switch-views.png)
+![Saved Filter Step 4](/img/admin-docs/modules/switch-views.png)
 
 ### Switch Layout 
 
@@ -174,7 +174,7 @@ When configured you can switch between the 2 collection views currently supporte
 
 If enabled you will see this option enabled in the "Customize Layout" option that opens after clicking on the cog wheel in the upper right corner. 
 
-![Saved Filter Step 4](/img/admin-docs/layouts/switch-views.png)
+![Saved Filter Step 4](/img/admin-docs/modules/switch-views.png)
 
 
 ## Related Recipes
