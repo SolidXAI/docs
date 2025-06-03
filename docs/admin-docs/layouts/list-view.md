@@ -84,7 +84,26 @@ Here's an example layout for a model named Book:
 
 As you can see from the above the json array under children controls the sequence in which the fields are displayed.
 
-TODO: More details on all the different layout elements one can use in the List View can be found in the developer documentation. Create a table explaining each attribute in detail.
+### 📋 List View Attributes (type: "list")
+| Attribute            | Description                                                                 |
+|----------------------|-----------------------------------------------------------------------------|
+| pagination           | Enables pagination in the list view.                                        |
+| pageSizeOptions      | Array of selectable page sizes for pagination (e.g., `[10, 25, 50]`).       |
+| enableGlobalSearch   | Displays a global search bar for filtering across all searchable fields.    |
+| create               | Shows a "Create" button to add new records.                                 |
+| edit                 | Enables editing functionality for individual records.                       |
+| delete               | Allows records to be deleted from the list.                                 |
+| allowedViews         | Specifies which view modes are available (e.g., `list`, `kanban`).          |
+
+### 🧩 Field Attributes (type: "field")
+| Attribute       | Description                                                                 |
+|------------------|-----------------------------------------------------------------------------|
+| name             | Internal name or key of the field (e.g., `id`, `title`, `authors`).        |
+| label            | Optional. Label to be shown in the table header; defaults to `name` if omitted. |
+| sortable         | Boolean. If true, allows sorting by this field.                            |
+| isSearchable     | Boolean. If true, includes the field in both global and field-level search.|
+
+TODO: More details on all the different layout elements one can use in the List View have to be added here...
 
 ## Key Features 
 
