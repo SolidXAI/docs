@@ -70,20 +70,58 @@ For all the models listed below, please make sure to add all the fields, save th
 
 We need a model to store the institute details, the fields involved are. 
 
-| Column Name                | SolidX Type | Validations | Notes |
-|----------------------------|-------------|-------------|-------|
-| instituteName              | shortText   | required    | -     |
-| logo                       | mediaSingle | -           | -     |
-| description                | longText    | -           | -     |
-| hostedPagePrefix           | shortText   | required    | -     |
-| paymentGatewayMerchantId   | shortText   | required    | -     |
-| paymentGatewayAccessKey    | longText    | required    | -     |
-| paymentGatewayAccessSecret | shortText   | required    | -     |
-| pointOfContactName         | shortText   | -           | -     |
-| pointOfContactEmail        | shortText   | -           | -     |
-| pointOfContactMobile       | shortText   | -           | -     |
-| instituteAddress           | longText    | -           | -     |
-| instituteContactNumber     | shortText   | -           | -     |
-| instituteContactEmail      | shortText   | -           | -     |
+| Column Name                | SolidX Type | Advanced Config                                             |
+|----------------------------|-------------|-------------------------------------------------------------|
+| instituteName              | shortText   | required, unique, indexed, audited & also marked as Userkey |
+| logo                       | mediaSingle | required                                                    |
+| description                | longText    | -                                                           |
+| hostedPagePrefix           | shortText   | required, unique, indexed, audited                          |
+| paymentGatewayMerchantId   | shortText   | required, unique, indexed                                   |
+| paymentGatewayAccessKey    | longText    | required, unique, indexed                                   |
+| paymentGatewayAccessSecret | shortText   | required                                                    |
+| pointOfContactName         | shortText   | -                                                           |
+| pointOfContactEmail        | shortText   | -                                                           |
+| pointOfContactMobile       | shortText   | -                                                           |
+| instituteAddress           | longText    | -                                                           |
+| instituteContactNumber     | shortText   | -                                                           |
+| instituteContactEmail      | shortText   | -                                                           |
 
+<br />
+> Since the institute model is soft delete aware [read this recipe](../../../recipes/) on the impact of this on code generation.
+
+At this point you can go ahead and generate the code for this entity. 
+
+After adding the above fields we realise that the `instituteContactEmail` and `pointOfContactEmail` fields could have been set as SolidX type email. 
+
+To do this we need to 
+
+1. Delete the fields.
+2. Save the model metadata. 
+3. Use the row action to generate the code. (At this point if you see the code diff in your vscode you will see that the fields have been deleted).
+
+    Look at these images to see what it looks like on my laptop. 
+
+    solid-api/src/fees-portal/dtos/create-institute.dto.ts
+    ![Create Model Sample](/img/tutorial/school-fees-portal/2-data-model/create-institute-diff.png)
+
+    solid-api/src/fees-portal/dtos/update-institute.dto.ts
+    ![Create Model Sample](/img/tutorial/school-fees-portal/2-data-model/update-institute-diff.png)
+
+    solid-api/src/fees-portal/entities/institute.entity.ts
+    ![Create Model Sample](/img/tutorial/school-fees-portal/2-data-model/institute-diff.png)
+
+    solid-api/module-metadata/fees-portal/fees-portal-metadata.json
+    ![Create Model Sample](/img/tutorial/school-fees-portal/2-data-model/fees-portal-metadata-diff.png)
+
+4. Re-add them with the correct type.
+
+## Other Cases 
+
+### Adding fields to existing models 
+
+#### Managing Required Fields 
+
+#### Adding Fields to Layouts
+
+### Deleting fields from existing models 
 
