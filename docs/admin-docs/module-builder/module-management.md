@@ -35,9 +35,9 @@ Once you've entered the above details, saving the module will register it in Sol
 
 After creating the module Metadata you need to click on the "Generate Module" action button. 
 
-You can find this action button in the list view context menu for each row, and also on the form view header context menu.
+You can find this action button in the list view context menu for each row.
 
-TODO: screenshot of the generate module popup to come here.
+![Module Create Form](/img/admin-docs/module-builder/module-generate-code-popup.png)
 
 ### Generated Code
 

@@ -1,5 +1,5 @@
 ---
-sidebar_position: 1
+sidebar_position: 2
 ---
 
 # Admin Docs
@@ -23,7 +23,7 @@ You can optionally choose to read about our design goals first before proceeding
 
 We recommend going through the documentation in the following order
 
-1. Go through our tutorial, this will give you an in-depth walkthrough of the core features of SolidX.
+1. Go through our [tutorial](../tutorial/school-fees-portal/index.md), this will give you an in-depth walkthrough of the core features of SolidX.
 2. Learn about the SolidX admin panel. 
     - Here you will figure out how to configure your domains data model. 
     - Automatically create a feature rich admin user interface using which you can manage your data model.

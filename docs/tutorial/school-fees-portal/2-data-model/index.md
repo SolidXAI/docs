@@ -42,4 +42,48 @@ The above step of creating a new module simply creates an entry in the `ss_modul
 
 This opens a confirmation dialog 
 
-![Generate Module Code Confirmation](/img/tutorial/school-fees-portal/2-data-model/module-generate-code-confirmation.png)
+![Generate Module Code Confirmation](/img/tutorial/school-fees-portal/2-data-model/module-generate-code-confirmation-updated.png)
+
+After you click "Ok" SolidX backend will generate the necessary code to support this module and after page refresh you will be able to see the newly created module in the menu. You will also see a default "home" page created for the newly created module.
+
+![Module Home Page](/img/tutorial/school-fees-portal/2-data-model/module-home-page.png)
+
+> You can get rid of the default home page generated and instead put a custom [dashboard for this module](../custom-module-home/). We will be doing this in a later step in this tutorial.
+
+Now we can move on to creating all the models in our system. 
+
+## Model
+
+To create models you need to go to Solid Core > App Builder > Model and then click on the Add button. You will first need to fill out the basic details about this model, look at the below screenshot for a sample. 
+
+![Create Model Sample](/img/tutorial/school-fees-portal/2-data-model/create-model-sample.png)
+
+For this tutorial we will be marking all models as soft delete aware & also enable audit tracking on all models. 
+
+All fields in the model form are explained in detail [here](../../../admin-docs/module-builder/model-management.md).
+
+On similar lines you can add all fields to the newly created model, more details on all field types supported can be found [here](../../../admin-docs/module-builder/field-management.md). 
+
+For all the models listed below, please make sure to add all the fields, save the model and then use the row actions to generate the code for this model.
+
+### Institute 
+
+We need a model to store the institute details, the fields involved are. 
+
+| Column Name                | SolidX Type | Validations | Notes |
+|----------------------------|-------------|-------------|-------|
+| instituteName              | shortText   | required    | -     |
+| logo                       | mediaSingle | -           | -     |
+| description                | longText    | -           | -     |
+| hostedPagePrefix           | shortText   | required    | -     |
+| paymentGatewayMerchantId   | shortText   | required    | -     |
+| paymentGatewayAccessKey    | longText    | required    | -     |
+| paymentGatewayAccessSecret | shortText   | required    | -     |
+| pointOfContactName         | shortText   | -           | -     |
+| pointOfContactEmail        | shortText   | -           | -     |
+| pointOfContactMobile       | shortText   | -           | -     |
+| instituteAddress           | longText    | -           | -     |
+| instituteContactNumber     | shortText   | -           | -     |
+| instituteContactEmail      | shortText   | -           | -     |
+
+

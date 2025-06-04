@@ -84,7 +84,9 @@ They support rich semantic types that allow for expressive and dynamic user inte
 
 When a new model is created SolidX generates a bunch of boilerplate code linked to this model. 
 
-To see the impact of what happens when we generate the code linked to a model metadata you can visit this page. TODO: Create the structure of the developer documentation and provide link here. 
+To see the impact of what happens when we generate the code linked to a model metadata you can view our [developer documentation](../../developer-docs/index.md). 
+
+TODO: Create the structure of the developer documentation and provide link here.
 
 
 ## Related Recipes
