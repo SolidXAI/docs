@@ -1,5 +1,5 @@
 ---
-sidebar_position: 3
+sidebar_position: 2
 ---
 
 # 2. Data Model
@@ -114,6 +114,26 @@ To do this we need to
     ![Create Model Sample](/img/tutorial/school-fees-portal/2-data-model/fees-portal-metadata-diff.png)
 
 4. Re-add them with the correct type.
+
+This gives you an idea of how you can modify fields which have been added earlier to your SolidX model.
+
+### Institute User 
+
+This table allows us to configure users of the fees portal, using this model we can create 
+
+### Institute Fee Type
+
+### Institute Reminder 
+
+### Student 
+
+### Payment Collection 
+
+### Payment Collection Item 
+
+### Payment Collection Item Detail 
+
+### Payment
 
 ## Other Cases 
 
