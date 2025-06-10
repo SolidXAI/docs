@@ -122,18 +122,122 @@ This gives you an idea of how you can modify fields which have been added earlie
 This table allows us to configure users of the fees portal, using this model we can create 
 
 ### Institute Fee Type
+Every Institute can configure multiple types of fees, the fields involved are 
+
+| Column Name                | SolidX Type | Advanced Config                                             |
+|----------------------------|-------------|-------------------------------------------------------------|
+| feeType                    | shortText   | required                                                    |
+| institute                  | relation    | required, manyToOne                                         |
+
+<br />
 
 ### Institute Reminder 
 
+This table allows us to store schedule reminder configuration records, the fields involved are 
+
+| Column Name                | SolidX Type | Advanced Config                                             |
+|----------------------------|-------------|-------------------------------------------------------------|
+| scheduleName               | shortText   | required                                                    |
+| isActive                   | boolean     | required                                                    |
+| frequency                  | selectionStatic   | required                                              |
+| startTime                  | time        |                                                             |
+| endTime                    | time        |                                                             |
+| startDate                  | date        |                                                             |
+| endDate                    | date        |                                                             |
+| dayOfWeek                  | selectionStatic   |                                                       | 
+| dayOfMonth                 | int         |                                                             |    
+| lastRunAt                  | datetime    |                                                             |
+| nextRunAt                  | datetime    |                                                             |
+| job                        | selectionStatic   | required                                              | 
+| institute                  | relation          | required                                              | 
+
+<br />
+
 ### Student 
 
+This table allows us to store student records institute wise, the fields involved are 
+
+| Column Name                | SolidX Type | Advanced Config                                             |
+|----------------------------|-------------|-------------------------------------------------------------|
+| studentName                | shortText   | required                                                    |
+| studentEmailAddress        | shortText   |                                                             |
+| studentMobileNumber        | shortText   |                                                             |
+| parentName                 | shortText   | required                                                    |
+| parentMobileNumber         | shortText   | required                                                    |
+| parentEmailAddress         | shortText   |                                                             |
+| studentId                  | shortText   | required                                                    |
+| institute                  | relation    | required, manyToOne                                         |
+
+<br />
+
 ### Payment Collection 
+This table allows us to store payment collection records institute wise, the fields involved are 
+
+| Column Name                | SolidX Type | Advanced Config                                             |
+|----------------------------|-------------|-------------------------------------------------------------|
+| name                       | shortText   | required, unique, indexed, audited & also marked as Userkey |
+| description                | longText    | required                                                    |
+| instituteId                | relation    | required, manyToOne                                         |
+| paymentFile                | mediaSingle | required, 5Mb, default-aws-s3                               |
+
+<br />
 
 ### Payment Collection Item 
 
+This table allows us to store payment collection collected for user, the fields involved are 
+
+| Column Name                | SolidX Type | Advanced Config                                             |
+|----------------------------|-------------|-------------------------------------------------------------|
+| student                    | relation    | required, manyToOne                                         |
+| paymentCollectionRequest   | relation    | required, manyToOne                                         |
+| institute                  | relation    | required, manyToOne                                         |
+| feeType                    | relation    | required, manyToOne                                         |
+| dueDate                    | date        | required                                                    |
+| amountToBePaid             | decimal     | required                                                    |
+| partPaymentAllowed         | boolean     | required                                                    |
+| status                     | selectionStatic    | required                                             |
+| amountPaid                 | decimal    | required                                                     |
+| amountPending              | decimal    | required                                                     |
+| isOverdue                  | boolean    | required                                                     |
+| overdueByDays              | int    | required                                                         |
+
+<br />
+
 ### Payment Collection Item Detail 
 
+This table allows us to store payment collection detail of user, the fields involved are 
+
+| Column Name                | SolidX Type | Advanced Config                                             |
+|----------------------------|-------------|-------------------------------------------------------------|
+| institute                  | relation    | required, manyToOne                                         |
+| student                    | relation    | required, manyToOne                                         |
+| paymentCollectionItem      | relation    | required, manyToOne                                         |
+| paymentDate                | datetime    | required, manyToOne                                         |
+| amountPaid                 | decimal     | required                                                    |
+| isRefunded                 | boolean     |                                                             |
+| status                     | selectionStatic    | required                                             |
+| payment                    | relation    | required, manyToOne                                         |
+
+<br />
+
 ### Payment
+
+This table allows us to store payment records of a user, the fields involved are 
+
+| Column Name                | SolidX Type | Advanced Config                                             |
+|----------------------------|-------------|-------------------------------------------------------------|
+| institute                  | relation    | required, manyToOne                                         |
+| student                    | relation    | required, manyToOne                                         |
+| mSwipeIpgOrderId           | shortText   |                                                             |
+| mSwipeIpgPaymentId         | shortText   |                                                             |
+| mSwipeIpgTransId           | shortText   |                                                             |
+| mSwipeIpgInvoiceId         | shortText   |                                                             |
+| mSwipeEncodedIpgId         | shortText   |                                                             |
+| mSwipeIpgStatus            | shortText   |                                                             |    
+| isRefunded                 | boolean     | required                                                    |
+| paymentStatus              | selectionStatic     |      required                                       |
+
+<br />
 
 ## Other Cases 
 
