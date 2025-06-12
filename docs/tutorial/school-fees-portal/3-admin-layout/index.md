@@ -55,18 +55,386 @@ For now we will arrange the list view & form view of the generate models to make
         "sortable": true,
         "filterable": true
       }
+    },
+    {
+      "type": "field",
+      "attrs": {
+        "name": "logo",
+        "sortable": true,
+        "filterable": true
+      }
+    },
+    {
+      "type": "field",
+      "attrs": {
+        "name": "description",
+        "sortable": true,
+        "filterable": true
+      }
+    },
+    {
+      "type": "field",
+      "attrs": {
+        "name": "hostedPagePrefix",
+        "sortable": true,
+        "filterable": true
+      }
+    },
+    {
+      "type": "field",
+      "attrs": {
+        "name": "paymentGatewayMerchantId",
+        "sortable": true,
+        "filterable": true
+      }
+    },
+    {
+      "type": "field",
+      "attrs": {
+        "name": "paymentGatewayAccessKey",
+        "sortable": true,
+        "filterable": true
+      }
+    },
+    {
+      "type": "field",
+      "attrs": {
+        "name": "paymentGatewayAccessSecret",
+        "sortable": true,
+        "filterable": true
+      }
+    },
+    {
+      "type": "field",
+      "attrs": {
+        "name": "pointOfContactName",
+        "sortable": true,
+        "filterable": true
+      }
+    },
+    {
+      "type": "field",
+      "attrs": {
+        "name": "pointOfContactMobile",
+        "sortable": true,
+        "filterable": true
+      }
+    },
+    {
+      "type": "field",
+      "attrs": {
+        "name": "instituteAddress",
+        "sortable": true,
+        "filterable": true
+      }
+    },
+    {
+      "type": "field",
+      "attrs": {
+        "name": "instituteContactNumber",
+        "sortable": true,
+        "filterable": true
+      }
+    },
+    {
+      "type": "field",
+      "attrs": {
+        "name": "instituteContactEmail",
+        "sortable": true,
+        "filterable": true
+      }
+    },
+    {
+      "type": "field",
+      "attrs": {
+        "name": "pointOfContactEmail",
+        "sortable": true,
+        "filterable": true
+      }
     }
   ]
 }
 ```
 
 ### Form View
+```
+{
+  "type": "form",
+  "attrs": {
+    "name": "form-1",
+    "label": "Institute",
+    "className": "grid"
+  },
+  "children": [
+    {
+      "type": "sheet",
+      "attrs": {
+        "name": "sheet-1"
+      },
+      "children": [
+        {
+          "type": "row",
+          "attrs": {
+            "name": "sheet-1"
+          },
+          "children": [
+            {
+              "type": "column",
+              "attrs": {
+                "name": "group-1",
+                "label": "",
+                "className": "col-6"
+              },
+              "children": [
+                {
+                  "type": "field",
+                  "attrs": {
+                    "name": "instituteName"
+                  }
+                },
+                {
+                  "type": "field",
+                  "attrs": {
+                    "name": "description"
+                  }
+                },
+                {
+                  "type": "field",
+                  "attrs": {
+                    "name": "paymentGatewayMerchantId"
+                  }
+                },
+                {
+                  "type": "field",
+                  "attrs": {
+                    "name": "paymentGatewayAccessSecret"
+                  }
+                },
+                {
+                  "type": "field",
+                  "attrs": {
+                    "name": "pointOfContactMobile"
+                  }
+                },
+                {
+                  "type": "field",
+                  "attrs": {
+                    "name": "instituteContactNumber"
+                  }
+                },
+                {
+                  "type": "field",
+                  "attrs": {
+                    "name": "pointOfContactEmail"
+                  }
+                }
+              ]
+            },
+            {
+              "type": "column",
+              "attrs": {
+                "name": "group-2",
+                "label": "",
+                "className": "col-6"
+              },
+              "children": [
+                {
+                  "type": "field",
+                  "attrs": {
+                    "name": "logo"
+                  }
+                },
+                {
+                  "type": "field",
+                  "attrs": {
+                    "name": "hostedPagePrefix"
+                  }
+                },
+                {
+                  "type": "field",
+                  "attrs": {
+                    "name": "paymentGatewayAccessKey"
+                  }
+                },
+                {
+                  "type": "field",
+                  "attrs": {
+                    "name": "pointOfContactName"
+                  }
+                },
+                {
+                  "type": "field",
+                  "attrs": {
+                    "name": "instituteAddress"
+                  }
+                },
+                {
+                  "type": "field",
+                  "attrs": {
+                    "name": "instituteContactEmail"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
+```
 
 ## Institute User 
 
 ### List View 
-
+```
+{
+   "type": "list",
+   "attrs": {
+      "pagination": true,
+      "pageSizeOptions": [
+         10,
+         25,
+         50
+      ],
+      "enableGlobalSearch": true,
+      "create": true,
+      "edit": true,
+      "delete": true
+   },
+   "children": [
+      {
+         "type": "field",
+         "attrs": {
+            "name": "firstName",
+            "isSearchable": true
+         }
+      },
+      {
+         "type": "field",
+         "attrs": {
+            "name": "lastName",
+            "isSearchable": true
+         }
+      },
+      {
+         "type": "field",
+         "attrs": {
+            "name": "emailAddress",
+            "isSearchable": true
+         }
+      },
+      {
+         "type": "field",
+         "attrs": {
+            "name": "mobileNumber",
+            "isSearchable": true
+         }
+      },
+      {
+         "type": "field",
+         "attrs": {
+            "name": "userType",
+            "isSearchable": true
+         }
+      },
+      {
+         "type": "field",
+         "attrs": {
+            "name": "institute",
+            "isSearchable": true
+         }
+      }
+   ]
+}
+```
 ### Form View
+```
+{
+   "type": "form",
+   "attrs": {
+      "name": "form-1",
+      "label": "Institute User",
+      "className": "grid"
+   },
+   "children": [
+      {
+         "type": "sheet",
+         "attrs": {
+            "name": "sheet-1"
+         },
+         "children": [
+            {
+               "type": "row",
+               "attrs": {
+                  "name": "group-1",
+                  "label": "",
+                  "className": ""
+               },
+               "children": [
+                  {
+                     "type": "column",
+                     "attrs": {
+                        "name": "group-1",
+                        "label": "",
+                        "className": "col-6"
+                     },
+                     "children": [
+                        {
+                           "type": "field",
+                           "attrs": {
+                              "name": "firstName"
+                           }
+                        },
+                        {
+                           "type": "field",
+                           "attrs": {
+                              "name": "lastName"
+                           }
+                        },
+                        {
+                           "type": "field",
+                           "attrs": {
+                              "name": "emailAddress"
+                           }
+                        }
+                     ]
+                  },
+                  {
+                     "type": "column",
+                     "attrs": {
+                        "name": "group-2",
+                        "label": "",
+                        "className": "col-6"
+                     },
+                     "children": [
+                        {
+                           "type": "field",
+                           "attrs": {
+                              "name": "mobileNumber"
+                           }
+                        },
+                        {
+                           "type": "field",
+                           "attrs": {
+                              "name": "userType"
+                           }
+                        },
+                        {
+                           "type": "field",
+                           "attrs": {
+                              "name": "institute"
+                           }
+                        }
+                     ]
+                  }
+               ]
+            }
+         ]
+      }
+   ]
+}
+```
 
 ## Institute Fee Type
 
@@ -116,7 +484,66 @@ For now we will arrange the list view & form view of the generate models to make
 ```
 
 ### Form View
-
+```
+{
+  "type": "form",
+  "attrs": {
+    "name": "form-1",
+    "label": "Fee Type",
+    "className": "grid"
+  },
+  "children": [
+    {
+      "type": "sheet",
+      "attrs": {
+        "name": "sheet-1"
+      },
+      "children": [
+        {
+          "type": "row",
+          "attrs": {
+            "name": "sheet-1"
+          },
+          "children": [
+            {
+              "type": "column",
+              "attrs": {
+                "name": "group-1",
+                "label": "",
+                "className": "col-6"
+              },
+              "children": [
+                {
+                  "type": "field",
+                  "attrs": {
+                    "name": "feeType"
+                  }
+                }
+              ]
+            },
+            {
+              "type": "column",
+              "attrs": {
+                "name": "group-2",
+                "label": "",
+                "className": "col-6"
+              },
+              "children": [
+                {
+                  "type": "field",
+                  "attrs": {
+                    "name": "institute"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
+```
 ## Institute Reminder 
 
 ### List View 
@@ -253,7 +680,132 @@ For now we will arrange the list view & form view of the generate models to make
 ```
 
 ### Form View
-
+```
+{
+  "type": "form",
+  "attrs": {
+    "name": "form-1",
+    "label": "Institute Reminder",
+    "className": "grid"
+  },
+  "children": [
+    {
+      "type": "sheet",
+      "attrs": {
+        "name": "sheet-1"
+      },
+      "children": [
+        {
+          "type": "row",
+          "attrs": {
+            "name": "sheet-1"
+          },
+          "children": [
+            {
+              "type": "column",
+              "attrs": {
+                "name": "group-1",
+                "label": "",
+                "className": "col-6"
+              },
+              "children": [
+                {
+                  "type": "field",
+                  "attrs": {
+                    "name": "scheduleName"
+                  }
+                },
+                {
+                  "type": "field",
+                  "attrs": {
+                    "name": "frequency"
+                  }
+                },
+                {
+                  "type": "field",
+                  "attrs": {
+                    "name": "endTime"
+                  }
+                },
+                {
+                  "type": "field",
+                  "attrs": {
+                    "name": "endDate"
+                  }
+                },
+                {
+                  "type": "field",
+                  "attrs": {
+                    "name": "lastRunAt"
+                  }
+                },
+                {
+                  "type": "field",
+                  "attrs": {
+                    "name": "institute"
+                  }
+                },
+                {
+                  "type": "field",
+                  "attrs": {
+                    "name": "job"
+                  }
+                }
+              ]
+            },
+            {
+              "type": "column",
+              "attrs": {
+                "name": "group-2",
+                "label": "",
+                "className": "col-6"
+              },
+              "children": [
+                {
+                  "type": "field",
+                  "attrs": {
+                    "name": "isActive"
+                  }
+                },
+                {
+                  "type": "field",
+                  "attrs": {
+                    "name": "startTime"
+                  }
+                },
+                {
+                  "type": "field",
+                  "attrs": {
+                    "name": "startDate"
+                  }
+                },
+                {
+                  "type": "field",
+                  "attrs": {
+                    "name": "dayOfMonth"
+                  }
+                },
+                {
+                  "type": "field",
+                  "attrs": {
+                    "name": "nextRunAt"
+                  }
+                },
+                {
+                  "type": "field",
+                  "attrs": {
+                    "name": "dayOfWeek"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
+```
 ## Student 
 
 ### List View 
@@ -344,61 +896,108 @@ For now we will arrange the list view & form view of the generate models to make
         "sortable": true,
         "filterable": true
       }
-    },
-    {
-      "type": "field",
-      "attrs": {
-        "name": "paymentCollectionItems",
-        "sortable": true,
-        "filterable": true
-      }
-    },
-    {
-      "type": "field",
-      "attrs": {
-        "name": "paymentCollectionItemDetails",
-        "sortable": true,
-        "filterable": true
-      }
-    },
-    {
-      "type": "field",
-      "attrs": {
-        "name": "payments",
-        "sortable": true,
-        "filterable": true
-      }
-    },
-    {
-      "type": "field",
-      "attrs": {
-        "name": "paymentCollectionItems",
-        "sortable": true,
-        "filterable": true
-      }
-    },
-    {
-      "type": "field",
-      "attrs": {
-        "name": "paymentCollectionItems",
-        "sortable": true,
-        "filterable": true
-      }
-    },
-    {
-      "type": "field",
-      "attrs": {
-        "name": "paymentCollectionItemDetails",
-        "sortable": true,
-        "filterable": true
-      }
     }
   ]
 }
 ```
 
 ### Form View
-
+```
+{
+  "type": "form",
+  "attrs": {
+    "name": "form-1",
+    "label": "Student",
+    "className": "grid"
+  },
+  "children": [
+    {
+      "type": "sheet",
+      "attrs": {
+        "name": "sheet-1"
+      },
+      "children": [
+        {
+          "type": "row",
+          "attrs": {
+            "name": "sheet-1"
+          },
+          "children": [
+            {
+              "type": "column",
+              "attrs": {
+                "name": "group-1",
+                "label": "",
+                "className": "col-6"
+              },
+              "children": [
+                {
+                  "type": "field",
+                  "attrs": {
+                    "name": "studentName"
+                  }
+                },
+                {
+                  "type": "field",
+                  "attrs": {
+                    "name": "studentMobileNumber"
+                  }
+                },
+                {
+                  "type": "field",
+                  "attrs": {
+                    "name": "parentMobileNumber"
+                  }
+                },
+                {
+                  "type": "field",
+                  "attrs": {
+                    "name": "studentId"
+                  }
+                }
+              ]
+            },
+            {
+              "type": "column",
+              "attrs": {
+                "name": "group-2",
+                "label": "",
+                "className": "col-6"
+              },
+              "children": [
+                {
+                  "type": "field",
+                  "attrs": {
+                    "name": "studentEmailAddress"
+                  }
+                },
+                {
+                  "type": "field",
+                  "attrs": {
+                    "name": "parentName"
+                  }
+                },
+                {
+                  "type": "field",
+                  "attrs": {
+                    "name": "parentEmailAddress"
+                  }
+                },
+                {
+                  "type": "field",
+                  "attrs": {
+                    "name": "institute"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
+```
 ## Payment Collection 
 
 ### List View 
@@ -457,37 +1056,84 @@ For now we will arrange the list view & form view of the generate models to make
         "sortable": true,
         "filterable": true
       }
-    },
-    {
-      "type": "field",
-      "attrs": {
-        "name": "paymentCollectionItems",
-        "sortable": true,
-        "filterable": true
-      }
-    },
-    {
-      "type": "field",
-      "attrs": {
-        "name": "paymentCollectionItems",
-        "sortable": true,
-        "filterable": true
-      }
-    },
-    {
-      "type": "field",
-      "attrs": {
-        "name": "paymentCollectionItems",
-        "sortable": true,
-        "filterable": true
-      }
     }
   ]
 }
 ```
 
 ### Form View
-
+```
+{
+  "type": "form",
+  "attrs": {
+    "name": "form-1",
+    "label": "Payment Collection",
+    "className": "grid"
+  },
+  "children": [
+    {
+      "type": "sheet",
+      "attrs": {
+        "name": "sheet-1"
+      },
+      "children": [
+        {
+          "type": "row",
+          "attrs": {
+            "name": "sheet-1"
+          },
+          "children": [
+            {
+              "type": "column",
+              "attrs": {
+                "name": "group-1",
+                "label": "",
+                "className": "col-6"
+              },
+              "children": [
+                {
+                  "type": "field",
+                  "attrs": {
+                    "name": "name"
+                  }
+                },
+                {
+                  "type": "field",
+                  "attrs": {
+                    "name": "institute"
+                  }
+                }
+              ]
+            },
+            {
+              "type": "column",
+              "attrs": {
+                "name": "group-2",
+                "label": "",
+                "className": "col-6"
+              },
+              "children": [
+                {
+                  "type": "field",
+                  "attrs": {
+                    "name": "description"
+                  }
+                },
+                {
+                  "type": "field",
+                  "attrs": {
+                    "name": "paymentFile"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
+```
 ## Payment Collection Item 
 
 ### List View 
@@ -526,7 +1172,7 @@ For now we will arrange the list view & form view of the generate models to make
     {
       "type": "field",
       "attrs": {
-        "name": "paymentCollectionRequest",
+        "name": "paymentCollection",
         "sortable": true,
         "filterable": true
       }
@@ -582,14 +1228,6 @@ For now we will arrange the list view & form view of the generate models to make
     {
       "type": "field",
       "attrs": {
-        "name": "paymentCollectionItemDetails",
-        "sortable": true,
-        "filterable": true
-      }
-    },
-    {
-      "type": "field",
-      "attrs": {
         "name": "amountPaid",
         "sortable": true,
         "filterable": true
@@ -618,37 +1256,132 @@ For now we will arrange the list view & form view of the generate models to make
         "sortable": true,
         "filterable": true
       }
-    },
-    {
-      "type": "field",
-      "attrs": {
-        "name": "paymentCollectionItemDetails",
-        "sortable": true,
-        "filterable": true
-      }
-    },
-    {
-      "type": "field",
-      "attrs": {
-        "name": "paymentCollectionItemDetails",
-        "sortable": true,
-        "filterable": true
-      }
-    },
-    {
-      "type": "field",
-      "attrs": {
-        "name": "paymentCollectionItemDetails",
-        "sortable": true,
-        "filterable": true
-      }
     }
   ]
 }
 ```
 
 ### Form View
-
+```
+{
+  "type": "form",
+  "attrs": {
+    "name": "form-1",
+    "label": "Payment Collection Item",
+    "className": "grid"
+  },
+  "children": [
+    {
+      "type": "sheet",
+      "attrs": {
+        "name": "sheet-1"
+      },
+      "children": [
+        {
+          "type": "row",
+          "attrs": {
+            "name": "sheet-1"
+          },
+          "children": [
+            {
+              "type": "column",
+              "attrs": {
+                "name": "group-1",
+                "label": "",
+                "className": "col-6"
+              },
+              "children": [
+                {
+                  "type": "field",
+                  "attrs": {
+                    "name": "student"
+                  }
+                },
+                {
+                  "type": "field",
+                  "attrs": {
+                    "name": "institute"
+                  }
+                },
+                {
+                  "type": "field",
+                  "attrs": {
+                    "name": "dueDate"
+                  }
+                },
+                {
+                  "type": "field",
+                  "attrs": {
+                    "name": "partPaymentAllowed"
+                  }
+                },
+                {
+                  "type": "field",
+                  "attrs": {
+                    "name": "amountPaid"
+                  }
+                },
+                {
+                  "type": "field",
+                  "attrs": {
+                    "name": "isOverdue"
+                  }
+                }
+              ]
+            },
+            {
+              "type": "column",
+              "attrs": {
+                "name": "group-2",
+                "label": "",
+                "className": "col-6"
+              },
+              "children": [
+                {
+                  "type": "field",
+                  "attrs": {
+                    "name": "paymentCollection"
+                  }
+                },
+                {
+                  "type": "field",
+                  "attrs": {
+                    "name": "feeType"
+                  }
+                },
+                {
+                  "type": "field",
+                  "attrs": {
+                    "name": "amountToBePaid"
+                  }
+                },
+                {
+                  "type": "field",
+                  "attrs": {
+                    "name": "status"
+                  }
+                },
+                {
+                  "type": "field",
+                  "attrs": {
+                    "name": "amountPending"
+                  }
+                },
+                {
+                  "type": "field",
+                  "attrs": {
+                    "name": "overdueByDays"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
+```
 ## Payment Collection Item Detail 
 
 ### List View 
@@ -727,22 +1460,6 @@ For now we will arrange the list view & form view of the generate models to make
     {
       "type": "field",
       "attrs": {
-        "name": "paymentCollectionItem",
-        "sortable": true,
-        "filterable": true
-      }
-    },
-    {
-      "type": "field",
-      "attrs": {
-        "name": "paymentCollectionItem",
-        "sortable": true,
-        "filterable": true
-      }
-    },
-    {
-      "type": "field",
-      "attrs": {
         "name": "payment",
         "sortable": true,
         "filterable": true
@@ -753,6 +1470,96 @@ For now we will arrange the list view & form view of the generate models to make
 ```
 
 ### Form View
+```
+{
+  "type": "form",
+  "attrs": {
+    "name": "form-1",
+    "label": "Payment Collection Item Detail",
+    "className": "grid"
+  },
+  "children": [
+    {
+      "type": "sheet",
+      "attrs": {
+        "name": "sheet-1"
+      },
+      "children": [
+        {
+          "type": "row",
+          "attrs": {
+            "name": "sheet-1"
+          },
+          "children": [
+            {
+              "type": "column",
+              "attrs": {
+                "name": "group-1",
+                "label": "",
+                "className": "col-6"
+              },
+              "children": [
+                {
+                  "type": "field",
+                  "attrs": {
+                    "name": "institute"
+                  }
+                },
+                {
+                  "type": "field",
+                  "attrs": {
+                    "name": "paymentCollectionItem"
+                  }
+                },
+                {
+                  "type": "field",
+                  "attrs": {
+                    "name": "amountPaid"
+                  }
+                },
+                {
+                  "type": "field",
+                  "attrs": {
+                    "name": "payment"
+                  }
+                }
+              ]
+            },
+            {
+              "type": "column",
+              "attrs": {
+                "name": "group-2",
+                "label": "",
+                "className": "col-6"
+              },
+              "children": [
+                {
+                  "type": "field",
+                  "attrs": {
+                    "name": "student"
+                  }
+                },
+                {
+                  "type": "field",
+                  "attrs": {
+                    "name": "paymentDate"
+                  }
+                },
+                {
+                  "type": "field",
+                  "attrs": {
+                    "name": "isRefunded"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
+```
 
 ## Payment
 
@@ -868,18 +1675,123 @@ For now we will arrange the list view & form view of the generate models to make
         "sortable": true,
         "filterable": true
       }
-    },
-    {
-      "type": "field",
-      "attrs": {
-        "name": "paymentCollectionItemDetails",
-        "sortable": true,
-        "filterable": true
-      }
     }
   ]
 }
 ```
 
 ### Form View
- 
+ ```
+ {
+  "type": "form",
+  "attrs": {
+    "name": "form-1",
+    "label": "Payment",
+    "className": "grid"
+  },
+  "children": [
+    {
+      "type": "sheet",
+      "attrs": {
+        "name": "sheet-1"
+      },
+      "children": [
+        {
+          "type": "row",
+          "attrs": {
+            "name": "sheet-1"
+          },
+          "children": [
+            {
+              "type": "column",
+              "attrs": {
+                "name": "group-1",
+                "label": "",
+                "className": "col-6"
+              },
+              "children": [
+                {
+                  "type": "field",
+                  "attrs": {
+                    "name": "institute"
+                  }
+                },
+                {
+                  "type": "field",
+                  "attrs": {
+                    "name": "mSwipeIpgOrderId"
+                  }
+                },
+                {
+                  "type": "field",
+                  "attrs": {
+                    "name": "mSwipeIpgTransId"
+                  }
+                },
+                {
+                  "type": "field",
+                  "attrs": {
+                    "name": "mSwipeEncodedIpgId"
+                  }
+                },
+                {
+                  "type": "field",
+                  "attrs": {
+                    "name": "amount"
+                  }
+                },
+                {
+                  "type": "field",
+                  "attrs": {
+                    "name": "paymentStatus"
+                  }
+                }
+              ]
+            },
+            {
+              "type": "column",
+              "attrs": {
+                "name": "group-2",
+                "label": "",
+                "className": "col-6"
+              },
+              "children": [
+                {
+                  "type": "field",
+                  "attrs": {
+                    "name": "student"
+                  }
+                },
+                {
+                  "type": "field",
+                  "attrs": {
+                    "name": "mSwipeIpgPaymentId"
+                  }
+                },
+                {
+                  "type": "field",
+                  "attrs": {
+                    "name": "mSwipeIpgInvoiceId"
+                  }
+                },
+                {
+                  "type": "field",
+                  "attrs": {
+                    "name": "mSwipeIpgStatus"
+                  }
+                },
+                {
+                  "type": "field",
+                  "attrs": {
+                    "name": "isRefunded"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
+ ```
