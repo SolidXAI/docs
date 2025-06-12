@@ -173,106 +173,265 @@ For now we will arrange the list view & form view of the generate models to make
       },
       "children": [
         {
-          "type": "row",
+          "type": "notebook",
           "attrs": {
-            "name": "sheet-1"
+            "name": "notebook-1"
           },
           "children": [
             {
-              "type": "column",
+              "type": "page",
               "attrs": {
-                "name": "group-1",
-                "label": "",
-                "className": "col-6"
+                "name": "page-1",
+                "label": "Institutes"
               },
               "children": [
                 {
-                  "type": "field",
+                  "type": "row",
                   "attrs": {
-                    "name": "instituteName"
-                  }
-                },
-                {
-                  "type": "field",
-                  "attrs": {
-                    "name": "description"
-                  }
-                },
-                {
-                  "type": "field",
-                  "attrs": {
-                    "name": "paymentGatewayMerchantId"
-                  }
-                },
-                {
-                  "type": "field",
-                  "attrs": {
-                    "name": "paymentGatewayAccessSecret"
-                  }
-                },
-                {
-                  "type": "field",
-                  "attrs": {
-                    "name": "pointOfContactMobile"
-                  }
-                },
-                {
-                  "type": "field",
-                  "attrs": {
-                    "name": "instituteContactNumber"
-                  }
-                },
-                {
-                  "type": "field",
-                  "attrs": {
-                    "name": "pointOfContactEmail"
-                  }
+                    "name": "sheet-1"
+                  },
+                  "children": [
+                    {
+                      "type": "column",
+                      "attrs": {
+                        "name": "group-1",
+                        "label": "Institutes Basic",
+                        "className": "col-6"
+                      },
+                      "children": [
+                        {
+                          "type": "field",
+                          "attrs": {
+                            "name": "instituteName"
+                          }
+                        },
+                        {
+                          "type": "field",
+                          "attrs": {
+                            "name": "description"
+                          }
+                        },
+                        {
+                          "type": "field",
+                          "attrs": {
+                            "name": "instituteAddress",
+                            "disabled": true
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "type": "column",
+                      "attrs": {
+                        "name": "group-1",
+                        "label": "Institutes Contact",
+                        "className": "col-6"
+                      },
+                      "children": [
+                        {
+                          "type": "field",
+                          "attrs": {
+                            "name": "instituteContactNumber",
+                            "disabled": true
+                          }
+                        },
+                        {
+                          "type": "field",
+                          "attrs": {
+                            "name": "instituteContactEmail",
+                            "disabled": true
+                          }
+                        },
+                        {
+                          "type": "field",
+                          "attrs": {
+                            "name": "hostedPagePrefix",
+                            "disabled": true
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "type": "column",
+                      "attrs": {
+                        "name": "group-1",
+                        "label": "Institutes Logo",
+                        "className": "col-12"
+                      },
+                      "children": [
+                        {
+                          "type": "field",
+                          "attrs": {
+                            "name": "logo",
+                            "disabled": true
+                          }
+                        }
+                      ]
+                    }
+                  ]
                 }
               ]
             },
             {
-              "type": "column",
+              "type": "page",
               "attrs": {
-                "name": "group-2",
-                "label": "",
-                "className": "col-6"
+                "name": "page-2",
+                "label": "Payment Gateway Details"
               },
               "children": [
                 {
-                  "type": "field",
+                  "type": "row",
                   "attrs": {
-                    "name": "logo"
-                  }
-                },
+                    "name": "sheet-1"
+                  },
+                  "children": [
+                    {
+                      "type": "column",
+                      "attrs": {
+                        "name": "group-1",
+                        "label": "Payment Gateway Details",
+                        "className": "col-6"
+                      },
+                      "children": [
+                        {
+                          "type": "field",
+                          "attrs": {
+                            "name": "paymentGatewayMerchantId"
+                          }
+                        },
+                        {
+                          "type": "field",
+                          "attrs": {
+                            "name": "paymentGatewayAccessKey"
+                          }
+                        },
+                        {
+                          "type": "field",
+                          "attrs": {
+                            "name": "paymentGatewayAccessSecret"
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "page",
+              "attrs": {
+                "name": "page-3",
+                "label": "Contacts"
+              },
+              "children": [
                 {
-                  "type": "field",
+                  "type": "row",
                   "attrs": {
-                    "name": "hostedPagePrefix"
-                  }
-                },
+                    "name": "sheet-1"
+                  },
+                  "children": [
+                    {
+                      "type": "column",
+                      "attrs": {
+                        "name": "group-1",
+                        "label": "Contacts",
+                        "className": "col-6"
+                      },
+                      "children": [
+                        {
+                          "type": "field",
+                          "attrs": {
+                            "name": "pointOfContactName"
+                          }
+                        },
+                        {
+                          "type": "field",
+                          "attrs": {
+                            "name": "pointOfContactMobile"
+                          }
+                        },
+                        {
+                          "type": "field",
+                          "attrs": {
+                            "name": "pointOfContactEmail"
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+
+            {
+              "type": "page",
+              "attrs": {
+                "name": "page-5",
+                "label": "Fee Types"
+              },
+              "children": [
                 {
-                  "type": "field",
+                  "type": "row",
                   "attrs": {
-                    "name": "paymentGatewayAccessKey"
-                  }
-                },
+                    "name": "sheet-1"
+                  },
+                  "children": [
+                    {
+                      "type": "column",
+                      "attrs": {
+                        "name": "group-1",
+                        "label": "Fee Types",
+                        "className": "col-12"
+                      },
+                      "children": [
+                        {
+                          "type": "field",
+                          "attrs": {
+                            "name": "feeTypes",
+                            "inlineCreate": "true",
+                            "showFieldLabel": false,
+                            "showLabel": false
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "page",
+              "attrs": {
+                "name": "page-6",
+                "label": "Institute Users"
+              },
+              "children": [
                 {
-                  "type": "field",
+                  "type": "row",
                   "attrs": {
-                    "name": "pointOfContactName"
-                  }
-                },
-                {
-                  "type": "field",
-                  "attrs": {
-                    "name": "instituteAddress"
-                  }
-                },
-                {
-                  "type": "field",
-                  "attrs": {
-                    "name": "instituteContactEmail"
-                  }
+                    "name": "sheet-1"
+                  },
+                  "children": [
+                    {
+                      "type": "column",
+                      "attrs": {
+                        "name": "group-1",
+                        "label": "Institute Users",
+                        "className": "col-12"
+                      },
+                      "children": [
+                        {
+                          "type": "field",
+                          "attrs": {
+                            "name": "instituteUsers",
+                            "inlineCreate": "false",
+                            "showFieldLabel": false,
+                            "showLabel": false
+                          }
+                        }
+                      ]
+                    }
+                  ]
                 }
               ]
             }
@@ -351,88 +510,141 @@ For now we will arrange the list view & form view of the generate models to make
 ### Form View
 ```
 {
-   "type": "form",
-   "attrs": {
-      "name": "form-1",
-      "label": "Institute User",
-      "className": "grid"
-   },
-   "children": [
-      {
-         "type": "sheet",
-         "attrs": {
-            "name": "sheet-1"
-         },
-         "children": [
+  "type": "form",
+  "attrs": {
+    "name": "form-1",
+    "label": "View Metadata",
+    "className": "grid"
+  },
+  "children": [
+    {
+      "type": "sheet",
+      "attrs": {
+        "name": "sheet-1"
+      },
+      "children": [
+        {
+          "type": "notebook",
+          "attrs": {
+            "name": "notebook-1"
+          },
+          "children": [
             {
-               "type": "row",
-               "attrs": {
-                  "name": "group-1",
-                  "label": "",
-                  "className": ""
-               },
-               "children": [
-                  {
-                     "type": "column",
-                     "attrs": {
-                        "name": "group-1",
-                        "label": "",
-                        "className": "col-6"
-                     },
-                     "children": [
-                        {
-                           "type": "field",
-                           "attrs": {
-                              "name": "firstName"
-                           }
-                        },
-                        {
-                           "type": "field",
-                           "attrs": {
-                              "name": "lastName"
-                           }
-                        },
-                        {
-                           "type": "field",
-                           "attrs": {
-                              "name": "emailAddress"
-                           }
-                        }
-                     ]
+              "type": "page",
+              "attrs": {
+                "name": "page-1",
+                "label": "General Info"
+              },
+              "children": [
+                {
+                  "type": "row",
+                  "attrs": {
+                    "name": "page-1-row-1",
+                    "label": "",
+                    "className": ""
                   },
-                  {
-                     "type": "column",
-                     "attrs": {
-                        "name": "group-2",
+                  "children": [
+                    {
+                      "type": "column",
+                      "attrs": {
+                        "name": "page-1-row-1-col-1",
                         "label": "",
                         "className": "col-6"
-                     },
-                     "children": [
+                      },
+                      "children": [
                         {
-                           "type": "field",
-                           "attrs": {
-                              "name": "mobileNumber"
-                           }
+                          "type": "field",
+                          "attrs": {
+                            "name": "name"
+                          }
                         },
                         {
-                           "type": "field",
-                           "attrs": {
-                              "name": "userType"
-                           }
+                          "type": "field",
+                          "attrs": {
+                            "name": "displayName"
+                          }
                         },
                         {
-                           "type": "field",
-                           "attrs": {
-                              "name": "institute"
-                           }
+                          "type": "field",
+                          "attrs": {
+                            "name": "type"
+                          }
+                        },
+                        {
+                          "type": "field",
+                          "attrs": {
+                            "name": "module"
+                          }
+                        },
+                        {
+                          "type": "field",
+                          "attrs": {
+                            "name": "model"
+                          }
                         }
-                     ]
-                  }
-               ]
+                      ]
+                    },
+                    {
+                      "type": "column",
+                      "attrs": {
+                        "name": "page-1-row-1-col-2",
+                        "label": "",
+                        "className": "col-6"
+                      },
+                      "children": [
+                        {
+                          "type": "field",
+                          "attrs": {
+                            "name": "context"
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "page",
+              "attrs": {
+                "name": "page-2",
+                "label": "Layout"
+              },
+              "children": [
+                {
+                  "type": "row",
+                  "attrs": {
+                    "name": "page-2-row-1",
+                    "label": "",
+                    "className": ""
+                  },
+                  "children": [
+                    {
+                      "type": "column",
+                      "attrs": {
+                        "name": "page-2-row-1-col-1",
+                        "label": "",
+                        "className": "col-12"
+                      },
+                      "children": [
+                        {
+                          "type": "field",
+                          "attrs": {
+                            "name": "layout",
+                            "height": "80vh"
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
             }
-         ]
-      }
-   ]
+          ]
+        }
+      ]
+    }
+  ]
 }
 ```
 
@@ -489,7 +701,7 @@ For now we will arrange the list view & form view of the generate models to make
   "type": "form",
   "attrs": {
     "name": "form-1",
-    "label": "Fee Type",
+    "label": "View Metadata",
     "className": "grid"
   },
   "children": [
@@ -500,40 +712,119 @@ For now we will arrange the list view & form view of the generate models to make
       },
       "children": [
         {
-          "type": "row",
+          "type": "notebook",
           "attrs": {
-            "name": "sheet-1"
+            "name": "notebook-1"
           },
           "children": [
             {
-              "type": "column",
+              "type": "page",
               "attrs": {
-                "name": "group-1",
-                "label": "",
-                "className": "col-6"
+                "name": "page-1",
+                "label": "General Info"
               },
               "children": [
                 {
-                  "type": "field",
+                  "type": "row",
                   "attrs": {
-                    "name": "feeType"
-                  }
+                    "name": "page-1-row-1",
+                    "label": "",
+                    "className": ""
+                  },
+                  "children": [
+                    {
+                      "type": "column",
+                      "attrs": {
+                        "name": "page-1-row-1-col-1",
+                        "label": "",
+                        "className": "col-6"
+                      },
+                      "children": [
+                        {
+                          "type": "field",
+                          "attrs": {
+                            "name": "name"
+                          }
+                        },
+                        {
+                          "type": "field",
+                          "attrs": {
+                            "name": "displayName"
+                          }
+                        },
+                        {
+                          "type": "field",
+                          "attrs": {
+                            "name": "type"
+                          }
+                        },
+                        {
+                          "type": "field",
+                          "attrs": {
+                            "name": "module"
+                          }
+                        },
+                        {
+                          "type": "field",
+                          "attrs": {
+                            "name": "model"
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "type": "column",
+                      "attrs": {
+                        "name": "page-1-row-1-col-2",
+                        "label": "",
+                        "className": "col-6"
+                      },
+                      "children": [
+                        {
+                          "type": "field",
+                          "attrs": {
+                            "name": "context"
+                          }
+                        }
+                      ]
+                    }
+                  ]
                 }
               ]
             },
             {
-              "type": "column",
+              "type": "page",
               "attrs": {
-                "name": "group-2",
-                "label": "",
-                "className": "col-6"
+                "name": "page-2",
+                "label": "Layout"
               },
               "children": [
                 {
-                  "type": "field",
+                  "type": "row",
                   "attrs": {
-                    "name": "institute"
-                  }
+                    "name": "page-2-row-1",
+                    "label": "",
+                    "className": ""
+                  },
+                  "children": [
+                    {
+                      "type": "column",
+                      "attrs": {
+                        "name": "page-2-row-1-col-1",
+                        "label": "",
+                        "className": "col-12"
+                      },
+                      "children": [
+                        {
+                          "type": "field",
+                          "attrs": {
+                            "name": "layout",
+                            "height": "80vh"
+                          }
+                        }
+                      ]
+                    }
+                  ]
                 }
               ]
             }
@@ -685,7 +976,7 @@ For now we will arrange the list view & form view of the generate models to make
   "type": "form",
   "attrs": {
     "name": "form-1",
-    "label": "Institute Reminder",
+    "label": "View Metadata",
     "className": "grid"
   },
   "children": [
@@ -696,106 +987,119 @@ For now we will arrange the list view & form view of the generate models to make
       },
       "children": [
         {
-          "type": "row",
+          "type": "notebook",
           "attrs": {
-            "name": "sheet-1"
+            "name": "notebook-1"
           },
           "children": [
             {
-              "type": "column",
+              "type": "page",
               "attrs": {
-                "name": "group-1",
-                "label": "",
-                "className": "col-6"
+                "name": "page-1",
+                "label": "General Info"
               },
               "children": [
                 {
-                  "type": "field",
+                  "type": "row",
                   "attrs": {
-                    "name": "scheduleName"
-                  }
-                },
-                {
-                  "type": "field",
-                  "attrs": {
-                    "name": "frequency"
-                  }
-                },
-                {
-                  "type": "field",
-                  "attrs": {
-                    "name": "endTime"
-                  }
-                },
-                {
-                  "type": "field",
-                  "attrs": {
-                    "name": "endDate"
-                  }
-                },
-                {
-                  "type": "field",
-                  "attrs": {
-                    "name": "lastRunAt"
-                  }
-                },
-                {
-                  "type": "field",
-                  "attrs": {
-                    "name": "institute"
-                  }
-                },
-                {
-                  "type": "field",
-                  "attrs": {
-                    "name": "job"
-                  }
+                    "name": "page-1-row-1",
+                    "label": "",
+                    "className": ""
+                  },
+                  "children": [
+                    {
+                      "type": "column",
+                      "attrs": {
+                        "name": "page-1-row-1-col-1",
+                        "label": "",
+                        "className": "col-6"
+                      },
+                      "children": [
+                        {
+                          "type": "field",
+                          "attrs": {
+                            "name": "name"
+                          }
+                        },
+                        {
+                          "type": "field",
+                          "attrs": {
+                            "name": "displayName"
+                          }
+                        },
+                        {
+                          "type": "field",
+                          "attrs": {
+                            "name": "type"
+                          }
+                        },
+                        {
+                          "type": "field",
+                          "attrs": {
+                            "name": "module"
+                          }
+                        },
+                        {
+                          "type": "field",
+                          "attrs": {
+                            "name": "model"
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "type": "column",
+                      "attrs": {
+                        "name": "page-1-row-1-col-2",
+                        "label": "",
+                        "className": "col-6"
+                      },
+                      "children": [
+                        {
+                          "type": "field",
+                          "attrs": {
+                            "name": "context"
+                          }
+                        }
+                      ]
+                    }
+                  ]
                 }
               ]
             },
             {
-              "type": "column",
+              "type": "page",
               "attrs": {
-                "name": "group-2",
-                "label": "",
-                "className": "col-6"
+                "name": "page-2",
+                "label": "Layout"
               },
               "children": [
                 {
-                  "type": "field",
+                  "type": "row",
                   "attrs": {
-                    "name": "isActive"
-                  }
-                },
-                {
-                  "type": "field",
-                  "attrs": {
-                    "name": "startTime"
-                  }
-                },
-                {
-                  "type": "field",
-                  "attrs": {
-                    "name": "startDate"
-                  }
-                },
-                {
-                  "type": "field",
-                  "attrs": {
-                    "name": "dayOfMonth"
-                  }
-                },
-                {
-                  "type": "field",
-                  "attrs": {
-                    "name": "nextRunAt"
-                  }
-                },
-                {
-                  "type": "field",
-                  "attrs": {
-                    "name": "dayOfWeek"
-                  }
+                    "name": "page-2-row-1",
+                    "label": "",
+                    "className": ""
+                  },
+                  "children": [
+                    {
+                      "type": "column",
+                      "attrs": {
+                        "name": "page-2-row-1-col-1",
+                        "label": "",
+                        "className": "col-12"
+                      },
+                      "children": [
+                        {
+                          "type": "field",
+                          "attrs": {
+                            "name": "layout",
+                            "height": "80vh"
+                          }
+                        }
+                      ]
+                    }
+                  ]
                 }
               ]
             }
@@ -907,7 +1211,7 @@ For now we will arrange the list view & form view of the generate models to make
   "type": "form",
   "attrs": {
     "name": "form-1",
-    "label": "Student",
+    "label": "View Metadata",
     "className": "grid"
   },
   "children": [
@@ -918,76 +1222,119 @@ For now we will arrange the list view & form view of the generate models to make
       },
       "children": [
         {
-          "type": "row",
+          "type": "notebook",
           "attrs": {
-            "name": "sheet-1"
+            "name": "notebook-1"
           },
           "children": [
             {
-              "type": "column",
+              "type": "page",
               "attrs": {
-                "name": "group-1",
-                "label": "",
-                "className": "col-6"
+                "name": "page-1",
+                "label": "General Info"
               },
               "children": [
                 {
-                  "type": "field",
+                  "type": "row",
                   "attrs": {
-                    "name": "studentName"
-                  }
-                },
-                {
-                  "type": "field",
-                  "attrs": {
-                    "name": "studentMobileNumber"
-                  }
-                },
-                {
-                  "type": "field",
-                  "attrs": {
-                    "name": "parentMobileNumber"
-                  }
-                },
-                {
-                  "type": "field",
-                  "attrs": {
-                    "name": "studentId"
-                  }
+                    "name": "page-1-row-1",
+                    "label": "",
+                    "className": ""
+                  },
+                  "children": [
+                    {
+                      "type": "column",
+                      "attrs": {
+                        "name": "page-1-row-1-col-1",
+                        "label": "",
+                        "className": "col-6"
+                      },
+                      "children": [
+                        {
+                          "type": "field",
+                          "attrs": {
+                            "name": "name"
+                          }
+                        },
+                        {
+                          "type": "field",
+                          "attrs": {
+                            "name": "displayName"
+                          }
+                        },
+                        {
+                          "type": "field",
+                          "attrs": {
+                            "name": "type"
+                          }
+                        },
+                        {
+                          "type": "field",
+                          "attrs": {
+                            "name": "module"
+                          }
+                        },
+                        {
+                          "type": "field",
+                          "attrs": {
+                            "name": "model"
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "type": "column",
+                      "attrs": {
+                        "name": "page-1-row-1-col-2",
+                        "label": "",
+                        "className": "col-6"
+                      },
+                      "children": [
+                        {
+                          "type": "field",
+                          "attrs": {
+                            "name": "context"
+                          }
+                        }
+                      ]
+                    }
+                  ]
                 }
               ]
             },
             {
-              "type": "column",
+              "type": "page",
               "attrs": {
-                "name": "group-2",
-                "label": "",
-                "className": "col-6"
+                "name": "page-2",
+                "label": "Layout"
               },
               "children": [
                 {
-                  "type": "field",
+                  "type": "row",
                   "attrs": {
-                    "name": "studentEmailAddress"
-                  }
-                },
-                {
-                  "type": "field",
-                  "attrs": {
-                    "name": "parentName"
-                  }
-                },
-                {
-                  "type": "field",
-                  "attrs": {
-                    "name": "parentEmailAddress"
-                  }
-                },
-                {
-                  "type": "field",
-                  "attrs": {
-                    "name": "institute"
-                  }
+                    "name": "page-2-row-1",
+                    "label": "",
+                    "className": ""
+                  },
+                  "children": [
+                    {
+                      "type": "column",
+                      "attrs": {
+                        "name": "page-2-row-1-col-1",
+                        "label": "",
+                        "className": "col-12"
+                      },
+                      "children": [
+                        {
+                          "type": "field",
+                          "attrs": {
+                            "name": "layout",
+                            "height": "80vh"
+                          }
+                        }
+                      ]
+                    }
+                  ]
                 }
               ]
             }
@@ -1067,7 +1414,7 @@ For now we will arrange the list view & form view of the generate models to make
   "type": "form",
   "attrs": {
     "name": "form-1",
-    "label": "Payment Collection",
+    "label": "View Metadata",
     "className": "grid"
   },
   "children": [
@@ -1078,52 +1425,119 @@ For now we will arrange the list view & form view of the generate models to make
       },
       "children": [
         {
-          "type": "row",
+          "type": "notebook",
           "attrs": {
-            "name": "sheet-1"
+            "name": "notebook-1"
           },
           "children": [
             {
-              "type": "column",
+              "type": "page",
               "attrs": {
-                "name": "group-1",
-                "label": "",
-                "className": "col-6"
+                "name": "page-1",
+                "label": "General Info"
               },
               "children": [
                 {
-                  "type": "field",
+                  "type": "row",
                   "attrs": {
-                    "name": "name"
-                  }
-                },
-                {
-                  "type": "field",
-                  "attrs": {
-                    "name": "institute"
-                  }
+                    "name": "page-1-row-1",
+                    "label": "",
+                    "className": ""
+                  },
+                  "children": [
+                    {
+                      "type": "column",
+                      "attrs": {
+                        "name": "page-1-row-1-col-1",
+                        "label": "",
+                        "className": "col-6"
+                      },
+                      "children": [
+                        {
+                          "type": "field",
+                          "attrs": {
+                            "name": "name"
+                          }
+                        },
+                        {
+                          "type": "field",
+                          "attrs": {
+                            "name": "displayName"
+                          }
+                        },
+                        {
+                          "type": "field",
+                          "attrs": {
+                            "name": "type"
+                          }
+                        },
+                        {
+                          "type": "field",
+                          "attrs": {
+                            "name": "module"
+                          }
+                        },
+                        {
+                          "type": "field",
+                          "attrs": {
+                            "name": "model"
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "type": "column",
+                      "attrs": {
+                        "name": "page-1-row-1-col-2",
+                        "label": "",
+                        "className": "col-6"
+                      },
+                      "children": [
+                        {
+                          "type": "field",
+                          "attrs": {
+                            "name": "context"
+                          }
+                        }
+                      ]
+                    }
+                  ]
                 }
               ]
             },
             {
-              "type": "column",
+              "type": "page",
               "attrs": {
-                "name": "group-2",
-                "label": "",
-                "className": "col-6"
+                "name": "page-2",
+                "label": "Layout"
               },
               "children": [
                 {
-                  "type": "field",
+                  "type": "row",
                   "attrs": {
-                    "name": "description"
-                  }
-                },
-                {
-                  "type": "field",
-                  "attrs": {
-                    "name": "paymentFile"
-                  }
+                    "name": "page-2-row-1",
+                    "label": "",
+                    "className": ""
+                  },
+                  "children": [
+                    {
+                      "type": "column",
+                      "attrs": {
+                        "name": "page-2-row-1-col-1",
+                        "label": "",
+                        "className": "col-12"
+                      },
+                      "children": [
+                        {
+                          "type": "field",
+                          "attrs": {
+                            "name": "layout",
+                            "height": "80vh"
+                          }
+                        }
+                      ]
+                    }
+                  ]
                 }
               ]
             }
@@ -1278,100 +1692,153 @@ For now we will arrange the list view & form view of the generate models to make
       },
       "children": [
         {
-          "type": "row",
+          "type": "notebook",
           "attrs": {
-            "name": "sheet-1"
+            "name": "notebook-1"
           },
           "children": [
             {
-              "type": "column",
+              "type": "page",
               "attrs": {
-                "name": "group-1",
-                "label": "",
-                "className": "col-6"
+                "name": "page-1",
+                "label": "Payment Collection Item"
               },
               "children": [
                 {
-                  "type": "field",
+                  "type": "row",
                   "attrs": {
-                    "name": "student"
-                  }
-                },
-                {
-                  "type": "field",
-                  "attrs": {
-                    "name": "institute"
-                  }
-                },
-                {
-                  "type": "field",
-                  "attrs": {
-                    "name": "dueDate"
-                  }
-                },
-                {
-                  "type": "field",
-                  "attrs": {
-                    "name": "partPaymentAllowed"
-                  }
-                },
-                {
-                  "type": "field",
-                  "attrs": {
-                    "name": "amountPaid"
-                  }
-                },
-                {
-                  "type": "field",
-                  "attrs": {
-                    "name": "isOverdue"
-                  }
+                    "name": "sheet-1"
+                  },
+                  "children": [
+                    {
+                      "type": "column",
+                      "attrs": {
+                        "name": "group-1",
+                        "label": "Basic",
+                        "className": "col-6"
+                      },
+                      "children": [
+                        {
+                          "type": "field",
+                          "attrs": {
+                            "name": "student"
+                          }
+                        },
+                        {
+                          "type": "field",
+                          "attrs": {
+                            "name": "paymentCollection"
+                          }
+                        },
+                        {
+                          "type": "field",
+                          "attrs": {
+                            "name": "institute"
+                          }
+                        },
+                        {
+                          "type": "field",
+                          "attrs": {
+                            "name": "feeType"
+                          }
+                        },
+                        {
+                          "type": "field",
+                          "attrs": {
+                            "name": "isOverdue"
+                          }
+                        },
+                        {
+                          "type": "field",
+                          "attrs": {
+                            "name": "partPaymentAllowed"
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "type": "column",
+                      "attrs": {
+                        "name": "group-1",
+                        "label": "Configuration",
+                        "className": "col-6"
+                      },
+                      "children": [
+                        {
+                          "type": "field",
+                          "attrs": {
+                            "name": "dueDate"
+                          }
+                        },
+                        {
+                          "type": "field",
+                          "attrs": {
+                            "name": "amountToBePaid"
+                          }
+                        },
+                        {
+                          "type": "field",
+                          "attrs": {
+                            "name": "status"
+                          }
+                        },
+                        {
+                          "type": "field",
+                          "attrs": {
+                            "name": "amountPaid"
+                          }
+                        },
+                        {
+                          "type": "field",
+                          "attrs": {
+                            "name": "amountPending"
+                          }
+                        },
+                        {
+                          "type": "field",
+                          "attrs": {
+                            "name": "overdueByDays"
+                          }
+                        }
+                      ]
+                    }
+                  ]
                 }
               ]
             },
             {
-              "type": "column",
+              "type": "page",
               "attrs": {
-                "name": "group-2",
-                "label": "",
-                "className": "col-6"
+                "name": "page-2",
+                "label": "Payment Collection Item Details"
               },
               "children": [
                 {
-                  "type": "field",
+                  "type": "row",
                   "attrs": {
-                    "name": "paymentCollection"
-                  }
-                },
-                {
-                  "type": "field",
-                  "attrs": {
-                    "name": "feeType"
-                  }
-                },
-                {
-                  "type": "field",
-                  "attrs": {
-                    "name": "amountToBePaid"
-                  }
-                },
-                {
-                  "type": "field",
-                  "attrs": {
-                    "name": "status"
-                  }
-                },
-                {
-                  "type": "field",
-                  "attrs": {
-                    "name": "amountPending"
-                  }
-                },
-                {
-                  "type": "field",
-                  "attrs": {
-                    "name": "overdueByDays"
-                  }
+                    "name": "sheet-1"
+                  },
+                  "children": [
+                    {
+                      "type": "column",
+                      "attrs": {
+                        "name": "group-1",
+                        "label": "Payment Collection Item Details",
+                        "className": "col-12"
+                      },
+                      "children": [
+                        {
+                          "type": "field",
+                          "attrs": {
+                            "name": "paymentCollectionItemDetails",
+                            "inlineCreate": "false",
+                            "showFieldLabel": false,
+                            "showLabel": false
+                          }
+                        }
+                      ]
+                    }
+                  ]
                 }
               ]
             }
@@ -1475,7 +1942,7 @@ For now we will arrange the list view & form view of the generate models to make
   "type": "form",
   "attrs": {
     "name": "form-1",
-    "label": "Payment Collection Item Detail",
+    "label": "View Metadata",
     "className": "grid"
   },
   "children": [
@@ -1486,70 +1953,119 @@ For now we will arrange the list view & form view of the generate models to make
       },
       "children": [
         {
-          "type": "row",
+          "type": "notebook",
           "attrs": {
-            "name": "sheet-1"
+            "name": "notebook-1"
           },
           "children": [
             {
-              "type": "column",
+              "type": "page",
               "attrs": {
-                "name": "group-1",
-                "label": "",
-                "className": "col-6"
+                "name": "page-1",
+                "label": "General Info"
               },
               "children": [
                 {
-                  "type": "field",
+                  "type": "row",
                   "attrs": {
-                    "name": "institute"
-                  }
-                },
-                {
-                  "type": "field",
-                  "attrs": {
-                    "name": "paymentCollectionItem"
-                  }
-                },
-                {
-                  "type": "field",
-                  "attrs": {
-                    "name": "amountPaid"
-                  }
-                },
-                {
-                  "type": "field",
-                  "attrs": {
-                    "name": "payment"
-                  }
+                    "name": "page-1-row-1",
+                    "label": "",
+                    "className": ""
+                  },
+                  "children": [
+                    {
+                      "type": "column",
+                      "attrs": {
+                        "name": "page-1-row-1-col-1",
+                        "label": "",
+                        "className": "col-6"
+                      },
+                      "children": [
+                        {
+                          "type": "field",
+                          "attrs": {
+                            "name": "name"
+                          }
+                        },
+                        {
+                          "type": "field",
+                          "attrs": {
+                            "name": "displayName"
+                          }
+                        },
+                        {
+                          "type": "field",
+                          "attrs": {
+                            "name": "type"
+                          }
+                        },
+                        {
+                          "type": "field",
+                          "attrs": {
+                            "name": "module"
+                          }
+                        },
+                        {
+                          "type": "field",
+                          "attrs": {
+                            "name": "model"
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "type": "column",
+                      "attrs": {
+                        "name": "page-1-row-1-col-2",
+                        "label": "",
+                        "className": "col-6"
+                      },
+                      "children": [
+                        {
+                          "type": "field",
+                          "attrs": {
+                            "name": "context"
+                          }
+                        }
+                      ]
+                    }
+                  ]
                 }
               ]
             },
             {
-              "type": "column",
+              "type": "page",
               "attrs": {
-                "name": "group-2",
-                "label": "",
-                "className": "col-6"
+                "name": "page-2",
+                "label": "Layout"
               },
               "children": [
                 {
-                  "type": "field",
+                  "type": "row",
                   "attrs": {
-                    "name": "student"
-                  }
-                },
-                {
-                  "type": "field",
-                  "attrs": {
-                    "name": "paymentDate"
-                  }
-                },
-                {
-                  "type": "field",
-                  "attrs": {
-                    "name": "isRefunded"
-                  }
+                    "name": "page-2-row-1",
+                    "label": "",
+                    "className": ""
+                  },
+                  "children": [
+                    {
+                      "type": "column",
+                      "attrs": {
+                        "name": "page-2-row-1-col-1",
+                        "label": "",
+                        "className": "col-12"
+                      },
+                      "children": [
+                        {
+                          "type": "field",
+                          "attrs": {
+                            "name": "layout",
+                            "height": "80vh"
+                          }
+                        }
+                      ]
+                    }
+                  ]
                 }
               ]
             }
@@ -1706,7 +2222,7 @@ For now we will arrange the list view & form view of the generate models to make
               "type": "column",
               "attrs": {
                 "name": "group-1",
-                "label": "",
+                "label": "Basic",
                 "className": "col-6"
               },
               "children": [
@@ -1719,19 +2235,7 @@ For now we will arrange the list view & form view of the generate models to make
                 {
                   "type": "field",
                   "attrs": {
-                    "name": "mSwipeIpgOrderId"
-                  }
-                },
-                {
-                  "type": "field",
-                  "attrs": {
-                    "name": "mSwipeIpgTransId"
-                  }
-                },
-                {
-                  "type": "field",
-                  "attrs": {
-                    "name": "mSwipeEncodedIpgId"
+                    "name": "student"
                   }
                 },
                 {
@@ -1745,21 +2249,27 @@ For now we will arrange the list view & form view of the generate models to make
                   "attrs": {
                     "name": "paymentStatus"
                   }
+                },
+                {
+                  "type": "field",
+                  "attrs": {
+                    "name": "isRefunded"
+                  }
                 }
               ]
             },
             {
               "type": "column",
               "attrs": {
-                "name": "group-2",
-                "label": "",
+                "name": "group-1",
+                "label": "IPG Configuration",
                 "className": "col-6"
               },
               "children": [
                 {
                   "type": "field",
                   "attrs": {
-                    "name": "student"
+                    "name": "mSwipeIpgOrderId"
                   }
                 },
                 {
@@ -1771,19 +2281,25 @@ For now we will arrange the list view & form view of the generate models to make
                 {
                   "type": "field",
                   "attrs": {
+                    "name": "mSwipeIpgTransId"
+                  }
+                },
+                {
+                  "type": "field",
+                  "attrs": {
                     "name": "mSwipeIpgInvoiceId"
                   }
                 },
                 {
                   "type": "field",
                   "attrs": {
-                    "name": "mSwipeIpgStatus"
+                    "name": "mSwipeEncodedIpgId"
                   }
                 },
                 {
                   "type": "field",
                   "attrs": {
-                    "name": "isRefunded"
+                    "name": "mSwipeIpgStatus"
                   }
                 }
               ]
