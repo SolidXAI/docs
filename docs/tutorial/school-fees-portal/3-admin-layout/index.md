@@ -513,7 +513,7 @@ For now we will arrange the list view & form view of the generate models to make
   "type": "form",
   "attrs": {
     "name": "form-1",
-    "label": "View Metadata",
+    "label": "Institute",
     "className": "grid"
   },
   "children": [
@@ -533,53 +533,40 @@ For now we will arrange the list view & form view of the generate models to make
               "type": "page",
               "attrs": {
                 "name": "page-1",
-                "label": "General Info"
+                "label": "Institutes"
               },
               "children": [
                 {
                   "type": "row",
                   "attrs": {
-                    "name": "page-1-row-1",
-                    "label": "",
-                    "className": ""
+                    "name": "sheet-1"
                   },
                   "children": [
                     {
                       "type": "column",
                       "attrs": {
-                        "name": "page-1-row-1-col-1",
-                        "label": "",
+                        "name": "group-1",
+                        "label": "Institutes Basic",
                         "className": "col-6"
                       },
                       "children": [
                         {
                           "type": "field",
                           "attrs": {
-                            "name": "name"
+                            "name": "instituteName"
                           }
                         },
                         {
                           "type": "field",
                           "attrs": {
-                            "name": "displayName"
+                            "name": "description"
                           }
                         },
                         {
                           "type": "field",
                           "attrs": {
-                            "name": "type"
-                          }
-                        },
-                        {
-                          "type": "field",
-                          "attrs": {
-                            "name": "module"
-                          }
-                        },
-                        {
-                          "type": "field",
-                          "attrs": {
-                            "name": "model"
+                            "name": "instituteAddress",
+                            "disabled": false
                           }
                         }
                       ]
@@ -587,15 +574,47 @@ For now we will arrange the list view & form view of the generate models to make
                     {
                       "type": "column",
                       "attrs": {
-                        "name": "page-1-row-1-col-2",
-                        "label": "",
+                        "name": "group-1",
+                        "label": "Institutes Contact",
                         "className": "col-6"
                       },
                       "children": [
                         {
                           "type": "field",
                           "attrs": {
-                            "name": "context"
+                            "name": "instituteContactNumber",
+                            "disabled": false
+                          }
+                        },
+                        {
+                          "type": "field",
+                          "attrs": {
+                            "name": "instituteContactEmail",
+                            "disabled": false
+                          }
+                        },
+                        {
+                          "type": "field",
+                          "attrs": {
+                            "name": "hostedPagePrefix",
+                            "disabled": false
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "type": "column",
+                      "attrs": {
+                        "name": "group-1",
+                        "label": "Institutes Logo",
+                        "className": "col-12"
+                      },
+                      "children": [
+                        {
+                          "type": "field",
+                          "attrs": {
+                            "name": "logo",
+                            "disabled": false
                           }
                         }
                       ]
@@ -608,30 +627,156 @@ For now we will arrange the list view & form view of the generate models to make
               "type": "page",
               "attrs": {
                 "name": "page-2",
-                "label": "Layout"
+                "label": "Payment Gateway Details"
               },
               "children": [
                 {
                   "type": "row",
                   "attrs": {
-                    "name": "page-2-row-1",
-                    "label": "",
-                    "className": ""
+                    "name": "sheet-1"
                   },
                   "children": [
                     {
                       "type": "column",
                       "attrs": {
-                        "name": "page-2-row-1-col-1",
-                        "label": "",
+                        "name": "group-1",
+                        "label": "Payment Gateway Details",
+                        "className": "col-6"
+                      },
+                      "children": [
+                        {
+                          "type": "field",
+                          "attrs": {
+                            "name": "paymentGatewayMerchantId"
+                          }
+                        },
+                        {
+                          "type": "field",
+                          "attrs": {
+                            "name": "paymentGatewayAccessKey"
+                          }
+                        },
+                        {
+                          "type": "field",
+                          "attrs": {
+                            "name": "paymentGatewayAccessSecret"
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "page",
+              "attrs": {
+                "name": "page-3",
+                "label": "Contacts"
+              },
+              "children": [
+                {
+                  "type": "row",
+                  "attrs": {
+                    "name": "sheet-1"
+                  },
+                  "children": [
+                    {
+                      "type": "column",
+                      "attrs": {
+                        "name": "group-1",
+                        "label": "Contacts",
+                        "className": "col-6"
+                      },
+                      "children": [
+                        {
+                          "type": "field",
+                          "attrs": {
+                            "name": "pointOfContactName"
+                          }
+                        },
+                        {
+                          "type": "field",
+                          "attrs": {
+                            "name": "pointOfContactMobile"
+                          }
+                        },
+                        {
+                          "type": "field",
+                          "attrs": {
+                            "name": "pointOfContactEmail"
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "page",
+              "attrs": {
+                "name": "page-5",
+                "label": "Fee Types"
+              },
+              "children": [
+                {
+                  "type": "row",
+                  "attrs": {
+                    "name": "sheet-1"
+                  },
+                  "children": [
+                    {
+                      "type": "column",
+                      "attrs": {
+                        "name": "group-1",
+                        "label": "Fee Types",
                         "className": "col-12"
                       },
                       "children": [
                         {
                           "type": "field",
                           "attrs": {
-                            "name": "layout",
-                            "height": "80vh"
+                            "name": "feeTypes",
+                            "inlineCreate": "true",
+                            "showFieldLabel": false,
+                            "showLabel": false
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "page",
+              "attrs": {
+                "name": "page-6",
+                "label": "Institute Users"
+              },
+              "children": [
+                {
+                  "type": "row",
+                  "attrs": {
+                    "name": "sheet-1"
+                  },
+                  "children": [
+                    {
+                      "type": "column",
+                      "attrs": {
+                        "name": "group-1",
+                        "label": "Institute Users",
+                        "className": "col-12"
+                      },
+                      "children": [
+                        {
+                          "type": "field",
+                          "attrs": {
+                            "name": "instituteUsers",
+                            "inlineCreate": "true",
+                            "showFieldLabel": false,
+                            "showLabel": false
                           }
                         }
                       ]
