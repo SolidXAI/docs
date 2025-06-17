@@ -93,6 +93,19 @@ You can extend the built-in **SolidX User** model to attach additional fields or
 
 
 ## Custom home page for the module
+When you create a new module in SolidX, a custom home page is automatically generated for that module.
+
+![Default Login Page](/img/tutorial/school-fees-portal/4-customization/home.png)
+
+This custom home page acts as a dashboard for the module and provides the following features:
+
+✅ A visual overview of the module data (charts, stats, or cards).
+
+➕ Quick access buttons to create new entries for the module.
+
+📄 Shortcuts to manage Models, Fields, and other module-related configurations.
+You can access this page from the left-hand sidebar by clicking the module name under that you can se Home. It is designed to help module admins manage and understand their module data at a glance, without needing to manually configure a dashboard.
+
 ## Computed fields 
 ## Subscribers 
 ### Consume the payment file
