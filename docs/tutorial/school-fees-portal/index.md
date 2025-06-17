@@ -4,7 +4,7 @@ sidebar_position: 1
 
 # School Fees Portal
 
-## Introduction: 
+## Introduction
 
 Building a Fee Collection Platform for Educational Institutions
 
