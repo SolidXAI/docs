@@ -34,26 +34,60 @@ More details on the SolidX media-provider can be found in the [Recipes Documenta
 - Automatically provisioning branded landing pages (e.g., `school-name.platform.com`)
 
 
+### Creating A New Institute User
+To create a new institute user, we will extend the SolidX User model.
 
-## Extending the SolidX user model  
+When you extend the institute user model with the SolidX User model, you inherit all the built-in fields from the core user schema, including:
 
-You can extend the built-in **SolidX User** model to attach additional fields or relationships required by your application. Follow the steps below to do this from the **App Builder**:
+✅ Full Name
 
-### Step 1: Navigate to Model Creation
-1. Go to the **SolidX Module**.
-2. Click on **App Builder** → **Models**.
-3. Create a new model or open an existing one that you want to extend.
+✅ Email
 
-### Step 2: Enable as Child of SolidX User
-1. In the **Model Creation** screen, fill in all the required fields like **Name**, **Display Name**, etc.
-2. Scroll down to the **Configuration** section.
-3. Enable the **Is Child** checkbox.
-4. A dropdown will appear — select **SolidX User** from the list.
+✅ Mobile Number
 
-![Default Login Page](/img/tutorial/school-fees-portal/4-customization/extend-solidx-user-model.png)
+✅ Password
 
-> ✅ Once selected, your model will now **extend the SolidX User model**, allowing it to inherit its core identity fields while adding your own custom fields.
+Once extended, you can add your own custom fields specific to your institute user, such as userType, institute.
 
+This allows you to build a user profile tailored to your institute's needs while still leveraging SolidX’s user authentication and management features.
+
+➡️ You can check the step-by-step guide to extending the institute user model under the [Recipes Documentation](../../../recipes/solidx-extend-user/index.md).
+
+### Creating A institute Fee Types
+
+To define the types of fees applicable to an institute (e.g., Tuition, Bus, Library, Semester 1), We create a customizable Fee Type model. These fee types help categorize charges and are essential for managing institute-specific billing and reporting.
+
+✅ Key Features:
+
+Each Fee Type (like Tuition, Bus, etc.) is unique per institute.
+
+It ensures no duplicate fee types exist within the same institution.
+
+Fee Types are reusable across different academic sessions and student billing structures.
+
+### Institute Fee Type Entity
+
+Once you create the Fee Type model, your entity might look like this:
+
+```
+@Entity('fees_portal_fee_type')
+@Index(["feeType", "deletedTracker"], { unique: true })
+export class FeeType extends CommonEntity {
+    @Column({ type: "varchar" })
+    feeType: string;
+    @ManyToOne(() => Institute, { onDelete: "CASCADE", nullable: false })
+    @JoinColumn()
+    institute: Institute;
+}
+```
+
+You can see the @Index decorator ensures that each fee type is unique within the context of the institute.
+
+The institute relation ensures that the fee type is always scoped to a specific institute.
+
+The form view for adding or editing fee types looks like this:
+
+![Default Login Page](/img/tutorial/school-fees-portal/5-recipes/fee-type.png)
 
 ## Custom home page for the module
 When you create a new module in SolidX, a custom home page is automatically generated for that module.
