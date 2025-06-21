@@ -25,7 +25,7 @@ You can extend the built-in **SolidX User** model to attach additional fields or
 
 After extending the SolidX User model, your form view might look like this:
 
-![Default Login Page](/img/tutorial/school-fees-portal/5-recipes/user-model-form-view.png)
+![Default Login Page](/img/tutorial/school-fees-portal/5-recipes/institute-user-form.png)
 
 
 ### Institute User Form View Layout
@@ -38,6 +38,7 @@ After extending the SolidX User model, your form view might look like this:
     "label": "Institute User",
     "className": "grid"
   },
+  "onFieldChange": "bondHandler",
   "children": [
     {
       "type": "sheet",
@@ -55,7 +56,7 @@ After extending the SolidX User model, your form view might look like this:
               "type": "column",
               "attrs": {
                 "name": "group-1",
-                "label": "User Detail",
+                "label": "Basics",
                 "className": "col-6"
               },
               "children": [
@@ -74,12 +75,6 @@ After extending the SolidX User model, your form view might look like this:
                 {
                   "type": "field",
                   "attrs": {
-                    "name": "password"
-                  }
-                },
-                {
-                  "type": "field",
-                  "attrs": {
                     "name": "username"
                   }
                 },
@@ -92,7 +87,23 @@ After extending the SolidX User model, your form view might look like this:
                 {
                   "type": "field",
                   "attrs": {
-                    "name": "userType"
+                    "name": "institute"
+                  }
+                }
+              ]
+            },
+            {
+              "type": "column",
+              "attrs": {
+                "name": "group-1",
+                "label": "",
+                "className": "col-6"
+              },
+              "children": [
+                {
+                  "type": "field",
+                  "attrs": {
+                    "name": "password"
                   }
                 }
               ]
