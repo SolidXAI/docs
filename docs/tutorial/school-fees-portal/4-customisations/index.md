@@ -30,27 +30,23 @@ To create a new institute user, we will extend the SolidX User model.
 
 When you extend the institute user model with the SolidX User model, you inherit all the built-in fields from the core user schema, including:
 
-✅ Full Name
-
-✅ Email
-
-✅ Mobile Number
-
-✅ Password
+- Full Name
+- Email
+- Mobile Number
+- Password
 
 Once extended, you can add your own custom fields specific to your institute user, such as userType, institute.
 
 This allows you to build a user profile tailored to your institute's needs while still leveraging SolidX’s user authentication and management features.
 
-➡️ You can check the step-by-step guide to extending the institute user model under the [Recipes Documentation](../../../recipes/solidx-extend-user/index.md).
+> You can check the step-by-step guide to extending the institute user model under the [Recipes Documentation](../../../recipes/solidx-extend-user/index.md).
 
 Once the User entity is extended in your project, if you create a user without specifying a password, SolidX automatically:
 
-Generates a secure random password
+1. Generates a secure random password.
+2. Sends an email to the user containing their login credentials.
 
-Sends an email to the user containing their login credentials
-
-This email is sent based on the system's email configuration and follows either the synchronous or asynchronous path depending on your environment setup.
+SolidX contains an abstraction around sending emails that is used to send these emails. More details on how to configure SolidX to send emails you can read this recipe. 
 
 ### 📧 Sending Emails in SolidX
 

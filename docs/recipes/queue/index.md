@@ -2,13 +2,56 @@
 sidebar_position: 4
 ---
 
-# SolidX Queue 
+# Queues
+Queues allow any enterprise system to implement scalability allowing long running tasks to be done as background jobs. Queues being a commonly seen pattern in high performance enterprise applications SolidX has an inbuilt abstraction around queues. 
+SolidX uses the following brokers to enable queues 
 
-In SolidX, you can configure queues to use either:
+- Database 
+- RabbitMQ 
+- Redis 
 
-🗄️ Database (default for simple jobs and local dev)
+## Environment Variables
+TODO: tabular display of all possible environment variables, also special mention for the variable called "QUEUES_SERVICE_ROLE"
+TODO: QUEUES_SERVICE_ROLE - mention that this variable allows us to control when a service has to be run in subscriber role, publisher role or both.
+TODO: Some variables are linked to the broker we have selected like the rabbitmq url will only be required to be specified if broker is rabbitmq
 
-🐇 RabbitMQ (for high-performance distributed tasks)
+## How To Configure Jobs
+In SolidX a task which has to be run as a background job requires the following components. We will explain all 3 components using a dummy example representing a long running background job.
+
+### Job Options
+
+First we create a config object to represent our job, we are essentially only giving a name, specifying which type of broker to use to run this job & most importantly the queue name that will be used. 
+
+Eg. 
+
+```
+import { BrokerType } from '../../interfaces';
+
+const QUEUE_NAME = 'test_queue_db';
+
+export default {
+    name: 'queueTestDb',
+    type: BrokerType.Database,
+    queueName: QUEUE_NAME,
+};
+
+```
+
+### Publisher 
+
+
+### Subscriber 
+
+
+## Publishing Jobs 
+TODO: In this section we talk about how to use the PublisherFactory service to trigger a background job. Again you can use the test-queue controller to showcase this. 
+
+
+## Admin Interface 
+
+SolidX comes with a very useful interface where all background jobs are tracked 
+TODO: Explain each field of the 2 entities viz. Queues & Messages
+
 
 ### 🏗️ Smart Broker Selection using FactoryPublisher
 
