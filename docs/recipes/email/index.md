@@ -9,9 +9,23 @@ SolidX email configuration allows you to send emails using any SMTP credentials.
 
 ### Environment Variables 
 
-TODO: add a tabular display explaining each variable. 
-TODO: especially explain the variable used to control whether emails are sent synchronously or asynchronously using queues. From here you can link to the queues recipe. 
+<!-- TODO: add a tabular display explaining each variable.  -->
 
+| Variable Name                 | Description                                                    | Values                                                       |
+|----------------------------|----------------------------------------------------------------|--------------------------------------------------------------|
+| COMMON_EMAIL_SHOULD_QUEUE  | Whether to queue emails or send immediately                   | true: queue for async sending; false: send immediately       |
+| COMMON_SMTP_EMAIL_SMTP_HOST| The hostname of the SMTP server                                | e.g., smtp.gmail.com, smtp.sendgrid.net                      |
+| COMMON_SMTP_EMAIL_SMTP_PORT| The port used by the SMTP server                               | Common values: 587 (TLS), 465 (SSL), 25 (non-secure)         |
+| COMMON_SMTP_EMAIL_USERNAME | Username for SMTP authentication                               | Usually an email address                                     |
+| COMMON_SMTP_EMAIL_PASSWORD | Password or app-specific password for SMTP                     | Should be stored securely (e.g., in environment/secret)      |
+| COMMON_SMTP_EMAIL_FROM     | The default “from” address used in sent emails                 | e.g., no-reply@yourdomain.com                                |
+
+
+
+<!-- TODO: especially explain the variable used to control whether emails are sent synchronously or asynchronously using queues. From here you can link to the queues recipe.  -->
+
+COMMON_EMAIL_SHOULD_QUEUE
+- This variable used to control whether emails are sent synchronously or asynchronously using queues <a href="../queue" target="_blank">Recipes Documentation ➜</a>
 ### Triggering Emails 
 
 You can trigger emails from anywhere in your code by simply injecting the SMTPEMailService.
@@ -59,7 +73,8 @@ export class AuthenticationService {
 And then we can trigger an email, again a sample code snippet from SolidX authentication service is shown below. 
 The below code is using the sendEmailUsingTemplate method exposed by the SMTPEmailService, this method allows you to send emails based on pre-configured email templates. You can also use another method called sendEmail that allows you to specify the email body directly.
 
-> More info on template based emails can be found here.
+> More info on template based emails can be found here.[ ➜](#template-based-emails).
+
 
 ```
 
@@ -90,34 +105,6 @@ The below code is using the sendEmailUsingTemplate method exposed by the SMTPEma
 ```
 
 
-<!-- To send emails synchronously, you need to configure the following settings in your .env file of the API project:
-
-```
-COMMON_EMAIL_SHOULD_QUEUE=false
-COMMON_SMTP_EMAIL_SMTP_HOST=
-COMMON_SMTP_EMAIL_SMTP_PORT=587
-COMMON_SMTP_EMAIL_USERNAME=
-COMMON_SMTP_EMAIL_PASSWORD=
-COMMON_SMTP_EMAIL_FROM=
-```
-COMMON_EMAIL_SHOULD_QUEUE=false
-
-This flag is critical — it ensures the email is sent immediately, without entering any job queue or background task.
-
-The other SMTP settings must be filled with your provider's actual credentials:
-
-HOST – SMTP server address (e.g., smtp.gmail.com)
-
-PORT – usually 587 (for TLS)
-
-USERNAME – your email username
-
-PASSWORD – the SMTP password or app password
-
-FROM – sender's display email (e.g., no-reply@example.com)
-
-✅ After completing all the above configuration, you will be able to send emails synchronously without any additional queue setup. -->
-
 ## Elastic Email
 
 ### Environment Variables 
@@ -126,6 +113,87 @@ FROM – sender's display email (e.g., no-reply@example.com)
 
 
 ## Template Based Emails 
-TODO: show the screen in Solid core where we can configure email templates. Render a table to explain each field of the email template entity. 
-TODO: talk about the 4 email templates already present, render a table showing the name of each template and its purpose. 
-TODO: show the code sample again where we are using template based email sending method, and explain each argument especially the 3rd argument which is a data object whose attributes are used to do template variable replacement at runtime. 
+<!-- TODO: show the screen in Solid core where we can configure email templates. -->
+
+- Here is how the **SolidX Email Template Form View** looks like:
+
+![Default Login Page](/img/tutorial/school-fees-portal/5-recipes/email-template-form-view.png)
+ <!-- TODO: Render a table to explain each field of the email template entity.  -->
+
+ - All the fields of the **Email Template** are described in the table below:
+
+ | Field Name   | Description                                                                 | Values / Behavior                                                           |
+|---------------|-----------------------------------------------------------------------------|------------------------------------------------------------------------------|
+| name          | Unique identifier used internally to refer to the template                 | Must be unique (e.g., `student-fee-reminder`)                               |
+| displayName   | Human-readable name shown in admin UI                                      | Any string, used for readability (e.g., `Student Fee Reminder`)             |
+| body          | The main email body (HTML or plain text supported)                         | Email content; supports template variables (e.g., `{{studentName}}`)        |
+| subject       | Email subject line                                                          | Can include template variables; default is empty (`{}`)                     |
+| description   | Optional description for the email template                                 | Explains purpose or usage; optional                                         |
+| active        | Indicates whether the template is active and usable                         | `true`: can be used; `false`: ignored/skipped                              |
+| attachments   | List of associated file attachments sent with the email                    | Array of `EmailAttachment` entities (e.g., PDFs, reports)                  |
+| type          | Category or grouping of the email template (optional)                      | e.g., `notification`, `reminder`, `marketing`                              |
+
+<!-- TODO: talk about the 4 email templates already present, -->
+
+- Below is the list view from **SolidX** showing the pre-configured email templates:
+
+![Default Login Page](/img/tutorial/school-fees-portal/5-recipes/email-template-list-view.png)
+
+<!-- TODO: render a table showing the name of each template and its purpose.  -->
+
+- All the email templates of Solidx are described in the table below:
+
+| Template Name              | Purpose                                                                 |
+|----------------------------|-------------------------------------------------------------------------|
+| `forgot-password`          | Sent when a user requests to reset their password                       |
+| `otp-on-login`             | Sent to the user with a One-Time Password (OTP) during login            |
+| `otp-on-register`          | Sent with an OTP to verify user identity during registration            |
+| `on-force-password-change` | Sent when the user is forced to change their password (e.g., for security) |
+
+
+<!-- TODO: show the code sample again where we are using template based email sending method,  -->
+Here is the solidx email sending code snippet which use sendEmailUsingTemplate method to sent emails.
+```
+    private async notifyUserOnForcePasswordChange(user: User, autoGeneratedPwd: string) {
+        const companyLogo = await this.getCompanyLogo();
+
+        this.mailService.sendEmailUsingTemplate(
+            user.email,
+            'on-force-password-change',
+            {
+                solidAppName: process.env.SOLID_APP_NAME,
+                solidAppWebsiteUrl: process.env.SOLID_APP_WEBSITE_URL,
+                frontendLoginPageUrl: process.env.IAM_FRONTEND_APP_LOGIN_PAGE_URL,
+                email: user.email,
+                fullName: user.fullName,
+                userName: user.username,
+                password: autoGeneratedPwd,
+                companyLogoUrl: companyLogo
+            },
+            this.commonConfiguration.shouldQueueEmails,
+            'user',
+            user.id
+        );
+    }
+
+```
+<!-- TODO: and explain each argument especially the 3rd argument which is a data object whose attributes are used to do template variable 
+replacement at runtime.  -->
+
+- All the arguments used in the SolidX sendEmailUsingTemplate(...) method are described in the table below:
+
+| Arguments Name              | Purpose                                                                 |
+|----------------------------|-------------------------------------------------------------------------|
+| `user.email`                  | The recipient’s email address.                   |
+| `on-force-password-change`    | The name of the email template to be used for this email.   |
+| `Template Variables`          | A data object containing dynamic values that will replace variables in the email template.|
+| `solidAppName`                | The name of the application, usually shown in the email footer or heading. |
+| `solidAppWebsiteUrl`          | The URL to the application's public site or landing page.|
+| `frontendLoginPageUrl`        | The direct login page URL, used in the email as a call-to-action link. |
+| `email`                       | The full name of the user (used in personalization). |
+| `fullName`                    | The name of the application, usually shown in the email footer or heading. |
+| `userName`                    | The user’s login username. |
+| `password`                    | The newly generated password to be shared with the user. |
+| `companyLogoUrl`              | The logo URL to visually brand the email.|
+| `shouldQueueEmails`           | A boolean flag indicating whether the email should be queued or sent immediately.|
+
