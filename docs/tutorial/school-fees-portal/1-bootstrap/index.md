@@ -101,4 +101,5 @@ Under this folder you will see 2 folders
 
 Under each you will see a .env file has been configured based on the answers to the prompts that you have provided. 
 
-TODO: More details on the generated folder structure and files generated can be found in the [Developer Documentation](../../../developer-docs/index.md)
+TODO: More details on the generated folder structure and files generated can be found in the <a href="../../../developer-docs" target="_blank">Developer Documentation ➜</a>
+<!-- [Developer Documentation](../../../developer-docs/index.md) -->
