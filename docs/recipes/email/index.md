@@ -73,7 +73,7 @@ export class AuthenticationService {
 And then we can trigger an email, again a sample code snippet from SolidX authentication service is shown below. 
 The below code is using the sendEmailUsingTemplate method exposed by the SMTPEmailService, this method allows you to send emails based on pre-configured email templates. You can also use another method called sendEmail that allows you to specify the email body directly.
 
-> More info on template based emails can be found here.[ ➜](#template-based-emails).
+> More info on template based emails can be found here.[ ➜](#template-based-emails)
 
 
 ```
