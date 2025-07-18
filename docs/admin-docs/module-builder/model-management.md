@@ -4,7 +4,8 @@ sidebar_position: 2
 
 # Models
 
-SolidX Models represent the structure of your data within a module. Each model defines a specific type of data & its relationships with other fields.
+SolidX Models represent the structure of your data within a module. Each model defines a specific type of data, all attributes / fields that a model is made of & its relationships with other models.
+
 Each model is a semantic, configurable data structure that forms the basis of adding custom business logic.
 
 ## Creating a Model

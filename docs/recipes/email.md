@@ -32,8 +32,7 @@ You can trigger emails from anywhere in your code by simply injecting the SMTPEM
 Below code snippet is from the SolidX authentication service, as you can see below the SMTPEmailService is injected like any other dependency in the constructor. 
 
 
-```
-
+```typescript
 
 @Injectable()
 export class AuthenticationService {

@@ -79,7 +79,7 @@ Standard CRUD actions (create, edit, delete) can be enabled per model via layout
 
 These custom buttons can be added to the list view header or against each row. 
 
-More details can be found on the [Action Buttons Recipe](../../recipes/) page.
+TODO: More details can be found on the [Action Buttons Recipe](../../recipes/) page.
 
 TODO: Screenshots pending from Sapphire or anywhere we have action buttons on the list view.
 

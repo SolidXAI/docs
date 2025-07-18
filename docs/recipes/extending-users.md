@@ -2,7 +2,7 @@
 sidebar_position: 5
 ---
 
-# SolidX User Model
+# Extending Users
 
 ## Extending the SolidX user model  
 
