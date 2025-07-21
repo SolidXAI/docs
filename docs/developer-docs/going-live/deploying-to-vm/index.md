@@ -79,14 +79,14 @@ npm run start
 ```
 > Press `Ctrl + C` to exit; we will use `pm2` next.
 
-## 🔄 Set Up the Process Manager
+## 🔄 Deploy with Process Manager
 
 ### 🧪 Install pm2 Globally
 ```bash
 npm install -g pm2
 ```
 
-### ⚙️ Create PM2 Config File
+### ⚙️ Create pm2 Config File
 Inside both `solid-api` and `solid-ui` folders, create `pm2.config.js`:
 ```js
 module.exports = {
@@ -100,13 +100,13 @@ module.exports = {
 };
 ```
 
-### ▶️ Start with PM2
+### ▶️ Start apps with pm2
 ```bash
 pm2 start pm2.config.js
 pm2 list
 ```
 
-### 📜 Create `deploy.sh` in Each App
+### 📜 Create deploy scripts
 ```bash
 #!/bin/bash
 git pull
