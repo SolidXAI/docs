@@ -80,11 +80,6 @@ export class FeeType extends CommonEntity {
 
 You can see the @Index decorator generated makes the feeType unique across Institutes, which is not the expected behavior. 
 
-We can achieve the expected behavior by changing the generated code like below 
-
-TODO: Put the updated code below...
-```
-```
 
 With the above change you can see that although SolidX is a low-code platform it also allows developers complete flexibility to make changes as per system requirements. 
 
@@ -110,5 +105,261 @@ This custom home page acts as a dashboard for the module and provides the follow
 You can access this page from the left-hand sidebar by clicking the module name under that you can se Home. It is designed to help module admins manage and understand their module data at a glance, without needing to manually configure a dashboard.
 
 ## Computed fields 
+
+In SolidX, Computed Fields allow developers to dynamically calculate and assign values to specific fields based on other data in the system. These fields are not filled manually by users; instead, their values are computed automatically during specific entity lifecycle events—like afterInsert, afterUpdate, etc.
+### Creating a Computed Field
+You can define a computed field through the UI by following these steps:
+
+- Go to the Model where you want to add the computed field.
+
+- Add or edit a field, and set its Field Type to Computed.
+
+- Navigate to the Advanced Config tab (as shown in the screenshot).
+
+Configure the computed logic:
+
+- Computed Field Value Type: (optional) The expected type (e.g., number, string).
+
+- Computed Field Provider: Select a provider (e.g., PaymentCollectionItemAmountProvider) that contains the logic for calculation.
+
+- Trigger Config: Define when the computation should be triggered by choosing:
+
+- Module and Model the field belongs to.
+
+- Operations like afterInsert, afterUpdate, etc.
+
+![Default Login Page](/img/tutorial/school-fees-portal/4-customization/computed-field.png)
+
+Example
+
+```
+import { Injectable } from '@nestjs/common';
+import {
+  ComputedFieldProvider,
+  CommonEntity,
+  IEntityPreComputeFieldProvider,
+  IEntityPostComputeFieldProvider,
+  ComputedFieldMetadata,
+} from '@solidstarters/solid-core';
+import { kebabCase } from 'lodash';
+import { PaymentCollectionItemDetail } from '../entities/payment-collection-item-detail.entity';
+import { EntityManager } from 'typeorm';
+import { InjectEntityManager } from '@nestjs/typeorm';
+import { PaymentCollectionItem } from '../entities/payment-collection-item.entity';
+import { error } from 'console';
+
+@ComputedFieldProvider()
+@Injectable()
+export class PaymentCollectionItemAmountProvider
+  implements IEntityPostComputeFieldProvider<PaymentCollectionItemDetail, any>
+{
+  constructor(
+    @InjectEntityManager()
+    private readonly entityManager: EntityManager,
+  ) {}
+  async postComputeAndSaveValue(
+    triggerEntity: PaymentCollectionItemDetail,
+    computedFieldMetadata: ComputedFieldMetadata<any>,
+  ): Promise<void> {
+    if (!triggerEntity?.paymentCollectionItem?.id) {
+      throw new error('Payment Collection Item Id Missing');
+    }
+    const paymentCollectionItemDetailId = triggerEntity?.id;
+    const { amountPaid, totalamounttobepaid, amountPending, status } =
+      await this.getPaymentCollectionItemAmounts(
+        triggerEntity?.paymentCollectionItem?.id,
+      );
+    const result = await this.entityManager.update(
+      PaymentCollectionItem,
+      { id: triggerEntity?.paymentCollectionItem?.id },
+      {
+        amountPaid: amountPaid,
+        amountPending: amountPending,
+        totalAmountToBePaid: totalamounttobepaid,
+        status: status,
+      },
+    );
+  }
+
+  name(): string {
+    return 'PaymentCollectionItemAmountProvider';
+  }
+
+  help(): string {
+    return 'Payment Collection ItemA mountProvider field provider used to create fields whose value is a concatenation of other fields in the same model.';
+  }
+
+  private async getPaymentCollectionItemAmounts(itemId: number): Promise<{
+    amountPaid: number;
+    totalamounttobepaid: number;
+    amountPending: number;
+    status: string;
+  }> {
+    const details = await this.entityManager.find(PaymentCollectionItemDetail, {
+      where: { paymentCollectionItem: { id: itemId } },
+      relations: ['paymentCollectionItem'],
+    });
+
+    const amountPaid = details.reduce(
+      (sum, detail) => sum + Number(detail.amountPaid || 0),
+      0,
+    );
+    const paymentCollectionItem = details[0]?.paymentCollectionItem;
+    const totalamounttobepaid =
+      Number(paymentCollectionItem?.amountToBePaid || 0) +
+      Number(paymentCollectionItem?.lateAmountToBePaid || 0);
+
+    const amountPending = totalamounttobepaid - amountPaid;
+
+    const status = amountPending > 0 ? 'Partially Paid' : 'Fully Paid';
+
+    return { amountPaid, totalamounttobepaid, amountPending, status };
+  }
+}
+
+```
+
 ## Subscribers 
-### Consume the payment file
+
+In SolidX, Subscribers are powerful hooks used to perform custom logic before or after certain operations such as insert, update, or remove on entities. They are ideal for advanced workflows like validation, data transformation, or triggering additional database actions programmatically.
+
+Subscribers are especially useful when you want to extend or override default behavior during entity lifecycle events.
+
+Example: Automating Student Fees Setup on File Upload
+
+In our School Fees Portal, we use a subscriber to automate the process of creating PaymentCollectionItem records whenever a PaymentCollection Excel file is uploaded.
+
+Code Sample
+Here's a trimmed view of how this subscriber looks:
+
+```
+@EventSubscriber()
+@Injectable()
+export class MediaTransactionSubscriber implements EntitySubscriberInterface<Media> {
+  constructor(
+    @InjectDataSource() private readonly dataSource: DataSource,
+    @InjectRepository(Student) private readonly studentRepo: Student,
+  ) {
+    this.dataSource.subscribers.push(this);
+  }
+
+  listenTo() {
+    return Media;
+  }
+
+  async afterInsert(event: InsertEvent<Media>): Promise<void> {
+    const media = event.entity;
+
+    if (
+      media.modelMetadata.singularName === 'paymentCollection' &&
+      media.fieldMetadata.name === 'paymentFile'
+    ) {
+      // Process the Excel file and generate records
+      await this.paymentCollectionTransaction(event);
+    }
+  }
+
+  private async paymentCollectionTransaction(event: InsertEvent<Media>) {
+    // Load file using ExcelJS
+    // Parse rows and headers
+    // For each row: create or update students, then create fee items
+  }
+}
+
+```
+
+## Consume the payment file
+
+To simplify and streamline fee collection, we integrates a payment gateway system for students to pay their dues online. The integration works with any gateway and handles the full lifecycle:
+
+- Student selects dues to pay.
+
+- System generates a payment link.
+
+- Student completes payment via gateway.
+
+- Gateway redirects back to the system with a callback.
+
+- System updates all related records based on success/failure.
+
+### Generating a Payment Link
+
+```
+@Post('payment-gateway')
+@Public()
+@StudentAuth()
+async generatePaymentGateway(@Body() body: GeneratePaymentGatewayDto) {
+  const paymentCollectionItemIds = Object.keys(body.amountMap).map(Number);
+  const url = await this.service.generatePaymentGatewayLink(
+    body.studentId,
+    paymentCollectionItemIds,
+    body.amountMap,
+    body.totalAmount,
+  );
+  return { url };
+}
+
+```
+### Handling the Payment Callback
+Once the student completes payment on the gateway, the gateway sends a POST callback to your backend.
+
+```
+@Post('/payment-callback')
+@Public()
+async handleMswipeCallback(@Req() request: Request, @Res() response: Response) {
+  const formData = request.body;
+
+  const result = await this.service.handleMswipePaymentCallback({
+    mswipeIpgOrderId: formData['OrderID'],
+    mswipeIpgPaymentId: formData['PaymentID'],
+    mswipeIpgTransId: formData['TransID'],
+    mswipeIpgStatus: formData['Status'],
+    mswipeIpgInvoiceId: formData['InvoiceID'],
+    mswipeEncodedIpgId: formData['En_Ipg_ID'],
+  });
+
+  return response.redirect(
+    `${process.env.FRONTEND_BASE_URL}/dashboard?paymentStatus=${result.success ? 'success' : 'failed'}&txnId=${formData['TransID']}`,
+  );
+}
+
+```
+
+## Scheduling Jobs
+
+SolidX provides a flexible mechanism to automate backend tasks using scheduled jobs. These jobs can be configured to run at specific times or intervals and are scoped to specific modules. This is particularly useful for recurring tasks like sending reminders, syncing data, or running cleanup processes.
+
+### Create a Scheduled Job
+
+- Go to the SolidX module (admin panel).
+
+- In the left-hand menu, expand “Other”.
+
+- Click on “Scheduled Job”.
+
+- Click “Create Scheduled Job”.
+
+- Fill in the Job Details:
+
+![Default Login Page](/img/tutorial/school-fees-portal/4-customization/schedule.png)
+
+Example:
+
+```
+import { Injectable, Logger } from '@nestjs/common';
+import { IScheduledJob, ScheduledJob, ScheduledJobProvider } from '@solidstarters/solid-core';
+
+@Injectable()
+@ScheduledJobProvider()
+export class HelloWorldJobService implements IScheduledJob {
+  private readonly logger = new Logger(HelloWorldJobService.name);
+
+  async execute(reminder: ScheduledJob): Promise<void> {
+    this.logger.log(`Hello from job: ${reminder.job}`);
+    this.logger.log(`Reminder Name: ${reminder.scheduleName}, ID: ${reminder.id}`);
+  }
+}
+```
+
+
+
