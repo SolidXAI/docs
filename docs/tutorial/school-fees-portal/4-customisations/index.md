@@ -343,7 +343,8 @@ SolidX provides a flexible mechanism to automate backend tasks using scheduled j
 
 ![Default Login Page](/img/tutorial/school-fees-portal/4-customization/schedule.png)
 
-Example:
+Code Sample Here's a trimmed view of how this scheduled job looks:
+
 
 ```
 import { Injectable, Logger } from '@nestjs/common';
