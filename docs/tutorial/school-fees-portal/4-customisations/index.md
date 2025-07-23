@@ -107,117 +107,9 @@ You can access this page from the left-hand sidebar by clicking the module name 
 ## Computed fields 
 
 In SolidX, Computed Fields allow developers to dynamically calculate and assign values to specific fields based on other data in the system. These fields are not filled manually by users; instead, their values are computed automatically during specific entity lifecycle events—like afterInsert, afterUpdate, etc.
-### Creating a Computed Field
-You can define a computed field through the UI by following these steps:
 
-- Go to the Model where you want to add the computed field.
+SolidX computed fields full implementation you can read this recipe. <a href="../../../recipes/computed-fields" target="_blank">Recipes Documentation ➜</a>
 
-- Add or edit a field, and set its Field Type to Computed.
-
-- Navigate to the Advanced Config tab (as shown in the screenshot).
-
-Configure the computed logic:
-
-- Computed Field Value Type: (optional) The expected type (e.g., number, string).
-
-- Computed Field Provider: Select a provider (e.g., PaymentCollectionItemAmountProvider) that contains the logic for calculation.
-
-- Trigger Config: Define when the computation should be triggered by choosing:
-
-- Module and Model the field belongs to.
-
-- Operations like afterInsert, afterUpdate, etc.
-
-![Default Login Page](/img/tutorial/school-fees-portal/4-customization/computed-field.png)
-
-Example
-
-```
-import { Injectable } from '@nestjs/common';
-import {
-  ComputedFieldProvider,
-  CommonEntity,
-  IEntityPreComputeFieldProvider,
-  IEntityPostComputeFieldProvider,
-  ComputedFieldMetadata,
-} from '@solidstarters/solid-core';
-import { kebabCase } from 'lodash';
-import { PaymentCollectionItemDetail } from '../entities/payment-collection-item-detail.entity';
-import { EntityManager } from 'typeorm';
-import { InjectEntityManager } from '@nestjs/typeorm';
-import { PaymentCollectionItem } from '../entities/payment-collection-item.entity';
-import { error } from 'console';
-
-@ComputedFieldProvider()
-@Injectable()
-export class PaymentCollectionItemAmountProvider
-  implements IEntityPostComputeFieldProvider<PaymentCollectionItemDetail, any>
-{
-  constructor(
-    @InjectEntityManager()
-    private readonly entityManager: EntityManager,
-  ) {}
-  async postComputeAndSaveValue(
-    triggerEntity: PaymentCollectionItemDetail,
-    computedFieldMetadata: ComputedFieldMetadata<any>,
-  ): Promise<void> {
-    if (!triggerEntity?.paymentCollectionItem?.id) {
-      throw new error('Payment Collection Item Id Missing');
-    }
-    const paymentCollectionItemDetailId = triggerEntity?.id;
-    const { amountPaid, totalamounttobepaid, amountPending, status } =
-      await this.getPaymentCollectionItemAmounts(
-        triggerEntity?.paymentCollectionItem?.id,
-      );
-    const result = await this.entityManager.update(
-      PaymentCollectionItem,
-      { id: triggerEntity?.paymentCollectionItem?.id },
-      {
-        amountPaid: amountPaid,
-        amountPending: amountPending,
-        totalAmountToBePaid: totalamounttobepaid,
-        status: status,
-      },
-    );
-  }
-
-  name(): string {
-    return 'PaymentCollectionItemAmountProvider';
-  }
-
-  help(): string {
-    return 'Payment Collection ItemA mountProvider field provider used to create fields whose value is a concatenation of other fields in the same model.';
-  }
-
-  private async getPaymentCollectionItemAmounts(itemId: number): Promise<{
-    amountPaid: number;
-    totalamounttobepaid: number;
-    amountPending: number;
-    status: string;
-  }> {
-    const details = await this.entityManager.find(PaymentCollectionItemDetail, {
-      where: { paymentCollectionItem: { id: itemId } },
-      relations: ['paymentCollectionItem'],
-    });
-
-    const amountPaid = details.reduce(
-      (sum, detail) => sum + Number(detail.amountPaid || 0),
-      0,
-    );
-    const paymentCollectionItem = details[0]?.paymentCollectionItem;
-    const totalamounttobepaid =
-      Number(paymentCollectionItem?.amountToBePaid || 0) +
-      Number(paymentCollectionItem?.lateAmountToBePaid || 0);
-
-    const amountPending = totalamounttobepaid - amountPaid;
-
-    const status = amountPending > 0 ? 'Partially Paid' : 'Fully Paid';
-
-    return { amountPaid, totalamounttobepaid, amountPending, status };
-  }
-}
-
-```
 
 ## Subscribers 
 
@@ -361,6 +253,18 @@ export class HelloWorldJobService implements IScheduledJob {
   }
 }
 ```
+
+## SolidX Handler
+
+SolidX Handlers are a powerful way to customize, extend, or override functionality in the SolidX UI. They allow developers to inject logic or custom behavior into form view fields, list views, table actions, or even page-level features — making them ideal for dynamic form rendering, custom validations, or workflow logic tailored to your business needs.
+
+These handlers are part of the SolidX extension system, which makes the UI highly flexible and modular without modifying the core codebase.
+
+For full implementation you can read this recipe. <a href="../../../recipes/handlers" target="_blank">Recipes Documentation ➜</a>
+
+
+
+
 
 
 
