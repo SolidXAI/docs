@@ -5,7 +5,7 @@ import type * as Preset from '@docusaurus/preset-classic';
 // This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
 
 const config: Config = {
-  title: 'SOLID STARTERS',
+  title: 'SolidX',
   tagline: 'Enterprise-focussed low-code development platform',
   favicon: 'img/favicon.ico',
 
@@ -67,9 +67,9 @@ const config: Config = {
   themeConfig: {
     image: 'img/docusaurus-social-card.jpg',
     navbar: {
-      title: 'SOLID STARTERS ',
+      title: 'SolidX',
       logo: {
-        alt: 'SOLID Starters Alt Logo',
+        alt: 'SolidX Alt Logo',
         src: 'img/NavbarLogo.png',
       },
       items: [
@@ -83,38 +83,33 @@ const config: Config = {
         {
           to: '/blog',
           label: '⏱️  Blog',
-          position: 'left', 
+          position: 'left',
           className: 'custom-center-item',
         },
-        
+
         {
           href: 'https://github.com/facebook/docusaurus',
           label: 'GitHub',
           position: 'right',
         },
       ],
-    
-     
-    }
-
-    ,
-
+    },
 
     footer: {
       style: 'dark',
-      logo:{
-        src:'img/NavbarLogo.png', 
-        className:'footer-bottom-icon'
+      logo: {
+        src: 'img/NavbarLogo.png',
+        className: 'footer-bottom-icon'
       },
 
       links: [
-      
+
         {
           title: 'Docs',
           items: [
             {
               label: 'Tutorial',
-              to: 'docs/user-docs/',
+              to: 'docs/admin-docs/',
             },
           ],
         },
@@ -135,15 +130,13 @@ const config: Config = {
             },
           ],
         },
-        
-        
         {
           title: 'More',
           items: [
             {
               label: 'Blog',
               to: '/blog',
-              className:"myfooterdataClass"
+              className: "myfooterdataClass"
             },
             {
               label: 'GitHub',
@@ -152,9 +145,9 @@ const config: Config = {
           ],
         },
       ],
-      // copyright: `Copyright © ${new Date().getFullYear()} SOLID Starters, LogicLoop Ventures LLP.`,
+      // copyright: `Copyright © ${new Date().getFullYear()} SolidX, LogicLoop Ventures LLP.`,
     },
- 
+
   } satisfies Preset.ThemeConfig,
 };
 

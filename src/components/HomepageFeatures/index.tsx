@@ -8,7 +8,7 @@ type FeatureItem = {
   title: string;
   description: ReactNode;
   // Svg?: React.ComponentType<React.ComponentProps<'svg'>>;
-  imgs?:string
+  imgs?: string
   moreInfo?: string,
   to?: string,
 
@@ -16,42 +16,48 @@ type FeatureItem = {
 
 const FeatureList: FeatureItem[] = [
   {
-    title: 'Solid Docs',
+    title: 'Admin Docs',
     imgs: require('@site/static/img/homeImg1.png').default,
     description: (
       <>
-        Docusaurus was designed from the ground up to be easily installed and
-        used to get your website up and running quickly.
+        A complete guide for administrators and business users to install, configure, and manage applications in SolidX. <br></br>Learn how to set up modules, setup core business entities or models, manage users, and tailor the platform to fit your organizational needs—without writing code.
       </>
     ),
     moreInfo: 'ReadMore',
-    to: 'docs/user-docs/',
-
+    to: 'docs/admin-docs/',
   },
+  // {
+  //   title: 'Guided Tutorial',
+  //   imgs: require('@site/static/img/homeImg1.png').default,
+  //   description: (
+  //     <>
+  //       Dive into SolidX’s low-code engine and learn how to extend, customize, and integrate enterprise applications using APIs, code hooks, and reusable components. <br></br>Ideal for developers looking to build advanced logic and automation on top of the platform.
+  //     </>
+  //   ),
+  //   moreInfo: 'ReadMore',
+  //   to: 'docs/admin-docs/',
+  // },
   {
-    title: 'Solid Docs',
+    title: 'Developer Docs',
     imgs: require('@site/static/img/homeImg1.png').default,
     description: (
       <>
-        Docusaurus lets you focus on your docs, and we&apos;ll do the chores. Go
-        ahead and move your docs into the <code >docs</code> directory.
+        Dive into SolidX’s low-code engine and learn how to extend, customize, and integrate enterprise applications using APIs, code hooks, and reusable components. <br></br>Ideal for developers looking to build advanced logic and automation on top of the platform.
       </>
     ),
     moreInfo: 'ReadMore',
-    to: 'docs/user-docs/',
+    to: 'docs/admin-docs/',
   },
-  
- 
 ];
 
 function Feature({ title, description, moreInfo, to, imgs }: FeatureItem) {
   return (
     <div className={clsx(`col col--5 ${styles.homeCards}`)}>
       <div className="text--start padding-horiz--md">
-      <img src="/img/CardIcon2.png" alt="" width={40} height={40} />
-      <Heading as="h1">{title}</Heading>
-        <p className='home-card-desc'>{description}</p>
-      
+        <img src="/img/CardIcon2.png" alt="" width={50} height={50} />
+        <Heading as="h1">{title}</Heading>
+        <p>{description}</p>
+
         <a href={to} className={styles.moreInfoLink}>
           {moreInfo}
           <svg
