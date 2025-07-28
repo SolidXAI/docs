@@ -188,7 +188,7 @@
 .docItemContainer_Djhp article > *:first-child {
   color: #ffffff !important;
   font-size: var(--ifm-md-font-size) !important;
-  font-size: 0.975rem !important;
+  font-size: 1rem !important;
 }
 
 .table-of-contents__link {
@@ -467,7 +467,7 @@ code {
 
 @media (min-width: 1024px) {
   .docItemContainer_Djhp {
-    width: 75% !important;
+    width:80% !important;
     margin: auto !important;
   }
 }

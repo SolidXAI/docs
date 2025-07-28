@@ -42,6 +42,7 @@
   color: #a77aff;
   text-decoration: none !important;
   font-weight: 500;
+  font-size: 1rem !important;
 }
 
 .arrowIcon {
@@ -50,5 +51,5 @@
 
 .moreInfoLink:hover {
   gap: 0.7rem;
-  font-size: 1.1rem;
+  text-decoration: underline !important;
 }
