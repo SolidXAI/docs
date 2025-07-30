@@ -8,7 +8,7 @@ type FeatureItem = {
   title: string;
   description: ReactNode;
   // Svg?: React.ComponentType<React.ComponentProps<'svg'>>;
-  imgs?: string
+  imgs?:string
   moreInfo?: string,
   to?: string,
 

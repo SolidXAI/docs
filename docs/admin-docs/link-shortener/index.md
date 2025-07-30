@@ -16,7 +16,7 @@ The Link Shortener enables:
 - Analytics
 
 ## Features
-
+<!-- 
 ### URL Management
 - Custom short URLs
 - Automatic generation
@@ -36,7 +36,47 @@ The Link Shortener enables:
 - Rate limiting
 - Domain whitelisting
 - HTTPS enforcement
-- Bot protection
+- Bot protection -->
+
+<div className="feature-grid">
+
+  <div className="feature-card">
+    <h4 className="card-title">1. URL Management</h4>
+    <ul className="card-desc">
+      <li>Custom short URLs</li>
+      <li>Automatic generation</li>
+      <li>URL validation</li>
+      <li>Expiry settings</li>
+      <li>Access restrictions</li>
+    </ul>
+  </div>
+
+  <div className="feature-card">
+    <h4 className="card-title">2. Analytics</h4>
+    <ul className="card-desc">
+      <li>Click tracking</li>
+      <li>Geographic data</li>
+      <li>Device information</li>
+      <li>Referrer tracking</li>
+      <li>Time-based stats</li>
+    </ul>
+  </div>
+
+  <div className="feature-card">
+    <h4 className="card-title">3. Security</h4>
+    <ul className="card-desc">
+      <li>Access control</li>
+      <li>Rate limiting</li>
+      <li>Domain whitelisting</li>
+      <li>HTTPS enforcement</li>
+      <li>Bot protection</li>
+    </ul>
+  </div>
+
+</div>
+
+
+
 
 ## Configuration
 
@@ -166,7 +206,7 @@ const stats = await getUrlStats("abc123");
 ```
 
 ## Best Practices
-
+<!-- 
 1. **URL Management**
    - Use HTTPS only
    - Set appropriate expiry
@@ -193,7 +233,57 @@ const stats = await getUrlStats("abc123");
    - Optimize redirects
    - Monitor latency
    - Scale horizontally
-   - Regular maintenance
+   - Regular maintenance -->
+
+
+<div className="feature-grid">
+  <div className="feature-card">
+    <h4 className="card-title">1. URL Management</h4>
+    <ul className="card-desc">
+      <li>Use HTTPS only</li>
+      <li>Set appropriate expiry</li>
+      <li>Monitor usage patterns</li>
+      <li>Clean up old URLs</li>
+      <li>Document purpose</li>
+    </ul>
+  </div>
+
+  <div className="feature-card">
+    <h4 className="card-title">2. Security</h4>
+    <ul className="card-desc">
+      <li>Enable rate limiting</li>
+      <li>Validate URLs</li>
+      <li>Monitor abuse</li>
+      <li>Regular audits</li>
+      <li>Secure storage</li>
+    </ul>
+  </div>
+
+  <div className="feature-card">
+    <h4 className="card-title">3. Analytics</h4>
+    <ul className="card-desc">
+      <li>Respect privacy</li>
+      <li>Aggregate data</li>
+      <li>Regular backups</li>
+      <li>Monitor trends</li>
+      <li>Clean old data</li>
+    </ul>
+  </div>
+
+  <div className="feature-card">
+    <h4 className="card-title">4. Performance</h4>
+    <ul className="card-desc">
+      <li>Cache responses</li>
+      <li>Optimize redirects</li>
+      <li>Monitor latency</li>
+      <li>Scale horizontally</li>
+      <li>Regular maintenance</li>
+    </ul>
+  </div>
+
+</div>
+
+
 
 ## Common Use Cases
 

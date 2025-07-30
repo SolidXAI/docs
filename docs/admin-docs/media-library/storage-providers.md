@@ -39,35 +39,85 @@ SOLID supports multiple storage providers for media files, offering flexibility 
 }
 ```
 
-### Upcoming Providers
+<!-- ### Upcoming Providers
 - Azure Blob Storage
 - Google Cloud Storage
 - SFTP
-- Custom providers
+- Custom providers -->
+
+<div className="feature-grid">
+
+  <div className="feature-card">
+    <h4 className="card-title">
+    ### Upcoming Providers ###
+    </h4>
+    <ul className="card-desc">
+      <li>Azure Blob Storage</li>
+      <li>Google Cloud Storage</li>
+      <li>SFTP</li>
+      <li>Custom providers</li>
+    </ul>
+  </div>
+</div>
+
+
 
 ## Provider Features
 
-### Common Features
+<!-- ### Common Features
 All storage providers support:
 - File upload/download
 - Directory operations
 - Access control
-- Metadata management
+- Metadata management -->
+
+
+<div className="feature-grid">
+
+  <div className="feature-card">
+    <h4 className="card-title">
+    ### Common Features ###
+    </h4>
+    <ul className="card-desc">
+      <li>File upload/download</li>
+      <li>Directory operations</li>
+      <li>Access control</li>
+      <li>Metadata management </li>
+    </ul>
+  </div>
+</div>
 
 ### Provider-Specific Features
 
-#### Local Filesystem
-- Direct file access
-- System-level permissions
-- Local caching
-- Path customization
+<div className="feature-grid">
 
-#### Amazon S3
-- Bucket policies
-- CloudFront integration
-- Lifecycle rules
-- Versioning
-- Cross-region replication
+  <div className="feature-card">
+    <h4 className="card-title">
+    ### 1 Local Filesystem ###
+    </h4>
+    <ul className="card-desc">
+      <li>Direct file access</li>
+      <li>System-level permissions</li>
+      <li>Local caching</li>
+      <li>Path customization</li>
+    </ul>
+  </div>
+
+  <div className="feature-card">
+    <h4 className="card-title">
+    ### 2 Amazon S3 ###
+    </h4>
+    <ul className="card-desc">
+      <li>Bucket policies</li>
+      <li>CloudFront integration</li>
+      <li>Lifecycle rules</li>
+      <li>Versioning</li>
+      <li>Cross-region replication</li>
+    </ul>
+  </div>
+
+</div>
+
 
 ## Configuration
 
@@ -96,7 +146,7 @@ Files can be routed to different providers based on:
 
 ## Best Practices
 
-1. **Provider Selection**
+<!-- 1. **Provider Selection**
    - Consider scalability needs
    - Evaluate cost implications
    - Assess performance requirements
@@ -118,7 +168,54 @@ Files can be routed to different providers based on:
    - Regular backups
    - Monitor storage usage
    - Clean up unused files
-   - Update configurations
+   - Update configurations -->
+
+
+<div className="feature-grid">
+
+  <div className="feature-card">
+    <h4 className="card-title">1 Provider Selection</h4>
+    <ul className="card-desc">
+      <li>Consider scalability needs</li>
+      <li>Evaluate cost implications</li>
+      <li>Assess performance requirements</li>
+      <li>Plan for redundancy</li>
+    </ul>
+  </div>
+
+  <div className="feature-card">
+    <h4 className="card-title">2 Security</h4>
+    <ul className="card-desc">
+      <li>Use secure credentials</li>
+      <li>Implement proper ACLs</li>
+      <li>Enable encryption</li>
+      <li>Regular security audits</li>
+    </ul>
+  </div>
+
+  <div className="feature-card">
+    <h4 className="card-title">3 Performance</h4>
+    <ul className="card-desc">
+      <li>Configure caching</li>
+      <li>Optimize file sizes</li>
+      <li>Use CDN when possible</li>
+      <li>Monitor usage patterns</li>
+    </ul>
+  </div>
+
+  <div className="feature-card">
+    <h4 className="card-title">4 Maintenance</h4>
+    <ul className="card-desc">
+      <li>Regular backups</li>
+      <li>Monitor storage usage</li>
+      <li>Clean up unused files</li>
+      <li>Update configurations</li>
+    </ul>
+  </div>
+
+</div>
+
+
 
 ## Implementation Guide
 
@@ -142,7 +239,7 @@ npm install @solid/storage-provider-name
   }
 }
 ```
-
+<!-- 
 3. **Set Up Permissions**
 - Configure access credentials
 - Set up network access
@@ -152,11 +249,36 @@ npm install @solid/storage-provider-name
 - Upload test file
 - Verify access
 - Check permissions
-- Validate features
+- Validate features -->
+
+
+<div className="feature-grid">
+
+  <div className="feature-card">
+    <h4 className="card-title">3 Set Up Permissions</h4>
+    <ul className="card-desc">
+      <li>Configure access credentials</li>
+      <li>Set up network access</li>
+      <li>Define security policies</li>
+    </ul>
+  </div>
+
+  <div className="feature-card">
+    <h4 className="card-title">4 Test Configuration</h4>
+    <ul className="card-desc">
+      <li>Upload test file</li>
+      <li>Verify access</li>
+      <li>Check permissions</li>
+      <li>Validate features</li>
+    </ul>
+  </div>
+
+</div>
+
 
 ### Migration Between Providers
 
-1. **Preparation**
+<!-- 1. **Preparation**
    - Inventory existing files
    - Plan migration schedule
    - Test migration process
@@ -172,4 +294,39 @@ npm install @solid/storage-provider-name
    - Test file access
    - Verify permissions
    - Check performance
-   - Monitor errors
+   - Monitor errors -->
+
+
+<div className="feature-grid">
+
+  <div className="feature-card">
+    <h4 className="card-title">1 Preparation</h4>
+    <ul className="card-desc">
+      <li>Inventory existing files</li>
+      <li>Plan migration schedule</li>
+      <li>Test migration process</li>
+      <li>Prepare rollback plan</li>
+    </ul>
+  </div>
+
+  <div className="feature-card">
+    <h4 className="card-title">2 Execution</h4>
+    <ul className="card-desc">
+      <li>Copy files to new provider</li>
+      <li>Verify file integrity</li>
+      <li>Update references</li>
+      <li>Switch provider settings</li>
+    </ul>
+  </div>
+
+  <div className="feature-card">
+    <h4 className="card-title">3 Verification</h4>
+    <ul className="card-desc">
+      <li>Test file access</li>
+      <li>Verify permissions</li>
+      <li>Check performance</li>
+      <li>Monitor errors</li>
+    </ul>
+  </div>
+
+</div>

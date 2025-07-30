@@ -130,7 +130,7 @@ All API errors follow a consistent format:
 
 ## Best Practices
 
-1. **Authentication**
+<!-- 1. **Authentication**
    - Always use HTTPS
    - Keep tokens secure
    - Implement token refresh
@@ -152,4 +152,56 @@ All API errors follow a consistent format:
    - Keep examples up-to-date
    - Document all parameters
    - Include response examples
-   - Note any limitations
+   - Note any limitations -->
+
+<div className="feature-grid">
+
+  <div className="feature-card">
+    <h4 className="card-title">
+    1  Authentication
+    </h4>
+    <ul className="card-desc">
+      <li>Always use HTTPS</li>
+      <li>Keep tokens secure</li>
+      <li>Implement token refresh</li>
+      <li>Handle token expiration</li>
+    </ul>
+  </div>
+
+  <div className="feature-card">
+    <h4 className="card-title">
+    2  Request Optimization
+    </h4>
+    <ul className="card-desc">
+      <li>Use field selection</li>
+      <li>Implement pagination</li>
+      <li>Optimize queries</li>
+      <li>Cache responses</li>
+    </ul>
+  </div>
+
+  <div className="feature-card">
+    <h4 className="card-title">
+    3  Error Handling
+    </h4>
+    <ul className="card-desc">
+      <li>Validate input data</li>
+      <li>Return meaningful errors</li>
+      <li>Log API errors</li>
+      <li>Handle rate limiting</li>
+    </ul>
+  </div>
+
+  <div className="feature-card">
+    <h4 className="card-title">
+    4  Documentation
+    </h4>
+    <ul className="card-desc">
+      <li>Keep examples up-to-date</li>
+      <li>Document all parameters</li>
+      <li>Include response examples</li>
+      <li>Note any limitations</li>
+    </ul>
+  </div>
+
+</div>

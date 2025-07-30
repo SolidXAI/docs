@@ -63,6 +63,20 @@ Email Templates in SOLID allow you to create and manage HTML/Text based email te
 - Loop structures
 - Helper functions
 
+
+<!-- <div className="feature-grid">
+
+  <div className="feature-card ">
+    <h4 className="card-title">1. Content</h4>
+    <ul className="card-desc">
+      <li>Variable replacement</li>
+      <li>Conditional sections</li>
+      <li>Loop structures</li>
+      <li>Helper functions</li>
+    </ul>
+  </div>
+</div> -->
+
 ### Attachments
 
 #### Static Attachments
@@ -182,7 +196,7 @@ Child template:
 
 ## Best Practices
 
-1. **Design**
+<!-- 1. **Design**
    - Use responsive layouts
    - Test across email clients
    - Include plain text version
@@ -208,7 +222,59 @@ Child template:
    - Check responsiveness
    - Verify attachments
    - Monitor delivery
-   - Track engagement
+   - Track engagement -->
+
+
+
+<div className="feature-grid">
+
+  <div className="feature-card">
+    <h4 className="card-title ">1 Design</h4>
+    <ul className="card-desc">
+      <li>1 Use responsive layouts</li>
+      <li>Test across email clients</li>
+      <li>Include plain text version</li>
+      <li>Optimize images</li>
+      <li>Follow email standards</li>
+    </ul>
+  </div>
+
+  <div className="feature-card">
+    <h4 className="card-title ">2 Content</h4>
+    <ul className="card-desc">
+      <li>Clear subject lines</li>
+      <li>Consistent branding</li>
+      <li>Mobile-friendly design</li>
+      <li>Accessible content</li>
+      <li>Valid links</li>
+    </ul>
+  </div>
+
+  <div className="feature-card">
+    <h4 className="card-title ">3 Variables</h4>
+    <ul className="card-desc">
+      <li>Document all variables</li>
+      <li>Provide defaults when possible</li>
+      <li>Validate data types</li>
+      <li>Handle missing values</li>
+      <li>Use clear naming</li>
+    </ul>
+  </div>
+
+  <div className="feature-card">
+    <h4 className="card-title ">4 Testing</h4>
+    <ul className="card-desc">
+      <li>Test all variables</li>
+      <li>Check responsiveness</li>
+      <li>Verify attachments</li>
+      <li>Monitor delivery</li>
+      <li>Track engagement</li>
+    </ul>
+  </div>
+
+</div>
+
+
 
 ## Common Use Cases
 
