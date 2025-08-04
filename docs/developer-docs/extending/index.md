@@ -30,8 +30,6 @@ SolidX provides the following extensibility features:
 - The default layout supports:
   - List View
   - Form View
-  - Kanban View
-  - And more
 
 ### 🎨 Frontend Customization
 

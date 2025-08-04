@@ -35,7 +35,7 @@ solid-api/
 ### 🔹 Notable Subfolders
 
 - `src/`
-  - Contains `main.ts` (entry point for the SolidX backend) and all functional modules like:
+  - Contains `main.ts` (entry point for the SolidX backend) and all SolidX modules like:
     - `fees-portal/`
   - `main-cli.ts` -> entry point for the SolidX cli commands.
   - `app.module.ts` ->  Contains the application module configuration.
@@ -47,8 +47,9 @@ solid-api/
 - `@solidstarters/solid-code-builder`
   - Contains the functionality for generating the code in the SolidX backend.
 
-### 📝 TODO
- - Add more detailed documentation about the functional module project structure  
+### 📝 SolidX modules
+ - A SolidX module is a logical container that groups together related models and functionality under a unified domain or feature area e.g `fees-portal`.
+ - You can find the structure for a SolidX module here [Generated Code](../extending/generated-code/index.md).  
 ---
 
 ## 🎨 `solid-ui/` - Frontend (Next.js & Prime React)
@@ -96,3 +97,6 @@ Contains editor-specific configurations like `launch.json` for debugging and IDE
 - All environment variables are stored in `.env` files within each app folder.
 
 ---
+
+## TODO
+- Add more details on the files in the package structure
