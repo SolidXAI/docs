@@ -69,6 +69,14 @@ This is only required on development machines, not on production servers. SolidX
 ```bash
 npm install -g @angular-devkit/schematics-cli
 ```
+
+## Install copyfiles CLI
+:::note
+This is only required on development machines, not on production servers. SolidX uses copyfiles to copy static files.
+:::
+```bash
+npm install -g copyfiles
+``` 
 <!-- TODO
-Get rid of above step by using the schematics-cli in the node_modules folder.
+Get rid of above 2 steps by using the schematics-cli & copyfiles packages in the node_modules folder.
 -->
