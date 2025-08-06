@@ -36,8 +36,8 @@ This method encapsulates the logic required to activate an institute’s portal.
 
 ⸻
 
-📚 Related Recipes
-	•	👉 Creating a Custom Service
-	•	👉 Creating a Service Method with Custom Logic
+## 📚 Related Recipes
+	-	👉 Creating a Custom Service
+	-	👉 Creating a Service Method with Custom Logic
 
 ⸻

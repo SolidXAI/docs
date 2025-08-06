@@ -46,8 +46,8 @@ For example, the above method in InstituteController will generate a permission 
 
 ⸻
 
-📚 Related Recipes (TODO)
-	•	👉 Creating a Custom Controller
-	•	👉 Creating a Controller Endpoint with Custom Authentication
+## 📚 Related Recipes (TODO)
+	-	👉 Creating a Custom Controller
+	-	👉 Creating a Controller Endpoint with Custom Authentication
 
 ⸻
