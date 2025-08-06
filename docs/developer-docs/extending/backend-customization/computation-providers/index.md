@@ -1,6 +1,8 @@
 ---
 title: Computation Providers
 description: Learn how to extend the backend with custom computation providers.
+sidebar_position: 4
+keywords: [backend, computation providers, customization]
 ---
 
 # 🧮 Computation Providers
