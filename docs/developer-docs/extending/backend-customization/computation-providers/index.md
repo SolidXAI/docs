@@ -128,6 +128,10 @@ export interface IEntityComputedFieldProvider {
    - `postComputeAndSaveValue()` is called **asynchronously** via background jobs
    - Final saving happens via `ComputedFieldEvaluationSubscriber`
 
+:::note
+The computed field configuration is loaded from the database and cached in the solid registry on application startup. So any changes to a computed field configuration will require a server restart to take effect.
+:::
+
 ---
 
 ## 📚 Related Recipes 
