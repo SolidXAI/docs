@@ -1,4 +1,3 @@
-
 ---
 sidebar_position: 1
 title: Background Jobs
@@ -8,10 +7,10 @@ keywords: [background jobs, SolidX, asynchronous processing, job queues, RabbitM
 
 # ⚙️ Background Jobs in SolidX
 
-Background jobs in SolidX allow asynchronous task processing, perfect for long-running operations such as:
+Background jobs in SolidX allow asynchronous task processing, for e.g :
 - Sending emails or notifications
-- Data processing
 - Deferred tasks that don’t require immediate execution
+- Heavy computations that can be processed in the background
 
 ---
 
