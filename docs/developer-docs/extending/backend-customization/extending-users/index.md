@@ -11,12 +11,12 @@ This section covers how to **extend user functionality in SolidX**, including cr
 
 ---
 
-## 🧩 Creating a Custom User Field
+## 🧩 Configuring a Custom User Model
 
-To create a custom user model:
+### To create a custom user model:
 
-1. Set `isChild: true` and specify `User` as the parent model in your field metadata.
-2. Below is an example configuration:
+- Set `isChild: true` and specify `User` as the parent model in your field metadata.
+- Below is an example configuration:
 
 <details>
 <summary>📄 Sample Field Metadata for <code>instituteUser</code></summary>
@@ -65,19 +65,18 @@ To create a custom user model:
 </details>
 
 
-	3.	This will generate form/list views in SolidX to manage the custom users.
+- This will generate form/list views in SolidX to manage the custom users.
 
 ⸻
 
-🛠 Persisting a Custom User Model
+## 🛠 Persisting a Custom User
 
-Since user creation is more than just a simple insert, you must override the generated controller code.
+Since user creation is more than just a simple insert i.e (password encryption, user password history management, etc.)  you must override the generated controller code to allow creating a custom user properly.
 
 🔁 Replace This Code:
 
 <details>
 <summary>🔧 Default Generated Code</summary>
-
 ```typescript
 @ApiBearerAuth("jwt")
 @Post()
@@ -116,12 +115,12 @@ async create(@Body() createDto: CreateInstituteUserDto, @UploadedFiles() files: 
 </details>
 
 
-	4.	✅ Use generated code as-is for other CRUD operations. Only create() requires overriding.
+	4.	Use generated code as-is for other CRUD operations. Only create() requires overriding.
 	5.	You can also show parent user fields in layouts like any other fields. No special config needed.
 
 ⸻
 
-🧪 Generated Code Example
+## 🧪 Generated Code (for custom user models)
 
 <details>
 <summary>📦 DTOs & Entity</summary>
@@ -147,17 +146,15 @@ export class InstituteUser extends User {}
 
 ⸻
 
-⚙️ How It Works
+## ⚙️ How It Works
 	1.	The generated model extends User, inheriting all fields & methods.
 	2.	AuthenticationService.signupForExtensionUser() handles:
-	•	User field persistence
-	•	Email notifications
-	•	Password encryption & history tracking
+	  -	User field persistence
+	  -	Email notifications
+	  -	Password encryption & history tracking
 	3.	SolidX generates UI + API endpoints to manage custom users.
 
 :::note
-All user records, including custom ones, are stored in the same User table.
+All user records, including custom user ones, are stored in the same User i.e `ss_user` table.
 SolidX uses a discriminator column to distinguish custom user types.
 :::
-
-Let me know if you'd like to turn this into a downloadable PDF or DOCX instead! |oai:code-citation|
