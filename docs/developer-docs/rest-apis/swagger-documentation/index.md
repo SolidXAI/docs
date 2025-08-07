@@ -1,5 +1,7 @@
 ---
 sidebar_position: 5
+title: Swagger Documentation
+description: This section provides details on how to access and use the Swagger documentation for SolidX REST APIs.
 ---
 
 # API Documentation

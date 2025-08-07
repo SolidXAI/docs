@@ -46,7 +46,7 @@ const FeatureList: FeatureItem[] = [
       </>
     ),
     moreInfo: 'ReadMore',
-    to: 'docs/admin-docs/',
+    to: 'docs/developer-docs/',
   },
 ];
 
