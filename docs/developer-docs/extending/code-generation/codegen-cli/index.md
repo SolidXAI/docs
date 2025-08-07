@@ -19,7 +19,7 @@ Generates a new module in the SolidX backend.
 ### 🔧 Command
 
 ```bash
-solid add-module
+solid add-module <options>
 ```
 
 ### 🔍 Options
@@ -42,7 +42,7 @@ Creates or updates a model and its related files within an existing module.
 ### 🔧 Command
 
 ```bash
-solid refresh-model
+solid refresh-model <options>
 ```
 
 ### 🔍 Options
@@ -67,7 +67,7 @@ Removes fields from an existing model in the SolidX backend.
 ### 🔧 Command
 
 ```bash
-solid remove-fields
+solid remove-fields <options>
 ```
 
 ### 🔍 Options
