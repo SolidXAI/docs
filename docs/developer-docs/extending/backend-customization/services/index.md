@@ -17,8 +17,7 @@ To add a new method to an existing service, follow these steps:
 
 1. 🔍 Identify the service you want to extend.  
 2. ✍️ Create a new method in the service class that implements your logic.  
-3. 📄 Document the method in your service documentation.  
-4. 🔗 Update the corresponding controller if you want to expose this functionality via API.
+3. 🔗 Update the corresponding controller if you want to expose this functionality via API.
 
 <details>
 <summary>📄 Example: Add <code>activateInstitutePortal</code> to <code>InstituteService</code></summary>

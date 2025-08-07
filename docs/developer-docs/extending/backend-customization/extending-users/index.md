@@ -91,7 +91,7 @@ async create(@Body() createDto: CreateInstituteUserDto, @UploadedFiles() files: 
 ✅ With This Logic:
 
 <details>
-<summary>✅ Revised Implementation</summary>
+<summary>✅ Revised Implementation (InstituteController)</summary>
 
 ```typescript
 @ApiBearerAuth("jwt")
@@ -111,6 +111,66 @@ async create(@Body() createDto: CreateInstituteUserDto, @UploadedFiles() files: 
   // Call signupForExtensionUser to persist user in SolidX
   return this.authenticationService.signupForExtensionUser(signupDto, extensionUserDto, this.repo);
 }
+```
+</details>
+
+<details>
+<summary>✅ Methods Implementation (InstituteService)</summary>
+```typescript
+  async toExtensionUserDto(createDto: CreateInstituteUserDto): Promise<any> {
+    // Populate the extension user data for the user
+    let institute = null;
+    if (createDto.instituteId) {
+      institute = await this.InstituteRepo.findOne({
+        where: {
+          //@ts-ignore
+          id: createDto.instituteId,
+        },
+      });
+    }
+
+    return {
+      ...createDto,
+      institute,
+    };
+  }
+
+  toSignUpDto(createDto: CreateInstituteUserDto): SignUpDto {
+    // Populate the signup data for the user
+    return {
+      fullName: createDto.fullName,
+      username: createDto.username,
+      email: createDto.email,
+      password: createDto.password,
+      mobile: createDto.mobile,
+      roles: [createDto.userType], // set the role to the userType i.e userType name is same as the role name
+    };
+  }
+
+  async validateEmailDomain(instituteId: number, email: string) {
+    const institute = await this.InstituteRepo.findOne({
+      where: { id: instituteId },
+    });
+
+    if (!institute) {
+      return  false;
+    }
+    if (!institute.emailDomain) {
+      return  true;
+    }
+    const emailDomain = email.split('@')[1]?.toLowerCase();
+    if (!emailDomain) {
+      return false;
+    }
+
+    // Compare with the domain stored in DB
+    if (emailDomain === institute.emailDomain.toLowerCase()) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
 ```
 </details>
 
@@ -138,11 +198,11 @@ export class UpdateInstituteUserDto extends UpdateUserDto {
 
 // Entity
 @ChildEntity()
-export class InstituteUser extends User {}
+export class InstituteUser extends User {
+  ...
+}
 ```
 </details>
-
-
 
 ⸻
 
@@ -156,5 +216,5 @@ export class InstituteUser extends User {}
 
 :::note
 All user records, including custom user ones, are stored in the same User i.e `ss_user` table.
-SolidX uses a discriminator column to distinguish custom user types.
+SolidX uses a discriminator column i.e `type` to distinguish custom user types.
 :::

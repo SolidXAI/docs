@@ -41,7 +41,7 @@ This method will handle POST requests to the /activate-institute-portal endpoint
 :::note
 When you run solid seed, SolidX scans the code for controllers and their methods to auto-create permissions.
 
-For example, the above method in InstituteController will generate a permission named institute.activateInstitutePortal.
+For example, the above method in InstituteController will generate a permission named InstituteController.activateInstitutePortal.
 :::
 
 ⸻

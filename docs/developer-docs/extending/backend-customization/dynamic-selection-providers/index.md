@@ -45,14 +45,11 @@ In this section, we will explore how to create **dynamic selection providers** t
 </details>
 
 
-
-⸻
-
-2️⃣ Create the Dynamic Selection Provider
+### 2️⃣ Create the Dynamic Selection Provider Class
 
 You need to create a provider class that implements the ISelectionProvider interface.
-	•	The values() method fetches and returns selection options.
-	•	The value() method is currently not used, and can be left with an empty implementation.
+	- The values() method fetches and returns selection options.
+	- The value() method is currently not used, and can be left with an empty implementation.
 
 :::note
 The value() method can simply throw a NotImplementedException.
@@ -116,10 +113,7 @@ export class ListOfValuesSelectionProvider implements ISelectionProvider<ListOfV
 </details>
 
 
-
-⸻
-
-⚙️ How It Works
+## ⚙️ How It Works
 
 To support your dynamic selection field, your provider must implement the following interface:
 
@@ -137,7 +131,7 @@ export interface ISelectionProvider<T extends ISelectionProviderContext> {
 </details>
 
 
-🔁 Runtime Flow
+## 🔁 Runtime Flow
 
 Here’s how the dynamic selection works in runtime:
 	1.	🧠 The frontend calls FieldMetadataService.getSelectionDynamicValues().

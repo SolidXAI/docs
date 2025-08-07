@@ -127,8 +127,8 @@ export interface IEntityComputedFieldProvider {
    - `preComputeValue()` is called **synchronously**
    - Value is set directly on the entity and auto-saved
 3. For **after** operations:
-   - `postComputeAndSaveValue()` is called **asynchronously** via background jobs
-   - Final saving happens via `ComputedFieldEvaluationSubscriber`
+   - `postComputeAndSaveValue()` is called **asynchronously** via [Background Jobs](../background-jobs/index.md)
+   - Final saving happens via `ComputedFieldEvaluationSubscriber`.
 
 :::note
 The computed field configuration is loaded from the database and cached in the solid registry on application startup. So any changes to a computed field configuration will require a server restart to take effect.
