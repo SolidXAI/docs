@@ -48,8 +48,8 @@ The App Builder is a core module of SOLID that enables you to create and manage 
 
 Use the App Builder to construct everything from simple forms to complex data-driven applications, making it a versatile tool for any development project. -->
 
-<div className="feature-grid">
-  <div className="feature-card-medium">
+<div className ='border-box'>
+
   The App Builder consists of three main components that work in harmony to provide a comprehensive development environment:
 
 - [Module Management](./module-management.md) - Organize your application structure
@@ -61,7 +61,6 @@ Use the App Builder to construct everything from simple forms to complex data-dr
 
 Use the App Builder to construct everything from simple forms to complex data-driven applications, making it a versatile tool for any development project.
 
-  </div>
 </div>
 
 ### Views
@@ -72,16 +71,18 @@ Use the App Builder to construct everything from simple forms to complex data-dr
 2. [Kanban View](./views/kanban-view.md) - Visualize and manage data on a kanban board, ideal for task and workflow management.
 3. [Form View](./views/form-view.md) - Create and edit individual records efficiently with an intuitive interface for detailed data entry. -->
 
-<div className="feature-grid">
-  <div className="feature-card-medium">
+<div className ='border-box'>
+
   The App Builder supports multiple view types to display and interact with your data:
 
   1. [List View](./views/list-view.md) - Display data in a tabular format for easy comparison and bulk actions.
   2. [Kanban View](./views/kanban-view.md) - Visualize and manage data on a kanban board, ideal for task and workflow management.
   3. [Form View](./views/form-view.md) - Create and edit individual records efficiently with an intuitive interface for detailed data entry.
 
-  </div>
 </div>
+
+<div className='extra-space'></div>
+
 
 ####
 **Tags:** [`#introduction`](./strapi-guide) [`#concepts`](./beginner-guide)

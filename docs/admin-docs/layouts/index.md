@@ -37,7 +37,7 @@ The Form View is used to create or edit a single record. It renders each field w
 
 Each layout leverages the rich metadata attached to models and fields to deliver intelligent and dynamic behavior, below are a few examples (not an exhaustive list) of use-cases where the layouts use the rich metadata to bring type specific behavior.
 
-✅ Type-Specific Filtering (List & Kanban Views)
+ Type-Specific Filtering (List & Kanban Views)
 
 Fields are rendered with filter options tailored to their semantic type:
 
@@ -50,7 +50,7 @@ Fields are rendered with filter options tailored to their semantic type:
 
 This allows users to slice, search, and interact with collections in a highly productive way.
 
-🧩 Intelligent Field Rendering (Form View)
+ Intelligent Field Rendering (Form View)
 
 In Form Views, each field type is rendered using components optimized for its data and usage context:
 

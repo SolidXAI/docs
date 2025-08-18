@@ -19,8 +19,7 @@ The List View provides a powerful tabular interface for viewing and managing you
 - **Saved Queries**: Save and reuse frequently used filter combinations -->
 
 ### Search and Filter
-<div className="feature-grid">
-   <div className="feature-card-medium">
+<div className="border-box">
 
    - **Global Search**: Quick search across all searchable fields
    - **Advanced Filters**:   
@@ -31,7 +30,6 @@ The List View provides a powerful tabular interface for viewing and managing you
      - Relationship filters
    - **Saved Queries**: Save and reuse frequently used filter combinations
 
-   </div>
 </div>
 
 ### Data Management

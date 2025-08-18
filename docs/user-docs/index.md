@@ -14,13 +14,13 @@ Welcome to SOLID Starters' user documentation! SOLID Starters is an enterprise-f
 2. Log in with your credentials (default credentials: admin@example.com / admin@123)
 3. Upon first login, you'll be prompted to change your password. Please ensure you create a strong, unique password to secure access to your applications. -->
 
-<div className="feature-grid">
-  <div className="feature-card" href="/docs/user-docs/app-builder/">
+<div className="border-box">
     <h4 className='header-title'>To access the admin panel :</h4>
+
       - Navigate to your SOLID installation URL
       - Log in with your credentials (default credentials: admin@example.com / admin@123)
       - Upon first login, you'll be prompted to change your password. Please ensure you create a strong, unique password to secure access to your applications.
-  </div>
+
 </div>
 
 ### Core Features
@@ -63,26 +63,27 @@ SOLID provides several key features to help you build and manage your applicatio
 </div>
 
 ### Best Practices
-<!-- 
+
+<!--
 - Ensure regular updates and backups of your application.
 - Utilize consistent naming conventions for modules, models and fields to maintain organization. -->
 
-<div className="feature-grid">
-  <div className="feature-card" href="/docs/user-docs/app-builder/">
-    <h4 className='header-title-tips'>Information for beginner developers</h4>
-     - Ensure regular updates and backups of your application 
-    - Utilize consistent naming conventions for modules, models and fields to maintain organization.
-  </div>
+<div class="tips-box ">
+  <h4>💡 Tips to make the best of the docs</h4>
+  <ul>
+    <li>Information for beginner developers </li>
+    <li> Utilize consistent naming conventions for modules, models and fields to maintain organization.</li>
+  </ul>
 </div>
+
+
 
 ### Additional Resources
 
 - [Community Forum](#coming-soon)
 - [FAQs](#coming-soon)
 
-
-**Tags:** [`#introduction`](./strapi-guide) [`#concepts`](./beginner-guide) [`#getStarted`](./strapi-guide) [`#solidX`](./beginner-guide)
-
+<div className='extra-space'></div>
 
 
-
+**Tags:** [`#introduction`](./strapi-guide) [`#concepts`](./beginner-guide) 

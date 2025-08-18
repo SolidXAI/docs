@@ -33,29 +33,21 @@ The notification system offers:
 
 ### [Email Templates](./email-templates.md)
 
-<div className="feature-grid">
-  <div className="feature-card">
-    <ul className="card-desc">
-      <li>HTML/Text templates</li>
-      <li>Dynamic placeholders</li>
-      <li>Static attachments</li>
-      <li>Dynamic attachments (Reports)</li>
-      <li>Provider abstraction (SMTP, Amazon SES)</li>
-    </ul>
-  </div>
+<div className="border-box">
+      - HTML/Text templates
+      - Dynamic placeholders
+      - Stattachments
+      - Dynamic attachments (Reports)
+      - Provider abstraction (SMTP, Amazon SES)ic at
 </div>
 
 ### [SMS Templates](./sms-templates.md)
 
-<div className="feature-grid">
-  <div className="feature-card">
-    <ul className="card-desc">
-      <li>Text templates</li>
-      <li>Dynamic placeholders</li>
-      <li>Link shortening</li>
-      <li>Provider abstraction (Twilio, Msg91, Gupshup)</li>
-    </ul>
-  </div>
+<div className="border-box">
+      - Text templates
+      - Dynamic placeholders
+      - Link shortening
+      - Provider abstraction (Twilio, Msg91, Gupshup)
 </div>
 
 

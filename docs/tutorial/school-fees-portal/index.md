@@ -105,7 +105,7 @@ The system supports the following types of notifications:
 - **Visual Reports:** Future scope for in-system dashboards
 
 
-## 🔧 What You'll Build
+##  What You'll Build
 
 In this tutorial, you'll learn how to build a fee collection system with:
 
@@ -120,9 +120,9 @@ Let's get started by setting up the foundation for the platform.
 
 
 
-## 🧰 Prerequisites
+##  Prerequisites
 
-### 👩‍💻 Who is this tutorial for?
+###  Who is this tutorial for?
 
 This tutorial is intended for:
 
@@ -131,7 +131,7 @@ This tutorial is intended for:
 - Teams looking to integrate payment workflows with admin portals
 - Developers familiar with APIs, relational databases, and async job queues
 
-### 🖥️ Local Development Environment
+###  Local Development Environment
 
 To follow along with this tutorial, ensure your local machine has the following:
 
@@ -143,5 +143,5 @@ To follow along with this tutorial, ensure your local machine has the following:
 
 You should also be comfortable using the terminal and a code editor like VS Code.
 
-> ⚠️ Make sure PostgreSQL and Redis are running locally or accessible via Docker containers before starting the implementation steps.
+> Make sure PostgreSQL and Redis are running locally or accessible via Docker containers before starting the implementation steps.
 

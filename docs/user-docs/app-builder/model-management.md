@@ -25,7 +25,7 @@ To create a new model:
 | Audit Tracking | Track creation, updates, and deletion of records |
 | Internationalization | Enable multi-language support for records |
 
-### Advanced Features
+## Advanced Features
 <!-- 
 ### Soft Delete
 When enabled, records are marked as deleted instead of being permanently removed from the database. This provides:
@@ -53,31 +53,28 @@ Built-in support for multiple languages:
 
 
 ### Soft Delete
-<div className="feature-grid">
-   <div className="feature-card-medium">
+<div className="border-box">
    When enabled, records are marked as deleted instead of being permanently removed from the database. This provides:
    - Record recovery capability
    - Maintenance of data integrity
    - Preservation of historical data
    - Ability to restore accidentally deleted records
-   </div>
 </div>
 
 ### Audit Tracking
-<div className="feature-grid">
-   <div className="feature-card-medium">
+<div className="border-box">
+
    Comprehensive tracking of record changes:
    - Creation timestamp and user
    - Modification timestamp and user
    - Deletion timestamp and user (with soft delete)
    - Field-level change history
    - Comments and annotations
-   </div>
 </div>
 
 ### Internationalization
-<div className="feature-grid">
-   <div className="feature-card-medium">
+<div className="border-box">
+
    Built-in support for multiple languages:
    - Define translatable fields
    - Manage translations per record
@@ -85,7 +82,6 @@ Built-in support for multiple languages:
    - Language fallback configuration
    - Translation import/export
 
-   </div>
 </div>
 
 ### Model Relationships
