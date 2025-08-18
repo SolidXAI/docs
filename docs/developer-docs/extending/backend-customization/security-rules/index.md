@@ -66,4 +66,11 @@ Follow these steps to configure a custom security rule:
 Support for applying rules in the basic `find()` method is still a TODO.
 :::
 
+## Troubleshooting
+If you encounter issues with security rules:
+- 🔄 Ensure the server is restarted after making changes to the security rules.
+- Ensure that the `roleUserKey` and `modelMetadataUserKey` are correctly defined and match the roles and models in your application.
+- Ensure that the permissions related to the security rules are not assigned to the "Public" role, since public endpoints skip security checks. 
+- Check the logic in `securityRuleConfig.filters` to ensure it correctly references the user ID and model data.
+- Enable debug sql logging, by adding the  DEFAULT_DATABASE_LOGGING=true environment variable, to see the SQL queries being generated and applied. This can help identify if the security rules are being applied correctly if the sql queries are being generated and applied correctly.
 ---
