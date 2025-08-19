@@ -7,41 +7,12 @@ sidebar_position: 1
 #  Deploying to VM
 This section provides guidance on how to deploy your SolidX applications to a virtual machine (VM).
 
-##  Setup PostgreSQL Database
-This guide assumes you are using PostgreSQL as your database.
-
-:::note
-If you're using a different database, please refer to its official documentation.
+:::info
+📌 Before continuing, make sure you've completed the [Prerequisites](/docs/developer-docs/prerequisites).
 :::
-
-###  Install PostgreSQL on Ubuntu 22/24
-Follow [DigitalOcean's guide](https://www.digitalocean.com/community/tutorials/how-to-install-postgresql-on-ubuntu-22-04-quickstart) for detailed instructions.
-
-###  Create a PostgreSQL User and Database
-1. Create a user:
-  ```bash
-  sudo -u postgres createuser --interactive
-  ```
-2. Update the password:
-  ```sql
-  ALTER USER <user> WITH PASSWORD '<password>';
-  ```
-3. Create and access the database:
-  ```bash
-  sudo -u postgres createdb <dbname>
-  psql -U <user> -h localhost -d <dbname>
-   ```
 
 ##  Run SolidX Application
 This section explains how to run the SolidX app on a virtual machine.
-
-###  Install Git
-```bash
-sudo apt update
-sudo apt install git -y
-git config --global user.name "Server Admin"
-git config --global user.email "admin@logicloop.io"
-```
 
 ###  Clone Repository
 ```bash
@@ -50,17 +21,6 @@ git clone <repo http url>
 
 ###  Update Environment Variables
 Create the `.env` files inside `solid-api` and `solid-ui` with your database credentials and other configs.
-
-###  Install Node.js and npm using nvm
-```bash
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
-export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-nvm --version
-nvm install 22.13.1
-node -v
-npm -v
-```
 
 ###  Verify Backend is Running
 ```bash
@@ -205,5 +165,8 @@ Visit: `https://<domain_name>` to verify SSL.
 ---
 
 :::tip
-You can set up a cron job or use `pm2 save && pm2 startup` to ensure apps restart after reboot.
+You can set up a cron job or use the commands below to ensure apps restart after reboot.
 :::
+
+```bash
+pm2 save && pm2 startup

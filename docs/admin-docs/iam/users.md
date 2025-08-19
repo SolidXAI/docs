@@ -71,12 +71,12 @@ There are several ways to create users:
 
 | Property | Description |
 |----------|-------------|
+| Full name | User's full name |
 | Username | Unique identifier |
 | Email | Primary contact |
 | Password | Securely hashed |
-| Status | Active/Inactive |
+| Mobile | User's mobile number |
 | Roles | Assigned roles |
-| Profile | Additional info |
 
 ## User Profile
 
@@ -134,7 +134,7 @@ There are several ways to create users:
     </ul>
   </div>
 
-  <div className="feature-card">
+  <!-- <div className="feature-card">
     <h4 className="card-title">Multi-factor Authentication</h4>
     <ul className="card-desc">
       <li>Enable/disable 2FA</li>
@@ -154,7 +154,7 @@ There are several ways to create users:
       <li>Recovery codes</li>
       <li>Admin assistance</li>
     </ul>
-  </div>
+  </div> -->
 
 </div>
 
@@ -184,9 +184,7 @@ There are several ways to create users:
     <h4 className="card-title">User List View</h4>
     <ul className="card-desc">
       <li>Search users</li>
-      <li>Filter by status</li>
-      <li>Filter by role</li>
-      <li>Bulk actions</li>
+      <li>Filter users</li>
       <li>Export users</li>
     </ul>
   </div>
@@ -196,9 +194,7 @@ There are several ways to create users:
     <ul className="card-desc">
       <li>Profile information</li>
       <li>Role management</li>
-      <li>Permission overview</li>
       <li>Activity history</li>
-      <li>Security settings</li>
     </ul>
   </div>
 
@@ -241,7 +237,7 @@ There are several ways to create users:
     <ul className="card-desc">
       <li>Validate email addresses</li>
       <li>Enforce strong passwords</li>
-      <li>Require email verification</li>
+      <!-- <li>Require email verification</li> -->
       <li>Set appropriate roles</li>
       <li>Document user purpose</li>
     </ul>
@@ -253,14 +249,14 @@ There are several ways to create users:
       <li>Collect necessary information</li>
       <li>Respect privacy</li>
       <li>Regular information updates</li>
-      <li>Clean inactive accounts</li>
+      <!-- <li>Clean inactive accounts</li> -->
     </ul>
   </div>
 
   <div className="feature-card">
     <h4 className="card-title">Security</h4>
     <ul className="card-desc">
-      <li>Enable MFA for sensitive roles</li>
+      <!-- <li>Enable MFA for sensitive roles</li> -->
       <li>Regular password changes</li>
       <li>Monitor login attempts</li>
       <li>Review access regularly</li>
@@ -270,7 +266,7 @@ There are several ways to create users:
   <div className="feature-card">
     <h4 className="card-title">Maintenance</h4>
     <ul className="card-desc">
-      <li>Archive inactive users</li>
+      <!-- <li>Archive inactive users</li> -->
       <li>Update user information</li>
       <li>Review role assignments</li>
       <li>Clean up permissions</li>
@@ -279,52 +275,22 @@ There are several ways to create users:
 
 </div>
 
-
-
-
-## Common Operations
-
 ### Creating a New User
+![View existing users](/img/admin-docs/iam/users/user-list.png)  
+*Figure 1: User list page showing existing users.*
+  
+![Create a user](/img/admin-docs/iam/users/user-creation.png)  
+*Figure 2: User creation form to add a new user.*
 
-1. Navigate to Users section
-2. Click "Create User"
-3. Fill in the form:
-```json
-{
-  "username": "john.doe",
-  "email": "john.doe@example.com",
-  "firstName": "John",
-  "lastName": "Doe",
-  "roles": ["editor", "viewer"],
-  "status": "active"
-}
-```
-4. Send invitation
+To create a new user
+1. Navigate to IAM->Users section
+2. Click on the Add button
+3. Fill in the form and fill in the required details:
+4. Assign the user the required roles
+5. Click on the Save button.
+6. User is created and added to the list of users 
+5. User is sent a mail with the login link and is prompted to change their password, i.e (if forceChangePassword is enabled in the settings)
 
-### Updating User Status
-
-1. Find user in list
-2. Click "Edit"
-3. Change status:
-```json
-{
-  "status": "inactive",
-  "deactivationReason": "Extended leave",
-  "deactivationDate": "2024-01-01"
-}
-```
-4. Save changes
-
-### Managing User Roles
-
-1. Access user details
-2. Go to Roles tab
-3. Modify role assignments:
-```json
-{
-  "addRoles": ["manager"],
-  "removeRoles": ["editor"],
-  "effectiveDate": "immediate"
-}
-```
-4. Confirm changes
+:::note
+Internal user is a pre-defined technical role with limited permissions. All users need to be assigned this role, for application to work properly on user login
+:::
