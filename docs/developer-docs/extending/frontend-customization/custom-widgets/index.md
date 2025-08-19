@@ -5,19 +5,49 @@ description: Learn how to create custom widgets for the frontend of your applica
 ---
 
 ## Overview
-Custom widgets allow you to extend the UI functionality of your frontend application by adding new components that can be reused across different views. These widgets can encapsulate specific functionality and associated with a specific field allowing you to render the same field in different ways based on the widget configuration.
+Custom widgets allow you to extend the UI functionality of your frontend application by adding new components to your view layouts, that can be reused.
+These widgets are not associated with any fields in the model.
+Instead, they are used to enhance the user interface by providing custom rendering or interaction capabilities.
 
-There are 2 kinds of custom widgets:
-1. **Edit Widgets**: These are used to render fields in a specific way for forms i.e (in create / edit mode)
-2. **View Widgets**: These are used to render fields in a specific way for forms i.e (in view mode)
+SolidX does provide a built-in way to create custom widgets using the `CustomHtml` widget.
 
-View widget can be used to render fields in forms in view mode, or in list views. 
+## How to configure the CustomHtml widget
+For e.g if i need to create a custom widget that displays how many characters a user has typed in a text field, I can create a custom widget and place it below a particular fields in the form layout.
 
-We can write custom widget to write custom UI functionality which can be used in the form layout json configuration.
-The widgets need to registeredas below in the solid-extensions.ts file in the solid-ui/app folder, before using them in the form layout json configuration:
-```typescript
-registerExtensionComponent("BookSimilarTitles", BookSimilarTitles);
+You can configure it as below:
+
+```json
+                                      {
+                                        "type": "custom",
+                                        "attrs": {
+                                          "name": "page-1-row-1-div-1-div-1-title-custom",
+                                          "widget": "CustomHtml",
+                                          "html": "<span>You have typed {{ctxtTitleAlphpabetCount}}</span>",
+                                          "visible": false
+                                        }
+                                      }
 ```
 
-## Examples
-TODO
+Above configuration uses the `CustomHtml` widget to display a message that shows the number of characters typed in a text field.
+
+It receives props of type SolidFormWidgetProps
+
+
+The `{{ctxtTitleAlphpabetCount}}` is a placeholder that will be replaced with the actual count dynamically. This variable could either be a field value which can accessed using the field name or a custom variable, which can be set in the form data using the custom handler. You can read more about form handlers in this section [Form View Event Listners](../form-view-event-listeners/index.md)
+
+## 🔄 How It Works
+1. SolidX loads the **form layout** in edit/view mode.  
+2. It identifies custom fields i.e with type custom 
+3. It dynamically imports the corresponding widget component.  
+4. The widget is rendered with props like:
+``` tsx
+export type SolidFormWidgetProps = {
+    field: any;
+    // This comes from Formik...
+    formData: Record<string, any>;
+    viewMetadata: SolidView;
+    fieldsMetadata: FieldsMetadata;
+    formViewData: any;
+}
+```
+5. The widget then applies your **custom rendering logic**.  

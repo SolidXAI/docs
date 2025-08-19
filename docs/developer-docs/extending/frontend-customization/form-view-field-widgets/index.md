@@ -184,9 +184,26 @@ Now you can configure the widget in the form view layout:
 1. SolidX loads the **form layout** in edit mode.  
 2. It identifies fields with an `editWidget`.  
 3. It dynamically imports the corresponding widget component.  
-4. The widget is rendered with props like:
-   - `formik` → form state management  
-   - `fieldContext` → field metadata & layout info  
+4. The widget is rendered with props of type `SolidFormFieldWidgetProps`:
+``` tsx
+export type SolidFormFieldWidgetProps = {
+    formik: any;
+    fieldContext?: SolidFieldProps;
+}
+
+export type SolidFieldProps = {
+    solidFormViewMetaData: any;
+    fieldMetadata: any,
+    field: any,
+    data: any,
+    modelName?: any,
+    readOnly?: any,
+    viewMode?: any
+    onChange?: any,
+    onBlur?: any,
+    parentData?: any,
+}
+```
 5. The widget then applies your **custom rendering logic**.  
 6. Default widgets are also rendered using the same mechanism.
 

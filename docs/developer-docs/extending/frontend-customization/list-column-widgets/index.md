@@ -133,11 +133,23 @@ Now you can use `ScoreWidget` in your layout JSON:
 1. When the **SolidX app** loads the list view, it reads the **layout configuration**.
 2. It checks fields that have a `viewWidget` attribute.
 3. The corresponding widget is **dynamically imported**.
-4. The widget is rendered for each row, with props:
-   - `rowData` → actual row values  
-   - `solidListViewMetaData` → list view metadata  
-   - `fieldMetadata` → field configuration details  
-   - `column` → column metadata
+4. The widget is rendered for each row, with props of type `SolidListFieldWidgetProps`:
+```
+export type SolidListFieldWidgetProps = {
+    rowData: any;
+    solidListViewMetaData: any
+    fieldMetadata: FieldMetadata;
+    column: any;
+}
+
+export type FieldMetadata = CommonEntity & {
+    id: number;
+    name: string;
+    displayName: string;
+    // For now we have kept it flexible allowing any number of other key / value pairs...
+    [key: string]: any;
+}
+```
 5. The widget displays data based on **custom logic** you define.
 
 ---
