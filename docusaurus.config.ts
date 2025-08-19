@@ -1,11 +1,11 @@
-import {themes as prismThemes} from 'prism-react-renderer';
-import type {Config} from '@docusaurus/types';
+import { themes as prismThemes } from 'prism-react-renderer';
+import type { Config } from '@docusaurus/types';
 import type * as Preset from '@docusaurus/preset-classic';
 
 // This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
 
 const config: Config = {
-  title: 'SOLID Starters',
+  title: 'SolidX',
   tagline: 'Enterprise-focussed low-code development platform',
   favicon: 'img/favicon.ico',
 
@@ -65,22 +65,28 @@ const config: Config = {
   ],
 
   themeConfig: {
-    // Replace with your project's social card
     image: 'img/docusaurus-social-card.jpg',
     navbar: {
-      title: 'SOLID Starters Documentation',
+      title: 'SolidX',
       logo: {
-        alt: 'SOLID Starters Alt Logo',
-        src: 'img/logo.svg',
+        alt: 'SolidX Alt Logo',
+        src: 'img/NavbarLogo.png',
       },
       items: [
         {
           type: 'docSidebar',
           sidebarId: 'tutorialSidebar',
-          position: 'left',
-          label: 'Tutorial',
+          position: 'left', // keep this as left
+          label: '⏱️  Tutorial',
+          className: 'custom-center-item',
         },
-        {to: '/blog', label: 'Blog', position: 'left'},
+        {
+          to: '/blog',
+          label: '⏱️  Blog',
+          position: 'left',
+          className: 'custom-center-item',
+        },
+
         {
           href: 'https://github.com/facebook/docusaurus',
           label: 'GitHub',
@@ -88,15 +94,22 @@ const config: Config = {
         },
       ],
     },
+
     footer: {
       style: 'dark',
+      logo: {
+        src: 'img/NavbarLogo.png',
+        className: 'footer-bottom-icon'
+      },
+
       links: [
+
         {
           title: 'Docs',
           items: [
             {
               label: 'Tutorial',
-              to: '/docs/intro',
+              to: 'docs/admin-docs/',
             },
           ],
         },
@@ -123,6 +136,7 @@ const config: Config = {
             {
               label: 'Blog',
               to: '/blog',
+              className: "myfooterdataClass"
             },
             {
               label: 'GitHub',
@@ -131,12 +145,9 @@ const config: Config = {
           ],
         },
       ],
-      copyright: `Copyright © ${new Date().getFullYear()} SOLID Starters, LogicLoop Ventures LLP.`,
+      // copyright: `Copyright © ${new Date().getFullYear()} SolidX, LogicLoop Ventures LLP.`,
     },
-    prism: {
-      theme: prismThemes.github,
-      darkTheme: prismThemes.dracula,
-    },
+
   } satisfies Preset.ThemeConfig,
 };
 

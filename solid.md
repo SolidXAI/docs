@@ -64,7 +64,7 @@
 
 [Link Shortener Module	9](#link-shortener-module)
 
-[Other Settings	9](#other-settings)
+<!-- [Other Settings	9](#other-settings) -->
 
 [Plugin Architecture	9](#plugin-architecture)
 
@@ -78,7 +78,7 @@
 
 ## **Introduction** {#introduction}
 
-We need to create a page introducing SOLID starters and what it stands for, maybe a writeup of some of the design goals, we need to position it here as an enterprise low code platform.
+We need to create a page introducing SolidX and what it stands for, maybe a writeup of some of the design goals, we need to position it here as an enterprise low code platform.
 
 Reference design for this could be: [https://docs.strapi.io/](https://docs.strapi.io/) 
 
@@ -135,7 +135,7 @@ At the bottom then we can have sections similar to the above page for us the sec
 
 ### **App Builder / Resource Builder**  {#app-builder-/-resource-builder}
 
-The App Builder is one of the core modules that comes with SOLID starters. 
+The App Builder is one of the core modules that comes with SolidX. 
 
 Reference: [https://docs.strapi.io/user-docs/content-type-builder](https://docs.strapi.io/user-docs/content-type-builder) 
 

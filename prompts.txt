@@ -1,0 +1,33 @@
+# Prompt 1: 
+- - - - - -
+I have a platform called SolidX which is being built as a low code platform.
+It is 90% ready, we are testing / fixing / using it on client projects. 
+I am in the process of creating documentation for this using docusaurus. 
+On the home page of the documentation I have 2 sections 
+
+Developer Docs 
+Admin Docs 
+
+The developer docs will talk a lot more about exactly how a developer can use it. 
+
+The Admin docs will talk about things like how to get started, install it, use its various features to configure an application.
+
+I have 2 cards on the home page representing each of these, can you write a couple of lines about each. 
+
+# Prompt 3: 
+- - - - - -
+SolidX is structured around building applications centered around the concept of Modules, each module houses / encapsulates a bunch of models which will represent the domain model of the problem being solved, and each model in turn is made up of fields. 
+
+I am creating a docusaurus page to explain the concept of module builder, can you write a quick note using the above as a basis. 
+
+Also if you can cite an eg. to make it more clear to the reader. 
+
+# Prompt 2: 
+- - - - - -
+We can elaborate a little bit more on models and fields, because in SolidX models are able to express semantic relationships, hold more metadata like which is the data source a model is able read / write its data from, does a model implement soft delete functinality, does a model support internationalization etc... 
+
+Similarly fields exhibit more semantic types like there are fields of type one2many, many2one, many2many, selectionStatic (allows creating a drop-down using a static list of values), selectionDynamic (allows creating a drop-down using dynamic data sources like 3rd party APIs to fetch list of countries or currencies), mediaSingle (allows one to upload a single attachment could be of any type - pdf, image, video, audio) or mediaMultiple (allows one to upload multiple media files). 
+
+These are a few examples there are more but want to give a flavour to the user reading this in the intro itself. 
+
+
