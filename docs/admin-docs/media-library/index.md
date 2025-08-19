@@ -33,21 +33,18 @@ Flexible storage options including:
   - SFTP -->
 
 ### [Storage Providers](./storage-providers.md)
-<div className="feature-grid">
-  <div className="feature-card">
+<div className="border-box">
     <h4 className="card-title">Flexible storage options including:</h4>
-    <ul className="card-desc">
-      <li>Browsing media files</li>
-      <li>Organizing assets</li>
-      <li>Managing metadata</li>
-      <li>Performing bulk operations</li>
-    </ul>
-  </div>
+      - Browsing media files
+      - Organizing assets
+      - Managing metadata
+      - Performing bulk operations
 </div>
 
+
+
 ### [Media View](./media-view.md)
-<div className="feature-grid">
-  <div className="feature-card">
+<div className="border-box">
     <h4 className="card-title">A powerful interface for:</h4>
     - Local filesystem
     - Amazon S3
@@ -55,7 +52,6 @@ Flexible storage options including:
       - Azure Blob Storage
       - Google Cloud Storage
       - SFTP
-  </div>
 </div>
 
 

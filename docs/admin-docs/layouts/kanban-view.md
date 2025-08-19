@@ -123,7 +123,7 @@ Here's an example layout for a model named Book:
 }
 ```
 
-### 🗂️ Kanban View Attributes
+###  Kanban View Attributes
 | Attribute              | Description                                                                 |
 |------------------------|-----------------------------------------------------------------------------|
 | swimlanesCount         | Number of swimlanes (columns) to display in the Kanban board.               |
@@ -136,7 +136,7 @@ Here's an example layout for a model named Book:
 | draggable              | Enables drag-and-drop of cards between swimlanes.                           |
 | allowedViews           | View modes the user can toggle between (e.g., `kanban`, `list`).            |
 
-### 🧱 Layout Elements
+###  Layout Elements
 These are the layout elements one can use as children of the Kanban view.
 
 | Element Type | Attribute                  | Description                                                                 |
@@ -152,7 +152,7 @@ These are the layout elements one can use as children of the Kanban view.
 | field        | kanbanImagePreviewClassname | Optional CSS class to style image preview in the Kanban card.              |
 | field        | isSearchable               | If true, includes the field in global search.                               |
 
-### 🧩 Nested Displays
+###  Nested Displays
 Kanban views allow deep nesting of UI components to structure the card layout visually.
 
 1. **card**: Top-level container for a single record in the Kanban.
@@ -160,7 +160,7 @@ Kanban views allow deep nesting of UI components to structure the card layout vi
 3. **column**: Placed inside a row to divide horizontal space.
 4. **field**: Placed inside a column to render individual data points.
 
-➡️ Example nesting structure:
+ Example nesting structure:
 card → row → column → field(s)
 
 This allows building responsive card layouts using grid-style divisions (e.g., Bootstrap-style `col-12`, `col-6`, etc.).

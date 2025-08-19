@@ -14,7 +14,7 @@ In SolidX, applications are structured around Modules, which serve as the primar
 
 A module represents a self-contained functional area of your app — for example, Admissions, Inventory, or HR. Within each module, you define Models, which represent the core data structures relevant to that domain.
 
-### 🧩 Models — More Than Just Tables
+###  Models — More Than Just Tables
 
 Unlike traditional low-code platforms where models are little more than simple database tables, SolidX models are semantic, configurable, and powerful:
 
@@ -24,7 +24,7 @@ Unlike traditional low-code platforms where models are little more than simple d
   - Computed Fields & Expressions: Define business logic directly at the model level.
   - Custom Actions & Lifecycle Hooks: Inject custom behavior into your model’s create, update, or delete lifecycle.
 
-### 🧬 Fields — Not Just Name & Type
+###  Fields — Not Just Name & Type
 
 Fields in SolidX go beyond basic types like string or integer. 
 
@@ -39,7 +39,7 @@ They support rich semantic types that allow for expressive and dynamic user inte
 These fields not only define the data schema but also influence the form layouts, validations, and user experience automatically — reducing the need for hand-coded UI logic.
 
 
-### 💡 Example
+###  Example
 
 Hypothetically speaking if we think about a School Management system we could have the following structure.
   - Module: Admissions
@@ -55,7 +55,8 @@ Hypothetically speaking if we think about a School Management system we could ha
 
 <br></br>
 
-<img src="/img/admin-docs/module-builder/module-model-eg-image.png" alt="SolidX Module Diagram" width="300" height="auto" />
+<img src="/img/admin-docs/module-builder/module-model-eg-image.png" alt="SolidX Module Diagram" width="300" height="auto"  />
+
 
 <br></br>
 <br></br>
@@ -70,6 +71,8 @@ Whats more is that SolidX generates a feature rich REST API backend on top of th
 
 You can now use the below cards to browse through the key functionality exposed by the SolidX module builder. 
 
+<div className="border-box">
+
 ### Model Builder
 Define and manage your data models through an intuitive interface that simplifies the model creation process. This includes:
 
@@ -79,6 +82,11 @@ Define and manage your data models through an intuitive interface that simplifie
     Efficiently define and manage the structure of your application’s data, ensuring it aligns with your business requirements.
   - [Fields](./field-management.md): <br />
     Configure various field types to structure your data, ensuring that it meets your application's needs effectively.
+</div>
+
+<div className="extra-space"></div>
+
+<div className="border-box">
 
 ### Layout Editor
 The models & fields used to define your domain can be arranged to generate a very powerful and feature rich metadata driven admin user interface. Which is highly customisable to accomodate a lot of enterprise use-cases. 
@@ -91,6 +99,8 @@ Allowing one to create custom views for your data using list, kanban, and form l
     Create and customize different perspectives for displaying your data, such as List View, Kanban View, and Form View.
   - **Custom Actions**: <br />
     Implement additional functionalities that can be triggered by user interactions.
+
+</div>
 
 <!-- 
 ## Getting Started

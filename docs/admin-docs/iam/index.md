@@ -61,66 +61,48 @@ Multiple authentication methods:
 
 ### [Users](./users.md)
 
-<div className="feature-grid">
-  <div className="feature-card">
-    <p className="card-title">Manage user accounts and profiles:</p>
-    <ul className="card-desc">
-      <li>User creation and invitation</li>
-      <li>Profile management</li>
-      <li>Account settings</li>
-      <li>Access control</li>
-    </ul>
-  </div>
+<div className="border-box">
+  <h4 className="card-title">Manage user accounts and profiles:</h4>
+   - User creation and invitation
+   - Profile management
+   - Account settings
+   - Access control
 </div>
-
 
 ### [Roles](./roles.md)
 
-<div className="feature-grid">
-  <div className="feature-card">
-    <p className="card-title">Define and manage user roles:</p>
-    <ul className="card-desc">
-      <li>Role creation</li>
-      <li>Permission assignment</li>
-      <li>Role hierarchy</li>
-      <li>Access levels</li>
-    </ul>
-  </div>
+<div className="border-box">
+  <h4 className="card-title">Define and manage user roles:</h4>
+    - Role creation
+    - Permission assignment
+    - Role hierarchy
+    - Access levels
 </div>
 
 ### [Permissions](./permissions.md)
 
-<div className="feature-grid">
-  <div className="feature-card">
-    <p className="card-title">Control access to system features:</p>
-    <ul className="card-desc">
-      <li>Automatic permission discovery</li>
-      <li>Permission grouping</li>
-      <li>Custom permissions</li>
-      <li>Permission inheritance</li>
-    </ul>
-  </div>
+<div className="border-box">
+    <h4 className="card-title">Control access to system features:</h4>
+     - Automatic permission discovery
+     - Permission grouping
+     - Custom permissions
+     - Permission inheritance
 </div>
 
 ### [Record Rules](./record-rules.md)
 
-<div className="feature-grid">
-  <div className="feature-card">
-    <p className="card-title">Configure data-level security:</p>
-    <ul className="card-desc">
-      <li>Record-level access control</li>
-      <li>Dynamic rules</li>
-      <li>User-based filters</li>
-      <li>Role-based filters</li>
-    </ul>
-  </div>
+<div className="border-box">
+    <h4 className="card-title">Configure data-level security:</h4>
+     - Record-level access control
+     - Dynamic rules
+     - User-based filters
+     - Role-based filters
 </div>
 
 ### [Authentication Providers](./auth-providers.md)
 
-<div className="feature-grid">
-  <div className="feature-card">
-    <p className="card-title ">Multiple authentication methods:</p>
+<div className="border-box">
+    <h4 className="card-title ">Multiple authentication methods:</h4>
       - Password-based
       - OTP (passwordless)
       - OAuth providers:
@@ -129,7 +111,6 @@ Multiple authentication methods:
         - LinkedIn
         - Twitter/X
       - Custom providers 
-  </div>
 </div>
 
 

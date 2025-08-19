@@ -4,25 +4,25 @@ description: Step-by-step guide to deploy SolidX applications on Ubuntu virtual 
 sidebar_position: 1
 ---
 
-# 🚀 Deploying to VM
+#  Deploying to VM
 This section provides guidance on how to deploy your SolidX applications to a virtual machine (VM).
 
 :::info
 📌 Before continuing, make sure you've completed the [Prerequisites](/docs/developer-docs/prerequisites).
 :::
 
-## 🔧 Run SolidX Application
+##  Run SolidX Application
 This section explains how to run the SolidX app on a virtual machine.
 
-### 📁 Clone Repository
+###  Clone Repository
 ```bash
 git clone <repo http url>
 ```
 
-### ⚙️ Update Environment Variables
+###  Update Environment Variables
 Create the `.env` files inside `solid-api` and `solid-ui` with your database credentials and other configs.
 
-### 🔍 Verify Backend is Running
+###  Verify Backend is Running
 ```bash
 cd solid-api
 npm i
@@ -30,7 +30,7 @@ npm run build
 npm run start
 ```
 
-### 🔍 Verify Frontend is Running
+###  Verify Frontend is Running
 ```bash
 cd solid-ui
 npm i
@@ -39,14 +39,14 @@ npm run start
 ```
 > Press `Ctrl + C` to exit; we will use `pm2` next.
 
-## 🔄 Deploy with Process Manager
+##  Deploy with Process Manager
 
-### 🧪 Install pm2 Globally
+###  Install pm2 Globally
 ```bash
 npm install -g pm2
 ```
 
-### ⚙️ Create pm2 Config File
+### Create pm2 Config File
 Inside both `solid-api` and `solid-ui` folders, create `pm2.config.js`:
 ```js
 module.exports = {
@@ -60,13 +60,13 @@ module.exports = {
 };
 ```
 
-### ▶️ Start apps with pm2
+### ▶ Start apps with pm2
 ```bash
 pm2 start pm2.config.js
 pm2 list
 ```
 
-### 📜 Create deploy scripts
+###  Create deploy scripts
 ```bash
 #!/bin/bash
 git pull
@@ -81,7 +81,7 @@ Make it executable:
 chmod +x deploy.sh
 ```
 
-### 🚀 Run the Deploy Scripts
+###  Run the Deploy Scripts
 ```bash
 cd solid-api
 ./deploy.sh
@@ -89,16 +89,16 @@ cd ../solid-ui
 ./deploy.sh
 ```
 
-## 🌱 Seed the Backend Database
+##  Seed the Backend Database
 ```bash
 cd solid-api
 ./rebuild.sh
 solid seed
 ```
 
-## 🌐 Setup Nginx & SSL
+##  Setup Nginx & SSL
 
-### 🌍 Install Nginx
+###  Install Nginx
 ```bash
 sudo apt update
 sudo apt install nginx -y
@@ -107,14 +107,14 @@ sudo systemctl enable nginx
 sudo systemctl status nginx
 ```
 
-### 🔐 Enable Firewall for Nginx
+###  Enable Firewall for Nginx
 ```bash
 sudo ufw allow 'Nginx Full'
 sudo ufw enable
 sudo ufw status
 ```
 
-### 🏷️ Create Virtual Host Files
+###  Create Virtual Host Files
 ```bash
 cd /etc/nginx/sites-available
 touch <api_domain_name>
@@ -153,7 +153,7 @@ sudo tail -f /var/log/nginx/error.log
 ```
 Visit: `http://<domain_name>`
 
-### 🔒 Install SSL with Certbot
+###  Install SSL with Certbot
 ```bash
 sudo apt install certbot python3-certbot-nginx -y
 sudo certbot --nginx -d <api_domain_name>

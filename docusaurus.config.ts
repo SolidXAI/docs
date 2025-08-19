@@ -7,7 +7,7 @@ import type * as Preset from '@docusaurus/preset-classic';
 const config: Config = {
   title: 'SolidX',
   tagline: 'Enterprise-focussed low-code development platform',
-  favicon: 'img/favicon.ico',
+  favicon: 'img/tab-logo.png',
 
   // Set the production url of your site here
   url: 'https://docs.solidstarters.com',
@@ -67,7 +67,7 @@ const config: Config = {
   themeConfig: {
     image: 'img/docusaurus-social-card.jpg',
     navbar: {
-      title: 'SolidX',
+      title: '',
       logo: {
         alt: 'SolidX Alt Logo',
         src: 'img/NavbarLogo.png',

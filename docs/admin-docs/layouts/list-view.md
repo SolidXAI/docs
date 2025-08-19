@@ -84,7 +84,7 @@ Here's an example layout for a model named Book:
 
 As you can see from the above the json array under children controls the sequence in which the fields are displayed.
 
-### 📋 List View Attributes (type: "list")
+###  List View Attributes (type: "list")
 | Attribute            | Description                                                                 |
 |----------------------|-----------------------------------------------------------------------------|
 | pagination           | Enables pagination in the list view.                                        |
@@ -95,7 +95,7 @@ As you can see from the above the json array under children controls the sequenc
 | delete               | Allows records to be deleted from the list.                                 |
 | allowedViews         | Specifies which view modes are available (e.g., `list`, `kanban`).          |
 
-### 🧩 Field Attributes (type: "field")
+###  Field Attributes (type: "field")
 | Attribute       | Description                                                                 |
 |------------------|-----------------------------------------------------------------------------|
 | name             | Internal name or key of the field (e.g., `id`, `title`, `authors`).        |

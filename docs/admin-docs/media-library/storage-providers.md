@@ -45,20 +45,17 @@ SOLID supports multiple storage providers for media files, offering flexibility 
 - SFTP
 - Custom providers -->
 
-<div className="feature-grid">
 
-  <div className="feature-card">
-    <h4 className="card-title">
-    ### Upcoming Providers ###
-    </h4>
-    <ul className="card-desc">
-      <li>Azure Blob Storage</li>
-      <li>Google Cloud Storage</li>
-      <li>SFTP</li>
-      <li>Custom providers</li>
-    </ul>
-  </div>
-</div>
+
+
+### Upcoming Providers ###
+- Azure Blob Storage
+- Google Cloud Storage
+- SFTP
+- Custom providers
+
+
+
 
 
 
@@ -72,19 +69,14 @@ All storage providers support:
 - Metadata management -->
 
 
-<div className="feature-grid">
-
-  <div className="feature-card">
+<div className="border-box">
     <h4 className="card-title">
     ### Common Features ###
     </h4>
-    <ul className="card-desc">
-      <li>File upload/download</li>
-      <li>Directory operations</li>
-      <li>Access control</li>
-      <li>Metadata management </li>
-    </ul>
-  </div>
+    - File upload/download
+    - Directory operations
+    - Access control
+    - Metadata management
 </div>
 
 ### Provider-Specific Features
