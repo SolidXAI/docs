@@ -4,7 +4,7 @@ sidebar_position: 2
 
 # Roles
 
-Roles in SOLID provide a way to group permissions and manage access control at a high level. Each role represents a set of permissions that can be assigned to users.
+Roles in SolidX provide a way to group permissions and manage access control at a high level. Each role represents a set of permissions that can be assigned to users.
 
 ## Role Management
 
