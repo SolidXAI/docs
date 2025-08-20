@@ -20,6 +20,9 @@ Generates a new module in the SolidX backend.
 
 ```bash
 solid add-module <options>
+
+Example:
+solid add-module -n myNewModule
 ```
 
 ### 🔍 Options
@@ -43,6 +46,9 @@ Creates or updates a model and its related files within an existing module.
 
 ```bash
 solid refresh-model <options>
+
+Example:
+solid refresh-model -n myNewModelSingularName
 ```
 
 ### 🔍 Options
@@ -68,12 +74,15 @@ Removes fields from an existing model in the SolidX backend.
 
 ```bash
 solid remove-fields <options>
+
+Example:
+solid remove-fields -fids "[myFieldId]" -mid myModelId
 ```
 
 ### 🔍 Options
 
 - `-fids fieldIds`, `--fieldIds <fieldIds>`  
-  The IDs of the fields to be removed.
+  The IDs of the fields to be removed. This needs to be a JSON stringified representation of an array e.g "[1]" or "[2,3]"
 
 - `-mid modelId`, `--modelId <modelId>`  
   The ID of the model from which the fields will be removed.

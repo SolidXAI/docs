@@ -170,3 +170,4 @@ You can set up a cron job or use the commands below to ensure apps restart after
 
 ```bash
 pm2 save && pm2 startup
+```
