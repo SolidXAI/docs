@@ -151,7 +151,11 @@ sudo nginx -t
 sudo systemctl restart nginx
 sudo tail -f /var/log/nginx/error.log
 ```
-Visit: `http://<domain_name>`
+
+Verify if the below urls are working over http before proceeding with installing the http certificate:
+  - api swagger docs - `http://<api_domain_name>/docs`
+  - admin UI login - `http://<ui_domain_name>`
+  - curl request - `curl -I http://<ui_domain_name>` (it should return something like a 200 OK response)
 
 ###  Install SSL with Certbot
 ```bash
@@ -170,4 +174,12 @@ You can set up a cron job or use the commands below to ensure apps restart after
 
 ```bash
 pm2 save && pm2 startup
+```
+
+:::tip
+You can set up log rotation for pm2 logs using the following command. This will setup log rotation to rotate daily with a max size of 10MB with 30 days rotation by default and compress the rotated logs.
+```bash
+pm2 install pm2-logrotate
+pm2 set pm2-logrotate:max_size 10M
+pm2 set pm2-logrotate:compress true
 ```
