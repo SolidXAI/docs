@@ -1,0 +1,563 @@
+# SolidX View Configurations Guide
+
+This guide provides comprehensive documentation for view configurations in SolidX platform metadata, with real examples from the fees-portal module.
+
+## 1. VIEW TYPES OVERVIEW
+
+Views define UI presentation of models and automatically generate:
+- **List Views**: Tabular display with search, filter, pagination
+- **Form Views**: Input forms for create/edit operations
+- **Kanban Views**: Card-based display with drag-and-drop
+
+Each view contains:
+- Basic metadata (name, type, model reference)
+- Layout configuration (structure and components)
+- UI behavior settings
+- Security/role configurations
+
+## 2. LIST VIEW CONFIGURATION
+
+List views display records in tabular format with advanced features like search, filtering, and pagination.
+
+### Basic List View Structure
+```json
+{
+  "name": "institute-list-view",
+  "displayName": "Institute",
+  "type": "list",
+  "context": "{}",
+  "moduleUserKey": "fees-portal",
+  "modelUserKey": "institute",
+  "layout": {
+    "type": "list",
+    "attrs": {
+      // List view attributes
+    },
+    "children": [
+      // Field configurations
+    ]
+  }
+}
+```
+
+### List View Attributes
+```json
+"attrs": {
+  "pagination": true,                    // Enable pagination
+  "pageSizeOptions": [10, 25, 50],      // Available page sizes
+  "enableGlobalSearch": true,            // Global search across fields
+  "create": true,                        // Allow record creation from list
+  "edit": true,                          // Allow inline/record editing
+  "delete": true,                        // Allow record deletion
+  "configureViewActions": {              // Role-based action permissions
+    "import": {
+      "roles": ["Admin", "Mswipe Admin"]
+    },
+    "showArchived": {
+      "roles": ["Admin", "Mswipe Admin"]
+    },
+    "export": {
+      "roles": ["Admin", "Mswipe Admin", "Institute Admin"]
+    },
+    "customizeLayout": {
+      "roles": ["Admin", "Mswipe Admin"]
+    },
+    "saveCustomFilter": {
+      "roles": ["Admin", "Mswipe Admin"]
+    }
+  }
+}
+```
+
+### List View Field Configuration
+```json
+"children": [
+  {
+    "type": "field",
+    "attrs": {
+      "name": "instituteName",           // Field name from model
+      "sortable": true,                  // Enable column sorting
+      "filterable": true,                // Enable column filtering
+      "isSearchable": true               // Include in global search
+    }
+  },
+  {
+    "type": "field",
+    "attrs": {
+      "name": "logo",
+      "sortable": true,
+      "filterable": true,
+      "isSearchable": true
+    }
+  },
+  {
+    "type": "field",
+    "attrs": {
+      "name": "paymentGatewayAccessSecret",
+      "viewWidget": "maskedShortTextList",  // Custom widget for display
+      "sortable": true,
+      "filterable": true,
+      "isSearchable": true
+    }
+  }
+]
+```
+
+## 3. FORM VIEW CONFIGURATION
+
+Form views handle data entry and editing with complex layout structures using sheets, notebooks, and pages.
+
+### Basic Form View Structure
+```json
+{
+  "name": "institute-form-view",
+  "displayName": "Institute",
+  "type": "form",
+  "context": "{}",
+  "moduleUserKey": "fees-portal",
+  "modelUserKey": "institute",
+  "layout": {
+    "type": "form",
+    "attrs": {
+      // Form view attributes
+    },
+    "onFormLayoutLoad": "instituteEditHandler",  // Event handler
+    "children": [
+      // Layout components (sheets, notebooks, etc.)
+    ]
+  }
+}
+```
+
+### Form View Attributes
+```json
+"attrs": {
+  "name": "form-1",                      // Form identifier
+  "label": "Institute",                  // Form title
+  "className": "grid",                   // CSS class for layout
+  "formButtons": [                       // Custom form buttons
+    {
+      "attrs": {
+        "className": "",
+        "label": "Preview",
+        "action": "PreviewPortal",
+        "icon": "pi",
+        "actionInContextMenu": true,
+        "openInPopup": true,
+        "customComponentIsSystem": true,
+        "closable": true
+      }
+    }
+  ]
+}
+```
+
+### Form Layout Components Hierarchy
+
+Form layouts use a hierarchical structure:
+```
+Form
+└── Sheet (top-level container)
+    └── Notebook (tab container)
+        └── Page (individual tab)
+            └── Row (horizontal layout)
+                └── Column (vertical container)
+                    └── Field (input component)
+```
+
+#### Sheet Component
+```json
+{
+  "type": "sheet",
+  "attrs": {
+    "name": "sheet-1"
+  },
+  "children": [
+    // Notebook or Row components
+  ]
+}
+```
+
+#### Notebook Component (Tabs)
+```json
+{
+  "type": "notebook",
+  "attrs": {
+    "name": "notebook-1"
+  },
+  "children": [
+    // Page components (tabs)
+  ]
+}
+```
+
+#### Page Component (Individual Tab)
+```json
+{
+  "type": "page",
+  "attrs": {
+    "name": "page-1",
+    "label": "Institutes"
+  },
+  "children": [
+    // Row components
+  ]
+}
+```
+
+#### Row Component (Horizontal Layout)
+```json
+{
+  "type": "row",
+  "attrs": {
+    "name": "row-1"
+  },
+  "children": [
+    // Column components
+  ]
+}
+```
+
+#### Column Component (Vertical Container)
+```json
+{
+  "type": "column",
+  "attrs": {
+    "name": "column-1",
+    "label": "Institutes Basic",        // Optional group label
+    "className": "col-6"                // CSS grid class
+  },
+  "children": [
+    // Field components
+  ]
+}
+```
+
+#### Field Component (Form Input)
+```json
+{
+  "type": "field",
+  "attrs": {
+    "name": "instituteName",            // Field name from model
+    "disabled": false,                  // Field enabled/disabled
+    "showLabel": true,                  // Show field label
+    "viewWidget": "default",            // Display widget override
+    "editWidget": "default"             // Edit widget override
+  }
+}
+```
+
+### Complete Form Layout Example
+```json
+{
+  "type": "form",
+  "attrs": {
+    "name": "form-1",
+    "label": "Institute",
+    "className": "grid"
+  },
+  "onFormLayoutLoad": "instituteEditHandler",
+  "children": [
+    {
+      "type": "sheet",
+      "attrs": { "name": "sheet-1" },
+      "children": [
+        {
+          "type": "notebook",
+          "attrs": { "name": "notebook-1" },
+          "children": [
+            {
+              "type": "page",
+              "attrs": {
+                "name": "page-1",
+                "label": "Institutes"
+              },
+              "children": [
+                {
+                  "type": "row",
+                  "attrs": { "name": "row-1" },
+                  "children": [
+                    {
+                      "type": "column",
+                      "attrs": {
+                        "name": "column-1",
+                        "label": "Institutes Basic",
+                        "className": "col-6"
+                      },
+                      "children": [
+                        {
+                          "type": "field",
+                          "attrs": { "name": "instituteName" }
+                        },
+                        {
+                          "type": "field",
+                          "attrs": { "name": "description" }
+                        }
+                      ]
+                    },
+                    {
+                      "type": "column",
+                      "attrs": {
+                        "name": "column-2",
+                        "label": "Institutes Contact",
+                        "className": "col-6"
+                      },
+                      "children": [
+                        {
+                          "type": "field",
+                          "attrs": {
+                            "name": "instituteAddress",
+                            "disabled": false
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "page",
+              "attrs": {
+                "name": "page-2",
+                "label": "Payment Gateway Details"
+              },
+              "children": [
+                // Additional form sections
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
+```
+
+## 4. KANBAN VIEW CONFIGURATION
+
+Kanban views display records as cards with drag-and-drop functionality.
+
+### Basic Kanban View Structure
+```json
+{
+  "name": "task-kanban-view",
+  "displayName": "Task Board",
+  "type": "kanban",
+  "context": "{}",
+  "moduleUserKey": "fees-portal",
+  "modelUserKey": "task",
+  "layout": {
+    "type": "kanban",
+    "attrs": {
+      // Kanban view attributes
+    },
+    "children": [
+      // Card template configuration
+    ]
+  }
+}
+```
+
+### Kanban View Attributes
+```json
+"attrs": {
+  "swimlanesCount": 10,                 // Number of swimlanes to show
+  "recordsInSwimlane": 5,              // Records per swimlane
+  "enableGlobalSearch": true,           // Enable search functionality
+  "create": true,                       // Allow record creation
+  "edit": true,                         // Allow record editing
+  "delete": true,                       // Allow record deletion
+  "groupBy": "status",                  // Field to group cards by
+  "draggable": true,                    // Enable drag-and-drop
+  "allowedViews": ["list", "kanban"]    // Alternative view types
+}
+```
+
+### Kanban Card Template
+```json
+"children": [
+  {
+    "type": "cardTemplate",
+    "attrs": {
+      "name": "task-card"
+    },
+    "children": [
+      {
+        "type": "field",
+        "attrs": {
+          "name": "title",
+          "displayType": "header"       // Display as card header
+        }
+      },
+      {
+        "type": "field",
+        "attrs": {
+          "name": "description",
+          "displayType": "content"      // Display as card content
+        }
+      },
+      {
+        "type": "field",
+        "attrs": {
+          "name": "priority",
+          "displayType": "badge"        // Display as colored badge
+        }
+      }
+    ]
+  }
+]
+```
+
+## 5. VIEW SECURITY AND ROLES
+
+### Role-Based View Actions
+```json
+"configureViewActions": {
+  "import": {
+    "roles": ["Admin", "Manager"]
+  },
+  "export": {
+    "roles": ["Admin", "Manager", "User"]
+  },
+  "customizeLayout": {
+    "roles": ["Admin"]
+  },
+  "saveCustomFilter": {
+    "roles": ["Admin", "Manager"]
+  }
+}
+```
+
+### Field-Level Permissions in Views
+```json
+{
+  "type": "field",
+  "attrs": {
+    "name": "salary",
+    "viewRoles": ["Admin", "HR"],       // Who can view this field
+    "editRoles": ["Admin"],             // Who can edit this field
+    "hidden": false
+  }
+}
+```
+
+## 6. VIEW WIDGETS AND CUSTOMIZATIONS
+
+### Custom View Widgets
+```json
+{
+  "type": "field",
+  "attrs": {
+    "name": "password",
+    "viewWidget": "maskedShortTextList",    // List view widget
+    "editWidget": "maskedShortTextEdit"     // Edit form widget
+  }
+}
+```
+
+### Available Widget Types
+- **Default widgets**: Auto-selected based on field type
+- **Custom widgets**: Specific widget overrides for special display needs
+- **Masked widgets**: For sensitive data (passwords, secrets)
+- **Rich widgets**: For formatted content display
+
+## 7. VIEW CONTEXT AND EVENT HANDLERS
+
+### View Context Configuration
+```json
+{
+  "context": "{\"defaultFilter\": {\"status\": \"active\"}, \"sortBy\": \"createdAt\"}",
+  "onFormLayoutLoad": "instituteEditHandler",
+  "onFieldChange": "handleFieldValidation",
+  "onFormSubmit": "validateAndSubmit"
+}
+```
+
+### Event Handler Types
+- `onFormLayoutLoad`: Executed when form loads
+- `onFieldChange`: Triggered on field value changes
+- `onFormSubmit`: Executed before form submission
+- `onViewLoad`: Executed when view loads
+
+## 8. VIEW LAYOUT RESPONSIVE DESIGN
+
+### CSS Grid Classes
+```json
+{
+  "type": "column",
+  "attrs": {
+    "className": "col-12 col-md-6 col-lg-4"  // Responsive grid classes
+  }
+}
+```
+
+### Layout Breakpoints
+- `col-12`: Full width on all screens
+- `col-md-6`: Half width on medium screens and up
+- `col-lg-4`: Third width on large screens and up
+
+## 9. ADVANCED VIEW FEATURES
+
+### Inline Editing
+```json
+{
+  "type": "list",
+  "attrs": {
+    "inlineEdit": true,
+    "inlineEditFields": ["status", "priority"],
+    "autoSave": true
+  }
+}
+```
+
+### Bulk Operations
+```json
+{
+  "type": "list",
+  "attrs": {
+    "bulkSelect": true,
+    "bulkActions": ["delete", "update", "export"],
+    "bulkActionRoles": ["Admin", "Manager"]
+  }
+}
+```
+
+### Custom Filters and Search
+```json
+{
+  "type": "list",
+  "attrs": {
+    "customFilters": [
+      {
+        "name": "overdue",
+        "label": "Overdue Tasks",
+        "filter": {"dueDate": {"$lt": "CURRENT_DATE"}}
+      }
+    ],
+    "advancedSearch": true,
+    "searchFields": ["title", "description", "tags"]
+  }
+}
+```
+
+## 10. VIEW CONFIGURATION BEST PRACTICES
+
+### Layout Organization
+1. **Use logical grouping**: Group related fields in columns with descriptive labels
+2. **Progressive disclosure**: Use tabs (notebooks) for complex forms
+3. **Responsive design**: Use appropriate grid classes for different screen sizes
+4. **Field ordering**: Place important fields first, follow logical workflow
+
+### Security Considerations
+1. **Role-based access**: Configure view actions based on user roles
+2. **Field-level security**: Hide sensitive fields from unauthorized users
+3. **Audit trails**: Enable audit tracking for sensitive operations
+
+### Performance Optimization
+1. **Pagination**: Always enable pagination for large datasets
+2. **Lazy loading**: Use lazy loading for related data
+3. **Field selection**: Only display necessary fields in list views
+4. **Caching**: Implement caching for frequently accessed views
+
+This comprehensive guide covers all aspects of view configuration in SolidX, from basic list views to complex form layouts and kanban boards. The examples provided are based on real configurations from the fees-portal module.
