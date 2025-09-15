@@ -8,7 +8,7 @@ sidebar_position: 1
 This section provides guidance on how to deploy your SolidX applications to a virtual machine (VM).
 
 :::info
-📌 Before continuing, make sure you've completed the [Prerequisites](/docs/developer-docs/prerequisites).
+ Before continuing, make sure you've completed the [Prerequisites](/docs/developer-docs/prerequisites).
 :::
 
 ##  Run SolidX Application
@@ -60,7 +60,7 @@ module.exports = {
 };
 ```
 
-### ▶ Start apps with pm2
+###  Start apps with pm2
 ```bash
 pm2 start pm2.config.js
 pm2 list

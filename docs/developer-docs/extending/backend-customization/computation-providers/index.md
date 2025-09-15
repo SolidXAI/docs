@@ -5,15 +5,18 @@ sidebar_position: 4
 keywords: [backend, computation providers, customization]
 ---
 
-# 🧮 Computation Providers
+import { NoteBoxs } from '@site/src/common/NoteBoxs';
+
+
+#  Computation Providers
 
 Computation providers are essential for defining how **computed fields** are calculated and updated in the backend. This guide walks you through setting up and implementing them in SolidX.
 
 ---
 
-## ⚙️ How to Configure a Computed Field
+##  How to Configure a Computed Field
 
-### 🧾 Sample Metadata Configuration
+###  Sample Metadata Configuration
 
 In the `computedFieldValueProvider`, we specify the **provider class** responsible for the computation logic.
 
@@ -43,7 +46,7 @@ You can:
 - Persist additional logic and saving in `postComputeAndSaveValue`
 
 <details>
-  <summary>📄 Example: Configuration for <code>amountPaid</code> computed field</summary>
+  <summary> Example: Configuration for <code>amountPaid</code> computed field</summary>
 
 ```json
 {
@@ -88,12 +91,12 @@ You can:
 
 ---
 
-## 🧩 Computation Provider Interfaces
+##  Computation Provider Interfaces
 
 To implement a custom computation provider, you need to implement either or both of the following interfaces:
 
 <details>
-  <summary>💡 Interfaces to Implement</summary>
+  <summary> Interfaces to Implement</summary>
 
 ```ts
 
@@ -118,9 +121,9 @@ export interface IEntityComputedFieldProvider {
 
 ---
 
-## ⚙️ How It Works
+##  How It Works
 
-### 🛠 Core Mechanism
+###  Core Mechanism
 
 1. `ComputedEntityFieldSubscriber` listens to `insert`, `update`, and `delete` events across all entities.
 2. For **before** operations:
@@ -130,17 +133,19 @@ export interface IEntityComputedFieldProvider {
    - `postComputeAndSaveValue()` is called **asynchronously** via [Background Jobs](../background-jobs/index.md)
    - Final saving happens via `ComputedFieldEvaluationSubscriber`.
 
-:::note
-The computed field configuration is loaded from the database and cached in the solid registry on application startup. So any changes to a computed field configuration will require a server restart to take effect.
-:::
 
+
+
+<NoteBoxs>
+The computed field configuration is loaded from the database and cached in the solid registry on application startup. So any changes to a computed field configuration will require a server restart to take effect.
+</NoteBoxs>
 ---
 
-## 📚 Related Recipes 
+##  Related Recipes 
 ### TODO
 
-- 👉 [Pre-computed fields](../pre-computed-fields/index.md)  
-- 👉 [Post-computed fields](../post-computed-fields/index.md)  
-- 👉 [Multiple Computed Fields](../multiple-computed-fields/index.md)  
+-  [Pre-computed fields](../pre-computed-fields/index.md)  
+-  [Post-computed fields](../post-computed-fields/index.md)  
+-  [Multiple Computed Fields](../multiple-computed-fields/index.md)  
 
 ---

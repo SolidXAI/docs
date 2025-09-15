@@ -4,7 +4,7 @@ description: Overview of the folder structure for the SolidX Fullstack Applicati
 sidebar_position: 3
 ---
 
-# 📦 Project Structure
+# Project Structure
 
 This project is organized into a backend API (`solid-api`) and frontend UI (`solid-ui`) along with supporting scripts and configurations.
 
@@ -16,7 +16,7 @@ This project is organized into a backend API (`solid-api`) and frontend UI (`sol
 └── upgrade.sh                # SolidX upgrade script
 ```
 
-## 🛠️ `solid-api/` - Backend (NestJS & TypeORM)
+##  `solid-api/` - Backend (NestJS & TypeORM)
 
 This folder contains all backend services, business logic, and configurations.
 
@@ -41,18 +41,18 @@ solid-api/
   - `app.module.ts` ->  Contains the application module configuration.
   - `app-default-database.module.ts` -> Contains all the database configuration.
 
-### 📦 SolidX dependencies
+### SolidX dependencies
 - `@solidstarters/solid-core`
   - Contains the core SolidX module which provides the core backend services for SolidX.
 - `@solidstarters/solid-code-builder`
   - Contains the functionality for generating the code in the SolidX backend.
 
-### 📝 SolidX modules
+### SolidX modules
  - A SolidX module is a logical container that groups together related models and functionality under a unified domain or feature area e.g `fees-portal`.
  - You can find the structure for a SolidX module here [Generated Code](../extending/generated-code/index.md).  
 ---
 
-## 🎨 `solid-ui/` - Frontend (Next.js & Prime React)
+## `solid-ui/` - Frontend (Next.js & Prime React)
 
 The frontend is built using Next.js and Prime React components.
 
@@ -77,23 +77,23 @@ solid-ui/
 - `redux/`
   - Global state configuration.
 
-### 📦 SolidX dependencies
+### SolidX dependencies
 - `@solidstarters/solid-core-ui`
   - Contains the core ui components for the SolidX UI.
 ---
 
-## 🔧 `Debugging` - VS Code
+## `Debugging` - VS Code
 
 Contains editor-specific configurations like `launch.json` for debugging and IDE behavior.
 
 ---
 
-## 🔁 Upgrade Scripts
+##  Upgrade Scripts
 - `upgrade.sh`: Used for upgrading the core SolidX backend/frontend dependencies.
 
 ---
 
-## 🧭 Tips
+## Tips
 - All environment variables are stored in `.env` files within each app folder.
 
 ---

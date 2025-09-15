@@ -4,7 +4,7 @@ description: Guide to extending SolidX with custom code generation and frontend/
 sidebar_position: 5
 ---
 
-# 🧩 Extending SolidX
+#  Extending SolidX
 
 This section outlines how to extend **SolidX** to build your own functional modules, such as a `school-fees-portal`.
 
@@ -14,11 +14,11 @@ In addition to scaffolding, SolidX supports **deep customization** across both f
 
 ---
 
-## 🔧 Customization Capabilities
+##  Customization Capabilities
 
 SolidX provides the following extensibility features:
 
-### ⚙️ Generated Code
+###  Generated Code
 
 - Quickly scaffold new modules using the SolidX code generation tool.
 - Auto-generates:
@@ -31,7 +31,7 @@ SolidX provides the following extensibility features:
   - List View
   - Form View
 
-### 🎨 Frontend Customization
+###  Frontend Customization
 
 - Modify the generated `layout.json` to:
   - Customize list views
@@ -39,7 +39,7 @@ SolidX provides the following extensibility features:
   - Configure kanban boards
   - Add custom UI behaviors
 
-### 🛠 Backend Customization
+###  Backend Customization
 
 - Extend the NestJS backend by adding:
   - Custom services and controllers

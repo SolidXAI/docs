@@ -4,6 +4,7 @@ sidebar_position: 2
 
 # Admin Docs
 
+
 Welcome to SolidX admin documentation! SolidX is an enterprise-focused, low-code development platform engineered for today's web applications.
 
 With SolidX, you can build sophisticated applications without the constraints of traditional low-code platforms, embracing standards-based, versatile solutions that empower your team.

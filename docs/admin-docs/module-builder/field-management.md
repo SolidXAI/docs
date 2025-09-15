@@ -306,7 +306,7 @@ The SelectionStatic field in SolidX allows users to choose a value from a predef
 - Static List of Options
 Define a set of options as label–value pairs.
 Example:
-```
+```json
 [
   { "label": "Active", "value": "active" },
   { "label": "Inactive", "value": "inactive" }

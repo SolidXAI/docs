@@ -4,7 +4,10 @@ description: Information about the create endpoint of the REST API, including us
 sidebar_position: 1
 ---
 
-# 🛠️ Create Endpoint Overview
+import { NoteBoxs } from '@site/src/common/NoteBoxs';
+
+
+#  Create Endpoint Overview
 
 This section provides information about the SolidX **create REST endpoints**, including how to use them, what parameters they accept, and what responses they return.
 
@@ -12,21 +15,21 @@ SolidX supports both single record creation and bulk record creation.
 
 ---
 
-## ✨ Creating a Single Record
+##  Creating a Single Record
 
-### 🔐 Headers
+###  Headers
 
 ```http
 Content-Type: application/json
 Authorization: Bearer <token>
 ```
 
-### 📤 Request
+###  Request
 
 `POST /api/fee-type`
 
 <details>
-<summary>📄 Request Body</summary>
+<summary> Request Body</summary>
 
 ```json
 {
@@ -42,7 +45,7 @@ Authorization: Bearer <token>
 </details>
 
 <details>
-<summary>📄 Sample Request</summary>
+<summary> Sample Request</summary>
 
 ```json
 {
@@ -55,7 +58,7 @@ Authorization: Bearer <token>
 </details>
 
 <details>
-<summary>📨 Sample Response</summary>
+<summary> Sample Response</summary>
 
 ```json
 {
@@ -96,16 +99,16 @@ Authorization: Bearer <token>
 
 ---
 
-## 📦 Bulk Record Creation
+##  Bulk Record Creation
 
 To create multiple records at once:
 
-### 📤 Request
+###  Request
 
 `POST /api/fee-type/bulk`
 
 <details>
-<summary>📄 Sample Bulk Request</summary>
+<summary> Sample Bulk Request</summary>
 
 ```json
 [
@@ -121,11 +124,11 @@ To create multiple records at once:
 
 ---
 
-## 🖼️ Creating a Record with Media
+##  Creating a Record with Media
 
 If your model includes media fields (e.g., uploading a logo), use the `multipart/form-data` content type.
 
-### 📤 Request with Media
+###  Request with Media
 
 ```
 POST /api/fee-type
@@ -134,7 +137,7 @@ Authorization: Bearer <token>
 ```
 
 <details>
-<summary>📄 Multipart Form Data Example</summary>
+<summary> Multipart Form Data Example</summary>
 
 ```
 --boundary
@@ -155,7 +158,11 @@ Content-Type: image/png
 
 </details>
 
-:::note
-✅ Ensure the user has the appropriate **create permission** for the model.  
-Refer to the [Permissions](../../../admin-docs/iam/permissions.md) section for more information.
-:::
+
+
+
+
+<NoteBoxs>
+ Ensure the user has the appropriate **create permission** for the model.  
+  Refer to the [Permissions](../../../admin-docs/iam/permissions.md) section for more information.
+</NoteBoxs>

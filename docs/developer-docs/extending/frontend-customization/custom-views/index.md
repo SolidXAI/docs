@@ -5,25 +5,25 @@ keywords: [custom views, frontend customization, custom actions, custom componen
 sidebar_position: 2
 ---
 
-# 🌟 Custom Views
+#  Custom Views
 
-## 🔎 Overview
+##  Overview
 Custom views allow you to create **custom pages** in the frontend of your application.  
 They can be embedded into form views or used to build specialized UI.
 
 ---
 
-## ⚙️ Steps to Create a Custom Page in a Form View
+## Steps to Create a Custom Page in a Form View
 
 1. **Create the custom view component**  
    Place it inside your extensions folder:  
-   📂 `solid-ui/app/admin/extensions/BookSimilarTitles.tsx`
+    `solid-ui/app/admin/extensions/BookSimilarTitles.tsx`
 
 2. **Register the custom view**  
    Register it in `solid-ui/app/admin/extensions/index.ts` using `registerExtensionComponent`.
 
 <details>
-<summary>📄 Code: Registering the Component</summary>
+<summary> Code: Registering the Component</summary>
 
 ```typescript
 registerExtensionComponent("BookSimilarTitles", BookSimilarTitles);
@@ -34,7 +34,7 @@ registerExtensionComponent("BookSimilarTitles", BookSimilarTitles);
    You can embed the custom widget in your form JSON layout.
 
 <details>
-<summary>📄 Code: Form Layout Example</summary>
+<summary> Code: Form Layout Example</summary>
 
 ```json
 {
@@ -53,7 +53,7 @@ registerExtensionComponent("BookSimilarTitles", BookSimilarTitles);
         "children": [
           {
             "type": "notebook",
-            "attrs": { "name": "notebook-1" },
+            "attrs": { "name": "notebook-1" },  
             "children": [
               {
                 "type": "page",
@@ -91,10 +91,10 @@ registerExtensionComponent("BookSimilarTitles", BookSimilarTitles);
 
 ---
 
-## 📚 Example: `BookSimilarTitles` Component
+##  Example: `BookSimilarTitles` Component
 
 <details>
-<summary>📄 Code: BookSimilarTitles.tsx</summary>
+<summary> Code: BookSimilarTitles.tsx</summary>
 
 ```typescript
 "use client";
@@ -158,14 +158,14 @@ export default BookSimilarTitles;
 
 ---
 
-## 🔄 How It Works
+##  How It Works
 
 1. SolidX loads the **custom view component** when the form is rendered.  
 2. The **custom view** is injected into the form layout at the specified location.  
 3. The custom view receives props of type `SolidFormWidgetProps`.  
 
 <details>
-<summary>📄 Code: Props Types</summary>
+<summary> Code: Props Types</summary>
 
 ```tsx
 export type SolidFormWidgetProps = {
@@ -203,4 +203,4 @@ export type FieldMetadata = CommonEntity & {
 
 ---
 
-✅ With this approach, you can **extend SolidX forms with powerful custom views**.
+ With this approach, you can **extend SolidX forms with powerful custom views**.

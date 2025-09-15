@@ -16,7 +16,7 @@ Permissions in SOLID are automatically discovered based on controller actions an
 
 ### Permission Structure
 
-```
+```bash
 module:resource:action
 
 Examples:

@@ -4,9 +4,9 @@ title: Form View Field Widgets
 description: Learn how to create form view field widgets for the frontend of your application.
 ---
 
-# 📝 Form View Field Widgets
+#  Form View Field Widgets
 
-## 🔎 Overview
+##  Overview
 Form view widgets allow you to **customize how fields are displayed** in a form view.  
 They support both **view mode** and **edit mode**.
 
@@ -14,7 +14,7 @@ You can use either:
 - **Built-in widgets** (provided by the framework), or  
 - **Custom widgets** (that you create).
 
-✨ Example: Display an integer field `score` as a **slider** using the built-in `integerSlider` widget.
+ Example: Display an integer field `score` as a **slider** using the built-in `integerSlider` widget.
 
 ```json
 {
@@ -39,7 +39,7 @@ You can use either:
 
 ---
 
-## 🛠️ Creating a Custom Widget
+##  Creating a Custom Widget
 
 ### 1. Create the Widget Component
 Here’s an example of an **integer slider widget**:
@@ -136,8 +136,8 @@ export const SolidIntegerSliderStyleFormEditWidget = ({ formik, fieldContext }: 
 ```
 </details>
 
-📂 **File Path:**
-```
+ **File Path:**
+```bash
 /solid-ui/app/admin/extensions/SolidIntegerSliderStyleFormEditWidget.tsx
 ```
 
@@ -154,12 +154,12 @@ registerExtensionComponent(
 );
 ```
 
-📂 **File Path:**
+ **File Path:**
 ```
 /solid-ui/app/admin/extensions/solid-extensions.ts
 ```
 
-💡 **Note:** The alias `integerSlider` allows you to use this widget in layout configuration easily.
+ **Note:** The alias `integerSlider` allows you to use this widget in layout configuration easily.
 
 ---
 
@@ -179,7 +179,7 @@ Now you can configure the widget in the form view layout:
 
 ---
 
-## 🔄 How It Works
+##  How It Works
 
 1. SolidX loads the **form layout** in edit mode.  
 2. It identifies fields with an `editWidget`.  
@@ -209,7 +209,7 @@ export type SolidFieldProps = {
 
 ---
 
-## 👁️ View Widgets (Read-Only Mode)
+##  View Widgets (Read-Only Mode)
 
 Similarly, you can create **view widgets** for **read-only mode** using `viewWidget` instead of `editWidget`.
 
@@ -240,4 +240,4 @@ This allows you to render a **boolean field as "Yes/No"** in view mode.
 
 ---
 
-✅ With this approach, you can **seamlessly extend** SolidX form views using custom widgets for both **edit** and **view** modes.
+ With this approach, you can **seamlessly extend** SolidX form views using custom widgets for both **edit** and **view** modes.

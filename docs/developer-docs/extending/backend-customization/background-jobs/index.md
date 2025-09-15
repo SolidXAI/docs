@@ -5,7 +5,7 @@ description: Learn how to set up and manage background jobs in SolidX, including
 keywords: [background jobs, SolidX, asynchronous processing, job queues, RabbitMQ, database broker]
 ---
 
-# ⚙️ Background Jobs in SolidX
+#  Background Jobs in SolidX
 
 Background jobs in SolidX allow asynchronous task processing, for e.g :
 - Sending emails or notifications
@@ -14,13 +14,13 @@ Background jobs in SolidX allow asynchronous task processing, for e.g :
 
 ---
 
-## 🛠️ Setting Up a Background Job
+##  Setting Up a Background Job
 
 ### 1. Define Queue Options
 Specify the queue name and broker type in an options object.
 
 <details>
-<summary>📄 <code>email-queue-options-database.ts</code></summary>
+<summary> <code>email-queue-options-database.ts</code></summary>
 
 ```ts
 import { BrokerType } from "src/interfaces";
@@ -41,7 +41,7 @@ export default {
 Send jobs to the queue using a publisher.
 
 <details>
-<summary>📄 <code>email-queue-publisher-database.ts</code></summary>
+<summary><code>email-queue-publisher-database.ts</code></summary>
 
 ```ts
 import { Injectable } from '@nestjs/common';
@@ -75,7 +75,7 @@ export class EmailQueuePublisherDatabase extends DatabasePublisher<any> {
 Subscribers process messages from the queue.
 
 <details>
-<summary>📄 <code>email-queue-subscriber-database.ts</code></summary>
+<summary> <code>email-queue-subscriber-database.ts</code></summary>
 
 ```ts
 import { Injectable } from '@nestjs/common';
@@ -112,7 +112,7 @@ export class EmailQueueSubscriberDatabase extends DatabaseSubscriber<any> {
 
 ---
 
-## 🔁 Naming Convention
+##  Naming Convention
 
 The publisher and subscriber names should follow a convention based on the broker type:
 - `NameDatabase` for database broker
@@ -122,14 +122,14 @@ They are standard NestJS providers and must be registered in their respective mo
 
 ---
 
-## 🗃️ Database Tables
+##  Database Tables
 
 - `ss_mq_message_queue`: Queue names registry
 - `ss_mq_message`: Stores message details including status, retries, payload
 
 ---
 
-## ⚙️ Environment Variable
+##  Environment Variable
 
 - `QUEUE_SERVICE_ROLE`  
   - `"subscriber"`: Only processes jobs  
@@ -138,14 +138,14 @@ They are standard NestJS providers and must be registered in their respective mo
 
 ---
 
-## 📦 Supported Brokers
+##  Supported Brokers
 
-### 🛢️ Database Broker
+###  Database Broker
 - Jobs are stored in `ss_mq_message`
 - Uses polling to fetch and process jobs every second
 - Best for lightweight or dependency-free setups
 
-### 🐇 RabbitMQ Broker
+###  RabbitMQ Broker
 - Jobs processed via RabbitMQ queues
 - Uses `amqplib` for message handling
 - Best for larger-scale systems requiring reliability and routing

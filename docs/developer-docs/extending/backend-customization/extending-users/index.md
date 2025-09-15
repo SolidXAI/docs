@@ -5,13 +5,13 @@ description: Learn how to extend user functionality in SolidX.
 keywords: [backend, users, customization]
 ---
 
-# 👥 Overview
+#  Overview
 
 This section covers how to **extend user functionality in SolidX**, including creating custom user fields and implementing the logic required to persist a custom user model.
 
 ---
 
-## 🧩 Configuring a Custom User Model
+##  Configuring a Custom User Model
 
 ### To create a custom user model:
 
@@ -19,7 +19,7 @@ This section covers how to **extend user functionality in SolidX**, including cr
 - Below is an example configuration:
 
 <details>
-<summary>📄 Sample Field Metadata for <code>instituteUser</code></summary>
+<summary> Sample Field Metadata for <code>instituteUser</code></summary>
 
 ```json
 {
@@ -69,14 +69,14 @@ This section covers how to **extend user functionality in SolidX**, including cr
 
 ⸻
 
-## 🛠 Persisting a Custom User
+##  Persisting a Custom User
 
 Since user creation is more than just a simple insert i.e (password encryption, user password history management, etc.)  you must override the generated controller code to allow creating a custom user properly.
 
-🔁 Replace This Code:
+ Replace This Code:
 
 <details>
-<summary>🔧 Default Generated Code</summary>
+<summary> Default Generated Code</summary>
 ```typescript
 @ApiBearerAuth("jwt")
 @Post()
@@ -88,10 +88,10 @@ async create(@Body() createDto: CreateInstituteUserDto, @UploadedFiles() files: 
 </details>
 
 
-✅ With This Logic:
+ With This Logic:
 
 <details>
-<summary>✅ Revised Implementation (InstituteController)</summary>
+<summary> Revised Implementation (InstituteController)</summary>
 
 ```typescript
 @ApiBearerAuth("jwt")
@@ -115,7 +115,7 @@ async create(@Body() createDto: CreateInstituteUserDto, @UploadedFiles() files: 
 </details>
 
 <details>
-<summary>✅ Methods Implementation (InstituteService)</summary>
+<summary> Methods Implementation (InstituteService)</summary>
 ```typescript
   async toExtensionUserDto(createDto: CreateInstituteUserDto): Promise<any> {
     // Populate the extension user data for the user
@@ -180,10 +180,10 @@ async create(@Body() createDto: CreateInstituteUserDto, @UploadedFiles() files: 
 
 ⸻
 
-## 🧪 Generated Code (for custom user models)
+##  Generated Code (for custom user models)
 
 <details>
-<summary>📦 DTOs & Entity</summary>
+<summary> DTOs & Entity</summary>
 
 ```typescript
 // Create DTO
@@ -206,7 +206,7 @@ export class InstituteUser extends User {
 
 ⸻
 
-## ⚙️ How It Works
+##  How It Works
 	1.	The generated model extends User, inheriting all fields & methods.
 	2.	AuthenticationService.signupForExtensionUser() handles:
 	  -	User field persistence

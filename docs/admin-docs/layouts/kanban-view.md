@@ -16,7 +16,7 @@ The Kanban view is defined using a JSON layout that is automatically generated w
 
 Here's an example layout for a model named Book:
 
-```
+```json
 {
   "type": "kanban",
   "attrs": {
@@ -230,7 +230,7 @@ The default buttons viz. create, edit & delete aswell as custom header or row ac
 
 For example in the below layout, the column "publisher" will be visible only to users who have the role admin or super-admin.
 
-```
+```json
 {
   "type": "list",
   "attrs": {
@@ -282,7 +282,7 @@ TODO: Point to developer documentation, each element of type: "field" in the Lis
 
 One of the most powerful customization points is the ability to control how a field's cell is rendered using a custom view widget.
 
-```
+```json
 {
   "type": "field",
   "attrs": {

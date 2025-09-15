@@ -5,7 +5,7 @@ import type * as Preset from '@docusaurus/preset-classic';
 // This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
 
 const config: Config = {
-  title: 'SolidX',
+  title: 'SolidX Docs',
   tagline: 'Enterprise-focussed low-code development platform',
   favicon: 'img/tab-logo.png',
 
@@ -56,6 +56,7 @@ const config: Config = {
           onInlineTags: 'warn',
           onInlineAuthors: 'warn',
           onUntruncatedBlogPosts: 'warn',
+
         },
         theme: {
           customCss: './src/css/custom.css',
@@ -77,12 +78,12 @@ const config: Config = {
           type: 'docSidebar',
           sidebarId: 'tutorialSidebar',
           position: 'left', // keep this as left
-          label: '⏱️  Tutorial',
+          label: ' Tutorial',
           className: 'custom-center-item',
         },
         {
           to: '/blog',
-          label: '⏱️  Blog',
+          label: ' Blog',
           position: 'left',
           className: 'custom-center-item',
         },
@@ -146,6 +147,11 @@ const config: Config = {
         },
       ],
       // copyright: `Copyright © ${new Date().getFullYear()} SolidX, LogicLoop Ventures LLP.`,
+    },
+    prism: {
+      theme: prismThemes.github,        // Light theme
+      darkTheme: prismThemes.dracula,   // Dark theme
+      additionalLanguages: ['typescript', 'tsx', 'bash','json'],
     },
 
   } satisfies Preset.ThemeConfig,

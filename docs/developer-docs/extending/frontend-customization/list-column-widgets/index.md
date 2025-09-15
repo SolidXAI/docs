@@ -4,19 +4,19 @@ title: List Column Widgets
 description: Learn how to create list column widgets for the frontend of your application.
 ---
 
-# 📋 List Column Widgets
+#  List Column Widgets
 
-## 🔎 Overview
+##  Overview
 List view widgets allow you to **customize the display of fields** in a list view.  
 You can render fields using **built-in widgets** or by creating your own **custom widgets**.
 
-✨ For example, to display a user's name along with their avatar, you can use the built-in widget **`SolidShortTextAvatarWidget`**.
+ For example, to display a user's name along with their avatar, you can use the built-in widget **`SolidShortTextAvatarWidget`**.
 
 The view widget is configured using the `viewWidget` attribute in the **list view layout JSON**.
 
 ---
 
-## ⚙️ Configuring a List View Widget
+##  Configuring a List View Widget
 
 ```json
 {
@@ -40,7 +40,7 @@ The view widget is configured using the `viewWidget` attribute in the **list vie
 }
 ```
 
-✅ The widgets can be:
+ The widgets can be:
 - **Built-in** (provided by `@solidstarters/solid-core-ui`)
 - **Custom** (created by you)
 
@@ -48,7 +48,7 @@ In the example above, `SolidShortTextAvatarWidget` is a **built-in widget** that
 
 ---
 
-## 🛠️ Creating a Custom Widget
+##  Creating a Custom Widget
 
 If you need a custom display (e.g. a **score widget** with colors based on score values), follow these steps:
 
@@ -91,7 +91,7 @@ export const ScoreWidget = ({ rowData, solidListViewMetaData, fieldMetadata, col
 ```
 </details>
 
-📂 **File Path:**
+ **File Path:**
 ```
 /solid-ui/app/admin/extensions/ScoreWidget.tsx
 ```
@@ -105,7 +105,7 @@ Register the widget in `solid-extensions.ts` so the framework recognizes it.
 registerExtensionComponent("ScoreWidget", ScoreWidget);
 ```
 
-📂 **File Path:**
+ **File Path:**
 ```
 /solid-ui/app/admin/extensions/solid-extensions.ts
 ```
@@ -128,7 +128,7 @@ Now you can use `ScoreWidget` in your layout JSON:
 
 ---
 
-## 🔄 How It Works
+##  How It Works
 
 1. When the **SolidX app** loads the list view, it reads the **layout configuration**.
 2. It checks fields that have a `viewWidget` attribute.
@@ -154,10 +154,10 @@ export type FieldMetadata = CommonEntity & {
 
 ---
 
-## 📌 TODO
+##  TODO
 - Add detailed explanation of each parameter passed to the widget:
   - `rowData`
   - `solidListViewMetaData`
   - `fieldMetadata`
   - `column`
-```tsx
+<!-- ```tsx -->

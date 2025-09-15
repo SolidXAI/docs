@@ -4,15 +4,15 @@ description: Overview of how the database is initialized with metadata in SolidX
 sidebar_position: 4
 ---
 
-# 🌱 Seeding the Database
+#  Seeding the Database
 
 Seeding is the process of initializing the database with the **essential metadata and data** required for the application to function correctly.
 
-> 🎯 The result of the seeding step is a **fully functional database** with all necessary metadata populated.
+>  The result of the seeding step is a **fully functional database** with all necessary metadata populated.
 
 ---
 
-## 🚀 Running the seed Command
+##  Running the seed Command
 
 To run the seeding process, execute the following command in the `solid-api` directory:
 
@@ -25,66 +25,66 @@ It is responsible for populating all the necessary metadata into the database.
 
 ---
 
-## 📋 What Gets Seeded?
+## What Gets Seeded?
 
 The following metadata is populated during the seeding process:
 
-### 🔐 Permissions
+###  Permissions
 - Permission names are derived from the controller and controller method names.
 - Example: `UserController.findMany`, `MenuItemMetadataController.findMany`
 
-### 🗂 Media Storage Providers
+###  Media Storage Providers
 - Sets up providers used for storing media files.
 - Default providers include:
   - `default-filesystem`: For local file storage.
 
-### 🧩 System Fields Metadata
+### System Fields Metadata
 - All the system models and fields are defined in the solid-core-metadata.json file provided by the `@solidstarters/solid-core` package.
 - The above configuration gets seeded as part of this step
 
-### 📦 Functional Modules Metadata
+###  Functional Modules Metadata
 - Reads from JSON files to seed metadata per functional module (e.g. fees portal, temple portal).
 
-### 🧑‍🤝‍🧑 Roles
+###  Roles
 - Creates default roles like:
   - `Admin`: With all permissions.
   - `Internal User`: With the necessary technical permissions. All users created in SolidX are assigned this role.
 - Other custom roles are created but require manual permission assignment post-login.
 
-### 👥 Users
+### Users
 - Seeds default users as specified in metadata.
 - Users are prompted to **change their passwords** on first login.
 
-### 🖼 Views
+###  Views
 - User interface components are created based on metadata.
 
-### ⚙️ Actions
+###  Actions
 - Links views to functionalities using action definitions.
 
-### 📚 Menus
+###  Menus
 - Sets up navigation menus for the app.
 
-### 📧 Email Templates
+###  Email Templates
 - Initializes default email templates for notifications.
 
-### 📲 SMS Templates
+###  SMS Templates
 - Populates SMS templates for messaging services.
 
-### 🛠 Settings
+###  Settings
 - Seeds default application-level configurations.
 
-### 🛡 Security Rules
+###  Security Rules
 - Establishes access rules for different models and roles.
 
-### 🔢 List of Values
+### List of Values
 - Predefined value lists used across the app (e.g., dropdowns).
 
-### 📊 Dashboards
+###  Dashboards
 - Dashboard configuration providing visual summaries and KPIs
 
 ---
 
-## 🧠 Summary
+##  Summary
 
 The seeding process is **essential for bootstrapping** a SolidX instance with all necessary metadata.  
 Make sure to verify seeded users and assign proper permissions for any additional roles.

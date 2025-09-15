@@ -5,25 +5,25 @@ keywords: [backend, controllers, customization]
 sidebar_position: 3
 ---
 
-# 🛠️ Extending Controllers
+#  Extending Controllers
 
 Controllers are responsible for handling requests and returning responses. Customizing them allows you to tailor the behavior of your application to meet specific needs.
 
 ---
 
-## ➕ Adding a New Endpoint to a Controller
+##  Adding a New Endpoint to a Controller
 
 To add a new endpoint to an existing controller, follow these steps:
 
-1. 🔍 Identify the controller you want to extend.
-2. ✍️ Create a new method in the controller class that handles the logic for the new endpoint.
-3. 🛣️ Define the route for the new endpoint in your routing configuration.
-4. 📄 Ensure the new endpoint is documented in your API docs.
+1.  Identify the controller you want to extend.
+2.  Create a new method in the controller class that handles the logic for the new endpoint.
+3.  Define the route for the new endpoint in your routing configuration.
+4.  Ensure the new endpoint is documented in your API docs.
 
 You can also create your own custom controller by adding a new file in the `controllers` directory and defining your custom controller there.
 
 <details>
-  <summary>📄 Example: Add a new endpoint to <code>InstituteController</code></summary>
+  <summary> Example: Add a new endpoint to <code>InstituteController</code></summary>
 
 ```ts
 @ApiBearerAuth("jwt")
@@ -46,8 +46,8 @@ For example, the above method in InstituteController will generate a permission 
 
 ⸻
 
-## 📚 Related Recipes (TODO)
-	-	👉 Creating a Custom Controller
-	-	👉 Creating a Controller Endpoint with Custom Authentication
+##  Related Recipes (TODO)
+	-	 Creating a Custom Controller
+	-	 Creating a Controller Endpoint with Custom Authentication
 
 ⸻

@@ -4,9 +4,9 @@ title: Recover Endpoint
 description: Information about the recover endpoint of the REST API, including usage, parameters, and responses
 ---
 
-# 🔄 Recover Endpoint
+#  Recover Endpoint
 
-## 🧭 Overview
+##  Overview
 The recover endpoint allows you to restore one or more records that have been soft-deleted in your application.
 
 This documentation includes usage examples for:
@@ -15,20 +15,20 @@ This documentation includes usage examples for:
 
 ---
 
-## 🔁 Recover a Single Record
+##  Recover a Single Record
 
-### ✅ Headers
+###  Headers
 ```http
 Content-Type: application/json
 Authorization: Bearer <token>
 ```
 
-### 📤 Sample Request
+###  Sample Request
 ```http
 POST /api/fee-type/recover/{id}
 ```
 
-### 📥 Sample Response
+###  Sample Response
 ```json
 {
   "statusCode": 200,
@@ -54,29 +54,29 @@ POST /api/fee-type/recover/{id}
 }
 ```
 
-> ⚠️ **Known Issue**: Although the record is successfully recovered in the database, the response may still contain `deletedAt` and `deletedTracker`. This is expected to be fixed in upcoming releases.
+>  **Known Issue**: Although the record is successfully recovered in the database, the response may still contain `deletedAt` and `deletedTracker`. This is expected to be fixed in upcoming releases.
 
 ---
 
-## 📦 Bulk Recovery of Records
+##  Bulk Recovery of Records
 
-### ✅ Headers
+###  Headers
 ```http
 Content-Type: application/json
 Authorization: Bearer <token>
 ```
 
-### 📤 Sample Request
+###  Sample Request
 ```http
 POST /api/fee-type/recover/bulk
 ```
 
-### 📤 Sample Body
+###  Sample Body
 ```json
 [1, 2, 3]  // Array of record IDs to recover
 ```
 
-### 📥 Sample Response
+###  Sample Response
 ```json
 {
   "statusCode": 200,
@@ -106,4 +106,4 @@ POST /api/fee-type/recover/bulk
 ```
 
 ---
-> ⚠️ **Known Issue**: Similar to single record recovery, the response may still include `deletedAt` and `deletedTracker` fields for recovered records. This is expected to be resolved in future updates.
+>  **Known Issue**: Similar to single record recovery, the response may still include `deletedAt` and `deletedTracker` fields for recovered records. This is expected to be resolved in future updates.
