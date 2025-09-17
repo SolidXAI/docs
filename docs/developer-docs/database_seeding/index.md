@@ -1,5 +1,5 @@
 ---
-title: Seeding and Metadata
+title: Database Seeding
 description: Overview of how the database is initialized with metadata in SolidX.
 sidebar_position: 4
 ---
