@@ -4,7 +4,7 @@ description: Overview of the module metadata schema used in SolidX.
 sidebar_position: 1
 ---
 
-## Module Metadata
+## Overview
 
 When creating a new module in SolidX, you're defining a **core building block** of your application.  
 A module groups together related models and functionality under a **unified domain**.

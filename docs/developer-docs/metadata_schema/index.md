@@ -40,3 +40,8 @@ All examples below are within the context of a **Fees Portal Module** (A Fee Col
 👉 For more details about the Fees Portal module, see [School Fees Portal Tutorial](../tutorial/school-fees-portal/index.md).
 
 ---
+
+## TODO
+1. Why of metadata i.e rationale
+2. metatadata attributes
+ - Explain the attributes which are slightly advanced
