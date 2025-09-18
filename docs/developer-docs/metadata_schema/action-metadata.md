@@ -20,7 +20,7 @@ For a conceptual overview / guide/ recipes of how actions can be used in SolidX,
         {
             "displayName": "fees-portal Home",
             "name": "fees-portal-home-action",
-            "type": "custom",
+            "type": "custom", // Custom action
             "domain": "",
             "context": "",
             "customComponent": "/admin/core/fees-portal/home",
@@ -33,7 +33,7 @@ For a conceptual overview / guide/ recipes of how actions can be used in SolidX,
         {
             "displayName": "Institute List Action",
             "name": "institute-list-action",
-            "type": "solid",
+            "type": "solid", // Standard SolidX action
             "domain": "",
             "context": "",
             "customComponent": "",
