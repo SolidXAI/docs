@@ -13,7 +13,7 @@ Each model is a semantic, configurable data structure that forms the basis of ad
 👉 For a conceptual overview of what a model is, see [Model Management Documentation](../admin-docs/module-builder/model-management.md).
 
 ---
-Example: Institute Model
+### Example: Institute Model
 <summary>📑 Model Schema</summary>
 
 ```json
