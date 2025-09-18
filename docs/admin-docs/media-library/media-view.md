@@ -2,6 +2,9 @@
 sidebar_position: 1
 ---
 
+import { FaFolder, FaFileUpload, FaSearch, FaThList, FaTh, FaCopy, FaShareAlt, FaShieldAlt, FaCogs } from "react-icons/fa";
+import { IoIosArrowForward } from "react-icons/io";
+
 # Media View
 
 The Media View provides an intuitive interface for managing and organizing your media files, similar to popular file management systems.
@@ -9,32 +12,13 @@ The Media View provides an intuitive interface for managing and organizing your 
 ## Interface Overview
 
 ### Main Components
-<!-- 1. **Folder Tree**
-   - Hierarchical folder structure
-   - Drag-and-drop organization
-   - Folder creation/deletion
-   - Folder renaming
-   - Access control settings
-
-2. **File Browser**
-   - Grid/List view toggle
-   - File previews
-   - Selection mode
-   - Sort options
-   - Filter capabilities
-
-3. **Information Panel**
-   - File metadata
-   - Preview
-   - Version history
-   - Usage tracking
-   - Share settings -->
 
 <div className="feature-grid">
 
   <div className="feature-card">
-    <h4 className="card-title">
-      1 Folder Tree
+    <h4 className="card-title card-headear-wrapper">
+      <FaFolder size={16} style={{ marginRight: "10px" }} />
+       Folder Tree
     </h4>
     <ul className="card-desc">
       <li>Hierarchical folder structure</li>
@@ -46,8 +30,9 @@ The Media View provides an intuitive interface for managing and organizing your 
   </div>
 
   <div className="feature-card">
-    <h4 className="card-title">
-      2 File Browser
+    <h4 className="card-title card-headear-wrapper">
+      <FaThList size={15} style={{ marginRight: "10px" }} />
+       File Browser
     </h4>
     <ul className="card-desc">
       <li>Grid/List view toggle</li>
@@ -59,8 +44,9 @@ The Media View provides an intuitive interface for managing and organizing your 
   </div>
 
   <div className="feature-card">
-    <h4 className="card-title">
-     3 Information Panel
+    <h4 className="card-title card-headear-wrapper">
+      <FaFileUpload size={16} style={{ marginRight: "10px" }} />
+      Information Panel
     </h4>
     <ul className="card-desc">
       <li>File metadata</li>
@@ -73,38 +59,16 @@ The Media View provides an intuitive interface for managing and organizing your 
 
 </div>
 
-
-
-
 ## Features
 
 ### File Management
-<!-- - **Upload**
-  - Drag-and-drop upload
-  - Multi-file upload
-  - Upload progress tracking
-  - Duplicate detection
-  - File type validation
-
-- **Organization**
-  - Create folders
-  - Move/Copy files
-  - Bulk operations
-  - Tag management
-  - Custom metadata
-
-- **Search**
-  - Full-text search
-  - Filter by type
-  - Filter by date
-  - Filter by size
-  - Advanced filters -->
 
 <div className="feature-grid">
 
   <div className="feature-card">
-    <h4 className="card-title">
-     1 Upload
+    <h4 className="card-title card-headear-wrapper">
+      <FaFileUpload size={15} style={{ marginRight: "10px" }} />
+       Upload
     </h4>
     <ul className="card-desc">
       <li>Drag-and-drop upload</li>
@@ -116,8 +80,9 @@ The Media View provides an intuitive interface for managing and organizing your 
   </div>
 
   <div className="feature-card">
-    <h4 className="card-title">
-     2 Organization
+    <h4 className="card-title card-headear-wrapper">
+      <FaFolder size={15} style={{ marginRight: "10px" }} />
+       Organization
     </h4>
     <ul className="card-desc">
       <li>Create folders</li>
@@ -129,8 +94,9 @@ The Media View provides an intuitive interface for managing and organizing your 
   </div>
 
   <div className="feature-card">
-    <h4 className="card-title">
-    3  Search
+    <h4 className="card-title card-headear-wrapper">
+      <FaSearch size={16} style={{ marginRight: "10px" }} />
+      Search
     </h4>
     <ul className="card-desc">
       <li>Full-text search</li>
@@ -143,31 +109,14 @@ The Media View provides an intuitive interface for managing and organizing your 
 
 </div>
 
-
-
-
-
 ### View Options
-
-<!-- #### Grid View
-   - Thumbnail previews
-   - Quick actions
-   - Selection mode
-   - Drag-and-drop
-   - Resize options
-
-   #### List View
-   - Detailed information
-   - Sortable columns
-   - Bulk actions
-   - Inline preview
-   - Quick filters -->
 
 <div className="feature-grid">
 
   <div className="feature-card">
-    <h4 className="card-title">
-     1 Thumbnail View
+    <h4 className="card-title card-headear-wrapper">
+      <FaTh size={15} style={{ marginRight: "10px" }} />
+       Thumbnail View
     </h4>
     <ul className="card-desc">
       <li>Thumbnail previews</li>
@@ -179,8 +128,9 @@ The Media View provides an intuitive interface for managing and organizing your 
   </div>
 
   <div className="feature-card">
-    <h4 className="card-title">
-    2  List View
+    <h4 className="card-title card-headear-wrapper">
+      <FaThList size={16} style={{ marginRight: "10px" }} />
+       List View
     </h4>
     <ul className="card-desc">
       <li>Detailed information</li>
@@ -193,32 +143,15 @@ The Media View provides an intuitive interface for managing and organizing your 
 
 </div>
 
-
-
-
-
-
-
 ### File Operations
 
-<!-- #### Basic Operations
-- Copy
-- Move
-- Rename
-- Delete
-- Download
-
-#### Advanced Features
-- Generate share links
-- Set expiry dates
-- Configure permissions
-- Add descriptions
-- Manage versions -->
-
-   <div className="feature-grid">
+<div className="feature-grid">
 
   <div className="feature-card">
-    <h4 className="card-title">1 Basic Operations</h4>
+    <h4 className="card-title card-headear-wrapper">
+      <FaCopy size={15} style={{ marginRight: "8px" }} />
+       Basic Operations
+    </h4>
     <ul className="card-desc">
       <li>Copy</li>
       <li>Move</li>
@@ -229,7 +162,10 @@ The Media View provides an intuitive interface for managing and organizing your 
   </div>
 
   <div className="feature-card">
-    <h4 className="card-title">2 Advanced Features</h4>
+    <h4 className="card-title card-headear-wrapper">
+      <FaShareAlt size={16} style={{ marginRight: "8px" }} />
+       Advanced Features
+    </h4>
     <ul className="card-desc">
       <li>Generate share links</li>
       <li>Set expiry dates</li>
@@ -241,10 +177,8 @@ The Media View provides an intuitive interface for managing and organizing your 
 
 </div>
 
-
-
-
 ## File Information
+<div className="border-box">
 
 ### Metadata Display
 - File name
@@ -256,6 +190,12 @@ The Media View provides an intuitive interface for managing and organizing your 
 - Tags
 - Custom fields
 
+</div>
+
+<br/>
+<div className="border-box">
+
+
 ### Preview Support
 - Images
 - Documents
@@ -263,103 +203,59 @@ The Media View provides an intuitive interface for managing and organizing your 
 - Audio files
 - PDF files
 
-<!-- <div className="feature-grid">
-
-  <div className="feature-card">
-    <h4 className="card-title">Metadata Display</h4>
-    <ul className="card-desc">
-      <li>File name</li>
-      <li>Size</li>
-      <li>Type</li>
-      <li>Created date</li>
-      <li>Modified date</li>
-      <li>Owner</li>
-      <li>Tags</li>
-      <li>Custom fields</li>
-    </ul>
-  </div>
-
-  <div className="feature-card">
-    <h4 className="card-title">Preview Support</h4>
-    <ul className="card-desc">
-      <li>Images</li>
-      <li>Documents</li>
-      <li>Videos</li>
-      <li>Audio files</li>
-      <li>PDF files</li>
-    </ul>
-  </div>
-
-</div> -->
+</div>
 
 
 ## Best Practices
 
-<!-- 1. **Organization**
-   - Use clear folder names
-   - Maintain consistent structure
-   - Apply relevant tags
-   - Update metadata regularly
+<details>
+  <summary className="card-title card-headear-wrapper">
+    <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
+    Organization
+  </summary>
+  <ul className="card-desc">
+    <li>Use clear folder names</li>
+    <li>Maintain consistent structure</li>
+    <li>Apply relevant tags</li>
+    <li>Update metadata regularly</li>
+  </ul>
+</details>
 
-2. **Performance**
-   - Optimize file sizes
-   - Use appropriate formats
-   - Limit folder sizes
-   - Regular cleanup
+<details>
+  <summary className="card-title card-headear-wrapper">
+    <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
+    Performance
+  </summary>
+  <ul className="card-desc">
+    <li>Optimize file sizes</li>
+    <li>Use appropriate formats</li>
+    <li>Limit folder sizes</li>
+    <li>Regular cleanup</li>
+  </ul>
+</details>
 
-3. **Security**
-   - Set proper permissions
-   - Use secure sharing
-   - Monitor access
-   - Regular audits
+<details>
+  <summary className="card-title card-headear-wrapper">
+    <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
+    Security
+  </summary>
+  <ul className="card-desc">
+    <li>Set proper permissions</li>
+    <li>Use secure sharing</li>
+    <li>Monitor access</li>
+    <li>Regular audits</li>
+  </ul>
+</details>
 
-4. **Workflow**
-   - Document naming conventions
-   - Define folder structure
-   - Establish backup procedures
-   - Create usage guidelines -->
-
-
-<div className="feature-grid">
-
-  <div className="feature-card">
-    <h4 className="card-title">1 Organization</h4>
-    <ul className="card-desc">
-      <li>Use clear folder names</li>
-      <li>Maintain consistent structure</li>
-      <li>Apply relevant tags</li>
-      <li>Update metadata regularly</li>
-    </ul>
-  </div>
-
-  <div className="feature-card">
-    <h4 className="card-title">2 Performance</h4>
-    <ul className="card-desc">
-      <li>Optimize file sizes</li>
-      <li>Use appropriate formats</li>
-      <li>Limit folder sizes</li>
-      <li>Regular cleanup</li>
-    </ul>
-  </div>
-
-  <div className="feature-card">
-    <h4 className="card-title">3 Security</h4>
-    <ul className="card-desc">
-      <li>Set proper permissions</li>
-      <li>Use secure sharing</li>
-      <li>Monitor access</li>
-      <li>Regular audits</li>
-    </ul>
-  </div>
-
-  <div className="feature-card">
-    <h4 className="card-title">4 Workflow</h4>
-    <ul className="card-desc">
-      <li>Document naming conventions</li>
-      <li>Define folder structure</li>
-      <li>Establish backup procedures</li>
-      <li>Create usage guidelines</li>
-    </ul>
-  </div>
-
-</div>
+<details>
+  <summary className="card-title card-headear-wrapper">
+    <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
+    Workflow
+  </summary>
+  <ul className="card-desc">
+    <li>Document naming conventions</li>
+    <li>Define folder structure</li>
+    <li>Establish backup procedures</li>
+    <li>Create usage guidelines</li>
+  </ul>
+</details>

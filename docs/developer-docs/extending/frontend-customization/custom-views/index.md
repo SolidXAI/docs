@@ -5,6 +5,9 @@ keywords: [custom views, frontend customization, custom actions, custom componen
 sidebar_position: 2
 ---
 
+import { IoIosArrowForward } from "react-icons/io";
+
+
 #  Custom Views
 
 ##  Overview
@@ -22,19 +25,28 @@ They can be embedded into form views or used to build specialized UI.
 2. **Register the custom view**  
    Register it in `solid-ui/app/admin/extensions/index.ts` using `registerExtensionComponent`.
 
+
 <details>
-<summary> Code: Registering the Component</summary>
+ <summary className="card-title card-headear-wrapper">
+    <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
+    Code: Registering the Component
+</summary>
 
 ```typescript
 registerExtensionComponent("BookSimilarTitles", BookSimilarTitles);
 ```
+
 </details>
 
 3. **Add the custom view to the form layout**  
    You can embed the custom widget in your form JSON layout.
 
 <details>
-<summary> Code: Form Layout Example</summary>
+
+ <summary className="card-title card-headear-wrapper">
+    <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
+     Code: Form Layout Example
+</summary>
 
 ```json
 {
@@ -94,7 +106,10 @@ registerExtensionComponent("BookSimilarTitles", BookSimilarTitles);
 ##  Example: `BookSimilarTitles` Component
 
 <details>
-<summary> Code: BookSimilarTitles.tsx</summary>
+ <summary className="card-title card-headear-wrapper">
+    <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
+     Code: BookSimilarTitles.tsx
+</summary>
 
 ```typescript
 "use client";
@@ -165,7 +180,10 @@ export default BookSimilarTitles;
 3. The custom view receives props of type `SolidFormWidgetProps`.  
 
 <details>
-<summary> Code: Props Types</summary>
+ <summary className="card-title card-headear-wrapper">
+    <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
+     Code: Props Types
+</summary>
 
 ```tsx
 export type SolidFormWidgetProps = {

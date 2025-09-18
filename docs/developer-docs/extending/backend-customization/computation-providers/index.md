@@ -6,6 +6,9 @@ keywords: [backend, computation providers, customization]
 ---
 
 import { NoteBoxs } from '@site/src/common/NoteBoxs';
+import { IoIosArrowForward } from "react-icons/io";
+import { MdSettings,MdBuildCircle } from "react-icons/md";
+
 
 
 #  Computation Providers
@@ -16,7 +19,12 @@ Computation providers are essential for defining how **computed fields** are cal
 
 ##  How to Configure a Computed Field
 
+
+  <h3 className=" card-headear-wrapper">
+    <MdSettings size={24}  />
+
 ###  Sample Metadata Configuration
+</h3>
 
 In the `computedFieldValueProvider`, we specify the **provider class** responsible for the computation logic.
 
@@ -33,6 +41,7 @@ Supported operations include:
 - `after-insert`
 - `after-remove`
 
+
 🔸 **Before operations** trigger `preComputeValue()` of `IEntityPreComputeFieldProvider`.
 
 🔸 **After operations** trigger `postComputeAndSaveValue()` of `IEntityPostComputeFieldProvider`.
@@ -46,7 +55,10 @@ You can:
 - Persist additional logic and saving in `postComputeAndSaveValue`
 
 <details>
-  <summary> Example: Configuration for <code>amountPaid</code> computed field</summary>
+  <summary className="card-title card-headear-wrapper">
+    <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
+   Example: Configuration for <code>amountPaid</code> computed field
+</summary>
 
 ```json
 {
@@ -96,7 +108,10 @@ You can:
 To implement a custom computation provider, you need to implement either or both of the following interfaces:
 
 <details>
-  <summary> Interfaces to Implement</summary>
+    <summary className="card-title card-headear-wrapper">
+    <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
+   Interfaces to Implement
+</summary>
 
 ```ts
 
@@ -123,7 +138,11 @@ export interface IEntityComputedFieldProvider {
 
 ##  How It Works
 
+  <h3 className=" card-headear-wrapper">
+    <MdBuildCircle size={20}  />
+
 ###  Core Mechanism
+</h3>
 
 1. `ComputedEntityFieldSubscriber` listens to `insert`, `update`, and `delete` events across all entities.
 2. For **before** operations:

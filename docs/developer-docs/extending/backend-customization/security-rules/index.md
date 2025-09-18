@@ -5,13 +5,24 @@ description: Learn how to customize security rules in SolidX.
 keywords: [backend, security, customization]
 ---
 
+import { IoIosArrowForward, IoIosLock, IoIosInformationCircle, IoIosWarning } from "react-icons/io";
+import { NoteBoxs } from '@site/src/common/NoteBoxs';
+
+
+
 #  Security Rules in SolidX
 
 Security rules are crucial for **controlling access to data** in SolidX. By defining these rules, you can restrict visibility at the model level and ensure that only authorized users can access sensitive information.
 
 ---
 
+  <h2 className=" card-headear-wrapper">
+    <IoIosLock size={26} style={{ marginRight: "10px" }} />
+
 ## Adding a New Security Rule
+</h2>
+
+
 
 Follow these steps to configure a custom security rule:
 
@@ -24,7 +35,10 @@ Follow these steps to configure a custom security rule:
 3.  Define the logic inside `securityRuleConfig.filters`. These filters are applied when data is retrieved for the logged-in user, depending upon the user's role and the model data they are accessing.
 
 <details>
-<summary> Example: Rule for <code>Institute Admin</code></summary>
+ <summary className="card-title card-headear-wrapper">
+    <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
+    Example: Rule for <code>Institute Admin</code>
+</summary>
 
 ```json
 {
@@ -53,7 +67,13 @@ Follow these steps to configure a custom security rule:
 
 ---
 
+
+  <h2 className=" card-headear-wrapper">
+    <IoIosInformationCircle size={26} style={{ marginRight: "10px" }} />
+
 ##  How It Works
+</h2>
+
 
 1.  Security rules are evaluated within the `SolidBaseRepository` class (from `@solidstarters/solid-core`).
 2.  Any repository that extends `SolidBaseRepository` will automatically enforce security rules during data retrieval via query builders.
@@ -62,11 +82,17 @@ Follow these steps to configure a custom security rule:
 5.  Security rules are loaded from the database **at server startup** and stored in the Solid Registry.
    -  After updating or adding rules, **restart the server** for the changes to take effect.
 
-:::info Note
-Support for applying rules in the basic `find()` method is still a TODO.
-:::
+
+
+<NoteBoxs>
+  Support for applying rules in the basic <span className="color-green"> find() </span> method is still a TODO.
+</NoteBoxs>
+
+  <h2 className=" card-headear-wrapper">
+    <IoIosWarning size={26} style={{ marginRight: "10px" }} />
 
 ## Troubleshooting
+</h2>
 If you encounter issues with security rules:
 -  Ensure the server is restarted after making changes to the security rules.
 - Ensure that the `roleUserKey` and `modelMetadataUserKey` are correctly defined and match the roles and models in your application.

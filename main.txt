@@ -1,200 +1,36 @@
 ---
-sidebar_position: 1
+sidebar_position: 3
 ---
 
-# Users
+# Form View
 
-User management in SOLID provides comprehensive tools for managing user accounts, profiles, and access control.
+The Form View provides a comprehensive interface for creating and editing individual records, with support for complex data entry, validation, and workflow management.
 
-## User Management
+## Core Features
 
-### Creating Users
+### Form Layout
 
-There are several ways to create users:
-
-<!-- 1. **Admin Creation**
-   - Navigate to Users section
-   - Click "Create User"
-   - Fill required information
-   - Assign roles
-   - Send invitation
-
-2. **User Invitation**
-   - Send email invitation
-   - User completes registration
-   - Automatic role assignment
-   - Email verification
-
-3. **Self Registration**
-   - Enable public registration
-   - Configure registration fields
-   - Set default roles
-   - Enable email verification -->
-
-<div className="feature-grid">
-
-  <div className="feature-card">
-    <h4 className="card-title">Admin Creation</h4>
-    <ul className="card-desc">
-      <li>Navigate to Users section</li>
-      <li>Click "Create User"</li>
-      <li>Fill required information</li>
-      <li>Assign roles</li>
-      <li>Send invitation</li>
-    </ul>
-  </div>
-
-  <div className="feature-card">
-    <h4 className="card-title">User Invitation</h4>
-    <ul className="card-desc">
-      <li>Send email invitation</li>
-      <li>User completes registration</li>
-      <li>Automatic role assignment</li>
-      <li>Email verification</li>
-    </ul>
-  </div>
-
-  <div className="feature-card">
-    <h4 className="card-title">Self Registration</h4>
-    <ul className="card-desc">
-      <li>Enable public registration</li>
-      <li>Configure registration fields</li>
-      <li>Set default roles</li>
-      <li>Enable email verification</li>
-    </ul>
-  </div>
-
-</div>
-
-
-### User Properties
-
-| Property | Description |
-|----------|-------------|
-| Full name | User's full name |
-| Username | Unique identifier |
-| Email | Primary contact |
-| Password | Securely hashed |
-| Mobile | User's mobile number |
-| Roles | Assigned roles |
-
-## User Profile
-
-<!-- ### Profile Management
-- Personal information
-- Contact details
-- Preferences
-- Profile picture
-- Custom fields
-
-### Account Settings
-- Password change
-- Email preferences
-- Notification settings
-- Language preferences
-- Theme settings -->
-
-
-
-
-
-## Security Features
-
-<!-- ### Password Management
-- Password complexity rules
-- Password expiration
-- Password history
-- Failed login lockout
-- Password reset
-
-### Multi-factor Authentication
-- Enable/disable 2FA
-- Authentication methods
-- Backup codes
-- Device management
-- Session control
-
-### Account Recovery
-- Password reset
-- Email verification
-- Security questions
-- Recovery codes
-- Admin assistance -->
-
-<div className="feature-grid">
-
-  <div className="feature-card">
-    <h4 className="card-title">Password Management</h4>
-    <ul className="card-desc">
-      <li>Password complexity rules</li>
-      <li>Password expiration</li>
-      <li>Password history</li>
-      <li>Failed login lockout</li>
-      <li>Password reset</li>
-    </ul>
-  </div>
-
-  <!-- <div className="feature-card">
-    <h4 className="card-title">Multi-factor Authentication</h4>
-    <ul className="card-desc">
-      <li>Enable/disable 2FA</li>
-      <li>Authentication methods</li>
-      <li>Backup codes</li>
-      <li>Device management</li>
-      <li>Session control</li>
-    </ul>
-  </div>
-
-  <div className="feature-card">
-    <h4 className="card-title">Account Recovery</h4>
-    <ul className="card-desc">
-      <li>Password reset</li>
-      <li>Email verification</li>
-      <li>Security questions</li>
-      <li>Recovery codes</li>
-      <li>Admin assistance</li>
-    </ul>
-  </div> -->
-
-</div>
-
-
-
-## User Interface
-
-<!-- ### User List View
-- Search users
-- Filter by status
-- Filter by role
-- Bulk actions
-- Export users
-
-### User Detail View
-- Profile information
-- Role management
-- Permission overview
-- Activity history
-- Security settings
- -->
 
 
 <div className="feature-grid">
 
   <div className="feature-card">
-    <h4 className="card-title">User List View</h4>
+    <h4 className="card-title">1 Section Management</h4>
     <ul className="card-desc">
-      <li>Search users</li>
-      <li>Filter users</li>
-      <li>Export users</li>
+      <li>Logical grouping of fields</li>
+      <li>Collapsible sections</li>
+      <li>Conditional visibility</li>
+      <li>Custom styling</li>
     </ul>
   </div>
 
   <div className="feature-card">
-    <h4 className="card-title">User Detail View</h4>
+    <h4 className="card-title">2 Field Arrangement</h4>
     <ul className="card-desc">
-      <li>Profile information</li>
-      <li>Role management</li>
-      <li>Activity history</li>
+      <li>Responsive grid layout</li>
+      <li>Field sizing and spacing</li>
+      <li>Label positioning</li>
+      <li>Help text support</li>
     </ul>
   </div>
 
@@ -202,102 +38,296 @@ There are several ways to create users:
 
 
 
+### Data Entry
+
+
+<div className="feature-grid">
+
+  <div className="feature-card">
+    <h4 className="card-title">1 Field Types</h4>
+    <ul className="card-desc">
+      <li>All supported field types</li>
+      <li>Custom field components</li>
+      <li>Rich text editing</li>
+      <li>File uploads</li>
+    </ul>
+  </div>
+
+  <div className="feature-card">
+    <h4 className="card-title">2 Validation</h4>
+    <ul className="card-desc">
+      <li>Real-time validation</li>
+      <li>Custom validation rules</li>
+      <li>Cross-field validation</li>
+      <li>Error messaging</li>
+    </ul>
+  </div>
+
+</div>
+
+
+
+### Advanced Features
+
+
+<div className="feature-grid">
+
+  <div className="feature-card">
+    <h4 className="card-title">1 Audit Trail</h4>
+    <ul className="card-desc">
+      <li>Change history</li>
+      <li>User tracking</li>
+      <li>Timestamp logging</li>
+      <li>Change comments</li>
+    </ul>
+  </div>
+
+  <div className="feature-card">
+    <h4 className="card-title">2 Workflow Integration</h4>
+    <ul className="card-desc">
+      <li>Status management</li>
+      <li>Stage transitions</li>
+      <li>Approval processes</li>
+      <li>Action triggers</li>
+    </ul>
+  </div>
+
+  <div className="feature-card">
+    <h4 className="card-title">3 Chatter/Comments</h4>
+    <ul className="card-desc">
+      <li>Threaded discussions</li>
+      <li>@mentions</li>
+      <li>File attachments</li>
+      <li>Activity log</li>
+    </ul>
+  </div>
+
+</div>
+
+
+
+## Form Configuration
+
+Customize form layout and behavior through JSON configuration:
+
+```json
+{
+  "layout": {
+    "sections": [
+      {
+        "title": "Basic Information",
+        "collapsible": true,
+        "defaultOpen": true,
+        "columns": 2,
+        "fields": [
+          {
+            "name": "title",
+            "size": "full"
+          },
+          {
+            "name": "status",
+            "size": "half"
+          },
+          {
+            "name": "priority",
+            "size": "half"
+          }
+        ]
+      },
+      {
+        "title": "Details",
+        "condition": "status === 'active'",
+        "fields": [
+          {
+            "name": "description",
+            "size": "full"
+          },
+          {
+            "name": "attachments",
+            "size": "full"
+          }
+        ]
+      }
+    ],
+    "sidebar": {
+      "sections": [
+        {
+          "type": "workflow",
+          "position": "top"
+        },
+        {
+          "type": "audit",
+          "position": "middle"
+        },
+        {
+          "type": "chatter",
+          "position": "bottom"
+        }
+      ]
+    }
+  },
+  "actions": {
+    "save": {
+      "label": "Save",
+      "position": "top",
+      "validation": true
+    },
+    "custom": [
+      {
+        "name": "approve",
+        "label": "Approve",
+        "condition": "status === 'pending'",
+        "confirmation": {
+          "title": "Confirm Approval",
+          "message": "Are you sure you want to approve this record?"
+        }
+      }
+    ]
+  }
+}
+```
+
+## Form Components
+
+### Main Form Area
+- Field groups and sections
+- Dynamic field rendering
+- Conditional visibility
+- Validation feedback
+
+
+
+
+### Sidebar Components
+
+
+<div className="feature-grid">
+
+  <div className="feature-card">
+    <h4 className="card-title">
+    1 Workflow Ribbon 
+    </h4>
+    <ul className="card-desc">
+      <li>Current status</li>
+      <li>Available transitions</li>
+      <li>Stage history</li>
+      <li>Action buttons</li>
+    </ul>
+  </div>
+
+  <div className="feature-card">
+    <h4 className="card-title">
+    2 Audit Trail 
+    </h4>
+    <ul className="card-desc">
+      <li>Change history</li>
+      <li>User actions</li>
+      <li>Timestamps</li>
+      <li>Field changes</li>
+    </ul>
+  </div>
+
+  <div className="feature-card">
+    <h4 className="card-title">
+   3 Chatter/Comments 
+    </h4>
+    <ul className="card-desc">
+      <li>Discussion threads</li>
+      <li>File attachments</li>
+      <li>User mentions</li>
+      <li>Activity feed</li>
+    </ul>
+  </div>
+
+</div>
+
+
+
+
+### Action Bar
+- Primary actions (Save, Delete)
+- Custom actions
+- Workflow actions
+- Quick links
 
 ## Best Practices
 
-<!-- 1. **User Creation**
-   - Validate email addresses
-   - Enforce strong passwords
-   - Require email verification
-   - Set appropriate roles
-   - Document user purpose
 
-2. **Profile Management**
-   - Collect necessary information
-   - Respect privacy
-   - Regular information updates
-   - Clean inactive accounts
 
-3. **Security**
-   - Enable MFA for sensitive roles
-   - Regular password changes
-   - Monitor login attempts
-   - Review access regularly
-
-4. **Maintenance**
-   - Archive inactive users
-   - Update user information
-   - Review role assignments
-   - Clean up permissions -->
 
 <div className="feature-grid">
 
   <div className="feature-card">
-    <h4 className="card-title">User Creation</h4>
+    <h4 className="card-title">
+    1  Layout Design
+    </h4>
     <ul className="card-desc">
-      <li>Validate email addresses</li>
-      <li>Enforce strong passwords</li>
-      <!-- <li>Require email verification</li> -->
-      <li>Set appropriate roles</li>
-      <li>Document user purpose</li>
+      <li>Group related fields</li>
+      <li>Use logical sections</li>
+      <li>Consider field dependencies</li>
+      <li>Optimize for readability</li>
     </ul>
   </div>
 
   <div className="feature-card">
-    <h4 className="card-title">Profile Management</h4>
+    <h4 className="card-title">
+    2  Validation
+    </h4>
     <ul className="card-desc">
-      <li>Collect necessary information</li>
-      <li>Respect privacy</li>
-      <li>Regular information updates</li>
-      <!-- <li>Clean inactive accounts</li> -->
+      <li>Provide clear error messages</li>
+      <li>Validate in real-time</li>
+      <li>Handle edge cases</li>
+      <li>Consider field relationships</li>
     </ul>
   </div>
 
   <div className="feature-card">
-    <h4 className="card-title">Security</h4>
+    <h4 className="card-title">
+     3 Performance
+    </h4>
     <ul className="card-desc">
-      <!-- <li>Enable MFA for sensitive roles</li> -->
-      <li>Regular password changes</li>
-      <li>Monitor login attempts</li>
-      <li>Review access regularly</li>
+      <li>Load data efficiently</li>
+      <li>Cache form state</li>
+      <li>Optimize validations</li>
+      <li>Handle large forms</li>
     </ul>
   </div>
 
   <div className="feature-card">
-    <h4 className="card-title">Maintenance</h4>
+    <h4 className="card-title">
+    4  User Experience
+    </h4>
     <ul className="card-desc">
-      <!-- <li>Archive inactive users</li> -->
-      <li>Update user information</li>
-      <li>Review role assignments</li>
-      <li>Clean up permissions</li>
+      <li>Clear navigation</li>
+      <li>Consistent styling</li>
+      <li>Helpful tooltips</li>
+      <li>Keyboard shortcuts</li>
+    </ul>
+  </div>
+
+  <div className="feature-card">
+    <h4 className="card-title">
+    5  Workflow Integration
+    </h4>
+    <ul className="card-desc">
+      <li>Clear status indicators</li>
+      <li>Intuitive transitions</li>
+      <li>Proper validations</li>
+      <li>Audit trail tracking</li>
+    </ul>
+  </div>
+
+  <div className="feature-card">
+    <h4 className="card-title">
+    6  Chatter/Comments
+    </h4>
+    <ul className="card-desc">
+      <li>Discussion threads</li>
+      <li>File attachments</li>
+      <li>User mentions</li>
+      <li>Activity feed</li>
     </ul>
   </div>
 
 </div>
 
-### Creating a New User
-![View existing users](/img/admin-docs/iam/users/user-list.png)  
-*Figure 1: User list page showing existing users.*
-  
-![Create a user](/img/admin-docs/iam/users/user-creation.png)  
-*Figure 2: User creation form to add a new user.*
-
-To create a new user
-1. Navigate to IAM->Users section
-2. Click on the Add button
-3. Fill in the form and fill in the required details:
-4. Assign the user the required roles
-5. Click on the Save button.
-6. User is created and added to the list of users 
-5. User is sent a mail with the login link and is prompted to change their password, i.e (if forceChangePassword is enabled in the settings)
-
-:::note
-Internal user is a pre-defined technical role with limited permissions. All users need to be assigned this role, for application to work properly on user login
-:::
-
-<div class="tips-box note-box">
-  <h4>💡 Note</h4>
-  <ul>
-    <li>Internal user is a pre-defined technical role with limited permissions. All users need to be assigned this role, for application to work properly on user login</li>
-  </ul>
-</div>

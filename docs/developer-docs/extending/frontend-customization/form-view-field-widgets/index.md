@@ -4,6 +4,9 @@ title: Form View Field Widgets
 description: Learn how to create form view field widgets for the frontend of your application.
 ---
 
+import { IoIosArrowForward } from "react-icons/io";
+
+
 #  Form View Field Widgets
 
 ##  Overview
@@ -44,7 +47,10 @@ You can use either:
 ### 1. Create the Widget Component
 Here’s an example of an **integer slider widget**:
 <details>
-<summary><code>SolidIntegerSliderStyleFormEditWidget</code></summary>
+ <summary className="card-title card-headear-wrapper">
+    <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
+    <code>SolidIntegerSliderStyleFormEditWidget</code>
+</summary>
 
 ```tsx
 import { SolidFormFieldWidgetProps } from "@solidstarters/solid-core-ui/dist/types/solid-core";
@@ -133,6 +139,7 @@ export const SolidIntegerSliderStyleFormEditWidget = ({ formik, fieldContext }: 
         </div>
     );
 }
+
 ```
 </details>
 
@@ -215,7 +222,12 @@ Similarly, you can create **view widgets** for **read-only mode** using `viewWid
 
 ### Example: Boolean View Widget
 <details>
-<summary><code>CustomBooleanFormViewWidget</code></summary>
+ <summary className="card-title card-headear-wrapper">
+    <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
+   <code>CustomBooleanFormViewWidget</code>
+</summary>
+
+
 ```tsx
 export const CustomBooleanFormViewWidget = ({ formik, fieldContext }: SolidFormFieldWidgetProps) => {
     const fieldMetadata = fieldContext.fieldMetadata;

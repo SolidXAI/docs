@@ -149,9 +149,9 @@ const config: Config = {
       // copyright: `Copyright © ${new Date().getFullYear()} SolidX, LogicLoop Ventures LLP.`,
     },
     prism: {
-      theme: prismThemes.github,        // Light theme
-      darkTheme: prismThemes.dracula,   // Dark theme
-      additionalLanguages: ['typescript', 'tsx', 'bash','json'],
+      theme: prismThemes.github,        
+      darkTheme: prismThemes.dracula,  
+      additionalLanguages: ['typescript', 'tsx', 'bash', 'json', 'http'],
     },
 
   } satisfies Preset.ThemeConfig,

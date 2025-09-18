@@ -4,6 +4,9 @@ title: List Column Widgets
 description: Learn how to create list column widgets for the frontend of your application.
 ---
 
+import { IoIosArrowForward } from "react-icons/io";
+
+
 #  List Column Widgets
 
 ##  Overview
@@ -54,7 +57,10 @@ If you need a custom display (e.g. a **score widget** with colors based on score
 
 ### 1. Create the Widget Component
 <details>
-<summary><code>ScoreWidget</code></summary>
+ <summary className="card-title card-headear-wrapper">
+    <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
+    <code>ScoreWidget</code>
+</summary>
 
 ```tsx
 import { SolidListFieldWidgetProps } from "@solidstarters/solid-core-ui/dist/types/solid-core";

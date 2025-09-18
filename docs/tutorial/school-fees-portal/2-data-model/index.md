@@ -66,7 +66,7 @@ On similar lines you can add all fields to the newly created model, more details
 
 For all the models listed below, please make sure to add all the fields, save the model and then use the row actions to generate the code for this model.
 
-### Institute 
+### 1. nstitute 
 
 We need a model to store the institute details, the fields involved are. 
 
@@ -117,11 +117,11 @@ To do this we need to
 
 This gives you an idea of how you can modify fields which have been added earlier to your SolidX model.
 
-### Institute User 
+### 2. Institute User 
 
 This table allows us to configure users of the fees portal, using this model we can create 
 
-### Institute Fee Type
+### 3. Institute Fee Type
 Every Institute can configure multiple types of fees, the fields involved are 
 
 | Column Name                | SolidX Type | Advanced Config                                             |
@@ -131,7 +131,7 @@ Every Institute can configure multiple types of fees, the fields involved are
 
 <br />
 
-### Institute Reminder 
+### 4. Institute Reminder 
 
 This table allows us to store schedule reminder configuration records, the fields involved are 
 
@@ -153,7 +153,7 @@ This table allows us to store schedule reminder configuration records, the field
 
 <br />
 
-### Student 
+### 5. Student 
 
 This table allows us to store student records institute wise, the fields involved are 
 
@@ -170,7 +170,7 @@ This table allows us to store student records institute wise, the fields involve
 
 <br />
 
-### Payment Collection 
+### 6. Payment Collection 
 This table allows us to store payment collection records institute wise, the fields involved are 
 
 | Column Name                | SolidX Type | Advanced Config                                             |
@@ -182,7 +182,7 @@ This table allows us to store payment collection records institute wise, the fie
 
 <br />
 
-### Payment Collection Item 
+### 7. Payment Collection Item 
 
 This table allows us to store payment collection collected for user, the fields involved are 
 
@@ -203,7 +203,7 @@ This table allows us to store payment collection collected for user, the fields 
 
 <br />
 
-### Payment Collection Item Detail 
+### 8. Payment Collection Item Detail 
 
 This table allows us to store payment collection detail of user, the fields involved are 
 
@@ -220,7 +220,7 @@ This table allows us to store payment collection detail of user, the fields invo
 
 <br />
 
-### Payment
+### 9. Payment
 
 This table allows us to store payment records of a user, the fields involved are 
 

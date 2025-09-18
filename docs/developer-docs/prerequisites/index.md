@@ -4,6 +4,7 @@ description: Describes the tools needed before installing SolidX.
 sidebar_position: 1
 ---
 
+import { FaUserPlus,FaTerminal } from "react-icons/fa";
 import { NoteBoxs } from '@site/src/common/NoteBoxs';
 
 # Prerequisites
@@ -22,7 +23,12 @@ If you're using a different database, please refer to its official documentation
 
 Follow [DigitalOcean's guide](https://www.digitalocean.com/community/tutorials/how-to-install-postgresql-on-ubuntu-22-04-quickstart) for detailed installation instructions.
 
+ <h4 className="card-title card-headear-wrapper">
+      <FaUserPlus size={20} style={{ marginRight: "2px" }} />
+
 ### Create a PostgreSQL User and Database
+ </h4>
+
 
 1. Create a user:
 
@@ -46,7 +52,12 @@ Follow [DigitalOcean's guide](https://www.digitalocean.com/community/tutorials/h
 
 ## Git Installation
 
+ <h4 className="card-title card-headear-wrapper">
+      <FaTerminal size={20}  />
+
 ### On Ubuntu / macOS:
+ </h4>
+
 
 ```bash
 sudo apt update
@@ -59,8 +70,13 @@ git config --global user.email "<User Email>"
 
 ## Node.js & npm Setup (via nvm)
 
-### On Ubuntu / macOS:
 
+ <h4 className="card-title card-headear-wrapper">
+      <FaTerminal size={20}  />
+
+### On Ubuntu / macOS:
+ </h4>
+ 
 ```bash
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
 export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"

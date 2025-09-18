@@ -4,6 +4,9 @@ description: This page provides a list of CLI commands that can be used as an al
 sidebar_position: 2
 ---
 
+import { FaTerminal, FaSlidersH } from "react-icons/fa";
+
+
 #  Code Generation CLI
 
 This page provides a list of CLI commands that can be used as an alternative to generate backend code in SolidX.
@@ -16,7 +19,12 @@ The SolidX code builder—invoked either from the SolidX Admin UI or the CLI—u
 
 Generates a new module in the SolidX backend.
 
+<h4 className="card-title card-headear-wrapper">
+  <FaTerminal size={19} />
+
 ###  Command
+</h4>
+
 
 ```tsx
 solid add-module <options>
@@ -25,7 +33,11 @@ Example:
 solid add-module -n myNewModule
 ```
 
+<h4 className="card-title card-headear-wrapper">
+  <FaSlidersH size={18}  />
+
 ###  Options
+</h4>
 
 - `-n moduleName`, `--moduleName <moduleName>`  
   The name of the module to be generated.
@@ -42,7 +54,11 @@ solid add-module -n myNewModule
 
 Creates or updates a model and its related files within an existing module.
 
+<h4 className="card-title card-headear-wrapper">
+  <FaTerminal size={19} />
+
 ###  Command
+</h4>
 
 ```tsx
 solid refresh-model <options>
@@ -51,7 +67,11 @@ Example:
 solid refresh-model -n myNewModelSingularName
 ```
 
+<h4 className="card-title card-headear-wrapper">
+  <FaSlidersH size={18}  />
+
 ###  Options
+</h4>
 
 - `-n modelName`, `--modelName <modelName>`  
   The name of the model to be generated.
@@ -70,7 +90,11 @@ solid refresh-model -n myNewModelSingularName
 
 Removes fields from an existing model in the SolidX backend.
 
+<h4 className="card-title card-headear-wrapper">
+  <FaTerminal size={19} />
+
 ###  Command
+</h4>
 
 ```bash
 solid remove-fields <options>
@@ -79,7 +103,11 @@ Example:
 solid remove-fields -fids "[myFieldId]" -mid myModelId
 ```
 
+<h4 className="card-title card-headear-wrapper">
+  <FaSlidersH size={18}  />
+
 ###  Options
+</h4>
 
 - `-fids fieldIds`, `--fieldIds <fieldIds>`  
   The IDs of the fields to be removed. This needs to be a JSON stringified representation of an array e.g "[1]" or "[2,3]"

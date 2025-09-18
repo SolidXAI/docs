@@ -5,6 +5,11 @@ description: Learn how to write the scheduled jobs in your SolidX application.
 keywords: [backend, scheduled jobs, customization]
 ---
 
+import { IoIosArrowForward } from "react-icons/io";
+import { IoIosAlarm } from "react-icons/io";
+
+
+
 #  Creating Scheduled Jobs
 
 Scheduled jobs in SolidX allow you to run recurring tasks such as sending notifications, cleaning up records, syncing data, or performing regular maintenance.
@@ -13,7 +18,12 @@ This section walks you through how to create and integrate custom scheduled jobs
 
 ---
 
+<h4 className="card-title card-headear-wrapper">
+  <IoIosAlarm size={26} style={{ marginRight: "10px" }} />
+
 ##  Adding a New Scheduled Job
+</h4>
+
 
 Follow these steps to define and use a custom scheduled job:
 
@@ -22,7 +32,10 @@ Follow these steps to define and use a custom scheduled job:
 Create a new service class that implements the `IScheduledJob` interface.
 
 <details>
-<summary>Example: HelloWorld Scheduled Job</summary>
+ <summary className="card-title card-headear-wrapper">
+    <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
+    Example: HelloWorld Scheduled Job
+</summary>
 
 ```ts
 import { Injectable, Logger } from '@nestjs/common';
@@ -50,7 +63,10 @@ Ensure the job service is registered in the appropriate module under the provide
 Add the job definition in your metadata.json or job configuration file.
 
 <details>
-<summary>Example Metadata Configuration</summary>
+ <summary className="card-title card-headear-wrapper">
+    <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
+    Example Metadata Configuration
+</summary>
 
 ```json
 {
@@ -75,10 +91,8 @@ Add the job definition in your metadata.json or job configuration file.
 ```
 </details>
 
-⸻
+---
 
 ###  How It Works (TODO)
 	- How job schedules are evaluated
 	-	Triggering mechanism and intervals
-
-⸻

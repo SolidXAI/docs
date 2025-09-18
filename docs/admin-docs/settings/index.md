@@ -2,6 +2,9 @@
 sidebar_position: 9
 ---
 
+import { IoIosArrowForward } from "react-icons/io";
+
+
 # Other Settings
 
 SOLID provides various system-wide settings and configurations to manage your application's behavior and functionality.
@@ -229,85 +232,6 @@ The Settings module includes:
 }
 ```
 
-## Best Practices
-
-<!-- 1. **List of Values**
-   - Use meaningful names
-   - Document purpose
-   - Consider translations
-   - Regular reviews
-   - Version control
-
-2. **Logging**
-   - Set retention periods
-   - Monitor storage
-   - Regular cleanup
-   - Error alerts
-   - Performance monitoring
-
-3. **Import/Export**
-   - Validate data
-   - Handle errors gracefully
-   - Schedule off-peak
-   - Monitor resources
-   - Backup data
-
-4. **Saved Views**
-   - Clear naming
-   - Document purpose
-   - Regular cleanup
-   - Test performance
-   - Review permissions -->
-
-
-  <div className="feature-grid">
-
-  <div className="feature-card">
-    <h4 className="card-title">1. List of Values</h4>
-    <ul className="card-desc">
-      <li>Use meaningful names</li>
-      <li>Document purpose</li>
-      <li>Consider translations</li>
-      <li>Regular reviews</li>
-      <li>Version control</li>
-    </ul>
-  </div>
-
-  <div className="feature-card">
-    <h4 className="card-title">2. Logging</h4>
-    <ul className="card-desc">
-      <li>Set retention periods</li>
-      <li>Monitor storage</li>
-      <li>Regular cleanup</li>
-      <li>Error alerts</li>
-      <li>Performance monitoring</li>
-    </ul>
-  </div>
-
-  <div className="feature-card">
-    <h4 className="card-title">3. Import/Export</h4>
-    <ul className="card-desc">
-      <li>Validate data</li>
-      <li>Handle errors gracefully</li>
-      <li>Schedule off-peak</li>
-      <li>Monitor resources</li>
-      <li>Backup data</li>
-    </ul>
-  </div>
-
-  <div className="feature-card">
-    <h4 className="card-title">4. Saved Views</h4>
-    <ul className="card-desc">
-      <li>Clear naming</li>
-      <li>Document purpose</li>
-      <li>Regular cleanup</li>
-      <li>Test performance</li>
-      <li>Review permissions</li>
-    </ul>
-  </div>
-
-</div>
-
 
 ## Common Operations
 
@@ -402,3 +326,64 @@ The Settings module includes:
     }
   }
 }
+```
+
+
+## Best Practices
+
+
+<details>
+  <summary className="card-title card-headear-wrapper">
+    <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
+    List of Values
+  </summary>
+  <ul className="card-desc">
+    <li>Use meaningful names</li>
+    <li>Document purpose</li>
+    <li>Consider translations</li>
+    <li>Regular reviews</li>
+    <li>Version control</li>
+  </ul>
+</details>
+
+<details>
+  <summary className="card-title card-headear-wrapper">
+    <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
+    Logging
+  </summary>
+  <ul className="card-desc">
+    <li>Set retention periods</li>
+    <li>Monitor storage</li>
+    <li>Regular cleanup</li>
+    <li>Error alerts</li>
+    <li>Performance monitoring</li>
+  </ul>
+</details>
+
+<details>
+  <summary className="card-title card-headear-wrapper">
+    <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
+    Import/Export
+  </summary>
+  <ul className="card-desc">
+    <li>Validate data</li>
+    <li>Handle errors gracefully</li>
+    <li>Schedule off-peak</li>
+    <li>Monitor resources</li>
+    <li>Backup data</li>
+  </ul>
+</details>
+
+<details>
+  <summary className="card-title card-headear-wrapper">
+    <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
+    Saved Views
+  </summary>
+  <ul className="card-desc">
+    <li>Clear naming</li>
+    <li>Document purpose</li>
+    <li>Regular cleanup</li>
+    <li>Test performance</li>
+    <li>Review permissions</li>
+  </ul>
+</details>

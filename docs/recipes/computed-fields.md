@@ -31,7 +31,7 @@ Configure the computed logic:
 
 Code Sample Here's a trimmed view of how this computed fields implementation looks:
 
-```
+```tsx
 import { Injectable } from '@nestjs/common';
 import {
   ComputedFieldProvider,

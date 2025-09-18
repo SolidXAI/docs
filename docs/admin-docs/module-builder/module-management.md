@@ -2,6 +2,9 @@
 sidebar_position: 1
 ---
 
+import { FiPlusCircle, FiDatabase, FiCode, FiLayers, FiFileText } from "react-icons/fi";
+
+
 # Modules
 
 When creating a new module in SolidX, you're defining a core building block of your application. A module is a logical container that groups together related models and functionality under a unified domain or feature area.
@@ -137,41 +140,3 @@ Below is a list of recipes that are relevant to module management.
 1. [Additional Datasources](../../recipes/): <br />
    This recipe talks about how you can add additional data sources to your application.
 
-
-<!-- 
-### Data Source Configuration
-- Each module can be configured to use a specific data source
-- Supports multiple database types (RDBMS and NoSQL)
-- Allows for flexible data management across different databases
-
-### Access Control
-- Enable/disable modules for different user roles
-- Control module visibility in the admin panel
-- Manage module-level permissions
-
-### API Integration
-- Automatic RESTful API endpoint generation
-- Swagger documentation for all endpoints
-- Built-in authentication and authorization
-
-### Menu Integration
-- Automatic menu structure generation
-- Customizable menu ordering
-- Role-based menu visibility
-
-## Best Practices
-
-1. **Logical Grouping**
-   - Group related functionality together
-   - Keep modules focused and single-purpose
-   - Consider future scalability
-
-2. **Naming Conventions**
-   - Use clear, descriptive names
-   - Follow consistent naming patterns
-   - Consider internationalization needs
-
-3. **Data Source Planning**
-   - Plan database requirements carefully
-   - Consider data isolation needs
-   - Account for scalability requirements -->

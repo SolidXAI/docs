@@ -4,6 +4,9 @@ title: Custom Widgets
 description: Learn how to create custom widgets for the frontend of your application.
 ---
 
+import { IoIosArrowForward } from "react-icons/io";
+
+
 #  Custom Widgets
 
 ##  Overview
@@ -21,7 +24,10 @@ These widgets:
  Example: Display how many characters a user has typed in a text field.
 
 <details>
-<summary> Code: CustomHtml Widget Configuration</summary>
+ <summary className="card-title card-headear-wrapper">
+    <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
+    Code: CustomHtml Widget Configuration
+</summary>
 
 ```json
 {
@@ -58,7 +64,10 @@ These widgets:
 4. The widget is rendered with the following props:  
 
 <details>
-<summary> Code: Props Interface</summary>
+ <summary className="card-title card-headear-wrapper">
+    <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
+    Code: Props Interface
+</summary>
 
 ```tsx
 export type SolidFormWidgetProps = {

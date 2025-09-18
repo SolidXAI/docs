@@ -14,14 +14,10 @@ Code generation in SolidX dramatically improves productivity and consistency by 
 
 ##  Key Features
 
--  **Modular Architecture**  
-  Automatically generate a well-structured module with its own isolated logic and configuration.
+-  **Modular Architecture :**  Automatically generate a well-structured module with its own isolated logic and configuration.
 
--  **Model Generation**  
-  Generate database entities, DTOs, services, and controllers based on model metadata.
+-  **Model Generation :**  Generate database entities, DTOs, services, and controllers based on model metadata.
 
--  **Field Management**  
-  Easily add, update, or remove model fields, with automatic updates to related files.
+-  **Field Management :**  Easily add, update, or remove model fields, with automatic updates to related files.
 
--  **CLI Support**  
-  Trigger code generation tasks from the command line using the SolidX CLI. Can be used alternatively to the web interface for generating SolidX modules.
+-  **CLI Support :**  Trigger code generation tasks from the command line using the SolidX CLI. Can be used alternatively to the web interface for generating SolidX modules.

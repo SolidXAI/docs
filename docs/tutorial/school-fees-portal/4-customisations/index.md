@@ -66,7 +66,7 @@ Most important customisation required for fee types is the that each Fee Type (l
 
 By default in SolidX when you mark a field as unique (and if the model is also soft-delete aware) it generates the following type of code. 
 
-```
+```tsx
 @Entity('fees_portal_fee_type')
 @Index(["feeType", "deletedTracker"], { unique: true })
 export class FeeType extends CommonEntity {
@@ -124,7 +124,7 @@ In our School Fees Portal, we use a subscriber to automate the process of creati
 Code Sample
 Here's a trimmed view of how this subscriber looks:
 
-```
+```tsx
 @EventSubscriber()
 @Injectable()
 export class MediaTransactionSubscriber implements EntitySubscriberInterface<Media> {
@@ -176,7 +176,7 @@ To simplify and streamline fee collection, we integrates a payment gateway syste
 
 ### Generating a Payment Link
 
-```
+```tsx
 @Post('payment-gateway')
 @Public()
 @StudentAuth()
@@ -195,7 +195,7 @@ async generatePaymentGateway(@Body() body: GeneratePaymentGatewayDto) {
 ### Handling the Payment Callback
 Once the student completes payment on the gateway, the gateway sends a POST callback to your backend.
 
-```
+```tsx
 @Post('/payment-callback')
 @Public()
 async handleMswipeCallback(@Req() request: Request, @Res() response: Response) {
@@ -238,7 +238,7 @@ SolidX provides a flexible mechanism to automate backend tasks using scheduled j
 Code Sample Here's a trimmed view of how this scheduled job looks:
 
 
-```
+```tsx
 import { Injectable, Logger } from '@nestjs/common';
 import { IScheduledJob, ScheduledJob, ScheduledJobProvider } from '@solidstarters/solid-core';
 

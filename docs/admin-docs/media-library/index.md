@@ -1,6 +1,9 @@
 ---
 sidebar_position: 4
 ---
+import { FaFileUpload, FaSitemap, FaImage, FaUserShield } from "react-icons/fa"
+import { IoIosArrowForward } from "react-icons/io";
+
 
 # Media Library
 
@@ -59,38 +62,13 @@ Flexible storage options including:
 
 
 ## Features
-<!-- 
-### Asset Management
-- Upload multiple files
-- Create folders
-- Move/copy files
-- Delete assets
-- Rename files
-
-### Organization
-- Folder structure
-- Tags and categories
-- Search functionality
-- Filter by type
-- Sort options
-
-### Image Processing
-- Automatic thumbnail generation
-- Image resizing
-- Format conversion
-- Metadata extraction
-
-### Access Control
-- Role-based permissions
-- Folder-level access
-- Share links
-- Download controls -->
 
 <div className="feature-grid">
 
   <div className="feature-card">
-    <h4 className="card-title">
-     1 Asset Management
+    <h4 className="card-title card-headear-wrapper">
+      <FaFileUpload size={15} style={{ marginRight: "10px" }} />
+       Asset Management
     </h4>
     <ul className="card-desc">
       <li>Upload multiple files</li>
@@ -102,8 +80,9 @@ Flexible storage options including:
   </div>
 
   <div className="feature-card">
-    <h4 className="card-title">
-     2 Organization
+    <h4 className="card-title card-headear-wrapper">
+      <FaSitemap size={15} style={{ marginRight: "10px" }} />
+       Organization
     </h4>
     <ul className="card-desc">
       <li>Folder structure</li>
@@ -115,8 +94,9 @@ Flexible storage options including:
   </div>
 
   <div className="feature-card">
-    <h4 className="card-title">
-     3 Image Processing
+    <h4 className="card-title card-headear-wrapper">
+      <FaImage size={16} style={{ marginRight: "10px" }} />
+       Image Processing
     </h4>
     <ul className="card-desc">
       <li>Automatic thumbnail generation</li>
@@ -127,8 +107,9 @@ Flexible storage options including:
   </div>
 
   <div className="feature-card">
-    <h4 className="card-title">
-     4 Access Control
+    <h4 className="card-title card-headear-wrapper">
+      <FaUserShield size={16} style={{ marginRight: "10px" }} />
+       Access Control
     </h4>
     <ul className="card-desc">
       <li>Role-based permissions</li>
@@ -143,81 +124,58 @@ Flexible storage options including:
 
 
 
+
 ## Best Practices
 
-<!-- 1. **Organization**
-   - Use consistent naming
-   - Create logical folders
-   - Apply relevant tags
-   - Document usage guidelines
-
-2. **Performance**
-   - Optimize file sizes
-   - Use appropriate formats
-   - Configure caching
-   - Monitor storage usage
-
-3. **Security**
-   - Set proper permissions
-   - Regular access audits
-   - Secure share links
-   - Monitor usage
-
-4. **Maintenance**
-   - Regular cleanup
-   - Version management
-   - Backup strategy
-   - Usage monitoring -->
-
-
-<div className="feature-grid">
-
-  <div className="feature-card">
-    <h4 className="card-title">
-    1  Organization
-    </h4>
+  <details >
+    <summary className="card-title card-headear-wrapper">
+      <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
+       Organization
+    </summary>
     <ul className="card-desc">
       <li>Use consistent naming</li>
       <li>Create logical folders</li>
       <li>Apply relevant tags</li>
       <li>Document usage guidelines</li>
     </ul>
-  </div>
+  </details>
 
-  <div className="feature-card">
-    <h4 className="card-title">
-    2  Performance
-    </h4>
+  <details >
+    <summary className="card-title card-headear-wrapper">
+      <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
+       Performance
+    </summary>
     <ul className="card-desc">
       <li>Optimize file sizes</li>
       <li>Use appropriate formats</li>
       <li>Configure caching</li>
       <li>Monitor storage usage</li>
     </ul>
-  </div>
+  </details>
 
-  <div className="feature-card">
-    <h4 className="card-title">
-    3  Security
-    </h4>
+  <details >
+    <summary className="card-title card-headear-wrapper">
+      <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
+       Security
+    </summary>
     <ul className="card-desc">
       <li>Set proper permissions</li>
       <li>Regular access audits</li>
       <li>Secure share links</li>
       <li>Monitor usage</li>
     </ul>
-  </div>
+  </details>
 
-  <div className="feature-card">
-    <h4 className="card-title">
-    4 Maintenance
-    </h4>
+  <details >
+    <summary className="card-title card-headear-wrapper">
+      <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
+      Maintenance
+    </summary>
     <ul className="card-desc">
       <li>Regular cleanup</li>
       <li>Version management</li>
       <li>Backup strategy</li>
       <li>Usage monitoring</li>
     </ul>
-  </div>
+  </details>
 
-</div>

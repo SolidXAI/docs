@@ -42,7 +42,7 @@ To enable media uploads to AWS S3, follow these steps as a **Solid Admin**:
 ### Step 4: Update Environment Variables
 Ensure your `.env` file includes the following keys:
 
-```env
+```tsx
 S3_AWS_ACCESS_KEY=your-access-key
 S3_AWS_SECRET_KEY=your-secret-key
 S3_AWS_REGION_NAME=your-region-name
@@ -67,7 +67,7 @@ media-uploads/ folder.
 ### Step 2: Set Base URL in Environment File
 In your `.env` file, make sure to include the base URL for accessing locally stored media:
 
-```env
+```bash
 BASE_URL=http://your-domain.com/media
 ```
 

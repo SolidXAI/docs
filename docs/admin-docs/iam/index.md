@@ -2,6 +2,10 @@
 sidebar_position: 5
 ---
 
+import { FaUser, FaUsersCog, FaDatabase, FaUserShield, FaKey, FaLock, FaSignInAlt, FaRegLightbulb,FaShieldAlt,FaShieldVirus,FaUserCog } from "react-icons/fa";
+import { IoIosArrowForward } from "react-icons/io";
+
+
 # IAM
 
 SOLID's IAM system provides comprehensive user, role, and permission management to secure your application.
@@ -9,6 +13,7 @@ SOLID's IAM system provides comprehensive user, role, and permission management 
 ## Overview
 
 The IAM system consists of several key components:
+
 - User management
 - Role-based access control (RBAC)
 - Permission management
@@ -17,52 +22,13 @@ The IAM system consists of several key components:
 
 ## Components
 
-<!-- 
-### [Users](./users.md)
-Manage user accounts and profiles:
-- User creation and invitation
-- Profile management
-- Account settings
-- Access control
-
-
-### [Roles](./roles.md)
-Define and manage user roles:
-- Role creation
-- Permission assignment
-- Role hierarchy
-- Access levels
-
-### [Permissions](./permissions.md)
-Control access to system features:
-- Automatic permission discovery
-- Permission grouping
-- Custom permissions
-- Permission inheritance
-
-### [Record Rules](./record-rules.md)
-Configure data-level security:
-- Record-level access control
-- Dynamic rules
-- User-based filters
-- Role-based filters
-
-### [Authentication Providers](./auth-providers.md)
-Multiple authentication methods:
-- Password-based
-- OTP (passwordless)
-- OAuth providers:
-  - Google
-  - Meta/Facebook
-  - LinkedIn
-  - Twitter/X
-- Custom providers -->
-
-
 ### [Users](./users.md)
 
 <div className="border-box">
-  <h4 className="card-title">Manage user accounts and profiles:</h4>
+  <h4 className="card-title card-headear-wrapper">
+      <FaUser size={15} style={{ marginRight: "10px" }} />
+      Manage user accounts and profiles:
+    </h4>
    - User creation and invitation
    - Profile management
    - Account settings
@@ -72,7 +38,10 @@ Multiple authentication methods:
 ### [Roles](./roles.md)
 
 <div className="border-box">
-  <h4 className="card-title">Define and manage user roles:</h4>
+  <h4 className="card-title card-headear-wrapper">
+      <FaUsersCog size={15} style={{ marginRight: "10px" }} />
+      Define and manage user roles:
+    </h4>
     - Role creation
     - Permission assignment
     - Role hierarchy
@@ -82,7 +51,10 @@ Multiple authentication methods:
 ### [Permissions](./permissions.md)
 
 <div className="border-box">
-    <h4 className="card-title">Control access to system features:</h4>
+    <h4 className="card-title card-headear-wrapper">
+      <FaKey size={15} style={{ marginRight: "10px" }} />
+      Control access to system features:
+    </h4>
      - Automatic permission discovery
      - Permission grouping
      - Custom permissions
@@ -92,7 +64,10 @@ Multiple authentication methods:
 ### [Record Rules](./record-rules.md)
 
 <div className="border-box">
-    <h4 className="card-title">Configure data-level security:</h4>
+    <h4 className="card-title card-headear-wrapper">
+      <FaDatabase size={15} style={{ marginRight: "10px" }} />
+      Configure data-level security:
+    </h4>
      - Record-level access control
      - Dynamic rules
      - User-based filters
@@ -102,7 +77,10 @@ Multiple authentication methods:
 ### [Authentication Providers](./auth-providers.md)
 
 <div className="border-box">
-    <h4 className="card-title ">Multiple authentication methods:</h4>
+    <h4 className="card-title card-headear-wrapper">
+      <FaLock size={15} style={{ marginRight: "10px" }} />
+      Multiple authentication methods:
+    </h4>
       - Password-based
       - OTP (passwordless)
       - OAuth providers:
@@ -113,48 +91,13 @@ Multiple authentication methods:
       - Custom providers 
 </div>
 
-
-
-
-
-
-
 ## Key Features
-
-<!-- ### User Management
-- User registration
-- Profile management
-- Password policies
-- Account recovery
-- Session management
-
-### Access Control
-- Role-based access
-- Permission management
-- Record-level security
-- API authentication
-- Token management
-
-### Authentication
-- Multiple auth methods
-- Social login
-- Two-factor auth
-- Single sign-on
-- JWT tokens
-
-### Security Features
-- Password hashing
-- Session management
-- Token expiration
-- Audit logging
-- Security policies -->
-
-
 <div className="feature-grid">
 
   <div className="feature-card">
-    <h4 className="card-title">
-    ### User Management ### 
+    <h4 className="card-title card-headear-wrapper">
+      <FaUserCog size={15} style={{ marginRight: "10px" }} />
+      User Management  
     </h4>
     <ul className="card-desc">
       <li>User registration</li>
@@ -166,8 +109,9 @@ Multiple authentication methods:
   </div>
 
   <div className="feature-card">
-    <h4 className="card-title">
-    ### Access Control ### 
+    <h4 className="card-title card-headear-wrapper">
+      <FaShieldAlt size={15} style={{ marginRight: "10px" }} />
+      Access Control  
     </h4>
     <ul className="card-desc">
       <li>Role-based access</li>
@@ -179,8 +123,9 @@ Multiple authentication methods:
   </div>
 
   <div className="feature-card">
-    <h4 className="card-title">
-    ### Authentication ### 
+    <h4 className="card-title card-headear-wrapper">
+      <FaLock size={15} style={{ marginRight: "10px" }} />
+      Authentication  
     </h4>
     <ul className="card-desc">
       <li>Multiple auth methods</li>
@@ -192,8 +137,9 @@ Multiple authentication methods:
   </div>
 
   <div className="feature-card">
-    <h4 className="card-title">
-    ### Security Features ### 
+    <h4 className="card-title card-headear-wrapper">
+      <FaShieldVirus size={15} style={{ marginRight: "10px" }} />
+      Security Features  
     </h4>
     <ul className="card-desc">
       <li>Password hashing</li>
@@ -206,85 +152,55 @@ Multiple authentication methods:
 
 </div>
 
-
-
-
 ## Best Practices
+<details>
+  <summary className="card-title card-headear-wrapper">
+    <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
+    User Management
+  </summary>
+  <ul className="card-desc">
+    <li>Implement strong password policies</li>
+    <li>Enable account recovery</li>
+    <li>Monitor user activity</li>
+    <li>Regular access reviews</li>
+  </ul>
+</details>
 
-<!-- 1. **User Management**
-   - Implement strong password policies
-   - Enable account recovery
-   - Monitor user activity
-   - Regular access reviews
+<details>
+  <summary className="card-title card-headear-wrapper">
+    <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
+    Role Design
+  </summary>
+  <ul className="card-desc">
+    <li>Follow principle of least privilege</li>
+    <li>Create role hierarchies</li>
+    <li>Document role purposes</li>
+    <li>Regular role audits</li>
+  </ul>
+</details>
 
-2. **Role Design**
-   - Follow principle of least privilege
-   - Create role hierarchies
-   - Document role purposes
-   - Regular role audits
+<details>
+  <summary className="card-title card-headear-wrapper">
+    <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
+    Permissions
+  </summary>
+  <ul className="card-desc">
+    <li>Group related permissions</li>
+    <li>Regular permission reviews</li>
+    <li>Document permission usage</li>
+    <li>Monitor permission changes</li>
+  </ul>
+</details>
 
-3. **Permissions**
-   - Group related permissions
-   - Regular permission reviews
-   - Document permission usage
-   - Monitor permission changes
-
-4. **Security**
-   - Enable audit logging
-   - Monitor failed logins
-   - Regular security reviews
-   - Incident response plan -->
-
-
-   <div className="feature-grid">
-
-  <div className="feature-card">
-    <h4 className="card-title">
-    ### User Management ###
-    </h4>
-    <ul className="card-desc">
-      <li>Implement strong password policies</li>
-      <li>Enable account recovery</li>
-      <li>Monitor user activity</li>
-      <li>Regular access reviews</li>
-    </ul>
-  </div>
-
-  <div className="feature-card">
-    <h4 className="card-title">
-    ### Role Design ###
-    </h4>
-    <ul className="card-desc">
-      <li>Follow principle of least privilege</li>
-      <li>Create role hierarchies</li>
-      <li>Document role purposes</li>
-      <li>Regular role audits</li>
-    </ul>
-  </div>
-
-  <div className="feature-card">
-    <h4 className="card-title">
-    ### Permissions ###
-    </h4>
-    <ul className="card-desc">
-      <li>Group related permissions</li>
-      <li>Regular permission reviews</li>
-      <li>Document permission usage</li>
-      <li>Monitor permission changes</li>
-    </ul>
-  </div>
-
-  <div className="feature-card">
-    <h4 className="card-title">
-    ### Security ###
-    </h4>
-    <ul className="card-desc">
-      <li>Enable audit logging</li>
-      <li>Monitor failed logins</li>
-      <li>Regular security reviews</li>
-      <li>Incident response plan</li>
-    </ul>
-  </div>
-
-</div>
-
+<details>
+  <summary className="card-title card-headear-wrapper">
+    <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
+    Security
+  </summary>
+  <ul className="card-desc">
+    <li>Enable audit logging</li>
+    <li>Monitor failed logins</li>
+    <li>Regular security reviews</li>
+    <li>Incident response plan</li>
+  </ul>
+</details>

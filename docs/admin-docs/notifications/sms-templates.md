@@ -2,6 +2,9 @@
 sidebar_position: 2
 ---
 
+import { IoIosArrowForward } from "react-icons/io";
+
+
 # SMS Templates
 
 SMS Templates in SOLID enable you to create and manage text message templates with dynamic content and integrated link shortening capabilities.
@@ -167,87 +170,6 @@ SMS Templates in SOLID enable you to create and manage text message templates wi
 }
 ```
 
-## Best Practices
-<!-- 
-1. **Content**
-   - Keep messages concise
-   - Clear call-to-action
-   - Avoid abbreviations
-   - Include opt-out info
-   - Respect time zones
-
-2. **Variables**
-   - Validate input length
-   - Handle special characters
-   - Set default values
-   - Document requirements
-   - Test edge cases
-
-3. **Links**
-   - Use link shortening
-   - Track click rates
-   - Set link expiry
-   - Monitor usage
-   - Secure URLs
-
-4. **Compliance**
-   - Follow regulations
-   - Honor opt-outs
-   - Track consent
-   - Maintain records
-   - Regular audits
- -->
-
-
-<div className="feature-grid">
-
-  <div className="feature-card ">
-    <h4 className="card-title">1. Content</h4>
-    <ul className="card-desc">
-      <li>Keep messages concise</li>
-      <li>Clear call-to-action</li>
-      <li>Avoid abbreviations</li>
-      <li>Include opt-out info</li>
-      <li>Respect time zones</li>
-    </ul>
-  </div>
-
-  <div className="feature-card ">
-    <h4 className="card-title">2. Variables</h4>
-    <ul className="card-desc">
-      <li>Validate input length</li>
-      <li>Handle special characters</li>
-      <li>Set default values</li>
-      <li>Document requirements</li>
-      <li>Test edge cases</li>
-    </ul>
-  </div>
-
-  <div className="feature-card ">
-    <h4 className="card-title">3. Links</h4>
-    <ul className="card-desc">
-      <li>Use link shortening</li>
-      <li>Track click rates</li>
-      <li>Set link expiry</li>
-      <li>Monitor usage</li>
-      <li>Secure URLs</li>
-    </ul>
-  </div>
-
-  <div className="feature-card ">
-    <h4 className="card-title">4. Compliance</h4>
-    <ul className="card-desc">
-      <li>Follow regulations</li>
-      <li>Honor opt-outs</li>
-      <li>Track consent</li>
-      <li>Maintain records</li>
-      <li>Regular audits</li>
-    </ul>
-  </div>
-
-</div>
-
-
 ## Common Use Cases
 
 ### Verification Code
@@ -319,3 +241,64 @@ SMS Templates in SOLID enable you to create and manage text message templates wi
   }
 }
 ```
+
+
+
+
+## Best Practices
+
+<details>
+  <summary className="card-title card-headear-wrapper">
+    <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
+    Content
+  </summary>
+  <ul className="card-desc">
+    <li>Keep messages concise</li>
+    <li>Clear call-to-action</li>
+    <li>Avoid abbreviations</li>
+    <li>Include opt-out info</li>
+    <li>Respect time zones</li>
+  </ul>
+</details>
+
+<details>
+  <summary className="card-title card-headear-wrapper">
+    <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
+    Variables
+  </summary>
+  <ul className="card-desc">
+    <li>Validate input length</li>
+    <li>Handle special characters</li>
+    <li>Set default values</li>
+    <li>Document requirements</li>
+    <li>Test edge cases</li>
+  </ul>
+</details>
+
+<details>
+  <summary className="card-title card-headear-wrapper">
+    <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
+    Links
+  </summary>
+  <ul className="card-desc">
+    <li>Use link shortening</li>
+    <li>Track click rates</li>
+    <li>Set link expiry</li>
+    <li>Monitor usage</li>
+    <li>Secure URLs</li>
+  </ul>
+</details>
+
+<details>
+  <summary className="card-title card-headear-wrapper">
+    <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
+    Compliance
+  </summary>
+  <ul className="card-desc">
+    <li>Follow regulations</li>
+    <li>Honor opt-outs</li>
+    <li>Track consent</li>
+    <li>Maintain records</li>
+    <li>Regular audits</li>
+  </ul>
+</details>

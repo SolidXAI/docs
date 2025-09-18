@@ -3,6 +3,8 @@ sidebar_position: 1
 title: Recover Endpoint
 description: Information about the recover endpoint of the REST API, including usage, parameters, and responses
 ---
+import {  MdHttp, MdInput,MdOutput,MdDescription } from "react-icons/md";
+
 
 #  Recover Endpoint
 
@@ -17,18 +19,36 @@ This documentation includes usage examples for:
 
 ##  Recover a Single Record
 
+<h3 className=" card-headear-wrapper">
+    <MdHttp size={24}  />
+
 ###  Headers
+</h3>
+
 ```http
 Content-Type: application/json
 Authorization: Bearer <token>
 ```
 
+
+ <h3 className=" card-headear-wrapper">
+    <MdInput size={18}  />
+
 ###  Sample Request
+  </h3>
+
+
 ```http
 POST /api/fee-type/recover/{id}
 ```
 
+
+ <h3 className=" card-headear-wrapper">
+    <MdOutput size={18}  />
+
 ###  Sample Response
+  </h3>
+
 ```json
 {
   "statusCode": 200,
@@ -60,23 +80,43 @@ POST /api/fee-type/recover/{id}
 
 ##  Bulk Recovery of Records
 
+<h3 className=" card-headear-wrapper">
+    <MdHttp size={24}  />
+
 ###  Headers
+</h3>
+
 ```http
 Content-Type: application/json
 Authorization: Bearer <token>
 ```
 
+ <h3 className=" card-headear-wrapper">
+    <MdInput size={18}  />
+
 ###  Sample Request
+  </h3>
+
 ```http
 POST /api/fee-type/recover/bulk
 ```
 
+ <h3 className=" card-headear-wrapper">
+    <MdDescription size={18}  />
+
 ###  Sample Body
+  </h3>
+
 ```json
 [1, 2, 3]  // Array of record IDs to recover
 ```
 
+ <h3 className=" card-headear-wrapper">
+    <MdOutput size={18}  />
+
 ###  Sample Response
+  </h3>
+
 ```json
 {
   "statusCode": 200,

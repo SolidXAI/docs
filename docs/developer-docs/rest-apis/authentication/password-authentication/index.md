@@ -4,6 +4,10 @@ title: Password Authentication
 description: Information about password-based authentication APIs
 ---
 
+import { MdOutlineSettings, MdHttp, MdInput, MdOutput } from "react-icons/md";
+import { FaPaperPlane } from "react-icons/fa";
+
+
 #  Password Authentication
 
 This section covers the password-based authentication APIs available in SolidX.
@@ -28,18 +32,34 @@ SolidX provides a comprehensive password-based authentication mechanism with the
 
 Allows users to create a new account.
 
+  <h3 className=" card-headear-wrapper">
+    <MdOutlineSettings size={20}  />
+
 ###  Environment Variables
+</h3>
+
 
 - `IAM_PASSWORD_REGISTRATION_ENABLED`: Enables/disables registration.
 - `IAM_ALLOW_PUBLIC_REGISTRATION`: Allows public registration when set to `true`.
 
-###  Headers
 
-```http
-Content-Type: application/json
-```
+<h3 className=" card-headear-wrapper">
+    <MdHttp size={24}  />
+
+###  Headers
+</h3>
+
+  ```http
+  Content-Type: application/json
+  ```
+
+  <h3 className=" card-headear-wrapper">
+    <MdInput size={18}  />
 
 ###  Request Body
+  </h3>
+
+
 
 ```json
 {
@@ -52,7 +72,12 @@ Content-Type: application/json
 }
 ```
 
+  <h3 className=" card-headear-wrapper">
+    <MdOutput size={20}  />
+
 ###  Response Body
+  </h3>
+
 
 ```json
 {
@@ -76,18 +101,30 @@ Content-Type: application/json
 
 Log in and receive access and refresh tokens.
 
-###  Environment Variables
+  <h3 className=" card-headear-wrapper">
+    <MdOutlineSettings size={20}  />
+
+###  Environment Variables  
+</h3>
 
 - `IAM_JWT_ACCESS_TOKEN_TTL`: TTL for access tokens (default: 60 mins).
 - `IAM_JWT_REFRESH_TOKEN_TTL`: TTL for refresh tokens (default: 1 day).
 
+<h3 className=" card-headear-wrapper">
+    <MdHttp size={24}  />
+
 ###  Headers
+</h3>
 
 ```http
 Content-Type: application/json
 ```
 
+  <h3 className=" card-headear-wrapper">
+    <MdInput size={18}  />
+
 ###  Request Body
+  </h3>
 
 ```json
 {
@@ -97,7 +134,11 @@ Content-Type: application/json
 }
 ```
 
+  <h3 className=" card-headear-wrapper">
+    <MdOutput size={20}  />
+
 ###  Response Body
+  </h3>
 
 ```json
 {
@@ -119,13 +160,21 @@ Content-Type: application/json
 
 Refresh the access token using a valid refresh token.
 
+<h3 className=" card-headear-wrapper">
+    <MdHttp size={24}  />
+
 ###  Headers
+</h3>
 
 ```http
 Content-Type: application/json
 ```
 
+<h3 className=" card-headear-wrapper">
+    <MdInput size={18}  />
+
 ###  Request Body
+  </h3>
 
 ```json
 {
@@ -133,7 +182,11 @@ Content-Type: application/json
 }
 ```
 
+  <h3 className=" card-headear-wrapper">
+    <MdOutput size={20}  />
+
 ###  Response Body
+  </h3>
 
 ```json
 {
@@ -148,17 +201,32 @@ Content-Type: application/json
 
 Initiates and confirms password reset flow.
 
-###  Environment Variable
+  <h3 className=" card-headear-wrapper">
+    <MdOutlineSettings size={20}  />
+
+###  Environment Variables
+</h3>
 
 - `IAM_OTP_EXPIRY`: OTP expiry time (default: 10 mins).
 
+<!-- ###   -->
+  <h3 className=" card-headear-wrapper">
+    <FaPaperPlane size={18}  />
+
 ###  Initiate Request
+</h3>
 
 ```http
 POST /api/iam/initiate/forgot-password
 ```
 
-#### Headers
+
+<h3 className=" card-headear-wrapper">
+    <MdHttp size={24}  />
+
+###  Headers
+</h3>
+
 
 ```http
 Content-Type: application/json
@@ -209,8 +277,12 @@ POST /api/iam/confirm/forgot-password
 
 ##  5. Change Password
 
-###  Request
+<h3 className=" card-headear-wrapper">
+    <MdInput size={18}  />
 
+###  Request Body
+  </h3>
+  
 ```http
 POST /api/iam/change-password
 ```

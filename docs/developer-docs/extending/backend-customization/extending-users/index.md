@@ -5,13 +5,16 @@ description: Learn how to extend user functionality in SolidX.
 keywords: [backend, users, customization]
 ---
 
-#  Overview
+import { IoIosArrowForward } from "react-icons/io";
+import { NoteBoxs } from '@site/src/common/NoteBoxs';
+
+# Overview
 
 This section covers how to **extend user functionality in SolidX**, including creating custom user fields and implementing the logic required to persist a custom user model.
 
 ---
 
-##  Configuring a Custom User Model
+## Configuring a Custom User Model
 
 ### To create a custom user model:
 
@@ -19,7 +22,10 @@ This section covers how to **extend user functionality in SolidX**, including cr
 - Below is an example configuration:
 
 <details>
-<summary> Sample Field Metadata for <code>instituteUser</code></summary>
+  <summary className="card-title card-headear-wrapper">
+    <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
+   Sample Field Metadata for <code>instituteUser</code>
+</summary>
 
 ```json
 {
@@ -62,21 +68,25 @@ This section covers how to **extend user functionality in SolidX**, including cr
   ]
 }
 ```
-</details>
 
+</details>
 
 - This will generate form/list views in SolidX to manage the custom users.
 
-⸻
+---
 
-##  Persisting a Custom User
+## Persisting a Custom User
 
-Since user creation is more than just a simple insert i.e (password encryption, user password history management, etc.)  you must override the generated controller code to allow creating a custom user properly.
+Since user creation is more than just a simple insert i.e (password encryption, user password history management, etc.) you must override the generated controller code to allow creating a custom user properly.
 
- Replace This Code:
+Replace This Code:
 
 <details>
-<summary> Default Generated Code</summary>
+  <summary className="card-title card-headear-wrapper">
+    <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
+     Default Generated Code
+</summary>
+
 ```typescript
 @ApiBearerAuth("jwt")
 @Post()
@@ -85,13 +95,16 @@ async create(@Body() createDto: CreateInstituteUserDto, @UploadedFiles() files: 
   return this.service.create(createDto, files);
 }
 ```
+
 </details>
 
-
- With This Logic:
+With This Logic:
 
 <details>
-<summary> Revised Implementation (InstituteController)</summary>
+  <summary className="card-title card-headear-wrapper">
+    <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
+     Revised Implementation (InstituteController)
+</summary>
 
 ```typescript
 @ApiBearerAuth("jwt")
@@ -112,10 +125,15 @@ async create(@Body() createDto: CreateInstituteUserDto, @UploadedFiles() files: 
   return this.authenticationService.signupForExtensionUser(signupDto, extensionUserDto, this.repo);
 }
 ```
+
 </details>
 
 <details>
-<summary> Methods Implementation (InstituteService)</summary>
+  <summary className="card-title card-headear-wrapper">
+    <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
+     Methods Implementation (InstituteService)
+</summary>
+
 ```typescript
   async toExtensionUserDto(createDto: CreateInstituteUserDto): Promise<any> {
     // Populate the extension user data for the user
@@ -172,18 +190,22 @@ async create(@Body() createDto: CreateInstituteUserDto, @UploadedFiles() files: 
   }
 
 ```
+
 </details>
 
+    4.	Use generated code as-is for other CRUD operations. Only create() requires overriding.
+    5.	You can also show parent user fields in layouts like any other fields. No special config needed.
 
-	4.	Use generated code as-is for other CRUD operations. Only create() requires overriding.
-	5.	You can also show parent user fields in layouts like any other fields. No special config needed.
+---
 
-⸻
-
-##  Generated Code (for custom user models)
+## Generated Code (for custom user models)
 
 <details>
-<summary> DTOs & Entity</summary>
+
+ <summary className="card-title card-headear-wrapper">
+    <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
+     DTOs & Entity
+</summary>
 
 ```typescript
 // Create DTO
@@ -202,19 +224,21 @@ export class InstituteUser extends User {
   ...
 }
 ```
+
 </details>
 
-⸻
+---
 
-##  How It Works
-	1.	The generated model extends User, inheriting all fields & methods.
-	2.	AuthenticationService.signupForExtensionUser() handles:
-	  -	User field persistence
-	  -	Email notifications
-	  -	Password encryption & history tracking
-	3.	SolidX generates UI + API endpoints to manage custom users.
+## How It Works
 
-:::note
-All user records, including custom user ones, are stored in the same User i.e `ss_user` table.
-SolidX uses a discriminator column i.e `type` to distinguish custom user types.
-:::
+    1.	The generated model extends User, inheriting all fields & methods.
+    2.	AuthenticationService.signupForExtensionUser() handles:
+      -	User field persistence
+      -	Email notifications
+      -	Password encryption & history tracking
+    3.	SolidX generates UI + API endpoints to manage custom users.
+
+<NoteBoxs>
+  All user records, including custom user ones, are stored in the same User i.e `ss_user` table.
+  SolidX uses a discriminator column i.e `type` to distinguish custom user types.
+</NoteBoxs>

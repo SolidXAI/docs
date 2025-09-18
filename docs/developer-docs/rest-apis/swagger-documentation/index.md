@@ -4,6 +4,13 @@ title: Swagger Documentation
 description: This section provides details on how to access and use the Swagger documentation for SolidX REST APIs.
 ---
 
+
+import { IoIosArrowForward } from "react-icons/io";
+import { HiOutlineExclamationCircle,HiOutlinePencilSquare} from "react-icons/hi2";
+import { HiOutlineViewList, HiOutlinePlusCircle } from "react-icons/hi";
+
+
+
 # API Documentation
 
 SOLID automatically generates comprehensive API documentation for all your endpoints using Swagger/OpenAPI specification. This documentation provides developers with an interactive interface to explore and test the APIs.
@@ -77,12 +84,22 @@ The list endpoint supports various query parameters:
 
 ### Example Requests
 
+ <h4 className=" card-headear-wrapper">
+    <HiOutlineViewList size={20}  />
+
 #### List Records with Filtering
+  </h4>
+  
 ```bash
 GET /api/posts?filters[status]=published&sort=created_at:desc
 ```
 
+ <h4 className=" card-headear-wrapper">
+    <HiOutlinePlusCircle size={20}  />
+
 #### Create Record
+  </h4>
+
 ```bash
 POST /api/posts
 {
@@ -92,7 +109,13 @@ POST /api/posts
 }
 ```
 
+
+ <h4 className=" card-headear-wrapper">
+    <HiOutlinePencilSquare size={20}  />
+
 #### Update Record
+  </h4>
+
 ```bash
 PUT /api/posts/1
 {
@@ -119,7 +142,12 @@ All API errors follow a consistent format:
 }
 ```
 
+  <h4 className="card-title card-headear-wrapper">
+    <HiOutlineExclamationCircle size={22}  />
+
 ### Common Error Codes
+  </h4>
+
 
 | Code | Description |
 |------|-------------|
@@ -156,54 +184,55 @@ All API errors follow a consistent format:
    - Include response examples
    - Note any limitations -->
 
-<div className="feature-grid">
-
-  <div className="feature-card">
-    <h4 className="card-title">
-    1  Authentication
-    </h4>
+  <details>
+    <summary className="card-title card-headear-wrapper">
+      <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
+      Authentication
+    </summary>
     <ul className="card-desc">
       <li>Always use HTTPS</li>
       <li>Keep tokens secure</li>
       <li>Implement token refresh</li>
       <li>Handle token expiration</li>
     </ul>
-  </div>
+  </details>
 
-  <div className="feature-card">
-    <h4 className="card-title">
-    2  Request Optimization
-    </h4>
+  <details>
+    <summary className="card-title card-headear-wrapper">
+      <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
+       Request Optimization
+    </summary>
     <ul className="card-desc">
       <li>Use field selection</li>
       <li>Implement pagination</li>
       <li>Optimize queries</li>
       <li>Cache responses</li>
     </ul>
-  </div>
+  </details>
 
-  <div className="feature-card">
-    <h4 className="card-title">
-    3  Error Handling
-    </h4>
+  <details>
+    <summary className="card-title card-headear-wrapper">
+      <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
+       Error Handling
+    </summary>
     <ul className="card-desc">
       <li>Validate input data</li>
       <li>Return meaningful errors</li>
       <li>Log API errors</li>
       <li>Handle rate limiting</li>
     </ul>
-  </div>
+  </details>
 
-  <div className="feature-card">
-    <h4 className="card-title">
-    4  Documentation
-    </h4>
+  <details>
+    <summary className="card-title card-headear-wrapper">
+      <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
+       Documentation
+    </summary>
     <ul className="card-desc">
       <li>Keep examples up-to-date</li>
       <li>Document all parameters</li>
       <li>Include response examples</li>
       <li>Note any limitations</li>
     </ul>
-  </div>
+  </details>
 
-</div>

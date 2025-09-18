@@ -24,7 +24,7 @@ For now we will arrange the list view & form view of the generate models to make
 
 ### List View 
 
-```
+```json
 {
   "type": "list",
   "attrs": {
@@ -157,7 +157,7 @@ For now we will arrange the list view & form view of the generate models to make
 ```
 
 ### Form View
-```
+```json
 {
   "type": "form",
   "attrs": {
@@ -446,7 +446,7 @@ For now we will arrange the list view & form view of the generate models to make
 ## Institute User 
 
 ### List View 
-```
+```json
 {
    "type": "list",
    "attrs": {
@@ -508,7 +508,7 @@ For now we will arrange the list view & form view of the generate models to make
 }
 ```
 ### Form View
-```
+```json
 {
   "type": "form",
   "attrs": {
@@ -796,7 +796,7 @@ For now we will arrange the list view & form view of the generate models to make
 ## Institute Fee Type
 
 ### List View 
-```
+```json
 {
   "type": "list",
   "attrs": {
@@ -841,7 +841,7 @@ For now we will arrange the list view & form view of the generate models to make
 ```
 
 ### Form View
-```
+```json
 {
   "type": "form",
   "attrs": {
@@ -983,7 +983,7 @@ For now we will arrange the list view & form view of the generate models to make
 ## Institute Reminder 
 
 ### List View 
-```
+```json
 {
   "type": "list",
   "attrs": {
@@ -1116,7 +1116,7 @@ For now we will arrange the list view & form view of the generate models to make
 ```
 
 ### Form View
-```
+```json
 {
   "type": "form",
   "attrs": {
@@ -1258,7 +1258,7 @@ For now we will arrange the list view & form view of the generate models to make
 ## Student 
 
 ### List View 
-```
+```json
 {
   "type": "list",
   "attrs": {
@@ -1351,7 +1351,7 @@ For now we will arrange the list view & form view of the generate models to make
 ```
 
 ### Form View
-```
+```json
 {
   "type": "form",
   "attrs": {
@@ -1493,7 +1493,7 @@ For now we will arrange the list view & form view of the generate models to make
 ## Payment Collection 
 
 ### List View 
-```
+```json
 {
   "type": "list",
   "attrs": {
@@ -1554,7 +1554,7 @@ For now we will arrange the list view & form view of the generate models to make
 ```
 
 ### Form View
-```
+```json
 {
   "type": "form",
   "attrs": {
@@ -1696,7 +1696,7 @@ For now we will arrange the list view & form view of the generate models to make
 ## Payment Collection Item 
 
 ### List View 
-```
+```json
 {
   "type": "list",
   "attrs": {
@@ -1821,7 +1821,7 @@ For now we will arrange the list view & form view of the generate models to make
 ```
 
 ### Form View
-```
+```json
 {
   "type": "form",
   "attrs": {
@@ -1997,7 +1997,7 @@ For now we will arrange the list view & form view of the generate models to make
 ## Payment Collection Item Detail 
 
 ### List View 
-```
+```json
 {
   "type": "list",
   "attrs": {
@@ -2082,7 +2082,7 @@ For now we will arrange the list view & form view of the generate models to make
 ```
 
 ### Form View
-```
+```json
 {
   "type": "form",
   "attrs": {
@@ -2225,7 +2225,7 @@ For now we will arrange the list view & form view of the generate models to make
 ## Payment
 
 ### List View 
-```
+```json
 {
   "type": "list",
   "attrs": {
@@ -2342,7 +2342,7 @@ For now we will arrange the list view & form view of the generate models to make
 ```
 
 ### Form View
- ```
+ ```json
  {
   "type": "form",
   "attrs": {

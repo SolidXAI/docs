@@ -5,6 +5,10 @@ sidebar_position: 1
 ---
 
 import { NoteBoxs } from '@site/src/common/NoteBoxs';
+import { IoIosArrowForward } from "react-icons/io";
+import {  MdHttp, MdInput,MdUploadFile } from "react-icons/md";
+
+
 
 
 #  Create Endpoint Overview
@@ -17,19 +21,30 @@ SolidX supports both single record creation and bulk record creation.
 
 ##  Creating a Single Record
 
+<h3 className=" card-headear-wrapper">
+    <MdHttp size={24}  />
+
 ###  Headers
+</h3>
 
 ```http
 Content-Type: application/json
 Authorization: Bearer <token>
 ```
 
-###  Request
+  <h3 className=" card-headear-wrapper">
+    <MdInput size={18}  />
+
+###  Request Body
+  </h3>
 
 `POST /api/fee-type`
 
 <details>
-<summary> Request Body</summary>
+ <summary className="card-title card-headear-wrapper">
+    <IoIosArrowForward  size={20} style={{ marginRight: "8px" }}  className="rotatable"  />
+     Request Body
+  </summary>
 
 ```json
 {
@@ -45,7 +60,10 @@ Authorization: Bearer <token>
 </details>
 
 <details>
-<summary> Sample Request</summary>
+ <summary className="card-title card-headear-wrapper">
+    <IoIosArrowForward  size={20} style={{ marginRight: "8px" }}  className="rotatable"  />
+     Sample Request
+  </summary>
 
 ```json
 {
@@ -58,7 +76,10 @@ Authorization: Bearer <token>
 </details>
 
 <details>
-<summary> Sample Response</summary>
+ <summary className="card-title card-headear-wrapper">
+    <IoIosArrowForward  size={20} style={{ marginRight: "8px" }}  className="rotatable"  />
+     Sample Response
+  </summary>
 
 ```json
 {
@@ -103,12 +124,19 @@ Authorization: Bearer <token>
 
 To create multiple records at once:
 
-###  Request
+  <h3 className=" card-headear-wrapper">
+    <MdInput size={18}  />
+
+###  Request 
+  </h3>
 
 `POST /api/fee-type/bulk`
 
 <details>
-<summary> Sample Bulk Request</summary>
+ <summary className="card-title card-headear-wrapper">
+    <IoIosArrowForward  size={20} style={{ marginRight: "8px" }}  className="rotatable"  />
+     Sample Bulk Request
+  </summary>
 
 ```json
 [
@@ -128,7 +156,12 @@ To create multiple records at once:
 
 If your model includes media fields (e.g., uploading a logo), use the `multipart/form-data` content type.
 
+  <h3 className=" card-headear-wrapper">
+    <MdUploadFile size={18}  />
+
 ###  Request with Media
+  </h3>
+
 
 ```
 POST /api/fee-type
@@ -137,7 +170,11 @@ Authorization: Bearer <token>
 ```
 
 <details>
-<summary> Multipart Form Data Example</summary>
+ <summary className="card-title card-headear-wrapper">
+    <IoIosArrowForward  size={20} style={{ marginRight: "8px" }}  className="rotatable"  />
+     Multipart Form Data Example
+  </summary>
+
 
 ```
 --boundary

@@ -2,6 +2,10 @@
 sidebar_position: 3
 ---
 
+import { FiList, FiColumns, FiEdit, FiFilter, FiSettings, FiCheckSquare, FiFileText, FiClock } from "react-icons/fi";
+import { MdDoubleArrow } from "react-icons/md";
+
+
 # Layout Editor
 
 ## Intro
@@ -10,28 +14,65 @@ SolidX automatically generates powerful and intuitive UI layouts for each model 
 
 Layouts are generated automatically once a model and its fields are configured. They adapt dynamically to the semantics of each field, ensuring each data type is handled appropriately in both display and interaction contexts.
 
+
 ## Layouts
 
 SolidX supports three primary layout types:
+<details>
+<summary><FiList size={18} style={{ marginRight: "10px" }} />List View</summary>
 
-### List View
+Is usually used to render a collection of records.  
 
-Is usually used to render a collection of records. 
+The List View provides a **tabular, grid-like presentation** of multiple records in a model. It is ideal for **data-dense interfaces** where **sorting, filtering, and scanning rows quickly** is a priority.
+<br/>
 
-The List View provides a tabular, grid-like presentation of multiple records in a model. It is ideal for data-dense interfaces where sorting, filtering, and scanning rows quickly is a priority.
+<!-- ### List View -->
+- <FiFilter size={14} style={{ marginRight: "5px" }} /> **Sorting & Filtering:** Columns can be sorted and filtered dynamically.  
+- <FiClock size={14} style={{ marginRight: "5px" }} /> **Pagination & Infinite Scroll:** Handles large datasets efficiently.  
+- **Customizable Columns :** Show/hide or reorder columns based on roles or user preference.  
+- **Inline Actions :** Perform actions like edit, delete, or view directly from the list.  
+- **Bulk Operations :** Select multiple rows for batch updates or deletions.  
 
-### Kanban View
+</details>
 
-Is usually used to render a collection of records. 
+<details>
+<summary><FiColumns size={18} style={{ marginRight: "10px" }} />Kanban View</summary>
 
-The Kanban View offers a board-style layout that groups records into columns based on a specific field (such as status or category). It’s perfect for workflows, pipelines, and status tracking.
+Is usually used to render a collection of records.  
 
-### Form View
+The Kanban View offers a **board-style layout** that groups records into columns based on a specific field (such as **status** or **category**). It’s perfect for **workflows, pipelines, and status tracking**.
+<br/>
 
-Is usually used to render a single of record. The form view serves a dual purpose of allowing users to view and edit the record.
+<!-- ### Kanban View -->
+- <FiFilter size={14} style={{ marginRight: "5px" }} /> **Drag & Drop:** Move cards between columns to update status.  
+- **Column Customization:** Show/hide columns or change the grouping field dynamically.  
+- **Card Details:** Quick view of record information on each card.  
+- **Filters & Search:** Easily filter cards by fields or search keywords.  
+- **Real-Time Updates:** Supports live updates if multiple users are interacting simultaneously.  
 
-The Form View is used to create or edit a single record. It renders each field with context-aware input controls based on the field type and its metadata (e.g., autocomplete for many-to-one, lists for one-to-many, rich editors for long text or HTML).
+</details>
 
+<details>
+<summary><FiEdit size={18} style={{ marginRight: "10px" }} />Form View</summary>
+
+Is usually used to render a **single record**. The Form View serves a dual purpose of allowing users to **view and edit** the record.
+
+The Form View renders each field with **context-aware input controls** based on the field type and its metadata, such as:
+
+- Autocomplete for **Many-to-One** fields  
+- Embedded sub-lists or tabs for **One-to-Many / Many-to-Many** fields  
+- File/media upload interfaces with previews and validations  
+- Rich text and long text editors  
+- Date/Time pickers with timezone handling  
+
+<!-- ### Form View -->
+- **Validation & Feedback:** Immediate field validation and inline error messages.  
+- **Dynamic Field Visibility:** Show or hide fields based on user role or record state.  
+- **Custom Actions:** Add buttons or workflow triggers specific to the record.  
+- **Audit & History:** Track changes and modifications for sensitive records.  
+- **Responsive Design:** Works well on desktop, tablet, and mobile screens.  
+
+</details>
 
 ## Metadata-Aware Rendering
 
@@ -74,11 +115,19 @@ Each layout is customizable at the configuration or code level, allowing develop
 - Create completely custom user interfaces.
 
 
+<div className="anchor-border-wrapper">
 
-## Next Steps
+<div className="card-headear-wrapper">
+    <MdDoubleArrow size={35} style={{ marginRight: "8px" }}/> 
+
+## Next Steps 
+
+</div>
 
 Explore each layout in detail to understand its features, configuration options, and extensibility:
 
-- [List View](./list-view.md):
-- [Kanban View](./kanban-view.md):
-- [Form View](./form-view.md):
+-  [List View](./list-view.md): learn how to display and manage collections of records efficiently, including sorting, filtering, and bulk operations.  
+-  [Kanban View](./kanban-view.md): learn how to organize records in board-style columns, track workflows, and update statuses with drag-and-drop.  
+-  [Form View](./form-view.md): learn how to view and edit single records with context-aware inputs, validation, and dynamic field behavior.  
+
+</div>

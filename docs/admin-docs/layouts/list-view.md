@@ -2,6 +2,12 @@
 sidebar_position: 1
 ---
 
+import { FiSearch, FiFilter, FiArrowUp, FiList,FiUserCheck } from "react-icons/fi";
+import { CiImport,CiExport } from "react-icons/ci";
+import { MdAttractions } from "react-icons/md";
+
+
+
 # List View
 
 ![List View](/img/admin-docs/layouts/list-view.png)
@@ -90,7 +96,7 @@ As you can see from the above the json array under children controls the sequenc
 | pagination           | Enables pagination in the list view.                                        |
 | pageSizeOptions      | Array of selectable page sizes for pagination (e.g., `[10, 25, 50]`).       |
 | enableGlobalSearch   | Displays a global search bar for filtering across all searchable fields.    |
-| create               | Shows a "Create" button to add new records.                                 |
+| create               | Shows a `Create` button to add new records.                                 |
 | edit                 | Enables editing functionality for individual records.                       |
 | delete               | Allows records to be deleted from the list.                                 |
 | allowedViews         | Specifies which view modes are available (e.g., `list`, `kanban`).          |
@@ -106,8 +112,11 @@ As you can see from the above the json array under children controls the sequenc
 TODO: More details on all the different layout elements one can use in the List View have to be added here...
 
 ## Key Features 
-
-### Search 
+  <div className="card-headear-wrapper">
+<FiSearch size={25}  style={{ marginRight: "2px"}} />
+    
+###  Search
+</div>
 
 Enabled via enableGlobalSearch: true, this allows users to search across multiple searchable fields quickly. Fields marked with isSearchable: true participate in this feature.
 
@@ -115,44 +124,76 @@ More details can be found on the [Modules List View](../modules/list-view.md) pa
 
 <!-- ![Global Search](/img/admin-docs/layouts/list-view-global-search.png) -->
 
-### Filtering
+<div className="card-headear-wrapper">
+<FiFilter size={26}  style={{ marginRight: "2px"}} />
+    
+###  Filtering
+</div>
+
 
 Each field type supports type-specific filters:
 
-Eg. 
-- Numeric: greater than, less than, between
-- Date/Time: before, after, between, today, last X days
-- Selection: is one of, is not one of
-- Boolean: is true, is false
-- Text: contains, does not contain
+
+Eg.
+- <span className="white-color"><strong>Numeric : </strong></span> greater than, less than, between
+- <span className="white-color"><strong>Date/Time : </strong></span> before, after, between, today, last X days
+- <span className="white-color"><strong>Selection : </strong></span> is one of, is not one of
+- <span className="white-color"><strong>Boolean : </strong></span> true, false
+- <span className="white-color"><strong>Text : </strong></span> contains, does not contain
+
 
 More details can be found on the [Modules List View](../modules/list-view.md) page.
 
-### Sorting
+<div className="card-headear-wrapper">
+  <FiArrowUp size={28}  style={{ marginRight: "2px"}} />
+    
+###  Sorting
+</div>
+
 
 Enable sorting per field using sortable: true. Clicking column headers toggles ascending/descending order.
 
 More details can be found on the [Modules List View](../modules/list-view.md) page.
 
-### Pagination
+<div className="card-headear-wrapper">
+  <FiList size={28}  style={{ marginRight: "2px"}} />
+    
+###  Pagination
+</div>
+
 
 Paginate large datasets efficiently with options to set default and allowed pageSizeOptions. Server-side pagination is supported for performance on large datasets.
 
 More details can be found on the [Modules List View](../modules/list-view.md) page.
 
-### Export
+
+
+<div className="card-headear-wrapper">
+  <CiExport size={28}  style={{ marginRight: "2px"}} />
+    
+###  Export
+</div>
+
 
 Data can be exported in standard formats such as CSV or Excel. This allows external analysis or record-keeping.
 
 More details can be found on the [Modules List View](../modules/list-view.md) page.
 
-### Import
-
+<div className="card-headear-wrapper">
+  <CiImport size={28}  style={{ marginRight: "2px"}} />
+    
+###  Import
+</div>
 Users can import records in bulk via structured files. Field mapping, validations, and error handling are supported out of the box.
 
 More details can be found on the [Modules List View](../modules/list-view.md) page.
 
+
+<div className="card-headear-wrapper">
+  <MdAttractions size={28}  style={{ marginRight: "2px"}} />
+    
 ### Action Buttons 
+</div>
 
 Standard CRUD actions (create, edit, delete) can be enabled per model via layout attributes. You can also add custom action buttons tied to server-side logic, workflows, or external integrations.
 
@@ -160,7 +201,11 @@ These custom buttons can be added to the list view header or against each row.
 
 TODO: More details can be found on the [Action Buttons Recipe](../../recipes/) page.
 
+<div className="card-headear-wrapper">
+  <FiUserCheck size={28} style={{ marginRight: "2px" }} />
+
 ### Impact of Roles
+</div>
 
 Just like on the list view Roles can be used to control the display of columns and action buttons on the kanban view also.
 
@@ -239,15 +284,16 @@ One of the most powerful customization points is the ability to control how a fi
 }
 ```
 
-- viewWidget refers to a React component.
-- This component must conform to a predefined interface (props, value, rowData, etc.).
-- You can use this to render:
-  - Images
-  - Icons
-  - Tags
-  - Links
-  - Badges
-  - Custom logic or formatting
+- <span className="white-color"> <strong> viewWidget   </strong> </span> refers to a React component that you can assign to a field.
+- The component must conform to a predefined interface, typically accepting props such as <span className="white-color"> <strong> value , rowData </strong> </span>  and others.
+- Using a custom <span className="white-color"> <strong> viewWidget   </strong> </span> ,you can render a wide variety of content, including:
+  - **Images** – Display thumbnails or full-size media.
+  - **Icons** – Add visual indicators or status symbols.
+  - **Tags** – Highlight categories, labels, or statuses.
+  - **Links** – Navigate to related records or external resources.
+  - **Badges** – Show statuses, counts, or other metadata.
+  - **Custom logic or formatting** – Apply any custom rendering rules, calculations, or UI elements.
+
 
 SolidX provides a default widget for each field type (e.g., Boolean → toggle icon, Media → image preview). Developers can override these defaults globally or per field.
 
@@ -280,138 +326,9 @@ When a new model is created, SolidX automatically creates a new layout JSON that
 TODO: More details on this can be found in the developer documentation section.
 
 ## Related Recipes
-- [Adding Custom Action Buttons](../../recipes/): <br />
+- [Adding Custom Action Buttons](../../recipes/):
    This recipe talks about how you can add custom action buttons to the list view header and rows.
-- [Custom View Widget](../../recipes/): <br />
+- [Custom View Widget](../../recipes/): 
    This recipe talks about how you can create a custom view widget to control how a field is rendered in the list view.
-- [Controlling List View With Roles](../../recipes/): <br />
+- [Controlling List View With Roles](../../recipes/): 
    This recipe talks about how you can control various visual aspects of the list view by using roles.
-
-<!-- 
-### Search and Filter
-- **Global Search**: Quick search across all searchable fields
-- **Advanced Filters**: 
-  - Complex filter conditions
-  - Multiple filter combinations
-  - Date range filters
-  - Numeric range filters
-  - Relationship filters
-- **Saved Queries**: Save and reuse frequently used filter combinations
-
-### Data Management
-- **Import**:
-  - CSV/Excel file import
-  - Field mapping
-  - Validation rules
-  - Error handling
-- **Export**:
-  - Multiple format support (CSV, Excel, PDF)
-  - Custom field selection
-  - Filtered data export
-- **Bulk Actions**:
-  - Multiple record selection
-  - Mass updates
-  - Batch deletion
-  - Custom bulk operations
-
-### View Customization
-- **Column Configuration**:
-  - Show/hide columns
-  - Column reordering
-  - Column width adjustment
-  - Custom formatting
-- **Sorting**:
-  - Multi-column sort
-  - Sort direction toggle
-  - Default sort configuration
-- **Pagination**:
-  - Adjustable page size
-  - Page navigation
-  - Total record count
-
-## Layout Configuration
-
-The list view layout is customizable through JSON configuration:
-
-```json
-{
-  "columns": [
-    {
-      "field": "name",
-      "label": "Name",
-      "sortable": true,
-      "width": 200,
-      "format": {
-        "type": "text",
-        "style": "bold"
-      }
-    },
-    {
-      "field": "status",
-      "label": "Status",
-      "sortable": true,
-      "width": 150,
-      "format": {
-        "type": "badge",
-        "colors": {
-          "active": "green",
-          "inactive": "red"
-        }
-      }
-    },
-    {
-      "field": "created_at",
-      "label": "Created Date",
-      "sortable": true,
-      "format": {
-        "type": "date",
-        "pattern": "MM/DD/YYYY"
-      }
-    }
-  ],
-  "defaultSort": {
-    "field": "created_at",
-    "direction": "desc"
-  },
-  "actions": {
-    "view": true,
-    "edit": true,
-    "delete": true,
-    "custom": [
-      {
-        "name": "archive",
-        "label": "Archive",
-        "icon": "archive",
-        "condition": "status === 'active'"
-      }
-    ]
-  }
-}
-```
-
-## Best Practices
-
-1. **Performance Optimization**
-   - Show only necessary columns
-   - Use pagination for large datasets
-   - Implement efficient filtering
-   - Cache frequently used queries
-
-2. **User Experience**
-   - Order columns logically
-   - Group related columns
-   - Provide meaningful column headers
-   - Include helpful tooltips
-
-3. **Data Management**
-   - Configure appropriate bulk actions
-   - Set up data validation rules
-   - Plan export formats
-   - Consider audit requirements
-
-4. **Security**
-   - Implement proper access controls
-   - Validate bulk operations
-   - Secure sensitive data columns
-   - Log important actions
- -->
