@@ -1,4 +1,4 @@
-# SolidX Field Types Reference Guide
+# SolidX Field Recipes & Reference
 
 This guide provides comprehensive documentation for all field types supported in SolidX platform metadata, with real examples from the fees-portal module.
 

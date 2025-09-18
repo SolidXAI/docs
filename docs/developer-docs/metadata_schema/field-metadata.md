@@ -294,6 +294,81 @@ Every SolidX model is composed of fields. Fields in SolidX go over and above the
 </details>
 ---
 
+## 🎛 Field Type (`type`)  
+
+> **This is the most important attribute of a field.**  
+> It determines the **behavior, validation, storage, and UI options** for the field.  
+
+---
+
+### 📊 Numeric Types
+| Value    | Reference |
+|----------|------------|
+| `int`    | [Integer Field](../../admin-docs/module-builder/field-management#integer) |
+| `bigint` | [BigInt Field](../../admin-docs/module-builder/field-management#bigint) |
+| `decimal`| [Decimal Field](../../admin-docs/module-builder/field-management#decimal) |
+
+---
+
+### ✍️ Text Types
+| Value       | Reference |
+|-------------|-----------|
+| `shortText` | [Short Text Field](../../admin-docs/module-builder/field-management#shorttext) |
+| `longText`  | [Long Text Field](../../admin-docs/module-builder/field-management#longtext) |
+| `richText`  | [Rich Text Field](../../admin-docs/module-builder/field-management#richtext) |
+| `json`      | [JSON Field](../../admin-docs/module-builder/field-management#json) |
+
+---
+
+### 🔘 Boolean
+- [`boolean`](../../admin-docs/module-builder/field-management#boolean)
+
+---
+
+### 🗓 Date & Time Types
+| Value     | Reference |
+|-----------|-----------|
+| `date`    | [Date Field](../../admin-docs/module-builder/field-management#date) |
+| `datetime`| [Datetime Field](../../admin-docs/module-builder/field-management#datetime) |
+| `time`    | [Time Field](../../admin-docs/module-builder/field-management#time) |
+
+---
+
+### 🔗 Relations
+- [`relation`](../../admin-docs/module-builder/field-management#relation)
+
+---
+
+### 🖼 Media Types
+| Value         | Reference |
+|---------------|-----------|
+| `mediaSingle`   | [Single Media Field](../../admin-docs/module-builder/field-management#single-media) |
+| `mediaMultiple` | [Multiple Media Field](../../admin-docs/module-builder/field-management#multiple-media) |
+
+---
+
+### 📧 Auth & Identity
+| Value     | Reference |
+|-----------|-----------|
+| `email`   | [Email Field](../../admin-docs/module-builder/field-management#email) |
+| `password`| [Password Field](../../admin-docs/module-builder/field-management#password) |
+
+---
+
+### ✅ Selection
+| Value            | Reference |
+|------------------|-----------|
+| `selectionStatic`  | [Static Selection Field](../../admin-docs/module-builder/field-management#static-selection) |
+| `selectionDynamic` | [Dynamic Selection Field](../../admin-docs/module-builder/field-management#dynamic-selection) |
+
+---
+
+### ⚙️ Computed
+- [`computed`](../../admin-docs/module-builder/field-management#computed)
+
+
+---
+
 ## 🔍 Field Metadata Attributes
 
 ### `name` *(string, required)*
@@ -315,27 +390,7 @@ Short help/purpose text shown in UI or docs.
 ---
 
 ### `type` *(SolidFieldType, required)*
-Determines behavior, validation, and type-specific options.  
-**Values:** 
-- int
-- bigint
-- decimal
-- shortText
-- longText
-- richText
-- json
-- boolean
-- date
-- datetime
-- time
-- relation
-- mediaSingle
-- mediaMultiple
-- email
-- password
-- selectionStatic
-- selectionDynamic
-- computed
+Refer to [Field Type](#-field-type-type) section above.
 
 **Default:** N/A
 
@@ -831,4 +886,7 @@ Allow multiple selected values (UI + storage impact).
 
 
 ---
+
+## Recipes & Patterns
+You can refer to this [Field Metadata Recipes & Patterns](../../recipes/field-types-reference.md) documentation for some common field metadata recipes and patterns that you can use while defining your model fields.
 
