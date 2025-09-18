@@ -145,4 +145,5 @@ If set to `true`, the model will support internationalization, allowing records 
 **Default:** `false`
 
 ---
-
+## 📚 Related Recipes (TODO)
+-	👉 [Model Type Recipes](../../recipes/solidx-metadata-complete-guide.md)
