@@ -887,6 +887,5 @@ Allow multiple selected values (UI + storage impact).
 
 ---
 
-## Recipes & Patterns
-You can refer to this [Field Metadata Recipes & Patterns](../../recipes/field-types-reference.md) documentation for some common field metadata recipes and patterns that you can use while defining your model fields.
-
+## 📚 Related Recipes (TODO)
+-	👉 [Field Type Recipes](../../recipes/field-types-reference.md)
