@@ -1,0 +1,82 @@
+---
+title: SMS Templates
+description: Metadata schema for populating SMS templates in SolidX applications.
+sidebar_position: 10
+---
+
+## Overview
+SMS Templates in SOLID allow you to create and manage SMS templates with dynamic content and attachments.
+
+### Example: Email Templates Metadata
+<summary> Email Templates Schema </summary>
+``` json
+{
+  ..., // Other metadata 
+  "smsTemplates": [
+    {
+      "name": "otp-on-register-custom",
+      "displayName": "Custom: Otp On Register",
+      "body": "otp-on-register-custom.handlebars.txt",
+      "description": "This template is used to generate the account verification sms sent to users to verify their mobile number when they register.",
+      "smsProviderTemplateId": "<TEMPLATE_ID_FROM_SMS_PROVIDER>",
+      "active": true,
+      "type": "text"
+    },
+    {
+      "name": "otp-on-login-custom",
+      "displayName": "Custom: Otp On Login",
+      "body": "otp-on-login-custom.handlebars.txt",
+      "description": "This template is used to send the sms with the OTP when logging in.",
+      "smsProviderTemplateId": "<TEMPLATE_ID_FROM_SMS_PROVIDER>",
+      "active": true,
+      "type": "text"
+    },
+
+  ]
+}
+```
+
+### Example : SMS Template File
+<details>
+<summary> SMS Template File </summary>
+``` text
+Hello {{ firstName }}, Log in to {{ solidAppName }}, using {{ mobileVerificationTokenOnLogin }} as your verification code.
+```
+</details>
+
+## Email Templates Metadata Attributes
+
+### `name` *(string, required, unique)*
+Unique name for the sms template. It should be in kebab-case format (e.g., `example-template-name`).
+
+---
+### `displayName` *(string, required)*
+Display name for the sms template.
+
+---
+### `body` *(string, required)*
+    - In the metadata json, the filename of the sms template is specified. The templates are searched for in the `module-metadata/<module-name>/sms-templates/` directory of the module.
+    - The body is then replaced with the content of the sms template file. This will include plain text content. The body can include dynamic placeholders using Handlebars syntax (e.g., `{{placeholderName}}`), as shown in the [SMS Template file](#example--sms-template-file) above.
+
+#### 📖 Further Reference
+ - 📋 **SMS Body Creation:** [SMS Templates Guide](../../admin-docs/notifications/sms-templates.md)
+
+:::note
+Please refer to the [Handlebars Documentation](https://handlebarsjs.com/) for more information on using Handlebars syntax in email templates.
+:::
+
+---
+### `subject` *(string, required)*
+Subject line of the email template. It can include dynamic placeholders.
+
+---
+### `description` *(string, optional)*
+A brief description of the email template.
+
+---
+### `active` *(boolean, optional)*
+Indicates whether the email template is active. Defaults to `true`.
+
+---
+### `type` *(string, optional)*
+Type of the email template (e.g., `text`, `html`). Defaults to `text`.

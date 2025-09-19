@@ -1,6 +1,12 @@
 ---
+title: Email Templates
+description: Learn how to create and manage email templates in SOLID, including dynamic content
 sidebar_position: 1
 ---
+
+:::caution
+Work in Progress - This document is currently being updated. Some sections may be incomplete or subject to change.
+:::
 
 # Email Templates
 

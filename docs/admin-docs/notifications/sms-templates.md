@@ -1,6 +1,12 @@
 ---
+title: SMS Templates
+description: Learn how to create and manage SMS templates in SOLID, including dynamic content
 sidebar_position: 2
 ---
+
+:::caution
+Work in Progress - This document is currently being updated. Some sections may be incomplete or subject to change.
+:::
 
 # SMS Templates
 
