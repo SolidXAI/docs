@@ -1,6 +1,6 @@
 ---
-title: Populating Users
-description: Metadata schema for defining users in SolidX applications.
+title: Users
+description: Metadata schema for populating users in SolidX applications.
 sidebar_position: 8
 ---
 
