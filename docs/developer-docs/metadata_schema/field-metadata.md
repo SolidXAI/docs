@@ -873,9 +873,10 @@ Declared output type of the computed field.
 
 ### `computedFieldTriggerConfig` *(array of objects, optional)*
 Operations that trigger compute and the trigger model/module to attach to. This is useful when the computed field depends on relations or other models and needs to be re-computed when those models change.
-<summary> Config schema</summary>
+<!-- <summary> Config schema</summary> -->
+**Config schema**
 
-``` ts
+``` tsx
 export class ComputedFieldTriggerConfig {
   moduleName: string; // Name of the module which should trigger the computed field re-evaluation
   modelName: string; // Name of the model which should trigger the computed field re-evaluation
@@ -978,18 +979,18 @@ Allow multiple selected values (UI + storage impact).
 | Aspect                | Text(short/long/rich)                 | Number(int/decimal/bigint) | Date/time | Relation | Media | Selection | Computed |
 |-----------------------|------------------------                |-----------------------------|-----------|---------|-------|-----------|----------|
 | `length`              | <MdCheckCircle className="icon-yes" />                     | <MdCancel className="icon-no" />                           | <MdCancel className="icon-no" />         | <MdCancel className="icon-no" />       | <MdCancel className="icon-no" />     | <MdCancel className="icon-no" />         | <MdCancel className="icon-no" />        |
-| `min` / `max`         | <MdCheckCircle className="icon-yes" />                           | <span className="table-icon-with-text"> <MdCheckCircle className="icon-yes" /> (range) </span>                    | <MdCheckCircle className="icon-yes" />  (bounds)| <MdCancel className="icon-no" />      | <MdCancel className="icon-no" />     | <MdCancel className="icon-no" />         | <MdCancel className="icon-no" />        |
+| `min` / `max`         | <MdCheckCircle className="icon-yes" />                           | <span className="table-icon-with-text"> <MdCheckCircle className="icon-yes" /> (range) </span>                    | <span className="table-icon-with-text"> <MdCheckCircle className="icon-yes" /> (bounds) </span>  | <MdCancel className="icon-no" />      | <MdCancel className="icon-no" />     | <MdCancel className="icon-no" />         | <MdCancel className="icon-no" />        |
 | `regexPattern`        | <MdCheckCircle className="icon-yes" />                                   | <MdCancel className="icon-no" />                           | <MdCancel className="icon-no" />         | <MdCancel className="icon-no" />       | <MdCancel className="icon-no" />     | <MdCancel className="icon-no" />         | <MdCancel className="icon-no" />        |
 | `media*`              | <MdCancel className="icon-no" />                                    | <MdCancel className="icon-no" />                           | <MdCancel className="icon-no" />         | <MdCancel className="icon-no" />       | <MdCheckCircle className="icon-yes" />     | <MdCancel className="icon-no" />         | <MdCancel className="icon-no" />        |
 | `relation*`           | <MdCancel className="icon-no" />                                     | <MdCancel className="icon-no" />                           | <MdCancel className="icon-no" />         | <MdCheckCircle className="icon-yes" />       | <MdCancel className="icon-no" />     | <MdCancel className="icon-no" />         | <MdCancel className="icon-no" />        |
 | `selection*`          | <MdCancel className="icon-no" />                                    | <MdCancel className="icon-no" />                           | <MdCancel className="icon-no" />         | <MdCancel className="icon-no" />       | <MdCancel className="icon-no" />     | <MdCheckCircle className="icon-yes" />         | <MdCancel className="icon-no" />        |
 | `computed*`           | <MdCancel className="icon-no" />                                     | <MdCancel className="icon-no" />                           | <MdCancel className="icon-no" />         | <MdCancel className="icon-no" />       | <MdCancel className="icon-no" />     | <MdCancel className="icon-no" />         | <MdCheckCircle className="icon-yes" />        |
 | `encrypt`/`private`   | <MdCheckCircle className="icon-yes" />                                    | <MdCheckCircle className="icon-yes" />                            | <MdCheckCircle className="icon-yes" />         | (id only)| file meta| values   | output   |
-| `index`               | <span className="table-icon-with-text"> <MdCheckCircle className="icon-yes" /> (except rich/long) </span>                    | <MdCheckCircle className="icon-yes" />                            | <MdCheckCircle className="icon-yes" />         | <MdCheckCircle className="icon-yes" />       | <MdCancel className="icon-no" />     | <MdCheckCircle className="icon-yes" />         | <MdCheckCircle className="icon-yes" />  (virtual) |
+| `index`               | <span className="table-icon-with-text"> <MdCheckCircle className="icon-yes" /> (except rich/long) </span>                    | <MdCheckCircle className="icon-yes" />                            | <MdCheckCircle className="icon-yes" />         | <MdCheckCircle className="icon-yes" />       | <MdCancel className="icon-no" />     | <MdCheckCircle className="icon-yes" />         | <span className="table-icon-with-text"> <MdCheckCircle className="icon-yes" /> (virtual) </span>     |
 
 
 
 ---
 
-## 📚 Related Recipes (TODO)
+##  Related Recipes (TODO)
 -	👉 [Field Type Recipes](../../recipes/field-types-reference.md)

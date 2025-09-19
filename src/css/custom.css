@@ -33,6 +33,9 @@
   --solid-border-default: #5c4490; /* new default border */
   --solid-border-soft: rgba(255, 255, 255, 0.08); /* soft, minimal */
   --solid-border-highlight: #8c6dbe; /* high contrast / emphasis */
+  --solid-green-color-500:#5cb176;
+  --solid-warning-color-500:#f29d41;
+  --solid-red-color-500: #e25555;
 
   --solid-small-font-size: 0.875rem;
   --solid-md-font-size: 0.975rem;
@@ -267,7 +270,7 @@
 }
 
 .header-title-tips {
-  color: #5cb176 !important;
+  color: var(--solid-green-color-500) !important;
   margin: 0rem 0rem 0.45rem 0rem !important;
   font-size: 1.06rem !important;
 }
@@ -406,7 +409,44 @@ p {
   background-color: transparent;
 }
 
-/* === TABLES === */
+/* ======================== TABLES =================== */
+/* Wrap markdown tables automatically scrollable */
+.markdown table {
+  display: block;           /* allow horizontal scroll */
+  overflow-x: auto;
+  width: 100%;
+  -webkit-overflow-scrolling: touch; /* smooth scroll on mobile */
+}
+
+/* Global horizontal scrollbar styling */
+.markdown table::-webkit-scrollbar {
+  height: 2px; 
+}
+
+.markdown table::-webkit-scrollbar-track {
+  background: var(--solid-primary-dark); /* track color based on theme */
+  border-radius: 3px;
+}
+
+.markdown table::-webkit-scrollbar-thumb {
+  background: var(--solid-purple); /* main theme color */
+  border-radius: 3px;
+}
+
+.markdown table::-webkit-scrollbar-thumb:hover {
+  background: var(--solid-purple-hover);
+}
+
+.markdown table::-webkit-scrollbar-corner {
+  background: var(--solid-primary-dark);
+}
+
+/* Firefox support */
+.markdown table {
+  scrollbar-color: var(--solid-border-default) var(--solid-primary-dark);
+  scrollbar-width:thin;
+}
+
 thead {
   background-color: #7d31e614 !important;
 }
@@ -680,6 +720,12 @@ code {
   color: var(--solid-icon);
 }
 
+
+
+.tips-box.warning-box h4{
+  color: #f29d41;
+}
+
 .tips-box.information-box h4 {
   color: var(--solid-link);
 }
@@ -881,6 +927,29 @@ li a:hover {
 
 .white-color {
   color: var(--solid-color-white) !important;
+}
+
+.icon-yes {
+  color: var(--solid-green-color-500);
+  font-size: 25px;
+}
+.icon-no {
+  color: var(--solid-red-color-500);
+  font-size: 25px;
+}
+
+.markdown table td:has(.icon-yes),
+.markdown table td:has(.icon-no) {
+  text-align: center;
+  vertical-align: middle;
+}
+
+
+.table-icon-with-text{
+  display: flex;
+  gap: 8px ;
+  justify-content: center;
+  align-items:  center;
 }
 
 @media (min-width: 1024px) {

@@ -77,7 +77,7 @@ const config: Config = {
         {
           type: 'docSidebar',
           sidebarId: 'tutorialSidebar',
-          position: 'left', // keep this as left
+          position: 'left', 
           label: ' Tutorial',
           className: 'custom-center-item',
         },

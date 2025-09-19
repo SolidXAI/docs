@@ -93,6 +93,19 @@ Add the job definition in your metadata.json or job configuration file.
 
 ---
 
-###  How It Works (TODO)
+### Supported Frequencies
+- Every Minute
+- Hourly
+- Daily
+- Weekly
+- Monthly
+
+### ⚙️ How It Works
 	- How job schedules are evaluated
+    - The SchedulerServiceImpl in @solidstarters/solid-core is responsible for evaluating and executing scheduled jobs.
+    - Job Execution Flow:
+      1. Fetch Active Jobs: The service retrieves all active scheduled jobs from the database.
+      2. Determine Due Jobs: It checks each job's nextRunAt against the current time to identify jobs that are due for execution.
+      3. Execute Jobs: For each due job, it invokes the corresponding job service's execute method.
+      4. Update Job Metadata: After execution, it updates the job's lastRunAt and nextRunAt fields based on the defined frequency.  
 	-	Triggering mechanism and intervals
