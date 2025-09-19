@@ -66,17 +66,17 @@ Please refer to the [Handlebars Documentation](https://handlebarsjs.com/) for mo
 :::
 
 ---
-### `subject` *(string, required)*
-Subject line of the email template. It can include dynamic placeholders.
+### `smsProviderTemplateId` *(string, optional)*
+Unique identifier for the SMS template from the SMS provider (e.g., Twilio, Nexmo). This ID is used to reference the template when sending SMS messages through the provider's API.
 
 ---
 ### `description` *(string, optional)*
-A brief description of the email template.
+A brief description of the SMS template.
 
 ---
 ### `active` *(boolean, optional)*
-Indicates whether the email template is active. Defaults to `true`.
+Indicates whether the SMS template is active. Defaults to `true`.
 
 ---
 ### `type` *(string, optional)*
-Type of the email template (e.g., `text`, `html`). Defaults to `text`.
+Type of the SMS template. Currently supports `text` only.
