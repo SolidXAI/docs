@@ -1,5 +1,5 @@
 ---
-title: Menu Metadata
+title: Menu Item Metadata
 description: Metadata schema for defining menus in SolidX applications.
 sidebar_position: 6
 ---
@@ -65,7 +65,7 @@ For a conceptual overview of menus in SolidX, refer to the [Menu System Overview
 }
 ```
 
-## Menu Metadata Attributes
+## Menu Item Metadata Attributes
 
 ### `name` *(string, required, unique)*
 Name of the menu item (column/property).  

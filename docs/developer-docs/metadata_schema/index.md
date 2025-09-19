@@ -19,8 +19,7 @@ Every module can have its own metadata file which is then seeded into the databa
 - View Metadata  
 - Action Metadata  
 - Menu Item Metadata  
-- Permissions  
-- Roles  
+- Roles & Permissions  
 - Users  
 - Email Templates  
 - SMS Templates  
