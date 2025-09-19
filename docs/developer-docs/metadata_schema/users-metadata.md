@@ -5,7 +5,7 @@ sidebar_position: 8
 ---
 
 ## Overview
-We can populate some initial users in the system using the `users` metadata. These users will created with the default role that is specified in the environment variable IAM_DEFAULT_ROLE or `Public` role if the environment variable is not set.
+We can populate some initial users in the system using the `users` metadata. These users will created with the default role that is specified in the environment variable `IAM_DEFAULT_ROLE` or `Public` role if the environment variable is not set.
 
 For a conceptual overview of users, refer to the [Users Management](../../admin-docs/iam/users.md) documentation.
 
