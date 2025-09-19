@@ -24,7 +24,6 @@ SolidX supports three primary layout types:
 Is usually used to render a collection of records.  
 
 The List View provides a **tabular, grid-like presentation** of multiple records in a model. It is ideal for **data-dense interfaces** where **sorting, filtering, and scanning rows quickly** is a priority.
-<br/>
 
 <!-- ### List View -->
 - <FiFilter size={14} style={{ marginRight: "5px" }} /> **Sorting & Filtering:** Columns can be sorted and filtered dynamically.  
@@ -41,7 +40,6 @@ The List View provides a **tabular, grid-like presentation** of multiple records
 Is usually used to render a collection of records.  
 
 The Kanban View offers a **board-style layout** that groups records into columns based on a specific field (such as **status** or **category**). It’s perfect for **workflows, pipelines, and status tracking**.
-<br/>
 
 <!-- ### Kanban View -->
 - <FiFilter size={14} style={{ marginRight: "5px" }} /> **Drag & Drop:** Move cards between columns to update status.  

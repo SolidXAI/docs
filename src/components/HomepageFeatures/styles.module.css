@@ -28,6 +28,10 @@
   box-shadow: 0 2px 6px #3008614f;
 }
 
+.homeCardMain p{
+  margin-bottom: 10px !important;
+}
+
 
 .homeCardMain {
   display: flex !important;

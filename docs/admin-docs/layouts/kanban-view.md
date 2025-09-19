@@ -383,11 +383,11 @@ When a new model is created, SolidX automatically creates a new layout JSON that
 TODO: More details on this can be found in the developer documentation section.
 
 ## Related Recipes
-- [Adding Custom Action Buttons](../../recipes/): <br />
+- [Adding Custom Action Buttons](../../recipes/):
    This recipe talks about how you can add custom action buttons to the list view header and rows.
-- [Custom View Widget](../../recipes/): <br />
+- [Custom View Widget](../../recipes/):
    This recipe talks about how you can create a custom view widget to control how a field is rendered in the list view.
-- [Controlling Kanban View With Roles](../../recipes/): <br />
+- [Controlling Kanban View With Roles](../../recipes/):
    This recipe talks about how you can control various visual aspects of the list view by using roles.
 
 
