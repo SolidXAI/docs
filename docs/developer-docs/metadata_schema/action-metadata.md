@@ -4,7 +4,7 @@ description : Metadata schema for defining actions in SolidX applications.
 sidebar_position: 5
 ---
 
-# Overview
+## Overview
 Actions define what happens when users interact with UI elements like menu items, buttons, or links. They connect the frontend to backend functionality and determine how data is displayed or processed.
 
 For a conceptual overview / guide/ recipes of how actions can be used in SolidX, refer to the [Action Guide](../../recipes/actions-menus-guide.md).
@@ -47,7 +47,7 @@ For a conceptual overview / guide/ recipes of how actions can be used in SolidX,
 }
 ```
 
-# Action Metadata Atributes
+## Action Metadata Atributes
 
 ### `name` *(string, required, unique)*
 Name of the action item (column/property).  
