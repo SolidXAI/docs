@@ -118,11 +118,11 @@ To create a new model:
 
   <p>They support rich semantic types that allow for expressive and dynamic user interfaces out of the box, below are a few examples:</p>
   <ul>
-    <li>one2many, many2one, many2many: Define relationships between models just like you would in a full-stack framework.</li>
-    <li>selectionStatic: Create dropdowns using static value lists (e.g. status: [New, In Review, Approved]).</li>
-    <li>selectionDynamic: Fetch dropdown options from dynamic sources such as APIs (e.g. countries from a REST endpoint).</li>
-    <li>mediaSingle / mediaMultiple: Allow single or multiple file uploads including images, documents, audio, or video.</li>
-    <li>richText / markdown / json / expression: Provide advanced content editing, structured data input, or script-based values.</li>
+    <li> **one2many, many2one, many2many:**  Define relationships between models just like you would in a full-stack framework.</li>
+    <li> **selectionStatic:** Create dropdowns using static value lists (e.g. status: [New, In Review, Approved]).</li>
+    <li> **selectionDynamic:** Fetch dropdown options from dynamic sources such as APIs (e.g. countries from a REST endpoint).</li>
+    <li> **mediaSingle / mediaMultiple:** Allow single or multiple file uploads including images, documents, audio, or video.</li>
+    <li> **richText / markdown / json / expression:** Provide advanced content editing, structured data input, or script-based values.</li>
   </ul>
 
 
