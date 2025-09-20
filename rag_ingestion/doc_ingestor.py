@@ -7,7 +7,7 @@ import logging
 import subprocess
 from pathlib import Path
 from typing import Dict, Optional, Tuple, List
-
+from r2r import R2RException
 from r2r import R2RClient
 
 logger = logging.getLogger(__name__)
@@ -152,6 +152,39 @@ class DocIngestor:
         else:
             self._manifest = {}
 
+    # ---- collection resolve ----
+
+    def ensure_collection(self) -> str:
+        """Ensure we have a collection_id in the manifest, create if needed."""
+        coll_id = self._manifest.get("_collection_id")
+        if coll_id:
+            return coll_id
+
+        if self.dry_run:
+            coll_id = "dry-run-collection"
+            logger.info("[DRY-RUN] Would create collection 'solidx-docs'")
+        else:
+            solidx_docs_collection = None 
+            try:
+                solidx_docs_collection = self.client.collections.retrieve_by_name(name='solidx-docs')
+            except R2RException as r2rEx:
+                logger.warning('Collection solidx-docs does not exist, will attempt to create it.')
+
+            if not solidx_docs_collection:
+                result = self.client.collections.create(
+                    name="solidx-docs",
+                    description="SolidX documentation collection",
+                )
+                coll_id = str(result.results.id)
+                
+                logger.info(f"Created collection 'solidx-docs' with id={coll_id}")
+            else:
+                coll_id = solidx_docs_collection.results.id
+                logger.info(f"Resolved collection 'solidx-docs' with id={coll_id}")
+
+        self._manifest["_collection_id"] = coll_id
+        return coll_id
+
     def save_manifest(self) -> None:
         tmp = self.manifest_path.with_suffix(".tmp")
         tmp.write_text(
@@ -168,36 +201,6 @@ class DocIngestor:
             if p.is_file() and p.suffix.lower() in self.exts
         ]
 
-    # def build_metadata(self, file_path: Path, rel_path: Path, file_text: str) -> Dict:
-    #     fm = try_parse_frontmatter(file_text)
-    #     title = extract_title(file_text, fm)
-    #     section = rel_path.parts[0] if len(rel_path.parts) > 0 else ""
-    #     crumb = breadcrumbs(rel_path)
-    #     slug = path_to_slug(rel_path)
-
-    #     meta = {
-    #         "source": "docusaurus",
-    #         "project": self.project,
-    #         # e.g. "admin-docs"
-    #         "section": section,
-    #         # e.g. "admin-docs/iam/permissions"
-    #         "slug": slug,
-    #         "path": str(rel_path).replace("\\", "/"),
-    #         "filename": file_path.name,
-    #         "breadcrumbs": crumb,
-    #         "title": title,
-    #         "frontmatter": fm,
-    #         # useful knobs for retrieval/ranking
-    #         "kind": "documentation",
-    #         "format": "markdown",
-    #     }
-
-    #     gitmeta = git_last_modified(file_path)
-    #     if gitmeta:
-    #         meta.update(gitmeta)
-
-    #     return meta
-
     def build_metadata(self, file_path: Path, rel_path: Path, file_text: str) -> Dict:
         fm = try_parse_frontmatter(file_text)
         title = extract_title(file_text, fm)
@@ -213,14 +216,14 @@ class DocIngestor:
             "path": str(rel_path).replace("\\", "/"),
             "filename": file_path.name,
             "breadcrumbs": crumb,
-            "title": title,
-            "frontmatter": fm,
-            "kind": "documentation",
-            "format": (
-                "markdown"
-                if file_path.suffix.lower() in (".md", ".mdx")
-                else file_path.suffix.lower().lstrip(".")
-            ),
+            "doc_title": title,
+            # "frontmatter": fm,
+            # "kind": "documentation",
+            # "format": (
+            #     "markdown"
+            #     if file_path.suffix.lower() in (".md", ".mdx")
+            #     else file_path.suffix.lower().lstrip(".")
+            # ),
         }
 
         gitmeta = git_last_modified(file_path)
@@ -229,7 +232,7 @@ class DocIngestor:
 
         return sanitize_metadata(base_meta)
 
-    def upsert_file(self, file_path: Path) -> None:
+    def upsert_file(self, file_path: Path, collection_id: str) -> None:
         rel_path = file_path.relative_to(self.base_dir)
         key = str(rel_path).replace("\\", "/")
 
@@ -260,14 +263,16 @@ class DocIngestor:
             generated_id = uuid.uuid4()
             resp = self.client.documents.create(
                 file_path=str(file_path),
+                metadata=metadata,
                 id=str(generated_id),
+                collection_ids=[collection_id],
             )
             new_id = resp.results.document_id
             logger.info(f"Created: {key} -> document_id={new_id}")
 
         self._manifest[key] = {
             "hash": file_hash,
-            "document_id": new_id,
+            "document_id": str(new_id),
             "metadata": metadata,
         }
 
@@ -294,8 +299,10 @@ class DocIngestor:
     def run(self, cleanup: bool = True) -> None:
         logger.info(f"Scanning base_dir={self.base_dir}")
         self.load_manifest()
+        collection_id = self.ensure_collection()
+
         for p in self.iter_files():
-            self.upsert_file(p)
+            self.upsert_file(p, collection_id)
         if cleanup:
             self.cleanup_orphans()
         self.save_manifest()
