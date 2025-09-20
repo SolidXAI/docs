@@ -4,7 +4,11 @@ description: Metadata schema for defining roles and permissions in SolidX applic
 sidebar_position: 7
 ---
 
+import { InfoBox } from '@site/src/common/InfoBox';
+
+
 ## Overview
+
 Roles in SolidX provide a way to group permissions and manage access control at a high level. Each role represents a set of permissions that can be assigned to users.
 Permissions in SOLID are automatically discovered based on controller actions and provide fine-grained control over what users can do within the system.
 
@@ -13,8 +17,10 @@ By Default `Admin` role is created with all permissions.
 ---
 
 ### Example: Fee Portal Module Roles & Permissions Metadata
+
 <summary> Roles & Permissions Schema </summary>
-``` json
+
+```json
 {
   ..., // Other metadata
   "roles": [ // Array of role metadata
@@ -34,25 +40,32 @@ By Default `Admin` role is created with all permissions.
         "InstituteController.recoverMany",
       ],
     }
-  ] 
-}   
+  ]
+}
 ```
 
 ## Roles & Permissions Metadata Attributes
-### `name` *(string, required, unique)*
+
+### `name` _(string, required, unique)_
+
 Name of the role.
 
---- 
+---
 
-### `description` *(string, optional)*
+### `description` _(string, optional)_
+
 A brief description of the role's purpose.
 
---- 
+---
 
-### `permissions` *(array of strings, optional)*
+### `permissions` _(array of strings, optional)_
+
 An array of permission strings associated with the role. Each permission corresponds to a specific action that can be performed within the system, typically in the format `controller.method` (e.g., `InstituteController.update`).
-:::note
+
+
+
+<InfoBox>
 Permissions are automatically discovered based on controller methods in the codebase. So for e.g., if you have a controller for managing institutes with methods like create, the permission `InstituteController.create` will be automatically created.
-:::
+</InfoBox>
 
 ---

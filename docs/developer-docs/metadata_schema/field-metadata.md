@@ -6,8 +6,11 @@ sidebar_position: 3
 
 import { IoIosArrowForward } from "react-icons/io";
 import { FaCheckCircle } from "react-icons/fa";
-import { MdNumbers, MdTextFields, MdCalendarMonth, MdMerge, MdPhotoLibrary,MdSecurity, MdCheckBox, MdFunctions,MdWarningAmber,MdCheckCircle,MdCancel } from "react-icons/md";
-import { HiOutlineInformationCircle } from "react-icons/hi2"
+import { MdNumbers, MdTextFields, MdCalendarMonth, MdMerge, MdPhotoLibrary,MdSecurity, MdCheckBox, MdFunctions,MdCheckCircle,MdCancel } from "react-icons/md";
+import { InfoBox } from '@site/src/common/InfoBox';
+import { WarningBox } from '@site/src/common/WarningBox';
+
+
 
 
 ## Overview
@@ -517,13 +520,10 @@ Enable symmetric encryption-at-rest for this field.
 **Default:** false
 
 
-<div className="tips-box info-box">
-  <h4 className="card-headear-wrapper">
-    <HiOutlineInformationCircle size={20} style={{ marginRight: "8px" }} />
-  Info
-  </h4>
+
+<InfoBox>
  Feature coming soon!
-</div>
+</InfoBox>
 
 ---
 
@@ -534,13 +534,11 @@ Only if `encrypt = true`.
 - aes-256  
 **Default:** aes-256 (recommended)
 
-<div className="tips-box info-box">
-  <h4 className="card-headear-wrapper">
-    <HiOutlineInformationCircle size={20} style={{ marginRight: "8px" }} />
-  Info
-  </h4>
+
+
+<InfoBox>
  Feature coming soon!
-</div>
+</InfoBox>
 
 ---
 
@@ -551,13 +549,10 @@ Only if `encrypt = true`. Controls when plaintext is produced.
 - after-transit  
 **Default:** after-transit
 
-<div className="tips-box info-box">
-  <h4 className="card-headear-wrapper">
-    <HiOutlineInformationCircle size={20} style={{ marginRight: "8px" }} />
-  Info
-  </h4>
+
+<InfoBox>
  Feature coming soon!
-</div>
+</InfoBox>
 
 ---
 
@@ -586,13 +581,11 @@ Lower bound (number/date) or minimum length (text/json).
 Exclude from default listings/exports; require elevated access.  
 **Default:** false
 
-<div className="tips-box info-box">
-  <h4 className="card-headear-wrapper">
-    <HiOutlineInformationCircle size={20} style={{ marginRight: "8px" }} />
-  Info
-  </h4>
+
+<InfoBox>
  Feature coming soon!
-</div>
+</InfoBox>
+
 ---
 
 ### `mediaTypes` *(MediaType[], optional)*
@@ -627,13 +620,13 @@ Name/userKey of configured media storage provider.
 **Default:** default-filesystem
 
 
-<div className="tips-box info-box">
-  <h4 className="card-headear-wrapper">
-    <HiOutlineInformationCircle size={20} style={{ marginRight: "8px" }} />
-  Info
-  </h4>
-By default, SolidX applications gets seeded with 2 media storage providers i.e default-filesystem and default-aws-s3. You can create more providers as per your requirements. You can refer to the [Storage Provider Documentation](../../admin-docs/media-library/storage-providers.md) for more details.
-</div>
+
+
+
+<InfoBox>
+  By default, SolidX applications gets seeded with 2 media storage providers i.e default-filesystem and default-aws-s3. You can create more providers as per your requirements. You can refer to the [Storage Provider Documentation](../../admin-docs/media-library/storage-providers.md) for more details.
+</InfoBox>
+
 
 ---
 
@@ -662,13 +655,14 @@ Generate inverse side on co-model.
 
 
 
-<div className="tips-box warning-box">
-  <h4 className="card-headear-wrapper">
-    <MdWarningAmber size={20} style={{ marginRight: "8px" }} />
-  Warning
-  </h4>
-Currently we auto-create the inverse side of the field metadata on the co-model. In future releases, we will get rid of the inverse field auto-creation and instead have the user explicitly create the inverse field on the co-model. This is to ensure that the user has full control on how the inverse field is created on the co-model and keep things explicit and simple
-</div>
+
+
+
+
+
+<WarningBox>
+  Currently we auto-create the inverse side of the field metadata on the co-model. In future releases, we will get rid of the inverse field auto-creation and instead have the user explicitly create the inverse field on the co-model. This is to ensure that the user has full control on how the inverse field is created on the co-model and keep things explicit and simple
+</WarningBox>
 
 ---
 
@@ -710,14 +704,11 @@ At least one side must be the owner, otherwise the many-to-many relation will no
 
 ---
 
-<div className="tips-box info-box">
-  <h4 className="card-headear-wrapper">
-    <HiOutlineInformationCircle size={20} style={{ marginRight: "8px" }} />
-  Info
-  </h4>
-TODO: change default to true in future releases
-</div>
 
+
+<InfoBox>
+  TODO: change default to true in future releases
+</InfoBox>
 
 ### `relationFieldFixedFilter` *(string, optional)*
 Fixed filter (JSON) applied when fetching related records from the admin ui. This can be used to apply static as well as dynamic filters when we want to conditionally filter the values shown for the related records
@@ -911,14 +902,10 @@ System fields are excluded from code generation (hand-written code assumed).
 Soft-removal flag for the field definition. Fields marked for removal are excluded from code generation.
 **Default:** false
 
-<div className="tips-box info-box">
-  <h4 className="card-headear-wrapper">
-    <HiOutlineInformationCircle size={20} style={{ marginRight: "8px" }} />
-  Info
-  </h4>
- This flag enables the code builder to identify fields that need to be deleted from the codebase. They are deleted after code generation is complete.  
-</div>
 
+<InfoBox>
+ This flag enables the code builder to identify fields that need to be deleted from the codebase. They are deleted after code generation is complete.  
+</InfoBox>
 ---
 
 ### `columnName` *(string, optional)*

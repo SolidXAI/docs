@@ -4,9 +4,11 @@ description: Step-by-step guide to deploy SolidX applications on Ubuntu virtual 
 sidebar_position: 1
 ---
 
-import { HiOutlineInformationCircle, HiOutlineCog, HiOutlineServer } from "react-icons/hi2"
+import { HiOutlineCog, HiOutlineServer } from "react-icons/hi2"
 import { HiOutlineCode,HiOutlineDesktopComputer } from "react-icons/hi";
 import { FaLightbulb } from "react-icons/fa";
+import { InfoBox } from '@site/src/common/InfoBox';
+
 
 
 
@@ -14,13 +16,10 @@ import { FaLightbulb } from "react-icons/fa";
 
 This section provides guidance on how to deploy your SolidX applications to a virtual machine (VM).
 
-<div className="tips-box info-box">
-  <h4 className="card-headear-wrapper">
-    <HiOutlineInformationCircle size={20} style={{ marginRight: "8px" }} />
-  Info
-  </h4>
+
+<InfoBox>
  Before continuing, make sure you've completed the [Prerequisites](/docs/developer-docs/prerequisites).
-</div>
+</InfoBox>
 
 ## A) Run SolidX Application
 
