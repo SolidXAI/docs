@@ -175,14 +175,13 @@ class DocIngestor:
                     name="solidx-docs",
                     description="SolidX documentation collection",
                 )
-                coll_id = str(result.results.id)
-                
+                coll_id = result.results.id
                 logger.info(f"Created collection 'solidx-docs' with id={coll_id}")
             else:
                 coll_id = solidx_docs_collection.results.id
                 logger.info(f"Resolved collection 'solidx-docs' with id={coll_id}")
 
-        self._manifest["_collection_id"] = coll_id
+        self._manifest["_collection_id"] = str(coll_id)
         return coll_id
 
     def save_manifest(self) -> None:
@@ -303,6 +302,6 @@ class DocIngestor:
 
         for p in self.iter_files():
             self.upsert_file(p, collection_id)
-        if cleanup:
-            self.cleanup_orphans()
+        # if cleanup:
+        #     self.cleanup_orphans()
         self.save_manifest()
