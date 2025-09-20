@@ -1,10 +1,27 @@
----
+--- 
+title: Storage Providers
+description: Overview of supported media storage providers in SolidX applications.
 sidebar_position: 2
 ---
 
 import { FaPlay, FaCheckCircle, FaCogs,FaHdd, FaAws} from "react-icons/fa"
 import { IoIosArrowForward } from "react-icons/io";
+import {MdWarningAmber } from "react-icons/md";
 
+
+
+
+
+<div className="tips-box warning-box">
+  <h4 className="card-headear-wrapper">
+    <MdWarningAmber size={20} style={{ marginRight: "8px" }} />
+  Warning
+  </h4>
+  Work in Progress - This document is currently being updated. Some sections may be incomplete or subject to change.
+
+</div>
+
+<br/>
 
 # Storage Providers
 
