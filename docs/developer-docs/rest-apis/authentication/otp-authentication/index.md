@@ -3,14 +3,19 @@ title: OTP Authentication
 description: Information about OTP-based authentication APIs
 sidebar_position: 2
 ---
+  
+import { MdOutlineSettings, MdHttp, MdInput, MdOutput } from "react-icons/md";
+import { FiShare2 } from "react-icons/fi";
 
-# 🔑 OTP Authentication
+
+
+#  OTP Authentication
 
 This section covers the OTP-based authentication APIs available in SolidX.
 
 ---
 
-## 🛠️ Implementation Overview
+##  Implementation Overview
 
 SolidX provides a comprehensive OTP-based authentication mechanism with the following endpoints:
 
@@ -19,9 +24,9 @@ SolidX provides a comprehensive OTP-based authentication mechanism with the foll
 
 ---
 
-## 🧾 1. Register
+##  1. Register
 
-### 📌 1.1 Initiate Registration
+###  1.1 Initiate Registration
 
 Allows users to register using their username, email, or mobile number through OTP verification.
 
@@ -32,25 +37,44 @@ The registration process is divided into two steps:
 
 The `validationSources` field in the request body specifies which sources (`email`, `mobile`) should be validated. This can be customized via environment variables or overridden via the `transactional` flag in the request.
 
-### 📍 Endpoint
+
+  <h3 className=" card-headear-wrapper">
+    <FiShare2 size={20}  />
+
+###  Endpoint
+</h3>
 
 ```
 POST /api/iam/otp/register/initiate
 ```
 
-### 🌐 Environment Variables
+
+  <h3 className=" card-headear-wrapper">
+    <MdOutlineSettings size={20}  />
+
+###  Environment Variables
+</h3>
 
 - `IAM_PASSWORD_LESS_REGISTRATION`: Enables/disables OTP registration.
 - `IAM_OTP_EXPIRY`: OTP expiry time (default: 5 mins).
 - `IAM_PASSWORD_LESS_REGISTRATION_VALIDATE_WHAT`: Values can be `email`, `mobile`, or both.
 
-### 📬 Headers
+<h3 className=" card-headear-wrapper">
+    <MdHttp size={24}  />
+
+###  Headers
+</h3>
+
 
 ```http
 Content-Type: application/json
 ```
 
-### 📤 Request Body
+  <h3 className=" card-headear-wrapper">
+    <MdInput size={18}  />
+
+###  Request Body
+  </h3> 
 
 ```json
 {
@@ -62,7 +86,11 @@ Content-Type: application/json
 }
 ```
 
-### 📥 Response Body
+  <h3 className=" card-headear-wrapper">
+    <MdOutput size={20}  />
+
+###  Response Body
+  </h3>
 
 ```json
 {
@@ -72,19 +100,27 @@ Content-Type: application/json
 
 ---
 
-### 📌 1.2 Confirm Registration
+###  1.2 Confirm Registration
 
 ```
 POST /api/iam/otp/register/confirm
 ```
 
-### 📬 Headers
+<h3 className=" card-headear-wrapper">
+    <MdHttp size={24}  />
+
+###  Headers
+</h3>
 
 ```http
 Content-Type: application/json
 ```
 
-### 📤 Request Body
+  <h3 className=" card-headear-wrapper">
+    <MdInput size={18}  />
+
+###  Request Body
+  </h3> 
 
 ```json
 {
@@ -94,7 +130,11 @@ Content-Type: application/json
 }
 ```
 
-### 📥 Response Body
+<h3 className=" card-headear-wrapper">
+    <MdOutput size={20}  />
+
+###  Response Body
+  </h3>
 
 ```json
 {
@@ -105,33 +145,48 @@ Content-Type: application/json
 
 ---
 
-## 🧾 2. Login
+##  2. Login
 
-### 📌 2.1 Initiate Login
+###  2.1 Initiate Login
 
 Allows users to log in using username, email, or mobile through OTP.
 
 Similar to registration, the `validationSources` and environment variables control OTP delivery.
 
-### 📍 Endpoint
+  <h3 className=" card-headear-wrapper">
+    <FiShare2 size={20}  />
+
+###  Endpoint
+</h3>
 
 ```
 POST /api/iam/otp/login/initiate
 ```
 
-### 🌐 Environment Variables
+###  Environment Variables
 
 - `IAM_PASSWORD_LESS_REGISTRATION`: Enables/disables OTP login.
 - `IAM_OTP_EXPIRY`: OTP expiry time (default: 5 mins).
 - `IAM_PASSWORD_LESS_LOGIN_VALIDATE_WHAT`: What to validate during login.
 
-### 📬 Headers
+<h3 className=" card-headear-wrapper">
+    <MdHttp size={24}  />
+
+###  Headers
+</h3>
+
 
 ```http
 Content-Type: application/json
 ```
 
-### 📤 Request Body
+  <h3 className=" card-headear-wrapper">
+    <MdInput size={18}  />
+
+###  Request Body
+  </h3> 
+
+
 
 ```json
 {
@@ -140,7 +195,11 @@ Content-Type: application/json
 }
 ```
 
-### 📥 Response Body
+<h3 className=" card-headear-wrapper">
+    <MdOutput size={20}  />
+
+###  Response Body
+  </h3>
 
 ```json
 {
@@ -150,19 +209,29 @@ Content-Type: application/json
 
 ---
 
-### 📌 2.2 Confirm Login
+###  2.2 Confirm Login
 
 ```
 POST /api/iam/otp/login/confirm
 ```
 
-### 📬 Headers
+<h3 className=" card-headear-wrapper">
+    <MdHttp size={24}  />
+
+###  Headers
+</h3>
+
 
 ```http
 Content-Type: application/json
 ```
 
-### 📤 Request Body
+  <h3 className=" card-headear-wrapper">
+    <MdInput size={18}  />
+
+###  Request Body
+  </h3> 
+
 
 ```json
 {
@@ -172,7 +241,12 @@ Content-Type: application/json
 }
 ```
 
-### 📥 Response Body
+<h3 className=" card-headear-wrapper">
+    <MdOutput size={20}  />
+
+###  Response Body
+  </h3>
+
 
 ```json
 {

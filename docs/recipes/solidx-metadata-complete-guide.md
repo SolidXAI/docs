@@ -1,5 +1,8 @@
 # SolidX Metadata Complete Documentation Guide
 
+import { IoIosArrowForward } from "react-icons/io";
+
+
 ## Overview
 
 This comprehensive guide documents the complete SolidX platform metadata structure using real examples from the fees-portal module. SolidX is a low-code platform that uses metadata-driven development to automatically generate backend APIs, frontend UIs, and database schemas.
@@ -693,39 +696,81 @@ SolidX Platform
 
 ## Best Practices
 
-### 1. Naming Conventions
-- Use kebab-case for internal names (`fees-portal`, `institute-list-view`)
-- Use PascalCase for display names (`Fees Portal`, `Institute List View`)
-- Use camelCase for field names (`instituteName`, `feeAmount`)
+<details>
+  <summary className="card-title card-headear-wrapper">
+    <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
+    Naming Conventions
+  </summary>
+  <ul className="card-desc">
+    <li>Use kebab-case for internal names (<code>fees-portal</code>, <code>institute-list-view</code>)</li>
+    <li>Use PascalCase for display names (<code>Fees Portal</code>, <code>Institute List View</code>)</li>
+    <li>Use camelCase for field names (<code>instituteName</code>, <code>feeAmount</code>)</li>
+  </ul>
+</details>
 
-### 2. Security First
-- Always configure roles and security rules
-- Use principle of least privilege
-- Implement proper data filtering
-- Enable audit tracking for sensitive operations
+<details>
+  <summary className="card-title card-headear-wrapper">
+    <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
+    Security First
+  </summary>
+  <ul className="card-desc">
+    <li>Always configure roles and security rules</li>
+    <li>Use principle of least privilege</li>
+    <li>Implement proper data filtering</li>
+    <li>Enable audit tracking for sensitive operations</li>
+  </ul>
+</details>
 
-### 3. Performance Optimization
-- Use database indexes for frequently queried fields
-- Enable pagination for large datasets
-- Implement proper caching strategies
-- Use lazy loading for related data
+<details>
+  <summary className="card-title card-headear-wrapper">
+    <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
+    Performance Optimization
+  </summary>
+  <ul className="card-desc">
+    <li>Use database indexes for frequently queried fields</li>
+    <li>Enable pagination for large datasets</li>
+    <li>Implement proper caching strategies</li>
+    <li>Use lazy loading for related data</li>
+  </ul>
+</details>
 
-### 4. User Experience
-- Group related fields logically in forms
-- Use appropriate field types for data validation
-- Provide helpful field descriptions
-- Implement responsive layouts
+<details>
+  <summary className="card-title card-headear-wrapper">
+    <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
+    User Experience
+  </summary>
+  <ul className="card-desc">
+    <li>Group related fields logically in forms</li>
+    <li>Use appropriate field types for data validation</li>
+    <li>Provide helpful field descriptions</li>
+    <li>Implement responsive layouts</li>
+  </ul>
+</details>
 
-### 5. Maintainability
-- Use consistent field configurations
-- Document complex business logic
-- Version control metadata changes
-- Test security rules thoroughly
+<details>
+  <summary className="card-title card-headear-wrapper">
+    <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
+    Maintainability
+  </summary>
+  <ul className="card-desc">
+    <li>Use consistent field configurations</li>
+    <li>Document complex business logic</li>
+    <li>Version control metadata changes</li>
+    <li>Test security rules thoroughly</li>
+  </ul>
+</details>
 
-### 6. Data Integrity
-- Configure proper field validations
-- Set up referential integrity for relations
-- Use appropriate data types
-- Implement data constraints
+<details>
+  <summary className="card-title card-headear-wrapper">
+    <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
+    Data Integrity
+  </summary>
+  <ul className="card-desc">
+    <li>Configure proper field validations</li>
+    <li>Set up referential integrity for relations</li>
+    <li>Use appropriate data types</li>
+    <li>Implement data constraints</li>
+  </ul>
+</details>
 
 This comprehensive guide provides everything you need to understand and work with SolidX metadata configurations. The examples are based on real implementations from the fees-portal module and demonstrate best practices for building robust, secure, and user-friendly applications with the SolidX platform.

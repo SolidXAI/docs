@@ -56,7 +56,7 @@ function Feature({ title, description, moreInfo, to, imgs }: FeatureItem) {
       <div className="text--start padding-horiz--md">
         <img src="/img/CardIcon2.png" alt="" width={50} height={50} />
         <Heading as="h1">{title}</Heading>
-        <p>{description}</p>
+        <p className=''>{description}</p>
 
         <a href={to} className={styles.moreInfoLink}>
           {moreInfo}

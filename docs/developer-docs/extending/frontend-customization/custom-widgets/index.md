@@ -4,24 +4,30 @@ title: Custom Widgets
 description: Learn how to create custom widgets for the frontend of your application.
 ---
 
-# 🌟 Custom Widgets
+import { IoIosArrowForward } from "react-icons/io";
 
-## 🔎 Overview
+
+#  Custom Widgets
+
+##  Overview
 Custom widgets allow you to **extend the UI functionality** of your frontend application by adding new components to your view layouts.  
 These widgets:
 - Are **not associated with any fields** in the model.  
 - Are used to **enhance the UI** by providing **custom rendering** or **interaction capabilities**.  
 
-💡 SolidX provides a built-in way to create custom widgets using the **`CustomHtml`** widget.
+ SolidX provides a built-in way to create custom widgets using the **`CustomHtml`** widget.
 
 ---
 
-## ⚙️ How to Configure the `CustomHtml` Widget
+##  How to Configure the `CustomHtml` Widget
 
-✨ Example: Display how many characters a user has typed in a text field.
+ Example: Display how many characters a user has typed in a text field.
 
 <details>
-<summary>📄 Code: CustomHtml Widget Configuration</summary>
+ <summary className="card-title card-headear-wrapper">
+    <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
+    Code: CustomHtml Widget Configuration
+</summary>
 
 ```json
 {
@@ -36,21 +42,21 @@ These widgets:
 ```
 </details>
 
-### 🔍 Explanation
+###  Explanation
 - Uses the `CustomHtml` widget to show a dynamic message.  
 - Displays the **number of characters typed** in a text field.  
 - Receives props of type `SolidFormWidgetProps`.  
 - The variable `{{ctxtTitleAlphpabetCount}}` is replaced dynamically.  
 
-📌 This placeholder can represent:  
+ This placeholder can represent:  
 - A **field value** (referenced by field name).  
 - A **custom variable**, set in the form data via a **form handler**.  
 
-👉 Learn more here: [Form View Event Listeners](../form-view-event-listeners/index.md)
+ Learn more here: [Form View Event Listeners](../form-view-event-listeners/index.md)
 
 ---
 
-## 🔄 How It Works
+##  How It Works
 
 1. SolidX loads the **form layout** in edit/view mode.  
 2. It identifies **custom fields** (`type: custom`).  
@@ -58,7 +64,10 @@ These widgets:
 4. The widget is rendered with the following props:  
 
 <details>
-<summary>📄 Code: Props Interface</summary>
+ <summary className="card-title card-headear-wrapper">
+    <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
+    Code: Props Interface
+</summary>
 
 ```tsx
 export type SolidFormWidgetProps = {
@@ -76,4 +85,4 @@ export type SolidFormWidgetProps = {
 
 ---
 
-✅ With this approach, you can create **reusable UI enhancements** and extend your SolidX frontend with ease.
+ With this approach, you can create **reusable UI enhancements** and extend your SolidX frontend with ease.

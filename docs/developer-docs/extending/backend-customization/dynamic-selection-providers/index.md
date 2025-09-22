@@ -5,18 +5,26 @@ description: Learn how to create dynamic selection providers to customize the se
 keywords: [backend, dynamic selection, providers, customization]
 ---
 
-# 🌐 Overview
+import { NoteBoxs } from '@site/src/common/NoteBoxs';
+import { IoIosArrowForward } from "react-icons/io";
+
+
+# Overview
 
 In this section, we will explore how to create **dynamic selection providers** to customize selection options in your application. These providers allow you to define custom logic for fetching and returning selection options based on specific criteria or conditions.
 
 ---
 
-## 🧩 Creating a Selection Dynamic Field with a Provider
+## Creating a Selection Dynamic Field with a Provider
 
-### 1️⃣ Sample Field Metadata Configuration
+### 1 Sample Field Metadata Configuration
 
 <details>
-<summary>📄 Example Configuration</summary>
+ <summary className="card-title card-headear-wrapper">
+    <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
+    Example Configuration
+</summary>
+
 
 ```json
 {
@@ -42,83 +50,101 @@ In this section, we will explore how to create **dynamic selection providers** t
   "isMultiSelect": true
 }
 ```
+
 </details>
 
+### 2 Create the Dynamic Selection Provider Class
 
-### 2️⃣ Create the Dynamic Selection Provider Class
+You need to create a provider class that implements the ISelectionProvider interface. - The values() method fetches and returns selection options. - The value() method is currently not used, and can be left with an empty implementation.
 
-You need to create a provider class that implements the ISelectionProvider interface.
-	- The values() method fetches and returns selection options.
-	- The value() method is currently not used, and can be left with an empty implementation.
+<NoteBoxs>
+    The <span classname="color-green"> value() </span> method can simply throw a NotImplementedException.
+</NoteBoxs>
 
-:::note
-The value() method can simply throw a NotImplementedException.
-:::
+<br/>
 
 <details>
-<summary>📦 Example: <code>ListOfValuesSelectionProvider</code></summary>
+ <summary className="card-title card-headear-wrapper">
+    <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
+   Example: <code>ListOfValuesSelectionProvider</code>
+  </summary>
 
 ```ts
 import { ListOfValuesService } from "../services/list-of-values.service";
-import { PaginationQueryDto } from "src/dtos/pagination-query.dto";
+import { Pagin>ationQueryDto } from "src/dtos/pagination-query.dto";
 import { SelectionProvider } from "src/decorators/selection-provider.decorator";
 import { Injectable } from "@nestjs/common";
-import { ISelectionProvider, ISelectionProviderContext, ISelectionProviderValues } from "../interfaces";
+import {
+  ISelectionProvider,
+  ISelectionProviderContext,
+  ISelectionProviderValues,
+} from "../interfaces";
 import { BasicFilterDto } from "src/dtos/basic-filters.dto";
 
 interface ListOfValuesProviderContext extends ISelectionProviderContext {
-    type: string;
+  type: string;
 }
 
 const DEFAULT_LIMIT = 100;
 
 @SelectionProvider()
 @Injectable()
-export class ListOfValuesSelectionProvider implements ISelectionProvider<ListOfValuesProviderContext> {
-    constructor(private readonly listOfValuesService: ListOfValuesService) {}
+export class ListOfValuesSelectionProvider
+  implements ISelectionProvider<ListOfValuesProviderContext>
+{
+  constructor(private readonly listOfValuesService: ListOfValuesService) {}
 
-    name(): string {
-        return 'ListOfValuesSelectionProvider';
-    }
+  name(): string {
+    return "ListOfValuesSelectionProvider";
+  }
 
-    help(): string {
-        return "# This is lov provider";
-    }
+  help(): string {
+    return "# This is lov provider";
+  }
 
-    value(optionValue: string, ctxt: ListOfValuesProviderContext): Promise<ISelectionProviderValues | any> {
-        throw new Error("Method not implemented.");
-    }
+  value(
+    optionValue: string,
+    ctxt: ListOfValuesProviderContext
+  ): Promise<ISelectionProviderValues | any> {
+    throw new Error("Method not implemented.");
+  }
 
-    async values(query: string, ctxt: ListOfValuesProviderContext): Promise<readonly ISelectionProviderValues[]> {
-        const basicFilterQuery = new BasicFilterDto(DEFAULT_LIMIT, 0);
-        if (ctxt.type) {
-            basicFilterQuery.filters = {
-                type: { $eq: ctxt.type }
-            };
-        }
-        if (query) {
-            basicFilterQuery.filters = {
-                ...basicFilterQuery.filters,
-                display: { $containsi: `%${query}%` }
-            };
-        }
-        const lovs = await this.listOfValuesService.find(basicFilterQuery);
-        return lovs.records.map(lov => ({
-            label: lov.display,
-            value: lov.value
-        }));
+  async values(
+    query: string,
+    ctxt: ListOfValuesProviderContext
+  ): Promise<readonly ISelectionProviderValues[]> {
+    const basicFilterQuery = new BasicFilterDto(DEFAULT_LIMIT, 0);
+    if (ctxt.type) {
+      basicFilterQuery.filters = {
+        type: { $eq: ctxt.type },
+      };
     }
+    if (query) {
+      basicFilterQuery.filters = {
+        ...basicFilterQuery.filters,
+        display: { $containsi: `%${query}%` },
+      };
+    }
+    const lovs = await this.listOfValuesService.find(basicFilterQuery);
+    return lovs.records.map((lov) => ({
+      label: lov.display,
+      value: lov.value,
+    }));
+  }
 }
 ```
+
 </details>
 
-
-## ⚙️ How It Works
+## How It Works
 
 To support your dynamic selection field, your provider must implement the following interface:
 
 <details>
-<summary>🧪 <code>ISelectionProvider</code> Interface</summary>
+ <summary className="card-title card-headear-wrapper">
+    <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
+    <code>ISelectionProvider</code> Interface
+</summary>
 
 ```ts
 export interface ISelectionProvider<T extends ISelectionProviderContext> {
@@ -128,15 +154,10 @@ export interface ISelectionProvider<T extends ISelectionProviderContext> {
   values(query: any, ctxt: T): Promise<readonly ISelectionProviderValues[]>;
 }
 ```
+
 </details>
 
+## Runtime Flow
 
-## 🔁 Runtime Flow
+Here’s how the dynamic selection works in runtime: 1. The frontend calls FieldMetadataService.getSelectionDynamicValues(). 2. This method internally calls the values() method of your provider class. 3. The typed query is passed as the query argument. 4. Your provider returns a list of options based on the context and query.
 
-Here’s how the dynamic selection works in runtime:
-	1.	🧠 The frontend calls FieldMetadataService.getSelectionDynamicValues().
-	2.	📤 This method internally calls the values() method of your provider class.
-	3.	🔍 The typed query is passed as the query argument.
-	4.	📋 Your provider returns a list of options based on the context and query.
-
-⸻

@@ -4,7 +4,9 @@ description: Guide to extending SolidX with custom code generation and frontend/
 sidebar_position: 5
 ---
 
-# 🧩 Extending SolidX
+import { FaCode, FaDesktop, FaServer } from "react-icons/fa";
+
+# Extending SolidX
 
 This section outlines how to extend **SolidX** to build your own functional modules, such as a `school-fees-portal`.
 
@@ -14,11 +16,18 @@ In addition to scaffolding, SolidX supports **deep customization** across both f
 
 ---
 
-## 🔧 Customization Capabilities
+## Customization Capabilities
 
 SolidX provides the following extensibility features:
 
-### ⚙️ Generated Code
+<div className="border-box">
+
+<h4 className="card-title card-headear-wrapper">
+  <FaCode size={18} style={{ marginRight: "2px" }} />
+
+### Generated Code
+
+</h4>
 
 - Quickly scaffold new modules using the SolidX code generation tool.
 - Auto-generates:
@@ -31,7 +40,16 @@ SolidX provides the following extensibility features:
   - List View
   - Form View
 
-### 🎨 Frontend Customization
+</div>
+<br/>
+<div className="border-box">
+
+<h4 className="card-title card-headear-wrapper">
+  <FaDesktop size={18} style={{ marginRight: "2px" }} />
+
+### Frontend Customization
+
+</h4>
 
 - Modify the generated `layout.json` to:
   - Customize list views
@@ -39,13 +57,26 @@ SolidX provides the following extensibility features:
   - Configure kanban boards
   - Add custom UI behaviors
 
-### 🛠 Backend Customization
+</div>
+
+<br/>
+
+<div className="border-box">
+
+<h4 className="card-title card-headear-wrapper">
+  <FaServer size={18} style={{ marginRight: "2px" }} />
+
+### Backend Customization
+
+</h4>
 
 - Extend the NestJS backend by adding:
   - Custom services and controllers
   - Computed providers
   - Middleware or interceptors
   - Business-specific logic
+
+</div>
 
 ---
 

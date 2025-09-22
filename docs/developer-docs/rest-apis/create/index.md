@@ -4,7 +4,14 @@ description: Information about the create endpoint of the REST API, including us
 sidebar_position: 1
 ---
 
-# 🛠️ Create Endpoint Overview
+import { NoteBoxs } from '@site/src/common/NoteBoxs';
+import { IoIosArrowForward } from "react-icons/io";
+import {  MdHttp, MdInput,MdUploadFile } from "react-icons/md";
+
+
+
+
+#  Create Endpoint Overview
 
 This section provides information about the SolidX **create REST endpoints**, including how to use them, what parameters they accept, and what responses they return.
 
@@ -12,21 +19,32 @@ SolidX supports both single record creation and bulk record creation.
 
 ---
 
-## ✨ Creating a Single Record
+##  Creating a Single Record
 
-### 🔐 Headers
+<h3 className=" card-headear-wrapper">
+    <MdHttp size={24}  />
+
+###  Headers
+</h3>
 
 ```http
 Content-Type: application/json
 Authorization: Bearer <token>
 ```
 
-### 📤 Request
+  <h3 className=" card-headear-wrapper">
+    <MdInput size={18}  />
+
+###  Request Body
+  </h3>
 
 `POST /api/fee-type`
 
 <details>
-<summary>📄 Request Body</summary>
+ <summary className="card-title card-headear-wrapper">
+    <IoIosArrowForward  size={20} style={{ marginRight: "8px" }}  className="rotatable"  />
+     Request Body
+  </summary>
 
 ```json
 {
@@ -42,7 +60,10 @@ Authorization: Bearer <token>
 </details>
 
 <details>
-<summary>📄 Sample Request</summary>
+ <summary className="card-title card-headear-wrapper">
+    <IoIosArrowForward  size={20} style={{ marginRight: "8px" }}  className="rotatable"  />
+     Sample Request
+  </summary>
 
 ```json
 {
@@ -55,7 +76,10 @@ Authorization: Bearer <token>
 </details>
 
 <details>
-<summary>📨 Sample Response</summary>
+ <summary className="card-title card-headear-wrapper">
+    <IoIosArrowForward  size={20} style={{ marginRight: "8px" }}  className="rotatable"  />
+     Sample Response
+  </summary>
 
 ```json
 {
@@ -96,16 +120,23 @@ Authorization: Bearer <token>
 
 ---
 
-## 📦 Bulk Record Creation
+##  Bulk Record Creation
 
 To create multiple records at once:
 
-### 📤 Request
+  <h3 className=" card-headear-wrapper">
+    <MdInput size={18}  />
+
+###  Request 
+  </h3>
 
 `POST /api/fee-type/bulk`
 
 <details>
-<summary>📄 Sample Bulk Request</summary>
+ <summary className="card-title card-headear-wrapper">
+    <IoIosArrowForward  size={20} style={{ marginRight: "8px" }}  className="rotatable"  />
+     Sample Bulk Request
+  </summary>
 
 ```json
 [
@@ -121,11 +152,16 @@ To create multiple records at once:
 
 ---
 
-## 🖼️ Creating a Record with Media
+##  Creating a Record with Media
 
 If your model includes media fields (e.g., uploading a logo), use the `multipart/form-data` content type.
 
-### 📤 Request with Media
+  <h3 className=" card-headear-wrapper">
+    <MdUploadFile size={18}  />
+
+###  Request with Media
+  </h3>
+
 
 ```
 POST /api/fee-type
@@ -134,7 +170,11 @@ Authorization: Bearer <token>
 ```
 
 <details>
-<summary>📄 Multipart Form Data Example</summary>
+ <summary className="card-title card-headear-wrapper">
+    <IoIosArrowForward  size={20} style={{ marginRight: "8px" }}  className="rotatable"  />
+     Multipart Form Data Example
+  </summary>
+
 
 ```
 --boundary
@@ -155,7 +195,11 @@ Content-Type: image/png
 
 </details>
 
-:::note
-✅ Ensure the user has the appropriate **create permission** for the model.  
-Refer to the [Permissions](../../../admin-docs/iam/permissions.md) section for more information.
-:::
+
+
+
+
+<NoteBoxs>
+ Ensure the user has the appropriate **create permission** for the model.  
+  Refer to the [Permissions](../../../admin-docs/iam/permissions.md) section for more information.
+</NoteBoxs>

@@ -2,6 +2,17 @@
 sidebar_position: 3
 ---
 
+import { FiDatabase } from "react-icons/fi";
+import { MdLooksOne,MdTextFields, MdCalendarToday, MdEvent, MdAccessTime, MdAttachFile, MdCollections, MdEmail,MdListAlt, MdSyncAlt, MdFingerprint } from "react-icons/md";
+import { TbNumbers,TbFileText } from "react-icons/tb";
+import { LuCalculator } from "react-icons/lu";
+import { RiFileTextFill,RiLockPasswordLine,RiFunctionLine } from "react-icons/ri";
+import { VscJson } from "react-icons/vsc";
+import { HiOutlineLink } from "react-icons/hi";
+import { FaCheckCircle } from "react-icons/fa";
+
+
+
 # Fields
 
 Every SolidX model is composed of fields. Fields in SolidX go over and above the standard fields one expects, instead we treat fields as semantic attributes with relevance to how the users interact with that data in our admin interface. 
@@ -60,7 +71,14 @@ Additional Settings
 
 Beyond this settings that are specific to each field type, will be cover in detail below. 
 
+
+
+  <h3 className=" card-headear-wrapper">
+    <MdLooksOne size={20}  />
+
 ### Integer
+</h3>
+
 
 The Integer field type in SolidX is designed to be flexible, secure, and highly configurable. It supports a range of built-in options that make it easy to enforce data integrity, enable advanced features, and respect security boundaries.
 
@@ -72,14 +90,24 @@ Validation
 ![Integer Field](/img/admin-docs/module-builder/integer-field.png)
 
 
+  <h3 className=" card-headear-wrapper">
+    <TbNumbers size={22}  />
+
 ### Big Integer
+</h3>
+
 
 Big Integer fields are designed to store very large whole numbers beyond the limits of standard integers, ideal for high-precision IDs or large counters.
 
 ![Big Integer](/img/admin-docs/module-builder/big-integer-field.png)
 
 
+  <h3 className=" card-headear-wrapper">
+    <LuCalculator size={20}  />
+
 ### Decimal
+</h3>
+
 
 Decimal fields are used to store precise numeric values with fixed decimal places, making them ideal for financial data, measurements, and other use cases where accuracy is critical.
 
@@ -90,7 +118,11 @@ Validation
 ![Decimal](/img/admin-docs/module-builder/decimal-field.png)
 
 
+  <h3 className=" card-headear-wrapper">
+    <MdTextFields size={22}  />
+
 ### Short Text
+</h3>
 
 Short Text fields are used to store brief strings of text, such as names, titles, or labels, with configurable length limits and validation options.
 
@@ -101,7 +133,11 @@ Validation
 ![Short Text](/img/admin-docs/module-builder/short-text-field.png)
 
 
+  <h3 className=" card-headear-wrapper">
+    <TbFileText size={22}  />
+
 ### Long Text
+</h3>
 
 Long Text fields are designed to store larger bodies of text, such as descriptions, notes, or comments, and support extended character limits.
 
@@ -110,53 +146,86 @@ TODO: Remove the validations & regex fields from this field.
 ![Long Text](/img/admin-docs/module-builder/long-text-field.png)
 
 
+  <h3 className=" card-headear-wrapper">
+    <RiFileTextFill size={20}  />
+
 ### Rich Text
+</h3>
 
 Rich Text fields allow users to input and store formatted content—including bold, italics, lists, links, and more—making them ideal for articles, documentation, or any content that requires styling.
 
 ![Rich Text](/img/admin-docs/module-builder/rich-text-field.png)
 
 
+  <h3 className=" card-headear-wrapper">
+    <VscJson size={24}  />
+
 ### JSON
+</h3>
 
 JSON fields are used to store structured data as key-value pairs. They support both json and jsonb storage formats—where jsonb allows efficient indexing and querying, making it ideal for advanced filtering and partial matching of nested data.
 
 ![JSON](/img/admin-docs/module-builder/json-field.png)
 
 
+  <h3 className=" card-headear-wrapper">
+    <FaCheckCircle size={20}  />
+
 ### Boolean
+</h3>
+
+
 
 Boolean fields store true or false values, commonly used for toggles, flags, or status indicators within your data model.
 
 ![Boolean](/img/admin-docs/module-builder/boolean-field.png)
 
 
+  <h3 className=" card-headear-wrapper">
+    <MdCalendarToday size={20}  />
+
 ### Date
+</h3>
 
 Date fields are used to store calendar dates (without time), ideal for representing birthdays, deadlines, or scheduled events.
 
 ![Date](/img/admin-docs/module-builder/date-field.png)
 
 
+  <h3 className=" card-headear-wrapper">
+    <MdEvent size={22}  />
+
 ### Datetime
+</h3>
+
 
 Datetime fields store both date and time information, making them ideal for timestamps, scheduling, and tracking events with precise timing.
 
 ![Datetime](/img/admin-docs/module-builder/datetime-field.png)
 
 
+  <h3 className=" card-headear-wrapper">
+    <MdAccessTime size={22}  />
+
 ### Time
+</h3>
+
 
 Time fields store time-of-day values without a date, useful for representing hours and minutes such as business hours or appointment times.
 
 ![Time](/img/admin-docs/module-builder/time-field.png)
 
 
+  <h3 className=" card-headear-wrapper">
+    <HiOutlineLink size={22}  />
+
 ### Relation
+</h3>
+
 
 Relation fields are used to define connections between different models, enabling you to represent real-world relationships between entities in SolidX. This core feature supports various types of associations, including many-to-one, one-to-many, and many-to-many, allowing flexible and powerful data modeling.
 
-#### Many to one
+#### 1. Many to one
 
 When you create a many-to-one relation field in SolidX, you can configure the following options to define and control the behavior of the relationship:
 1.	Co-Module Name: <br />
@@ -179,7 +248,7 @@ When you create a many-to-one relation field in SolidX, you can configure the fo
 
 ![Many to one](/img/admin-docs/module-builder/relation-field-many-to-one.png)
 
-#### Many to many
+#### 2. Many to many
 
 The many-to-many relation field in SolidX allows you to model scenarios where multiple records in one model can be related to multiple records in another. This is especially useful for representing complex, bidirectional relationships between entities.
 
@@ -202,7 +271,7 @@ In a school system, a student can enroll in multiple courses, and each course ca
 
 ![Many to many](/img/admin-docs/module-builder/relation-field-many-to-many.png)
 
-#### One to many
+#### 3. One to many
 
 The one-to-many relation field in SolidX allows a single record in one model to be linked to multiple records in another model. It's commonly used to model parent-child relationships, where the "one" side acts as the parent and the "many" side as the child.
 
@@ -227,7 +296,12 @@ A Country can have many States, but each State belongs to only one Country. A on
 
 ![One to many](/img/admin-docs/module-builder/relation-field-one-to-many.png)
 
+  <h3 className=" card-headear-wrapper">
+    <MdAttachFile size={22}  />
+
 ### Single Media
+</h3>
+
 
 The Single Media field in SolidX allows users to upload and attach a single file to a record. It supports a wide range of file types and offers powerful configuration options to suit diverse application needs.
 
@@ -257,7 +331,11 @@ Attach a user's profile picture, a scanned document, or a product video using th
 
 ![Single Media](/img/admin-docs/module-builder/single-media-field.png)
 
+  <h3 className=" card-headear-wrapper">
+    <MdCollections size={22}  />
+
 ### Multiple Media
+</h3>
 
 The Multiple Media field in SolidX enables attaching multiple files to a single record, making it ideal for use cases that require storing galleries, document sets, or file bundles. 
 
@@ -269,14 +347,23 @@ Use the Multiple Media field to attach a product image gallery, upload multiple 
 ![Multiple Media](/img/admin-docs/module-builder/multiple-media-field.png)
 
 
+  <h3 className=" card-headear-wrapper">
+    <MdEmail size={24}  />
+
 ### Email
+</h3>
+
 
 The Email field in SolidX is designed to store valid email addresses with built-in validation to ensure data correctness.
 
 ![Email](/img/admin-docs/module-builder/email-field.png)
 
 
+  <h3 className=" card-headear-wrapper">
+    <RiLockPasswordLine size={22}  />
+
 ### Password
+</h3>
 
 The Password field in SolidX is designed for securely capturing and validating user passwords, with built-in UI enhancements and configurable password policies.
 
@@ -298,7 +385,11 @@ Use the Password field for user registration or authentication forms, with built
 ![Password](/img/admin-docs/module-builder/password-field.png)
 
 
+  <h3 className=" card-headear-wrapper">
+    <MdListAlt size={24}  />
+
 ### Static Selection
+</h3>
 
 The SelectionStatic field in SolidX allows users to choose a value from a predefined, fixed list of options. It’s ideal for dropdowns, radio buttons, or selection lists where the choices are known and unchanging.
 
@@ -306,7 +397,7 @@ The SelectionStatic field in SolidX allows users to choose a value from a predef
 - Static List of Options
 Define a set of options as label–value pairs.
 Example:
-```
+```json
 [
   { "label": "Active", "value": "active" },
   { "label": "Inactive", "value": "inactive" }
@@ -328,7 +419,11 @@ Use a SelectionStatic field to store a user's status (Active/Inactive), a priori
 ![Static Selection](/img/admin-docs/module-builder/static-selection-field.png)
 
 
+  <h3 className=" card-headear-wrapper">
+    <MdSyncAlt size={24}  />
+
 ### Dynamic Selection
+</h3>
 
 The SelectionDynamic field provides all the usability of a dropdown or selectable list—just like the SelectionStatic field—but with dynamic, runtime-driven values sourced from backend logic.
 
@@ -354,14 +449,24 @@ Developers can create and register custom SelectionDynamicProvider services easi
 ![Static Selection](/img/admin-docs/module-builder/dynamic-selection-field.png)
 
 
+  <h3 className=" card-headear-wrapper">
+    <MdFingerprint size={24}  />
+
 ### Computed 
+</h3>
+
 
 TODO: Write this after the computed field ticket is done.
 
 ![Static Selection](/img/admin-docs/module-builder/computed-field.png)
 
 
+
+  <h3 className=" card-headear-wrapper">
+    <RiFunctionLine size={24}  />
+
 ### UUID
+</h3>
 
 TODO: Maybe we remove and replace with a computed field only...
 
@@ -371,17 +476,19 @@ Every field type has a specific impact on how the code is generated by SolidX.
 
 TODO: More details on this can be found in the developer documentation section.
 
+
+    
 ## Related Recipes
-- [Dynamic Selection Provider](../../recipes/): <br />
-   This recipe talks about how you can create your own dynamic selection provider.
-- [Basic Computed Field](../../recipes/): <br />
-   This recipe talks about how you can create a basic computed field, viz. a computed field whose value depends on the same record.
-- [Advanced Computed Field](../../recipes/): <br />
-   This recipe talks about how you can create an advanced computed field viz. a computed field whose value depends on other records of other models or even other records of the same model.
-- [Fixed Filter With Many-To-One](../../recipes/): <br />
-   Here we explain with an example how to use a fixed filter.
-- [Storage Provider](../../recipes/): <br />
-   This recipe talks about how you can add a new media storage provider, we will create a storage provider to store files to the Azure Blob storage. 
+
+  <ul>
+    <li><a href='../../recipes/'>Dynamic Selection Provider</a>: This recipe talks about how you can create your own dynamic selection provider.</li>
+    <li><a href='../../recipes/'>Basic Computed Field</a>: This recipe talks about how you can create a basic computed field, viz. a computed field whose value depends on the same record.</li>
+    <li><a href='../../recipes/'>Advanced Computed Field</a>: This recipe talks about how you can create an advanced computed field viz. a computed field whose value depends on other records of other models or even other records of the same model.</li>
+    <li><a href='../../recipes/'>Fixed Filter With Many-To-One</a>: Here we explain with an example how to use a fixed filter.</li>
+    <li><a href='../../recipes/'>Storage Provider</a>: This recipe talks about how you can add a new media storage provider, we will create a storage provider to store files to the Azure Blob storage.</li>
+  </ul>
+
+
 
 
 <!-- 

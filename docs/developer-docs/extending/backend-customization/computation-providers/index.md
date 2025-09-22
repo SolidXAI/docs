@@ -5,15 +5,26 @@ sidebar_position: 4
 keywords: [backend, computation providers, customization]
 ---
 
-# 🧮 Computation Providers
+import { NoteBoxs } from '@site/src/common/NoteBoxs';
+import { IoIosArrowForward } from "react-icons/io";
+import { MdSettings,MdBuildCircle } from "react-icons/md";
+
+
+
+#  Computation Providers
 
 Computation providers are essential for defining how **computed fields** are calculated and updated in the backend. This guide walks you through setting up and implementing them in SolidX.
 
 ---
 
-## ⚙️ How to Configure a Computed Field
+##  How to Configure a Computed Field
 
-### 🧾 Sample Metadata Configuration
+
+  <h3 className=" card-headear-wrapper">
+    <MdSettings size={24}  />
+
+###  Sample Metadata Configuration
+</h3>
 
 In the `computedFieldValueProvider`, we specify the **provider class** responsible for the computation logic.
 
@@ -30,6 +41,7 @@ Supported operations include:
 - `after-insert`
 - `after-remove`
 
+
 🔸 **Before operations** trigger `preComputeValue()` of `IEntityPreComputeFieldProvider`.
 
 🔸 **After operations** trigger `postComputeAndSaveValue()` of `IEntityPostComputeFieldProvider`.
@@ -43,7 +55,10 @@ You can:
 - Persist additional logic and saving in `postComputeAndSaveValue`
 
 <details>
-  <summary>📄 Example: Configuration for <code>amountPaid</code> computed field</summary>
+  <summary className="card-title card-headear-wrapper">
+    <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
+   Example: Configuration for <code>amountPaid</code> computed field
+</summary>
 
 ```json
 {
@@ -88,12 +103,15 @@ You can:
 
 ---
 
-## 🧩 Computation Provider Interfaces
+##  Computation Provider Interfaces
 
 To implement a custom computation provider, you need to implement either or both of the following interfaces:
 
 <details>
-  <summary>💡 Interfaces to Implement</summary>
+    <summary className="card-title card-headear-wrapper">
+    <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
+   Interfaces to Implement
+</summary>
 
 ```ts
 
@@ -118,9 +136,13 @@ export interface IEntityComputedFieldProvider {
 
 ---
 
-## ⚙️ How It Works
+##  How It Works
 
-### 🛠 Core Mechanism
+  <h3 className=" card-headear-wrapper">
+    <MdBuildCircle size={20}  />
+
+###  Core Mechanism
+</h3>
 
 1. `ComputedEntityFieldSubscriber` listens to `insert`, `update`, and `delete` events across all entities.
 2. For **before** operations:
@@ -130,17 +152,19 @@ export interface IEntityComputedFieldProvider {
    - `postComputeAndSaveValue()` is called **asynchronously** via [Background Jobs](../background-jobs/index.md)
    - Final saving happens via `ComputedFieldEvaluationSubscriber`.
 
-:::note
-The computed field configuration is loaded from the database and cached in the solid registry on application startup. So any changes to a computed field configuration will require a server restart to take effect.
-:::
 
+
+
+<NoteBoxs>
+The computed field configuration is loaded from the database and cached in the solid registry on application startup. So any changes to a computed field configuration will require a server restart to take effect.
+</NoteBoxs>
 ---
 
-## 📚 Related Recipes 
+##  Related Recipes 
 ### TODO
 
-- 👉 [Pre-computed fields](../pre-computed-fields/index.md)  
-- 👉 [Post-computed fields](../post-computed-fields/index.md)  
-- 👉 [Multiple Computed Fields](../multiple-computed-fields/index.md)  
+-  [Pre-computed fields](../pre-computed-fields/index.md)  
+-  [Post-computed fields](../post-computed-fields/index.md)  
+-  [Multiple Computed Fields](../multiple-computed-fields/index.md)  
 
 ---

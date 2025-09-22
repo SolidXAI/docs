@@ -2,6 +2,10 @@
 sidebar_position: 2
 ---
 
+import { FiSearch, FiFilter, FiArrowUp, FiList,FiUserCheck } from "react-icons/fi";
+import { CiImport,CiExport } from "react-icons/ci";
+import { MdAttractions } from "react-icons/md";
+
 # Kanban View
 
 ![Kanban View](/img/admin-docs/layouts/kanban-view.png)
@@ -16,7 +20,7 @@ The Kanban view is defined using a JSON layout that is automatically generated w
 
 Here's an example layout for a model named Book:
 
-```
+```json
 {
   "type": "kanban",
   "attrs": {
@@ -166,55 +170,90 @@ card → row → column → field(s)
 This allows building responsive card layouts using grid-style divisions (e.g., Bootstrap-style `col-12`, `col-6`, etc.).
 
 TODO: More details on all the different layout elements one can use in the Kanban View to be added here...
-
 ## Key Features 
 
-### Search 
+<div className="card-headear-wrapper">
+  <FiSearch size={26} style={{ marginRight: "2px"}} />
+    
+### Search
+</div>
 
 Enabled via enableGlobalSearch: true, this allows users to search across multiple searchable fields quickly. Fields marked with isSearchable: true participate in this feature.
 
 More details can be found on the [Kanban View](../modules/kanban-view.md) page.
 
-<!-- ![Global Search](/img/admin-docs/layouts/list-view-global-search.png) -->
 
+<div className="card-headear-wrapper">
+  <FiFilter size={26} style={{ marginRight: "2px"}} />
+    
 ### Filtering
+</div>
 
 Each field type supports type-specific filters:
 
-Eg. 
-- Numeric: greater than, less than, between
-- Date/Time: before, after, between, today, last X days
-- Selection: is one of, is not one of
-- Boolean: is true, is false
-- Text: contains, does not contain
+
+Eg.
+- <span className="white-color"><strong>Numeric : </strong></span> greater than, less than, between
+- <span className="white-color"><strong>Date/Time : </strong></span> before, after, between, today, last X days
+- <span className="white-color"><strong>Selection : </strong></span> is one of, is not one of
+- <span className="white-color"><strong>Boolean : </strong></span> true, false
+- <span className="white-color"><strong>Text : </strong></span> contains, does not contain
+
+
+
 
 More details can be found on the [Kanban View](../modules/kanban-view.md) page.
 
+
+<div className="card-headear-wrapper">
+  <FiArrowUp size={28} style={{ marginRight: "2px"}} />
+    
 ### Sorting
+</div>
 
 Enable sorting per field using sortable: true. Clicking column headers toggles ascending/descending order.
 
 More details can be found on the [Kanban View](../modules/kanban-view.md) page.
 
+
+<div className="card-headear-wrapper">
+  <FiList size={28} style={{ marginRight: "2px"}} />
+    
 ### Pagination
+</div>
 
 Paginate large datasets efficiently with options to set default and allowed pageSizeOptions. Server-side pagination is supported for performance on large datasets.
 
 More details can be found on the [Kanban View](../modules/kanban-view.md) page.
 
+
+<div className="card-headear-wrapper">
+  <CiExport size={28} style={{ marginRight: "2px"}} />
+    
 ### Export
+</div>
 
 Data can be exported in standard formats such as CSV or Excel. This allows external analysis or record-keeping.
 
 More details can be found on the [Kanban View](../modules/kanban-view.md) page.
 
+
+<div className="card-headear-wrapper">
+  <CiImport size={28} style={{ marginRight: "2px"}} />
+    
 ### Import
+</div>
 
 Users can import records in bulk via structured files. Field mapping, validations, and error handling are supported out of the box.
 
 More details can be found on the [Kanban View](../modules/kanban-view.md) page.
 
-### Action Buttons 
+
+<div className="card-headear-wrapper">
+  <MdAttractions size={28} style={{ marginRight: "2px"}} />
+    
+### Action Buttons
+</div>
 
 Standard CRUD actions (create, edit, delete) can be enabled per model via layout attributes. You can also add custom action buttons tied to server-side logic, workflows, or external integrations.
 
@@ -222,15 +261,20 @@ These custom buttons can be added to the list view header or against each row.
 
 TODO: More details can be found on the [Kanban Action Buttons Recipe](../../recipes/) page.
 
+
+<div className="card-headear-wrapper">
+  <FiUserCheck size={28} style={{ marginRight: "2px"}} />
+
 ### Impact of Roles
+</div>
 
-Roles can be used to control the display of columns and action buttons on the list view. 
+Roles can be used to control the display of columns and action buttons on the list view.  
 
-The default buttons viz. create, edit & delete aswell as custom header or row actions can be controlled such that they are rendered only if the currently logged in user has that role.
+The default buttons viz. create, edit & delete as well as custom header or row actions can be controlled such that they are rendered only if the currently logged in user has that role.  
 
 For example in the below layout, the column "publisher" will be visible only to users who have the role admin or super-admin.
 
-```
+```json
 {
   "type": "list",
   "attrs": {
@@ -282,7 +326,7 @@ TODO: Point to developer documentation, each element of type: "field" in the Lis
 
 One of the most powerful customization points is the ability to control how a field's cell is rendered using a custom view widget.
 
-```
+```json
 {
   "type": "field",
   "attrs": {
@@ -295,15 +339,17 @@ One of the most powerful customization points is the ability to control how a fi
 }
 ```
 
-- viewWidget refers to a React component.
-- This component must conform to a predefined interface (props, value, rowData, etc.).
-- You can use this to render:
-  - Images
-  - Icons
-  - Tags
-  - Links
-  - Badges
-  - Custom logic or formatting
+
+- <span className="white-color"> <strong> viewWidget   </strong> </span> refers to a React component that you can assign to a field.
+- The component must conform to a predefined interface, typically accepting props such as <span className="white-color"> <strong> value , rowData </strong> </span>  and others.
+- Using a custom <span className="white-color"> <strong> viewWidget   </strong> </span> ,you can render a wide variety of content, including:
+  - **Images** – Display thumbnails or full-size media.
+  - **Icons** – Add visual indicators or status symbols.
+  - **Tags** – Highlight categories, labels, or statuses.
+  - **Links** – Navigate to related records or external resources.
+  - **Badges** – Show statuses, counts, or other metadata.
+  - **Custom logic or formatting** – Apply any custom rendering rules, calculations, or UI elements.
+
 
 SolidX provides a default widget for each field type (e.g., Boolean → toggle icon, Media → image preview). Developers can override these defaults globally or per field.
 
@@ -337,11 +383,11 @@ When a new model is created, SolidX automatically creates a new layout JSON that
 TODO: More details on this can be found in the developer documentation section.
 
 ## Related Recipes
-- [Adding Custom Action Buttons](../../recipes/): <br />
+- [Adding Custom Action Buttons](../../recipes/):
    This recipe talks about how you can add custom action buttons to the list view header and rows.
-- [Custom View Widget](../../recipes/): <br />
+- [Custom View Widget](../../recipes/):
    This recipe talks about how you can create a custom view widget to control how a field is rendered in the list view.
-- [Controlling Kanban View With Roles](../../recipes/): <br />
+- [Controlling Kanban View With Roles](../../recipes/):
    This recipe talks about how you can control various visual aspects of the list view by using roles.
 
 

@@ -3,6 +3,8 @@ title: Module Metadata Schema
 description: Overview of the module metadata schema used in SolidX.
 sidebar_position: 1
 ---
+import { MdCategory } from "react-icons/md";
+
 
 ## Overview
 
@@ -13,9 +15,9 @@ A module groups together related models and functionality under a **unified doma
 
 ---
 
-### ▶️ Example: Fees Portal Module
+###  Example: Fees Portal Module
 
-<summary>📑 Module Schema</summary>
+<summary> Module Schema</summary>
 
 ```json
 {
@@ -36,7 +38,13 @@ A module groups together related models and functionality under a **unified doma
 
 ---
 
-## 🔍 Module Metadata Attributes
+  <h2 className=" card-headear-wrapper">
+    <MdCategory size={24} style={{ marginRight: "10px" }} />
+
+##  Module Metadata Attributes
+</h2>
+
+
 
 ### `name` *(string, required, unique)*
 Unique identifier for the module (lowercase, underscores/dashes).  

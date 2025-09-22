@@ -1,6 +1,9 @@
 ---
 sidebar_position: 6
 ---
+import { FaEnvelope, FaServer, FaSms, FaGlobe,FaFileAlt, FaEdit, FaTruck } from "react-icons/fa";
+import { IoIosArrowForward } from "react-icons/io";
+
 
 # Email & SMS Templates
 
@@ -17,18 +20,7 @@ The notification system offers:
 
 ## Components
 
-<!-- ### [Email Templates](./email-templates.md)
-- HTML/Text templates
-- Dynamic placeholders
-- Static attachments
-- Dynamic attachments (Reports)
-- Provider abstraction (SMTP, Amazon SES)
 
-### [SMS Templates](./sms-templates.md)
-- Text templates
-- Dynamic placeholders
-- Link shortening
-- Provider abstraction (Twilio, Msg91, Gupshup) -->
 
 
 ### [Email Templates](./email-templates.md)
@@ -51,37 +43,13 @@ The notification system offers:
 </div>
 
 
-
-
-
-## Features
-
-<!-- ### Template Management
-- Version control
-- Preview functionality
-- Test sending
-- Template variables
-- Template inheritance
-
-### Content Features
-- Rich text editing
-- Variable validation
-- Conditional content
-- Multi-language support
-- Template categories
-
-### Delivery Features
-- Queue management
-- Retry handling
-- Delivery tracking
-- Bounce handling
-- Analytics -->
-
-
 <div className="feature-grid">
 
   <div className="feature-card">
-    <h4 className="card-title">1 Template Management</h4>
+    <h4 className="card-title card-headear-wrapper">
+      <FaFileAlt size={16} style={{ marginRight: "10px" }} />
+      Template Management
+    </h4>
     <ul className="card-desc">
       <li>Version control</li>
       <li>Preview functionality</li>
@@ -92,7 +60,10 @@ The notification system offers:
   </div>
 
   <div className="feature-card">
-    <h4 className="card-title">2 Content Features</h4>
+    <h4 className="card-title card-headear-wrapper">
+      <FaEdit size={16} style={{ marginRight: "10px" }} />
+      Content Features
+    </h4>
     <ul className="card-desc">
       <li>Rich text editing</li>
       <li>Variable validation</li>
@@ -103,7 +74,10 @@ The notification system offers:
   </div>
 
   <div className="feature-card">
-    <h4 className="card-title">3 Delivery Features</h4>
+    <h4 className="card-title card-headear-wrapper">
+      <FaTruck size={16} style={{ marginRight: "10px" }} />
+      Delivery Features
+    </h4>
     <ul className="card-desc">
       <li>Queue management</li>
       <li>Retry handling</li>
@@ -119,22 +93,14 @@ The notification system offers:
 ## Provider Support
 
 ### Email Providers
-  <!-- 1. **Amazon SES**
-    - High deliverability
-    - Detailed analytics
-    - Bounce management
-    - Reputation monitoring
-
-  2. **SMTP**
-    - Standard protocol
-    - Wide compatibility
-    - Custom server support
-    - TLS encryption -->
 
 <div className="feature-grid">
 
   <div className="feature-card">
-    <h4 className="card-title">1 Amazon SES</h4>
+    <h4 className="card-title card-headear-wrapper">
+      <FaEnvelope size={16} style={{ marginRight: "10px" }} />
+      Amazon SES
+    </h4>
     <ul className="card-desc">
       <li>High deliverability</li>
       <li>Detailed analytics</li>
@@ -144,7 +110,10 @@ The notification system offers:
   </div>
 
   <div className="feature-card">
-    <h4 className="card-title">2 SMTP</h4>
+    <h4 className="card-title card-headear-wrapper">
+      <FaServer size={14} style={{ marginRight: "10px" }} />
+      SMTP
+    </h4>
     <ul className="card-desc">
       <li>Standard protocol</li>
       <li>Wide compatibility</li>
@@ -155,23 +124,15 @@ The notification system offers:
 
 </div>
 
-
 ### SMS Providers
-<!-- 1. **Twilio**
-   - Global coverage
-   - High reliability
-   - Delivery tracking
-   - Two-way messaging
-
-2. **Additional Providers**
-   - Msg91
-   - Gupshup
-   - Custom providers -->
 
 <div className="feature-grid">
 
   <div className="feature-card">
-    <h4 className="card-title">1 Twilio</h4>
+    <h4 className="card-title card-headear-wrapper">
+      <FaSms size={16} style={{ marginRight: "10px" }} />
+      Twilio
+    </h4>
     <ul className="card-desc">
       <li>Global coverage</li>
       <li>High reliability</li>
@@ -181,7 +142,10 @@ The notification system offers:
   </div>
 
   <div className="feature-card">
-    <h4 className="card-title">2 Additional Providers</h4>
+    <h4 className="card-title card-headear-wrapper">
+      <FaGlobe size={16} style={{ marginRight: "10px" }} />
+      Additional Providers
+    </h4>
     <ul className="card-desc">
       <li>Msg91</li>
       <li>Gupshup</li>
@@ -191,79 +155,6 @@ The notification system offers:
 
 </div>
 
-
-## Best Practices
-<!-- 
-1. **Template Design**
-   - Use clear layouts
-   - Test responsiveness
-   - Include plain text
-   - Follow email standards
-   - Optimize for mobile
-
-2. **Content Management**
-   - Document variables
-   - Version templates
-   - Test thoroughly
-   - Monitor performance
-
-3. **Delivery**
-   - Configure SPF/DKIM
-   - Monitor bounces
-   - Track engagement
-   - Handle failures
-
-4. **Maintenance**
-   - Regular updates
-   - Clean old templates
-   - Update providers
-   - Review analytics -->
-
-
-<div className="feature-grid">
-
-  <div className="feature-card">
-    <h4 className="card-title">1 Template Design</h4>
-    <ul className="card-desc">
-      <li>Use clear layouts</li>
-      <li>Test responsiveness</li>
-      <li>Include plain text</li>
-      <li>Follow email standards</li>
-      <li>Optimize for mobile</li>
-    </ul>
-  </div>
-
-  <div className="feature-card">
-    <h4 className="card-title">2 Content Management</h4>
-    <ul className="card-desc">
-      <li>Document variables</li>
-      <li>Version templates</li>
-      <li>Test thoroughly</li>
-      <li>Monitor performance</li>
-    </ul>
-  </div>
-
-  <div className="feature-card">
-    <h4 className="card-title">3 Delivery</h4>
-    <ul className="card-desc">
-      <li>Configure SPF/DKIM</li>
-      <li>Monitor bounces</li>
-      <li>Track engagement</li>
-      <li>Handle failures</li>
-    </ul>
-  </div>
-
-  <div className="feature-card">
-    <h4 className="card-title">4 Maintenance</h4>
-    <ul className="card-desc">
-      <li>Regular updates</li>
-      <li>Clean old templates</li>
-      <li>Update providers</li>
-      <li>Review analytics</li>
-    </ul>
-  </div>
-
-</div>
 
 
 
@@ -380,3 +271,59 @@ await sendSMS({
   }
 }
 ```
+
+
+## Best Practices
+
+<details>
+  <summary className="card-title card-headear-wrapper">
+    <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
+    Template Design
+  </summary>
+  <ul className="card-desc">
+    <li>Use clear layouts</li>
+    <li>Test responsiveness</li>
+    <li>Include plain text</li>
+    <li>Follow email standards</li>
+    <li>Optimize for mobile</li>
+  </ul>
+</details>
+
+<details>
+  <summary className="card-title card-headear-wrapper">
+    <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
+    Content Management
+  </summary>
+  <ul className="card-desc">
+    <li>Document variables</li>
+    <li>Version templates</li>
+    <li>Test thoroughly</li>
+    <li>Monitor performance</li>
+  </ul>
+</details>
+
+<details>
+  <summary className="card-title card-headear-wrapper">
+    <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
+    Delivery
+  </summary>
+  <ul className="card-desc">
+    <li>Configure SPF/DKIM</li>
+    <li>Monitor bounces</li>
+    <li>Track engagement</li>
+    <li>Handle failures</li>
+  </ul>
+</details>
+
+<details>
+  <summary className="card-title card-headear-wrapper">
+    <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
+    Maintenance
+  </summary>
+  <ul className="card-desc">
+    <li>Regular updates</li>
+    <li>Clean old templates</li>
+    <li>Update providers</li>
+    <li>Review analytics</li>
+  </ul>
+</details>

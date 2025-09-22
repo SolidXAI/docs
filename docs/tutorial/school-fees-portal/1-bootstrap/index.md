@@ -35,7 +35,7 @@ When you run this command, the CLI will guide you through a series of prompts. H
 
 Once you answer these prompts, the CLI performs the following setup steps:
 
-✅ What the CLI Does
+ What the CLI Does
 	1.	Sets up boilerplate for the backend
 	2.	Installs the Solid CLI binary globally
 	3.	Sets up boilerplate for the frontend
@@ -55,7 +55,7 @@ Once the above CLI runs a new SolidX project is bootstrapped, SolidX generates b
 > After you run `solid seed` a default admin user will be configured the password of which will be printed on the terminal. Please make a note of this as this will not appear again.
 
 ### Backend 
-```
+```bash
 cd school-fees-portal/solid-api
 
 # Seed the database with initial metadata
@@ -76,7 +76,7 @@ SolidX backend allows you to generate all your REST API endpoints and comes pre-
 
 
 ### Frontend
-```
+```bash
 
 cd school-fees-portal/solid-ui
 

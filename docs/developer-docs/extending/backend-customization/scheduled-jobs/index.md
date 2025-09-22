@@ -5,7 +5,12 @@ description: Learn how to write the scheduled jobs in your SolidX application.
 keywords: [backend, scheduled jobs, customization]
 ---
 
-# 🕒 Creating Scheduled Jobs
+import { IoIosArrowForward } from "react-icons/io";
+import { IoIosAlarm } from "react-icons/io";
+
+
+
+#  Creating Scheduled Jobs
 
 Scheduled jobs in SolidX allow you to run recurring tasks such as sending notifications, cleaning up records, syncing data, or performing regular maintenance.
 
@@ -13,16 +18,24 @@ This section walks you through how to create and integrate custom scheduled jobs
 
 ---
 
-## ➕ Adding a New Scheduled Job
+<h4 className="card-title card-headear-wrapper">
+  <IoIosAlarm size={26} style={{ marginRight: "10px" }} />
+
+##  Adding a New Scheduled Job
+</h4>
+
 
 Follow these steps to define and use a custom scheduled job:
 
-### 1️⃣ Create a Job Service
+### 1 Create a Job Service
 
 Create a new service class that implements the `IScheduledJob` interface.
 
 <details>
-<summary>📦 Example: HelloWorld Scheduled Job</summary>
+ <summary className="card-title card-headear-wrapper">
+    <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
+    Example: HelloWorld Scheduled Job
+</summary>
 
 ```ts
 import { Injectable, Logger } from '@nestjs/common';
@@ -41,16 +54,19 @@ export class HelloWorldJobService implements IScheduledJob {
 ```
 </details>
 
-### 2️⃣ Register the Service
+### 2 Register the Service
 
 Ensure the job service is registered in the appropriate module under the providers array.
 
-### 3️⃣ Define the Job in Metadata
+### 3 Define the Job in Metadata
 
 Add the job definition in your metadata.json or job configuration file.
 
 <details>
-<summary>🧾 Example Metadata Configuration</summary>
+ <summary className="card-title card-headear-wrapper">
+    <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
+    Example Metadata Configuration
+</summary>
 
 ```json
 {
@@ -75,7 +91,7 @@ Add the job definition in your metadata.json or job configuration file.
 ```
 </details>
 
-⸻
+---
 
 ### Supported Frequencies
 - Every Minute
@@ -93,5 +109,3 @@ Add the job definition in your metadata.json or job configuration file.
       3. Execute Jobs: For each due job, it invokes the corresponding job service's execute method.
       4. Update Job Metadata: After execution, it updates the job's lastRunAt and nextRunAt fields based on the defined frequency.  
 	-	Triggering mechanism and intervals
-
-⸻

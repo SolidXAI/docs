@@ -2,6 +2,14 @@
 sidebar_position: 3
 ---
 
+import { 
+  FaDatabase, FaCogs, FaUsers, FaTools, 
+  FaKey, FaArchive 
+} from "react-icons/fa";
+
+import { IoIosArrowForward } from "react-icons/io";
+
+
 # Permissions
 
 Permissions in SOLID are automatically discovered based on controller actions and provide fine-grained control over what users can do within the system.
@@ -16,7 +24,7 @@ Permissions in SOLID are automatically discovered based on controller actions an
 
 ### Permission Structure
 
-```
+```bash
 module:resource:action
 
 Examples:
@@ -25,77 +33,58 @@ Examples:
 - media:files:upload
 ```
 
-## Permission Types
 
 ### Resource Permissions
-
-<!-- 1. **CRUD Operations**
-   - Create: `resource:create`
-   - Read: `resource:read`
-   - Update: `resource:update`
-   - Delete: `resource:delete`
-
-2. **Special Operations**
-   - Import: `resource:import`
-   - Export: `resource:export`
-   - Archive: `resource:archive`
-   - Restore: `resource:restore` -->
-
 
 <div className="feature-grid">
 
   <div className="feature-card">
-    <h4 className="card-title">1 CRUD Operations</h4>
-    - Create: `resource:create`
-   - Read: `resource:read`
-   - Update: `resource:update`
-   - Delete: `resource:delete`
+    <h4 className="card-title card-headear-wrapper">
+      <FaDatabase size={15} style={{ marginRight: "10px" }} />
+      CRUD Operations
+    </h4>
+    - Create: `resource:create`  
+    - Read: `resource:read`  
+    - Update: `resource:update`  
+    - Delete: `resource:delete`
   </div>
 
   <div className="feature-card">
-    <h4 className="card-title">2 Special Operations</h4>
-    - Import: `resource:import`
-   - Export: `resource:export`
-   - Archive: `resource:archive`
-   - Restore: `resource:restore`
-
+    <h4 className="card-title card-headear-wrapper">
+      <FaArchive size={15} style={{ marginRight: "10px" }} />
+      Special Operations
+    </h4>
+    - Import: `resource:import`  
+    - Export: `resource:export`  
+    - Archive: `resource:archive`  
+    - Restore: `resource:restore`
   </div>
 
 </div>
 
 
-
-
 ### Administrative Permissions
-
-<!-- 1. **User Management**
-   - Create users: `users:create`
-   - Manage roles: `roles:manage`
-   - Assign permissions: `permissions:assign`
-
-2. **System Settings**
-   - Configure system: `settings:manage`
-   - Manage modules: `modules:manage`
-   - View logs: `logs:read` -->
-
-
 
 <div className="feature-grid">
 
   <div className="feature-card">
-    <h4 className="card-title">1 User Management</h4>
-    - Create users: `users:create`
-   - Manage roles: `roles:manage`
-   - Assign permissions: `permissions:assign`
+    <h4 className="card-title card-headear-wrapper">
+      <FaUsers size={16} style={{ marginRight: "10px" }} />
+      User Management
+    </h4>
+    - Create users: `users:create`  
+    - Manage roles: `roles:manage`  
+    - Assign permissions: `permissions:assign`
   </div>
 
   <div className="feature-card">
-    <h4 className="card-title">2 System Settings</h4>
-      - Configure system: `settings:manage`
-   - Manage modules: `modules:manage`
-   - View logs: `logs:read`
-
-
+    <h4 className="card-title card-headear-wrapper">
+      <FaCogs size={16} style={{ marginRight: "10px" }} />
+      System Settings
+    </h4>
+    - Configure system: `settings:manage`  
+    - Manage modules: `modules:manage`  
+    - View logs: `logs:read`
   </div>
 
 </div>
@@ -103,33 +92,26 @@ Examples:
 
 ### Feature Permissions
 
-<!-- 1. **Module Access**
-   - Access module: `module:access`
-   - Configure module: `module:configure`
-   - Manage module data: `module:manage`
-
-2. **Tool Access**
-   - Use import tool: `tools:import:use`
-   - Use export tool: `tools:export:use`
-   - Use admin tools: `tools:admin:use` -->
-
-
 <div className="feature-grid">
 
   <div className="feature-card">
-    <h4 className="card-title">1 Module Access</h4>
-  - Access module: `module:access`
-   - Configure module: `module:configure`
-   - Manage module data: `module:manage`
+    <h4 className="card-title card-headear-wrapper">
+      <FaKey size={16} style={{ marginRight: "10px" }} />
+      Module Access
+    </h4>
+    - Access module: `module:access`  
+    - Configure module: `module:configure`  
+    - Manage module data: `module:manage`
   </div>
 
   <div className="feature-card">
-    <h4 className="card-title">2 Tool Access</h4>
-     - Use import tool: `tools:import:use`
-   - Use export tool: `tools:export:use`
-   - Use admin tools: `tools:admin:use`
-
-
+    <h4 className="card-title card-headear-wrapper">
+      <FaTools size={16} style={{ marginRight: "10px" }} />
+      Tool Access
+    </h4>
+    - Use import tool: `tools:import:use`  
+    - Use export tool: `tools:export:use`  
+    - Use admin tools: `tools:admin:use`
   </div>
 
 </div>
@@ -201,76 +183,6 @@ Permissions can be grouped for easier management:
 }
 ```
 
-## Best Practices
-
-<!-- 1. **Permission Design**
-   - Use clear, descriptive names
-   - Follow naming conventions
-   - Document permission purposes
-   - Consider dependencies
-
-2. **Permission Assignment**
-   - Follow least privilege principle
-   - Group related permissions
-   - Regular permission audits
-   - Document assignments
-
-3. **Security**
-   - Validate permission checks
-   - Log permission changes
-   - Monitor usage patterns
-   - Regular security reviews
-
-4. **Maintenance**
-   - Clean up unused permissions
-   - Update documentation
-   - Review dependencies
-   - Monitor performance -->
-
-<div className="feature-grid">
-
-  <div className="feature-card">
-    <h4 className="card-title">1 Permission Design</h4>
-    <ul className="card-desc">
-      <li>Use clear, descriptive names</li>
-      <li>Follow naming conventions</li>
-      <li>Document permission purposes</li>
-      <li>Consider dependencies</li>
-    </ul>
-  </div>
-
-  <div className="feature-card">
-    <h4 className="card-title">2 Permission Assignment</h4>
-    <ul className="card-desc">
-      <li>Follow least privilege principle</li>
-      <li>Group related permissions</li>
-      <li>Regular permission audits</li>
-      <li>Document assignments</li>
-    </ul>
-  </div>
-
-  <div className="feature-card">
-    <h4 className="card-title">3 Security</h4>
-    <ul className="card-desc">
-      <li>Validate permission checks</li>
-      <li>Log permission changes</li>
-      <li>Monitor usage patterns</li>
-      <li>Regular security reviews</li>
-    </ul>
-  </div>
-
-  <div className="feature-card">
-    <h4 className="card-title">4 Maintenance</h4>
-    <ul className="card-desc">
-      <li>Clean up unused permissions</li>
-      <li>Update documentation</li>
-      <li>Review dependencies</li>
-      <li>Monitor performance</li>
-    </ul>
-  </div>
-
-</div>
-
 
 
 
@@ -323,3 +235,59 @@ Permissions can be grouped for easier management:
   }
 }
 ```
+
+
+
+### Best Practices 
+
+<details>
+  <summary className="card-title card-headear-wrapper">
+    <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
+    Permission Design
+  </summary>
+  <ul className="card-desc">
+    <li>Use clear, descriptive names</li>
+    <li>Follow naming conventions</li>
+    <li>Document permission purposes</li>
+    <li>Consider dependencies between permissions</li>
+  </ul>
+</details>
+
+<details>
+  <summary className="card-title card-headear-wrapper">
+    <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
+    Permission Assignment
+  </summary>
+  <ul className="card-desc">
+    <li>Follow the principle of least privilege</li>
+    <li>Group related permissions logically</li>
+    <li>Perform regular permission audits</li>
+    <li>Document assignments and changes</li>
+  </ul>
+</details>
+
+<details>
+  <summary className="card-title card-headear-wrapper">
+    <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
+    Security
+  </summary>
+  <ul className="card-desc">
+    <li>Validate permission checks programmatically</li>
+    <li>Log permission changes</li>
+    <li>Monitor usage patterns for anomalies</li>
+    <li>Perform regular security reviews</li>
+  </ul>
+</details>
+
+<details>
+  <summary className="card-title card-headear-wrapper">
+    <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
+    Maintenance
+  </summary>
+  <ul className="card-desc">
+    <li>Clean up unused permissions</li>
+    <li>Update permission documentation</li>
+    <li>Review dependencies when modifying permissions</li>
+    <li>Monitor performance and access patterns</li>
+  </ul>
+</details>

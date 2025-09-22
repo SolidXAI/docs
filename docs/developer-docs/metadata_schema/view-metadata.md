@@ -4,6 +4,12 @@ description: Metadata schema for defining views in SolidX applications.
 sidebar_position: 4
 ---
 
+import { IoIosArrowForward } from "react-icons/io";
+import { InfoBox } from '@site/src/common/InfoBox';
+
+
+
+
 ## Overview
 Views define UI presentation of models and automatically generate:
     - List Views: Tabular display with search, filter, pagination
@@ -16,7 +22,11 @@ For a conceptual overview / guide/ recipes of how views can be used in SolidX, r
 
 ### Example: Fee Portal List/Form Views
 <details>
-<summary> View Schema </summary>
+  <summary className="card-title card-headear-wrapper">
+    <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
+    View Schema
+  </summary>
+  
 ``` json
     { // List View for Institute Model
       "name": "institute-list-view", 
@@ -640,13 +650,18 @@ Controls how fields, widgets, buttons, and other UI elements are organized.
 
 For detailed attribute-level documentation of the `layout` schema per view type, see:
 
-- 📋 **List View:** [List View Layout Attributes](../../recipes/view-configurations-guide#list-view-attributes)  
-- 📝 **Form View:** [Form View Layout Attributes](../../recipes/view-configurations-guide#form-view-attributes)  
-- 🗂 **Kanban View:** [Kanban View Layout Attributes](../../recipes/view-configurations-guide#kanban-view-attributes)
+-  **List View:** [List View Layout Attributes](../../recipes/view-configurations-guide#list-view-attributes)  
+-  **Form View:** [Form View Layout Attributes](../../recipes/view-configurations-guide#form-view-attributes)  
+-  **Kanban View:** [Kanban View Layout Attributes](../../recipes/view-configurations-guide#kanban-view-attributes)
 
-:::info
-Each view type has its own expected `layout` schema. Use the links above to understand required keys, optional properties, and usage examples.
-:::
+
+
+
+<InfoBox>
+  Each view type has its own expected `layout` schema. Use the links above to understand required keys, optional properties, and usage examples.
+
+</InfoBox>
+
 
 ---
 ### `moduleUserKey` *(string, optional)*

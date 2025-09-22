@@ -2,6 +2,14 @@
 sidebar_position: 3
 ---
 
+import { FaWpforms } from "react-icons/fa";
+import { FiFolder, FiCheckCircle, FiUserCheck } from "react-icons/fi";
+import { MdViewComfy, MdHistory, MdComment } from "react-icons/md";
+import { RiLayoutRowLine } from "react-icons/ri";
+import { BiCheckShield } from "react-icons/bi";
+import { HiOutlineLightningBolt } from "react-icons/hi";
+import { IoIosArrowForward } from "react-icons/io";
+
 # Form View
 
 The Form View provides a comprehensive interface for creating and editing individual records, with support for complex data entry, validation, and workflow management.
@@ -10,21 +18,13 @@ The Form View provides a comprehensive interface for creating and editing indivi
 
 ### Form Layout
 
-<!-- - **Section Management**:
-  - Logical grouping of fields
-  - Collapsible sections
-  - Conditional visibility
-  - Custom styling
-- **Field Arrangement**:
-  - Responsive grid layout
-  - Field sizing and spacing
-  - Label positioning
-  - Help text support -->
-
 <div className="feature-grid">
 
   <div className="feature-card">
-    <h4 className="card-title">1 Section Management</h4>
+    <h4 className="card-title card-headear-wrapper ">
+      <FiFolder size={20} style={{ marginRight: "10px" }} />
+      Section Management
+    </h4>
     <ul className="card-desc">
       <li>Logical grouping of fields</li>
       <li>Collapsible sections</li>
@@ -34,7 +34,10 @@ The Form View provides a comprehensive interface for creating and editing indivi
   </div>
 
   <div className="feature-card">
-    <h4 className="card-title">2 Field Arrangement</h4>
+    <h4 className="card-title card-headear-wrapper ">
+      <MdViewComfy size={22} style={{ marginRight: "10px" }} />
+      Field Arrangement
+    </h4>
     <ul className="card-desc">
       <li>Responsive grid layout</li>
       <li>Field sizing and spacing</li>
@@ -45,24 +48,15 @@ The Form View provides a comprehensive interface for creating and editing indivi
 
 </div>
 
-
-
 ### Data Entry
-<!-- - **Field Types**:
-  - All supported field types
-  - Custom field components
-  - Rich text editing
-  - File uploads
-- **Validation**:
-  - Real-time validation
-  - Custom validation rules
-  - Cross-field validation
-  - Error messaging -->
 
 <div className="feature-grid">
 
   <div className="feature-card">
-    <h4 className="card-title">1 Field Types</h4>
+    <h4 className="card-title card-headear-wrapper ">
+      <FaWpforms size={19} style={{ marginRight: "10px" }} />
+      Field Types
+    </h4>
     <ul className="card-desc">
       <li>All supported field types</li>
       <li>Custom field components</li>
@@ -72,7 +66,10 @@ The Form View provides a comprehensive interface for creating and editing indivi
   </div>
 
   <div className="feature-card">
-    <h4 className="card-title">2 Validation</h4>
+    <h4 className="card-title card-headear-wrapper ">
+      <BiCheckShield size={24} style={{ marginRight: "10px" }} />
+      Validation
+    </h4>
     <ul className="card-desc">
       <li>Real-time validation</li>
       <li>Custom validation rules</li>
@@ -83,29 +80,15 @@ The Form View provides a comprehensive interface for creating and editing indivi
 
 </div>
 
-
-
 ### Advanced Features
-<!-- - **Audit Trail**:
-  - Change history
-  - User tracking
-  - Timestamp logging
-  - Change comments
-- **Workflow Integration**:
-  - Status management
-  - Stage transitions
-  - Approval processes
-  - Action triggers
-- **Chatter/Comments**:
-  - Threaded discussions
-  - @mentions
-  - File attachments
-  - Activity log -->
 
 <div className="feature-grid">
 
   <div className="feature-card">
-    <h4 className="card-title">1 Audit Trail</h4>
+    <h4 className="card-title card-headear-wrapper ">
+      <MdHistory size={22} style={{ marginRight: "10px" }} />
+      Audit Trail
+    </h4>
     <ul className="card-desc">
       <li>Change history</li>
       <li>User tracking</li>
@@ -115,7 +98,10 @@ The Form View provides a comprehensive interface for creating and editing indivi
   </div>
 
   <div className="feature-card">
-    <h4 className="card-title">2 Workflow Integration</h4>
+    <h4 className="card-title card-headear-wrapper ">
+      <HiOutlineLightningBolt size={22} style={{ marginRight: "10px" }} />
+      Workflow Integration
+    </h4>
     <ul className="card-desc">
       <li>Status management</li>
       <li>Stage transitions</li>
@@ -125,7 +111,10 @@ The Form View provides a comprehensive interface for creating and editing indivi
   </div>
 
   <div className="feature-card">
-    <h4 className="card-title">3 Chatter/Comments</h4>
+    <h4 className="card-title card-headear-wrapper ">
+      <MdComment size={20} style={{ marginRight: "10px" }} />
+      Chatter/Comments
+    </h4>
     <ul className="card-desc">
       <li>Threaded discussions</li>
       <li>@mentions</li>
@@ -135,8 +124,6 @@ The Form View provides a comprehensive interface for creating and editing indivi
   </div>
 
 </div>
-
-
 
 ## Form Configuration
 
@@ -227,33 +214,14 @@ Customize form layout and behavior through JSON configuration:
 - Conditional visibility
 - Validation feedback
 
-
-
-
 ### Sidebar Components
-<!-- 1. **Workflow Ribbon**:
-   - Current status
-   - Available transitions
-   - Stage history
-   - Action buttons
-
-2. **Audit Trail**:
-   - Change history
-   - User actions
-   - Timestamps
-   - Field changes
-
-3. **Chatter/Comments**:
-   - Discussion threads
-   - File attachments
-   - User mentions
-   - Activity feed -->
 
 <div className="feature-grid">
 
   <div className="feature-card">
-    <h4 className="card-title">
-    1 Workflow Ribbon 
+    <h4 className="card-title card-headear-wrapper ">
+      <HiOutlineLightningBolt size={22} style={{ marginRight: "10px" }} />
+      Workflow Ribbon
     </h4>
     <ul className="card-desc">
       <li>Current status</li>
@@ -264,8 +232,9 @@ Customize form layout and behavior through JSON configuration:
   </div>
 
   <div className="feature-card">
-    <h4 className="card-title">
-    2 Audit Trail 
+    <h4 className="card-title card-headear-wrapper ">
+      <MdHistory size={22} style={{ marginRight: "10px" }} />
+      Audit Trail
     </h4>
     <ul className="card-desc">
       <li>Change history</li>
@@ -276,8 +245,9 @@ Customize form layout and behavior through JSON configuration:
   </div>
 
   <div className="feature-card">
-    <h4 className="card-title">
-   3 Chatter/Comments 
+    <h4 className="card-title card-headear-wrapper ">
+      <MdComment size={20} style={{ marginRight: "10px" }} />
+      Chatter/Comments
     </h4>
     <ul className="card-desc">
       <li>Discussion threads</li>
@@ -288,9 +258,6 @@ Customize form layout and behavior through JSON configuration:
   </div>
 
 </div>
-
-
-
 
 ### Action Bar
 - Primary actions (Save, Delete)
@@ -300,111 +267,81 @@ Customize form layout and behavior through JSON configuration:
 
 ## Best Practices
 
-<!-- 1. **Layout Design**
-   - Group related fields
-   - Use logical sections
-   - Consider field dependencies
-   - Optimize for readability
-
-2. **Validation**
-   - Provide clear error messages
-   - Validate in real-time
-   - Handle edge cases
-   - Consider field relationships
-
-3. **Performance**
-   - Load data efficiently
-   - Cache form state
-   - Optimize validations
-   - Handle large forms
-
-4. **User Experience**
-   - Clear navigation
-   - Consistent styling
-   - Helpful tooltips
-   - Keyboard shortcuts
-
-5. **Workflow Integration**
-   - Clear status indicators
-   - Intuitive transitions
-   - Proper validations
-   - Audit trail tracking -->
-
-
-
-<div className="feature-grid">
-
-  <div className="feature-card">
-    <h4 className="card-title">
-    1  Layout Design
-    </h4>
+  <details>
+    <summary className="card-title card-headear-wrapper">
+    <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
+      Layout Design
+    </summary>
     <ul className="card-desc">
       <li>Group related fields</li>
       <li>Use logical sections</li>
       <li>Consider field dependencies</li>
       <li>Optimize for readability</li>
     </ul>
-  </div>
+  </details>
 
-  <div className="feature-card">
-    <h4 className="card-title">
-    2  Validation
-    </h4>
+  <details>
+    <summary className="card-title card-headear-wrapper">
+    <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
+      Validation
+    </summary>
     <ul className="card-desc">
       <li>Provide clear error messages</li>
       <li>Validate in real-time</li>
       <li>Handle edge cases</li>
       <li>Consider field relationships</li>
     </ul>
-  </div>
+  </details>
 
-  <div className="feature-card">
-    <h4 className="card-title">
-     3 Performance
-    </h4>
+  <details>
+    <summary className="card-title card-headear-wrapper">
+    <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
+      Performance
+    </summary>
     <ul className="card-desc">
       <li>Load data efficiently</li>
       <li>Cache form state</li>
       <li>Optimize validations</li>
       <li>Handle large forms</li>
     </ul>
-  </div>
+  </details>
 
-  <div className="feature-card">
-    <h4 className="card-title">
-    4  User Experience
-    </h4>
+  <details>
+    <summary className="card-title card-headear-wrapper">
+    <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
+      User Experience
+    </summary>
     <ul className="card-desc">
       <li>Clear navigation</li>
       <li>Consistent styling</li>
       <li>Helpful tooltips</li>
       <li>Keyboard shortcuts</li>
     </ul>
-  </div>
+  </details>
 
-  <div className="feature-card">
-    <h4 className="card-title">
-    5  Workflow Integration
-    </h4>
+  <details>
+    <summary className="card-title card-headear-wrapper">
+    <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
+      Workflow Integration
+    </summary>
     <ul className="card-desc">
       <li>Clear status indicators</li>
       <li>Intuitive transitions</li>
       <li>Proper validations</li>
       <li>Audit trail tracking</li>
     </ul>
-  </div>
+  </details>
 
-  <div className="feature-card">
-    <h4 className="card-title">
-    6  Chatter/Comments
-    </h4>
+  <details>
+    <summary className="card-title card-headear-wrapper">
+    <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
+      Chatter/Comments
+    </summary>
     <ul className="card-desc">
       <li>Discussion threads</li>
       <li>File attachments</li>
       <li>User mentions</li>
       <li>Activity feed</li>
     </ul>
-  </div>
-
-</div>
+  </details>
 

@@ -30,7 +30,7 @@ After extending the SolidX User model, your form view might look like this:
 
 ### Institute User Form View Layout
 
-```
+```json
 {
   "type": "form",
   "attrs": {
@@ -118,15 +118,15 @@ After extending the SolidX User model, your form view might look like this:
 
 In the form above:
 
-🟢 fullName, email, mobile, password → come from the SolidX User model
+**fullName, email, mobile, password → come from the SolidX User model**
 
-🔵 userType, institute → come from the Institute User model
+**userType, institute → come from the Institute User model**
 
 ### Institute User Entity
 
 Once extended, your InstituteUser entity might look like this:
 
-```
+```tsx
 @ChildEntity()
 export class InstituteUser extends User {
     @Column({ type: "varchar" })
@@ -141,7 +141,7 @@ export class InstituteUser extends User {
 
 Once extended, your InstituteUser create Dto might look like this:
 
-```
+```tsx
 export class CreateInstituteUserDto extends CreateUserDto {
     @IsNotEmpty()
     @IsString()
@@ -162,7 +162,7 @@ export class CreateInstituteUserDto extends CreateUserDto {
 
 Once extended, your InstituteUser update Dto might look like this:
 
-```
+```tsx
 export class UpdateInstituteUserDto extends UpdateUserDto {
     @IsOptional()
     @IsInt()
@@ -187,7 +187,7 @@ export class UpdateInstituteUserDto extends UpdateUserDto {
 
 In the controller, the create method for institute users you need to change like below to use the SolidX auth logic:
 
-```
+```tsx
 create(
   @Body() createDto: CreateInstituteUserDto,
   @UploadedFiles() files: Array<Express.Multer.File>
@@ -203,9 +203,9 @@ Registering the user using the base SolidX User logic
 
 Handling both provided and missing passwords:
 
-✅ If password is provided: user is created directly
+ If password is provided: user is created directly
 
-🔐 If password is not provided: a random password is generated and emailed to the user
+ If password is not provided: a random password is generated and emailed to the user
 
 This way, you get full authentication and user provisioning using SolidX’s base system with custom fields.
 

@@ -4,6 +4,15 @@ description: Overview of the field metadata schema used in SolidX.
 sidebar_position: 3
 ---
 
+import { IoIosArrowForward } from "react-icons/io";
+import { FaCheckCircle } from "react-icons/fa";
+import { MdNumbers, MdTextFields, MdCalendarMonth, MdMerge, MdPhotoLibrary,MdSecurity, MdCheckBox, MdFunctions,MdCheckCircle,MdCancel } from "react-icons/md";
+import { InfoBox } from '@site/src/common/InfoBox';
+import { WarningBox } from '@site/src/common/WarningBox';
+
+
+
+
 ## Overview
 
 Every SolidX model is composed of fields. Fields in SolidX go over and above the standard fields one expects, instead we treat fields as semantic attributes with relevance to how the users interact with that data in our admin interface. 
@@ -13,7 +22,10 @@ Every SolidX model is composed of fields. Fields in SolidX go over and above the
 ---
 ### Example: Institute + Fee Type Model fields
 <details>
-<summary>📑 Field Schema</summary>
+ <summary className="card-title card-headear-wrapper">
+    <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
+    Field Schema
+  </summary>
 
 ```json
 {
@@ -294,14 +306,19 @@ Every SolidX model is composed of fields. Fields in SolidX go over and above the
 </details>
 ---
 
-## 🎛 Field Type (`type`)  
+##  Field Type (`type`)  
 
 > **This is the most important attribute of a field.**  
 > It determines the **behavior, validation, storage, and UI options** for the field.  
 
 ---
 
-### 📊 Numeric Types
+  <h3 className=" card-headear-wrapper">
+    <MdNumbers size={24}  />
+
+###  Numeric Types
+</h3>
+
 | Value    | Reference |
 |----------|------------|
 | `int`    | [Integer Field](../../admin-docs/module-builder/field-management#integer) |
@@ -310,7 +327,12 @@ Every SolidX model is composed of fields. Fields in SolidX go over and above the
 
 ---
 
-### ✍️ Text Types
+  <h3 className=" card-headear-wrapper">
+    <MdTextFields size={24}  />
+
+###  Text Types
+</h3>
+
 | Value       | Reference |
 |-------------|-----------|
 | `shortText` | [Short Text Field](../../admin-docs/module-builder/field-management#shorttext) |
@@ -320,12 +342,22 @@ Every SolidX model is composed of fields. Fields in SolidX go over and above the
 
 ---
 
-### 🔘 Boolean
+  <h3 className=" card-headear-wrapper">
+    <FaCheckCircle size={20}  />
+
+### Boolean
+</h3>
+
 - [`boolean`](../../admin-docs/module-builder/field-management#boolean)
 
 ---
 
-### 🗓 Date & Time Types
+  <h3 className=" card-headear-wrapper">
+    <MdCalendarMonth size={22}  />
+
+### Boolean
+</h3>
+
 | Value     | Reference |
 |-----------|-----------|
 | `date`    | [Date Field](../../admin-docs/module-builder/field-management#date) |
@@ -334,12 +366,22 @@ Every SolidX model is composed of fields. Fields in SolidX go over and above the
 
 ---
 
-### 🔗 Relations
+  <h3 className=" card-headear-wrapper">
+    <MdMerge size={24}  />
+
+###  Relations
+</h3>
+
 - [`relation`](../../admin-docs/module-builder/field-management#relation)
 
 ---
 
-### 🖼 Media Types
+  <h3 className=" card-headear-wrapper">
+    <MdPhotoLibrary size={24}  />
+
+###  Relations
+</h3>
+
 | Value         | Reference |
 |---------------|-----------|
 | `mediaSingle`   | [Single Media Field](../../admin-docs/module-builder/field-management#single-media) |
@@ -347,7 +389,12 @@ Every SolidX model is composed of fields. Fields in SolidX go over and above the
 
 ---
 
-### 📧 Auth & Identity
+  <h3 className=" card-headear-wrapper">
+    <MdSecurity size={20}  />
+
+###  Auth & Identity
+</h3>
+
 | Value     | Reference |
 |-----------|-----------|
 | `email`   | [Email Field](../../admin-docs/module-builder/field-management#email) |
@@ -355,7 +402,12 @@ Every SolidX model is composed of fields. Fields in SolidX go over and above the
 
 ---
 
-### ✅ Selection
+  <h3 className=" card-headear-wrapper">
+    <MdCheckBox size={20}  />
+
+###  Selection
+</h3>
+
 | Value            | Reference |
 |------------------|-----------|
 | `selectionStatic`  | [Static Selection Field](../../admin-docs/module-builder/field-management#static-selection) |
@@ -363,13 +415,17 @@ Every SolidX model is composed of fields. Fields in SolidX go over and above the
 
 ---
 
-### ⚙️ Computed
+  <h3 className=" card-headear-wrapper">
+    <MdFunctions size={24}  />
+
+###  Computed
+</h3>
 - [`computed`](../../admin-docs/module-builder/field-management#computed)
 
 
 ---
 
-## 🔍 Field Metadata Attributes
+##  Field Metadata Attributes
 
 ### `name` *(string, required)*
 Name of the field (column/property).  
@@ -462,9 +518,12 @@ Enforces uniqueness.
 ### `encrypt` *(boolean, optional)*
 Enable symmetric encryption-at-rest for this field.  
 **Default:** false
-:::note
+
+
+
+<InfoBox>
  Feature coming soon!
-:::
+</InfoBox>
 
 ---
 
@@ -474,9 +533,12 @@ Only if `encrypt = true`.
 - aes-128
 - aes-256  
 **Default:** aes-256 (recommended)
-:::note
-Feature coming soon!
-:::
+
+
+
+<InfoBox>
+ Feature coming soon!
+</InfoBox>
 
 ---
 
@@ -486,9 +548,12 @@ Only if `encrypt = true`. Controls when plaintext is produced.
 - before-transit
 - after-transit  
 **Default:** after-transit
-:::note
-Feature coming soon!
-:::
+
+
+<InfoBox>
+ Feature coming soon!
+</InfoBox>
+
 ---
 
 ### `index` *(boolean, optional)*
@@ -515,9 +580,12 @@ Lower bound (number/date) or minimum length (text/json).
 ### `private` *(boolean, optional)*
 Exclude from default listings/exports; require elevated access.  
 **Default:** false
-:::note
-Feature coming soon!
-:::
+
+
+<InfoBox>
+ Feature coming soon!
+</InfoBox>
+
 ---
 
 ### `mediaTypes` *(MediaType[], optional)*
@@ -551,9 +619,15 @@ Name/userKey of configured media storage provider.
 **Applies to:** mediaSingle, mediaMultiple  
 **Default:** default-filesystem
 
-:::note
-By default, SolidX applications gets seeded with 2 media storage providers i.e default-filesystem and default-aws-s3. You can create more providers as per your requirements. You can refer to the [Storage Provider Documentation](../../admin-docs/media-library/storage-providers.md) for more details.
-:::
+
+
+
+
+<InfoBox>
+  By default, SolidX applications gets seeded with 2 media storage providers i.e default-filesystem and default-aws-s3. You can create more providers as per your requirements. You can refer to the [Storage Provider Documentation](../../admin-docs/media-library/storage-providers.md) for more details.
+</InfoBox>
+
+
 ---
 
 ### `relationType` *(RelationType, optional)*
@@ -579,9 +653,17 @@ Generate inverse side on co-model.
 **Applies to:** relation  
 **Default:** false
 
-:::warning
-Currently we auto-create the inverse side of the field metadata on the co-model. In future releases, we will get rid of the inverse field auto-creation and instead have the user explicitly create the inverse field on the co-model. This is to ensure that the user has full control on how the inverse field is created on the co-model and keep things explicit and simple
-:::
+
+
+
+
+
+
+
+<WarningBox>
+  Currently we auto-create the inverse side of the field metadata on the co-model. In future releases, we will get rid of the inverse field auto-creation and instead have the user explicitly create the inverse field on the co-model. This is to ensure that the user has full control on how the inverse field is created on the co-model and keep things explicit and simple
+</WarningBox>
+
 ---
 
 ### `relationCascade` *(CascadeType, optional)*
@@ -619,18 +701,25 @@ Marks this side as the **owner** of the many-to-many.
 At least one side must be the owner, otherwise the many-to-many relation will not work.  
 **Applies to:** relation (many-to-many)  
 **Default:** false
-:::info
-TODO: change default to true in future releases
-:::
 
 ---
+
+
+
+<InfoBox>
+  TODO: change default to true in future releases
+</InfoBox>
 
 ### `relationFieldFixedFilter` *(string, optional)*
 Fixed filter (JSON) applied when fetching related records from the admin ui. This can be used to apply static as well as dynamic filters when we want to conditionally filter the values shown for the related records
 
 The filter is a JSON object of schema type BasicFilterDto:
 <details>
-<summary>📑 Filter schema</summary>
+ <summary className="card-title card-headear-wrapper">
+    <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
+    Filter schema
+  </summary>
+
 ```ts
 export enum SoftDeleteFilter {
     INCLUSIVE = "inclusive",
@@ -775,8 +864,10 @@ Declared output type of the computed field.
 
 ### `computedFieldTriggerConfig` *(array of objects, optional)*
 Operations that trigger compute and the trigger model/module to attach to. This is useful when the computed field depends on relations or other models and needs to be re-computed when those models change.
-<summary>📑 Config schema</summary>
-``` ts
+<!-- <summary> Config schema</summary> -->
+**Config schema**
+
+``` tsx
 export class ComputedFieldTriggerConfig {
   moduleName: string; // Name of the module which should trigger the computed field re-evaluation
   modelName: string; // Name of the model which should trigger the computed field re-evaluation
@@ -810,10 +901,11 @@ System fields are excluded from code generation (hand-written code assumed).
 ### `isMarkedForRemoval` *(boolean, optional)*
 Soft-removal flag for the field definition. Fields marked for removal are excluded from code generation.
 **Default:** false
-:::info
- This flag enables the code builder to identify fields that need to be deleted from the codebase. They are deleted after code generation is complete.  
-:::
 
+
+<InfoBox>
+ This flag enables the code builder to identify fields that need to be deleted from the codebase. They are deleted after code generation is complete.  
+</InfoBox>
 ---
 
 ### `columnName` *(string, optional)*
@@ -871,21 +963,21 @@ Allow multiple selected values (UI + storage impact).
 
 ## Quick Matrix (What applies where?)
 
-| Aspect                | Text (short/long/rich) | Number (int/decimal/bigint) | Date/time | Relation | Media | Selection | Computed |
-|-----------------------|------------------------|-----------------------------|-----------|---------|-------|-----------|----------|
-| `length`              | ✅                     | ❌                          | ❌        | ❌      | ❌    | ❌        | ❌       |
-| `min` / `max`         | ✅ (length)            | ✅ (range)                   | ✅ (bounds)| ❌     | ❌    | ❌        | ❌       |
-| `regexPattern`        | ✅                     | ❌                          | ❌        | ❌      | ❌    | ❌        | ❌       |
-| `media*`              | ❌                     | ❌                          | ❌        | ❌      | ✅    | ❌        | ❌       |
-| `relation*`           | ❌                     | ❌                          | ❌        | ✅      | ❌    | ❌        | ❌       |
-| `selection*`          | ❌                     | ❌                          | ❌        | ❌      | ❌    | ✅        | ❌       |
-| `computed*`           | ❌                     | ❌                          | ❌        | ❌      | ❌    | ❌        | ✅       |
-| `encrypt`/`private`   | ✅                     | ✅                           | ✅        | (id only)| file meta| values   | output   |
-| `index`               | ✅ (except rich/long)  | ✅                           | ✅        | ✅      | ❌    | ✅        | ✅ (virtual) |
+| Aspect                | Text(short/long/rich)                 | Number(int/decimal/bigint) | Date/time | Relation | Media | Selection | Computed |
+|-----------------------|------------------------                |-----------------------------|-----------|---------|-------|-----------|----------|
+| `length`              | <MdCheckCircle className="icon-yes" />                     | <MdCancel className="icon-no" />                           | <MdCancel className="icon-no" />         | <MdCancel className="icon-no" />       | <MdCancel className="icon-no" />     | <MdCancel className="icon-no" />         | <MdCancel className="icon-no" />        |
+| `min` / `max`         | <MdCheckCircle className="icon-yes" />                           | <span className="table-icon-with-text"> <MdCheckCircle className="icon-yes" /> (range) </span>                    | <span className="table-icon-with-text"> <MdCheckCircle className="icon-yes" /> (bounds) </span>  | <MdCancel className="icon-no" />      | <MdCancel className="icon-no" />     | <MdCancel className="icon-no" />         | <MdCancel className="icon-no" />        |
+| `regexPattern`        | <MdCheckCircle className="icon-yes" />                                   | <MdCancel className="icon-no" />                           | <MdCancel className="icon-no" />         | <MdCancel className="icon-no" />       | <MdCancel className="icon-no" />     | <MdCancel className="icon-no" />         | <MdCancel className="icon-no" />        |
+| `media*`              | <MdCancel className="icon-no" />                                    | <MdCancel className="icon-no" />                           | <MdCancel className="icon-no" />         | <MdCancel className="icon-no" />       | <MdCheckCircle className="icon-yes" />     | <MdCancel className="icon-no" />         | <MdCancel className="icon-no" />        |
+| `relation*`           | <MdCancel className="icon-no" />                                     | <MdCancel className="icon-no" />                           | <MdCancel className="icon-no" />         | <MdCheckCircle className="icon-yes" />       | <MdCancel className="icon-no" />     | <MdCancel className="icon-no" />         | <MdCancel className="icon-no" />        |
+| `selection*`          | <MdCancel className="icon-no" />                                    | <MdCancel className="icon-no" />                           | <MdCancel className="icon-no" />         | <MdCancel className="icon-no" />       | <MdCancel className="icon-no" />     | <MdCheckCircle className="icon-yes" />         | <MdCancel className="icon-no" />        |
+| `computed*`           | <MdCancel className="icon-no" />                                     | <MdCancel className="icon-no" />                           | <MdCancel className="icon-no" />         | <MdCancel className="icon-no" />       | <MdCancel className="icon-no" />     | <MdCancel className="icon-no" />         | <MdCheckCircle className="icon-yes" />        |
+| `encrypt`/`private`   | <MdCheckCircle className="icon-yes" />                                    | <MdCheckCircle className="icon-yes" />                            | <MdCheckCircle className="icon-yes" />         | (id only)| file meta| values   | output   |
+| `index`               | <span className="table-icon-with-text"> <MdCheckCircle className="icon-yes" /> (except rich/long) </span>                    | <MdCheckCircle className="icon-yes" />                            | <MdCheckCircle className="icon-yes" />         | <MdCheckCircle className="icon-yes" />       | <MdCancel className="icon-no" />     | <MdCheckCircle className="icon-yes" />         | <span className="table-icon-with-text"> <MdCheckCircle className="icon-yes" /> (virtual) </span>     |
 
 
 
 ---
 
-## 📚 Related Recipes (TODO)
+##  Related Recipes (TODO)
 -	👉 [Field Type Recipes](../../recipes/field-types-reference.md)

@@ -4,7 +4,8 @@
   padding: 2rem 0 8rem 0;
   width: 100%;
   background-color: #0a0120;
-  /* color: grey; */
+  padding-left: 8px !important;
+  padding-right: 8px !important;
 
 }
 
@@ -25,6 +26,10 @@
   padding: 2.5rem 0rem 0rem 1.1rem !important;
   border-radius: 10px;
   box-shadow: 0 2px 6px #3008614f;
+}
+
+.homeCardMain p{
+  margin-bottom: 10px !important;
 }
 
 

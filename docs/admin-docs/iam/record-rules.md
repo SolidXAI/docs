@@ -2,6 +2,9 @@
 sidebar_position: 4
 ---
 
+import { IoIosArrowForward } from "react-icons/io";
+
+
 # Record Rules
 
 Record Rules in SOLID provide fine-grained access control at the data level, allowing you to define who can access specific records based on various conditions.
@@ -135,77 +138,6 @@ Rules are evaluated in priority order:
 2. More specific rules take precedence
 3. Deny rules override allow rules
 
-## Best Practices
-
-<!-- 1. **Rule Design**
-   - Keep rules simple and focused
-   - Use meaningful names
-   - Document rule purpose
-   - Consider performance impact
-
-2. **Security**
-   - Test rule combinations
-   - Validate rule logic
-   - Monitor rule effectiveness
-   - Regular security audits
-
-3. **Maintenance**
-   - Regular rule review
-   - Update documentation
-   - Clean up unused rules
-   - Monitor performance
-
-4. **Testing**
-   - Test edge cases
-   - Verify rule combinations
-   - Check rule priorities
-   - Validate performance -->
-
-
-<div className="feature-grid">
-
-  <div className="feature-card">
-    <h4 className="card-title">1 Rule Design</h4>
-    <ul className="card-desc">
-      <li>Keep rules simple and focused</li>
-      <li>Use meaningful names</li>
-      <li>Document rule purpose</li>
-      <li>Consider performance impact</li>
-    </ul>
-  </div>
-
-  <div className="feature-card">
-    <h4 className="card-title">2 Security</h4>
-    <ul className="card-desc">
-      <li>Test rule combinations</li>
-      <li>Validate rule logic</li>
-      <li>Monitor rule effectiveness</li>
-      <li>Regular security audits</li>
-    </ul>
-  </div>
-
-  <div className="feature-card">
-    <h4 className="card-title">3 Maintenance</h4>
-    <ul className="card-desc">
-      <li>Regular rule review</li>
-      <li>Update documentation</li>
-      <li>Clean up unused rules</li>
-      <li>Monitor performance</li>
-    </ul>
-  </div>
-
-  <div className="feature-card">
-    <h4 className="card-title">4 Testing</h4>
-    <ul className="card-desc">
-      <li>Test edge cases</li>
-      <li>Verify rule combinations</li>
-      <li>Check rule priorities</li>
-      <li>Validate performance</li>
-    </ul>
-  </div>
-
-</div>
-
 
 
 ## Common Scenarios
@@ -271,3 +203,60 @@ Rules are evaluated in priority order:
   }
 }
 ```
+
+
+
+
+## Best Practices
+
+<details>
+  <summary className="card-title card-headear-wrapper">
+    <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
+    Rule Design
+  </summary>
+  <ul className="card-desc">
+    <li>Keep rules simple and focused</li>
+    <li>Use meaningful names</li>
+    <li>Document rule purpose</li>
+    <li>Consider performance impact</li>
+  </ul>
+</details>
+
+<details>
+  <summary className="card-title card-headear-wrapper">
+    <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
+    Security
+  </summary>
+  <ul className="card-desc">
+    <li>Test rule combinations</li>
+    <li>Validate rule logic</li>
+    <li>Monitor rule effectiveness</li>
+    <li>Regular security audits</li>
+  </ul>
+</details>
+
+<details>
+  <summary className="card-title card-headear-wrapper">
+    <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
+    Maintenance
+  </summary>
+  <ul className="card-desc">
+    <li>Regular rule review</li>
+    <li>Update documentation</li>
+    <li>Clean up unused rules</li>
+    <li>Monitor performance</li>
+  </ul>
+</details>
+
+<details>
+  <summary className="card-title card-headear-wrapper">
+    <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
+    Testing
+  </summary>
+  <ul className="card-desc">
+    <li>Test edge cases</li>
+    <li>Verify rule combinations</li>
+    <li>Check rule priorities</li>
+    <li>Validate performance</li>
+  </ul>
+</details>

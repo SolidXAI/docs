@@ -24,7 +24,7 @@ import TutorialCards from '@site/src/components/Tutorials';
 
 <div className="feature-grid">
 
-  <a className="feature-card" href="/docs/tutorial/school-fees-portal">
+  <a className="feature-card-medium" href="/docs/tutorial/school-fees-portal">
     <h4 className='home-card-title card-tilte'>School Fess Portal</h4>
     <p className="home-card-desc card-desc">
 

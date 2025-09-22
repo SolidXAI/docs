@@ -15,7 +15,7 @@ We can create solidX handlers by following steps.
 
 Example code (paymentCollectionChangeHandler.ts)
 
-```
+```tsx
 import { getSession } from "next-auth/react";
 import axios from "axios";
 const API_URL = process.env.NEXT_PUBLIC_BACKEND_API_URL;
@@ -69,7 +69,7 @@ export default paymentCollectionHandler;
 ```
 - After creating handler we have to register this handler in solid-extension.ts file.
 
-```
+```tsx
 import {registerExtensionFunction } from "@solidstarters/solid-core-ui";
 import ImageGrid12Column from "./admin/extensions/ImageGrid12Column";
 import paymentCollectionHandler from "./admin/extensions/paymentCollectionChangeHandler";
@@ -80,7 +80,7 @@ registerExtensionFunction('paymentCollectionHandler', paymentCollectionHandler);
 ```
 - Once Handler is register we have to define it in the metadata json file.
 
-```
+```json
 {
   "name": "paymentCollection-form-view",
   "type": "form",

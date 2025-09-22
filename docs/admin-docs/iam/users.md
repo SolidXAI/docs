@@ -2,6 +2,10 @@
 sidebar_position: 1
 ---
 
+import { NoteBoxs } from '@site/src/common/NoteBoxs';
+import { FaUserShield, FaEnvelopeOpenText, FaUserPlus,FaKey, FaListAlt, FaIdBadge } from "react-icons/fa";
+import { IoIosArrowForward } from "react-icons/io";
+
 # Users
 
 User management in SOLID provides comprehensive tools for managing user accounts, profiles, and access control.
@@ -12,29 +16,13 @@ User management in SOLID provides comprehensive tools for managing user accounts
 
 There are several ways to create users:
 
-<!-- 1. **Admin Creation**
-   - Navigate to Users section
-   - Click "Create User"
-   - Fill required information
-   - Assign roles
-   - Send invitation
-
-2. **User Invitation**
-   - Send email invitation
-   - User completes registration
-   - Automatic role assignment
-   - Email verification
-
-3. **Self Registration**
-   - Enable public registration
-   - Configure registration fields
-   - Set default roles
-   - Enable email verification -->
-
 <div className="feature-grid">
 
   <div className="feature-card">
-    <h4 className="card-title">Admin Creation</h4>
+      <h4 className="card-title card-headear-wrapper">
+      <FaUserShield size={15} style={{ marginRight: "10px" }} />
+      Admin Creation:
+    </h4>
     <ul className="card-desc">
       <li>Navigate to Users section</li>
       <li>Click "Create User"</li>
@@ -45,7 +33,10 @@ There are several ways to create users:
   </div>
 
   <div className="feature-card">
-    <h4 className="card-title">User Invitation</h4>
+     <h4 className="card-title card-headear-wrapper">
+      <FaEnvelopeOpenText size={15} style={{ marginRight: "10px" }} />
+      User Invitation:
+    </h4>
     <ul className="card-desc">
       <li>Send email invitation</li>
       <li>User completes registration</li>
@@ -55,7 +46,10 @@ There are several ways to create users:
   </div>
 
   <div className="feature-card">
-    <h4 className="card-title">Self Registration</h4>
+    <h4 className="card-title card-headear-wrapper">
+      <FaUserPlus size={15} style={{ marginRight: "10px" }} />
+      Self Registration:
+    </h4>
     <ul className="card-desc">
       <li>Enable public registration</li>
       <li>Configure registration fields</li>
@@ -66,65 +60,24 @@ There are several ways to create users:
 
 </div>
 
-
 ### User Properties
 
-| Property | Description |
-|----------|-------------|
-| Full name | User's full name |
-| Username | Unique identifier |
-| Email | Primary contact |
-| Password | Securely hashed |
-| Mobile | User's mobile number |
-| Roles | Assigned roles |
-
-## User Profile
-
-<!-- ### Profile Management
-- Personal information
-- Contact details
-- Preferences
-- Profile picture
-- Custom fields
-
-### Account Settings
-- Password change
-- Email preferences
-- Notification settings
-- Language preferences
-- Theme settings -->
-
-
-
-
-
+| Property  | Description          |
+| --------- | -------------------- |
+| Full name | User's full name     |
+| Username  | Unique identifier    |
+| Email     | Primary contact      |
+| Password  | Securely hashed      |
+| Mobile    | User's mobile number |
+| Roles     | Assigned roles       |
 ## Security Features
 
-<!-- ### Password Management
-- Password complexity rules
-- Password expiration
-- Password history
-- Failed login lockout
-- Password reset
-
-### Multi-factor Authentication
-- Enable/disable 2FA
-- Authentication methods
-- Backup codes
-- Device management
-- Session control
-
-### Account Recovery
-- Password reset
-- Email verification
-- Security questions
-- Recovery codes
-- Admin assistance -->
-
 <div className="feature-grid">
-
   <div className="feature-card">
-    <h4 className="card-title">Password Management</h4>
+    <h4 className="card-title card-headear-wrapper">
+      <FaKey size={16} style={{ marginRight: "10px" }} />
+      Password Management
+    </h4>
     <ul className="card-desc">
       <li>Password complexity rules</li>
       <li>Password expiration</li>
@@ -133,55 +86,16 @@ There are several ways to create users:
       <li>Password reset</li>
     </ul>
   </div>
-
-  <!-- <div className="feature-card">
-    <h4 className="card-title">Multi-factor Authentication</h4>
-    <ul className="card-desc">
-      <li>Enable/disable 2FA</li>
-      <li>Authentication methods</li>
-      <li>Backup codes</li>
-      <li>Device management</li>
-      <li>Session control</li>
-    </ul>
-  </div>
-
-  <div className="feature-card">
-    <h4 className="card-title">Account Recovery</h4>
-    <ul className="card-desc">
-      <li>Password reset</li>
-      <li>Email verification</li>
-      <li>Security questions</li>
-      <li>Recovery codes</li>
-      <li>Admin assistance</li>
-    </ul>
-  </div> -->
-
 </div>
-
-
 
 ## User Interface
 
-<!-- ### User List View
-- Search users
-- Filter by status
-- Filter by role
-- Bulk actions
-- Export users
-
-### User Detail View
-- Profile information
-- Role management
-- Permission overview
-- Activity history
-- Security settings
- -->
-
-
 <div className="feature-grid">
-
   <div className="feature-card">
-    <h4 className="card-title">User List View</h4>
+    <h4 className="card-title card-headear-wrapper">
+      <FaListAlt size={16} style={{ marginRight: "10px" }} />
+      User List View
+    </h4>
     <ul className="card-desc">
       <li>Search users</li>
       <li>Filter users</li>
@@ -190,107 +104,87 @@ There are several ways to create users:
   </div>
 
   <div className="feature-card">
-    <h4 className="card-title">User Detail View</h4>
+    <h4 className="card-title card-headear-wrapper">
+      <FaIdBadge size={16} style={{ marginRight: "10px" }} />
+      User Detail View
+    </h4>
     <ul className="card-desc">
       <li>Profile information</li>
       <li>Role management</li>
       <li>Activity history</li>
     </ul>
   </div>
-
-</div>
-
-
-
-
-## Best Practices
-
-<!-- 1. **User Creation**
-   - Validate email addresses
-   - Enforce strong passwords
-   - Require email verification
-   - Set appropriate roles
-   - Document user purpose
-
-2. **Profile Management**
-   - Collect necessary information
-   - Respect privacy
-   - Regular information updates
-   - Clean inactive accounts
-
-3. **Security**
-   - Enable MFA for sensitive roles
-   - Regular password changes
-   - Monitor login attempts
-   - Review access regularly
-
-4. **Maintenance**
-   - Archive inactive users
-   - Update user information
-   - Review role assignments
-   - Clean up permissions -->
-
-<div className="feature-grid">
-
-  <div className="feature-card">
-    <h4 className="card-title">User Creation</h4>
-    <ul className="card-desc">
-      <li>Validate email addresses</li>
-      <li>Enforce strong passwords</li>
-      <!-- <li>Require email verification</li> -->
-      <li>Set appropriate roles</li>
-      <li>Document user purpose</li>
-    </ul>
-  </div>
-
-  <div className="feature-card">
-    <h4 className="card-title">Profile Management</h4>
-    <ul className="card-desc">
-      <li>Collect necessary information</li>
-      <li>Respect privacy</li>
-      <li>Regular information updates</li>
-      <!-- <li>Clean inactive accounts</li> -->
-    </ul>
-  </div>
-
-  <div className="feature-card">
-    <h4 className="card-title">Security</h4>
-    <ul className="card-desc">
-      <!-- <li>Enable MFA for sensitive roles</li> -->
-      <li>Regular password changes</li>
-      <li>Monitor login attempts</li>
-      <li>Review access regularly</li>
-    </ul>
-  </div>
-
-  <div className="feature-card">
-    <h4 className="card-title">Maintenance</h4>
-    <ul className="card-desc">
-      <!-- <li>Archive inactive users</li> -->
-      <li>Update user information</li>
-      <li>Review role assignments</li>
-      <li>Clean up permissions</li>
-    </ul>
-  </div>
-
 </div>
 
 ### Creating a New User
+
 ![View existing users](/img/admin-docs/iam/users/user-list.png)  
-*Figure 1: User list page showing existing users.*
-  
+_Figure 1: User list page showing existing users._
+
 ![Create a user](/img/admin-docs/iam/users/user-creation.png)  
-*Figure 2: User creation form to add a new user.*
+_Figure 2: User creation form to add a new user._
 
-To create a new user
-1. Navigate to IAM->Users section
-2. Click on the Add button
-3. Fill in the form and fill in the required details:
+To create a new user:
+
+1. Navigate to IAM → Users section
+2. Click the Add button
+3. Fill in the required details in the form
 4. Assign the user the required roles
-5. Click on the Save button.
-6. User is created and added to the list of users 
-5. User is sent a mail with the login link and is prompted to change their password, i.e (if forceChangePassword is enabled in the settings)
+5. Click Save
+6. User is added to the list of users
+7. User receives a mail with the login link and is prompted to change their password (if `forceChangePassword` is enabled)
 
-:::note
-Internal user is a pre-defined technical role with limited permissions. All users need to be assigned this role, for application to work properly on user login
-:::
+<NoteBoxs>
+  Internal user is a pre-defined technical role with limited permissions. All users need to be assigned this role, for application to work properly on user login.
+</NoteBoxs>
+
+## Best Practices
+
+<details>
+  <summary className="card-title card-headear-wrapper">
+    <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
+    User Creation
+  </summary>
+  <ul className="card-desc">
+    <li>Validate email addresses</li>
+    <li>Enforce strong passwords</li>
+    <li>Set appropriate roles</li>
+    <li>Document user purpose</li>
+  </ul>
+</details>
+
+<details>
+  <summary className="card-title card-headear-wrapper">
+    <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
+    Profile Management
+  </summary>
+  <ul className="card-desc">
+    <li>Collect necessary information</li>
+    <li>Respect privacy</li>
+    <li>Regular information updates</li>
+  </ul>
+</details>
+
+<details>
+  <summary className="card-title card-headear-wrapper">
+    <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
+    Security
+  </summary>
+  <ul className="card-desc">
+    <li>Regular password changes</li>
+    <li>Monitor login attempts</li>
+    <li>Review access regularly</li>
+  </ul>
+</details>
+
+<details>
+  <summary className="card-title card-headear-wrapper">
+    <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
+    Maintenance
+  </summary>
+  <ul className="card-desc">
+    <li>Update user information</li>
+    <li>Review role assignments</li>
+    <li>Clean up permissions</li>
+  </ul>
+</details>

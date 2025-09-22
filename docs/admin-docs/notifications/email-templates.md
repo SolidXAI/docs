@@ -4,9 +4,20 @@ description: Learn how to create and manage email templates in SOLID, including 
 sidebar_position: 1
 ---
 
-:::caution
-Work in Progress - This document is currently being updated. Some sections may be incomplete or subject to change.
-:::
+import { IoIosArrowForward } from "react-icons/io";
+
+import {MdWarningAmber } from "react-icons/md";
+import { WarningBox } from '@site/src/common/WarningBox';
+
+
+
+<WarningBox>
+  Work in Progress - This document is currently being updated. Some sections may be incomplete or subject to change.
+</WarningBox>
+
+
+
+<br/>
 
 # Email Templates
 
@@ -200,85 +211,6 @@ Child template:
 }
 ```
 
-## Best Practices
-
-<!-- 1. **Design**
-   - Use responsive layouts
-   - Test across email clients
-   - Include plain text version
-   - Optimize images
-   - Follow email standards
-
-2. **Content**
-   - Clear subject lines
-   - Consistent branding
-   - Mobile-friendly design
-   - Accessible content
-   - Valid links
-
-3. **Variables**
-   - Document all variables
-   - Provide defaults when possible
-   - Validate data types
-   - Handle missing values
-   - Use clear naming
-
-4. **Testing**
-   - Test all variables
-   - Check responsiveness
-   - Verify attachments
-   - Monitor delivery
-   - Track engagement -->
-
-
-
-<div className="feature-grid">
-
-  <div className="feature-card">
-    <h4 className="card-title ">1 Design</h4>
-    <ul className="card-desc">
-      <li>1 Use responsive layouts</li>
-      <li>Test across email clients</li>
-      <li>Include plain text version</li>
-      <li>Optimize images</li>
-      <li>Follow email standards</li>
-    </ul>
-  </div>
-
-  <div className="feature-card">
-    <h4 className="card-title ">2 Content</h4>
-    <ul className="card-desc">
-      <li>Clear subject lines</li>
-      <li>Consistent branding</li>
-      <li>Mobile-friendly design</li>
-      <li>Accessible content</li>
-      <li>Valid links</li>
-    </ul>
-  </div>
-
-  <div className="feature-card">
-    <h4 className="card-title ">3 Variables</h4>
-    <ul className="card-desc">
-      <li>Document all variables</li>
-      <li>Provide defaults when possible</li>
-      <li>Validate data types</li>
-      <li>Handle missing values</li>
-      <li>Use clear naming</li>
-    </ul>
-  </div>
-
-  <div className="feature-card">
-    <h4 className="card-title ">4 Testing</h4>
-    <ul className="card-desc">
-      <li>Test all variables</li>
-      <li>Check responsiveness</li>
-      <li>Verify attachments</li>
-      <li>Monitor delivery</li>
-      <li>Track engagement</li>
-    </ul>
-  </div>
-
-</div>
 
 
 
@@ -321,3 +253,64 @@ Child template:
     <p>This link will expire in {{expiryTime}} minutes.</p>
 </div>
 ```
+
+
+
+
+## Best Practices
+
+<details>
+  <summary className="card-title card-headear-wrapper">
+    <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
+    Design
+  </summary>
+  <ul className="card-desc">
+    <li>Use responsive layouts</li>
+    <li>Test across email clients</li>
+    <li>Include plain text version</li>
+    <li>Optimize images</li>
+    <li>Follow email standards</li>
+  </ul>
+</details>
+
+<details>
+  <summary className="card-title card-headear-wrapper">
+    <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
+    Content
+  </summary>
+  <ul className="card-desc">
+    <li>Clear subject lines</li>
+    <li>Consistent branding</li>
+    <li>Mobile-friendly design</li>
+    <li>Accessible content</li>
+    <li>Valid links</li>
+  </ul>
+</details>
+
+<details>
+  <summary className="card-title card-headear-wrapper">
+    <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
+    Variables
+  </summary>
+  <ul className="card-desc">
+    <li>Document all variables</li>
+    <li>Provide defaults when possible</li>
+    <li>Validate data types</li>
+    <li>Handle missing values</li>
+    <li>Use clear naming</li>
+  </ul>
+</details>
+
+<details>
+  <summary className="card-title card-headear-wrapper">
+    <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
+    Testing
+  </summary>
+  <ul className="card-desc">
+    <li>Test all variables</li>
+    <li>Check responsiveness</li>
+    <li>Verify attachments</li>
+    <li>Monitor delivery</li>
+    <li>Track engagement</li>
+  </ul>
+</details>

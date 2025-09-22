@@ -4,6 +4,9 @@ description: Overview of the model metadata schema used in SolidX.
 sidebar_position: 2
 ---
 
+import { MdCategory } from "react-icons/md";
+
+
 ## Overview
 
 SolidX Models represent the structure of your data within a module. Each model defines a specific type of data, all attributes / fields that a model is made of & its relationships with other models.
@@ -14,7 +17,7 @@ Each model is a semantic, configurable data structure that forms the basis of ad
 
 ---
 ### Example: Institute Model
-<summary>📑 Model Schema</summary>
+<summary> Model Schema</summary>
 
 ```json
 {
@@ -60,7 +63,11 @@ Each model is a semantic, configurable data structure that forms the basis of ad
 
 ---
 
-## 🔍 Model Metadata Attributes
+  <h2 className=" card-headear-wrapper">
+    <MdCategory size={24} style={{ marginRight: "10px" }} />
+
+##  Model Metadata Attributes
+</h2>
 
 ### `singularName` *(string, required, unique)*
 Unique identifier for the model (lowercase, underscores/dashes).  
@@ -145,5 +152,5 @@ If set to `true`, the model will support internationalization, allowing records 
 **Default:** `false`
 
 ---
-## 📚 Related Recipes (TODO)
+##  Related Recipes (TODO)
 -	👉 [Model Type Recipes](../../recipes/solidx-metadata-complete-guide.md)
