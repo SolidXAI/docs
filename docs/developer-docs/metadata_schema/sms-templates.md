@@ -8,6 +8,7 @@ sidebar_position: 10
 SMS Templates in SOLID allow you to create and manage SMS templates with dynamic content and attachments.
 
 ### Example: Email Templates Metadata
+<details>
 <summary> Email Templates Schema </summary>
 ``` json
 {
@@ -35,7 +36,7 @@ SMS Templates in SOLID allow you to create and manage SMS templates with dynamic
   ]
 }
 ```
-
+</details>
 ### Example : SMS Template File
 <details>
 <summary> SMS Template File </summary>

@@ -8,6 +8,7 @@ sidebar_position: 14
 List of Values (LOV) are used to define a set of predefined values that can be used in various parts of the SolidX application, such as dropdowns or selection fields. This helps ensure data consistency and improve user experience.
 
 ### Example: List of Values Metadata
+<details>
 <summary> List of Values Schema </summary>
 ``` json
 {
@@ -43,6 +44,7 @@ List of Values (LOV) are used to define a set of predefined values that can be u
     ]
 }
 ```
+</details>
 
 ### Example of Dynamic Selection Field using List of Values
 ``` json

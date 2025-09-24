@@ -10,6 +10,7 @@ Scheduled jobs in SolidX allow you to run recurring tasks such as sending notifi
 For a guide on how to create and manage scheduled jobs in SolidX, refer to the [Creating Scheduled Jobs](../../developer-docs/extending/backend-customization/scheduled-jobs/index.md).
 
 ## Example: Scheduled Jobs Metadata
+<details>
 <summary> Scheduled Jobs Schema </summary>
 ``` json
 {
@@ -25,7 +26,7 @@ For a guide on how to create and manage scheduled jobs in SolidX, refer to the [
   ]
 }
 ```
-
+</details>
 ## Scheduled Jobs Metadata Attributes
 
 ### `scheduleName` *(string, required, unique)*

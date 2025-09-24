@@ -17,7 +17,8 @@ Each model is a semantic, configurable data structure that forms the basis of ad
 
 ---
 ### Example: Institute Model
-<summary> Model Schema</summary>
+<details>
+<summary>📑 Model Schema</summary>
 
 ```json
 {
@@ -60,7 +61,7 @@ Each model is a semantic, configurable data structure that forms the basis of ad
   ... // Other metadata
 }
 ``` 
-
+</details>
 ---
 
   <h2 className=" card-headear-wrapper">

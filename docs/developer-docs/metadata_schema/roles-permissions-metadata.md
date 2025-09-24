@@ -17,7 +17,7 @@ By Default `Admin` role is created with all permissions.
 ---
 
 ### Example: Fee Portal Module Roles & Permissions Metadata
-
+<details>
 <summary> Roles & Permissions Schema </summary>
 
 ```json
@@ -43,7 +43,7 @@ By Default `Admin` role is created with all permissions.
   ]
 }
 ```
-
+</details>
 ## Roles & Permissions Metadata Attributes
 
 ### `name` _(string, required, unique)_

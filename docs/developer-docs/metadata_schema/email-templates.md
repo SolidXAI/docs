@@ -8,6 +8,7 @@ sidebar_position: 9
 Email Templates in SOLID allow you to create and manage HTML/Text based email templates with dynamic content and attachments.
 
 ### Example: Email Templates Metadata
+<details>
 <summary> Email Templates Schema </summary>
 ``` json
 {
@@ -34,6 +35,7 @@ Email Templates in SOLID allow you to create and manage HTML/Text based email te
   ]
 }
 ```
+</details>
 
 ### Example : Email Template File
 <details>
