@@ -12,7 +12,7 @@ import { NoteBoxs } from '@site/src/common/NoteBoxs';
 
 This section covers how to **extend user functionality in SolidX**, including creating custom user fields and implementing the logic required to persist a custom user model.
 
----
+
 
 ## Configuring a Custom User Model
 
@@ -73,7 +73,7 @@ This section covers how to **extend user functionality in SolidX**, including cr
 
 - This will generate form/list views in SolidX to manage the custom users.
 
----
+
 
 ## Persisting a Custom User
 
@@ -196,7 +196,7 @@ async create(@Body() createDto: CreateInstituteUserDto, @UploadedFiles() files: 
     4.	Use generated code as-is for other CRUD operations. Only create() requires overriding.
     5.	You can also show parent user fields in layouts like any other fields. No special config needed.
 
----
+
 
 ## Generated Code (for custom user models)
 
@@ -227,7 +227,7 @@ export class InstituteUser extends User {
 
 </details>
 
----
+
 
 ## How It Works
 

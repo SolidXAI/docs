@@ -13,7 +13,7 @@ This page provides a list of CLI commands that can be used as an alternative to 
 
 The SolidX code builder—invoked either from the SolidX Admin UI or the CLI—uses Angular Schematics to scaffold code in the backend.
 
----
+
 
 ##  Add Module
 
@@ -48,7 +48,7 @@ solid add-module -n myNewModule
 - `-d dryRun`, `--dryRun <dryRun>`  
   Whether to run the command in dry-run mode.
 
----
+
 
 ##  Refresh Model
 
@@ -84,7 +84,7 @@ solid refresh-model -n myNewModelSingularName
 
  Refer to [Generated code](../index.md) for a breakdown of the files and structure generated.
 
----
+
 
 ##  Remove Fields
 
@@ -120,6 +120,6 @@ solid remove-fields -fids "[myFieldId]" -mid myModelId
 
  Refer to [Generated code](../index.md) for a breakdown of the files and structure after running this command.
 
----
+
 
 >  The underlying implementation leverages Angular schematics and schema definitions to validate and process these operations.

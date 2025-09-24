@@ -11,7 +11,7 @@ Welcome! This section guides you through setting up **SolidX** for a school fees
 
 Whether you're new or returning, this step-by-step tutorial will help you quickly bootstrap your application.
 
----
+
 
 **Getting Started**
 
@@ -20,7 +20,7 @@ Whether you're new or returning, this step-by-step tutorial will help you quickl
 
 > This link provides all the steps you need to get your SolidX application up and running.
 
----
+
 
 <!-- Improve the following section to include the actual installation steps -->
 **What You’ll Do**

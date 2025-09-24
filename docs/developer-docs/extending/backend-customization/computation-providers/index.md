@@ -15,7 +15,7 @@ import { MdSettings,MdBuildCircle } from "react-icons/md";
 
 Computation providers are essential for defining how **computed fields** are calculated and updated in the backend. This guide walks you through setting up and implementing them in SolidX.
 
----
+
 
 ##  How to Configure a Computed Field
 
@@ -101,7 +101,7 @@ You can:
 
 </details>
 
----
+
 
 ##  Computation Provider Interfaces
 
@@ -134,7 +134,7 @@ export interface IEntityComputedFieldProvider {
 
 </details>
 
----
+
 
 ##  How It Works
 
@@ -158,7 +158,7 @@ export interface IEntityComputedFieldProvider {
 <NoteBoxs>
 The computed field configuration is loaded from the database and cached in the solid registry on application startup. So any changes to a computed field configuration will require a server restart to take effect.
 </NoteBoxs>
----
+
 
 ##  Related Recipes 
 ### TODO
@@ -167,4 +167,3 @@ The computed field configuration is loaded from the database and cached in the s
 -  [Post-computed fields](../post-computed-fields/index.md)  
 -  [Multiple Computed Fields](../multiple-computed-fields/index.md)  
 
----

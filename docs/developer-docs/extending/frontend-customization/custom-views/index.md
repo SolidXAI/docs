@@ -14,7 +14,7 @@ import { IoIosArrowForward } from "react-icons/io";
 Custom views allow you to create **custom pages** in the frontend of your application.  
 They can be embedded into form views or used to build specialized UI.
 
----
+
 
 ## Steps to Create a Custom Page in a Form View
 
@@ -101,7 +101,7 @@ registerExtensionComponent("BookSimilarTitles", BookSimilarTitles);
 ```
 </details>
 
----
+
 
 ##  Example: `BookSimilarTitles` Component
 
@@ -171,7 +171,7 @@ export default BookSimilarTitles;
 ```
 </details>
 
----
+
 
 ##  How It Works
 
@@ -219,6 +219,6 @@ export type FieldMetadata = CommonEntity & {
    - **View metadata**  
    - **Other properties**
 
----
+
 
  With this approach, you can **extend SolidX forms with powerful custom views**.

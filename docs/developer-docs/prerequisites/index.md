@@ -48,7 +48,7 @@ Follow [DigitalOcean's guide](https://www.digitalocean.com/community/tutorials/h
    psql -U <user> -h localhost -d <dbname>
    ```
 
----
+
 
 ## Git Installation
 
@@ -66,7 +66,7 @@ git config --global user.name "<User Name>"
 git config --global user.email "<User Email>"
 ```
 
----
+
 
 ## Node.js & npm Setup (via nvm)
 

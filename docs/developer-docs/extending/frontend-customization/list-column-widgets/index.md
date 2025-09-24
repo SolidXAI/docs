@@ -17,7 +17,7 @@ You can render fields using **built-in widgets** or by creating your own **custo
 
 The view widget is configured using the `viewWidget` attribute in the **list view layout JSON**.
 
----
+
 
 ##  Configuring a List View Widget
 
@@ -49,7 +49,7 @@ The view widget is configured using the `viewWidget` attribute in the **list vie
 
 In the example above, `SolidShortTextAvatarWidget` is a **built-in widget** that displays the user's name and avatar.
 
----
+
 
 ##  Creating a Custom Widget
 
@@ -102,7 +102,7 @@ export const ScoreWidget = ({ rowData, solidListViewMetaData, fieldMetadata, col
 /solid-ui/app/admin/extensions/ScoreWidget.tsx
 ```
 
----
+
 
 ### 2. Register the Widget
 Register the widget in `solid-extensions.ts` so the framework recognizes it.
@@ -116,7 +116,7 @@ registerExtensionComponent("ScoreWidget", ScoreWidget);
 /solid-ui/app/admin/extensions/solid-extensions.ts
 ```
 
----
+
 
 ### 3. Use in Layout
 Now you can use `ScoreWidget` in your layout JSON:
@@ -132,7 +132,7 @@ Now you can use `ScoreWidget` in your layout JSON:
 }
 ```
 
----
+
 
 ##  How It Works
 
@@ -158,7 +158,7 @@ export type FieldMetadata = CommonEntity & {
 ```
 5. The widget displays data based on **custom logic** you define.
 
----
+
 
 ##  TODO
 - Add detailed explanation of each parameter passed to the widget:

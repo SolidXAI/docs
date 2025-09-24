@@ -14,7 +14,7 @@ import { NoteBoxs } from '@site/src/common/NoteBoxs';
 
 Security rules are crucial for **controlling access to data** in SolidX. By defining these rules, you can restrict visibility at the model level and ensure that only authorized users can access sensitive information.
 
----
+
 
   <h2 className=" card-headear-wrapper">
     <IoIosLock size={26} style={{ marginRight: "10px" }} />
@@ -65,7 +65,7 @@ Follow these steps to configure a custom security rule:
 </details>
 4. The `$activeUserId` variable is automatically replaced with the ID of the currently logged-in user when the rule is applied.
 
----
+
 
 
   <h2 className=" card-headear-wrapper">
@@ -99,4 +99,3 @@ If you encounter issues with security rules:
 - Ensure that the permissions related to the security rules are not assigned to the "Public" role, since public endpoints skip security checks. 
 - Check the logic in `securityRuleConfig.filters` to ensure it correctly references the user ID and model data.
 - Enable debug sql logging, by adding the  DEFAULT_DATABASE_LOGGING=true environment variable, to see the SQL queries being generated and applied. This can help identify if the security rules are being applied correctly if the sql queries are being generated and applied correctly.
----

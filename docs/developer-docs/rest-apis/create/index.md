@@ -17,7 +17,7 @@ This section provides information about the SolidX **create REST endpoints**, in
 
 SolidX supports both single record creation and bulk record creation.
 
----
+
 
 ##  Creating a Single Record
 
@@ -118,7 +118,7 @@ Authorization: Bearer <token>
 
 </details>
 
----
+
 
 ##  Bulk Record Creation
 
@@ -150,7 +150,7 @@ To create multiple records at once:
 
 </details>
 
----
+
 
 ##  Creating a Record with Media
 
