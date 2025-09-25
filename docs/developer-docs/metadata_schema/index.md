@@ -21,21 +21,21 @@ Every module can have its own metadata file which is then seeded into the databa
 </h2>
 
 
-- Module Metadata  
-- Model Metadata  
-- Field Metadata  
-- View Metadata  
-- Action Metadata  
-- Menu Item Metadata  
-- Roles & Permissions  
-- Users  
-- Email Templates  
-- SMS Templates  
-- Media Storage Providers  
-- Scheduled Jobs  
-- Security Rules  
-- List of Values  
-- Dashboard Metadata  
+Module Metadata  
+Model Metadata  
+Field Metadata  
+View Metadata  
+Action Metadata  
+Menu Item Metadata  
+Roles & Permissions  
+Users  
+Email Templates  
+SMS Templates  
+Media Storage Providers  
+Scheduled Jobs  
+Security Rules  
+List of Values  
+Dashboard Metadata  
 
 
 

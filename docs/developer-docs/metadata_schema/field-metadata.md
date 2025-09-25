@@ -348,7 +348,7 @@ Every SolidX model is composed of fields. Fields in SolidX go over and above the
 ### Boolean
 </h3>
 
-- [`boolean`](../../admin-docs/module-builder/field-management#boolean)
+[`boolean`](../../admin-docs/module-builder/field-management#boolean)
 
 
 
@@ -372,7 +372,7 @@ Every SolidX model is composed of fields. Fields in SolidX go over and above the
 ###  Relations
 </h3>
 
-- [`relation`](../../admin-docs/module-builder/field-management#relation)
+[`relation`](../../admin-docs/module-builder/field-management#relation)
 
 
 
@@ -420,7 +420,7 @@ Every SolidX model is composed of fields. Fields in SolidX go over and above the
 
 ###  Computed
 </h3>
-- [`computed`](../../admin-docs/module-builder/field-management#computed)
+[`computed`](../../admin-docs/module-builder/field-management#computed)
 
 
 
