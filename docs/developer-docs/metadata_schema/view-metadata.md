@@ -18,7 +18,7 @@ Views define UI presentation of models and automatically generate:
 
 For a conceptual overview / guide/ recipes of how views can be used in SolidX, refer to the [View Metadata Guide](../../recipes/view-configurations-guide.md).
 
-
+---
 
 ### Example: Fee Portal List/Form Views
 <details>
@@ -616,13 +616,13 @@ You can refer to the [Kanban View Example](../../recipes/view-configurations-gui
 Name of the view (used for referencing).  
 **Default:** N/A
 
-
+---
 
 ### `displayName` *(string, required)*
 Display name of the view (shown in the UI).  
 **Default:** N/A
 
-
+---
 
 ### `type` *(string, required)*
 Type of view. Supported types:
@@ -631,13 +631,13 @@ Type of view. Supported types:
 - `kanban`: Kanban view for visualizing records as cards in columns.
 **Default:** N/A
 
-
+---
 
 ### `context` *(JSON, optional)*
 JSON object defining context-specific parameters for the view.  
 **Default:** N/A
 
-
+---
 
 ### `layout` *(JSON, required)*
 
@@ -663,12 +663,12 @@ For detailed attribute-level documentation of the `layout` schema per view type,
 </InfoBox>
 
 
-
+---
 ### `moduleUserKey` *(string, optional)*
 User key of the module this view belongs to.  
 **Default:** N/A
 
-
+---
 
 ### `modelUserKey` *(string, optional)*
 User key of the model this view is associated with.  

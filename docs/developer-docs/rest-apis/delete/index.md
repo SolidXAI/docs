@@ -11,7 +11,7 @@ import {  MdHttp, MdInput,MdOutput,MdDescription } from "react-icons/md";
 
 This section explains how to use the **delete endpoints** of the REST API in SolidX. You can remove records either individually or in bulk using these endpoints.
 
-
+---
 
 ##  Deleting a Single Record
 
@@ -78,7 +78,7 @@ DELETE /api/fee-type/{id}
 
  The above response confirms soft deletion, showing timestamps and tracker info.
 
-
+---
 
 ##  Bulk Deletion
 
@@ -155,9 +155,10 @@ DELETE /api/fee-type/bulk
 
 </details>
 
-
+---
 
  **Summary**
 - Use `DELETE /api/model/{id}` for soft-deleting a single record.
 - Use `DELETE /api/model/bulk` with an array of IDs for bulk deletion.
 - Responses return deleted data including soft delete metadata (`deletedAt`, `deletedTracker`).
+---

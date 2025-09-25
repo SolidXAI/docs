@@ -14,7 +14,7 @@ SolidX offers a **powerful code generation tool** that enables rapid scaffolding
 
 In addition to scaffolding, SolidX supports **deep customization** across both frontend and backend layers. You can tailor UI components, introduce new features, or adjust the behavior of existing elements to match your application's needs.
 
-
+---
 
 ## Customization Capabilities
 
@@ -78,6 +78,6 @@ SolidX provides the following extensibility features:
 
 </div>
 
-
+---
 
 By leveraging these capabilities, you can build modular, scalable, and highly customized applications using the SolidX framework.

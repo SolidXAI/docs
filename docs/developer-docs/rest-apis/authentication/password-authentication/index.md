@@ -12,7 +12,7 @@ import { FaPaperPlane } from "react-icons/fa";
 
 This section covers the password-based authentication APIs available in SolidX.
 
-
+---
 
 ##  Implementation Overview
 
@@ -26,7 +26,7 @@ SolidX provides a comprehensive password-based authentication mechanism with the
 6. **Get User Info**
 7. **Logout**
 
-
+---
 
 ##  1. Register
 
@@ -95,7 +95,7 @@ Allows users to create a new account.
 
 >  **Note**: The response body can be optimized. It currently includes sensitive data like passwords.
 
-
+---
 
 ##  2. Authenticate
 
@@ -154,7 +154,7 @@ Content-Type: application/json
 }
 ```
 
-
+---
 
 ##  3. Refresh Tokens
 
@@ -195,7 +195,7 @@ Content-Type: application/json
 }
 ```
 
-
+---
 
 ##  4. Forgot Password
 
@@ -273,7 +273,7 @@ POST /api/iam/confirm/forgot-password
 }
 ```
 
-
+---
 
 ##  5. Change Password
 
@@ -298,7 +298,7 @@ POST /api/iam/change-password
 }
 ```
 
-
+---
 
 ##  6. Get User Info
 
@@ -328,7 +328,7 @@ Authorization: Bearer <ACCESS_TOKEN>
 }
 ```
 
-
+---
 
 ##  7. Logout
 

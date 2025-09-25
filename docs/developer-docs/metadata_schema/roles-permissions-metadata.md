@@ -14,7 +14,7 @@ Permissions in SOLID are automatically discovered based on controller actions an
 
 By Default `Admin` role is created with all permissions.
 
-
+---
 
 ### Example: Fee Portal Module Roles & Permissions Metadata
 <details>
@@ -50,13 +50,13 @@ By Default `Admin` role is created with all permissions.
 
 Name of the role.
 
-
+---
 
 ### `description` _(string, optional)_
 
 A brief description of the role's purpose.
 
-
+---
 
 ### `permissions` _(array of strings, optional)_
 
@@ -68,4 +68,4 @@ An array of permission strings associated with the role. Each permission corresp
 Permissions are automatically discovered based on controller methods in the codebase. So for e.g., if you have a controller for managing institutes with methods like create, the permission `InstituteController.create` will be automatically created.
 </InfoBox>
 
-
+---

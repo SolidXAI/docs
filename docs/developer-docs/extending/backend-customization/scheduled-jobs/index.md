@@ -16,7 +16,7 @@ Scheduled jobs in SolidX allow you to run recurring tasks such as sending notifi
 
 This section walks you through how to create and integrate custom scheduled jobs into your application.
 
-
+---
 
 <h4 className="card-title card-headear-wrapper">
   <IoIosAlarm size={26} style={{ marginRight: "10px" }} />
@@ -91,7 +91,7 @@ Add the job definition in your metadata.json or job configuration file.
 ```
 </details>
 
-
+---
 
 ### Supported Frequencies
 - Every Minute

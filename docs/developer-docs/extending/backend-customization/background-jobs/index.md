@@ -23,7 +23,7 @@ Background jobs in SolidX allow asynchronous task processing, for e.g :
 - Deferred tasks that don’t require immediate execution
 - Heavy computations that can be processed in the background
 
-
+---
 
 ## Setting Up a Background Job
 
@@ -51,7 +51,7 @@ export default {
 
 </details>
 
-
+---
 
 ### 2. Configure a Publisher
 
@@ -90,7 +90,7 @@ export class EmailQueuePublisherDatabase extends DatabasePublisher<any> {
 
 </details>
 
-
+---
 
 ### 3. Configure a Subscriber
 
@@ -149,7 +149,7 @@ export class EmailQueueSubscriberDatabase extends DatabaseSubscriber<any> {
 
 
 
-
+---
 
 <h4 className="card-title card-headear-wrapper">
   <FaTag size={19} style={{ marginRight: "10px" }} />
@@ -164,7 +164,7 @@ The publisher and subscriber names should follow a convention based on the broke
 
 They are standard NestJS providers and must be registered in their respective modules.
 
-
+---
 
 <h4 className="card-title card-headear-wrapper">
   <FaDatabase size={20} style={{ marginRight: "10px" }} />
@@ -175,7 +175,7 @@ They are standard NestJS providers and must be registered in their respective mo
 - `ss_mq_message_queue`: Queue names registry
 - `ss_mq_message`: Stores message details including status, retries, payload
 
-
+---
 
 <h4 className="card-title card-headear-wrapper">
   <FaCode size={20} style={{ marginRight: "10px" }} />
@@ -189,7 +189,7 @@ They are standard NestJS providers and must be registered in their respective mo
   - `"both"`: Processes and publishes jobs  
     Useful for distributed job handling.
 
-
+---
 
 <h4 className="card-title card-headear-wrapper">
   <FaProjectDiagram size={20} style={{ marginRight: "10px" }} />

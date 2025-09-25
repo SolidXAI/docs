@@ -9,7 +9,7 @@ SOLID automatically generates and manages the admin panel's menu structure based
 
 For a conceptual overview of menus in SolidX, refer to the [Menu System Overview](../../admin-docs/modules/menu-structure.md).
 
-
+---
 ### Example: Fee Portal Module Menu Metadata
 <details>
 <summary> Menu Schema </summary>
@@ -78,13 +78,13 @@ Name of the menu item (column/property).
 Display name of the menu item (shown in the UI).  
 **Default:** N/A
 
-
+---
 
 ### `moduleUserKey` *(string, required)*
 User key of the module this menu item belongs to.  
 **Default:** N/A
 
-
+---
 
 ### `parentMenuItemUserKey` *(string, optional)*
 User key of the parent menu item (for nested menus).  
@@ -92,7 +92,7 @@ If empty or not provided, the menu item is a top-level item.
 **Default:** `""` (empty string)
 
 
-
+---
 
 ### `actionUserKey` *(string, optional)*
 User key of the action this menu item links to.  
@@ -100,7 +100,7 @@ If empty or not provided, the menu item will not link to any action.
 **Default:** `""` (empty string)
 
 
-
+---
 
 ### `roles` *(array of Role Metadata, optional)*
 Array of roles that can access this menu item.  
@@ -108,7 +108,7 @@ If empty or not provided, the menu item is accessible only to the `Admin` role.
 Refer to [Role Metadata](../../admin-docs/iam/roles.md) for details.
 
 
-
+---
 
 ### `sequenceNumber` *(number, optional)*
 Sequence number for ordering menu items.  
@@ -116,7 +116,7 @@ Lower numbers appear first. If empty or not provided, menu items are shown in th
 **Default:** N/A
 
 
-
+---
 
 ### `iconName` *(string, optional)*
 Name of the icon to display alongside the menu item.

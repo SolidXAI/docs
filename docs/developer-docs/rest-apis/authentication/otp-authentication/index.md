@@ -13,7 +13,7 @@ import { FiShare2 } from "react-icons/fi";
 
 This section covers the OTP-based authentication APIs available in SolidX.
 
-
+---
 
 ##  Implementation Overview
 
@@ -22,7 +22,7 @@ SolidX provides a comprehensive OTP-based authentication mechanism with the foll
 1. **Register**
 2. **Login**
 
-
+---
 
 ##  1. Register
 
@@ -98,7 +98,7 @@ Content-Type: application/json
 }
 ```
 
-
+---
 
 ###  1.2 Confirm Registration
 
@@ -143,7 +143,7 @@ Content-Type: application/json
 }
 ```
 
-
+---
 
 ##  2. Login
 
@@ -207,7 +207,7 @@ Content-Type: application/json
 }
 ```
 
-
+---
 
 ###  2.2 Confirm Login
 

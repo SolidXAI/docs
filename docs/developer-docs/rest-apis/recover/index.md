@@ -15,7 +15,7 @@ This documentation includes usage examples for:
 - Recovering a single record by ID
 - Recovering records in bulk
 
-
+---
 
 ##  Recover a Single Record
 
@@ -76,7 +76,7 @@ POST /api/fee-type/recover/{id}
 
 >  **Known Issue**: Although the record is successfully recovered in the database, the response may still contain `deletedAt` and `deletedTracker`. This is expected to be fixed in upcoming releases.
 
-
+---
 
 ##  Bulk Recovery of Records
 
@@ -145,5 +145,5 @@ POST /api/fee-type/recover/bulk
 }
 ```
 
-
+---
 >  **Known Issue**: Similar to single record recovery, the response may still include `deletedAt` and `deletedTracker` fields for recovered records. This is expected to be resolved in future updates.

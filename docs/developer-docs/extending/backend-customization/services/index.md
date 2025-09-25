@@ -12,7 +12,7 @@ import { IoIosArrowForward } from "react-icons/io";
 
 Services are responsible for business logic and data manipulation in your application. Extending services allows you to implement custom logic beyond the default behavior.
 
-
+---
 
 ##  Adding a New Method to a Service
 
@@ -39,7 +39,7 @@ async activateInstitutePortal(ids: (number | string)[]): Promise<any> {
 
 This method encapsulates the logic required to activate an institute’s portal. You can then call this service method from a controller to make it accessible via an endpoint.
 
-
+---
 
 ##  Related Recipes
 	-	 Creating a Custom Service

@@ -19,7 +19,7 @@ The **Solid Registry** is a central registry that stores all metadata and config
 
 At application startup, the registry loads all relevant components, making them available for runtime use.
 
-
+---
 
 ## Registered Components
 
@@ -123,7 +123,7 @@ Provides dynamic data for dashboard variable dropdowns.
 
 Supplies data sources for dashboard questions (charts, summaries, etc).
 
-
+---
 
 ## When Is the Registry Populated?
 
@@ -131,4 +131,4 @@ All of the above components are registered **at application startup**.
 
 > If you modify any metadata registered in the Solid Registry, you **must restart the application** for those changes to take effect.
 
-
+---

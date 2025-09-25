@@ -11,7 +11,7 @@ import { MdWidgets, MdTrackChanges,MdPsychology } from "react-icons/md";
 The metadata configuration in SolidX allows configuring different **models** along with their **fields, relationships, permissions, roles, views**, and more.  
 Every module can have its own metadata file which is then seeded into the database.
 
-
+---
 
 
   <h2 className=" card-headear-wrapper">
@@ -37,7 +37,7 @@ Every module can have its own metadata file which is then seeded into the databa
 - List of Values  
 - Dashboard Metadata  
 
-
+---
 
 
   <h2 className=" card-headear-wrapper">
@@ -51,7 +51,7 @@ This section focuses on **working examples** using the metadata schema and expla
 All examples below are within the context of a **Fees Portal Module** (A Fee Collection Module for Educational Institutions).  
  For more details about the Fees Portal module, see [School Fees Portal Tutorial](../tutorial/school-fees-portal/index.md).
 
-
+---
 
 
   <h2 className=" card-headear-wrapper">

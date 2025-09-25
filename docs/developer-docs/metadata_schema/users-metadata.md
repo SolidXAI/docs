@@ -9,7 +9,7 @@ We can populate some initial users in the system using the `users` metadata. The
 
 For a conceptual overview of users, refer to the [Users Management](../../admin-docs/iam/users.md) documentation.
 
-
+---
 
 ### Example: Fee Portal Module Users Metadata
 <details>
@@ -41,19 +41,20 @@ For a conceptual overview of users, refer to the [Users Management](../../admin-
 ### `fullName` *(string, required)*
 Full name of the user.
 
-
+---
 ### `username` *(string, required, unique)*
 Unique username for the user.
 
-
+---
 ### `email` *(string, required, unique)*
 Unique email address of the user.
 
-
+---
 ### `password` *(string, required)*
 Password for the user account. It is recommended to use a strong password.
 
-
+---
 ### `mobile` *(string, optional)*
 Mobile number of the user.
 
+---
