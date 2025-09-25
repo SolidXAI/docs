@@ -12,7 +12,6 @@ For a conceptual overview / guide/ recipes of how actions can be used in SolidX,
 
 
 ### Example: Fee Portal Module Action Metadata
-<details>
 <summary> Action Schema </summary>
 ``` json
 {
@@ -47,7 +46,6 @@ For a conceptual overview / guide/ recipes of how actions can be used in SolidX,
     ]
 }
 ```
-</details>
 
 ## Action Metadata Atributes
 

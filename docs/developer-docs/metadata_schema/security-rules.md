@@ -10,7 +10,6 @@ Security rules are crucial for controlling access to data in SolidX. By defining
 For a guide on how to create and manage security rules in SolidX, refer to the [Creating Security Rules](../../developer-docs/extending/backend-customization/security-rules/index.md).
 
 ## Example: Security Rules Metadata
-<details>
 <summary> Security Rules Schema </summary>
 ``` json
 {
@@ -36,7 +35,7 @@ For a guide on how to create and manage security rules in SolidX, refer to the [
   ]
 }
 ```
-</details>
+
 ## Security Rules Metadata Attributes
 
 

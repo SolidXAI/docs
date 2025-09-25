@@ -17,8 +17,7 @@ Each model is a semantic, configurable data structure that forms the basis of ad
 
 
 ### Example: Institute Model
-<details>
-<summary>📑 Model Schema</summary>
+<summary> Model Schema</summary>
 
 ```json
 {

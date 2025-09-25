@@ -864,16 +864,16 @@ Declared output type of the computed field.
 
 ### `computedFieldTriggerConfig` *(array of objects, optional)*
 Operations that trigger compute and the trigger model/module to attach to. This is useful when the computed field depends on relations or other models and needs to be re-computed when those models change.
-<details>
-<summary>📑 Config schema</summary>
-``` ts
+<!-- <summary> Config schema</summary> -->
+**Config schema**
+
+``` tsx
 export class ComputedFieldTriggerConfig {
   moduleName: string; // Name of the module which should trigger the computed field re-evaluation
   modelName: string; // Name of the model which should trigger the computed field re-evaluation
   operations: ComputedFieldTriggerOperation[]; // List of operations on the model, when computed field should be re-evaluated
 }
 ```
-</details>
 **Operations values:** 
 - before-insert
 - after-insert

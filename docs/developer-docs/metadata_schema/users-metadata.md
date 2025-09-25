@@ -12,7 +12,6 @@ For a conceptual overview of users, refer to the [Users Management](../../admin-
 
 
 ### Example: Fee Portal Module Users Metadata
-<details>
 <summary> Users Schema </summary>
 ``` json
 {
@@ -35,7 +34,6 @@ For a conceptual overview of users, refer to the [Users Management](../../admin-
   ]
 }
 ```
-</details>
 
 ## Users Metadata Attributes
 ### `fullName` *(string, required)*

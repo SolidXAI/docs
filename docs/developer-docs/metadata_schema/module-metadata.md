@@ -15,9 +15,9 @@ A module groups together related models and functionality under a **unified doma
 
 
 
-### ▶️ Example: Fees Portal Module
-<details>
-<summary>📑 Module Schema</summary>
+###  Example: Fees Portal Module
+
+<summary> Module Schema</summary>
 
 ```json
 {
@@ -34,7 +34,7 @@ A module groups together related models and functionality under a **unified doma
   ... // Other metadata components go here
 }
 ```
-</details>
+
 
 
 

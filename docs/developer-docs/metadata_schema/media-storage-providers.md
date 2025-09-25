@@ -9,7 +9,6 @@ SOLID supports multiple storage providers for media files, offering flexibility 
 For a conceptual overview of media storage providers in SolidX, refer to the [Storage Providers](../../admin-docs/media-library/storage-providers.md).
 
 ## Example: Media Storage Providers Metadata
-<details>
 <summary> Media Storage Providers Schema </summary>
 ``` json
 {
@@ -26,7 +25,6 @@ For a conceptual overview of media storage providers in SolidX, refer to the [St
   ],
 }
 ```
-</details>
 :::info
 For the media storage provider `default-aws-s3`, you need to provide the following environment variables in your `.env` file or deployment environment:
 

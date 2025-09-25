@@ -11,7 +11,6 @@ For a conceptual overview of menus in SolidX, refer to the [Menu System Overview
 
 
 ### Example: Fee Portal Module Menu Metadata
-<details>
 <summary> Menu Schema </summary>
 ``` json
 {
@@ -65,7 +64,7 @@ For a conceptual overview of menus in SolidX, refer to the [Menu System Overview
   ],
 }
 ```
-</details>
+
 ## Menu Item Metadata Attributes
 
 ### `name` *(string, required, unique)*
