@@ -40,7 +40,7 @@ You can use either:
 }
 ```
 
----
+
 
 ##  Creating a Custom Widget
 
@@ -148,7 +148,7 @@ export const SolidIntegerSliderStyleFormEditWidget = ({ formik, fieldContext }: 
 /solid-ui/app/admin/extensions/SolidIntegerSliderStyleFormEditWidget.tsx
 ```
 
----
+
 
 ### 2. Register the Widget
 Widgets must be **registered** in `solid-extensions.ts`:
@@ -168,7 +168,7 @@ registerExtensionComponent(
 
  **Note:** The alias `integerSlider` allows you to use this widget in layout configuration easily.
 
----
+
 
 ### 3. Use in Layout
 Now you can configure the widget in the form view layout:
@@ -184,7 +184,7 @@ Now you can configure the widget in the form view layout:
 }
 ```
 
----
+
 
 ##  How It Works
 
@@ -214,7 +214,7 @@ export type SolidFieldProps = {
 5. The widget then applies your **custom rendering logic**.  
 6. Default widgets are also rendered using the same mechanism.
 
----
+
 
 ##  View Widgets (Read-Only Mode)
 
@@ -250,6 +250,6 @@ export const CustomBooleanFormViewWidget = ({ formik, fieldContext }: SolidFormF
 
 This allows you to render a **boolean field as "Yes/No"** in view mode.
 
----
+
 
  With this approach, you can **seamlessly extend** SolidX form views using custom widgets for both **edit** and **view** modes.

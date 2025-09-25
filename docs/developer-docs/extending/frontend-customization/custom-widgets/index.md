@@ -17,7 +17,7 @@ These widgets:
 
  SolidX provides a built-in way to create custom widgets using the **`CustomHtml`** widget.
 
----
+
 
 ##  How to Configure the `CustomHtml` Widget
 
@@ -54,7 +54,7 @@ These widgets:
 
  Learn more here: [Form View Event Listeners](../form-view-event-listeners/index.md)
 
----
+
 
 ##  How It Works
 
@@ -83,6 +83,6 @@ export type SolidFormWidgetProps = {
 
 5. The widget applies your **custom rendering logic**.  
 
----
+
 
  With this approach, you can create **reusable UI enhancements** and extend your SolidX frontend with ease.

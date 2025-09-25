@@ -15,7 +15,7 @@ Seeding is the process of initializing the database with the **essential metadat
 
 >  The result of the seeding step is a **fully functional database** with all necessary metadata populated.
 
----
+
 
 ##  Running the seed Command
 
@@ -28,7 +28,7 @@ solid seed
 This command triggers the `ModuleMetadataSeederService`, provided by the [`@solidstarters/solid-core`](https://www.npmjs.com/package/@solidstarters/solid-core) package.  
 It is responsible for populating all the necessary metadata into the database.
 
----
+
 
 ## What Gets Seeded?
 
@@ -162,7 +162,7 @@ The following metadata is populated during the seeding process:
 
 - Dashboard configuration providing visual summaries and KPIs
 
----
+
 
 ##  Summary
 

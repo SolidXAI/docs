@@ -9,7 +9,7 @@ Actions define what happens when users interact with UI elements like menu items
 
 For a conceptual overview / guide/ recipes of how actions can be used in SolidX, refer to the [Action Guide](../../recipes/actions-menus-guide.md).
 
----
+
 
 ### Example: Fee Portal Module Action Metadata
 <details>
@@ -55,13 +55,13 @@ For a conceptual overview / guide/ recipes of how actions can be used in SolidX,
 Name of the action item (column/property).  
 **Default:** N/A
 
----
+
 
 ### `displayName` *(string, required)*
 Display name of the action item (shown in the UI).  
 **Default:** N/A
 
----
+
 
 ### `type` *(string, required)*
 Type of action. Supported types:
@@ -69,7 +69,7 @@ Type of action. Supported types:
 - `custom`: Custom action that uses a custom frontend component. You need to provide the `customComponent` attribute for this type.
 **Default:** N/A
 
----
+
 
 ### `domain` *(JSON, optional)*
 JSON object defining domain-specific parameters for the action.  
@@ -81,43 +81,43 @@ JSON object defining domain-specific parameters for the action.
 JSON object defining context-specific parameters for the action.  
 **Default:** N/A
 
----
+
 
 ### `customComponent` *(string, optional)*
 Path to the custom frontend component to be used for the action.
 **Applies:** Only if `type` is `custom`.
 **Default:** N/A
 
----
+
 
 ### `customIsModal` *(boolean, optional)*
 Indicates if the custom component should be displayed as a modal dialog.
 **Applies:** Only if `type` is `custom`.  
 **Default:** `false`
 
----
+
 
 ### `serverEndpoint` *(string, optional)*
 Backend server endpoint to be called for the action.
 **Applies:** Only if `type` is `custom`.  
 **Default:** N/A    
 
----
+
 
 ### `viewUserKey` *(string, optional)*
 User key of the view associated with the action.  
 **Default:** N/A
 
----
+
 ### `moduleUserKey` *(string, required)*
 User key of the module this action belongs to.  
 **Default:** N/A
 
----
+
 ### `modelUserKey` *(string, required)*
 User key of the model this action operates on.  
 **Default:** N/A
 
----
+
 
 

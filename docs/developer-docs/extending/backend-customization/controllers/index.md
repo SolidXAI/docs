@@ -12,7 +12,7 @@ import { NoteBoxs } from '@site/src/common/NoteBoxs';
 
 Controllers are responsible for handling requests and returning responses. Customizing them allows you to tailor the behavior of your application to meet specific needs.
 
----
+
 
 ##  Adding a New Endpoint to a Controller
 
@@ -52,7 +52,7 @@ This method will handle POST requests to the /activate-institute-portal endpoint
 </NoteBoxs>
 
 
----
+
 
 ##  Related Recipes (TODO)
 	-	 Creating a Custom Controller

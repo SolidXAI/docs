@@ -225,7 +225,7 @@ sudo systemctl restart nginx
 
 Visit: `https://<domain_name>` to verify SSL.
 
----
+
 
 
 <div className="tips-box">

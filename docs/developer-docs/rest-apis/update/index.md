@@ -11,7 +11,7 @@ import {  MdHttp, MdInput,MdOutput,MdDescription } from "react-icons/md";
 
 This section provides details about the **Update Endpoints** of the REST API, including usage patterns, headers, request/response formats, and examples of both **partial** and **full** updates.
 
----
+
 
 ##  Types of Updates
 
@@ -89,7 +89,7 @@ PATCH /api/fee-type/1
 
 </details>
 
----
+
 
 ### 2 Full Update
 - Method: `PUT`
@@ -167,7 +167,7 @@ PUT /api/fee-type/1
 
 </details>
 
----
+
 
 ##  Update Without Media
 
@@ -195,7 +195,7 @@ Authorization: Bearer <token>
 
 </details>
 
----
+
 
 ##  Update With Media
 
@@ -228,4 +228,4 @@ files: profile-picture.jpg
 
 </details>
 
----
+

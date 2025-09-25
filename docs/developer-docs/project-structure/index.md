@@ -115,23 +115,23 @@ solid-ui/
 - `@solidstarters/solid-core-ui`
   - Contains the core ui components for the SolidX UI.
   
----
+
 
 ## `Debugging` - VS Code
 
 Contains editor-specific configurations like `launch.json` for debugging and IDE behavior.
 
----
+
 
 ##  Upgrade Scripts
 - `upgrade.sh`: Used for upgrading the core SolidX backend/frontend dependencies.
 
----
+
 
 ## TODO
 - Add more details on the files in the package structure
 
----
+
 
 
 <div className="tips-box">

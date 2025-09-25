@@ -13,7 +13,7 @@ A module groups together related models and functionality under a **unified doma
 
 👉 For a conceptual overview of what a module is, see [Module Management Documentation](../admin-docs/module-builder/module-management.md).
 
----
+
 
 ### ▶️ Example: Fees Portal Module
 <details>
@@ -36,7 +36,7 @@ A module groups together related models and functionality under a **unified doma
 ```
 </details>
 
----
+
 
   <h2 className=" card-headear-wrapper">
     <MdCategory size={24} style={{ marginRight: "10px" }} />
@@ -51,39 +51,39 @@ Unique identifier for the module (lowercase, underscores/dashes).
 Used internally by the system and in the API (e.g., `"sales"`).  
 **Default:** N/A
 
----
+
 
 ### `displayName` *(string, required)*
 Human-readable name shown in the admin panel’s navigation and UI  
 (e.g., `"Sales Management"`).  
 **Default:** N/A
 
----
+
 
 ### `description` *(string, optional)*
 Short summary of what the module represents or its purpose.  
 **Default:** N/A
 
----
+
 
 ### `defaultDataSource` *(string, optional)*
 Default data source (from a predefined list) used to read/write data.  
 **Default:** N/A
 
----
+
 
 ### `menuSequenceNumber` *(number, optional)*
 Order in which the module appears in the sidebar/navigation menu  
 (lower numbers appear earlier).  
 **Default:** N/A
 
----
+
 
 ### `isSystem` *(boolean, required)*
 Marks this as a **system module** (cannot be deleted).  
 **Default:** `false`
 
----
+
 
 ### `menuIconUrl` *(string, optional)*
 Path/URL of an icon to represent the module in the navigation pane.  

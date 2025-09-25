@@ -19,7 +19,7 @@ Every SolidX model is composed of fields. Fields in SolidX go over and above the
 
 👉 For a conceptual overview of fields supported in a model, see [Field Management Documentation](../../admin-docs/module-builder/field-management.md).
 
----
+
 ### Example: Institute + Fee Type Model fields
 <details>
  <summary className="card-title card-headear-wrapper">
@@ -304,14 +304,14 @@ Every SolidX model is composed of fields. Fields in SolidX go over and above the
 }
 ```
 </details>
----
+
 
 ##  Field Type (`type`)  
 
 > **This is the most important attribute of a field.**  
 > It determines the **behavior, validation, storage, and UI options** for the field.  
 
----
+
 
   <h3 className=" card-headear-wrapper">
     <MdNumbers size={24}  />
@@ -325,7 +325,7 @@ Every SolidX model is composed of fields. Fields in SolidX go over and above the
 | `bigint` | [BigInt Field](../../admin-docs/module-builder/field-management#bigint) |
 | `decimal`| [Decimal Field](../../admin-docs/module-builder/field-management#decimal) |
 
----
+
 
   <h3 className=" card-headear-wrapper">
     <MdTextFields size={24}  />
@@ -340,7 +340,7 @@ Every SolidX model is composed of fields. Fields in SolidX go over and above the
 | `richText`  | [Rich Text Field](../../admin-docs/module-builder/field-management#richtext) |
 | `json`      | [JSON Field](../../admin-docs/module-builder/field-management#json) |
 
----
+
 
   <h3 className=" card-headear-wrapper">
     <FaCheckCircle size={20}  />
@@ -350,7 +350,7 @@ Every SolidX model is composed of fields. Fields in SolidX go over and above the
 
 - [`boolean`](../../admin-docs/module-builder/field-management#boolean)
 
----
+
 
   <h3 className=" card-headear-wrapper">
     <MdCalendarMonth size={22}  />
@@ -364,7 +364,7 @@ Every SolidX model is composed of fields. Fields in SolidX go over and above the
 | `datetime`| [Datetime Field](../../admin-docs/module-builder/field-management#datetime) |
 | `time`    | [Time Field](../../admin-docs/module-builder/field-management#time) |
 
----
+
 
   <h3 className=" card-headear-wrapper">
     <MdMerge size={24}  />
@@ -374,7 +374,7 @@ Every SolidX model is composed of fields. Fields in SolidX go over and above the
 
 - [`relation`](../../admin-docs/module-builder/field-management#relation)
 
----
+
 
   <h3 className=" card-headear-wrapper">
     <MdPhotoLibrary size={24}  />
@@ -387,7 +387,7 @@ Every SolidX model is composed of fields. Fields in SolidX go over and above the
 | `mediaSingle`   | [Single Media Field](../../admin-docs/module-builder/field-management#single-media) |
 | `mediaMultiple` | [Multiple Media Field](../../admin-docs/module-builder/field-management#multiple-media) |
 
----
+
 
   <h3 className=" card-headear-wrapper">
     <MdSecurity size={20}  />
@@ -400,7 +400,7 @@ Every SolidX model is composed of fields. Fields in SolidX go over and above the
 | `email`   | [Email Field](../../admin-docs/module-builder/field-management#email) |
 | `password`| [Password Field](../../admin-docs/module-builder/field-management#password) |
 
----
+
 
   <h3 className=" card-headear-wrapper">
     <MdCheckBox size={20}  />
@@ -413,7 +413,7 @@ Every SolidX model is composed of fields. Fields in SolidX go over and above the
 | `selectionStatic`  | [Static Selection Field](../../admin-docs/module-builder/field-management#static-selection) |
 | `selectionDynamic` | [Dynamic Selection Field](../../admin-docs/module-builder/field-management#dynamic-selection) |
 
----
+
 
   <h3 className=" card-headear-wrapper">
     <MdFunctions size={24}  />
@@ -423,7 +423,7 @@ Every SolidX model is composed of fields. Fields in SolidX go over and above the
 - [`computed`](../../admin-docs/module-builder/field-management#computed)
 
 
----
+
 
 ##  Field Metadata Attributes
 
@@ -431,32 +431,32 @@ Every SolidX model is composed of fields. Fields in SolidX go over and above the
 Name of the field (column/property).  
 **Default:** N/A
 
----
+
 
 ### `displayName` *(string, required)*
 Human-readable label for UI and docs.  
 **Default:** N/A
 
----
+
 
 ### `description` *(string, optional)*
 Short help/purpose text shown in UI or docs.  
 **Default:** N/A
 
----
+
 
 ### `type` *(SolidFieldType, required)*
 Refer to [Field Type](#-field-type-type) section above.
 
 **Default:** N/A
 
----
+
 
 ### `modelId` *(number, optional)*
 Numeric id of the owning model (internal linkage).  
 **Default:** N/A
 
----
+
 
 ### `ormType` *(PSQLType, optional)*
 Override database column type. Use only when the default mapping from `type` is insufficient.  
@@ -482,38 +482,38 @@ Max length/size where relevant.
 **Applies to:** shortText, longText, richText, json  
 **Default:** N/A -->
 
----
+
 
 ### `defaultValue` *(string, optional)*
 Literal default value applied on create.  
 **Default:** N/A
 
----
+
 
 ### `regexPattern` *(string, optional)*
 Validation pattern for textual inputs.  
 **Applies to:** shortText, longText, email, password  
 **Default:** N/A
 
----
+
 
 ### `regexPatternNotMatchingErrorMsg` *(string, optional)*
 Custom error message when `regexPattern` fails.  
 **Default:** N/A
 
----
+
 
 ### `required` *(boolean, optional)*
 Marks field as mandatory.  
 **Default:** false
 
----
+
 
 ### `unique` *(boolean, optional)*
 Enforces uniqueness.  
 **Default:** false
 
----
+
 
 ### `encrypt` *(boolean, optional)*
 Enable symmetric encryption-at-rest for this field.  
@@ -525,7 +525,7 @@ Enable symmetric encryption-at-rest for this field.
  Feature coming soon!
 </InfoBox>
 
----
+
 
 ### `encryptionType` *(enum, optional)*
 Only if `encrypt = true`.  
@@ -540,7 +540,7 @@ Only if `encrypt = true`.
  Feature coming soon!
 </InfoBox>
 
----
+
 
 ### `decryptWhen` *(enum, optional)*
 Only if `encrypt = true`. Controls when plaintext is produced.  
@@ -554,28 +554,28 @@ Only if `encrypt = true`. Controls when plaintext is produced.
  Feature coming soon!
 </InfoBox>
 
----
+
 
 ### `index` *(boolean, optional)*
 Add an index for search/sort (where supported).  
 **Not applicable to:** richText, longText  
 **Default:** false
 
----
+
 
 ### `max` *(number, optional)*
 Upper bound (number/date) or maximum length (text/json).  
 **Applies to:** shortText, longText, richText, json, int, decimal, date, datetime, time  
 **Default:** N/A
 
----
+
 
 ### `min` *(number, optional)*
 Lower bound (number/date) or minimum length (text/json).  
 **Applies to:** shortText, longText, richText, json, int, decimal, date, datetime, time  
 **Default:** N/A
 
----
+
 
 ### `private` *(boolean, optional)*
 Exclude from default listings/exports; require elevated access.  
@@ -586,7 +586,7 @@ Exclude from default listings/exports; require elevated access.
  Feature coming soon!
 </InfoBox>
 
----
+
 
 ### `mediaTypes` *(MediaType[], optional)*
 Allowlist of media categories.  
@@ -598,21 +598,21 @@ Allowlist of media categories.
 - file  
 **Default:** All sensible for the field type
 
----
+
 
 ### `mediaMaxSizeKb` *(number, optional)*
 Max upload size per item in kilobytes.  
 **Applies to:** mediaSingle, mediaMultiple  
 **Default:** N/A
 
----
+
 
 ### `mediaStorageProviderId` *(number, optional)*
 Numeric id of configured media storage provider.  
 **Applies to:** mediaSingle, mediaMultiple  
 **Default:** Module/provider default
 
----
+
 
 ### `mediaStorageProviderUserKey` *(string, optional)*
 Name/userKey of configured media storage provider.  
@@ -628,7 +628,7 @@ Name/userKey of configured media storage provider.
 </InfoBox>
 
 
----
+
 
 ### `relationType` *(RelationType, optional)*
 Kind of relation.  
@@ -639,14 +639,14 @@ Kind of relation.
 - one-to-many  
 **Default:** N/A
 
----
+
 
 ### `relationCoModelSingularName` *(string, optional)*
 `singularName` of the related co-model.  
 **Applies to:** relation  
 **Default:** N/A
 
----
+
 
 ### `relationCreateInverse` *(boolean, optional)*
 Generate inverse side on co-model.  
@@ -664,7 +664,7 @@ Generate inverse side on co-model.
   Currently we auto-create the inverse side of the field metadata on the co-model. In future releases, we will get rid of the inverse field auto-creation and instead have the user explicitly create the inverse field on the co-model. This is to ensure that the user has full control on how the inverse field is created on the co-model and keep things explicit and simple
 </WarningBox>
 
----
+
 
 ### `relationCascade` *(CascadeType, optional)*
 Only if `type = relation` and `relationCreateInverse = true`.
@@ -676,7 +676,7 @@ Cascade behavior for persistence i.e (create/update) and deletion.
 - cascade  
 **Default:** restrict (recommended explicitness)
 
----
+
 
 ### `relationModelModuleName` *(string, optional)*
 Only if `type = relation` and `relationCreateInverse = true` and the related co-model lives in a **different module**.
@@ -684,7 +684,7 @@ Module name if the related co-model lives in a **different module**.
 **Applies to:** relation  
 **Default:** Current module
 
----
+
 
 ### `relationCoModelFieldName` *(string, mandatory for many-to-many)*
 Only if `type = relation` and `relationCreateInverse = true`.
@@ -693,7 +693,7 @@ Auto-inferred for many-to-one but required for many-to-many.
 **Applies to:** relation  
 **Default:** Auto-inferred for many-to-one
 
----
+
 
 ### `isRelationManyToManyOwner` *(boolean, mandatory for many-to-many)*
 Only if `type = relation` and `relationType = many-to-many`.
@@ -702,7 +702,7 @@ At least one side must be the owner, otherwise the many-to-many relation will no
 **Applies to:** relation (many-to-many)  
 **Default:** false
 
----
+
 
 
 
@@ -801,28 +801,28 @@ export class PaginationQueryDto {
 **Applies to:** relation  
 **Default:** N/A
 
----
+
 
 ### `selectionDynamicProvider` *(string, optional)*
 Provider identifier for loading dynamic options.
 **Applies to:** selectionDynamic  
 **Default:** N/A
 
----
+
 
 ### `selectionDynamicProviderCtxt` *(string, optional)*
 Context/config passed to the dynamic provider.
 **Applies to:** selectionDynamic  
 **Default:** N/A
 
----
+
 
 ### `selectionStaticValues` *(string[], optional)*
 List of static options in `key:Label` format.  
 **Applies to:** selectionStatic  
 **Default:** N/A
 
----
+
 
 ### `selectionValueType` *(enum, optional)*
 Primitive type of selection values.  
@@ -832,21 +832,21 @@ Primitive type of selection values.
 - int  
 **Default:** string
 
----
+
 
 ### `computedFieldValueProvider` *(string, optional)*
 Provider/class that computes the field value.  
 **Applies to:** computed  
 **Default:** N/A
 
----
+
 
 ### `computedFieldValueProviderCtxt` *(string, optional)*
 Context/config passed to the computed value provider.  
 **Applies to:** computed  
 **Default:** N/A
 
----
+
 
 ### `computedFieldValueType` *(enum, optional)*
 Declared output type of the computed field.  
@@ -860,7 +860,7 @@ Declared output type of the computed field.
 - datetime  
 **Default:** string
 
----
+
 
 ### `computedFieldTriggerConfig` *(array of objects, optional)*
 Operations that trigger compute and the trigger model/module to attach to. This is useful when the computed field depends on relations or other models and needs to be re-computed when those models change.
@@ -884,19 +884,19 @@ export class ComputedFieldTriggerConfig {
 **Applies to:** computed  
 **Default:** N/A
 
----
+
 
 <!-- ### `uuid` *(string, optional)*
 Explicit UUID for this field definition (rarely needed).  
 **Default:** Auto-generated -->
 
----
+
 
 ### `isSystem` *(boolean, optional)*
 System fields are excluded from code generation (hand-written code assumed).  
 **Default:** false
 
----
+
 
 ### `isMarkedForRemoval` *(boolean, optional)*
 Soft-removal flag for the field definition. Fields marked for removal are excluded from code generation.
@@ -906,46 +906,46 @@ Soft-removal flag for the field definition. Fields marked for removal are exclud
 <InfoBox>
  This flag enables the code builder to identify fields that need to be deleted from the codebase. They are deleted after code generation is complete.  
 </InfoBox>
----
+
 
 ### `columnName` *(string, optional)*
 Override database column name.  
 **Default:** Derived from `name`
 
----
+
 
 ### `relationCoModelColumnName` *(string, optional)*
 Override co-model's column name for relation bindings.  
 **Applies to:** relation  
 **Default:** Auto-generated/inferred
 
----
+
 
 ### `isUserKey` *(boolean, optional)*
 Marks this field as the **user key** (friendly identifier). This is mandatory if we need to use a relation field in the UI, since the user key is what gets displayed in the dropdowns and lookups.  
 **Default:** false
 
----
+
 
 ### `relationJoinTableName` *(string, optional)*
 Custom join table name for many-to-many.  
 **Applies to:** relation (many-to-many)  
 **Default:** Auto-generated
 
----
+
 
 ### `enableAuditTracking` *(boolean, optional)*
 Track create/update/delete for this field in audit logs.  
 **Default:** false
 
----
+
 
 ### `isMultiSelect` *(boolean, optional)*
 Allow multiple selected values (UI + storage impact).  
 **Applies to:** selection fields and some primitives depending on UI policy  
 **Default:** false
 
----
+
 
 ## Implementation Notes & Gotchas
 
@@ -959,7 +959,7 @@ Allow multiple selected values (UI + storage impact).
 - **Computed** — Providers should be idempotent and side‑effect free. For pre-compute operations e.g (before-insert, before-update, before-remove), provider needs to set the value on the entity object directly i.e (since in pre-compute operations, the assumption is that the computed field entity and the triggering entity are the same). For post-compute operations e.g (after-insert, after-update, after-remove), provider needs to use the entity manager in the provider implementation to update the entity since in post-compute operations, the assumption is that the computed field entity and the triggering entity can be different.
 - **Media** — Validate MIME and size server-side. `mediaTypes` is an allowlist, not a guarantee of safety. Consider thumbnailing and antivirus for file uploads.
 
----
+
 
 ## Quick Matrix (What applies where?)
 
@@ -977,7 +977,7 @@ Allow multiple selected values (UI + storage impact).
 
 
 
----
+
 
 ##  Related Recipes (TODO)
 -	👉 [Field Type Recipes](../../recipes/field-types-reference.md)
