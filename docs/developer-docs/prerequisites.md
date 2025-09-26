@@ -7,11 +7,11 @@ sidebar_position: 1
 import { FaUserPlus,FaTerminal } from "react-icons/fa";
 import { NoteBoxs } from '@site/src/common/NoteBoxs';
 
-# Prerequisites
+# 📋 Prerequisites
 
 > ⚠️ **Note:** These installation instructions are provided as a **guideline**. Environments differ, so if you run into issues, you can troubleshoot by consulting the relevant official documentation or searching for solutions on the internet.
 
-## Database Setup
+## 🗄️ Database Setup
 
 This guide assumes you're using **PostgreSQL** as your database.
 
@@ -19,9 +19,9 @@ This guide assumes you're using **PostgreSQL** as your database.
 If you're using a different database, please refer to its official documentation.
 </NoteBoxs>
 
-### Installing PostgreSQL
+### 🛠️ Installing PostgreSQL
 
-#### On Ubuntu / macOS:
+#### 💻 On Ubuntu / macOS
 
 Follow [DigitalOcean's guide](https://www.digitalocean.com/community/tutorials/how-to-install-postgresql-on-ubuntu-22-04-quickstart) for detailed installation instructions.  
 > Alternatively, you can use your package manager of choice or follow the official PostgreSQL docs for your OS.
@@ -36,7 +36,7 @@ psql --version
 systemctl status postgresql --no-pager
 ```
 
-#### Create a PostgreSQL User and Database
+#### 👤 Create a PostgreSQL User and Database
 
 <h4 className="card-title card-headear-wrapper">
   <FaUserPlus size={20} style={{ marginRight: "2px" }} />
@@ -71,11 +71,11 @@ systemctl status postgresql --no-pager
 
 ---
 
-## Git Installation
+## 🌐 Git Installation
 
 <h4 className="card-title card-headear-wrapper">
   <FaTerminal size={20}  />
-  On Ubuntu / macOS
+  💻 On Ubuntu / macOS
 </h4>
 
 > If you already have Git installed via another method (Xcode, Homebrew, source build), you can skip this step. You can also search “install git on your distro” for alternatives.
@@ -95,11 +95,11 @@ git config --list   # Validate configuration
 
 ---
 
-## Node.js & npm Setup (via nvm)
+## ⚙️ Node.js & npm Setup (via nvm)
 
 <h4 className="card-title card-headear-wrapper">
   <FaTerminal size={20}  />
-  On Ubuntu / macOS
+  💻 On Ubuntu / macOS
 </h4>
 
 > You may also use your OS package manager (e.g., brew install node) or download binaries from Node.js official site. We recommend nvm for version management.
@@ -122,7 +122,7 @@ npm -v
 
 ---
 
-## Install Schematics CLI
+## 🧩 Install schematics-cli
 
 <NoteBoxs>
 This is only required on development machines, not on production servers. SolidX uses Angular schematics for generating backend controllers and services.
@@ -139,7 +139,7 @@ schematics --version
 
 ---
 
-## Install copyfiles CLI
+## 📂 Install copyfiles
 
 <NoteBoxs>
 This is only required on development machines, not on production servers. SolidX uses copyfiles to copy static files.
