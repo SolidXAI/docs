@@ -10,9 +10,9 @@ Installing `SolidX` is a breeze with our [create-solid-app](https://www.npmjs.co
 
 ## 🔖 Quick Overview
 - Run the command below to initialize your SolidX project:  
-  ```tsx
+  ```bash
   npx @solidstarters/create-solid-app
-
+  ```
 - Answer a few simple prompts to configure your project.
 - Voila! Your SolidX project should be up and running.
 - Customize SolidX to fit your needs!
