@@ -1,5 +1,5 @@
 ---
-title: Project Structure
+# title: Project Structure
 description: Overview of the folder structure for the SolidX Fullstack Application.
 sidebar_position: 3
 ---
@@ -7,29 +7,29 @@ sidebar_position: 3
 import { FaFolder,FaBoxOpen,FaPuzzlePiece,FaLightbulb } from "react-icons/fa";
 
 
-# Project Structure
+# 📂 Project Structure
 
 This project is organized into a backend API (`solid-api`) and frontend UI (`solid-ui`) along with supporting scripts and configurations.
 
 ```bash
 .
-├── .vscode/                  # VS Code settings (e.g. debug configuration)
-├── solid-api/                # Backend API built with NestJS
-├── solid-ui/                 # Frontend UI built with Next.js
+├── .vscode/                  # VS Code settings
+├── solid-api/                # Backend API (NestJS)
+├── solid-ui/                 # Frontend UI (Next.js)
 └── upgrade.sh                # SolidX upgrade script
 ```
 
-##  `solid-api/` - Backend (NestJS & TypeORM)
+## ⚙️ solid-api/ - Backend (NestJS & TypeORM)
 
 This folder contains all backend services, business logic, and configurations.
 
 ```bash
 solid-api/
 ├── .env, .gitignore, etc.       # Config and ignore files
-├── logs/                        # Log files for application and errors
-├── media-files-storage/         # Uploaded or generated media/data files
-├── media-uploads/               # Temporary media uploads folder
-├── module-metadata/             # Per-module metadata as json files
+├── logs/                        # Application / Error logs
+├── media-files-storage/         # Uploaded or generated files
+├── media-uploads/               # Temporary upload folder
+├── module-metadata/             # Module metadata (JSON)
 ├── src/                         # Source code for the backend
 ├── test/                        # E2E tests
 ├── rebuild*.sh / refresh.bat    # Rebuild and refresh scripts
@@ -39,7 +39,7 @@ solid-api/
    <h4 className="card-title card-headear-wrapper">
       <FaFolder size={20} style={{ marginRight: "2px" }} />
 
-  ###  Notable Subfolders
+  ### 📁 Notable Subfolders
    </h4>
 
 
@@ -53,7 +53,7 @@ solid-api/
    <h4 className="card-title card-headear-wrapper">
       <FaBoxOpen size={22} style={{ marginRight: "2px" }} />
 
-  ### SolidX dependencies
+  ### 📦 SolidX dependencies
    </h4>
   - `@solidstarters/solid-core`
     - Contains the core SolidX module which provides the core backend services for SolidX.
@@ -64,34 +64,35 @@ solid-api/
   <h4 className="card-title card-headear-wrapper">
       <FaPuzzlePiece size={20} style={{ marginRight: "2px" }} />
 
-  ### SolidX modules
+  ### 🧩 SolidX modules
    </h4>
 
   
   - A SolidX module is a logical container that groups together related models and functionality under a unified domain or feature area e.g `fees-portal`.
-  - You can find the structure for a SolidX module here [Generated Code](../extending/generated-code/index.md).  
+  - You can find the structure for a SolidX module here [Generated Code](../developer-docs/extending/code-generation/index.md).  
   ---
 
-## `solid-ui/` - Frontend (Next.js & Prime React)
+## 🎨 solid-ui/ - Frontend (Next.js & Prime React)
 
 The frontend is built using Next.js and Prime React components.
 
 ```bash
 solid-ui/
-├── .env, .gitignore, etc.       # Config and ignore files
-├── .next/                       # Next.js build output (auto-generated)
-├── app/                         # App Router pages (e.g., admin, auth)
-├── public/                      # Static assets like icons and SVGs
-├── redux/                       # Global Redux store config
-├── types/                       # TypeScript type declarations
-├── next.config.js, middleware.ts, etc. # App-wide config and middlewares
+├── .env, .gitignore       # Config / ignore files
+├── .next/                 # Next.js build output
+├── app/                   # App Router pages (e.g., admin, auth)
+├── public/                # Static assets like icons and SVGs
+├── redux/                 # Global Redux store config
+├── types/                 # TypeScript type declarations
+├── next.config.js         # Next.js configuration
+├── middleware.ts          # App-wide config and middlewares
 ```
 
 
    <h4 className="card-title card-headear-wrapper">
       <FaFolder size={20} style={{ marginRight: "2px" }} />
 
-  ###  Notable Subfolders
+  ### 📁 Notable Subfolders
    </h4>
 
   - `app/`
@@ -109,30 +110,17 @@ solid-ui/
    <h4 className="card-title card-headear-wrapper">
       <FaBoxOpen size={22} style={{ marginRight: "2px" }} />
 
-  ### SolidX dependencies
+  ### 📦 SolidX dependencies
    </h4>
 
 - `@solidstarters/solid-core-ui`
   - Contains the core ui components for the SolidX UI.
   
-
-
-## `Debugging` - VS Code
-
+## 🐞 Debugging - VS Code
 Contains editor-specific configurations like `launch.json` for debugging and IDE behavior.
 
-
-
-##  Upgrade Scripts
-- `upgrade.sh`: Used for upgrading the core SolidX backend/frontend dependencies.
-
-
-
-## TODO
-- Add more details on the files in the package structure
-
-
-
+## 🔄 Upgrade Scripts
+`upgrade.sh`: Used for upgrading the core SolidX backend/frontend dependencies.
 
 <div className="tips-box">
   <h4 className="card-headear-wrapper">
@@ -143,5 +131,3 @@ Contains editor-specific configurations like `launch.json` for debugging and IDE
     <li>All environment variables are stored in <span className="color-green"> .env </span> files within each app folder.</li>
   </ul>
 </div>
-
-
