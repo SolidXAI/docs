@@ -7,7 +7,7 @@ sidebar_position: 3.5
 import { MdWidgets, MdTrackChanges, MdPsychology, MdInfoOutline } from "react-icons/md";
 import { FaDatabase } from "react-icons/fa";
 
-# Metadata Schema
+# 🧩 Metadata Schema
 ## 🔖 Overview
 
 The metadata schema in `SolidX` is designed to provide a flexible and extensible way to define the structure and behavior of various application components. By using a metadata-driven approach, developers can easily customize and extend the functionality of the `SolidX`platform without modifying the core codebase.
@@ -71,4 +71,4 @@ In the upcoming sections, we’ll walk through practical examples that use the m
 
 These examples are based on the Fees Portal Module (a Fee Collection Module for Educational Institutions).
 
-👉 If you’d like to learn more about the Fees Portal module itself, you can refer to the detailed guide here: [School Fees Portal Tutorial](../tutorial/school-fees-portal/index.md)
+👉 If you’d like to learn more about the Fees Portal module itself, you can refer to the detailed guide here: [School Fees Portal Tutorial](../../tutorial/school-fees-portal/index.md)
