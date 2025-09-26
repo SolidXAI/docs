@@ -2,7 +2,7 @@
   "_collection_id": "374cd978-6c65-4407-90d5-f2c5ad776f7d",
   "temp/security-roles-guide.md": {
     "hash": "9ab5d5c2b3cae917e7d754429054bf4385d855951cf7868a1b16634102ef21f6",
-    "document_id": "e35646fa-82b0-4d16-bfab-82d9a4992c1c",
+    "document_id": "9b264f35-4471-4d78-b84f-d1f3f9a6c410",
     "metadata": {
       "source": "docusaurus",
       "project": "solidx-docs",
@@ -14,11 +14,12 @@
         "temp",
         "security-roles-guide"
       ],
-      "doc_title": "SolidX Security & Roles Guide",
+      "doc_title": "temp/security-roles-guide.md",
       "git_commit": "ba54f46544782820ca6f75f8eacdf91e0ee3ed1e",
       "git_author": "Pathik",
       "git_email": "pathik@inspeero.com",
-      "git_date": "Sun Sep 14 09:33:12 2025 +0530"
+      "git_date": "Sun Sep 14 09:33:12 2025 +0530",
+      "title": "temp/security-roles-guide.md"
     }
   },
   "tutorial/index.md": {

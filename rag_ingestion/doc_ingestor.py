@@ -14,6 +14,7 @@ logger = logging.getLogger(__name__)
 
 FRONTMATTER_RE = re.compile(r"^\s*---\s*\n(.*?)\n---\s*\n", re.DOTALL)
 H1_RE = re.compile(r"^\s*#\s+(.+?)\s*$", re.MULTILINE)
+H2_RE = re.compile(r"^\s*##\s+(.+?)\s*$", re.MULTILINE)
 
 
 def sanitize_metadata(meta: Dict) -> Dict:
@@ -79,6 +80,42 @@ def extract_title(text: str, fm: Dict) -> Optional[str]:
         return fm["title"]
     m = H1_RE.search(text)
     return m.group(1).strip() if m else None
+
+
+def split_by_h2(text: str) -> List[Dict[str, str]]:
+    """
+    Split document content by H2 headers, maintaining order.
+    Returns list of chunks with section titles and content.
+    """
+    # Remove frontmatter from text for processing
+    clean_text = FRONTMATTER_RE.sub("", text).strip()
+    
+    # Find all H2 matches with their positions
+    h2_matches = list(H2_RE.finditer(clean_text))
+    
+    if not h2_matches:
+        # No H2 headers found, return the entire content as one chunk
+        return [{"section_title": None, "content": clean_text}]
+    
+    chunks = []
+    
+    # Process each H2 section
+    for i, match in enumerate(h2_matches):
+        section_title = match.group(1).strip()
+        start_pos = match.start()
+        
+        # Determine end position (start of next H2 or end of text)
+        end_pos = h2_matches[i + 1].start() if i + 1 < len(h2_matches) else len(clean_text)
+        
+        # Extract content from H2 header to next H2 (or end)
+        section_content = clean_text[start_pos:end_pos].strip()
+        
+        chunks.append({
+            "section_title": section_title,
+            "content": section_content
+        })
+    
+    return chunks
 
 
 def path_to_slug(p: Path) -> str:
@@ -191,6 +228,57 @@ class DocIngestor:
         )
         tmp.replace(self.manifest_path)
 
+    def debug_document_chunks(self, document_id: str) -> None:
+        """Debug function to examine chunks created by R2R for a specific document"""
+        try:
+            import time
+            # Wait a moment for R2R to finish processing
+            time.sleep(3)
+            
+            logger.info(f"=== DEBUG: Analyzing chunks for document {document_id} ===")
+            
+            # Get document details
+            doc_response = self.client.documents.retrieve(document_id)
+            logger.info(f"Document title: {getattr(doc_response.results, 'title', 'N/A')}")
+            
+            # Check if summary was generated
+            summary = getattr(doc_response.results, 'summary', None)
+            if summary:
+                logger.info(f"✓ Summary generated: {summary[:100]}...")
+            else:
+                logger.warning("✗ No summary generated")
+            
+            # Get chunks for this document - use correct API method
+            chunks_response = self.client.chunks.list(
+                filters={"document_id": str(document_id)},  # Convert UUID to string
+                limit=100  # Get all chunks
+            )
+            
+            chunks = chunks_response.results
+            logger.info(f"Total chunks created by R2R: {len(chunks)}")
+            
+            # Analyze chunk content
+            h2_chunks = []
+            for i, chunk in enumerate(chunks):
+                lines = chunk.text.strip().split('\n')
+                first_line = lines[0] if lines else ""
+                
+                if first_line.startswith("## "):
+                    h2_chunks.append((i, first_line, len(chunk.text)))
+                    logger.info(f"Chunk {i+1}: H2 Section - {first_line} ({len(chunk.text)} chars)")
+                else:
+                    logger.info(f"Chunk {i+1}: Non-H2 - {first_line[:50]}... ({len(chunk.text)} chars)")
+            
+            logger.info(f"=== SUMMARY: {len(h2_chunks)} H2-based chunks out of {len(chunks)} total ===")
+            
+            if len(h2_chunks) == 10:
+                logger.info("✓ Perfect! Got exactly 10 H2-based chunks as expected")
+            else:
+                logger.warning(f"✗ Expected 10 H2 chunks, got {len(h2_chunks)}")
+                
+        except Exception as e:
+            logger.error(f"Debug chunk analysis failed: {e}")
+
     # ---- scan + ingest ----
 
     def iter_files(self) -> List[Path]:
@@ -202,7 +290,8 @@ class DocIngestor:
 
     def build_metadata(self, file_path: Path, rel_path: Path, file_text: str) -> Dict:
         fm = try_parse_frontmatter(file_text)
-        title = extract_title(file_text, fm)
+        # Use file path as title instead of content title
+        title = str(rel_path).replace("\\", "/")
         section = rel_path.parts[0] if len(rel_path.parts) > 0 else ""
         crumb = breadcrumbs(rel_path)
         slug = path_to_slug(rel_path)
@@ -259,19 +348,47 @@ class DocIngestor:
             new_id = "dry-run"
             logger.info(f"[DRY-RUN] Would create document for {key}")
         else:
+            # Split content by H2 headers
+            chunks_data = split_by_h2(file_text)
+            
+            # Debug: Log what we're getting from H2 splitting
+            logger.info(f"H2 split result: {len(chunks_data)} sections found")
+            for i, chunk_data in enumerate(chunks_data):
+                title = chunk_data["section_title"]
+                content_preview = chunk_data["content"][:100].replace('\n', ' ')
+                logger.info(f"  Section {i}: '{title}' - {content_preview}...")
+            
+            # Prepare chunks for R2R ingestion - use simple approach that worked
+            chunks = []
+            for chunk_data in chunks_data:
+                chunks.append(chunk_data["content"])
+            
+            # Use file path as title
+            rel_path = file_path.relative_to(self.base_dir)
+            doc_title = str(rel_path).replace("\\", "/")
+            metadata["title"] = doc_title
+            
+            # Use pre-processed chunks to preserve exact H2 structure
+            logger.info(f"Using pre-processed chunks approach with {len(chunks)} H2 sections")
+            
             generated_id = uuid.uuid4()
             resp = self.client.documents.create(
-                file_path=str(file_path),
+                chunks=chunks,  # Use pre-processed chunks to preserve exact H2 structure
                 metadata=metadata,
                 id=str(generated_id),
                 collection_ids=[collection_id],
+                ingestion_mode="fast",  # Fast mode respects our pre-processed chunks
+                run_with_orchestration=True  # Enable orchestration for summary generation
             )
-            new_id = resp.results.document_id
-            logger.info(f"Created: {key} -> document_id={new_id}")
+            document_id = resp.results.document_id
+            logger.info(f"Created: {key} -> document_id={document_id} ({len(chunks)} H2 chunks via pre-processed chunks)")
+            
+            # Debug: Check what chunks were actually created by R2R
+            # self.debug_document_chunks(document_id)  # Commented out - debug shows collection-wide results
 
         self._manifest[key] = {
             "hash": file_hash,
-            "document_id": str(new_id),
+            "document_id": str(document_id),
             "metadata": metadata,
         }
 
@@ -305,3 +422,69 @@ class DocIngestor:
         # if cleanup:
         #     self.cleanup_orphans()
         self.save_manifest()
+
+    def upsert_single_file(self, file_path: str) -> Dict[str, str]:
+        """
+        Upsert a single file for testing purposes.
+        Returns document information including document_id.
+        """
+        file_path_obj = Path(file_path).resolve()
+        
+        if not file_path_obj.exists():
+            raise FileNotFoundError(f"File not found: {file_path}")
+        
+        if not file_path_obj.is_file():
+            raise ValueError(f"Path is not a file: {file_path}")
+        
+        # Check if file extension is supported
+        if file_path_obj.suffix.lower() not in self.exts:
+            raise ValueError(f"File extension {file_path_obj.suffix} not supported. Supported: {self.exts}")
+        
+        logger.info(f"Upserting single file: {file_path_obj}")
+        self.load_manifest()
+        collection_id = self.ensure_collection()
+        
+        # Store original base_dir 
+        original_base_dir = self.base_dir
+        
+        # Don't change base_dir - keep it as the original docs directory
+        # This ensures the relative path matches existing manifest entries
+        
+        try:
+            self.upsert_file(file_path_obj, collection_id)
+            self.save_manifest()
+            
+            # Calculate relative path from original base_dir for manifest lookup
+            try:
+                rel_path = file_path_obj.relative_to(self.base_dir)
+            except ValueError:
+                # Handle cases where file is outside base_dir (e.g., ../docs/temp/file.md)
+                # Try to find the correct relative path by looking for 'docs' directory
+                file_parts = file_path_obj.parts
+                base_parts = self.base_dir.parts
+                
+                # If both paths contain 'docs', use everything after 'docs' in the file path
+                if 'docs' in file_parts:
+                    docs_index = file_parts.index('docs')
+                    rel_path = Path(*file_parts[docs_index + 1:])
+                else:
+                    # Last resort: use the filename
+                    rel_path = file_path_obj.name
+            
+            key = str(rel_path).replace("\\", "/")
+            doc_info = self._manifest.get(key, {})
+            
+            result = {
+                "file_path": str(file_path_obj),
+                "relative_path": key,
+                "document_id": doc_info.get("document_id", "unknown"),
+                "hash": doc_info.get("hash", "unknown"),
+                "status": "success"
+            }
+            
+            logger.info(f"Single file upsert completed: {result}")
+            return result
+            
+        finally:
+            # Restore original base_dir
+            self.base_dir = original_base_dir
