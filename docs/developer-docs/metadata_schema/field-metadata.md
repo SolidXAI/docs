@@ -29,278 +29,97 @@ Every SolidX model is composed of fields. Fields in SolidX go over and above the
 
 ```json
 {
-    "moduleMetadata": {
-        ..., // Module metadata 
-        "models": [ // Model metadata array
-            { // Institute model metadata
-                "singularName": "institute",
-                "pluralName": "institutes",
-                "displayName": "Institute",
-                "description": "The institute name...",
-                "dataSource": "default",
-                "dataSourceType": "postgres",
-                "tableName": "fees_portal_institute",
-                "userKeyFieldUserKey": "instituteName",
-                "isChild": false,
-                "enableAuditTracking": true,
-                "enableSoftDelete": false,
-                "draftPublishWorkflow": false,
-                "internationalisation": false,
-                "fields": [ // Institute model fields metadata
-                    {
-                        "name": "instituteName",
-                        "displayName": "Institute Name",
-                        "description": null,
-                        "type": "shortText",
-                        "ormType": "varchar",
-                        "isSystem": false,
-                        "defaultValue": null,
-                        "min": null,
-                        "max": null,
-                        "required": true,
-                        "unique": true,
-                        "index": true,
-                        "private": false,
-                        "encrypt": false,
-                        "encryptionType": null,
-                        "decryptWhen": null,
-                        "columnName": null,
-                        "isUserKey": true,
-                        "enableAuditTracking": false
-                    },
-                    {
-                        "name": "logo",
-                        "displayName": "Logo",
-                        "description": null,
-                        "type": "mediaSingle",
-                        "ormType": "varchar",
-                        "isSystem": false,
-                        "mediaTypes": [
-                            "image"
-                        ],
-                        "mediaMaxSizeKb": 5120,
-                        "required": true,
-                        "unique": false,
-                        "index": false,
-                        "private": false,
-                        "encrypt": false,
-                        "encryptionType": null,
-                        "decryptWhen": null,
-                        "columnName": null,
-                        "mediaStorageProviderUserKey": "default-aws-s3"
-                    },
-                    {
-                        "name": "description",
-                        "displayName": "Description",
-                        "description": null,
-                        "type": "longText",
-                        "ormType": "text",
-                        "isSystem": false,
-                        "regexPattern": "",
-                        "regexPatternNotMatchingErrorMsg": "",
-                        "defaultValue": null,
-                        "min": null,
-                        "max": null,
-                        "required": false,
-                        "unique": false,
-                        "index": false,
-                        "private": false,
-                        "encrypt": false,
-                        "encryptionType": null,
-                        "decryptWhen": null,
-                        "columnName": null
-                    },
-                    ..., // Other fields
-                    {
-                        "name": "feeTypes",
-                        "displayName": "FeeTypes",
-                        "description": "FeeTypes",
-                        "type": "relation",
-                        "ormType": "integer",
-                        "isSystem": false,
-                        "relationType": "one-to-many",
-                        "relationCoModelFieldName": "institute",
-                        "relationCreateInverse": true,
-                        "relationCoModelSingularName": "feeType",
-                        "relationCoModelColumnName": null,
-                        "relationModelModuleName": "fees-portal",
-                        "relationCascade": "cascade",
-                        "required": false,
-                        "unique": false,
-                        "index": false,
-                        "private": false,
-                        "encrypt": false,
-                        "encryptionType": null,
-                        "decryptWhen": null,
-                        "columnName": null,
-                        "relationJoinTableName": null,
-                        "isRelationManyToManyOwner": null,
-                        "relationFieldFixedFilter": "",
-                        "enableAuditTracking": false
-                    },
-                    ..., // Other fields
-                ]
-            },
-            { // Fee Type model metadata
-                "singularName": "feeType",
-                "pluralName": "feeTypes",
-                "displayName": "Fee Type",
-                "description": "Model used to capture different fee types that a school, institute might use.",
-                "dataSource": "default",
-                "dataSourceType": "postgres",
-                "tableName": "fees_portal_fee_type",
-                "userKeyFieldUserKey": "feeTypeUserKey",
-                "isChild": false,
-                "enableAuditTracking": true,
-                "enableSoftDelete": false,
-                "draftPublishWorkflow": false,
-                "internationalisation": false,
-                "fields": [ // Fee Type model fields metadata
-                    {
-                        "name": "feeType",
-                        "displayName": "Fee Type",
-                        "description": "The actual fee type. Eg. Tuition Fees, Bus Fees",
-                        "type": "shortText",
-                        "ormType": "varchar",
-                        "isSystem": false,
-                        "defaultValue": null,
-                        "min": null,
-                        "max": null,
-                        "required": true,
-                        "unique": false,
-                        "index": false,
-                        "private": false,
-                        "encrypt": false,
-                        "encryptionType": null,
-                        "decryptWhen": null,
-                        "columnName": null,
-                        "isUserKey": true,
-                        "enableAuditTracking": false
-                    },
-                    {
-                        "name": "institute",
-                        "displayName": "Institute",
-                        "description": null,
-                        "type": "relation",
-                        "ormType": "integer",
-                        "isSystem": false,
-                        "relationType": "many-to-one",
-                        "relationCoModelFieldName": "feeTypes",
-                        "relationCreateInverse": true,
-                        "relationCoModelSingularName": "institute",
-                        "relationCoModelColumnName": null,
-                        "relationModelModuleName": "fees-portal",
-                        "relationCascade": "cascade",
-                        "required": true,
-                        "unique": false,
-                        "index": false,
-                        "private": false,
-                        "encrypt": false,
-                        "encryptionType": null,
-                        "decryptWhen": null,
-                        "columnName": null,
-                        "relationJoinTableName": null,
-                        "isRelationManyToManyOwner": null,
-                        "relationFieldFixedFilter": "",
-                        "enableAuditTracking": false
-                    },
-                    {
-                        "name": "partPaymentAllowed",
-                        "displayName": "Part Payment Allowed",
-                        "description": null,
-                        "type": "boolean",
-                        "ormType": "boolean",
-                        "isSystem": false,
-                        "defaultValue": null,
-                        "required": true,
-                        "index": false,
-                        "private": false,
-                        "encrypt": false,
-                        "encryptionType": null,
-                        "decryptWhen": null,
-                        "columnName": null,
-                        "enableAuditTracking": false
-                    },
-                    {
-                        "name": "latePaymentFeesType",
-                        "displayName": "Late Payment Fees Type",
-                        "description": null,
-                        "type": "selectionStatic",
-                        "ormType": "varchar",
-                        "isSystem": false,
-                        "defaultValue": "None",
-                        "selectionStaticValues": [
-                            "None:None",
-                            "Percent:Percent",
-                            "Absolute:Absolute"
-                        ],
-                        "selectionValueType": "string",
-                        "required": false,
-                        "unique": false,
-                        "index": false,
-                        "private": false,
-                        "encrypt": false,
-                        "encryptionType": null,
-                        "decryptWhen": null,
-                        "columnName": null,
-                        "enableAuditTracking": false,
-                        "isMultiSelect": false
-                    },
-                    {
-                        "name": "latePaymentFees",
-                        "displayName": "Late Payment Fees",
-                        "description": null,
-                        "type": "decimal",
-                        "ormType": "decimal",
-                        "isSystem": false,
-                        "defaultValue": "0",
-                        "min": null,
-                        "max": null,
-                        "required": false,
-                        "unique": false,
-                        "index": false,
-                        "private": false,
-                        "encrypt": false,
-                        "encryptionType": null,
-                        "decryptWhen": null,
-                        "columnName": null,
-                        "enableAuditTracking": false
-                    },
-                    {
-                        "name": "feeTypeUserKey",
-                        "displayName": "Fee Type User Key",
-                        "description": "Concatenation of fee type and institute name",
-                        "type": "computed",
-                        "ormType": "varchar",
-                        "isSystem": false,
-                        "computedFieldValueType": "string",
-                        "computedFieldTriggerConfig": [
-                            {
-                                "modelName": "feeType",
-                                "moduleName": "fees-portal",
-                                "operations": [
-                                    "before-insert"
-                                ]
-                            }
-                        ],
-                        "computedFieldValueProvider": "ConcatEntityComputedFieldProvider",
-                        "computedFieldValueProviderCtxt": "{\n  \"fields\": [\n    \"feeType\",\n    \"institute.instituteName\"\n  ],\n  \"separator\": \"-\",\n  \"slugify\": true\n}",
-                        "required": true,
-                        "unique": true,
-                        "index": false,
-                        "private": false,
-                        "encrypt": false,
-                        "encryptionType": null,
-                        "decryptWhen": null,
-                        "columnName": null,
-                        "isUserKey": true
-                    }
-                ]
-            },
-            ..., // Other models
+  "moduleMetadata": {
+    ..., // Module metadata 
+    "models": [ // Model metadata array
+      { // Institute model metadata
+        "singularName": "institute",
+        "pluralName": "institutes",
+        "displayName": "Institute",
+        "description": "Institute records",
+        "dataSource": "default",
+        "dataSourceType": "postgres",
+        "tableName": "fees_portal_institute",
+        "userKeyFieldUserKey": "instituteName",
+        "isChild": false,
+        "enableAuditTracking": true,
+        "enableSoftDelete": false,
+        "draftPublishWorkflow": false,
+        "internationalisation": false,
+        "fields": [ // Institute model fields metadata
+          {
+            "name": "instituteName",
+            "displayName": "Institute Name",
+            "description": null,
+            "type": "shortText",
+            "ormType": "varchar",
+            "isSystem": false,
+            "defaultValue": null,
+            "min": null,
+            "max": null,
+            "required": true,
+            "unique": true,
+            "index": true,
+            "private": false,
+            "encrypt": false,
+            "encryptionType": null,
+            "decryptWhen": null,
+            "columnName": null,
+            "isUserKey": true,
+            "enableAuditTracking": false
+          },
+          ..., // Other fields
         ]
-    },
-    ... // Other metadata
+      },
+      { // Fee Type model metadata
+        "singularName": "feeType",
+        "pluralName": "feeTypes",
+        "displayName": "Fee Type",
+        "description": "Fee Type records",
+        "dataSource": "default",
+        "dataSourceType": "postgres",
+        "tableName": "fees_portal_fee_type",
+        "userKeyFieldUserKey": "feeTypeUserKey",
+        "isChild": false,
+        "enableAuditTracking": true,
+        "enableSoftDelete": false,
+        "draftPublishWorkflow": false,
+        "internationalisation": false,
+        "fields": [ // Fee Type model fields metadata
+          {
+            "name": "institute",
+            "displayName": "Institute",
+            "description": null,
+            "type": "relation",
+            "ormType": "integer",
+            "isSystem": false,
+            "relationType": "many-to-one",
+            "relationCoModelFieldName": "feeTypes",
+            "relationCreateInverse": true,
+            "relationCoModelSingularName": "institute",
+            "relationCoModelColumnName": null,
+            "relationModelModuleName": "fees-portal",
+            "relationCascade": "cascade",
+            "required": true,
+            "unique": false,
+            "index": false,
+            "private": false,
+            "encrypt": false,
+            "encryptionType": null,
+            "decryptWhen": null,
+            "columnName": null,
+            "relationJoinTableName": null,
+            "isRelationManyToManyOwner": null,
+            "relationFieldFixedFilter": "",
+            "enableAuditTracking": false
+          },
+          ... // Other fields
+        ]
+      },
+      ..., // Other models
+    ]
+  },
+  ... // Other metadata
 }
 ```
 </details>
@@ -319,11 +138,11 @@ Every SolidX model is composed of fields. Fields in SolidX go over and above the
 ###  Numeric Types
 </h3>
 
-| Value    | Reference |
-|----------|------------|
-| `int`    | [Integer Field](../../admin-docs/module-builder/field-management#integer) |
-| `bigint` | [BigInt Field](../../admin-docs/module-builder/field-management#bigint) |
-| `decimal`| [Decimal Field](../../admin-docs/module-builder/field-management#decimal) |
+| Value    | Reference | Example |
+|----------|------------|---------|
+| `int`    | [Integer Field](../../admin-docs/module-builder/field-management#integer) | [See Example](#int) |
+| `bigint` | [BigInt Field](../../admin-docs/module-builder/field-management#bigint) | [See Example](#bigint-todo) |
+| `decimal`| [Decimal Field](../../admin-docs/module-builder/field-management#decimal) | [See Example](#decimal) |
 
 
 
@@ -333,12 +152,12 @@ Every SolidX model is composed of fields. Fields in SolidX go over and above the
 ###  Text Types
 </h3>
 
-| Value       | Reference |
-|-------------|-----------|
-| `shortText` | [Short Text Field](../../admin-docs/module-builder/field-management#shorttext) |
-| `longText`  | [Long Text Field](../../admin-docs/module-builder/field-management#longtext) |
-| `richText`  | [Rich Text Field](../../admin-docs/module-builder/field-management#richtext) |
-| `json`      | [JSON Field](../../admin-docs/module-builder/field-management#json) |
+| Value       | Reference | Example |
+|-------------|-----------|---------|
+| `shortText` | [Short Text Field](../../admin-docs/module-builder/field-management#shorttext) | [See Example](#shorttext) |
+| `longText`  | [Long Text Field](../../admin-docs/module-builder/field-management#longtext) | [See Example](#longtext) |
+| `richText`  | [Rich Text Field](../../admin-docs/module-builder/field-management#richtext) | [See Example](#richtext) |
+| `json`      | [JSON Field](../../admin-docs/module-builder/field-management#json) | [See Example](#json) |
 
 
 
@@ -348,70 +167,75 @@ Every SolidX model is composed of fields. Fields in SolidX go over and above the
 ### Boolean
 </h3>
 
-[`boolean`](../../admin-docs/module-builder/field-management#boolean)
+| Value     | Reference | Example |
+|-----------|-----------|---------|
+| `boolean` | [Boolean Field](../../admin-docs/module-builder/field-management#boolean) | [See Example](#boolean) |
 
 
 
   <h3 className=" card-headear-wrapper">
     <MdCalendarMonth size={22}  />
 
-### Boolean
+### Date / Time Types
 </h3>
 
-| Value     | Reference |
-|-----------|-----------|
-| `date`    | [Date Field](../../admin-docs/module-builder/field-management#date) |
-| `datetime`| [Datetime Field](../../admin-docs/module-builder/field-management#datetime) |
-| `time`    | [Time Field](../../admin-docs/module-builder/field-management#time) |
+| Value     | Reference | Example |
+|-----------|-----------|---------|
+| `date`    | [Date Field](../../admin-docs/module-builder/field-management#date) | [See Example](#date) |
+| `datetime`| [Datetime Field](../../admin-docs/module-builder/field-management#datetime) | [See Example](#datetime) |
+| `time`    | [Time Field](../../admin-docs/module-builder/field-management#time) | [See Example](#time-todo) |
 
 
 
   <h3 className=" card-headear-wrapper">
     <MdMerge size={24}  />
 
-###  Relations
+###  Relation Types
 </h3>
 
-[`relation`](../../admin-docs/module-builder/field-management#relation)
-
+| Value         | Reference | Example |
+|---------------|-----------| --------|
+| `many-to-one`   | [Many To One](../../admin-docs/module-builder/field-management#many-to-one) | [See Example](#many-to-one-relation-child--parent) |
+| `one-to-many`   | [One To Many](../../admin-docs/module-builder/field-management#one-to-many) | [See Example](#one-to-many-relation-parent--children) |
+| `many-to-many`  | [Many To Many](../../admin-docs/module-builder/field-management#many-to-many) | [See Example](#many-to-many-relation) |
 
 
   <h3 className=" card-headear-wrapper">
     <MdPhotoLibrary size={24}  />
 
-###  Relations
+###  Media Types
 </h3>
 
-| Value         | Reference |
-|---------------|-----------|
-| `mediaSingle`   | [Single Media Field](../../admin-docs/module-builder/field-management#single-media) |
-| `mediaMultiple` | [Multiple Media Field](../../admin-docs/module-builder/field-management#multiple-media) |
+| Value         | Reference | Example |
+|---------------|-----------| --------|
+| `mediaSingle`   | [Single Media Field](../../admin-docs/module-builder/field-management#single-media) | [See Example](#mediasingle) |
+| `mediaMultiple` | [Multiple Media Field](../../admin-docs/module-builder/field-management#multiple-media) | [See Example](#mediamultiple) |
 
 
 
   <h3 className=" card-headear-wrapper">
     <MdSecurity size={20}  />
 
-###  Auth & Identity
+###  Specialized Types
 </h3>
 
-| Value     | Reference |
-|-----------|-----------|
-| `email`   | [Email Field](../../admin-docs/module-builder/field-management#email) |
-| `password`| [Password Field](../../admin-docs/module-builder/field-management#password) |
+| Value     | Reference | Example |
+|-----------|-----------|---------|
+| `email`   | [Email Field](../../admin-docs/module-builder/field-management#email) | [See Example](#email) |
+| `password`| [Password Field](../../admin-docs/module-builder/field-management#password) | [See Example](#password) |
 
 
 
   <h3 className=" card-headear-wrapper">
     <MdCheckBox size={20}  />
 
-###  Selection
+###  Selection Types
 </h3>
 
-| Value            | Reference |
-|------------------|-----------|
-| `selectionStatic`  | [Static Selection Field](../../admin-docs/module-builder/field-management#static-selection) |
-| `selectionDynamic` | [Dynamic Selection Field](../../admin-docs/module-builder/field-management#dynamic-selection) |
+| Value            | Reference | Example |
+|------------------|-----------|---------|
+| `selectionStatic`  | [Static Selection Field](../../admin-docs/module-builder/field-management#static-selection) | [See Example](#selectionstatic) |
+| `selectionDynamic` | [Dynamic Selection Field](../../admin-docs/module-builder/field-management#dynamic-selection) | [See Example](#selectiondynamic) |
 
 
 
@@ -420,10 +244,475 @@ Every SolidX model is composed of fields. Fields in SolidX go over and above the
 
 ###  Computed
 </h3>
-[`computed`](../../admin-docs/module-builder/field-management#computed)
+| Value      | Reference | Example |
+|------------|-----------|---------|
+| `computed` | [Computed Field](../../admin-docs/module-builder/field-management#computed) | [See Example](#computed-1) |
 
 
+## Field Metadata Examples
+### Numeric Types
+#### int
+**Purpose**: For whole numbers (positive/negative)  
+**Database**: `integer` column  
+**UI Component**: Number input field  
+**Use Cases**: Counts, quantities, IDs, rankings
 
+```json
+{
+  "name": "studentCount",
+  "displayName": "Student Count",
+  "type": "int",
+  "ormType": "integer",
+  "min": 0,
+  "max": 10000,
+  "defaultValue": 0,
+  "required": true
+}
+```
+**Key Properties**:
+- `min`: Lower bound
+- `max`: Upper bound
+- `defaultValue`: Initial value on create
+
+
+#### decimal
+**Purpose**: For decimal/floating point numbers  
+**Database**: `decimal` column  
+**UI Component**: Decimal input field  
+**Use Cases**: Prices, percentages, measurements, financial amounts
+
+```json
+{
+  "name": "feeAmount",
+  "displayName": "Fee Amount",
+  "type": "decimal",
+  "ormType": "decimal",
+  "min": 0,
+  "max": 100000,
+  "defaultValue": "0.00",
+  "required": true,
+}
+```
+**Key Properties**:
+- `min`: Lower bound
+- `max`: Upper bound
+- `defaultValue`: Initial value on create
+
+#### bigint (TODO)
+
+### Text Types
+
+#### shortText
+**Purpose**: For shorter text content (typically up to 1000 characters)  
+**Database**: `varchar` column  
+**UI Component**: Text input field  
+**Use Cases**: Names, titles, identifiers, short descriptions
+
+```json
+{
+  "name": "instituteName",
+  "displayName": "Institute Name",
+  "type": "shortText",
+  "ormType": "varchar",
+  "min": null,
+  "max": 256,
+  "required": true,
+  "unique": true,
+  "index": true,
+  "isUserKey": true
+}
+```
+
+**Key Properties**:
+- `min`/`max`: Character limits
+- `unique`: Enforce uniqueness
+- `index`: Database performance optimization
+- `isUserKey`: Use as record identifier
+
+#### longText
+**Purpose**: For multi-line text content of any length  
+**Database**: `text` column  
+**UI Component**: Textarea field  
+**Use Cases**: Descriptions, comments, notes, multi-paragraph content
+
+```json
+{
+  "name": "description",
+  "displayName": "Description",
+  "type": "longText",
+  "ormType": "text",
+  "regexPattern": "^[a-zA-Z0-9\\s]*$",
+  "regexPatternNotMatchingErrorMsg": "Only alphanumeric characters and spaces allowed",
+  "min": 10,
+  "max": 5000,
+  "required": false
+}
+```
+
+**Key Properties**:
+- `regexPattern`: Validation pattern
+- `regexPatternNotMatchingErrorMsg`: Custom validation error message
+- Supports longer content than `shortText`
+
+#### richText
+**Purpose**: For formatted text with HTML support  
+**Database**: `text` column  
+**UI Component**: Rich text editor (HTML)  
+**Use Cases**: Content with formatting, FAQs, policies, documentation
+
+```json
+{
+  "name": "privacyPolicy",
+  "displayName": "Privacy Policy",
+  "type": "richText",
+  "ormType": "text",
+  "required": false,
+}
+```
+
+**Key Properties**:
+- Supports HTML formatting
+- No length restrictions
+- Rich editing capabilities in UI
+
+### Boolean
+
+#### boolean
+**Purpose**: For true/false values  
+**Database**: `boolean` column  
+**UI Component**: Checkbox or toggle switch  
+**Use Cases**: Flags, settings, yes/no options, status indicators
+
+```json
+{
+  "name": "isActive",
+  "displayName": "Is Active",
+  "type": "boolean",
+  "ormType": "boolean",
+  "defaultValue": true,
+  "required": true
+}
+```
+
+**Key Properties**:
+- `defaultValue`: `true` or `false`
+- Simple on/off state management
+
+### Date / Time Types
+
+#### date
+**Purpose**: For date values only (no time)  
+**Database**: `date` column  
+**UI Component**: Date picker  
+**Use Cases**: Birth dates, deadlines, event dates
+
+```json
+{
+  "name": "dueDate",
+  "displayName": "Due Date",
+  "type": "date",
+  "ormType": "date",
+  "required": true,
+  "defaultValue": null
+}
+```
+
+#### datetime
+**Purpose**: For date and time values  
+**Database**: `timestamp` column  
+**UI Component**: DateTime picker  
+**Use Cases**: Created/updated timestamps, scheduled events, appointments
+
+```json
+{
+  "name": "registeredAt",
+  "displayName": "Registered At",
+  "type": "datetime",
+  "ormType": "timestamp",
+  "required": true,
+  "enableAuditTracking": true
+}
+```
+
+#### time (TODO)
+
+### Relation Types
+
+**Purpose**: Establish relationships between models  
+**Database**: Foreign key columns or junction tables  
+**UI Component**: Related record selector  
+**Use Cases**: Parent-child relationships, data linking
+
+**Supported Types** i.e attribute (`relationType`):
+ - `many-to-one`: Many records link to one parent (e.g., Orders → Customer)
+ - `one-to-many`: One record has many children (e.g., Customer → Orders)
+ - `many-to-many`: Many records link to many others via a junction table (e.g., Students ↔ Courses)
+
+#### Many-to-One Relation (Child → Parent)
+```json
+{
+  "name": "institute",
+  "displayName": "Institute",
+  "type": "relation",
+  "relationType": "many-to-one",
+  "relationCoModelSingularName": "institute",
+  "relationCoModelColumnName": null,
+  "relationModelModuleName": "fees-portal",
+  "relationCascade": "cascade",
+  "required": true
+}
+```
+
+#### One-to-Many Relation (Parent → Children)
+```json
+{
+  "name": "feeTypes",
+  "displayName": "Fee Types",
+  "type": "relation",
+  "relationType": "one-to-many",
+  "relationCoModelSingularName": "feeType",
+  "relationCoModelFieldName": "institute",
+  "relationCoModelColumnName": "instituteId",
+  "relationModelModuleName": "fees-portal",
+  "relationCreateInverse": true
+}
+```
+
+#### Many-to-Many Relation
+```json
+{
+  "name": "categories",
+  "displayName": "Categories",
+  "type": "relation",
+  "relationType": "many-to-many",
+  "relationCoModelSingularName": "category",
+  "relationModelModuleName": "fees-portal",
+  "relationJoinTableName": "fee_category_junction",
+  "isRelationManyToManyOwner": true,
+  "relationCreateInverse": true
+}
+```
+
+**Key Properties**:
+- `relationType`:  "one-to-many", "many-to-one", "many-to-many"
+- `relationCoModelSingularName`: Target model name
+- `relationCoModelColumnName`: Foreign key column name
+- `relationJoinTableName`: Junction table for many-to-many
+- `relationCascade`: Cascade behavior for deletes
+- `relationCreateInverse`: Auto-create inverse relationship
+
+Give an example of inverse vs non-inverse relation creation (TODO)
+
+### Media Types
+
+#### mediaSingle
+**Purpose**: Single file/image upload  
+**UI Component**: File upload with preview  
+**Use Cases**: Profile pictures, logos, single documents
+
+```json
+{
+  "name": "logo",
+  "displayName": "Logo",
+  "type": "mediaSingle",
+  "mediaTypes": ["image"],
+  "mediaMaxSizeKb": 5120,
+  "mediaStorageProviderUserKey": "default-aws-s3",
+  "required": true
+}
+```
+
+#### mediaMultiple
+**Purpose**: Multiple file uploads  
+**UI Component**: Multi-file upload with gallery  
+**Use Cases**: Photo galleries, document collections, attachments
+
+```json
+{
+  "name": "documents",
+  "displayName": "Documents",
+  "type": "mediaMultiple",
+  "mediaTypes": ["image", "document", "pdf"],
+  "mediaMaxSizeKb": 10240,
+  "mediaStorageProviderUserKey": "default-aws-s3",
+  "required": false
+}
+```
+
+**Key Properties**:
+- `mediaTypes`: Array of allowed file types
+- `mediaMaxSizeKb`: Maximum file size per file
+- `mediaStorageProviderUserKey`: [Storage configuration reference](../../admin-docs/media-library/storage-providers.md)
+
+### Specialized Types
+
+#### email
+**Purpose**: Email addresses with validation  
+**Database**: `varchar`  
+**UI Component**: Email input field  
+**Use Cases**: User contact information, notifications
+
+```json
+{
+  "name": "email",
+  "displayName": "Email Address",
+  "type": "email",
+  "ormType": "varchar",
+  "required": true,
+  "unique": true,
+  "index": true
+}
+```
+
+#### json
+**Purpose**: Store complex JSON data structures  
+**Database**: `text`/`jsonb`  
+**UI Component**: JSON editor or code field  
+**Use Cases**: Flexible data structures, API responses, configurations
+
+```json
+{
+  "name": "metadata",
+  "displayName": "Metadata",
+  "type": "json",
+  "ormType": "jsonb",
+  "required": false,
+  "defaultValue": "{}"
+}
+```
+
+#### password
+**Purpose**: Secure password storage with hashing  
+**Database**: `varchar` (hashed)  
+**UI Component**: Password input field  
+**Use Cases**: User authentication, secure credentials
+
+```json
+{
+  "name": "password",
+  "displayName": "Password",
+  "type": "password",
+  "ormType": "varchar",
+  "min": 8,
+  "max": 128,
+  "required": true,
+  "regexPattern": "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$",
+}
+```
+
+### Selection Types
+
+#### selectionStatic
+**Purpose**: Dropdown with predefined options  
+**Database**: `varchar` column  
+**UI Component**: Dropdown/select field  
+**Use Cases**: Status options, categories, fixed lists
+
+```json
+{
+  "name": "latePaymentFeesType",
+  "displayName": "Late Payment Fees Type",
+  "type": "selectionStatic",
+  "ormType": "varchar",
+  "selectionStaticValues": [
+    "None:None",
+    "Percent:Percent",
+    "Absolute:Absolute"
+  ],
+  "selectionValueType": "string",
+  "defaultValue": "None",
+  "required": true
+}
+```
+
+**Format**: `"value:label"` where value is stored in DB, label is displayed in UI
+
+#### selectionDynamic
+**Purpose**: Dropdown populated from API/database query  
+**Database**: `varchar` column  
+**UI Component**: Dynamic dropdown field  
+**Use Cases**: Related data, user lists, dynamic categories
+
+```json
+{
+  "name": "studentId",
+  "displayName": "Student",
+  "type": "selectionDynamic",
+  "ormType": "varchar",
+  "selectionDynamicProvider": "StudentListProvider",
+  "selectionDynamicProviderCtxt": "{\"filters\": {\"isActive\": true}}",
+  "required": true
+}
+```
+
+**Key Properties**:
+- `selectionDynamicProvider`: Provider class responsible for returning the dynamic dropdown options
+- `selectionDynamicProviderCtxt`: JSON context/config passed to the provider
+
+### Computed
+
+#### computed
+**Purpose**: Auto-calculated values from other fields  
+**Database**: `varchar`/`decimal`/etc. (based on result type)  
+**UI Component**: Read-only display field  
+**Use Cases**: Calculated totals, formatted names, derived values
+
+```json
+{
+  "name": "fullName",
+  "displayName": "Full Name",
+  "type": "computed",
+  "ormType": "varchar",
+  "computedFieldValueType": "string",
+  "computedFieldTriggerConfig": [
+    {
+      "modelName": "student",
+      "moduleName": "fees-portal",
+      "operations": ["before-insert", "before-update"]
+    }
+  ],
+  "computedFieldValueProvider": "ConcatEntityComputedFieldProvider",
+  "computedFieldValueProviderCtxt": "{\"fields\":[\"firstName\",\"lastName\"],\"separator\":\" \"}",
+  "required": true
+}
+```
+
+**Key Properties**:
+- `computedFieldValueType`: Result data type
+- `computedFieldTriggerConfig`: When to recalculate
+- `computedFieldValueProvider`: Computation service provider class
+- `computedFieldValueProviderCtxt`: JSON configuration for provider
+
+
+## Common Field Metadata Attributes
+All field types support these common properties:
+
+### Core Properties
+- `name`: Internal field reference (camelCase)
+- `displayName`: User-friendly UI label
+- `description`: Optional documentation
+- `type`: Field type identifier
+- `ormType`: Database column type
+- `isSystem`: System-managed field flag
+- `required`: Mandatory field flag
+- `unique`: Uniqueness constraint
+- `index`: Database index creation
+- `private`: Hidden from UI flag (Not yet implemented)
+- `defaultValue`: Default field value
+
+### Security Properties
+- `encrypt`: Enable field encryption (Not yet implemented)
+- `encryptionType`: Encryption method (AES, bcrypt, etc.) (Not yet implemented)
+- `decryptWhen`: When to decrypt ("always", "admin_only", "never") (Not yet implemented)
+
+### Database Properties
+- `columnName`: Custom database column name
+- `enableAuditTracking`: Include in audit logs
+
+### Validation Properties
+- `min`/`max`: Value/length constraints
+- `regexPattern`: Custom validation pattern
+- `regexPatternNotMatchingErrorMsg`: Custom error message
 
 ##  Field Metadata Attributes
 
@@ -959,9 +1248,51 @@ Allow multiple selected values (UI + storage impact).
 - **Computed** — Providers should be idempotent and side‑effect free. For pre-compute operations e.g (before-insert, before-update, before-remove), provider needs to set the value on the entity object directly i.e (since in pre-compute operations, the assumption is that the computed field entity and the triggering entity are the same). For post-compute operations e.g (after-insert, after-update, after-remove), provider needs to use the entity manager in the provider implementation to update the entity since in post-compute operations, the assumption is that the computed field entity and the triggering entity can be different.
 - **Media** — Validate MIME and size server-side. `mediaTypes` is an allowlist, not a guarantee of safety. Consider thumbnailing and antivirus for file uploads.
 
+## Cheat Sheet
+
+```
+┌─────────────────────────────────────┐
+│           DATA TYPE?                │
+├─────────────────────────────────────┤
+│ TEXT:                              │
+│ ├── Short (< 1000 chars) → shortText │
+│ ├── Long/Multi-line → longText      │
+│ └── Formatted/HTML → richText       │
+├─────────────────────────────────────┤
+│ NUMBERS:                           │
+│ ├── Whole numbers → int             │
+│ └── Decimals → decimal              │
+├─────────────────────────────────────┤
+│ CHOICES:                           │
+│ ├── Fixed options → selectionStatic │
+│ └── Dynamic data → selectionDynamic │
+├─────────────────────────────────────┤
+│ RELATIONSHIPS:                     │
+│ ├── One-to-One → relation           │
+│ ├── One-to-Many → relation          │
+│ ├── Many-to-One → relation          │
+│ └── Many-to-Many → relation         │
+├─────────────────────────────────────┤
+│ FILES:                             │
+│ ├── Single file → mediaSingle       │
+│ └── Multiple files → mediaMultiple  │
+├─────────────────────────────────────┤
+│ CALCULATED:                        │
+│ └── Auto-computed → computed        │
+├─────────────────────────────────────┤
+│ SPECIAL:                           │
+│ ├── True/False → boolean           │
+│ ├── Date only → date               │
+│ ├── Date+Time → datetime           │
+│ ├── Password → password            │
+│ ├── Email → email                  │
+│ ├── Phone → phone                  │
+│ └── Complex data → json            │
+└─────────────────────────────────────┘
+```
 
 
-## Quick Matrix (What applies where?)
+<!-- ## Quick Matrix (What applies where?)
 
 | Aspect                | Text(short/long/rich)                 | Number(int/decimal/bigint) | Date/time | Relation | Media | Selection | Computed |
 |-----------------------|------------------------                |-----------------------------|-----------|---------|-------|-----------|----------|
@@ -973,11 +1304,4 @@ Allow multiple selected values (UI + storage impact).
 | `selection*`          | <MdCancel className="icon-no" />                                    | <MdCancel className="icon-no" />                           | <MdCancel className="icon-no" />         | <MdCancel className="icon-no" />       | <MdCancel className="icon-no" />     | <MdCheckCircle className="icon-yes" />         | <MdCancel className="icon-no" />        |
 | `computed*`           | <MdCancel className="icon-no" />                                     | <MdCancel className="icon-no" />                           | <MdCancel className="icon-no" />         | <MdCancel className="icon-no" />       | <MdCancel className="icon-no" />     | <MdCancel className="icon-no" />         | <MdCheckCircle className="icon-yes" />        |
 | `encrypt`/`private`   | <MdCheckCircle className="icon-yes" />                                    | <MdCheckCircle className="icon-yes" />                            | <MdCheckCircle className="icon-yes" />         | (id only)| file meta| values   | output   |
-| `index`               | <span className="table-icon-with-text"> <MdCheckCircle className="icon-yes" /> (except rich/long) </span>                    | <MdCheckCircle className="icon-yes" />                            | <MdCheckCircle className="icon-yes" />         | <MdCheckCircle className="icon-yes" />       | <MdCancel className="icon-no" />     | <MdCheckCircle className="icon-yes" />         | <span className="table-icon-with-text"> <MdCheckCircle className="icon-yes" /> (virtual) </span>     |
-
-
-
-
-
-##  Related Recipes (TODO)
--	👉 [Field Type Recipes](../../recipes/field-types-reference.md)
+| `index`               | <span className="table-icon-with-text"> <MdCheckCircle className="icon-yes" /> (except rich/long) </span>                    | <MdCheckCircle className="icon-yes" />                            | <MdCheckCircle className="icon-yes" />         | <MdCheckCircle className="icon-yes" />       | <MdCancel className="icon-no" />     | <MdCheckCircle className="icon-yes" />         | <span className="table-icon-with-text"> <MdCheckCircle className="icon-yes" /> (virtual) </span>     | -->

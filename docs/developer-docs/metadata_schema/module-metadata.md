@@ -1,22 +1,20 @@
 ---
-title: Module Metadata Schema
+# title: Module Metadata Schema
 description: Overview of the module metadata schema used in SolidX.
 sidebar_position: 1
 ---
 import { MdCategory } from "react-icons/md";
 
-
-## Overview
+# 📦 Module Metadata Schema
+## 🔖 Overview
 
 When creating a new module in SolidX, you're defining a **core building block** of your application.  
 A module groups together related models and functionality under a **unified domain**.
 
-👉 For a conceptual overview of what a module is, see [Module Management Documentation](../admin-docs/module-builder/module-management.md).
+👉 For a conceptual overview of what a module is, see [Module Management Documentation](../../admin-docs/module-builder/module-management.md).
 
-
-
-###  Example: Fees Portal Module
-
+### 🔎 Example: Fees Portal Module
+<details>
 <summary> Module Schema</summary>
 
 ```json
@@ -24,7 +22,7 @@ A module groups together related models and functionality under a **unified doma
   "moduleMetadata": {
     "name": "fees-portal",
     "displayName": "Fees Portal",
-    "description": "Used to keep a track of all fees collections requests",
+    "description": "Keep track of fees collections requests",
     "defaultDataSource": "default",
     "menuIconUrl": null,
     "menuSequenceNumber": 2,
@@ -34,16 +32,15 @@ A module groups together related models and functionality under a **unified doma
   ... // Other metadata components go here
 }
 ```
-
+</details>
 
 
 
   <h2 className=" card-headear-wrapper">
     <MdCategory size={24} style={{ marginRight: "10px" }} />
 
-##  Module Metadata Attributes
+## Module Metadata Attributes
 </h2>
-
 
 
 ### `name` *(string, required, unique)*

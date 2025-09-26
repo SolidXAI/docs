@@ -13,7 +13,7 @@ SolidX Models represent the structure of your data within a module. Each model d
 
 Each model is a semantic, configurable data structure that forms the basis of adding custom business logic.
 
-👉 For a conceptual overview of what a model is, see [Model Management Documentation](../admin-docs/module-builder/model-management.md).
+👉 For a conceptual overview of what a model is, see [Model Management Documentation](../../admin-docs/module-builder/model-management.md).
 
 ### Example: Institute Model
 <details>
@@ -28,7 +28,7 @@ Each model is a semantic, configurable data structure that forms the basis of ad
         "singularName": "institute",
         "pluralName": "institutes",
         "displayName": "Institute",
-        "description": "The institute name...",
+        "description": "Institute records",
         "dataSource": "default",
         "dataSourceType": "postgres",
         "tableName": "fees_portal_institute",
@@ -43,7 +43,7 @@ Each model is a semantic, configurable data structure that forms the basis of ad
         "singularName": "instituteUser",
         "pluralName": "instituteUsers",
         "displayName": "Institute User",
-        "description": "This table allows us to store institute user records",
+        "description": "Institute User records",
         "dataSource": "default",
         "dataSourceType": "postgres",
         "tableName": "fees_portal_institute_user",
@@ -153,4 +153,4 @@ If set to `true`, the model will support internationalization, allowing records 
 
 
 ##  Related Recipes (TODO)
--	👉 [Model Type Recipes](../../recipes/solidx-metadata-complete-guide.md)
+-	👉 [Model Type Recipes](../../recipes/solidx-metadata-complete-guide.md)  
