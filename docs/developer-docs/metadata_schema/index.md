@@ -6,6 +6,7 @@ sidebar_position: 3.5
 
 import { MdWidgets, MdTrackChanges, MdPsychology, MdInfoOutline } from "react-icons/md";
 import { FaDatabase } from "react-icons/fa";
+import { IoIosArrowForward } from "react-icons/io";
 
 # 🧩 Metadata Schema
 ## 🔖 Overview
@@ -64,6 +65,84 @@ Below are the key components of the metadata schema. All the functionality conce
 - 🗂️ List of Values  
 - 📊 Dashboard Metadata  
 
+## 🏗️ Best Practices
+
+<details>
+  <summary className="card-title card-headear-wrapper">
+    <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
+    Naming Conventions
+  </summary>
+  <ul className="card-desc">
+    <li>Use kebab-case for internal names (<code>fees-portal</code>, <code>institute-list-view</code>)</li>
+    <li>Use PascalCase for display names (<code>Fees Portal</code>, <code>Institute List View</code>)</li>
+    <li>Use camelCase for field names (<code>instituteName</code>, <code>feeAmount</code>)</li>
+  </ul>
+</details>
+
+<details>
+  <summary className="card-title card-headear-wrapper">
+    <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
+    Security First
+  </summary>
+  <ul className="card-desc">
+    <li>Always configure roles and security rules</li>
+    <li>Use principle of least privilege</li>
+    <li>Implement proper data filtering</li>
+    <li>Enable audit tracking for sensitive operations</li>
+  </ul>
+</details>
+
+<details>
+  <summary className="card-title card-headear-wrapper">
+    <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
+    Performance Optimization
+  </summary>
+  <ul className="card-desc">
+    <li>Use database indexes for frequently queried fields</li>
+    <!-- <li>Enable pagination for large datasets</li>
+    <li>Implement proper caching strategies</li>
+    <li>Use lazy loading for related data</li> -->
+  </ul>
+</details>
+
+<details>
+  <summary className="card-title card-headear-wrapper">
+    <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
+    User Experience
+  </summary>
+  <ul className="card-desc">
+    <li>Group related fields logically in forms</li>
+    <li>Use appropriate field types for data validation</li>
+    <li>Provide helpful field descriptions</li>
+    <!-- <li>Implement responsive layouts</li> -->
+  </ul>
+</details>
+
+<details>
+  <summary className="card-title card-headear-wrapper">
+    <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
+    Maintainability
+  </summary>
+  <ul className="card-desc">
+    <li>Use consistent field configurations</li>
+    <!-- <li>Document complex business logic</li> -->
+    <li>Version control metadata changes</li>
+    <li>Test security rules thoroughly</li>
+  </ul>
+</details>
+
+<details>
+  <summary className="card-title card-headear-wrapper">
+    <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
+    Data Integrity
+  </summary>
+  <ul className="card-desc">
+    <li>Configure proper field validations</li>
+    <!-- <li>Set up referential integrity for relations</li> -->
+    <li>Use appropriate data types</li>
+    <li>Use appropriate relation cascading rules</li>
+  </ul>
+</details>
 
 ## 📘 What’s Coming Up
 
