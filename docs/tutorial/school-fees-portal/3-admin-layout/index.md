@@ -11,7 +11,7 @@ When a new model is added to a SolidX module the system automatically generates 
 3. List view 
 4. Form view 
 
-Buy default the list view & form view will contain all the fields which were added in the model at the time of creation. 
+By default the list view & form view will contain all the fields which were added in the model at the time of creation. 
 
 The layout simply arranges all the fields in a left to right (for list view) or top to bottom (for form view) manner. 
 
