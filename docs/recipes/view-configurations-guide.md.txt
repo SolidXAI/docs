@@ -43,13 +43,20 @@ List views display records in tabular format with advanced features like search,
 ### List View Attributes
 ```json
 "attrs": {
-  "pagination": true,                    // Enable pagination
-  "pageSizeOptions": [10, 25, 50],      // Available page sizes
-  "enableGlobalSearch": true,            // Global search across fields
-  "create": true,                        // Allow record creation from list
-  "edit": true,                          // Allow inline/record editing
-  "delete": true,                        // Allow record deletion
-  "configureViewActions": {              // Role-based action permissions
+  // Enable pagination
+  "pagination": true,
+  // Available page sizes                    
+  "pageSizeOptions": [10, 25, 50],
+  // Enable global search       
+  "enableGlobalSearch": true,
+  // Allow record creation from list            
+  "create": true,
+  // Allow inline/record editing                        
+  "edit": true,
+  // Allow record deletion                          
+  "delete": true,
+  // Role-based action permissions                        
+  "configureViewActions": {              
     "import": {
       "roles": ["Admin", "Mswipe Admin"]
     },
