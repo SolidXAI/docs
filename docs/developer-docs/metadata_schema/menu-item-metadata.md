@@ -35,7 +35,8 @@ For a conceptual overview of menus in SolidX, refer to the [Menu System Overview
       "actionUserKey": "fees-portal-home-action",
       "moduleUserKey": "fees-portal",
       "parentMenuItemUserKey": "",
-      "roles": []
+      "roles": [],
+      "iconName": "home"
     },
     {
       "displayName": "Institute",
@@ -47,7 +48,8 @@ For a conceptual overview of menus in SolidX, refer to the [Menu System Overview
       "roles": [
         "Institute Admin",
         "Mswipe Admin"
-      ]
+      ],
+      "iconName": "school"
     },
     {
       "displayName": "Initiate Payments",
@@ -59,7 +61,8 @@ For a conceptual overview of menus in SolidX, refer to the [Menu System Overview
       "roles": [
         "Institute Admin",
         "Mswipe Admin"
-      ]
+      ],
+      "iconName": "payments"
     },
     {
       "displayName": "Created Payments",
@@ -71,7 +74,8 @@ For a conceptual overview of menus in SolidX, refer to the [Menu System Overview
       "roles": [
         "Institute Admin",
         "Mswipe Admin"
-      ]
+      ],
+      "iconName": "receipt"
     },
   ],
 }
