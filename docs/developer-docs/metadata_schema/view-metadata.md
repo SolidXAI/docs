@@ -2,13 +2,22 @@
 title: View Metadata
 description: Metadata schema for defining views in SolidX applications.
 sidebar_position: 4
+json_pointer: "/views"
+jsonpath: "$.views"
+parent_component: root
+type: array
+items_type: "object"
+items_attributes_doc: "#view-metadata-attributes"
 ---
 
 import { IoIosArrowForward } from "react-icons/io";
 import { InfoBox } from '@site/src/common/InfoBox';
 
-
-
+# View Metadata
+> **Where it lives**  
+> **JSON Pointer:** `/views`  
+> **JSONPath:** `$.views`  
+> **Parent:** Root of the metadata file
 
 ## Overview
 Views define UI presentation of models and automatically generate:
@@ -16,8 +25,7 @@ Views define UI presentation of models and automatically generate:
     - Form Views: Input forms for create/edit operations
     - Kanban Views: Card-based display with drag-and-drop
 
-For a conceptual overview / guide/ recipes of how views can be used in SolidX, refer to the [View Metadata Guide](../../recipes/view-configurations-guide.md).
-
+For a conceptual overview / guide/ recipes of how views can be used in SolidX, refer to the [View Metadata Guide](../../recipes/view-configurations-guide.md
 
 
 ### Example: Fee Portal List/Form Views

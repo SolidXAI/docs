@@ -1,8 +1,20 @@
 ---
-title : List of Values
+# title : List of Values
 description : Metadata schema for defining list of values in SolidX applications.
 sidebar_position: 14
+json_pointer: "/listOfValues"
+jsonpath: "$.listOfValues"
+parent_component: root
+type: array
+items_type: "object"
+items_attributes_doc: "#list-of-values-metadata-attributes"
 ---
+
+# List of Values
+> **Where it lives**  
+> **JSON Pointer:** `/listOfValues`  
+> **JSONPath:** `$.listOfValues`  
+> **Parent:** Root of the metadata file
 
 ## Overview
 List of Values (LOV) are used to define a set of predefined values that can be used in various parts of the SolidX application, such as dropdowns or selection fields. This helps ensure data consistency and improve user experience.

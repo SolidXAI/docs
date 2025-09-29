@@ -2,7 +2,20 @@
 title: Users
 description: Metadata schema for populating users in SolidX applications.
 sidebar_position: 8
+json_pointer: "/users"
+jsonpath: "$.users"
+parent_component: root
+type: array
+items_type: "object"
+items_attributes_doc: "#users-metadata-attributes"
 ---
+
+# Users 
+> **Where it lives**  
+> **JSON Pointer:** `/users`  
+> **JSONPath:** `$.users`  
+> **Parent:** Root of the metadata file
+
 
 ## Overview
 We can populate some initial users in the system using the `users` metadata. These users will created with the default role that is specified in the environment variable `IAM_DEFAULT_ROLE` or `Public` role if the environment variable is not set.

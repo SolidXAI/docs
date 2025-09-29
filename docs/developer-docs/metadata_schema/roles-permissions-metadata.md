@@ -1,11 +1,22 @@
 ---
-title: Roles & Permissions
+# title: Roles & Permissions
 description: Metadata schema for defining roles and permissions in SolidX applications.
 sidebar_position: 7
+json_pointer: "/roles"
+jsonpath: "$.roles"
+parent_component: root
+type: array
+items_type: "object"
+items_attributes_doc: "#roles-permissions-metadata-attributes"
 ---
 
 import { InfoBox } from '@site/src/common/InfoBox';
 
+# Roles & Permissions
+> **Where it lives**  
+> **JSON Pointer:** `/roles`  
+> **JSONPath:** `$.roles`  
+> **Parent:** Root of the metadata file
 
 ## Overview
 

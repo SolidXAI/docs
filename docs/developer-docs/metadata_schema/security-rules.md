@@ -2,7 +2,19 @@
 title: Security Rules
 description: Metadata schema for defining security rules in SolidX applications.
 sidebar_position: 13
+json_pointer: "/securityRules"
+jsonpath: "$.securityRules"
+parent_component: root
+type: array
+items_type: "object"
+items_attributes_doc: "#security-rules-metadata-attributes"
 ---
+
+# Security Rules
+> **Where it lives**  
+> **JSON Pointer:** `/securityRules`  
+> **JSONPath:** `$.securityRules`  
+> **Parent:** Root of the metadata file
 
 ## Overview
 Security rules are crucial for controlling access to data in SolidX. By defining these rules, you can restrict visibility at the model level and ensure that only authorized users can access sensitive information.

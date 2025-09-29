@@ -2,7 +2,20 @@
 title: Scheduled Jobs
 description: Metadata schema for defining scheduled jobs in SolidX applications.
 sidebar_position: 12
+json_pointer: "/scheduledJobs"
+jsonpath: "$.scheduledJobs"
+parent_component: root
+type: array
+items_type: "object"
+items_attributes_doc: "#scheduled-jobs-metadata-attributes"
 ---
+
+# Scheduled Jobs
+> **Where it lives**  
+> **JSON Pointer:** `/scheduledJobs`  
+> **JSONPath:** `$.scheduledJobs`  
+> **Parent:** Root of the metadata file
+
 
 ## Overview
 Scheduled jobs in SolidX allow you to run recurring tasks such as sending notifications, cleaning up records, syncing data, or performing regular maintenance.

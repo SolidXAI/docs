@@ -2,10 +2,21 @@
 # title: Module Metadata Schema
 description: Overview of the module metadata schema used in SolidX.
 sidebar_position: 1
+json_pointer: "/moduleMetadata"
+jsonpath: "$.moduleMetadata"
+parent_component: root
+items_type: object
+items_attributes_doc: "#module-metadata-attributes"
 ---
 import { MdCategory } from "react-icons/md";
 
-# 📦 Module Metadata Schema
+# 📦 Module Metadata
+
+> **Where it lives**  
+> **JSON Pointer:** `/moduleMetadata`  
+> **JSONPath:** `$.moduleMetadata`  
+> **Parent:** Root of the metadata file
+
 ## 🔖 Overview
 
 When creating a new module in SolidX, you're defining a **core building block** of your application.  

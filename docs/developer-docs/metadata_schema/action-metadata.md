@@ -1,8 +1,20 @@
 ---
-title : Action Metadata
+# title : Action Metadata
 description : Metadata schema for defining actions in SolidX applications.
 sidebar_position: 5
+json_pointer: "/actions"
+jsonpath: "$.actions"
+parent_component: root
+type: array
+items_type: "object"
+items_attributes_doc: "#action-metadata-attributes"
 ---
+
+# Action Metadata
+> **Where it lives**  
+> **JSON Pointer:** `/actions`  
+> **JSONPath:** `$.actions`  
+> **Parent:** Root of the metadata file
 
 ## Overview
 Actions define what happens when users interact with UI elements like menu items, buttons, or links. They connect the frontend to backend functionality and determine how data is displayed or processed.

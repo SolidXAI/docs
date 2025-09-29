@@ -1,11 +1,22 @@
 ---
-title: Model Metadata Schema
+# title: Model Metadata Schema
 description: Overview of the model metadata schema used in SolidX.
 sidebar_position: 2
+json_pointer: "/moduleMetadata/models"
+jsonpath: "$.moduleMetadata.models"
+parent_component: moduleMetadata
+type: array,
+items_type: "object"
+items_attributes_doc: "#model-metadata-attributes"
 ---
 
 import { MdCategory } from "react-icons/md";
 
+# Model Metadata
+> **Where it lives**  
+> **JSON Pointer:** `/moduleMetadata/models`  
+> **JSONPath:** `$.moduleMetadata.models`  
+> **Parent:** `moduleMetadata` in the root of the metadata file
 
 ## Overview
 

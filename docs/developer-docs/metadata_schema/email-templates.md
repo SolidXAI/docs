@@ -1,8 +1,21 @@
 ---
-title: Email Templates
+# title: Email Templates
 description: Metadata schema for populating email templates in SolidX applications.
 sidebar_position: 9
+json_pointer: "/emailTemplates"
+jsonpath: "$.emailTemplates"
+parent_component: root
+type: array
+items_type: "object"
+items_attributes_doc: "#email-templates-metadata-attributes"
 ---
+
+# Email Templates
+> **Where it lives**  
+> **JSON Pointer:** `/emailTemplates`  
+> **JSONPath:** `$.emailTemplates`  
+> **Parent:** Root of the metadata file
+
 
 ## Overview
 Email Templates in SOLID allow you to create and manage HTML/Text based email templates with dynamic content and attachments.

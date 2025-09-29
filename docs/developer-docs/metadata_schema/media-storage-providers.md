@@ -1,8 +1,20 @@
 ---
-title: Media Storage Providers Metadata
+# title: Media Storage Providers Metadata
 description: Metadata schema for defining media storage providers in SolidX applications.
 sidebar_position: 11
+json_pointer: "/mediaStorageProviders"
+jsonpath: "$.mediaStorageProviders"
+parent_component: root
+type: array
+items_type: "object"
+items_attributes_doc: "#media-storage-providers-metadata-attributes"
 ---
+
+# Media Storage Providers
+> **Where it lives**  
+> **JSON Pointer:** `/mediaStorageProviders`  
+> **JSONPath:** `$.mediaStorageProviders`  
+> **Parent:** Root of the metadata file
 
 ## Overview
 SOLID supports multiple storage providers for media files, offering flexibility in how and where your media assets are stored.

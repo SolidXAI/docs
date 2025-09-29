@@ -1,7 +1,13 @@
 ---
-title: Field Metadata Schema
+# title: Field Metadata Schema
 description: Overview of the field metadata schema used in SolidX.
 sidebar_position: 3
+json_pointer: "/moduleMetadata/models/fields"
+jsonpath: "$.moduleMetadata.models[*].fields[*]"
+parent_component: models
+type: array,
+items_type: "object"
+items_attributes_doc: "#field-metadata-attributes"
 ---
 
 import { IoIosArrowForward } from "react-icons/io";
@@ -11,7 +17,11 @@ import { InfoBox } from '@site/src/common/InfoBox';
 import { WarningBox } from '@site/src/common/WarningBox';
 
 
-
+# Field Metadata
+> **Where it lives**  
+> **JSON Pointer:** `/moduleMetadata/models/fields`  
+> **JSONPath:** `$.moduleMetadata.models[*].fields[*]`  
+> **Parent:** `models` in the `moduleMetadata` of the root of the metadata file
 
 ## Overview
 

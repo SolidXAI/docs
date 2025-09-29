@@ -2,7 +2,19 @@
 title: Menu Item Metadata
 description: Metadata schema for defining menus in SolidX applications.
 sidebar_position: 6
+json_pointer: "/menus"
+jsonpath: "$.menus"
+parent_component: root
+type: array
+items_type: "object"
+items_attributes_doc: "#menu-item-metadata-attributes"
 ---
+
+# Menu Item Metadata
+> **Where it lives**  
+> **JSON Pointer:** `/menus`  
+> **JSONPath:** `$.menus`  
+> **Parent:** Root of the metadata file
 
 ## Overview
 SOLID automatically generates and manages the admin panel's menu structure based on your modules and resources. The menu system provides an intuitive way to navigate through your application's features

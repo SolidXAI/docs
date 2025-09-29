@@ -1,8 +1,19 @@
 ---
-title: SMS Templates
+# title: SMS Templates
 description: Metadata schema for populating SMS templates in SolidX applications.
 sidebar_position: 10
+json_pointer: "/smsTemplates"
+jsonpath: "$.smsTemplates"
+parent_component: root
+type: array
+items_type: "object"
+items_attributes_doc: "#email-templates-metadata-attributes"
 ---
+# SMS Templates
+> **Where it lives**  
+> **JSON Pointer:** `/smsTemplates`  
+> **JSONPath:** `$.smsTemplates`  
+> **Parent:** Root of the metadata file
 
 ## Overview
 SMS Templates in SOLID allow you to create and manage SMS templates with dynamic content and attachments.
