@@ -11,6 +11,8 @@ items_attributes_doc: "#model-metadata-attributes"
 ---
 
 import { MdCategory } from "react-icons/md";
+import { IoIosArrowForward } from "react-icons/io";
+
 
 # Model Metadata
 > **Where it lives**  
@@ -26,9 +28,14 @@ Each model is a semantic, configurable data structure that forms the basis of ad
 
 👉 For a conceptual overview of what a model is, see [Model Management Documentation](../../admin-docs/module-builder/model-management.md).
 
+
+
 ### Example: Institute Model
 <details>
-<summary> Model Schema</summary>
+  <summary className="card-title card-headear-wrapper">
+    <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
+    Model Schema
+  </summary>
 
 ```json
 {

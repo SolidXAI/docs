@@ -9,24 +9,29 @@ items_type: object
 items_attributes_doc: "#module-metadata-attributes"
 ---
 import { MdCategory } from "react-icons/md";
+import { IoIosArrowForward } from "react-icons/io";
 
-# 📦 Module Metadata
+
+#  Module Metadata
 
 > **Where it lives**  
 > **JSON Pointer:** `/moduleMetadata`  
 > **JSONPath:** `$.moduleMetadata`  
 > **Parent:** Root of the metadata file
 
-## 🔖 Overview
+##  Overview
 
 When creating a new module in SolidX, you're defining a **core building block** of your application.  
 A module groups together related models and functionality under a **unified domain**.
 
 👉 For a conceptual overview of what a module is, see [Module Management Documentation](../../admin-docs/module-builder/module-management.md).
 
-### 🔎 Example: Fees Portal Module
+###  Example: Fees Portal Module
 <details>
-<summary> Module Schema</summary>
+  <summary className="card-title card-headear-wrapper">
+    <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
+    Module Schema
+  </summary>
 
 ```json
 {

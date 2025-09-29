@@ -5,11 +5,12 @@ sidebar_position: 3.5
 ---
 
 import { MdWidgets, MdTrackChanges, MdPsychology, MdInfoOutline } from "react-icons/md";
-import { FaDatabase } from "react-icons/fa";
+import { FaDatabase,FaLightbulb } from "react-icons/fa";
 import { IoIosArrowForward } from "react-icons/io";
 
-# 🧩 Metadata Schema
-## 🔖 Overview
+
+#  Metadata Schema
+##  Overview
 
 The metadata schema in `SolidX` is designed to provide a flexible and extensible way to define the structure and behavior of various application components. By using a metadata-driven approach, developers can easily customize and extend the functionality of the `SolidX`platform without modifying the core codebase.
 
@@ -19,9 +20,10 @@ The metadata can either be defined in JSON files or through the admin interface.
 
 Every module needs to have its own metadata file which is then seeded into the database.
 
-## 🌱 Seeding Metadata
+##  Seeding Metadata
 To apply metadata changes made in the JSON file directly, you must sync the database with the updated metadata files.
 1. **Seed metadata into the database**:
+
 ```bash
 solid seed
 ```
@@ -35,37 +37,43 @@ solid refresh-model -n <model name>
 ```
 This step ensures the generated code reflects the latest metadata.
 Typical cases where this extra step is required:
-- ➕ Adding a new module  
-- 🏗️ Adding fields to a model  
-
-:::tip
-Just running the `solid seed` command is sufficient for most cases, except the ones mentioned above, since the platform reads the metadata directly from the database at runtime.
-:::
+-  Adding a new module  
+-  Adding fields to a model  
 
 
 
+<div className="tips-box">
+  <h4 className="card-headear-wrapper">
+    <FaLightbulb className="feature-icon" />
+    Tips 
+  </h4>
+  <ul>
+    <li> Just running the <span className="color-green"> solid seed </span>command is sufficient for most cases, except the ones mentioned above, since the platform reads the metadata directly from the database at runtime.</li>
+  </ul>
+</div>
 
-## 🧩 Key Components
+
+##  Key Components
 
 Below are the key components of the metadata schema. All the functionality concerning the below components is driven by the metadata schema.
 
-- 📦 Module Metadata  
-- 🗄️ Model Metadata  
-- 🔑 Field Metadata  
-- 👁️ View Metadata  
-- ⚡ Action Metadata  
-- 📋 Menu Item Metadata  
-- 🔐 Roles & Permissions  
-- 👥 Users  
-- ✉️ Email Templates  
-- 📱 SMS Templates  
-- 🖼️ Media Storage Providers  
-- ⏰ Scheduled Jobs  
-- 🛡️ Security Rules  
-- 🗂️ List of Values  
-- 📊 Dashboard Metadata  
+-  Module Metadata  
+-  Model Metadata  
+-  Field Metadata  
+-  View Metadata  
+-  Action Metadata  
+-  Menu Item Metadata  
+-  Roles & Permissions  
+-  Users  
+-  Email Templates  
+-  SMS Templates  
+-  Media Storage Providers  
+-  Scheduled Jobs  
+-  Security Rules  
+-  List of Values  
+-  Dashboard Metadata  
 
-## 🏗️ Best Practices
+##  Best Practices
 
 <details>
   <summary className="card-title card-headear-wrapper">
@@ -144,7 +152,7 @@ Below are the key components of the metadata schema. All the functionality conce
   </ul>
 </details>
 
-## 📘 What’s Coming Up
+##  What’s Coming Up
 
 In the upcoming sections, we’ll walk through practical examples that use the metadata schema and explain each attribute in detail.
 

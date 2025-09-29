@@ -654,7 +654,7 @@ Controls how fields, widgets, buttons, and other UI elements are organized.
 
 **Default:** N/A
 
-#### 📖 Further Reference
+####  Further Reference
 
 For detailed attribute-level documentation of the `layout` schema per view type, see:
 

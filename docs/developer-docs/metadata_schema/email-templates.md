@@ -10,6 +10,10 @@ items_type: "object"
 items_attributes_doc: "#email-templates-metadata-attributes"
 ---
 
+import { IoIosArrowForward } from "react-icons/io";
+import { InfoBox } from '@site/src/common/InfoBox';
+
+
 # Email Templates
 > **Where it lives**  
 > **JSON Pointer:** `/emailTemplates`  
@@ -22,6 +26,7 @@ Email Templates in SOLID allow you to create and manage HTML/Text based email te
 
 ### Example: Email Templates Metadata
 <summary> Email Templates Schema </summary>
+
 ``` json
 {
   ..., // Other metadata 
@@ -50,7 +55,11 @@ Email Templates in SOLID allow you to create and manage HTML/Text based email te
 
 ### Example : Email Template File
 <details>
-<summary> Email Template File </summary>
+  <summary className="card-title card-headear-wrapper">
+    <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
+   Email Template File 
+  </summary>
+
 ``` html
 <!DOCTYPE html>
 <html lang="en">
@@ -445,12 +454,16 @@ Display name for the email template.
     - In the metadata json, the filename of the email template is specified. The templates are searched for in the `module-metadata/<module-name>/email-templates/` directory of the module.
     - The body is then replaced with the content of the email template file. This can include HTML or plain text content. The body can include dynamic placeholders using Handlebars syntax (e.g., `{{placeholderName}}`), as shown in the [Email Template file](#example--email-template-file) above.
 
-#### 📖 Further Reference
- - 📋 **Email Body Creation:** [Email Templates Guide](../../admin-docs/notifications/email-templates.md)
+####  Further Reference
+ -  **Email Body Creation:** [Email Templates Guide](../../admin-docs/notifications/email-templates.md)
 
-:::note
+
+
+
+
+<InfoBox>
 Please refer to the [Handlebars Documentation](https://handlebarsjs.com/) for more information on using Handlebars syntax in email templates.
-:::
+</InfoBox>
 
 
 ### `subject` *(string, required)*

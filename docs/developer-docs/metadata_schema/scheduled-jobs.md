@@ -16,6 +16,9 @@ items_attributes_doc: "#scheduled-jobs-metadata-attributes"
 > **JSONPath:** `$.scheduledJobs`  
 > **Parent:** Root of the metadata file
 
+import { InfoBox } from '@site/src/common/InfoBox';
+
+
 
 ## Overview
 Scheduled jobs in SolidX allow you to run recurring tasks such as sending notifications, cleaning up records, syncing data, or performing regular maintenance.
@@ -61,9 +64,10 @@ Days of the week on which the job should run (applicable for weekly frequency). 
 
 **Example:** `["Monday", "Wednesday", "Friday"]`  
 **Applies to:** `Weekly` frequency
-:::note
-Currently the configuration expects json configuration in stringified format. In future releases, we may support direct array input.
-:::
+
+<InfoBox>
+  Currently the configuration expects json configuration in stringified format. In future releases, we may support direct array input.
+</InfoBox>
 
 
 ### `moduleUserKey` *(string, required)*
