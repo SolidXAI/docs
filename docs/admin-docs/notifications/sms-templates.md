@@ -1,6 +1,6 @@
 ---
 title: SMS Templates
-description: Learn how to create and manage SMS templates in SOLID, including dynamic content
+description: Learn how to create and manage SMS templates in SolidX, including dynamic content
 sidebar_position: 2
 ---
 
@@ -16,7 +16,7 @@ import { WarningBox } from '@site/src/common/WarningBox';
 
 # SMS Templates
 
-SMS Templates in SOLID enable you to create and manage text message templates with dynamic content and integrated link shortening capabilities.
+SMS Templates in SolidX enable you to create and manage text message templates with dynamic content and integrated link shortening capabilities.
 
 ## Template Creation
 

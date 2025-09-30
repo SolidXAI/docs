@@ -16,28 +16,21 @@ items_attributes_doc: "#email-templates-metadata-attributes"
 > **Parent:** Root of the metadata file
 
 ## Overview
-SMS Templates in SOLID allow you to create and manage SMS templates with dynamic content and attachments.
+SMS Templates in SOLID allow you to create and manage SMS templates with dynamic content.
 
-### Example: Email Templates Metadata
-<summary> Email Templates Schema </summary>
+### Example: SMS Templates Metadata
+Below is an example of configuring an SMS template which sends an OTP when a user logs in.
+<details>
+<summary> SMS Templates Schema </summary>
 ``` json
 {
   ..., // Other metadata 
   "smsTemplates": [
     {
-      "name": "otp-on-register-custom",
-      "displayName": "Custom: Otp On Register",
-      "body": "otp-on-register-custom.handlebars.txt",
-      "description": "This template is used to generate the account verification sms sent to users to verify their mobile number when they register.",
-      "smsProviderTemplateId": "<TEMPLATE_ID_FROM_SMS_PROVIDER>",
-      "active": true,
-      "type": "text"
-    },
-    {
       "name": "otp-on-login-custom",
       "displayName": "Custom: Otp On Login",
       "body": "otp-on-login-custom.handlebars.txt",
-      "description": "This template is used to send the sms with the OTP when logging in.",
+      "description": "Send sms with OTP when logging in.",
       "smsProviderTemplateId": "<TEMPLATE_ID_FROM_SMS_PROVIDER>",
       "active": true,
       "type": "text"
@@ -46,16 +39,41 @@ SMS Templates in SOLID allow you to create and manage SMS templates with dynamic
   ]
 }
 ```
+</details>
 
 ### Example : SMS Template File
+Below is an example of the content of the SMS template file `otp-on-login-custom.handlebars.txt` referenced in the above metadata. This file contains the actual SMS message with dynamic placeholders.
 <details>
 <summary> SMS Template File </summary>
 ``` text
-Hello {{ firstName }}, Log in to {{ solidAppName }}, using {{ mobileVerificationTokenOnLogin }} as your verification code.
+Hi {{ firstName }}, Login to {{ solidAppName }}, using {{ mobileVerificationTokenOnLogin }} as your verification code.
 ```
 </details>
 
-## Email Templates Metadata Attributes
+### Example : Sending SMS Using Template (TODO ticket)
+Below is a code snippet demonstrating how to send an SMS using the defined SMS templates via the `SmsServiceFactory`. This example shows how to send an OTP verification SMS to a user.
+<details>
+<summary> SMS Sending Code Snippet </summary>
+``` ts
+import { SmsServiceFactory } from 'your-sms-service';
+
+async sendOtpSms(user: { mobile: string; firstName?: string; username: string, mobileVerificationTokenOnLogin: string }, otp: string) {
+  const smsService = SmsServiceFactory.getSmsService();
+
+  await smsService.sendSmsUsingTemplate(
+      user.mobile,
+      'otp-on-login',
+      {
+          solidAppName: process.env.SOLID_APP_NAME,
+          mobileVerificationTokenOnLogin: user.mobileVerificationTokenOnLogin,
+          firstName: user.username,
+          fullName: user.fullName ? user.fullName : user.username,
+      }
+  );
+```
+</details>
+
+## SMS Templates Metadata Attributes
 
 ### `name` *(string, required, unique)*
 Unique name for the sms template. It should be in kebab-case format (e.g., `example-template-name`).
