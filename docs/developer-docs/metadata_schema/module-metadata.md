@@ -25,6 +25,7 @@ A module groups together related models and functionality under a **unified doma
 👉 For a conceptual overview of what a module is, see [Module Management Documentation](../../admin-docs/module-builder/module-management.md).
 
 ### 🔎 Example: Fees Portal Module
+Below is a module metadata example for a "Fees Portal" module that tracks fee collection requests.
 <details>
 <summary> Module Schema</summary>
 
@@ -45,6 +46,9 @@ A module groups together related models and functionality under a **unified doma
 ```
 </details>
 
+:::info
+The defaultDataSource is set to "default" here, which refers to the default data source configured in your SolidX instance. This is the TypeORM data source configured in your app-default.database.ts in your project `solid-api` src folder.
+:::
 
 
   <h2 className=" card-headear-wrapper">

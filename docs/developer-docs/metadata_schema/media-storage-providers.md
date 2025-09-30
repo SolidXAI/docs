@@ -10,7 +10,7 @@ items_type: "object"
 items_attributes_doc: "#media-storage-providers-metadata-attributes"
 ---
 
-# Media Storage Providers
+# Media Storage
 > **Where it lives**  
 > **JSON Pointer:** `/mediaStorageProviders`  
 > **JSONPath:** `$.mediaStorageProviders`  
