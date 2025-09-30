@@ -1,2592 +1,937 @@
 {
-  "tutorial/index.md": {
-    "hash": "5a60fa5e410fb0f780d21adbbb5726ed786651211c6359a2d64ad16485670ef4",
-    "document_id": "e4794e59-8d49-4b16-ae23-bafd62d2f131",
-    "collection_id": "cd59267d-67e0-4897-91a6-1a338f5e83bf",
-    "metadata": {
-      "source": "docusaurus",
-      "project": "solidx-docs",
-      "section": "tutorial",
-      "slug": "tutorial/index",
-      "path": "tutorial/index.md",
-      "filename": "index.md",
-      "breadcrumbs": [
-        "tutorial",
-        "index"
-      ],
-      "doc_title": "tutorial/index.md",
-      "git_commit": "2901b1f860f942e6bfac2621092a477c43d67c42",
-      "git_author": "Saibaz.Khan",
-      "git_email": "saibaz.khan@logicloop.io",
-      "git_date": "Mon Sep 15 16:38:22 2025 +0530",
-      "collection_id": "cd59267d-67e0-4897-91a6-1a338f5e83bf",
-      "collection_name": "tutorial",
-      "title": "tutorial/index.md"
-    }
-  },
-  "admin-docs/index.md": {
-    "hash": "89f4e18eaf2bad4f8d844a140bf68219b86feaadb40cc8fe1d95c95f81d2284c",
-    "document_id": "83729ad7-9448-4b3e-a1d5-327a3a8c60e4",
-    "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
-    "metadata": {
-      "source": "docusaurus",
-      "project": "solidx-docs",
-      "section": "admin-docs",
-      "slug": "admin-docs/index",
-      "path": "admin-docs/index.md",
-      "filename": "index.md",
-      "breadcrumbs": [
-        "admin-docs",
-        "index"
-      ],
-      "doc_title": "admin-docs/index.md",
-      "git_commit": "995375355863532de57a880ec4789d526e0a2771",
-      "git_author": "Saibaz.Khan",
-      "git_email": "saibaz.khan@logicloop.io",
-      "git_date": "Thu Sep 18 19:18:08 2025 +0530",
-      "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
-      "collection_name": "admin-docs",
-      "title": "admin-docs/index.md"
-    }
-  },
-  "recipes/email.md": {
-    "hash": "0b3033ba8ba54bd517a4a8d0266a7a6230c1869e12c30bf53e9e33d3040ed08c",
-    "document_id": "ec7e30db-883a-4a7d-b261-a89a535764a7",
-    "collection_id": "f0935ef1-c3c4-403d-b32f-2a2d52861db1",
-    "metadata": {
-      "source": "docusaurus",
-      "project": "solidx-docs",
-      "section": "recipes",
-      "slug": "recipes/email",
-      "path": "recipes/email.md",
-      "filename": "email.md",
-      "breadcrumbs": [
-        "recipes",
-        "email"
-      ],
-      "doc_title": "recipes/email.md",
-      "git_commit": "995375355863532de57a880ec4789d526e0a2771",
-      "git_author": "Saibaz.Khan",
-      "git_email": "saibaz.khan@logicloop.io",
-      "git_date": "Thu Sep 18 19:18:08 2025 +0530",
-      "collection_id": "f0935ef1-c3c4-403d-b32f-2a2d52861db1",
-      "collection_name": "recipes",
-      "title": "recipes/email.md"
-    }
-  },
-  "recipes/computed-fields.md": {
-    "hash": "2ba513ac1d515d7602ad14d9fcbab20532187652ac263ef1877f1004e490c2d3",
-    "document_id": "287d5052-46bf-4213-bbe3-f908146adaa0",
-    "collection_id": "f0935ef1-c3c4-403d-b32f-2a2d52861db1",
-    "metadata": {
-      "source": "docusaurus",
-      "project": "solidx-docs",
-      "section": "recipes",
-      "slug": "recipes/computed-fields",
-      "path": "recipes/computed-fields.md",
-      "filename": "computed-fields.md",
-      "breadcrumbs": [
-        "recipes",
-        "computed-fields"
-      ],
-      "doc_title": "recipes/computed-fields.md",
-      "git_commit": "995375355863532de57a880ec4789d526e0a2771",
-      "git_author": "Saibaz.Khan",
-      "git_email": "saibaz.khan@logicloop.io",
-      "git_date": "Thu Sep 18 19:18:08 2025 +0530",
-      "collection_id": "f0935ef1-c3c4-403d-b32f-2a2d52861db1",
-      "collection_name": "recipes",
-      "title": "recipes/computed-fields.md"
-    }
-  },
-  "recipes/media-providers.md": {
-    "hash": "5812dd8914d8e21bd8c4b3cd0385ca2f4e215675e5ec30bb3aedd9fec51039f3",
-    "document_id": "02e4dab5-1ede-4e24-ba2d-d1b2a80f72a9",
-    "collection_id": "f0935ef1-c3c4-403d-b32f-2a2d52861db1",
-    "metadata": {
-      "source": "docusaurus",
-      "project": "solidx-docs",
-      "section": "recipes",
-      "slug": "recipes/media-providers",
-      "path": "recipes/media-providers.md",
-      "filename": "media-providers.md",
-      "breadcrumbs": [
-        "recipes",
-        "media-providers"
-      ],
-      "doc_title": "recipes/media-providers.md",
-      "git_commit": "995375355863532de57a880ec4789d526e0a2771",
-      "git_author": "Saibaz.Khan",
-      "git_email": "saibaz.khan@logicloop.io",
-      "git_date": "Thu Sep 18 19:18:08 2025 +0530",
-      "collection_id": "f0935ef1-c3c4-403d-b32f-2a2d52861db1",
-      "collection_name": "recipes",
-      "title": "recipes/media-providers.md"
-    }
-  },
-  "recipes/extending-users.md": {
-    "hash": "6685c0db971b30319fcb27aed29ddbb81cba138476fa6ad2aa7f0a8ff0a506de",
-    "document_id": "418cee22-4c00-4e7c-9899-f64992c4f745",
-    "collection_id": "f0935ef1-c3c4-403d-b32f-2a2d52861db1",
-    "metadata": {
-      "source": "docusaurus",
-      "project": "solidx-docs",
-      "section": "recipes",
-      "slug": "recipes/extending-users",
-      "path": "recipes/extending-users.md",
-      "filename": "extending-users.md",
-      "breadcrumbs": [
-        "recipes",
-        "extending-users"
-      ],
-      "doc_title": "recipes/extending-users.md",
-      "git_commit": "995375355863532de57a880ec4789d526e0a2771",
-      "git_author": "Saibaz.Khan",
-      "git_email": "saibaz.khan@logicloop.io",
-      "git_date": "Thu Sep 18 19:18:08 2025 +0530",
-      "collection_id": "f0935ef1-c3c4-403d-b32f-2a2d52861db1",
-      "collection_name": "recipes",
-      "title": "recipes/extending-users.md"
-    }
-  },
-  "recipes/index.md": {
-    "hash": "0d72d575b21eb24ccc2c8242cc860f39805ae58f972c13e0eb86e8fbc9a4fff9",
-    "document_id": "e670cff7-fc2b-448e-b4f5-bbb5804499b2",
-    "collection_id": "f0935ef1-c3c4-403d-b32f-2a2d52861db1",
-    "metadata": {
-      "source": "docusaurus",
-      "project": "solidx-docs",
-      "section": "recipes",
-      "slug": "recipes/index",
-      "path": "recipes/index.md",
-      "filename": "index.md",
-      "breadcrumbs": [
-        "recipes",
-        "index"
-      ],
-      "doc_title": "recipes/index.md",
-      "git_commit": "1b74d46a9e285a53ed6fb765235525cc4d24d69e",
-      "git_author": "Harish Patel",
-      "git_email": "harish@logicloop.io",
-      "git_date": "Fri Jul 18 12:35:11 2025 +0100",
-      "collection_id": "f0935ef1-c3c4-403d-b32f-2a2d52861db1",
-      "collection_name": "recipes",
-      "title": "recipes/index.md"
-    }
-  },
-  "recipes/soft-delete.md": {
-    "hash": "b47296a0febe076b020d2c09f5fce86b88a8753cda1a8dff5837a927f76c8721",
-    "document_id": "493c731e-dd58-4ab4-aded-9dd217a601f0",
-    "collection_id": "f0935ef1-c3c4-403d-b32f-2a2d52861db1",
-    "metadata": {
-      "source": "docusaurus",
-      "project": "solidx-docs",
-      "section": "recipes",
-      "slug": "recipes/soft-delete",
-      "path": "recipes/soft-delete.md",
-      "filename": "soft-delete.md",
-      "breadcrumbs": [
-        "recipes",
-        "soft-delete"
-      ],
-      "doc_title": "recipes/soft-delete.md",
-      "git_commit": "1b74d46a9e285a53ed6fb765235525cc4d24d69e",
-      "git_author": "Harish Patel",
-      "git_email": "harish@logicloop.io",
-      "git_date": "Fri Jul 18 12:35:11 2025 +0100",
-      "collection_id": "f0935ef1-c3c4-403d-b32f-2a2d52861db1",
-      "collection_name": "recipes",
-      "title": "recipes/soft-delete.md"
-    }
-  },
-  "recipes/queue.md": {
-    "hash": "d44836f63c8937f8362065743a7260652edefc76f2234ae22766bbc0e02168c9",
-    "document_id": "d250f83e-2047-4714-9b92-3fc065ee8234",
-    "collection_id": "f0935ef1-c3c4-403d-b32f-2a2d52861db1",
-    "metadata": {
-      "source": "docusaurus",
-      "project": "solidx-docs",
-      "section": "recipes",
-      "slug": "recipes/queue",
-      "path": "recipes/queue.md",
-      "filename": "queue.md",
-      "breadcrumbs": [
-        "recipes",
-        "queue"
-      ],
-      "doc_title": "recipes/queue.md",
-      "git_commit": "995375355863532de57a880ec4789d526e0a2771",
-      "git_author": "Saibaz.Khan",
-      "git_email": "saibaz.khan@logicloop.io",
-      "git_date": "Thu Sep 18 19:18:08 2025 +0530",
-      "collection_id": "f0935ef1-c3c4-403d-b32f-2a2d52861db1",
-      "collection_name": "recipes",
-      "title": "recipes/queue.md"
-    }
-  },
-  "recipes/actions-menus-guide.md": {
-    "hash": "d7e48d03be7754bf42bf00b790df19e02497435b89ae353f6afdfe575ff6087d",
-    "document_id": "0e7825fb-d963-442a-9340-a98d27db5dd0",
-    "collection_id": "f0935ef1-c3c4-403d-b32f-2a2d52861db1",
-    "metadata": {
-      "source": "docusaurus",
-      "project": "solidx-docs",
-      "section": "recipes",
-      "slug": "recipes/actions-menus-guide",
-      "path": "recipes/actions-menus-guide.md",
-      "filename": "actions-menus-guide.md",
-      "breadcrumbs": [
-        "recipes",
-        "actions-menus-guide"
-      ],
-      "doc_title": "recipes/actions-menus-guide.md",
-      "git_commit": "d1c458666149b24e75bb6e2f04e279bc95ae6009",
-      "git_author": "Oswald Rodrigues",
-      "git_email": "oswald@logicloop.io",
-      "git_date": "Thu Sep 18 18:18:21 2025 +0530",
-      "collection_id": "f0935ef1-c3c4-403d-b32f-2a2d52861db1",
-      "collection_name": "recipes",
-      "title": "recipes/actions-menus-guide.md"
-    }
-  },
-  "recipes/handlers.md": {
-    "hash": "1370d7e24131ae267c88a5ecd30fc4bd1a916f82a60d2a7693fe00fe2be9fc34",
-    "document_id": "81c40f62-1c86-4009-a7e3-998199711d4b",
-    "collection_id": "f0935ef1-c3c4-403d-b32f-2a2d52861db1",
-    "metadata": {
-      "source": "docusaurus",
-      "project": "solidx-docs",
-      "section": "recipes",
-      "slug": "recipes/handlers",
-      "path": "recipes/handlers.md",
-      "filename": "handlers.md",
-      "breadcrumbs": [
-        "recipes",
-        "handlers"
-      ],
-      "doc_title": "recipes/handlers.md",
-      "git_commit": "995375355863532de57a880ec4789d526e0a2771",
-      "git_author": "Saibaz.Khan",
-      "git_email": "saibaz.khan@logicloop.io",
-      "git_date": "Thu Sep 18 19:18:08 2025 +0530",
-      "collection_id": "f0935ef1-c3c4-403d-b32f-2a2d52861db1",
-      "collection_name": "recipes",
-      "title": "recipes/handlers.md"
-    }
-  },
-  "recipes/additional-datasources.md": {
-    "hash": "11a02a076db439d55971ea92671ce46d8aca155961b52b4305f0a2bd1224546a",
-    "document_id": "d36c745f-995d-4089-9a5a-f1b5d0dd3df8",
-    "collection_id": "f0935ef1-c3c4-403d-b32f-2a2d52861db1",
-    "metadata": {
-      "source": "docusaurus",
-      "project": "solidx-docs",
-      "section": "recipes",
-      "slug": "recipes/additional-datasources",
-      "path": "recipes/additional-datasources.md",
-      "filename": "additional-datasources.md",
-      "breadcrumbs": [
-        "recipes",
-        "additional-datasources"
-      ],
-      "doc_title": "recipes/additional-datasources.md",
-      "git_commit": "1b74d46a9e285a53ed6fb765235525cc4d24d69e",
-      "git_author": "Harish Patel",
-      "git_email": "harish@logicloop.io",
-      "git_date": "Fri Jul 18 12:35:11 2025 +0100",
-      "collection_id": "f0935ef1-c3c4-403d-b32f-2a2d52861db1",
-      "collection_name": "recipes",
-      "title": "recipes/additional-datasources.md"
-    }
-  },
   "developer-docs/prerequisites.md": {
     "hash": "0eec621b0684692ee157eb580c9aa6a169f858dacb1819e70896da49a325d68f",
-    "document_id": "e26e278a-2037-4fe4-8ada-9a3aab12c1b7",
+    "document_id": "a8de3fbe-45aa-49d5-b6cc-89df3d7709da",
     "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
     "metadata": {
       "source": "docusaurus",
       "project": "solidx-docs",
       "section": "developer-docs",
-      "slug": "developer-docs/prerequisites",
       "path": "developer-docs/prerequisites.md",
-      "filename": "prerequisites.md",
-      "breadcrumbs": [
-        "developer-docs",
-        "prerequisites"
-      ],
       "doc_title": "developer-docs/prerequisites.md",
-      "git_commit": "8ce3873ca4bb9419d6fbab836d1fb0221400760d",
-      "git_author": "Oswald Rodrigues",
-      "git_email": "oswald@logicloop.io",
-      "git_date": "Fri Sep 26 09:02:59 2025 +0530",
       "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
       "collection_name": "developer-docs",
-      "title": "developer-docs/prerequisites.md"
+      "title": "developer-docs/prerequisites.md",
+      "chunk_count": 5,
+      "has_summaries": true
     }
   },
   "developer-docs/index.md": {
     "hash": "777ab247567e31e33bef4447dd54f3e5226bcaf554a03dcd9989b6a1121002bf",
-    "document_id": "eb11ca64-3810-4f13-aa7f-1b1556f7fac7",
+    "document_id": "ba7a9180-87a0-4c4e-8f7d-2e517bdf7654",
     "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
     "metadata": {
       "source": "docusaurus",
       "project": "solidx-docs",
       "section": "developer-docs",
-      "slug": "developer-docs/index",
       "path": "developer-docs/index.md",
-      "filename": "index.md",
-      "breadcrumbs": [
-        "developer-docs",
-        "index"
-      ],
       "doc_title": "developer-docs/index.md",
-      "git_commit": "0718b10404c0506e7d98d2de6dcb39bf1033beac",
-      "git_author": "Harish Patel",
-      "git_email": "harish@logicloop.io",
-      "git_date": "Wed Jun 4 17:20:57 2025 +0100",
       "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
       "collection_name": "developer-docs",
-      "title": "developer-docs/index.md"
+      "title": "developer-docs/index.md",
+      "chunk_count": 1,
+      "has_summaries": true
     }
   },
   "developer-docs/installation.md": {
     "hash": "3f46bf6222bdc608cf53625929f31f3512f2b7d36fe7c352f2ea4215e7872d12",
-    "document_id": "9d87c60e-2c8c-410e-82c5-a147442a3251",
+    "document_id": "7ba79185-440a-4170-a475-b4e088603da4",
     "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
     "metadata": {
       "source": "docusaurus",
       "project": "solidx-docs",
       "section": "developer-docs",
-      "slug": "developer-docs/installation",
       "path": "developer-docs/installation.md",
-      "filename": "installation.md",
-      "breadcrumbs": [
-        "developer-docs",
-        "installation"
-      ],
       "doc_title": "developer-docs/installation.md",
-      "git_commit": "af3225b072cfa8ec787598e2a5631c1218850b89",
-      "git_author": "Oswald Rodrigues",
-      "git_email": "oswald@logicloop.io",
-      "git_date": "Fri Sep 26 09:17:41 2025 +0530",
       "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
       "collection_name": "developer-docs",
-      "title": "developer-docs/installation.md"
+      "title": "developer-docs/installation.md",
+      "chunk_count": 2,
+      "has_summaries": true
     }
   },
   "developer-docs/project-structure.md": {
     "hash": "c400482456edc3a1302cdbee0f9127818ff095dbc0309ccd5411a1fd80635181",
-    "document_id": "272d0247-0e5d-41ba-8a2d-f50ef4d8bef9",
+    "document_id": "eb3693ce-8bec-4503-9b94-5a1417aa87e5",
     "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
     "metadata": {
       "source": "docusaurus",
       "project": "solidx-docs",
       "section": "developer-docs",
-      "slug": "developer-docs/project-structure",
       "path": "developer-docs/project-structure.md",
-      "filename": "project-structure.md",
-      "breadcrumbs": [
-        "developer-docs",
-        "project-structure"
-      ],
       "doc_title": "developer-docs/project-structure.md",
-      "git_commit": "8c1b470da570957a48165aa20b96c43bc0f8c257",
-      "git_author": "Oswald Rodrigues",
-      "git_email": "oswald@logicloop.io",
-      "git_date": "Fri Sep 26 09:41:06 2025 +0530",
       "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
       "collection_name": "developer-docs",
-      "title": "developer-docs/project-structure.md"
-    }
-  },
-  "tutorial/school-fees-portal/index.md": {
-    "hash": "8bd4824dcf0d4a5f30168febe9784ea86c36918e31020cd8742c81d1de953071",
-    "document_id": "e05d58de-c1de-4289-b610-d774a8fa274c",
-    "collection_id": "cd59267d-67e0-4897-91a6-1a338f5e83bf",
-    "metadata": {
-      "source": "docusaurus",
-      "project": "solidx-docs",
-      "section": "tutorial",
-      "slug": "tutorial/school-fees-portal/index",
-      "path": "tutorial/school-fees-portal/index.md",
-      "filename": "index.md",
-      "breadcrumbs": [
-        "tutorial",
-        "school-fees-portal",
-        "index"
-      ],
-      "doc_title": "tutorial/school-fees-portal/index.md",
-      "git_commit": "7104864b820cb6b4c55259d8a04226ea97704e13",
-      "git_author": "Saibaz.Khan",
-      "git_email": "saibaz.khan@logicloop.io",
-      "git_date": "Mon Aug 18 09:48:49 2025 +0530",
-      "collection_id": "cd59267d-67e0-4897-91a6-1a338f5e83bf",
-      "collection_name": "tutorial",
-      "title": "tutorial/school-fees-portal/index.md"
-    }
-  },
-  "tutorial/school-fees-portal/1-bootstrap/index.md": {
-    "hash": "ec5cfbf70f5e927cb0d79c573fa165449fe0f55fbfe52f2467c4721356469509",
-    "document_id": "adf81923-b540-4a63-b47b-91ca004fd27c",
-    "collection_id": "cd59267d-67e0-4897-91a6-1a338f5e83bf",
-    "metadata": {
-      "source": "docusaurus",
-      "project": "solidx-docs",
-      "section": "tutorial",
-      "slug": "tutorial/school-fees-portal/1-bootstrap/index",
-      "path": "tutorial/school-fees-portal/1-bootstrap/index.md",
-      "filename": "index.md",
-      "breadcrumbs": [
-        "tutorial",
-        "school-fees-portal",
-        "1-bootstrap",
-        "index"
-      ],
-      "doc_title": "tutorial/school-fees-portal/1-bootstrap/index.md",
-      "git_commit": "995375355863532de57a880ec4789d526e0a2771",
-      "git_author": "Saibaz.Khan",
-      "git_email": "saibaz.khan@logicloop.io",
-      "git_date": "Thu Sep 18 19:18:08 2025 +0530",
-      "collection_id": "cd59267d-67e0-4897-91a6-1a338f5e83bf",
-      "collection_name": "tutorial",
-      "title": "tutorial/school-fees-portal/1-bootstrap/index.md"
-    }
-  },
-  "tutorial/school-fees-portal/4-customisations/index.md": {
-    "hash": "a70d91b08f5367533a265622499a0c21d3a01fd8b68c6f955e913f5fcabe2bd3",
-    "document_id": "c9f988cb-78a9-4f68-9353-6c6714572106",
-    "collection_id": "cd59267d-67e0-4897-91a6-1a338f5e83bf",
-    "metadata": {
-      "source": "docusaurus",
-      "project": "solidx-docs",
-      "section": "tutorial",
-      "slug": "tutorial/school-fees-portal/4-customisations/index",
-      "path": "tutorial/school-fees-portal/4-customisations/index.md",
-      "filename": "index.md",
-      "breadcrumbs": [
-        "tutorial",
-        "school-fees-portal",
-        "4-customisations",
-        "index"
-      ],
-      "doc_title": "tutorial/school-fees-portal/4-customisations/index.md",
-      "git_commit": "995375355863532de57a880ec4789d526e0a2771",
-      "git_author": "Saibaz.Khan",
-      "git_email": "saibaz.khan@logicloop.io",
-      "git_date": "Thu Sep 18 19:18:08 2025 +0530",
-      "collection_id": "cd59267d-67e0-4897-91a6-1a338f5e83bf",
-      "collection_name": "tutorial",
-      "title": "tutorial/school-fees-portal/4-customisations/index.md"
-    }
-  },
-  "tutorial/school-fees-portal/2-data-model/index.md": {
-    "hash": "b38fe37a61c5775d27cb71f591dc477d8144059b9c18c36609624d7478d2b588",
-    "document_id": "9ff48a78-ea20-4109-b26d-afde30458eac",
-    "collection_id": "cd59267d-67e0-4897-91a6-1a338f5e83bf",
-    "metadata": {
-      "source": "docusaurus",
-      "project": "solidx-docs",
-      "section": "tutorial",
-      "slug": "tutorial/school-fees-portal/2-data-model/index",
-      "path": "tutorial/school-fees-portal/2-data-model/index.md",
-      "filename": "index.md",
-      "breadcrumbs": [
-        "tutorial",
-        "school-fees-portal",
-        "2-data-model",
-        "index"
-      ],
-      "doc_title": "tutorial/school-fees-portal/2-data-model/index.md",
-      "git_commit": "995375355863532de57a880ec4789d526e0a2771",
-      "git_author": "Saibaz.Khan",
-      "git_email": "saibaz.khan@logicloop.io",
-      "git_date": "Thu Sep 18 19:18:08 2025 +0530",
-      "collection_id": "cd59267d-67e0-4897-91a6-1a338f5e83bf",
-      "collection_name": "tutorial",
-      "title": "tutorial/school-fees-portal/2-data-model/index.md"
-    }
-  },
-  "tutorial/school-fees-portal/3-admin-layout/index.md": {
-    "hash": "9109819eb119faa26430b3a1064e8de8dea82c0a226dab3afb67839a159f3dc0",
-    "document_id": "df9a15b8-6fb0-4368-b851-a5ae01ad41bb",
-    "collection_id": "cd59267d-67e0-4897-91a6-1a338f5e83bf",
-    "metadata": {
-      "source": "docusaurus",
-      "project": "solidx-docs",
-      "section": "tutorial",
-      "slug": "tutorial/school-fees-portal/3-admin-layout/index",
-      "path": "tutorial/school-fees-portal/3-admin-layout/index.md",
-      "filename": "index.md",
-      "breadcrumbs": [
-        "tutorial",
-        "school-fees-portal",
-        "3-admin-layout",
-        "index"
-      ],
-      "doc_title": "tutorial/school-fees-portal/3-admin-layout/index.md",
-      "git_commit": "7a8a76348751d63252ba7cf900caeab76899c0a4",
-      "git_author": "Harish Patel",
-      "git_email": "harish@logicloop.io",
-      "git_date": "Sat Sep 27 18:28:09 2025 +0100",
-      "collection_id": "cd59267d-67e0-4897-91a6-1a338f5e83bf",
-      "collection_name": "tutorial",
-      "title": "tutorial/school-fees-portal/3-admin-layout/index.md"
-    }
-  },
-  "admin-docs/settings/index.md": {
-    "hash": "474fc676ef5992c0cb02fc86699ceae148c3bcf2f3ae75d522cd2de69ac623b9",
-    "document_id": "f21599d0-d794-4f8a-8621-8b5422f84a91",
-    "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
-    "metadata": {
-      "source": "docusaurus",
-      "project": "solidx-docs",
-      "section": "admin-docs",
-      "slug": "admin-docs/settings/index",
-      "path": "admin-docs/settings/index.md",
-      "filename": "index.md",
-      "breadcrumbs": [
-        "admin-docs",
-        "settings",
-        "index"
-      ],
-      "doc_title": "admin-docs/settings/index.md",
-      "git_commit": "995375355863532de57a880ec4789d526e0a2771",
-      "git_author": "Saibaz.Khan",
-      "git_email": "saibaz.khan@logicloop.io",
-      "git_date": "Thu Sep 18 19:18:08 2025 +0530",
-      "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
-      "collection_name": "admin-docs",
-      "title": "admin-docs/settings/index.md"
-    }
-  },
-  "admin-docs/module-builder/module-management.md": {
-    "hash": "73c708b5afd71174b3d8ef47d728839af7b92d2f2a14822e0c75d82a7bd158f3",
-    "document_id": "86bbd7e6-f9d7-42cd-975b-328309db9296",
-    "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
-    "metadata": {
-      "source": "docusaurus",
-      "project": "solidx-docs",
-      "section": "admin-docs",
-      "slug": "admin-docs/module-builder/module-management",
-      "path": "admin-docs/module-builder/module-management.md",
-      "filename": "module-management.md",
-      "breadcrumbs": [
-        "admin-docs",
-        "module-builder",
-        "module-management"
-      ],
-      "doc_title": "admin-docs/module-builder/module-management.md",
-      "git_commit": "995375355863532de57a880ec4789d526e0a2771",
-      "git_author": "Saibaz.Khan",
-      "git_email": "saibaz.khan@logicloop.io",
-      "git_date": "Thu Sep 18 19:18:08 2025 +0530",
-      "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
-      "collection_name": "admin-docs",
-      "title": "admin-docs/module-builder/module-management.md"
-    }
-  },
-  "admin-docs/module-builder/model-management.md": {
-    "hash": "bc17091da05712f138c0974d8fd2dc81b628a20e55c167413c79562990510aac",
-    "document_id": "584418a3-9c6b-41ae-80be-728561b030e1",
-    "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
-    "metadata": {
-      "source": "docusaurus",
-      "project": "solidx-docs",
-      "section": "admin-docs",
-      "slug": "admin-docs/module-builder/model-management",
-      "path": "admin-docs/module-builder/model-management.md",
-      "filename": "model-management.md",
-      "breadcrumbs": [
-        "admin-docs",
-        "module-builder",
-        "model-management"
-      ],
-      "doc_title": "admin-docs/module-builder/model-management.md",
-      "git_commit": "a4b4fb11462d286475654414ea886356980c5dd9",
-      "git_author": "Saibaz.Khan",
-      "git_email": "saibaz.khan@logicloop.io",
-      "git_date": "Sat Sep 20 11:35:51 2025 +0530",
-      "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
-      "collection_name": "admin-docs",
-      "title": "admin-docs/module-builder/model-management.md"
-    }
-  },
-  "admin-docs/module-builder/field-management.md": {
-    "hash": "769d917b0188261efb3330e62667076b5bb0fed8529a825bf64311f87b36bba8",
-    "document_id": "f38d3a70-5934-4cb8-a4eb-57cd055196ac",
-    "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
-    "metadata": {
-      "source": "docusaurus",
-      "project": "solidx-docs",
-      "section": "admin-docs",
-      "slug": "admin-docs/module-builder/field-management",
-      "path": "admin-docs/module-builder/field-management.md",
-      "filename": "field-management.md",
-      "breadcrumbs": [
-        "admin-docs",
-        "module-builder",
-        "field-management"
-      ],
-      "doc_title": "admin-docs/module-builder/field-management.md",
-      "git_commit": "8f8e1de7753ac5980a39857a0a36a7efd0ee0bd2",
-      "git_author": "Saibaz.Khan",
-      "git_email": "saibaz.khan@logicloop.io",
-      "git_date": "Fri Sep 19 11:26:47 2025 +0530",
-      "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
-      "collection_name": "admin-docs",
-      "title": "admin-docs/module-builder/field-management.md"
-    }
-  },
-  "admin-docs/module-builder/index.md": {
-    "hash": "a2332fd851dc01c2e26ccbc3dcb4f7b76d3085ead5f5da4bbb65b2b7991d6372",
-    "document_id": "e645f6fe-63f6-49fc-b129-c3bb10f3b53a",
-    "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
-    "metadata": {
-      "source": "docusaurus",
-      "project": "solidx-docs",
-      "section": "admin-docs",
-      "slug": "admin-docs/module-builder/index",
-      "path": "admin-docs/module-builder/index.md",
-      "filename": "index.md",
-      "breadcrumbs": [
-        "admin-docs",
-        "module-builder",
-        "index"
-      ],
-      "doc_title": "admin-docs/module-builder/index.md",
-      "git_commit": "995375355863532de57a880ec4789d526e0a2771",
-      "git_author": "Saibaz.Khan",
-      "git_email": "saibaz.khan@logicloop.io",
-      "git_date": "Thu Sep 18 19:18:08 2025 +0530",
-      "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
-      "collection_name": "admin-docs",
-      "title": "admin-docs/module-builder/index.md"
-    }
-  },
-  "admin-docs/iam/permissions.md": {
-    "hash": "71c86a875ff1dbb7a7b944c2bf943abd8665a56c91462ffd922d1cfcbc695780",
-    "document_id": "dfb924a7-58dd-4c39-b3ca-f85ccab8f3f7",
-    "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
-    "metadata": {
-      "source": "docusaurus",
-      "project": "solidx-docs",
-      "section": "admin-docs",
-      "slug": "admin-docs/iam/permissions",
-      "path": "admin-docs/iam/permissions.md",
-      "filename": "permissions.md",
-      "breadcrumbs": [
-        "admin-docs",
-        "iam",
-        "permissions"
-      ],
-      "doc_title": "admin-docs/iam/permissions.md",
-      "git_commit": "995375355863532de57a880ec4789d526e0a2771",
-      "git_author": "Saibaz.Khan",
-      "git_email": "saibaz.khan@logicloop.io",
-      "git_date": "Thu Sep 18 19:18:08 2025 +0530",
-      "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
-      "collection_name": "admin-docs",
-      "title": "admin-docs/iam/permissions.md"
-    }
-  },
-  "admin-docs/iam/record-rules.md": {
-    "hash": "f90dbdc9344af80d57fb1a3ec6b589d9f1aa0d83847e1c46367fa098a75b76bc",
-    "document_id": "31d00c04-70b1-4bb0-a1d0-2fd7476b5b76",
-    "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
-    "metadata": {
-      "source": "docusaurus",
-      "project": "solidx-docs",
-      "section": "admin-docs",
-      "slug": "admin-docs/iam/record-rules",
-      "path": "admin-docs/iam/record-rules.md",
-      "filename": "record-rules.md",
-      "breadcrumbs": [
-        "admin-docs",
-        "iam",
-        "record-rules"
-      ],
-      "doc_title": "admin-docs/iam/record-rules.md",
-      "git_commit": "995375355863532de57a880ec4789d526e0a2771",
-      "git_author": "Saibaz.Khan",
-      "git_email": "saibaz.khan@logicloop.io",
-      "git_date": "Thu Sep 18 19:18:08 2025 +0530",
-      "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
-      "collection_name": "admin-docs",
-      "title": "admin-docs/iam/record-rules.md"
-    }
-  },
-  "admin-docs/iam/roles.md": {
-    "hash": "b9ce1f5981e758c46f81280f4b69790f38be3602cd03ba87e532e1f44d09300e",
-    "document_id": "f150d395-4ac7-4372-8df3-04c5ca01b8f1",
-    "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
-    "metadata": {
-      "source": "docusaurus",
-      "project": "solidx-docs",
-      "section": "admin-docs",
-      "slug": "admin-docs/iam/roles",
-      "path": "admin-docs/iam/roles.md",
-      "filename": "roles.md",
-      "breadcrumbs": [
-        "admin-docs",
-        "iam",
-        "roles"
-      ],
-      "doc_title": "admin-docs/iam/roles.md",
-      "git_commit": "995375355863532de57a880ec4789d526e0a2771",
-      "git_author": "Saibaz.Khan",
-      "git_email": "saibaz.khan@logicloop.io",
-      "git_date": "Thu Sep 18 19:18:08 2025 +0530",
-      "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
-      "collection_name": "admin-docs",
-      "title": "admin-docs/iam/roles.md"
-    }
-  },
-  "admin-docs/iam/users.md": {
-    "hash": "efa3e00fc33126f7bf10f74290dc0e81e971bac8480d1bd2cea033caf663ea7a",
-    "document_id": "44576090-cafe-4cbd-8651-3e6614189558",
-    "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
-    "metadata": {
-      "source": "docusaurus",
-      "project": "solidx-docs",
-      "section": "admin-docs",
-      "slug": "admin-docs/iam/users",
-      "path": "admin-docs/iam/users.md",
-      "filename": "users.md",
-      "breadcrumbs": [
-        "admin-docs",
-        "iam",
-        "users"
-      ],
-      "doc_title": "admin-docs/iam/users.md",
-      "git_commit": "995375355863532de57a880ec4789d526e0a2771",
-      "git_author": "Saibaz.Khan",
-      "git_email": "saibaz.khan@logicloop.io",
-      "git_date": "Thu Sep 18 19:18:08 2025 +0530",
-      "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
-      "collection_name": "admin-docs",
-      "title": "admin-docs/iam/users.md"
-    }
-  },
-  "admin-docs/iam/index.md": {
-    "hash": "2286b63cecfc374fa30a35492eeb5fe0ebd52f59906bf92f545292d9c6f60f43",
-    "document_id": "94452de0-51c3-43a1-9b54-4fa5d1c48910",
-    "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
-    "metadata": {
-      "source": "docusaurus",
-      "project": "solidx-docs",
-      "section": "admin-docs",
-      "slug": "admin-docs/iam/index",
-      "path": "admin-docs/iam/index.md",
-      "filename": "index.md",
-      "breadcrumbs": [
-        "admin-docs",
-        "iam",
-        "index"
-      ],
-      "doc_title": "admin-docs/iam/index.md",
-      "git_commit": "995375355863532de57a880ec4789d526e0a2771",
-      "git_author": "Saibaz.Khan",
-      "git_email": "saibaz.khan@logicloop.io",
-      "git_date": "Thu Sep 18 19:18:08 2025 +0530",
-      "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
-      "collection_name": "admin-docs",
-      "title": "admin-docs/iam/index.md"
-    }
-  },
-  "admin-docs/layouts/form-view.md": {
-    "hash": "af4d1c87974e970ce6ae14ab1a1bc1f578880606da5a7858648521fb3540be6d",
-    "document_id": "b01ad760-3889-49ee-bb10-c7d5933a9922",
-    "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
-    "metadata": {
-      "source": "docusaurus",
-      "project": "solidx-docs",
-      "section": "admin-docs",
-      "slug": "admin-docs/layouts/form-view",
-      "path": "admin-docs/layouts/form-view.md",
-      "filename": "form-view.md",
-      "breadcrumbs": [
-        "admin-docs",
-        "layouts",
-        "form-view"
-      ],
-      "doc_title": "admin-docs/layouts/form-view.md",
-      "git_commit": "995375355863532de57a880ec4789d526e0a2771",
-      "git_author": "Saibaz.Khan",
-      "git_email": "saibaz.khan@logicloop.io",
-      "git_date": "Thu Sep 18 19:18:08 2025 +0530",
-      "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
-      "collection_name": "admin-docs",
-      "title": "admin-docs/layouts/form-view.md"
-    }
-  },
-  "admin-docs/layouts/index.md": {
-    "hash": "bff718c804501412a60de28ea24c108161ddaadab2634c0b867a004ff4010dfd",
-    "document_id": "ba309e7a-2669-4a50-9e34-92cc5aa4ab9b",
-    "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
-    "metadata": {
-      "source": "docusaurus",
-      "project": "solidx-docs",
-      "section": "admin-docs",
-      "slug": "admin-docs/layouts/index",
-      "path": "admin-docs/layouts/index.md",
-      "filename": "index.md",
-      "breadcrumbs": [
-        "admin-docs",
-        "layouts",
-        "index"
-      ],
-      "doc_title": "admin-docs/layouts/index.md",
-      "git_commit": "8f8e1de7753ac5980a39857a0a36a7efd0ee0bd2",
-      "git_author": "Saibaz.Khan",
-      "git_email": "saibaz.khan@logicloop.io",
-      "git_date": "Fri Sep 19 11:26:47 2025 +0530",
-      "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
-      "collection_name": "admin-docs",
-      "title": "admin-docs/layouts/index.md"
-    }
-  },
-  "admin-docs/layouts/kanban-view.md": {
-    "hash": "20bb01e5d091657fff9b3215e0bbcec776bc9dd469e3117730338e692780216e",
-    "document_id": "848c17a2-0f99-41bb-9cb4-a98a19521fcb",
-    "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
-    "metadata": {
-      "source": "docusaurus",
-      "project": "solidx-docs",
-      "section": "admin-docs",
-      "slug": "admin-docs/layouts/kanban-view",
-      "path": "admin-docs/layouts/kanban-view.md",
-      "filename": "kanban-view.md",
-      "breadcrumbs": [
-        "admin-docs",
-        "layouts",
-        "kanban-view"
-      ],
-      "doc_title": "admin-docs/layouts/kanban-view.md",
-      "git_commit": "8f8e1de7753ac5980a39857a0a36a7efd0ee0bd2",
-      "git_author": "Saibaz.Khan",
-      "git_email": "saibaz.khan@logicloop.io",
-      "git_date": "Fri Sep 19 11:26:47 2025 +0530",
-      "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
-      "collection_name": "admin-docs",
-      "title": "admin-docs/layouts/kanban-view.md"
-    }
-  },
-  "admin-docs/layouts/list-view.md": {
-    "hash": "a1b7ddb02a52b9958febf7e2d95c827d349adeb8310f03f0742d5e4fa38c9cda",
-    "document_id": "9bda84cb-305c-4af3-9ac9-800f23bbbfd2",
-    "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
-    "metadata": {
-      "source": "docusaurus",
-      "project": "solidx-docs",
-      "section": "admin-docs",
-      "slug": "admin-docs/layouts/list-view",
-      "path": "admin-docs/layouts/list-view.md",
-      "filename": "list-view.md",
-      "breadcrumbs": [
-        "admin-docs",
-        "layouts",
-        "list-view"
-      ],
-      "doc_title": "admin-docs/layouts/list-view.md",
-      "git_commit": "995375355863532de57a880ec4789d526e0a2771",
-      "git_author": "Saibaz.Khan",
-      "git_email": "saibaz.khan@logicloop.io",
-      "git_date": "Thu Sep 18 19:18:08 2025 +0530",
-      "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
-      "collection_name": "admin-docs",
-      "title": "admin-docs/layouts/list-view.md"
-    }
-  },
-  "admin-docs/media-library/index.md": {
-    "hash": "2b4869fd5d2ba76ef746965d9469dad991095dfb21d0a540484c60ab53209f63",
-    "document_id": "daa544bb-7598-47c6-8f14-ede4dc0d2706",
-    "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
-    "metadata": {
-      "source": "docusaurus",
-      "project": "solidx-docs",
-      "section": "admin-docs",
-      "slug": "admin-docs/media-library/index",
-      "path": "admin-docs/media-library/index.md",
-      "filename": "index.md",
-      "breadcrumbs": [
-        "admin-docs",
-        "media-library",
-        "index"
-      ],
-      "doc_title": "admin-docs/media-library/index.md",
-      "git_commit": "995375355863532de57a880ec4789d526e0a2771",
-      "git_author": "Saibaz.Khan",
-      "git_email": "saibaz.khan@logicloop.io",
-      "git_date": "Thu Sep 18 19:18:08 2025 +0530",
-      "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
-      "collection_name": "admin-docs",
-      "title": "admin-docs/media-library/index.md"
-    }
-  },
-  "admin-docs/media-library/storage-providers.md": {
-    "hash": "b10bcabd9257c984462771e61ff2a7fd68a51cd5378caf7ba0e2755a6a39c5ea",
-    "document_id": "2285691a-a3eb-4518-b1fa-5a4a7fc271f2",
-    "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
-    "metadata": {
-      "source": "docusaurus",
-      "project": "solidx-docs",
-      "section": "admin-docs",
-      "slug": "admin-docs/media-library/storage-providers",
-      "path": "admin-docs/media-library/storage-providers.md",
-      "filename": "storage-providers.md",
-      "breadcrumbs": [
-        "admin-docs",
-        "media-library",
-        "storage-providers"
-      ],
-      "doc_title": "admin-docs/media-library/storage-providers.md",
-      "git_commit": "2fc3d07a5a5d0653b04cf447d0cc3dc6d1327696",
-      "git_author": "Saibaz.Khan",
-      "git_email": "saibaz.khan@logicloop.io",
-      "git_date": "Sat Sep 20 12:31:25 2025 +0530",
-      "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
-      "collection_name": "admin-docs",
-      "title": "admin-docs/media-library/storage-providers.md"
-    }
-  },
-  "admin-docs/media-library/media-view.md": {
-    "hash": "6d454f4f8447ebb1d2d0993bdd076c5e80c3cf201fd56db64307cf75939936b4",
-    "document_id": "d71bb7ee-0c73-490f-8df4-a1d5f98f1766",
-    "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
-    "metadata": {
-      "source": "docusaurus",
-      "project": "solidx-docs",
-      "section": "admin-docs",
-      "slug": "admin-docs/media-library/media-view",
-      "path": "admin-docs/media-library/media-view.md",
-      "filename": "media-view.md",
-      "breadcrumbs": [
-        "admin-docs",
-        "media-library",
-        "media-view"
-      ],
-      "doc_title": "admin-docs/media-library/media-view.md",
-      "git_commit": "995375355863532de57a880ec4789d526e0a2771",
-      "git_author": "Saibaz.Khan",
-      "git_email": "saibaz.khan@logicloop.io",
-      "git_date": "Thu Sep 18 19:18:08 2025 +0530",
-      "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
-      "collection_name": "admin-docs",
-      "title": "admin-docs/media-library/media-view.md"
-    }
-  },
-  "admin-docs/modules/form-view.md": {
-    "hash": "cbd18a9b56b8884c32f2ce526478d1c237aa2c44f386b4c1890952f8b2db6d50",
-    "document_id": "b035aa61-7b7e-469b-93a9-edcf41819553",
-    "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
-    "metadata": {
-      "source": "docusaurus",
-      "project": "solidx-docs",
-      "section": "admin-docs",
-      "slug": "admin-docs/modules/form-view",
-      "path": "admin-docs/modules/form-view.md",
-      "filename": "form-view.md",
-      "breadcrumbs": [
-        "admin-docs",
-        "modules",
-        "form-view"
-      ],
-      "doc_title": "admin-docs/modules/form-view.md",
-      "git_commit": "45f72a29af6beb3c184a0d99a78f19660ec1a9df",
-      "git_author": "Harish Patel",
-      "git_email": "harish@logicloop.io",
-      "git_date": "Sat May 31 17:34:50 2025 +0100",
-      "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
-      "collection_name": "admin-docs",
-      "title": "admin-docs/modules/form-view.md"
-    }
-  },
-  "admin-docs/modules/menu-structure.md": {
-    "hash": "61947d0f2e4e9cfc19332cde6029ba13f5fb46768a640689f3783decafce2db7",
-    "document_id": "36af467a-5a18-45dc-9fd2-a5152b4a01a9",
-    "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
-    "metadata": {
-      "source": "docusaurus",
-      "project": "solidx-docs",
-      "section": "admin-docs",
-      "slug": "admin-docs/modules/menu-structure",
-      "path": "admin-docs/modules/menu-structure.md",
-      "filename": "menu-structure.md",
-      "breadcrumbs": [
-        "admin-docs",
-        "modules",
-        "menu-structure"
-      ],
-      "doc_title": "admin-docs/modules/menu-structure.md",
-      "git_commit": "995375355863532de57a880ec4789d526e0a2771",
-      "git_author": "Saibaz.Khan",
-      "git_email": "saibaz.khan@logicloop.io",
-      "git_date": "Thu Sep 18 19:18:08 2025 +0530",
-      "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
-      "collection_name": "admin-docs",
-      "title": "admin-docs/modules/menu-structure.md"
-    }
-  },
-  "admin-docs/modules/index.md": {
-    "hash": "1dc12518c0896b75954fa0aec4eccaa848ddf31c5876cf4a6f98784414bb4054",
-    "document_id": "6d1021ab-b943-4d55-a8ac-938f2a2fdb4d",
-    "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
-    "metadata": {
-      "source": "docusaurus",
-      "project": "solidx-docs",
-      "section": "admin-docs",
-      "slug": "admin-docs/modules/index",
-      "path": "admin-docs/modules/index.md",
-      "filename": "index.md",
-      "breadcrumbs": [
-        "admin-docs",
-        "modules",
-        "index"
-      ],
-      "doc_title": "admin-docs/modules/index.md",
-      "git_commit": "995375355863532de57a880ec4789d526e0a2771",
-      "git_author": "Saibaz.Khan",
-      "git_email": "saibaz.khan@logicloop.io",
-      "git_date": "Thu Sep 18 19:18:08 2025 +0530",
-      "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
-      "collection_name": "admin-docs",
-      "title": "admin-docs/modules/index.md"
-    }
-  },
-  "admin-docs/modules/kanban-view.md": {
-    "hash": "a716a690d30466a787a7f2b4b77af8535a4d54f92cb18a4405e286d65b3bafb4",
-    "document_id": "8c764b18-ea96-44a2-9191-d60f57cc2273",
-    "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
-    "metadata": {
-      "source": "docusaurus",
-      "project": "solidx-docs",
-      "section": "admin-docs",
-      "slug": "admin-docs/modules/kanban-view",
-      "path": "admin-docs/modules/kanban-view.md",
-      "filename": "kanban-view.md",
-      "breadcrumbs": [
-        "admin-docs",
-        "modules",
-        "kanban-view"
-      ],
-      "doc_title": "admin-docs/modules/kanban-view.md",
-      "git_commit": "995375355863532de57a880ec4789d526e0a2771",
-      "git_author": "Saibaz.Khan",
-      "git_email": "saibaz.khan@logicloop.io",
-      "git_date": "Thu Sep 18 19:18:08 2025 +0530",
-      "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
-      "collection_name": "admin-docs",
-      "title": "admin-docs/modules/kanban-view.md"
-    }
-  },
-  "admin-docs/modules/list-view.md": {
-    "hash": "97fe8b2fbef28b503b58812fe66437d5973ca90c4b221f77d10d14e90b39b436",
-    "document_id": "ed0b4f6f-7707-4a4f-a036-38c7d4bccf75",
-    "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
-    "metadata": {
-      "source": "docusaurus",
-      "project": "solidx-docs",
-      "section": "admin-docs",
-      "slug": "admin-docs/modules/list-view",
-      "path": "admin-docs/modules/list-view.md",
-      "filename": "list-view.md",
-      "breadcrumbs": [
-        "admin-docs",
-        "modules",
-        "list-view"
-      ],
-      "doc_title": "admin-docs/modules/list-view.md",
-      "git_commit": "995375355863532de57a880ec4789d526e0a2771",
-      "git_author": "Saibaz.Khan",
-      "git_email": "saibaz.khan@logicloop.io",
-      "git_date": "Thu Sep 18 19:18:08 2025 +0530",
-      "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
-      "collection_name": "admin-docs",
-      "title": "admin-docs/modules/list-view.md"
-    }
-  },
-  "admin-docs/notifications/sms-templates.md": {
-    "hash": "fa3e0b20398ea5ee8121d716cb7562fd1ac9e81e2992c45ed298e176674f1815",
-    "document_id": "75de0139-493f-4727-8d2e-d80bdecb60ee",
-    "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
-    "metadata": {
-      "source": "docusaurus",
-      "project": "solidx-docs",
-      "section": "admin-docs",
-      "slug": "admin-docs/notifications/sms-templates",
-      "path": "admin-docs/notifications/sms-templates.md",
-      "filename": "sms-templates.md",
-      "breadcrumbs": [
-        "admin-docs",
-        "notifications",
-        "sms-templates"
-      ],
-      "doc_title": "admin-docs/notifications/sms-templates.md",
-      "git_commit": "2fc3d07a5a5d0653b04cf447d0cc3dc6d1327696",
-      "git_author": "Saibaz.Khan",
-      "git_email": "saibaz.khan@logicloop.io",
-      "git_date": "Sat Sep 20 12:31:25 2025 +0530",
-      "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
-      "collection_name": "admin-docs",
-      "title": "admin-docs/notifications/sms-templates.md"
-    }
-  },
-  "admin-docs/notifications/index.md": {
-    "hash": "c4c4aaa53e869dcad6ca0b1266cc0633738e9d53c1b4c0c03519c0e8c20b1e81",
-    "document_id": "84807f9a-6f58-4f88-bd92-eef9a00d7fa6",
-    "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
-    "metadata": {
-      "source": "docusaurus",
-      "project": "solidx-docs",
-      "section": "admin-docs",
-      "slug": "admin-docs/notifications/index",
-      "path": "admin-docs/notifications/index.md",
-      "filename": "index.md",
-      "breadcrumbs": [
-        "admin-docs",
-        "notifications",
-        "index"
-      ],
-      "doc_title": "admin-docs/notifications/index.md",
-      "git_commit": "995375355863532de57a880ec4789d526e0a2771",
-      "git_author": "Saibaz.Khan",
-      "git_email": "saibaz.khan@logicloop.io",
-      "git_date": "Thu Sep 18 19:18:08 2025 +0530",
-      "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
-      "collection_name": "admin-docs",
-      "title": "admin-docs/notifications/index.md"
-    }
-  },
-  "admin-docs/notifications/email-templates.md": {
-    "hash": "3695f51366c5c990f738918f11d014f7f5aabb921ee57265de5b51135f8642c4",
-    "document_id": "560f7521-cfa0-42bc-b216-28afc7d81ac3",
-    "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
-    "metadata": {
-      "source": "docusaurus",
-      "project": "solidx-docs",
-      "section": "admin-docs",
-      "slug": "admin-docs/notifications/email-templates",
-      "path": "admin-docs/notifications/email-templates.md",
-      "filename": "email-templates.md",
-      "breadcrumbs": [
-        "admin-docs",
-        "notifications",
-        "email-templates"
-      ],
-      "doc_title": "admin-docs/notifications/email-templates.md",
-      "git_commit": "2fc3d07a5a5d0653b04cf447d0cc3dc6d1327696",
-      "git_author": "Saibaz.Khan",
-      "git_email": "saibaz.khan@logicloop.io",
-      "git_date": "Sat Sep 20 12:31:25 2025 +0530",
-      "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
-      "collection_name": "admin-docs",
-      "title": "admin-docs/notifications/email-templates.md"
+      "title": "developer-docs/project-structure.md",
+      "chunk_count": 4,
+      "has_summaries": true
     }
   },
   "developer-docs/metadata_schema/action-metadata.md": {
     "hash": "d6600880bd2b77cdece32c3a9a411f43baedc33e5e657fb641c8e5a659fe6af0",
-    "document_id": "238cdbb5-43a5-4a93-8402-f1a73eccb611",
+    "document_id": "e63cbb16-5c75-45c4-a75a-c9fd3bfe33c0",
     "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
     "metadata": {
       "source": "docusaurus",
       "project": "solidx-docs",
       "section": "developer-docs",
-      "slug": "developer-docs/metadata_schema/action-metadata",
       "path": "developer-docs/metadata_schema/action-metadata.md",
-      "filename": "action-metadata.md",
-      "breadcrumbs": [
-        "developer-docs",
-        "metadata_schema",
-        "action-metadata"
-      ],
       "doc_title": "developer-docs/metadata_schema/action-metadata.md",
-      "git_commit": "fedc074afa5f79a8765ba8349bd9db7b6ba02705",
-      "git_author": "Oswald Rodrigues",
-      "git_email": "oswald@logicloop.io",
-      "git_date": "Mon Sep 29 11:12:46 2025 +0530",
       "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
       "collection_name": "developer-docs",
-      "title": "developer-docs/metadata_schema/action-metadata.md"
+      "title": "developer-docs/metadata_schema/action-metadata.md",
+      "chunk_count": 2,
+      "has_summaries": true
     }
   },
   "developer-docs/metadata_schema/menu-item-metadata.md": {
     "hash": "9a52fdc7c116e0dbb41779bbbccd99d253bea37ae80ae3c379ff3e4d6e9a6c5b",
-    "document_id": "8537d8e8-15a0-4813-a872-e2783e5b7c37",
+    "document_id": "e3406de0-60c6-4514-b167-8be87c5bade5",
     "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
     "metadata": {
       "source": "docusaurus",
       "project": "solidx-docs",
       "section": "developer-docs",
-      "slug": "developer-docs/metadata_schema/menu-item-metadata",
       "path": "developer-docs/metadata_schema/menu-item-metadata.md",
-      "filename": "menu-item-metadata.md",
-      "breadcrumbs": [
-        "developer-docs",
-        "metadata_schema",
-        "menu-item-metadata"
-      ],
       "doc_title": "developer-docs/metadata_schema/menu-item-metadata.md",
-      "git_commit": "6cbdd879fbc3007e016cb0a7262c6480cb845a88",
-      "git_author": "Oswald Rodrigues",
-      "git_email": "oswald@logicloop.io",
-      "git_date": "Mon Sep 29 17:56:34 2025 +0530",
       "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
       "collection_name": "developer-docs",
-      "title": "developer-docs/metadata_schema/menu-item-metadata.md"
+      "title": "developer-docs/metadata_schema/menu-item-metadata.md",
+      "chunk_count": 2,
+      "has_summaries": true
     }
   },
   "developer-docs/metadata_schema/view-metadata.md": {
     "hash": "4ba75e9be0806cf4295c941c3469c7abfef01b01b233cc0be377f3d7fd70d500",
-    "document_id": "9dd7582b-8389-460b-9656-958383a5dd7e",
+    "document_id": "badf44df-c2c2-4b0d-8f94-ad2ea4891264",
     "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
     "metadata": {
       "source": "docusaurus",
       "project": "solidx-docs",
       "section": "developer-docs",
-      "slug": "developer-docs/metadata_schema/view-metadata",
       "path": "developer-docs/metadata_schema/view-metadata.md",
-      "filename": "view-metadata.md",
-      "breadcrumbs": [
-        "developer-docs",
-        "metadata_schema",
-        "view-metadata"
-      ],
       "doc_title": "developer-docs/metadata_schema/view-metadata.md",
-      "git_commit": "e4474e969aca6755a23b263c74c09501b6c54b71",
-      "git_author": "Oswald Rodrigues",
-      "git_email": "oswald@logicloop.io",
-      "git_date": "Mon Sep 29 17:26:43 2025 +0530",
       "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
       "collection_name": "developer-docs",
-      "title": "developer-docs/metadata_schema/view-metadata.md"
+      "title": "developer-docs/metadata_schema/view-metadata.md",
+      "chunk_count": 5,
+      "has_summaries": true
     }
   },
   "developer-docs/metadata_schema/roles-permissions-metadata.md": {
     "hash": "2857d0174ea4f22d4e554c34a46f54771bedf44176dd2ba041c0cd624655d0f2",
-    "document_id": "5ef389b8-beea-458f-a07f-a0f903ae4829",
+    "document_id": "ac70570f-269f-4eb1-a206-ee9dba9b5667",
     "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
     "metadata": {
       "source": "docusaurus",
       "project": "solidx-docs",
       "section": "developer-docs",
-      "slug": "developer-docs/metadata_schema/roles-permissions-metadata",
       "path": "developer-docs/metadata_schema/roles-permissions-metadata.md",
-      "filename": "roles-permissions-metadata.md",
-      "breadcrumbs": [
-        "developer-docs",
-        "metadata_schema",
-        "roles-permissions-metadata"
-      ],
       "doc_title": "developer-docs/metadata_schema/roles-permissions-metadata.md",
-      "git_commit": "fedc074afa5f79a8765ba8349bd9db7b6ba02705",
-      "git_author": "Oswald Rodrigues",
-      "git_email": "oswald@logicloop.io",
-      "git_date": "Mon Sep 29 11:12:46 2025 +0530",
       "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
       "collection_name": "developer-docs",
-      "title": "developer-docs/metadata_schema/roles-permissions-metadata.md"
+      "title": "developer-docs/metadata_schema/roles-permissions-metadata.md",
+      "chunk_count": 2,
+      "has_summaries": true
     }
   },
   "developer-docs/metadata_schema/security-rules.md": {
     "hash": "360a557039b6abb0bbe75e38ab79abac480990c227c45f1329b984361dd8c3ae",
-    "document_id": "fcb2daa1-d9ac-4d39-8abe-701208547a79",
+    "document_id": "f4c5e104-8efc-40ae-93b6-08d387fb932d",
     "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
     "metadata": {
       "source": "docusaurus",
       "project": "solidx-docs",
       "section": "developer-docs",
-      "slug": "developer-docs/metadata_schema/security-rules",
       "path": "developer-docs/metadata_schema/security-rules.md",
-      "filename": "security-rules.md",
-      "breadcrumbs": [
-        "developer-docs",
-        "metadata_schema",
-        "security-rules"
-      ],
       "doc_title": "developer-docs/metadata_schema/security-rules.md",
-      "git_commit": "fedc074afa5f79a8765ba8349bd9db7b6ba02705",
-      "git_author": "Oswald Rodrigues",
-      "git_email": "oswald@logicloop.io",
-      "git_date": "Mon Sep 29 11:12:46 2025 +0530",
       "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
       "collection_name": "developer-docs",
-      "title": "developer-docs/metadata_schema/security-rules.md"
+      "title": "developer-docs/metadata_schema/security-rules.md",
+      "chunk_count": 3,
+      "has_summaries": true
     }
   },
   "developer-docs/metadata_schema/scheduled-jobs.md": {
     "hash": "f72412598d3fab5cf0c46021b95f1f589bcf34d9a318fd322becef3381b064dd",
-    "document_id": "777c5818-70eb-4170-88a1-9321b9618a6e",
+    "document_id": "c8d47bff-24ed-4157-af40-758e0541918f",
     "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
     "metadata": {
       "source": "docusaurus",
       "project": "solidx-docs",
       "section": "developer-docs",
-      "slug": "developer-docs/metadata_schema/scheduled-jobs",
       "path": "developer-docs/metadata_schema/scheduled-jobs.md",
-      "filename": "scheduled-jobs.md",
-      "breadcrumbs": [
-        "developer-docs",
-        "metadata_schema",
-        "scheduled-jobs"
-      ],
       "doc_title": "developer-docs/metadata_schema/scheduled-jobs.md",
-      "git_commit": "fedc074afa5f79a8765ba8349bd9db7b6ba02705",
-      "git_author": "Oswald Rodrigues",
-      "git_email": "oswald@logicloop.io",
-      "git_date": "Mon Sep 29 11:12:46 2025 +0530",
       "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
       "collection_name": "developer-docs",
-      "title": "developer-docs/metadata_schema/scheduled-jobs.md"
+      "title": "developer-docs/metadata_schema/scheduled-jobs.md",
+      "chunk_count": 3,
+      "has_summaries": true
     }
   },
   "developer-docs/metadata_schema/sms-templates.md": {
-    "hash": "4a617eeec61a2ffa30abb05cc761e8b3899091f92eed587a3b3ce6e57445ded0",
-    "document_id": "b2aaf089-79f0-4d1d-88be-2b545710c8a7",
+    "hash": "c18269112e0e3fd3483e8100f3d3257cd41801e27d15dd02b1952596ea3d75c3",
+    "document_id": "618d376e-ab6a-4219-be36-d884c72edcf4",
     "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
     "metadata": {
       "source": "docusaurus",
       "project": "solidx-docs",
       "section": "developer-docs",
-      "slug": "developer-docs/metadata_schema/sms-templates",
       "path": "developer-docs/metadata_schema/sms-templates.md",
-      "filename": "sms-templates.md",
-      "breadcrumbs": [
-        "developer-docs",
-        "metadata_schema",
-        "sms-templates"
-      ],
       "doc_title": "developer-docs/metadata_schema/sms-templates.md",
-      "git_commit": "fedc074afa5f79a8765ba8349bd9db7b6ba02705",
-      "git_author": "Oswald Rodrigues",
-      "git_email": "oswald@logicloop.io",
-      "git_date": "Mon Sep 29 11:12:46 2025 +0530",
       "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
       "collection_name": "developer-docs",
-      "title": "developer-docs/metadata_schema/sms-templates.md"
+      "title": "developer-docs/metadata_schema/sms-templates.md",
+      "chunk_count": 2,
+      "has_summaries": true
     }
   },
   "developer-docs/metadata_schema/media-storage-providers.md": {
     "hash": "449eaf9e0c870d9ce2495293ea7fd551ac45b54a82b3d7d847355feacca243ac",
-    "document_id": "f486eb15-9b8c-4586-9f54-4fc29626f800",
+    "document_id": "3b8bd62a-78a4-4264-a351-1e307fbb204b",
     "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
     "metadata": {
       "source": "docusaurus",
       "project": "solidx-docs",
       "section": "developer-docs",
-      "slug": "developer-docs/metadata_schema/media-storage-providers",
       "path": "developer-docs/metadata_schema/media-storage-providers.md",
-      "filename": "media-storage-providers.md",
-      "breadcrumbs": [
-        "developer-docs",
-        "metadata_schema",
-        "media-storage-providers"
-      ],
       "doc_title": "developer-docs/metadata_schema/media-storage-providers.md",
-      "git_commit": "fedc074afa5f79a8765ba8349bd9db7b6ba02705",
-      "git_author": "Oswald Rodrigues",
-      "git_email": "oswald@logicloop.io",
-      "git_date": "Mon Sep 29 11:12:46 2025 +0530",
       "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
       "collection_name": "developer-docs",
-      "title": "developer-docs/metadata_schema/media-storage-providers.md"
+      "title": "developer-docs/metadata_schema/media-storage-providers.md",
+      "chunk_count": 3,
+      "has_summaries": true
     }
   },
   "developer-docs/metadata_schema/users-metadata.md": {
     "hash": "889580de842ffb4b9af7a9a834ed048095cc6e45082d1b3521d0341d479d4fb8",
-    "document_id": "73558a69-f1f7-4850-b256-a4db7e62ce1d",
+    "document_id": "911e13ca-4655-4d39-a152-83482dd7d7a8",
     "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
     "metadata": {
       "source": "docusaurus",
       "project": "solidx-docs",
       "section": "developer-docs",
-      "slug": "developer-docs/metadata_schema/users-metadata",
       "path": "developer-docs/metadata_schema/users-metadata.md",
-      "filename": "users-metadata.md",
-      "breadcrumbs": [
-        "developer-docs",
-        "metadata_schema",
-        "users-metadata"
-      ],
       "doc_title": "developer-docs/metadata_schema/users-metadata.md",
-      "git_commit": "ca5148c952f658c1e9179ff976bb0cdfaa4d1160",
-      "git_author": "Oswald Rodrigues",
-      "git_email": "oswald@logicloop.io",
-      "git_date": "Tue Sep 30 09:51:31 2025 +0530",
       "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
       "collection_name": "developer-docs",
-      "title": "developer-docs/metadata_schema/users-metadata.md"
+      "title": "developer-docs/metadata_schema/users-metadata.md",
+      "chunk_count": 3,
+      "has_summaries": true
     }
   },
   "developer-docs/metadata_schema/field-metadata.md": {
     "hash": "342f5b3922926a7c6212a5c3cb388543de3fe3332ea843563a5bf15e2df9f462",
-    "document_id": "5ab17368-04da-4b32-b6ca-83b2f5b7caec",
+    "document_id": "3323c192-9dea-4605-8660-1d17c3a8acc5",
     "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
     "metadata": {
       "source": "docusaurus",
       "project": "solidx-docs",
       "section": "developer-docs",
-      "slug": "developer-docs/metadata_schema/field-metadata",
       "path": "developer-docs/metadata_schema/field-metadata.md",
-      "filename": "field-metadata.md",
-      "breadcrumbs": [
-        "developer-docs",
-        "metadata_schema",
-        "field-metadata"
-      ],
       "doc_title": "developer-docs/metadata_schema/field-metadata.md",
-      "git_commit": "fedc074afa5f79a8765ba8349bd9db7b6ba02705",
-      "git_author": "Oswald Rodrigues",
-      "git_email": "oswald@logicloop.io",
-      "git_date": "Mon Sep 29 11:12:46 2025 +0530",
       "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
       "collection_name": "developer-docs",
-      "title": "developer-docs/metadata_schema/field-metadata.md"
+      "title": "developer-docs/metadata_schema/field-metadata.md",
+      "chunk_count": 7,
+      "has_summaries": true
     }
   },
   "developer-docs/metadata_schema/index.md": {
     "hash": "475037b7372566adabd1bfbd2213cda9ba6c046d7ce765bd8383cc6c57bdb0b6",
-    "document_id": "5fbecf07-1aa2-4975-a312-b39947bd7c07",
+    "document_id": "fada3705-8d7c-4b8b-84dc-0ba9199ac46a",
     "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
     "metadata": {
       "source": "docusaurus",
       "project": "solidx-docs",
       "section": "developer-docs",
-      "slug": "developer-docs/metadata_schema/index",
       "path": "developer-docs/metadata_schema/index.md",
-      "filename": "index.md",
-      "breadcrumbs": [
-        "developer-docs",
-        "metadata_schema",
-        "index"
-      ],
       "doc_title": "developer-docs/metadata_schema/index.md",
-      "git_commit": "2a6808e943c7d6f71823fcd285d77e1962df9dff",
-      "git_author": "Oswald Rodrigues",
-      "git_email": "oswald@logicloop.io",
-      "git_date": "Fri Sep 26 18:58:18 2025 +0530",
       "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
       "collection_name": "developer-docs",
-      "title": "developer-docs/metadata_schema/index.md"
+      "title": "developer-docs/metadata_schema/index.md",
+      "chunk_count": 5,
+      "has_summaries": true
     }
   },
   "developer-docs/metadata_schema/module-metadata.md": {
     "hash": "5148233e7e6e975ff905735dd7fc6f8c8b37aa63272b4fc698e368a8a4afd099",
-    "document_id": "0f069ff2-55d3-43aa-8e39-07ae94c05c6f",
+    "document_id": "1e68f96b-a0c4-45ce-b74a-d9f5514a6751",
     "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
     "metadata": {
       "source": "docusaurus",
       "project": "solidx-docs",
       "section": "developer-docs",
-      "slug": "developer-docs/metadata_schema/module-metadata",
       "path": "developer-docs/metadata_schema/module-metadata.md",
-      "filename": "module-metadata.md",
-      "breadcrumbs": [
-        "developer-docs",
-        "metadata_schema",
-        "module-metadata"
-      ],
       "doc_title": "developer-docs/metadata_schema/module-metadata.md",
-      "git_commit": "fedc074afa5f79a8765ba8349bd9db7b6ba02705",
-      "git_author": "Oswald Rodrigues",
-      "git_email": "oswald@logicloop.io",
-      "git_date": "Mon Sep 29 11:12:46 2025 +0530",
       "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
       "collection_name": "developer-docs",
-      "title": "developer-docs/metadata_schema/module-metadata.md"
+      "title": "developer-docs/metadata_schema/module-metadata.md",
+      "chunk_count": 2,
+      "has_summaries": true
     }
   },
   "developer-docs/metadata_schema/list-of-values.md": {
-    "hash": "a02f8b5cb518bb2d4a2a65c2698638df2446d1bc3f87716684a27cefef458f74",
-    "document_id": "c471778c-ec7c-4e8a-b969-94a01857a8b9",
+    "hash": "8787019c991b4a1e7a0fbea6c5aeab6b8ea88d53134eccef4b16c1d856991068",
+    "document_id": "b0c5c4c9-a168-476c-90e7-31a4d741214c",
     "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
     "metadata": {
       "source": "docusaurus",
       "project": "solidx-docs",
       "section": "developer-docs",
-      "slug": "developer-docs/metadata_schema/list-of-values",
       "path": "developer-docs/metadata_schema/list-of-values.md",
-      "filename": "list-of-values.md",
-      "breadcrumbs": [
-        "developer-docs",
-        "metadata_schema",
-        "list-of-values"
-      ],
       "doc_title": "developer-docs/metadata_schema/list-of-values.md",
-      "git_commit": "fedc074afa5f79a8765ba8349bd9db7b6ba02705",
-      "git_author": "Oswald Rodrigues",
-      "git_email": "oswald@logicloop.io",
-      "git_date": "Mon Sep 29 11:12:46 2025 +0530",
       "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
       "collection_name": "developer-docs",
-      "title": "developer-docs/metadata_schema/list-of-values.md"
+      "title": "developer-docs/metadata_schema/list-of-values.md",
+      "chunk_count": 1,
+      "has_summaries": true
     }
   },
   "developer-docs/metadata_schema/email-templates.md": {
     "hash": "51a4aebf43a787fa466f7b3cec5df2a4a09dac62ca8b4609a0ccfecc9d278a9a",
-    "document_id": "af213b76-a3c7-4bf0-8532-36cbf94ff5df",
+    "document_id": "961738b8-da57-487f-bef0-2e1fe68e9f35",
     "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
     "metadata": {
       "source": "docusaurus",
       "project": "solidx-docs",
       "section": "developer-docs",
-      "slug": "developer-docs/metadata_schema/email-templates",
       "path": "developer-docs/metadata_schema/email-templates.md",
-      "filename": "email-templates.md",
-      "breadcrumbs": [
-        "developer-docs",
-        "metadata_schema",
-        "email-templates"
-      ],
       "doc_title": "developer-docs/metadata_schema/email-templates.md",
-      "git_commit": "ca5148c952f658c1e9179ff976bb0cdfaa4d1160",
-      "git_author": "Oswald Rodrigues",
-      "git_email": "oswald@logicloop.io",
-      "git_date": "Tue Sep 30 09:51:31 2025 +0530",
       "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
       "collection_name": "developer-docs",
-      "title": "developer-docs/metadata_schema/email-templates.md"
+      "title": "developer-docs/metadata_schema/email-templates.md",
+      "chunk_count": 2,
+      "has_summaries": true
     }
   },
   "developer-docs/metadata_schema/model-metadata.md": {
     "hash": "e927d63135b7b866480c0f9123edb6915d627a179d1d26bb3e599a6bb85f3773",
-    "document_id": "21faf502-3f98-4570-9779-1e218eaa987f",
+    "document_id": "f1ca1c9d-a4bc-4963-b070-3ea5ea7f97f9",
     "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
     "metadata": {
       "source": "docusaurus",
       "project": "solidx-docs",
       "section": "developer-docs",
-      "slug": "developer-docs/metadata_schema/model-metadata",
       "path": "developer-docs/metadata_schema/model-metadata.md",
-      "filename": "model-metadata.md",
-      "breadcrumbs": [
-        "developer-docs",
-        "metadata_schema",
-        "model-metadata"
-      ],
       "doc_title": "developer-docs/metadata_schema/model-metadata.md",
-      "git_commit": "fedc074afa5f79a8765ba8349bd9db7b6ba02705",
-      "git_author": "Oswald Rodrigues",
-      "git_email": "oswald@logicloop.io",
-      "git_date": "Mon Sep 29 11:12:46 2025 +0530",
       "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
       "collection_name": "developer-docs",
-      "title": "developer-docs/metadata_schema/model-metadata.md"
+      "title": "developer-docs/metadata_schema/model-metadata.md",
+      "chunk_count": 3,
+      "has_summaries": true
     }
   },
   "developer-docs/going-live/deploying-to-vm.md": {
     "hash": "6f8752b4523e6646e1df053a96e2ee73f96cff3a9818e3cd2354ef014bfc6490",
-    "document_id": "e52a2ebd-c5d5-40d0-996b-8182ba052348",
+    "document_id": "35820c35-5b09-4457-b3ea-719d8a3201b8",
     "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
     "metadata": {
       "source": "docusaurus",
       "project": "solidx-docs",
       "section": "developer-docs",
-      "slug": "developer-docs/going-live/deploying-to-vm",
       "path": "developer-docs/going-live/deploying-to-vm.md",
-      "filename": "deploying-to-vm.md",
-      "breadcrumbs": [
-        "developer-docs",
-        "going-live",
-        "deploying-to-vm"
-      ],
       "doc_title": "developer-docs/going-live/deploying-to-vm.md",
-      "git_commit": "1b99ad76472a86e96e6f88861105cc2859757993",
-      "git_author": "Oswald Rodrigues",
-      "git_email": "oswald@logicloop.io",
-      "git_date": "Thu Sep 25 17:39:13 2025 +0530",
       "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
       "collection_name": "developer-docs",
-      "title": "developer-docs/going-live/deploying-to-vm.md"
+      "title": "developer-docs/going-live/deploying-to-vm.md",
+      "chunk_count": 4,
+      "has_summaries": true
     }
   },
   "developer-docs/going-live/index.md": {
     "hash": "080eb9d9d3659affeceec77f8d15990b72827fc67c8d5d6c675acd0f790c1d22",
-    "document_id": "bd436711-1be2-468e-b600-50581ca9d139",
+    "document_id": "e2eb67a4-afa1-4ca5-a29a-c31c926083fa",
     "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
     "metadata": {
       "source": "docusaurus",
       "project": "solidx-docs",
       "section": "developer-docs",
-      "slug": "developer-docs/going-live/index",
       "path": "developer-docs/going-live/index.md",
-      "filename": "index.md",
-      "breadcrumbs": [
-        "developer-docs",
-        "going-live",
-        "index"
-      ],
       "doc_title": "developer-docs/going-live/index.md",
-      "git_commit": "cb2205dd0acf5adeb1eb5cf8183496128dfcbc34",
-      "git_author": "Oswald Rodrigues",
-      "git_email": "oswald@logicloop.io",
-      "git_date": "Fri Aug 1 12:26:04 2025 +0530",
       "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
       "collection_name": "developer-docs",
-      "title": "developer-docs/going-live/index.md"
+      "title": "developer-docs/going-live/index.md",
+      "chunk_count": 1,
+      "has_summaries": true
     }
   },
   "developer-docs/rest-apis/index.md": {
     "hash": "2643eec9d3822d6861126a0117758bdd6a2ef6d1cc1e19077587f279ac384f6e",
-    "document_id": "134976e0-68a4-40a4-8a3e-ce2b97fa8b43",
+    "document_id": "3a087ede-9eee-4868-812c-4d41611ecf47",
     "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
     "metadata": {
       "source": "docusaurus",
       "project": "solidx-docs",
       "section": "developer-docs",
-      "slug": "developer-docs/rest-apis/index",
       "path": "developer-docs/rest-apis/index.md",
-      "filename": "index.md",
-      "breadcrumbs": [
-        "developer-docs",
-        "rest-apis",
-        "index"
-      ],
       "doc_title": "developer-docs/rest-apis/index.md",
-      "git_commit": "f79e0a8eef670a17206c6cc2899200c46f073e85",
-      "git_author": "Oswald Rodrigues",
-      "git_email": "oswald@logicloop.io",
-      "git_date": "Thu Aug 7 16:29:55 2025 +0530",
       "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
       "collection_name": "developer-docs",
-      "title": "developer-docs/rest-apis/index.md"
+      "title": "developer-docs/rest-apis/index.md",
+      "chunk_count": 1,
+      "has_summaries": true
     }
   },
   "developer-docs/database_seeding/index.md": {
     "hash": "48d513cf54aacdf8842b53de680eb74778b797e802c19fbc353fa922cc0b5604",
-    "document_id": "b1acb38a-3a87-4854-8d1f-91bcffdc6c1d",
+    "document_id": "3946bf1c-f986-47e1-8be3-ac47fde0cec9",
     "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
     "metadata": {
       "source": "docusaurus",
       "project": "solidx-docs",
       "section": "developer-docs",
-      "slug": "developer-docs/database_seeding/index",
       "path": "developer-docs/database_seeding/index.md",
-      "filename": "index.md",
-      "breadcrumbs": [
-        "developer-docs",
-        "database_seeding",
-        "index"
-      ],
       "doc_title": "developer-docs/database_seeding/index.md",
-      "git_commit": "0af698ecc789c998b6402f9044b25ca1de4b1b16",
-      "git_author": "Oswald Rodrigues",
-      "git_email": "oswald@logicloop.io",
-      "git_date": "Thu Sep 25 13:20:46 2025 +0530",
       "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
       "collection_name": "developer-docs",
-      "title": "developer-docs/database_seeding/index.md"
+      "title": "developer-docs/database_seeding/index.md",
+      "chunk_count": 3,
+      "has_summaries": true
     }
   },
   "developer-docs/extending/index.md": {
     "hash": "1551815822631a09cd023663b5e6473585705353998b898ba8ae21501bbe5957",
-    "document_id": "ed116af3-f1c4-4beb-b46b-8590cb3920c2",
+    "document_id": "fa341421-93ea-4e0c-8d51-456b53e12150",
     "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
     "metadata": {
       "source": "docusaurus",
       "project": "solidx-docs",
       "section": "developer-docs",
-      "slug": "developer-docs/extending/index",
       "path": "developer-docs/extending/index.md",
-      "filename": "index.md",
-      "breadcrumbs": [
-        "developer-docs",
-        "extending",
-        "index"
-      ],
       "doc_title": "developer-docs/extending/index.md",
-      "git_commit": "0af698ecc789c998b6402f9044b25ca1de4b1b16",
-      "git_author": "Oswald Rodrigues",
-      "git_email": "oswald@logicloop.io",
-      "git_date": "Thu Sep 25 13:20:46 2025 +0530",
       "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
       "collection_name": "developer-docs",
-      "title": "developer-docs/extending/index.md"
+      "title": "developer-docs/extending/index.md",
+      "chunk_count": 1,
+      "has_summaries": true
     }
   },
   "developer-docs/rest-apis/swagger-documentation/index.md": {
     "hash": "7f6f5fcfa058ff470d247637b2e090c2086a4eba13a3a059a006d81cf393dc52",
-    "document_id": "1702182b-228c-49ba-880b-a0acdcb49f96",
+    "document_id": "886b1476-2ca7-4727-a80a-227d54d7d387",
     "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
     "metadata": {
       "source": "docusaurus",
       "project": "solidx-docs",
       "section": "developer-docs",
-      "slug": "developer-docs/rest-apis/swagger-documentation/index",
       "path": "developer-docs/rest-apis/swagger-documentation/index.md",
-      "filename": "index.md",
-      "breadcrumbs": [
-        "developer-docs",
-        "rest-apis",
-        "swagger-documentation",
-        "index"
-      ],
       "doc_title": "developer-docs/rest-apis/swagger-documentation/index.md",
-      "git_commit": "995375355863532de57a880ec4789d526e0a2771",
-      "git_author": "Saibaz.Khan",
-      "git_email": "saibaz.khan@logicloop.io",
-      "git_date": "Thu Sep 18 19:18:08 2025 +0530",
       "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
       "collection_name": "developer-docs",
-      "title": "developer-docs/rest-apis/swagger-documentation/index.md"
+      "title": "developer-docs/rest-apis/swagger-documentation/index.md",
+      "chunk_count": 5,
+      "has_summaries": true
     }
   },
   "developer-docs/rest-apis/update/index.md": {
     "hash": "3de85b62536ac66b2aae18726dcc4b7c2790beebfba3720e68664a7f0b7f2a73",
-    "document_id": "1a86e5a7-59e4-4363-a7df-ef4471e047f8",
+    "document_id": "79d2c8a4-9da6-49d7-ad07-6c2ee30d89d2",
     "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
     "metadata": {
       "source": "docusaurus",
       "project": "solidx-docs",
       "section": "developer-docs",
-      "slug": "developer-docs/rest-apis/update/index",
       "path": "developer-docs/rest-apis/update/index.md",
-      "filename": "index.md",
-      "breadcrumbs": [
-        "developer-docs",
-        "rest-apis",
-        "update",
-        "index"
-      ],
       "doc_title": "developer-docs/rest-apis/update/index.md",
-      "git_commit": "0af698ecc789c998b6402f9044b25ca1de4b1b16",
-      "git_author": "Oswald Rodrigues",
-      "git_email": "oswald@logicloop.io",
-      "git_date": "Thu Sep 25 13:20:46 2025 +0530",
       "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
       "collection_name": "developer-docs",
-      "title": "developer-docs/rest-apis/update/index.md"
+      "title": "developer-docs/rest-apis/update/index.md",
+      "chunk_count": 3,
+      "has_summaries": true
     }
   },
   "developer-docs/rest-apis/delete/index.md": {
     "hash": "eb50154ba2fc13640f354d8a220f05493daa3b9ed7b788ff65c581801eec210c",
-    "document_id": "5a329b70-3c25-4428-93e4-d71e59d61082",
+    "document_id": "eb030c91-0178-4c1e-bc45-fab2710df684",
     "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
     "metadata": {
       "source": "docusaurus",
       "project": "solidx-docs",
       "section": "developer-docs",
-      "slug": "developer-docs/rest-apis/delete/index",
       "path": "developer-docs/rest-apis/delete/index.md",
-      "filename": "index.md",
-      "breadcrumbs": [
-        "developer-docs",
-        "rest-apis",
-        "delete",
-        "index"
-      ],
       "doc_title": "developer-docs/rest-apis/delete/index.md",
-      "git_commit": "0af698ecc789c998b6402f9044b25ca1de4b1b16",
-      "git_author": "Oswald Rodrigues",
-      "git_email": "oswald@logicloop.io",
-      "git_date": "Thu Sep 25 13:20:46 2025 +0530",
       "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
       "collection_name": "developer-docs",
-      "title": "developer-docs/rest-apis/delete/index.md"
+      "title": "developer-docs/rest-apis/delete/index.md",
+      "chunk_count": 2,
+      "has_summaries": true
     }
   },
   "developer-docs/rest-apis/retrieve/index.md": {
     "hash": "a6b97039345b2399f608ea619aab23bf22ac385abc5614266c1fc01bfd55d3e5",
-    "document_id": "467cc787-0b22-4f45-9dae-ff81312a7c32",
+    "document_id": "e0df1dfe-6a20-4e77-bd7f-f2daaa3c81d9",
     "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
     "metadata": {
       "source": "docusaurus",
       "project": "solidx-docs",
       "section": "developer-docs",
-      "slug": "developer-docs/rest-apis/retrieve/index",
       "path": "developer-docs/rest-apis/retrieve/index.md",
-      "filename": "index.md",
-      "breadcrumbs": [
-        "developer-docs",
-        "rest-apis",
-        "retrieve",
-        "index"
-      ],
       "doc_title": "developer-docs/rest-apis/retrieve/index.md",
-      "git_commit": "f79e0a8eef670a17206c6cc2899200c46f073e85",
-      "git_author": "Oswald Rodrigues",
-      "git_email": "oswald@logicloop.io",
-      "git_date": "Thu Aug 7 16:29:55 2025 +0530",
       "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
       "collection_name": "developer-docs",
-      "title": "developer-docs/rest-apis/retrieve/index.md"
+      "title": "developer-docs/rest-apis/retrieve/index.md",
+      "chunk_count": 1,
+      "has_summaries": true
     }
   },
   "developer-docs/rest-apis/create/index.md": {
     "hash": "26ba97d10178014e1dcb72509e37112d80387a9cf59571708f56aaf5b4166351",
-    "document_id": "6a2216d6-be7f-4f6a-ad11-223f790964b6",
+    "document_id": "24b4e5f8-1283-4b4d-9115-3bc65228b1af",
     "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
     "metadata": {
       "source": "docusaurus",
       "project": "solidx-docs",
       "section": "developer-docs",
-      "slug": "developer-docs/rest-apis/create/index",
       "path": "developer-docs/rest-apis/create/index.md",
-      "filename": "index.md",
-      "breadcrumbs": [
-        "developer-docs",
-        "rest-apis",
-        "create",
-        "index"
-      ],
       "doc_title": "developer-docs/rest-apis/create/index.md",
-      "git_commit": "0af698ecc789c998b6402f9044b25ca1de4b1b16",
-      "git_author": "Oswald Rodrigues",
-      "git_email": "oswald@logicloop.io",
-      "git_date": "Thu Sep 25 13:20:46 2025 +0530",
       "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
       "collection_name": "developer-docs",
-      "title": "developer-docs/rest-apis/create/index.md"
+      "title": "developer-docs/rest-apis/create/index.md",
+      "chunk_count": 3,
+      "has_summaries": true
     }
   },
   "developer-docs/rest-apis/recover/index.md": {
     "hash": "239ebc297adf03aaf3a426fa25b03bd7b42c28fa6a00d91216db60f6edfe0f91",
-    "document_id": "407e44d2-626a-4314-b3e1-4f263b9abfd7",
+    "document_id": "c093c8c9-5a10-42ab-a405-61cc057f53d2",
     "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
     "metadata": {
       "source": "docusaurus",
       "project": "solidx-docs",
       "section": "developer-docs",
-      "slug": "developer-docs/rest-apis/recover/index",
       "path": "developer-docs/rest-apis/recover/index.md",
-      "filename": "index.md",
-      "breadcrumbs": [
-        "developer-docs",
-        "rest-apis",
-        "recover",
-        "index"
-      ],
       "doc_title": "developer-docs/rest-apis/recover/index.md",
-      "git_commit": "0af698ecc789c998b6402f9044b25ca1de4b1b16",
-      "git_author": "Oswald Rodrigues",
-      "git_email": "oswald@logicloop.io",
-      "git_date": "Thu Sep 25 13:20:46 2025 +0530",
       "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
       "collection_name": "developer-docs",
-      "title": "developer-docs/rest-apis/recover/index.md"
+      "title": "developer-docs/rest-apis/recover/index.md",
+      "chunk_count": 3,
+      "has_summaries": true
     }
   },
   "developer-docs/rest-apis/authentication/index.md": {
     "hash": "95649ac45417df5ef770d3bd9e74cc783d8aedde3c9705d0197bc4dbd747b51e",
-    "document_id": "457def9f-8d14-47cb-ac72-c3a6a232f12f",
+    "document_id": "8e2074a4-2e47-4bf9-9101-881363ce852b",
     "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
     "metadata": {
       "source": "docusaurus",
       "project": "solidx-docs",
       "section": "developer-docs",
-      "slug": "developer-docs/rest-apis/authentication/index",
       "path": "developer-docs/rest-apis/authentication/index.md",
-      "filename": "index.md",
-      "breadcrumbs": [
-        "developer-docs",
-        "rest-apis",
-        "authentication",
-        "index"
-      ],
       "doc_title": "developer-docs/rest-apis/authentication/index.md",
-      "git_commit": "f79e0a8eef670a17206c6cc2899200c46f073e85",
-      "git_author": "Oswald Rodrigues",
-      "git_email": "oswald@logicloop.io",
-      "git_date": "Thu Aug 7 16:29:55 2025 +0530",
       "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
       "collection_name": "developer-docs",
-      "title": "developer-docs/rest-apis/authentication/index.md"
+      "title": "developer-docs/rest-apis/authentication/index.md",
+      "chunk_count": 1,
+      "has_summaries": true
     }
   },
   "developer-docs/rest-apis/authentication/oauth-authentication/index.md": {
     "hash": "645b4e6744d189c128f60dbb3a613363718f4ef871540f311709d996b6092f81",
-    "document_id": "7bf2371f-d943-47d1-902a-b1074cc4f230",
+    "document_id": "d190b937-e3b1-4153-888a-da40abc3ddae",
     "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
     "metadata": {
       "source": "docusaurus",
       "project": "solidx-docs",
       "section": "developer-docs",
-      "slug": "developer-docs/rest-apis/authentication/oauth-authentication/index",
       "path": "developer-docs/rest-apis/authentication/oauth-authentication/index.md",
-      "filename": "index.md",
-      "breadcrumbs": [
-        "developer-docs",
-        "rest-apis",
-        "authentication",
-        "oauth-authentication",
-        "index"
-      ],
       "doc_title": "developer-docs/rest-apis/authentication/oauth-authentication/index.md",
-      "git_commit": "995375355863532de57a880ec4789d526e0a2771",
-      "git_author": "Saibaz.Khan",
-      "git_email": "saibaz.khan@logicloop.io",
-      "git_date": "Thu Sep 18 19:18:08 2025 +0530",
       "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
       "collection_name": "developer-docs",
-      "title": "developer-docs/rest-apis/authentication/oauth-authentication/index.md"
+      "title": "developer-docs/rest-apis/authentication/oauth-authentication/index.md",
+      "chunk_count": 7,
+      "has_summaries": true
     }
   },
   "developer-docs/rest-apis/authentication/otp-authentication/index.md": {
     "hash": "5a70a8d29f97747d2f501e031a6674ea0e666ae211617b9fb61658695c1aa043",
-    "document_id": "07d11fa9-7bf8-413a-9475-68969de1d6cc",
+    "document_id": "002ccb95-4944-4603-875e-e3730388f824",
     "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
     "metadata": {
       "source": "docusaurus",
       "project": "solidx-docs",
       "section": "developer-docs",
-      "slug": "developer-docs/rest-apis/authentication/otp-authentication/index",
       "path": "developer-docs/rest-apis/authentication/otp-authentication/index.md",
-      "filename": "index.md",
-      "breadcrumbs": [
-        "developer-docs",
-        "rest-apis",
-        "authentication",
-        "otp-authentication",
-        "index"
-      ],
       "doc_title": "developer-docs/rest-apis/authentication/otp-authentication/index.md",
-      "git_commit": "0af698ecc789c998b6402f9044b25ca1de4b1b16",
-      "git_author": "Oswald Rodrigues",
-      "git_email": "oswald@logicloop.io",
-      "git_date": "Thu Sep 25 13:20:46 2025 +0530",
       "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
       "collection_name": "developer-docs",
-      "title": "developer-docs/rest-apis/authentication/otp-authentication/index.md"
+      "title": "developer-docs/rest-apis/authentication/otp-authentication/index.md",
+      "chunk_count": 3,
+      "has_summaries": true
     }
   },
   "developer-docs/rest-apis/authentication/password-authentication/index.md": {
     "hash": "866d15d4e9fb1a181f48b22fb24c282c427688b82765a7c11ed84f1b048daeea",
-    "document_id": "9ed1ada8-3e3c-4ad2-b1c6-04409735fb4c",
+    "document_id": "0ceac4ab-1eeb-4684-9356-b168e18e79a1",
     "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
     "metadata": {
       "source": "docusaurus",
       "project": "solidx-docs",
       "section": "developer-docs",
-      "slug": "developer-docs/rest-apis/authentication/password-authentication/index",
       "path": "developer-docs/rest-apis/authentication/password-authentication/index.md",
-      "filename": "index.md",
-      "breadcrumbs": [
-        "developer-docs",
-        "rest-apis",
-        "authentication",
-        "password-authentication",
-        "index"
-      ],
       "doc_title": "developer-docs/rest-apis/authentication/password-authentication/index.md",
-      "git_commit": "0af698ecc789c998b6402f9044b25ca1de4b1b16",
-      "git_author": "Oswald Rodrigues",
-      "git_email": "oswald@logicloop.io",
-      "git_date": "Thu Sep 25 13:20:46 2025 +0530",
       "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
       "collection_name": "developer-docs",
-      "title": "developer-docs/rest-apis/authentication/password-authentication/index.md"
+      "title": "developer-docs/rest-apis/authentication/password-authentication/index.md",
+      "chunk_count": 8,
+      "has_summaries": true
+    }
+  },
+  "developer-docs/extending/code-generation/codegen-cl.md": {
+    "hash": "fa4fe78bc869082de27961a23575bf8b0284baa61a676d58fa14fa6ccccd3c26",
+    "document_id": "f305fd89-dd11-451a-bbd4-f44a3952f75e",
+    "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
+    "metadata": {
+      "source": "docusaurus",
+      "project": "solidx-docs",
+      "section": "developer-docs",
+      "path": "developer-docs/extending/code-generation/codegen-cl.md",
+      "doc_title": "developer-docs/extending/code-generation/codegen-cl.md",
+      "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
+      "collection_name": "developer-docs",
+      "title": "developer-docs/extending/code-generation/codegen-cl.md",
+      "chunk_count": 3,
+      "has_summaries": true
     }
   },
   "developer-docs/extending/code-generation/index.md": {
     "hash": "de5f7d1938cdbbaef8ea70361d37b288156ce5a1c57a04e47470540e5e668ebb",
-    "document_id": "a9fb2101-1d61-4a67-a8d9-668af9e175b7",
+    "document_id": "d6eca7c0-a36f-45e6-bcfa-43d0be8ec9cf",
     "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
     "metadata": {
       "source": "docusaurus",
       "project": "solidx-docs",
       "section": "developer-docs",
-      "slug": "developer-docs/extending/code-generation/index",
       "path": "developer-docs/extending/code-generation/index.md",
-      "filename": "index.md",
-      "breadcrumbs": [
-        "developer-docs",
-        "extending",
-        "code-generation",
-        "index"
-      ],
       "doc_title": "developer-docs/extending/code-generation/index.md",
-      "git_commit": "995375355863532de57a880ec4789d526e0a2771",
-      "git_author": "Saibaz.Khan",
-      "git_email": "saibaz.khan@logicloop.io",
-      "git_date": "Thu Sep 18 19:18:08 2025 +0530",
       "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
       "collection_name": "developer-docs",
-      "title": "developer-docs/extending/code-generation/index.md"
+      "title": "developer-docs/extending/code-generation/index.md",
+      "chunk_count": 2,
+      "has_summaries": true
     }
   },
   "developer-docs/extending/frontend-customization/index.md": {
     "hash": "7fd55a481db192c430a26f23d44ac44b48338d9c43784bd097e4ced2165e9051",
-    "document_id": "3c2ccf15-5248-493e-bdb7-a40c88195967",
+    "document_id": "97777f79-8171-4e47-af8c-f63b57dd0bb8",
     "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
     "metadata": {
       "source": "docusaurus",
       "project": "solidx-docs",
       "section": "developer-docs",
-      "slug": "developer-docs/extending/frontend-customization/index",
       "path": "developer-docs/extending/frontend-customization/index.md",
-      "filename": "index.md",
-      "breadcrumbs": [
-        "developer-docs",
-        "extending",
-        "frontend-customization",
-        "index"
-      ],
       "doc_title": "developer-docs/extending/frontend-customization/index.md",
-      "git_commit": "3ae93b0ec00dcc2c380ede355dc0be8b6b4a7967",
-      "git_author": "Oswald Rodrigues",
-      "git_email": "oswald@logicloop.io",
-      "git_date": "Mon Aug 4 18:51:35 2025 +0530",
       "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
       "collection_name": "developer-docs",
-      "title": "developer-docs/extending/frontend-customization/index.md"
+      "title": "developer-docs/extending/frontend-customization/index.md",
+      "chunk_count": 1,
+      "has_summaries": true
     }
   },
   "developer-docs/extending/backend-customization/index.md": {
     "hash": "aa56933b6950ca8514ea114170caa28925346e791c6deb81e54c071913057287",
-    "document_id": "5caa8ebd-4b89-445a-be65-4838cd9531f1",
+    "document_id": "a690875e-8a96-42f1-bfbf-2f426a9baa66",
     "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
     "metadata": {
       "source": "docusaurus",
       "project": "solidx-docs",
       "section": "developer-docs",
-      "slug": "developer-docs/extending/backend-customization/index",
       "path": "developer-docs/extending/backend-customization/index.md",
-      "filename": "index.md",
-      "breadcrumbs": [
-        "developer-docs",
-        "extending",
-        "backend-customization",
-        "index"
-      ],
       "doc_title": "developer-docs/extending/backend-customization/index.md",
-      "git_commit": "4ac82d4ee4904d0e950b485e6095ce91d28cb4f1",
-      "git_author": "Oswald Rodrigues",
-      "git_email": "oswald@logicloop.io",
-      "git_date": "Wed Aug 6 14:18:44 2025 +0530",
       "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
       "collection_name": "developer-docs",
-      "title": "developer-docs/extending/backend-customization/index.md"
-    }
-  },
-  "developer-docs/extending/code-generation/todo/index.md": {
-    "hash": "e57efcc23d650642a04cbd570607647dfd1c80920786d9a0b03a28526e7f5761",
-    "document_id": "40eb35a8-14c1-41e2-96dd-349c0b9a2191",
-    "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
-    "metadata": {
-      "source": "docusaurus",
-      "project": "solidx-docs",
-      "section": "developer-docs",
-      "slug": "developer-docs/extending/code-generation/todo/index",
-      "path": "developer-docs/extending/code-generation/todo/index.md",
-      "filename": "index.md",
-      "breadcrumbs": [
-        "developer-docs",
-        "extending",
-        "code-generation",
-        "todo",
-        "index"
-      ],
-      "doc_title": "developer-docs/extending/code-generation/todo/index.md",
-      "git_commit": "3ae93b0ec00dcc2c380ede355dc0be8b6b4a7967",
-      "git_author": "Oswald Rodrigues",
-      "git_email": "oswald@logicloop.io",
-      "git_date": "Mon Aug 4 18:51:35 2025 +0530",
-      "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
-      "collection_name": "developer-docs",
-      "title": "developer-docs/extending/code-generation/todo/index.md"
+      "title": "developer-docs/extending/backend-customization/index.md",
+      "chunk_count": 1,
+      "has_summaries": true
     }
   },
   "developer-docs/extending/code-generation/codegen-structure/index.md": {
     "hash": "926b1cf62294311aafdd09595ca50dacf5145900b7bf9b385c1741d564a6a528",
-    "document_id": "e0b29d5d-3dee-4d92-9577-0677f5aefc8d",
+    "document_id": "c264a61b-86a5-41fa-b8b7-d6e0dfa1cf5b",
     "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
     "metadata": {
       "source": "docusaurus",
       "project": "solidx-docs",
       "section": "developer-docs",
-      "slug": "developer-docs/extending/code-generation/codegen-structure/index",
       "path": "developer-docs/extending/code-generation/codegen-structure/index.md",
-      "filename": "index.md",
-      "breadcrumbs": [
-        "developer-docs",
-        "extending",
-        "code-generation",
-        "codegen-structure",
-        "index"
-      ],
       "doc_title": "developer-docs/extending/code-generation/codegen-structure/index.md",
-      "git_commit": "0af698ecc789c998b6402f9044b25ca1de4b1b16",
-      "git_author": "Oswald Rodrigues",
-      "git_email": "oswald@logicloop.io",
-      "git_date": "Thu Sep 25 13:20:46 2025 +0530",
       "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
       "collection_name": "developer-docs",
-      "title": "developer-docs/extending/code-generation/codegen-structure/index.md"
-    }
-  },
-  "developer-docs/extending/code-generation/codegen-cli/index.md": {
-    "hash": "efbaa932092e2c646c8585ad5af6ca042d2c4fbdf6dc8369c290c8842f49ebb3",
-    "document_id": "448ad70d-60d6-41b1-a9cb-4666f37b848e",
-    "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
-    "metadata": {
-      "source": "docusaurus",
-      "project": "solidx-docs",
-      "section": "developer-docs",
-      "slug": "developer-docs/extending/code-generation/codegen-cli/index",
-      "path": "developer-docs/extending/code-generation/codegen-cli/index.md",
-      "filename": "index.md",
-      "breadcrumbs": [
-        "developer-docs",
-        "extending",
-        "code-generation",
-        "codegen-cli",
-        "index"
-      ],
-      "doc_title": "developer-docs/extending/code-generation/codegen-cli/index.md",
-      "git_commit": "0af698ecc789c998b6402f9044b25ca1de4b1b16",
-      "git_author": "Oswald Rodrigues",
-      "git_email": "oswald@logicloop.io",
-      "git_date": "Thu Sep 25 13:20:46 2025 +0530",
-      "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
-      "collection_name": "developer-docs",
-      "title": "developer-docs/extending/code-generation/codegen-cli/index.md"
+      "title": "developer-docs/extending/code-generation/codegen-structure/index.md",
+      "chunk_count": 3,
+      "has_summaries": true
     }
   },
   "developer-docs/extending/frontend-customization/form-view-field-widgets/index.md": {
     "hash": "4c25aa2ad78f5e6e578781a8575af002925cde2b21f0655bf39617fbbc9361e7",
-    "document_id": "498e093d-1390-4ab4-a8da-16634907867e",
+    "document_id": "356565d7-afc4-4d3e-a89b-88b28b2df44e",
     "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
     "metadata": {
       "source": "docusaurus",
       "project": "solidx-docs",
       "section": "developer-docs",
-      "slug": "developer-docs/extending/frontend-customization/form-view-field-widgets/index",
       "path": "developer-docs/extending/frontend-customization/form-view-field-widgets/index.md",
-      "filename": "index.md",
-      "breadcrumbs": [
-        "developer-docs",
-        "extending",
-        "frontend-customization",
-        "form-view-field-widgets",
-        "index"
-      ],
       "doc_title": "developer-docs/extending/frontend-customization/form-view-field-widgets/index.md",
-      "git_commit": "0af698ecc789c998b6402f9044b25ca1de4b1b16",
-      "git_author": "Oswald Rodrigues",
-      "git_email": "oswald@logicloop.io",
-      "git_date": "Thu Sep 25 13:20:46 2025 +0530",
       "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
       "collection_name": "developer-docs",
-      "title": "developer-docs/extending/frontend-customization/form-view-field-widgets/index.md"
+      "title": "developer-docs/extending/frontend-customization/form-view-field-widgets/index.md",
+      "chunk_count": 4,
+      "has_summaries": true
     }
   },
   "developer-docs/extending/frontend-customization/custom-widgets/index.md": {
     "hash": "8ad18f81a12491bbe28d5774095dedb634dddcbc7b735dab683f7d2d44121438",
-    "document_id": "f6f29359-9911-411a-908c-0f732a775659",
+    "document_id": "c2237fae-f804-498e-9455-b97b0d3a2020",
     "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
     "metadata": {
       "source": "docusaurus",
       "project": "solidx-docs",
       "section": "developer-docs",
-      "slug": "developer-docs/extending/frontend-customization/custom-widgets/index",
       "path": "developer-docs/extending/frontend-customization/custom-widgets/index.md",
-      "filename": "index.md",
-      "breadcrumbs": [
-        "developer-docs",
-        "extending",
-        "frontend-customization",
-        "custom-widgets",
-        "index"
-      ],
       "doc_title": "developer-docs/extending/frontend-customization/custom-widgets/index.md",
-      "git_commit": "0af698ecc789c998b6402f9044b25ca1de4b1b16",
-      "git_author": "Oswald Rodrigues",
-      "git_email": "oswald@logicloop.io",
-      "git_date": "Thu Sep 25 13:20:46 2025 +0530",
       "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
       "collection_name": "developer-docs",
-      "title": "developer-docs/extending/frontend-customization/custom-widgets/index.md"
+      "title": "developer-docs/extending/frontend-customization/custom-widgets/index.md",
+      "chunk_count": 3,
+      "has_summaries": true
     }
   },
   "developer-docs/extending/frontend-customization/kanban-field-widgets/index.md": {
     "hash": "eeafc6483a64eebac5b6048102deff1440f5f840fbeae9badd4a74d5f153e162",
-    "document_id": "8ebdd161-8a1c-4b9b-8a4d-242198ff8ccf",
+    "document_id": "ab26f67c-d02a-4ea2-94b8-4526eb42c351",
     "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
     "metadata": {
       "source": "docusaurus",
       "project": "solidx-docs",
       "section": "developer-docs",
-      "slug": "developer-docs/extending/frontend-customization/kanban-field-widgets/index",
       "path": "developer-docs/extending/frontend-customization/kanban-field-widgets/index.md",
-      "filename": "index.md",
-      "breadcrumbs": [
-        "developer-docs",
-        "extending",
-        "frontend-customization",
-        "kanban-field-widgets",
-        "index"
-      ],
       "doc_title": "developer-docs/extending/frontend-customization/kanban-field-widgets/index.md",
-      "git_commit": "9596e18f2b3f50ddce025f5f6fe85ae2871577d4",
-      "git_author": "Oswald Rodrigues",
-      "git_email": "oswald@logicloop.io",
-      "git_date": "Wed Aug 6 18:12:10 2025 +0530",
       "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
       "collection_name": "developer-docs",
-      "title": "developer-docs/extending/frontend-customization/kanban-field-widgets/index.md"
+      "title": "developer-docs/extending/frontend-customization/kanban-field-widgets/index.md",
+      "chunk_count": 1,
+      "has_summaries": true
     }
   },
   "developer-docs/extending/frontend-customization/custom-views/index.md": {
     "hash": "6b69b6926b66710a1ed32b0459336dbd6b3ea8e922f88167025522e87731b287",
-    "document_id": "9d1ba761-d92b-4e40-85ac-1eee85052aad",
+    "document_id": "04e3067f-e122-4e21-aece-70b97d1b0387",
     "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
     "metadata": {
       "source": "docusaurus",
       "project": "solidx-docs",
       "section": "developer-docs",
-      "slug": "developer-docs/extending/frontend-customization/custom-views/index",
       "path": "developer-docs/extending/frontend-customization/custom-views/index.md",
-      "filename": "index.md",
-      "breadcrumbs": [
-        "developer-docs",
-        "extending",
-        "frontend-customization",
-        "custom-views",
-        "index"
-      ],
       "doc_title": "developer-docs/extending/frontend-customization/custom-views/index.md",
-      "git_commit": "0af698ecc789c998b6402f9044b25ca1de4b1b16",
-      "git_author": "Oswald Rodrigues",
-      "git_email": "oswald@logicloop.io",
-      "git_date": "Thu Sep 25 13:20:46 2025 +0530",
       "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
       "collection_name": "developer-docs",
-      "title": "developer-docs/extending/frontend-customization/custom-views/index.md"
+      "title": "developer-docs/extending/frontend-customization/custom-views/index.md",
+      "chunk_count": 4,
+      "has_summaries": true
     }
   },
   "developer-docs/extending/frontend-customization/form-view-event-listeners/index.md": {
     "hash": "a7e293629a4427061d569a5e3770f99dc8505413757087f0b8afee58f38e7372",
-    "document_id": "7a0835a1-87b2-4896-a5b5-2432d680170f",
+    "document_id": "ce057cbc-4bd3-428a-8cb9-56f2e82d5017",
     "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
     "metadata": {
       "source": "docusaurus",
       "project": "solidx-docs",
       "section": "developer-docs",
-      "slug": "developer-docs/extending/frontend-customization/form-view-event-listeners/index",
       "path": "developer-docs/extending/frontend-customization/form-view-event-listeners/index.md",
-      "filename": "index.md",
-      "breadcrumbs": [
-        "developer-docs",
-        "extending",
-        "frontend-customization",
-        "form-view-event-listeners",
-        "index"
-      ],
       "doc_title": "developer-docs/extending/frontend-customization/form-view-event-listeners/index.md",
-      "git_commit": "59682461e12ba5237e16f75034cefe4d5cce38e2",
-      "git_author": "Oswald Rodrigues",
-      "git_email": "oswald@logicloop.io",
-      "git_date": "Tue Aug 19 10:26:10 2025 +0530",
       "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
       "collection_name": "developer-docs",
-      "title": "developer-docs/extending/frontend-customization/form-view-event-listeners/index.md"
+      "title": "developer-docs/extending/frontend-customization/form-view-event-listeners/index.md",
+      "chunk_count": 1,
+      "has_summaries": true
     }
   },
   "developer-docs/extending/frontend-customization/list-column-widgets/index.md": {
     "hash": "00ea65f536d9156f60a7acbb4377990a8bbdc4103c27f9583ea74223fa3d9c74",
-    "document_id": "7189cb7d-93b6-494b-947a-1b75be0c0111",
+    "document_id": "c93dbab8-7906-4215-8cb2-d1a2f2c744a9",
     "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
     "metadata": {
       "source": "docusaurus",
       "project": "solidx-docs",
       "section": "developer-docs",
-      "slug": "developer-docs/extending/frontend-customization/list-column-widgets/index",
       "path": "developer-docs/extending/frontend-customization/list-column-widgets/index.md",
-      "filename": "index.md",
-      "breadcrumbs": [
-        "developer-docs",
-        "extending",
-        "frontend-customization",
-        "list-column-widgets",
-        "index"
-      ],
       "doc_title": "developer-docs/extending/frontend-customization/list-column-widgets/index.md",
-      "git_commit": "0af698ecc789c998b6402f9044b25ca1de4b1b16",
-      "git_author": "Oswald Rodrigues",
-      "git_email": "oswald@logicloop.io",
-      "git_date": "Thu Sep 25 13:20:46 2025 +0530",
       "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
       "collection_name": "developer-docs",
-      "title": "developer-docs/extending/frontend-customization/list-column-widgets/index.md"
+      "title": "developer-docs/extending/frontend-customization/list-column-widgets/index.md",
+      "chunk_count": 5,
+      "has_summaries": true
     }
   },
   "developer-docs/extending/backend-customization/scheduled-jobs/index.md": {
     "hash": "1be52db3c8042e7292feb352b65d1571965be016146fdfcce31a34a83b6dacd7",
-    "document_id": "e3f40507-0524-4428-a59d-35ae6a5eb826",
+    "document_id": "4b8123cb-6f7a-4142-97d1-90fb516ee67a",
     "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
     "metadata": {
       "source": "docusaurus",
       "project": "solidx-docs",
       "section": "developer-docs",
-      "slug": "developer-docs/extending/backend-customization/scheduled-jobs/index",
       "path": "developer-docs/extending/backend-customization/scheduled-jobs/index.md",
-      "filename": "index.md",
-      "breadcrumbs": [
-        "developer-docs",
-        "extending",
-        "backend-customization",
-        "scheduled-jobs",
-        "index"
-      ],
       "doc_title": "developer-docs/extending/backend-customization/scheduled-jobs/index.md",
-      "git_commit": "0af698ecc789c998b6402f9044b25ca1de4b1b16",
-      "git_author": "Oswald Rodrigues",
-      "git_email": "oswald@logicloop.io",
-      "git_date": "Thu Sep 25 13:20:46 2025 +0530",
       "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
       "collection_name": "developer-docs",
-      "title": "developer-docs/extending/backend-customization/scheduled-jobs/index.md"
+      "title": "developer-docs/extending/backend-customization/scheduled-jobs/index.md",
+      "chunk_count": 1,
+      "has_summaries": true
     }
   },
   "developer-docs/extending/backend-customization/solid-registry/index.md": {
     "hash": "e875e97ccfd380d1efa15d2725303bc681148dcda95cb3d2d901baab141c097e",
-    "document_id": "7e635139-26c7-42ff-ac76-1d8501c9a5e7",
+    "document_id": "295c1448-53ba-457f-b695-91bd6850c681",
     "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
     "metadata": {
       "source": "docusaurus",
       "project": "solidx-docs",
       "section": "developer-docs",
-      "slug": "developer-docs/extending/backend-customization/solid-registry/index",
       "path": "developer-docs/extending/backend-customization/solid-registry/index.md",
-      "filename": "index.md",
-      "breadcrumbs": [
-        "developer-docs",
-        "extending",
-        "backend-customization",
-        "solid-registry",
-        "index"
-      ],
       "doc_title": "developer-docs/extending/backend-customization/solid-registry/index.md",
-      "git_commit": "0af698ecc789c998b6402f9044b25ca1de4b1b16",
-      "git_author": "Oswald Rodrigues",
-      "git_email": "oswald@logicloop.io",
-      "git_date": "Thu Sep 25 13:20:46 2025 +0530",
       "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
       "collection_name": "developer-docs",
-      "title": "developer-docs/extending/backend-customization/solid-registry/index.md"
+      "title": "developer-docs/extending/backend-customization/solid-registry/index.md",
+      "chunk_count": 2,
+      "has_summaries": true
     }
   },
   "developer-docs/extending/backend-customization/background-jobs/index.md": {
     "hash": "e27e459bd31d8ffdb88011c15e542e94042da2fed0d6c2c1b1737c77af33ee6d",
-    "document_id": "c5b4ccc9-9743-414d-a8b5-1718dced4078",
+    "document_id": "83cf8fcb-d3ba-43a6-b9dd-ab604da6253a",
     "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
     "metadata": {
       "source": "docusaurus",
       "project": "solidx-docs",
       "section": "developer-docs",
-      "slug": "developer-docs/extending/backend-customization/background-jobs/index",
       "path": "developer-docs/extending/backend-customization/background-jobs/index.md",
-      "filename": "index.md",
-      "breadcrumbs": [
-        "developer-docs",
-        "extending",
-        "backend-customization",
-        "background-jobs",
-        "index"
-      ],
       "doc_title": "developer-docs/extending/backend-customization/background-jobs/index.md",
-      "git_commit": "0af698ecc789c998b6402f9044b25ca1de4b1b16",
-      "git_author": "Oswald Rodrigues",
-      "git_email": "oswald@logicloop.io",
-      "git_date": "Thu Sep 25 13:20:46 2025 +0530",
       "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
       "collection_name": "developer-docs",
-      "title": "developer-docs/extending/backend-customization/background-jobs/index.md"
+      "title": "developer-docs/extending/backend-customization/background-jobs/index.md",
+      "chunk_count": 5,
+      "has_summaries": true
     }
   },
   "developer-docs/extending/backend-customization/dashboard-providers/index.md": {
     "hash": "0192c3ff2971b0b03fd9cf31a08201eb861e396a437a8323bd4ae08e60c9a48a",
-    "document_id": "35414b37-eb89-41b5-85c3-92e7993b9b66",
+    "document_id": "dbfe4685-e956-4235-b795-ff5960857bb0",
     "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
     "metadata": {
       "source": "docusaurus",
       "project": "solidx-docs",
       "section": "developer-docs",
-      "slug": "developer-docs/extending/backend-customization/dashboard-providers/index",
       "path": "developer-docs/extending/backend-customization/dashboard-providers/index.md",
-      "filename": "index.md",
-      "breadcrumbs": [
-        "developer-docs",
-        "extending",
-        "backend-customization",
-        "dashboard-providers",
-        "index"
-      ],
       "doc_title": "developer-docs/extending/backend-customization/dashboard-providers/index.md",
-      "git_commit": "4ac82d4ee4904d0e950b485e6095ce91d28cb4f1",
-      "git_author": "Oswald Rodrigues",
-      "git_email": "oswald@logicloop.io",
-      "git_date": "Wed Aug 6 14:18:44 2025 +0530",
       "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
       "collection_name": "developer-docs",
-      "title": "developer-docs/extending/backend-customization/dashboard-providers/index.md"
+      "title": "developer-docs/extending/backend-customization/dashboard-providers/index.md",
+      "chunk_count": 1,
+      "has_summaries": true
     }
   },
   "developer-docs/extending/backend-customization/dynamic-selection-providers/index.md": {
     "hash": "9058b994722ba5d0d47e4f93a3031fa05dee52f6b38fad46acdc3a90f3d52377",
-    "document_id": "948f09d8-9a0e-4017-b0fe-05fcd72531d0",
+    "document_id": "ee1b8e45-1c59-4860-a114-8b0628436dc0",
     "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
     "metadata": {
       "source": "docusaurus",
       "project": "solidx-docs",
       "section": "developer-docs",
-      "slug": "developer-docs/extending/backend-customization/dynamic-selection-providers/index",
       "path": "developer-docs/extending/backend-customization/dynamic-selection-providers/index.md",
-      "filename": "index.md",
-      "breadcrumbs": [
-        "developer-docs",
-        "extending",
-        "backend-customization",
-        "dynamic-selection-providers",
-        "index"
-      ],
       "doc_title": "developer-docs/extending/backend-customization/dynamic-selection-providers/index.md",
-      "git_commit": "0af698ecc789c998b6402f9044b25ca1de4b1b16",
-      "git_author": "Oswald Rodrigues",
-      "git_email": "oswald@logicloop.io",
-      "git_date": "Thu Sep 25 13:20:46 2025 +0530",
       "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
       "collection_name": "developer-docs",
-      "title": "developer-docs/extending/backend-customization/dynamic-selection-providers/index.md"
+      "title": "developer-docs/extending/backend-customization/dynamic-selection-providers/index.md",
+      "chunk_count": 3,
+      "has_summaries": true
     }
   },
   "developer-docs/extending/backend-customization/computation-providers/index.md": {
     "hash": "66d088cdc2926dd912679dac3de4e104ee89fda9028958a7ad750cc36da86c92",
-    "document_id": "e91a4d75-61f5-43ef-98a1-ec9cf07b456e",
+    "document_id": "965a26eb-b9bf-40ca-8fb6-a57774bf8529",
     "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
     "metadata": {
       "source": "docusaurus",
       "project": "solidx-docs",
       "section": "developer-docs",
-      "slug": "developer-docs/extending/backend-customization/computation-providers/index",
       "path": "developer-docs/extending/backend-customization/computation-providers/index.md",
-      "filename": "index.md",
-      "breadcrumbs": [
-        "developer-docs",
-        "extending",
-        "backend-customization",
-        "computation-providers",
-        "index"
-      ],
       "doc_title": "developer-docs/extending/backend-customization/computation-providers/index.md",
-      "git_commit": "0af698ecc789c998b6402f9044b25ca1de4b1b16",
-      "git_author": "Oswald Rodrigues",
-      "git_email": "oswald@logicloop.io",
-      "git_date": "Thu Sep 25 13:20:46 2025 +0530",
       "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
       "collection_name": "developer-docs",
-      "title": "developer-docs/extending/backend-customization/computation-providers/index.md"
+      "title": "developer-docs/extending/backend-customization/computation-providers/index.md",
+      "chunk_count": 4,
+      "has_summaries": true
     }
   },
   "developer-docs/extending/backend-customization/controllers/index.md": {
     "hash": "4f7a02bce5d6cf16a7b5b3d7d8709cab2bb09d0b5f2b326b3fd504ce403f4951",
-    "document_id": "85af110b-d14d-4e42-89f0-73252754d296",
+    "document_id": "fc5c370f-5eb1-42ef-8a0a-34936c68857c",
     "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
     "metadata": {
       "source": "docusaurus",
       "project": "solidx-docs",
       "section": "developer-docs",
-      "slug": "developer-docs/extending/backend-customization/controllers/index",
       "path": "developer-docs/extending/backend-customization/controllers/index.md",
-      "filename": "index.md",
-      "breadcrumbs": [
-        "developer-docs",
-        "extending",
-        "backend-customization",
-        "controllers",
-        "index"
-      ],
       "doc_title": "developer-docs/extending/backend-customization/controllers/index.md",
-      "git_commit": "0af698ecc789c998b6402f9044b25ca1de4b1b16",
-      "git_author": "Oswald Rodrigues",
-      "git_email": "oswald@logicloop.io",
-      "git_date": "Thu Sep 25 13:20:46 2025 +0530",
       "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
       "collection_name": "developer-docs",
-      "title": "developer-docs/extending/backend-customization/controllers/index.md"
+      "title": "developer-docs/extending/backend-customization/controllers/index.md",
+      "chunk_count": 2,
+      "has_summaries": true
     }
   },
   "developer-docs/extending/backend-customization/extending-users/index.md": {
     "hash": "d4c1ec05d2b0395f69c70490fb85d5405e2329fd99e591a6666535124c236e9b",
-    "document_id": "3a19e1a7-dc5b-44dc-b18b-470562043a1b",
+    "document_id": "f9775b77-1d4d-4d7c-bcda-61703952b497",
     "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
     "metadata": {
       "source": "docusaurus",
       "project": "solidx-docs",
       "section": "developer-docs",
-      "slug": "developer-docs/extending/backend-customization/extending-users/index",
       "path": "developer-docs/extending/backend-customization/extending-users/index.md",
-      "filename": "index.md",
-      "breadcrumbs": [
-        "developer-docs",
-        "extending",
-        "backend-customization",
-        "extending-users",
-        "index"
-      ],
       "doc_title": "developer-docs/extending/backend-customization/extending-users/index.md",
-      "git_commit": "0af698ecc789c998b6402f9044b25ca1de4b1b16",
-      "git_author": "Oswald Rodrigues",
-      "git_email": "oswald@logicloop.io",
-      "git_date": "Thu Sep 25 13:20:46 2025 +0530",
       "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
       "collection_name": "developer-docs",
-      "title": "developer-docs/extending/backend-customization/extending-users/index.md"
+      "title": "developer-docs/extending/backend-customization/extending-users/index.md",
+      "chunk_count": 4,
+      "has_summaries": true
     }
   },
   "developer-docs/extending/backend-customization/security-rules/index.md": {
     "hash": "1669c4dc1e98f9f4d0aea1d98ec35d0bdf2580c7a92f92938d2e04454d59319e",
-    "document_id": "6148ecf5-fa91-49a5-b354-fbfcc416283c",
+    "document_id": "78b015b4-0a6c-41b8-85b4-c41c790c6dc3",
     "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
     "metadata": {
       "source": "docusaurus",
       "project": "solidx-docs",
       "section": "developer-docs",
-      "slug": "developer-docs/extending/backend-customization/security-rules/index",
       "path": "developer-docs/extending/backend-customization/security-rules/index.md",
-      "filename": "index.md",
-      "breadcrumbs": [
-        "developer-docs",
-        "extending",
-        "backend-customization",
-        "security-rules",
-        "index"
-      ],
       "doc_title": "developer-docs/extending/backend-customization/security-rules/index.md",
-      "git_commit": "0af698ecc789c998b6402f9044b25ca1de4b1b16",
-      "git_author": "Oswald Rodrigues",
-      "git_email": "oswald@logicloop.io",
-      "git_date": "Thu Sep 25 13:20:46 2025 +0530",
       "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
       "collection_name": "developer-docs",
-      "title": "developer-docs/extending/backend-customization/security-rules/index.md"
+      "title": "developer-docs/extending/backend-customization/security-rules/index.md",
+      "chunk_count": 3,
+      "has_summaries": true
     }
   },
   "developer-docs/extending/backend-customization/services/index.md": {
     "hash": "1825f4dbd72c0c2f1ce93821a97d4a93d9336e4084bfa78232a97d25908eddcc",
-    "document_id": "3edf76d5-3dfc-48d9-97dd-d60cbb8a7f31",
+    "document_id": "db217d00-ce8b-4365-ac59-2426b21966ab",
     "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
     "metadata": {
       "source": "docusaurus",
       "project": "solidx-docs",
       "section": "developer-docs",
-      "slug": "developer-docs/extending/backend-customization/services/index",
       "path": "developer-docs/extending/backend-customization/services/index.md",
-      "filename": "index.md",
-      "breadcrumbs": [
-        "developer-docs",
-        "extending",
-        "backend-customization",
-        "services",
-        "index"
-      ],
       "doc_title": "developer-docs/extending/backend-customization/services/index.md",
-      "git_commit": "0af698ecc789c998b6402f9044b25ca1de4b1b16",
-      "git_author": "Oswald Rodrigues",
-      "git_email": "oswald@logicloop.io",
-      "git_date": "Thu Sep 25 13:20:46 2025 +0530",
       "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
       "collection_name": "developer-docs",
-      "title": "developer-docs/extending/backend-customization/services/index.md"
+      "title": "developer-docs/extending/backend-customization/services/index.md",
+      "chunk_count": 2,
+      "has_summaries": true
     }
   }
 }

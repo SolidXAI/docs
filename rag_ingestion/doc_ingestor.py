@@ -9,6 +9,7 @@ from pathlib import Path
 from typing import Dict, Optional, Tuple, List
 from r2r import R2RException
 from r2r import R2RClient
+from openai import OpenAI
 
 logger = logging.getLogger(__name__)
 
@@ -176,6 +177,7 @@ class DocIngestor:
         project: Optional[str] = None,
         exts: Tuple[str, ...] = (".md",),  # add ".mdx" if needed
         dry_run: bool = False,
+        openai_api_key: Optional[str] = None,
     ):
         self.client = client
         self.base_dir = base_dir
@@ -184,6 +186,14 @@ class DocIngestor:
         self.exts = exts
         self.dry_run = dry_run
         self._manifest: Dict[str, Dict] = {}
+        
+        # Initialize OpenAI client for summary generation
+        self.openai_client = None
+        if openai_api_key or os.getenv("OPENAI_API_KEY"):
+            self.openai_client = OpenAI(api_key=openai_api_key or os.getenv("OPENAI_API_KEY"))
+            logger.info("OpenAI client initialized for chunk summary generation")
+        else:
+            logger.warning("No OpenAI API key provided. Chunk summaries will not be generated.")
 
     # ---- manifest helpers ----
 
@@ -236,6 +246,61 @@ class DocIngestor:
             except Exception as e:
                 logger.error(f"✗ Collection '{subdir}' ({collection_id}) not found or inaccessible: {e}")
                 raise ValueError(f"Collection for '{subdir}' does not exist. Please create it first.")
+
+    def generate_chunk_summary(self, chunk_content: str, section_title: Optional[str], doc_title: str) -> Dict[str, str]:
+        """
+        Generate both short and detailed summaries for a chunk using OpenAI GPT.
+        
+        Args:
+            chunk_content: The actual content of the chunk
+            section_title: The H2 section title (if any)
+            doc_title: The document title/path
+            
+        Returns:
+            Dictionary with 'short_summary' and 'detailed_summary' keys
+        """
+        if not self.openai_client:
+            return {"short_summary": "", "detailed_summary": ""}
+        
+        try:
+            # Create context-aware prompt
+            context = f"Document: {doc_title}"
+            if section_title:
+                context += f"\nSection: {section_title}"
+            
+            prompt = f"""Given this documentation chunk, provide:
+                1. A short one-line summary (max 50 words)
+                2. A detailed summary (about 3 to 4 sentences)
+
+                {context}
+
+                Content:
+                {chunk_content[:1500]}  # Limit content to avoid token limits
+
+                Respond in JSON format:
+                {{
+                "short_summary": "one-line summary here",
+                "detailed_summary": "First sentence. Second sentence. Third sentence etc."
+                }}"""
+
+            response = self.openai_client.chat.completions.create(
+                model="gpt-4.1",  # Using cost-effective model
+                messages=[
+                    {"role": "system", "content": "You are a technical documentation summarizer. Provide concise, accurate summaries."},
+                    {"role": "user", "content": prompt}
+                ],
+                temperature=0.3,
+                max_tokens=1500,
+                response_format={"type": "json_object"}
+            )
+            
+            summaries = json.loads(response.choices[0].message.content)
+            logger.debug(f"Generated summaries for section '{section_title or 'untitled'}'")
+            return summaries
+            
+        except Exception as e:
+            logger.warning(f"Failed to generate summary: {e}")
+            return {"short_summary": "", "detailed_summary": ""}
 
     def save_manifest(self) -> None:
         tmp = self.manifest_path.with_suffix(".tmp")
@@ -309,17 +374,17 @@ class DocIngestor:
         # Use file path as title instead of content title
         title = str(rel_path).replace("\\", "/")
         section = rel_path.parts[0] if len(rel_path.parts) > 0 else ""
-        crumb = breadcrumbs(rel_path)
-        slug = path_to_slug(rel_path)
+        # crumb = breadcrumbs(rel_path)
+        # slug = path_to_slug(rel_path)
 
         base_meta = {
             "source": "docusaurus",
             "project": self.project,
             "section": section,
-            "slug": slug,
+            # "slug": slug,
             "path": str(rel_path).replace("\\", "/"),
-            "filename": file_path.name,
-            "breadcrumbs": crumb,
+            # "filename": file_path.name,
+            # "breadcrumbs": crumb,
             "doc_title": title,
             # "frontmatter": fm,
             # "kind": "documentation",
@@ -330,9 +395,9 @@ class DocIngestor:
             # ),
         }
 
-        gitmeta = git_last_modified(file_path)
-        if gitmeta:
-            base_meta.update(gitmeta)
+        # gitmeta = git_last_modified(file_path)
+        # if gitmeta:
+        #     base_meta.update(gitmeta)
 
         return sanitize_metadata(base_meta)
 
@@ -384,22 +449,51 @@ class DocIngestor:
                 content_preview = chunk_data["content"][:100].replace('\n', ' ')
                 # logger.info(f"  Section {i}: '{title}' - {content_preview}...")
             
-            # Prepare chunks for R2R ingestion - use simple approach that worked
-            chunks = []
-            for chunk_data in chunks_data:
-                chunks.append(chunk_data["content"])
-            
             # Use file path as title
             rel_path = file_path.relative_to(self.base_dir)
             doc_title = str(rel_path).replace("\\", "/")
             metadata["title"] = doc_title
             
-            # Use pre-processed chunks to preserve exact H2 structure
-            logger.info(f"Using pre-processed chunks approach with {len(chunks)} H2 sections")
+            # Prepare enhanced chunks with order metadata and summaries
+            chunks = []
+            chunk_metadata_list = []
+            total_chunks = len(chunks_data)
+            
+            logger.info(f"Processing {total_chunks} H2 sections with summaries and ordering...")
+            
+            for idx, chunk_data in enumerate(chunks_data):
+                chunk_order = idx + 1  # 1-indexed for human readability
+                section_title = chunk_data["section_title"]
+                content = chunk_data["content"]
+                
+                # Generate summaries using OpenAI
+                summaries = self.generate_chunk_summary(content, section_title, doc_title)
+                
+                # Add the original content without modifications
+                chunks.append(content)
+                
+                # Prepare chunk-level metadata
+                chunk_meta = {
+                    "chunk_order": chunk_order,
+                    "total_chunks": total_chunks,
+                    "section_title": section_title or "Introduction",
+                    "short_summary": summaries.get("short_summary", ""),
+                    "detailed_summary": summaries.get("detailed_summary", ""),
+                }
+                chunk_metadata_list.append(chunk_meta)
+                
+                logger.info(f"  Chunk {chunk_order}/{total_chunks}: '{section_title or 'Introduction'}' - {summaries.get('short_summary', 'No summary')[:60]}...")
+            
+            # Add document-level metadata
+            metadata["chunk_count"] = total_chunks
+            metadata["has_summaries"] = bool(self.openai_client)
+            
+            # Create document with chunks
+            logger.info(f"Creating document with {len(chunks)} H2 sections...")
             
             generated_id = uuid.uuid4()
             resp = self.client.documents.create(
-                chunks=chunks,  # Use pre-processed chunks to preserve exact H2 structure
+                chunks=chunks,
                 metadata=metadata,
                 id=str(generated_id),
                 collection_ids=[collection_id],
@@ -407,7 +501,44 @@ class DocIngestor:
                 run_with_orchestration=True  # Enable orchestration for summary generation
             )
             document_id = resp.results.document_id
-            logger.info(f"Created: {key} -> document_id={document_id} ({len(chunks)} H2 chunks via pre-processed chunks)")
+            logger.info(f"Created: {key} -> document_id={document_id}")
+            
+            # Wait a moment for R2R to process chunks
+            import time
+            time.sleep(2)
+            
+            # Now update each chunk with its metadata
+            logger.info(f"Updating chunk-level metadata for {total_chunks} chunks...")
+            try:
+                # Retrieve chunks for this document
+                chunks_response = self.client.chunks.list_by_document(
+                    document_id=document_id,
+                    limit=total_chunks
+                )
+                
+                created_chunks = chunks_response.results
+                logger.info(f"Retrieved {len(created_chunks)} chunks from R2R")
+                
+                # Update each chunk with its metadata
+                for idx, chunk in enumerate(created_chunks):
+                    if idx < len(chunk_metadata_list):
+                        chunk_meta = chunk_metadata_list[idx]
+                        
+                        # Update chunk with metadata - API requires 'text' field
+                        update_data = {
+                            "id": str(chunk.id),
+                            "text": chunk.text,  # Include existing text
+                            "metadata": chunk_meta
+                        }
+                        
+                        self.client.chunks.update(update_data)
+                        logger.info(f"  Updated chunk {idx + 1}/{len(created_chunks)} with metadata")
+                
+                logger.info(f"✓ Successfully updated all chunk metadata")
+                
+            except Exception as e:
+                logger.warning(f"Failed to update chunk metadata: {e}")
+                logger.warning("Document created successfully but chunk metadata not applied")
             
             # Debug: Check what chunks were actually created by R2R
             # self.debug_document_chunks(document_id)  # Commented out - debug shows collection-wide results
