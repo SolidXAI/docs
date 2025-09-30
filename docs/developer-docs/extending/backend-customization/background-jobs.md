@@ -15,21 +15,29 @@ keywords:
 import { FaTag, FaDatabase, FaCode, FaProjectDiagram } from "react-icons/fa";
 import { IoIosArrowForward } from "react-icons/io";
 
-# Background Jobs in SolidX
+Background jobs in SolidX enable asynchronous task processing, making it easy to offload work that doesn’t need to run immediately. Common use cases include:
+	-	Sending emails or notifications
+	-	Deferring non-urgent tasks
+	-	Handling heavy computations in the background
 
-Background jobs in SolidX allow asynchronous task processing, for e.g :
+SolidX implements this using a message queue system based on the Work Queue / Competing Consumers pattern:
+	-	Publishers push jobs into a queue
+	-	Subscribers pick up and process jobs asynchronously
 
-- Sending emails or notifications
-- Deferred tasks that don’t require immediate execution
-- Heavy computations that can be processed in the background
+Job execution is fully tracked with support for status updates, retries, and failures:
+	-	ss_mq_message → stores individual queue messages
+	-	ss_mq_message_queue → stores job queue definitions
 
-
+SolidX supports both:
+	- Database-backed queues – simple, lightweight, no external dependencies
+	- RabbitMQ – robust, production-ready, and recommended for high-throughput systems
 
 ## Setting Up a Background Job
 
 ### 1. Define Queue Options
 
 Specify the queue name and broker type in an options object.
+Below is an example configuration for a database-backed queue for sending emails.
 
 <details>
  <summary className="card-title card-headear-wrapper">
@@ -40,22 +48,23 @@ Specify the queue name and broker type in an options object.
 ```ts
 import { BrokerType } from "src/interfaces";
 
-const MAIL_QUEUE_NAME = "solid_email_db_queue_v3";
+const MAIL_QUEUE_NAME = "solidx.email.db"; 
+//const MAIL_QUEUE_NAME = "solidx.email.rabbitmq"; //For RabbitMQ
 
 export default {
   name: "solidEmailInstance",
   type: BrokerType.Database,
+  //type: BrokerType.Rabbitmq //For RabbitMQ
   queueName: MAIL_QUEUE_NAME,
 };
 ```
-
 </details>
 
 
 
 ### 2. Configure a Publisher
 
-Send jobs to the queue using a publisher.
+We need to create a publisher class which extends the appropriate base publisher class based on the broker type and specify the queue options.
 
 <details>
  <summary className="card-title card-headear-wrapper">
@@ -90,11 +99,15 @@ export class EmailQueuePublisherDatabase extends DatabasePublisher<any> {
 
 </details>
 
-
+<!-- //FIXME: -->
+:::info  
+In the near future, you need not create a publisher. Only subscriber needs to be created.
+:::
 
 ### 3. Configure a Subscriber
 
-Subscribers process messages from the queue.
+Subscribers process messages from the queue. They house the actual job processing logic.
+Below is an example subscriber that sends emails using the SMTP service.
 
 <details>
  <summary className="card-title card-headear-wrapper">
@@ -115,7 +128,7 @@ import { QueuesModuleOptions } from "src/interfaces";
 @Injectable()
 export class EmailQueueSubscriberDatabase extends DatabaseSubscriber<any> {
   constructor(
-    private readonly emailService: SMTPEMailService,
+    private readonly mailFactory: MailServiceFactory,
     readonly mqMessageService: MqMessageService,
     readonly mqMessageQueueService: MqMessageQueueService
   ) {
@@ -129,26 +142,20 @@ export class EmailQueueSubscriberDatabase extends DatabaseSubscriber<any> {
   }
 
   subscribe(message: QueueMessage<any>) {
-    return this.emailService.sendEmailSynchronously(message);
+    const mailService = this.mailFactory.getMailService();
+    return mailService.sendEmailSynchronously(message);
   }
 }
 ```
 
 </details>
+:::tip
+Keep your subscribe method clean and simple. Keep the actual logic in a separate service and call it from the subscribe method.
+::: 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+:::info
+The above examples use a database broker. For RabbitMQ, simply switch the base classes to `RabbitmqPublisher` and `RabbitmqSubscriber`, and update the queue options accordingly.
+:::
 
 
 <h4 className="card-title card-headear-wrapper">
@@ -163,7 +170,6 @@ The publisher and subscriber names should follow a convention based on the broke
 - `NameRabbitmq` for RabbitMQ broker
 
 They are standard NestJS providers and must be registered in their respective modules.
-
 
 
 <h4 className="card-title card-headear-wrapper">
@@ -182,12 +188,37 @@ They are standard NestJS providers and must be registered in their respective mo
 
 ## Environment Variable
 </h4>
+### 📨 Broker
+- **`QUEUES_DEFAULT_BROKER`**  
+  Choose the broker for background jobs:  
+  - `"database"` → Database broker (**default**)  
+  - `"rabbitmq"` → RabbitMQ broker  
+
+- **`QUEUES_RABBIT_MQ_URL`** *(RabbitMQ only)*  
+  RabbitMQ connection string, e.g.:  
+  `amqp://guest:guest@127.0.0.1:5672`
 
 
-- `QUEUE_SERVICE_ROLE`
-  - `"subscriber"`: Only processes jobs
-  - `"both"`: Processes and publishes jobs  
-    Useful for distributed job handling.
+### 🖥 Service Role
+- **`QUEUES_SERVICE_ROLE`**  
+  Defines how this service instance participates:  
+  - `"subscriber"` → Only processes jobs  
+  - `"both"` → Publishes **and** processes jobs  
+    _(useful for distributed job handling)_
+:::info
+In a distributed setup, you can have some instances only processing jobs while others handle both publishing and processing. This is useful for load balancing and scaling for e.g (you can set the `QUEUES_SERVICE_ROLE` to `subscriber` on multiple instances to only process jobs, while having one instance set to `both` to handle publishing/subscribing).
+:::
+
+### 📧 Email Jobs
+- **`COMMON_EMAIL_SHOULD_QUEUE`**  
+  - `true` → Send emails via background jobs  
+  - `false` → Send emails synchronously (**default**)  
+
+
+### 📱 SMS Jobs
+- **`COMMON_SMS_SHOULD_QUEUE`**  
+  - `true` → Send SMS via background jobs  
+  - `false` → Send SMS synchronously (**default**)  
 
 
 
@@ -211,4 +242,4 @@ They are standard NestJS providers and must be registered in their respective mo
 - Best for larger-scale systems requiring reliability and routing
 - Management UI: [http://localhost:15672](http://localhost:15672)
 - Default login: `guest / guest`
-- Set `QUEUES_RABBIT_MQ_URL`, e.g. `amqp://guest:guest@127.0.0.1:5672`
+- Set `QUEUES_RABBIT_MQ_URL` to connect to your RabbitMQ instance

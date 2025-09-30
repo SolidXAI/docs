@@ -40,6 +40,7 @@ Below is an example of how to initialize users using the metadata configuration.
       "username": "janesmith",
       "email": "jane.smith@example.com",
       "mobile": "918888888888",
+      "roles": ["Admin", "Editor"] // Ensure these roles exist in the system or are provided in the roles metadata
     }  
   ]
 }
@@ -60,6 +61,9 @@ Unique email address of the user.
 **Includes** country code (e.g. 919876543210 for India)
 
 Mobile number of the user.
+
+### `roles` *(array of strings, optional)*
+List of roles to be assigned to the user. If not provided, the user will be assigned the default role specified in the environment variable `IAM_DEFAULT_ROLE` or `Public` role if the  environment variable is not set. Also note, if roles are provided and the `IAM_DEFAULT_ROLE` is present, it will be added to the list of roles assigned to the user.
 
 ## Further Reference
 - [Users Management](../../admin-docs/iam/users.md)
