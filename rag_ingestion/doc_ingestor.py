@@ -156,7 +156,17 @@ def breadcrumbs(rel_path: Path) -> List[str]:
 class DocIngestor:
     """
     Ingests Docusaurus .md docs into R2R with a local manifest to track hashes + R2R IDs.
+    Documents from different subdirectories are ingested into separate collections.
     """
+
+    # Mapping of subdirectory names to their collection IDs
+    COLLECTION_MAPPING = {
+        "admin-docs": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
+        "developer-docs": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
+        "recipes": "f0935ef1-c3c4-403d-b32f-2a2d52861db1",
+        "tutorial": "cd59267d-67e0-4897-91a6-1a338f5e83bf",
+        "user-docs": "32abd328-cb4c-4792-888b-a690a47c4e29",
+    }
 
     def __init__(
         self,
@@ -189,37 +199,43 @@ class DocIngestor:
         else:
             self._manifest = {}
 
+    def get_collection_id_for_file(self, rel_path: Path) -> str:
+        """
+        Determine which collection a file belongs to based on its relative path.
+        Returns the collection ID for the first matching subdirectory.
+        """
+        # Get the first directory component (e.g., "admin-docs" from "admin-docs/iam/permissions.md")
+        if len(rel_path.parts) > 0:
+            first_dir = rel_path.parts[0]
+            collection_id = self.COLLECTION_MAPPING.get(first_dir)
+            if collection_id:
+                logger.debug(f"File {rel_path} mapped to collection '{first_dir}' ({collection_id})")
+                return collection_id
+        
+        # Fallback: if no mapping found, log a warning
+        logger.warning(f"No collection mapping found for file {rel_path}. File will be skipped.")
+        return None
+
     # ---- collection resolve ----
 
-    def ensure_collection(self) -> str:
-        """Ensure we have a collection_id in the manifest, create if needed."""
-        coll_id = self._manifest.get("_collection_id")
-        if coll_id:
-            return coll_id
-
+    def verify_collections(self) -> None:
+        """
+        Verify that all configured collections exist in R2R.
+        This should be called once at the start of ingestion.
+        """
         if self.dry_run:
-            coll_id = "dry-run-collection"
-            logger.info("[DRY-RUN] Would create collection 'solidx-docs'")
-        else:
-            solidx_docs_collection = None 
+            logger.info("[DRY-RUN] Would verify collections")
+            return
+        
+        logger.info("Verifying collections exist in R2R...")
+        for subdir, collection_id in self.COLLECTION_MAPPING.items():
             try:
-                solidx_docs_collection = self.client.collections.retrieve_by_name(name='solidx-docs')
-            except R2RException as r2rEx:
-                logger.warning('Collection solidx-docs does not exist, will attempt to create it.')
-
-            if not solidx_docs_collection:
-                result = self.client.collections.create(
-                    name="solidx-docs",
-                    description="SolidX documentation collection",
-                )
-                coll_id = result.results.id
-                logger.info(f"Created collection 'solidx-docs' with id={coll_id}")
-            else:
-                coll_id = solidx_docs_collection.results.id
-                logger.info(f"Resolved collection 'solidx-docs' with id={coll_id}")
-
-        self._manifest["_collection_id"] = str(coll_id)
-        return coll_id
+                # Try to retrieve the collection to verify it exists
+                collection = self.client.collections.retrieve(collection_id)
+                logger.info(f"✓ Collection '{subdir}' verified: {collection_id}")
+            except Exception as e:
+                logger.error(f"✗ Collection '{subdir}' ({collection_id}) not found or inaccessible: {e}")
+                raise ValueError(f"Collection for '{subdir}' does not exist. Please create it first.")
 
     def save_manifest(self) -> None:
         tmp = self.manifest_path.with_suffix(".tmp")
@@ -320,9 +336,15 @@ class DocIngestor:
 
         return sanitize_metadata(base_meta)
 
-    def upsert_file(self, file_path: Path, collection_id: str) -> None:
+    def upsert_file(self, file_path: Path) -> None:
         rel_path = file_path.relative_to(self.base_dir)
         key = str(rel_path).replace("\\", "/")
+
+        # Determine which collection this file belongs to
+        collection_id = self.get_collection_id_for_file(rel_path)
+        if not collection_id:
+            logger.warning(f"Skipping file {key} - no collection mapping found")
+            return
 
         file_hash = sha256_file(file_path)
         prev = self._manifest.get(key)
@@ -333,6 +355,10 @@ class DocIngestor:
         # (Re)ingest
         file_text = file_path.read_text(encoding="utf-8", errors="ignore")
         metadata = self.build_metadata(file_path, rel_path, file_text)
+        
+        # Add collection information to metadata for tracking
+        metadata["collection_id"] = collection_id
+        metadata["collection_name"] = next((k for k, v in self.COLLECTION_MAPPING.items() if v == collection_id), "unknown")
 
         # If existed but changed: delete old first
         if prev and prev.get("document_id"):
@@ -352,11 +378,11 @@ class DocIngestor:
             chunks_data = split_by_h2(file_text)
             
             # Debug: Log what we're getting from H2 splitting
-            logger.info(f"H2 split result: {len(chunks_data)} sections found")
+            # logger.info(f"H2 split result: {len(chunks_data)} sections found")
             for i, chunk_data in enumerate(chunks_data):
                 title = chunk_data["section_title"]
                 content_preview = chunk_data["content"][:100].replace('\n', ' ')
-                logger.info(f"  Section {i}: '{title}' - {content_preview}...")
+                # logger.info(f"  Section {i}: '{title}' - {content_preview}...")
             
             # Prepare chunks for R2R ingestion - use simple approach that worked
             chunks = []
@@ -389,6 +415,7 @@ class DocIngestor:
         self._manifest[key] = {
             "hash": file_hash,
             "document_id": str(document_id),
+            "collection_id": collection_id,
             "metadata": metadata,
         }
 
@@ -415,10 +442,10 @@ class DocIngestor:
     def run(self, cleanup: bool = True) -> None:
         logger.info(f"Scanning base_dir={self.base_dir}")
         self.load_manifest()
-        collection_id = self.ensure_collection()
+        self.verify_collections()
 
         for p in self.iter_files():
-            self.upsert_file(p, collection_id)
+            self.upsert_file(p)
         # if cleanup:
         #     self.cleanup_orphans()
         self.save_manifest()
@@ -442,7 +469,7 @@ class DocIngestor:
         
         logger.info(f"Upserting single file: {file_path_obj}")
         self.load_manifest()
-        collection_id = self.ensure_collection()
+        self.verify_collections()
         
         # Store original base_dir 
         original_base_dir = self.base_dir
@@ -451,7 +478,7 @@ class DocIngestor:
         # This ensures the relative path matches existing manifest entries
         
         try:
-            self.upsert_file(file_path_obj, collection_id)
+            self.upsert_file(file_path_obj)
             self.save_manifest()
             
             # Calculate relative path from original base_dir for manifest lookup
