@@ -187,8 +187,8 @@
     }
   },
   "developer-docs/metadata_schema/media-storage-providers.md": {
-    "hash": "449eaf9e0c870d9ce2495293ea7fd551ac45b54a82b3d7d847355feacca243ac",
-    "document_id": "3b8bd62a-78a4-4264-a351-1e307fbb204b",
+    "hash": "61891b6c5677ac3dd35b87d43acdde0c64068da4d5b1a82c72800415a59efdf1",
+    "document_id": "3ca31ba3-f71c-4476-8af0-38d32e985ed0",
     "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
     "metadata": {
       "source": "docusaurus",
@@ -204,8 +204,8 @@
     }
   },
   "developer-docs/metadata_schema/users-metadata.md": {
-    "hash": "889580de842ffb4b9af7a9a834ed048095cc6e45082d1b3521d0341d479d4fb8",
-    "document_id": "911e13ca-4655-4d39-a152-83482dd7d7a8",
+    "hash": "4d95c2454de85700f92187ebb1c779c9b15c89a8f6d4304b0687000f9c839be2",
+    "document_id": "2ed4373f-0447-481d-adf0-b68e31144951",
     "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
     "metadata": {
       "source": "docusaurus",
@@ -255,8 +255,8 @@
     }
   },
   "developer-docs/metadata_schema/module-metadata.md": {
-    "hash": "5148233e7e6e975ff905735dd7fc6f8c8b37aa63272b4fc698e368a8a4afd099",
-    "document_id": "1e68f96b-a0c4-45ce-b74a-d9f5514a6751",
+    "hash": "511c8fda5d07f8523884fb7676095c8998b6f84e22629cee94164948bf2b223d",
+    "document_id": "dbab219c-115b-4211-bfcc-735dd9849820",
     "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
     "metadata": {
       "source": "docusaurus",
@@ -931,6 +931,737 @@
       "collection_name": "developer-docs",
       "title": "developer-docs/extending/backend-customization/services/index.md",
       "chunk_count": 2,
+      "has_summaries": true
+    }
+  },
+  "tutorial/index.md": {
+    "hash": "5a60fa5e410fb0f780d21adbbb5726ed786651211c6359a2d64ad16485670ef4",
+    "document_id": "0f051810-4f90-4bc3-a8ed-204ab93e9b21",
+    "collection_id": "cd59267d-67e0-4897-91a6-1a338f5e83bf",
+    "metadata": {
+      "source": "docusaurus",
+      "project": "solidx-docs",
+      "section": "tutorial",
+      "path": "tutorial/index.md",
+      "doc_title": "tutorial/index.md",
+      "collection_id": "cd59267d-67e0-4897-91a6-1a338f5e83bf",
+      "collection_name": "tutorial",
+      "title": "tutorial/index.md",
+      "chunk_count": 1,
+      "has_summaries": true
+    }
+  },
+  "recipes/email.md": {
+    "hash": "0b3033ba8ba54bd517a4a8d0266a7a6230c1869e12c30bf53e9e33d3040ed08c",
+    "document_id": "6e230799-6165-4f9a-be47-74c1a113107e",
+    "collection_id": "f0935ef1-c3c4-403d-b32f-2a2d52861db1",
+    "metadata": {
+      "source": "docusaurus",
+      "project": "solidx-docs",
+      "section": "recipes",
+      "path": "recipes/email.md",
+      "doc_title": "recipes/email.md",
+      "collection_id": "f0935ef1-c3c4-403d-b32f-2a2d52861db1",
+      "collection_name": "recipes",
+      "title": "recipes/email.md",
+      "chunk_count": 3,
+      "has_summaries": true
+    }
+  },
+  "recipes/computed-fields.md": {
+    "hash": "2ba513ac1d515d7602ad14d9fcbab20532187652ac263ef1877f1004e490c2d3",
+    "document_id": "9334be31-0c53-417d-ac95-ef00f21a42a0",
+    "collection_id": "f0935ef1-c3c4-403d-b32f-2a2d52861db1",
+    "metadata": {
+      "source": "docusaurus",
+      "project": "solidx-docs",
+      "section": "recipes",
+      "path": "recipes/computed-fields.md",
+      "doc_title": "recipes/computed-fields.md",
+      "collection_id": "f0935ef1-c3c4-403d-b32f-2a2d52861db1",
+      "collection_name": "recipes",
+      "title": "recipes/computed-fields.md",
+      "chunk_count": 1,
+      "has_summaries": true
+    }
+  },
+  "recipes/media-providers.md": {
+    "hash": "5812dd8914d8e21bd8c4b3cd0385ca2f4e215675e5ec30bb3aedd9fec51039f3",
+    "document_id": "c0bcf83f-b60f-49b5-9d43-36e8485d6895",
+    "collection_id": "f0935ef1-c3c4-403d-b32f-2a2d52861db1",
+    "metadata": {
+      "source": "docusaurus",
+      "project": "solidx-docs",
+      "section": "recipes",
+      "path": "recipes/media-providers.md",
+      "doc_title": "recipes/media-providers.md",
+      "collection_id": "f0935ef1-c3c4-403d-b32f-2a2d52861db1",
+      "collection_name": "recipes",
+      "title": "recipes/media-providers.md",
+      "chunk_count": 2,
+      "has_summaries": true
+    }
+  },
+  "recipes/extending-users.md": {
+    "hash": "6685c0db971b30319fcb27aed29ddbb81cba138476fa6ad2aa7f0a8ff0a506de",
+    "document_id": "94d45dbe-2a01-4a2c-8cd4-1aba4f65d997",
+    "collection_id": "f0935ef1-c3c4-403d-b32f-2a2d52861db1",
+    "metadata": {
+      "source": "docusaurus",
+      "project": "solidx-docs",
+      "section": "recipes",
+      "path": "recipes/extending-users.md",
+      "doc_title": "recipes/extending-users.md",
+      "collection_id": "f0935ef1-c3c4-403d-b32f-2a2d52861db1",
+      "collection_name": "recipes",
+      "title": "recipes/extending-users.md",
+      "chunk_count": 1,
+      "has_summaries": true
+    }
+  },
+  "recipes/index.md": {
+    "hash": "0d72d575b21eb24ccc2c8242cc860f39805ae58f972c13e0eb86e8fbc9a4fff9",
+    "document_id": "25b995dd-2a90-4702-9807-2eadacd89128",
+    "collection_id": "f0935ef1-c3c4-403d-b32f-2a2d52861db1",
+    "metadata": {
+      "source": "docusaurus",
+      "project": "solidx-docs",
+      "section": "recipes",
+      "path": "recipes/index.md",
+      "doc_title": "recipes/index.md",
+      "collection_id": "f0935ef1-c3c4-403d-b32f-2a2d52861db1",
+      "collection_name": "recipes",
+      "title": "recipes/index.md",
+      "chunk_count": 1,
+      "has_summaries": true
+    }
+  },
+  "recipes/soft-delete.md": {
+    "hash": "b47296a0febe076b020d2c09f5fce86b88a8753cda1a8dff5837a927f76c8721",
+    "document_id": "7f0ff6c4-6593-4cd4-a965-647f2d581521",
+    "collection_id": "f0935ef1-c3c4-403d-b32f-2a2d52861db1",
+    "metadata": {
+      "source": "docusaurus",
+      "project": "solidx-docs",
+      "section": "recipes",
+      "path": "recipes/soft-delete.md",
+      "doc_title": "recipes/soft-delete.md",
+      "collection_id": "f0935ef1-c3c4-403d-b32f-2a2d52861db1",
+      "collection_name": "recipes",
+      "title": "recipes/soft-delete.md",
+      "chunk_count": 1,
+      "has_summaries": true
+    }
+  },
+  "recipes/queue.md": {
+    "hash": "d44836f63c8937f8362065743a7260652edefc76f2234ae22766bbc0e02168c9",
+    "document_id": "3a576c76-cd35-4637-bbec-5f76d0a66db8",
+    "collection_id": "f0935ef1-c3c4-403d-b32f-2a2d52861db1",
+    "metadata": {
+      "source": "docusaurus",
+      "project": "solidx-docs",
+      "section": "recipes",
+      "path": "recipes/queue.md",
+      "doc_title": "recipes/queue.md",
+      "collection_id": "f0935ef1-c3c4-403d-b32f-2a2d52861db1",
+      "collection_name": "recipes",
+      "title": "recipes/queue.md",
+      "chunk_count": 4,
+      "has_summaries": true
+    }
+  },
+  "recipes/actions-menus-guide.md": {
+    "hash": "d7e48d03be7754bf42bf00b790df19e02497435b89ae353f6afdfe575ff6087d",
+    "document_id": "bffac339-e90c-4395-87cd-c7542eb5292d",
+    "collection_id": "f0935ef1-c3c4-403d-b32f-2a2d52861db1",
+    "metadata": {
+      "source": "docusaurus",
+      "project": "solidx-docs",
+      "section": "recipes",
+      "path": "recipes/actions-menus-guide.md",
+      "doc_title": "recipes/actions-menus-guide.md",
+      "collection_id": "f0935ef1-c3c4-403d-b32f-2a2d52861db1",
+      "collection_name": "recipes",
+      "title": "recipes/actions-menus-guide.md",
+      "chunk_count": 13,
+      "has_summaries": true
+    }
+  },
+  "recipes/handlers.md": {
+    "hash": "1370d7e24131ae267c88a5ecd30fc4bd1a916f82a60d2a7693fe00fe2be9fc34",
+    "document_id": "7e758f69-a81a-4239-bd69-98d5b597109c",
+    "collection_id": "f0935ef1-c3c4-403d-b32f-2a2d52861db1",
+    "metadata": {
+      "source": "docusaurus",
+      "project": "solidx-docs",
+      "section": "recipes",
+      "path": "recipes/handlers.md",
+      "doc_title": "recipes/handlers.md",
+      "collection_id": "f0935ef1-c3c4-403d-b32f-2a2d52861db1",
+      "collection_name": "recipes",
+      "title": "recipes/handlers.md",
+      "chunk_count": 1,
+      "has_summaries": true
+    }
+  },
+  "recipes/additional-datasources.md": {
+    "hash": "11a02a076db439d55971ea92671ce46d8aca155961b52b4305f0a2bd1224546a",
+    "document_id": "3bb0f97c-cfef-45c3-aa44-e09478628ff0",
+    "collection_id": "f0935ef1-c3c4-403d-b32f-2a2d52861db1",
+    "metadata": {
+      "source": "docusaurus",
+      "project": "solidx-docs",
+      "section": "recipes",
+      "path": "recipes/additional-datasources.md",
+      "doc_title": "recipes/additional-datasources.md",
+      "collection_id": "f0935ef1-c3c4-403d-b32f-2a2d52861db1",
+      "collection_name": "recipes",
+      "title": "recipes/additional-datasources.md",
+      "chunk_count": 1,
+      "has_summaries": true
+    }
+  },
+  "tutorial/school-fees-portal/index.md": {
+    "hash": "8bd4824dcf0d4a5f30168febe9784ea86c36918e31020cd8742c81d1de953071",
+    "document_id": "302928e5-7cd5-45dc-b9e6-bb51290b728c",
+    "collection_id": "cd59267d-67e0-4897-91a6-1a338f5e83bf",
+    "metadata": {
+      "source": "docusaurus",
+      "project": "solidx-docs",
+      "section": "tutorial",
+      "path": "tutorial/school-fees-portal/index.md",
+      "doc_title": "tutorial/school-fees-portal/index.md",
+      "collection_id": "cd59267d-67e0-4897-91a6-1a338f5e83bf",
+      "collection_name": "tutorial",
+      "title": "tutorial/school-fees-portal/index.md",
+      "chunk_count": 5,
+      "has_summaries": true
+    }
+  },
+  "tutorial/school-fees-portal/1-bootstrap/index.md": {
+    "hash": "ec5cfbf70f5e927cb0d79c573fa165449fe0f55fbfe52f2467c4721356469509",
+    "document_id": "030bda6a-9fef-4e1b-b533-9d27d3e7eed6",
+    "collection_id": "cd59267d-67e0-4897-91a6-1a338f5e83bf",
+    "metadata": {
+      "source": "docusaurus",
+      "project": "solidx-docs",
+      "section": "tutorial",
+      "path": "tutorial/school-fees-portal/1-bootstrap/index.md",
+      "doc_title": "tutorial/school-fees-portal/1-bootstrap/index.md",
+      "collection_id": "cd59267d-67e0-4897-91a6-1a338f5e83bf",
+      "collection_name": "tutorial",
+      "title": "tutorial/school-fees-portal/1-bootstrap/index.md",
+      "chunk_count": 2,
+      "has_summaries": true
+    }
+  },
+  "tutorial/school-fees-portal/4-customisations/index.md": {
+    "hash": "a70d91b08f5367533a265622499a0c21d3a01fd8b68c6f955e913f5fcabe2bd3",
+    "document_id": "961ad7c1-0565-49d1-8e7d-bfec0ecaf0a6",
+    "collection_id": "cd59267d-67e0-4897-91a6-1a338f5e83bf",
+    "metadata": {
+      "source": "docusaurus",
+      "project": "solidx-docs",
+      "section": "tutorial",
+      "path": "tutorial/school-fees-portal/4-customisations/index.md",
+      "doc_title": "tutorial/school-fees-portal/4-customisations/index.md",
+      "collection_id": "cd59267d-67e0-4897-91a6-1a338f5e83bf",
+      "collection_name": "tutorial",
+      "title": "tutorial/school-fees-portal/4-customisations/index.md",
+      "chunk_count": 7,
+      "has_summaries": true
+    }
+  },
+  "tutorial/school-fees-portal/2-data-model/index.md": {
+    "hash": "b38fe37a61c5775d27cb71f591dc477d8144059b9c18c36609624d7478d2b588",
+    "document_id": "599def14-9b51-436e-a580-77cb1a9f6c28",
+    "collection_id": "cd59267d-67e0-4897-91a6-1a338f5e83bf",
+    "metadata": {
+      "source": "docusaurus",
+      "project": "solidx-docs",
+      "section": "tutorial",
+      "path": "tutorial/school-fees-portal/2-data-model/index.md",
+      "doc_title": "tutorial/school-fees-portal/2-data-model/index.md",
+      "collection_id": "cd59267d-67e0-4897-91a6-1a338f5e83bf",
+      "collection_name": "tutorial",
+      "title": "tutorial/school-fees-portal/2-data-model/index.md",
+      "chunk_count": 4,
+      "has_summaries": true
+    }
+  },
+  "tutorial/school-fees-portal/3-admin-layout/index.md": {
+    "hash": "9109819eb119faa26430b3a1064e8de8dea82c0a226dab3afb67839a159f3dc0",
+    "document_id": "1e6e0dc8-83b2-4d76-a58b-db57100e861c",
+    "collection_id": "cd59267d-67e0-4897-91a6-1a338f5e83bf",
+    "metadata": {
+      "source": "docusaurus",
+      "project": "solidx-docs",
+      "section": "tutorial",
+      "path": "tutorial/school-fees-portal/3-admin-layout/index.md",
+      "doc_title": "tutorial/school-fees-portal/3-admin-layout/index.md",
+      "collection_id": "cd59267d-67e0-4897-91a6-1a338f5e83bf",
+      "collection_name": "tutorial",
+      "title": "tutorial/school-fees-portal/3-admin-layout/index.md",
+      "chunk_count": 9,
+      "has_summaries": true
+    }
+  },
+  "developer-docs/extending/backend-customization/background-jobs.md": {
+    "hash": "8ade4229fa699d7a39cc2427b9a88c5f44a00f49d2e9f803b432073554077205",
+    "document_id": "a1692f12-205a-4ead-acc0-a375ea22d54f",
+    "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
+    "metadata": {
+      "source": "docusaurus",
+      "project": "solidx-docs",
+      "section": "developer-docs",
+      "path": "developer-docs/extending/backend-customization/background-jobs.md",
+      "doc_title": "developer-docs/extending/backend-customization/background-jobs.md",
+      "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
+      "collection_name": "developer-docs",
+      "title": "developer-docs/extending/backend-customization/background-jobs.md",
+      "chunk_count": 5,
+      "has_summaries": true
+    }
+  },
+  "admin-docs/index.md": {
+    "hash": "89f4e18eaf2bad4f8d844a140bf68219b86feaadb40cc8fe1d95c95f81d2284c",
+    "document_id": "a738e76d-9757-44fd-a878-487558077499",
+    "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
+    "metadata": {
+      "source": "docusaurus",
+      "project": "solidx-docs",
+      "section": "admin-docs",
+      "path": "admin-docs/index.md",
+      "doc_title": "admin-docs/index.md",
+      "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
+      "collection_name": "admin-docs",
+      "title": "admin-docs/index.md",
+      "chunk_count": 3,
+      "has_summaries": true
+    }
+  },
+  "admin-docs/settings/index.md": {
+    "hash": "474fc676ef5992c0cb02fc86699ceae148c3bcf2f3ae75d522cd2de69ac623b9",
+    "document_id": "27430577-9499-4848-9ddd-187b84e2f74e",
+    "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
+    "metadata": {
+      "source": "docusaurus",
+      "project": "solidx-docs",
+      "section": "admin-docs",
+      "path": "admin-docs/settings/index.md",
+      "doc_title": "admin-docs/settings/index.md",
+      "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
+      "collection_name": "admin-docs",
+      "title": "admin-docs/settings/index.md",
+      "chunk_count": 7,
+      "has_summaries": true
+    }
+  },
+  "admin-docs/module-builder/module-management.md": {
+    "hash": "73c708b5afd71174b3d8ef47d728839af7b92d2f2a14822e0c75d82a7bd158f3",
+    "document_id": "31855179-0073-441e-8f0a-c0800781fb98",
+    "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
+    "metadata": {
+      "source": "docusaurus",
+      "project": "solidx-docs",
+      "section": "admin-docs",
+      "path": "admin-docs/module-builder/module-management.md",
+      "doc_title": "admin-docs/module-builder/module-management.md",
+      "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
+      "collection_name": "admin-docs",
+      "title": "admin-docs/module-builder/module-management.md",
+      "chunk_count": 3,
+      "has_summaries": true
+    }
+  },
+  "admin-docs/module-builder/model-management.md": {
+    "hash": "bc17091da05712f138c0974d8fd2dc81b628a20e55c167413c79562990510aac",
+    "document_id": "8c04cd5f-4a18-4aa7-951d-3dcb0cf3f92d",
+    "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
+    "metadata": {
+      "source": "docusaurus",
+      "project": "solidx-docs",
+      "section": "admin-docs",
+      "path": "admin-docs/module-builder/model-management.md",
+      "doc_title": "admin-docs/module-builder/model-management.md",
+      "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
+      "collection_name": "admin-docs",
+      "title": "admin-docs/module-builder/model-management.md",
+      "chunk_count": 3,
+      "has_summaries": true
+    }
+  },
+  "admin-docs/module-builder/field-management.md": {
+    "hash": "769d917b0188261efb3330e62667076b5bb0fed8529a825bf64311f87b36bba8",
+    "document_id": "98fc4fb3-6af9-4128-8e64-e7bdeb23bad1",
+    "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
+    "metadata": {
+      "source": "docusaurus",
+      "project": "solidx-docs",
+      "section": "admin-docs",
+      "path": "admin-docs/module-builder/field-management.md",
+      "doc_title": "admin-docs/module-builder/field-management.md",
+      "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
+      "collection_name": "admin-docs",
+      "title": "admin-docs/module-builder/field-management.md",
+      "chunk_count": 8,
+      "has_summaries": true
+    }
+  },
+  "admin-docs/module-builder/index.md": {
+    "hash": "a2332fd851dc01c2e26ccbc3dcb4f7b76d3085ead5f5da4bbb65b2b7991d6372",
+    "document_id": "74776bed-75b8-4790-9bf0-2da88c90553b",
+    "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
+    "metadata": {
+      "source": "docusaurus",
+      "project": "solidx-docs",
+      "section": "admin-docs",
+      "path": "admin-docs/module-builder/index.md",
+      "doc_title": "admin-docs/module-builder/index.md",
+      "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
+      "collection_name": "admin-docs",
+      "title": "admin-docs/module-builder/index.md",
+      "chunk_count": 2,
+      "has_summaries": true
+    }
+  },
+  "admin-docs/iam/permissions.md": {
+    "hash": "71c86a875ff1dbb7a7b944c2bf943abd8665a56c91462ffd922d1cfcbc695780",
+    "document_id": "7b490726-42f2-4ac7-98b6-4e5b3d8119fc",
+    "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
+    "metadata": {
+      "source": "docusaurus",
+      "project": "solidx-docs",
+      "section": "admin-docs",
+      "path": "admin-docs/iam/permissions.md",
+      "doc_title": "admin-docs/iam/permissions.md",
+      "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
+      "collection_name": "admin-docs",
+      "title": "admin-docs/iam/permissions.md",
+      "chunk_count": 4,
+      "has_summaries": true
+    }
+  },
+  "admin-docs/iam/record-rules.md": {
+    "hash": "f90dbdc9344af80d57fb1a3ec6b589d9f1aa0d83847e1c46367fa098a75b76bc",
+    "document_id": "5b068bc2-7e2d-4352-9be7-6fc328cbf80c",
+    "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
+    "metadata": {
+      "source": "docusaurus",
+      "project": "solidx-docs",
+      "section": "admin-docs",
+      "path": "admin-docs/iam/record-rules.md",
+      "doc_title": "admin-docs/iam/record-rules.md",
+      "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
+      "collection_name": "admin-docs",
+      "title": "admin-docs/iam/record-rules.md",
+      "chunk_count": 6,
+      "has_summaries": true
+    }
+  },
+  "admin-docs/iam/roles.md": {
+    "hash": "b9ce1f5981e758c46f81280f4b69790f38be3602cd03ba87e532e1f44d09300e",
+    "document_id": "d7c4deac-a32d-4e05-bc0b-f3147a8f11f7",
+    "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
+    "metadata": {
+      "source": "docusaurus",
+      "project": "solidx-docs",
+      "section": "admin-docs",
+      "path": "admin-docs/iam/roles.md",
+      "doc_title": "admin-docs/iam/roles.md",
+      "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
+      "collection_name": "admin-docs",
+      "title": "admin-docs/iam/roles.md",
+      "chunk_count": 3,
+      "has_summaries": true
+    }
+  },
+  "admin-docs/iam/users.md": {
+    "hash": "efa3e00fc33126f7bf10f74290dc0e81e971bac8480d1bd2cea033caf663ea7a",
+    "document_id": "a608cd79-56ff-456c-8286-2e5aa12926ce",
+    "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
+    "metadata": {
+      "source": "docusaurus",
+      "project": "solidx-docs",
+      "section": "admin-docs",
+      "path": "admin-docs/iam/users.md",
+      "doc_title": "admin-docs/iam/users.md",
+      "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
+      "collection_name": "admin-docs",
+      "title": "admin-docs/iam/users.md",
+      "chunk_count": 4,
+      "has_summaries": true
+    }
+  },
+  "admin-docs/iam/index.md": {
+    "hash": "2286b63cecfc374fa30a35492eeb5fe0ebd52f59906bf92f545292d9c6f60f43",
+    "document_id": "c9eee9d7-508e-4384-b7de-3e0e80d448a0",
+    "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
+    "metadata": {
+      "source": "docusaurus",
+      "project": "solidx-docs",
+      "section": "admin-docs",
+      "path": "admin-docs/iam/index.md",
+      "doc_title": "admin-docs/iam/index.md",
+      "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
+      "collection_name": "admin-docs",
+      "title": "admin-docs/iam/index.md",
+      "chunk_count": 4,
+      "has_summaries": true
+    }
+  },
+  "admin-docs/layouts/form-view.md": {
+    "hash": "af4d1c87974e970ce6ae14ab1a1bc1f578880606da5a7858648521fb3540be6d",
+    "document_id": "bd1c9411-201b-4724-9779-bc4b4712b9d0",
+    "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
+    "metadata": {
+      "source": "docusaurus",
+      "project": "solidx-docs",
+      "section": "admin-docs",
+      "path": "admin-docs/layouts/form-view.md",
+      "doc_title": "admin-docs/layouts/form-view.md",
+      "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
+      "collection_name": "admin-docs",
+      "title": "admin-docs/layouts/form-view.md",
+      "chunk_count": 4,
+      "has_summaries": true
+    }
+  },
+  "admin-docs/layouts/index.md": {
+    "hash": "bff718c804501412a60de28ea24c108161ddaadab2634c0b867a004ff4010dfd",
+    "document_id": "45820d8b-6789-4320-aa9c-83a62c0d9071",
+    "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
+    "metadata": {
+      "source": "docusaurus",
+      "project": "solidx-docs",
+      "section": "admin-docs",
+      "path": "admin-docs/layouts/index.md",
+      "doc_title": "admin-docs/layouts/index.md",
+      "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
+      "collection_name": "admin-docs",
+      "title": "admin-docs/layouts/index.md",
+      "chunk_count": 5,
+      "has_summaries": true
+    }
+  },
+  "admin-docs/layouts/kanban-view.md": {
+    "hash": "20bb01e5d091657fff9b3215e0bbcec776bc9dd469e3117730338e692780216e",
+    "document_id": "78f77ff2-1de0-4ffc-925a-69cf274e359a",
+    "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
+    "metadata": {
+      "source": "docusaurus",
+      "project": "solidx-docs",
+      "section": "admin-docs",
+      "path": "admin-docs/layouts/kanban-view.md",
+      "doc_title": "admin-docs/layouts/kanban-view.md",
+      "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
+      "collection_name": "admin-docs",
+      "title": "admin-docs/layouts/kanban-view.md",
+      "chunk_count": 10,
+      "has_summaries": true
+    }
+  },
+  "admin-docs/layouts/list-view.md": {
+    "hash": "a1b7ddb02a52b9958febf7e2d95c827d349adeb8310f03f0742d5e4fa38c9cda",
+    "document_id": "91edefd3-d34a-4acb-8927-dabdb279d03a",
+    "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
+    "metadata": {
+      "source": "docusaurus",
+      "project": "solidx-docs",
+      "section": "admin-docs",
+      "path": "admin-docs/layouts/list-view.md",
+      "doc_title": "admin-docs/layouts/list-view.md",
+      "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
+      "collection_name": "admin-docs",
+      "title": "admin-docs/layouts/list-view.md",
+      "chunk_count": 6,
+      "has_summaries": true
+    }
+  },
+  "admin-docs/media-library/index.md": {
+    "hash": "2b4869fd5d2ba76ef746965d9469dad991095dfb21d0a540484c60ab53209f63",
+    "document_id": "f4329fce-8a16-4f40-adbf-00841c7ace44",
+    "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
+    "metadata": {
+      "source": "docusaurus",
+      "project": "solidx-docs",
+      "section": "admin-docs",
+      "path": "admin-docs/media-library/index.md",
+      "doc_title": "admin-docs/media-library/index.md",
+      "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
+      "collection_name": "admin-docs",
+      "title": "admin-docs/media-library/index.md",
+      "chunk_count": 4,
+      "has_summaries": true
+    }
+  },
+  "admin-docs/media-library/storage-providers.md": {
+    "hash": "b10bcabd9257c984462771e61ff2a7fd68a51cd5378caf7ba0e2755a6a39c5ea",
+    "document_id": "0105c118-2f10-47fb-b3ce-57f122973a02",
+    "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
+    "metadata": {
+      "source": "docusaurus",
+      "project": "solidx-docs",
+      "section": "admin-docs",
+      "path": "admin-docs/media-library/storage-providers.md",
+      "doc_title": "admin-docs/media-library/storage-providers.md",
+      "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
+      "collection_name": "admin-docs",
+      "title": "admin-docs/media-library/storage-providers.md",
+      "chunk_count": 5,
+      "has_summaries": true
+    }
+  },
+  "admin-docs/media-library/media-view.md": {
+    "hash": "6d454f4f8447ebb1d2d0993bdd076c5e80c3cf201fd56db64307cf75939936b4",
+    "document_id": "2732395b-bc62-4c82-9531-353e4fb4f018",
+    "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
+    "metadata": {
+      "source": "docusaurus",
+      "project": "solidx-docs",
+      "section": "admin-docs",
+      "path": "admin-docs/media-library/media-view.md",
+      "doc_title": "admin-docs/media-library/media-view.md",
+      "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
+      "collection_name": "admin-docs",
+      "title": "admin-docs/media-library/media-view.md",
+      "chunk_count": 4,
+      "has_summaries": true
+    }
+  },
+  "admin-docs/modules/form-view.md": {
+    "hash": "cbd18a9b56b8884c32f2ce526478d1c237aa2c44f386b4c1890952f8b2db6d50",
+    "document_id": "bce93c57-d609-447f-b84c-7b20833bc069",
+    "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
+    "metadata": {
+      "source": "docusaurus",
+      "project": "solidx-docs",
+      "section": "admin-docs",
+      "path": "admin-docs/modules/form-view.md",
+      "doc_title": "admin-docs/modules/form-view.md",
+      "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
+      "collection_name": "admin-docs",
+      "title": "admin-docs/modules/form-view.md",
+      "chunk_count": 1,
+      "has_summaries": true
+    }
+  },
+  "admin-docs/modules/menu-structure.md": {
+    "hash": "61947d0f2e4e9cfc19332cde6029ba13f5fb46768a640689f3783decafce2db7",
+    "document_id": "3eb54d40-be74-49b3-9c75-220643b24bfd",
+    "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
+    "metadata": {
+      "source": "docusaurus",
+      "project": "solidx-docs",
+      "section": "admin-docs",
+      "path": "admin-docs/modules/menu-structure.md",
+      "doc_title": "admin-docs/modules/menu-structure.md",
+      "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
+      "collection_name": "admin-docs",
+      "title": "admin-docs/modules/menu-structure.md",
+      "chunk_count": 4,
+      "has_summaries": true
+    }
+  },
+  "admin-docs/modules/index.md": {
+    "hash": "1dc12518c0896b75954fa0aec4eccaa848ddf31c5876cf4a6f98784414bb4054",
+    "document_id": "174cd0ca-ff7d-4906-a7b8-508556ed17a2",
+    "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
+    "metadata": {
+      "source": "docusaurus",
+      "project": "solidx-docs",
+      "section": "admin-docs",
+      "path": "admin-docs/modules/index.md",
+      "doc_title": "admin-docs/modules/index.md",
+      "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
+      "collection_name": "admin-docs",
+      "title": "admin-docs/modules/index.md",
+      "chunk_count": 3,
+      "has_summaries": true
+    }
+  },
+  "admin-docs/modules/kanban-view.md": {
+    "hash": "a716a690d30466a787a7f2b4b77af8535a4d54f92cb18a4405e286d65b3bafb4",
+    "document_id": "45c93be6-ccd7-4504-8fa7-acd5748b8726",
+    "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
+    "metadata": {
+      "source": "docusaurus",
+      "project": "solidx-docs",
+      "section": "admin-docs",
+      "path": "admin-docs/modules/kanban-view.md",
+      "doc_title": "admin-docs/modules/kanban-view.md",
+      "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
+      "collection_name": "admin-docs",
+      "title": "admin-docs/modules/kanban-view.md",
+      "chunk_count": 2,
+      "has_summaries": true
+    }
+  },
+  "admin-docs/modules/list-view.md": {
+    "hash": "97fe8b2fbef28b503b58812fe66437d5973ca90c4b221f77d10d14e90b39b436",
+    "document_id": "7e5f62f1-ca22-4042-9c64-a82b71ed8eff",
+    "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
+    "metadata": {
+      "source": "docusaurus",
+      "project": "solidx-docs",
+      "section": "admin-docs",
+      "path": "admin-docs/modules/list-view.md",
+      "doc_title": "admin-docs/modules/list-view.md",
+      "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
+      "collection_name": "admin-docs",
+      "title": "admin-docs/modules/list-view.md",
+      "chunk_count": 2,
+      "has_summaries": true
+    }
+  },
+  "admin-docs/notifications/sms-templates.md": {
+    "hash": "f166778768277141f210db1909cd80b7ea24a9be6855908e7aec7119fe2dc918",
+    "document_id": "c169db38-f625-4b89-868a-67c6c2639d50",
+    "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
+    "metadata": {
+      "source": "docusaurus",
+      "project": "solidx-docs",
+      "section": "admin-docs",
+      "path": "admin-docs/notifications/sms-templates.md",
+      "doc_title": "admin-docs/notifications/sms-templates.md",
+      "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
+      "collection_name": "admin-docs",
+      "title": "admin-docs/notifications/sms-templates.md",
+      "chunk_count": 6,
+      "has_summaries": true
+    }
+  },
+  "admin-docs/notifications/index.md": {
+    "hash": "c4c4aaa53e869dcad6ca0b1266cc0633738e9d53c1b4c0c03519c0e8c20b1e81",
+    "document_id": "dbea59df-4aef-4c49-a20f-ad74a87f8cce",
+    "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
+    "metadata": {
+      "source": "docusaurus",
+      "project": "solidx-docs",
+      "section": "admin-docs",
+      "path": "admin-docs/notifications/index.md",
+      "doc_title": "admin-docs/notifications/index.md",
+      "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
+      "collection_name": "admin-docs",
+      "title": "admin-docs/notifications/index.md",
+      "chunk_count": 6,
+      "has_summaries": true
+    }
+  },
+  "admin-docs/notifications/email-templates.md": {
+    "hash": "3695f51366c5c990f738918f11d014f7f5aabb921ee57265de5b51135f8642c4",
+    "document_id": "39aaa29d-4759-454f-b08e-d6e133945e3f",
+    "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
+    "metadata": {
+      "source": "docusaurus",
+      "project": "solidx-docs",
+      "section": "admin-docs",
+      "path": "admin-docs/notifications/email-templates.md",
+      "doc_title": "admin-docs/notifications/email-templates.md",
+      "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
+      "collection_name": "admin-docs",
+      "title": "admin-docs/notifications/email-templates.md",
+      "chunk_count": 5,
       "has_summaries": true
     }
   }

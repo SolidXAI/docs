@@ -549,6 +549,10 @@ class DocIngestor:
             "collection_id": collection_id,
             "metadata": metadata,
         }
+        
+        # Save manifest after each successful file upsert
+        self.save_manifest()
+        logger.info(f"Manifest updated for {key}")
 
     def cleanup_orphans(self) -> None:
         """
@@ -579,6 +583,10 @@ class DocIngestor:
             self.upsert_file(p)
         # if cleanup:
         #     self.cleanup_orphans()
+        
+        # Manifest is now saved after each file, so this final save is redundant
+        # but keeping it here as a safety measure to ensure manifest is persisted
+        logger.info("All files processed. Final manifest save...")
         self.save_manifest()
 
     def upsert_single_file(self, file_path: str) -> Dict[str, str]:
@@ -610,6 +618,8 @@ class DocIngestor:
         
         try:
             self.upsert_file(file_path_obj)
+            # Manifest is now saved within upsert_file, so this call is redundant
+            # but keeping it as a safety measure
             self.save_manifest()
             
             # Calculate relative path from original base_dir for manifest lookup
