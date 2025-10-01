@@ -1,5 +1,5 @@
 ---
-sidebar_position: 2
+sidebar_position: 7
 title: Scheduled Jobs
 description: Learn how to write the scheduled jobs in your SolidX application.
 keywords: [backend, scheduled jobs, customization]

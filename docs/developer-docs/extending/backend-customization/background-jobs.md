@@ -1,5 +1,5 @@
 ---
-sidebar_position: 1
+sidebar_position: 6
 title: Background Jobs
 description: Learn how to set up and manage background jobs in SolidX, including configuration for different brokers like Database and RabbitMQ.
 keywords:

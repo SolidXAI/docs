@@ -1,0 +1,8 @@
+# Checklist
+1. Ensure all page structures are flattened i.e get rid of index files
+3. Ensure all headers are embedded in right sequence
+4. Ensure all menu items are visible for navigation
+5. Ensure all cross links work
+6. Add rationale wherever necessary
+7. Give context around the examples provided
+8. Keep menu title short to avoid wrapping

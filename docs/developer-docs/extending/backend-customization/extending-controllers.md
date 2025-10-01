@@ -2,7 +2,7 @@
 title: Extending Controllers
 description: Learn how to extend the backend controllers in your application.
 keywords: [backend, controllers, customization]
-sidebar_position: 3
+sidebar_position: 1
 ---
 import { IoIosArrowForward } from "react-icons/io";
 import { NoteBoxs } from '@site/src/common/NoteBoxs';

@@ -1,5 +1,5 @@
 ---
-sidebar_position: 3
+sidebar_position: 9
 title: Extending Users
 description: Learn how to extend user functionality in SolidX.
 keywords: [backend, users, customization]

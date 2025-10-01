@@ -1,5 +1,5 @@
 ---
-sidebar_position: 1
+sidebar_position: 12
 title: Dynamic Selection Providers
 description: Learn how to create dynamic selection providers to customize the selection options in your application.
 keywords: [backend, dynamic selection, providers, customization]
