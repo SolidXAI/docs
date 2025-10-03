@@ -131,9 +131,17 @@ By default, table names are generated automatically based on the singular name o
 
 ### `userKeyFieldUserKey` *(string, optional)* i.e the user key field name
 The field in the model that serves as a unique identifier for records, often used for display purposes.  
-For example, in an "Institute" model, this could be the `"instituteName"` field.  
+For example, in an "Institute" model, this could be the `"instituteName"` field.
+Users keys are used in the UI to reference a model record. Examples include:
+ - While displaying relation records in a dropdown, the model's user key field is shown as the label for each option e.g `"Institute A"`.
+ - While displaying relation records in a list view, the model's user key field is shown as the label by default.
+ - In the details view of a record, the model's user key field is shown in the breadcrumb navigation.
+
 **Default:** N/A
 
+:::info
+User keys should be unique and stable (i.e., should not change over time) for a model. If a model is used in relations, it is mandatory to have a unique user key field defined for it for the functionality to work correctly.
+:::
 
 ### `isChild` *(boolean, required)*
 Indicates if the model is a child model (i.e., an extension of another model).  
@@ -181,3 +189,4 @@ If set to `true`, the model will support internationalization, allowing records 
 </div>
 
 -	👉 [Model Type Recipes](../../recipes/solidx-metadata-complete-guide.md)  
+**Default:** `false`

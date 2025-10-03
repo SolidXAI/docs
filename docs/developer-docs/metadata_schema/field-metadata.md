@@ -1283,7 +1283,11 @@ Override co-model's column name for relation bindings.
 
 
 ### `isUserKey` *(boolean, optional)*
-Marks this field as the **user key** (friendly identifier). This is mandatory if we need to use a relation field in the UI, since the user key is what gets displayed in the dropdowns and lookups.  
+Marks this field as the **user key** (friendly identifier).
+
+Further Reference:
+- [Model User Keys Explained](./model-metadata.md#userkeyfielduserkey-string-optional-ie-the-user-key-field-name) 
+
 **Default:** false
 
 

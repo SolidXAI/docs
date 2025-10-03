@@ -1,5 +1,5 @@
 ---
-sidebar_position: 2
+sidebar_position: 10
 title: Solid Registry
 description: Learn how to extend the Solid Registry in your SolidX application.
 keywords: [backend, solid registry, customization]

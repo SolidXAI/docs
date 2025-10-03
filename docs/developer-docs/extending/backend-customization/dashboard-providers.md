@@ -1,5 +1,5 @@
 ---
-sidebar_position: 2
+sidebar_position: 13
 title: Dashboard Providers
 description: Create custom dashboard providers to return the data for rendering dashboard widgets.
 keywords: [backend, dashboard, providers, customization]

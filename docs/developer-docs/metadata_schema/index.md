@@ -149,6 +149,8 @@ Below are the key components of the metadata schema. All the functionality conce
     <li>Configure proper field validations</li>
     <!-- <li>Set up referential integrity for relations</li> -->
     <li>Use appropriate data types</li>
+    <li>Ensure unique constraints where necessary</li>
+    <li>Choose appropriate user keys for models. User keys should be unique and stable (i.e should not change over time) for a model</li>
     <li>Use appropriate relation cascading rules</li>
   </ul>
 </details>

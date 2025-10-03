@@ -163,7 +163,7 @@ If your model includes media fields (e.g., uploading a logo), use the `multipart
   </h3>
 
 
-```
+```http
 POST /api/fee-type
 Content-Type: multipart/form-data
 Authorization: Bearer <token>
@@ -176,7 +176,7 @@ Authorization: Bearer <token>
   </summary>
 
 
-```bash
+```http
 --boundary
 Content-Disposition: form-data; name="data"
 

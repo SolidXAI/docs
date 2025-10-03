@@ -1,5 +1,5 @@
 ---
-sidebar_position: 4
+sidebar_position: 2
 title: Extending Services
 description: Learn how to extend the backend services in your application.
 keywords: [backend, services, customization]

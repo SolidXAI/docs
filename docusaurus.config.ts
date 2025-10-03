@@ -66,6 +66,11 @@ const config: Config = {
   ],
 
   themeConfig: {
+    colorMode: {
+      defaultMode: 'light', // 👈 default is light
+      disableSwitch: false, // user can still toggle
+      respectPrefersColorScheme: false, // ignores system setting
+    },
     image: 'img/docusaurus-social-card.jpg',
     navbar: {
       title: '',
