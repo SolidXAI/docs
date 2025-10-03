@@ -1,59 +1,97 @@
 ---
 title: Extending Controllers
-description: Learn how to extend the backend controllers in your application.
+description: Learn how to extend backend controllers in SolidX.
 keywords: [backend, controllers, customization]
 sidebar_position: 1
 ---
+
 import { IoIosArrowForward } from "react-icons/io";
 import { NoteBoxs } from '@site/src/common/NoteBoxs';
 
+# Extending Controllers
 
-#  Extending Controllers
+In SolidX, **controllers** are responsible for handling incoming requests and returning responses.  
+Customizing controllers allows you to **add new endpoints**, modify existing ones, or introduce business-specific logic into your application.
 
-Controllers are responsible for handling requests and returning responses. Customizing them allows you to tailor the behavior of your application to meet specific needs.
+---
 
+## Adding a New Endpoint
 
+To add a new endpoint to an existing controller:
 
-##  Adding a New Endpoint to a Controller
+1. Identify the controller you want to extend.  
+2. Add a new method inside the controller class to handle the endpoint logic.  
+3. Decorate the method with the appropriate HTTP method decorator (`@Get()`, `@Post()`, etc.).  
+4. Ensure the endpoint is registered in your API documentation.  
+5. Optionally, create a dedicated **DTO** for payload validation and Swagger docs.
 
-To add a new endpoint to an existing controller, follow these steps:
+You can also create an entirely new controller by adding a new file in the `controllers` directory and defining your custom logic there.
 
-1.  Identify the controller you want to extend.
-2.  Create a new method in the controller class that handles the logic for the new endpoint.
-3.  Define the route for the new endpoint in your routing configuration.
-4.  Ensure the new endpoint is documented in your API docs.
+---
 
-You can also create your own custom controller by adding a new file in the `controllers` directory and defining your custom controller there.
+### Example: Extending `InstituteController`
 
 <details>
   <summary className="card-title card-headear-wrapper">
     <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
-    Example: Add a new endpoint to <code>InstituteController</code>
-</summary>
+    Add New Endpoints to <code>InstituteController</code>
+  </summary>
 
 ```ts
+// Adds an endpoint to activate the institute portal
 @ApiBearerAuth("jwt")
-@Post('activate-institute-portal')
+@Post("activate-institute-portal")
 async activateInstitute(@Body() ids: (number | string)[]) {
-  const result = await this.service.activateInstitutePortal(ids); // Assuming you have created a service method for this
-  return result; 
+  // Delegate logic to the service layer
+  return this.service.activateInstitutePortal(ids);
+}
+
+// Adds an endpoint that accepts multipart/form-data with files + JSON body
+@ApiBearerAuth("jwt")
+@Post("custom-logic")
+@UseInterceptors(AnyFilesInterceptor())
+async performCustomLogicUsingBody(
+  @Body() payloadDto: CustomPayloadDto,
+  @UploadedFiles() files: Array<Express.Multer.File>,
+) {
+  return this.service.performCustomLogic(payloadDto, files);
+}
+
+// DTO definition with Swagger decorators for request validation & docs
+export class CustomPayloadDto {
+  @ApiProperty({
+    description: "The name of the entity",
+    example: "Sample Name",
+  })
+  name: string;
+
+  @ApiProperty({
+    description: "The description of the entity",
+    example: "This is a sample description.",
+  })
+  description: string;
 }
 ```
 </details>
 
+The first method (`activateInstitute`) handles `POST /activate-institute-portal` requests, while the second (`performCustomLogicUsingBody`) demonstrates handling **multipart/form-data** (files + JSON).
 
-This method will handle POST requests to the /activate-institute-portal endpoint and delegate the logic to the activateInstitutePortal method in the service layer.
+---
 
-
+## Permission Auto-Generation
 
 <NoteBoxs>
-    When you run solid seed, SolidX scans the code for controllers and their methods to auto-create permissions.
-    For example, the above method in InstituteController will generate a permission named InstituteController.activateInstitutePortal.
+When you run `solid seed`, SolidX scans controllers and their methods to **auto-generate permissions**.  
+For example, the method `activateInstitute` in `InstituteController` will generate a permission named:
+
+```
+InstituteController.activateInstitute
+```
 </NoteBoxs>
 
+---
 
+## Related Recipes (TODO)
 
-
-##  Related Recipes (TODO)
-	-	 Creating a Custom Controller
-	-	 Creating a Controller Endpoint with Custom Authentication
+- Creating a Custom Controller  
+- Creating a Controller Endpoint with Custom Authentication  
