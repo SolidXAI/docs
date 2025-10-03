@@ -176,7 +176,7 @@ Authorization: Bearer <token>
   </summary>
 
 
-```
+```bash
 --boundary
 Content-Disposition: form-data; name="data"
 

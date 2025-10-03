@@ -42,9 +42,9 @@ Supported operations include:
 - `after-remove`
 
 
-🔸 **Before operations** trigger `preComputeValue()` of `IEntityPreComputeFieldProvider`.
+ **Before operations** trigger `preComputeValue()` of `IEntityPreComputeFieldProvider`.
 
-🔸 **After operations** trigger `postComputeAndSaveValue()` of `IEntityPostComputeFieldProvider`.
+ **After operations** trigger `postComputeAndSaveValue()` of `IEntityPostComputeFieldProvider`.
 
 > For **before operations**, `modelName` must be the same as the model with the computed field.  
 > For **after operations**, it can be **any model**, related or unrelated.

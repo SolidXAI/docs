@@ -9,6 +9,7 @@ from pathlib import Path
 from typing import Dict, Optional, Tuple, List
 from r2r import R2RException
 from r2r import R2RClient
+from openai import OpenAI
 
 logger = logging.getLogger(__name__)
 
@@ -156,7 +157,17 @@ def breadcrumbs(rel_path: Path) -> List[str]:
 class DocIngestor:
     """
     Ingests Docusaurus .md docs into R2R with a local manifest to track hashes + R2R IDs.
+    Documents from different subdirectories are ingested into separate collections.
     """
+
+    # Mapping of subdirectory names to their collection IDs
+    COLLECTION_MAPPING = {
+        "admin-docs": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
+        "developer-docs": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
+        "recipes": "f0935ef1-c3c4-403d-b32f-2a2d52861db1",
+        "tutorial": "cd59267d-67e0-4897-91a6-1a338f5e83bf",
+        "user-docs": "32abd328-cb4c-4792-888b-a690a47c4e29",
+    }
 
     def __init__(
         self,
@@ -166,6 +177,7 @@ class DocIngestor:
         project: Optional[str] = None,
         exts: Tuple[str, ...] = (".md",),  # add ".mdx" if needed
         dry_run: bool = False,
+        openai_api_key: Optional[str] = None,
     ):
         self.client = client
         self.base_dir = base_dir
@@ -174,6 +186,14 @@ class DocIngestor:
         self.exts = exts
         self.dry_run = dry_run
         self._manifest: Dict[str, Dict] = {}
+        
+        # Initialize OpenAI client for summary generation
+        self.openai_client = None
+        if openai_api_key or os.getenv("OPENAI_API_KEY"):
+            self.openai_client = OpenAI(api_key=openai_api_key or os.getenv("OPENAI_API_KEY"))
+            logger.info("OpenAI client initialized for chunk summary generation")
+        else:
+            logger.warning("No OpenAI API key provided. Chunk summaries will not be generated.")
 
     # ---- manifest helpers ----
 
@@ -189,37 +209,98 @@ class DocIngestor:
         else:
             self._manifest = {}
 
+    def get_collection_id_for_file(self, rel_path: Path) -> str:
+        """
+        Determine which collection a file belongs to based on its relative path.
+        Returns the collection ID for the first matching subdirectory.
+        """
+        # Get the first directory component (e.g., "admin-docs" from "admin-docs/iam/permissions.md")
+        if len(rel_path.parts) > 0:
+            first_dir = rel_path.parts[0]
+            collection_id = self.COLLECTION_MAPPING.get(first_dir)
+            if collection_id:
+                logger.debug(f"File {rel_path} mapped to collection '{first_dir}' ({collection_id})")
+                return collection_id
+        
+        # Fallback: if no mapping found, log a warning
+        logger.warning(f"No collection mapping found for file {rel_path}. File will be skipped.")
+        return None
+
     # ---- collection resolve ----
 
-    def ensure_collection(self) -> str:
-        """Ensure we have a collection_id in the manifest, create if needed."""
-        coll_id = self._manifest.get("_collection_id")
-        if coll_id:
-            return coll_id
-
+    def verify_collections(self) -> None:
+        """
+        Verify that all configured collections exist in R2R.
+        This should be called once at the start of ingestion.
+        """
         if self.dry_run:
-            coll_id = "dry-run-collection"
-            logger.info("[DRY-RUN] Would create collection 'solidx-docs'")
-        else:
-            solidx_docs_collection = None 
+            logger.info("[DRY-RUN] Would verify collections")
+            return
+        
+        logger.info("Verifying collections exist in R2R...")
+        for subdir, collection_id in self.COLLECTION_MAPPING.items():
             try:
-                solidx_docs_collection = self.client.collections.retrieve_by_name(name='solidx-docs')
-            except R2RException as r2rEx:
-                logger.warning('Collection solidx-docs does not exist, will attempt to create it.')
+                # Try to retrieve the collection to verify it exists
+                collection = self.client.collections.retrieve(collection_id)
+                logger.info(f"✓ Collection '{subdir}' verified: {collection_id}")
+            except Exception as e:
+                logger.error(f"✗ Collection '{subdir}' ({collection_id}) not found or inaccessible: {e}")
+                raise ValueError(f"Collection for '{subdir}' does not exist. Please create it first.")
 
-            if not solidx_docs_collection:
-                result = self.client.collections.create(
-                    name="solidx-docs",
-                    description="SolidX documentation collection",
-                )
-                coll_id = result.results.id
-                logger.info(f"Created collection 'solidx-docs' with id={coll_id}")
-            else:
-                coll_id = solidx_docs_collection.results.id
-                logger.info(f"Resolved collection 'solidx-docs' with id={coll_id}")
+    def generate_chunk_summary(self, chunk_content: str, section_title: Optional[str], doc_title: str) -> Dict[str, str]:
+        """
+        Generate both short and detailed summaries for a chunk using OpenAI GPT.
+        
+        Args:
+            chunk_content: The actual content of the chunk
+            section_title: The H2 section title (if any)
+            doc_title: The document title/path
+            
+        Returns:
+            Dictionary with 'short_summary' and 'detailed_summary' keys
+        """
+        if not self.openai_client:
+            return {"short_summary": "", "detailed_summary": ""}
+        
+        try:
+            # Create context-aware prompt
+            context = f"Document: {doc_title}"
+            if section_title:
+                context += f"\nSection: {section_title}"
+            
+            prompt = f"""Given this documentation chunk, provide:
+                1. A short one-line summary (max 50 words)
+                2. A detailed summary (about 3 to 4 sentences)
 
-        self._manifest["_collection_id"] = str(coll_id)
-        return coll_id
+                {context}
+
+                Content:
+                {chunk_content[:1500]}  # Limit content to avoid token limits
+
+                Respond in JSON format:
+                {{
+                "short_summary": "one-line summary here",
+                "detailed_summary": "First sentence. Second sentence. Third sentence etc."
+                }}"""
+
+            response = self.openai_client.chat.completions.create(
+                model="gpt-4.1",  # Using cost-effective model
+                messages=[
+                    {"role": "system", "content": "You are a technical documentation summarizer. Provide concise, accurate summaries."},
+                    {"role": "user", "content": prompt}
+                ],
+                temperature=0.3,
+                max_tokens=1500,
+                response_format={"type": "json_object"}
+            )
+            
+            summaries = json.loads(response.choices[0].message.content)
+            logger.debug(f"Generated summaries for section '{section_title or 'untitled'}'")
+            return summaries
+            
+        except Exception as e:
+            logger.warning(f"Failed to generate summary: {e}")
+            return {"short_summary": "", "detailed_summary": ""}
 
     def save_manifest(self) -> None:
         tmp = self.manifest_path.with_suffix(".tmp")
@@ -293,17 +374,17 @@ class DocIngestor:
         # Use file path as title instead of content title
         title = str(rel_path).replace("\\", "/")
         section = rel_path.parts[0] if len(rel_path.parts) > 0 else ""
-        crumb = breadcrumbs(rel_path)
-        slug = path_to_slug(rel_path)
+        # crumb = breadcrumbs(rel_path)
+        # slug = path_to_slug(rel_path)
 
         base_meta = {
             "source": "docusaurus",
             "project": self.project,
             "section": section,
-            "slug": slug,
+            # "slug": slug,
             "path": str(rel_path).replace("\\", "/"),
-            "filename": file_path.name,
-            "breadcrumbs": crumb,
+            # "filename": file_path.name,
+            # "breadcrumbs": crumb,
             "doc_title": title,
             # "frontmatter": fm,
             # "kind": "documentation",
@@ -314,15 +395,21 @@ class DocIngestor:
             # ),
         }
 
-        gitmeta = git_last_modified(file_path)
-        if gitmeta:
-            base_meta.update(gitmeta)
+        # gitmeta = git_last_modified(file_path)
+        # if gitmeta:
+        #     base_meta.update(gitmeta)
 
         return sanitize_metadata(base_meta)
 
-    def upsert_file(self, file_path: Path, collection_id: str) -> None:
+    def upsert_file(self, file_path: Path) -> None:
         rel_path = file_path.relative_to(self.base_dir)
         key = str(rel_path).replace("\\", "/")
+
+        # Determine which collection this file belongs to
+        collection_id = self.get_collection_id_for_file(rel_path)
+        if not collection_id:
+            logger.warning(f"Skipping file {key} - no collection mapping found")
+            return
 
         file_hash = sha256_file(file_path)
         prev = self._manifest.get(key)
@@ -333,6 +420,10 @@ class DocIngestor:
         # (Re)ingest
         file_text = file_path.read_text(encoding="utf-8", errors="ignore")
         metadata = self.build_metadata(file_path, rel_path, file_text)
+        
+        # Add collection information to metadata for tracking
+        metadata["collection_id"] = collection_id
+        metadata["collection_name"] = next((k for k, v in self.COLLECTION_MAPPING.items() if v == collection_id), "unknown")
 
         # If existed but changed: delete old first
         if prev and prev.get("document_id"):
@@ -352,28 +443,57 @@ class DocIngestor:
             chunks_data = split_by_h2(file_text)
             
             # Debug: Log what we're getting from H2 splitting
-            logger.info(f"H2 split result: {len(chunks_data)} sections found")
+            # logger.info(f"H2 split result: {len(chunks_data)} sections found")
             for i, chunk_data in enumerate(chunks_data):
                 title = chunk_data["section_title"]
                 content_preview = chunk_data["content"][:100].replace('\n', ' ')
-                logger.info(f"  Section {i}: '{title}' - {content_preview}...")
-            
-            # Prepare chunks for R2R ingestion - use simple approach that worked
-            chunks = []
-            for chunk_data in chunks_data:
-                chunks.append(chunk_data["content"])
+                # logger.info(f"  Section {i}: '{title}' - {content_preview}...")
             
             # Use file path as title
             rel_path = file_path.relative_to(self.base_dir)
             doc_title = str(rel_path).replace("\\", "/")
             metadata["title"] = doc_title
             
-            # Use pre-processed chunks to preserve exact H2 structure
-            logger.info(f"Using pre-processed chunks approach with {len(chunks)} H2 sections")
+            # Prepare enhanced chunks with order metadata and summaries
+            chunks = []
+            chunk_metadata_list = []
+            total_chunks = len(chunks_data)
+            
+            logger.info(f"Processing {total_chunks} H2 sections with summaries and ordering...")
+            
+            for idx, chunk_data in enumerate(chunks_data):
+                chunk_order = idx + 1  # 1-indexed for human readability
+                section_title = chunk_data["section_title"]
+                content = chunk_data["content"]
+                
+                # Generate summaries using OpenAI
+                summaries = self.generate_chunk_summary(content, section_title, doc_title)
+                
+                # Add the original content without modifications
+                chunks.append(content)
+                
+                # Prepare chunk-level metadata
+                chunk_meta = {
+                    "chunk_order": chunk_order,
+                    "total_chunks": total_chunks,
+                    "section_title": section_title or "Introduction",
+                    "short_summary": summaries.get("short_summary", ""),
+                    "detailed_summary": summaries.get("detailed_summary", ""),
+                }
+                chunk_metadata_list.append(chunk_meta)
+                
+                logger.info(f"  Chunk {chunk_order}/{total_chunks}: '{section_title or 'Introduction'}' - {summaries.get('short_summary', 'No summary')[:60]}...")
+            
+            # Add document-level metadata
+            metadata["chunk_count"] = total_chunks
+            metadata["has_summaries"] = bool(self.openai_client)
+            
+            # Create document with chunks
+            logger.info(f"Creating document with {len(chunks)} H2 sections...")
             
             generated_id = uuid.uuid4()
             resp = self.client.documents.create(
-                chunks=chunks,  # Use pre-processed chunks to preserve exact H2 structure
+                chunks=chunks,
                 metadata=metadata,
                 id=str(generated_id),
                 collection_ids=[collection_id],
@@ -381,7 +501,44 @@ class DocIngestor:
                 run_with_orchestration=True  # Enable orchestration for summary generation
             )
             document_id = resp.results.document_id
-            logger.info(f"Created: {key} -> document_id={document_id} ({len(chunks)} H2 chunks via pre-processed chunks)")
+            logger.info(f"Created: {key} -> document_id={document_id}")
+            
+            # Wait a moment for R2R to process chunks
+            import time
+            time.sleep(2)
+            
+            # Now update each chunk with its metadata
+            logger.info(f"Updating chunk-level metadata for {total_chunks} chunks...")
+            try:
+                # Retrieve chunks for this document
+                chunks_response = self.client.chunks.list_by_document(
+                    document_id=document_id,
+                    limit=total_chunks
+                )
+                
+                created_chunks = chunks_response.results
+                logger.info(f"Retrieved {len(created_chunks)} chunks from R2R")
+                
+                # Update each chunk with its metadata
+                for idx, chunk in enumerate(created_chunks):
+                    if idx < len(chunk_metadata_list):
+                        chunk_meta = chunk_metadata_list[idx]
+                        
+                        # Update chunk with metadata - API requires 'text' field
+                        update_data = {
+                            "id": str(chunk.id),
+                            "text": chunk.text,  # Include existing text
+                            "metadata": chunk_meta
+                        }
+                        
+                        self.client.chunks.update(update_data)
+                        logger.info(f"  Updated chunk {idx + 1}/{len(created_chunks)} with metadata")
+                
+                logger.info(f"✓ Successfully updated all chunk metadata")
+                
+            except Exception as e:
+                logger.warning(f"Failed to update chunk metadata: {e}")
+                logger.warning("Document created successfully but chunk metadata not applied")
             
             # Debug: Check what chunks were actually created by R2R
             # self.debug_document_chunks(document_id)  # Commented out - debug shows collection-wide results
@@ -389,8 +546,13 @@ class DocIngestor:
         self._manifest[key] = {
             "hash": file_hash,
             "document_id": str(document_id),
+            "collection_id": collection_id,
             "metadata": metadata,
         }
+        
+        # Save manifest after each successful file upsert
+        self.save_manifest()
+        logger.info(f"Manifest updated for {key}")
 
     def cleanup_orphans(self) -> None:
         """
@@ -415,12 +577,16 @@ class DocIngestor:
     def run(self, cleanup: bool = True) -> None:
         logger.info(f"Scanning base_dir={self.base_dir}")
         self.load_manifest()
-        collection_id = self.ensure_collection()
+        self.verify_collections()
 
         for p in self.iter_files():
-            self.upsert_file(p, collection_id)
+            self.upsert_file(p)
         # if cleanup:
         #     self.cleanup_orphans()
+        
+        # Manifest is now saved after each file, so this final save is redundant
+        # but keeping it here as a safety measure to ensure manifest is persisted
+        logger.info("All files processed. Final manifest save...")
         self.save_manifest()
 
     def upsert_single_file(self, file_path: str) -> Dict[str, str]:
@@ -442,7 +608,7 @@ class DocIngestor:
         
         logger.info(f"Upserting single file: {file_path_obj}")
         self.load_manifest()
-        collection_id = self.ensure_collection()
+        self.verify_collections()
         
         # Store original base_dir 
         original_base_dir = self.base_dir
@@ -451,7 +617,9 @@ class DocIngestor:
         # This ensures the relative path matches existing manifest entries
         
         try:
-            self.upsert_file(file_path_obj, collection_id)
+            self.upsert_file(file_path_obj)
+            # Manifest is now saved within upsert_file, so this call is redundant
+            # but keeping it as a safety measure
             self.save_manifest()
             
             # Calculate relative path from original base_dir for manifest lookup

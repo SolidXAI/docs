@@ -277,7 +277,7 @@ Menus define the navigation structure and connect actions to UI elements.
 ### Standard SolidX Routing
 SolidX uses consistent URL patterns for actions:
 
-```
+```bash
 # List Views
 /admin/{module}/{model}/all
 /admin/address-master/institute/all
@@ -362,7 +362,8 @@ SolidX uses consistent URL patterns for actions:
 4. **User Experience**: Place frequently used items at the top
 
 ### Action Naming Conventions
-```
+
+```bash
 # List Actions
 {model}-list-view
 institute-list-view

@@ -17,6 +17,7 @@ items_attributes_doc: "#security-rules-metadata-attributes"
 > **Parent:** Root of the metadata file
 
 import { FaLightbulb } from "react-icons/fa";
+import { RiShieldLine } from "react-icons/ri";
 import { InfoBox } from '@site/src/common/InfoBox';
 
 
@@ -54,7 +55,12 @@ For a guide on how to create and manage security rules in SolidX, refer to the [
 }
 ```
 
+<h2 className=" card-headear-wrapper">
+    <RiShieldLine size={24} style={{ marginRight: "10px" }} />
+
 ## Security Rules Metadata Attributes
+</h2>
+
 
 
 ### `name` *(string, required, unique)*

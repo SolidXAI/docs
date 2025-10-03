@@ -78,6 +78,6 @@ SolidX provides the following extensibility features:
 
 </div>
 
-
+<br/>
 
 By leveraging these capabilities, you can build modular, scalable, and highly customized applications using the SolidX framework.

@@ -74,8 +74,6 @@ html[data-theme='light'] {
 
 
 :root {
-
-
   --solid-small-font-size: 0.875rem;
   --solid-md-font-size: 0.975rem;
   --solid-lg-font-size: 1.2rem;
@@ -220,7 +218,6 @@ display: none !important;
 .navbar__link--active {
   color: var(--solid-color-white) !important;
   background-color: var(--solid-border-subtle);
-  /* background-color: var(--solid-purple-hover); */
   border: 1px solid var(--solid-border-default);
 }
 
@@ -593,6 +590,17 @@ code .token.known-class-name.class-name {
   color: var(--solid-color-white)
 
 }
+
+.collapsibleContent_i85q:has(.codeBlockContent_biex) {
+  margin-top: 0;
+  border-top: none !important;
+}
+
+.collapsibleContent_i85q {
+  border-top: 1px solid var(--solid-border-default) !important;
+}
+
+
 
 /* === FOOTER === */
 

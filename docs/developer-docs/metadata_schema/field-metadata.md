@@ -12,9 +12,12 @@ items_attributes_doc: "#field-metadata-attributes"
 
 import { IoIosArrowForward } from "react-icons/io";
 import { FaCheckCircle } from "react-icons/fa";
-import { MdNumbers, MdTextFields, MdCalendarMonth, MdMerge, MdPhotoLibrary,MdSecurity, MdCheckBox, MdFunctions,MdCheckCircle,MdCancel } from "react-icons/md";
+import { MdNumbers, MdTextFields, MdCalendarMonth, MdMerge, MdPhotoLibrary,MdSecurity, MdCheckBox, MdFunctions,MdCheckCircle,MdCancel,MdRule } from "react-icons/md";
+import { RiSettings3Line,RiShieldKeyholeLine } from "react-icons/ri";     
+import { BiData,BiBookContent} from "react-icons/bi";             
 import { InfoBox } from '@site/src/common/InfoBox';
 import { WarningBox } from '@site/src/common/WarningBox';
+
 
 
 # Field Metadata
@@ -224,7 +227,7 @@ Every SolidX model is composed of fields. Fields in SolidX go over and above the
 
 
   <h3 className=" card-headear-wrapper">
-    <MdSecurity size={20}  />
+    <MdSecurity size={22}  />
 
 ###  Specialized Types
 </h3>
@@ -260,8 +263,13 @@ Every SolidX model is composed of fields. Fields in SolidX go over and above the
 
 
 ## Field Metadata Examples
-### Numeric Types
-#### int
+  <h3 className=" card-headear-wrapper">
+    <MdNumbers size={24}  />
+
+###  Numeric Types
+</h3>
+
+#### 1. int
 **Purpose**: For whole numbers (positive/negative)  
 **Database**: `integer` column  
 **UI Component**: Number input field  
@@ -285,7 +293,7 @@ Every SolidX model is composed of fields. Fields in SolidX go over and above the
 - `defaultValue`: Initial value on create
 
 
-#### decimal
+#### 2. decimal
 **Purpose**: For decimal/floating point numbers  
 **Database**: `decimal` column  
 **UI Component**: Decimal input field  
@@ -308,11 +316,16 @@ Every SolidX model is composed of fields. Fields in SolidX go over and above the
 - `max`: Upper bound
 - `defaultValue`: Initial value on create
 
-#### bigint (TODO)
+#### 3. bigint (TODO)
 
-### Text Types
+  <h3 className=" card-headear-wrapper">
+    <MdTextFields size={24}  />
 
-#### shortText
+###  Text Types
+</h3>
+
+
+#### 1. shortText
 **Purpose**: For shorter text content (typically up to 1000 characters)  
 **Database**: `varchar` column  
 **UI Component**: Text input field  
@@ -339,7 +352,7 @@ Every SolidX model is composed of fields. Fields in SolidX go over and above the
 - `index`: Database performance optimization
 - `isUserKey`: Use as record identifier
 
-#### longText
+#### 2. longText
 **Purpose**: For multi-line text content of any length  
 **Database**: `text` column  
 **UI Component**: Textarea field  
@@ -364,7 +377,7 @@ Every SolidX model is composed of fields. Fields in SolidX go over and above the
 - `regexPatternNotMatchingErrorMsg`: Custom validation error message
 - Supports longer content than `shortText`
 
-#### richText
+#### 3. richText
 **Purpose**: For formatted text with HTML support  
 **Database**: `text` column  
 **UI Component**: Rich text editor (HTML)  
@@ -385,9 +398,13 @@ Every SolidX model is composed of fields. Fields in SolidX go over and above the
 - No length restrictions
 - Rich editing capabilities in UI
 
-### Boolean
+<h3 className=" card-headear-wrapper">
+    <FaCheckCircle size={20}  />
 
-#### boolean
+### Boolean
+</h3>
+
+#### 1. boolean
 **Purpose**: For true/false values  
 **Database**: `boolean` column  
 **UI Component**: Checkbox or toggle switch  
@@ -408,9 +425,13 @@ Every SolidX model is composed of fields. Fields in SolidX go over and above the
 - `defaultValue`: `true` or `false`
 - Simple on/off state management
 
-### Date / Time Types
+<h3 className=" card-headear-wrapper">
+    <MdCalendarMonth size={22}  />
 
-#### date
+### Date / Time Types
+</h3>
+
+#### 1. date
 **Purpose**: For date values only (no time)  
 **Database**: `date` column  
 **UI Component**: Date picker  
@@ -427,7 +448,7 @@ Every SolidX model is composed of fields. Fields in SolidX go over and above the
 }
 ```
 
-#### datetime
+#### 2. datetime
 **Purpose**: For date and time values  
 **Database**: `timestamp` column  
 **UI Component**: DateTime picker  
@@ -444,9 +465,13 @@ Every SolidX model is composed of fields. Fields in SolidX go over and above the
 }
 ```
 
-#### time (TODO)
+#### 3. time (TODO)
 
-### Relation Types
+<h3 className=" card-headear-wrapper">
+    <MdMerge size={24}  />
+
+###  Relation Types
+</h3>
 
 **Purpose**: Establish relationships between models  
 **Database**: Foreign key columns or junction tables  
@@ -458,7 +483,7 @@ Every SolidX model is composed of fields. Fields in SolidX go over and above the
  - `one-to-many`: One record has many children (e.g., Customer → Orders)
  - `many-to-many`: Many records link to many others via a junction table (e.g., Students ↔ Courses)
 
-#### Many-to-One Relation (Child → Parent)
+#### 1. Many-to-One Relation (Child → Parent)
 ```json
 {
   "name": "institute",
@@ -473,7 +498,7 @@ Every SolidX model is composed of fields. Fields in SolidX go over and above the
 }
 ```
 
-#### One-to-Many Relation (Parent → Children)
+#### 2. One-to-Many Relation (Parent → Children)
 ```json
 {
   "name": "feeTypes",
@@ -488,7 +513,7 @@ Every SolidX model is composed of fields. Fields in SolidX go over and above the
 }
 ```
 
-#### Many-to-Many Relation
+#### 3. Many-to-Many Relation
 ```json
 {
   "name": "categories",
@@ -513,9 +538,14 @@ Every SolidX model is composed of fields. Fields in SolidX go over and above the
 
 Give an example of inverse vs non-inverse relation creation (TODO)
 
-### Media Types
+<h3 className=" card-headear-wrapper">
+    <MdPhotoLibrary size={24}  />
 
-#### mediaSingle
+###  Media Types
+</h3>
+
+
+#### 1. mediaSingle
 **Purpose**: Single file/image upload  
 **UI Component**: File upload with preview  
 **Use Cases**: Profile pictures, logos, single documents
@@ -532,7 +562,7 @@ Give an example of inverse vs non-inverse relation creation (TODO)
 }
 ```
 
-#### mediaMultiple
+#### 2. mediaMultiple
 **Purpose**: Multiple file uploads  
 **UI Component**: Multi-file upload with gallery  
 **Use Cases**: Photo galleries, document collections, attachments
@@ -554,9 +584,13 @@ Give an example of inverse vs non-inverse relation creation (TODO)
 - `mediaMaxSizeKb`: Maximum file size per file
 - `mediaStorageProviderUserKey`: [Storage configuration reference](../../admin-docs/media-library/storage-providers.md)
 
-### Specialized Types
+<h3 className=" card-headear-wrapper">
+    <MdSecurity size={22}  />
 
-#### email
+###  Specialized Types
+</h3>
+
+#### 1. email
 **Purpose**: Email addresses with validation  
 **Database**: `varchar`  
 **UI Component**: Email input field  
@@ -574,7 +608,7 @@ Give an example of inverse vs non-inverse relation creation (TODO)
 }
 ```
 
-#### json
+#### 2. json
 **Purpose**: Store complex JSON data structures  
 **Database**: `text`/`jsonb`  
 **UI Component**: JSON editor or code field  
@@ -591,7 +625,7 @@ Give an example of inverse vs non-inverse relation creation (TODO)
 }
 ```
 
-#### password
+#### 3. password
 **Purpose**: Secure password storage with hashing  
 **Database**: `varchar` (hashed)  
 **UI Component**: Password input field  
@@ -610,9 +644,13 @@ Give an example of inverse vs non-inverse relation creation (TODO)
 }
 ```
 
-### Selection Types
+<h3 className=" card-headear-wrapper">
+    <MdCheckBox size={20}  />
 
-#### selectionStatic
+###  Selection Types
+</h3>
+
+#### 1. selectionStatic
 **Purpose**: Dropdown with predefined options  
 **Database**: `varchar` column  
 **UI Component**: Dropdown/select field  
@@ -637,7 +675,7 @@ Give an example of inverse vs non-inverse relation creation (TODO)
 
 **Format**: `"value:label"` where value is stored in DB, label is displayed in UI
 
-#### selectionDynamic
+#### 2. selectionDynamic
 **Purpose**: Dropdown populated from API/database query  
 **Database**: `varchar` column  
 **UI Component**: Dynamic dropdown field  
@@ -659,9 +697,13 @@ Give an example of inverse vs non-inverse relation creation (TODO)
 - `selectionDynamicProvider`: Provider class responsible for returning the dynamic dropdown options
 - `selectionDynamicProviderCtxt`: JSON context/config passed to the provider
 
-### Computed
+<h3 className=" card-headear-wrapper">
+    <MdFunctions size={24}  />
 
-#### computed
+###  Computed
+</h3>
+
+#### 1. computed
 **Purpose**: Auto-calculated values from other fields  
 **Database**: `varchar`/`decimal`/etc. (based on result type)  
 **UI Component**: Read-only display field  
@@ -697,7 +739,12 @@ Give an example of inverse vs non-inverse relation creation (TODO)
 ## Common Field Metadata Attributes
 All field types support these common properties:
 
+<h3 className=" card-headear-wrapper">
+    <RiSettings3Line size={24}  />
+
 ### Core Properties
+</h3>
+
 - `name`: Internal field reference (camelCase)
 - `displayName`: User-friendly UI label
 - `description`: Optional documentation
@@ -710,16 +757,31 @@ All field types support these common properties:
 - `private`: Hidden from UI flag (Not yet implemented)
 - `defaultValue`: Default field value
 
+<h3 className=" card-headear-wrapper">
+    <RiShieldKeyholeLine size={24}  />
+
 ### Security Properties
+</h3>
+
 - `encrypt`: Enable field encryption (Not yet implemented)
 - `encryptionType`: Encryption method (AES, bcrypt, etc.) (Not yet implemented)
 - `decryptWhen`: When to decrypt ("always", "admin_only", "never") (Not yet implemented)
 
+<h3 className=" card-headear-wrapper">
+    <BiData size={24}  />
+
 ### Database Properties
+</h3>
+
 - `columnName`: Custom database column name
 - `enableAuditTracking`: Include in audit logs
 
+<h3 className=" card-headear-wrapper">
+    <MdRule size={24}  />
+
 ### Validation Properties
+</h3>
+
 - `min`/`max`: Value/length constraints
 - `regexPattern`: Custom validation pattern
 - `regexPatternNotMatchingErrorMsg`: Custom error message
@@ -1258,7 +1320,12 @@ Allow multiple selected values (UI + storage impact).
 - **Computed** — Providers should be idempotent and side‑effect free. For pre-compute operations e.g (before-insert, before-update, before-remove), provider needs to set the value on the entity object directly i.e (since in pre-compute operations, the assumption is that the computed field entity and the triggering entity are the same). For post-compute operations e.g (after-insert, after-update, after-remove), provider needs to use the entity manager in the provider implementation to update the entity since in post-compute operations, the assumption is that the computed field entity and the triggering entity can be different.
 - **Media** — Validate MIME and size server-side. `mediaTypes` is an allowlist, not a guarantee of safety. Consider thumbnailing and antivirus for file uploads.
 
+<h2 className=" card-headear-wrapper">
+    <BiBookContent size={24} style={{ marginRight: "10px" }} />
+
 ## Cheat Sheet
+</h2>
+
 
 ```
 ┌─────────────────────────────────────┐

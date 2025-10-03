@@ -13,7 +13,9 @@ items_attributes_doc: "#media-storage-providers-metadata-attributes"
 import { IoIosArrowForward } from "react-icons/io";
 import { InfoBox } from '@site/src/common/InfoBox';
 
-# Media Storage Providers
+
+
+# Media Storage
 > **Where it lives**  
 > **JSON Pointer:** `/mediaStorageProviders`  
 > **JSONPath:** `$.mediaStorageProviders`  
@@ -57,6 +59,7 @@ S3_BUCKET_NAME=<YOUR_BUCKET_NAME>      # Can also be specified in JSON
 
 
 ## Media Storage Providers Metadata Attributes
+
 
 ### `name` *(string, required, unique)*
 Name of the media storage provider (column/property).

@@ -12,6 +12,8 @@ items_attributes_doc: "#model-metadata-attributes"
 
 import { MdCategory } from "react-icons/md";
 import { IoIosArrowForward } from "react-icons/io";
+import { FiPackage } from "react-icons/fi";
+
 
 
 # Model Metadata
@@ -170,5 +172,12 @@ If set to `true`, the model will support internationalization, allowing records 
 **Default:** `false`
 
 
+<br/>
+<div className="card-headear-wrapper">
+  <FiPackage size={25} style={{ marginRight: "12px" }} />
+
 ##  Related Recipes (TODO)
+
+</div>
+
 -	👉 [Model Type Recipes](../../recipes/solidx-metadata-complete-guide.md)  

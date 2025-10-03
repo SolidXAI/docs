@@ -140,7 +140,8 @@ Now you can use `ScoreWidget` in your layout JSON:
 2. It checks fields that have a `viewWidget` attribute.
 3. The corresponding widget is **dynamically imported**.
 4. The widget is rendered for each row, with props of type `SolidListFieldWidgetProps`:
-```
+
+```tsx
 export type SolidListFieldWidgetProps = {
     rowData: any;
     solidListViewMetaData: any

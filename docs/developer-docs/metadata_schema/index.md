@@ -4,9 +4,10 @@ description: Overview of the metadata schema used in SolidX.
 sidebar_position: 3.5
 ---
 
-import { MdWidgets, MdTrackChanges, MdPsychology, MdInfoOutline } from "react-icons/md";
-import { FaDatabase,FaLightbulb } from "react-icons/fa";
+import { MdUpcoming } from "react-icons/md";
+import {FaLightbulb } from "react-icons/fa";
 import { IoIosArrowForward } from "react-icons/io";
+
 
 
 #  Metadata Schema
@@ -152,7 +153,11 @@ Below are the key components of the metadata schema. All the functionality conce
   </ul>
 </details>
 
+  <h2 className=" card-headear-wrapper">
+  <MdUpcoming size={28} style={{ marginRight: "12px" }} />
+
 ##  What’s Coming Up
+</h2>
 
 In the upcoming sections, we’ll walk through practical examples that use the metadata schema and explain each attribute in detail.
 

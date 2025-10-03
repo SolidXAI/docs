@@ -17,7 +17,7 @@ Security rules are crucial for **controlling access to data** in SolidX. By defi
 
 
   <h2 className=" card-headear-wrapper">
-    <IoIosLock size={26} style={{ marginRight: "10px" }} />
+    <IoIosLock size={24} style={{ marginRight: "10px" }} />
 
 ## Adding a New Security Rule
 </h2>
@@ -69,7 +69,7 @@ Follow these steps to configure a custom security rule:
 
 
   <h2 className=" card-headear-wrapper">
-    <IoIosInformationCircle size={26} style={{ marginRight: "10px" }} />
+    <IoIosInformationCircle size={24} style={{ marginRight: "10px" }} />
 
 ##  How It Works
 </h2>
@@ -89,7 +89,7 @@ Follow these steps to configure a custom security rule:
 </NoteBoxs>
 
   <h2 className=" card-headear-wrapper">
-    <IoIosWarning size={26} style={{ marginRight: "10px" }} />
+    <IoIosWarning size={24} style={{ marginRight: "10px" }} />
 
 ## Troubleshooting
 </h2>

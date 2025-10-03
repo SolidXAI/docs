@@ -16,6 +16,7 @@ items_attributes_doc: "#scheduled-jobs-metadata-attributes"
 > **JSONPath:** `$.scheduledJobs`  
 > **Parent:** Root of the metadata file
 
+import { MdSchedule } from "react-icons/md";
 import { InfoBox } from '@site/src/common/InfoBox';
 
 
@@ -26,7 +27,10 @@ Scheduled jobs in SolidX allow you to run recurring tasks such as sending notifi
 For a guide on how to create and manage scheduled jobs in SolidX, refer to the [Creating Scheduled Jobs](../../developer-docs/extending/backend-customization/scheduled-jobs/index.md).
 
 ## Example: Scheduled Jobs Metadata
+
+
 <summary> Scheduled Jobs Schema </summary>
+
 ``` json
 {
   "scheduledJobs": [
@@ -42,7 +46,11 @@ For a guide on how to create and manage scheduled jobs in SolidX, refer to the [
 }
 ```
 
+<h2 className=" card-headear-wrapper">
+    <MdSchedule size={24} style={{ marginRight: "10px" }} />
+
 ## Scheduled Jobs Metadata Attributes
+</h2>
 
 ### `scheduleName` *(string, required, unique)*
 Name of the scheduled job.

@@ -23,6 +23,8 @@ import { InfoBox } from '@site/src/common/InfoBox';
 List of Values (LOV) are used to define a set of predefined values that can be used in various parts of the SolidX application, such as dropdowns or selection fields. This helps ensure data consistency and improve user experience.
 
 ### Example: List of Values Metadata
+Below is an example wherein we define several list of values for different types such as INDUSTRY and REGULATED_BY.
+
 <summary> List of Values Schema </summary>
 
 ``` json
@@ -60,7 +62,11 @@ List of Values (LOV) are used to define a set of predefined values that can be u
 }
 ```
 
-### Example of Dynamic Selection Field using List of Values
+### Using the List of Values in Dynamic Selection Fields
+To use the defined list of values in your application, you need to reference them by creating a dynamic selection field in your model.
+
+To utilize the defined list of values in a dynamic selection field, you can configure a field in your model to reference the LOV using the `ListOfValuesSelectionProvider`. Below is an example of how to set up a dynamic selection field that pulls values from the `REGULATED_BY` type in the LOV.
+
 ``` json
 {
     "moduleMetadata": {
@@ -79,7 +85,7 @@ List of Values (LOV) are used to define a set of predefined values that can be u
                         "ormType": "varchar",
                         "isSystem": false,
                         "selectionDynamicProvider": "ListOfValuesSelectionProvider",
-                        "selectionDynamicProviderCtxt": "{\n  \"type\": \"REGULATED_BY\"\n}",
+                        "selectionDynamicProviderCtxt": "{\"type\": \"REGULATED_BY\"}",
                         "selectionValueType": "string",
                         "required": false,
                         "unique": false,
@@ -108,4 +114,27 @@ List of Values (LOV) are used to define a set of predefined values that can be u
 ####  Further Reference
  -  Understanding Dynamic Selection Fields: See [Dynamic Selection Fields Documentation](../../admin-docs/module-builder/field-management#dynamic-selection)
 
-### List of Values Metadata Attributes (TODO)
+### List of Values Metadata Attributes
+
+
+### `type` *(string, required)*
+Type/category of the list of values (e.g., INDUSTRY, COUNTRY, STATUS).
+
+### `value` *(string, required)*
+The actual value stored in the database.
+
+### `display` *(string, required)*
+The display name shown to users in the UI.
+
+### `description` *(string, required)*
+A brief description of the list of value.
+
+### `default` *(boolean, optional, default: false)*
+Indicates if this value is the default selection.
+
+### `sequence` *(number, optional)*
+Defines the order in which the values are displayed.
+
+### `moduleUserKey` *(string, optional)*
+The user key of the module to which this list of values is associated. This helps in scoping the LOV to a specific module.
+

@@ -10,6 +10,7 @@ items_type: "object"
 items_attributes_doc: "#roles-permissions-metadata-attributes"
 ---
 
+import { RiShieldUserLine } from "react-icons/ri";
 import { InfoBox } from '@site/src/common/InfoBox';
 
 # Roles & Permissions
@@ -55,7 +56,13 @@ By Default `Admin` role is created with all permissions.
 }
 ```
 
+
+<h2 className=" card-headear-wrapper">
+    <RiShieldUserLine size={22} style={{ marginRight: "10px" }} />
+
 ## Roles & Permissions Metadata Attributes
+</h2>
+
 
 ### `name` _(string, required, unique)_
 

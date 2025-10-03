@@ -10,6 +10,9 @@ items_type: "object"
 items_attributes_doc: "#action-metadata-attributes"
 ---
 
+import { MdOutlineAssignment } from "react-icons/md";
+
+
 # Action Metadata
 > **Where it lives**  
 > **JSON Pointer:** `/actions`  
@@ -59,7 +62,12 @@ For a conceptual overview / guide/ recipes of how actions can be used in SolidX,
 }
 ```
 
+<h2 className=" card-headear-wrapper">
+    <MdOutlineAssignment size={24} style={{ marginRight: "10px" }} />
+
 ## Action Metadata Atributes
+</h2>
+
 
 ### `name` *(string, required, unique)*
 Name of the action item (column/property).  
