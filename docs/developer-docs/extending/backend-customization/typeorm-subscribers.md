@@ -29,9 +29,8 @@ It listens to events such as:
 - Transaction events (`beforeTransactionStart`, `afterTransactionCommit`, etc.)  
 
 **Key Points for Using Subscribers in SolidX:**  
-1. Add the subscriber to the **database module providers array**, so it gets registered with TypeORM.  
-2. Mark the subscriber with the NestJS `@Injectable()` decorator, just like other providers. This enables dependency injection inside subscribers.  
-3. Keep your **business logic in a dedicated service**, and call the service from the subscriber. This ensures separation of concerns and maintainability.  
+1. Mark the subscriber with the NestJS `@Injectable()` decorator, just like other providers. This enables dependency injection inside subscribers.  
+2. Keep your **business logic in a dedicated service**, and call the service from the subscriber. This ensures separation of concerns and maintainability.  
 
 
 ## Example: Creating a Subscriber
