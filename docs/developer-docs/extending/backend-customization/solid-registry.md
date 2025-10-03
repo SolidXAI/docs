@@ -1,8 +1,8 @@
 ---
 sidebar_position: 10
 title: Solid Registry
-description: Learn how to extend the Solid Registry in your SolidX application.
-keywords: [backend, solid registry, customization]
+description: Learn how to extend and use the Solid Registry in your SolidX application.
+keywords: [backend, solid registry, customization, metadata]
 ---
 
 import { FaDatabase,FaCalculator,FaChartBar } from "react-icons/fa";
@@ -10,125 +10,195 @@ import { IoMdTimer,IoIosLock } from "react-icons/io";
 import { MdTune,MdSettings,MdLanguage,MdViewList ,MdDashboard} from "react-icons/md";
 import { FiDatabase} from "react-icons/fi";
 
-
-
-
 # Solid Registry Overview
 
-The **Solid Registry** is a central registry that stores all metadata and configuration for your SolidX application. It serves both as a **cache** and a **metadata manager**, enabling fast access to critical application data without repeatedly querying the database.
+The **Solid Registry** is the central **discovery and configuration hub** of your SolidX application.  
+It acts both as a **cache** and a **metadata manager**, providing:
 
-At application startup, the registry loads all relevant components, making them available for runtime use.
+- **Fast lookups**: Components can be resolved without repeated database queries.
+- **Consistency**: Application-wide rules, modules, and providers are available in one place.
+- **Extensibility**: Drop in a new provider, decorate it, and the registry auto-discovers it.
 
+At application startup, the registry loads all relevant components and makes them available for runtime resolution.  
+If you update registered metadata, you **must restart the application** to reload the registry.
 
+---
+
+## Solid Registry Pattern (TODO)
+
+The registry follows a clear pattern: **Decorator → Interface → Implementation → Registry → Consumer**.
+
+```
+ ┌─────────────────────────┐
+ │       Interface         │
+ │  (contract definition)  │
+ │ e.g. IErrorCodeProvider │
+ └───────────┬─────────────┘
+             │
+             │ implemented by
+             ▼
+ ┌───────────────────────────────────────┐
+ │         Implementation Class          │
+ │  @Injectable()                        │
+ │  @ErrorCodeProvider()  (decorator)    │
+ │                                       │
+ │ class FeesPortalErrorCodeProvider     │
+ │   implements IErrorCodeProvider { ...}│
+ └──────────────────┬────────────────────┘
+                    │
+                    │ discovered by
+                    ▼
+ ┌───────────────────────────────────────┐
+ │           SolidRegistry               │
+ │ - Maintains a lookup map              │
+ │ - Discovers all providers with        │
+ │   @ErrorCodeProvider decorator        │
+ │ - Registers them keyed by name/code   │
+ └──────────────────┬────────────────────┘
+                    │
+                    │ resolved at runtime
+                    ▼
+ ┌───────────────────────────────────────┐
+ │       Consumer / Runtime Logic        │
+ │ e.g. ExceptionFilter, Scheduler, etc. │
+ │                                       │
+ │ registry.getErrorCodeProviders()      │
+ │   → returns all error code providers  │
+ └───────────────────────────────────────┘
+```
+
+**Flow:**  (TODO)
+1. Define a contract (e.g., `IErrorCodeProvider`)  
+2. Decorate an implementation (`@ErrorCodeProvider()`)  
+3. Registry auto-discovers providers (via reflection metadata)  
+4. Consumer resolves provider at runtime (e.g., `ExceptionFilter`)  
+
+✅ This pattern makes it easy to **plug in new providers** without modifying the core logic.
+
+---
 
 ## Registered Components
 
-Below are the key components tracked by the Solid Registry:
+The following components are tracked by the Solid Registry:
 
-  <h3 className=" card-headear-wrapper">
-    <FaDatabase size={16} />
+---
 
-### Seeders
+<h3 className="card-headear-wrapper">
+  <FaDatabase size={16} />
+  Seeders
 </h3>
 
-Seeders populate your database with initial data. The registry keeps a catalog of all seeders to enable easy discovery and execution.
+**Purpose:** Populate your database with initial or default data (e.g., system roles, default fee types).  
+**How it works:** The registry maintains a catalog of all available seeders. Developers can easily list, execute, or selectively run seeders.  
+**See also:** [Seeders Guide](../seeders)
 
-  <h3 className=" card-headear-wrapper">
-    <IoMdTimer size={18} />
+---
 
-### Scheduled Jobs
+<h3 className="card-headear-wrapper">
+  <IoMdTimer size={18} />
+  Scheduled Jobs
 </h3>
 
+**Purpose:** Define recurring tasks such as reminders, report generation, and cleanup jobs.  
+**How it works:** Registered jobs are tied into the scheduling engine. The registry ensures all jobs are loaded, discoverable, and can be managed or paused centrally.  
+**See also:** [Jobs & Scheduling](../jobs)
 
-Jobs that run at scheduled intervals (e.g., reminders, cleanups) are registered for monitoring and scheduling control.
+---
 
-  <h3 className=" card-headear-wrapper">
-    <MdTune size={18} />
-
-### Selection Providers
+<h3 className="card-headear-wrapper">
+  <MdTune size={18} />
+  Selection Providers
 </h3>
 
-These supply dynamic values for selection fields (like dropdowns) in the UI, and the registry ensures they're accessible application-wide.
+**Purpose:** Provide dynamic values for selection fields in the UI (e.g., dropdowns, filters).  
+**How it works:** A `@SelectionProvider` class can be created, registered, and then consumed by form components. The registry ensures all providers are globally available without additional wiring.  
+**See also:** [Field Metadata](../fields)
 
-  <h3 className=" card-headear-wrapper">
-    <FaCalculator size={18} />
+---
 
-### Computed Fields
+<h3 className="card-headear-wrapper">
+  <FaCalculator size={18} />
+  Computed Fields
 </h3>
 
-Computed fields derive values based on logic. The registry stores all metadata for identifying and processing these fields.
+**Purpose:** Derive field values dynamically based on logic (e.g., total amount, status based on conditions).  
+**How it works:** Each computed field provider is registered with metadata, making them discoverable by the runtime when evaluating entity fields.  
+**See also:** [Computed Fields](../computed-fields)
 
-  <h3 className=" card-headear-wrapper">
-    <FiDatabase size={18} />
+---
 
-### Solid Database Modules
+<h3 className="card-headear-wrapper">
+  <FiDatabase size={18} />
+  Solid Database Modules
 </h3>
 
+**Purpose:** Define your application’s database schema, models, and relations.  
+**How it works:** Modules (like Fees, School, Library) are registered in the Solid Registry, ensuring schema consistency and discoverability across the application.  
+**See also:** [Modules Overview](../modules)
 
-Defines your application’s database schema. The registry ensures consistency and availability of all modules.
+---
 
-  <h3 className=" card-headear-wrapper">
-    <MdSettings size={18} />
-
-### Controllers
+<h3 className="card-headear-wrapper">
+  <MdSettings size={18} />
+  Controllers
 </h3>
 
+**Purpose:** Handle incoming HTTP requests and expose routes.  
+**How it works:** The registry tracks all controllers, enabling automated route mapping and simplifying metadata introspection for APIs.  
+**See also:** [Controllers](../controllers)
 
-Handles incoming HTTP requests. All controllers are registered, simplifying route handling and metadata tracking.
+---
 
-
-<h3 className=" card-headear-wrapper">
-    <IoIosLock size={18} />
-
-### Security Rules
+<h3 className="card-headear-wrapper">
+  <IoIosLock size={18} />
+  Security Rules
 </h3>
 
-Used to restrict data access based on user roles. The registry manages these rules and enforces them on relevant operations.
+**Purpose:** Restrict access to entities and fields based on roles and policies.  
+**How it works:** The registry stores all declared rules. Every query automatically applies these rules by resolving them from the registry.  
+**See also:** [Security Rules](../security-rules)
 
-  <h3 className=" card-headear-wrapper">
-    <MdLanguage size={18} />
+---
 
-### Locales
+<h3 className="card-headear-wrapper">
+  <MdLanguage size={18} />
+  Locales
 </h3>
 
-Handles localization settings (languages, formats). The registry keeps track of all available locales.
+**Purpose:** Manage localization, translations, and regional formats.  
+**How it works:** Each locale configuration is registered at startup. Applications can dynamically switch or apply formats based on user preference.  
+**See also:** [Localization](../localization)
 
-  <h3 className=" card-headear-wrapper">
-    <FaChartBar size={20} />
+---
 
-### Computed Field Metadata
+<h3 className="card-headear-wrapper">
+  <MdDashboard size={18} />
+  Dashboard Variable Selection Providers
 </h3>
 
+**Purpose:** Provide dynamic lists of variables for dashboards (e.g., filters like branch, department, or timeframe).  
+**How it works:** Developers can implement new providers that populate variables at runtime. The registry ensures these providers are available to all dashboards.  
+**See also:** [Dashboards](../dashboards)
 
+---
 
-Metadata definitions for computed fields are separately registered to help with field evaluations.
-
-  <h3 className=" card-headear-wrapper">
-    <MdDashboard size={18} />
-
-### Dashboard Variable Selection Providers
+<h3 className="card-headear-wrapper">
+  <MdViewList size={20} />
+  Dashboard Question Data Providers
 </h3>
 
+**Purpose:** Supply data sources for dashboard questions (charts, KPIs, summaries).  
+**How it works:** Providers can query APIs, databases, or aggregates. The registry makes them available for dynamic dashboard rendering.  
+**See also:** [Dashboard Questions](../dashboard-questions)
 
-
-Provides dynamic data for dashboard variable dropdowns.
-
-  <h3 className=" card-headear-wrapper">
-    <MdViewList size={20} />
-
-### Dashboard Question Data Providers
-</h3>
-
-
-
-Supplies data sources for dashboard questions (charts, summaries, etc).
-
-
+---
 
 ## When Is the Registry Populated?
 
-All of the above components are registered **at application startup**.
+All components are registered **at application startup**.  
 
-> If you modify any metadata registered in the Solid Registry, you **must restart the application** for those changes to take effect.
+- This ensures they are immediately discoverable.  
+- If you modify any registered metadata, restart the application.  
+- Hot-reload of providers is not supported (yet).  
 
-
+---
