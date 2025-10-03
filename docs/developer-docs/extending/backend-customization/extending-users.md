@@ -8,40 +8,42 @@ keywords: [backend, users, customization]
 import { IoIosArrowForward } from "react-icons/io";
 import { NoteBoxs } from '@site/src/common/NoteBoxs';
 
-# Overview
+## Overview
 
-This section covers how to **extend user functionality in SolidX**, including creating custom user fields and implementing the logic required to persist a custom user model.
+In some cases, you may need to extend the default **User** model in SolidX to accommodate additional attributes or relationships specific to your application. This is achieved by creating a **custom user model** as a child of the base `User` model provided by SolidX.
 
+This guide covers how to:  
+- Create a custom user model  
+- Add custom fields and relationships  
+- Override user creation logic to handle password encryption, validation, and persistence  
 
+---
 
 ## Configuring a Custom User Model
 
-### To create a custom user model:
+As an example, consider extending the `User` model into an `InstituteUser` model. The `InstituteUser` includes fields such as `userType` and a relation to an `Institute`.
 
-- Set `isChild: true` and specify `User` as the parent model in your field metadata.
-- Below is an example configuration:
+### Steps to Create a Custom User Model
+1. Set `isChild: true` in your model metadata.  
+2. Specify `User` as the `parentModelUserKey`.  
+3. Add your custom fields and relationships.  
 
 <details>
   <summary className="card-title card-headear-wrapper">
     <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
-   Sample Field Metadata for <code>instituteUser</code>
-</summary>
+    Sample Field Metadata for <code>instituteUser</code>
+  </summary>
 
 ```json
 {
   "singularName": "instituteUser",
   "pluralName": "instituteUsers",
   "displayName": "Institute User",
-  "description": "This table allows us to store institute user records",
-  "dataSource": "default",
-  "dataSourceType": "postgres",
   "tableName": "fees_portal_institute_user",
   "isChild": true,
   "parentModelUserKey": "user",
   "enableAuditTracking": true,
   "enableSoftDelete": true,
-  "draftPublishWorkflow": false,
-  "internationalisation": false,
   "fields": [
     {
       "name": "userType",
@@ -68,26 +70,25 @@ This section covers how to **extend user functionality in SolidX**, including cr
   ]
 }
 ```
-
 </details>
 
-- This will generate form/list views in SolidX to manage the custom users.
+This configuration generates list and form views in SolidX to manage your custom users.
 
+---
 
+## Overriding User Creation Logic
 
-## Persisting a Custom User
+User creation involves more than a simple insert (password encryption, password history, email notifications). Therefore, you must override the generated `create` method in your custom user controller.
 
-Since user creation is more than just a simple insert i.e (password encryption, user password history management, etc.) you must override the generated controller code to allow creating a custom user properly.
-
-Replace This Code:
+### Default Generated Code
 
 <details>
   <summary className="card-title card-headear-wrapper">
     <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
-     Default Generated Code
-</summary>
+    Default Implementation
+  </summary>
 
-```typescript
+```ts
 @ApiBearerAuth("jwt")
 @Post()
 @UseInterceptors(AnyFilesInterceptor())
@@ -95,150 +96,117 @@ async create(@Body() createDto: CreateInstituteUserDto, @UploadedFiles() files: 
   return this.service.create(createDto, files);
 }
 ```
-
 </details>
 
-With This Logic:
+### Revised Implementation
+
+Replace the default with logic that validates input, converts DTOs, and calls `signupForExtensionUser`:
 
 <details>
   <summary className="card-title card-headear-wrapper">
     <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
-     Revised Implementation (InstituteController)
-</summary>
+    Revised Implementation (InstituteController)
+  </summary>
 
-```typescript
+```ts
 @ApiBearerAuth("jwt")
 @Post()
 @UseInterceptors(AnyFilesInterceptor())
 async create(@Body() createDto: CreateInstituteUserDto, @UploadedFiles() files: Array<Express.Multer.File>) {
-  // Add an custom user validation logic for your custom user model
+  // Custom validation
   const result = await this.service.validateEmailDomain(createDto.instituteId, createDto.email);
   if (result === false) {
     throw new BadRequestException('Email Domain is not Valid');
   }
 
-  // Convert the createDto to a signupDto and extensionUserDto
+  // Convert DTOs
   const signupDto = this.service.toSignUpDto(createDto);
   const extensionUserDto = await this.service.toExtensionUserDto(createDto);
 
-  // Call signupForExtensionUser to persist user in SolidX
+  // Persist user
   return this.authenticationService.signupForExtensionUser(signupDto, extensionUserDto, this.repo);
 }
 ```
-
 </details>
+
+### Supporting Methods in Service
 
 <details>
   <summary className="card-title card-headear-wrapper">
     <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
-     Methods Implementation (InstituteService)
-</summary>
+    Methods Implementation (InstituteService)
+  </summary>
 
-```typescript
-  async toExtensionUserDto(createDto: CreateInstituteUserDto): Promise<any> {
-    // Populate the extension user data for the user
-    let institute = null;
-    if (createDto.instituteId) {
-      institute = await this.InstituteRepo.findOne({
-        where: {
-          //@ts-ignore
-          id: createDto.instituteId,
-        },
-      });
-    }
-
-    return {
-      ...createDto,
-      institute,
-    };
+```ts
+async toExtensionUserDto(createDto: CreateInstituteUserDto): Promise<any> {
+  let institute = null;
+  if (createDto.instituteId) {
+    institute = await this.InstituteRepo.findOne({ where: { id: createDto.instituteId } });
   }
+  return { ...createDto, institute };
+}
 
-  toSignUpDto(createDto: CreateInstituteUserDto): SignUpDto {
-    // Populate the signup data for the user
-    return {
-      fullName: createDto.fullName,
-      username: createDto.username,
-      email: createDto.email,
-      password: createDto.password,
-      mobile: createDto.mobile,
-      roles: [createDto.userType], // set the role to the userType i.e userType name is same as the role name
-    };
-  }
+toSignUpDto(createDto: CreateInstituteUserDto): SignUpDto {
+  return {
+    fullName: createDto.fullName,
+    username: createDto.username,
+    email: createDto.email,
+    password: createDto.password,
+    mobile: createDto.mobile,
+    roles: [createDto.userType], // role name = userType
+  };
+}
 
-  async validateEmailDomain(instituteId: number, email: string) {
-    const institute = await this.InstituteRepo.findOne({
-      where: { id: instituteId },
-    });
+async validateEmailDomain(instituteId: number, email: string) {
+  const institute = await this.InstituteRepo.findOne({ where: { id: instituteId } });
+  if (!institute) return false;
+  if (!institute.emailDomain) return true;
 
-    if (!institute) {
-      return  false;
-    }
-    if (!institute.emailDomain) {
-      return  true;
-    }
-    const emailDomain = email.split('@')[1]?.toLowerCase();
-    if (!emailDomain) {
-      return false;
-    }
-
-    // Compare with the domain stored in DB
-    if (emailDomain === institute.emailDomain.toLowerCase()) {
-      return true;
-    } else {
-      return false;
-    }
-  }
-
+  const emailDomain = email.split('@')[1]?.toLowerCase();
+  return emailDomain === institute.emailDomain.toLowerCase();
+}
 ```
-
 </details>
 
-    4.	Use generated code as-is for other CRUD operations. Only create() requires overriding.
-    5.	You can also show parent user fields in layouts like any other fields. No special config needed.
+> ⚠️ Use the generated code for other CRUD operations as-is. Only `create()` requires overriding.
 
+---
 
+## Generated Code for Custom User Models
 
-## Generated Code (for custom user models)
+When `isChild: true` and `User` is the parent model, SolidX generates DTOs and Entities extending the base User model:
 
 <details>
-
- <summary className="card-title card-headear-wrapper">
+  <summary className="card-title card-headear-wrapper">
     <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
-     DTOs & Entity
-</summary>
+    DTOs & Entity
+  </summary>
 
-```typescript
+```ts
 // Create DTO
-export class CreateInstituteUserDto extends CreateUserDto {
-  ...
-}
+export class CreateInstituteUserDto extends CreateUserDto { ... }
 
 // Update DTO
-export class UpdateInstituteUserDto extends UpdateUserDto {
-  ...
-}
+export class UpdateInstituteUserDto extends UpdateUserDto { ... }
 
 // Entity
 @ChildEntity()
-export class InstituteUser extends User {
-  ...
-}
+export class InstituteUser extends User { ... }
 ```
-
 </details>
 
-
+---
 
 ## How It Works
 
-    1.	The generated model extends User, inheriting all fields & methods.
-    2.	AuthenticationService.signupForExtensionUser() handles:
-      -	User field persistence
-      -	Email notifications
-      -	Password encryption & history tracking
-    3.	SolidX generates UI + API endpoints to manage custom users.
+1. The generated custom model extends `User`, inheriting all base fields and methods.  
+2. `AuthenticationService.signupForExtensionUser()` handles:  
+   - Persistence of user fields  
+   - Password encryption & history  
+   - Email notifications  
+3. SolidX generates both UI and API endpoints for managing custom users.
 
 <NoteBoxs>
-  All user records, including custom user ones, are stored in the same User i.e `ss_user` table.
-  SolidX uses a discriminator column i.e `type` to distinguish custom user types.
+All user records, including custom ones, are stored in the same `ss_user` table.  
+SolidX uses a discriminator column (`type`) to differentiate between custom user types.
 </NoteBoxs>
