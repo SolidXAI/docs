@@ -16,6 +16,10 @@ items_attributes_doc: "#scheduled-jobs-metadata-attributes"
 > **JSONPath:** `$.scheduledJobs`  
 > **Parent:** Root of the metadata file
 
+import { MdSchedule } from "react-icons/md";
+import { InfoBox } from '@site/src/common/InfoBox';
+
+
 
 ## Overview
 Scheduled jobs in SolidX allow you to run recurring tasks such as sending notifications, cleaning up records, syncing data, or performing regular maintenance.
@@ -23,7 +27,10 @@ Scheduled jobs in SolidX allow you to run recurring tasks such as sending notifi
 For a guide on how to create and manage scheduled jobs in SolidX, refer to the [Creating Scheduled Jobs](../../developer-docs/extending/backend-customization/scheduled-jobs/index.md).
 
 ## Example: Scheduled Jobs Metadata
+
+
 <summary> Scheduled Jobs Schema </summary>
+
 ``` json
 {
   "scheduledJobs": [
@@ -39,7 +46,11 @@ For a guide on how to create and manage scheduled jobs in SolidX, refer to the [
 }
 ```
 
+<h2 className=" card-headear-wrapper">
+    <MdSchedule size={24} style={{ marginRight: "10px" }} />
+
 ## Scheduled Jobs Metadata Attributes
+</h2>
 
 ### `scheduleName` *(string, required, unique)*
 Name of the scheduled job.
@@ -61,9 +72,10 @@ Days of the week on which the job should run (applicable for weekly frequency). 
 
 **Example:** `["Monday", "Wednesday", "Friday"]`  
 **Applies to:** `Weekly` frequency
-:::note
-Currently the configuration expects json configuration in stringified format. In future releases, we may support direct array input.
-:::
+
+<InfoBox>
+  Currently the configuration expects json configuration in stringified format. In future releases, we may support direct array input.
+</InfoBox>
 
 
 ### `moduleUserKey` *(string, required)*

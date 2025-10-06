@@ -10,6 +10,8 @@ items_type: "object"
 items_attributes_doc: "#menu-item-metadata-attributes"
 ---
 
+import { MdMenuBook } from "react-icons/md"; 
+
 # Menu Item Metadata
 > **Where it lives**  
 > **JSON Pointer:** `/menus`  
@@ -24,6 +26,7 @@ For a conceptual overview of menus in SolidX, refer to the [Menu System Overview
 
 ### Example: Fee Portal Module Menu Metadata
 <summary> Menu Schema </summary>
+
 ``` json
 {
   ..., // Other metadata  
@@ -81,7 +84,14 @@ For a conceptual overview of menus in SolidX, refer to the [Menu System Overview
 }
 ```
 
+
+<h2 className=" card-headear-wrapper">
+    <MdMenuBook size={22} style={{ marginRight: "10px" }} />
+
 ## Menu Item Metadata Attributes
+</h2>
+
+
 
 ### `name` *(string, required, unique)*
 Name of the menu item (column/property).  

@@ -10,6 +10,11 @@ items_type: "object"
 items_attributes_doc: "#email-templates-metadata-attributes"
 ---
 
+import { IoIosArrowForward } from "react-icons/io";
+import { MdEmail } from "react-icons/md";
+import { InfoBox } from '@site/src/common/InfoBox';
+
+
 # Email Templates
 > **Where it lives**  
 > **JSON Pointer:** `/emailTemplates`  
@@ -23,9 +28,12 @@ Email Templates in `SolidX` allow you to create and manage HTML/Text based email
 ### Example: Email Templates Metadata
 Below is an example configuration for two email templates: one for sending payment reminders and another for OTP verification. The body of the email templates is stored in separate HTML files i.e (specified in the `body` attribute)
 <details>
-<summary>
+
+<summary className="card-title card-headear-wrapper">
+    <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
  Email Templates Schema
-</summary>
+  </summary>
+
 ``` json
 {
   ..., // Other metadata
@@ -54,6 +62,7 @@ Below is an example configuration for two email templates: one for sending payme
 </details>
 
 ### Example : Email Template File
+
 Below are examples of email template files that can be referenced in the `body` attribute of the email template metadata.
 
 This example uses Handlebars syntax for dynamic content insertion.
@@ -61,7 +70,11 @@ This example uses Handlebars syntax for dynamic content insertion.
 The variables used in this template (like `{{student.studentName}}`, `{{dueDetails.totalAmountDue}}`, etc.) should correspond to the data structure passed when sending the email.
 
 <details>
-<summary> Email Template File (HTML) </summary>
+  <summary className="card-title card-headear-wrapper">
+    <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
+   Email Template File 
+  </summary>
+
 ``` html
 <!DOCTYPE html>
 <html lang="en">
@@ -160,8 +173,12 @@ The variables used in this template (like `{{student.studentName}}`, `{{dueDetai
 ```
 </details>
 <details>
-<summary> Email Template File (Text) </summary>
-``` text
+ <summary className="card-title card-headear-wrapper">
+    <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
+   Email Template File (Text)
+  </summary>
+
+```tsx
 Hi {{ fullName }},
 
 Thank you for signing up for {{ solidAppName }}!
@@ -185,7 +202,11 @@ The {{ solidAppName }} Team
 Below is a code snippet demonstrating how to send an email using the defined email templates via the `MailServiceFactory`. This example shows how to send an OTP verification email to a user.
 
 <details>
-<summary> Email Sending Code Snippet </summary>
+<summary className="card-title card-headear-wrapper">
+    <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
+   Email Sending Code Snippet
+  </summary>
+
 ``` ts
 // Example: sending an email via the MailServiceFactory
 
@@ -219,7 +240,12 @@ export class MailerExampleService {
 }
 ```
 </details>
+
+<h2 className=" card-headear-wrapper">
+    <MdEmail size={22} style={{ marginRight: "10px" }} />
+
 ## Email Templates Metadata Attributes
+</h2>
 
 ### `name` *(string, required, unique)*
 Unique name for the email template. It should be in kebab-case format (e.g., `example-template-name`).
@@ -233,12 +259,16 @@ Display name for the email template.
     - In the metadata json, the filename of the email template is specified. The templates are searched for in the `module-metadata/<module-name>/email-templates/` directory of the module.
     - The body is then replaced with the content of the email template file. This can include HTML or plain text content. The body can include dynamic placeholders using Handlebars syntax (e.g., `{{placeholderName}}`), as shown in the [Email Template file](#example--email-template-file) above.
 
-#### 📖 Further Reference
- - 📋 **Email Body Creation:** [Email Templates Guide](../../admin-docs/notifications/email-templates.md)
+####  Further Reference
+ -  **Email Body Creation:** [Email Templates Guide](../../admin-docs/notifications/email-templates.md)
 
-:::note
+
+
+
+
+<InfoBox>
 Please refer to the [Handlebars Documentation](https://handlebarsjs.com/) for more information on using Handlebars syntax in email templates.
-:::
+</InfoBox>
 
 
 ### `subject` *(string, required)*

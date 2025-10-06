@@ -10,6 +10,11 @@ items_type: "object"
 items_attributes_doc: "#media-storage-providers-metadata-attributes"
 ---
 
+import { IoIosArrowForward } from "react-icons/io";
+import { InfoBox } from '@site/src/common/InfoBox';
+
+
+
 # Media Storage
 > **Where it lives**  
 > **JSON Pointer:** `/mediaStorageProviders`  
@@ -22,6 +27,7 @@ For a conceptual overview of media storage providers in SolidX, refer to the [St
 
 ## Example: Media Storage Providers Metadata
 <summary> Media Storage Providers Schema </summary>
+
 ``` json
 {
   ..., // Other metadata
@@ -36,9 +42,12 @@ For a conceptual overview of media storage providers in SolidX, refer to the [St
     }
   ],
 }
+
 ```
-:::info
+
+<InfoBox>
 For the media storage provider `default-aws-s3`, you need to provide the following environment variables in your `.env` file or deployment environment:
+<br/>
 
 ```bash
 S3_AWS_ACCESS_KEY=<YOUR_ACCESS_KEY>    # Only in env, not JSON (for security)
@@ -46,9 +55,11 @@ S3_AWS_SECRET_KEY=<YOUR_SECRET_KEY>    # Only in env, not JSON (for security)
 S3_AWS_REGION_NAME=<YOUR_AWS_REGION>   # Can also be specified in JSON
 S3_BUCKET_NAME=<YOUR_BUCKET_NAME>      # Can also be specified in JSON
 ```
-:::
+</InfoBox>
+
 
 ## Media Storage Providers Metadata Attributes
+
 
 ### `name` *(string, required, unique)*
 Name of the media storage provider (column/property).

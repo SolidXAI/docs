@@ -11,6 +11,10 @@ items_attributes_doc: "#model-metadata-attributes"
 ---
 
 import { MdCategory } from "react-icons/md";
+import { IoIosArrowForward } from "react-icons/io";
+import { FiPackage } from "react-icons/fi";
+
+
 
 # Model Metadata
 > **Where it lives**  
@@ -26,9 +30,14 @@ Each model is a semantic, configurable data structure that forms the basis of ad
 
 👉 For a conceptual overview of what a model is, see [Model Management Documentation](../../admin-docs/module-builder/model-management.md).
 
+
+
 ### Example: Institute Model
 <details>
-<summary> Model Schema</summary>
+  <summary className="card-title card-headear-wrapper">
+    <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
+    Model Schema
+  </summary>
 
 ```json
 {
@@ -168,4 +177,16 @@ If set to `true`, the model will support a draft and publish workflow, allowing 
 
 ### `internationalisation` *(boolean, required)*
 If set to `true`, the model will support internationalization, allowing records to have translations in multiple languages. This is useful for applications that need to cater to a global audience. 
+**Default:** `false`
+
+
+<br/>
+<div className="card-headear-wrapper">
+  <FiPackage size={25} style={{ marginRight: "12px" }} />
+
+##  Related Recipes (TODO)
+
+</div>
+
+-	👉 [Model Type Recipes](../../recipes/solidx-metadata-complete-guide.md)  
 **Default:** `false`

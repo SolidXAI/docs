@@ -10,6 +10,9 @@ items_type: "object"
 items_attributes_doc: "#list-of-values-metadata-attributes"
 ---
 
+import { InfoBox } from '@site/src/common/InfoBox';
+
+
 # List of Values
 > **Where it lives**  
 > **JSON Pointer:** `/listOfValues`  
@@ -23,6 +26,7 @@ List of Values (LOV) are used to define a set of predefined values that can be u
 Below is an example wherein we define several list of values for different types such as INDUSTRY and REGULATED_BY.
 
 <summary> List of Values Schema </summary>
+
 ``` json
 {
     ..., // Other metadata sections
@@ -101,14 +105,18 @@ To utilize the defined list of values in a dynamic selection field, you can conf
     }
 }
 ```
-:::info
-ListOfValuesSelectionProvider is a built-in selection provider that fetches values from the `listOfValues` metadata based on the specified `type`. The `selectionDynamicProviderCtxt` contains a JSON string with the `type` key to filter the LOV entries.
-:::
 
-#### 📖 Further Reference
- - 📋 Understanding Dynamic Selection Fields: See [Dynamic Selection Fields Documentation](../../admin-docs/module-builder/field-management#dynamic-selection)
+
+<InfoBox>
+    ListOfValuesSelectionProvider is a built-in selection provider that fetches values from the `listOfValues` metadata based on the specified `type`. The `selectionDynamicProviderCtxt` contains a JSON string with the `type` key to filter the LOV entries.
+</InfoBox>
+
+####  Further Reference
+ -  Understanding Dynamic Selection Fields: See [Dynamic Selection Fields Documentation](../../admin-docs/module-builder/field-management#dynamic-selection)
 
 ### List of Values Metadata Attributes
+
+
 ### `type` *(string, required)*
 Type/category of the list of values (e.g., INDUSTRY, COUNTRY, STATUS).
 

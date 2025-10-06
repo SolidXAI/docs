@@ -6,7 +6,7 @@ sidebar_position: 2
 
 import { FaTerminal, FaSlidersH } from "react-icons/fa";
 
-# ⚡ Code Generation CLI
+#  Code Generation CLI
 
 The SolidX code builder—invoked either from the SolidX Admin UI or the CLI—uses Angular Schematics to scaffold backend code.  
 
@@ -15,7 +15,7 @@ Other commands such as `add-module` or `remove-fields` are available but are typ
 
 ---
 
-## 🔑 Refresh Model (Most Important)
+##  Refresh Model (Most Important)
 
 Creates or updates a model and its related files within an existing module.  
 This is the **main command you’ll use** to keep code in sync with metadata.
@@ -52,7 +52,7 @@ solid refresh-model -n myNewModelSingularName
 
 ---
 
-## 📦 Add Module (Rarely Needed)
+##  Add Module (Rarely Needed)
 
 Generates a new module in the SolidX backend.  
 Mostly useful during **initial setup**, as modules are usually scaffolded automatically when creating metadata.
@@ -87,7 +87,7 @@ solid add-module -n myNewModule
 
 ---
 
-## 🧹 Remove Fields (Edge Case)
+##  Remove Fields (Edge Case)
 
 Removes fields from an existing model in the SolidX backend.  
 Rarely required — mostly used for cleanup when metadata and generated code need alignment.
@@ -124,4 +124,4 @@ solid remove-fields -fids "[myFieldId]" -mid myModelId
 
 ---
 
-> ⚙️ The underlying implementation leverages Angular schematics and schema definitions to validate and process these operations.
+>  The underlying implementation leverages Angular schematics and schema definitions to validate and process these operations.

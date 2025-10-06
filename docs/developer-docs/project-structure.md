@@ -7,7 +7,7 @@ sidebar_position: 3
 import { FaFolder,FaBoxOpen,FaPuzzlePiece,FaLightbulb } from "react-icons/fa";
 
 
-# 📂 Project Structure
+#  Project Structure
 
 This project is organized into a backend API (`solid-api`) and frontend UI (`solid-ui`) along with supporting scripts and configurations.
 
@@ -19,7 +19,7 @@ This project is organized into a backend API (`solid-api`) and frontend UI (`sol
 └── upgrade.sh                # SolidX upgrade script
 ```
 
-## ⚙️ solid-api/ - Backend (NestJS & TypeORM)
+##  solid-api/ - Backend (NestJS & TypeORM)
 
 This folder contains all backend services, business logic, and configurations.
 
@@ -39,7 +39,7 @@ solid-api/
    <h4 className="card-title card-headear-wrapper">
       <FaFolder size={20} style={{ marginRight: "2px" }} />
 
-  ### 📁 Notable Subfolders
+  ###  Notable Subfolders
    </h4>
 
 
@@ -53,7 +53,7 @@ solid-api/
    <h4 className="card-title card-headear-wrapper">
       <FaBoxOpen size={22} style={{ marginRight: "2px" }} />
 
-  ### 📦 SolidX dependencies
+  ###  SolidX dependencies
    </h4>
   - `@solidstarters/solid-core`
     - Contains the core SolidX module which provides the core backend services for SolidX.
@@ -64,7 +64,7 @@ solid-api/
   <h4 className="card-title card-headear-wrapper">
       <FaPuzzlePiece size={20} style={{ marginRight: "2px" }} />
 
-  ### 🧩 SolidX modules
+  ###  SolidX modules
    </h4>
 
   
@@ -72,7 +72,7 @@ solid-api/
   - You can find the structure for a SolidX module here [Generated Code](../developer-docs/extending/code-generation/index.md).  
   ---
 
-## 🎨 solid-ui/ - Frontend (Next.js & Prime React)
+##  solid-ui/ - Frontend (Next.js & Prime React)
 
 The frontend is built using Next.js and Prime React components.
 
@@ -92,7 +92,7 @@ solid-ui/
    <h4 className="card-title card-headear-wrapper">
       <FaFolder size={20} style={{ marginRight: "2px" }} />
 
-  ### 📁 Notable Subfolders
+  ###  Notable Subfolders
    </h4>
 
   - `app/`
@@ -110,16 +110,16 @@ solid-ui/
    <h4 className="card-title card-headear-wrapper">
       <FaBoxOpen size={22} style={{ marginRight: "2px" }} />
 
-  ### 📦 SolidX dependencies
+  ###  SolidX dependencies
    </h4>
 
 - `@solidstarters/solid-core-ui`
   - Contains the core ui components for the SolidX UI.
   
-## 🐞 Debugging - VS Code
+##  Debugging - VS Code
 Contains editor-specific configurations like `launch.json` for debugging and IDE behavior.
 
-## 🔄 Upgrade Scripts
+##  Upgrade Scripts
 `upgrade.sh`: Used for upgrading the core SolidX backend/frontend dependencies.
 
 <div className="tips-box">

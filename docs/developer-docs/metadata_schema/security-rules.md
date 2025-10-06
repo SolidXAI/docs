@@ -16,6 +16,12 @@ items_attributes_doc: "#security-rules-metadata-attributes"
 > **JSONPath:** `$.securityRules`  
 > **Parent:** Root of the metadata file
 
+import { FaLightbulb } from "react-icons/fa";
+import { RiShieldLine } from "react-icons/ri";
+import { InfoBox } from '@site/src/common/InfoBox';
+
+
+
 ## Overview
 Security rules are crucial for controlling access to data in SolidX. By defining these rules, you can restrict visibility at the model level and ensure that only authorized users can access sensitive information.
 
@@ -23,6 +29,7 @@ For a guide on how to create and manage security rules in SolidX, refer to the [
 
 ## Example: Security Rules Metadata
 <summary> Security Rules Schema </summary>
+
 ``` json
 {
   ..., // Other metadata sections
@@ -48,7 +55,12 @@ For a guide on how to create and manage security rules in SolidX, refer to the [
 }
 ```
 
+<h2 className=" card-headear-wrapper">
+    <RiShieldLine size={24} style={{ marginRight: "10px" }} />
+
 ## Security Rules Metadata Attributes
+</h2>
+
 
 
 ### `name` *(string, required, unique)*
@@ -68,23 +80,32 @@ The user key of the model (entity) to which this security rule applies. This hel
 A JSON object defining the actual security rule configuration. This typically includes filters that determine which records are accessible based on the active user's context.
 Contains a json object with a `filters` key that defines the filtering logic. The filters object is consistent with the filter structure used in queries, allowing for complex conditions and relationships.
 
-#### 📖 Further Reference
- - 📋 Understanding Filters: See [Filters Documentation](../../developer-docs/rest-apis/retrieve/index.md) for details on constructing filter objects.
+####  Further Reference
+ -  Understanding Filters: See [Filters Documentation](../../developer-docs/rest-apis/retrieve/index.md) for details on constructing filter objects.
 
-:::tip
+
+
+
+
+<div className="tips-box">
+  <h4 className="card-headear-wrapper">
+    <FaLightbulb className="feature-icon" />
+    Tip
+  </h4>
 Verify if the security rules are working as expected by making API calls with the filters defined in the security rules.
 
-For example: 
+<span className="color-green"> For example: </span>
+<br/>
+
 ```http
 /GET api/v1/feeType
 ?filters[institute][instituteUsers][id][$eq]
 =$activeUserId
 ```
-:::
 
-:::info
-You can also use interactive query builder to convert filter objects to query strings. See [Interactive Query Builder](https://docs.strapi.io/cms/api/rest/interactive-query-builder)
-:::
+</div>
 
 
-
+<InfoBox>
+  You can also use interactive query builder to convert filter objects to query strings. See [Interactive Query Builder](https://docs.strapi.io/cms/api/rest/interactive-query-builder)
+</InfoBox>

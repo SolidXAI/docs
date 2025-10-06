@@ -10,6 +10,9 @@ items_type: "object"
 items_attributes_doc: "#users-metadata-attributes"
 ---
 
+import { FaUsers } from "react-icons/fa";
+
+
 # Users 
 > **Where it lives**  
 > **JSON Pointer:** `/users`  
@@ -25,6 +28,7 @@ We can populate some initial users in the system using the `users` metadata. The
 Below is an example of how to initialize users using the metadata configuration. The below example creates two users, "John Doe" and "Jane Smith", with their respective details. Since no passwords are provided, the system will auto-generate secure passwords for these users and mail them to the specified email addresses.
 
 <summary> Users Schema </summary>
+
 ``` json
 {
   ..., // Other metadata
@@ -46,7 +50,12 @@ Below is an example of how to initialize users using the metadata configuration.
 }
 ```
 
+<h2 className=" card-headear-wrapper">
+    <FaUsers size={22} style={{ marginRight: "10px" }} />
+
 ## Users Metadata Attributes
+</h2>
+
 ### `fullName` *(string, required)*
 Full name of the user.
 

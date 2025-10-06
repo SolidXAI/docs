@@ -1,5 +1,6 @@
 ---
 # title: SMS Templates
+
 description: Metadata schema for populating SMS templates in SolidX applications.
 sidebar_position: 10
 json_pointer: "/smsTemplates"
@@ -8,6 +9,10 @@ parent_component: root
 type: array
 items_type: "object"
 items_attributes_doc: "#email-templates-metadata-attributes"
+
+
+
+
 ---
 # SMS Templates
 > **Where it lives**  
@@ -15,13 +20,22 @@ items_attributes_doc: "#email-templates-metadata-attributes"
 > **JSONPath:** `$.smsTemplates`  
 > **Parent:** Root of the metadata file
 
+
+import { IoIosArrowForward } from "react-icons/io";
+import { MdTextsms } from "react-icons/md";
+import { InfoBox } from '@site/src/common/InfoBox';
+
 ## Overview
 SMS Templates in SOLID allow you to create and manage SMS templates with dynamic content.
 
 ### Example: SMS Templates Metadata
 Below is an example of configuring an SMS template which sends an OTP when a user logs in.
 <details>
-<summary> SMS Templates Schema </summary>
+  <summary className="card-title card-headear-wrapper">
+    <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
+    SMS Templates Schema
+  </summary>
+
 ``` json
 {
   ..., // Other metadata 
@@ -44,8 +58,12 @@ Below is an example of configuring an SMS template which sends an OTP when a use
 ### Example : SMS Template File
 Below is an example of the content of the SMS template file `otp-on-login-custom.handlebars.txt` referenced in the above metadata. This file contains the actual SMS message with dynamic placeholders.
 <details>
-<summary> SMS Template File </summary>
-``` text
+ <summary className="card-title card-headear-wrapper">
+    <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
+   SMS Template File 
+  </summary>
+
+```text
 Hi {{ firstName }}, Login to {{ solidAppName }}, using {{ mobileVerificationTokenOnLogin }} as your verification code.
 ```
 </details>
@@ -53,7 +71,11 @@ Hi {{ firstName }}, Login to {{ solidAppName }}, using {{ mobileVerificationToke
 ### Example : Sending SMS Using Template (TODO ticket)
 Below is a code snippet demonstrating how to send an SMS using the defined SMS templates via the `SmsServiceFactory`. This example shows how to send an OTP verification SMS to a user.
 <details>
-<summary> SMS Sending Code Snippet </summary>
+  <summary className="card-title card-headear-wrapper">
+    <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
+    SMS Sending Code Snippet
+  </summary>
+
 ``` ts
 import { SmsServiceFactory } from 'your-sms-service';
 
@@ -73,7 +95,11 @@ async sendOtpSms(user: { mobile: string; firstName?: string; username: string, m
 ```
 </details>
 
+<h2 className=" card-headear-wrapper">
+    <MdTextsms size={22} style={{ marginRight: "10px" }} />
+
 ## SMS Templates Metadata Attributes
+</h2>
 
 ### `name` *(string, required, unique)*
 Unique name for the sms template. It should be in kebab-case format (e.g., `example-template-name`).
@@ -87,13 +113,13 @@ Display name for the sms template.
     - In the metadata json, the filename of the sms template is specified. The templates are searched for in the `module-metadata/<module-name>/sms-templates/` directory of the module.
     - The body is then replaced with the content of the sms template file. This will include plain text content. The body can include dynamic placeholders using Handlebars syntax (e.g., `{{placeholderName}}`), as shown in the [SMS Template file](#example--sms-template-file) above.
 
-#### 📖 Further Reference
- - 📋 **SMS Body Creation:** [SMS Templates Guide](../../admin-docs/notifications/sms-templates.md)
+####  Further Reference
+ -  **SMS Body Creation:** [SMS Templates Guide](../../admin-docs/notifications/sms-templates.md)
 
-:::note
-Please refer to the [Handlebars Documentation](https://handlebarsjs.com/) for more information on using Handlebars syntax in email templates.
-:::
 
+<InfoBox>
+  Please refer to the [Handlebars Documentation](https://handlebarsjs.com/) for more information on using Handlebars syntax in email templates.
+</InfoBox>
 
 ### `smsProviderTemplateId` *(string, optional)*
 Unique identifier for the SMS template from the SMS provider (e.g., Twilio, Nexmo). This ID is used to reference the template when sending SMS messages through the provider's API.

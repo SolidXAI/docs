@@ -48,12 +48,12 @@ Add entries to the `securityRules` array in your module’s metadata JSON.
 
 - `$activeUserId` — replaced at runtime with the **logged-in user’s ID**.
 
-
-
-<h2 className="card-header-wrapper">
+<h2 className=" card-headear-wrapper">
   <IoIosLock size={26} style={{ marginRight: "10px" }} />
+
   Adding a New Security Rule
 </h2>
+
 
 1) In your module metadata, add a rule to `securityRules`.  
 2) Fill in the required fields above.  
@@ -89,8 +89,9 @@ Add entries to the `securityRules` array in your module’s metadata JSON.
 
 
 
-<h2 className="card-header-wrapper">
+<h2 className=" card-headear-wrapper">
   <IoIosInformationCircle size={26} style={{ marginRight: "10px" }} />
+
   How It Works
 </h2>
 
@@ -102,11 +103,13 @@ Add entries to the `securityRules` array in your module’s metadata JSON.
    - After adding/changing rules, **restart the server**.
 
 
-
-<h2 className="card-header-wrapper">
+<h2 className=" card-headear-wrapper">
   <IoIosWarning size={26} style={{ marginRight: "10px" }} />
+
   Common Pitfalls & Troubleshooting
 </h2>
+
+
 
 - **Restart required:** Rules are read on startup. Restart the server after changes.  
 - **Exact keys:** Check `roleUserKey` and `modelMetadataUserKey` spellings and that they exist.  
@@ -114,7 +117,8 @@ Add entries to the `securityRules` array in your module’s metadata JSON.
   - Example: If `"InstituteController.findMany"` is granted to `"Public"`, `GET /api/institute` becomes unauthenticated and **no security rules** apply.  
 - **Filters correctness:** Validate your `securityRuleConfig.filters` structure and paths (e.g., relation names, field names).  
 - **SQL visibility:** Turn on SQL debug to see applied filters:
-  ```env
+
+  ```bash
   DEFAULT_DATABASE_LOGGING=true
   ```
 

@@ -5,6 +5,7 @@
  */
 
 /* You can override the default Infima variables here. */
+/* Dark theme (your current one) */
 :root {
   --solid-primary: #140f1e;
   --solid-primary-dark: #05010f;
@@ -15,7 +16,6 @@
   --solid-primary-lightest: #190842;
   --solid-secondary-color: #1c1529;
   --solid-color-white: #ffffff;
-  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
   --solid-bg-main: #0e061d;
   --solid-purple: #300861;
   --solid-purple-hover: #4a0d94;
@@ -30,13 +30,17 @@
   --solid-footer-border: #311a57;
   --solid-border-light: #8c6dbe;
   --solid-border-subtle: #3b2d5c; 
-  --solid-border-default: #5c4490; /* new default border */
-  --solid-border-soft: rgba(255, 255, 255, 0.08); /* soft, minimal */
-  --solid-border-highlight: #8c6dbe; /* high contrast / emphasis */
+  --solid-border-default: #5c4490;
+  --solid-border-soft: rgba(255, 255, 255, 0.08);
+  --solid-border-highlight: #8c6dbe;
   --solid-green-color-500:#5cb176;
   --solid-warning-color-500:#f29d41;
   --solid-red-color-500: #e25555;
+}
 
+
+
+:root {
   --solid-small-font-size: 0.875rem;
   --solid-md-font-size: 0.975rem;
   --solid-lg-font-size: 1.2rem;
@@ -120,6 +124,10 @@
                "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif !important;
 } */
 
+.toggle_vylO.colorModeToggle_DEke{
+display: none !important;
+}
+
 .features_t9lD {
   background-color: var(--solid-primary) !important ;
 }
@@ -170,14 +178,14 @@
 
 .navbar__link {
   color: #e0d8ff !important;
-  padding: 0.1rem 1rem !important;
+  padding: 0.05rem 1rem !important;
 }
 
 .navbar__link:hover,
 .navbar__link--active {
   color: var(--solid-color-white) !important;
-  background-color: var(--solid-border-default);
-  border: 1px solid var(--solid-border-subtle);
+  background-color: var(--solid-border-subtle);
+  border: 1px solid var(--solid-border-default);
 }
 
 .navbar__logo {
@@ -488,6 +496,17 @@ code {
   color: var(--solid-color-white) !important;
   font-size: var(--solid-small-font-size);
 }
+/* 
+code .plain,
+code .token.imports,
+code .token.punctuation,
+code .token.maybe-class-name,
+code .token.operator,
+code .token.builtin,
+code .token.property-access,
+code .token.known-class-name.class-name {
+  color: var(--solid-color-white) !important;
+} */
 
 .codeBlockLines_e6Vv {
   /* background-color: var(--solid-code) !important; */
@@ -533,6 +552,22 @@ code {
   border: 1px solid var(--solid-border-highlight) !important; /* slightly brighter on hover */
   color: var(--solid-color-white) !important;
 }
+
+.pagination-nav__sublabel{
+  color: var(--solid-color-white)
+
+}
+
+.collapsibleContent_i85q:has(.codeBlockContent_biex) {
+  margin-top: 0;
+  border-top: none !important;
+}
+
+.collapsibleContent_i85q {
+  border-top: 1px solid var(--solid-border-default) !important;
+}
+
+
 
 /* === FOOTER === */
 
@@ -847,6 +882,7 @@ code {
 blockquote {
   /* background-color: var(--solid-purple-hover); */
   border-color: var(--solid-purple-hover) !important;
+  color: var(--solid-body);
 }
 
 /*=========  icons ================ */
@@ -894,6 +930,7 @@ summary {
   list-style: none;
   padding: 0 !important;
   font-size: 1rem !important;
+  color: var(--solid-color-white);
 }
 
 summary::-webkit-details-marker {

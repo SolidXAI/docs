@@ -7,6 +7,8 @@ keywords: [backend, dynamic selection, providers, customization]
 
 import { NoteBoxs } from '@site/src/common/NoteBoxs';
 import { IoIosArrowForward } from "react-icons/io";
+import { FaLightbulb } from "react-icons/fa";
+
 
 # Dynamic Selection Providers
 
@@ -52,10 +54,17 @@ The `selectionDynamicProviderCtxt` specifies which fields from the API response 
 
 </details>
 
-:::tip
+
+<div className="tips-box">
+  <h4 className="card-headear-wrapper">
+    <FaLightbulb className="feature-icon" />
+    Tip
+  </h4>
+
 - Use the built-in **`ListOfValuesSelectionProvider`** when you just need to fetch options from your database.  
 - Create a **custom provider** when the logic for fetching or filtering is more complex, or when data comes from an external source like an API.
-:::
+</div>
+
 
 ---
 
@@ -65,8 +74,10 @@ Your provider class must implement the `ISelectionProvider` interface.
 The most important method is `values()`, which fetches and returns the available options.
 
 <NoteBoxs>
-The <code>value()</code> method is deprecated. It can simply throw a <code>NotImplementedException</code> and is kept only for backward compatibility.
+  The <code>value()</code> method is deprecated. It can simply throw a <code>NotImplementedException</code> and is kept only for backward compatibility.
 </NoteBoxs>
+
+<br/>
 
 <details>
  <summary className="card-title card-headear-wrapper">

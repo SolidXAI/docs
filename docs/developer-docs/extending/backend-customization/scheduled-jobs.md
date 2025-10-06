@@ -19,7 +19,7 @@ This section walks you through how to create and integrate custom scheduled jobs
 
 
 <h4 className="card-title card-headear-wrapper">
-  <IoIosAlarm size={26} style={{ marginRight: "10px" }} />
+  <IoIosAlarm size={24} style={{ marginRight: "10px" }} />
 
 ##  Adding a New Scheduled Job
 </h4>
@@ -100,7 +100,7 @@ Add the job definition in your metadata.json or job configuration file.
 - Weekly
 - Monthly
 
-### ⚙️ How It Works
+###  How It Works
 	- How job schedules are evaluated
     - The SchedulerServiceImpl in @solidstarters/solid-core is responsible for evaluating and executing scheduled jobs.
     - Job Execution Flow:

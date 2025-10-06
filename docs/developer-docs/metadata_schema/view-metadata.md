@@ -10,6 +10,9 @@ items_type: "object"
 items_attributes_doc: "#view-metadata-attributes"
 ---
 
+import { MdViewList,MdDescription,MdViewKanban,MdSecurity,MdWidgets,MdViewQuilt } from "react-icons/md";
+import { RiLockLine } from "react-icons/ri";
+import { FaBolt } from "react-icons/fa";            
 import { IoIosArrowForward } from "react-icons/io";
 import { InfoBox } from '@site/src/common/InfoBox';
 
@@ -178,10 +181,14 @@ Views define UI presentation of models and automatically generate:
 You can refer to the [Kanban View Example](../../recipes/view-configurations-guide#4-kanban-view-configuration) for a detailed example of Kanban view metadata. -->
 
 ## View Configurations
+<h3 className=" card-headear-wrapper">
+    <MdViewList size={22}  />
+
 ### List View
+</h3>
 List views display records in tabular format with advanced features like search, filtering, and pagination.
 
-#### Basic List View Structure
+#### 1. Basic List View Structure
 ```json
 {
   "name": "institute-list-view",
@@ -202,7 +209,7 @@ List views display records in tabular format with advanced features like search,
 }
 ```
 
-#### List View Attributes
+#### 2. List View Attributes
 ```json
 "attrs": {
     // Enable pagination
@@ -237,7 +244,7 @@ List views display records in tabular format with advanced features like search,
 }
 ```
 
-#### List View Field Configuration
+#### 3. List View Field Configuration
 ```json
 "children": [
   {
@@ -272,10 +279,14 @@ List views display records in tabular format with advanced features like search,
 ]
 ```
 
+<h3 className=" card-headear-wrapper">
+    <MdDescription size={22}  />
+
 ### Form View
+</h3>
 Form views handle data entry and editing with complex layout structures using sheets, notebooks, and pages.
 
-#### Basic Form View Structure
+#### 1. Basic Form View Structure
 ```json
 {
   "name": "institute-form-view",
@@ -297,7 +308,7 @@ Form views handle data entry and editing with complex layout structures using sh
 }
 ```
 
-#### Form View Attributes
+#### 2. Form View Attributes
 ```json
 "attrs": {
   "name": "form-1",                      // Form identifier
@@ -320,7 +331,7 @@ Form views handle data entry and editing with complex layout structures using sh
 }
 ```
 
-#### Form Layout Components Hierarchy
+#### 3. Form Layout Components Hierarchy
 
 Form layouts use a hierarchical structure:
 ```
@@ -502,11 +513,16 @@ Form
 }
 ```
 
+<h3 className=" card-headear-wrapper">
+    <MdViewKanban size={22}  />
+
 ### Kanban View
+</h3>
 
 Kanban views display records as cards with drag-and-drop functionality.
 
-#### Basic Kanban View Structure
+
+#### 1. Basic Kanban View Structure
 ```json
 {
   "name": "task-kanban-view",
@@ -527,7 +543,7 @@ Kanban views display records as cards with drag-and-drop functionality.
 }
 ```
 
-#### Kanban View Attributes
+#### 2. Kanban View Attributes
 ```json
 "attrs": {
   "swimlanesCount": 10,                 // Number of swimlanes to show
@@ -542,7 +558,7 @@ Kanban views display records as cards with drag-and-drop functionality.
 }
 ```
 
-#### Kanban Card Template
+#### 3. Kanban Card Template
 ```json
 "children": [
   {
@@ -582,7 +598,12 @@ Kanban views display records as cards with drag-and-drop functionality.
 Views support role-based access control (RBAC) to restrict actions and field-level permissions based on user roles.
 
 Below view actions will be visible/enabled only for users with the specified roles.
+<h3 className=" card-headear-wrapper">
+    <MdSecurity size={21}  />
+
 ### Role-Based View Actions
+</h3>
+
 ```json
 "configureViewActions": {
   "import": {
@@ -601,7 +622,12 @@ Below view actions will be visible/enabled only for users with the specified rol
 ```
 
 Below field will be visible only for users with the specified roles. This works in both list and form views.
+<h3 className=" card-headear-wrapper">
+    <RiLockLine size={21}  />
+
 ### Field-Level Permissions in Views
+</h3>
+
 ```json
 {
   "type": "field",
@@ -612,7 +638,11 @@ Below field will be visible only for users with the specified roles. This works 
 }
 ```
 
+<h3 className=" card-headear-wrapper">
+    <MdWidgets size={21}  />
+
 ### View Widgets (TODO)
+</h3>
 Views support custom widgets to enhance field display and editing experiences. List view supports `viewWidget` and form views support `viewWidget` for view mode and `editWidget` for edit mode respectively.
 
 #### Custom View Widgets
@@ -633,8 +663,14 @@ Views support custom widgets to enhance field display and editing experiences. L
 - **Masked widgets**: For sensitive data (passwords, secrets)
 - **Rich widgets**: For formatted content display
 
+<h3 className=" card-headear-wrapper">
+    <FaBolt size={21}  />
+
 ### View Event Handlers (TODO)
+</h3>
+
 Views support event handlers to execute custom logic at various stages of the view lifecycle. We can write custom handlers in our project which react to these events and modify view behavior dynamically.
+
 
 #### Event Handler Types
 - `onFormLayoutLoad`: Executed when form loads
@@ -643,7 +679,11 @@ Views support event handlers to execute custom logic at various stages of the vi
 - `onFormSubmit`: Executed before form submission
 - `onViewLoad`: Executed when view loads
 
+<h3 className=" card-headear-wrapper">
+    <MdViewQuilt size={24}  />
+
 ### View Layout Responsive Design
+</h3>
 
 #### CSS Grid Classes
 ```json
@@ -696,7 +736,7 @@ Controls how fields, widgets, buttons, and other UI elements are organized.
 
 **Default:** N/A
 
-#### 📖 Further Reference
+####  Further Reference
 
 For detailed attribute-level documentation of the `layout` schema per view type, see:
 
@@ -726,17 +766,38 @@ User key of the model this view is associated with.
 
 ## Best Practices
 
-### Layout Organization
-1. **Use logical grouping**: Group related fields in columns with descriptive labels
-2. **Progressive disclosure**: Use tabs (notebooks) for complex forms
-3. **Responsive design**: Use appropriate grid classes for different screen sizes
-4. **Field ordering**: Place important fields first, follow logical workflow
+<details>
+  <summary className="card-title card-header-wrapper">
+    <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
+    Layout Organization
+  </summary>
+  <ul className="card-desc">
+    <li><strong>Use logical grouping</strong>: Group related fields in columns with descriptive labels</li>
+    <li><strong>Progressive disclosure</strong>: Use tabs (notebooks) for complex forms</li>
+    <li><strong>Responsive design</strong>: Use appropriate grid classes for different screen sizes</li>
+    <li><strong>Field ordering</strong>: Place important fields first, follow logical workflow</li>
+  </ul>
+</details>
 
-### Security Considerations
-1. **Role-based access**: Configure view actions based on user roles
-2. **Field-level security**: Hide sensitive fields from unauthorized users
-3. **Audit trails**: Enable audit tracking for sensitive operations
+<details>
+  <summary className="card-title card-header-wrapper">
+    <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
+    Security Considerations
+  </summary>
+  <ul className="card-desc">
+    <li><strong>Role-based access</strong>: Configure view actions based on user roles</li>
+    <li><strong>Field-level security</strong>: Hide sensitive fields from unauthorized users</li>
+    <li><strong>Audit trails</strong>: Enable audit tracking for sensitive operations</li>
+  </ul>
+</details>
 
-### Performance Optimization
-1. **Pagination**: Always enable pagination for large datasets
-2. **Field selection**: Only display necessary fields in list views
+<details>
+  <summary className="card-title card-header-wrapper">
+    <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
+    Performance Optimization
+  </summary>
+  <ul className="card-desc">
+    <li><strong>Pagination</strong>: Always enable pagination for large datasets</li>
+    <li><strong>Field selection</strong>: Only display necessary fields in list views</li>
+  </ul>
+</details>

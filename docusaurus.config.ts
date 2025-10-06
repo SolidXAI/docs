@@ -66,6 +66,11 @@ const config: Config = {
   ],
 
   themeConfig: {
+    colorMode: {
+      defaultMode: 'light', // 👈 default is light
+      disableSwitch: false, // user can still toggle
+      respectPrefersColorScheme: false, // ignores system setting
+    },
     image: 'img/docusaurus-social-card.jpg',
     navbar: {
       title: '',
@@ -151,7 +156,7 @@ const config: Config = {
     prism: {
       theme: prismThemes.github,        
       darkTheme: prismThemes.dracula,  
-      additionalLanguages: ['typescript', 'tsx', 'bash', 'json', 'http'],
+      additionalLanguages: ['typescript', 'tsx', 'bash', 'json', 'http', 'diff']
     },
 
   } satisfies Preset.ThemeConfig,

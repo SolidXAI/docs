@@ -69,26 +69,26 @@ SOLID supports multiple authentication methods through its provider system, offe
 
 #### 1. Frontend initiates auth:
 
-```javascript
+```tsx
 // Redirect to OAuth provider
 window.location.href = "https://solid.website.com/api/iam/[provider]/connect";
 ```
 
 #### 2. Backend handles callback:
 
-```
+```http
 https://solid.website.com/api/iam/[provider]/connect/callback
 ```
 
 #### 3. Provider redirects with code:
 
-```
+```http
 http://website.com/connect/[provider]/callback?accessCode=[code]
 ```
 
 #### 4. Frontend exchanges code:
 
-```
+```http
 GET https://solid.website.com/api/iam/[provider]/auth?accessCode=[code]
 ```
 

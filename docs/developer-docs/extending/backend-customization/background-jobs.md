@@ -12,8 +12,12 @@ keywords:
     database broker,
   ]
 ---
-import { FaTag, FaDatabase, FaCode, FaProjectDiagram } from "react-icons/fa";
+
+import { FaTag, FaDatabase, FaCode, FaProjectDiagram,FaLightbulb } from "react-icons/fa";
 import { IoIosArrowForward } from "react-icons/io";
+import { InfoBox } from '@site/src/common/InfoBox';
+
+
 
 Background jobs in SolidX enable asynchronous task processing, making it easy to offload work that doesn’t need to run immediately. Common use cases include:
 	-	Sending emails or notifications
@@ -100,9 +104,11 @@ export class EmailQueuePublisherDatabase extends DatabasePublisher<any> {
 </details>
 
 <!-- //FIXME: -->
-:::info  
-In the near future, you need not create a publisher. Only subscriber needs to be created.
-:::
+
+<InfoBox>
+  In the near future, you need not create a publisher. Only subscriber needs to be created.
+</InfoBox>
+
 
 ### 3. Configure a Subscriber
 
@@ -149,17 +155,22 @@ export class EmailQueueSubscriberDatabase extends DatabaseSubscriber<any> {
 ```
 
 </details>
-:::tip
-Keep your subscribe method clean and simple. Keep the actual logic in a separate service and call it from the subscribe method.
-::: 
 
-:::info
-The above examples use a database broker. For RabbitMQ, simply switch the base classes to `RabbitmqPublisher` and `RabbitmqSubscriber`, and update the queue options accordingly.
-:::
+<div className="tips-box">
+  <h4 className="card-headear-wrapper">
+    <FaLightbulb className="feature-icon" />
+    Tip
+  </h4>
+Keep your subscribe method clean and simple. Keep the actual logic in a separate service and call it from the subscribe method.
+</div>
+
+<InfoBox>
+  The above examples use a database broker. For RabbitMQ, simply switch the base classes to `RabbitmqPublisher` and `RabbitmqSubscriber`, and update the queue options accordingly.
+</InfoBox>
 
 
 <h4 className="card-title card-headear-wrapper">
-  <FaTag size={19} style={{ marginRight: "10px" }} />
+  <FaTag size={18} style={{ marginRight: "10px" }} />
 
 ## Naming Convention
 </h4>
@@ -188,7 +199,8 @@ They are standard NestJS providers and must be registered in their respective mo
 
 ## Environment Variable
 </h4>
-### 📨 Broker
+
+### Broker
 - **`QUEUES_DEFAULT_BROKER`**  
   Choose the broker for background jobs:  
   - `"database"` → Database broker (**default**)  
@@ -199,23 +211,26 @@ They are standard NestJS providers and must be registered in their respective mo
   `amqp://guest:guest@127.0.0.1:5672`
 
 
-### 🖥 Service Role
+###  Service Role
 - **`QUEUES_SERVICE_ROLE`**  
   Defines how this service instance participates:  
   - `"subscriber"` → Only processes jobs  
   - `"both"` → Publishes **and** processes jobs  
     _(useful for distributed job handling)_
-:::info
-In a distributed setup, you can have some instances only processing jobs while others handle both publishing and processing. This is useful for load balancing and scaling for e.g (you can set the `QUEUES_SERVICE_ROLE` to `subscriber` on multiple instances to only process jobs, while having one instance set to `both` to handle publishing/subscribing).
-:::
 
-### 📧 Email Jobs
+
+<InfoBox>
+  In a distributed setup, you can have some instances only processing jobs while others handle both publishing and processing. This is useful for load balancing and scaling for e.g (you can set the `QUEUES_SERVICE_ROLE` to `subscriber` on multiple instances to only process jobs, while having one instance set to `both` to handle publishing/subscribing).
+</InfoBox>
+
+
+###  Email Jobs
 - **`COMMON_EMAIL_SHOULD_QUEUE`**  
   - `true` → Send emails via background jobs  
   - `false` → Send emails synchronously (**default**)  
 
 
-### 📱 SMS Jobs
+###  SMS Jobs
 - **`COMMON_SMS_SHOULD_QUEUE`**  
   - `true` → Send SMS via background jobs  
   - `false` → Send SMS synchronously (**default**)  
