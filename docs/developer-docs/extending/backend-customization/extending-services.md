@@ -1,46 +1,91 @@
 ---
 sidebar_position: 2
 title: Extending Services
-description: Learn how to extend the backend services in your application.
+description: Learn how to extend backend services in SolidX.
 keywords: [backend, services, customization]
 ---
 
 import { IoIosArrowForward } from "react-icons/io";
 
+# Extending Services
 
-#  Extending Services
+In SolidX, **services** are responsible for implementing **business logic** and handling **data manipulation**.  
+By extending services, you can introduce custom logic that goes beyond the default CRUD behavior provided by SolidX.  
 
-Services are responsible for business logic and data manipulation in your application. Extending services allows you to implement custom logic beyond the default behavior.
+This is especially useful when:  
+- You want to add domain-specific operations (e.g., activating a portal, sending notifications).  
+- You need to encapsulate logic that should be reused across multiple controllers.  
+- You want to keep your **controllers thin** (focused on request/response) while moving logic into **services** (focused on business rules).  
 
 
 
-##  Adding a New Method to a Service
+## Why Create Service Methods?
 
-To add a new method to an existing service, follow these steps:
+Creating methods inside services provides several benefits:  
 
-1.  Identify the service you want to extend.  
-2.  Create a new method in the service class that implements your logic.  
-3.  Update the corresponding controller if you want to expose this functionality via API.
+- **Separation of Concerns** → Business logic resides in services, keeping controllers simple.  
+- **Reusability** → The same service method can be reused by multiple controllers or scheduled jobs.  
+- **Testability** → Service methods are easier to unit test compared to full controller logic.  
+- **Consistency** → Centralized service methods reduce duplication across your codebase.  
+
+
+
+## Adding a New Method
+
+To add a new method to an existing service:
+
+1. Identify the service you want to extend.  
+2. Add a method in the service class that implements your business logic.  
+3. Update the corresponding controller if you want to expose this functionality via an API endpoint.  
 
 <details>
   <summary className="card-title card-headear-wrapper">
     <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
-   Example: Add <code>activateInstitutePortal</code> to <code>InstituteService</code>
-</summary>
+    Example: Add <code>activateInstitutePortal</code> to <code>InstituteService</code>
+  </summary>
 
 ```ts
-async activateInstitutePortal(ids: (number | string)[]): Promise<any> {
-  // Logic to activate the institute portal
-  // This could involve updating the database, sending notifications, etc.
+@Injectable()
+export class InstituteService {
+  constructor(private readonly instituteRepo: Repository<Institute>) {}
+
+  async activateInstitutePortal(ids: (number | string)[]): Promise<any> {
+    // Example: update the status of multiple institutes to "Active"
+    await this.instituteRepo.update(
+      { id: In(ids) },
+      { portalActive: true, activatedAt: new Date() }
+    );
+
+    // Example: trigger a domain event or send notifications
+    // await this.notificationService.notifyAdmins(ids, 'Institute portal activated');
+
+    return { success: true, activatedIds: ids };
+  }
 }
 ```
 </details>
 
+This method encapsulates the logic required to **activate an institute’s portal**.  
+It could include **database updates, event publishing, or notification sending**.  
 
-This method encapsulates the logic required to activate an institute’s portal. You can then call this service method from a controller to make it accessible via an endpoint.
 
 
+## Using Service Methods in Controllers
 
-##  Related Recipes
-	-	 Creating a Custom Service
-	-	 Creating a Service Method with Custom Logic
+Once you’ve created a service method, you can call it from a controller endpoint.  
+This keeps the controller lightweight while delegating heavy logic to the service.
+
+See the [Extending Controllers](./extending-controllers.md) guide for details on adding endpoints.  
+
+### Example: Connecting `activateInstitutePortal` to `InstituteController`
+
+```ts
+@ApiBearerAuth("jwt")
+@Post("activate-institute-portal")
+async activateInstitute(@Body() ids: (number | string)[]) {
+  return this.service.activateInstitutePortal(ids);
+}
+```
+
+Here, the controller method simply delegates to the **service method**, ensuring a clean separation of responsibilities.
+
