@@ -14,7 +14,7 @@ However, there may be cases where you need to create your own provider — for e
 
 To make this easy, SolidX offers abstractions that help you implement your own provider while keeping the code **clean, testable, and decoupled**.
 
----
+
 
 ## ⚙️ Steps to Create a Custom Email Provider
 
@@ -141,7 +141,7 @@ export class CustomNotifyApiEmailService implements IMail {
 }
 ```
 
----
+
 
 ### 2. Register Your Custom Provider
 
@@ -155,7 +155,7 @@ import { CustomNotifyApiEmailService } from "./custom-notify-api-email.service";
 export class AppModule {}
 ```
 
----
+
 
 ### 3. Use the `MailFactory` to Send Emails
 
@@ -200,7 +200,7 @@ await mailService.sendEmail(
 );
 ```
 
----
+
 
 ## 🧠 Interface Definition
 
@@ -240,7 +240,7 @@ export interface IMail<TResponse = unknown> {
 
 > 💡 **Recommendation:** Use email templates for better separation of content and logic. It allows you to modify templates without changing your backend code.
 
----
+
 
 ## ✅ Summary
 
@@ -251,4 +251,4 @@ export interface IMail<TResponse = unknown> {
 | 3️⃣ | Register it in your module |
 | 4️⃣ | Use `MailFactory` to send emails (template or manual) |
 
----
+
