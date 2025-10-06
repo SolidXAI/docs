@@ -154,7 +154,7 @@ const config: Config = {
       // copyright: `Copyright © ${new Date().getFullYear()} SolidX, LogicLoop Ventures LLP.`,
     },
     prism: {
-      theme: prismThemes.github,        
+      theme: prismThemes.dracula,        
       darkTheme: prismThemes.dracula,  
       additionalLanguages: ['typescript', 'tsx', 'bash', 'json', 'http', 'diff']
     },
