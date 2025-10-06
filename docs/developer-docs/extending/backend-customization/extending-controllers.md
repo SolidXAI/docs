@@ -3,6 +3,7 @@ title: Extending Controllers
 description: Learn how to extend backend controllers in SolidX.
 keywords: [backend, controllers, customization]
 sidebar_position: 1
+solidx_concerns: [add_controller_endpoint]
 ---
 
 import { IoIosArrowForward } from "react-icons/io";

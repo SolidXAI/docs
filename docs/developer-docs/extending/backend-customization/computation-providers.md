@@ -3,6 +3,7 @@ title: Computation Providers
 description: Learn how to extend the backend with custom computation providers.
 sidebar_position: 5
 keywords: [backend, computation providers, customization]
+solidx_concerns: [add_computed_field_provider]
 ---
 
 import { NoteBoxs } from '@site/src/common/NoteBoxs';

@@ -3,6 +3,7 @@ sidebar_position: 9
 title: Extending Users
 description: Learn how to extend user functionality in SolidX.
 keywords: [backend, users, customization]
+solidx_concerns: [extending_user]
 ---
 
 import { IoIosArrowForward } from "react-icons/io";

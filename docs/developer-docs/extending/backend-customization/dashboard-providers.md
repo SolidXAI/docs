@@ -3,6 +3,7 @@ sidebar_position: 13
 title: Dashboard Providers
 description: Create custom dashboard providers to return the data for rendering dashboard widgets.
 keywords: [backend, dashboard, providers, customization]
+solidx_concerns: [create/update_dashboard_widget]
 ---
 
 # Dashboard Providers

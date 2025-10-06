@@ -3,6 +3,7 @@ sidebar_position: 7
 title: Scheduled Jobs
 description: Learn how to write the scheduled jobs in your SolidX application.
 keywords: [backend, scheduled jobs, customization]
+solidx_concerns: [add_scheduled_job]
 ---
 
 import { IoIosArrowForward } from "react-icons/io";

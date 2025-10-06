@@ -3,6 +3,7 @@ sidebar_position: 11
 title: Security Rules
 description: Learn how to customize security rules in SolidX.
 keywords: [backend, security, customization]
+solidx_concerns: [add/update_security_record_rule]
 ---
 
 import { IoIosArrowForward, IoIosLock, IoIosInformationCircle, IoIosWarning } from "react-icons/io";

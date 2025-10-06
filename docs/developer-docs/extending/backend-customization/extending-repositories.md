@@ -3,6 +3,7 @@ sidebar_position: 4
 # title: Extending Repositories
 description: Learn how to extend functionality in repositories in your application.
 keywords: [backend, repositories, customization]
+solidx_concerns: [extending_repository, add_custom_service_method, add_controller_endpoint]
 ---
 
 # Extending Repositories

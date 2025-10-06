@@ -3,6 +3,7 @@ sidebar_position: 2
 title: Extending Services
 description: Learn how to extend backend services in SolidX.
 keywords: [backend, services, customization]
+solidx_concerns: [add_custom_service_method, using_crud_service_method, add_controller_endpoint]
 ---
 
 import { IoIosArrowForward } from "react-icons/io";

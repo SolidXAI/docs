@@ -3,6 +3,7 @@ sidebar_position: 12
 title: Dynamic Selection Providers
 description: Learn how to create dynamic selection providers to customize the selection options in your application.
 keywords: [backend, dynamic selection, providers, customization]
+solidx_concerns: [dynamic_selection_provider]
 ---
 
 import { NoteBoxs } from '@site/src/common/NoteBoxs';
