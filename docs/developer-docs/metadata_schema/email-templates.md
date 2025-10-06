@@ -8,6 +8,7 @@ parent_component: root
 type: array
 items_type: "object"
 items_attributes_doc: "#email-templates-metadata-attributes"
+solidx_concerns: [create/update_email_template, new_email_provider]
 ---
 
 import { IoIosArrowForward } from "react-icons/io";

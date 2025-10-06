@@ -8,6 +8,7 @@ parent_component: root
 type: array
 items_type: "object"
 items_attributes_doc: "#users-metadata-attributes"
+solidx_concerns: []
 ---
 
 import { FaUsers } from "react-icons/fa";

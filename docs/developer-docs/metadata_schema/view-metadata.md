@@ -8,6 +8,7 @@ parent_component: root
 type: array
 items_type: "object"
 items_attributes_doc: "#view-metadata-attributes"
+solidx_concerns: [update_layout, add_field_to_existing_layout, remove_field_from_existing_layout, modify_layout_field_attribute]
 ---
 
 import { MdViewList,MdDescription,MdViewKanban,MdSecurity,MdWidgets,MdViewQuilt } from "react-icons/md";

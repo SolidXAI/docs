@@ -1,8 +1,19 @@
+	•	add_full_custom_ui
+	•	onlayoutload_handler_function
+	•	ondataload_handler_function
+	•	add_form_button
+	•	add_list_header_button_with
+	•	add_list_row_button_with
+	•	create_custom_form_field_widget
+	•	create_custom_list_field_widget
+	•	create_custom_widget
+
 Here’s your revised list with each item converted to singular form, while keeping the original naming style consistent:
 	•	add_custom_menu_action_combo
 	•	update_layout
 	•	add_field_to_existing_layout
 	•	remove_field_from_existing_layout
+	•	add_field_to_a_model
 	•	remove_field_from_a_model
 	•	add_new_role_with_permission
 	•	modify_role

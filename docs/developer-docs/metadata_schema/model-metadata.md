@@ -8,6 +8,7 @@ parent_component: moduleMetadata
 type: array,
 items_type: "object"
 items_attributes_doc: "#model-metadata-attributes"
+solidx_concerns: [add_field_to_a_model, remove_field_from_a_model]
 ---
 
 import { MdCategory } from "react-icons/md";

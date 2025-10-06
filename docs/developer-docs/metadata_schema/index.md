@@ -2,6 +2,7 @@
 # title: Metadata Schema
 description: Overview of the metadata schema used in SolidX.
 sidebar_position: 3.5
+solidx_concerns: [add_field_to_existing_layout, add_field_to_a_model, add/update_security_record_rule]
 ---
 
 import { MdUpcoming } from "react-icons/md";

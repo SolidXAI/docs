@@ -2,6 +2,7 @@
 sidebar_position: 2
 title: Custom Widgets
 description: Learn how to create custom widgets for the frontend of your application.
+solidx_concerns: [create_custom_widget, add_form_button]
 ---
 
 import { IoIosArrowForward } from "react-icons/io";

@@ -9,7 +9,7 @@ parent_component: root
 type: array
 items_type: "object"
 items_attributes_doc: "#email-templates-metadata-attributes"
-
+solidx_concerns: [create/update_sms_template, new_sms_provider]
 
 
 

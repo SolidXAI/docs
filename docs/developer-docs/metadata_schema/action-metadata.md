@@ -8,6 +8,7 @@ parent_component: root
 type: array
 items_type: "object"
 items_attributes_doc: "#action-metadata-attributes"
+solidx_concerns: [add_custom_menu_action_combo]
 ---
 
 import { MdOutlineAssignment } from "react-icons/md";

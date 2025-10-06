@@ -3,6 +3,7 @@ title: Custom Views
 description: Learn how to create custom views in the frontend of your application.
 keywords: [custom views, frontend customization, custom actions, custom components]
 sidebar_position: 2
+solidx_concerns: [ add_full_custom_ui, add_custom_menu_action_combo,create_custom_widget]
 ---
 
 import { IoIosArrowForward } from "react-icons/io";

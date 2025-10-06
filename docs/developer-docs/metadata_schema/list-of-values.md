@@ -8,6 +8,7 @@ parent_component: root
 type: array
 items_type: "object"
 items_attributes_doc: "#list-of-values-metadata-attributes"
+solidx_concerns: [add_lov_record]
 ---
 
 import { InfoBox } from '@site/src/common/InfoBox';

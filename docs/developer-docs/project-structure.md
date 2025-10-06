@@ -2,6 +2,7 @@
 # title: Project Structure
 description: Overview of the folder structure for the SolidX Fullstack Application.
 sidebar_position: 3
+solidx_concerns: []
 ---
 
 import { FaFolder,FaBoxOpen,FaPuzzlePiece,FaLightbulb } from "react-icons/fa";

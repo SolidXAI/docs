@@ -8,6 +8,7 @@ parent_component: root
 type: array
 items_type: "object"
 items_attributes_doc: "#scheduled-jobs-metadata-attributes"
+solidx_concerns: [add_scheduled_job]
 ---
 
 # Scheduled Jobs

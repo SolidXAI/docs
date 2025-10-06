@@ -8,6 +8,7 @@ parent_component: root
 type: array
 items_type: "object"
 items_attributes_doc: "#media-storage-providers-metadata-attributes"
+solidx_concerns: []
 ---
 
 import { IoIosArrowForward } from "react-icons/io";

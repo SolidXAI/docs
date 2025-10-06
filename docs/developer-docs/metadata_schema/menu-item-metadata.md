@@ -8,6 +8,7 @@ parent_component: root
 type: array
 items_type: "object"
 items_attributes_doc: "#menu-item-metadata-attributes"
+solidx_concerns: [add_custom_menu_action_combo, add_new_role_with_permission, modify_role]
 ---
 
 import { MdMenuBook } from "react-icons/md"; 

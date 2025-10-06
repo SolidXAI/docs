@@ -2,6 +2,7 @@
 sidebar_position: 2
 title: Form View Field Widgets
 description: Learn how to create form view field widgets for the frontend of your application.
+solidx_concerns: [create_custom_form_field_widget]
 ---
 
 import { IoIosArrowForward } from "react-icons/io";

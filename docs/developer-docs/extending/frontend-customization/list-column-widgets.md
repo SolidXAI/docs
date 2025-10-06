@@ -2,6 +2,7 @@
 sidebar_position: 2
 title: List Column Widgets
 description: Learn how to create list column widgets for the frontend of your application.
+solidx_concerns: [create_custom_list_field_widget, add_list_header_button_with, add_list_row_button_with]
 ---
 
 import { IoIosArrowForward } from "react-icons/io";

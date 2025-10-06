@@ -2,6 +2,7 @@
 sidebar_position: 2
 title : Form View Event Listeners
 description: Learn how to create event listeners for form view events in your frontend application.
+solidx_concerns: [add_change_handler_function, onlayoutload_handler_function, ondataload_handler_function]
 ---
 
 ## Overview
