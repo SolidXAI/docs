@@ -2,7 +2,7 @@
 sidebar_position: 9
 title: Extending Users
 description: Learn how to extend user functionality in SolidX.
-summary: Guide to extending the default User model in SolidX by creating custom user models as children. Covers metadata configuration with `isChild: true`, `parentModelUserKey`, adding custom fields and relationships (e.g., `InstituteUser` with `userType` and institute relation), overriding user creation logic for password encryption, validation, and persistence, and registering custom services in NestJS modules for handling extended user functionality.
+summary: Guide to extending the default User model in SolidX by creating custom user models as children. Covers metadata configuration with isChild true and parentModelUserKey, adding custom fields and relationships (for example InstituteUser with userType and institute relation), overriding user creation logic for password encryption, validation, and persistence, and registering custom services in NestJS modules for handling extended user functionality.
 keywords: [backend, users, customization]
 solidx_concerns: [extending_user]
 ---

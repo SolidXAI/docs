@@ -62,6 +62,7 @@ def sha256_file(path: Path) -> str:
 def try_parse_frontmatter(text: str) -> Dict:
     """
     Parses YAML frontmatter if present. Returns {} if none or if PyYAML not installed.
+    Uses safe parsing with fallback for malformed YAML.
     """
     m = FRONTMATTER_RE.match(text)
     if not m:
@@ -70,8 +71,38 @@ def try_parse_frontmatter(text: str) -> Dict:
     try:
         import yaml  # optional dependency
 
-        parsed = yaml.safe_load(yaml_block) or {}
-        return parsed
+        # Try to parse with safe_load first
+        try:
+            parsed = yaml.safe_load(yaml_block) or {}
+            return parsed
+        except yaml.YAMLError:
+            # If YAML parsing fails, try to manually extract key fields
+            # This handles cases where values have unescaped colons
+            logger.debug("YAML parsing failed, attempting manual field extraction")
+            result = {}
+            for line in yaml_block.split('\n'):
+                line = line.strip()
+                if ':' in line and not line.startswith('#'):
+                    # Split only on first colon
+                    key, _, value = line.partition(':')
+                    key = key.strip()
+                    value = value.strip()
+                    
+                    # Remove quotes if present
+                    if value.startswith('"') and value.endswith('"'):
+                        value = value[1:-1]
+                    elif value.startswith("'") and value.endswith("'"):
+                        value = value[1:-1]
+                    
+                    # Handle list values (simple comma-separated or bracketed)
+                    if value.startswith('[') and value.endswith(']'):
+                        # Parse as list
+                        value = [v.strip().strip('"').strip("'") for v in value[1:-1].split(',')]
+                    
+                    if key and value:
+                        result[key] = value
+            
+            return result
     except Exception as e:
         logger.warning(f"Frontmatter parsing failed: {e}")
         return {}

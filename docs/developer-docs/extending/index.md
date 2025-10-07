@@ -1,7 +1,7 @@
 ---
 title: Extending SolidX
 description: Guide to extending SolidX with custom code generation and frontend/backend customization.
-summary: This document serves as an overview of SolidX's extensibility features, explaining how to build custom functional modules and extend the platform's capabilities. It highlights three main customization areas: Generated Code (using the code generation tool to scaffold controllers, services, entities, DTOs, and layout JSON files with default list and form views), Frontend Customization (modifying layout.json for custom list views, form layouts, kanban boards, and UI behaviors), and Backend Customization (extending NestJS backend with custom services, controllers, computed providers, middleware, and business logic).
+summary: This document serves as an overview of SolidX extensibility features, explaining how to build custom functional modules and extend the platform capabilities. It highlights three main customization areas - Generated Code (using the code generation tool to scaffold controllers, services, entities, DTOs, and layout JSON files with default list and form views), Frontend Customization (modifying layout.json for custom list views, form layouts, kanban boards, and UI behaviors), and Backend Customization (extending NestJS backend with custom services, controllers, computed providers, middleware, and business logic).
 sidebar_position: 5
 ---
 
