@@ -190,11 +190,11 @@ class DocIngestor:
         
         # Initialize OpenAI client for summary generation
         self.openai_client = None
-        if openai_api_key or os.getenv("OPENAI_API_KEY"):
-            self.openai_client = OpenAI(api_key=openai_api_key or os.getenv("OPENAI_API_KEY"))
-            logger.info("OpenAI client initialized for chunk summary generation")
-        else:
-            logger.warning("No OpenAI API key provided. Chunk summaries will not be generated.")
+        # if openai_api_key or os.getenv("OPENAI_API_KEY"):
+        #     self.openai_client = OpenAI(api_key=openai_api_key or os.getenv("OPENAI_API_KEY"))
+        #     logger.info("OpenAI client initialized for chunk summary generation")
+        # else:
+        #     logger.warning("No OpenAI API key provided. Chunk summaries will not be generated.")
 
     # ---- manifest helpers ----
 
