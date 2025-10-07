@@ -1,6 +1,7 @@
 ---
 # title: Media Storage Providers Metadata
 description: Metadata schema for defining media storage providers in SolidX applications.
+summary: This document explains media storage provider metadata in SolidX, which supports multiple storage options for media files including local filesystem and AWS S3. The metadata includes provider name and type attributes. Default providers (default-filesystem and default-aws-s3) are automatically seeded and don't require explicit JSON configuration. For AWS S3, sensitive credentials (access key, secret key) must be provided via environment variables rather than in JSON for security. The document references the admin documentation for conceptual understanding and provides configuration examples for different storage provider types.
 sidebar_position: 11
 json_pointer: "/mediaStorageProviders"
 jsonpath: "$.mediaStorageProviders"

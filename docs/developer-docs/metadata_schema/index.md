@@ -1,6 +1,7 @@
 ---
 # title: Metadata Schema
 description: Overview of the metadata schema used in SolidX.
+summary: This document provides an overview of SolidX's metadata-driven architecture, which enables flexible configuration of both backend and frontend functionality without modifying core code. Metadata can be defined in JSON files or through the admin interface and is automatically synced to the database. Key components include Module, Model, Field, View, Action, Menu Item, Roles & Permissions, Users, Email/SMS Templates, Media Storage Providers, Scheduled Jobs, Security Rules, List of Values, and Dashboard metadata. The document covers seeding processes, best practices for naming conventions, security, performance optimization, user experience, maintainability, and data integrity.
 sidebar_position: 3.5
 solidx_concerns: [add_field_to_existing_layout, add_field_to_a_model, add/update_security_record_rule]
 ---

@@ -1,6 +1,7 @@
 ---
 # title: Module Metadata Schema
 description: Overview of the module metadata schema used in SolidX.
+summary: This document explains the module metadata schema in SolidX, which represents the top-level building blocks for organizing applications. A module groups related models and functionality under a unified domain (like a Fees Portal module). The metadata includes properties such as module name, display name, description, default data source, menu icon, sequence number, and system flag. Examples demonstrate configuring module metadata for applications, and the document references the admin documentation for conceptual understanding of module management and the hierarchical relationship where modules contain models which contain fields.
 sidebar_position: 1
 json_pointer: "/moduleMetadata"
 jsonpath: "$.moduleMetadata"

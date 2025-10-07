@@ -2,6 +2,7 @@
 sidebar_position: 2
 title: Custom Widgets
 description: Learn how to create custom widgets for the frontend of your application.
+summary: Guide to creating custom widgets in SolidX using the built-in `CustomHtml` widget for extending UI functionality without field associations. Covers configuring widgets in form layouts with dynamic HTML rendering, using placeholders for field values and custom variables (e.g., `{{ctxtTitleAlphpabetCount}}`), receiving `SolidFormWidgetProps`, and setting custom variables via form event handlers for enhanced UI interactions.
 solidx_concerns: [create_custom_widget, add_form_button]
 ---
 

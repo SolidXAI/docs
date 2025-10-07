@@ -2,6 +2,7 @@
 sidebar_position: 15
 title: Email Providers
 description: Learn how to create and configure custom email providers in SolidX.
+summary: Guide to creating custom email providers beyond the built-in SMTP provider. Covers implementing the `IMail` interface with `@MailProvider()` decorator, using `EmailTemplateService` for templates, `PublisherFactory` for background job queuing, methods for synchronous/asynchronous sending with and without templates, handling attachments, API-based service integration (e.g., third-party email APIs), and proper error handling for email delivery.
 keywords: [backend, email providers, customization]
 solidx_concerns: [new_email_provider]
 ---

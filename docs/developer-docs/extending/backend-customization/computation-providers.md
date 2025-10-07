@@ -1,6 +1,7 @@
 ---
 title: Computation Providers
 description: Learn how to extend the backend with custom computation providers.
+summary: Explains SolidX computed fields powered by computation providers for automatic value derivation (e.g., totals, full names, age). Covers metadata configuration including `computedFieldTriggerConfig` for specifying triggers (before/after insert/update/remove operations), `computedFieldValueProvider` class implementation, `IEntityPreComputeFieldProvider` and `IEntityPostComputeFieldProvider` interfaces, provider registration, and examples like `PaymentCollectionItemAmountProvider` for calculating amounts based on related records.
 sidebar_position: 5
 keywords: [backend, computation providers, customization]
 solidx_concerns: [add_computed_field_provider]

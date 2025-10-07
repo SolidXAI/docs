@@ -1,6 +1,7 @@
 ---
 title: Security Rules
 description: Metadata schema for defining security rules in SolidX applications.
+summary: This document explains security rules metadata in SolidX, which controls data access at the model level to ensure only authorized users can view sensitive information. Each rule includes a name, description, associated role, target model, and security rule configuration with filter conditions. The filter configuration supports complex query structures using operators like $eq with dynamic values such as $activeUserId for user-specific data filtering. Examples demonstrate restricting fee type visibility to institute users through relational filtering across associated models. The document links to detailed guides on creating and managing security rules in the backend customization section.
 sidebar_position: 13
 json_pointer: "/securityRules"
 jsonpath: "$.securityRules"

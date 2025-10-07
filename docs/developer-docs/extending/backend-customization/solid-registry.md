@@ -2,6 +2,7 @@
 sidebar_position: 10
 title: Solid Registry
 description: Learn how to extend and use the Solid Registry in your SolidX application.
+summary: Explains the Solid Registry as SolidX's central discovery and configuration hub, acting as a cache and metadata manager. Provides fast component lookups, application-wide consistency for rules/modules/providers, and extensibility via decorator-based auto-discovery. Covers the registry pattern (Decorator → Interface → Implementation → Registry → Consumer), registered components including error code providers, selection providers, computed field providers, scheduled jobs, email/SMS/WhatsApp providers, and security rules.
 keywords: [backend, solid registry, customization, metadata]
 ---
 

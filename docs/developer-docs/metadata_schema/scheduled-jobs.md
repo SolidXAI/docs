@@ -1,6 +1,7 @@
 ---
 title: Scheduled Jobs
 description: Metadata schema for defining scheduled jobs in SolidX applications.
+summary: This document describes scheduled jobs metadata in SolidX, which enables configuration of recurring tasks such as sending notifications, cleaning up records, data synchronization, or regular maintenance. The metadata includes schedule name, active status flag, frequency specification, days of week when the job should run, the job class name to execute, and associated module reference. Examples demonstrate configuring late fee calculation jobs that run at specified intervals. The document links to detailed guides on creating and managing scheduled jobs in the backend customization section.
 sidebar_position: 12
 json_pointer: "/scheduledJobs"
 jsonpath: "$.scheduledJobs"

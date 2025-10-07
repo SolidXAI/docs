@@ -1,6 +1,7 @@
 ---
 title: View Metadata
 description: Metadata schema for defining views in SolidX applications.
+summary: This document explains view metadata in SolidX, which defines UI presentations of models and automatically generates list views (tabular displays with search, filter, pagination), form views (input forms for create/edit operations), and kanban views (card-based displays with drag-and-drop). The metadata includes view type, name, display name, context, associated module and model, and comprehensive layout configurations. Layout structures use hierarchical components including sheets, notebooks, tabs, rows, columns, and fields, with extensive widget options for different field types, custom widgets, and formatting controls. The document provides detailed examples and attribute documentation for configuring view layouts.
 sidebar_position: 4
 json_pointer: "/views"
 jsonpath: "$.views"

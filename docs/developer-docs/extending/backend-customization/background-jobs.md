@@ -2,6 +2,7 @@
 sidebar_position: 6
 title: Background Jobs
 description: Learn how to set up and manage background jobs in SolidX, including configuration for different brokers like Database and RabbitMQ.
+summary: Comprehensive guide to implementing asynchronous task processing in SolidX using background jobs. Covers the Work Queue/Competing Consumers pattern with database-backed and RabbitMQ brokers. Details publisher/subscriber setup, queue configuration, message handling, job tracking via `ss_mq_message` tables, retry mechanisms, and integration with email/SMS/WhatsApp providers. Includes code examples for both broker types and job execution patterns.
 keywords:
   [
     background jobs,

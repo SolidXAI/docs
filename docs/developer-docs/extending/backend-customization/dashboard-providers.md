@@ -2,6 +2,7 @@
 sidebar_position: 13
 title: Dashboard Providers
 description: Create custom dashboard providers to return the data for rendering dashboard widgets.
+summary: Introduction to creating custom dashboard providers in SolidX for fetching and returning data with UI options for dashboard widget rendering. Implementation details are pending future documentation updates.
 keywords: [backend, dashboard, providers, customization]
 solidx_concerns: [create/update_dashboard_widget]
 ---

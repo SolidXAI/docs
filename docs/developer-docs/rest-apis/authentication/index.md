@@ -2,6 +2,7 @@
 sidebar_position: 1
 description: This section elaborates on the authentication APIs provided for the different authentication providers.
 title: Authentication APIs
+summary: This document provides an overview of the authentication mechanisms supported by SolidX. The platform offers three authentication providers: Password-based authentication (the default method using username and password), OTP authentication (using One-Time Passwords for secure login), and OAuth authentication (currently supporting Google as an OAuth provider for social login integration).
 ---
 
 SolidX supports the below authentication providers:

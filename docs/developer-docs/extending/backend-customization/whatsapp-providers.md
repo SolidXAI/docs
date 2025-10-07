@@ -2,6 +2,7 @@
 sidebar_position: 16
 # title: WhatsApp Providers
 description: Learn how to create and configure custom WhatsApp providers in SolidX.
+summary: Guide to creating custom WhatsApp providers beyond the built-in Msg91 provider. Covers implementing `IWhatsAppTransport` interface with `@WhatsAppProvider()` decorator, `sendWhatsAppMessage()` method accepting phone number, templateId, and parameters, synchronous/asynchronous message sending via background jobs, using `PublisherFactory` for queuing, and integration with third-party WhatsApp APIs. Notes that template management is handled by external providers (Twilio, Msg91), not SolidX.
 keywords: [backend, whatsapp providers, customization]
 solidx_concerns: [new_whatsapp_provider]
 ---

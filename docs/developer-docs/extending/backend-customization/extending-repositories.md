@@ -2,6 +2,7 @@
 sidebar_position: 4
 # title: Extending Repositories
 description: Learn how to extend functionality in repositories in your application.
+summary: Details extending repositories inheriting from `SolidBaseRepository<T>` with metadata-aware TypeORM behavior and security rule enforcement via `SecurityRuleRepository`. Covers creating custom query methods using overridden `find`/`findOne` (security-scoped), using QueryBuilder for complex joins, centralizing business-specific queries, composable data access patterns, and examples like `findActiveByInstitute()`. Emphasizes separation between data access and business logic for maintainability and testability.
 keywords: [backend, repositories, customization]
 solidx_concerns: [extending_repository, add_custom_service_method, add_controller_endpoint]
 ---

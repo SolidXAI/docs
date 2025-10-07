@@ -1,5 +1,8 @@
 ---
 sidebar_position: 5
+title: OAuth Authentication
+description: Information about OAuth-based authentication providers
+summary: Comprehensive guide to OAuth authentication in SolidX supporting multiple providers (Password, OTP, Google, Meta/Facebook, LinkedIn, Twitter/X, custom OAuth). Covers standard OAuth flow (frontend redirect, backend callback), environment variable configuration per provider (client IDs, secrets, callback URLs), securing OAuth with state validation, token exchange, user profile retrieval, session management with JWT tokens, frontend implementation patterns, and examples for Google OAuth integration.
 ---
 
 import { HiOutlineLockClosed, HiOutlineKey, HiOutlineGlobeAlt } from "react-icons/hi";

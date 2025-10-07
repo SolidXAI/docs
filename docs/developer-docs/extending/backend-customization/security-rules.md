@@ -2,6 +2,7 @@
 sidebar_position: 11
 title: Security Rules
 description: Learn how to customize security rules in SolidX.
+summary: Describes SolidX record-level security rules for controlling data visibility per role and model. By default, no rules are enforced. Covers defining rules in module metadata with required fields (name, description, roleUserKey, modelMetadataUserKey, securityRuleConfig.filters), using special variables like `$activeUserId` for dynamic filtering, applying the most permissive rule for users with multiple roles, and examples restricting Client Admin access to their own client records.
 keywords: [backend, security, customization]
 solidx_concerns: [add/update_security_record_rule]
 ---

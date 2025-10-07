@@ -2,6 +2,7 @@
 sidebar_position: 2
 title: Form View Field Widgets
 description: Learn how to create form view field widgets for the frontend of your application.
+summary: Details creating custom form view field widgets in SolidX for customizing field display in view and edit modes. Covers using built-in widgets (e.g., `integerSlider`) or creating custom ones, implementing components with `SolidFormFieldWidgetProps` (formik, fieldContext, metadata), registering widgets via `registerExtensionComponent`, configuring `editWidget`/`viewWidget` in form layout JSON, handling field validation, labels, and examples like slider widgets with tooltips and color-coded values.
 solidx_concerns: [create_custom_form_field_widget]
 ---
 
