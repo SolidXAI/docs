@@ -70,9 +70,10 @@ def try_parse_frontmatter(text: str) -> Dict:
     try:
         import yaml  # optional dependency
 
-        return yaml.safe_load(yaml_block) or {}
-    except Exception:
-        logger.debug("Frontmatter present but PyYAML not installed or invalid YAML.")
+        parsed = yaml.safe_load(yaml_block) or {}
+        return parsed
+    except Exception as e:
+        logger.warning(f"Frontmatter parsing failed: {e}")
         return {}
 
 
@@ -242,7 +243,7 @@ class DocIngestor:
             try:
                 # Try to retrieve the collection to verify it exists
                 collection = self.client.collections.retrieve(collection_id)
-                logger.info(f"✓ Collection '{subdir}' verified: {collection_id}")
+                # logger.info(f"✓ Collection '{subdir}' verified: {collection_id}")
             except Exception as e:
                 logger.error(f"✗ Collection '{subdir}' ({collection_id}) not found or inaccessible: {e}")
                 raise ValueError(f"Collection for '{subdir}' does not exist. Please create it first.")
@@ -372,7 +373,7 @@ class DocIngestor:
     def build_metadata(self, file_path: Path, rel_path: Path, file_text: str) -> Dict:
         fm = try_parse_frontmatter(file_text)
         # Use file path as title instead of content title
-        title = str(rel_path).replace("\\", "/")
+        doc_title = str(rel_path).replace("\\", "/")
         section = rel_path.parts[0] if len(rel_path.parts) > 0 else ""
         # crumb = breadcrumbs(rel_path)
         # slug = path_to_slug(rel_path)
@@ -385,7 +386,7 @@ class DocIngestor:
             "path": str(rel_path).replace("\\", "/"),
             # "filename": file_path.name,
             # "breadcrumbs": crumb,
-            "doc_title": title,
+            "doc_title": doc_title,
             # "frontmatter": fm,
             # "kind": "documentation",
             # "format": (
@@ -394,6 +395,33 @@ class DocIngestor:
             #     else file_path.suffix.lower().lstrip(".")
             # ),
         }
+        
+        # Extract specific frontmatter fields for document metadata
+        # Only add fields that are present in the frontmatter
+        if "title" in fm and isinstance(fm["title"], str):
+            base_meta["title"] = fm["title"]
+        
+        if "description" in fm and isinstance(fm["description"], str):
+            base_meta["description"] = fm["description"]
+        
+        if "summary" in fm and isinstance(fm["summary"], str):
+            base_meta["summary"] = fm["summary"]
+        
+        if "keywords" in fm:
+            # Ensure keywords is a list
+            if isinstance(fm["keywords"], list):
+                base_meta["keywords"] = fm["keywords"]
+            elif isinstance(fm["keywords"], str):
+                # Handle case where keywords might be a comma-separated string
+                base_meta["keywords"] = [k.strip() for k in fm["keywords"].split(",")]
+        
+        if "solidx_concerns" in fm:
+            # Ensure solidx_concerns is a list
+            if isinstance(fm["solidx_concerns"], list):
+                base_meta["solidx_concerns"] = fm["solidx_concerns"]
+            elif isinstance(fm["solidx_concerns"], str):
+                # Handle case where concerns might be a comma-separated string
+                base_meta["solidx_concerns"] = [c.strip() for c in fm["solidx_concerns"].split(",")]
 
         # gitmeta = git_last_modified(file_path)
         # if gitmeta:
@@ -449,10 +477,11 @@ class DocIngestor:
                 content_preview = chunk_data["content"][:100].replace('\n', ' ')
                 # logger.info(f"  Section {i}: '{title}' - {content_preview}...")
             
-            # Use file path as title
+            # Use file path as title only if frontmatter didn't provide one
             rel_path = file_path.relative_to(self.base_dir)
             doc_title = str(rel_path).replace("\\", "/")
-            metadata["title"] = doc_title
+            if "title" not in metadata:
+                metadata["title"] = doc_title
             
             # Prepare enhanced chunks with order metadata and summaries
             chunks = []
@@ -467,7 +496,7 @@ class DocIngestor:
                 content = chunk_data["content"]
                 
                 # Generate summaries using OpenAI
-                summaries = self.generate_chunk_summary(content, section_title, doc_title)
+                # summaries = self.generate_chunk_summary(content, section_title, doc_title)
                 
                 # Add the original content without modifications
                 chunks.append(content)
@@ -477,16 +506,16 @@ class DocIngestor:
                     "chunk_order": chunk_order,
                     "total_chunks": total_chunks,
                     "section_title": section_title or "Introduction",
-                    "short_summary": summaries.get("short_summary", ""),
-                    "detailed_summary": summaries.get("detailed_summary", ""),
+                    # "short_summary": summaries.get("short_summary", ""),
+                    # "detailed_summary": summaries.get("detailed_summary", ""),
                 }
                 chunk_metadata_list.append(chunk_meta)
                 
-                logger.info(f"  Chunk {chunk_order}/{total_chunks}: '{section_title or 'Introduction'}' - {summaries.get('short_summary', 'No summary')[:60]}...")
+                # logger.info(f"  Chunk {chunk_order}/{total_chunks}: '{section_title or 'Introduction'}' - {summaries.get('short_summary', 'No summary')[:60]}...")
             
             # Add document-level metadata
             metadata["chunk_count"] = total_chunks
-            metadata["has_summaries"] = bool(self.openai_client)
+            # metadata["has_summaries"] = bool(self.openai_client)
             
             # Create document with chunks
             logger.info(f"Creating document with {len(chunks)} H2 sections...")
@@ -508,37 +537,37 @@ class DocIngestor:
             time.sleep(2)
             
             # Now update each chunk with its metadata
-            logger.info(f"Updating chunk-level metadata for {total_chunks} chunks...")
-            try:
-                # Retrieve chunks for this document
-                chunks_response = self.client.chunks.list_by_document(
-                    document_id=document_id,
-                    limit=total_chunks
-                )
+            # logger.info(f"Updating chunk-level metadata for {total_chunks} chunks...")
+            # try:
+            #     # Retrieve chunks for this document
+            #     chunks_response = self.client.chunks.list_by_document(
+            #         document_id=document_id,
+            #         limit=total_chunks
+            #     )
                 
-                created_chunks = chunks_response.results
-                logger.info(f"Retrieved {len(created_chunks)} chunks from R2R")
+            #     created_chunks = chunks_response.results
+            #     logger.info(f"Retrieved {len(created_chunks)} chunks from R2R")
                 
-                # Update each chunk with its metadata
-                for idx, chunk in enumerate(created_chunks):
-                    if idx < len(chunk_metadata_list):
-                        chunk_meta = chunk_metadata_list[idx]
+            #     # Update each chunk with its metadata
+            #     for idx, chunk in enumerate(created_chunks):
+            #         if idx < len(chunk_metadata_list):
+            #             chunk_meta = chunk_metadata_list[idx]
                         
-                        # Update chunk with metadata - API requires 'text' field
-                        update_data = {
-                            "id": str(chunk.id),
-                            "text": chunk.text,  # Include existing text
-                            "metadata": chunk_meta
-                        }
+            #             # Update chunk with metadata - API requires 'text' field
+            #             update_data = {
+            #                 "id": str(chunk.id),
+            #                 "text": chunk.text,  # Include existing text
+            #                 "metadata": chunk_meta
+            #             }
                         
-                        self.client.chunks.update(update_data)
-                        logger.info(f"  Updated chunk {idx + 1}/{len(created_chunks)} with metadata")
+            #             self.client.chunks.update(update_data)
+            #             logger.info(f"  Updated chunk {idx + 1}/{len(created_chunks)} with metadata")
                 
-                logger.info(f"✓ Successfully updated all chunk metadata")
+            #     logger.info(f"✓ Successfully updated all chunk metadata")
                 
-            except Exception as e:
-                logger.warning(f"Failed to update chunk metadata: {e}")
-                logger.warning("Document created successfully but chunk metadata not applied")
+            # except Exception as e:
+            #     logger.warning(f"Failed to update chunk metadata: {e}")
+            #     logger.warning("Document created successfully but chunk metadata not applied")
             
             # Debug: Check what chunks were actually created by R2R
             # self.debug_document_chunks(document_id)  # Commented out - debug shows collection-wide results
