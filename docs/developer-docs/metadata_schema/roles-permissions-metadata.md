@@ -1,5 +1,5 @@
 ---
-# title: Roles & Permissions
+title: Roles & Permissions
 description: Metadata schema for defining roles and permissions in SolidX applications.
 summary: This document explains roles and permissions metadata in SolidX, which provides role-based access control at a high level. Roles group permissions and can be assigned to users, while permissions are automatically discovered based on controller actions for fine-grained control. Each role has a name and description, with permissions specified as an array of controller method names (e.g., "InstituteController.create", "InstituteController.findMany"). The system includes a default Admin role with all permissions. Examples demonstrate creating custom roles like Institute Admin with specific permission sets for managing institute-related operations.
 sidebar_position: 7

@@ -1,5 +1,5 @@
 ---
-# title: Email Templates
+title: Email Templates
 description: Metadata schema for populating email templates in SolidX applications.
 summary: This document explains email template metadata in SolidX, which enables creation and management of HTML/text-based email templates with dynamic content and attachments. Templates use Handlebars syntax for variable insertion and are stored in separate HTML files referenced by the metadata. Key attributes include template name, display name, body file reference, subject line, description, active status, and template type (text/html). Examples demonstrate configuring templates for payment reminders and OTP verification, including sample HTML template files with dynamic variables, styling, and layout structures. The system supports template file organization in the solid-api/src directory.
 sidebar_position: 9

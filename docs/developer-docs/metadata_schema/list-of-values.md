@@ -1,5 +1,5 @@
 ---
-# title : List of Values
+title : List of Values
 description : Metadata schema for defining list of values in SolidX applications.
 summary: This document describes list of values (LOV) metadata in SolidX, which defines predefined value sets for use in dropdowns and selection fields throughout the application. Each LOV entry includes type (category), value (internal identifier), display text (shown to users), description, default flag, sequence number for ordering, and associated module reference. Examples demonstrate configuring industry types (Healthcare, Information Technology) and regulatory bodies (FCA, SEC, PRA, CBI) with proper sequencing. The metadata ensures data consistency, improves user experience, and provides centralized management of commonly used value lists across the application.
 sidebar_position: 14

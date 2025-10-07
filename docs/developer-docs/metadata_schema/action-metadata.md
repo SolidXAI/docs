@@ -1,5 +1,5 @@
 ---
-# title : Action Metadata
+title : Action Metadata
 description : Metadata schema for defining actions in SolidX applications.
 summary: This document defines action metadata in SolidX, which determines what happens when users interact with UI elements like menu items, buttons, or links. Actions connect the frontend to backend functionality and control how data is displayed or processed. The metadata supports two main action types: 'solid' (standard SolidX actions linked to views) and 'custom' (custom component actions with optional modal display). Key attributes include action name, display name, type, domain, context, custom component path, server endpoint, associated view, module, and model. Actions serve as the bridge between user interactions and application responses.
 sidebar_position: 5

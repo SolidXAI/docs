@@ -1,5 +1,5 @@
 ---
-# title: Prerequisites
+title: Prerequisites
 description: Describes the tools needed before installing SolidX.
 summary: This document outlines the essential tools and software required before installing SolidX. It covers installation and setup instructions for PostgreSQL database (including user and database creation), Git version control, Node.js and npm via nvm, schematics-cli for Angular schematics-based code generation, and copyfiles utility. Each section provides platform-specific installation commands for Ubuntu/macOS along with validation steps to ensure proper setup. These prerequisites are necessary for development machines to support SolidX's low-code platform functionality.
 sidebar_position: 1

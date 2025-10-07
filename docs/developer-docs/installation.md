@@ -1,5 +1,5 @@
 ---
-# title: Installing SolidX
+title: Installing SolidX
 description: Overview of how to initialize a SolidX project with links to the full step-by-step tutorial.
 summary: This document provides a quick overview of installing SolidX using the create-solid-app starter template. Users can initialize a project by running a single npx command, answering configuration prompts, and the system creates the complete project structure with both solid-api (backend) and solid-ui (frontend) folders. The page includes a link to a comprehensive step-by-step tutorial for detailed installation guidance including environment setup and configuration.
 sidebar_position: 2
