@@ -643,7 +643,7 @@ Below field will be visible only for users with the specified roles. This works 
 <h3 className=" card-headear-wrapper">
     <MdWidgets size={21}  />
 
-### View Widgets (TODO)
+### View Widgets
 </h3>
 Views support custom widgets to enhance field display and editing experiences. List view supports `viewWidget` and form views support `viewWidget` for view mode and `editWidget` for edit mode respectively.
 
@@ -659,11 +659,14 @@ Views support custom widgets to enhance field display and editing experiences. L
 }
 ```
 
-#### Available Widget Types
-- **Default widgets**: Auto-selected based on field type
+#### Below are use-cases wherein we might want to override default widgets:
 - **Custom widgets**: Specific widget overrides for special display needs
 - **Masked widgets**: For sensitive data (passwords, secrets)
 - **Rich widgets**: For formatted content display
+
+#### Further Reference
+- List View Widgets: [List View Widgets](../extending/frontend-customization/list-column-widgets.md)
+- Form View / Edit Widgets: [Form View Widgets](../extending/frontend-customization/form-view-field-widgets.md)
 
 <h3 className=" card-headear-wrapper">
     <FaBolt size={21}  />
@@ -678,8 +681,11 @@ Views support event handlers to execute custom logic at various stages of the vi
 - `onFormLayoutLoad`: Executed when form loads
 - `onFormDataLoad`: Executed after form data is loaded
 - `onFieldChange`: Triggered on field value changes
-- `onFormSubmit`: Executed before form submission
-- `onViewLoad`: Executed when view loads
+- `onFieldBlur`: Executed when a field loses focus
+- `onCustomWidgetRender`: Called when a custom widget is rendered
+
+#### Further Reference
+- [Event Handlers Documentation](../extending/frontend-customization/form-view-event-listeners.md)
 
 <h3 className=" card-headear-wrapper">
     <MdViewQuilt size={24}  />
