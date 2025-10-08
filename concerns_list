@@ -24,7 +24,7 @@ Here’s your revised list with each item converted to singular form, while keep
 	•	create/update_email_template
 	•	create/update_sms_template
 	•	add_computed_field_provider
-	•	add_custom_service_method
+	•	add_custom_service_method	
 	•	add_controller_endpoint
 	•	add_change_handler_function
 	•	new_background_job

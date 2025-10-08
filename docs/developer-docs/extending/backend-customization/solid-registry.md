@@ -23,66 +23,12 @@ It acts both as a **cache** and a **metadata manager**, providing:
 At application startup, the registry loads all relevant components and makes them available for runtime resolution.  
 If you update registered metadata, you **must restart the application** to reload the registry.
 
----
-
-## Solid Registry Pattern (TODO)
-
-The registry follows a clear pattern: **Decorator → Interface → Implementation → Registry → Consumer**.
-
-```
- ┌─────────────────────────┐
- │       Interface         │
- │  (contract definition)  │
- │ e.g. IErrorCodeProvider │
- └───────────┬─────────────┘
-             │
-             │ implemented by
-             ▼
- ┌───────────────────────────────────────┐
- │         Implementation Class          │
- │  @Injectable()                        │
- │  @ErrorCodeProvider()  (decorator)    │
- │                                       │
- │ class FeesPortalErrorCodeProvider     │
- │   implements IErrorCodeProvider { ...}│
- └──────────────────┬────────────────────┘
-                    │
-                    │ discovered by
-                    ▼
- ┌───────────────────────────────────────┐
- │           SolidRegistry               │
- │ - Maintains a lookup map              │
- │ - Discovers all providers with        │
- │   @ErrorCodeProvider decorator        │
- │ - Registers them keyed by name/code   │
- └──────────────────┬────────────────────┘
-                    │
-                    │ resolved at runtime
-                    ▼
- ┌───────────────────────────────────────┐
- │       Consumer / Runtime Logic        │
- │ e.g. ExceptionFilter, Scheduler, etc. │
- │                                       │
- │ registry.getErrorCodeProviders()      │
- │   → returns all error code providers  │
- └───────────────────────────────────────┘
-```
-
-**Flow:**  (TODO)
-1. Define a contract (e.g., `IErrorCodeProvider`)  
-2. Decorate an implementation (`@ErrorCodeProvider()`)  
-3. Registry auto-discovers providers (via reflection metadata)  
-4. Consumer resolves provider at runtime (e.g., `ExceptionFilter`)  
-
-✅ This pattern makes it easy to **plug in new providers** without modifying the core logic.
-
----
 
 ## Registered Components
 
 The following components are tracked by the Solid Registry:
 
----
+
 
 <h3 className="card-headear-wrapper">
   <FaDatabase size={16} />
@@ -93,7 +39,7 @@ The following components are tracked by the Solid Registry:
 **How it works:** The registry maintains a catalog of all available seeders. Developers can easily list, execute, or selectively run seeders.  
 **See also:** [Seeders Guide](../seeders)
 
----
+
 
 <h3 className="card-headear-wrapper">
   <IoMdTimer size={18} />
@@ -104,7 +50,7 @@ The following components are tracked by the Solid Registry:
 **How it works:** Registered jobs are tied into the scheduling engine. The registry ensures all jobs are loaded, discoverable, and can be managed or paused centrally.  
 **See also:** [Jobs & Scheduling](../jobs)
 
----
+
 
 <h3 className="card-headear-wrapper">
   <MdTune size={18} />
@@ -115,7 +61,7 @@ The following components are tracked by the Solid Registry:
 **How it works:** A `@SelectionProvider` class can be created, registered, and then consumed by form components. The registry ensures all providers are globally available without additional wiring.  
 **See also:** [Field Metadata](../fields)
 
----
+
 
 <h3 className="card-headear-wrapper">
   <FaCalculator size={18} />
@@ -126,7 +72,7 @@ The following components are tracked by the Solid Registry:
 **How it works:** Each computed field provider is registered with metadata, making them discoverable by the runtime when evaluating entity fields.  
 **See also:** [Computed Fields](../computed-fields)
 
----
+
 
 <h3 className="card-headear-wrapper">
   <FiDatabase size={18} />
@@ -137,7 +83,7 @@ The following components are tracked by the Solid Registry:
 **How it works:** Modules (like Fees, School, Library) are registered in the Solid Registry, ensuring schema consistency and discoverability across the application.  
 **See also:** [Modules Overview](../modules)
 
----
+
 
 <h3 className="card-headear-wrapper">
   <MdSettings size={18} />
@@ -148,7 +94,7 @@ The following components are tracked by the Solid Registry:
 **How it works:** The registry tracks all controllers, enabling automated route mapping and simplifying metadata introspection for APIs.  
 **See also:** [Controllers](../controllers)
 
----
+
 
 <h3 className="card-headear-wrapper">
   <IoIosLock size={18} />
@@ -159,7 +105,7 @@ The following components are tracked by the Solid Registry:
 **How it works:** The registry stores all declared rules. Every query automatically applies these rules by resolving them from the registry.  
 **See also:** [Security Rules](../security-rules)
 
----
+
 
 <h3 className="card-headear-wrapper">
   <MdLanguage size={18} />
@@ -170,7 +116,7 @@ The following components are tracked by the Solid Registry:
 **How it works:** Each locale configuration is registered at startup. Applications can dynamically switch or apply formats based on user preference.  
 **See also:** [Localization](../localization)
 
----
+
 
 <h3 className="card-headear-wrapper">
   <MdDashboard size={18} />
@@ -181,7 +127,7 @@ The following components are tracked by the Solid Registry:
 **How it works:** Developers can implement new providers that populate variables at runtime. The registry ensures these providers are available to all dashboards.  
 **See also:** [Dashboards](../dashboards)
 
----
+
 
 <h3 className="card-headear-wrapper">
   <MdViewList size={20} />
@@ -192,7 +138,7 @@ The following components are tracked by the Solid Registry:
 **How it works:** Providers can query APIs, databases, or aggregates. The registry makes them available for dynamic dashboard rendering.  
 **See also:** [Dashboard Questions](../dashboard-questions)
 
----
+
 
 ## When Is the Registry Populated?
 
@@ -202,4 +148,8 @@ All components are registered **at application startup**.
 - If you modify any registered metadata, restart the application.  
 - Hot-reload of providers is not supported (yet).  
 
----
+:::note
+If you are running the application in a dev mode i.e using `npm run solidx:dev`, the application will automatically restart when it detects file changes, so you don't need to manually restart it for registry changes to take effect.
+:::
+
+
