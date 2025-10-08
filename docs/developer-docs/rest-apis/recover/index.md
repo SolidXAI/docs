@@ -3,7 +3,6 @@ sidebar_position: 1
 title: Recover Endpoint
 description: Information about the recover endpoint of the REST API, including usage, parameters, and responses
 summary: This document explains the recover endpoints in SolidX's REST API, which allow restoration of soft-deleted records. It covers both single record recovery (by ID) and bulk recovery (using an array of IDs) operations. The documentation provides complete examples including HTTP headers, request formats, and sample responses. It also notes a known issue where the response may still contain deletedAt and deletedTracker fields even though the record is successfully recovered in the database, which is expected to be fixed in future releases.
-sidebar_position: 1
 ---
 import {  MdHttp, MdInput,MdOutput,MdDescription } from "react-icons/md";
 
