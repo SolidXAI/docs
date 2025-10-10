@@ -11,7 +11,9 @@ items_type: "object"
 items_attributes_doc: "#action-metadata-attributes"
 solidx_concerns: [add_custom_menu_action_combo]
 ---
-
+import { IoIosArrowForward } from "react-icons/io";
+import { MdEmail } from "react-icons/md";
+import { InfoBox } from '@site/src/common/InfoBox';
 import { MdOutlineAssignment } from "react-icons/md";
 
 
@@ -24,49 +26,142 @@ import { MdOutlineAssignment } from "react-icons/md";
 ## Overview
 Actions define what happens when users interact with UI elements like menu items, buttons, or links. They connect the frontend to backend functionality and determine how data is displayed or processed.
 
-For a conceptual overview / guide/ recipes of how actions can be used in SolidX, refer to the [Action Guide](../../recipes/actions-menus-guide.md).
+Menus, buttons, and links in SolidX applications are associated with actions.
 
+When a user clicks on one of these UI elements, the corresponding action is triggered, executing the defined behavior.
 
+Key Configuration Points:
 
-### Example: Fee Portal Module Action Metadata
-<summary> Action Schema </summary>
-``` json
+1. **Module and View Association**: All actions need to be linked to a module and a view.
+
+2. **Solid Actions**: In case of solid actions, the view user key and model user key is required. Since solid actions are generally linked to standard SolidX views, no custom component path is needed. In case of custom actions, a custom component path i.e (the linked view) is required. 
+
+3. **Custom Actions**: Custom actions can optionally be displayed as modal dialogs. If the action is a custom action, the `customComponent` attribute must be provided to specify the path to the custom frontend component. The `customIsModal` attribute indicates if the component should be displayed as a modal dialog.
+
+:::note
+In case a custom action is not associated with a model, the model user key can be left blank.
+:::
+
+### Action Types
+1. **Solid Actions**: Standard CRUD operations using SolidX's built-in views
+2. **Custom Actions**: Custom components or pages with specific functionality
+
+### Configuration Examples
+
+### `Solid` Action Example
+Below is an example of a `solid` action configuration, which links to a standard SolidX view for listing institutes.
+<details>
+<summary className="card-title card-headear-wrapper">
+    <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
+ Click to expand
+</summary>
+```json
 {
     ..., // Other metadata
     "actions": [
         {
-            "displayName": "fees-portal Home",
+            "displayName": "Institute List View",      // User-friendly action name
+            "name": "institute-list-view",             // Internal action reference (kebab-case)
+            "type": "solid",                           // Action type: solid, custom
+            "domain": "",                              // Domain context (optional)
+            "context": "",                             // Additional configuration (optional)
+            "customComponent": "",                     // UI route path
+            "customIsModal": true,                     // Display as modal dialog
+            "serverEndpoint": "",                      // Feature to be implemented
+            "viewUserKey": "institute-list-view",      // Target view reference
+            "moduleUserKey": "fees-portal",            // Module this action belongs to
+            "modelUserKey": "institute"                // Model for standard actions
+        },
+        ... // Other actions
+    ]
+}
+```
+</details>
+
+### `Custom` Action Example
+Below is an example of a `custom` action configuration, which links to a custom frontend component for the fees portal home page.
+<details>
+<summary className="card-title card-headear-wrapper">
+    <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
+ Click to expand
+  </summary>
+```json
+{
+    ..., // Other metadata
+    "actions": [
+        {
+            "displayName": "Fees Portal Home",
             "name": "fees-portal-home-action",
             "type": "custom", // Custom action
             "domain": "",
             "context": "",
-            "customComponent": "/admin/core/fees-portal/home",
+            "customComponent": "/admin/core/fees-portal/home", // Required for custom actions
             "customIsModal": true,
-            "serverEndpoint": "",
+            "serverEndpoint": "", // Feature to be implemented
             "viewUserKey": "",
             "moduleUserKey": "fees-portal",
             "modelUserKey": ""
         },
-        {
-            "displayName": "Institute List Action",
-            "name": "institute-list-action",
-            "type": "solid", // Standard SolidX action
-            "domain": "",
-            "context": "",
-            "customComponent": "",
-            "customIsModal": true,
-            "serverEndpoint": "",
-            "viewUserKey": "institute-list-view",
-            "moduleUserKey": "fees-portal",
-            "modelUserKey": "institute"
-        },
+        ... // Other actions
     ]
 }
+``` 
+</details>
+
+## Complete Navigation Structure Example
+
+Here's a complete navigation structure example from the fees-portal, illustrating how menus and actions are defined together:
+<details>
+<summary className="card-title card-headear-wrapper">
+    <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
+ Click to expand
+  </summary>
+
+```json
+{
+  "menus": [
+    {
+      "displayName": "Home",
+      "name": "fees-portal-home-menu",
+      "sequenceNumber": 1,
+      "actionUserKey": "fees-portal-home-action"
+    },
+    {
+      "displayName": "Institute",
+      "name": "institute-menu-item",
+      "sequenceNumber": 2,
+      "actionUserKey": "institute-list-action",
+      "roles": ["Institute Admin", "Mswipe Admin"]
+    },
+    ... // Additional menus
+  ],
+  "actions": [
+    {
+      "displayName": "fees-portal Home",
+      "name": "fees-portal-home-action",
+      "type": "custom",
+      "customComponent": "/admin/core/fees-portal/home",
+      "customIsModal": true,
+      "moduleUserKey": "fees-portal"
+    },
+    {
+      "displayName": "Institute List Action",
+      "name": "institute-list-action",
+      "type": "solid",
+      "customComponent": "",
+      "customIsModal": true,
+      "viewUserKey": "institute-list-view",
+      "modelUserKey": "institute",
+      "moduleUserKey": "fees-portal",
+    }
+    // ... Additional actions
+  ]
+}
 ```
+</details>
 
 <h2 className=" card-headear-wrapper">
     <MdOutlineAssignment size={24} style={{ marginRight: "10px" }} />
-
 ## Action Metadata Atributes
 </h2>
 
@@ -104,8 +199,8 @@ JSON object defining context-specific parameters for the action.
 
 
 ### `customComponent` *(string, optional)*
-Path to the custom frontend component to be used for the action.
-**Applies:** Only if `type` is `custom`.
+Path to the custom frontend component to be used for the action.  
+**Applies:** Only if `type` is `custom`.  
 **Default:** N/A
 
 
@@ -118,7 +213,7 @@ Indicates if the custom component should be displayed as a modal dialog.
 
 
 ### `serverEndpoint` *(string, optional)*
-Backend server endpoint to be called for the action.
+Backend server endpoint to be called for the action.  
 **Applies:** Only if `type` is `custom`.  
 **Default:** N/A    
 
