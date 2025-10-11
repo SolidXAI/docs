@@ -117,8 +117,8 @@
     }
   },
   "developer-docs/metadata_schema/view-metadata.md": {
-    "hash": "9007612711875017993ae6cf5fd57e15d7bd7328d7a5f17d5de643881b7f0c4d",
-    "document_id": "ad378bea-38c8-4546-aba5-416b515fb56b",
+    "hash": "d37cef75f52c20182842aaee1928c94129eff8dc7ddae56e22b717f505159eac",
+    "document_id": "288f37ef-74c8-4f42-a86b-cdfbe65d4b9e",
     "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
     "metadata": {
       "source": "docusaurus",
@@ -127,8 +127,8 @@
       "path": "developer-docs/metadata_schema/view-metadata.md",
       "doc_title": "developer-docs/metadata_schema/view-metadata.md",
       "title": "View Metadata",
-      "description": "Metadata schema for defining views in SolidX applications.",
-      "summary": "This document explains view metadata in SolidX, which defines UI presentations of models and automatically generates list views (tabular displays with search, filter, pagination), form views (input forms for create/edit operations), and kanban views (card-based displays with drag-and-drop). The metadata includes view type, name, display name, context, associated module and model, and comprehensive layout configurations. Layout structures use hierarchical components including sheets, notebooks, tabs, rows, columns, and fields, with extensive widget options for different field types, custom widgets, and formatting controls. The document provides detailed examples and attribute documentation for configuring view layouts.",
+      "description": "Metadata schema for defining views in SolidX applications — with explanations before each code snippet.",
+      "summary": "This document explains view metadata in SolidX, which defines UI presentations of models and automatically generates list views (tabular displays with search, filter, pagination), form views (input forms for create/edit operations), and kanban views (card-based displays with drag-and-drop). Each example below now starts with a short “What this shows” explanation.",
       "solidx_concerns": [
         "update_layout",
         "add_field_to_existing_layout",
@@ -137,7 +137,7 @@
       ],
       "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
       "collection_name": "developer-docs",
-      "chunk_count": 5
+      "chunk_count": 6
     }
   },
   "developer-docs/metadata_schema/roles-permissions-metadata.md": {
@@ -310,8 +310,8 @@
     }
   },
   "developer-docs/metadata_schema/module-metadata.md": {
-    "hash": "8b21d1d6f789f87f84d5ef275f5431623d90de01e91bf772255bc197cc158fbb",
-    "document_id": "29f417d9-0458-464b-80f8-24d0b324c1cc",
+    "hash": "eed52942d4271f5a61c1a47b23a28af35cb9e611cc653bb51203ac410c457850",
+    "document_id": "1ecd7f20-b565-4d55-8b61-15c3a8ce4167",
     "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
     "metadata": {
       "source": "docusaurus",
@@ -322,7 +322,9 @@
       "title": "Module Metadata Schema",
       "description": "Overview of the module metadata schema used in SolidX.",
       "summary": "This document explains the module metadata schema in SolidX, which represents the top-level building blocks for organizing applications. A module groups related models and functionality under a unified domain (like a Fees Portal module). The metadata includes properties such as module name, display name, description, default data source, menu icon, sequence number, and system flag. Examples demonstrate configuring module metadata for applications, and the document references the admin documentation for conceptual understanding of module management and the hierarchical relationship where modules contain models which contain fields.",
-      "solidx_concerns": [],
+      "solidx_concerns": [
+        "create_module"
+      ],
       "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
       "collection_name": "developer-docs",
       "chunk_count": 2
@@ -372,8 +374,8 @@
     }
   },
   "developer-docs/metadata_schema/model-metadata.md": {
-    "hash": "9a197a4c2eb791062af0eddb0f6189c04ccad6431c6c48b0bd40066a8fddc267",
-    "document_id": "6b984ce6-4f2e-47be-b6cd-f385e78bc771",
+    "hash": "f0cbec17149fa7ec419893a31610d7b6c77e6325160789c5e01a97cd8ad603d6",
+    "document_id": "4e682897-f009-4ccb-b6fc-fc2aeb4f8af5",
     "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
     "metadata": {
       "source": "docusaurus",
@@ -385,6 +387,7 @@
       "description": "Overview of the model metadata schema used in SolidX.",
       "summary": "This document details the model metadata schema in SolidX, where models represent data structures (entities/tables) within modules. Each model is a semantic, configurable structure that defines specific data types, their attributes, and relationships with other models. Key properties include singular/plural names, display name, data source configuration, table name, soft delete settings, audit logging, internationalization support, exportability, and user key field designation. The metadata also specifies which fields serve as unique identifiers for records and controls various behavioral aspects like draft-publish workflows.",
       "solidx_concerns": [
+        "create_model",
         "add_field_to_a_model",
         "remove_field_from_a_model"
       ],
@@ -483,8 +486,8 @@
     }
   },
   "developer-docs/rest-apis/swagger-documentation/index.md": {
-    "hash": "68f6561aac789b70f4f8c0d48e7b8bdf01bbfe976a1c031a25705bf5c232f9a8",
-    "document_id": "e98071a0-f69f-49fe-8518-dbe05de8cc97",
+    "hash": "1170dae5dbfed84dd8e8d4b25edf3e5178ade02f22578d4de232deaa01f0ae09",
+    "document_id": "7721a289-462a-47e9-b483-66fc124b63de",
     "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
     "metadata": {
       "source": "docusaurus",
@@ -519,8 +522,8 @@
     }
   },
   "developer-docs/rest-apis/delete/index.md": {
-    "hash": "63350fdacbce8b936a72f8315b827baf205cc80b1bdd022636144771a60dfe73",
-    "document_id": "0823926f-d096-441d-bad9-c47a6256db52",
+    "hash": "2e270e653d682df94fe38a33bf72630ea99240d9abce147e38c79db685c3fd6e",
+    "document_id": "2c98bbc7-13f1-4078-99b6-ce50fbfc4f85",
     "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
     "metadata": {
       "source": "docusaurus",
@@ -573,8 +576,8 @@
     }
   },
   "developer-docs/rest-apis/recover/index.md": {
-    "hash": "0e131352b16e054cec972fa5439a2467e9b6f25ea8a24ec743496431aae0490f",
-    "document_id": "6f97f57f-6080-4c2f-a38f-857862379780",
+    "hash": "ddcee165d615cea63334470cb5dc281d0073f11b7e008cce656f549de087e192",
+    "document_id": "98fdf942-e10a-40d1-8ed0-360feaf9f38f",
     "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
     "metadata": {
       "source": "docusaurus",
@@ -2074,8 +2077,8 @@
     }
   },
   "developer-docs/extending/backend-customization/sms-providers.md": {
-    "hash": "99f8c917c8f3cd6d6ef10f537aa2c18eaf3216aac4b1834ea626e2a9051ba5a3",
-    "document_id": "fc0adfe8-327e-47d8-8d55-35a87f90002a",
+    "hash": "4f70f2b14b7d728ac094cf5bfa5403b8edb3368f8d202729097425e474a34d79",
+    "document_id": "62684372-0cdf-488c-9067-bc1c6e680f25",
     "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
     "metadata": {
       "source": "docusaurus",
@@ -2083,10 +2086,20 @@
       "section": "developer-docs",
       "path": "developer-docs/extending/backend-customization/sms-providers.md",
       "doc_title": "developer-docs/extending/backend-customization/sms-providers.md",
+      "title": "SMS Providers",
+      "description": "Learn how to create and configure custom SMS providers in SolidX.",
+      "summary": "Introduction to creating and configuring custom SMS providers in SolidX for sending text messages via third-party services. Implementation details pending future documentation updates.",
+      "keywords": [
+        "backend",
+        "sms providers",
+        "customization"
+      ],
+      "solidx_concerns": [
+        "new_sms_provider"
+      ],
       "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
       "collection_name": "developer-docs",
-      "title": "developer-docs/extending/backend-customization/sms-providers.md",
-      "chunk_count": 1
+      "chunk_count": 4
     }
   },
   "developer-docs/extending/backend-customization/extending-users.md": {
@@ -2143,8 +2156,8 @@
     }
   },
   "developer-docs/extending/backend-customization/crud-service.md": {
-    "hash": "19e52f24fd5a4bc377c6c6d881d5bf05b2614336f3b6c158d9ba95059431e0ad",
-    "document_id": "3ab659ea-b74b-428d-ab96-979aa81b98cc",
+    "hash": "431f2e8d162c86a0442caffb465f90920718248de054b7a19f6ac1aab2dfc5be",
+    "document_id": "9ba7dbb4-7e89-43ae-a67d-ade585e7d70f",
     "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
     "metadata": {
       "source": "docusaurus",
@@ -2152,15 +2165,28 @@
       "section": "developer-docs",
       "path": "developer-docs/extending/backend-customization/crud-service.md",
       "doc_title": "developer-docs/extending/backend-customization/crud-service.md",
+      "title": "CRUD Service",
+      "description": "Learn how to create and customize CRUD services in your application.",
+      "summary": "Guide to creating and customizing CRUD services in SolidX applications for managing data layer operations, including methods for create, read, update, and delete functionality with business logic integration.",
+      "keywords": [
+        "backend",
+        "services",
+        "CRUD",
+        "customization"
+      ],
+      "solidx_concerns": [
+        "using_crud_service_method",
+        "add_custom_service_method",
+        "add_controller_endpoint"
+      ],
       "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
       "collection_name": "developer-docs",
-      "title": "developer-docs/extending/backend-customization/crud-service.md",
-      "chunk_count": 1
+      "chunk_count": 9
     }
   },
   "developer-docs/extending/backend-customization/solid-registry.md": {
-    "hash": "6fa4573c44b818bcf91c5ab6df882ebd151982608fea041d52293e99682c7f73",
-    "document_id": "ec6b1749-8f88-464e-b611-dee6c35f92c7",
+    "hash": "945c1a5498498c0c8365a6ca21b1ee80ff0dc151d6da35034ce48cfaae9edf94",
+    "document_id": "92fe2732-3f4a-48e9-a26b-7d592f822ec8",
     "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
     "metadata": {
       "source": "docusaurus",
@@ -2179,7 +2205,7 @@
       ],
       "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
       "collection_name": "developer-docs",
-      "chunk_count": 3
+      "chunk_count": 2
     }
   },
   "developer-docs/extending/backend-customization/extending-repositories.md": {
