@@ -8,7 +8,7 @@ jsonpath: "$.moduleMetadata"
 parent_component: root
 items_type: object
 items_attributes_doc: "#module-metadata-attributes"
-solidx_concerns: []
+solidx_concerns: [create_module]
 ---
 import { MdCategory } from "react-icons/md";
 import { IoIosArrowForward } from "react-icons/io";
