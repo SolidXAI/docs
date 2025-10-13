@@ -106,8 +106,3 @@ Verify if the security rules are working as expected by making API calls with th
 ```
 
 </div>
-
-
-<InfoBox>
-  You can also use interactive query builder to convert filter objects to query strings. See [Interactive Query Builder](https://docs.strapi.io/cms/api/rest/interactive-query-builder)
-</InfoBox>
