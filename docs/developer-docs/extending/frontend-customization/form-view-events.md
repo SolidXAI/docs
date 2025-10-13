@@ -95,7 +95,9 @@ const handleBookFormViewChange = (event: SolidUiEvent) => {
 export default handleBookFormViewChange;
 ```
 </details>
-
+:::info
+If you are setting dataChanged to true, ensure you return the full newFormData object, not just the modified field.
+:::
 :::tip
 **Keep model concerns together.** Use a single file (e.g., `bookFormViewChangeHandler.ts`) for all form‑view event logic for that model. It makes maintenance and onboarding much easier.
 :::
