@@ -19,7 +19,7 @@ Form view **function extensions** let you react to lifecycle events in a SolidX 
 
 You author **listener functions**, register them with `registerExtensionFunction`, and reference them in your **form view layout JSON**.
 
----
+
 
 ## Supported Events
 
@@ -35,7 +35,7 @@ SolidX currently supports these form view events:
 If your handler **mutates layout and/or data**, return the appropriate flags: `layoutChanged: true` and/or `dataChanged: true`. Without these flags, changes are ignored.
 :::
 
----
+
 
 ## Project Structure & File Paths
 
@@ -46,7 +46,7 @@ Place your handler(s) under your admin extensions folder. A common convention is
 /solid-ui/app/admin/extensions/solid-extensions.ts   # registration
 ```
 
----
+
 
 ## Creating a Handler
 
@@ -102,7 +102,7 @@ If you are setting dataChanged to true, ensure you return the full newFormData o
 **Keep model concerns together.** Use a single file (e.g., `bookFormViewChangeHandler.ts`) for all form‑view event logic for that model. It makes maintenance and onboarding much easier.
 :::
 
----
+
 
 ## Registering the Handler
 
@@ -123,7 +123,7 @@ registerExtensionFunction("bookFormViewChangeHandler", handleBookFormViewChange)
 ```
 </details>
 
----
+
 
 ## Using Handlers in a Layout
 
@@ -162,7 +162,7 @@ Reference your handler **aliases** in the layout JSON for the form view.
 Your handler can be **one function** that switches on `event.type`, or **multiple functions** registered under different aliases. Choose whichever keeps the code clearer for your team.
 :::
 
----
+
 
 ## Event Payload (Types)
 
@@ -187,7 +187,7 @@ export type SolidUiEvent = {
 ```
 </details>
 
----
+
 
 ## Returning Changes
 
@@ -208,7 +208,7 @@ return {
 - If you touch **data**, set `dataChanged: true` and return `newFormData`.
 - If you touch **both**, set **both** flags and return both payloads.
 
----
+
 
 ## Common Patterns
 
@@ -217,7 +217,7 @@ return {
 - **Async validations:** Use `onFieldBlur` to kick off lightweight checks (e.g., uniqueness). For heavy work, prefer server‑side validation.
 - **Safety first:** Avoid deep mutations of `viewMetadata.layout` directly; use `SolidViewLayoutManager`. Always return flags correctly.
 
----
+
 
 ## Troubleshooting
 - **“My changes aren’t applied”** → Verify you set `layoutChanged`/`dataChanged` appropriately.
