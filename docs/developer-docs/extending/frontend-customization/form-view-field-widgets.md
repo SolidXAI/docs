@@ -1,6 +1,6 @@
 ---
 sidebar_position: 4
-title: Form View Custom Field Widgets
+title: Form View Field Widgets
 description: Learn how to create form view field widgets for the frontend of your application.
 summary: Details creating custom form view field widgets in SolidX for customizing field display in view and edit modes. Covers using built-in widgets (e.g., `integerSlider`) or creating custom ones, implementing components with `SolidFormFieldWidgetProps` (formik, fieldContext, metadata), registering widgets via `registerExtensionComponent`, configuring `editWidget`/`viewWidget` in form layout JSON, handling field validation, labels, and examples like slider widgets with tooltips and color-coded values.
 solidx_concerns: [create_custom_form_field_widget]
@@ -9,7 +9,7 @@ solidx_concerns: [create_custom_form_field_widget]
 import { IoIosArrowForward } from "react-icons/io";
 
 
-#  Form View Field Widgets
+<!-- #  Form View Field Widgets -->
 
 ##  Overview
 Form view widgets allow you to **customize how fields are displayed** in a form view.  
@@ -20,7 +20,11 @@ You can use either:
 - **Custom widgets** (that you create).
 
  Example: Display an integer field `score` as a **slider** using the built-in `integerSlider` widget.
-
+<details>
+    <summary className="card-title card-headear-wrapper">
+        <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
+        <code>Using Built-in Widget</code>
+    </summary>
 ```json
 {
   "name": "model-form-view",
@@ -41,6 +45,7 @@ You can use either:
   }
 }
 ```
+</details>
 :::tip
 In the above example, the `editWidget` attribute specifies the widget to use in **edit mode**. While registering a widget, you can provide an **alias** (like `integerSlider`) to reference it easily in the layout instead of the full component name e.g. `SolidIntegerSliderStyleFormEditWidget`.
 :::
@@ -50,7 +55,7 @@ In the above example, the `editWidget` attribute specifies the widget to use in 
 ##  Creating a Custom Widget
 
 ### 1. Create the Widget Component
-Here’s an example of an **integer slider widget**:
+Here’s an example of an **integer slider widget**. This widget allows users to select an integer value using a slider.
 <details>
  <summary className="card-title card-headear-wrapper">
     <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
@@ -148,7 +153,10 @@ export const SolidIntegerSliderStyleFormEditWidget = ({ formik, fieldContext }: 
 ```
 </details>
 
- **File Path:**
+ **File Path:** 
+ 
+ As per project structure, place the widget component in the `extensions` folder:
+
 ```bash
 /solid-ui/app/admin/extensions/SolidIntegerSliderStyleFormEditWidget.tsx
 ```
@@ -157,38 +165,57 @@ export const SolidIntegerSliderStyleFormEditWidget = ({ formik, fieldContext }: 
 
 ### 2. Register the Widget
 Widgets must be **registered** in `solid-extensions.ts`:
-
+<details>
+ <summary className="card-title card-headear-wrapper">
+    <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
+   <code>Registering the Widget</code>
+   </summary>
 ```tsx
 registerExtensionComponent(
-  "SolidIntegerSliderStyleFormEditWidget",
-  SolidIntegerSliderStyleFormEditWidget,
+  "SolidIntegerSliderStyleFormEditWidget", // component name
+  SolidIntegerSliderStyleFormEditWidget, // component reference
   ["integerSlider"]   // alias name
 );
 ```
+</details>
 
  **File Path:**
 ```
 /solid-ui/app/admin/extensions/solid-extensions.ts
 ```
 
- **Note:** The alias `integerSlider` allows you to use this widget in layout configuration easily.
 
-
-
-### 3. Use in Layout
-Now you can configure the widget in the form view layout:
-
+### 3. Use in Layout 
+Now you can configure the widget within the form view layout configuration in the module metadata schema JSON file:
+<details>
+ <summary className="card-title card-headear-wrapper">
+    <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
+   <code>Using Custom Widget in Layout</code>
+   </summary>
 ```json
 {
-  "type": "field",
-  "attrs": {
-    "name": "score",
-    "label": "Score",
-    "editWidget": "integerSlider"
+  "name": "institute-form-view",
+  ... // other attributes
+  "layout": {
+    "type": "form",
+    ... // other attributes
+    "children": [
+      {
+      "type": "field",
+      "attrs": {
+          "name": "score",
+          "label": "Score",
+          "editWidget": "integerSlider"
+        }
+      }
+    ]
   }
 }
 ```
+</details>
 
+File Path:
+``` /solid-api/module-metadata/<module-name>/<module-name>-metadata.json ```
 
 
 ##  How It Works
@@ -197,25 +224,32 @@ Now you can configure the widget in the form view layout:
 2. It identifies fields with an `editWidget`.  
 3. It dynamically imports the corresponding widget component.  
 4. The widget is rendered with props of type `SolidFormFieldWidgetProps`:
+<details>
+ <summary className="card-title card-headear-wrapper">
+    <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
+   <code>SolidFormFieldWidgetProps</code>
+   </summary>
 ``` tsx
 export type SolidFormFieldWidgetProps = {
-    formik: any;
-    fieldContext?: SolidFieldProps;
+    formik: any; // Formik instance for form state management
+    fieldContext?: SolidFieldProps; 
 }
 
 export type SolidFieldProps = {
-    solidFormViewMetaData: any;
-    fieldMetadata: any,
-    field: any,
-    data: any,
-    modelName?: any,
-    readOnly?: any,
-    viewMode?: any
-    onChange?: any,
-    onBlur?: any,
-    parentData?: any,
+    solidFormViewMetaData: any; // Metadata of the form view
+    fieldMetadata: any, // Metadata of the specific field
+    field: any, // Layout info of the field
+    data: any, // Current data of the form
+    modelName?: any, // Name of the model
+    readOnly?: any, // Is the field read-only
+    viewMode?: any // Is the form in view mode
+    onChange?: any, // Callback for change events
+    onBlur?: any, // Callback for blur events
+    // Used in embedded views i.e for relation fields
+    parentData?: any, // Data of the parent entity
 }
 ```
+</details>
 5. The widget then applies your **custom rendering logic**.  
 6. Default widgets are also rendered using the same mechanism.
 
