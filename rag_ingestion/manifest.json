@@ -1,7 +1,201 @@
 {
+  "tutorial/index.md": {
+    "hash": "5a60fa5e410fb0f780d21adbbb5726ed786651211c6359a2d64ad16485670ef4",
+    "document_id": "61e1f040-a4b7-48cf-8937-f85ad4a3811a",
+    "collection_id": "cd59267d-67e0-4897-91a6-1a338f5e83bf",
+    "metadata": {
+      "source": "docusaurus",
+      "project": "solidx-docs",
+      "section": "tutorial",
+      "path": "tutorial/index.md",
+      "doc_title": "tutorial/index.md",
+      "collection_id": "cd59267d-67e0-4897-91a6-1a338f5e83bf",
+      "collection_name": "tutorial",
+      "title": "tutorial/index.md",
+      "chunk_count": 1
+    }
+  },
+  "admin-docs/index.md": {
+    "hash": "89f4e18eaf2bad4f8d844a140bf68219b86feaadb40cc8fe1d95c95f81d2284c",
+    "document_id": "985e5ca3-a5e1-4684-9563-9717898d8006",
+    "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
+    "metadata": {
+      "source": "docusaurus",
+      "project": "solidx-docs",
+      "section": "admin-docs",
+      "path": "admin-docs/index.md",
+      "doc_title": "admin-docs/index.md",
+      "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
+      "collection_name": "admin-docs",
+      "title": "admin-docs/index.md",
+      "chunk_count": 3
+    }
+  },
+  "recipes/email.md": {
+    "hash": "0b3033ba8ba54bd517a4a8d0266a7a6230c1869e12c30bf53e9e33d3040ed08c",
+    "document_id": "c3c3c5b5-1bef-46e1-8fa7-6844d3214b14",
+    "collection_id": "f0935ef1-c3c4-403d-b32f-2a2d52861db1",
+    "metadata": {
+      "source": "docusaurus",
+      "project": "solidx-docs",
+      "section": "recipes",
+      "path": "recipes/email.md",
+      "doc_title": "recipes/email.md",
+      "collection_id": "f0935ef1-c3c4-403d-b32f-2a2d52861db1",
+      "collection_name": "recipes",
+      "title": "recipes/email.md",
+      "chunk_count": 3
+    }
+  },
+  "recipes/computed-fields.md": {
+    "hash": "2ba513ac1d515d7602ad14d9fcbab20532187652ac263ef1877f1004e490c2d3",
+    "document_id": "f3bea14d-739e-4e9e-b893-07694700c690",
+    "collection_id": "f0935ef1-c3c4-403d-b32f-2a2d52861db1",
+    "metadata": {
+      "source": "docusaurus",
+      "project": "solidx-docs",
+      "section": "recipes",
+      "path": "recipes/computed-fields.md",
+      "doc_title": "recipes/computed-fields.md",
+      "collection_id": "f0935ef1-c3c4-403d-b32f-2a2d52861db1",
+      "collection_name": "recipes",
+      "title": "recipes/computed-fields.md",
+      "chunk_count": 1
+    }
+  },
+  "recipes/media-providers.md": {
+    "hash": "5812dd8914d8e21bd8c4b3cd0385ca2f4e215675e5ec30bb3aedd9fec51039f3",
+    "document_id": "3ebb965f-de08-4c9a-b0c3-7312f1aba6f1",
+    "collection_id": "f0935ef1-c3c4-403d-b32f-2a2d52861db1",
+    "metadata": {
+      "source": "docusaurus",
+      "project": "solidx-docs",
+      "section": "recipes",
+      "path": "recipes/media-providers.md",
+      "doc_title": "recipes/media-providers.md",
+      "collection_id": "f0935ef1-c3c4-403d-b32f-2a2d52861db1",
+      "collection_name": "recipes",
+      "title": "recipes/media-providers.md",
+      "chunk_count": 2
+    }
+  },
+  "recipes/extending-users.md": {
+    "hash": "6685c0db971b30319fcb27aed29ddbb81cba138476fa6ad2aa7f0a8ff0a506de",
+    "document_id": "7c01e4d6-0b46-452a-9440-7adedd31cb22",
+    "collection_id": "f0935ef1-c3c4-403d-b32f-2a2d52861db1",
+    "metadata": {
+      "source": "docusaurus",
+      "project": "solidx-docs",
+      "section": "recipes",
+      "path": "recipes/extending-users.md",
+      "doc_title": "recipes/extending-users.md",
+      "collection_id": "f0935ef1-c3c4-403d-b32f-2a2d52861db1",
+      "collection_name": "recipes",
+      "title": "recipes/extending-users.md",
+      "chunk_count": 1
+    }
+  },
+  "recipes/index.md": {
+    "hash": "0d72d575b21eb24ccc2c8242cc860f39805ae58f972c13e0eb86e8fbc9a4fff9",
+    "document_id": "0c8aad16-cdaf-44bd-9d19-69707102b0e1",
+    "collection_id": "f0935ef1-c3c4-403d-b32f-2a2d52861db1",
+    "metadata": {
+      "source": "docusaurus",
+      "project": "solidx-docs",
+      "section": "recipes",
+      "path": "recipes/index.md",
+      "doc_title": "recipes/index.md",
+      "collection_id": "f0935ef1-c3c4-403d-b32f-2a2d52861db1",
+      "collection_name": "recipes",
+      "title": "recipes/index.md",
+      "chunk_count": 1
+    }
+  },
+  "recipes/soft-delete.md": {
+    "hash": "b47296a0febe076b020d2c09f5fce86b88a8753cda1a8dff5837a927f76c8721",
+    "document_id": "003938a7-406f-4833-b3b3-c06a47eff549",
+    "collection_id": "f0935ef1-c3c4-403d-b32f-2a2d52861db1",
+    "metadata": {
+      "source": "docusaurus",
+      "project": "solidx-docs",
+      "section": "recipes",
+      "path": "recipes/soft-delete.md",
+      "doc_title": "recipes/soft-delete.md",
+      "collection_id": "f0935ef1-c3c4-403d-b32f-2a2d52861db1",
+      "collection_name": "recipes",
+      "title": "recipes/soft-delete.md",
+      "chunk_count": 1
+    }
+  },
+  "recipes/queue.md": {
+    "hash": "d44836f63c8937f8362065743a7260652edefc76f2234ae22766bbc0e02168c9",
+    "document_id": "66073a7e-81aa-4c0f-9128-509f27374e94",
+    "collection_id": "f0935ef1-c3c4-403d-b32f-2a2d52861db1",
+    "metadata": {
+      "source": "docusaurus",
+      "project": "solidx-docs",
+      "section": "recipes",
+      "path": "recipes/queue.md",
+      "doc_title": "recipes/queue.md",
+      "collection_id": "f0935ef1-c3c4-403d-b32f-2a2d52861db1",
+      "collection_name": "recipes",
+      "title": "recipes/queue.md",
+      "chunk_count": 4
+    }
+  },
+  "recipes/handlers.md": {
+    "hash": "1370d7e24131ae267c88a5ecd30fc4bd1a916f82a60d2a7693fe00fe2be9fc34",
+    "document_id": "f5dd0989-4cb9-4839-922e-0ae5885d3424",
+    "collection_id": "f0935ef1-c3c4-403d-b32f-2a2d52861db1",
+    "metadata": {
+      "source": "docusaurus",
+      "project": "solidx-docs",
+      "section": "recipes",
+      "path": "recipes/handlers.md",
+      "doc_title": "recipes/handlers.md",
+      "collection_id": "f0935ef1-c3c4-403d-b32f-2a2d52861db1",
+      "collection_name": "recipes",
+      "title": "recipes/handlers.md",
+      "chunk_count": 1
+    }
+  },
+  "recipes/additional-datasources.md": {
+    "hash": "11a02a076db439d55971ea92671ce46d8aca155961b52b4305f0a2bd1224546a",
+    "document_id": "e7aec0af-b9b7-4d45-864d-97287e19cfec",
+    "collection_id": "f0935ef1-c3c4-403d-b32f-2a2d52861db1",
+    "metadata": {
+      "source": "docusaurus",
+      "project": "solidx-docs",
+      "section": "recipes",
+      "path": "recipes/additional-datasources.md",
+      "doc_title": "recipes/additional-datasources.md",
+      "collection_id": "f0935ef1-c3c4-403d-b32f-2a2d52861db1",
+      "collection_name": "recipes",
+      "title": "recipes/additional-datasources.md",
+      "chunk_count": 1
+    }
+  },
+  "developer-docs/database-seeding.md": {
+    "hash": "a21bfabfa04f2c4b3fcf308ce8bf4fbc197b390208b2c654dafed4f55b3d81d9",
+    "document_id": "e6e46957-59c0-45f6-a12b-ecbf74253a4f",
+    "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
+    "metadata": {
+      "source": "docusaurus",
+      "project": "solidx-docs",
+      "section": "developer-docs",
+      "path": "developer-docs/database-seeding.md",
+      "doc_title": "developer-docs/database-seeding.md",
+      "title": "Database Seeding",
+      "description": "Overview of how the database is initialized with metadata in SolidX.",
+      "summary": "This document explains the database seeding process in SolidX, which initializes the database with essential metadata and data required for the application to function. The seeding is triggered via the 'solid seed' command and populates permissions, media storage providers, system fields, functional modules metadata, roles (Admin and Internal User), default users, views, actions, menus, email/SMS templates, settings, security rules, list of values, and dashboard configurations. The ModuleMetadataSeederService from the @solidstarters/solid-core package handles all the seeding operations automatically.",
+      "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
+      "collection_name": "developer-docs",
+      "chunk_count": 3
+    }
+  },
   "developer-docs/prerequisites.md": {
     "hash": "fc3a4da155ded511abb5f04f1a14345720cc4381e83b57577720f962883bae9a",
-    "document_id": "b5e40e95-b297-4757-84a1-424cc23f00bc",
+    "document_id": "31ba5c8c-3d03-4d50-9217-af657c759b85",
     "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
     "metadata": {
       "source": "docusaurus",
@@ -19,7 +213,7 @@
   },
   "developer-docs/index.md": {
     "hash": "0ba6df944939135dd9c6890f61fe01a92394dfada71517b27b752bd890063aa8",
-    "document_id": "ed987e88-d359-45c8-9a07-f0ea05257c59",
+    "document_id": "461cd1f5-6a12-4ba2-ae79-d239f49c064b",
     "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
     "metadata": {
       "source": "docusaurus",
@@ -37,7 +231,7 @@
   },
   "developer-docs/installation.md": {
     "hash": "a4ce861ba229cb3148a3c61e7c637f98b0d087ee8735e7786fe34f410864cc78",
-    "document_id": "10190a8f-67df-4fb5-9958-692dcc1c6ce7",
+    "document_id": "9ce0da1d-05a6-4d2a-b518-d8a54ed5d16b",
     "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
     "metadata": {
       "source": "docusaurus",
@@ -55,7 +249,7 @@
   },
   "developer-docs/project-structure.md": {
     "hash": "f6cc97136817caf24c09896cdcf59cc20de7b3b2114a9c5b8eef0b3b20350460",
-    "document_id": "fd626962-27b0-4adf-8132-b8a6585aec38",
+    "document_id": "3166f114-b258-423a-b687-914b2c04313f",
     "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
     "metadata": {
       "source": "docusaurus",
@@ -72,9 +266,492 @@
       "chunk_count": 4
     }
   },
+  "tutorial/school-fees-portal/index.md": {
+    "hash": "8bd4824dcf0d4a5f30168febe9784ea86c36918e31020cd8742c81d1de953071",
+    "document_id": "ff3b778c-f21d-4825-ab26-d0cf50a626a7",
+    "collection_id": "cd59267d-67e0-4897-91a6-1a338f5e83bf",
+    "metadata": {
+      "source": "docusaurus",
+      "project": "solidx-docs",
+      "section": "tutorial",
+      "path": "tutorial/school-fees-portal/index.md",
+      "doc_title": "tutorial/school-fees-portal/index.md",
+      "collection_id": "cd59267d-67e0-4897-91a6-1a338f5e83bf",
+      "collection_name": "tutorial",
+      "title": "tutorial/school-fees-portal/index.md",
+      "chunk_count": 5
+    }
+  },
+  "tutorial/school-fees-portal/1-bootstrap/index.md": {
+    "hash": "ec5cfbf70f5e927cb0d79c573fa165449fe0f55fbfe52f2467c4721356469509",
+    "document_id": "9a0410c0-ea43-4eab-ae51-4f2b8f7332cf",
+    "collection_id": "cd59267d-67e0-4897-91a6-1a338f5e83bf",
+    "metadata": {
+      "source": "docusaurus",
+      "project": "solidx-docs",
+      "section": "tutorial",
+      "path": "tutorial/school-fees-portal/1-bootstrap/index.md",
+      "doc_title": "tutorial/school-fees-portal/1-bootstrap/index.md",
+      "collection_id": "cd59267d-67e0-4897-91a6-1a338f5e83bf",
+      "collection_name": "tutorial",
+      "title": "tutorial/school-fees-portal/1-bootstrap/index.md",
+      "chunk_count": 2
+    }
+  },
+  "tutorial/school-fees-portal/4-customisations/index.md": {
+    "hash": "a70d91b08f5367533a265622499a0c21d3a01fd8b68c6f955e913f5fcabe2bd3",
+    "document_id": "7c3f87bc-adb9-4a26-98ec-131eb0b71550",
+    "collection_id": "cd59267d-67e0-4897-91a6-1a338f5e83bf",
+    "metadata": {
+      "source": "docusaurus",
+      "project": "solidx-docs",
+      "section": "tutorial",
+      "path": "tutorial/school-fees-portal/4-customisations/index.md",
+      "doc_title": "tutorial/school-fees-portal/4-customisations/index.md",
+      "collection_id": "cd59267d-67e0-4897-91a6-1a338f5e83bf",
+      "collection_name": "tutorial",
+      "title": "tutorial/school-fees-portal/4-customisations/index.md",
+      "chunk_count": 7
+    }
+  },
+  "tutorial/school-fees-portal/2-data-model/index.md": {
+    "hash": "b38fe37a61c5775d27cb71f591dc477d8144059b9c18c36609624d7478d2b588",
+    "document_id": "d57c5176-a7c6-42f6-9a84-2645f59f0718",
+    "collection_id": "cd59267d-67e0-4897-91a6-1a338f5e83bf",
+    "metadata": {
+      "source": "docusaurus",
+      "project": "solidx-docs",
+      "section": "tutorial",
+      "path": "tutorial/school-fees-portal/2-data-model/index.md",
+      "doc_title": "tutorial/school-fees-portal/2-data-model/index.md",
+      "collection_id": "cd59267d-67e0-4897-91a6-1a338f5e83bf",
+      "collection_name": "tutorial",
+      "title": "tutorial/school-fees-portal/2-data-model/index.md",
+      "chunk_count": 4
+    }
+  },
+  "tutorial/school-fees-portal/3-admin-layout/index.md": {
+    "hash": "9109819eb119faa26430b3a1064e8de8dea82c0a226dab3afb67839a159f3dc0",
+    "document_id": "ffd12dc2-a983-415e-a3ad-a63f87c3aa22",
+    "collection_id": "cd59267d-67e0-4897-91a6-1a338f5e83bf",
+    "metadata": {
+      "source": "docusaurus",
+      "project": "solidx-docs",
+      "section": "tutorial",
+      "path": "tutorial/school-fees-portal/3-admin-layout/index.md",
+      "doc_title": "tutorial/school-fees-portal/3-admin-layout/index.md",
+      "collection_id": "cd59267d-67e0-4897-91a6-1a338f5e83bf",
+      "collection_name": "tutorial",
+      "title": "tutorial/school-fees-portal/3-admin-layout/index.md",
+      "chunk_count": 9
+    }
+  },
+  "admin-docs/settings/index.md": {
+    "hash": "474fc676ef5992c0cb02fc86699ceae148c3bcf2f3ae75d522cd2de69ac623b9",
+    "document_id": "3d92a297-f375-4339-82bb-d0d62fc76001",
+    "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
+    "metadata": {
+      "source": "docusaurus",
+      "project": "solidx-docs",
+      "section": "admin-docs",
+      "path": "admin-docs/settings/index.md",
+      "doc_title": "admin-docs/settings/index.md",
+      "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
+      "collection_name": "admin-docs",
+      "title": "admin-docs/settings/index.md",
+      "chunk_count": 7
+    }
+  },
+  "admin-docs/module-builder/module-management.md": {
+    "hash": "73c708b5afd71174b3d8ef47d728839af7b92d2f2a14822e0c75d82a7bd158f3",
+    "document_id": "2c92f724-0a42-4ff2-8a32-563747076c59",
+    "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
+    "metadata": {
+      "source": "docusaurus",
+      "project": "solidx-docs",
+      "section": "admin-docs",
+      "path": "admin-docs/module-builder/module-management.md",
+      "doc_title": "admin-docs/module-builder/module-management.md",
+      "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
+      "collection_name": "admin-docs",
+      "title": "admin-docs/module-builder/module-management.md",
+      "chunk_count": 3
+    }
+  },
+  "admin-docs/module-builder/model-management.md": {
+    "hash": "bc17091da05712f138c0974d8fd2dc81b628a20e55c167413c79562990510aac",
+    "document_id": "8d256136-696c-4fb7-be35-69f217809318",
+    "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
+    "metadata": {
+      "source": "docusaurus",
+      "project": "solidx-docs",
+      "section": "admin-docs",
+      "path": "admin-docs/module-builder/model-management.md",
+      "doc_title": "admin-docs/module-builder/model-management.md",
+      "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
+      "collection_name": "admin-docs",
+      "title": "admin-docs/module-builder/model-management.md",
+      "chunk_count": 3
+    }
+  },
+  "admin-docs/module-builder/field-management.md": {
+    "hash": "769d917b0188261efb3330e62667076b5bb0fed8529a825bf64311f87b36bba8",
+    "document_id": "858cb344-3cf8-4aab-bf0c-563181b10c95",
+    "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
+    "metadata": {
+      "source": "docusaurus",
+      "project": "solidx-docs",
+      "section": "admin-docs",
+      "path": "admin-docs/module-builder/field-management.md",
+      "doc_title": "admin-docs/module-builder/field-management.md",
+      "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
+      "collection_name": "admin-docs",
+      "title": "admin-docs/module-builder/field-management.md",
+      "chunk_count": 8
+    }
+  },
+  "admin-docs/module-builder/index.md": {
+    "hash": "a2332fd851dc01c2e26ccbc3dcb4f7b76d3085ead5f5da4bbb65b2b7991d6372",
+    "document_id": "f6a163df-aa44-46a5-a41a-b7cf737c28aa",
+    "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
+    "metadata": {
+      "source": "docusaurus",
+      "project": "solidx-docs",
+      "section": "admin-docs",
+      "path": "admin-docs/module-builder/index.md",
+      "doc_title": "admin-docs/module-builder/index.md",
+      "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
+      "collection_name": "admin-docs",
+      "title": "admin-docs/module-builder/index.md",
+      "chunk_count": 2
+    }
+  },
+  "admin-docs/iam/permissions.md": {
+    "hash": "71c86a875ff1dbb7a7b944c2bf943abd8665a56c91462ffd922d1cfcbc695780",
+    "document_id": "ffff5301-a6be-4bcd-8296-4cf3ad8e63d9",
+    "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
+    "metadata": {
+      "source": "docusaurus",
+      "project": "solidx-docs",
+      "section": "admin-docs",
+      "path": "admin-docs/iam/permissions.md",
+      "doc_title": "admin-docs/iam/permissions.md",
+      "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
+      "collection_name": "admin-docs",
+      "title": "admin-docs/iam/permissions.md",
+      "chunk_count": 4
+    }
+  },
+  "admin-docs/iam/record-rules.md": {
+    "hash": "f90dbdc9344af80d57fb1a3ec6b589d9f1aa0d83847e1c46367fa098a75b76bc",
+    "document_id": "ebafb19a-fd3e-467a-98cd-679a0c8526a9",
+    "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
+    "metadata": {
+      "source": "docusaurus",
+      "project": "solidx-docs",
+      "section": "admin-docs",
+      "path": "admin-docs/iam/record-rules.md",
+      "doc_title": "admin-docs/iam/record-rules.md",
+      "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
+      "collection_name": "admin-docs",
+      "title": "admin-docs/iam/record-rules.md",
+      "chunk_count": 6
+    }
+  },
+  "admin-docs/iam/roles.md": {
+    "hash": "b9ce1f5981e758c46f81280f4b69790f38be3602cd03ba87e532e1f44d09300e",
+    "document_id": "c5a9c6c1-25d1-47ba-a218-f0961d0d9098",
+    "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
+    "metadata": {
+      "source": "docusaurus",
+      "project": "solidx-docs",
+      "section": "admin-docs",
+      "path": "admin-docs/iam/roles.md",
+      "doc_title": "admin-docs/iam/roles.md",
+      "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
+      "collection_name": "admin-docs",
+      "title": "admin-docs/iam/roles.md",
+      "chunk_count": 3
+    }
+  },
+  "admin-docs/iam/users.md": {
+    "hash": "efa3e00fc33126f7bf10f74290dc0e81e971bac8480d1bd2cea033caf663ea7a",
+    "document_id": "166ec9aa-7ec3-4583-a8df-6bd94feb3701",
+    "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
+    "metadata": {
+      "source": "docusaurus",
+      "project": "solidx-docs",
+      "section": "admin-docs",
+      "path": "admin-docs/iam/users.md",
+      "doc_title": "admin-docs/iam/users.md",
+      "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
+      "collection_name": "admin-docs",
+      "title": "admin-docs/iam/users.md",
+      "chunk_count": 4
+    }
+  },
+  "admin-docs/iam/index.md": {
+    "hash": "2286b63cecfc374fa30a35492eeb5fe0ebd52f59906bf92f545292d9c6f60f43",
+    "document_id": "abd50b19-573d-42d7-af84-0d9b69533bee",
+    "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
+    "metadata": {
+      "source": "docusaurus",
+      "project": "solidx-docs",
+      "section": "admin-docs",
+      "path": "admin-docs/iam/index.md",
+      "doc_title": "admin-docs/iam/index.md",
+      "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
+      "collection_name": "admin-docs",
+      "title": "admin-docs/iam/index.md",
+      "chunk_count": 4
+    }
+  },
+  "admin-docs/layouts/form-view.md": {
+    "hash": "af4d1c87974e970ce6ae14ab1a1bc1f578880606da5a7858648521fb3540be6d",
+    "document_id": "c6043b18-30c4-49b9-948a-f7fd04522b85",
+    "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
+    "metadata": {
+      "source": "docusaurus",
+      "project": "solidx-docs",
+      "section": "admin-docs",
+      "path": "admin-docs/layouts/form-view.md",
+      "doc_title": "admin-docs/layouts/form-view.md",
+      "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
+      "collection_name": "admin-docs",
+      "title": "admin-docs/layouts/form-view.md",
+      "chunk_count": 4
+    }
+  },
+  "admin-docs/layouts/index.md": {
+    "hash": "bff718c804501412a60de28ea24c108161ddaadab2634c0b867a004ff4010dfd",
+    "document_id": "20fcaea9-49df-462c-9251-4c68f94973bb",
+    "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
+    "metadata": {
+      "source": "docusaurus",
+      "project": "solidx-docs",
+      "section": "admin-docs",
+      "path": "admin-docs/layouts/index.md",
+      "doc_title": "admin-docs/layouts/index.md",
+      "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
+      "collection_name": "admin-docs",
+      "title": "admin-docs/layouts/index.md",
+      "chunk_count": 5
+    }
+  },
+  "admin-docs/layouts/kanban-view.md": {
+    "hash": "20bb01e5d091657fff9b3215e0bbcec776bc9dd469e3117730338e692780216e",
+    "document_id": "29e9aa47-f3f3-48e1-8a81-ac9481a7d5ae",
+    "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
+    "metadata": {
+      "source": "docusaurus",
+      "project": "solidx-docs",
+      "section": "admin-docs",
+      "path": "admin-docs/layouts/kanban-view.md",
+      "doc_title": "admin-docs/layouts/kanban-view.md",
+      "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
+      "collection_name": "admin-docs",
+      "title": "admin-docs/layouts/kanban-view.md",
+      "chunk_count": 10
+    }
+  },
+  "admin-docs/layouts/list-view.md": {
+    "hash": "a1b7ddb02a52b9958febf7e2d95c827d349adeb8310f03f0742d5e4fa38c9cda",
+    "document_id": "3a5520c4-c3d8-4331-8740-0a489289e063",
+    "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
+    "metadata": {
+      "source": "docusaurus",
+      "project": "solidx-docs",
+      "section": "admin-docs",
+      "path": "admin-docs/layouts/list-view.md",
+      "doc_title": "admin-docs/layouts/list-view.md",
+      "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
+      "collection_name": "admin-docs",
+      "title": "admin-docs/layouts/list-view.md",
+      "chunk_count": 6
+    }
+  },
+  "admin-docs/media-library/index.md": {
+    "hash": "2b4869fd5d2ba76ef746965d9469dad991095dfb21d0a540484c60ab53209f63",
+    "document_id": "b2ed7bcd-b03e-4421-b625-abff5ee39503",
+    "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
+    "metadata": {
+      "source": "docusaurus",
+      "project": "solidx-docs",
+      "section": "admin-docs",
+      "path": "admin-docs/media-library/index.md",
+      "doc_title": "admin-docs/media-library/index.md",
+      "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
+      "collection_name": "admin-docs",
+      "title": "admin-docs/media-library/index.md",
+      "chunk_count": 4
+    }
+  },
+  "admin-docs/media-library/storage-providers.md": {
+    "hash": "b10bcabd9257c984462771e61ff2a7fd68a51cd5378caf7ba0e2755a6a39c5ea",
+    "document_id": "a85c5ba4-8ac0-4105-acf0-e995d2e40ce1",
+    "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
+    "metadata": {
+      "source": "docusaurus",
+      "project": "solidx-docs",
+      "section": "admin-docs",
+      "path": "admin-docs/media-library/storage-providers.md",
+      "doc_title": "admin-docs/media-library/storage-providers.md",
+      "title": "Storage Providers",
+      "description": "Overview of supported media storage providers in SolidX applications.",
+      "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
+      "collection_name": "admin-docs",
+      "chunk_count": 5
+    }
+  },
+  "admin-docs/media-library/media-view.md": {
+    "hash": "6d454f4f8447ebb1d2d0993bdd076c5e80c3cf201fd56db64307cf75939936b4",
+    "document_id": "f1a82af9-3e17-4ed5-b683-39248269d88f",
+    "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
+    "metadata": {
+      "source": "docusaurus",
+      "project": "solidx-docs",
+      "section": "admin-docs",
+      "path": "admin-docs/media-library/media-view.md",
+      "doc_title": "admin-docs/media-library/media-view.md",
+      "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
+      "collection_name": "admin-docs",
+      "title": "admin-docs/media-library/media-view.md",
+      "chunk_count": 4
+    }
+  },
+  "admin-docs/modules/form-view.md": {
+    "hash": "cbd18a9b56b8884c32f2ce526478d1c237aa2c44f386b4c1890952f8b2db6d50",
+    "document_id": "e81b9c2b-f91a-4aec-9f99-c70ff325ef82",
+    "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
+    "metadata": {
+      "source": "docusaurus",
+      "project": "solidx-docs",
+      "section": "admin-docs",
+      "path": "admin-docs/modules/form-view.md",
+      "doc_title": "admin-docs/modules/form-view.md",
+      "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
+      "collection_name": "admin-docs",
+      "title": "admin-docs/modules/form-view.md",
+      "chunk_count": 1
+    }
+  },
+  "admin-docs/modules/menu-structure.md": {
+    "hash": "61947d0f2e4e9cfc19332cde6029ba13f5fb46768a640689f3783decafce2db7",
+    "document_id": "b23b3462-1ca4-4e10-9790-14194bf7bdde",
+    "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
+    "metadata": {
+      "source": "docusaurus",
+      "project": "solidx-docs",
+      "section": "admin-docs",
+      "path": "admin-docs/modules/menu-structure.md",
+      "doc_title": "admin-docs/modules/menu-structure.md",
+      "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
+      "collection_name": "admin-docs",
+      "title": "admin-docs/modules/menu-structure.md",
+      "chunk_count": 4
+    }
+  },
+  "admin-docs/modules/index.md": {
+    "hash": "1dc12518c0896b75954fa0aec4eccaa848ddf31c5876cf4a6f98784414bb4054",
+    "document_id": "367bb5d2-3793-4ea5-ae7a-d1bdb2b8db48",
+    "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
+    "metadata": {
+      "source": "docusaurus",
+      "project": "solidx-docs",
+      "section": "admin-docs",
+      "path": "admin-docs/modules/index.md",
+      "doc_title": "admin-docs/modules/index.md",
+      "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
+      "collection_name": "admin-docs",
+      "title": "admin-docs/modules/index.md",
+      "chunk_count": 3
+    }
+  },
+  "admin-docs/modules/kanban-view.md": {
+    "hash": "a716a690d30466a787a7f2b4b77af8535a4d54f92cb18a4405e286d65b3bafb4",
+    "document_id": "c2538da6-4cbb-4511-8d79-951d7528b9aa",
+    "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
+    "metadata": {
+      "source": "docusaurus",
+      "project": "solidx-docs",
+      "section": "admin-docs",
+      "path": "admin-docs/modules/kanban-view.md",
+      "doc_title": "admin-docs/modules/kanban-view.md",
+      "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
+      "collection_name": "admin-docs",
+      "title": "admin-docs/modules/kanban-view.md",
+      "chunk_count": 2
+    }
+  },
+  "admin-docs/modules/list-view.md": {
+    "hash": "97fe8b2fbef28b503b58812fe66437d5973ca90c4b221f77d10d14e90b39b436",
+    "document_id": "7d955a2b-6b7a-456b-944c-c7acce4e2bd0",
+    "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
+    "metadata": {
+      "source": "docusaurus",
+      "project": "solidx-docs",
+      "section": "admin-docs",
+      "path": "admin-docs/modules/list-view.md",
+      "doc_title": "admin-docs/modules/list-view.md",
+      "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
+      "collection_name": "admin-docs",
+      "title": "admin-docs/modules/list-view.md",
+      "chunk_count": 2
+    }
+  },
+  "admin-docs/notifications/sms-templates.md": {
+    "hash": "f166778768277141f210db1909cd80b7ea24a9be6855908e7aec7119fe2dc918",
+    "document_id": "3332a026-8051-4da1-975f-a2f60a1805a3",
+    "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
+    "metadata": {
+      "source": "docusaurus",
+      "project": "solidx-docs",
+      "section": "admin-docs",
+      "path": "admin-docs/notifications/sms-templates.md",
+      "doc_title": "admin-docs/notifications/sms-templates.md",
+      "title": "SMS Templates",
+      "description": "Learn how to create and manage SMS templates in SolidX, including dynamic content",
+      "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
+      "collection_name": "admin-docs",
+      "chunk_count": 6
+    }
+  },
+  "admin-docs/notifications/index.md": {
+    "hash": "c4c4aaa53e869dcad6ca0b1266cc0633738e9d53c1b4c0c03519c0e8c20b1e81",
+    "document_id": "232e6c7e-ec6e-453e-b05f-d7ff3c8c91d7",
+    "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
+    "metadata": {
+      "source": "docusaurus",
+      "project": "solidx-docs",
+      "section": "admin-docs",
+      "path": "admin-docs/notifications/index.md",
+      "doc_title": "admin-docs/notifications/index.md",
+      "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
+      "collection_name": "admin-docs",
+      "title": "admin-docs/notifications/index.md",
+      "chunk_count": 6
+    }
+  },
+  "admin-docs/notifications/email-templates.md": {
+    "hash": "3695f51366c5c990f738918f11d014f7f5aabb921ee57265de5b51135f8642c4",
+    "document_id": "247555c2-bd59-4b9d-a5ce-a3bfe72d4607",
+    "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
+    "metadata": {
+      "source": "docusaurus",
+      "project": "solidx-docs",
+      "section": "admin-docs",
+      "path": "admin-docs/notifications/email-templates.md",
+      "doc_title": "admin-docs/notifications/email-templates.md",
+      "title": "Email Templates",
+      "description": "Learn how to create and manage email templates in SOLID, including dynamic content",
+      "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
+      "collection_name": "admin-docs",
+      "chunk_count": 5
+    }
+  },
   "developer-docs/metadata_schema/action-metadata.md": {
-    "hash": "abe5025c4fa09032311902aeaa4f648baa7e7aa32d7557afc6a8862f99659e87",
-    "document_id": "9625c95c-0e4e-4f49-8476-15afdc13396e",
+    "hash": "a6d684b4d897ec5cb53f23b826c632caf0557a7ec12fc9afec55b6e5f0e7906f",
+    "document_id": "bc5bcdc7-0039-47ae-b7b5-8b0b641454b9",
     "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
     "metadata": {
       "source": "docusaurus",
@@ -90,12 +767,12 @@
       ],
       "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
       "collection_name": "developer-docs",
-      "chunk_count": 2
+      "chunk_count": 3
     }
   },
   "developer-docs/metadata_schema/menu-item-metadata.md": {
     "hash": "f528a8affaac6be31fa732eab045f6c29240e25d477c107ee6bfe9a63ea48a44",
-    "document_id": "7c4c4f5e-a14f-41ad-8760-fcf0ff34beb2",
+    "document_id": "ca9d10c0-6b8a-411c-a529-1e3aa0eecfc8",
     "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
     "metadata": {
       "source": "docusaurus",
@@ -118,7 +795,7 @@
   },
   "developer-docs/metadata_schema/view-metadata.md": {
     "hash": "d37cef75f52c20182842aaee1928c94129eff8dc7ddae56e22b717f505159eac",
-    "document_id": "288f37ef-74c8-4f42-a86b-cdfbe65d4b9e",
+    "document_id": "871c9d79-d079-4517-acac-a86e42a95a57",
     "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
     "metadata": {
       "source": "docusaurus",
@@ -142,7 +819,7 @@
   },
   "developer-docs/metadata_schema/roles-permissions-metadata.md": {
     "hash": "73afd7715500f8bb657526b4a8fc3a2d0f9f934e43a17573494f99282c482b28",
-    "document_id": "e8366fb8-4e2d-4df4-9d7c-137d2cb3c06a",
+    "document_id": "e9919bf6-6e32-4796-a473-e667228d2a02",
     "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
     "metadata": {
       "source": "docusaurus",
@@ -163,8 +840,8 @@
     }
   },
   "developer-docs/metadata_schema/security-rules.md": {
-    "hash": "b8f60aedc500f75fbf858002f0ab80b3bbe42250b1ae2727b300078f6dc54c63",
-    "document_id": "359ed3ea-88b1-4006-bea0-e65d89d4cd45",
+    "hash": "57a7494d64d4986bf349c048f14a837d9b1069ce814081126eda838ae8dcb57a",
+    "document_id": "6b7486b3-3111-4700-90e2-8584a13948b8",
     "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
     "metadata": {
       "source": "docusaurus",
@@ -185,7 +862,7 @@
   },
   "developer-docs/metadata_schema/scheduled-jobs.md": {
     "hash": "e89d7ae93078587fb5c556f25695036bf435965c8ed5056c11ba58f52e0d174c",
-    "document_id": "cd4b2841-b782-48e3-aad7-32626ec76242",
+    "document_id": "7b3d5e76-d6b4-4710-b33e-6604d2ef51f9",
     "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
     "metadata": {
       "source": "docusaurus",
@@ -206,7 +883,7 @@
   },
   "developer-docs/metadata_schema/sms-templates.md": {
     "hash": "43380c0fe329e226da2ed15e6de7589be75a8027059357263ffa4e1b846bd08a",
-    "document_id": "edfe2ea8-6866-4dd3-be86-3ee9f3b0c44b",
+    "document_id": "09ca766e-4dd3-434a-b59f-70688cb2ff75",
     "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
     "metadata": {
       "source": "docusaurus",
@@ -228,7 +905,7 @@
   },
   "developer-docs/metadata_schema/media-storage-providers.md": {
     "hash": "206176d17fedbd3ebaaa63aca795839acd035680bd8d92b1e676dbb778e02b96",
-    "document_id": "a451070b-c1f8-4307-963d-f76d92c2b3d3",
+    "document_id": "60824843-f6c0-4a01-ae90-f08141a77815",
     "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
     "metadata": {
       "source": "docusaurus",
@@ -247,7 +924,7 @@
   },
   "developer-docs/metadata_schema/users-metadata.md": {
     "hash": "2c1defdd410fa24fa1e45798bd0caa253f0d106c393acc24fe75af8d5c017ccf",
-    "document_id": "170be5c9-51a8-4436-9184-f59fb449f0c6",
+    "document_id": "68c2c21c-9ffc-4007-b3a3-ac15db5f5c4e",
     "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
     "metadata": {
       "source": "docusaurus",
@@ -265,8 +942,8 @@
     }
   },
   "developer-docs/metadata_schema/field-metadata.md": {
-    "hash": "620cad1432a3c601a7723e07f04a8196d6963c2087986399b9a2135e3b5c270c",
-    "document_id": "b3a8ef2b-7b54-4777-920b-1d6316e27734",
+    "hash": "8417c24976253a2174b1e78191c1d892eec7d4442bbcf33e9559572a2b0d6287",
+    "document_id": "91c02cb9-f223-4755-80ef-a157c48bcb31",
     "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
     "metadata": {
       "source": "docusaurus",
@@ -279,7 +956,8 @@
       "summary": "This comprehensive document details field metadata in SolidX, which treats fields as semantic attributes that define how users interact with data in the admin interface. It covers extensive field types including numeric (integer, bigInteger, decimal), text (shortText, longText, richText), temporal (date, dateTime, time), boolean, JSON, media (singleMedia, multipleMedia), specialized types (email, GUID, computed fields), selection fields (static and dynamic), and relation fields (manyToOne, oneToMany, manyToMany). Each field type includes configuration options for validation, default values, encryption, indexing, uniqueness, privacy, and audit tracking, with detailed examples and attribute documentation.",
       "solidx_concerns": [
         "add_field_to_a_model",
-        "remove_field_from_a_model"
+        "remove_field_from_a_model",
+        "create_model_with_fields"
       ],
       "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
       "collection_name": "developer-docs",
@@ -288,7 +966,7 @@
   },
   "developer-docs/metadata_schema/index.md": {
     "hash": "781088f29a29070d29fad9aebecbbecca520c2911da3fdcebbae401075e0c75e",
-    "document_id": "b10a2a95-5980-4189-88ef-9124f76c76ff",
+    "document_id": "d8c0dc0d-bef6-432f-9f1b-a45fc6d2769e",
     "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
     "metadata": {
       "source": "docusaurus",
@@ -311,7 +989,7 @@
   },
   "developer-docs/metadata_schema/module-metadata.md": {
     "hash": "eed52942d4271f5a61c1a47b23a28af35cb9e611cc653bb51203ac410c457850",
-    "document_id": "1ecd7f20-b565-4d55-8b61-15c3a8ce4167",
+    "document_id": "ec7767fc-5f60-42a8-a09d-28d9755a64f6",
     "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
     "metadata": {
       "source": "docusaurus",
@@ -332,7 +1010,7 @@
   },
   "developer-docs/metadata_schema/list-of-values.md": {
     "hash": "589f4b5ac13f44aeda96a48e4f60f2d2a1dd79f1a6ad44c917235ebef3ab120a",
-    "document_id": "23f38b20-f32e-43ec-a906-cbe411823bec",
+    "document_id": "6e2efbcd-5d95-496d-9741-f2a79bb10f05",
     "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
     "metadata": {
       "source": "docusaurus",
@@ -353,7 +1031,7 @@
   },
   "developer-docs/metadata_schema/email-templates.md": {
     "hash": "ff0760f3c1caf91919475f68d7c6640867f73962fc5861577e024d5476c3cf10",
-    "document_id": "aef5d5a8-7769-40b6-96f8-c873d634ac76",
+    "document_id": "0d853f63-fc13-4688-9522-e7a70055fe5a",
     "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
     "metadata": {
       "source": "docusaurus",
@@ -374,8 +1052,8 @@
     }
   },
   "developer-docs/metadata_schema/model-metadata.md": {
-    "hash": "f0cbec17149fa7ec419893a31610d7b6c77e6325160789c5e01a97cd8ad603d6",
-    "document_id": "4e682897-f009-4ccb-b6fc-fc2aeb4f8af5",
+    "hash": "c63aa3d3a36c0cee38d196d6c6f5d7451d31b6f288ccb752247bb4ef26b0bb9d",
+    "document_id": "b8ad82bb-57df-4446-b1e2-53a2933cbb2d",
     "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
     "metadata": {
       "source": "docusaurus",
@@ -387,7 +1065,7 @@
       "description": "Overview of the model metadata schema used in SolidX.",
       "summary": "This document details the model metadata schema in SolidX, where models represent data structures (entities/tables) within modules. Each model is a semantic, configurable structure that defines specific data types, their attributes, and relationships with other models. Key properties include singular/plural names, display name, data source configuration, table name, soft delete settings, audit logging, internationalization support, exportability, and user key field designation. The metadata also specifies which fields serve as unique identifiers for records and controls various behavioral aspects like draft-publish workflows.",
       "solidx_concerns": [
-        "create_model",
+        "create_model_with_fields",
         "add_field_to_a_model",
         "remove_field_from_a_model"
       ],
@@ -398,7 +1076,7 @@
   },
   "developer-docs/going-live/deploying-to-vm.md": {
     "hash": "b76eed150eac190110e7571e45587341eb14576af6e843aec41b5c28a17aa9f4",
-    "document_id": "cedff9d2-58ca-4dbf-b872-2fd0d72c6b40",
+    "document_id": "7138dea0-1dac-474f-8351-e86c7c87be23",
     "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
     "metadata": {
       "source": "docusaurus",
@@ -416,7 +1094,7 @@
   },
   "developer-docs/going-live/index.md": {
     "hash": "0f0188f6c087c25b134eed7849fd637e2e6bb2da7b73de841659607c9b14e284",
-    "document_id": "2531559a-0fed-42fd-87bd-2fd8ea9cf2c1",
+    "document_id": "95c78462-0927-464a-960c-47ea77ee929d",
     "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
     "metadata": {
       "source": "docusaurus",
@@ -434,7 +1112,7 @@
   },
   "developer-docs/rest-apis/index.md": {
     "hash": "c6db87634487a903573859422a37db04aea2bc3db37b0c9b44affceba0e08b03",
-    "document_id": "d0389fb4-4a30-4de9-8f2e-c7602cf4227c",
+    "document_id": "740faceb-6b67-4399-afd5-db2b3b54ce2a",
     "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
     "metadata": {
       "source": "docusaurus",
@@ -450,26 +1128,9 @@
       "chunk_count": 1
     }
   },
-  "developer-docs/database_seeding/index.md": {
-    "hash": "48d513cf54aacdf8842b53de680eb74778b797e802c19fbc353fa922cc0b5604",
-    "document_id": "3946bf1c-f986-47e1-8be3-ac47fde0cec9",
-    "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
-    "metadata": {
-      "source": "docusaurus",
-      "project": "solidx-docs",
-      "section": "developer-docs",
-      "path": "developer-docs/database_seeding/index.md",
-      "doc_title": "developer-docs/database_seeding/index.md",
-      "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
-      "collection_name": "developer-docs",
-      "title": "developer-docs/database_seeding/index.md",
-      "chunk_count": 3,
-      "has_summaries": true
-    }
-  },
   "developer-docs/extending/index.md": {
     "hash": "689f286ea00bed159dc3f5d69149d0c0cf140bbdf87c05cf11b735b98c969d12",
-    "document_id": "980e320c-0818-40ce-9c93-1ab1fadbef1e",
+    "document_id": "b5ae205c-9d8d-4a4d-a8eb-2a66be2259a5",
     "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
     "metadata": {
       "source": "docusaurus",
@@ -487,7 +1148,7 @@
   },
   "developer-docs/rest-apis/swagger-documentation/index.md": {
     "hash": "1170dae5dbfed84dd8e8d4b25edf3e5178ade02f22578d4de232deaa01f0ae09",
-    "document_id": "7721a289-462a-47e9-b483-66fc124b63de",
+    "document_id": "e246d69f-e1cc-4306-a546-3a6215a6edbc",
     "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
     "metadata": {
       "source": "docusaurus",
@@ -505,7 +1166,7 @@
   },
   "developer-docs/rest-apis/update/index.md": {
     "hash": "ebd6727d1bae68b5d4655db9cc060a01d4b1e7fc047552194b374ee2033e1987",
-    "document_id": "b55a0db5-7f86-432b-b910-dd10b18147af",
+    "document_id": "95f48565-cb4f-454b-aaa6-d65211ef5ee6",
     "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
     "metadata": {
       "source": "docusaurus",
@@ -523,7 +1184,7 @@
   },
   "developer-docs/rest-apis/delete/index.md": {
     "hash": "2e270e653d682df94fe38a33bf72630ea99240d9abce147e38c79db685c3fd6e",
-    "document_id": "2c98bbc7-13f1-4078-99b6-ce50fbfc4f85",
+    "document_id": "8971fcbf-b807-43b0-8c0a-8e86a1db59c4",
     "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
     "metadata": {
       "source": "docusaurus",
@@ -541,7 +1202,7 @@
   },
   "developer-docs/rest-apis/retrieve/index.md": {
     "hash": "e3593ea062a711fed36feab0fa83e11eedc43357fdc5973ba0fcb7493d61c486",
-    "document_id": "044a067b-8ad7-45fb-981b-a8e4145d98c2",
+    "document_id": "e55334a0-24ec-402e-8afc-97460a832300",
     "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
     "metadata": {
       "source": "docusaurus",
@@ -559,7 +1220,7 @@
   },
   "developer-docs/rest-apis/create/index.md": {
     "hash": "ccf26a02b8b6c5af2d29d1bc668e8f54ddcf17e41b121d34c05962c36f710bcd",
-    "document_id": "eb5b6a44-c41c-4754-a983-2f9744eb1b26",
+    "document_id": "b74c0220-bf79-4d25-9096-2040c1d665a6",
     "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
     "metadata": {
       "source": "docusaurus",
@@ -577,7 +1238,7 @@
   },
   "developer-docs/rest-apis/recover/index.md": {
     "hash": "ddcee165d615cea63334470cb5dc281d0073f11b7e008cce656f549de087e192",
-    "document_id": "98fdf942-e10a-40d1-8ed0-360feaf9f38f",
+    "document_id": "7b5b32dd-5962-4377-8f7e-060b8cabae27",
     "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
     "metadata": {
       "source": "docusaurus",
@@ -595,7 +1256,7 @@
   },
   "developer-docs/rest-apis/authentication/index.md": {
     "hash": "15df6a7498bfba83db3671f31f469a105c179dd8413c7da848bd741ccbebe211",
-    "document_id": "5aa42a08-527f-47cb-8d01-afb7c52c3761",
+    "document_id": "608a50a2-d842-4962-adeb-9e8f6e835bdf",
     "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
     "metadata": {
       "source": "docusaurus",
@@ -613,7 +1274,7 @@
   },
   "developer-docs/rest-apis/authentication/oauth-authentication/index.md": {
     "hash": "6f31ccd7e49e971234a9ea300cda9fd61b78a472f1daafa80ab81fa84f7f2696",
-    "document_id": "022bf55d-7b14-47a4-8bf1-6036d6222daa",
+    "document_id": "95dedee9-c1e2-4374-8377-78f8f5c821ef",
     "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
     "metadata": {
       "source": "docusaurus",
@@ -631,7 +1292,7 @@
   },
   "developer-docs/rest-apis/authentication/otp-authentication/index.md": {
     "hash": "b32dd32a9711cc39627245fbf99f81e8bd1de25bfb73e060630bb98c2839d72b",
-    "document_id": "4a6eb577-8d8f-4739-a343-0d46d0b6ba14",
+    "document_id": "f15ae3da-5b63-43a0-99a1-2ac598c91ad3",
     "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
     "metadata": {
       "source": "docusaurus",
@@ -649,7 +1310,7 @@
   },
   "developer-docs/rest-apis/authentication/password-authentication/index.md": {
     "hash": "b140937dfb119e8cc48dfb6967228bc93f157a30e296149bb7193b14c2986dec",
-    "document_id": "41176fc6-97e8-4abc-b4cb-283df913e42c",
+    "document_id": "f0b3b2b8-b40d-4b34-ad82-f82ea8daeba0",
     "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
     "metadata": {
       "source": "docusaurus",
@@ -667,7 +1328,7 @@
   },
   "developer-docs/extending/code-generation/codegen-cl.md": {
     "hash": "ad2b8a83412db573e75ead0b139fc794dae648aa7c04ede5c15dfeb0bdf121cd",
-    "document_id": "c4c13522-a7df-4602-a20f-fb028924c73d",
+    "document_id": "fee98219-4e6b-43b6-b08a-21db62458044",
     "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
     "metadata": {
       "source": "docusaurus",
@@ -683,9 +1344,27 @@
       "chunk_count": 3
     }
   },
+  "developer-docs/extending/code-generation/codegen-structure.md": {
+    "hash": "a97383b41ffb58f52570fc8f7a61d200a1b28a1db45a6658871a60e02e2526dc",
+    "document_id": "14425d52-e520-42c4-9e05-5705498b7bf0",
+    "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
+    "metadata": {
+      "source": "docusaurus",
+      "project": "solidx-docs",
+      "section": "developer-docs",
+      "path": "developer-docs/extending/code-generation/codegen-structure.md",
+      "doc_title": "developer-docs/extending/code-generation/codegen-structure.md",
+      "title": "Generated Code Structure",
+      "description": "This document describes the structure of code generated by SolidX when you create a module, model, or fields.",
+      "summary": "This document provides a comprehensive breakdown of the code structure generated by SolidX for modules, models, and fields. When generating a module, SolidX creates a basic NestJS module file. For models, it generates complete CRUD functionality including controllers (with RESTful APIs for create, update, soft delete, recovery, and query operations), services, DTOs (create and update), entities (TypeORM-based with field decorators), and repositories. The generated controllers include JWT authorization, Swagger documentation, file upload support, and comprehensive endpoints for data manipulation with filtering, pagination, sorting, and population capabilities.",
+      "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
+      "collection_name": "developer-docs",
+      "chunk_count": 3
+    }
+  },
   "developer-docs/extending/code-generation/index.md": {
     "hash": "904703aff8399d2d4be3ec52ccd0a6311fbd8f61a987fe9956c0023874bc5813",
-    "document_id": "2d215cc2-5324-4b94-b647-dc292f6fad56",
+    "document_id": "a193799e-95ee-489e-a106-2cb1f35bd03b",
     "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
     "metadata": {
       "source": "docusaurus",
@@ -701,9 +1380,125 @@
       "chunk_count": 2
     }
   },
+  "developer-docs/extending/frontend-customization/custom-views.md": {
+    "hash": "636b34e64e59812c9c95604e7ed6547f2caf8b3c7f9e9689518f1136d9e34526",
+    "document_id": "1124d00a-cac3-4796-ab07-d8fefdf619aa",
+    "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
+    "metadata": {
+      "source": "docusaurus",
+      "project": "solidx-docs",
+      "section": "developer-docs",
+      "path": "developer-docs/extending/frontend-customization/custom-views.md",
+      "doc_title": "developer-docs/extending/frontend-customization/custom-views.md",
+      "title": "Custom Views",
+      "description": "Learn how to create custom views in the frontend of your application.",
+      "summary": "Explains creating custom pages in SolidX frontend applications. Covers creating custom view components in the extensions folder, registering them using `registerExtensionComponent`, embedding custom views in form layouts using JSON configuration (notebooks, pages, custom widgets), accessing form data and metadata via props, and building specialized UI like `BookSimilarTitles` for displaying related data with filtering and action handlers.",
+      "keywords": [
+        "custom views",
+        "frontend customization",
+        "custom actions",
+        "custom components"
+      ],
+      "solidx_concerns": [
+        "add_full_custom_ui",
+        "add_custom_menu_action_combo",
+        "create_custom_widget"
+      ],
+      "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
+      "collection_name": "developer-docs",
+      "chunk_count": 4
+    }
+  },
+  "developer-docs/extending/frontend-customization/form-view-buttons.md": {
+    "hash": "f2b1f33221f0e37db426e811bee1c2974c629cbe66551cbb329dee5fb3e81f9c",
+    "document_id": "fea0c625-b575-4ba4-a43a-80704adb409d",
+    "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
+    "metadata": {
+      "source": "docusaurus",
+      "project": "solidx-docs",
+      "section": "developer-docs",
+      "path": "developer-docs/extending/frontend-customization/form-view-buttons.md",
+      "doc_title": "developer-docs/extending/frontend-customization/form-view-buttons.md",
+      "title": "Form View Buttons",
+      "description": "Learn how to customize form view buttons in your frontend application.",
+      "summary": "Explains customizing SolidX form view buttons to enhance user interaction. Covers adding custom buttons, modifying existing buttons, and handling button actions using `registerExtensionComponent`. Includes a working example `PreviewPortal` button that redirects to an external hosted page.",
+      "solidx_concerns": [
+        "add_form_button"
+      ],
+      "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
+      "collection_name": "developer-docs",
+      "chunk_count": 6
+    }
+  },
+  "developer-docs/extending/frontend-customization/form-view-field-widgets.md": {
+    "hash": "f65d0ede7ae15f2d218e8b93ed2437b2ede93e35c8dd524a0c24f64c97b6d741",
+    "document_id": "8a08440c-173a-44a6-8f5d-83189c8f037c",
+    "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
+    "metadata": {
+      "source": "docusaurus",
+      "project": "solidx-docs",
+      "section": "developer-docs",
+      "path": "developer-docs/extending/frontend-customization/form-view-field-widgets.md",
+      "doc_title": "developer-docs/extending/frontend-customization/form-view-field-widgets.md",
+      "title": "Form View Field Widgets",
+      "description": "Learn how to create form view field widgets for the frontend of your application.",
+      "summary": "Details creating custom form view field widgets in SolidX for customizing field display in view and edit modes. Covers using built-in widgets (e.g., `integerSlider`) or creating custom ones, implementing components with `SolidFormFieldWidgetProps` (formik, fieldContext, metadata), registering widgets via `registerExtensionComponent`, configuring `editWidget`/`viewWidget` in form layout JSON, handling field validation, labels, and examples like slider widgets with tooltips and color-coded values.",
+      "solidx_concerns": [
+        "create_custom_form_field_widget"
+      ],
+      "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
+      "collection_name": "developer-docs",
+      "chunk_count": 4
+    }
+  },
+  "developer-docs/extending/frontend-customization/list-view-buttons.md": {
+    "hash": "3f00a3fbfe1a1a163c5b219f8bedae0c29fb943713358485bcb43368212fa8ba",
+    "document_id": "7b348406-1250-4ead-8d65-429b33485871",
+    "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
+    "metadata": {
+      "source": "docusaurus",
+      "project": "solidx-docs",
+      "section": "developer-docs",
+      "path": "developer-docs/extending/frontend-customization/list-view-buttons.md",
+      "doc_title": "developer-docs/extending/frontend-customization/list-view-buttons.md",
+      "title": "List View Buttons",
+      "description": "Learn how to customize list view buttons in your frontend application.",
+      "summary": "Explains how to add and customize list view buttons in SolidX. Covers creating header buttons for list-wide actions and row buttons for record-specific actions, including configuration examples and prop details.",
+      "solidx_concerns": [
+        "add_list_header_button_with",
+        "add_list_row_button_with"
+      ],
+      "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
+      "collection_name": "developer-docs",
+      "chunk_count": 6
+    }
+  },
+  "developer-docs/extending/frontend-customization/list-view-field-widgets.md": {
+    "hash": "7e2ca7f734ac9117a33c47c90cc71194bc2e6988d0f9b100e5e27c0569241746",
+    "document_id": "63e42f93-1932-4b56-b570-96591f4aed24",
+    "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
+    "metadata": {
+      "source": "docusaurus",
+      "project": "solidx-docs",
+      "section": "developer-docs",
+      "path": "developer-docs/extending/frontend-customization/list-view-field-widgets.md",
+      "doc_title": "developer-docs/extending/frontend-customization/list-view-field-widgets.md",
+      "title": "List View Field Widgets",
+      "description": "Learn how to create list column widgets for the frontend of your application.",
+      "summary": "Guide to customizing field display in SolidX list views using built-in or custom widgets. Covers configuring `viewWidget` in list layout JSON (e.g., `SolidShortTextAvatarWidget` for name/avatar display), creating custom widgets implementing `SolidListFieldWidgetProps` (rowData, solidListViewMetaData, fieldMetadata, column), registering with `registerExtensionComponent`, and examples like `ScoreWidget` with color-coded labels and conditional styling based on field values.",
+      "solidx_concerns": [
+        "create_custom_list_field_widget",
+        "add_list_header_button_with",
+        "add_list_row_button_with"
+      ],
+      "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
+      "collection_name": "developer-docs",
+      "chunk_count": 5
+    }
+  },
   "developer-docs/extending/frontend-customization/index.md": {
     "hash": "e92efa5353122f7f2c9e636f428487fa05d50390dc503ca158e9583b60aa5671",
-    "document_id": "b7881fb8-db7a-48e4-b7a1-8adc84fcfdf1",
+    "document_id": "7c4d6f48-1e82-4cfb-97a6-b6f180aa1cbd",
     "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
     "metadata": {
       "source": "docusaurus",
@@ -717,587 +1512,89 @@
       "chunk_count": 1
     }
   },
-  "developer-docs/extending/backend-customization/index.md": {
-    "hash": "bb8f7cb8c50f12ad4eb1e6134c8aee2872b97b84979928aae5d0a630d9259e09",
-    "document_id": "d788529b-4a11-4c6a-84fd-11dec6dedfad",
+  "developer-docs/extending/frontend-customization/layout-manager.md": {
+    "hash": "a570a4d08639dec5ec09b198d9199df3d642eb021db242e5273ee72a9f0074d9",
+    "document_id": "c29f29ff-42ac-4177-b5f0-5e6561511594",
     "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
     "metadata": {
       "source": "docusaurus",
       "project": "solidx-docs",
       "section": "developer-docs",
-      "path": "developer-docs/extending/backend-customization/index.md",
-      "doc_title": "developer-docs/extending/backend-customization/index.md",
-      "title": "Backend Customization",
-      "description": "This section provides an overview of backend customization capabilities in SolidX.",
-      "summary": "This document provides an overview of backend customization capabilities in SolidX, covering how developers can extend the NestJS-based backend functionality. Topics include adding custom API endpoints to controllers, modifying and extending existing services with custom business logic, implementing custom providers for specialized functionality, and integrating additional backend features to meet specific application requirements beyond the default CRUD operations.",
+      "path": "developer-docs/extending/frontend-customization/layout-manager.md",
+      "doc_title": "developer-docs/extending/frontend-customization/layout-manager.md",
+      "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
+      "collection_name": "developer-docs",
+      "title": "developer-docs/extending/frontend-customization/layout-manager.md",
+      "chunk_count": 1
+    }
+  },
+  "developer-docs/extending/frontend-customization/custom-widgets.md": {
+    "hash": "e341d9cc0c95f33eb0b4e26730357a2aef57398ca819d21ce4a131ebc362f241",
+    "document_id": "873f842a-c2c9-4322-a1ea-e0f848b00f58",
+    "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
+    "metadata": {
+      "source": "docusaurus",
+      "project": "solidx-docs",
+      "section": "developer-docs",
+      "path": "developer-docs/extending/frontend-customization/custom-widgets.md",
+      "doc_title": "developer-docs/extending/frontend-customization/custom-widgets.md",
+      "title": "Custom Widgets",
+      "description": "Learn how to create custom widgets for the frontend of your application.",
+      "summary": "Guide to creating custom widgets in SolidX using the built-in `CustomHtml` widget for extending UI functionality without field associations. Covers configuring widgets in form layouts with dynamic HTML rendering, using placeholders for field values and custom variables (e.g., `{{ctxtTitleAlphpabetCount}}`), receiving `SolidFormWidgetProps`, and setting custom variables via form event handlers for enhanced UI interactions.",
+      "solidx_concerns": [
+        "create_custom_widget",
+        "add_form_button"
+      ],
+      "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
+      "collection_name": "developer-docs",
+      "chunk_count": 3
+    }
+  },
+  "developer-docs/extending/frontend-customization/kanban-field-widgets.md": {
+    "hash": "c0bc1b5ac99508efb043b10226814dd0bb65f50544c17a65678d5bd8597edbd0",
+    "document_id": "15092df9-4e6c-47d1-8472-316eb9d14d07",
+    "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
+    "metadata": {
+      "source": "docusaurus",
+      "project": "solidx-docs",
+      "section": "developer-docs",
+      "path": "developer-docs/extending/frontend-customization/kanban-field-widgets.md",
+      "doc_title": "developer-docs/extending/frontend-customization/kanban-field-widgets.md",
+      "title": "Kanban Field Widgets",
+      "description": "Learn how to create form view field widgets for the frontend of your application.",
+      "summary": "Overview of creating custom widgets for Kanban views in SolidX, similar to custom widget implementation patterns for other view types.",
+      "solidx_concerns": [],
       "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
       "collection_name": "developer-docs",
       "chunk_count": 1
     }
   },
-  "developer-docs/extending/code-generation/codegen-structure/index.md": {
-    "hash": "926b1cf62294311aafdd09595ca50dacf5145900b7bf9b385c1741d564a6a528",
-    "document_id": "c264a61b-86a5-41fa-b8b7-d6e0dfa1cf5b",
+  "developer-docs/extending/frontend-customization/form-view-events.md": {
+    "hash": "3a6c59aa762043b83e8708f6dd91a1cf55b307e02f7f0ed8029b82da2842dfa1",
+    "document_id": "88cf7bf3-f0bb-4470-92c3-ccdc88d9e138",
     "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
     "metadata": {
       "source": "docusaurus",
       "project": "solidx-docs",
       "section": "developer-docs",
-      "path": "developer-docs/extending/code-generation/codegen-structure/index.md",
-      "doc_title": "developer-docs/extending/code-generation/codegen-structure/index.md",
+      "path": "developer-docs/extending/frontend-customization/form-view-events.md",
+      "doc_title": "developer-docs/extending/frontend-customization/form-view-events.md",
+      "title": "Form View Events",
+      "description": "Learn how to create event listeners for form view events in your frontend application.",
+      "summary": "Explains creating event listeners for SolidX form view events to extend frontend functionality. Covers supported events (onFormLayoutLoad, onFormDataLoad, onFieldChange, onFieldBlur, onCustomWidgetRender), registering handlers using `registerExtensionFunction`, accessing event data (type, modifiedField, modifiedFieldValue, formData, viewMetadata, fieldsMetadata), modifying UI layout dynamically with `SolidViewLayoutManager`, returning changes (layoutChanged, dataChanged, newFormData, newLayout), and examples like character count tracking.",
+      "solidx_concerns": [
+        "add_change_handler_function",
+        "onlayoutload_handler_function",
+        "ondataload_handler_function"
+      ],
       "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
       "collection_name": "developer-docs",
-      "title": "developer-docs/extending/code-generation/codegen-structure/index.md",
-      "chunk_count": 3,
-      "has_summaries": true
-    }
-  },
-  "developer-docs/extending/frontend-customization/form-view-field-widgets/index.md": {
-    "hash": "4c25aa2ad78f5e6e578781a8575af002925cde2b21f0655bf39617fbbc9361e7",
-    "document_id": "356565d7-afc4-4d3e-a89b-88b28b2df44e",
-    "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
-    "metadata": {
-      "source": "docusaurus",
-      "project": "solidx-docs",
-      "section": "developer-docs",
-      "path": "developer-docs/extending/frontend-customization/form-view-field-widgets/index.md",
-      "doc_title": "developer-docs/extending/frontend-customization/form-view-field-widgets/index.md",
-      "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
-      "collection_name": "developer-docs",
-      "title": "developer-docs/extending/frontend-customization/form-view-field-widgets/index.md",
-      "chunk_count": 4,
-      "has_summaries": true
-    }
-  },
-  "developer-docs/extending/frontend-customization/custom-widgets/index.md": {
-    "hash": "8ad18f81a12491bbe28d5774095dedb634dddcbc7b735dab683f7d2d44121438",
-    "document_id": "c2237fae-f804-498e-9455-b97b0d3a2020",
-    "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
-    "metadata": {
-      "source": "docusaurus",
-      "project": "solidx-docs",
-      "section": "developer-docs",
-      "path": "developer-docs/extending/frontend-customization/custom-widgets/index.md",
-      "doc_title": "developer-docs/extending/frontend-customization/custom-widgets/index.md",
-      "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
-      "collection_name": "developer-docs",
-      "title": "developer-docs/extending/frontend-customization/custom-widgets/index.md",
-      "chunk_count": 3,
-      "has_summaries": true
-    }
-  },
-  "developer-docs/extending/frontend-customization/kanban-field-widgets/index.md": {
-    "hash": "eeafc6483a64eebac5b6048102deff1440f5f840fbeae9badd4a74d5f153e162",
-    "document_id": "ab26f67c-d02a-4ea2-94b8-4526eb42c351",
-    "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
-    "metadata": {
-      "source": "docusaurus",
-      "project": "solidx-docs",
-      "section": "developer-docs",
-      "path": "developer-docs/extending/frontend-customization/kanban-field-widgets/index.md",
-      "doc_title": "developer-docs/extending/frontend-customization/kanban-field-widgets/index.md",
-      "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
-      "collection_name": "developer-docs",
-      "title": "developer-docs/extending/frontend-customization/kanban-field-widgets/index.md",
-      "chunk_count": 1,
-      "has_summaries": true
-    }
-  },
-  "developer-docs/extending/frontend-customization/custom-views/index.md": {
-    "hash": "6b69b6926b66710a1ed32b0459336dbd6b3ea8e922f88167025522e87731b287",
-    "document_id": "04e3067f-e122-4e21-aece-70b97d1b0387",
-    "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
-    "metadata": {
-      "source": "docusaurus",
-      "project": "solidx-docs",
-      "section": "developer-docs",
-      "path": "developer-docs/extending/frontend-customization/custom-views/index.md",
-      "doc_title": "developer-docs/extending/frontend-customization/custom-views/index.md",
-      "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
-      "collection_name": "developer-docs",
-      "title": "developer-docs/extending/frontend-customization/custom-views/index.md",
-      "chunk_count": 4,
-      "has_summaries": true
-    }
-  },
-  "developer-docs/extending/frontend-customization/form-view-event-listeners/index.md": {
-    "hash": "a7e293629a4427061d569a5e3770f99dc8505413757087f0b8afee58f38e7372",
-    "document_id": "ce057cbc-4bd3-428a-8cb9-56f2e82d5017",
-    "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
-    "metadata": {
-      "source": "docusaurus",
-      "project": "solidx-docs",
-      "section": "developer-docs",
-      "path": "developer-docs/extending/frontend-customization/form-view-event-listeners/index.md",
-      "doc_title": "developer-docs/extending/frontend-customization/form-view-event-listeners/index.md",
-      "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
-      "collection_name": "developer-docs",
-      "title": "developer-docs/extending/frontend-customization/form-view-event-listeners/index.md",
-      "chunk_count": 1,
-      "has_summaries": true
-    }
-  },
-  "developer-docs/extending/frontend-customization/list-column-widgets/index.md": {
-    "hash": "00ea65f536d9156f60a7acbb4377990a8bbdc4103c27f9583ea74223fa3d9c74",
-    "document_id": "c93dbab8-7906-4215-8cb2-d1a2f2c744a9",
-    "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
-    "metadata": {
-      "source": "docusaurus",
-      "project": "solidx-docs",
-      "section": "developer-docs",
-      "path": "developer-docs/extending/frontend-customization/list-column-widgets/index.md",
-      "doc_title": "developer-docs/extending/frontend-customization/list-column-widgets/index.md",
-      "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
-      "collection_name": "developer-docs",
-      "title": "developer-docs/extending/frontend-customization/list-column-widgets/index.md",
-      "chunk_count": 5,
-      "has_summaries": true
-    }
-  },
-  "developer-docs/extending/backend-customization/scheduled-jobs/index.md": {
-    "hash": "1be52db3c8042e7292feb352b65d1571965be016146fdfcce31a34a83b6dacd7",
-    "document_id": "4b8123cb-6f7a-4142-97d1-90fb516ee67a",
-    "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
-    "metadata": {
-      "source": "docusaurus",
-      "project": "solidx-docs",
-      "section": "developer-docs",
-      "path": "developer-docs/extending/backend-customization/scheduled-jobs/index.md",
-      "doc_title": "developer-docs/extending/backend-customization/scheduled-jobs/index.md",
-      "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
-      "collection_name": "developer-docs",
-      "title": "developer-docs/extending/backend-customization/scheduled-jobs/index.md",
-      "chunk_count": 1,
-      "has_summaries": true
-    }
-  },
-  "developer-docs/extending/backend-customization/solid-registry/index.md": {
-    "hash": "e875e97ccfd380d1efa15d2725303bc681148dcda95cb3d2d901baab141c097e",
-    "document_id": "295c1448-53ba-457f-b695-91bd6850c681",
-    "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
-    "metadata": {
-      "source": "docusaurus",
-      "project": "solidx-docs",
-      "section": "developer-docs",
-      "path": "developer-docs/extending/backend-customization/solid-registry/index.md",
-      "doc_title": "developer-docs/extending/backend-customization/solid-registry/index.md",
-      "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
-      "collection_name": "developer-docs",
-      "title": "developer-docs/extending/backend-customization/solid-registry/index.md",
-      "chunk_count": 2,
-      "has_summaries": true
-    }
-  },
-  "developer-docs/extending/backend-customization/background-jobs/index.md": {
-    "hash": "e27e459bd31d8ffdb88011c15e542e94042da2fed0d6c2c1b1737c77af33ee6d",
-    "document_id": "83cf8fcb-d3ba-43a6-b9dd-ab604da6253a",
-    "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
-    "metadata": {
-      "source": "docusaurus",
-      "project": "solidx-docs",
-      "section": "developer-docs",
-      "path": "developer-docs/extending/backend-customization/background-jobs/index.md",
-      "doc_title": "developer-docs/extending/backend-customization/background-jobs/index.md",
-      "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
-      "collection_name": "developer-docs",
-      "title": "developer-docs/extending/backend-customization/background-jobs/index.md",
-      "chunk_count": 5,
-      "has_summaries": true
-    }
-  },
-  "developer-docs/extending/backend-customization/dashboard-providers/index.md": {
-    "hash": "0192c3ff2971b0b03fd9cf31a08201eb861e396a437a8323bd4ae08e60c9a48a",
-    "document_id": "dbfe4685-e956-4235-b795-ff5960857bb0",
-    "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
-    "metadata": {
-      "source": "docusaurus",
-      "project": "solidx-docs",
-      "section": "developer-docs",
-      "path": "developer-docs/extending/backend-customization/dashboard-providers/index.md",
-      "doc_title": "developer-docs/extending/backend-customization/dashboard-providers/index.md",
-      "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
-      "collection_name": "developer-docs",
-      "title": "developer-docs/extending/backend-customization/dashboard-providers/index.md",
-      "chunk_count": 1,
-      "has_summaries": true
-    }
-  },
-  "developer-docs/extending/backend-customization/dynamic-selection-providers/index.md": {
-    "hash": "9058b994722ba5d0d47e4f93a3031fa05dee52f6b38fad46acdc3a90f3d52377",
-    "document_id": "ee1b8e45-1c59-4860-a114-8b0628436dc0",
-    "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
-    "metadata": {
-      "source": "docusaurus",
-      "project": "solidx-docs",
-      "section": "developer-docs",
-      "path": "developer-docs/extending/backend-customization/dynamic-selection-providers/index.md",
-      "doc_title": "developer-docs/extending/backend-customization/dynamic-selection-providers/index.md",
-      "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
-      "collection_name": "developer-docs",
-      "title": "developer-docs/extending/backend-customization/dynamic-selection-providers/index.md",
-      "chunk_count": 3,
-      "has_summaries": true
-    }
-  },
-  "developer-docs/extending/backend-customization/computation-providers/index.md": {
-    "hash": "66d088cdc2926dd912679dac3de4e104ee89fda9028958a7ad750cc36da86c92",
-    "document_id": "965a26eb-b9bf-40ca-8fb6-a57774bf8529",
-    "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
-    "metadata": {
-      "source": "docusaurus",
-      "project": "solidx-docs",
-      "section": "developer-docs",
-      "path": "developer-docs/extending/backend-customization/computation-providers/index.md",
-      "doc_title": "developer-docs/extending/backend-customization/computation-providers/index.md",
-      "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
-      "collection_name": "developer-docs",
-      "title": "developer-docs/extending/backend-customization/computation-providers/index.md",
-      "chunk_count": 4,
-      "has_summaries": true
-    }
-  },
-  "developer-docs/extending/backend-customization/controllers/index.md": {
-    "hash": "4f7a02bce5d6cf16a7b5b3d7d8709cab2bb09d0b5f2b326b3fd504ce403f4951",
-    "document_id": "fc5c370f-5eb1-42ef-8a0a-34936c68857c",
-    "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
-    "metadata": {
-      "source": "docusaurus",
-      "project": "solidx-docs",
-      "section": "developer-docs",
-      "path": "developer-docs/extending/backend-customization/controllers/index.md",
-      "doc_title": "developer-docs/extending/backend-customization/controllers/index.md",
-      "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
-      "collection_name": "developer-docs",
-      "title": "developer-docs/extending/backend-customization/controllers/index.md",
-      "chunk_count": 2,
-      "has_summaries": true
-    }
-  },
-  "developer-docs/extending/backend-customization/extending-users/index.md": {
-    "hash": "d4c1ec05d2b0395f69c70490fb85d5405e2329fd99e591a6666535124c236e9b",
-    "document_id": "f9775b77-1d4d-4d7c-bcda-61703952b497",
-    "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
-    "metadata": {
-      "source": "docusaurus",
-      "project": "solidx-docs",
-      "section": "developer-docs",
-      "path": "developer-docs/extending/backend-customization/extending-users/index.md",
-      "doc_title": "developer-docs/extending/backend-customization/extending-users/index.md",
-      "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
-      "collection_name": "developer-docs",
-      "title": "developer-docs/extending/backend-customization/extending-users/index.md",
-      "chunk_count": 4,
-      "has_summaries": true
-    }
-  },
-  "developer-docs/extending/backend-customization/security-rules/index.md": {
-    "hash": "1669c4dc1e98f9f4d0aea1d98ec35d0bdf2580c7a92f92938d2e04454d59319e",
-    "document_id": "78b015b4-0a6c-41b8-85b4-c41c790c6dc3",
-    "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
-    "metadata": {
-      "source": "docusaurus",
-      "project": "solidx-docs",
-      "section": "developer-docs",
-      "path": "developer-docs/extending/backend-customization/security-rules/index.md",
-      "doc_title": "developer-docs/extending/backend-customization/security-rules/index.md",
-      "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
-      "collection_name": "developer-docs",
-      "title": "developer-docs/extending/backend-customization/security-rules/index.md",
-      "chunk_count": 3,
-      "has_summaries": true
-    }
-  },
-  "developer-docs/extending/backend-customization/services/index.md": {
-    "hash": "1825f4dbd72c0c2f1ce93821a97d4a93d9336e4084bfa78232a97d25908eddcc",
-    "document_id": "db217d00-ce8b-4365-ac59-2426b21966ab",
-    "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
-    "metadata": {
-      "source": "docusaurus",
-      "project": "solidx-docs",
-      "section": "developer-docs",
-      "path": "developer-docs/extending/backend-customization/services/index.md",
-      "doc_title": "developer-docs/extending/backend-customization/services/index.md",
-      "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
-      "collection_name": "developer-docs",
-      "title": "developer-docs/extending/backend-customization/services/index.md",
-      "chunk_count": 2,
-      "has_summaries": true
-    }
-  },
-  "tutorial/index.md": {
-    "hash": "5a60fa5e410fb0f780d21adbbb5726ed786651211c6359a2d64ad16485670ef4",
-    "document_id": "0f051810-4f90-4bc3-a8ed-204ab93e9b21",
-    "collection_id": "cd59267d-67e0-4897-91a6-1a338f5e83bf",
-    "metadata": {
-      "source": "docusaurus",
-      "project": "solidx-docs",
-      "section": "tutorial",
-      "path": "tutorial/index.md",
-      "doc_title": "tutorial/index.md",
-      "collection_id": "cd59267d-67e0-4897-91a6-1a338f5e83bf",
-      "collection_name": "tutorial",
-      "title": "tutorial/index.md",
-      "chunk_count": 1,
-      "has_summaries": true
-    }
-  },
-  "recipes/email.md": {
-    "hash": "0b3033ba8ba54bd517a4a8d0266a7a6230c1869e12c30bf53e9e33d3040ed08c",
-    "document_id": "6e230799-6165-4f9a-be47-74c1a113107e",
-    "collection_id": "f0935ef1-c3c4-403d-b32f-2a2d52861db1",
-    "metadata": {
-      "source": "docusaurus",
-      "project": "solidx-docs",
-      "section": "recipes",
-      "path": "recipes/email.md",
-      "doc_title": "recipes/email.md",
-      "collection_id": "f0935ef1-c3c4-403d-b32f-2a2d52861db1",
-      "collection_name": "recipes",
-      "title": "recipes/email.md",
-      "chunk_count": 3,
-      "has_summaries": true
-    }
-  },
-  "recipes/computed-fields.md": {
-    "hash": "2ba513ac1d515d7602ad14d9fcbab20532187652ac263ef1877f1004e490c2d3",
-    "document_id": "9334be31-0c53-417d-ac95-ef00f21a42a0",
-    "collection_id": "f0935ef1-c3c4-403d-b32f-2a2d52861db1",
-    "metadata": {
-      "source": "docusaurus",
-      "project": "solidx-docs",
-      "section": "recipes",
-      "path": "recipes/computed-fields.md",
-      "doc_title": "recipes/computed-fields.md",
-      "collection_id": "f0935ef1-c3c4-403d-b32f-2a2d52861db1",
-      "collection_name": "recipes",
-      "title": "recipes/computed-fields.md",
-      "chunk_count": 1,
-      "has_summaries": true
-    }
-  },
-  "recipes/media-providers.md": {
-    "hash": "5812dd8914d8e21bd8c4b3cd0385ca2f4e215675e5ec30bb3aedd9fec51039f3",
-    "document_id": "c0bcf83f-b60f-49b5-9d43-36e8485d6895",
-    "collection_id": "f0935ef1-c3c4-403d-b32f-2a2d52861db1",
-    "metadata": {
-      "source": "docusaurus",
-      "project": "solidx-docs",
-      "section": "recipes",
-      "path": "recipes/media-providers.md",
-      "doc_title": "recipes/media-providers.md",
-      "collection_id": "f0935ef1-c3c4-403d-b32f-2a2d52861db1",
-      "collection_name": "recipes",
-      "title": "recipes/media-providers.md",
-      "chunk_count": 2,
-      "has_summaries": true
-    }
-  },
-  "recipes/extending-users.md": {
-    "hash": "6685c0db971b30319fcb27aed29ddbb81cba138476fa6ad2aa7f0a8ff0a506de",
-    "document_id": "94d45dbe-2a01-4a2c-8cd4-1aba4f65d997",
-    "collection_id": "f0935ef1-c3c4-403d-b32f-2a2d52861db1",
-    "metadata": {
-      "source": "docusaurus",
-      "project": "solidx-docs",
-      "section": "recipes",
-      "path": "recipes/extending-users.md",
-      "doc_title": "recipes/extending-users.md",
-      "collection_id": "f0935ef1-c3c4-403d-b32f-2a2d52861db1",
-      "collection_name": "recipes",
-      "title": "recipes/extending-users.md",
-      "chunk_count": 1,
-      "has_summaries": true
-    }
-  },
-  "recipes/index.md": {
-    "hash": "0d72d575b21eb24ccc2c8242cc860f39805ae58f972c13e0eb86e8fbc9a4fff9",
-    "document_id": "25b995dd-2a90-4702-9807-2eadacd89128",
-    "collection_id": "f0935ef1-c3c4-403d-b32f-2a2d52861db1",
-    "metadata": {
-      "source": "docusaurus",
-      "project": "solidx-docs",
-      "section": "recipes",
-      "path": "recipes/index.md",
-      "doc_title": "recipes/index.md",
-      "collection_id": "f0935ef1-c3c4-403d-b32f-2a2d52861db1",
-      "collection_name": "recipes",
-      "title": "recipes/index.md",
-      "chunk_count": 1,
-      "has_summaries": true
-    }
-  },
-  "recipes/soft-delete.md": {
-    "hash": "b47296a0febe076b020d2c09f5fce86b88a8753cda1a8dff5837a927f76c8721",
-    "document_id": "7f0ff6c4-6593-4cd4-a965-647f2d581521",
-    "collection_id": "f0935ef1-c3c4-403d-b32f-2a2d52861db1",
-    "metadata": {
-      "source": "docusaurus",
-      "project": "solidx-docs",
-      "section": "recipes",
-      "path": "recipes/soft-delete.md",
-      "doc_title": "recipes/soft-delete.md",
-      "collection_id": "f0935ef1-c3c4-403d-b32f-2a2d52861db1",
-      "collection_name": "recipes",
-      "title": "recipes/soft-delete.md",
-      "chunk_count": 1,
-      "has_summaries": true
-    }
-  },
-  "recipes/queue.md": {
-    "hash": "d44836f63c8937f8362065743a7260652edefc76f2234ae22766bbc0e02168c9",
-    "document_id": "3a576c76-cd35-4637-bbec-5f76d0a66db8",
-    "collection_id": "f0935ef1-c3c4-403d-b32f-2a2d52861db1",
-    "metadata": {
-      "source": "docusaurus",
-      "project": "solidx-docs",
-      "section": "recipes",
-      "path": "recipes/queue.md",
-      "doc_title": "recipes/queue.md",
-      "collection_id": "f0935ef1-c3c4-403d-b32f-2a2d52861db1",
-      "collection_name": "recipes",
-      "title": "recipes/queue.md",
-      "chunk_count": 4,
-      "has_summaries": true
-    }
-  },
-  "recipes/actions-menus-guide.md": {
-    "hash": "d1d3a1fb7939cdf413f07bd0cf1242289116457183292d8455cb8854ab7150c8",
-    "document_id": "10016c91-9a0a-4b12-bede-57c19b2352b4",
-    "collection_id": "f0935ef1-c3c4-403d-b32f-2a2d52861db1",
-    "metadata": {
-      "source": "docusaurus",
-      "project": "solidx-docs",
-      "section": "recipes",
-      "path": "recipes/actions-menus-guide.md",
-      "doc_title": "recipes/actions-menus-guide.md",
-      "collection_id": "f0935ef1-c3c4-403d-b32f-2a2d52861db1",
-      "collection_name": "recipes",
-      "title": "recipes/actions-menus-guide.md",
-      "chunk_count": 13
-    }
-  },
-  "recipes/handlers.md": {
-    "hash": "1370d7e24131ae267c88a5ecd30fc4bd1a916f82a60d2a7693fe00fe2be9fc34",
-    "document_id": "7e758f69-a81a-4239-bd69-98d5b597109c",
-    "collection_id": "f0935ef1-c3c4-403d-b32f-2a2d52861db1",
-    "metadata": {
-      "source": "docusaurus",
-      "project": "solidx-docs",
-      "section": "recipes",
-      "path": "recipes/handlers.md",
-      "doc_title": "recipes/handlers.md",
-      "collection_id": "f0935ef1-c3c4-403d-b32f-2a2d52861db1",
-      "collection_name": "recipes",
-      "title": "recipes/handlers.md",
-      "chunk_count": 1,
-      "has_summaries": true
-    }
-  },
-  "recipes/additional-datasources.md": {
-    "hash": "11a02a076db439d55971ea92671ce46d8aca155961b52b4305f0a2bd1224546a",
-    "document_id": "3bb0f97c-cfef-45c3-aa44-e09478628ff0",
-    "collection_id": "f0935ef1-c3c4-403d-b32f-2a2d52861db1",
-    "metadata": {
-      "source": "docusaurus",
-      "project": "solidx-docs",
-      "section": "recipes",
-      "path": "recipes/additional-datasources.md",
-      "doc_title": "recipes/additional-datasources.md",
-      "collection_id": "f0935ef1-c3c4-403d-b32f-2a2d52861db1",
-      "collection_name": "recipes",
-      "title": "recipes/additional-datasources.md",
-      "chunk_count": 1,
-      "has_summaries": true
-    }
-  },
-  "tutorial/school-fees-portal/index.md": {
-    "hash": "8bd4824dcf0d4a5f30168febe9784ea86c36918e31020cd8742c81d1de953071",
-    "document_id": "302928e5-7cd5-45dc-b9e6-bb51290b728c",
-    "collection_id": "cd59267d-67e0-4897-91a6-1a338f5e83bf",
-    "metadata": {
-      "source": "docusaurus",
-      "project": "solidx-docs",
-      "section": "tutorial",
-      "path": "tutorial/school-fees-portal/index.md",
-      "doc_title": "tutorial/school-fees-portal/index.md",
-      "collection_id": "cd59267d-67e0-4897-91a6-1a338f5e83bf",
-      "collection_name": "tutorial",
-      "title": "tutorial/school-fees-portal/index.md",
-      "chunk_count": 5,
-      "has_summaries": true
-    }
-  },
-  "tutorial/school-fees-portal/1-bootstrap/index.md": {
-    "hash": "ec5cfbf70f5e927cb0d79c573fa165449fe0f55fbfe52f2467c4721356469509",
-    "document_id": "030bda6a-9fef-4e1b-b533-9d27d3e7eed6",
-    "collection_id": "cd59267d-67e0-4897-91a6-1a338f5e83bf",
-    "metadata": {
-      "source": "docusaurus",
-      "project": "solidx-docs",
-      "section": "tutorial",
-      "path": "tutorial/school-fees-portal/1-bootstrap/index.md",
-      "doc_title": "tutorial/school-fees-portal/1-bootstrap/index.md",
-      "collection_id": "cd59267d-67e0-4897-91a6-1a338f5e83bf",
-      "collection_name": "tutorial",
-      "title": "tutorial/school-fees-portal/1-bootstrap/index.md",
-      "chunk_count": 2,
-      "has_summaries": true
-    }
-  },
-  "tutorial/school-fees-portal/4-customisations/index.md": {
-    "hash": "a70d91b08f5367533a265622499a0c21d3a01fd8b68c6f955e913f5fcabe2bd3",
-    "document_id": "961ad7c1-0565-49d1-8e7d-bfec0ecaf0a6",
-    "collection_id": "cd59267d-67e0-4897-91a6-1a338f5e83bf",
-    "metadata": {
-      "source": "docusaurus",
-      "project": "solidx-docs",
-      "section": "tutorial",
-      "path": "tutorial/school-fees-portal/4-customisations/index.md",
-      "doc_title": "tutorial/school-fees-portal/4-customisations/index.md",
-      "collection_id": "cd59267d-67e0-4897-91a6-1a338f5e83bf",
-      "collection_name": "tutorial",
-      "title": "tutorial/school-fees-portal/4-customisations/index.md",
-      "chunk_count": 7,
-      "has_summaries": true
-    }
-  },
-  "tutorial/school-fees-portal/2-data-model/index.md": {
-    "hash": "b38fe37a61c5775d27cb71f591dc477d8144059b9c18c36609624d7478d2b588",
-    "document_id": "599def14-9b51-436e-a580-77cb1a9f6c28",
-    "collection_id": "cd59267d-67e0-4897-91a6-1a338f5e83bf",
-    "metadata": {
-      "source": "docusaurus",
-      "project": "solidx-docs",
-      "section": "tutorial",
-      "path": "tutorial/school-fees-portal/2-data-model/index.md",
-      "doc_title": "tutorial/school-fees-portal/2-data-model/index.md",
-      "collection_id": "cd59267d-67e0-4897-91a6-1a338f5e83bf",
-      "collection_name": "tutorial",
-      "title": "tutorial/school-fees-portal/2-data-model/index.md",
-      "chunk_count": 4,
-      "has_summaries": true
-    }
-  },
-  "tutorial/school-fees-portal/3-admin-layout/index.md": {
-    "hash": "9109819eb119faa26430b3a1064e8de8dea82c0a226dab3afb67839a159f3dc0",
-    "document_id": "1e6e0dc8-83b2-4d76-a58b-db57100e861c",
-    "collection_id": "cd59267d-67e0-4897-91a6-1a338f5e83bf",
-    "metadata": {
-      "source": "docusaurus",
-      "project": "solidx-docs",
-      "section": "tutorial",
-      "path": "tutorial/school-fees-portal/3-admin-layout/index.md",
-      "doc_title": "tutorial/school-fees-portal/3-admin-layout/index.md",
-      "collection_id": "cd59267d-67e0-4897-91a6-1a338f5e83bf",
-      "collection_name": "tutorial",
-      "title": "tutorial/school-fees-portal/3-admin-layout/index.md",
-      "chunk_count": 9,
-      "has_summaries": true
+      "chunk_count": 11
     }
   },
   "developer-docs/extending/backend-customization/background-jobs.md": {
     "hash": "de848946025452637e650208ba120f09a1aa8ebc577b296d1f0021cf5b6cba4d",
-    "document_id": "6ec900e8-209a-4ba2-af11-8beacba5db88",
+    "document_id": "913b200e-9236-48c3-a22f-7bd92098899c",
     "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
     "metadata": {
       "source": "docusaurus",
@@ -1329,652 +1626,9 @@
       "chunk_count": 5
     }
   },
-  "admin-docs/index.md": {
-    "hash": "89f4e18eaf2bad4f8d844a140bf68219b86feaadb40cc8fe1d95c95f81d2284c",
-    "document_id": "a738e76d-9757-44fd-a878-487558077499",
-    "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
-    "metadata": {
-      "source": "docusaurus",
-      "project": "solidx-docs",
-      "section": "admin-docs",
-      "path": "admin-docs/index.md",
-      "doc_title": "admin-docs/index.md",
-      "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
-      "collection_name": "admin-docs",
-      "title": "admin-docs/index.md",
-      "chunk_count": 3,
-      "has_summaries": true
-    }
-  },
-  "admin-docs/settings/index.md": {
-    "hash": "474fc676ef5992c0cb02fc86699ceae148c3bcf2f3ae75d522cd2de69ac623b9",
-    "document_id": "27430577-9499-4848-9ddd-187b84e2f74e",
-    "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
-    "metadata": {
-      "source": "docusaurus",
-      "project": "solidx-docs",
-      "section": "admin-docs",
-      "path": "admin-docs/settings/index.md",
-      "doc_title": "admin-docs/settings/index.md",
-      "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
-      "collection_name": "admin-docs",
-      "title": "admin-docs/settings/index.md",
-      "chunk_count": 7,
-      "has_summaries": true
-    }
-  },
-  "admin-docs/module-builder/module-management.md": {
-    "hash": "73c708b5afd71174b3d8ef47d728839af7b92d2f2a14822e0c75d82a7bd158f3",
-    "document_id": "31855179-0073-441e-8f0a-c0800781fb98",
-    "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
-    "metadata": {
-      "source": "docusaurus",
-      "project": "solidx-docs",
-      "section": "admin-docs",
-      "path": "admin-docs/module-builder/module-management.md",
-      "doc_title": "admin-docs/module-builder/module-management.md",
-      "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
-      "collection_name": "admin-docs",
-      "title": "admin-docs/module-builder/module-management.md",
-      "chunk_count": 3,
-      "has_summaries": true
-    }
-  },
-  "admin-docs/module-builder/model-management.md": {
-    "hash": "bc17091da05712f138c0974d8fd2dc81b628a20e55c167413c79562990510aac",
-    "document_id": "8c04cd5f-4a18-4aa7-951d-3dcb0cf3f92d",
-    "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
-    "metadata": {
-      "source": "docusaurus",
-      "project": "solidx-docs",
-      "section": "admin-docs",
-      "path": "admin-docs/module-builder/model-management.md",
-      "doc_title": "admin-docs/module-builder/model-management.md",
-      "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
-      "collection_name": "admin-docs",
-      "title": "admin-docs/module-builder/model-management.md",
-      "chunk_count": 3,
-      "has_summaries": true
-    }
-  },
-  "admin-docs/module-builder/field-management.md": {
-    "hash": "769d917b0188261efb3330e62667076b5bb0fed8529a825bf64311f87b36bba8",
-    "document_id": "98fc4fb3-6af9-4128-8e64-e7bdeb23bad1",
-    "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
-    "metadata": {
-      "source": "docusaurus",
-      "project": "solidx-docs",
-      "section": "admin-docs",
-      "path": "admin-docs/module-builder/field-management.md",
-      "doc_title": "admin-docs/module-builder/field-management.md",
-      "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
-      "collection_name": "admin-docs",
-      "title": "admin-docs/module-builder/field-management.md",
-      "chunk_count": 8,
-      "has_summaries": true
-    }
-  },
-  "admin-docs/module-builder/index.md": {
-    "hash": "a2332fd851dc01c2e26ccbc3dcb4f7b76d3085ead5f5da4bbb65b2b7991d6372",
-    "document_id": "74776bed-75b8-4790-9bf0-2da88c90553b",
-    "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
-    "metadata": {
-      "source": "docusaurus",
-      "project": "solidx-docs",
-      "section": "admin-docs",
-      "path": "admin-docs/module-builder/index.md",
-      "doc_title": "admin-docs/module-builder/index.md",
-      "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
-      "collection_name": "admin-docs",
-      "title": "admin-docs/module-builder/index.md",
-      "chunk_count": 2,
-      "has_summaries": true
-    }
-  },
-  "admin-docs/iam/permissions.md": {
-    "hash": "71c86a875ff1dbb7a7b944c2bf943abd8665a56c91462ffd922d1cfcbc695780",
-    "document_id": "7b490726-42f2-4ac7-98b6-4e5b3d8119fc",
-    "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
-    "metadata": {
-      "source": "docusaurus",
-      "project": "solidx-docs",
-      "section": "admin-docs",
-      "path": "admin-docs/iam/permissions.md",
-      "doc_title": "admin-docs/iam/permissions.md",
-      "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
-      "collection_name": "admin-docs",
-      "title": "admin-docs/iam/permissions.md",
-      "chunk_count": 4,
-      "has_summaries": true
-    }
-  },
-  "admin-docs/iam/record-rules.md": {
-    "hash": "f90dbdc9344af80d57fb1a3ec6b589d9f1aa0d83847e1c46367fa098a75b76bc",
-    "document_id": "5b068bc2-7e2d-4352-9be7-6fc328cbf80c",
-    "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
-    "metadata": {
-      "source": "docusaurus",
-      "project": "solidx-docs",
-      "section": "admin-docs",
-      "path": "admin-docs/iam/record-rules.md",
-      "doc_title": "admin-docs/iam/record-rules.md",
-      "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
-      "collection_name": "admin-docs",
-      "title": "admin-docs/iam/record-rules.md",
-      "chunk_count": 6,
-      "has_summaries": true
-    }
-  },
-  "admin-docs/iam/roles.md": {
-    "hash": "b9ce1f5981e758c46f81280f4b69790f38be3602cd03ba87e532e1f44d09300e",
-    "document_id": "d7c4deac-a32d-4e05-bc0b-f3147a8f11f7",
-    "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
-    "metadata": {
-      "source": "docusaurus",
-      "project": "solidx-docs",
-      "section": "admin-docs",
-      "path": "admin-docs/iam/roles.md",
-      "doc_title": "admin-docs/iam/roles.md",
-      "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
-      "collection_name": "admin-docs",
-      "title": "admin-docs/iam/roles.md",
-      "chunk_count": 3,
-      "has_summaries": true
-    }
-  },
-  "admin-docs/iam/users.md": {
-    "hash": "efa3e00fc33126f7bf10f74290dc0e81e971bac8480d1bd2cea033caf663ea7a",
-    "document_id": "a608cd79-56ff-456c-8286-2e5aa12926ce",
-    "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
-    "metadata": {
-      "source": "docusaurus",
-      "project": "solidx-docs",
-      "section": "admin-docs",
-      "path": "admin-docs/iam/users.md",
-      "doc_title": "admin-docs/iam/users.md",
-      "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
-      "collection_name": "admin-docs",
-      "title": "admin-docs/iam/users.md",
-      "chunk_count": 4,
-      "has_summaries": true
-    }
-  },
-  "admin-docs/iam/index.md": {
-    "hash": "2286b63cecfc374fa30a35492eeb5fe0ebd52f59906bf92f545292d9c6f60f43",
-    "document_id": "c9eee9d7-508e-4384-b7de-3e0e80d448a0",
-    "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
-    "metadata": {
-      "source": "docusaurus",
-      "project": "solidx-docs",
-      "section": "admin-docs",
-      "path": "admin-docs/iam/index.md",
-      "doc_title": "admin-docs/iam/index.md",
-      "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
-      "collection_name": "admin-docs",
-      "title": "admin-docs/iam/index.md",
-      "chunk_count": 4,
-      "has_summaries": true
-    }
-  },
-  "admin-docs/layouts/form-view.md": {
-    "hash": "af4d1c87974e970ce6ae14ab1a1bc1f578880606da5a7858648521fb3540be6d",
-    "document_id": "bd1c9411-201b-4724-9779-bc4b4712b9d0",
-    "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
-    "metadata": {
-      "source": "docusaurus",
-      "project": "solidx-docs",
-      "section": "admin-docs",
-      "path": "admin-docs/layouts/form-view.md",
-      "doc_title": "admin-docs/layouts/form-view.md",
-      "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
-      "collection_name": "admin-docs",
-      "title": "admin-docs/layouts/form-view.md",
-      "chunk_count": 4,
-      "has_summaries": true
-    }
-  },
-  "admin-docs/layouts/index.md": {
-    "hash": "bff718c804501412a60de28ea24c108161ddaadab2634c0b867a004ff4010dfd",
-    "document_id": "45820d8b-6789-4320-aa9c-83a62c0d9071",
-    "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
-    "metadata": {
-      "source": "docusaurus",
-      "project": "solidx-docs",
-      "section": "admin-docs",
-      "path": "admin-docs/layouts/index.md",
-      "doc_title": "admin-docs/layouts/index.md",
-      "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
-      "collection_name": "admin-docs",
-      "title": "admin-docs/layouts/index.md",
-      "chunk_count": 5,
-      "has_summaries": true
-    }
-  },
-  "admin-docs/layouts/kanban-view.md": {
-    "hash": "20bb01e5d091657fff9b3215e0bbcec776bc9dd469e3117730338e692780216e",
-    "document_id": "78f77ff2-1de0-4ffc-925a-69cf274e359a",
-    "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
-    "metadata": {
-      "source": "docusaurus",
-      "project": "solidx-docs",
-      "section": "admin-docs",
-      "path": "admin-docs/layouts/kanban-view.md",
-      "doc_title": "admin-docs/layouts/kanban-view.md",
-      "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
-      "collection_name": "admin-docs",
-      "title": "admin-docs/layouts/kanban-view.md",
-      "chunk_count": 10,
-      "has_summaries": true
-    }
-  },
-  "admin-docs/layouts/list-view.md": {
-    "hash": "a1b7ddb02a52b9958febf7e2d95c827d349adeb8310f03f0742d5e4fa38c9cda",
-    "document_id": "91edefd3-d34a-4acb-8927-dabdb279d03a",
-    "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
-    "metadata": {
-      "source": "docusaurus",
-      "project": "solidx-docs",
-      "section": "admin-docs",
-      "path": "admin-docs/layouts/list-view.md",
-      "doc_title": "admin-docs/layouts/list-view.md",
-      "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
-      "collection_name": "admin-docs",
-      "title": "admin-docs/layouts/list-view.md",
-      "chunk_count": 6,
-      "has_summaries": true
-    }
-  },
-  "admin-docs/media-library/index.md": {
-    "hash": "2b4869fd5d2ba76ef746965d9469dad991095dfb21d0a540484c60ab53209f63",
-    "document_id": "f4329fce-8a16-4f40-adbf-00841c7ace44",
-    "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
-    "metadata": {
-      "source": "docusaurus",
-      "project": "solidx-docs",
-      "section": "admin-docs",
-      "path": "admin-docs/media-library/index.md",
-      "doc_title": "admin-docs/media-library/index.md",
-      "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
-      "collection_name": "admin-docs",
-      "title": "admin-docs/media-library/index.md",
-      "chunk_count": 4,
-      "has_summaries": true
-    }
-  },
-  "admin-docs/media-library/storage-providers.md": {
-    "hash": "b10bcabd9257c984462771e61ff2a7fd68a51cd5378caf7ba0e2755a6a39c5ea",
-    "document_id": "0105c118-2f10-47fb-b3ce-57f122973a02",
-    "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
-    "metadata": {
-      "source": "docusaurus",
-      "project": "solidx-docs",
-      "section": "admin-docs",
-      "path": "admin-docs/media-library/storage-providers.md",
-      "doc_title": "admin-docs/media-library/storage-providers.md",
-      "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
-      "collection_name": "admin-docs",
-      "title": "admin-docs/media-library/storage-providers.md",
-      "chunk_count": 5,
-      "has_summaries": true
-    }
-  },
-  "admin-docs/media-library/media-view.md": {
-    "hash": "6d454f4f8447ebb1d2d0993bdd076c5e80c3cf201fd56db64307cf75939936b4",
-    "document_id": "2732395b-bc62-4c82-9531-353e4fb4f018",
-    "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
-    "metadata": {
-      "source": "docusaurus",
-      "project": "solidx-docs",
-      "section": "admin-docs",
-      "path": "admin-docs/media-library/media-view.md",
-      "doc_title": "admin-docs/media-library/media-view.md",
-      "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
-      "collection_name": "admin-docs",
-      "title": "admin-docs/media-library/media-view.md",
-      "chunk_count": 4,
-      "has_summaries": true
-    }
-  },
-  "admin-docs/modules/form-view.md": {
-    "hash": "cbd18a9b56b8884c32f2ce526478d1c237aa2c44f386b4c1890952f8b2db6d50",
-    "document_id": "bce93c57-d609-447f-b84c-7b20833bc069",
-    "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
-    "metadata": {
-      "source": "docusaurus",
-      "project": "solidx-docs",
-      "section": "admin-docs",
-      "path": "admin-docs/modules/form-view.md",
-      "doc_title": "admin-docs/modules/form-view.md",
-      "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
-      "collection_name": "admin-docs",
-      "title": "admin-docs/modules/form-view.md",
-      "chunk_count": 1,
-      "has_summaries": true
-    }
-  },
-  "admin-docs/modules/menu-structure.md": {
-    "hash": "61947d0f2e4e9cfc19332cde6029ba13f5fb46768a640689f3783decafce2db7",
-    "document_id": "3eb54d40-be74-49b3-9c75-220643b24bfd",
-    "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
-    "metadata": {
-      "source": "docusaurus",
-      "project": "solidx-docs",
-      "section": "admin-docs",
-      "path": "admin-docs/modules/menu-structure.md",
-      "doc_title": "admin-docs/modules/menu-structure.md",
-      "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
-      "collection_name": "admin-docs",
-      "title": "admin-docs/modules/menu-structure.md",
-      "chunk_count": 4,
-      "has_summaries": true
-    }
-  },
-  "admin-docs/modules/index.md": {
-    "hash": "1dc12518c0896b75954fa0aec4eccaa848ddf31c5876cf4a6f98784414bb4054",
-    "document_id": "174cd0ca-ff7d-4906-a7b8-508556ed17a2",
-    "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
-    "metadata": {
-      "source": "docusaurus",
-      "project": "solidx-docs",
-      "section": "admin-docs",
-      "path": "admin-docs/modules/index.md",
-      "doc_title": "admin-docs/modules/index.md",
-      "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
-      "collection_name": "admin-docs",
-      "title": "admin-docs/modules/index.md",
-      "chunk_count": 3,
-      "has_summaries": true
-    }
-  },
-  "admin-docs/modules/kanban-view.md": {
-    "hash": "a716a690d30466a787a7f2b4b77af8535a4d54f92cb18a4405e286d65b3bafb4",
-    "document_id": "45c93be6-ccd7-4504-8fa7-acd5748b8726",
-    "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
-    "metadata": {
-      "source": "docusaurus",
-      "project": "solidx-docs",
-      "section": "admin-docs",
-      "path": "admin-docs/modules/kanban-view.md",
-      "doc_title": "admin-docs/modules/kanban-view.md",
-      "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
-      "collection_name": "admin-docs",
-      "title": "admin-docs/modules/kanban-view.md",
-      "chunk_count": 2,
-      "has_summaries": true
-    }
-  },
-  "admin-docs/modules/list-view.md": {
-    "hash": "97fe8b2fbef28b503b58812fe66437d5973ca90c4b221f77d10d14e90b39b436",
-    "document_id": "7e5f62f1-ca22-4042-9c64-a82b71ed8eff",
-    "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
-    "metadata": {
-      "source": "docusaurus",
-      "project": "solidx-docs",
-      "section": "admin-docs",
-      "path": "admin-docs/modules/list-view.md",
-      "doc_title": "admin-docs/modules/list-view.md",
-      "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
-      "collection_name": "admin-docs",
-      "title": "admin-docs/modules/list-view.md",
-      "chunk_count": 2,
-      "has_summaries": true
-    }
-  },
-  "admin-docs/notifications/sms-templates.md": {
-    "hash": "f166778768277141f210db1909cd80b7ea24a9be6855908e7aec7119fe2dc918",
-    "document_id": "c169db38-f625-4b89-868a-67c6c2639d50",
-    "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
-    "metadata": {
-      "source": "docusaurus",
-      "project": "solidx-docs",
-      "section": "admin-docs",
-      "path": "admin-docs/notifications/sms-templates.md",
-      "doc_title": "admin-docs/notifications/sms-templates.md",
-      "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
-      "collection_name": "admin-docs",
-      "title": "admin-docs/notifications/sms-templates.md",
-      "chunk_count": 6,
-      "has_summaries": true
-    }
-  },
-  "admin-docs/notifications/index.md": {
-    "hash": "c4c4aaa53e869dcad6ca0b1266cc0633738e9d53c1b4c0c03519c0e8c20b1e81",
-    "document_id": "dbea59df-4aef-4c49-a20f-ad74a87f8cce",
-    "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
-    "metadata": {
-      "source": "docusaurus",
-      "project": "solidx-docs",
-      "section": "admin-docs",
-      "path": "admin-docs/notifications/index.md",
-      "doc_title": "admin-docs/notifications/index.md",
-      "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
-      "collection_name": "admin-docs",
-      "title": "admin-docs/notifications/index.md",
-      "chunk_count": 6,
-      "has_summaries": true
-    }
-  },
-  "admin-docs/notifications/email-templates.md": {
-    "hash": "3695f51366c5c990f738918f11d014f7f5aabb921ee57265de5b51135f8642c4",
-    "document_id": "39aaa29d-4759-454f-b08e-d6e133945e3f",
-    "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
-    "metadata": {
-      "source": "docusaurus",
-      "project": "solidx-docs",
-      "section": "admin-docs",
-      "path": "admin-docs/notifications/email-templates.md",
-      "doc_title": "admin-docs/notifications/email-templates.md",
-      "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
-      "collection_name": "admin-docs",
-      "title": "admin-docs/notifications/email-templates.md",
-      "chunk_count": 5,
-      "has_summaries": true
-    }
-  },
-  "developer-docs/extending/backend-customization/extending-services.md": {
-    "hash": "4fd456614227c86a461c759e9a8c5109d153676a3827a79387e9e7066b48bc26",
-    "document_id": "32e4eca2-aa72-435c-8712-103281de1d8e",
-    "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
-    "metadata": {
-      "source": "docusaurus",
-      "project": "solidx-docs",
-      "section": "developer-docs",
-      "path": "developer-docs/extending/backend-customization/extending-services.md",
-      "doc_title": "developer-docs/extending/backend-customization/extending-services.md",
-      "title": "Extending Services",
-      "description": "Learn how to extend backend services in SolidX.",
-      "summary": "Explains extending NestJS services in SolidX to implement custom business logic beyond default CRUD operations. Covers creating service methods for domain-specific operations (e.g., activating portals, sending notifications), benefits of separation of concerns, reusability across controllers and scheduled jobs, improved testability, and consistency. Includes examples like `activateInstitutePortal()` with database updates and event publishing.",
-      "keywords": [
-        "backend",
-        "services",
-        "customization"
-      ],
-      "solidx_concerns": [
-        "add_custom_service_method",
-        "using_crud_service_method",
-        "add_controller_endpoint"
-      ],
-      "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
-      "collection_name": "developer-docs",
-      "chunk_count": 3
-    }
-  },
-  "developer-docs/database-seeding.md": {
-    "hash": "a21bfabfa04f2c4b3fcf308ce8bf4fbc197b390208b2c654dafed4f55b3d81d9",
-    "document_id": "1bafc780-b507-438f-9588-e4abb9058475",
-    "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
-    "metadata": {
-      "source": "docusaurus",
-      "project": "solidx-docs",
-      "section": "developer-docs",
-      "path": "developer-docs/database-seeding.md",
-      "doc_title": "developer-docs/database-seeding.md",
-      "title": "Database Seeding",
-      "description": "Overview of how the database is initialized with metadata in SolidX.",
-      "summary": "This document explains the database seeding process in SolidX, which initializes the database with essential metadata and data required for the application to function. The seeding is triggered via the 'solid seed' command and populates permissions, media storage providers, system fields, functional modules metadata, roles (Admin and Internal User), default users, views, actions, menus, email/SMS templates, settings, security rules, list of values, and dashboard configurations. The ModuleMetadataSeederService from the @solidstarters/solid-core package handles all the seeding operations automatically.",
-      "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
-      "collection_name": "developer-docs",
-      "chunk_count": 3
-    }
-  },
-  "developer-docs/extending/code-generation/codegen-structure.md": {
-    "hash": "a97383b41ffb58f52570fc8f7a61d200a1b28a1db45a6658871a60e02e2526dc",
-    "document_id": "0b62bfe4-1b07-4705-b772-23e48723a45b",
-    "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
-    "metadata": {
-      "source": "docusaurus",
-      "project": "solidx-docs",
-      "section": "developer-docs",
-      "path": "developer-docs/extending/code-generation/codegen-structure.md",
-      "doc_title": "developer-docs/extending/code-generation/codegen-structure.md",
-      "title": "Generated Code Structure",
-      "description": "This document describes the structure of code generated by SolidX when you create a module, model, or fields.",
-      "summary": "This document provides a comprehensive breakdown of the code structure generated by SolidX for modules, models, and fields. When generating a module, SolidX creates a basic NestJS module file. For models, it generates complete CRUD functionality including controllers (with RESTful APIs for create, update, soft delete, recovery, and query operations), services, DTOs (create and update), entities (TypeORM-based with field decorators), and repositories. The generated controllers include JWT authorization, Swagger documentation, file upload support, and comprehensive endpoints for data manipulation with filtering, pagination, sorting, and population capabilities.",
-      "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
-      "collection_name": "developer-docs",
-      "chunk_count": 3
-    }
-  },
-  "developer-docs/extending/frontend-customization/custom-views.md": {
-    "hash": "47c7fc3c92f5125baa01b4122a3a161f353aea0687e52d8c83229acbf336a263",
-    "document_id": "ea9104d1-71ea-4679-a894-7b3fcaed9308",
-    "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
-    "metadata": {
-      "source": "docusaurus",
-      "project": "solidx-docs",
-      "section": "developer-docs",
-      "path": "developer-docs/extending/frontend-customization/custom-views.md",
-      "doc_title": "developer-docs/extending/frontend-customization/custom-views.md",
-      "title": "Custom Views",
-      "description": "Learn how to create custom views in the frontend of your application.",
-      "summary": "Explains creating custom pages in SolidX frontend applications. Covers creating custom view components in the extensions folder, registering them using `registerExtensionComponent`, embedding custom views in form layouts using JSON configuration (notebooks, pages, custom widgets), accessing form data and metadata via props, and building specialized UI like `BookSimilarTitles` for displaying related data with filtering and action handlers.",
-      "keywords": [
-        "custom views",
-        "frontend customization",
-        "custom actions",
-        "custom components"
-      ],
-      "solidx_concerns": [
-        "add_full_custom_ui",
-        "add_custom_menu_action_combo",
-        "create_custom_widget"
-      ],
-      "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
-      "collection_name": "developer-docs",
-      "chunk_count": 4
-    }
-  },
-  "developer-docs/extending/frontend-customization/form-view-event-listeners.md": {
-    "hash": "85724895aea2f4f5a4219eb61a501043d25e8d3167ec8641a8ee4aff83fb1614",
-    "document_id": "02b7416e-ce72-4741-a0be-d1af8af09eb5",
-    "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
-    "metadata": {
-      "source": "docusaurus",
-      "project": "solidx-docs",
-      "section": "developer-docs",
-      "path": "developer-docs/extending/frontend-customization/form-view-event-listeners.md",
-      "doc_title": "developer-docs/extending/frontend-customization/form-view-event-listeners.md",
-      "title": "Form View Event Listeners",
-      "description": "Learn how to create event listeners for form view events in your frontend application.",
-      "summary": "Explains creating event listeners for SolidX form view events to extend frontend functionality. Covers supported events (onFormLayoutLoad, onFormDataLoad, onFieldChange, onFieldBlur, onCustomWidgetRender), registering handlers using `registerExtensionFunction`, accessing event data (type, modifiedField, modifiedFieldValue, formData, viewMetadata, fieldsMetadata), modifying UI layout dynamically with `SolidViewLayoutManager`, returning changes (layoutChanged, dataChanged, newFormData, newLayout), and examples like character count tracking.",
-      "solidx_concerns": [
-        "add_change_handler_function",
-        "onlayoutload_handler_function",
-        "ondataload_handler_function"
-      ],
-      "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
-      "collection_name": "developer-docs",
-      "chunk_count": 1
-    }
-  },
-  "developer-docs/extending/frontend-customization/form-view-field-widgets.md": {
-    "hash": "cfdce871641d19f4639356e3c78eb78e8c75507bf6d5ba02731eb99618db0391",
-    "document_id": "9dc6aaf0-a356-4ed5-9743-488901b21106",
-    "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
-    "metadata": {
-      "source": "docusaurus",
-      "project": "solidx-docs",
-      "section": "developer-docs",
-      "path": "developer-docs/extending/frontend-customization/form-view-field-widgets.md",
-      "doc_title": "developer-docs/extending/frontend-customization/form-view-field-widgets.md",
-      "title": "Form View Field Widgets",
-      "description": "Learn how to create form view field widgets for the frontend of your application.",
-      "summary": "Details creating custom form view field widgets in SolidX for customizing field display in view and edit modes. Covers using built-in widgets (e.g., `integerSlider`) or creating custom ones, implementing components with `SolidFormFieldWidgetProps` (formik, fieldContext, metadata), registering widgets via `registerExtensionComponent`, configuring `editWidget`/`viewWidget` in form layout JSON, handling field validation, labels, and examples like slider widgets with tooltips and color-coded values.",
-      "solidx_concerns": [
-        "create_custom_form_field_widget"
-      ],
-      "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
-      "collection_name": "developer-docs",
-      "chunk_count": 4
-    }
-  },
-  "developer-docs/extending/frontend-customization/custom-widgets.md": {
-    "hash": "e341d9cc0c95f33eb0b4e26730357a2aef57398ca819d21ce4a131ebc362f241",
-    "document_id": "df8fa71e-acbd-48a9-8f3e-e6d53cdb68c5",
-    "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
-    "metadata": {
-      "source": "docusaurus",
-      "project": "solidx-docs",
-      "section": "developer-docs",
-      "path": "developer-docs/extending/frontend-customization/custom-widgets.md",
-      "doc_title": "developer-docs/extending/frontend-customization/custom-widgets.md",
-      "title": "Custom Widgets",
-      "description": "Learn how to create custom widgets for the frontend of your application.",
-      "summary": "Guide to creating custom widgets in SolidX using the built-in `CustomHtml` widget for extending UI functionality without field associations. Covers configuring widgets in form layouts with dynamic HTML rendering, using placeholders for field values and custom variables (e.g., `{{ctxtTitleAlphpabetCount}}`), receiving `SolidFormWidgetProps`, and setting custom variables via form event handlers for enhanced UI interactions.",
-      "solidx_concerns": [
-        "create_custom_widget",
-        "add_form_button"
-      ],
-      "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
-      "collection_name": "developer-docs",
-      "chunk_count": 3
-    }
-  },
-  "developer-docs/extending/frontend-customization/kanban-field-widgets.md": {
-    "hash": "c0bc1b5ac99508efb043b10226814dd0bb65f50544c17a65678d5bd8597edbd0",
-    "document_id": "06f9ba37-3846-4492-92bb-f31c687d7b47",
-    "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
-    "metadata": {
-      "source": "docusaurus",
-      "project": "solidx-docs",
-      "section": "developer-docs",
-      "path": "developer-docs/extending/frontend-customization/kanban-field-widgets.md",
-      "doc_title": "developer-docs/extending/frontend-customization/kanban-field-widgets.md",
-      "title": "Kanban Field Widgets",
-      "description": "Learn how to create form view field widgets for the frontend of your application.",
-      "summary": "Overview of creating custom widgets for Kanban views in SolidX, similar to custom widget implementation patterns for other view types.",
-      "solidx_concerns": [],
-      "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
-      "collection_name": "developer-docs",
-      "chunk_count": 1
-    }
-  },
-  "developer-docs/extending/frontend-customization/list-column-widgets.md": {
-    "hash": "1115327d3526e228536467771e46ebf822e4329b24fde54bc40414b315e8608c",
-    "document_id": "668a43d5-228e-4e00-bed0-dcd33925058a",
-    "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
-    "metadata": {
-      "source": "docusaurus",
-      "project": "solidx-docs",
-      "section": "developer-docs",
-      "path": "developer-docs/extending/frontend-customization/list-column-widgets.md",
-      "doc_title": "developer-docs/extending/frontend-customization/list-column-widgets.md",
-      "title": "List Column Widgets",
-      "description": "Learn how to create list column widgets for the frontend of your application.",
-      "summary": "Guide to customizing field display in SolidX list views using built-in or custom widgets. Covers configuring `viewWidget` in list layout JSON (e.g., `SolidShortTextAvatarWidget` for name/avatar display), creating custom widgets implementing `SolidListFieldWidgetProps` (rowData, solidListViewMetaData, fieldMetadata, column), registering with `registerExtensionComponent`, and examples like `ScoreWidget` with color-coded labels and conditional styling based on field values.",
-      "solidx_concerns": [
-        "create_custom_list_field_widget",
-        "add_list_header_button_with",
-        "add_list_row_button_with"
-      ],
-      "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
-      "collection_name": "developer-docs",
-      "chunk_count": 5
-    }
-  },
   "developer-docs/extending/backend-customization/computation-providers.md": {
     "hash": "237ded671b808841f77dbc3f91481bdba1b5c7879b543bebd0bd4cb29c3515ff",
-    "document_id": "1a1c2b87-f039-41d5-a31f-7ea3c945d6a7",
+    "document_id": "fb165ce3-3937-4512-9dcb-72dbae1618d5",
     "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
     "metadata": {
       "source": "docusaurus",
@@ -2000,7 +1654,7 @@
   },
   "developer-docs/extending/backend-customization/security-rules.md": {
     "hash": "f7e6549ff233c2c109162de04176be58f5e5abbb21ce864336a103b3c4beae4a",
-    "document_id": "bde1edce-0562-47ee-a4c6-f167123582e2",
+    "document_id": "aabf978c-94ae-42d1-94b6-f685b5910eda",
     "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
     "metadata": {
       "source": "docusaurus",
@@ -2026,7 +1680,7 @@
   },
   "developer-docs/extending/backend-customization/typeorm-subscribers.md": {
     "hash": "2ae1ac1c19374fc72395017edd86316f9033bdb219cb5bae3d23aac8ba05d3cd",
-    "document_id": "f5a61c8a-edcb-4fe3-80ab-44e6d1e22480",
+    "document_id": "fd1359b1-b46d-48a3-bf83-b247e6a8c473",
     "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
     "metadata": {
       "source": "docusaurus",
@@ -2052,7 +1706,7 @@
   },
   "developer-docs/extending/backend-customization/scheduled-jobs.md": {
     "hash": "d4409ba7f5cb9c3fe4849b17e8dafd0a2bd27a32a52f15887e63bcdd2faa6fd2",
-    "document_id": "a04f791f-fdfc-48af-afaf-11f8c9de2305",
+    "document_id": "64b21139-9814-42ec-94d5-781f6dc8042c",
     "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
     "metadata": {
       "source": "docusaurus",
@@ -2078,7 +1732,7 @@
   },
   "developer-docs/extending/backend-customization/sms-providers.md": {
     "hash": "4f70f2b14b7d728ac094cf5bfa5403b8edb3368f8d202729097425e474a34d79",
-    "document_id": "62684372-0cdf-488c-9067-bc1c6e680f25",
+    "document_id": "8a96ad05-2dc0-45c3-a7c7-6a5eea6367b5",
     "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
     "metadata": {
       "source": "docusaurus",
@@ -2104,7 +1758,7 @@
   },
   "developer-docs/extending/backend-customization/extending-users.md": {
     "hash": "b3da4cb0da5ece478c9428ceac25e84d1b8845dcbe74e3db15503427a2d1e868",
-    "document_id": "7dc657d9-15ed-4111-83a8-1050d7b94c2f",
+    "document_id": "02b8f74e-3954-4e0b-a828-eb3a3f6d0703",
     "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
     "metadata": {
       "source": "docusaurus",
@@ -2130,7 +1784,7 @@
   },
   "developer-docs/extending/backend-customization/dynamic-selection-providers.md": {
     "hash": "bac6a7a7b97389344d9a6845c2beab864ebdfc203808687040b1eb454dcf3cbd",
-    "document_id": "0eab30ee-61f3-4efc-b009-a48d2f2e348c",
+    "document_id": "7b9cfae0-a4e1-49e1-be0c-ede2115828ec",
     "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
     "metadata": {
       "source": "docusaurus",
@@ -2157,7 +1811,7 @@
   },
   "developer-docs/extending/backend-customization/crud-service.md": {
     "hash": "431f2e8d162c86a0442caffb465f90920718248de054b7a19f6ac1aab2dfc5be",
-    "document_id": "9ba7dbb4-7e89-43ae-a67d-ade585e7d70f",
+    "document_id": "2f865710-13a9-44d0-92b7-1f01152c534f",
     "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
     "metadata": {
       "source": "docusaurus",
@@ -2186,7 +1840,7 @@
   },
   "developer-docs/extending/backend-customization/solid-registry.md": {
     "hash": "945c1a5498498c0c8365a6ca21b1ee80ff0dc151d6da35034ce48cfaae9edf94",
-    "document_id": "92fe2732-3f4a-48e9-a26b-7d592f822ec8",
+    "document_id": "bfd24626-59a8-483a-9929-dd60cad22136",
     "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
     "metadata": {
       "source": "docusaurus",
@@ -2210,7 +1864,7 @@
   },
   "developer-docs/extending/backend-customization/extending-repositories.md": {
     "hash": "fb2a6808dcc145afda2ad7ee3fa8759c542bbcefd0c72ad632cc1ebe148c4114",
-    "document_id": "019b3958-8762-4959-942d-cf7fc133399f",
+    "document_id": "df6f9e3d-18be-4f21-b71c-8e45de950d1f",
     "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
     "metadata": {
       "source": "docusaurus",
@@ -2236,9 +1890,37 @@
       "chunk_count": 4
     }
   },
+  "developer-docs/extending/backend-customization/extending-services.md": {
+    "hash": "4fd456614227c86a461c759e9a8c5109d153676a3827a79387e9e7066b48bc26",
+    "document_id": "6dd6b8e9-1422-4ec1-b4f5-7c8452d4b53a",
+    "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
+    "metadata": {
+      "source": "docusaurus",
+      "project": "solidx-docs",
+      "section": "developer-docs",
+      "path": "developer-docs/extending/backend-customization/extending-services.md",
+      "doc_title": "developer-docs/extending/backend-customization/extending-services.md",
+      "title": "Extending Services",
+      "description": "Learn how to extend backend services in SolidX.",
+      "summary": "Explains extending NestJS services in SolidX to implement custom business logic beyond default CRUD operations. Covers creating service methods for domain-specific operations (e.g., activating portals, sending notifications), benefits of separation of concerns, reusability across controllers and scheduled jobs, improved testability, and consistency. Includes examples like `activateInstitutePortal()` with database updates and event publishing.",
+      "keywords": [
+        "backend",
+        "services",
+        "customization"
+      ],
+      "solidx_concerns": [
+        "add_custom_service_method",
+        "using_crud_service_method",
+        "add_controller_endpoint"
+      ],
+      "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
+      "collection_name": "developer-docs",
+      "chunk_count": 3
+    }
+  },
   "developer-docs/extending/backend-customization/extending-controllers.md": {
     "hash": "9c92102444b10f8d7701031fb02a7c4a34707549f2488a189d7464a80f78e56a",
-    "document_id": "0f6acf2e-bfd6-48a7-a21c-8b3746a8ef18",
+    "document_id": "db880629-a67e-48a0-9b9c-407ce736de43",
     "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
     "metadata": {
       "source": "docusaurus",
@@ -2264,7 +1946,7 @@
   },
   "developer-docs/extending/backend-customization/dashboard-providers.md": {
     "hash": "e6dfdbaf0215a44674eb9ffdc1ef45db538447b38476db286cc6ec159554b4ab",
-    "document_id": "dde3c7bf-cec6-4668-b93c-b5e2583a34b4",
+    "document_id": "861016ab-e8e9-4dde-9951-0e383d0b2d8f",
     "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
     "metadata": {
       "source": "docusaurus",
@@ -2289,9 +1971,27 @@
       "chunk_count": 1
     }
   },
+  "developer-docs/extending/backend-customization/index.md": {
+    "hash": "bb8f7cb8c50f12ad4eb1e6134c8aee2872b97b84979928aae5d0a630d9259e09",
+    "document_id": "63e9c9d1-8594-4223-8945-e4472994b878",
+    "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
+    "metadata": {
+      "source": "docusaurus",
+      "project": "solidx-docs",
+      "section": "developer-docs",
+      "path": "developer-docs/extending/backend-customization/index.md",
+      "doc_title": "developer-docs/extending/backend-customization/index.md",
+      "title": "Backend Customization",
+      "description": "This section provides an overview of backend customization capabilities in SolidX.",
+      "summary": "This document provides an overview of backend customization capabilities in SolidX, covering how developers can extend the NestJS-based backend functionality. Topics include adding custom API endpoints to controllers, modifying and extending existing services with custom business logic, implementing custom providers for specialized functionality, and integrating additional backend features to meet specific application requirements beyond the default CRUD operations.",
+      "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
+      "collection_name": "developer-docs",
+      "chunk_count": 1
+    }
+  },
   "developer-docs/extending/backend-customization/email-providers.md": {
     "hash": "522a0b0fae42fc463673c3430104d554fccedd0e15723cf99f07cd38a31a80be",
-    "document_id": "2c29a0f9-0a51-4c46-8b70-267916b59420",
+    "document_id": "0c802771-cbc3-4e8f-8760-268be22927c6",
     "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
     "metadata": {
       "source": "docusaurus",
@@ -2317,7 +2017,7 @@
   },
   "developer-docs/extending/backend-customization/whatsapp-providers.md": {
     "hash": "c2b1d32bdc5fdc0fb87bfe354f2c17d335cc8a67a2dba88dbb7baeb692133b2d",
-    "document_id": "c6341e4f-07f4-4185-b3c6-f4b862b24308",
+    "document_id": "26816bdf-16aa-44d2-8eed-903e9269788d",
     "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
     "metadata": {
       "source": "docusaurus",

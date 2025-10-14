@@ -526,11 +526,22 @@ class DocIngestor:
                 section_title = chunk_data["section_title"]
                 content = chunk_data["content"]
                 
+                # Validate chunk content before adding
+                if not content or not content.strip():
+                    logger.warning(f"Skipping empty chunk at index {idx} for {key}")
+                    continue
+                
+                # Ensure content is a valid string and not too short
+                content_str = str(content).strip()
+                if len(content_str) < 10:
+                    logger.warning(f"Skipping too-short chunk at index {idx} for {key}: {content_str[:50]}")
+                    continue
+                
                 # Generate summaries using OpenAI
                 # summaries = self.generate_chunk_summary(content, section_title, doc_title)
                 
-                # Add the original content without modifications
-                chunks.append(content)
+                # Add the validated content
+                chunks.append(content_str)
                 
                 # Prepare chunk-level metadata
                 chunk_meta = {
@@ -544,22 +555,46 @@ class DocIngestor:
                 
                 # logger.info(f"  Chunk {chunk_order}/{total_chunks}: '{section_title or 'Introduction'}' - {summaries.get('short_summary', 'No summary')[:60]}...")
             
+            # Validate we have chunks before proceeding
+            if not chunks:
+                logger.error(f"No valid chunks generated for {key}. Skipping document creation.")
+                return
+            
+            # Final validation: ensure all chunks are non-empty strings
+            valid_chunks = [c for c in chunks if c and isinstance(c, str) and c.strip()]
+            if len(valid_chunks) != len(chunks):
+                logger.warning(f"Filtered out {len(chunks) - len(valid_chunks)} invalid chunks for {key}")
+                chunks = valid_chunks
+            
+            if not chunks:
+                logger.error(f"All chunks were invalid for {key}. Skipping document creation.")
+                return
+            
             # Add document-level metadata
-            metadata["chunk_count"] = total_chunks
+            metadata["chunk_count"] = len(chunks)  # Use actual chunk count after filtering
             # metadata["has_summaries"] = bool(self.openai_client)
             
             # Create document with chunks
-            logger.info(f"Creating document with {len(chunks)} H2 sections...")
+            logger.info(f"Creating document with {len(chunks)} valid chunks...")
+            
+            # Debug: Log chunk sizes for troubleshooting
+            for i, chunk in enumerate(chunks):
+                logger.debug(f"  Chunk {i+1}: {len(chunk)} chars, starts with: {chunk[:50].replace(chr(10), ' ')}")
             
             generated_id = uuid.uuid4()
-            resp = self.client.documents.create(
-                chunks=chunks,
-                metadata=metadata,
-                id=str(generated_id),
-                collection_ids=[collection_id],
-                ingestion_mode="fast",  # Fast mode respects our pre-processed chunks
-                run_with_orchestration=True  # Enable orchestration for summary generation
-            )
+            try:
+                resp = self.client.documents.create(
+                    chunks=chunks,
+                    metadata=metadata,
+                    id=str(generated_id),
+                    collection_ids=[collection_id],
+                    ingestion_mode="fast",  # Fast mode respects our pre-processed chunks
+                    run_with_orchestration=True  # Enable orchestration for summary generation
+                )
+            except Exception as e:
+                logger.error(f"Failed to create document for {key}: {e}")
+                logger.error(f"Document had {len(chunks)} chunks totaling {sum(len(c) for c in chunks)} chars")
+                raise
             document_id = resp.results.document_id
             logger.info(f"Created: {key} -> document_id={document_id}")
             
