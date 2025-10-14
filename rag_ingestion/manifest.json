@@ -1075,8 +1075,8 @@
     }
   },
   "developer-docs/going-live/deploying-to-vm.md": {
-    "hash": "b76eed150eac190110e7571e45587341eb14576af6e843aec41b5c28a17aa9f4",
-    "document_id": "7138dea0-1dac-474f-8351-e86c7c87be23",
+    "hash": "ed6f3c4a351d30a5853e74c38a2dc15ac4ed25f4bed6f1e5c13c0d1fc4ecb100",
+    "document_id": "83f505c0-1438-4602-a4ae-b54ae4612e63",
     "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
     "metadata": {
       "source": "docusaurus",
@@ -1084,7 +1084,7 @@
       "section": "developer-docs",
       "path": "developer-docs/going-live/deploying-to-vm.md",
       "doc_title": "developer-docs/going-live/deploying-to-vm.md",
-      "title": "Deploying SolidX to VM",
+      "title": "Virtual Machine",
       "description": "Step-by-step guide to deploy SolidX applications on Ubuntu virtual machines.",
       "summary": "This comprehensive guide walks through deploying SolidX applications on Ubuntu virtual machines. It covers cloning the repository, configuring environment variables, verifying backend and frontend operation, deploying with PM2 process manager (including config files and deploy scripts), database seeding with the rebuild script, and setting up Nginx as a reverse proxy with SSL certificates via Certbot. The guide also includes firewall configuration, virtual host setup, log rotation setup, and automatic restart configuration for production-ready deployment.",
       "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
@@ -2036,6 +2036,24 @@
       "solidx_concerns": [
         "new_whatsapp_provider"
       ],
+      "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
+      "collection_name": "developer-docs",
+      "chunk_count": 4
+    }
+  },
+  "developer-docs/going-live/deploying-to-ecs.md": {
+    "hash": "f5057646d46b4734cb2075ec41bae6d76af89fa244d01e05eaa06bad76a72458",
+    "document_id": "be719213-7ed1-48ea-8f48-6f9fd37d82d5",
+    "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
+    "metadata": {
+      "source": "docusaurus",
+      "project": "solidx-docs",
+      "section": "developer-docs",
+      "path": "developer-docs/going-live/deploying-to-ecs.md",
+      "doc_title": "developer-docs/going-live/deploying-to-ecs.md",
+      "title": "ECS",
+      "description": "Step-by-step guide to deploy SolidX applications on Ubuntu virtual machines.",
+      "summary": "This comprehensive guide walks through deploying SolidX applications on Ubuntu virtual machines. It covers cloning the repository, configuring environment variables, verifying backend and frontend operation, deploying with PM2 process manager (including config files and deploy scripts), database seeding with the rebuild script, and setting up Nginx as a reverse proxy with SSL certificates via Certbot. The guide also includes firewall configuration, virtual host setup, log rotation setup, and automatic restart configuration for production-ready deployment.",
       "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
       "collection_name": "developer-docs",
       "chunk_count": 4

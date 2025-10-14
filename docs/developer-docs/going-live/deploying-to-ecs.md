@@ -1,5 +1,5 @@
 ---
-title: Virtual Machine
+title: ECS
 description: Step-by-step guide to deploy SolidX applications on Ubuntu virtual machines.
 summary: This comprehensive guide walks through deploying SolidX applications on Ubuntu virtual machines. It covers cloning the repository, configuring environment variables, verifying backend and frontend operation, deploying with PM2 process manager (including config files and deploy scripts), database seeding with the rebuild script, and setting up Nginx as a reverse proxy with SSL certificates via Certbot. The guide also includes firewall configuration, virtual host setup, log rotation setup, and automatic restart configuration for production-ready deployment.
 sidebar_position: 1
