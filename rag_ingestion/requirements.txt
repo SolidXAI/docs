@@ -34,3 +34,4 @@ types-requests==2.32.4.20250913
 typing-inspection==0.4.1
 typing_extensions==4.15.0
 urllib3==2.5.0
+pyyaml==6.0.3
