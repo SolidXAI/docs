@@ -223,8 +223,75 @@ export interface IEntityComputedFieldProvider {
 Computed field configurations are loaded from the database and cached in the Solid Registry at application startup. Any changes require a server restart to take effect.
 </NoteBoxs>
 
-## Related Recipes (TODO)
+## In-Built Providers
 
-- [Pre-computed fields](../pre-computed-fields/index.md)  
-- [Post-computed fields](../post-computed-fields/index.md)  
-- [Multiple Computed Fields](../multiple-computed-fields/index.md)  
+This section describes the **built-in computation providers** available
+in SolidX for common use cases. Each provider includes a short
+description and the corresponding **context interface** for
+configuration.
+
+### AlphaNumExternalIdComputationProvider
+
+Generates an **alphanumeric external ID** based on a configurable
+pattern.\
+Useful for creating unique, human-readable identifiers (like invoice
+numbers or record codes).
+
+<details>
+  <summary className="card-title card-headear-wrapper">
+    <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
+    View Context Interface
+  </summary>
+``` ts
+export interface AlphaNumExternalIdContext {
+  prefix?: string;                  // alias -> staticPrefix
+  length?: number; // i.e default=5 // generated code length
+  dynamicFieldPrefix?: string;      // field name on the entity
+}
+```
+</details>
+
+### ConcatEntityComputedFieldProvider
+
+Concatenates **multiple entity fields** into a single string.\
+Ideal for building display names, codes, or composite labels derived
+from existing fields.
+
+
+<details>
+  <summary className="card-title card-headear-wrapper">
+    <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
+    View Context Interface
+  </summary>
+``` ts
+export interface ConcatComputedFieldContext {
+  separator: string; // concatenated values separator
+  // The fields to concatenate
+  fields: string[]; // supports "city.name" for nested paths (1-level deep)
+  // Optional: if true, slugify each field value before concatenation
+  slugify?: boolean; 
+}
+```
+</details>
+
+### NoopsEntityComputedFieldProviderService
+
+A **no-operation (noop)** provider that does not modify entity fields.\
+It allows tagging fields as computed without performing redundant
+calculations.
+
+This is particularly useful when one provider performs the main
+computation, and other computed fields are only "placeholders".
+
+#### Example Use Case
+
+-   Suppose you have multiple amount fields: `amount`, `taxes`, and
+    `totalAmount`.
+-   You create a computed field `totalAmount` linked to a provider like
+    `CalculateTotalAmountProvider` that performs all computations.
+-   The fields `amount` and `taxes` can still be tagged as computed but
+    linked to **NoopsEntityComputedFieldProviderService**, so they don't
+    re-compute independently.
+
+This ensures the logic resides only in one provider while maintaining
+metadata consistency.
