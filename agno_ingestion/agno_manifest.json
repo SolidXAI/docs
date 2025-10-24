@@ -1,0 +1,507 @@
+{
+  "developer-docs/extending/index.md": {
+    "hash": "689f286ea00bed159dc3f5d69149d0c0cf140bbdf87c05cf11b735b98c969d12",
+    "document_id": "69b141d2-8d62-4203-9771-fbbb1195b936",
+    "collection_id": "eb183925-d4ea-4614-a81f-0d0378e95bf7",
+    "metadata": {
+      "source": "docusaurus",
+      "project": "solidx-docs",
+      "section": "developer-docs",
+      "path": "developer-docs/extending/index.md",
+      "doc_title": "developer-docs/extending/index.md",
+      "title": "Extending SolidX",
+      "description": "Guide to extending SolidX with custom code generation and frontend/backend customization.",
+      "summary": "This document serves as an overview of SolidX extensibility features, explaining how to build custom functional modules and extend the platform capabilities. It highlights three main customization areas - Generated Code (using the code generation tool to scaffold controllers, services, entities, DTOs, and layout JSON files with default list and form views), Frontend Customization (modifying layout.json for custom list views, form layouts, kanban boards, and UI behaviors), and Backend Customization (extending NestJS backend with custom services, controllers, computed providers, middleware, and business logic).",
+      "chunk_count": 1,
+      "uploaded_by": "migration_script",
+      "uploaded_at": "2025-10-24T11:11:46.489708"
+    },
+    "chunk_count": 1,
+    "uploaded_at": "2025-10-24T11:11:49.446748"
+  },
+  "developer-docs/extending/backend-customization/background-jobs.md": {
+    "hash": "de848946025452637e650208ba120f09a1aa8ebc577b296d1f0021cf5b6cba4d",
+    "document_id": "9df5b623-74b2-499b-95bc-5ad6694d604d",
+    "collection_id": "eb183925-d4ea-4614-a81f-0d0378e95bf7",
+    "metadata": {
+      "source": "docusaurus",
+      "project": "solidx-docs",
+      "section": "developer-docs",
+      "path": "developer-docs/extending/backend-customization/background-jobs.md",
+      "doc_title": "developer-docs/extending/backend-customization/background-jobs.md",
+      "title": "Background Jobs",
+      "description": "Learn how to set up and manage background jobs in SolidX, including configuration for different brokers like Database and RabbitMQ.",
+      "summary": "Comprehensive guide to implementing asynchronous task processing in SolidX using background jobs. Covers the Work Queue/Competing Consumers pattern with database-backed and RabbitMQ brokers. Details publisher/subscriber setup, queue configuration, message handling, job tracking via `ss_mq_message` tables, retry mechanisms, and integration with email/SMS/WhatsApp providers. Includes code examples for both broker types and job execution patterns.",
+      "keywords": [
+        "background jobs",
+        "SolidX",
+        "asynchronous processing",
+        "job queues",
+        "RabbitMQ",
+        "database broker"
+      ],
+      "solidx_concerns": [
+        "new_background_job",
+        "add_new_sms_provider",
+        "add_new_email_provider",
+        "add_new_whatsapp_provider",
+        "add_custom_service_method",
+        "add_scheduled_job"
+      ],
+      "chunk_count": 5,
+      "uploaded_by": "migration_script",
+      "uploaded_at": "2025-10-24T11:11:49.450048"
+    },
+    "chunk_count": 5,
+    "uploaded_at": "2025-10-24T11:11:52.970820"
+  },
+  "developer-docs/extending/backend-customization/computation-providers.md": {
+    "hash": "5a0f59de4191a94d88f967ab711aefa6e80cc0781f981818f5307fbda25e3de6",
+    "document_id": "269a0dc3-b3ca-4a62-b9a5-d227482dcba4",
+    "collection_id": "eb183925-d4ea-4614-a81f-0d0378e95bf7",
+    "metadata": {
+      "source": "docusaurus",
+      "project": "solidx-docs",
+      "section": "developer-docs",
+      "path": "developer-docs/extending/backend-customization/computation-providers.md",
+      "doc_title": "developer-docs/extending/backend-customization/computation-providers.md",
+      "title": "Computation Providers",
+      "description": "Learn how to extend the backend with custom computation providers.",
+      "summary": "Explains SolidX computed fields powered by computation providers for automatic value derivation (e.g., totals, full names, age). Covers metadata configuration including `computedFieldTriggerConfig` for specifying triggers (before/after insert/update/remove operations), `computedFieldValueProvider` class implementation, `IEntityPreComputeFieldProvider` and `IEntityPostComputeFieldProvider` interfaces, provider registration, and examples like `PaymentCollectionItemAmountProvider` for calculating amounts based on related records.",
+      "keywords": [
+        "backend",
+        "computation providers",
+        "customization"
+      ],
+      "solidx_concerns": [
+        "add_computed_field_provider",
+        "create_model_with_fields",
+        "add_field_to_a_model"
+      ],
+      "chunk_count": 4,
+      "uploaded_by": "migration_script",
+      "uploaded_at": "2025-10-24T11:11:52.974623"
+    },
+    "chunk_count": 4,
+    "uploaded_at": "2025-10-24T11:11:55.649375"
+  },
+  "developer-docs/extending/backend-customization/security-rules.md": {
+    "hash": "f7e6549ff233c2c109162de04176be58f5e5abbb21ce864336a103b3c4beae4a",
+    "document_id": "fa41babc-268e-47ae-9a60-b62933fd8454",
+    "collection_id": "eb183925-d4ea-4614-a81f-0d0378e95bf7",
+    "metadata": {
+      "source": "docusaurus",
+      "project": "solidx-docs",
+      "section": "developer-docs",
+      "path": "developer-docs/extending/backend-customization/security-rules.md",
+      "doc_title": "developer-docs/extending/backend-customization/security-rules.md",
+      "title": "Security Rules",
+      "description": "Learn how to customize security rules in SolidX.",
+      "summary": "Describes SolidX record-level security rules for controlling data visibility per role and model. By default, no rules are enforced. Covers defining rules in module metadata with required fields (name, description, roleUserKey, modelMetadataUserKey, securityRuleConfig.filters), using special variables like `$activeUserId` for dynamic filtering, applying the most permissive rule for users with multiple roles, and examples restricting Client Admin access to their own client records.",
+      "keywords": [
+        "backend",
+        "security",
+        "customization"
+      ],
+      "solidx_concerns": [
+        "add/update_security_record_rule"
+      ],
+      "chunk_count": 2,
+      "uploaded_by": "migration_script",
+      "uploaded_at": "2025-10-24T11:11:55.651626"
+    },
+    "chunk_count": 2,
+    "uploaded_at": "2025-10-24T11:11:56.964063"
+  },
+  "developer-docs/extending/backend-customization/typeorm-subscribers.md": {
+    "hash": "2ae1ac1c19374fc72395017edd86316f9033bdb219cb5bae3d23aac8ba05d3cd",
+    "document_id": "a0b946c5-f7b0-4812-b0e4-48a71b91ef9f",
+    "collection_id": "eb183925-d4ea-4614-a81f-0d0378e95bf7",
+    "metadata": {
+      "source": "docusaurus",
+      "project": "solidx-docs",
+      "section": "developer-docs",
+      "path": "developer-docs/extending/backend-customization/typeorm-subscribers.md",
+      "doc_title": "developer-docs/extending/backend-customization/typeorm-subscribers.md",
+      "title": "TypeORM Subscribers",
+      "description": "Learn how to create and use TypeORM subscribers in your SolidX application.",
+      "summary": "Covers TypeORM subscribers for listening to entity lifecycle events (beforeInsert, afterInsert, beforeUpdate, afterUpdate, beforeRemove, afterRemove, afterLoad, transaction events). Explains creating subscribers implementing `EntitySubscriberInterface` with `@Injectable()` decorator for dependency injection, keeping business logic in dedicated services, registering subscribers in TypeORM configuration, and includes examples like `UserSubscriber` for audit logging. Recommends SolidX computed fields for most use cases.",
+      "keywords": [
+        "backend",
+        "TypeORM subscribers",
+        "customization"
+      ],
+      "solidx_concerns": [
+        "typeorm_subscribers"
+      ],
+      "chunk_count": 5,
+      "uploaded_by": "migration_script",
+      "uploaded_at": "2025-10-24T11:11:56.968973"
+    },
+    "chunk_count": 5,
+    "uploaded_at": "2025-10-24T11:11:59.933707"
+  },
+  "developer-docs/extending/backend-customization/scheduled-jobs.md": {
+    "hash": "d4409ba7f5cb9c3fe4849b17e8dafd0a2bd27a32a52f15887e63bcdd2faa6fd2",
+    "document_id": "192d7458-d0f6-44d4-a1a2-deb43e045d2a",
+    "collection_id": "eb183925-d4ea-4614-a81f-0d0378e95bf7",
+    "metadata": {
+      "source": "docusaurus",
+      "project": "solidx-docs",
+      "section": "developer-docs",
+      "path": "developer-docs/extending/backend-customization/scheduled-jobs.md",
+      "doc_title": "developer-docs/extending/backend-customization/scheduled-jobs.md",
+      "title": "Scheduled Jobs",
+      "description": "Learn how to write the scheduled jobs in your SolidX application.",
+      "summary": "Explains creating scheduled jobs in SolidX for recurring tasks like notifications, cleanup, syncing, or maintenance. Covers implementing `IScheduledJob` interface with `@ScheduledJobProvider()` decorator, registering job services in modules, defining job metadata with schedule name, frequency, days of week, job class name, and module reference. Includes examples like `HelloWorldJobService` and late fee calculation jobs.",
+      "keywords": [
+        "backend",
+        "scheduled jobs",
+        "customization"
+      ],
+      "solidx_concerns": [
+        "add_scheduled_job"
+      ],
+      "chunk_count": 1,
+      "uploaded_by": "migration_script",
+      "uploaded_at": "2025-10-24T11:11:59.937901"
+    },
+    "chunk_count": 1,
+    "uploaded_at": "2025-10-24T11:12:00.454286"
+  },
+  "developer-docs/extending/backend-customization/sms-providers.md": {
+    "hash": "4f70f2b14b7d728ac094cf5bfa5403b8edb3368f8d202729097425e474a34d79",
+    "document_id": "96eeef7d-b21e-4cfe-b7b2-888a7ab0b719",
+    "collection_id": "eb183925-d4ea-4614-a81f-0d0378e95bf7",
+    "metadata": {
+      "source": "docusaurus",
+      "project": "solidx-docs",
+      "section": "developer-docs",
+      "path": "developer-docs/extending/backend-customization/sms-providers.md",
+      "doc_title": "developer-docs/extending/backend-customization/sms-providers.md",
+      "title": "SMS Providers",
+      "description": "Learn how to create and configure custom SMS providers in SolidX.",
+      "summary": "Introduction to creating and configuring custom SMS providers in SolidX for sending text messages via third-party services. Implementation details pending future documentation updates.",
+      "keywords": [
+        "backend",
+        "sms providers",
+        "customization"
+      ],
+      "solidx_concerns": [
+        "new_sms_provider"
+      ],
+      "chunk_count": 4,
+      "uploaded_by": "migration_script",
+      "uploaded_at": "2025-10-24T11:12:00.457054"
+    },
+    "chunk_count": 4,
+    "uploaded_at": "2025-10-24T11:12:02.541537"
+  },
+  "developer-docs/extending/backend-customization/extending-users.md": {
+    "hash": "b3da4cb0da5ece478c9428ceac25e84d1b8845dcbe74e3db15503427a2d1e868",
+    "document_id": "e7522310-eae5-42cf-a4d1-7cabcfab9a64",
+    "collection_id": "eb183925-d4ea-4614-a81f-0d0378e95bf7",
+    "metadata": {
+      "source": "docusaurus",
+      "project": "solidx-docs",
+      "section": "developer-docs",
+      "path": "developer-docs/extending/backend-customization/extending-users.md",
+      "doc_title": "developer-docs/extending/backend-customization/extending-users.md",
+      "title": "Extending Users",
+      "description": "Learn how to extend user functionality in SolidX.",
+      "summary": "Guide to extending the default User model in SolidX by creating custom user models as children. Covers metadata configuration with isChild true and parentModelUserKey, adding custom fields and relationships (for example InstituteUser with userType and institute relation), overriding user creation logic for password encryption, validation, and persistence, and registering custom services in NestJS modules for handling extended user functionality.",
+      "keywords": [
+        "backend",
+        "users",
+        "customization"
+      ],
+      "solidx_concerns": [
+        "extending_user"
+      ],
+      "chunk_count": 5,
+      "uploaded_by": "migration_script",
+      "uploaded_at": "2025-10-24T11:12:02.544684"
+    },
+    "chunk_count": 5,
+    "uploaded_at": "2025-10-24T11:12:05.081624"
+  },
+  "developer-docs/extending/backend-customization/dynamic-selection-providers.md": {
+    "hash": "bac6a7a7b97389344d9a6845c2beab864ebdfc203808687040b1eb454dcf3cbd",
+    "document_id": "6b9f74ba-7bd4-431e-9da4-222769e56e19",
+    "collection_id": "eb183925-d4ea-4614-a81f-0d0378e95bf7",
+    "metadata": {
+      "source": "docusaurus",
+      "project": "solidx-docs",
+      "section": "developer-docs",
+      "path": "developer-docs/extending/backend-customization/dynamic-selection-providers.md",
+      "doc_title": "developer-docs/extending/backend-customization/dynamic-selection-providers.md",
+      "title": "Dynamic Selection Providers",
+      "description": "Learn how to create dynamic selection providers to customize the selection options in your application.",
+      "summary": "Explains creating dynamic selection providers for runtime option fetching from databases or APIs, replacing static lists. Covers field metadata configuration with `selectionDynamicProvider` and `selectionDynamicProviderCtxt`, implementing `ISelectionProvider` interface with `values()` method, provider registration, context handling, multi-select support, and examples like `StockApiSelectionProvider` for live exchange data. Highlights built-in `ListOfValuesSelectionProvider` for database queries.",
+      "keywords": [
+        "backend",
+        "dynamic selection",
+        "providers",
+        "customization"
+      ],
+      "solidx_concerns": [
+        "dynamic_selection_provider"
+      ],
+      "chunk_count": 4,
+      "uploaded_by": "migration_script",
+      "uploaded_at": "2025-10-24T11:12:05.085383"
+    },
+    "chunk_count": 4,
+    "uploaded_at": "2025-10-24T11:12:07.496253"
+  },
+  "developer-docs/extending/backend-customization/crud-service.md": {
+    "hash": "431f2e8d162c86a0442caffb465f90920718248de054b7a19f6ac1aab2dfc5be",
+    "document_id": "1f4bfa6e-9a85-4b9e-8a18-2f6892cc7b07",
+    "collection_id": "eb183925-d4ea-4614-a81f-0d0378e95bf7",
+    "metadata": {
+      "source": "docusaurus",
+      "project": "solidx-docs",
+      "section": "developer-docs",
+      "path": "developer-docs/extending/backend-customization/crud-service.md",
+      "doc_title": "developer-docs/extending/backend-customization/crud-service.md",
+      "title": "CRUD Service",
+      "description": "Learn how to create and customize CRUD services in your application.",
+      "summary": "Guide to creating and customizing CRUD services in SolidX applications for managing data layer operations, including methods for create, read, update, and delete functionality with business logic integration.",
+      "keywords": [
+        "backend",
+        "services",
+        "CRUD",
+        "customization"
+      ],
+      "solidx_concerns": [
+        "using_crud_service_method",
+        "add_custom_service_method",
+        "add_controller_endpoint"
+      ],
+      "chunk_count": 9,
+      "uploaded_by": "migration_script",
+      "uploaded_at": "2025-10-24T11:12:07.499698"
+    },
+    "chunk_count": 9,
+    "uploaded_at": "2025-10-24T11:12:12.500084"
+  },
+  "developer-docs/extending/backend-customization/solid-registry.md": {
+    "hash": "945c1a5498498c0c8365a6ca21b1ee80ff0dc151d6da35034ce48cfaae9edf94",
+    "document_id": "a4b91f5d-68f1-464d-afff-60b1f73e4579",
+    "collection_id": "eb183925-d4ea-4614-a81f-0d0378e95bf7",
+    "metadata": {
+      "source": "docusaurus",
+      "project": "solidx-docs",
+      "section": "developer-docs",
+      "path": "developer-docs/extending/backend-customization/solid-registry.md",
+      "doc_title": "developer-docs/extending/backend-customization/solid-registry.md",
+      "title": "Solid Registry",
+      "description": "Learn how to extend and use the Solid Registry in your SolidX application.",
+      "summary": "Explains the Solid Registry as SolidX's central discovery and configuration hub, acting as a cache and metadata manager. Provides fast component lookups, application-wide consistency for rules/modules/providers, and extensibility via decorator-based auto-discovery. Covers the registry pattern (Decorator → Interface → Implementation → Registry → Consumer), registered components including error code providers, selection providers, computed field providers, scheduled jobs, email/SMS/WhatsApp providers, and security rules.",
+      "keywords": [
+        "backend",
+        "solid registry",
+        "customization",
+        "metadata"
+      ],
+      "chunk_count": 2,
+      "uploaded_by": "migration_script",
+      "uploaded_at": "2025-10-24T11:12:12.503022"
+    },
+    "chunk_count": 2,
+    "uploaded_at": "2025-10-24T11:12:13.365820"
+  },
+  "developer-docs/extending/backend-customization/extending-repositories.md": {
+    "hash": "fb2a6808dcc145afda2ad7ee3fa8759c542bbcefd0c72ad632cc1ebe148c4114",
+    "document_id": "16e0fcdd-c5ad-4e3d-8370-6d7e3df26fda",
+    "collection_id": "eb183925-d4ea-4614-a81f-0d0378e95bf7",
+    "metadata": {
+      "source": "docusaurus",
+      "project": "solidx-docs",
+      "section": "developer-docs",
+      "path": "developer-docs/extending/backend-customization/extending-repositories.md",
+      "doc_title": "developer-docs/extending/backend-customization/extending-repositories.md",
+      "title": "Extending Repositories",
+      "description": "Learn how to extend functionality in repositories in your application.",
+      "summary": "Details extending repositories inheriting from `SolidBaseRepository<T>` with metadata-aware TypeORM behavior and security rule enforcement via `SecurityRuleRepository`. Covers creating custom query methods using overridden `find`/`findOne` (security-scoped), using QueryBuilder for complex joins, centralizing business-specific queries, composable data access patterns, and examples like `findActiveByInstitute()`. Emphasizes separation between data access and business logic for maintainability and testability.",
+      "keywords": [
+        "backend",
+        "repositories",
+        "customization"
+      ],
+      "solidx_concerns": [
+        "extending_repository",
+        "add_custom_service_method",
+        "add_controller_endpoint"
+      ],
+      "chunk_count": 4,
+      "uploaded_by": "migration_script",
+      "uploaded_at": "2025-10-24T11:12:13.368033"
+    },
+    "chunk_count": 4,
+    "uploaded_at": "2025-10-24T11:12:15.511372"
+  },
+  "developer-docs/extending/backend-customization/extending-services.md": {
+    "hash": "4fd456614227c86a461c759e9a8c5109d153676a3827a79387e9e7066b48bc26",
+    "document_id": "c917be69-c697-45a0-a2f6-28bc3b374536",
+    "collection_id": "eb183925-d4ea-4614-a81f-0d0378e95bf7",
+    "metadata": {
+      "source": "docusaurus",
+      "project": "solidx-docs",
+      "section": "developer-docs",
+      "path": "developer-docs/extending/backend-customization/extending-services.md",
+      "doc_title": "developer-docs/extending/backend-customization/extending-services.md",
+      "title": "Extending Services",
+      "description": "Learn how to extend backend services in SolidX.",
+      "summary": "Explains extending NestJS services in SolidX to implement custom business logic beyond default CRUD operations. Covers creating service methods for domain-specific operations (e.g., activating portals, sending notifications), benefits of separation of concerns, reusability across controllers and scheduled jobs, improved testability, and consistency. Includes examples like `activateInstitutePortal()` with database updates and event publishing.",
+      "keywords": [
+        "backend",
+        "services",
+        "customization"
+      ],
+      "solidx_concerns": [
+        "add_custom_service_method",
+        "using_crud_service_method",
+        "add_controller_endpoint"
+      ],
+      "chunk_count": 3,
+      "uploaded_by": "migration_script",
+      "uploaded_at": "2025-10-24T11:12:15.515134"
+    },
+    "chunk_count": 3,
+    "uploaded_at": "2025-10-24T11:12:17.560297"
+  },
+  "developer-docs/extending/backend-customization/extending-controllers.md": {
+    "hash": "9c92102444b10f8d7701031fb02a7c4a34707549f2488a189d7464a80f78e56a",
+    "document_id": "758c8c17-425e-41c4-a6aa-c9bb61492146",
+    "collection_id": "eb183925-d4ea-4614-a81f-0d0378e95bf7",
+    "metadata": {
+      "source": "docusaurus",
+      "project": "solidx-docs",
+      "section": "developer-docs",
+      "path": "developer-docs/extending/backend-customization/extending-controllers.md",
+      "doc_title": "developer-docs/extending/backend-customization/extending-controllers.md",
+      "title": "Extending Controllers",
+      "description": "Learn how to extend backend controllers in SolidX.",
+      "summary": "Covers extending NestJS controllers in SolidX to add custom endpoints or modify existing ones. Explains adding new methods with HTTP decorators (`@Get()`, `@Post()`), using `@ApiBearerAuth()` for JWT authentication, `@UseInterceptors(AnyFilesInterceptor())` for file uploads, creating DTOs with `@ApiProperty()` for Swagger documentation and validation, delegating business logic to services, and handling multipart/form-data requests with files.",
+      "keywords": [
+        "backend",
+        "controllers",
+        "customization"
+      ],
+      "solidx_concerns": [
+        "add_controller_endpoint"
+      ],
+      "chunk_count": 3,
+      "uploaded_by": "migration_script",
+      "uploaded_at": "2025-10-24T11:12:17.563843"
+    },
+    "chunk_count": 3,
+    "uploaded_at": "2025-10-24T11:12:19.259027"
+  },
+  "developer-docs/extending/backend-customization/dashboard-providers.md": {
+    "hash": "e6dfdbaf0215a44674eb9ffdc1ef45db538447b38476db286cc6ec159554b4ab",
+    "document_id": "b953b9bc-a39c-4018-a411-00ab2ade706a",
+    "collection_id": "eb183925-d4ea-4614-a81f-0d0378e95bf7",
+    "metadata": {
+      "source": "docusaurus",
+      "project": "solidx-docs",
+      "section": "developer-docs",
+      "path": "developer-docs/extending/backend-customization/dashboard-providers.md",
+      "doc_title": "developer-docs/extending/backend-customization/dashboard-providers.md",
+      "title": "Dashboard Providers",
+      "description": "Create custom dashboard providers to return the data for rendering dashboard widgets.",
+      "summary": "Introduction to creating custom dashboard providers in SolidX for fetching and returning data with UI options for dashboard widget rendering. Implementation details are pending future documentation updates.",
+      "keywords": [
+        "backend",
+        "dashboard",
+        "providers",
+        "customization"
+      ],
+      "solidx_concerns": [
+        "create/update_dashboard_widget"
+      ],
+      "chunk_count": 1,
+      "uploaded_by": "migration_script",
+      "uploaded_at": "2025-10-24T11:12:19.263304"
+    },
+    "chunk_count": 1,
+    "uploaded_at": "2025-10-24T11:12:19.681953"
+  },
+  "developer-docs/extending/backend-customization/index.md": {
+    "hash": "bb8f7cb8c50f12ad4eb1e6134c8aee2872b97b84979928aae5d0a630d9259e09",
+    "document_id": "a8336684-ecd0-4a31-a6ff-8f9f7f98a128",
+    "collection_id": "eb183925-d4ea-4614-a81f-0d0378e95bf7",
+    "metadata": {
+      "source": "docusaurus",
+      "project": "solidx-docs",
+      "section": "developer-docs",
+      "path": "developer-docs/extending/backend-customization/index.md",
+      "doc_title": "developer-docs/extending/backend-customization/index.md",
+      "title": "Backend Customization",
+      "description": "This section provides an overview of backend customization capabilities in SolidX.",
+      "summary": "This document provides an overview of backend customization capabilities in SolidX, covering how developers can extend the NestJS-based backend functionality. Topics include adding custom API endpoints to controllers, modifying and extending existing services with custom business logic, implementing custom providers for specialized functionality, and integrating additional backend features to meet specific application requirements beyond the default CRUD operations.",
+      "chunk_count": 1,
+      "uploaded_by": "migration_script",
+      "uploaded_at": "2025-10-24T11:12:19.684082"
+    },
+    "chunk_count": 1,
+    "uploaded_at": "2025-10-24T11:12:20.420440"
+  },
+  "developer-docs/extending/backend-customization/email-providers.md": {
+    "hash": "522a0b0fae42fc463673c3430104d554fccedd0e15723cf99f07cd38a31a80be",
+    "document_id": "2405c1f9-dbb5-4aed-a073-64685b162d69",
+    "collection_id": "eb183925-d4ea-4614-a81f-0d0378e95bf7",
+    "metadata": {
+      "source": "docusaurus",
+      "project": "solidx-docs",
+      "section": "developer-docs",
+      "path": "developer-docs/extending/backend-customization/email-providers.md",
+      "doc_title": "developer-docs/extending/backend-customization/email-providers.md",
+      "title": "Email Providers",
+      "description": "Learn how to create and configure custom email providers in SolidX.",
+      "summary": "Guide to creating custom email providers beyond the built-in SMTP provider. Covers implementing the `IMail` interface with `@MailProvider()` decorator, using `EmailTemplateService` for templates, `PublisherFactory` for background job queuing, methods for synchronous/asynchronous sending with and without templates, handling attachments, API-based service integration (e.g., third-party email APIs), and proper error handling for email delivery.",
+      "keywords": [
+        "backend",
+        "email providers",
+        "customization"
+      ],
+      "solidx_concerns": [
+        "new_email_provider"
+      ],
+      "chunk_count": 4,
+      "uploaded_by": "migration_script",
+      "uploaded_at": "2025-10-24T11:12:20.425626"
+    },
+    "chunk_count": 4,
+    "uploaded_at": "2025-10-24T11:12:22.655190"
+  },
+  "developer-docs/extending/backend-customization/whatsapp-providers.md": {
+    "hash": "c2b1d32bdc5fdc0fb87bfe354f2c17d335cc8a67a2dba88dbb7baeb692133b2d",
+    "document_id": "5100d0ef-8e8f-4577-8696-a569b1623074",
+    "collection_id": "eb183925-d4ea-4614-a81f-0d0378e95bf7",
+    "metadata": {
+      "source": "docusaurus",
+      "project": "solidx-docs",
+      "section": "developer-docs",
+      "path": "developer-docs/extending/backend-customization/whatsapp-providers.md",
+      "doc_title": "developer-docs/extending/backend-customization/whatsapp-providers.md",
+      "title": "WhatsApp Providers",
+      "description": "Learn how to create and configure custom WhatsApp providers in SolidX.",
+      "summary": "Guide to creating custom WhatsApp providers beyond the built-in Msg91 provider. Covers implementing `IWhatsAppTransport` interface with `@WhatsAppProvider()` decorator, `sendWhatsAppMessage()` method accepting phone number, templateId, and parameters, synchronous/asynchronous message sending via background jobs, using `PublisherFactory` for queuing, and integration with third-party WhatsApp APIs. Notes that template management is handled by external providers (Twilio, Msg91), not SolidX.",
+      "keywords": [
+        "backend",
+        "whatsapp providers",
+        "customization"
+      ],
+      "solidx_concerns": [
+        "new_whatsapp_provider"
+      ],
+      "chunk_count": 4,
+      "uploaded_by": "migration_script",
+      "uploaded_at": "2025-10-24T11:12:22.661465"
+    },
+    "chunk_count": 4,
+    "uploaded_at": "2025-10-24T11:12:24.710748"
+  }
+}

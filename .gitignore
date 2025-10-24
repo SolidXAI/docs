@@ -21,3 +21,5 @@ yarn-error.log*
 .claude
 CLAUDE.md
 venv
+*.pyc
+.env
