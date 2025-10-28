@@ -1017,6 +1017,17 @@ button[class*="copyButton"]:hover {
   gap: var(--solid-space-2);
 }
 
+/* Dark mode specific styling for tips boxes */
+[data-theme='dark'] .tips-box {
+  background-color: rgba(73, 69, 255, 0.08);
+  border-color: rgba(73, 69, 255, 0.2);
+  border-left-color: var(--solid-primary);
+}
+
+[data-theme='dark'] .tips-box h4 {
+  color: var(--solid-primary-light) !important;
+}
+
 .tips-box.info-box {
   border-left-color: var(--solid-info);
   background-color: var(--solid-info-bg);
@@ -1024,6 +1035,17 @@ button[class*="copyButton"]:hover {
 
 .tips-box.info-box h4 {
   color: var(--solid-info) !important;
+}
+
+/* Dark mode info box */
+[data-theme='dark'] .tips-box.info-box {
+  background-color: rgba(73, 69, 255, 0.08);
+  border-color: rgba(73, 69, 255, 0.2);
+  border-left-color: var(--solid-primary);
+}
+
+[data-theme='dark'] .tips-box.info-box h4 {
+  color: var(--solid-primary-light) !important;
 }
 
 .tips-box.warning-box {
@@ -1035,6 +1057,17 @@ button[class*="copyButton"]:hover {
   color: var(--solid-warning) !important;
 }
 
+/* Dark mode warning box */
+[data-theme='dark'] .tips-box.warning-box {
+  background-color: rgba(242, 157, 65, 0.08);
+  border-color: rgba(242, 157, 65, 0.2);
+  border-left-color: var(--solid-warning);
+}
+
+[data-theme='dark'] .tips-box.warning-box h4 {
+  color: #ffc278 !important;
+}
+
 .tips-box.error-box {
   border-left-color: var(--solid-error);
   background-color: var(--solid-error-bg);
@@ -1042,6 +1075,17 @@ button[class*="copyButton"]:hover {
 
 .tips-box.error-box h4 {
   color: var(--solid-error) !important;
+}
+
+/* Dark mode error box */
+[data-theme='dark'] .tips-box.error-box {
+  background-color: rgba(226, 85, 85, 0.08);
+  border-color: rgba(226, 85, 85, 0.2);
+  border-left-color: var(--solid-error);
+}
+
+[data-theme='dark'] .tips-box.error-box h4 {
+  color: #ff8a8a !important;
 }
 
 .tips-box.information-box {
