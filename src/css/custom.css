@@ -969,6 +969,13 @@ button[class*="copyButton"]:hover {
   border-color: var(--solid-primary);
   box-shadow: var(--solid-shadow-md);
   transform: translateY(-2px);
+  text-decoration: none !important;
+}
+
+/* Prevent underlines on any elements inside feature cards */
+.feature-card *,
+.feature-card:hover * {
+  text-decoration: none !important;
 }
 
 .card-tilte,
