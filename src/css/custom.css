@@ -619,14 +619,16 @@ button[aria-label*="Switch between dark and light mode"]:hover svg {
 ==============================================================================*/
 
 .table-of-contents {
-  font-size: var(--solid-font-size-sm);
+  font-size: 14px;
 }
 
 .table-of-contents__link {
   color: var(--solid-text-tertiary) !important;
-  padding: var(--solid-space-2) 0;
+  padding: 2px 0;
   display: block;
   transition: color 0.2s ease;
+  line-height: 1.2;
+  font-size: 14px !important;
 }
 
 .table-of-contents__link:hover {
@@ -648,14 +650,14 @@ button[aria-label*="Switch between dark and light mode"]:hover svg {
 
 /* ToC Border Indicator */
 .table-of-contents {
-  border-left: 2px solid var(--solid-border-light);
-  padding-left: var(--solid-space-4);
+  border-left: 1px solid var(--solid-border-light);
+  padding-left: 6px;
 }
 
 .table-of-contents__link--active {
   border-left: 2px solid var(--solid-primary);
-  margin-left: -2px;
-  padding-left: var(--solid-space-3);
+  margin-left: -1px;
+  padding-left: 5px;
 }
 
 /*==============================================================================
