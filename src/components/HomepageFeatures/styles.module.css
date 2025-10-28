@@ -35,6 +35,32 @@
   transform: translateY(-4px);
 }
 
+/* Card icon visibility fixes */
+.homeCards img[width="50"] {
+  opacity: 1 !important;
+  filter: none !important;
+}
+
+/* Ensure icons are visible in light mode */
+:root .homeCards img[width="50"],
+[data-theme='light'] .homeCards img[width="50"] {
+  filter: brightness(0) saturate(100%) invert(34%) sepia(95%) saturate(4762%) hue-rotate(239deg) brightness(101%) contrast(104%);
+  opacity: 0.9;
+}
+
+/* Icons in dark mode */
+[data-theme='dark'] .homeCards img[width="50"] {
+  filter: brightness(0) saturate(100%) invert(53%) sepia(93%) saturate(4762%) hue-rotate(239deg) brightness(105%) contrast(104%);
+  opacity: 1;
+}
+
+.homeCards:hover img[width="50"] {
+  filter: brightness(0) saturate(100%) invert(34%) sepia(95%) saturate(4762%) hue-rotate(239deg) brightness(101%) contrast(104%);
+  opacity: 1;
+  transform: scale(1.1);
+  transition: all 0.3s ease;
+}
+
 .homeCards:hover .featureSvg {
   transform: scale(1.02);
   box-shadow: var(--solid-shadow-lg);

@@ -415,6 +415,23 @@ ul li, ol li {
   text-decoration: none !important;
 }
 
+/* Navbar SVG icons - make them larger and more visible */
+.navbar svg,
+.navbar__items svg,
+.navbar__link svg {
+  width: 18px !important;
+  height: 18px !important;
+  min-width: 18px !important;
+  min-height: 18px !important;
+}
+
+/* Navbar icon buttons */
+.navbar button svg,
+.navbar a svg {
+  width: 18px !important;
+  height: 18px !important;
+}
+
 /* Make theme toggle visible - completely override any hiding */
 button.clean-btn.colorModeToggle_DEke,
 button[aria-label="Switch between dark and light mode (currently light mode)"],
@@ -422,27 +439,28 @@ button[aria-label="Switch between dark and light mode (currently dark mode)"] {
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
-  padding: var(--solid-space-2) !important;
+  padding: var(--solid-space-3) !important;
   border-radius: var(--solid-radius-md) !important;
-  transition: background-color 0.2s ease !important;
-  min-width: 32px !important;
-  min-height: 32px !important;
-  background-color: transparent !important;
-  border: 1px solid transparent !important;
+  transition: all 0.2s ease !important;
+  min-width: 40px !important;
+  min-height: 40px !important;
+  background-color: var(--solid-bg-tertiary) !important;
+  border: 1px solid var(--solid-border-light) !important;
 }
 
 button.clean-btn.colorModeToggle_DEke:hover,
 button[aria-label*="Switch between dark and light mode"]:hover {
-  background-color: var(--solid-bg-tertiary) !important;
-  border-color: var(--solid-border-light) !important;
+  background-color: var(--solid-primary-lightest) !important;
+  border-color: var(--solid-primary) !important;
+  transform: scale(1.05);
 }
 
 /* Theme toggle icons */
 .darkToggleIcon_wfgR,
 .lightToggleIcon_pyhR {
   display: inline-block !important;
-  width: 20px !important;
-  height: 20px !important;
+  width: 24px !important;
+  height: 24px !important;
   visibility: visible !important;
   opacity: 1 !important;
 }
@@ -451,18 +469,21 @@ button[aria-label*="Switch between dark and light mode"]:hover {
 button.clean-btn.colorModeToggle_DEke svg,
 button[aria-label*="Switch between dark and light mode"] svg {
   display: block !important;
-  width: 20px !important;
-  height: 20px !important;
+  width: 24px !important;
+  height: 24px !important;
   opacity: 1 !important;
   visibility: visible !important;
   fill: var(--solid-text-primary) !important;
   color: var(--solid-text-primary) !important;
+  stroke: var(--solid-text-primary) !important;
+  stroke-width: 0.5px;
 }
 
 button.clean-btn.colorModeToggle_DEke:hover svg,
 button[aria-label*="Switch between dark and light mode"]:hover svg {
   fill: var(--solid-primary) !important;
   color: var(--solid-primary) !important;
+  stroke: var(--solid-primary) !important;
 }
 
 /*==============================================================================
@@ -636,9 +657,7 @@ button[aria-label*="Switch between dark and light mode"]:hover svg {
 }
 
 /* Breadcrumb separator - let Docusaurus handle it naturally */
-.breadcrumbs__item:not(:last-child):after {
-  /* Don't override - use default Docusaurus separator */
-}
+/* No custom styling needed - using default Docusaurus separator */
 
 .breadcrumbs__item--active .breadcrumbs__link {
   color: var(--solid-text-primary) !important;
@@ -1058,7 +1077,7 @@ blockquote p {
 
 .button {
   background-color: var(--solid-primary);
-  color: white;
+  color: white !important;
   border: none;
   padding: var(--solid-space-3) var(--solid-space-6);
   border-radius: var(--solid-radius-md);
@@ -1066,7 +1085,7 @@ blockquote p {
   font-size: var(--solid-font-size-base);
   cursor: pointer;
   transition: all 0.2s ease;
-  text-decoration: none;
+  text-decoration: none !important;
   display: inline-block;
 }
 
@@ -1078,15 +1097,42 @@ blockquote p {
   text-decoration: none !important;
 }
 
+/* Primary button - ensure white text in both modes */
+.button--primary {
+  background-color: var(--solid-primary) !important;
+  color: #ffffff !important;
+  border: 2px solid var(--solid-primary) !important;
+}
+
+.button--primary:hover {
+  background-color: var(--solid-primary-dark) !important;
+  color: #ffffff !important;
+  border-color: var(--solid-primary-dark) !important;
+}
+
+/* Dark mode specific for primary button */
+[data-theme='dark'] .button--primary {
+  background-color: var(--solid-primary) !important;
+  color: #ffffff !important;
+  border-color: var(--solid-primary) !important;
+}
+
+[data-theme='dark'] .button--primary:hover {
+  background-color: var(--solid-primary-light) !important;
+  color: #ffffff !important;
+  border-color: var(--solid-primary-light) !important;
+}
+
 .button--secondary {
-  background-color: transparent;
-  border: 2px solid var(--solid-primary);
+  background-color: transparent !important;
+  border: 2px solid var(--solid-primary) !important;
   color: var(--solid-primary) !important;
 }
 
 .button--secondary:hover {
-  background-color: var(--solid-primary);
-  color: white !important;
+  background-color: var(--solid-primary) !important;
+  color: #ffffff !important;
+  border-color: var(--solid-primary) !important;
 }
 
 .button--lg {
@@ -1173,8 +1219,8 @@ blockquote p {
   }
 
   .navbar__toggle svg {
-    width: 20px !important;
-    height: 20px !important;
+    width: 24px !important;
+    height: 24px !important;
     color: var(--solid-text-primary) !important;
   }
 
