@@ -7,8 +7,6 @@
 	•	create_custom_form_field_widget
 	•	create_custom_list_field_widget
 	•	create_custom_widget
-
-Here’s your revised list with each item converted to singular form, while keeping the original naming style consistent:
 	•	add_custom_menu_action_combo
 	•	update_layout
 	•	add_field_to_existing_layout

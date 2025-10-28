@@ -204,12 +204,14 @@ def build_metadata(
             metadata["keywords"] = [k.strip() for k in frontmatter["keywords"].split(",")]
     
     if "solidx_concerns" in frontmatter:
-        # Ensure solidx_concerns is a list
+        # Store solidx_concerns as comma-separated string for efficient pre-filtering
         if isinstance(frontmatter["solidx_concerns"], list):
-            metadata["solidx_concerns"] = frontmatter["solidx_concerns"]
+            # Convert list to comma-separated string
+            metadata["solidx_concerns"] = ",".join(frontmatter["solidx_concerns"])
         elif isinstance(frontmatter["solidx_concerns"], str):
-            # Handle case where concerns might be a comma-separated string
-            metadata["solidx_concerns"] = [c.strip() for c in frontmatter["solidx_concerns"].split(",")]
+            # Already a string, normalize by removing extra whitespace
+            concerns_list = [c.strip() for c in frontmatter["solidx_concerns"].split(",")]
+            metadata["solidx_concerns"] = ",".join(concerns_list)
     
     return metadata
 
