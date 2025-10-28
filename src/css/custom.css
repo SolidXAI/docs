@@ -668,10 +668,31 @@ button[aria-label*="Switch between dark and light mode"]:hover svg {
   TABLES
 ==============================================================================*/
 
-.markdown table {
-  display: block;
+/* Table wrapper for horizontal scrolling */
+.markdown > table,
+article table,
+.theme-doc-markdown table {
+  display: table !important;
+  width: 100% !important;
+  table-layout: auto !important;
+  border-collapse: collapse !important;
+  margin: var(--solid-space-6) 0 !important;
+  border-radius: var(--solid-radius-lg);
+  border: 1px solid var(--solid-border-light);
+  overflow: visible !important;
+}
+
+/* Ensure table container allows scrolling on small screens */
+.table-wrapper,
+.markdown {
   overflow-x: auto;
   width: 100%;
+}
+
+.markdown table {
+  display: table !important;
+  width: 100% !important;
+  min-width: 100% !important;
   border-collapse: collapse;
   margin: var(--solid-space-6) 0;
   border-radius: var(--solid-radius-lg);
@@ -704,20 +725,25 @@ th {
   color: var(--solid-text-primary) !important;
   font-size: var(--solid-font-size-sm) !important;
   font-weight: var(--solid-font-semibold) !important;
-  padding: var(--solid-space-3) var(--solid-space-4) !important;
+  padding: var(--solid-space-4) var(--solid-space-5) !important;
   border: 1px solid var(--solid-border-light) !important;
   text-align: left;
+  vertical-align: top;
+  white-space: normal;
 }
 
 td {
   color: var(--solid-text-secondary) !important;
-  padding: var(--solid-space-3) var(--solid-space-4) !important;
+  padding: var(--solid-space-4) var(--solid-space-5) !important;
   font-weight: var(--solid-font-normal) !important;
   border: 1px solid var(--solid-border-light) !important;
   font-size: var(--solid-font-size-sm);
   word-wrap: break-word;
   overflow-wrap: break-word;
   hyphens: auto;
+  vertical-align: top;
+  white-space: normal;
+  line-height: var(--solid-line-height-relaxed);
 }
 
 tr {
@@ -736,6 +762,32 @@ table tr td:first-child {
 
 table tr:nth-child(even) {
   background-color: var(--solid-bg-secondary) !important;
+}
+
+/* Ensure proper column width distribution */
+table col:first-child,
+table th:first-child,
+table td:first-child {
+  width: auto !important;
+  min-width: 150px;
+}
+
+table col:nth-child(2),
+table th:nth-child(2),
+table td:nth-child(2) {
+  width: auto !important;
+}
+
+/* Remove any max-width constraints on tables */
+.markdown table,
+article table {
+  max-width: none !important;
+}
+
+/* Ensure code blocks inside tables don't break layout */
+table code {
+  white-space: nowrap;
+  display: inline-block;
 }
 
 /*==============================================================================
