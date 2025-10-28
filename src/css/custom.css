@@ -305,15 +305,29 @@ h2 {
 }
 
 h3 {
-  font-size: var(--solid-font-size-xl) !important;
+  font-size: var(--solid-font-size-lg) !important;
   font-weight: var(--solid-font-semibold) !important;
   color: var(--solid-text-primary) !important;
   margin-top: var(--solid-space-8) !important;
   margin-bottom: var(--solid-space-3) !important;
 }
 
+/* Model metadata attributes - even smaller for API documentation */
+h3.anchor,
+h3[id*="string"],
+h3[id*="required"],
+h3[id*="optional"],
+h3[id*="array"],
+h3[id*="object"],
+h3[id*="boolean"],
+h3[id*="number"] {
+  font-size: var(--solid-font-size-base) !important;
+  font-weight: var(--solid-font-medium) !important;
+  margin-top: var(--solid-space-6) !important;
+}
+
 h4 {
-  font-size: var(--solid-font-size-lg) !important;
+  font-size: var(--solid-font-size-base) !important;
   font-weight: var(--solid-font-semibold) !important;
   color: var(--solid-text-primary) !important;
   margin-top: var(--solid-space-6) !important;
