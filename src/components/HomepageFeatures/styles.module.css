@@ -28,6 +28,10 @@
   box-shadow: 0 2px 6px #3008614f;
 }
 
+.homeCards:hover {
+  box-shadow: 0px 0px 10px var(--solid-purple-hover);
+}
+
 .homeCardMain p{
   margin-bottom: 10px !important;
 }

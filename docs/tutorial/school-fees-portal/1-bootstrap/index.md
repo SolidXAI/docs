@@ -10,7 +10,7 @@ SolidX provides a powerful CLI tool to scaffold a full-stack multi-tenant SaaS a
 We will use the following command to create a new project:
 
 ## Create Solid App
-```bash
+```tsx
 npx @solidstarters/create-solid-app
 ```
 

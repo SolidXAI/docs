@@ -31,7 +31,10 @@ import TutorialCards from '@site/src/components/Tutorials';
 A complete guide for administrators and business users to create a Library Management System applications in SolidX. <br></br>Learn how to set up modules, setup core business entities or models, manage users, and tailor the platform to fit your organizational needs—without writing code.
 
 </p>
-<img src="/assets/images/homeImg1-2ff817de07795434a1a4d845580a9bf6.png" />
+
+<!-- <img src="/assets/images/homeImg1-2ff817de07795434a1a4d845580a9bf6.png" /> -->
+
+![SolidX Admin Dashboard](/img/homeImage-22.png)
 
   </a>
 
@@ -40,7 +43,8 @@ A complete guide for administrators and business users to create a Library Manag
     <p className="home-card-desc card-desc">
   A complete guide for administrators and business users to create a Library Management System applications in SolidX. <br></br>Learn how to set up modules, setup core business entities or models, manage users, and tailor the platform to fit your organizational needs—without writing code.
     </p>
-  <img src="/assets/images/homeImg1-2ff817de07795434a1a4d845580a9bf6.png" />
+![SolidX Admin Dashboard](/img/homeImage-11.png)
+  
   </a>
 
 </div>
