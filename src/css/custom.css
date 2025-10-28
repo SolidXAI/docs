@@ -85,60 +85,60 @@
   --solid-primary-lighter: #B4B3FF;
   --solid-primary-lightest: #2D2859;
   
-  /* Background Colors */
-  --solid-bg-main: #0e061d;
-  --solid-bg-secondary: #140f1e;
-  --solid-bg-tertiary: #1c1529;
-  --solid-bg-card: #1c1529;
-  --solid-code-bg: #0e0a18;
+  /* Background Colors - Strapi-inspired blue-gray palette */
+  --solid-bg-main: #212134;
+  --solid-bg-secondary: #2b2d42;
+  --solid-bg-tertiary: #32344b;
+  --solid-bg-card: #2b2d42;
+  --solid-code-bg: #1a1b2e;
   
-  /* Text Colors */
+  /* Text Colors - Better contrast with neutral tones */
   --solid-text-primary: #ffffff;
-  --solid-text-secondary: #d6ccf0;
-  --solid-text-tertiary: #b8acda;
-  --solid-text-muted: #9688c3;
+  --solid-text-secondary: #c0c0cf;
+  --solid-text-tertiary: #a5a5ba;
+  --solid-text-muted: #8e8ea9;
   --solid-color-white: #ffffff;
   
-  /* Link Colors */
-  --solid-link: #a77aff;
-  --solid-link-hover: #ddb7ff;
-  --solid-link-visited: #b987ff;
+  /* Link Colors - More subtle and readable */
+  --solid-link: #7b79ff;
+  --solid-link-hover: #a5a4ff;
+  --solid-link-visited: #9190ff;
   
-  /* Border Colors */
-  --solid-border-light: #3b2d5c;
-  --solid-border-subtle: #2a1f3c;
-  --solid-border-default: #5c4490;
-  --solid-border-strong: #8c6dbe;
-  --solid-border-highlight: #a77aff;
+  /* Border Colors - Improved visibility */
+  --solid-border-light: #32344b;
+  --solid-border-subtle: #3f4158;
+  --solid-border-default: #4a4a6a;
+  --solid-border-strong: #666687;
+  --solid-border-highlight: #7b79ff;
   
   /* Semantic Colors */
   --solid-success: #5cb176;
-  --solid-success-bg: #1a2e1f;
+  --solid-success-bg: #1a2e23;
   --solid-warning: #f29d41;
-  --solid-warning-bg: #2e1f0f;
+  --solid-warning-bg: #2e2417;
   --solid-error: #e25555;
-  --solid-error-bg: #2e1616;
+  --solid-error-bg: #2e1a1a;
   --solid-info: #6B68FF;
-  --solid-info-bg: #1f1d3e;
+  --solid-info-bg: #1f1f3e;
   
-  /* Navbar & Footer */
-  --solid-navbar-bg: #1c1529;
-  --solid-navbar-border: #3b2d5c;
-  --solid-footer-bg: #0e061d;
-  --solid-footer-border: #311a57;
+  /* Navbar & Footer - Consistent with new palette */
+  --solid-navbar-bg: #2b2d42;
+  --solid-navbar-border: #32344b;
+  --solid-footer-bg: #1a1b2e;
+  --solid-footer-border: #32344b;
   
-  /* Sidebar */
-  --solid-sidebar-bg: #140f1e;
-  --solid-sidebar-text: #d2c4f4;
+  /* Sidebar - Lighter than main content for better hierarchy */
+  --solid-sidebar-bg: #2b2d42;
+  --solid-sidebar-text: #c0c0cf;
   --solid-sidebar-text-hover: #ffffff;
-  --solid-sidebar-bg-hover: #300861;
-  --solid-sidebar-bg-active: #4a0d94;
+  --solid-sidebar-bg-hover: rgba(73, 69, 255, 0.15);
+  --solid-sidebar-bg-active: #4945FF;
   --solid-sidebar-text-active: #ffffff;
   
   /* Code & Syntax */
-  --solid-code-inline-bg: #1c1529;
+  --solid-code-inline-bg: #2b2d42;
   --solid-code-inline-text: #ff7eb6;
-  --solid-code-border: #5c4490;
+  --solid-code-border: #4a4a6a;
 }
 
 /*==============================================================================
