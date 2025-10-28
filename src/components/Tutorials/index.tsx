@@ -21,7 +21,7 @@ const TutorialList: FeatureItem[] = [
     imgs: require('@site/static/img/homeImg1.png').default,
     description: (
       <>
-        A complete guide for administrators and business users to create school fees portal applications in SolidX. <br></br>Learn how to set up modules, setup core business entities or models, manage users, and tailor the platform to fit your organizational needs—without writing code.
+        A complete guide for administrators and business users to create School Fees Portal application in SolidX. <br></br>Learn how to set up modules, setup core business entities or models, manage users, and tailor the platform to fit your organizational needs - without writing code.
       </>
     ),
     moreInfo: 'ReadMore',
@@ -32,7 +32,7 @@ const TutorialList: FeatureItem[] = [
     imgs: require('@site/static/img/homeImg1.png').default,
     description: (
       <>
-        A complete guide for administrators and business users to create a Library Management System applications in SolidX. <br></br>Learn how to set up modules, setup core business entities or models, manage users, and tailor the platform to fit your organizational needs—without writing code.
+        A complete guide for administrators and business users to create a Library Management System in SolidX. <br></br>Learn how to set up modules, setup core business entities or models, manage users, and tailor the platform to fit your organizational needs - without writing code.
         </>
     ),
     moreInfo: 'ReadMore',
