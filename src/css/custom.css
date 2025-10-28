@@ -199,6 +199,7 @@
   --solid-shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
   
   /* Docusaurus Overrides */
+  --ifm-font-size-base: 16px;
   --ifm-code-font-size: 0.9em;
   --ifm-font-family-base: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
   --ifm-font-family-monospace: 'SF Mono', 'Monaco', 'Inconsolata', 'Fira Code', 'Droid Sans Mono', 'Source Code Pro', monospace;
@@ -250,12 +251,18 @@
 }
 
 html {
+  /* Set explicit base font size to prevent browser scaling differences */
+  font-size: 16px !important;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
+  text-size-adjust: 100%;
 }
 
 body {
   font-family: var(--ifm-font-family-base);
+  font-size: 16px !important;
   background-color: var(--solid-bg-main);
   color: var(--solid-text-secondary);
 }
