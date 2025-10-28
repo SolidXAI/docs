@@ -70,10 +70,10 @@ Below is an example configuration for a computed field named `amountPaid` in the
 Supported operations include:
 - `before-update`
 - `before-insert`
-- `before-remove`
+- `before-delete`
 - `after-update`
 - `after-insert`
-- `after-remove`
+- `after-delete`
 
 🔸 **Before operations** trigger `preComputeValue()` of `IEntityPreComputeFieldProvider`.  
 🔸 **After operations** trigger `postComputeAndSaveValue()` of `IEntityPostComputeFieldProvider`.  
