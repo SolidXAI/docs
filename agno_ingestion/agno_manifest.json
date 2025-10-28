@@ -2232,5 +2232,107 @@
     },
     "chunk_count": 4,
     "uploaded_at": "2025-10-24T14:05:39.149277"
+  },
+  "index.md": {
+    "hash": "5a60fa5e410fb0f780d21adbbb5726ed786651211c6359a2d64ad16485670ef4",
+    "document_id": "cdeb9b3b-4e7d-454c-8007-233b6ccf55f4",
+    "collection_id": "fb196190-24f8-4a02-875f-66e34b5dbbd3",
+    "metadata": {
+      "source": "docusaurus",
+      "project": "solidx-docs",
+      "section": "tutorial",
+      "path": "tutorial/index.md",
+      "doc_title": "tutorial/index.md",
+      "chunk_count": 1,
+      "uploaded_by": "migration_script",
+      "uploaded_at": "2025-10-28T06:19:15.397097"
+    },
+    "chunk_count": 1,
+    "uploaded_at": "2025-10-28T06:19:20.798898"
+  },
+  "school-fees-portal/index.md": {
+    "hash": "8bd4824dcf0d4a5f30168febe9784ea86c36918e31020cd8742c81d1de953071",
+    "document_id": "2a1a3a38-109f-465c-97fc-35a7e27d5b5a",
+    "collection_id": "fb196190-24f8-4a02-875f-66e34b5dbbd3",
+    "metadata": {
+      "source": "docusaurus",
+      "project": "solidx-docs",
+      "section": "tutorial",
+      "path": "tutorial/school-fees-portal/index.md",
+      "doc_title": "tutorial/school-fees-portal/index.md",
+      "chunk_count": 5,
+      "uploaded_by": "migration_script",
+      "uploaded_at": "2025-10-28T06:19:20.806503"
+    },
+    "chunk_count": 5,
+    "uploaded_at": "2025-10-28T06:19:24.329705"
+  },
+  "school-fees-portal/1-bootstrap/index.md": {
+    "hash": "ec5cfbf70f5e927cb0d79c573fa165449fe0f55fbfe52f2467c4721356469509",
+    "document_id": "76c65c03-2eea-4ede-81fd-a2b7af64c25e",
+    "collection_id": "fb196190-24f8-4a02-875f-66e34b5dbbd3",
+    "metadata": {
+      "source": "docusaurus",
+      "project": "solidx-docs",
+      "section": "tutorial",
+      "path": "tutorial/school-fees-portal/1-bootstrap/index.md",
+      "doc_title": "tutorial/school-fees-portal/1-bootstrap/index.md",
+      "chunk_count": 2,
+      "uploaded_by": "migration_script",
+      "uploaded_at": "2025-10-28T06:19:24.340973"
+    },
+    "chunk_count": 2,
+    "uploaded_at": "2025-10-28T06:19:26.998597"
+  },
+  "school-fees-portal/4-customisations/index.md": {
+    "hash": "a70d91b08f5367533a265622499a0c21d3a01fd8b68c6f955e913f5fcabe2bd3",
+    "document_id": "3d8872d6-04db-4b49-a96f-ae3d56d2867c",
+    "collection_id": "fb196190-24f8-4a02-875f-66e34b5dbbd3",
+    "metadata": {
+      "source": "docusaurus",
+      "project": "solidx-docs",
+      "section": "tutorial",
+      "path": "tutorial/school-fees-portal/4-customisations/index.md",
+      "doc_title": "tutorial/school-fees-portal/4-customisations/index.md",
+      "chunk_count": 7,
+      "uploaded_by": "migration_script",
+      "uploaded_at": "2025-10-28T06:19:27.007805"
+    },
+    "chunk_count": 7,
+    "uploaded_at": "2025-10-28T06:19:31.779270"
+  },
+  "school-fees-portal/2-data-model/index.md": {
+    "hash": "b38fe37a61c5775d27cb71f591dc477d8144059b9c18c36609624d7478d2b588",
+    "document_id": "079ebfc6-c622-4da5-8019-09ac83e78720",
+    "collection_id": "fb196190-24f8-4a02-875f-66e34b5dbbd3",
+    "metadata": {
+      "source": "docusaurus",
+      "project": "solidx-docs",
+      "section": "tutorial",
+      "path": "tutorial/school-fees-portal/2-data-model/index.md",
+      "doc_title": "tutorial/school-fees-portal/2-data-model/index.md",
+      "chunk_count": 4,
+      "uploaded_by": "migration_script",
+      "uploaded_at": "2025-10-28T06:19:31.789763"
+    },
+    "chunk_count": 4,
+    "uploaded_at": "2025-10-28T06:19:35.004164"
+  },
+  "school-fees-portal/3-admin-layout/index.md": {
+    "hash": "9109819eb119faa26430b3a1064e8de8dea82c0a226dab3afb67839a159f3dc0",
+    "document_id": "31bb364e-109e-45de-b725-b9df408c3a07",
+    "collection_id": "fb196190-24f8-4a02-875f-66e34b5dbbd3",
+    "metadata": {
+      "source": "docusaurus",
+      "project": "solidx-docs",
+      "section": "tutorial",
+      "path": "tutorial/school-fees-portal/3-admin-layout/index.md",
+      "doc_title": "tutorial/school-fees-portal/3-admin-layout/index.md",
+      "chunk_count": 9,
+      "uploaded_by": "migration_script",
+      "uploaded_at": "2025-10-28T06:19:35.014791"
+    },
+    "chunk_count": 9,
+    "uploaded_at": "2025-10-28T06:19:42.889884"
   }
 }

@@ -47,11 +47,12 @@ class DocumentIngestor:
         manifest_path: Path,
         project: str = "solidx-docs",
         extensions: Tuple[str, ...] = (".md", ".mdx"),
-        dry_run: bool = False
+        dry_run: bool = False,
+        ingest_path: Optional[Path] = None
     ):
         """
         Initialize document ingestor.
-        
+
         Args:
             client: Agno-RAG API client
             base_dir: Base directory for documentation
@@ -59,6 +60,7 @@ class DocumentIngestor:
             project: Project name
             extensions: Tuple of file extensions to process
             dry_run: If True, don't actually upload documents
+            ingest_path: Optional path to ingest from (defaults to base_dir if not provided)
         """
         self.client = client
         self.base_dir = base_dir
@@ -66,6 +68,7 @@ class DocumentIngestor:
         self.project = project
         self.extensions = extensions
         self.dry_run = dry_run
+        self.ingest_path = ingest_path
         self._manifest: Dict[str, Dict] = {}
         
     def load_manifest(self) -> None:
@@ -95,16 +98,19 @@ class DocumentIngestor:
     
     def iter_files(self) -> List[Path]:
         """
-        Iterate over all markdown files in base directory.
-        
+        Iterate over all markdown files in ingest directory.
+
         Returns:
             List of file paths
         """
+        # Use ingest_path if provided, otherwise use base_dir
+        search_dir = self.ingest_path if self.ingest_path else self.base_dir
+
         files = [
-            p for p in self.base_dir.rglob("*")
+            p for p in search_dir.rglob("*")
             if p.is_file() and p.suffix.lower() in self.extensions
         ]
-        logger.info(f"Found {len(files)} markdown files")
+        logger.info(f"Found {len(files)} markdown files in {search_dir}")
         return files
     
     def verify_collections(self) -> bool:
@@ -149,11 +155,28 @@ class DocumentIngestor:
             True if successful, False otherwise
         """
         try:
-            rel_path = file_path.relative_to(self.base_dir)
+            # Use ingest_path for relative path calculation if provided, otherwise use base_dir
+            relative_base = self.ingest_path if self.ingest_path else self.base_dir
+            rel_path = file_path.relative_to(relative_base)
             key = str(rel_path).replace("\\", "/")
             
             # Determine which collection this file belongs to
             collection_id = get_collection_id_for_path(rel_path, COLLECTION_MAPPING)
+
+            # If no collection found and we're using ingest_path, check if ingest_path
+            # is a subdirectory of base_dir that matches a collection
+            if not collection_id and self.ingest_path:
+                try:
+                    ingest_relative_to_base = self.ingest_path.relative_to(self.base_dir)
+                    if len(ingest_relative_to_base.parts) > 0:
+                        collection_name = ingest_relative_to_base.parts[0]
+                        collection_id = COLLECTION_MAPPING.get(collection_name)
+                        if collection_id:
+                            logger.debug(f"File {key} mapped to collection '{collection_name}' from ingest_path ({collection_id})")
+                except ValueError:
+                    # ingest_path is not a subdirectory of base_dir, skip this logic
+                    pass
+
             if not collection_id:
                 logger.warning(f"Skipping file {key} - no collection mapping found")
                 return False
@@ -363,6 +386,9 @@ Examples:
   # Ingest all documents in the docs directory
   python ingest_docs.py
 
+  # Ingest documents from a specific path
+  python ingest_docs.py --path ./custom-docs
+
   # Ingest a single file for testing
   python ingest_docs.py --single-file ./docs/admin-docs/getting-started.md
 
@@ -379,7 +405,13 @@ Examples:
         type=str,
         help="Ingest a single file instead of scanning the entire base directory"
     )
-    
+
+    parser.add_argument(
+        "--path",
+        type=str,
+        help="Path to directory or files to ingest (optional, defaults to base directory)"
+    )
+
     parser.add_argument(
         "--base-dir",
         type=str,
@@ -444,9 +476,11 @@ def main():
     project = args.project or os.getenv("PROJECT_NAME", "solidx-docs")
     extensions = tuple(os.getenv("DOC_EXTENSIONS", ".md,.mdx").split(","))
     dry_run = args.dry_run or os.getenv("DRY_RUN", "false").lower() == "true"
+    ingest_path = Path(args.path).resolve() if args.path else None
     
     logger.info(f"API URL: {api_url}")
     logger.info(f"Base directory: {base_dir}")
+    logger.info(f"Ingest path: {ingest_path if ingest_path else 'using base directory'}")
     logger.info(f"Manifest: {manifest}")
     logger.info(f"Project: {project}")
     logger.info(f"Extensions: {extensions}")
@@ -492,7 +526,8 @@ def main():
         manifest_path=manifest,
         project=project,
         extensions=extensions,
-        dry_run=dry_run
+        dry_run=dry_run,
+        ingest_path=ingest_path
     )
     
     # Run ingestion
