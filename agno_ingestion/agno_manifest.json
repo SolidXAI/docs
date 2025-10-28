@@ -1,8 +1,8 @@
 {
   "tutorial/index.md": {
-    "hash": "5a60fa5e410fb0f780d21adbbb5726ed786651211c6359a2d64ad16485670ef4",
-    "document_id": "23baaf6e-6c40-4a67-920d-c508c4938b46",
-    "collection_id": "59feca4d-9011-48fb-a4c4-e894fdd5bb02",
+    "hash": "c610f38b70d803932c1e34517998dc92bdf5a42a1f1ac1288b710d3e73d940e2",
+    "document_id": "9082ccd4-492f-4726-94bf-9b3121aa3b55",
+    "collection_id": "18105f84-1076-4a19-93e2-8c678f7eab01",
     "metadata": {
       "source": "docusaurus",
       "project": "solidx-docs",
@@ -11,15 +11,15 @@
       "doc_title": "tutorial/index.md",
       "chunk_count": 1,
       "uploaded_by": "migration_script",
-      "uploaded_at": "2025-10-24T14:01:10.607105"
+      "uploaded_at": "2025-10-28T13:49:52.916821"
     },
     "chunk_count": 1,
-    "uploaded_at": "2025-10-24T14:01:18.751750"
+    "uploaded_at": "2025-10-28T13:49:54.526883"
   },
   "admin-docs/index.md": {
     "hash": "89f4e18eaf2bad4f8d844a140bf68219b86feaadb40cc8fe1d95c95f81d2284c",
-    "document_id": "ee6e7389-08f1-41e6-9c23-f75755571f88",
-    "collection_id": "0529e15b-88cb-4a61-9a73-6201a1102f4f",
+    "document_id": "73b559c1-aa26-462b-8ebe-587702a75848",
+    "collection_id": "ce81d211-ac5a-4764-bb89-ce13658b35f3",
     "metadata": {
       "source": "docusaurus",
       "project": "solidx-docs",
@@ -28,15 +28,15 @@
       "doc_title": "admin-docs/index.md",
       "chunk_count": 3,
       "uploaded_by": "migration_script",
-      "uploaded_at": "2025-10-24T14:01:18.756254"
+      "uploaded_at": "2025-10-28T13:49:54.532159"
     },
     "chunk_count": 3,
-    "uploaded_at": "2025-10-24T14:01:26.679961"
+    "uploaded_at": "2025-10-28T13:50:01.710698"
   },
   "recipes/email.md": {
     "hash": "0b3033ba8ba54bd517a4a8d0266a7a6230c1869e12c30bf53e9e33d3040ed08c",
-    "document_id": "ef00c1ba-2599-486f-b3ef-69c20c60ab70",
-    "collection_id": "97bd8322-b8d0-4daf-af77-6407015bb3a0",
+    "document_id": "474934d8-d9e9-498b-9a7c-8745e4d47c10",
+    "collection_id": "539d4993-4377-4819-9403-7c469bf42f0d",
     "metadata": {
       "source": "docusaurus",
       "project": "solidx-docs",
@@ -45,15 +45,15 @@
       "doc_title": "recipes/email.md",
       "chunk_count": 3,
       "uploaded_by": "migration_script",
-      "uploaded_at": "2025-10-24T14:01:26.683144"
+      "uploaded_at": "2025-10-28T13:50:01.712833"
     },
     "chunk_count": 3,
-    "uploaded_at": "2025-10-24T14:01:35.989058"
+    "uploaded_at": "2025-10-28T13:50:04.169041"
   },
   "recipes/computed-fields.md": {
     "hash": "2ba513ac1d515d7602ad14d9fcbab20532187652ac263ef1877f1004e490c2d3",
-    "document_id": "750a20e7-d9a2-49e1-9d27-b7e1dcc6b178",
-    "collection_id": "97bd8322-b8d0-4daf-af77-6407015bb3a0",
+    "document_id": "bed76ed9-3885-4a47-bc72-511c807cc44b",
+    "collection_id": "539d4993-4377-4819-9403-7c469bf42f0d",
     "metadata": {
       "source": "docusaurus",
       "project": "solidx-docs",
@@ -62,15 +62,15 @@
       "doc_title": "recipes/computed-fields.md",
       "chunk_count": 1,
       "uploaded_by": "migration_script",
-      "uploaded_at": "2025-10-24T14:01:35.992052"
+      "uploaded_at": "2025-10-28T13:50:04.172847"
     },
     "chunk_count": 1,
-    "uploaded_at": "2025-10-24T14:01:36.832476"
+    "uploaded_at": "2025-10-28T13:50:04.924640"
   },
   "recipes/media-providers.md": {
     "hash": "5812dd8914d8e21bd8c4b3cd0385ca2f4e215675e5ec30bb3aedd9fec51039f3",
-    "document_id": "356825db-44ad-481b-a8bc-a41d874b1323",
-    "collection_id": "97bd8322-b8d0-4daf-af77-6407015bb3a0",
+    "document_id": "a0c4587e-f08f-4a97-a9d2-fde82ab74979",
+    "collection_id": "539d4993-4377-4819-9403-7c469bf42f0d",
     "metadata": {
       "source": "docusaurus",
       "project": "solidx-docs",
@@ -79,15 +79,15 @@
       "doc_title": "recipes/media-providers.md",
       "chunk_count": 2,
       "uploaded_by": "migration_script",
-      "uploaded_at": "2025-10-24T14:01:36.883795"
+      "uploaded_at": "2025-10-28T13:50:04.933496"
     },
     "chunk_count": 2,
-    "uploaded_at": "2025-10-24T14:01:39.500834"
+    "uploaded_at": "2025-10-28T13:50:06.706645"
   },
   "recipes/extending-users.md": {
     "hash": "6685c0db971b30319fcb27aed29ddbb81cba138476fa6ad2aa7f0a8ff0a506de",
-    "document_id": "cdc80894-a0ca-46a9-a883-97b437dff937",
-    "collection_id": "97bd8322-b8d0-4daf-af77-6407015bb3a0",
+    "document_id": "ba950d9f-e1e6-44ad-a065-97260b89ddb0",
+    "collection_id": "539d4993-4377-4819-9403-7c469bf42f0d",
     "metadata": {
       "source": "docusaurus",
       "project": "solidx-docs",
@@ -96,15 +96,15 @@
       "doc_title": "recipes/extending-users.md",
       "chunk_count": 1,
       "uploaded_by": "migration_script",
-      "uploaded_at": "2025-10-24T14:01:39.503797"
+      "uploaded_at": "2025-10-28T13:50:06.719099"
     },
     "chunk_count": 1,
-    "uploaded_at": "2025-10-24T14:01:40.233962"
+    "uploaded_at": "2025-10-28T13:50:07.197876"
   },
   "recipes/index.md": {
     "hash": "0d72d575b21eb24ccc2c8242cc860f39805ae58f972c13e0eb86e8fbc9a4fff9",
-    "document_id": "08947582-a8b8-47e8-bd68-3ad7095c02ac",
-    "collection_id": "97bd8322-b8d0-4daf-af77-6407015bb3a0",
+    "document_id": "74e43958-cb4f-4688-ad2a-cec09ff5b458",
+    "collection_id": "539d4993-4377-4819-9403-7c469bf42f0d",
     "metadata": {
       "source": "docusaurus",
       "project": "solidx-docs",
@@ -113,15 +113,15 @@
       "doc_title": "recipes/index.md",
       "chunk_count": 1,
       "uploaded_by": "migration_script",
-      "uploaded_at": "2025-10-24T14:01:40.237680"
+      "uploaded_at": "2025-10-28T13:50:07.208049"
     },
     "chunk_count": 1,
-    "uploaded_at": "2025-10-24T14:01:41.341075"
+    "uploaded_at": "2025-10-28T13:50:08.281948"
   },
   "recipes/soft-delete.md": {
     "hash": "b47296a0febe076b020d2c09f5fce86b88a8753cda1a8dff5837a927f76c8721",
-    "document_id": "9bd36741-7e80-4ac8-992f-5b8a7d1f2ce3",
-    "collection_id": "97bd8322-b8d0-4daf-af77-6407015bb3a0",
+    "document_id": "046bad54-a49b-4537-b475-495aea172060",
+    "collection_id": "539d4993-4377-4819-9403-7c469bf42f0d",
     "metadata": {
       "source": "docusaurus",
       "project": "solidx-docs",
@@ -130,15 +130,15 @@
       "doc_title": "recipes/soft-delete.md",
       "chunk_count": 1,
       "uploaded_by": "migration_script",
-      "uploaded_at": "2025-10-24T14:01:41.343178"
+      "uploaded_at": "2025-10-28T13:50:08.284096"
     },
     "chunk_count": 1,
-    "uploaded_at": "2025-10-24T14:01:41.892100"
+    "uploaded_at": "2025-10-28T13:50:08.997504"
   },
   "recipes/queue.md": {
     "hash": "d44836f63c8937f8362065743a7260652edefc76f2234ae22766bbc0e02168c9",
-    "document_id": "2e1d5bad-72c8-4c49-aaae-27219e74de34",
-    "collection_id": "97bd8322-b8d0-4daf-af77-6407015bb3a0",
+    "document_id": "bfff9135-18a9-4617-adea-5c761f2058bb",
+    "collection_id": "539d4993-4377-4819-9403-7c469bf42f0d",
     "metadata": {
       "source": "docusaurus",
       "project": "solidx-docs",
@@ -147,15 +147,15 @@
       "doc_title": "recipes/queue.md",
       "chunk_count": 4,
       "uploaded_by": "migration_script",
-      "uploaded_at": "2025-10-24T14:01:41.896640"
+      "uploaded_at": "2025-10-28T13:50:09.007542"
     },
     "chunk_count": 4,
-    "uploaded_at": "2025-10-24T14:01:44.614904"
+    "uploaded_at": "2025-10-28T13:50:11.482610"
   },
   "recipes/handlers.md": {
     "hash": "1370d7e24131ae267c88a5ecd30fc4bd1a916f82a60d2a7693fe00fe2be9fc34",
-    "document_id": "86f6cb5d-ae8a-452a-991c-59856ae51262",
-    "collection_id": "97bd8322-b8d0-4daf-af77-6407015bb3a0",
+    "document_id": "8e3af497-e882-4a98-b7ca-f65a77cbfd32",
+    "collection_id": "539d4993-4377-4819-9403-7c469bf42f0d",
     "metadata": {
       "source": "docusaurus",
       "project": "solidx-docs",
@@ -164,15 +164,15 @@
       "doc_title": "recipes/handlers.md",
       "chunk_count": 1,
       "uploaded_by": "migration_script",
-      "uploaded_at": "2025-10-24T14:01:44.616826"
+      "uploaded_at": "2025-10-28T13:50:11.495032"
     },
     "chunk_count": 1,
-    "uploaded_at": "2025-10-24T14:01:58.868669"
+    "uploaded_at": "2025-10-28T13:50:12.256350"
   },
   "recipes/additional-datasources.md": {
     "hash": "11a02a076db439d55971ea92671ce46d8aca155961b52b4305f0a2bd1224546a",
-    "document_id": "d8a4dc1e-062a-468a-8937-f936f7a5b055",
-    "collection_id": "97bd8322-b8d0-4daf-af77-6407015bb3a0",
+    "document_id": "6bf70478-b4d2-4344-aa7b-44f1fb5f0522",
+    "collection_id": "539d4993-4377-4819-9403-7c469bf42f0d",
     "metadata": {
       "source": "docusaurus",
       "project": "solidx-docs",
@@ -181,15 +181,15 @@
       "doc_title": "recipes/additional-datasources.md",
       "chunk_count": 1,
       "uploaded_by": "migration_script",
-      "uploaded_at": "2025-10-24T14:01:58.870980"
+      "uploaded_at": "2025-10-28T13:50:12.265776"
     },
     "chunk_count": 1,
-    "uploaded_at": "2025-10-24T14:01:59.587413"
+    "uploaded_at": "2025-10-28T13:50:12.773020"
   },
   "developer-docs/database-seeding.md": {
     "hash": "a21bfabfa04f2c4b3fcf308ce8bf4fbc197b390208b2c654dafed4f55b3d81d9",
-    "document_id": "758b20a4-1c38-4fb2-9920-d23cad9904c7",
-    "collection_id": "e0414fa4-da64-4e70-a5ea-349424ba1a47",
+    "document_id": "5598f1cc-dd48-45c5-a420-9c919661eb9f",
+    "collection_id": "a7d72ddf-6d30-4390-aeb0-8d14ec87b52a",
     "metadata": {
       "source": "docusaurus",
       "project": "solidx-docs",
@@ -201,15 +201,15 @@
       "summary": "This document explains the database seeding process in SolidX, which initializes the database with essential metadata and data required for the application to function. The seeding is triggered via the 'solid seed' command and populates permissions, media storage providers, system fields, functional modules metadata, roles (Admin and Internal User), default users, views, actions, menus, email/SMS templates, settings, security rules, list of values, and dashboard configurations. The ModuleMetadataSeederService from the @solidstarters/solid-core package handles all the seeding operations automatically.",
       "chunk_count": 3,
       "uploaded_by": "migration_script",
-      "uploaded_at": "2025-10-24T14:01:59.594168"
+      "uploaded_at": "2025-10-28T13:50:12.780381"
     },
     "chunk_count": 3,
-    "uploaded_at": "2025-10-24T14:02:02.704422"
+    "uploaded_at": "2025-10-28T13:50:19.497580"
   },
   "developer-docs/prerequisites.md": {
     "hash": "fc3a4da155ded511abb5f04f1a14345720cc4381e83b57577720f962883bae9a",
-    "document_id": "78a15601-64d9-4a78-aa55-b6a479539688",
-    "collection_id": "e0414fa4-da64-4e70-a5ea-349424ba1a47",
+    "document_id": "480ff31d-4dea-491b-a4a4-9b66a3fafad8",
+    "collection_id": "a7d72ddf-6d30-4390-aeb0-8d14ec87b52a",
     "metadata": {
       "source": "docusaurus",
       "project": "solidx-docs",
@@ -221,15 +221,15 @@
       "summary": "This document outlines the essential tools and software required before installing SolidX. It covers installation and setup instructions for PostgreSQL database (including user and database creation), Git version control, Node.js and npm via nvm, schematics-cli for Angular schematics-based code generation, and copyfiles utility. Each section provides platform-specific installation commands for Ubuntu/macOS along with validation steps to ensure proper setup. These prerequisites are necessary for development machines to support SolidX's low-code platform functionality.",
       "chunk_count": 5,
       "uploaded_by": "migration_script",
-      "uploaded_at": "2025-10-24T14:02:02.711556"
+      "uploaded_at": "2025-10-28T13:50:19.509425"
     },
     "chunk_count": 5,
-    "uploaded_at": "2025-10-24T14:02:07.452357"
+    "uploaded_at": "2025-10-28T13:50:22.815399"
   },
   "developer-docs/index.md": {
     "hash": "0ba6df944939135dd9c6890f61fe01a92394dfada71517b27b752bd890063aa8",
-    "document_id": "c475f09e-e25d-4ea3-af7b-ec0477d060fc",
-    "collection_id": "e0414fa4-da64-4e70-a5ea-349424ba1a47",
+    "document_id": "c81e100b-39a4-4bd6-a5dd-a7340e3b160c",
+    "collection_id": "a7d72ddf-6d30-4390-aeb0-8d14ec87b52a",
     "metadata": {
       "source": "docusaurus",
       "project": "solidx-docs",
@@ -241,15 +241,15 @@
       "summary": "Welcome to SolidX developer documentation. SolidX is an enterprise-focused, low-code development platform engineered for modern web applications, providing comprehensive tools for rapid application development with full customization capabilities.",
       "chunk_count": 1,
       "uploaded_by": "migration_script",
-      "uploaded_at": "2025-10-24T14:02:07.455842"
+      "uploaded_at": "2025-10-28T13:50:22.821437"
     },
     "chunk_count": 1,
-    "uploaded_at": "2025-10-24T14:02:08.416794"
+    "uploaded_at": "2025-10-28T13:50:23.346452"
   },
   "developer-docs/installation.md": {
     "hash": "a4ce861ba229cb3148a3c61e7c637f98b0d087ee8735e7786fe34f410864cc78",
-    "document_id": "40228186-fe2f-4c18-9632-762705dca0b3",
-    "collection_id": "e0414fa4-da64-4e70-a5ea-349424ba1a47",
+    "document_id": "4984aa9e-c2d0-4ceb-be20-bc507365f7bb",
+    "collection_id": "a7d72ddf-6d30-4390-aeb0-8d14ec87b52a",
     "metadata": {
       "source": "docusaurus",
       "project": "solidx-docs",
@@ -261,15 +261,15 @@
       "summary": "This document provides a quick overview of installing SolidX using the create-solid-app starter template. Users can initialize a project by running a single npx command, answering configuration prompts, and the system creates the complete project structure with both solid-api (backend) and solid-ui (frontend) folders. The page includes a link to a comprehensive step-by-step tutorial for detailed installation guidance including environment setup and configuration.",
       "chunk_count": 2,
       "uploaded_by": "migration_script",
-      "uploaded_at": "2025-10-24T14:02:08.419826"
+      "uploaded_at": "2025-10-28T13:50:23.364545"
     },
     "chunk_count": 2,
-    "uploaded_at": "2025-10-24T14:02:09.628130"
+    "uploaded_at": "2025-10-28T13:50:24.476507"
   },
   "developer-docs/project-structure.md": {
     "hash": "f6cc97136817caf24c09896cdcf59cc20de7b3b2114a9c5b8eef0b3b20350460",
-    "document_id": "e128e516-15e1-41ba-a2bf-c0d33fe8fb1a",
-    "collection_id": "e0414fa4-da64-4e70-a5ea-349424ba1a47",
+    "document_id": "d07f8346-fd37-4f28-ba48-2f830e7bf95e",
+    "collection_id": "a7d72ddf-6d30-4390-aeb0-8d14ec87b52a",
     "metadata": {
       "source": "docusaurus",
       "project": "solidx-docs",
@@ -279,18 +279,18 @@
       "title": "Project Structure",
       "description": "Overview of the folder structure for the SolidX Fullstack Application.",
       "summary": "This document provides a comprehensive overview of the SolidX project folder structure, organized into backend (solid-api) and frontend (solid-ui) components. The solid-api folder contains NestJS-based backend services with source code, module metadata, logs, and media storage. The solid-ui folder houses the Next.js frontend with PrimeReact components, including app routes, Redux state management, and static assets. The document also covers key dependencies including @solidstarters/solid-core for backend services, solid-code-builder for code generation, and solid-core-ui for frontend components. It includes debugging configurations and upgrade scripts.",
-      "solidx_concerns": [],
+      "solidx_concerns": "",
       "chunk_count": 4,
       "uploaded_by": "migration_script",
-      "uploaded_at": "2025-10-24T14:02:09.635017"
+      "uploaded_at": "2025-10-28T13:50:24.478643"
     },
     "chunk_count": 4,
-    "uploaded_at": "2025-10-24T14:02:12.060397"
+    "uploaded_at": "2025-10-28T13:50:26.796740"
   },
   "tutorial/school-fees-portal/index.md": {
     "hash": "8bd4824dcf0d4a5f30168febe9784ea86c36918e31020cd8742c81d1de953071",
-    "document_id": "be89d460-b699-48f3-84a2-4cf2db8bf7b5",
-    "collection_id": "59feca4d-9011-48fb-a4c4-e894fdd5bb02",
+    "document_id": "51f3939f-1be7-4736-a548-7cb6a60fdb3a",
+    "collection_id": "18105f84-1076-4a19-93e2-8c678f7eab01",
     "metadata": {
       "source": "docusaurus",
       "project": "solidx-docs",
@@ -299,15 +299,15 @@
       "doc_title": "tutorial/school-fees-portal/index.md",
       "chunk_count": 5,
       "uploaded_by": "migration_script",
-      "uploaded_at": "2025-10-24T14:02:12.064499"
+      "uploaded_at": "2025-10-28T13:50:26.809024"
     },
     "chunk_count": 5,
-    "uploaded_at": "2025-10-24T14:02:14.958844"
+    "uploaded_at": "2025-10-28T13:50:30.823471"
   },
   "tutorial/school-fees-portal/1-bootstrap/index.md": {
-    "hash": "ec5cfbf70f5e927cb0d79c573fa165449fe0f55fbfe52f2467c4721356469509",
-    "document_id": "c7590d7c-c6a4-4ea7-b1f7-93a0f65e3007",
-    "collection_id": "59feca4d-9011-48fb-a4c4-e894fdd5bb02",
+    "hash": "f679730a1516509fce077abb203f2fdcb2fdb9ed163b7811434d27d8b58f5300",
+    "document_id": "4c68e1af-a131-4fbe-a270-773fb0cffa56",
+    "collection_id": "18105f84-1076-4a19-93e2-8c678f7eab01",
     "metadata": {
       "source": "docusaurus",
       "project": "solidx-docs",
@@ -316,15 +316,15 @@
       "doc_title": "tutorial/school-fees-portal/1-bootstrap/index.md",
       "chunk_count": 2,
       "uploaded_by": "migration_script",
-      "uploaded_at": "2025-10-24T14:02:14.960530"
+      "uploaded_at": "2025-10-28T13:50:30.836075"
     },
     "chunk_count": 2,
-    "uploaded_at": "2025-10-24T14:02:16.337195"
+    "uploaded_at": "2025-10-28T13:50:32.207191"
   },
   "tutorial/school-fees-portal/4-customisations/index.md": {
     "hash": "a70d91b08f5367533a265622499a0c21d3a01fd8b68c6f955e913f5fcabe2bd3",
-    "document_id": "07eeb546-c5e7-416f-a8da-3d8a407f1c69",
-    "collection_id": "59feca4d-9011-48fb-a4c4-e894fdd5bb02",
+    "document_id": "f6ebd5ad-d80f-47f4-a985-2bd265c3ef1c",
+    "collection_id": "18105f84-1076-4a19-93e2-8c678f7eab01",
     "metadata": {
       "source": "docusaurus",
       "project": "solidx-docs",
@@ -333,15 +333,15 @@
       "doc_title": "tutorial/school-fees-portal/4-customisations/index.md",
       "chunk_count": 7,
       "uploaded_by": "migration_script",
-      "uploaded_at": "2025-10-24T14:02:16.339398"
+      "uploaded_at": "2025-10-28T13:50:32.227714"
     },
     "chunk_count": 7,
-    "uploaded_at": "2025-10-24T14:02:21.168724"
+    "uploaded_at": "2025-10-28T13:50:35.946906"
   },
   "tutorial/school-fees-portal/2-data-model/index.md": {
     "hash": "b38fe37a61c5775d27cb71f591dc477d8144059b9c18c36609624d7478d2b588",
-    "document_id": "e240532b-cb8a-4051-b4d2-9141b176fe51",
-    "collection_id": "59feca4d-9011-48fb-a4c4-e894fdd5bb02",
+    "document_id": "b9e6db67-c4af-48c3-a8d6-748414d7ac77",
+    "collection_id": "18105f84-1076-4a19-93e2-8c678f7eab01",
     "metadata": {
       "source": "docusaurus",
       "project": "solidx-docs",
@@ -350,15 +350,15 @@
       "doc_title": "tutorial/school-fees-portal/2-data-model/index.md",
       "chunk_count": 4,
       "uploaded_by": "migration_script",
-      "uploaded_at": "2025-10-24T14:02:21.172382"
+      "uploaded_at": "2025-10-28T13:50:35.952049"
     },
     "chunk_count": 4,
-    "uploaded_at": "2025-10-24T14:02:23.121327"
+    "uploaded_at": "2025-10-28T13:50:38.032291"
   },
   "tutorial/school-fees-portal/3-admin-layout/index.md": {
     "hash": "9109819eb119faa26430b3a1064e8de8dea82c0a226dab3afb67839a159f3dc0",
-    "document_id": "3ff8cfb8-8e93-490b-882c-4061b921029c",
-    "collection_id": "59feca4d-9011-48fb-a4c4-e894fdd5bb02",
+    "document_id": "9f0913dd-dbba-4bfa-b603-e885ada1e62d",
+    "collection_id": "18105f84-1076-4a19-93e2-8c678f7eab01",
     "metadata": {
       "source": "docusaurus",
       "project": "solidx-docs",
@@ -367,15 +367,15 @@
       "doc_title": "tutorial/school-fees-portal/3-admin-layout/index.md",
       "chunk_count": 9,
       "uploaded_by": "migration_script",
-      "uploaded_at": "2025-10-24T14:02:23.124674"
+      "uploaded_at": "2025-10-28T13:50:38.046688"
     },
     "chunk_count": 9,
-    "uploaded_at": "2025-10-24T14:02:29.787114"
+    "uploaded_at": "2025-10-28T13:50:43.105342"
   },
   "admin-docs/settings/index.md": {
     "hash": "474fc676ef5992c0cb02fc86699ceae148c3bcf2f3ae75d522cd2de69ac623b9",
-    "document_id": "4c83596f-71b1-43fe-bf20-052457e37dcc",
-    "collection_id": "0529e15b-88cb-4a61-9a73-6201a1102f4f",
+    "document_id": "e431fdfd-52c6-48d0-a4ef-1fb8beade389",
+    "collection_id": "ce81d211-ac5a-4764-bb89-ce13658b35f3",
     "metadata": {
       "source": "docusaurus",
       "project": "solidx-docs",
@@ -384,15 +384,15 @@
       "doc_title": "admin-docs/settings/index.md",
       "chunk_count": 7,
       "uploaded_by": "migration_script",
-      "uploaded_at": "2025-10-24T14:02:29.789024"
+      "uploaded_at": "2025-10-28T13:50:43.115658"
     },
     "chunk_count": 7,
-    "uploaded_at": "2025-10-24T14:02:33.653678"
+    "uploaded_at": "2025-10-28T13:50:47.661974"
   },
   "admin-docs/module-builder/module-management.md": {
     "hash": "73c708b5afd71174b3d8ef47d728839af7b92d2f2a14822e0c75d82a7bd158f3",
-    "document_id": "8d966a60-c437-4d70-aa84-a210806d5548",
-    "collection_id": "0529e15b-88cb-4a61-9a73-6201a1102f4f",
+    "document_id": "d04060fe-aed1-45bc-a60b-7aa32f291168",
+    "collection_id": "ce81d211-ac5a-4764-bb89-ce13658b35f3",
     "metadata": {
       "source": "docusaurus",
       "project": "solidx-docs",
@@ -401,15 +401,15 @@
       "doc_title": "admin-docs/module-builder/module-management.md",
       "chunk_count": 3,
       "uploaded_by": "migration_script",
-      "uploaded_at": "2025-10-24T14:02:33.657222"
+      "uploaded_at": "2025-10-28T13:50:47.664699"
     },
     "chunk_count": 3,
-    "uploaded_at": "2025-10-24T14:02:35.160672"
+    "uploaded_at": "2025-10-28T13:50:49.581413"
   },
   "admin-docs/module-builder/model-management.md": {
     "hash": "bc17091da05712f138c0974d8fd2dc81b628a20e55c167413c79562990510aac",
-    "document_id": "9225c046-a46a-49da-ba47-cd45597a56f7",
-    "collection_id": "0529e15b-88cb-4a61-9a73-6201a1102f4f",
+    "document_id": "9d4eb5a9-4b96-419e-aa94-18b13678b4eb",
+    "collection_id": "ce81d211-ac5a-4764-bb89-ce13658b35f3",
     "metadata": {
       "source": "docusaurus",
       "project": "solidx-docs",
@@ -418,15 +418,15 @@
       "doc_title": "admin-docs/module-builder/model-management.md",
       "chunk_count": 3,
       "uploaded_by": "migration_script",
-      "uploaded_at": "2025-10-24T14:02:35.162909"
+      "uploaded_at": "2025-10-28T13:50:49.585547"
     },
     "chunk_count": 3,
-    "uploaded_at": "2025-10-24T14:02:37.613661"
+    "uploaded_at": "2025-10-28T13:50:52.434444"
   },
   "admin-docs/module-builder/field-management.md": {
     "hash": "769d917b0188261efb3330e62667076b5bb0fed8529a825bf64311f87b36bba8",
-    "document_id": "10acce26-b3f5-4b71-a6e5-946de7cd596f",
-    "collection_id": "0529e15b-88cb-4a61-9a73-6201a1102f4f",
+    "document_id": "ede81465-734f-4127-9f9d-2d0cd765fb92",
+    "collection_id": "ce81d211-ac5a-4764-bb89-ce13658b35f3",
     "metadata": {
       "source": "docusaurus",
       "project": "solidx-docs",
@@ -435,15 +435,15 @@
       "doc_title": "admin-docs/module-builder/field-management.md",
       "chunk_count": 8,
       "uploaded_by": "migration_script",
-      "uploaded_at": "2025-10-24T14:02:37.615986"
+      "uploaded_at": "2025-10-28T13:50:52.436264"
     },
     "chunk_count": 8,
-    "uploaded_at": "2025-10-24T14:02:41.803211"
+    "uploaded_at": "2025-10-28T13:50:57.288177"
   },
   "admin-docs/module-builder/index.md": {
     "hash": "a2332fd851dc01c2e26ccbc3dcb4f7b76d3085ead5f5da4bbb65b2b7991d6372",
-    "document_id": "38509ae5-0ff4-4685-9ee9-ae19177fa7db",
-    "collection_id": "0529e15b-88cb-4a61-9a73-6201a1102f4f",
+    "document_id": "1c9554fc-12ff-4dab-a234-2f4eb6f2fd56",
+    "collection_id": "ce81d211-ac5a-4764-bb89-ce13658b35f3",
     "metadata": {
       "source": "docusaurus",
       "project": "solidx-docs",
@@ -452,15 +452,15 @@
       "doc_title": "admin-docs/module-builder/index.md",
       "chunk_count": 2,
       "uploaded_by": "migration_script",
-      "uploaded_at": "2025-10-24T14:02:41.810775"
+      "uploaded_at": "2025-10-28T13:50:57.297187"
     },
     "chunk_count": 2,
-    "uploaded_at": "2025-10-24T14:02:42.902224"
+    "uploaded_at": "2025-10-28T13:50:58.343547"
   },
   "admin-docs/iam/permissions.md": {
     "hash": "71c86a875ff1dbb7a7b944c2bf943abd8665a56c91462ffd922d1cfcbc695780",
-    "document_id": "ca01aa73-76d2-42aa-97b0-026d6b2713d7",
-    "collection_id": "0529e15b-88cb-4a61-9a73-6201a1102f4f",
+    "document_id": "9f85d164-93ab-455c-8019-a2b896a23324",
+    "collection_id": "ce81d211-ac5a-4764-bb89-ce13658b35f3",
     "metadata": {
       "source": "docusaurus",
       "project": "solidx-docs",
@@ -469,15 +469,15 @@
       "doc_title": "admin-docs/iam/permissions.md",
       "chunk_count": 4,
       "uploaded_by": "migration_script",
-      "uploaded_at": "2025-10-24T14:02:42.905904"
+      "uploaded_at": "2025-10-28T13:50:58.349416"
     },
     "chunk_count": 4,
-    "uploaded_at": "2025-10-24T14:02:45.322593"
+    "uploaded_at": "2025-10-28T13:51:00.499422"
   },
   "admin-docs/iam/record-rules.md": {
     "hash": "f90dbdc9344af80d57fb1a3ec6b589d9f1aa0d83847e1c46367fa098a75b76bc",
-    "document_id": "9fe898ba-ba06-471f-a8e0-e5f5e284f76d",
-    "collection_id": "0529e15b-88cb-4a61-9a73-6201a1102f4f",
+    "document_id": "d11c9808-4fc2-486d-863b-c391172158c7",
+    "collection_id": "ce81d211-ac5a-4764-bb89-ce13658b35f3",
     "metadata": {
       "source": "docusaurus",
       "project": "solidx-docs",
@@ -486,15 +486,15 @@
       "doc_title": "admin-docs/iam/record-rules.md",
       "chunk_count": 6,
       "uploaded_by": "migration_script",
-      "uploaded_at": "2025-10-24T14:02:45.327879"
+      "uploaded_at": "2025-10-28T13:51:00.511797"
     },
     "chunk_count": 6,
-    "uploaded_at": "2025-10-24T14:02:48.846484"
+    "uploaded_at": "2025-10-28T13:51:04.482608"
   },
   "admin-docs/iam/roles.md": {
     "hash": "b9ce1f5981e758c46f81280f4b69790f38be3602cd03ba87e532e1f44d09300e",
-    "document_id": "f24cda68-d5fd-4739-8d47-400deb1cc9b0",
-    "collection_id": "0529e15b-88cb-4a61-9a73-6201a1102f4f",
+    "document_id": "cff3f9b6-ace9-43f8-ac5b-3583ae4f6f97",
+    "collection_id": "ce81d211-ac5a-4764-bb89-ce13658b35f3",
     "metadata": {
       "source": "docusaurus",
       "project": "solidx-docs",
@@ -503,15 +503,15 @@
       "doc_title": "admin-docs/iam/roles.md",
       "chunk_count": 3,
       "uploaded_by": "migration_script",
-      "uploaded_at": "2025-10-24T14:02:48.850185"
+      "uploaded_at": "2025-10-28T13:51:04.487427"
     },
     "chunk_count": 3,
-    "uploaded_at": "2025-10-24T14:02:50.541891"
+    "uploaded_at": "2025-10-28T13:51:06.125105"
   },
   "admin-docs/iam/users.md": {
     "hash": "efa3e00fc33126f7bf10f74290dc0e81e971bac8480d1bd2cea033caf663ea7a",
-    "document_id": "0e7bac80-8ac6-4bbb-ace1-65fb7a2b1d12",
-    "collection_id": "0529e15b-88cb-4a61-9a73-6201a1102f4f",
+    "document_id": "2e9e32ba-8555-431a-a436-accbd1013cff",
+    "collection_id": "ce81d211-ac5a-4764-bb89-ce13658b35f3",
     "metadata": {
       "source": "docusaurus",
       "project": "solidx-docs",
@@ -520,15 +520,15 @@
       "doc_title": "admin-docs/iam/users.md",
       "chunk_count": 4,
       "uploaded_by": "migration_script",
-      "uploaded_at": "2025-10-24T14:02:50.546293"
+      "uploaded_at": "2025-10-28T13:51:06.137103"
     },
     "chunk_count": 4,
-    "uploaded_at": "2025-10-24T14:02:53.207127"
+    "uploaded_at": "2025-10-28T13:51:08.784519"
   },
   "admin-docs/iam/index.md": {
     "hash": "2286b63cecfc374fa30a35492eeb5fe0ebd52f59906bf92f545292d9c6f60f43",
-    "document_id": "9a0748f6-083a-4101-b8bc-d6dcd450a03a",
-    "collection_id": "0529e15b-88cb-4a61-9a73-6201a1102f4f",
+    "document_id": "3c578af5-bb9f-4aae-974c-61550a8a0d76",
+    "collection_id": "ce81d211-ac5a-4764-bb89-ce13658b35f3",
     "metadata": {
       "source": "docusaurus",
       "project": "solidx-docs",
@@ -537,15 +537,15 @@
       "doc_title": "admin-docs/iam/index.md",
       "chunk_count": 4,
       "uploaded_by": "migration_script",
-      "uploaded_at": "2025-10-24T14:02:53.213156"
+      "uploaded_at": "2025-10-28T13:51:08.793748"
     },
     "chunk_count": 4,
-    "uploaded_at": "2025-10-24T14:02:56.052661"
+    "uploaded_at": "2025-10-28T13:51:11.697878"
   },
   "admin-docs/layouts/form-view.md": {
     "hash": "af4d1c87974e970ce6ae14ab1a1bc1f578880606da5a7858648521fb3540be6d",
-    "document_id": "13b1aec8-34c6-48f6-9e2c-804cdd2b558b",
-    "collection_id": "0529e15b-88cb-4a61-9a73-6201a1102f4f",
+    "document_id": "18f9840e-60c6-49e9-9014-6f76f5978f00",
+    "collection_id": "ce81d211-ac5a-4764-bb89-ce13658b35f3",
     "metadata": {
       "source": "docusaurus",
       "project": "solidx-docs",
@@ -554,15 +554,15 @@
       "doc_title": "admin-docs/layouts/form-view.md",
       "chunk_count": 4,
       "uploaded_by": "migration_script",
-      "uploaded_at": "2025-10-24T14:02:56.059790"
+      "uploaded_at": "2025-10-28T13:51:11.712704"
     },
     "chunk_count": 4,
-    "uploaded_at": "2025-10-24T14:02:58.355389"
+    "uploaded_at": "2025-10-28T13:51:14.416536"
   },
   "admin-docs/layouts/index.md": {
     "hash": "bff718c804501412a60de28ea24c108161ddaadab2634c0b867a004ff4010dfd",
-    "document_id": "694cdf70-e92d-49fa-ad83-c540b20074ee",
-    "collection_id": "0529e15b-88cb-4a61-9a73-6201a1102f4f",
+    "document_id": "5271608a-432b-4fb2-b03c-9304da164e00",
+    "collection_id": "ce81d211-ac5a-4764-bb89-ce13658b35f3",
     "metadata": {
       "source": "docusaurus",
       "project": "solidx-docs",
@@ -571,15 +571,15 @@
       "doc_title": "admin-docs/layouts/index.md",
       "chunk_count": 5,
       "uploaded_by": "migration_script",
-      "uploaded_at": "2025-10-24T14:02:58.362358"
+      "uploaded_at": "2025-10-28T13:51:14.432319"
     },
     "chunk_count": 5,
-    "uploaded_at": "2025-10-24T14:03:01.703535"
+    "uploaded_at": "2025-10-28T13:51:17.575322"
   },
   "admin-docs/layouts/kanban-view.md": {
     "hash": "20bb01e5d091657fff9b3215e0bbcec776bc9dd469e3117730338e692780216e",
-    "document_id": "2a843a13-c774-4b71-9588-e66c9b4e300f",
-    "collection_id": "0529e15b-88cb-4a61-9a73-6201a1102f4f",
+    "document_id": "942b87b9-0531-4018-90c0-272100ae23af",
+    "collection_id": "ce81d211-ac5a-4764-bb89-ce13658b35f3",
     "metadata": {
       "source": "docusaurus",
       "project": "solidx-docs",
@@ -588,15 +588,15 @@
       "doc_title": "admin-docs/layouts/kanban-view.md",
       "chunk_count": 10,
       "uploaded_by": "migration_script",
-      "uploaded_at": "2025-10-24T14:03:01.713130"
+      "uploaded_at": "2025-10-28T13:51:17.577790"
     },
     "chunk_count": 10,
-    "uploaded_at": "2025-10-24T14:03:06.649503"
+    "uploaded_at": "2025-10-28T13:51:24.634450"
   },
   "admin-docs/layouts/list-view.md": {
     "hash": "a1b7ddb02a52b9958febf7e2d95c827d349adeb8310f03f0742d5e4fa38c9cda",
-    "document_id": "6f0d3f83-81f9-4a22-b90f-5e9f25c2f907",
-    "collection_id": "0529e15b-88cb-4a61-9a73-6201a1102f4f",
+    "document_id": "d8715044-f29f-440a-a457-303702f0e418",
+    "collection_id": "ce81d211-ac5a-4764-bb89-ce13658b35f3",
     "metadata": {
       "source": "docusaurus",
       "project": "solidx-docs",
@@ -605,15 +605,15 @@
       "doc_title": "admin-docs/layouts/list-view.md",
       "chunk_count": 6,
       "uploaded_by": "migration_script",
-      "uploaded_at": "2025-10-24T14:03:06.655602"
+      "uploaded_at": "2025-10-28T13:51:24.643424"
     },
     "chunk_count": 6,
-    "uploaded_at": "2025-10-24T14:03:10.366277"
+    "uploaded_at": "2025-10-28T13:51:29.331377"
   },
   "admin-docs/media-library/index.md": {
     "hash": "2b4869fd5d2ba76ef746965d9469dad991095dfb21d0a540484c60ab53209f63",
-    "document_id": "f9388b67-4362-4c09-b9be-65ebd2aa002c",
-    "collection_id": "0529e15b-88cb-4a61-9a73-6201a1102f4f",
+    "document_id": "a7f1341e-e729-43fc-88b9-9c8218e509df",
+    "collection_id": "ce81d211-ac5a-4764-bb89-ce13658b35f3",
     "metadata": {
       "source": "docusaurus",
       "project": "solidx-docs",
@@ -622,15 +622,15 @@
       "doc_title": "admin-docs/media-library/index.md",
       "chunk_count": 4,
       "uploaded_by": "migration_script",
-      "uploaded_at": "2025-10-24T14:03:10.373057"
+      "uploaded_at": "2025-10-28T13:51:29.349770"
     },
     "chunk_count": 4,
-    "uploaded_at": "2025-10-24T14:03:12.033585"
+    "uploaded_at": "2025-10-28T13:51:31.707698"
   },
   "admin-docs/media-library/storage-providers.md": {
     "hash": "b10bcabd9257c984462771e61ff2a7fd68a51cd5378caf7ba0e2755a6a39c5ea",
-    "document_id": "9bdfc256-5e26-4b27-ba37-d01d5de68ea7",
-    "collection_id": "0529e15b-88cb-4a61-9a73-6201a1102f4f",
+    "document_id": "a3baecea-dfb9-425a-99f9-4e1983f809eb",
+    "collection_id": "ce81d211-ac5a-4764-bb89-ce13658b35f3",
     "metadata": {
       "source": "docusaurus",
       "project": "solidx-docs",
@@ -641,15 +641,15 @@
       "description": "Overview of supported media storage providers in SolidX applications.",
       "chunk_count": 5,
       "uploaded_by": "migration_script",
-      "uploaded_at": "2025-10-24T14:03:12.038741"
+      "uploaded_at": "2025-10-28T13:51:31.719821"
     },
     "chunk_count": 5,
-    "uploaded_at": "2025-10-24T14:03:15.526149"
+    "uploaded_at": "2025-10-28T13:51:35.307482"
   },
   "admin-docs/media-library/media-view.md": {
     "hash": "6d454f4f8447ebb1d2d0993bdd076c5e80c3cf201fd56db64307cf75939936b4",
-    "document_id": "f99a7996-e0a1-4ded-9a06-e8a25e8c9d83",
-    "collection_id": "0529e15b-88cb-4a61-9a73-6201a1102f4f",
+    "document_id": "cd851295-05af-46e3-8135-9aba3b8e90f3",
+    "collection_id": "ce81d211-ac5a-4764-bb89-ce13658b35f3",
     "metadata": {
       "source": "docusaurus",
       "project": "solidx-docs",
@@ -658,15 +658,15 @@
       "doc_title": "admin-docs/media-library/media-view.md",
       "chunk_count": 4,
       "uploaded_by": "migration_script",
-      "uploaded_at": "2025-10-24T14:03:15.533298"
+      "uploaded_at": "2025-10-28T13:51:35.316753"
     },
     "chunk_count": 4,
-    "uploaded_at": "2025-10-24T14:03:18.933169"
+    "uploaded_at": "2025-10-28T13:51:37.416689"
   },
   "admin-docs/modules/form-view.md": {
     "hash": "cbd18a9b56b8884c32f2ce526478d1c237aa2c44f386b4c1890952f8b2db6d50",
-    "document_id": "226f69da-b569-413b-baae-420b3a5720a9",
-    "collection_id": "0529e15b-88cb-4a61-9a73-6201a1102f4f",
+    "document_id": "31cf06a0-e609-4977-aad3-02457bdd7803",
+    "collection_id": "ce81d211-ac5a-4764-bb89-ce13658b35f3",
     "metadata": {
       "source": "docusaurus",
       "project": "solidx-docs",
@@ -675,15 +675,15 @@
       "doc_title": "admin-docs/modules/form-view.md",
       "chunk_count": 1,
       "uploaded_by": "migration_script",
-      "uploaded_at": "2025-10-24T14:03:18.941194"
+      "uploaded_at": "2025-10-28T13:51:37.418379"
     },
     "chunk_count": 1,
-    "uploaded_at": "2025-10-24T14:03:19.442700"
+    "uploaded_at": "2025-10-28T13:51:38.168951"
   },
   "admin-docs/modules/menu-structure.md": {
     "hash": "61947d0f2e4e9cfc19332cde6029ba13f5fb46768a640689f3783decafce2db7",
-    "document_id": "6669b1b0-d561-41ad-9714-6f113681d15d",
-    "collection_id": "0529e15b-88cb-4a61-9a73-6201a1102f4f",
+    "document_id": "f053a56e-2de4-48dd-a4c4-f43c7aadd99a",
+    "collection_id": "ce81d211-ac5a-4764-bb89-ce13658b35f3",
     "metadata": {
       "source": "docusaurus",
       "project": "solidx-docs",
@@ -692,15 +692,15 @@
       "doc_title": "admin-docs/modules/menu-structure.md",
       "chunk_count": 4,
       "uploaded_by": "migration_script",
-      "uploaded_at": "2025-10-24T14:03:19.447584"
+      "uploaded_at": "2025-10-28T13:51:38.175619"
     },
     "chunk_count": 4,
-    "uploaded_at": "2025-10-24T14:03:22.443878"
+    "uploaded_at": "2025-10-28T13:51:41.125098"
   },
   "admin-docs/modules/index.md": {
     "hash": "1dc12518c0896b75954fa0aec4eccaa848ddf31c5876cf4a6f98784414bb4054",
-    "document_id": "199b30b5-83d2-44e6-bf61-2a15d9f351d8",
-    "collection_id": "0529e15b-88cb-4a61-9a73-6201a1102f4f",
+    "document_id": "459391bf-ce5b-4086-b9cb-d4c11d719f6b",
+    "collection_id": "ce81d211-ac5a-4764-bb89-ce13658b35f3",
     "metadata": {
       "source": "docusaurus",
       "project": "solidx-docs",
@@ -709,15 +709,15 @@
       "doc_title": "admin-docs/modules/index.md",
       "chunk_count": 3,
       "uploaded_by": "migration_script",
-      "uploaded_at": "2025-10-24T14:03:22.449968"
+      "uploaded_at": "2025-10-28T13:51:41.132093"
     },
     "chunk_count": 3,
-    "uploaded_at": "2025-10-24T14:03:24.161239"
+    "uploaded_at": "2025-10-28T13:51:45.952534"
   },
   "admin-docs/modules/kanban-view.md": {
     "hash": "a716a690d30466a787a7f2b4b77af8535a4d54f92cb18a4405e286d65b3bafb4",
-    "document_id": "c83b98a7-3813-4da1-873e-598f907dff07",
-    "collection_id": "0529e15b-88cb-4a61-9a73-6201a1102f4f",
+    "document_id": "2643243b-d84f-4e95-a1f7-d5a30021a972",
+    "collection_id": "ce81d211-ac5a-4764-bb89-ce13658b35f3",
     "metadata": {
       "source": "docusaurus",
       "project": "solidx-docs",
@@ -726,15 +726,15 @@
       "doc_title": "admin-docs/modules/kanban-view.md",
       "chunk_count": 2,
       "uploaded_by": "migration_script",
-      "uploaded_at": "2025-10-24T14:03:24.165555"
+      "uploaded_at": "2025-10-28T13:51:45.955063"
     },
     "chunk_count": 2,
-    "uploaded_at": "2025-10-24T14:03:25.560830"
+    "uploaded_at": "2025-10-28T13:51:47.168688"
   },
   "admin-docs/modules/list-view.md": {
     "hash": "97fe8b2fbef28b503b58812fe66437d5973ca90c4b221f77d10d14e90b39b436",
-    "document_id": "62804455-97db-430e-9496-d35d19ad06b2",
-    "collection_id": "0529e15b-88cb-4a61-9a73-6201a1102f4f",
+    "document_id": "f4f501d0-a21e-4c22-98c5-887c8c8367fb",
+    "collection_id": "ce81d211-ac5a-4764-bb89-ce13658b35f3",
     "metadata": {
       "source": "docusaurus",
       "project": "solidx-docs",
@@ -743,15 +743,15 @@
       "doc_title": "admin-docs/modules/list-view.md",
       "chunk_count": 2,
       "uploaded_by": "migration_script",
-      "uploaded_at": "2025-10-24T14:03:25.566066"
+      "uploaded_at": "2025-10-28T13:51:47.172562"
     },
     "chunk_count": 2,
-    "uploaded_at": "2025-10-24T14:03:26.582884"
+    "uploaded_at": "2025-10-28T13:51:48.308615"
   },
   "admin-docs/notifications/sms-templates.md": {
     "hash": "f166778768277141f210db1909cd80b7ea24a9be6855908e7aec7119fe2dc918",
-    "document_id": "e967c891-a979-4357-8909-7bc82158e11c",
-    "collection_id": "0529e15b-88cb-4a61-9a73-6201a1102f4f",
+    "document_id": "13ecf132-1549-4efc-be33-2818f46cf845",
+    "collection_id": "ce81d211-ac5a-4764-bb89-ce13658b35f3",
     "metadata": {
       "source": "docusaurus",
       "project": "solidx-docs",
@@ -762,15 +762,15 @@
       "description": "Learn how to create and manage SMS templates in SolidX, including dynamic content",
       "chunk_count": 6,
       "uploaded_by": "migration_script",
-      "uploaded_at": "2025-10-24T14:03:26.587924"
+      "uploaded_at": "2025-10-28T13:51:48.315859"
     },
     "chunk_count": 6,
-    "uploaded_at": "2025-10-24T14:03:30.170451"
+    "uploaded_at": "2025-10-28T13:51:51.864617"
   },
   "admin-docs/notifications/index.md": {
     "hash": "c4c4aaa53e869dcad6ca0b1266cc0633738e9d53c1b4c0c03519c0e8c20b1e81",
-    "document_id": "46047979-c965-44f7-9f5a-eacc78371cbc",
-    "collection_id": "0529e15b-88cb-4a61-9a73-6201a1102f4f",
+    "document_id": "d98aeb21-a247-47f2-8f90-2ebb553edfdc",
+    "collection_id": "ce81d211-ac5a-4764-bb89-ce13658b35f3",
     "metadata": {
       "source": "docusaurus",
       "project": "solidx-docs",
@@ -779,15 +779,15 @@
       "doc_title": "admin-docs/notifications/index.md",
       "chunk_count": 6,
       "uploaded_by": "migration_script",
-      "uploaded_at": "2025-10-24T14:03:30.175730"
+      "uploaded_at": "2025-10-28T13:51:51.871554"
     },
     "chunk_count": 6,
-    "uploaded_at": "2025-10-24T14:03:33.548782"
+    "uploaded_at": "2025-10-28T13:51:55.572720"
   },
   "admin-docs/notifications/email-templates.md": {
     "hash": "3695f51366c5c990f738918f11d014f7f5aabb921ee57265de5b51135f8642c4",
-    "document_id": "047a29f5-3311-45ee-b8f4-0bce1c328815",
-    "collection_id": "0529e15b-88cb-4a61-9a73-6201a1102f4f",
+    "document_id": "ca443822-3e56-4ad9-9031-b2bf8a5e6bc7",
+    "collection_id": "ce81d211-ac5a-4764-bb89-ce13658b35f3",
     "metadata": {
       "source": "docusaurus",
       "project": "solidx-docs",
@@ -798,15 +798,15 @@
       "description": "Learn how to create and manage email templates in SOLID, including dynamic content",
       "chunk_count": 5,
       "uploaded_by": "migration_script",
-      "uploaded_at": "2025-10-24T14:03:33.556436"
+      "uploaded_at": "2025-10-28T13:51:55.581761"
     },
     "chunk_count": 5,
-    "uploaded_at": "2025-10-24T14:03:35.801759"
+    "uploaded_at": "2025-10-28T13:51:58.804747"
   },
   "developer-docs/metadata_schema/action-metadata.md": {
     "hash": "a6d684b4d897ec5cb53f23b826c632caf0557a7ec12fc9afec55b6e5f0e7906f",
-    "document_id": "b24b4343-e9b1-438d-94da-ba296a1e5712",
-    "collection_id": "e0414fa4-da64-4e70-a5ea-349424ba1a47",
+    "document_id": "4b8ed984-55bb-4bc7-9b63-9c58b068e7d9",
+    "collection_id": "a7d72ddf-6d30-4390-aeb0-8d14ec87b52a",
     "metadata": {
       "source": "docusaurus",
       "project": "solidx-docs",
@@ -816,20 +816,18 @@
       "title": "Action Metadata",
       "description": "Metadata schema for defining actions in SolidX applications.",
       "summary": "This document defines action metadata in SolidX, which determines what happens when users interact with UI elements like menu items, buttons, or links. Actions connect the frontend to backend functionality and control how data is displayed or processed. The metadata supports two main action types - solid (standard SolidX actions linked to views) and custom (custom component actions with optional modal display). Key attributes include action name, display name, type, domain, context, custom component path, server endpoint, associated view, module, and model. Actions serve as the bridge between user interactions and application responses.",
-      "solidx_concerns": [
-        "add_custom_menu_action_combo"
-      ],
+      "solidx_concerns": "add_custom_menu_action_combo",
       "chunk_count": 3,
       "uploaded_by": "migration_script",
-      "uploaded_at": "2025-10-24T14:03:35.810609"
+      "uploaded_at": "2025-10-28T13:51:58.820522"
     },
     "chunk_count": 3,
-    "uploaded_at": "2025-10-24T14:03:37.229210"
+    "uploaded_at": "2025-10-28T13:52:00.442162"
   },
   "developer-docs/metadata_schema/menu-item-metadata.md": {
     "hash": "f528a8affaac6be31fa732eab045f6c29240e25d477c107ee6bfe9a63ea48a44",
-    "document_id": "d2609ee4-3450-4e1a-8561-3339e03e6da1",
-    "collection_id": "e0414fa4-da64-4e70-a5ea-349424ba1a47",
+    "document_id": "e5418b2b-302e-4bde-9729-1620083198a5",
+    "collection_id": "a7d72ddf-6d30-4390-aeb0-8d14ec87b52a",
     "metadata": {
       "source": "docusaurus",
       "project": "solidx-docs",
@@ -839,22 +837,18 @@
       "title": "Menu Item Metadata",
       "description": "Metadata schema for defining menus in SolidX applications.",
       "summary": "This document describes menu item metadata in SolidX, which automatically generates and manages the admin panel's navigation structure based on modules and resources. Menu metadata includes display name, unique name, sequence number for ordering, associated action, module reference, parent menu item for hierarchical navigation, role-based access control, and icon names. The system supports nested menu structures through parent-child relationships, enabling complex navigation hierarchies. Examples demonstrate creating multi-level menus for modules like the Fees Portal with home pages, list views, and nested submenus.",
-      "solidx_concerns": [
-        "add_custom_menu_action_combo",
-        "add_new_role_with_permission",
-        "modify_role"
-      ],
+      "solidx_concerns": "add_custom_menu_action_combo,add_new_role_with_permission,modify_role",
       "chunk_count": 2,
       "uploaded_by": "migration_script",
-      "uploaded_at": "2025-10-24T14:03:37.238238"
+      "uploaded_at": "2025-10-28T13:52:00.450692"
     },
     "chunk_count": 2,
-    "uploaded_at": "2025-10-24T14:03:38.624276"
+    "uploaded_at": "2025-10-28T13:52:01.698754"
   },
   "developer-docs/metadata_schema/view-metadata.md": {
     "hash": "d37cef75f52c20182842aaee1928c94129eff8dc7ddae56e22b717f505159eac",
-    "document_id": "8eb7b85b-03d8-4ec2-8039-79c1e0b6c5e2",
-    "collection_id": "e0414fa4-da64-4e70-a5ea-349424ba1a47",
+    "document_id": "cde7587b-caab-4213-8cbf-6fa379863d22",
+    "collection_id": "a7d72ddf-6d30-4390-aeb0-8d14ec87b52a",
     "metadata": {
       "source": "docusaurus",
       "project": "solidx-docs",
@@ -864,23 +858,18 @@
       "title": "View Metadata",
       "description": "Metadata schema for defining views in SolidX applications — with explanations before each code snippet.",
       "summary": "This document explains view metadata in SolidX, which defines UI presentations of models and automatically generates list views (tabular displays with search, filter, pagination), form views (input forms for create/edit operations), and kanban views (card-based displays with drag-and-drop). Each example below now starts with a short “What this shows” explanation.",
-      "solidx_concerns": [
-        "update_layout",
-        "add_field_to_existing_layout",
-        "remove_field_from_existing_layout",
-        "modify_layout_field_attribute"
-      ],
+      "solidx_concerns": "update_layout,add_field_to_existing_layout,remove_field_from_existing_layout,modify_layout_field_attribute",
       "chunk_count": 6,
       "uploaded_by": "migration_script",
-      "uploaded_at": "2025-10-24T14:03:38.633090"
+      "uploaded_at": "2025-10-28T13:52:01.712859"
     },
     "chunk_count": 6,
-    "uploaded_at": "2025-10-24T14:03:42.044086"
+    "uploaded_at": "2025-10-28T13:52:05.476418"
   },
   "developer-docs/metadata_schema/roles-permissions-metadata.md": {
     "hash": "73afd7715500f8bb657526b4a8fc3a2d0f9f934e43a17573494f99282c482b28",
-    "document_id": "fb8b76fc-d1f7-4420-ab3e-1eaa75b826ef",
-    "collection_id": "e0414fa4-da64-4e70-a5ea-349424ba1a47",
+    "document_id": "b17a531e-7985-45d1-9909-fb068ff1d285",
+    "collection_id": "a7d72ddf-6d30-4390-aeb0-8d14ec87b52a",
     "metadata": {
       "source": "docusaurus",
       "project": "solidx-docs",
@@ -890,21 +879,18 @@
       "title": "Roles & Permissions",
       "description": "Metadata schema for defining roles and permissions in SolidX applications.",
       "summary": "This document explains roles and permissions metadata in SolidX, which provides role-based access control at a high level. Roles group permissions and can be assigned to users, while permissions are automatically discovered based on controller actions for fine-grained control. Each role has a name and description, with permissions specified as an array of controller method names (e.g., \"InstituteController.create\", \"InstituteController.findMany\"). The system includes a default Admin role with all permissions. Examples demonstrate creating custom roles like Institute Admin with specific permission sets for managing institute-related operations.",
-      "solidx_concerns": [
-        "add_new_role_with_permission",
-        "modify_role"
-      ],
+      "solidx_concerns": "add_new_role_with_permission,modify_role",
       "chunk_count": 2,
       "uploaded_by": "migration_script",
-      "uploaded_at": "2025-10-24T14:03:42.050926"
+      "uploaded_at": "2025-10-28T13:52:05.496364"
     },
     "chunk_count": 2,
-    "uploaded_at": "2025-10-24T14:03:43.175343"
+    "uploaded_at": "2025-10-28T13:52:07.419298"
   },
   "developer-docs/metadata_schema/security-rules.md": {
     "hash": "57a7494d64d4986bf349c048f14a837d9b1069ce814081126eda838ae8dcb57a",
-    "document_id": "4f1d901f-e1a0-4002-8202-6ca9bc9093a4",
-    "collection_id": "e0414fa4-da64-4e70-a5ea-349424ba1a47",
+    "document_id": "13b3e500-cfed-4dac-9186-7471f3eb7f21",
+    "collection_id": "a7d72ddf-6d30-4390-aeb0-8d14ec87b52a",
     "metadata": {
       "source": "docusaurus",
       "project": "solidx-docs",
@@ -914,20 +900,18 @@
       "title": "Security Rules",
       "description": "Metadata schema for defining security rules in SolidX applications.",
       "summary": "This document explains security rules metadata in SolidX, which controls data access at the model level to ensure only authorized users can view sensitive information. Each rule includes a name, description, associated role, target model, and security rule configuration with filter conditions. The filter configuration supports complex query structures using operators like $eq with dynamic values such as $activeUserId for user-specific data filtering. Examples demonstrate restricting fee type visibility to institute users through relational filtering across associated models. The document links to detailed guides on creating and managing security rules in the backend customization section.",
-      "solidx_concerns": [
-        "add/update_security_record_rule"
-      ],
+      "solidx_concerns": "add/update_security_record_rule",
       "chunk_count": 3,
       "uploaded_by": "migration_script",
-      "uploaded_at": "2025-10-24T14:03:43.184806"
+      "uploaded_at": "2025-10-28T13:52:07.421898"
     },
     "chunk_count": 3,
-    "uploaded_at": "2025-10-24T14:03:44.727479"
+    "uploaded_at": "2025-10-28T13:52:09.083878"
   },
   "developer-docs/metadata_schema/scheduled-jobs.md": {
     "hash": "e89d7ae93078587fb5c556f25695036bf435965c8ed5056c11ba58f52e0d174c",
-    "document_id": "9a580343-dc69-4537-951e-f562ebe9621c",
-    "collection_id": "e0414fa4-da64-4e70-a5ea-349424ba1a47",
+    "document_id": "b7c93042-0a54-4cf2-9f4c-035dd90deb99",
+    "collection_id": "a7d72ddf-6d30-4390-aeb0-8d14ec87b52a",
     "metadata": {
       "source": "docusaurus",
       "project": "solidx-docs",
@@ -937,20 +921,18 @@
       "title": "Scheduled Jobs",
       "description": "Metadata schema for defining scheduled jobs in SolidX applications.",
       "summary": "This document describes scheduled jobs metadata in SolidX, which enables configuration of recurring tasks such as sending notifications, cleaning up records, data synchronization, or regular maintenance. The metadata includes schedule name, active status flag, frequency specification, days of week when the job should run, the job class name to execute, and associated module reference. Examples demonstrate configuring late fee calculation jobs that run at specified intervals. The document links to detailed guides on creating and managing scheduled jobs in the backend customization section.",
-      "solidx_concerns": [
-        "add_scheduled_job"
-      ],
+      "solidx_concerns": "add_scheduled_job",
       "chunk_count": 3,
       "uploaded_by": "migration_script",
-      "uploaded_at": "2025-10-24T14:03:44.736093"
+      "uploaded_at": "2025-10-28T13:52:09.097409"
     },
     "chunk_count": 3,
-    "uploaded_at": "2025-10-24T14:03:46.369376"
+    "uploaded_at": "2025-10-28T13:52:10.933058"
   },
   "developer-docs/metadata_schema/sms-templates.md": {
     "hash": "43380c0fe329e226da2ed15e6de7589be75a8027059357263ffa4e1b846bd08a",
-    "document_id": "d248ce7e-0d9d-45c7-80f7-6eac392056b8",
-    "collection_id": "e0414fa4-da64-4e70-a5ea-349424ba1a47",
+    "document_id": "e2044f3e-a69b-428c-a4dd-0bef3b9392d6",
+    "collection_id": "a7d72ddf-6d30-4390-aeb0-8d14ec87b52a",
     "metadata": {
       "source": "docusaurus",
       "project": "solidx-docs",
@@ -960,21 +942,18 @@
       "title": "SMS Templates",
       "description": "Metadata schema for populating SMS templates in SolidX applications.",
       "summary": "This document describes SMS template metadata in SolidX, which allows creation and management of SMS templates with dynamic content using Handlebars syntax. Templates are stored in separate text files referenced by the metadata and support variables for personalization. Key attributes include template name, display name, body file reference, description, SMS provider template ID, active status, and type (text). The document provides examples of OTP login templates with dynamic variable substitution, file organization guidelines, and links to implementing custom SMS providers for integration with external SMS services like Twilio or AWS SNS.",
-      "solidx_concerns": [
-        "create/update_sms_template",
-        "new_sms_provider"
-      ],
+      "solidx_concerns": "create/update_sms_template,new_sms_provider",
       "chunk_count": 2,
       "uploaded_by": "migration_script",
-      "uploaded_at": "2025-10-24T14:03:46.387339"
+      "uploaded_at": "2025-10-28T13:52:10.941394"
     },
     "chunk_count": 2,
-    "uploaded_at": "2025-10-24T14:03:47.676751"
+    "uploaded_at": "2025-10-28T13:52:12.106156"
   },
   "developer-docs/metadata_schema/media-storage-providers.md": {
     "hash": "206176d17fedbd3ebaaa63aca795839acd035680bd8d92b1e676dbb778e02b96",
-    "document_id": "9d7f6e86-1c44-4e1c-8905-bfbe59afd6fd",
-    "collection_id": "e0414fa4-da64-4e70-a5ea-349424ba1a47",
+    "document_id": "dcebb005-f0c2-41c2-bfc6-c5274b3bcacf",
+    "collection_id": "a7d72ddf-6d30-4390-aeb0-8d14ec87b52a",
     "metadata": {
       "source": "docusaurus",
       "project": "solidx-docs",
@@ -984,18 +963,18 @@
       "title": "Media Storage Providers Metadata",
       "description": "Metadata schema for defining media storage providers in SolidX applications.",
       "summary": "This document explains media storage provider metadata in SolidX, which supports multiple storage options for media files including local filesystem and AWS S3. The metadata includes provider name and type attributes. Default providers (default-filesystem and default-aws-s3) are automatically seeded and don't require explicit JSON configuration. For AWS S3, sensitive credentials (access key, secret key) must be provided via environment variables rather than in JSON for security. The document references the admin documentation for conceptual understanding and provides configuration examples for different storage provider types.",
-      "solidx_concerns": [],
+      "solidx_concerns": "",
       "chunk_count": 3,
       "uploaded_by": "migration_script",
-      "uploaded_at": "2025-10-24T14:03:47.680838"
+      "uploaded_at": "2025-10-28T13:52:12.136066"
     },
     "chunk_count": 3,
-    "uploaded_at": "2025-10-24T14:03:49.043222"
+    "uploaded_at": "2025-10-28T13:52:13.534329"
   },
   "developer-docs/metadata_schema/users-metadata.md": {
     "hash": "2c1defdd410fa24fa1e45798bd0caa253f0d106c393acc24fe75af8d5c017ccf",
-    "document_id": "2615822e-1778-463d-96ae-e7ef9eb0ddf3",
-    "collection_id": "e0414fa4-da64-4e70-a5ea-349424ba1a47",
+    "document_id": "70bad87d-b37b-4086-a12a-768a6aa62609",
+    "collection_id": "a7d72ddf-6d30-4390-aeb0-8d14ec87b52a",
     "metadata": {
       "source": "docusaurus",
       "project": "solidx-docs",
@@ -1005,18 +984,18 @@
       "title": "Users",
       "description": "Metadata schema for populating users in SolidX applications.",
       "summary": "This document describes how to populate initial users in SolidX using metadata configuration. Users can be created with attributes including full name, username, email, mobile number, and optional role assignments. If no password is provided, the system auto-generates secure passwords and emails them to the specified addresses. Users are created with the default role specified in the IAM_DEFAULT_ROLE environment variable, or the Public role if not set. The metadata supports specifying multiple roles per user and includes examples of creating users with different configurations.",
-      "solidx_concerns": [],
+      "solidx_concerns": "",
       "chunk_count": 3,
       "uploaded_by": "migration_script",
-      "uploaded_at": "2025-10-24T14:03:49.049548"
+      "uploaded_at": "2025-10-28T13:52:13.548024"
     },
     "chunk_count": 3,
-    "uploaded_at": "2025-10-24T14:03:50.852939"
+    "uploaded_at": "2025-10-28T13:52:15.322183"
   },
   "developer-docs/metadata_schema/field-metadata.md": {
-    "hash": "8417c24976253a2174b1e78191c1d892eec7d4442bbcf33e9559572a2b0d6287",
-    "document_id": "35ab6b50-83c4-4575-881d-ec79e730fd07",
-    "collection_id": "e0414fa4-da64-4e70-a5ea-349424ba1a47",
+    "hash": "c3f96c8a9e1544d164a1cfee88006b2ac2fd6236e2cdff2cd2f83a48ba64b157",
+    "document_id": "375c5807-2715-4f9c-b2a1-481e8de7ebac",
+    "collection_id": "a7d72ddf-6d30-4390-aeb0-8d14ec87b52a",
     "metadata": {
       "source": "docusaurus",
       "project": "solidx-docs",
@@ -1026,22 +1005,18 @@
       "title": "Field Metadata Schema",
       "description": "Overview of the field metadata schema used in SolidX.",
       "summary": "This comprehensive document details field metadata in SolidX, which treats fields as semantic attributes that define how users interact with data in the admin interface. It covers extensive field types including numeric (integer, bigInteger, decimal), text (shortText, longText, richText), temporal (date, dateTime, time), boolean, JSON, media (singleMedia, multipleMedia), specialized types (email, GUID, computed fields), selection fields (static and dynamic), and relation fields (manyToOne, oneToMany, manyToMany). Each field type includes configuration options for validation, default values, encryption, indexing, uniqueness, privacy, and audit tracking, with detailed examples and attribute documentation.",
-      "solidx_concerns": [
-        "add_field_to_a_model",
-        "remove_field_from_a_model",
-        "create_model_with_fields"
-      ],
+      "solidx_concerns": "add_field_to_a_model,remove_field_from_a_model,create_model_with_fields",
       "chunk_count": 7,
       "uploaded_by": "migration_script",
-      "uploaded_at": "2025-10-24T14:03:50.857079"
+      "uploaded_at": "2025-10-28T13:52:15.336742"
     },
     "chunk_count": 7,
-    "uploaded_at": "2025-10-24T14:03:55.575211"
+    "uploaded_at": "2025-10-28T13:52:18.799869"
   },
   "developer-docs/metadata_schema/index.md": {
     "hash": "781088f29a29070d29fad9aebecbbecca520c2911da3fdcebbae401075e0c75e",
-    "document_id": "f0f8bcdf-a198-4b82-a9e3-91cfb8c93140",
-    "collection_id": "e0414fa4-da64-4e70-a5ea-349424ba1a47",
+    "document_id": "5a26206f-cbe8-490b-8ede-c469123870d3",
+    "collection_id": "a7d72ddf-6d30-4390-aeb0-8d14ec87b52a",
     "metadata": {
       "source": "docusaurus",
       "project": "solidx-docs",
@@ -1051,22 +1026,18 @@
       "title": "Metadata Schema",
       "description": "Overview of the metadata schema used in SolidX.",
       "summary": "This document provides an overview of SolidX's metadata-driven architecture, which enables flexible configuration of both backend and frontend functionality without modifying core code. Metadata can be defined in JSON files or through the admin interface and is automatically synced to the database. Key components include Module, Model, Field, View, Action, Menu Item, Roles & Permissions, Users, Email/SMS Templates, Media Storage Providers, Scheduled Jobs, Security Rules, List of Values, and Dashboard metadata. The document covers seeding processes, best practices for naming conventions, security, performance optimization, user experience, maintainability, and data integrity.",
-      "solidx_concerns": [
-        "add_field_to_existing_layout",
-        "add_field_to_a_model",
-        "add/update_security_record_rule"
-      ],
+      "solidx_concerns": "add_field_to_existing_layout,add_field_to_a_model,add/update_security_record_rule",
       "chunk_count": 5,
       "uploaded_by": "migration_script",
-      "uploaded_at": "2025-10-24T14:03:55.583937"
+      "uploaded_at": "2025-10-28T13:52:18.802562"
     },
     "chunk_count": 5,
-    "uploaded_at": "2025-10-24T14:03:58.169318"
+    "uploaded_at": "2025-10-28T13:52:21.365131"
   },
   "developer-docs/metadata_schema/module-metadata.md": {
     "hash": "eed52942d4271f5a61c1a47b23a28af35cb9e611cc653bb51203ac410c457850",
-    "document_id": "89d1533c-2669-43cb-9f35-d455da337fc3",
-    "collection_id": "e0414fa4-da64-4e70-a5ea-349424ba1a47",
+    "document_id": "56ae8626-4a4e-44d3-b26b-d736d2cbb250",
+    "collection_id": "a7d72ddf-6d30-4390-aeb0-8d14ec87b52a",
     "metadata": {
       "source": "docusaurus",
       "project": "solidx-docs",
@@ -1076,20 +1047,18 @@
       "title": "Module Metadata Schema",
       "description": "Overview of the module metadata schema used in SolidX.",
       "summary": "This document explains the module metadata schema in SolidX, which represents the top-level building blocks for organizing applications. A module groups related models and functionality under a unified domain (like a Fees Portal module). The metadata includes properties such as module name, display name, description, default data source, menu icon, sequence number, and system flag. Examples demonstrate configuring module metadata for applications, and the document references the admin documentation for conceptual understanding of module management and the hierarchical relationship where modules contain models which contain fields.",
-      "solidx_concerns": [
-        "create_module"
-      ],
+      "solidx_concerns": "create_module",
       "chunk_count": 2,
       "uploaded_by": "migration_script",
-      "uploaded_at": "2025-10-24T14:03:58.178939"
+      "uploaded_at": "2025-10-28T13:52:21.380744"
     },
     "chunk_count": 2,
-    "uploaded_at": "2025-10-24T14:03:59.388986"
+    "uploaded_at": "2025-10-28T13:52:22.547498"
   },
   "developer-docs/metadata_schema/list-of-values.md": {
     "hash": "589f4b5ac13f44aeda96a48e4f60f2d2a1dd79f1a6ad44c917235ebef3ab120a",
-    "document_id": "bde0221d-1a97-4061-ac09-e0476ff588e4",
-    "collection_id": "e0414fa4-da64-4e70-a5ea-349424ba1a47",
+    "document_id": "94f3d513-aaf3-4040-b60a-2438cdbeb566",
+    "collection_id": "a7d72ddf-6d30-4390-aeb0-8d14ec87b52a",
     "metadata": {
       "source": "docusaurus",
       "project": "solidx-docs",
@@ -1099,20 +1068,18 @@
       "title": "List of Values",
       "description": "Metadata schema for defining list of values in SolidX applications.",
       "summary": "This document describes list of values (LOV) metadata in SolidX, which defines predefined value sets for use in dropdowns and selection fields throughout the application. Each LOV entry includes type (category), value (internal identifier), display text (shown to users), description, default flag, sequence number for ordering, and associated module reference. Examples demonstrate configuring industry types (Healthcare, Information Technology) and regulatory bodies (FCA, SEC, PRA, CBI) with proper sequencing. The metadata ensures data consistency, improves user experience, and provides centralized management of commonly used value lists across the application.",
-      "solidx_concerns": [
-        "add_lov_record"
-      ],
+      "solidx_concerns": "add_lov_record",
       "chunk_count": 1,
       "uploaded_by": "migration_script",
-      "uploaded_at": "2025-10-24T14:03:59.397261"
+      "uploaded_at": "2025-10-28T13:52:22.551046"
     },
     "chunk_count": 1,
-    "uploaded_at": "2025-10-24T14:03:59.934324"
+    "uploaded_at": "2025-10-28T13:52:23.334033"
   },
   "developer-docs/metadata_schema/email-templates.md": {
     "hash": "ff0760f3c1caf91919475f68d7c6640867f73962fc5861577e024d5476c3cf10",
-    "document_id": "54af83b0-bf09-4a22-9ac7-4f534e154c62",
-    "collection_id": "e0414fa4-da64-4e70-a5ea-349424ba1a47",
+    "document_id": "c61b4ba9-d47e-4080-912f-7dc45ebdb4aa",
+    "collection_id": "a7d72ddf-6d30-4390-aeb0-8d14ec87b52a",
     "metadata": {
       "source": "docusaurus",
       "project": "solidx-docs",
@@ -1122,21 +1089,18 @@
       "title": "Email Templates",
       "description": "Metadata schema for populating email templates in SolidX applications.",
       "summary": "This document explains email template metadata in SolidX, which enables creation and management of HTML/text-based email templates with dynamic content and attachments. Templates use Handlebars syntax for variable insertion and are stored in separate HTML files referenced by the metadata. Key attributes include template name, display name, body file reference, subject line, description, active status, and template type (text/html). Examples demonstrate configuring templates for payment reminders and OTP verification, including sample HTML template files with dynamic variables, styling, and layout structures. The system supports template file organization in the solid-api/src directory.",
-      "solidx_concerns": [
-        "create/update_email_template",
-        "new_email_provider"
-      ],
+      "solidx_concerns": "create/update_email_template,new_email_provider",
       "chunk_count": 2,
       "uploaded_by": "migration_script",
-      "uploaded_at": "2025-10-24T14:03:59.940274"
+      "uploaded_at": "2025-10-28T13:52:23.344706"
     },
     "chunk_count": 2,
-    "uploaded_at": "2025-10-24T14:04:02.852253"
+    "uploaded_at": "2025-10-28T13:52:24.695011"
   },
   "developer-docs/metadata_schema/model-metadata.md": {
     "hash": "c63aa3d3a36c0cee38d196d6c6f5d7451d31b6f288ccb752247bb4ef26b0bb9d",
-    "document_id": "43725ca2-bc2d-40e6-9c6e-1e7d29e26bba",
-    "collection_id": "e0414fa4-da64-4e70-a5ea-349424ba1a47",
+    "document_id": "85a86fd3-449f-41b5-827e-c7ec5a6231b8",
+    "collection_id": "a7d72ddf-6d30-4390-aeb0-8d14ec87b52a",
     "metadata": {
       "source": "docusaurus",
       "project": "solidx-docs",
@@ -1146,22 +1110,18 @@
       "title": "Model Metadata Schema",
       "description": "Overview of the model metadata schema used in SolidX.",
       "summary": "This document details the model metadata schema in SolidX, where models represent data structures (entities/tables) within modules. Each model is a semantic, configurable structure that defines specific data types, their attributes, and relationships with other models. Key properties include singular/plural names, display name, data source configuration, table name, soft delete settings, audit logging, internationalization support, exportability, and user key field designation. The metadata also specifies which fields serve as unique identifiers for records and controls various behavioral aspects like draft-publish workflows.",
-      "solidx_concerns": [
-        "create_model_with_fields",
-        "add_field_to_a_model",
-        "remove_field_from_a_model"
-      ],
+      "solidx_concerns": "create_model_with_fields,add_field_to_a_model,remove_field_from_a_model",
       "chunk_count": 3,
       "uploaded_by": "migration_script",
-      "uploaded_at": "2025-10-24T14:04:02.857722"
+      "uploaded_at": "2025-10-28T13:52:24.721698"
     },
     "chunk_count": 3,
-    "uploaded_at": "2025-10-24T14:04:04.877372"
+    "uploaded_at": "2025-10-28T13:52:26.896862"
   },
   "developer-docs/going-live/deploying-to-vm.md": {
     "hash": "ed6f3c4a351d30a5853e74c38a2dc15ac4ed25f4bed6f1e5c13c0d1fc4ecb100",
-    "document_id": "3fc897c8-4e83-4c69-8927-39fb1a2cf5fe",
-    "collection_id": "e0414fa4-da64-4e70-a5ea-349424ba1a47",
+    "document_id": "9fd7981b-e8c2-4566-8b1f-283bc2c5e87b",
+    "collection_id": "a7d72ddf-6d30-4390-aeb0-8d14ec87b52a",
     "metadata": {
       "source": "docusaurus",
       "project": "solidx-docs",
@@ -1173,15 +1133,15 @@
       "summary": "This comprehensive guide walks through deploying SolidX applications on Ubuntu virtual machines. It covers cloning the repository, configuring environment variables, verifying backend and frontend operation, deploying with PM2 process manager (including config files and deploy scripts), database seeding with the rebuild script, and setting up Nginx as a reverse proxy with SSL certificates via Certbot. The guide also includes firewall configuration, virtual host setup, log rotation setup, and automatic restart configuration for production-ready deployment.",
       "chunk_count": 4,
       "uploaded_by": "migration_script",
-      "uploaded_at": "2025-10-24T14:04:04.881683"
+      "uploaded_at": "2025-10-28T13:52:26.906805"
     },
     "chunk_count": 4,
-    "uploaded_at": "2025-10-24T14:04:07.356384"
+    "uploaded_at": "2025-10-28T13:52:28.695469"
   },
   "developer-docs/going-live/index.md": {
     "hash": "0f0188f6c087c25b134eed7849fd637e2e6bb2da7b73de841659607c9b14e284",
-    "document_id": "c81dc863-3996-47e0-9f8e-5d96ff5831e1",
-    "collection_id": "e0414fa4-da64-4e70-a5ea-349424ba1a47",
+    "document_id": "98d3565a-640d-468f-aba4-67ff9839791e",
+    "collection_id": "a7d72ddf-6d30-4390-aeb0-8d14ec87b52a",
     "metadata": {
       "source": "docusaurus",
       "project": "solidx-docs",
@@ -1193,15 +1153,15 @@
       "summary": "This section provides guidance on deploying SolidX applications to production environments, covering various deployment strategies, configuration steps, and best practices for taking your application from development to live production use.",
       "chunk_count": 1,
       "uploaded_by": "migration_script",
-      "uploaded_at": "2025-10-24T14:04:07.361521"
+      "uploaded_at": "2025-10-28T13:52:28.700247"
     },
     "chunk_count": 1,
-    "uploaded_at": "2025-10-24T14:04:08.069080"
+    "uploaded_at": "2025-10-28T13:52:29.534770"
   },
   "developer-docs/going-live/deploying-to-ecs.md": {
     "hash": "f5057646d46b4734cb2075ec41bae6d76af89fa244d01e05eaa06bad76a72458",
-    "document_id": "5ea203b4-8bd7-4116-9009-6ecb9afa80e2",
-    "collection_id": "e0414fa4-da64-4e70-a5ea-349424ba1a47",
+    "document_id": "5bc44a9f-b5db-41fa-b540-fdd7bffeb25e",
+    "collection_id": "a7d72ddf-6d30-4390-aeb0-8d14ec87b52a",
     "metadata": {
       "source": "docusaurus",
       "project": "solidx-docs",
@@ -1213,15 +1173,15 @@
       "summary": "This comprehensive guide walks through deploying SolidX applications on Ubuntu virtual machines. It covers cloning the repository, configuring environment variables, verifying backend and frontend operation, deploying with PM2 process manager (including config files and deploy scripts), database seeding with the rebuild script, and setting up Nginx as a reverse proxy with SSL certificates via Certbot. The guide also includes firewall configuration, virtual host setup, log rotation setup, and automatic restart configuration for production-ready deployment.",
       "chunk_count": 4,
       "uploaded_by": "migration_script",
-      "uploaded_at": "2025-10-24T14:04:08.077127"
+      "uploaded_at": "2025-10-28T13:52:29.556861"
     },
     "chunk_count": 4,
-    "uploaded_at": "2025-10-24T14:04:09.940865"
+    "uploaded_at": "2025-10-28T13:52:34.296898"
   },
   "developer-docs/rest-apis/index.md": {
     "hash": "c6db87634487a903573859422a37db04aea2bc3db37b0c9b44affceba0e08b03",
-    "document_id": "c205e222-e905-478e-b4d0-327cf1f6d2ea",
-    "collection_id": "e0414fa4-da64-4e70-a5ea-349424ba1a47",
+    "document_id": "cf4e8e64-cf16-4de2-b3e9-bea91636118f",
+    "collection_id": "a7d72ddf-6d30-4390-aeb0-8d14ec87b52a",
     "metadata": {
       "source": "docusaurus",
       "project": "solidx-docs",
@@ -1233,15 +1193,15 @@
       "summary": "This section provides comprehensive documentation of SolidX's auto-generated REST APIs that enable communication between frontend and backend. The APIs cover authentication (password, OTP, OAuth), CRUD operations (create, retrieve, update, delete), record recovery for soft-deleted items, and comprehensive Swagger documentation. Each API endpoint follows RESTful principles with JWT bearer authentication, standardized request/response formats, support for file uploads, filtering, pagination, sorting, and field selection capabilities.",
       "chunk_count": 1,
       "uploaded_by": "migration_script",
-      "uploaded_at": "2025-10-24T14:04:09.944199"
+      "uploaded_at": "2025-10-28T13:52:34.310916"
     },
     "chunk_count": 1,
-    "uploaded_at": "2025-10-24T14:04:10.703538"
+    "uploaded_at": "2025-10-28T13:52:35.112240"
   },
   "developer-docs/extending/index.md": {
     "hash": "689f286ea00bed159dc3f5d69149d0c0cf140bbdf87c05cf11b735b98c969d12",
-    "document_id": "38c19e33-bc84-4e72-82f6-2a6440bd6a15",
-    "collection_id": "e0414fa4-da64-4e70-a5ea-349424ba1a47",
+    "document_id": "ad347d57-5908-4cfb-becf-9f5d7cf35e2a",
+    "collection_id": "a7d72ddf-6d30-4390-aeb0-8d14ec87b52a",
     "metadata": {
       "source": "docusaurus",
       "project": "solidx-docs",
@@ -1253,15 +1213,15 @@
       "summary": "This document serves as an overview of SolidX extensibility features, explaining how to build custom functional modules and extend the platform capabilities. It highlights three main customization areas - Generated Code (using the code generation tool to scaffold controllers, services, entities, DTOs, and layout JSON files with default list and form views), Frontend Customization (modifying layout.json for custom list views, form layouts, kanban boards, and UI behaviors), and Backend Customization (extending NestJS backend with custom services, controllers, computed providers, middleware, and business logic).",
       "chunk_count": 1,
       "uploaded_by": "migration_script",
-      "uploaded_at": "2025-10-24T14:04:10.710341"
+      "uploaded_at": "2025-10-28T13:52:35.128860"
     },
     "chunk_count": 1,
-    "uploaded_at": "2025-10-24T14:04:11.438471"
+    "uploaded_at": "2025-10-28T13:52:35.635239"
   },
   "developer-docs/rest-apis/swagger-documentation/index.md": {
     "hash": "1170dae5dbfed84dd8e8d4b25edf3e5178ade02f22578d4de232deaa01f0ae09",
-    "document_id": "bfc31826-eb25-4554-a1f4-891a575592ac",
-    "collection_id": "e0414fa4-da64-4e70-a5ea-349424ba1a47",
+    "document_id": "cbb887b2-54b0-4e93-a87f-8ffe6581ed15",
+    "collection_id": "a7d72ddf-6d30-4390-aeb0-8d14ec87b52a",
     "metadata": {
       "source": "docusaurus",
       "project": "solidx-docs",
@@ -1273,15 +1233,15 @@
       "summary": "This document provides comprehensive information about accessing and using SolidX's auto-generated Swagger/OpenAPI documentation. It explains how to access the documentation at the /api/docs endpoint, authenticate using JWT tokens via the login endpoint, and utilize the standard RESTful endpoints automatically generated for each resource. The documentation covers query parameters for filtering, sorting, pagination, population, and field selection, provides example requests for common operations, explains the standardized error handling format with common HTTP status codes, and outlines best practices for authentication, request optimization, error handling, and API documentation maintenance.",
       "chunk_count": 5,
       "uploaded_by": "migration_script",
-      "uploaded_at": "2025-10-24T14:04:11.447217"
+      "uploaded_at": "2025-10-28T13:52:35.641957"
     },
     "chunk_count": 5,
-    "uploaded_at": "2025-10-24T14:04:14.439978"
+    "uploaded_at": "2025-10-28T13:52:39.836253"
   },
   "developer-docs/rest-apis/update/index.md": {
     "hash": "ebd6727d1bae68b5d4655db9cc060a01d4b1e7fc047552194b374ee2033e1987",
-    "document_id": "06e5c57d-1aed-4c72-b1d9-19b763a65e03",
-    "collection_id": "e0414fa4-da64-4e70-a5ea-349424ba1a47",
+    "document_id": "fcb49853-5f44-4a0a-87f1-61dcb2b93e5b",
+    "collection_id": "a7d72ddf-6d30-4390-aeb0-8d14ec87b52a",
     "metadata": {
       "source": "docusaurus",
       "project": "solidx-docs",
@@ -1293,15 +1253,15 @@
       "summary": "This document explains the update endpoints in SolidX's REST API, covering both partial updates (PATCH method for updating specific fields) and full updates (PUT method for replacing entire records). It provides detailed examples of updates without media files (using JSON content type) and updates with media files (using multipart/form-data). Each section includes HTTP headers, request formats, sample payloads, and response structures. Both update methods are idempotent and require JWT bearer authentication.",
       "chunk_count": 3,
       "uploaded_by": "migration_script",
-      "uploaded_at": "2025-10-24T14:04:14.449040"
+      "uploaded_at": "2025-10-28T13:52:39.846030"
     },
     "chunk_count": 3,
-    "uploaded_at": "2025-10-24T14:04:15.868399"
+    "uploaded_at": "2025-10-28T13:52:41.587473"
   },
   "developer-docs/rest-apis/delete/index.md": {
     "hash": "2e270e653d682df94fe38a33bf72630ea99240d9abce147e38c79db685c3fd6e",
-    "document_id": "68121381-887a-4641-926e-4e762fc6d175",
-    "collection_id": "e0414fa4-da64-4e70-a5ea-349424ba1a47",
+    "document_id": "87f06e4d-e3ee-4e54-a449-7e1d6197f7d3",
+    "collection_id": "a7d72ddf-6d30-4390-aeb0-8d14ec87b52a",
     "metadata": {
       "source": "docusaurus",
       "project": "solidx-docs",
@@ -1313,15 +1273,15 @@
       "summary": "This document describes the delete endpoints in SolidX's REST API, covering both single record and bulk deletion operations. When soft delete is enabled on a model, records are not permanently removed but marked as deleted with deletedAt and deletedTracker fields populated. The documentation includes detailed examples of delete requests and responses, showing the HTTP headers required (Content-Type and Authorization), endpoint URLs, and the structure of returned data including soft delete metadata and tracking information.",
       "chunk_count": 2,
       "uploaded_by": "migration_script",
-      "uploaded_at": "2025-10-24T14:04:15.876687"
+      "uploaded_at": "2025-10-28T13:52:41.606330"
     },
     "chunk_count": 2,
-    "uploaded_at": "2025-10-24T14:04:16.863593"
+    "uploaded_at": "2025-10-28T13:52:43.343998"
   },
   "developer-docs/rest-apis/retrieve/index.md": {
     "hash": "e3593ea062a711fed36feab0fa83e11eedc43357fdc5973ba0fcb7493d61c486",
-    "document_id": "5f53cf45-e9f0-4b46-9334-f78115e4048b",
-    "collection_id": "e0414fa4-da64-4e70-a5ea-349424ba1a47",
+    "document_id": "6aeab8ba-4e05-4a89-8424-cec6c4e3d4a9",
+    "collection_id": "a7d72ddf-6d30-4390-aeb0-8d14ec87b52a",
     "metadata": {
       "source": "docusaurus",
       "project": "solidx-docs",
@@ -1333,15 +1293,15 @@
       "summary": "This document covers the retrieve endpoints of the SolidX REST API, explaining how to fetch records from the system. The endpoints support both retrieving multiple records with advanced filtering, pagination, sorting, and field selection options, as well as retrieving single records by ID. The documentation includes sample requests and responses, required headers, body content structure, and comprehensive examples of the filtering capabilities available for data retrieval operations.",
       "chunk_count": 1,
       "uploaded_by": "migration_script",
-      "uploaded_at": "2025-10-24T14:04:16.868477"
+      "uploaded_at": "2025-10-28T13:52:43.371594"
     },
     "chunk_count": 1,
-    "uploaded_at": "2025-10-24T14:04:17.473796"
+    "uploaded_at": "2025-10-28T13:52:44.146680"
   },
   "developer-docs/rest-apis/create/index.md": {
     "hash": "ccf26a02b8b6c5af2d29d1bc668e8f54ddcf17e41b121d34c05962c36f710bcd",
-    "document_id": "a5ceebe7-0e58-44a9-a786-e09cb2f9266b",
-    "collection_id": "e0414fa4-da64-4e70-a5ea-349424ba1a47",
+    "document_id": "452a0477-7c5f-4558-a93c-88e0b4734a90",
+    "collection_id": "a7d72ddf-6d30-4390-aeb0-8d14ec87b52a",
     "metadata": {
       "source": "docusaurus",
       "project": "solidx-docs",
@@ -1353,15 +1313,15 @@
       "summary": "This document details the create endpoints in SolidX's REST API, covering single record creation, bulk record creation, and record creation with media files. It provides comprehensive examples including HTTP headers (Content-Type and Authorization), request body structures, and sample responses for each scenario. The create endpoints support both JSON payloads for standard data and multipart/form-data for media uploads. All endpoints require proper create permissions and JWT bearer authentication for security.",
       "chunk_count": 3,
       "uploaded_by": "migration_script",
-      "uploaded_at": "2025-10-24T14:04:17.476707"
+      "uploaded_at": "2025-10-28T13:52:44.162112"
     },
     "chunk_count": 3,
-    "uploaded_at": "2025-10-24T14:04:19.496519"
+    "uploaded_at": "2025-10-28T13:52:45.777282"
   },
   "developer-docs/rest-apis/recover/index.md": {
     "hash": "ddcee165d615cea63334470cb5dc281d0073f11b7e008cce656f549de087e192",
-    "document_id": "051b6e32-fdc4-4d85-84a1-9c22f50e1cdc",
-    "collection_id": "e0414fa4-da64-4e70-a5ea-349424ba1a47",
+    "document_id": "b82fd94c-07fa-47f9-930d-fdadfbeda764",
+    "collection_id": "a7d72ddf-6d30-4390-aeb0-8d14ec87b52a",
     "metadata": {
       "source": "docusaurus",
       "project": "solidx-docs",
@@ -1373,15 +1333,15 @@
       "summary": "This document explains the recover endpoints in SolidX's REST API, which allow restoration of soft-deleted records. It covers both single record recovery (by ID) and bulk recovery (using an array of IDs) operations. The documentation provides complete examples including HTTP headers, request formats, and sample responses. It also notes a known issue where the response may still contain deletedAt and deletedTracker fields even though the record is successfully recovered in the database, which is expected to be fixed in future releases.",
       "chunk_count": 3,
       "uploaded_by": "migration_script",
-      "uploaded_at": "2025-10-24T14:04:19.502741"
+      "uploaded_at": "2025-10-28T13:52:45.790855"
     },
     "chunk_count": 3,
-    "uploaded_at": "2025-10-24T14:04:20.834484"
+    "uploaded_at": "2025-10-28T13:52:47.678093"
   },
   "developer-docs/rest-apis/authentication/index.md": {
     "hash": "15df6a7498bfba83db3671f31f469a105c179dd8413c7da848bd741ccbebe211",
-    "document_id": "38a5771b-3d2f-44b5-a4f6-39e42631f20b",
-    "collection_id": "e0414fa4-da64-4e70-a5ea-349424ba1a47",
+    "document_id": "6d563edc-7f30-4391-b12c-0c1e9aec8536",
+    "collection_id": "a7d72ddf-6d30-4390-aeb0-8d14ec87b52a",
     "metadata": {
       "source": "docusaurus",
       "project": "solidx-docs",
@@ -1393,15 +1353,15 @@
       "summary": "This document provides an overview of the authentication mechanisms supported by SolidX. The platform offers three authentication providers - Password-based authentication (the default method using username and password), OTP authentication (using One-Time Passwords for secure login), and OAuth authentication (currently supporting Google as an OAuth provider for social login integration).",
       "chunk_count": 1,
       "uploaded_by": "migration_script",
-      "uploaded_at": "2025-10-24T14:04:20.838037"
+      "uploaded_at": "2025-10-28T13:52:47.682596"
     },
     "chunk_count": 1,
-    "uploaded_at": "2025-10-24T14:04:21.584231"
+    "uploaded_at": "2025-10-28T13:52:48.257070"
   },
   "developer-docs/rest-apis/authentication/oauth-authentication/index.md": {
     "hash": "6f31ccd7e49e971234a9ea300cda9fd61b78a472f1daafa80ab81fa84f7f2696",
-    "document_id": "ed3075e6-7ded-4bb9-89ac-0f2fdd5a60d3",
-    "collection_id": "e0414fa4-da64-4e70-a5ea-349424ba1a47",
+    "document_id": "b37de7aa-3cb3-40ea-9541-bb44cb797c99",
+    "collection_id": "a7d72ddf-6d30-4390-aeb0-8d14ec87b52a",
     "metadata": {
       "source": "docusaurus",
       "project": "solidx-docs",
@@ -1413,15 +1373,15 @@
       "summary": "Comprehensive guide to OAuth authentication in SolidX supporting multiple providers (Password, OTP, Google, Meta/Facebook, LinkedIn, Twitter/X, custom OAuth). Covers standard OAuth flow (frontend redirect, backend callback), environment variable configuration per provider (client IDs, secrets, callback URLs), securing OAuth with state validation, token exchange, user profile retrieval, session management with JWT tokens, frontend implementation patterns, and examples for Google OAuth integration.",
       "chunk_count": 7,
       "uploaded_by": "migration_script",
-      "uploaded_at": "2025-10-24T14:04:21.593599"
+      "uploaded_at": "2025-10-28T13:52:48.277608"
     },
     "chunk_count": 7,
-    "uploaded_at": "2025-10-24T14:04:26.674556"
+    "uploaded_at": "2025-10-28T13:52:51.847551"
   },
   "developer-docs/rest-apis/authentication/otp-authentication/index.md": {
     "hash": "b32dd32a9711cc39627245fbf99f81e8bd1de25bfb73e060630bb98c2839d72b",
-    "document_id": "c0a36da8-ba1e-41c8-b3fc-44973a2cf5ad",
-    "collection_id": "e0414fa4-da64-4e70-a5ea-349424ba1a47",
+    "document_id": "96e13e27-b581-4fa1-b721-4fea460de085",
+    "collection_id": "a7d72ddf-6d30-4390-aeb0-8d14ec87b52a",
     "metadata": {
       "source": "docusaurus",
       "project": "solidx-docs",
@@ -1433,15 +1393,15 @@
       "summary": "Details SolidX OTP-based authentication mechanism with comprehensive API documentation. Covers two-step registration (Initiate Registration sends OTP to email/mobile with customizable validationSources, Confirm Registration verifies OTP) and two-step login (Initiate Login sends OTP, Confirm Login verifies and returns JWT tokens). Includes environment variables for OTP expiry, validation sources, request/response formats, error handling, and transactional override options.",
       "chunk_count": 3,
       "uploaded_by": "migration_script",
-      "uploaded_at": "2025-10-24T14:04:26.679315"
+      "uploaded_at": "2025-10-28T13:52:51.861156"
     },
     "chunk_count": 3,
-    "uploaded_at": "2025-10-24T14:04:28.214638"
+    "uploaded_at": "2025-10-28T13:52:53.991987"
   },
   "developer-docs/rest-apis/authentication/password-authentication/index.md": {
     "hash": "b140937dfb119e8cc48dfb6967228bc93f157a30e296149bb7193b14c2986dec",
-    "document_id": "978d8f45-1534-4ae5-a4a3-5c99c92bcf40",
-    "collection_id": "e0414fa4-da64-4e70-a5ea-349424ba1a47",
+    "document_id": "3346ca74-2a5b-4675-9985-0a3f36c7c5d7",
+    "collection_id": "a7d72ddf-6d30-4390-aeb0-8d14ec87b52a",
     "metadata": {
       "source": "docusaurus",
       "project": "solidx-docs",
@@ -1453,15 +1413,15 @@
       "summary": "Comprehensive documentation of SolidX password-based authentication APIs. Covers seven endpoints - Register (with environment variables for enabling registration), Authenticate (login with username and password, returns JWT tokens), Refresh Tokens (obtain new tokens using refresh token), Forgot Password (password reset flow), Change Password (for authenticated users), Get User Info (retrieve current user details), and Logout. Includes HTTP headers, request and response formats, error codes, and security considerations.",
       "chunk_count": 8,
       "uploaded_by": "migration_script",
-      "uploaded_at": "2025-10-24T14:04:28.220272"
+      "uploaded_at": "2025-10-28T13:52:54.011285"
     },
     "chunk_count": 8,
-    "uploaded_at": "2025-10-24T14:04:31.654052"
+    "uploaded_at": "2025-10-28T13:52:59.730253"
   },
   "developer-docs/extending/code-generation/codegen-cl.md": {
     "hash": "ad2b8a83412db573e75ead0b139fc794dae648aa7c04ede5c15dfeb0bdf121cd",
-    "document_id": "c33b6a7a-9638-4279-a4f0-f968ebe485b6",
-    "collection_id": "e0414fa4-da64-4e70-a5ea-349424ba1a47",
+    "document_id": "260d45cd-d72a-4135-ba8c-cbb623d5a172",
+    "collection_id": "a7d72ddf-6d30-4390-aeb0-8d14ec87b52a",
     "metadata": {
       "source": "docusaurus",
       "project": "solidx-docs",
@@ -1473,15 +1433,15 @@
       "summary": "This document details the CLI commands for code generation in SolidX using Angular Schematics. The primary command is 'solid refresh-model' which creates or updates a model and its related files within an existing module, keeping code synchronized with metadata. Additional commands include 'solid add-module' for generating new modules (rarely needed as modules are auto-scaffolded), and other specialized commands for field operations. The refresh-model command accepts options like modelName, modelId, and dryRun mode, and is the most frequently used command for maintaining code-metadata alignment.",
       "chunk_count": 3,
       "uploaded_by": "migration_script",
-      "uploaded_at": "2025-10-24T14:04:31.662460"
+      "uploaded_at": "2025-10-28T13:52:59.739682"
     },
     "chunk_count": 3,
-    "uploaded_at": "2025-10-24T14:04:33.246218"
+    "uploaded_at": "2025-10-28T13:53:02.560282"
   },
   "developer-docs/extending/code-generation/codegen-structure.md": {
     "hash": "a97383b41ffb58f52570fc8f7a61d200a1b28a1db45a6658871a60e02e2526dc",
-    "document_id": "feb7c312-d297-4623-bb23-43424a683205",
-    "collection_id": "e0414fa4-da64-4e70-a5ea-349424ba1a47",
+    "document_id": "1bced77f-6872-46d9-aebc-4cc5a516a98e",
+    "collection_id": "a7d72ddf-6d30-4390-aeb0-8d14ec87b52a",
     "metadata": {
       "source": "docusaurus",
       "project": "solidx-docs",
@@ -1493,15 +1453,15 @@
       "summary": "This document provides a comprehensive breakdown of the code structure generated by SolidX for modules, models, and fields. When generating a module, SolidX creates a basic NestJS module file. For models, it generates complete CRUD functionality including controllers (with RESTful APIs for create, update, soft delete, recovery, and query operations), services, DTOs (create and update), entities (TypeORM-based with field decorators), and repositories. The generated controllers include JWT authorization, Swagger documentation, file upload support, and comprehensive endpoints for data manipulation with filtering, pagination, sorting, and population capabilities.",
       "chunk_count": 3,
       "uploaded_by": "migration_script",
-      "uploaded_at": "2025-10-24T14:04:33.249944"
+      "uploaded_at": "2025-10-28T13:53:02.563655"
     },
     "chunk_count": 3,
-    "uploaded_at": "2025-10-24T14:04:34.881093"
+    "uploaded_at": "2025-10-28T13:53:05.097613"
   },
   "developer-docs/extending/code-generation/index.md": {
     "hash": "904703aff8399d2d4be3ec52ccd0a6311fbd8f61a987fe9956c0023874bc5813",
-    "document_id": "cdbb2f7d-3a50-4ffc-847c-01c4e6bcebe6",
-    "collection_id": "e0414fa4-da64-4e70-a5ea-349424ba1a47",
+    "document_id": "49b8f121-34b5-4940-98b2-f54ce3d723c8",
+    "collection_id": "a7d72ddf-6d30-4390-aeb0-8d14ec87b52a",
     "metadata": {
       "source": "docusaurus",
       "project": "solidx-docs",
@@ -1513,15 +1473,15 @@
       "summary": "This document introduces SolidX's code generation feature, which enables developers to quickly bootstrap modules by automatically generating essential boilerplate code. The system provides modular architecture generation, model generation (including database entities, DTOs, services, and controllers based on metadata), field management capabilities with automatic file updates, and CLI support for triggering code generation tasks. This feature dramatically improves productivity and consistency by reducing repetitive setup work and allowing developers to focus on implementing unique business logic.",
       "chunk_count": 2,
       "uploaded_by": "migration_script",
-      "uploaded_at": "2025-10-24T14:04:34.887715"
+      "uploaded_at": "2025-10-28T13:53:05.114113"
     },
     "chunk_count": 2,
-    "uploaded_at": "2025-10-24T14:04:36.112686"
+    "uploaded_at": "2025-10-28T13:53:06.048229"
   },
   "developer-docs/extending/frontend-customization/custom-views.md": {
     "hash": "636b34e64e59812c9c95604e7ed6547f2caf8b3c7f9e9689518f1136d9e34526",
-    "document_id": "9819df8a-98c0-4d74-8952-5c7b1e515d18",
-    "collection_id": "e0414fa4-da64-4e70-a5ea-349424ba1a47",
+    "document_id": "451d3407-bd6c-41f3-802f-352cf26f420e",
+    "collection_id": "a7d72ddf-6d30-4390-aeb0-8d14ec87b52a",
     "metadata": {
       "source": "docusaurus",
       "project": "solidx-docs",
@@ -1537,22 +1497,18 @@
         "custom actions",
         "custom components"
       ],
-      "solidx_concerns": [
-        "add_full_custom_ui",
-        "add_custom_menu_action_combo",
-        "create_custom_widget"
-      ],
+      "solidx_concerns": "add_full_custom_ui,add_custom_menu_action_combo,create_custom_widget",
       "chunk_count": 4,
       "uploaded_by": "migration_script",
-      "uploaded_at": "2025-10-24T14:04:36.123957"
+      "uploaded_at": "2025-10-28T13:53:06.066864"
     },
     "chunk_count": 4,
-    "uploaded_at": "2025-10-24T14:04:38.476691"
+    "uploaded_at": "2025-10-28T13:53:08.522103"
   },
   "developer-docs/extending/frontend-customization/form-view-buttons.md": {
     "hash": "f2b1f33221f0e37db426e811bee1c2974c629cbe66551cbb329dee5fb3e81f9c",
-    "document_id": "4ee6a09d-85b4-4ce7-b5d6-090b8af7e4c2",
-    "collection_id": "e0414fa4-da64-4e70-a5ea-349424ba1a47",
+    "document_id": "a06fcb5b-d4a4-4c51-807b-e48ffb85ae30",
+    "collection_id": "a7d72ddf-6d30-4390-aeb0-8d14ec87b52a",
     "metadata": {
       "source": "docusaurus",
       "project": "solidx-docs",
@@ -1562,20 +1518,18 @@
       "title": "Form View Buttons",
       "description": "Learn how to customize form view buttons in your frontend application.",
       "summary": "Explains customizing SolidX form view buttons to enhance user interaction. Covers adding custom buttons, modifying existing buttons, and handling button actions using `registerExtensionComponent`. Includes a working example `PreviewPortal` button that redirects to an external hosted page.",
-      "solidx_concerns": [
-        "add_form_button"
-      ],
+      "solidx_concerns": "add_form_button",
       "chunk_count": 6,
       "uploaded_by": "migration_script",
-      "uploaded_at": "2025-10-24T14:04:38.484772"
+      "uploaded_at": "2025-10-28T13:53:08.533642"
     },
     "chunk_count": 6,
-    "uploaded_at": "2025-10-24T14:04:41.543318"
+    "uploaded_at": "2025-10-28T13:53:12.155879"
   },
   "developer-docs/extending/frontend-customization/form-view-field-widgets.md": {
     "hash": "f65d0ede7ae15f2d218e8b93ed2437b2ede93e35c8dd524a0c24f64c97b6d741",
-    "document_id": "edd6bea1-c372-4714-b903-2d61658b3a73",
-    "collection_id": "e0414fa4-da64-4e70-a5ea-349424ba1a47",
+    "document_id": "980a130f-d337-46ee-b0a4-0cb6f0176acb",
+    "collection_id": "a7d72ddf-6d30-4390-aeb0-8d14ec87b52a",
     "metadata": {
       "source": "docusaurus",
       "project": "solidx-docs",
@@ -1585,20 +1539,18 @@
       "title": "Form View Field Widgets",
       "description": "Learn how to create form view field widgets for the frontend of your application.",
       "summary": "Details creating custom form view field widgets in SolidX for customizing field display in view and edit modes. Covers using built-in widgets (e.g., `integerSlider`) or creating custom ones, implementing components with `SolidFormFieldWidgetProps` (formik, fieldContext, metadata), registering widgets via `registerExtensionComponent`, configuring `editWidget`/`viewWidget` in form layout JSON, handling field validation, labels, and examples like slider widgets with tooltips and color-coded values.",
-      "solidx_concerns": [
-        "create_custom_form_field_widget"
-      ],
+      "solidx_concerns": "create_custom_form_field_widget",
       "chunk_count": 4,
       "uploaded_by": "migration_script",
-      "uploaded_at": "2025-10-24T14:04:41.553578"
+      "uploaded_at": "2025-10-28T13:53:12.165820"
     },
     "chunk_count": 4,
-    "uploaded_at": "2025-10-24T14:04:43.759385"
+    "uploaded_at": "2025-10-28T13:53:14.023695"
   },
   "developer-docs/extending/frontend-customization/list-view-buttons.md": {
     "hash": "3f00a3fbfe1a1a163c5b219f8bedae0c29fb943713358485bcb43368212fa8ba",
-    "document_id": "2de123a1-6afa-443a-8270-65020a904a87",
-    "collection_id": "e0414fa4-da64-4e70-a5ea-349424ba1a47",
+    "document_id": "a9c773ac-f55e-4805-90d5-f0f572efaef8",
+    "collection_id": "a7d72ddf-6d30-4390-aeb0-8d14ec87b52a",
     "metadata": {
       "source": "docusaurus",
       "project": "solidx-docs",
@@ -1608,21 +1560,18 @@
       "title": "List View Buttons",
       "description": "Learn how to customize list view buttons in your frontend application.",
       "summary": "Explains how to add and customize list view buttons in SolidX. Covers creating header buttons for list-wide actions and row buttons for record-specific actions, including configuration examples and prop details.",
-      "solidx_concerns": [
-        "add_list_header_button_with",
-        "add_list_row_button_with"
-      ],
+      "solidx_concerns": "add_list_header_button_with,add_list_row_button_with",
       "chunk_count": 6,
       "uploaded_by": "migration_script",
-      "uploaded_at": "2025-10-24T14:04:43.764156"
+      "uploaded_at": "2025-10-28T13:53:14.036982"
     },
     "chunk_count": 6,
-    "uploaded_at": "2025-10-24T14:04:48.197801"
+    "uploaded_at": "2025-10-28T13:53:16.922854"
   },
   "developer-docs/extending/frontend-customization/list-view-field-widgets.md": {
     "hash": "7e2ca7f734ac9117a33c47c90cc71194bc2e6988d0f9b100e5e27c0569241746",
-    "document_id": "d807c392-6daa-4353-bae4-3f9891beebb8",
-    "collection_id": "e0414fa4-da64-4e70-a5ea-349424ba1a47",
+    "document_id": "d48f7bb0-ecf6-4328-9b9c-c20168e04170",
+    "collection_id": "a7d72ddf-6d30-4390-aeb0-8d14ec87b52a",
     "metadata": {
       "source": "docusaurus",
       "project": "solidx-docs",
@@ -1632,22 +1581,18 @@
       "title": "List View Field Widgets",
       "description": "Learn how to create list column widgets for the frontend of your application.",
       "summary": "Guide to customizing field display in SolidX list views using built-in or custom widgets. Covers configuring `viewWidget` in list layout JSON (e.g., `SolidShortTextAvatarWidget` for name/avatar display), creating custom widgets implementing `SolidListFieldWidgetProps` (rowData, solidListViewMetaData, fieldMetadata, column), registering with `registerExtensionComponent`, and examples like `ScoreWidget` with color-coded labels and conditional styling based on field values.",
-      "solidx_concerns": [
-        "create_custom_list_field_widget",
-        "add_list_header_button_with",
-        "add_list_row_button_with"
-      ],
+      "solidx_concerns": "create_custom_list_field_widget,add_list_header_button_with,add_list_row_button_with",
       "chunk_count": 5,
       "uploaded_by": "migration_script",
-      "uploaded_at": "2025-10-24T14:04:48.209326"
+      "uploaded_at": "2025-10-28T13:53:16.944638"
     },
     "chunk_count": 5,
-    "uploaded_at": "2025-10-24T14:04:51.269324"
+    "uploaded_at": "2025-10-28T13:53:20.557954"
   },
   "developer-docs/extending/frontend-customization/index.md": {
     "hash": "e92efa5353122f7f2c9e636f428487fa05d50390dc503ca158e9583b60aa5671",
-    "document_id": "a857d8d6-6715-4827-9827-a4500a00cac4",
-    "collection_id": "e0414fa4-da64-4e70-a5ea-349424ba1a47",
+    "document_id": "87ac1311-4f4e-43ce-8576-4023a3c62551",
+    "collection_id": "a7d72ddf-6d30-4390-aeb0-8d14ec87b52a",
     "metadata": {
       "source": "docusaurus",
       "project": "solidx-docs",
@@ -1656,15 +1601,15 @@
       "doc_title": "developer-docs/extending/frontend-customization/index.md",
       "chunk_count": 1,
       "uploaded_by": "migration_script",
-      "uploaded_at": "2025-10-24T14:04:51.284164"
+      "uploaded_at": "2025-10-28T13:53:20.569504"
     },
     "chunk_count": 1,
-    "uploaded_at": "2025-10-24T14:04:52.258255"
+    "uploaded_at": "2025-10-28T13:53:21.075562"
   },
   "developer-docs/extending/frontend-customization/layout-manager.md": {
     "hash": "a570a4d08639dec5ec09b198d9199df3d642eb021db242e5273ee72a9f0074d9",
-    "document_id": "86898dce-49d8-42c5-81c3-3876e519f2db",
-    "collection_id": "e0414fa4-da64-4e70-a5ea-349424ba1a47",
+    "document_id": "d6f35486-6830-475f-b68b-9e92e21d4d8a",
+    "collection_id": "a7d72ddf-6d30-4390-aeb0-8d14ec87b52a",
     "metadata": {
       "source": "docusaurus",
       "project": "solidx-docs",
@@ -1673,15 +1618,15 @@
       "doc_title": "developer-docs/extending/frontend-customization/layout-manager.md",
       "chunk_count": 1,
       "uploaded_by": "migration_script",
-      "uploaded_at": "2025-10-24T14:04:52.268029"
+      "uploaded_at": "2025-10-28T13:53:21.089041"
     },
     "chunk_count": 1,
-    "uploaded_at": "2025-10-24T14:04:52.803010"
+    "uploaded_at": "2025-10-28T13:53:21.627048"
   },
   "developer-docs/extending/frontend-customization/custom-widgets.md": {
     "hash": "e341d9cc0c95f33eb0b4e26730357a2aef57398ca819d21ce4a131ebc362f241",
-    "document_id": "b3cab025-887f-400f-9243-bd144871cc10",
-    "collection_id": "e0414fa4-da64-4e70-a5ea-349424ba1a47",
+    "document_id": "50f59d20-4149-4a5e-abf0-486631bc6952",
+    "collection_id": "a7d72ddf-6d30-4390-aeb0-8d14ec87b52a",
     "metadata": {
       "source": "docusaurus",
       "project": "solidx-docs",
@@ -1691,21 +1636,18 @@
       "title": "Custom Widgets",
       "description": "Learn how to create custom widgets for the frontend of your application.",
       "summary": "Guide to creating custom widgets in SolidX using the built-in `CustomHtml` widget for extending UI functionality without field associations. Covers configuring widgets in form layouts with dynamic HTML rendering, using placeholders for field values and custom variables (e.g., `{{ctxtTitleAlphpabetCount}}`), receiving `SolidFormWidgetProps`, and setting custom variables via form event handlers for enhanced UI interactions.",
-      "solidx_concerns": [
-        "create_custom_widget",
-        "add_form_button"
-      ],
+      "solidx_concerns": "create_custom_widget,add_form_button",
       "chunk_count": 3,
       "uploaded_by": "migration_script",
-      "uploaded_at": "2025-10-24T14:04:52.807500"
+      "uploaded_at": "2025-10-28T13:53:21.638251"
     },
     "chunk_count": 3,
-    "uploaded_at": "2025-10-24T14:04:54.133516"
+    "uploaded_at": "2025-10-28T13:53:23.285632"
   },
   "developer-docs/extending/frontend-customization/kanban-field-widgets.md": {
     "hash": "c0bc1b5ac99508efb043b10226814dd0bb65f50544c17a65678d5bd8597edbd0",
-    "document_id": "34bac311-8cb6-4d7a-a637-49477d8789d7",
-    "collection_id": "e0414fa4-da64-4e70-a5ea-349424ba1a47",
+    "document_id": "729d526e-3281-4fbe-9f01-f7cbb1210c6e",
+    "collection_id": "a7d72ddf-6d30-4390-aeb0-8d14ec87b52a",
     "metadata": {
       "source": "docusaurus",
       "project": "solidx-docs",
@@ -1715,18 +1657,18 @@
       "title": "Kanban Field Widgets",
       "description": "Learn how to create form view field widgets for the frontend of your application.",
       "summary": "Overview of creating custom widgets for Kanban views in SolidX, similar to custom widget implementation patterns for other view types.",
-      "solidx_concerns": [],
+      "solidx_concerns": "",
       "chunk_count": 1,
       "uploaded_by": "migration_script",
-      "uploaded_at": "2025-10-24T14:04:54.141366"
+      "uploaded_at": "2025-10-28T13:53:23.298929"
     },
     "chunk_count": 1,
-    "uploaded_at": "2025-10-24T14:04:54.999843"
+    "uploaded_at": "2025-10-28T13:53:24.168997"
   },
   "developer-docs/extending/frontend-customization/form-view-events.md": {
     "hash": "3a6c59aa762043b83e8708f6dd91a1cf55b307e02f7f0ed8029b82da2842dfa1",
-    "document_id": "fc3b0692-7105-46cf-905a-d6ad99c123e6",
-    "collection_id": "e0414fa4-da64-4e70-a5ea-349424ba1a47",
+    "document_id": "0513aeee-ad1d-4569-9efc-336bcb051850",
+    "collection_id": "a7d72ddf-6d30-4390-aeb0-8d14ec87b52a",
     "metadata": {
       "source": "docusaurus",
       "project": "solidx-docs",
@@ -1736,22 +1678,18 @@
       "title": "Form View Events",
       "description": "Learn how to create event listeners for form view events in your frontend application.",
       "summary": "Explains creating event listeners for SolidX form view events to extend frontend functionality. Covers supported events (onFormLayoutLoad, onFormDataLoad, onFieldChange, onFieldBlur, onCustomWidgetRender), registering handlers using `registerExtensionFunction`, accessing event data (type, modifiedField, modifiedFieldValue, formData, viewMetadata, fieldsMetadata), modifying UI layout dynamically with `SolidViewLayoutManager`, returning changes (layoutChanged, dataChanged, newFormData, newLayout), and examples like character count tracking.",
-      "solidx_concerns": [
-        "add_change_handler_function",
-        "onlayoutload_handler_function",
-        "ondataload_handler_function"
-      ],
+      "solidx_concerns": "add_change_handler_function,onlayoutload_handler_function,ondataload_handler_function",
       "chunk_count": 11,
       "uploaded_by": "migration_script",
-      "uploaded_at": "2025-10-24T14:04:55.010660"
+      "uploaded_at": "2025-10-28T13:53:24.183588"
     },
     "chunk_count": 11,
-    "uploaded_at": "2025-10-24T14:05:00.791861"
+    "uploaded_at": "2025-10-28T13:53:29.589082"
   },
   "developer-docs/extending/backend-customization/background-jobs.md": {
     "hash": "de848946025452637e650208ba120f09a1aa8ebc577b296d1f0021cf5b6cba4d",
-    "document_id": "aa22f376-0001-49a6-ab6b-8c479289b201",
-    "collection_id": "e0414fa4-da64-4e70-a5ea-349424ba1a47",
+    "document_id": "fde55b9d-bdcf-4a32-a37d-1dddab3bb5a4",
+    "collection_id": "a7d72ddf-6d30-4390-aeb0-8d14ec87b52a",
     "metadata": {
       "source": "docusaurus",
       "project": "solidx-docs",
@@ -1769,25 +1707,18 @@
         "RabbitMQ",
         "database broker"
       ],
-      "solidx_concerns": [
-        "new_background_job",
-        "add_new_sms_provider",
-        "add_new_email_provider",
-        "add_new_whatsapp_provider",
-        "add_custom_service_method",
-        "add_scheduled_job"
-      ],
+      "solidx_concerns": "new_background_job,add_new_sms_provider,add_new_email_provider,add_new_whatsapp_provider,add_custom_service_method,add_scheduled_job",
       "chunk_count": 5,
       "uploaded_by": "migration_script",
-      "uploaded_at": "2025-10-24T14:05:00.807480"
+      "uploaded_at": "2025-10-28T13:53:29.603121"
     },
     "chunk_count": 5,
-    "uploaded_at": "2025-10-24T14:05:03.372683"
+    "uploaded_at": "2025-10-28T13:53:32.389503"
   },
   "developer-docs/extending/backend-customization/computation-providers.md": {
-    "hash": "5a0f59de4191a94d88f967ab711aefa6e80cc0781f981818f5307fbda25e3de6",
-    "document_id": "b1d29a53-06fd-4955-9dd7-0f2e1f8128e2",
-    "collection_id": "e0414fa4-da64-4e70-a5ea-349424ba1a47",
+    "hash": "3add5be05613e557e83d43b6bbc80091c0c4d7ccf82cf8b8c7ffe90bc99d1fe2",
+    "document_id": "f4958165-1be7-41a5-87c4-2adbae066d29",
+    "collection_id": "a7d72ddf-6d30-4390-aeb0-8d14ec87b52a",
     "metadata": {
       "source": "docusaurus",
       "project": "solidx-docs",
@@ -1802,22 +1733,18 @@
         "computation providers",
         "customization"
       ],
-      "solidx_concerns": [
-        "add_computed_field_provider",
-        "create_model_with_fields",
-        "add_field_to_a_model"
-      ],
+      "solidx_concerns": "add_computed_field_provider,create_model_with_fields,add_field_to_a_model",
       "chunk_count": 4,
       "uploaded_by": "migration_script",
-      "uploaded_at": "2025-10-24T14:05:03.385232"
+      "uploaded_at": "2025-10-28T13:53:32.397800"
     },
     "chunk_count": 4,
-    "uploaded_at": "2025-10-24T14:05:05.401129"
+    "uploaded_at": "2025-10-28T13:53:35.278120"
   },
   "developer-docs/extending/backend-customization/security-rules.md": {
     "hash": "f7e6549ff233c2c109162de04176be58f5e5abbb21ce864336a103b3c4beae4a",
-    "document_id": "9a164cba-54cc-4deb-ab52-17c58ec18d7d",
-    "collection_id": "e0414fa4-da64-4e70-a5ea-349424ba1a47",
+    "document_id": "4cd70eae-bb9c-47cf-8548-75ace0e62869",
+    "collection_id": "a7d72ddf-6d30-4390-aeb0-8d14ec87b52a",
     "metadata": {
       "source": "docusaurus",
       "project": "solidx-docs",
@@ -1832,20 +1759,18 @@
         "security",
         "customization"
       ],
-      "solidx_concerns": [
-        "add/update_security_record_rule"
-      ],
+      "solidx_concerns": "add/update_security_record_rule",
       "chunk_count": 2,
       "uploaded_by": "migration_script",
-      "uploaded_at": "2025-10-24T14:05:05.410573"
+      "uploaded_at": "2025-10-28T13:53:35.294263"
     },
     "chunk_count": 2,
-    "uploaded_at": "2025-10-24T14:05:06.592999"
+    "uploaded_at": "2025-10-28T13:53:36.305279"
   },
   "developer-docs/extending/backend-customization/typeorm-subscribers.md": {
     "hash": "2ae1ac1c19374fc72395017edd86316f9033bdb219cb5bae3d23aac8ba05d3cd",
-    "document_id": "4dca1659-b02f-452b-b86e-1e012a2d09f2",
-    "collection_id": "e0414fa4-da64-4e70-a5ea-349424ba1a47",
+    "document_id": "c53b1b09-1fcc-45e8-9ee8-fd53e0e41a72",
+    "collection_id": "a7d72ddf-6d30-4390-aeb0-8d14ec87b52a",
     "metadata": {
       "source": "docusaurus",
       "project": "solidx-docs",
@@ -1860,20 +1785,18 @@
         "TypeORM subscribers",
         "customization"
       ],
-      "solidx_concerns": [
-        "typeorm_subscribers"
-      ],
+      "solidx_concerns": "typeorm_subscribers",
       "chunk_count": 5,
       "uploaded_by": "migration_script",
-      "uploaded_at": "2025-10-24T14:05:06.597467"
+      "uploaded_at": "2025-10-28T13:53:36.315723"
     },
     "chunk_count": 5,
-    "uploaded_at": "2025-10-24T14:05:08.790932"
+    "uploaded_at": "2025-10-28T13:53:39.726257"
   },
   "developer-docs/extending/backend-customization/scheduled-jobs.md": {
     "hash": "d4409ba7f5cb9c3fe4849b17e8dafd0a2bd27a32a52f15887e63bcdd2faa6fd2",
-    "document_id": "0a839f33-3962-46e7-ab59-24b1e769a116",
-    "collection_id": "e0414fa4-da64-4e70-a5ea-349424ba1a47",
+    "document_id": "80e44648-715a-404d-a498-27625a4728f4",
+    "collection_id": "a7d72ddf-6d30-4390-aeb0-8d14ec87b52a",
     "metadata": {
       "source": "docusaurus",
       "project": "solidx-docs",
@@ -1888,20 +1811,18 @@
         "scheduled jobs",
         "customization"
       ],
-      "solidx_concerns": [
-        "add_scheduled_job"
-      ],
+      "solidx_concerns": "add_scheduled_job",
       "chunk_count": 1,
       "uploaded_by": "migration_script",
-      "uploaded_at": "2025-10-24T14:05:08.799093"
+      "uploaded_at": "2025-10-28T13:53:39.737126"
     },
     "chunk_count": 1,
-    "uploaded_at": "2025-10-24T14:05:09.449407"
+    "uploaded_at": "2025-10-28T13:53:40.256397"
   },
   "developer-docs/extending/backend-customization/sms-providers.md": {
     "hash": "4f70f2b14b7d728ac094cf5bfa5403b8edb3368f8d202729097425e474a34d79",
-    "document_id": "32f720da-1352-48dc-9c7b-c8f0956c9184",
-    "collection_id": "e0414fa4-da64-4e70-a5ea-349424ba1a47",
+    "document_id": "7c5a845d-5fdf-4eff-8e84-9fdd1fc09146",
+    "collection_id": "a7d72ddf-6d30-4390-aeb0-8d14ec87b52a",
     "metadata": {
       "source": "docusaurus",
       "project": "solidx-docs",
@@ -1916,20 +1837,18 @@
         "sms providers",
         "customization"
       ],
-      "solidx_concerns": [
-        "new_sms_provider"
-      ],
+      "solidx_concerns": "new_sms_provider",
       "chunk_count": 4,
       "uploaded_by": "migration_script",
-      "uploaded_at": "2025-10-24T14:05:09.454226"
+      "uploaded_at": "2025-10-28T13:53:40.260769"
     },
     "chunk_count": 4,
-    "uploaded_at": "2025-10-24T14:05:12.408911"
+    "uploaded_at": "2025-10-28T13:53:42.101936"
   },
   "developer-docs/extending/backend-customization/extending-users.md": {
     "hash": "b3da4cb0da5ece478c9428ceac25e84d1b8845dcbe74e3db15503427a2d1e868",
-    "document_id": "02764b4c-c2aa-47e4-b3f9-6e71aca3de54",
-    "collection_id": "e0414fa4-da64-4e70-a5ea-349424ba1a47",
+    "document_id": "4ecd743b-5a14-4be9-97d1-688de1988c60",
+    "collection_id": "a7d72ddf-6d30-4390-aeb0-8d14ec87b52a",
     "metadata": {
       "source": "docusaurus",
       "project": "solidx-docs",
@@ -1944,20 +1863,18 @@
         "users",
         "customization"
       ],
-      "solidx_concerns": [
-        "extending_user"
-      ],
+      "solidx_concerns": "extending_user",
       "chunk_count": 5,
       "uploaded_by": "migration_script",
-      "uploaded_at": "2025-10-24T14:05:12.438517"
+      "uploaded_at": "2025-10-28T13:53:42.113768"
     },
     "chunk_count": 5,
-    "uploaded_at": "2025-10-24T14:05:17.137487"
+    "uploaded_at": "2025-10-28T13:53:45.610960"
   },
   "developer-docs/extending/backend-customization/dynamic-selection-providers.md": {
     "hash": "bac6a7a7b97389344d9a6845c2beab864ebdfc203808687040b1eb454dcf3cbd",
-    "document_id": "c3d0184f-a2e2-4b63-a018-4d36802f2a5f",
-    "collection_id": "e0414fa4-da64-4e70-a5ea-349424ba1a47",
+    "document_id": "28b01044-dfc9-4b73-819f-5d92d5b0910a",
+    "collection_id": "a7d72ddf-6d30-4390-aeb0-8d14ec87b52a",
     "metadata": {
       "source": "docusaurus",
       "project": "solidx-docs",
@@ -1973,20 +1890,18 @@
         "providers",
         "customization"
       ],
-      "solidx_concerns": [
-        "dynamic_selection_provider"
-      ],
+      "solidx_concerns": "dynamic_selection_provider",
       "chunk_count": 4,
       "uploaded_by": "migration_script",
-      "uploaded_at": "2025-10-24T14:05:17.148947"
+      "uploaded_at": "2025-10-28T13:53:45.626491"
     },
     "chunk_count": 4,
-    "uploaded_at": "2025-10-24T14:05:19.518083"
+    "uploaded_at": "2025-10-28T13:53:48.039014"
   },
   "developer-docs/extending/backend-customization/crud-service.md": {
     "hash": "431f2e8d162c86a0442caffb465f90920718248de054b7a19f6ac1aab2dfc5be",
-    "document_id": "819b9154-0c91-475c-af30-2fa00af04b93",
-    "collection_id": "e0414fa4-da64-4e70-a5ea-349424ba1a47",
+    "document_id": "42b99b24-5b54-4660-963f-f1989570828e",
+    "collection_id": "a7d72ddf-6d30-4390-aeb0-8d14ec87b52a",
     "metadata": {
       "source": "docusaurus",
       "project": "solidx-docs",
@@ -2002,22 +1917,18 @@
         "CRUD",
         "customization"
       ],
-      "solidx_concerns": [
-        "using_crud_service_method",
-        "add_custom_service_method",
-        "add_controller_endpoint"
-      ],
+      "solidx_concerns": "using_crud_service_method,add_custom_service_method,add_controller_endpoint",
       "chunk_count": 9,
       "uploaded_by": "migration_script",
-      "uploaded_at": "2025-10-24T14:05:19.528310"
+      "uploaded_at": "2025-10-28T13:53:48.049045"
     },
     "chunk_count": 9,
-    "uploaded_at": "2025-10-24T14:05:24.491735"
+    "uploaded_at": "2025-10-28T13:53:53.560323"
   },
   "developer-docs/extending/backend-customization/solid-registry.md": {
     "hash": "945c1a5498498c0c8365a6ca21b1ee80ff0dc151d6da35034ce48cfaae9edf94",
-    "document_id": "b52d48ce-30e9-45f5-8a02-a95a41a0934a",
-    "collection_id": "e0414fa4-da64-4e70-a5ea-349424ba1a47",
+    "document_id": "30539d1e-8531-40c0-a531-4855fdfb7912",
+    "collection_id": "a7d72ddf-6d30-4390-aeb0-8d14ec87b52a",
     "metadata": {
       "source": "docusaurus",
       "project": "solidx-docs",
@@ -2035,15 +1946,15 @@
       ],
       "chunk_count": 2,
       "uploaded_by": "migration_script",
-      "uploaded_at": "2025-10-24T14:05:24.498705"
+      "uploaded_at": "2025-10-28T13:53:53.570729"
     },
     "chunk_count": 2,
-    "uploaded_at": "2025-10-24T14:05:25.956865"
+    "uploaded_at": "2025-10-28T13:53:55.014797"
   },
   "developer-docs/extending/backend-customization/extending-repositories.md": {
     "hash": "fb2a6808dcc145afda2ad7ee3fa8759c542bbcefd0c72ad632cc1ebe148c4114",
-    "document_id": "3c82179d-15fc-4e70-91c7-a133735ff892",
-    "collection_id": "e0414fa4-da64-4e70-a5ea-349424ba1a47",
+    "document_id": "a694f879-9c7a-4c98-9090-82f19e4b2632",
+    "collection_id": "a7d72ddf-6d30-4390-aeb0-8d14ec87b52a",
     "metadata": {
       "source": "docusaurus",
       "project": "solidx-docs",
@@ -2058,22 +1969,18 @@
         "repositories",
         "customization"
       ],
-      "solidx_concerns": [
-        "extending_repository",
-        "add_custom_service_method",
-        "add_controller_endpoint"
-      ],
+      "solidx_concerns": "extending_repository,add_custom_service_method,add_controller_endpoint",
       "chunk_count": 4,
       "uploaded_by": "migration_script",
-      "uploaded_at": "2025-10-24T14:05:25.960411"
+      "uploaded_at": "2025-10-28T13:53:55.023641"
     },
     "chunk_count": 4,
-    "uploaded_at": "2025-10-24T14:05:28.896450"
+    "uploaded_at": "2025-10-28T13:53:57.766769"
   },
   "developer-docs/extending/backend-customization/extending-services.md": {
     "hash": "4fd456614227c86a461c759e9a8c5109d153676a3827a79387e9e7066b48bc26",
-    "document_id": "d05f443e-ecca-47ba-b095-967c0fb4a6a5",
-    "collection_id": "e0414fa4-da64-4e70-a5ea-349424ba1a47",
+    "document_id": "b14260d2-07fe-4f8b-af45-a20920199b74",
+    "collection_id": "a7d72ddf-6d30-4390-aeb0-8d14ec87b52a",
     "metadata": {
       "source": "docusaurus",
       "project": "solidx-docs",
@@ -2088,22 +1995,18 @@
         "services",
         "customization"
       ],
-      "solidx_concerns": [
-        "add_custom_service_method",
-        "using_crud_service_method",
-        "add_controller_endpoint"
-      ],
+      "solidx_concerns": "add_custom_service_method,using_crud_service_method,add_controller_endpoint",
       "chunk_count": 3,
       "uploaded_by": "migration_script",
-      "uploaded_at": "2025-10-24T14:05:28.906123"
+      "uploaded_at": "2025-10-28T13:53:57.781107"
     },
     "chunk_count": 3,
-    "uploaded_at": "2025-10-24T14:05:30.562763"
+    "uploaded_at": "2025-10-28T13:53:59.879956"
   },
   "developer-docs/extending/backend-customization/extending-controllers.md": {
     "hash": "9c92102444b10f8d7701031fb02a7c4a34707549f2488a189d7464a80f78e56a",
-    "document_id": "1713d078-8c90-4f26-a8f4-12645bd3e307",
-    "collection_id": "e0414fa4-da64-4e70-a5ea-349424ba1a47",
+    "document_id": "6aacbf8e-d877-4df4-b9fe-046b93a23895",
+    "collection_id": "a7d72ddf-6d30-4390-aeb0-8d14ec87b52a",
     "metadata": {
       "source": "docusaurus",
       "project": "solidx-docs",
@@ -2118,20 +2021,18 @@
         "controllers",
         "customization"
       ],
-      "solidx_concerns": [
-        "add_controller_endpoint"
-      ],
+      "solidx_concerns": "add_controller_endpoint",
       "chunk_count": 3,
       "uploaded_by": "migration_script",
-      "uploaded_at": "2025-10-24T14:05:30.572824"
+      "uploaded_at": "2025-10-28T13:53:59.895748"
     },
     "chunk_count": 3,
-    "uploaded_at": "2025-10-24T14:05:32.101996"
+    "uploaded_at": "2025-10-28T13:54:03.871712"
   },
   "developer-docs/extending/backend-customization/dashboard-providers.md": {
     "hash": "e6dfdbaf0215a44674eb9ffdc1ef45db538447b38476db286cc6ec159554b4ab",
-    "document_id": "8eee84d8-58ba-4f95-9867-be08d7679bd3",
-    "collection_id": "e0414fa4-da64-4e70-a5ea-349424ba1a47",
+    "document_id": "0cdf1e20-88ce-4623-b032-686378c2bdd8",
+    "collection_id": "a7d72ddf-6d30-4390-aeb0-8d14ec87b52a",
     "metadata": {
       "source": "docusaurus",
       "project": "solidx-docs",
@@ -2147,20 +2048,18 @@
         "providers",
         "customization"
       ],
-      "solidx_concerns": [
-        "create/update_dashboard_widget"
-      ],
+      "solidx_concerns": "create/update_dashboard_widget",
       "chunk_count": 1,
       "uploaded_by": "migration_script",
-      "uploaded_at": "2025-10-24T14:05:32.124707"
+      "uploaded_at": "2025-10-28T13:54:03.882476"
     },
     "chunk_count": 1,
-    "uploaded_at": "2025-10-24T14:05:34.019850"
+    "uploaded_at": "2025-10-28T13:54:04.593070"
   },
   "developer-docs/extending/backend-customization/index.md": {
     "hash": "bb8f7cb8c50f12ad4eb1e6134c8aee2872b97b84979928aae5d0a630d9259e09",
-    "document_id": "ca90fc93-cf49-4ad8-af5c-fa008366c978",
-    "collection_id": "e0414fa4-da64-4e70-a5ea-349424ba1a47",
+    "document_id": "9e296a73-36f2-4a29-8447-3fb45bdc2f5e",
+    "collection_id": "a7d72ddf-6d30-4390-aeb0-8d14ec87b52a",
     "metadata": {
       "source": "docusaurus",
       "project": "solidx-docs",
@@ -2172,15 +2071,15 @@
       "summary": "This document provides an overview of backend customization capabilities in SolidX, covering how developers can extend the NestJS-based backend functionality. Topics include adding custom API endpoints to controllers, modifying and extending existing services with custom business logic, implementing custom providers for specialized functionality, and integrating additional backend features to meet specific application requirements beyond the default CRUD operations.",
       "chunk_count": 1,
       "uploaded_by": "migration_script",
-      "uploaded_at": "2025-10-24T14:05:34.023470"
+      "uploaded_at": "2025-10-28T13:54:04.605182"
     },
     "chunk_count": 1,
-    "uploaded_at": "2025-10-24T14:05:34.991341"
+    "uploaded_at": "2025-10-28T13:54:05.081782"
   },
   "developer-docs/extending/backend-customization/email-providers.md": {
     "hash": "522a0b0fae42fc463673c3430104d554fccedd0e15723cf99f07cd38a31a80be",
-    "document_id": "24c22b19-0be0-4a05-a434-c626bf8ce6fd",
-    "collection_id": "e0414fa4-da64-4e70-a5ea-349424ba1a47",
+    "document_id": "4833a44e-94bb-4583-81be-49bc1bdccb47",
+    "collection_id": "a7d72ddf-6d30-4390-aeb0-8d14ec87b52a",
     "metadata": {
       "source": "docusaurus",
       "project": "solidx-docs",
@@ -2195,20 +2094,18 @@
         "email providers",
         "customization"
       ],
-      "solidx_concerns": [
-        "new_email_provider"
-      ],
+      "solidx_concerns": "new_email_provider",
       "chunk_count": 4,
       "uploaded_by": "migration_script",
-      "uploaded_at": "2025-10-24T14:05:34.996570"
+      "uploaded_at": "2025-10-28T13:54:05.106557"
     },
     "chunk_count": 4,
-    "uploaded_at": "2025-10-24T14:05:36.797201"
+    "uploaded_at": "2025-10-28T13:54:07.679501"
   },
   "developer-docs/extending/backend-customization/whatsapp-providers.md": {
     "hash": "c2b1d32bdc5fdc0fb87bfe354f2c17d335cc8a67a2dba88dbb7baeb692133b2d",
-    "document_id": "c7c83396-b9e0-437d-a4fe-c2ffa9fd5111",
-    "collection_id": "e0414fa4-da64-4e70-a5ea-349424ba1a47",
+    "document_id": "36fc3425-5627-4bb0-9cbb-5fa6f1d4c189",
+    "collection_id": "a7d72ddf-6d30-4390-aeb0-8d14ec87b52a",
     "metadata": {
       "source": "docusaurus",
       "project": "solidx-docs",
@@ -2223,116 +2120,12 @@
         "whatsapp providers",
         "customization"
       ],
-      "solidx_concerns": [
-        "new_whatsapp_provider"
-      ],
+      "solidx_concerns": "new_whatsapp_provider",
       "chunk_count": 4,
       "uploaded_by": "migration_script",
-      "uploaded_at": "2025-10-24T14:05:36.809823"
+      "uploaded_at": "2025-10-28T13:54:07.683045"
     },
     "chunk_count": 4,
-    "uploaded_at": "2025-10-24T14:05:39.149277"
-  },
-  "index.md": {
-    "hash": "5a60fa5e410fb0f780d21adbbb5726ed786651211c6359a2d64ad16485670ef4",
-    "document_id": "cdeb9b3b-4e7d-454c-8007-233b6ccf55f4",
-    "collection_id": "fb196190-24f8-4a02-875f-66e34b5dbbd3",
-    "metadata": {
-      "source": "docusaurus",
-      "project": "solidx-docs",
-      "section": "tutorial",
-      "path": "tutorial/index.md",
-      "doc_title": "tutorial/index.md",
-      "chunk_count": 1,
-      "uploaded_by": "migration_script",
-      "uploaded_at": "2025-10-28T06:19:15.397097"
-    },
-    "chunk_count": 1,
-    "uploaded_at": "2025-10-28T06:19:20.798898"
-  },
-  "school-fees-portal/index.md": {
-    "hash": "8bd4824dcf0d4a5f30168febe9784ea86c36918e31020cd8742c81d1de953071",
-    "document_id": "2a1a3a38-109f-465c-97fc-35a7e27d5b5a",
-    "collection_id": "fb196190-24f8-4a02-875f-66e34b5dbbd3",
-    "metadata": {
-      "source": "docusaurus",
-      "project": "solidx-docs",
-      "section": "tutorial",
-      "path": "tutorial/school-fees-portal/index.md",
-      "doc_title": "tutorial/school-fees-portal/index.md",
-      "chunk_count": 5,
-      "uploaded_by": "migration_script",
-      "uploaded_at": "2025-10-28T06:19:20.806503"
-    },
-    "chunk_count": 5,
-    "uploaded_at": "2025-10-28T06:19:24.329705"
-  },
-  "school-fees-portal/1-bootstrap/index.md": {
-    "hash": "ec5cfbf70f5e927cb0d79c573fa165449fe0f55fbfe52f2467c4721356469509",
-    "document_id": "76c65c03-2eea-4ede-81fd-a2b7af64c25e",
-    "collection_id": "fb196190-24f8-4a02-875f-66e34b5dbbd3",
-    "metadata": {
-      "source": "docusaurus",
-      "project": "solidx-docs",
-      "section": "tutorial",
-      "path": "tutorial/school-fees-portal/1-bootstrap/index.md",
-      "doc_title": "tutorial/school-fees-portal/1-bootstrap/index.md",
-      "chunk_count": 2,
-      "uploaded_by": "migration_script",
-      "uploaded_at": "2025-10-28T06:19:24.340973"
-    },
-    "chunk_count": 2,
-    "uploaded_at": "2025-10-28T06:19:26.998597"
-  },
-  "school-fees-portal/4-customisations/index.md": {
-    "hash": "a70d91b08f5367533a265622499a0c21d3a01fd8b68c6f955e913f5fcabe2bd3",
-    "document_id": "3d8872d6-04db-4b49-a96f-ae3d56d2867c",
-    "collection_id": "fb196190-24f8-4a02-875f-66e34b5dbbd3",
-    "metadata": {
-      "source": "docusaurus",
-      "project": "solidx-docs",
-      "section": "tutorial",
-      "path": "tutorial/school-fees-portal/4-customisations/index.md",
-      "doc_title": "tutorial/school-fees-portal/4-customisations/index.md",
-      "chunk_count": 7,
-      "uploaded_by": "migration_script",
-      "uploaded_at": "2025-10-28T06:19:27.007805"
-    },
-    "chunk_count": 7,
-    "uploaded_at": "2025-10-28T06:19:31.779270"
-  },
-  "school-fees-portal/2-data-model/index.md": {
-    "hash": "b38fe37a61c5775d27cb71f591dc477d8144059b9c18c36609624d7478d2b588",
-    "document_id": "079ebfc6-c622-4da5-8019-09ac83e78720",
-    "collection_id": "fb196190-24f8-4a02-875f-66e34b5dbbd3",
-    "metadata": {
-      "source": "docusaurus",
-      "project": "solidx-docs",
-      "section": "tutorial",
-      "path": "tutorial/school-fees-portal/2-data-model/index.md",
-      "doc_title": "tutorial/school-fees-portal/2-data-model/index.md",
-      "chunk_count": 4,
-      "uploaded_by": "migration_script",
-      "uploaded_at": "2025-10-28T06:19:31.789763"
-    },
-    "chunk_count": 4,
-    "uploaded_at": "2025-10-28T06:19:35.004164"
-  },
-  "school-fees-portal/3-admin-layout/index.md": {
-    "hash": "9109819eb119faa26430b3a1064e8de8dea82c0a226dab3afb67839a159f3dc0",
-    "document_id": "31bb364e-109e-45de-b725-b9df408c3a07",
-    "collection_id": "fb196190-24f8-4a02-875f-66e34b5dbbd3",
-    "metadata": {
-      "source": "docusaurus",
-      "project": "solidx-docs",
-      "section": "tutorial",
-      "path": "tutorial/school-fees-portal/3-admin-layout/index.md",
-      "doc_title": "tutorial/school-fees-portal/3-admin-layout/index.md",
-      "chunk_count": 9,
-      "uploaded_by": "migration_script",
-      "uploaded_at": "2025-10-28T06:19:35.014791"
-    },
-    "chunk_count": 9,
-    "uploaded_at": "2025-10-28T06:19:42.889884"
+    "uploaded_at": "2025-10-28T13:54:10.512652"
   }
 }
