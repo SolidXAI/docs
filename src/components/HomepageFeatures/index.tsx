@@ -43,7 +43,6 @@ function Feature({ title, description, moreInfo, to, imgs }: FeatureItem) {
   return (
     <div className={clsx(`col col--5 ${styles.homeCards}`)}>
       <div className="text--start padding-horiz--md">
-        <img src="/img/CardIcon2.png" alt="" width={50} height={50} style={{ marginBottom: '1rem' }} />
         <Heading as="h2" style={{ fontSize: '1.75rem', marginBottom: '1rem' }}>{title}</Heading>
         <p style={{ fontSize: '1rem', lineHeight: '1.7', marginBottom: '1.5rem' }}>{description}</p>
 
