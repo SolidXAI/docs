@@ -1627,8 +1627,8 @@
     }
   },
   "developer-docs/extending/backend-customization/computation-providers.md": {
-    "hash": "237ded671b808841f77dbc3f91481bdba1b5c7879b543bebd0bd4cb29c3515ff",
-    "document_id": "fb165ce3-3937-4512-9dcb-72dbae1618d5",
+    "hash": "5a0f59de4191a94d88f967ab711aefa6e80cc0781f981818f5307fbda25e3de6",
+    "document_id": "99998507-a61c-4779-905d-53ce1cc48aff",
     "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
     "metadata": {
       "source": "docusaurus",
@@ -1645,7 +1645,9 @@
         "customization"
       ],
       "solidx_concerns": [
-        "add_computed_field_provider"
+        "add_computed_field_provider",
+        "create_model_with_fields",
+        "add_field_to_a_model"
       ],
       "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
       "collection_name": "developer-docs",
