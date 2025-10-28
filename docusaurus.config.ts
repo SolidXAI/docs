@@ -67,9 +67,9 @@ const config: Config = {
 
   themeConfig: {
     colorMode: {
-      defaultMode: 'light', // 👈 default is light
-      disableSwitch: false, // user can still toggle
-      respectPrefersColorScheme: false, // ignores system setting
+      defaultMode: 'light',
+      disableSwitch: false,
+      respectPrefersColorScheme: true, // Respect user's system preference
     },
     image: 'img/docusaurus-social-card.jpg',
     navbar: {
@@ -154,9 +154,16 @@ const config: Config = {
       // copyright: `Copyright © ${new Date().getFullYear()} SolidX, LogicLoop Ventures LLP.`,
     },
     prism: {
-      theme: prismThemes.dracula,        
-      darkTheme: prismThemes.dracula,  
-      additionalLanguages: ['typescript', 'tsx', 'bash', 'json', 'http', 'diff']
+      theme: prismThemes.github,        
+      darkTheme: prismThemes.vsDark,  
+      additionalLanguages: ['typescript', 'tsx', 'bash', 'json', 'http', 'diff'],
+      magicComments: [
+        {
+          className: 'theme-code-block-highlighted-line',
+          line: 'highlight-next-line',
+          block: {start: 'highlight-start', end: 'highlight-end'},
+        },
+      ],
     },
 
   } satisfies Preset.ThemeConfig,

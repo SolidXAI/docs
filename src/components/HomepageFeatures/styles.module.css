@@ -1,12 +1,9 @@
 .features {
   display: flex;
   align-items: center;
-  padding: 2rem 0 8rem 0;
+  padding: 4rem 2rem 6rem 2rem;
   width: 100%;
-  background-color: #0a0120;
-  padding-left: 8px !important;
-  padding-right: 8px !important;
-
+  background-color: var(--solid-bg-main);
 }
 
 .featureSvg {
@@ -14,51 +11,85 @@
   width: 100%;
   max-width: 470px;
   height: auto;
+  border-radius: 12px;
+  box-shadow: var(--solid-shadow-md);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
-
 
 .homeCards {
   display: flex;
   flex-direction: column;
-  gap: 20px;
-  border: 1px solid #4c257a78 !important;
-  margin: auto 2px !important;
-  padding: 2.5rem 0rem 0rem 1.1rem !important;
-  border-radius: 10px;
-  box-shadow: 0 2px 6px #3008614f;
+  gap: 24px;
+  border: 1px solid var(--solid-border-light) !important;
+  background-color: var(--solid-bg-card);
+  margin: 0 8px !important;
+  padding: 2.5rem 1.5rem 1.5rem 2rem !important;
+  border-radius: 16px;
+  box-shadow: var(--solid-shadow-sm);
+  transition: all 0.3s ease;
 }
 
 .homeCards:hover {
-  box-shadow: 0px 0px 10px var(--solid-purple-hover);
+  box-shadow: var(--solid-shadow-lg);
+  border-color: var(--solid-primary) !important;
+  transform: translateY(-4px);
 }
 
-.homeCardMain p{
-  margin-bottom: 10px !important;
+.homeCards:hover .featureSvg {
+  transform: scale(1.02);
+  box-shadow: var(--solid-shadow-lg);
 }
 
+.homeCardMain p {
+  margin-bottom: 12px !important;
+  color: var(--solid-text-secondary);
+}
 
 .homeCardMain {
   display: flex !important;
   justify-content: center !important;
-  gap: 30px;
-  font-size: 0.975rem;
+  gap: 32px;
+  font-size: 1rem;
 }
 
 .moreInfoLink {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  color: #a77aff;
+  color: var(--solid-primary);
   text-decoration: none !important;
-  font-weight: 500;
-  font-size: 1rem !important;
+  font-weight: 600;
+  font-size: 0.95rem !important;
+  transition: all 0.2s ease;
+  padding: 0.5rem 0;
 }
 
 .arrowIcon {
   flex-shrink: 0;
+  transition: transform 0.2s ease;
 }
 
 .moreInfoLink:hover {
-  gap: 0.7rem;
-  text-decoration: underline !important;
+  gap: 0.75rem;
+  color: var(--solid-primary-dark);
+  text-decoration: none !important;
+}
+
+.moreInfoLink:hover .arrowIcon {
+  transform: translateX(4px);
+}
+
+@media (max-width: 996px) {
+  .homeCardMain {
+    flex-direction: column;
+    gap: 24px;
+  }
+  
+  .homeCards {
+    margin: 0 !important;
+  }
+  
+  .features {
+    padding: 3rem 1rem 4rem 1rem;
+  }
 }
