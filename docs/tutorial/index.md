@@ -24,11 +24,11 @@ import TutorialCards from '@site/src/components/Tutorials';
 
 <div className="feature-grid">
 
-  <a className="feature-card-medium" href="/docs/tutorial/school-fees-portal">
-    <h4 className='home-card-title card-tilte'>School Fess Portal</h4>
+  <a className="feature-card" href="/docs/tutorial/school-fees-portal">
+    <h4 className='home-card-title card-tilte'>School Fees Portal</h4>
     <p className="home-card-desc card-desc">
 
-A complete guide for administrators and business users to create a Library Management System applications in SolidX. <br></br>Learn how to set up modules, setup core business entities or models, manage users, and tailor the platform to fit your organizational needs—without writing code.
+A complete guide for administrators and business users to create a School Fees Portal application in SolidX. <br></br>Learn how to set up modules, setup core business entities or models, manage users, and tailor the platform to fit your organizational needs—without writing code.
 
 </p>
 
