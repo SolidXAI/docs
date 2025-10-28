@@ -17,13 +17,13 @@ type FeatureItem = {
 const FeatureList: FeatureItem[] = [
   {
     title: 'Admin Docs',
-    imgs: require('@site/static/img/homeImg1.png').default,
+    imgs: require('@site/static/img/homeImage-11.png').default,
     description: (
       <>
         A complete guide for administrators and business users to install, configure, and manage applications in SolidX. <br></br>Learn how to set up modules, setup core business entities or models, manage users, and tailor the platform to fit your organizational needs—without writing code.
       </>
     ),
-    moreInfo: 'ReadMore',
+    moreInfo: 'Read More',
     to: 'docs/admin-docs/',
   },
   // {
@@ -39,13 +39,13 @@ const FeatureList: FeatureItem[] = [
   // },
   {
     title: 'Developer Docs',
-    imgs: require('@site/static/img/homeImg1.png').default,
+    imgs: require('@site/static/img/homeImage-22.png').default,
     description: (
       <>
         Dive into SolidX’s low-code engine and learn how to extend, customize, and integrate enterprise applications using APIs, code hooks, and reusable components. <br></br>Ideal for developers looking to build advanced logic and automation on top of the platform.
       </>
     ),
-    moreInfo: 'ReadMore',
+    moreInfo: 'Read More',
     to: 'docs/developer-docs/',
   },
 ];
