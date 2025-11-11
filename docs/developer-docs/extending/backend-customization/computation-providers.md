@@ -274,6 +274,33 @@ export interface ConcatComputedFieldContext {
 ```
 </details>
 
+### UuidExternalIdEntityComputedFieldProvider
+  <!-- async preComputeValue(
+    triggerEntity: CommonEntity,
+    computedFieldMetadata: ComputedFieldMetadata<any>
+  ): Promise<string> {
+    const { computedFieldValueProviderCtxt } = computedFieldMetadata;
+    const prefix = computedFieldValueProviderCtxt?.prefix ?? "";
+    const generated = `${prefix}-${uuidv4()}`;
+    return generated;
+  } -->
+
+Generates a **UUID-based external ID** with an optional prefix.\
+Useful for creating globally unique identifiers for records.
+Ideal for entities requiring unique references across distributed
+systems.
+
+<details>
+  <summary className="card-title card-headear-wrapper">
+    <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
+    View Context Interface
+  </summary>
+``` ts  
+  export interface UuidExternalIdContext {
+    prefix?: string; // alias -> staticPrefix
+  }
+``` ts
+
 ### NoopsEntityComputedFieldProviderService
 
 A **no-operation (noop)** provider that does not modify entity fields.\
