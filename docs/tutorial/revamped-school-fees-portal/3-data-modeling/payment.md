@@ -10,53 +10,18 @@ sidebar_position: 6
 
 | Field Name | Type | Description |
 |---|---|---|
-| `institute` | `relation` | Many-to-one relationship to the `institute` model. |
-| `student` | `relation` | Many-to-one relationship to the `student` model. |
-| `mSwipeIpgOrderId` | `shortText` | Order ID from the M-Swipe payment gateway. |
-| `mSwipeIpgPaymentId` | `shortText` | Payment ID from the M-Swipe payment gateway. |
-| `mSwipeIpgTransId` | `shortText` | Transaction ID from the M-Swipe payment gateway. |
-| `mSwipeIpgInvoiceId` | `shortText` | Invoice ID from the M-Swipe payment gateway. |
-| `mSwipeEncodedIpgId` | `shortText` | Encoded ID from the M-Swipe payment gateway. |
-| `mSwipeIpgStatus` | `shortText` | Status from the M-Swipe payment gateway. |
-| `amount` | `decimal` | The amount of the payment. |
-| `isRefunded` | `boolean` | A flag indicating if the payment has been refunded. |
-| `paymentStatus` | `selectionStatic` | The status of the payment (e.g., Pending, Succeeded, Failed). |
-| `paymentCollectionItemDetails` | `relation` | One-to-many relationship to `paymentCollectionItemDetail`. |
-
-**ER Diagram:**
-
-```mermaid
-erDiagram
-    institute {
-        string instituteName PK
-    }
-    student {
-        string studentId PK
-    }
-    payment {
-        int id PK
-        int instituteId FK
-        int studentId FK
-        string mSwipeIpgOrderId
-        decimal amount
-        boolean isRefunded
-        selectionStatic paymentStatus
-    }
-    paymentCollectionItemDetail {
-        int id PK
-        int paymentId FK
-    }
-
-    institute ||--o{ payment : "has"
-    student ||--o{ payment : "makes"
-    payment ||--o{ paymentCollectionItemDetail : "details"
-```
-
-
-**payment**
-
-![ER-payment](/img/tutorial/school-fees-portal/2-data-model/er-diagrams/er-payment.png)
-
+| `institute` | [`relation`](../../../admin-docs/module-builder/field-management#relation) | Many-to-one relationship to the `institute` model. |
+| `student` | [`relation`](../../../admin-docs/module-builder/field-management#relation) | Many-to-one relationship to the `student` model. |
+| `stripeOrderId` | [`shortText`](../../../admin-docs/module-builder/field-management#short-text) | Order ID from the Stripe payment gateway. |
+| `stripePaymentId` | [`shortText`](../../../admin-docs/module-builder/field-management#short-text) | Payment ID from the Stripe payment gateway. |
+| `stripeTransId` | [`shortText`](../../../admin-docs/module-builder/field-management#short-text) | Transaction ID from the Stripe payment gateway. |
+| `stripeInvoiceId` | [`shortText`](../../../admin-docs/module-builder/field-management#short-text) | Invoice ID from the Stripe payment gateway. |
+| `stripeEncodedId` | [`shortText`](../../../admin-docs/module-builder/field-management#short-text) | Encoded ID from the Stripe payment gateway. |
+| `stripeStatus` | [`shortText`](../../../admin-docs/module-builder/field-management#short-text) | Status from the Stripe payment gateway. |
+| `amount` | [`decimal`](../../../admin-docs/module-builder/field-management#decimal) | The amount of the payment. |
+| `isRefunded` | [`boolean`](../../../admin-docs/module-builder/field-management#boolean) | A flag indicating if the payment has been refunded. |
+| `paymentStatus` | [`selectionStatic`](../../../admin-docs/module-builder/field-management#static-selection) | The status of the payment (e.g., Pending, Succeeded, Failed). |
+| `paymentCollectionItemDetails` | [`relation`](../../../admin-docs/module-builder/field-management#relation) | One-to-many relationship to `paymentCollectionItemDetail`. |
 
 
 **Metadata JSON:**
@@ -134,8 +99,8 @@ erDiagram
       "enableAuditTracking": true
     },
     {
-      "name": "mSwipeIpgOrderId",
-      "displayName": "M Swipe Ipg Order Id",
+      "name": "stripeOrderId",
+      "displayName": "Stripe Order Id",
       "description": null,
       "type": "shortText",
       "ormType": "varchar",
@@ -155,8 +120,8 @@ erDiagram
       "enableAuditTracking": true
     },
     {
-      "name": "mSwipeIpgPaymentId",
-      "displayName": "M Swipe Ipg Payment Id",
+      "name": "stripePaymentId",
+      "displayName": "Stripe Payment Id",
       "description": null,
       "type": "shortText",
       "ormType": "varchar",
@@ -176,8 +141,8 @@ erDiagram
       "enableAuditTracking": true
     },
     {
-      "name": "mSwipeIpgTransId",
-      "displayName": "M Swipe Ipg Trans Id",
+      "name": "stripeTransId",
+      "displayName": "Stripe Trans Id",
       "description": null,
       "type": "shortText",
       "ormType": "varchar",
@@ -197,8 +162,8 @@ erDiagram
       "enableAuditTracking": true
     },
     {
-      "name": "mSwipeIpgInvoiceId",
-      "displayName": "M Swipe Ipg Invoice Id",
+      "name": "stripeInvoiceId",
+      "displayName": "Stripe Invoice Id",
       "description": null,
       "type": "shortText",
       "ormType": "varchar",
@@ -218,8 +183,8 @@ erDiagram
       "enableAuditTracking": true
     },
     {
-      "name": "mSwipeEncodedIpgId",
-      "displayName": "M Swipe Encoded Ipg Id",
+      "name": "stripeEncodedId",
+      "displayName": "Stripe Encoded Id",
       "description": null,
       "type": "shortText",
       "ormType": "varchar",
@@ -239,8 +204,8 @@ erDiagram
       "enableAuditTracking": true
     },
     {
-      "name": "mSwipeIpgStatus",
-      "displayName": "M Swipe Ipg Status",
+      "name": "stripeStatus",
+      "displayName": "Stripe Status",
       "description": null,
       "type": "shortText",
       "ormType": "varchar",
@@ -324,7 +289,7 @@ erDiagram
     {
       "name": "paymentCollectionItemDetails",
       "displayName": "PaymentCollectionItemDetails",
-      "description": "PaymentCollectionItemDetails",
+      "description": null,
       "type": "relation",
       "ormType": "integer",
       "isSystem": false,

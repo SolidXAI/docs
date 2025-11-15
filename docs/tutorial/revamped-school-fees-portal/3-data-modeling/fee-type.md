@@ -1,5 +1,5 @@
----
-sidebar_position: 2
+--- 
+sidebar_position: 2 
 ---
 
 # Fee Type Model
@@ -10,38 +10,14 @@ sidebar_position: 2
 
 | Field Name | Type | Description |
 |---|---|---|
-| `feeType` | `shortText` | The name of the fee type. |
-| `institute` | `relation` | A many-to-one relationship to the `institute` model. |
-| `partPaymentAllowed` | `boolean` | Whether partial payments are allowed for this fee type. |
-| `latePaymentFeesType` | `selectionStatic` | The type of late fee to apply (None, Percent, Absolute). |
-| `latePaymentFees` | `decimal` | The amount or percentage for the late fee. |
-| `feeTypeUserKey` | `computed` | A unique key for the fee type, computed from the fee type and institute name. |
+| `feeType` | [`shortText`](../../../admin-docs/module-builder/field-management#short-text) | The name of the fee type. |
+| `institute` | [`relation`](../../../admin-docs/module-builder/field-management#relation) | A many-to-one relationship to the `institute` model. |
+| `partPaymentAllowed` | [`boolean`](../../../admin-docs/module-builder/field-management#boolean) | Whether partial payments are allowed for this fee type. |
+| `latePaymentFeesType` | [`selectionStatic`](../../../admin-docs/module-builder/field-management#static-selection) | The type of late fee to apply (None, Percent, Absolute). |
+| `latePaymentFees` | [`decimal`](../../../admin-docs/module-builder/field-management#decimal) | The amount or percentage for the late fee. |
+| `feeTypeUserKey` | [`computed`](../../../admin-docs/module-builder/field-management#computed) | A unique key for the fee type, computed from the fee type and institute name. |
 
-**ER Diagram:**
 
-```mermaid
-erDiagram
-    institute {
-        string instituteName PK
-    }
-    feeType {
-        string feeType PK
-        int instituteId FK
-        boolean partPaymentAllowed
-        selectionStatic latePaymentFeesType
-    }
-    paymentCollectionItem {
-        int id PK
-        int feeTypeId FK
-    }
-
-    institute ||--o{ feeType : "has" 
-    feeType ||--o{ paymentCollectionItem : "classifies"
-```
-
-**fee-type**
-
-![ER-fee-type](/img/tutorial/school-fees-portal/2-data-model/er-diagrams/er-fee-type.png)
 
 **Metadata JSON:**
 

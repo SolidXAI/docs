@@ -6,7 +6,7 @@ sidebar_position: 2
 
 In this step, we'll initialize a new SolidX project using the official starter CLI.
 
-SolidX provides a powerful CLI tool to scaffold a full-stack multi-tenant SaaS application with a backend API and frontend UI, pre-wired for PostgreSQL, authentication, and data modeling.
+SolidX provides a powerful CLI tool to scaffold a full-stack multi-tenant SaaS application with a backend API and frontend UI, pre-wired for PostgreSQL.
 
 ## Create Solid App
 ```bash
@@ -19,28 +19,32 @@ When you run this command, the CLI will guide you through a series of prompts. H
 
 ### Configuration Options
 
+These are different options that you can provide to customize application that is being bootstrapped.
+
 | Prompt | Description |
 |--------|-------------|
-| **Project Name** | Name of your SolidX project. This will be the folder name where your codebase is generated. |
-| **Backend API Port** | The port number on which the backend API will run locally (e.g., `8080`). |
-| **Database Client** | The database type you want to use. Currently supports `pg` and `mysql` (PostgreSQL). |
+| **Project Name** | Name of your SolidX project. This will be the folder name where your codebase is generated. e.g.; `school-fees-portal` |
+| **Backend API Port** | The port number on which the backend API will run locally (e.g., `3000`). |
+| **Database Client** | The database type you want to use. Currently supports `PostgreSQL` and `MySQL`. |
 | **Database Username** | Your local database username for connecting to the database. |
 | **Database Password** | Password for the above database user. Entered securely in the terminal. |
 | **Database Name** | Name of the database to be used for this project. Make sure that you have created this database on your local database server previously. |
 | **Database Host** | Hostname of your database server. Typically `localhost` for local development. |
 | **Database Port** | Port on which the database is running. PostgreSQL defaults to `5432`. |
 | **Sync Models with Database** | Allows auto-syncing database schema with model definitions. Not recommended for production, but useful during development. |
-| **Frontend App Port** | The port on which the frontend app will run locally (e.g., `8081`). |
+| **Frontend App Port** | The port on which the frontend app will run locally (e.g., `3001`). |
 
 Once you answer these prompts, the CLI performs the following setup steps:
 
-- Sets up boilerplate for the backend
+- Sets up the backend server.
 - Installs the Solid CLI binary globally
-- Sets up boilerplate for the frontend
+- Sets up the frontend UI.
 - Generates .env files for both backend and frontend:
     - `/school-fees-portal/solid-api/.env`
     - `/school-fees-portal/solid-ui/.env`
 - Displays helpful next steps for running your app
+
+> Solid CLI binary is a set of shell commmands which allows running solidx functionality from command line.
 
 ## Output
 
@@ -66,7 +70,7 @@ npm run start:debug
 npm run start
 ```
 
-The SolidX backend allows you to generate all your REST API endpoints and comes pre-configured with Swagger documentation which you can access at `http://localhost:8080/docs`.
+The SolidX backend allows you to generate all your REST API endpoints and comes pre-configured with Swagger documentation which you can access at `http://localhost:3000/docs`.
 
 **Swagger Docs:**
 
@@ -83,7 +87,7 @@ cd school-fees-portal/solid-ui
 npm run dev
 ```
 
-The frontend application will be running at `http://localhost:8081`.
+The frontend application will be running at `http://localhost:3001`.
 
 **Default Admin Login Page:**
 
@@ -95,7 +99,16 @@ The frontend application will be running at `http://localhost:8081`.
 At this point, you will have a folder named after your project (e.g., `school-fees-portal`) in your working directory. You can open this folder in your code editor.
 
 Inside this project folder, you will find two main subdirectories:
-1.  `solid-api`: Contains the entire backend NestJS application.
-2.  `solid-ui`: Contains the entire frontend Next.js application.
+1.  `solid-api`: Contains the entire backend application.
+2.  `solid-ui`: Contains the entire frontend application.
+
+> SolidX backend uses [NestJS](https://docs.nestjs.com/) as its core framework.
+
+> SolidX frontend uses [NextJS](https://nextjs.org/docs) as its core UI framework.
+
 
 Each of these folders has its own `.env` file, pre-filled with the configuration you provided during the setup process.
+
+
+
+### TODO: Out of the box features.

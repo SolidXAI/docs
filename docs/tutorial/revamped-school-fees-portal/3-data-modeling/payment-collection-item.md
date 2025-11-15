@@ -10,66 +10,22 @@ sidebar_position: 5
 
 | Field Name | Type | Description |
 |---|---|---|
-| `student` | `relation` | Many-to-one relationship to the `student` model. |
-| `paymentCollection` | `relation` | Many-to-one relationship to the `paymentCollection` model. |
-| `institute` | `relation` | Many-to-one relationship to the `institute` model. |
-| `feeType` | `relation` | Many-to-one relationship to the `feeType` model. |
-| `dueDate` | `date` | The due date for this specific fee item. |
-| `amountToBePaid` | `decimal` | The amount to be paid for this fee item. |
-| `partPaymentAllowed` | `boolean` | Whether partial payment is allowed. |
-| `status` | `selectionStatic` | The payment status (e.g., Pending, Partially Paid, Fully Paid). |
-| `amountPaid` | `computed` | The total amount paid, computed from related payment details. |
-| `amountPending` | `computed` | The remaining amount to be paid. |
-| `isOverdue` | `boolean` | A flag indicating if the payment is overdue. |
-| `overdueByDays` | `int` | The number of days the payment is overdue. |
-| `paymentCollectionItemDetails` | `relation` | One-to-many relationship to `paymentCollectionItemDetail`. |
-| `lateAmountToBePaid` | `decimal` | The late fee amount to be paid. |
-| `totalAmountToBePaid` | `computed` | The total amount including late fees. |
-| `mode` | `shortText` | The mode of payment. |
-
-**ER Diagram:**
-
-```mermaid
-erDiagram
-    student {
-        string studentId PK
-    }
-    paymentCollection {
-        int id PK
-    }
-    institute {
-        string instituteName PK
-    }
-    feeType {
-        string feeType PK
-    }
-    paymentCollectionItem {
-        int id PK
-        int studentId FK
-        int paymentCollectionId FK
-        int instituteId FK
-        int feeTypeId FK
-        date dueDate
-        decimal amountToBePaid
-        boolean partPaymentAllowed
-        selectionStatic status
-    }
-    paymentCollectionItemDetail {
-        int id PK
-        int paymentCollectionItemId FK
-    }
-
-    student ||--o{ paymentCollectionItem : "has"
-    paymentCollection ||--o{ paymentCollectionItem : "contains"
-    institute ||--o{ paymentCollectionItem : "has"
-    feeType ||--o{ paymentCollectionItem : "classifies"
-    paymentCollectionItem ||--o{ paymentCollectionItemDetail : "details"
-```
-
-
-**payment-collection-item**
-
-![ER-payment-collection-item](/img/tutorial/school-fees-portal/2-data-model/er-diagrams/er-payment-collection-item.png)
+| `student` | [`relation`](../../../admin-docs/module-builder/field-management#relation) | Many-to-one relationship to the `student` model. |
+| `paymentCollection` | [`relation`](../../../admin-docs/module-builder/field-management#relation) | Many-to-one relationship to the `paymentCollection` model. |
+| `institute` | [`relation`](../../../admin-docs/module-builder/field-management#relation) | Many-to-one relationship to the `institute` model. |
+| `feeType` | [`relation`](../../../admin-docs/module-builder/field-management#relation) | Many-to-one relationship to the `feeType` model. |
+| `dueDate` | [`date`](../../../admin-docs/module-builder/field-management#date) | The due date for this specific fee item. |
+| `amountToBePaid` | [`decimal`](../../../admin-docs/module-builder/field-management#decimal) | The amount to be paid for this fee item. |
+| `partPaymentAllowed` | [`boolean`](../../../admin-docs/module-builder/field-management#boolean) | Whether partial payments are allowed for this fee type. |
+| `status` | [`selectionStatic`](../../../admin-docs/module-builder/field-management#static-selection) | The payment status (e.g., Pending, Partially Paid, Fully Paid). |
+| `amountPaid` | [`computed`](../../../admin-docs/module-builder/field-management#computed) | The total amount paid, computed from related payment details. |
+| `amountPending` | [`computed`](../../../admin-docs/module-builder/field-management#computed) | The remaining amount to be paid. |
+| `isOverdue` | [`boolean`](../../../admin-docs/module-builder/field-management#boolean) | A flag indicating if the payment is overdue. |
+| `overdueByDays` | [`integer`](../../../admin-docs/module-builder/field-management#integer) | The number of days the payment is overdue. |
+| `paymentCollectionItemDetails` | [`relation`](../../../admin-docs/module-builder/field-management#relation) | One-to-many relationship to `paymentCollectionItemDetail`. |
+| `lateAmountToBePaid` | [`decimal`](../../../admin-docs/module-builder/field-management#decimal) | The late fee amount to be paid. |
+| `totalAmountToBePaid` | [`computed`](../../../admin-docs/module-builder/field-management#computed) | The total amount including late fees. |
+| `mode` | [`shortText`](../../../admin-docs/module-builder/field-management#short-text) | The mode of payment. |
 
 
 **Metadata JSON:**
@@ -301,7 +257,7 @@ erDiagram
     {
       "name": "paymentCollectionItemDetails",
       "displayName": "PaymentCollectionItemDetails",
-      "description": "PaymentCollectionItemDetails",
+      "description": null,
       "type": "relation",
       "ormType": "integer",
       "isSystem": false,
@@ -455,7 +411,7 @@ erDiagram
     {
       "name": "mode",
       "displayName": "Mode",
-      "description": "Mode",
+      "description": null,
       "type": "shortText",
       "ormType": "varchar",
       "isSystem": false,

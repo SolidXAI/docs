@@ -10,53 +10,14 @@ sidebar_position: 7
 
 | Field Name | Type | Description |
 |---|---|---|
-| `institute` | `relation` | Many-to-one relationship to the `institute` model. |
-| `student` | `relation` | Many-to-one relationship to the `student` model. |
-| `paymentCollectionItem` | `relation` | Many-to-one relationship to the `paymentCollectionItem` model. |
-| `paymentDate` | `datetime` | The date and time of the payment. |
-| `amountPaid` | `decimal` | The amount paid in this transaction. |
-| `isRefunded` | `boolean` | A flag indicating if this portion of the payment was refunded. |
-| `paymentStatus` | `selectionStatic` | The status of this payment detail (e.g., Succeeded, Failed). |
-| `payment` | `relation` | Many-to-one relationship to the `payment` model. |
-
-**ER Diagram:**
-
-```mermaid
-erDiagram
-    institute {
-        string instituteName PK
-    }
-    student {
-        string studentId PK
-    }
-    paymentCollectionItem {
-        int id PK
-    }
-    payment {
-        int id PK
-    }
-    paymentCollectionItemDetail {
-        int id PK
-        int instituteId FK
-        int studentId FK
-        int paymentCollectionItemId FK
-        int paymentId FK
-        datetime paymentDate
-        decimal amountPaid
-        boolean isRefunded
-        selectionStatic paymentStatus
-    }
-
-    institute ||--o{ paymentCollectionItemDetail : "has"
-    student ||--o{ paymentCollectionItemDetail : "has"
-    paymentCollectionItem ||--o{ paymentCollectionItemDetail : "details"
-    payment ||--o{ paymentCollectionItemDetail : "details"
-```
-
-
-**payment-collection-item-detail**
-
-![ER-payment-collection-item-detail](/img/tutorial/school-fees-portal/2-data-model/er-diagrams/er-payment-collection-item-detail.png)
+| `institute` | [`relation`](../../../admin-docs/module-builder/field-management#relation) | Many-to-one relationship to the `institute` model. |
+| `student` | [`relation`](../../../admin-docs/module-builder/field-management#relation) | Many-to-one relationship to the `student` model. |
+| `paymentCollectionItem` | [`relation`](../../../admin-docs/module-builder/field-management#relation) | Many-to-one relationship to the `paymentCollectionItem` model. |
+| `paymentDate` | [`datetime`](../../../admin-docs/module-builder/field-management#datetime) | The date and time of the payment. |
+| `amountPaid` | [`decimal`](../../../admin-docs/module-builder/field-management#decimal) | The amount paid in this transaction. |
+| `isRefunded` | [`boolean`](../../../admin-docs/module-builder/field-management#boolean) | A flag indicating if this portion of the payment was refunded. |
+| `paymentStatus` | [`selectionStatic`](../../../admin-docs/module-builder/field-management#static-selection) | The status of this payment detail (e.g., Succeeded, Failed). |
+| `payment` | [`relation`](../../../admin-docs/module-builder/field-management#relation) | Many-to-one relationship to the `payment` model. |
 
 
 **Metadata JSON:**

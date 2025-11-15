@@ -10,33 +10,9 @@ sidebar_position: 8
 
 | Field Name | Type | Description |
 |---|---|---|
-| `userType` | `selectionStatic` | The type of user (e.g., Mswipe Admin, Institute Admin). |
-| `institute` | `relation` | A many-to-one relationship to the `institute` model. |
+| `userType` | [`selectionStatic`](../../../admin-docs/module-builder/field-management#static-selection) | The type of user (e.g., Mswipe Admin, Institute Admin). |
+| `institute` | [`relation`](../../../admin-docs/module-builder/field-management#relation) | A many-to-one relationship to the `institute` model. |
 
-**ER Diagram:**
-
-```mermaid
-erDiagram
-    user {
-        int id PK
-    }
-    institute {
-        string instituteName PK
-    }
-    instituteUser {
-        int userId PK, FK
-        int instituteId FK
-        selectionStatic userType
-    }
-
-    user <|..|| instituteUser : "extends"
-    institute ||--o{ instituteUser : "has"
-```
-
-
-**institute-user**
-
-![ER-institute-user](/img/tutorial/school-fees-portal/2-data-model/er-diagrams/er-institute-user.png)
 
 **Metadata JSON:**
 

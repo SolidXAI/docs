@@ -10,40 +10,13 @@ sidebar_position: 4
 
 | Field Name | Type | Description |
 |---|---|---|
-| `name` | `shortText` | A name for the payment collection batch. |
-| `description` | `longText` | A description of the payment collection. |
-| `institute` | `relation` | A many-to-one relationship to the `institute` model. |
-| `paymentFile` | `mediaSingle` | The uploaded file (e.g., Excel, CSV) containing fee details. |
-| `paymentCollectionItems` | `relation` | A one-to-many relationship to `paymentCollectionItem`. |
-| `dueDate` | `date` | The due date for the payments in this collection. |
-| `paymentCollectionId` | `computed` | A unique ID for the payment collection, computed from its name. |
-
-**ER Diagram:**
-
-```mermaid
-erDiagram
-    institute {
-        string instituteName PK
-    }
-    paymentCollection {
-        int id PK
-        int instituteId FK
-        string name
-        longText description
-        mediaSingle paymentFile
-    }
-    paymentCollectionItem {
-        int id PK
-        int paymentCollectionId FK
-    }
-
-    institute ||--o{ paymentCollection : "has" 
-    paymentCollection ||--o{ paymentCollectionItem : "contains"
-```
-
-**payment-collection**
-
-![ER-payment-collection](/img/tutorial/school-fees-portal/2-data-model/er-diagrams/er-payment-collection.png)
+| `name` | [`shortText`](../../../admin-docs/module-builder/field-management#short-text) | A name for the payment collection batch. |
+| `description` | [`longText`](../../../admin-docs/module-builder/field-management#long-text) | A description of the payment collection. |
+| `institute` | [`relation`](../../../admin-docs/module-builder/field-management#relation) | A many-to-one relationship to the `institute` model. |
+| `paymentFile` | [`mediaSingle`](../../../admin-docs/module-builder/field-management#single-media) | The uploaded file (e.g., Excel, CSV) containing fee details. |
+| `paymentCollectionItems` | [`relation`](../../../admin-docs/module-builder/field-management#relation) | A one-to-many relationship to `paymentCollectionItem`. |
+| `dueDate` | [`date`](../../../admin-docs/module-builder/field-management#date) | The due date for the payments in this collection. |
+| `paymentCollectionId` | [`computed`](../../../admin-docs/module-builder/field-management#computed) | A unique ID for the payment collection, computed from its name. |
 
 
 **Metadata JSON:**
@@ -160,7 +133,7 @@ erDiagram
     {
       "name": "paymentCollectionItems",
       "displayName": "PaymentCollectionItems",
-      "description": "PaymentCollectionItems",
+      "description": null,
       "type": "relation",
       "ormType": "integer",
       "isSystem": false,
@@ -205,7 +178,7 @@ erDiagram
     {
       "name": "paymentCollectionId",
       "displayName": "Payment Collection Id",
-      "description": "Payment Collection Id",
+      "description": null,
       "type": "computed",
       "ormType": "varchar",
       "isSystem": false,

@@ -6,14 +6,14 @@ sidebar_position: 1
 
 ## Introduction
 
-Building a Fee Collection Platform for Educational Institutions
+Building a Fee Collection Platform for Educational Institute
 
-Managing and collecting student fees efficiently remains a challenge for many educational institutions. Traditional methods often involve manual processes, fragmented systems, and lack transparency for both administrators and parents. This tutorial will walk through the process of building a hosted, multi-tenant fee collection platform tailored for educational institutions using SolidX.
+Managing and collecting student fees efficiently remains a challenge for many educational Institute. Traditional methods often involve manual processes, fragmented systems, and lack transparency for both administrators and students. This tutorial will walk through the process of building a hosted, multi-tenant fee collection platform tailored for educational Institute using SolidX.
 
-By the end of this tutorial, you will have a functional application that allows institutions to:
+By the end of this tutorial, you will have a functional application that allows Institute to:
 
 -   Onboard themselves and manage their own students and fee structures.
--   Configure a branded landing page for students and parents.
+-   Create a payment portal for the institue to manage payments for students/guardians.
 -   Initiate fee collection requests by uploading structured data.
 -   Process payments through an integrated payment gateway.
 -   Automate reminders and notifications for pending payments.
@@ -26,79 +26,76 @@ You will learn how to leverage SolidX's low-code capabilities to rapidly model a
 We'll support two main user types:
 
 ### Super Admin
-- Onboards new institutions
-- Configures initial landing page and fee types
-- Manages admin users for institutions
-- Can initiate collections (optional)
+- Onboards new institute.
+- Configures the fee types for the institute.
+- Manages admin users for institute.
+- Can initiate payment requests.
+- Configure payment portal for the institute to collect/manage payments.
 
-### Institution Admin
-- Belongs to a specific institution
+### Institute Admin
+- Belongs to a specific institute.
 - Uploads payment collection details
 - Tracks payments and generates reports
+
+### TODO: Other users e.g. Students, etc...
 
 
 ## Key Use Cases
 
-### 1. Onboarding an Educational Institution
+### 1. Onboarding an Educational Institute
 
 The onboarding process includes:
 
-- Creating a new institution tenant in the platform
-- Configuring institutional metadata such as:
-  - Name, domain, logo, hosted page prefix
+- Creating a new Institute.
+- Adding Institute details:
+  - Name
+  - Domain
+  - Logo
   - Fee types (e.g., Tuition, Bus, Library, Semester 1)
-- Adding institution admin users with domain-verified email IDs
-- Automatically provisioning branded landing pages (e.g., `school-name.platform.com`)
+- Adding Institute admin users.
+- Creating a hosted website (e.g., `https://my-institute.edu.com`)
 
-### 2. Configuring the Landing Page
+### 2. Configuring the website
 
-Each institution will receive a branded landing page where students or parents can:
+Each Institute will have a institute payment portal where students or guardians can:
 
-- Log in using email/mobile OTP
+- Log in using email/mobile
 - View due and historical payments
-- Start the payment process
+- Make due payments.
 
-> The page design will be standardized, with only the institutions branding (like logo) customized.
+> The page design will be standardized, with only the Institute branding (like logo) customized.
+
+
+> TODO: creating a sub-domain on solidxai.com
+
 
 ### 3. Initiating Payment Collections
 
-Admins can upload payment collection requests via CSV/Excel files.
+Admins can initiate payment collection by uploading CSV/Excel files with payment details for a particular institute.
 
 Each upload:
 
 - Contains fee details for multiple students
-- Creates records for students, payment collections, and individual fee items
-- Triggers email notifications to students/guardians about dues
+- Contains fee details for different fee types.
 
-> Optionally, WhatsApp or SMS notifications can be integrated in the future.
+>Each upload creates records for students, payment collections records and triggers email notifications to students/guardians about due payments.
+
+<!-- > Optionally, WhatsApp or SMS notifications can be integrated in the future. -->
 
 ### 4. Making a Payment
 
-Students/guardians receive emails with payment links. Once authenticated:
+Students/Guardians will receive emails with institute:
 
+- TODO: details of payment flow...
 - They see a breakdown of fees due by category (e.g., Semester 1, Bus, etc.)
-- They can choose partial/full payment amounts
+- They can choose to make partial/full payments.
 - The platform integrates with a payment gateway to process transactions
 - Real-time updates are reflected in the system's records
 
-### 5. Refunds & Chargeback Handling
+### 5. Notifications
 
-Institution admins can initiate refunds via the platform.
+The system supports the following types of notifications via emails:
 
-- Refunds update all related tables and mark items as refunded
-- Reporting views automatically adjust based on refund status
-- Chargeback logs can be generated using payment and fee-level records
+- **Fee Due Reminders:** Weekly reminders for pending or partially paid fees to institute students.
+- **New Payment Request:** Sent when new payment requests are uploaded to institute students.
 
-### 6. Notifications
-
-The system supports the following types of notifications:
-
-- **Fee Due Reminders:** Weekly reminders for pending or partially paid fees
-- **New Collection Alert:** Sent when new payment collections are uploaded
-
-
-### 7. Reporting
-
-- **Revenue Tracking:** Exportable Excel files combining payment collection and fee data
-- **Receipts:** To be configured based on institution needs
-- **Visual Reports:** Future scope for in-system dashboards

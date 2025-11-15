@@ -1,4 +1,4 @@
----
+--- 
 sidebar_position: 3
 ---
 
@@ -10,52 +10,19 @@ sidebar_position: 3
 
 | Field Name | Type | Description |
 |---|---|---|
-| `studentName` | `shortText` | The full name of the student. |
-| `studentEmailAddress` | `shortText` | The student's email address. |
-| `studentMobileNumber` | `shortText` | The student's mobile number. |
-| `parentName` | `shortText` | The name of the parent or guardian. |
-| `parentMobileNumber` | `shortText` | The parent's or guardian's mobile number. |
-| `parentEmailAddress` | `shortText` | The parent's or guardian's email address. |
-| `studentId` | `shortText` | The official student ID provided by the institute. |
-| `institute` | `relation` | A many-to-one relationship to the `institute` model. |
-| `payments` | `relation` | A one-to-many relationship to the `payment` model. |
-| `otp` | `shortText` | One-time password for student/parent login. |
-| `otpExpiresAt` | `datetime` | Expiry time for the OTP. |
-| `token` | `longText` | Authentication token for the student/parent session. |
-| `studentLoginId` | `computed` | A unique login ID for the student, computed from their name. |
-
-**ER Diagram:**
-
-```mermaid
-erDiagram
-    institute {
-        string instituteName PK
-    }
-    student {
-        string studentId PK
-        int instituteId FK
-        string studentName
-        string studentEmailAddress
-        string parentName
-    }
-    paymentCollectionItem {
-        int id PK
-        int studentId FK
-    }
-    payment {
-        int id PK
-        int studentId FK
-    }
-
-    institute ||--o{ student : "has" 
-    student ||--o{ paymentCollectionItem : "has" 
-    student ||--o{ payment : "makes" 
-```
-
-
-**student**
-
-![ER-student](/img/tutorial/school-fees-portal/2-data-model/er-diagrams/er-student.png)
+| `studentName` | [`shortText`](../../../admin-docs/module-builder/field-management#short-text) | The full name of the student. |
+| `studentEmailAddress` | [`shortText`](../../../admin-docs/module-builder/field-management#short-text) | The student's email address. |
+| `studentMobileNumber` | [`shortText`](../../../admin-docs/module-builder/field-management#short-text) | The student's mobile number. |
+| `parentName` | [`shortText`](../../../admin-docs/module-builder/field-management#short-text) | The name of the parent or guardian. |
+| `parentMobileNumber` | [`shortText`](../../../admin-docs/module-builder/field-management#short-text) | The parent's or guardian's mobile number. |
+| `parentEmailAddress` | [`shortText`](../../../admin-docs/module-builder/field-management#short-text) | The parent's or guardian's email address. |
+| `studentId` | [`shortText`](../../../admin-docs/module-builder/field-management#short-text) | The official student ID provided by the institute. |
+| `institute` | [`relation`](../../../admin-docs/module-builder/field-management#relation) | A many-to-one relationship to the `institute` model. |
+| `payments` | [`relation`](../../../admin-docs/module-builder/field-management#relation) | A one-to-many relationship to the `payment` model. |
+| `otp` | [`shortText`](../../../admin-docs/module-builder/field-management#short-text) | One-time password for student/parent login. |
+| `otpExpiresAt` | [`datetime`](../../../admin-docs/module-builder/field-management#datetime) | Expiry time for the OTP. |
+| `token` | [`longText`](../../../admin-docs/module-builder/field-management#long-text) | Authentication token for the student/parent session. |
+| `studentLoginId` | [`computed`](../../../admin-docs/module-builder/field-management#computed) | A unique login ID for the student, computed from their name. |
 
 
 **Metadata JSON:**

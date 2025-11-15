@@ -10,68 +10,26 @@ sidebar_position: 1
 
 | Field Name | Type | Description |
 |---|---|---|
-| `instituteName` | `shortText` | The official name of the institute. Marked as the user key. |
-| `logo` | `mediaSingle` | The institute's logo for branding. |
-| `description` | `longText` | A brief description of the institute. |
-| `paymentGatewayMerchantId` | `shortText` | Merchant ID for the payment gateway. |
-| `paymentGatewayAccessKey` | `shortText` | Access key for the payment gateway. |
-| `paymentGatewayAccessSecret` | `shortText` | Secret key for the payment gateway. |
-| `instituteAddress` | `longText` | The physical address of the institute. |
-| `feeTypes` | `relation` | One-to-many relationship with Fee Types. |
-| `instituteUsers` | `relation` | One-to-many relationship with Institute Users. |
-| `instituteBrochure` | `mediaSingle` | A brochure or informational document. |
-| `instituteIntroVideo` | `mediaSingle` | An introductory video for the institute. |
-| `supportEmail` | `shortText` | Email address for support queries. |
-| `supportMobile` | `shortText` | Mobile number for support queries. |
-| `gst` | `shortText` | GST number of the institute. |
-| `tnC` | `richText` | Terms and Conditions for the institute. |
-| `faqs` | `richText` | Frequently Asked Questions. |
-| `privacyPolicy` | `richText` | The institute's privacy policy. |
-| `emailDomain` | `shortText` | The official email domain of the institute. |
-| `custUserId` | `shortText` | Customer User ID for the institute. |
+| `instituteName` | [`shortText`](../../../admin-docs/module-builder/field-management#short-text) | The official name of the institute. Marked as the user key. |
+| `logo` | [`mediaSingle`](../../../admin-docs/module-builder/field-management#single-media) | The institute's logo for branding. |
+| `description` | [`longText`](../../../admin-docs/module-builder/field-management#long-text) | A brief description of the institute. |
+| `paymentGatewayMerchantId` | [`shortText`](../../../admin-docs/module-builder/field-management#short-text) | Merchant ID for the payment gateway. |
+| `paymentGatewayAccessKey` | [`shortText`](../../../admin-docs/module-builder/field-management#short-text) | Access key for the payment gateway. |
+| `paymentGatewayAccessSecret` | [`shortText`](../../../admin-docs/module-builder/field-management#short-text) | Secret key for the payment gateway. |
+| `instituteAddress` | [`longText`](../../../admin-docs/module-builder/field-management#long-text) | The physical address of the institute. |
+| `feeTypes` | [`relation`](../../../admin-docs/module-builder/field-management#relation) | One-to-many relationship with Fee Types. |
+| `instituteUsers` | [`relation`](../../../admin-docs/module-builder/field-management#relation) | One-to-many relationship with Institute Users. |
+| `instituteBrochure` | [`mediaSingle`](../../../admin-docs/module-builder/field-management#single-media) | A brochure or informational document. |
+| `instituteIntroVideo` | [`mediaSingle`](../../../admin-docs/module-builder/field-management#single-media) | An introductory video for the institute. |
+| `supportEmail` | [`shortText`](../../../admin-docs/module-builder/field-management#short-text) | Email address for support queries. |
+| `supportMobile` | [`shortText`](../../../admin-docs/module-builder/field-management#short-text) | Mobile number for support queries. |
+| `gst` | [`shortText`](../../../admin-docs/module-builder/field-management#short-text) | GST number of the institute. |
+| `tnC` | [`richText`](../../../admin-docs/module-builder/field-management#richtext) | Terms and Conditions for the institute. |
+| `faqs` | [`richText`](../../../admin-docs/module-builder/field-management#richtext) | Frequently Asked Questions. |
+| `privacyPolicy` | [`richText`](../../../admin-docs/module-builder/field-management#richtext) | The institute's privacy policy. |
+| `emailDomain` | [`shortText`](../../../admin-docs/module-builder/field-management#short-text) | The official email domain of the institute. |
+| `custUserId` | [`shortText`](../../../admin-docs/module-builder/field-management#short-text) | Customer User ID for the institute. |
 
-**ER Diagram:**
-
-```mermaid
-erDiagram
-    institute {
-        string instituteName PK
-        mediaSingle logo
-        longText description
-        string paymentGatewayMerchantId
-        string supportEmail
-        string supportMobile
-    }
-    feeType {
-        string feeType PK
-        int instituteId FK
-    }
-    student {
-        string studentId PK
-        int instituteId FK
-    }
-    paymentCollection {
-        int id PK
-        int instituteId FK
-    }
-    instituteUser {
-        int userId PK, FK
-        int instituteId FK
-    }
-    user {
-        int id PK
-    }
-
-    institute ||--o{ feeType : "has"
-    institute ||--o{ student : "has"
-    institute ||--o{ paymentCollection : "has"
-    institute ||--o{ instituteUser : "has"
-    user ||..|| instituteUser : "extends"
-```
-
-**institute**
-
-![ER-institute](/img/tutorial/school-fees-portal/2-data-model/er-diagrams/er-institute.png)
 
 <details>
 <summary>&emsp; View Metadata JSON</summary>
@@ -242,7 +200,7 @@ erDiagram
     {
       "name": "feeTypes",
       "displayName": "FeeTypes",
-      "description": "FeeTypes",
+      "description": null,
       "type": "relation",
       "ormType": "integer",
       "isSystem": false,
@@ -269,7 +227,7 @@ erDiagram
     {
       "name": "instituteUsers",
       "displayName": "InstituteUsers",
-      "description": "InstituteUsers",
+      "description": null,
       "type": "relation",
       "ormType": "integer",
       "isSystem": false,
@@ -470,7 +428,7 @@ erDiagram
     {
       "name": "custUserId",
       "displayName": "Cust UserID",
-      "description": "Customer UserID",
+      "description": null,
       "type": "shortText",
       "ormType": "varchar",
       "isSystem": false,
