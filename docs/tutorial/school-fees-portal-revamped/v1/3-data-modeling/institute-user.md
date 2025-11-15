@@ -10,7 +10,7 @@ sidebar_position: 8
 
 | Field Name | Type | Description |
 |---|---|---|
-| `userType` | [`selectionStatic`](../../../admin-docs/module-builder/field-management#static-selection) | The type of user (e.g., Mswipe Admin, Institute Admin). |
+| `userType` | [`selectionStatic`](../../../admin-docs/module-builder/field-management#static-selection) | The type of user (e.g., Institute Admin). |
 | `institute` | [`relation`](../../../admin-docs/module-builder/field-management#relation) | A many-to-one relationship to the `institute` model. |
 
 
@@ -43,11 +43,9 @@ sidebar_position: 8
       "ormType": "varchar",
       "isSystem": false,
       "defaultValue": "Institute Admin",
-      "selectionStaticValues": [
-        "Mswipe Admin:Mswipe Admin",
-        "Institute Admin:Institute Admin"
-      ],
-      "selectionValueType": "string",
+              "selectionStaticValues": [
+              "Institute Admin:Institute Admin"
+            ],      "selectionValueType": "string",
       "required": true,
       "unique": false,
       "index": false,

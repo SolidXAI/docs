@@ -1,4 +1,4 @@
----
+--- 
 sidebar_position: 3
 ---
 
@@ -1645,8 +1645,8 @@ The following diagram illustrates the relationships between the models in our `f
             "enableAuditTracking": true
           },
           {
-            "name": "mSwipeIpgOrderId",
-            "displayName": "M Swipe Ipg Order Id",
+            "name": "paymentGatewayOrderId",
+            "displayName": "Payment Gateway Order Id",
             "description": null,
             "type": "shortText",
             "ormType": "varchar",
@@ -1666,8 +1666,8 @@ The following diagram illustrates the relationships between the models in our `f
             "enableAuditTracking": true
           },
           {
-            "name": "mSwipeIpgPaymentId",
-            "displayName": "M Swipe Ipg Payment Id",
+            "name": "paymentGatewayPaymentId",
+            "displayName": "Payment Gateway Payment Id",
             "description": null,
             "type": "shortText",
             "ormType": "varchar",
@@ -1687,8 +1687,8 @@ The following diagram illustrates the relationships between the models in our `f
             "enableAuditTracking": true
           },
           {
-            "name": "mSwipeIpgTransId",
-            "displayName": "M Swipe Ipg Trans Id",
+            "name": "paymentGatewayTransId",
+            "displayName": "Payment Gateway Trans Id",
             "description": null,
             "type": "shortText",
             "ormType": "varchar",
@@ -1708,8 +1708,8 @@ The following diagram illustrates the relationships between the models in our `f
             "enableAuditTracking": true
           },
           {
-            "name": "mSwipeIpgInvoiceId",
-            "displayName": "M Swipe Ipg Invoice Id",
+            "name": "paymentGatewayInvoiceId",
+            "displayName": "Payment Gateway Invoice Id",
             "description": null,
             "type": "shortText",
             "ormType": "varchar",
@@ -1729,8 +1729,8 @@ The following diagram illustrates the relationships between the models in our `f
             "enableAuditTracking": true
           },
           {
-            "name": "mSwipeEncodedIpgId",
-            "displayName": "M Swipe Encoded Ipg Id",
+            "name": "paymentGatewayEncodedId",
+            "displayName": "Payment Gateway Encoded Id",
             "description": null,
             "type": "shortText",
             "ormType": "varchar",
@@ -1750,8 +1750,8 @@ The following diagram illustrates the relationships between the models in our `f
             "enableAuditTracking": true
           },
           {
-            "name": "mSwipeIpgStatus",
-            "displayName": "M Swipe Ipg Status",
+            "name": "paymentGatewayStatus",
+            "displayName": "Payment Gateway Status",
             "description": null,
             "type": "shortText",
             "ormType": "varchar",
@@ -2089,7 +2089,6 @@ The following diagram illustrates the relationships between the models in our `f
             "isSystem": false,
             "defaultValue": "Institute Admin",
             "selectionStaticValues": [
-              "Mswipe Admin:Mswipe Admin",
               "Institute Admin:Institute Admin"
             ],
             "selectionValueType": "string",

@@ -4,7 +4,7 @@ sidebar_position: 6
 
 # Payment Model
 
-**Business Purpose:** Records the details of a payment transaction, including gateway-specific IDs and the payment status.
+**Business Purpose:** Records the details of a single, complete payment transaction made by a student. This model acts as a log, capturing the total amount paid and all the identifiers returned by the external payment gateway.
 
 **Fields:**
 
@@ -12,19 +12,49 @@ sidebar_position: 6
 |---|---|---|
 | `institute` | [`relation`](../../../admin-docs/module-builder/field-management#relation) | Many-to-one relationship to the `institute` model. |
 | `student` | [`relation`](../../../admin-docs/module-builder/field-management#relation) | Many-to-one relationship to the `student` model. |
-| `stripeOrderId` | [`shortText`](../../../admin-docs/module-builder/field-management#short-text) | Order ID from the Stripe payment gateway. |
-| `stripePaymentId` | [`shortText`](../../../admin-docs/module-builder/field-management#short-text) | Payment ID from the Stripe payment gateway. |
-| `stripeTransId` | [`shortText`](../../../admin-docs/module-builder/field-management#short-text) | Transaction ID from the Stripe payment gateway. |
-| `stripeInvoiceId` | [`shortText`](../../../admin-docs/module-builder/field-management#short-text) | Invoice ID from the Stripe payment gateway. |
-| `stripeEncodedId` | [`shortText`](../../../admin-docs/module-builder/field-management#short-text) | Encoded ID from the Stripe payment gateway. |
-| `stripeStatus` | [`shortText`](../../../admin-docs/module-builder/field-management#short-text) | Status from the Stripe payment gateway. |
+| `paymentGatewayOrderId` | [`shortText`](../../../admin-docs/module-builder/field-management#short-text) | Order ID from the Payment Gateway. |
+| `paymentGatewayPaymentId` | [`shortText`](../../../admin-docs/module-builder/field-management#short-text) | Payment ID from the Payment Gateway. |
+| `paymentGatewayTransId` | [`shortText`](../../../admin-docs/module-builder/field-management#short-text) | Transaction ID from the Payment Gateway. |
+| `paymentGatewayInvoiceId` | [`shortText`](../../../admin-docs/module-builder/field-management#short-text) | Invoice ID from the Payment Gateway. |
+| `paymentGatewayEncodedId` | [`shortText`](../../../admin-docs/module-builder/field-management#short-text) | Encoded ID from the Payment Gateway. |
+| `paymentGatewayStatus` | [`shortText`](../../../admin-docs/module-builder/field-management#short-text) | Status from the Payment Gateway. |
 | `amount` | [`decimal`](../../../admin-docs/module-builder/field-management#decimal) | The amount of the payment. |
 | `isRefunded` | [`boolean`](../../../admin-docs/module-builder/field-management#boolean) | A flag indicating if the payment has been refunded. |
 | `paymentStatus` | [`selectionStatic`](../../../admin-docs/module-builder/field-management#static-selection) | The status of the payment (e.g., Pending, Succeeded, Failed). |
 | `paymentCollectionItemDetails` | [`relation`](../../../admin-docs/module-builder/field-management#relation) | One-to-many relationship to `paymentCollectionItemDetail`. |
 
+---
 
-**Metadata JSON:**
+### Key Fields Explained
+
+-   **`paymentGateway...` Fields:** This group of fields is essential for traceability. They store all the unique IDs and status codes returned by the payment gateway (e.g., Stripe, PayPal) after a transaction attempt. This is critical for reconciling payments, handling disputes, and debugging transaction issues.
+-   **`paymentStatus` (Static Selection):** This is our internal status for the payment, which is updated based on the callback we receive from the payment gateway. It can be `Pending` (while the user is on the payment page), `Succeeded`, or `Failed`.
+-   **`paymentCollectionItemDetails` (Relation):** This one-to-many relationship is key for partial payments. A single `Payment` of $100 could be linked to two `PaymentCollectionItemDetail` records: one for $70 towards "Tuition" and one for $30 towards "Bus Fee".
+
+---
+
+### Creation Steps
+
+If you are following the manual "Guided Tour", follow these steps to create the `Payment` model in the App Builder.
+
+1.  Navigate to **Fees Portal > App Builder > Model** and click **Add**.
+2.  Fill in the primary details for the model:
+    -   **Singular Name:** `payment`
+    -   **Plural Name:** `payments`
+    -   **Display Name:** `Payment`
+3.  Go to the **Fields** tab.
+4.  Click **Add Field** and create each field exactly as defined in the table above.
+5.  Click **Save**.
+
+---
+
+:::tip For the Fast Track: Model Metadata
+The JSON block below contains the complete metadata definition for the **Payment** model.
+
+This definition is structured with top-level properties for the model itself (like `singularName`, `pluralName`, `tableName`) and a `fields` array that defines every attribute you see in the table above.
+
+You can use this metadata as part of the "Fast Track" approach outlined in the [Data Modeling Overview](./index.md) by including it in the main `fees-portal-metadata.json` file.
+:::
 
 <details>
 <summary>&emsp; View Metadata JSON</summary>
@@ -99,8 +129,8 @@ sidebar_position: 6
       "enableAuditTracking": true
     },
     {
-      "name": "stripeOrderId",
-      "displayName": "Stripe Order Id",
+      "name": "paymentGatewayOrderId",
+      "displayName": "Payment Gateway Order Id",
       "description": null,
       "type": "shortText",
       "ormType": "varchar",
@@ -120,8 +150,8 @@ sidebar_position: 6
       "enableAuditTracking": true
     },
     {
-      "name": "stripePaymentId",
-      "displayName": "Stripe Payment Id",
+      "name": "paymentGatewayPaymentId",
+      "displayName": "Payment Gateway Payment Id",
       "description": null,
       "type": "shortText",
       "ormType": "varchar",
@@ -141,8 +171,8 @@ sidebar_position: 6
       "enableAuditTracking": true
     },
     {
-      "name": "stripeTransId",
-      "displayName": "Stripe Trans Id",
+      "name": "paymentGatewayTransId",
+      "displayName": "Payment Gateway Trans Id",
       "description": null,
       "type": "shortText",
       "ormType": "varchar",
@@ -162,8 +192,8 @@ sidebar_position: 6
       "enableAuditTracking": true
     },
     {
-      "name": "stripeInvoiceId",
-      "displayName": "Stripe Invoice Id",
+      "name": "paymentGatewayInvoiceId",
+      "displayName": "Payment Gateway Invoice Id",
       "description": null,
       "type": "shortText",
       "ormType": "varchar",
@@ -183,8 +213,8 @@ sidebar_position: 6
       "enableAuditTracking": true
     },
     {
-      "name": "stripeEncodedId",
-      "displayName": "Stripe Encoded Id",
+      "name": "paymentGatewayEncodedId",
+      "displayName": "Payment Gateway Encoded Id",
       "description": null,
       "type": "shortText",
       "ormType": "varchar",
@@ -204,8 +234,8 @@ sidebar_position: 6
       "enableAuditTracking": true
     },
     {
-      "name": "stripeStatus",
-      "displayName": "Stripe Status",
+      "name": "paymentGatewayStatus",
+      "displayName": "Payment Gateway Status",
       "description": null,
       "type": "shortText",
       "ormType": "varchar",
@@ -318,5 +348,3 @@ sidebar_position: 6
 ```
 
 </details>
-
-**Apply Changes:** Apply model changes as guided in Data Modeling page.
