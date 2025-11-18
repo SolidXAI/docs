@@ -6,7 +6,7 @@ sidebar_position: 2
 
 This section covers the primary workflows for an institute's administrative user, from logging in to managing payments.
 
-## User Login and Access Control
+## 2.1 User Login and Access Control
 
 An `InstituteUser` is a user who belongs to a specific institute. Their access must be strictly limited to their own institute's data.
 
@@ -21,16 +21,14 @@ SolidX achieves this data isolation not by writing complex queries in every serv
 
 This is configured once in the **Solid Core > Security > Security Record Rule** section of the admin panel. After that, every query, API call, and list view is automatically and securely filtered, providing robust multi-tenancy out of the box.
 
-:::tip
-A screenshot of the "Add/Edit Security Record Rule" UI from the admin panel would be very effective here.
-:::
+![Default Login Page](/img/tutorial/school-fees-portal/5-recipes/security-rule.png)
 
-## User Dashboard
+<!-- ## User Dashboard
 
 Upon logging in, the Institute Admin should be greeted with a dashboard providing an at-a-glance view of the institute's financial health.
 
 :::tip
-A mockup or screenshot of this dashboard UI would be very effective here.
+Dashboard feature will come shortly.
 :::
 
 ### Key Metrics on the Dashboard
@@ -41,54 +39,697 @@ A mockup or screenshot of this dashboard UI would be very effective here.
 -   **Recent Transactions:** A list of the 5-10 most recent payment activities (successful or failed).
 -   **Quick Actions:** Buttons to "Start a New Payment Collection" or "View All Students".
 
-## Bulk Data Upload via Excel
 
-This is the primary method for an institute to initiate a large number of fee requests at once.
 
-### Business Reason
 
-Manually creating hundreds of fee records is inefficient and error-prone. A bulk upload feature allows admins to work in a familiar tool like Excel and import everything in a single action.
+``` -->
 
-### Process Flow
+## 2.2 Institute User — Create / Download Excel for Upload
 
-```mermaid
-graph TD
-    A[Admin navigates to <br> 'Payment Collections' and clicks 'Add'] --> B{Fills in Collection Name <br> e.g., "Spring 2024 Fees"};
-    B --> C{Uploads Excel/CSV file <br> to the 'Payment File' field};
-    C --> D[Admin saves the Payment Collection];
-    D -- Triggers Event --> E((SolidX Backend));
-    E -- 'afterInsert' event --> F{MediaTransactionSubscriber <br> starts processing};
-    F --> G{Reads and validates <br> each row of the Excel file};
-    G --> H{For each row: <br> 1. Find or Create Student <br> 2. Create PaymentCollectionItem};
-    H --> I[Processing Complete];
-    I --> J[Emails are sent to all <br> parents/students about the new fees];
+Once the institute is onboarded and fee types are configured, the Institute Admin can upload student fee mappings in bulk.
+To simplify this, the system provides a Sample Excel Template that the admin can download, fill, and re-upload.
+
+### How It Works
+
+The Institute Admin navigates to:
+Fees Portal → Payment Collection → Initiate Payment
+
+A button Download Sample Excel is shown.
+
+Clicking this button downloads an auto-generated Excel file with pre-defined headers.
+
+The admin can now add or edit any number of rows, following the structure provided.
+
+:::tip Easy Bulk Upload
+The sample Excel ensures every institute follows a consistent data structure, reducing upload errors and making large student lists easy to import.
+:::
+
+### Excel Template Structure
+
+| Column Name           | Description                                                           |
+| --------------------- | --------------------------------------------------------------------- |
+| **Student ID**        | Unique identifier per institute (composite index ensures uniqueness). |
+| **Student Name**      | Name of the student.                                                  |
+| **Parent Name**       | Parent or guardian name.                                              |
+| **Parent Email**      | Email used for sending payment links & reminders.                     |
+| **Fee Types**         | One or multiple fee types mapped (dynamic per institute).             |
+| **Fee Type Due Date** | Due date for each fee type.                                           |
+| **Payment Mode**      | PG / Cash                          |
+
+:::info Template Evolution
+Fee Types column is dynamic — the system generates columns based on the institute’s configured fee types.
+:::
+
+### UI Preview
+
+![Default Login Page](/img/tutorial/school-fees-portal/6-usecase/excel.png)
+
+:::tip Payment Modes
+The system supports **two payment modes** — **Payment Gateway (PG)** and **Cash**.
+
+- **PG Mode:** Creates a pending payment record and sends a payment link to the parent.  
+- **Cash Mode:** Marks the payment as *Paid* instantly. No reminders, schedulers, or subscribers will process these records since they are already completed.
+
+This ensures accurate tracking while preventing unnecessary notifications for cash-settled payments.
+:::
+
+
+## 2.3 Institute User — Initiate Payment
+
+When an Institute Admin clicks Initiate Payment, the system automatically creates payment records for all students based on the institute’s configured fee types.
+
+### How It Works (Short Version)
+- Dynamic Fee Type Loading
+- The system fetches all active fee types for the institute. This makes the process fully dynamic — no manual mapping required.
+- Auto-Generate Payment Records
+
+### Using:
+
+- Uploaded student Excel with Configured fee types
+- The system generates necessary payment entries (Pending status) for each student–fee type combination.
+
+### Automatic Email Notifications
+
+For each generated payment record: A unique payment link is created
+####  An email is sent to the parent with:
+- Fee details
+- Due date
+- “Pay Now” button
+
+Clicking the button redirects to the Student Portal Payment Page.
+
+:::tip 
+Initiate Payment removes manual work — all records and parent notifications are fully automated.
+:::
+
+### Preview
+
+![Default Login Page](/img/tutorial/school-fees-portal/6-usecase/initiate-payment.png)
+
+### Code Snippet
+
+```Typescript
+  @ApiTags('Fees Portal')
+  @Controller('payment-collection')
+  export class PaymentCollectionController {
+    constructor(private readonly service: PaymentCollectionService) { }
+
+    @ApiBearerAuth('jwt')
+    @Post()
+    @UseInterceptors(AnyFilesInterceptor())
+    async create(
+      @Body() createDto: CreatePaymentCollectionDto,
+      @UploadedFiles() files: Array<Express.Multer.File>,
+    ) {
+      await this.service.feeTypeValidation(createDto, files)
+      return this.service.create(createDto, files);
+    }
+  }
+
 ```
 
-### Excel File Format
+```Typescript
+  //these validates both feetypes as well past due date
+  async feeTypeValidation(
+    createDto: CreatePaymentCollectionDto,
+    files: Express.Multer.File[],
+  ) {
+    if (!files?.length) {
+      throw new BadRequestException('Excel file is required');
+    }
 
-The system's subscriber will expect the uploaded Excel file to have a specific set of columns.
+    const { instituteId, ...rest } = createDto;
 
-| Column Header | Example | Description |
-|---|---|---|
-| `student_id` | `STU-1023` | The unique ID of the student in the institute. |
-| `student_name` | `Jane Doe` | Full name of the student. Used if the student doesn't exist yet. |
-| `parent_email` | `parent@example.com` | Parent's email. Used for notifications and creating new students. |
-| `fee_type` | `Tuition Fee` | The name of the fee. Must match a `FeeType` already configured for the institute. |
-| `amount` | `1500.00` | The amount due for this specific fee. |
-| `due_date` | `2024-09-01` | The date the payment is due (YYYY-MM-DD). |
+    if (!instituteId) {
+      throw new BadRequestException('Institute ID is required');
+    }
 
-## Initiating a Single Payment
+    const file = files[0];
 
-While bulk uploads are common, admins may also need to create a one-off fee request for a single student (e.g., for a library fine or a special event).
+    // Step 1: Read Excel using ExcelJS
+    const workbook = new ExcelJS.Workbook();
+    await workbook.xlsx.readFile(file.path); // ✅ load from file path
 
-This is done directly through the UI by navigating to the **Payment Collection Items** model, clicking "Add", and filling in the details manually, linking the student and fee type. Saving the record would trigger the same email notification as the bulk upload.
+    const worksheet = workbook.worksheets[0];
+    const headerRow = worksheet.getRow(1);
 
-## Canceling a Payment
+    const headers: string[] = (headerRow.values as ExcelJS.CellValue[])
+      .slice(1)
+      .filter((cell): cell is string => typeof cell === 'string')
+      .map((cell) => cell.trim());
 
-Admins may need to cancel a fee request that was created in error.
+    // Step 2: Define known non-fee fields
+    const knownFields = [
+      'Student Name',
+      'Student Id',
+      'Parent / Guardian Name',
+      'Parent / Guardian Email',
+      'Parent / Guardian Mobile',
+      'Payment Mode'
+    ];
 
-1.  The admin navigates to the specific `PaymentCollectionItem` record.
-2.  They select a "Cancel" action from the record's context menu or a button on the page.
-3.  The system updates the `status` of the `PaymentCollectionItem` to `Cancelled`.
-4.  This item will no longer appear in the student's list of outstanding fees.
-5.  **Note:** This action is only possible for fees that have not yet been paid. If a payment has been made, a formal "Refund" process must be initiated instead.
+    // Step 3: Identify fee type columns dynamically
+    const possibleFeeTypes = headers
+      .filter((header) => {
+        const normalized = header.toLowerCase();
+        return (
+          !knownFields.some((f) => f.toLowerCase() === normalized) &&
+          !normalized.includes('due date')
+        );
+      })
+      .map((header) => header.trim());
+
+    const uniqueFeeTypes = Array.from(new Set(possibleFeeTypes)).filter(
+      Boolean,
+    );
+
+    if (!uniqueFeeTypes.length) {
+      throw new BadRequestException('No fee types found in Excel headers.');
+    }
+
+    // Step 4: Validate against FeeType master for institute
+    const existingFeeTypes = await this.feeTypeRepo
+      .createQueryBuilder('fee_type')
+      .leftJoin('fee_type.institute', 'institute')
+      .where('fee_type.feeType IN (:...names)', { names: uniqueFeeTypes })
+      .andWhere('institute.id = :instituteId', { instituteId: instituteId })
+      .getMany();
+
+    const existingNames = existingFeeTypes.map((f) => f.feeType);
+    const missingFeeTypes = uniqueFeeTypes.filter(
+      (name) => !existingNames.includes(name),
+    );
+
+    if (missingFeeTypes.length) {
+      throw new BadRequestException(
+        `These fee types are not configured for the institute: ${missingFeeTypes.join(', ')}`,
+      );
+    }
+
+    // Step 5: Validate due dates are not in the past
+    const today = new Date();
+    today.setHours(0, 0, 0, 0); // Normalize to midnight
+
+    for (let i = 2; i <= worksheet.rowCount; i++) {
+      const row = worksheet.getRow(i);
+      if (!row.hasValues) continue;
+
+      for (const feeType of uniqueFeeTypes) {
+        const dueDateHeader = `${feeType} Due Date`;
+        const dueDateIndex = headers.findIndex(h => h === dueDateHeader);
+        if (dueDateIndex === -1) continue;
+
+        const dueDateCell = row.getCell(dueDateIndex + 1); // ExcelJS is 1-based
+        let dueDateValue: Date | null = null;
+
+        if (typeof dueDateCell.value === 'string' && dueDateCell.value.trim()) {
+          // Parse yyyy-mm-dd
+          const [year, month, day] = dueDateCell.value.trim().split('-').map(Number);
+          dueDateValue = new Date(year, month - 1, day);
+        } else if (dueDateCell.type === ExcelJS.ValueType.Date && dueDateCell.value instanceof Date) {
+          dueDateValue = dueDateCell.value;
+        }
+        if (dueDateValue && dueDateValue < today) {
+          throw new BadRequestException(
+            `Invalid due date: The entered due date (${dueDateCell.value}) is earlier than today's date. 
+            Past due dates are not allowed. 
+            Please provide a valid due date (today or a future date) for student "${row.getCell(headers.indexOf('Student Name') + 1).value}" and fee type "${feeType}".`
+          );
+        }
+      }
+    }
+
+    // Step 6: Validate Payment Mode
+    const paymentModeIndex = headers.findIndex(
+      (h) => h.toLowerCase() === 'payment mode'.toLowerCase(),
+    );
+
+    if (paymentModeIndex !== -1) {
+      for (let i = 2; i <= worksheet.rowCount; i++) {
+        const row = worksheet.getRow(i);
+        if (!row.hasValues) continue;
+
+        const cell = row.getCell(paymentModeIndex + 1);
+        let value = (cell.value || '').toString().trim().toUpperCase();
+
+        // Default to PG if empty
+        if (!value) {
+          value = 'PG';
+          cell.value = 'PG'; // optional: normalize the sheet value
+        }
+
+        if (value !== 'CASH' && value !== 'PG') {
+          throw new BadRequestException(
+            `Invalid Payment Mode "${cell.value}" found for student "${row.getCell(
+              headers.indexOf('Student Name') + 1,
+            ).value}". Only "CASH" or "PG" are allowed. If empty, default is "PG".`,
+          );
+        }
+      }
+    } else {
+      throw new BadRequestException(
+        'Payment Mode column is missing in Excel file.',
+      );
+    }
+
+    //add validation : parent and student email value should be in lowarcase and both are mandatory
+    const getEmailValue = (cell: ExcelJS.Cell): string => {
+      if (!cell.value) return '';
+
+      if (typeof cell.value === 'string') return cell.value.trim();
+
+      if (typeof cell.value === 'object' && 'text' in cell.value) {
+        return (cell.value as any).text.trim(); // ✅ use text property
+      }
+
+      return String(cell.value).trim();
+    };
+    //
+    const parentEmailIndex = headers.findIndex(
+      (h) => h.toLowerCase() === 'parent / guardian email'.toLowerCase(),
+    );
+    // Step 7: Validate that Student Email and Parent Email are lowercase and not empty
+    for (let i = 2; i <= worksheet.rowCount; i++) {
+      const row = worksheet.getRow(i);
+      if (!row.hasValues) continue;
+      const parentEmail = getEmailValue(row.getCell(parentEmailIndex + 1));
+      if (parentEmail !== parentEmail.toLowerCase()) {
+        throw new BadRequestException(
+          `Invalid Parent / Guardian Email "${parentEmail}" for student "${row.getCell(headers.indexOf('Student Name') + 1).value}". Emails must be in lowercase only.`,
+        );
+      }
+    }
+
+  }
+
+```
+
+## #Media Transaction Subscriber
+
+```Typescript
+  private async paymentCollectionTransaction(event: InsertEvent<Media>, transactionManager: EntityManager) {
+    const media = event.entity;
+    const paymentCollectionRepo = transactionManager.getRepository(PaymentCollection);
+    const paymentCollection = await paymentCollectionRepo.findOne({
+      where: { id: media.entityId },
+      relations: ['institute', 'institute.feeTypes'],
+    });
+
+    // Validation to check if the institute has feeTypes configured. 
+    const feeTypes = paymentCollection.institute?.feeTypes;
+    if (!feeTypes || feeTypes.length === 0) {
+      throw new Error(`No fee types configured for institute: ${paymentCollection.institute || 'unable-to-resolve-institute'}`)
+    }
+
+    const folderPath = path.resolve(process.cwd(), 'media-files-storage/');
+    const filePath = path.join(folderPath, media.relativeUri);
+    const workbook = new ExcelJS.Workbook();
+    await workbook.xlsx.readFile(filePath);
+    const sheet = workbook.worksheets[0];
+    if (!sheet) {
+      console.error('Excel sheet not found!');
+      return;
+    }
+    const headers: Record<string, number> = {};
+    const headerRow = sheet.getRow(1);
+    headerRow.eachCell((cell, colNumber) => {
+      headers[cell.value as string] = colNumber;
+    });
+
+    for (let i = 2; i <= sheet.rowCount; i++) {
+      const row = sheet.getRow(i);
+      if (!row.hasValues) {
+        continue;
+      }
+      const result = await this.processRow(row, paymentCollection, transactionManager, headers, event);
+    }
+  }
+```
+
+```Typescript 
+  private async processRow(row: ExcelJS.Row, paymentCollection: PaymentCollection, transactionManager: any, headers: Record<string, number>, event: InsertEvent<Media>) {
+
+    const studentRepo = transactionManager.getRepository(Student);
+    const feeTypeRepo = transactionManager.getRepository(FeeType);
+    const paymentCollectionItemRepo = transactionManager.getRepository(
+      PaymentCollectionItem,
+    );
+
+    const parseDateToObject = (dateString: string): Date | null => {
+      if (!dateString) return null; // Handle empty values
+      const [day, month, year] = dateString.split('-').map(Number);
+      return new Date(year, month - 1, day);
+    };
+
+    // adding new date test
+    const formatDateToDDMMYYYY = (date: Date): string => {
+      const day = String(date.getDate()).padStart(2, '0');
+      const month = String(date.getMonth() + 1).padStart(2, '0');
+      const year = date.getFullYear();
+      return `${year}-${month}-${day}`;
+    };
+
+    const getCellValue = (headerName: string) => {
+      if (headers[headerName] === undefined) return null;
+      const cell = row.getCell(headers[headerName]);
+
+      if (!cell || cell.value === null) return null;
+
+      // Handle native Excel Date type
+      if (cell.type === ExcelJS.ValueType.Date && cell.value instanceof Date) {
+        return formatDateToDDMMYYYY(cell.value); // Convert to dd-mm-yyyy string
+      }
+
+      // Fallback to text
+      return cell.text?.trim?.() ?? null;
+    };
+
+    // end
+    const studentName = getCellValue('Student Name');
+    const studentId = getCellValue('Student Id');
+    const studentMobileNo = getCellValue('Student Mobile');
+    const parentName = getCellValue('Parent / Guardian Name');
+    const parentEmail = getCellValue('Parent / Guardian Email');
+    const parentMobile = getCellValue('Parent / Guardian Mobile');
+    const mode = getCellValue('Payment Mode').toUpperCase() || 'PG';
+
+    let student = await studentRepo.findOne({
+      where: { studentId, institute: { id: paymentCollection?.institute?.id }},
+      relations: ['institute'],
+    });
+    if (!student) {
+      student = studentRepo.create({
+        studentName: studentName,
+        parentName: parentName,
+        parentMobileNumber: parentMobile,
+        parentEmailAddress: parentEmail,
+        studentId: studentId,
+        institute: paymentCollection?.institute,
+        studentMobileNumber: studentMobileNo,
+      });
+    }
+    student.studentName = studentName;
+    student.parentName = parentName;
+    student.parentEmailAddress = parentEmail;
+    student.parentMobileNumber = parentMobile;
+    student.studentMobileNumber = studentMobileNo;
+    student.instituteId = paymentCollection?.institute;
+
+    const studentResult = await studentRepo.save(student);
+
+    for (const feeType of paymentCollection.institute.feeTypes) {
+      const amount = parseFloat(getCellValue(`${feeType.feeType}`) || '0');
+      const dueDateStr = getCellValue(`${feeType.feeType} Due Date`);
+      const dueDate = dueDateStr ? new Date(dueDateStr) : new Date(paymentCollection?.dueDate);
+      const partPaymentAllowed = feeType?.partPaymentAllowed;
+
+      if (amount > 0) {
+        let status = 'Pending';
+        let amountPaid = 0;
+        let amountPending = amount;
+
+        // If mode is CASH, mark as fully paid
+        if (mode === 'CASH') {
+          status = 'Fully Paid';
+          amountPaid = amount;
+          amountPending = 0;
+        }
+
+        const item = paymentCollectionItemRepo.create({
+          student,
+          paymentCollection,
+          institute: paymentCollection.institute,
+          feeType,
+          dueDate: dueDate || new Date(),
+          amountToBePaid: amount,
+          partPaymentAllowed,
+          status,
+          amountPaid,
+          amountPending,
+          isOverdue: false,
+          overdueByDays: 0,
+          totalAmountToBePaid: amount,
+          lateAmountToBePaid: 0,
+          mode: mode,
+        });
+
+        await paymentCollectionItemRepo.save(item);
+      }
+
+    }
+
+  // After saving items for this student...
+  // Fetch items for this student (both paid + pending)
+  const allItems = await paymentCollectionItemRepo.find({
+      where: { 
+        student: { studentLoginId: student.studentLoginId },
+        paymentCollection: { id: paymentCollection.id }, 
+      },
+      relations: ['feeType', 'paymentCollection', 'student', 'institute'],
+    });
+
+    const fullyPaidItems = allItems.filter(i => i.status === 'Fully Paid');
+    const pendingItems = allItems.filter(i => i.status === 'Pending');
+
+    if (fullyPaidItems.length > 0) {
+      // ✅ CASE 1: Student has only fully paid items → send one Success mail
+      const feeTypes = [...new Set(fullyPaidItems.map(i => i.feeType?.feeType))].join(', ');
+      const paymentCollections = [...new Set(fullyPaidItems.map(i => i.paymentCollection?.name))].join(', ');
+
+      const createdAt = new Date().toLocaleDateString('en-US', {
+        day: '2-digit',
+        month: 'short',
+        year: 'numeric',
+      }).toUpperCase();
+
+      await this.paymentService.sendPaymentSuccessMail(
+        paymentCollection.institute.id,
+        {
+          student,
+          amount: fullyPaidItems.reduce((sum, i) => sum + Number(i.amountPaid || 0), 0),
+          feeTypes,
+          paymentCollections,
+          createdAt,
+          institute: student.institute,
+        },
+        null,
+        'success',
+      );
+
+    } else if (pendingItems.length > 0) {
+      // ✅ CASE 2: Student still has dues → send one Due mail
+      const totalAmountDue = pendingItems.reduce((sum, i) => {
+        const totalAmountToBePaid = Number(i.totalAmountToBePaid) || 0;
+        const amountPaid = Number(i.amountPaid) || 0;
+        return sum + (totalAmountToBePaid - amountPaid);
+      }, 0);
+      const feeTypes = [...new Set(pendingItems.map(i => i.feeType?.feeType))].join(', ');
+      const paymentCollections = [...new Set(pendingItems.map(i => i.paymentCollection?.name))].join(', ');
+
+      const createdAt = new Date().toLocaleDateString('en-US', {
+        day: '2-digit',
+        month: 'short',
+        year: 'numeric',
+      }).toUpperCase();
+
+      const dueFees = {
+        totalAmountDue,
+        feeTypes,
+        status: 'Pending',
+        redirectUrl: `https://${pendingItems?.[0].institute.hostedPagePrefix}-${process.env.TEMPLE_BASE_DOMAIN}/?id=${student.studentLoginId}`,
+        createdAt,
+        paymentCollections,
+        parentEmailAddress: student.parentEmailAddress,
+        student,
+      };
+
+      await this.paymentService.sendDueFeesMail(dueFees, paymentCollection.institute.id);
+    }
+  }
+```
+
+## 2.4 Automated Email Notifications & Reminders
+
+Once payments are initiated, the system automatically handles all communication with parents.
+This ensures parents are notified at the right time — without any manual intervention by the institute.
+
+### Initial Payment Notification (Immediately After Initiation)
+
+After the admin initiates payment collection:
+
+Each parent receives an email with:
+
+- Student details
+- Fee type & amount
+- Due date
+- A unique “Pay Now” Btn
+
+Clicking the link redirects the parent to the Student Portal Payment Page.
+
+This email is triggered by the system immediately after creating payment records.
+
+### 📩 Email Template Preview
+
+![Initial Payment Notification Email](/img/tutorial/school-fees-portal/6-usecase/email-remainder.png)
+
+### Automated Due-Date Reminders
+
+The system also sends automated reminders for overdue or upcoming payment deadlines.
+
+| Type                          | Trigger                                                        |
+| ----------------------------- | -------------------------------------------------------------- |
+| **Upcoming Due Reminder**     | Before the due date (optional, configurable)                   |
+| **Overdue Reminder**          | When due date passes and payment remains pending               |
+| **Multi-Frequency Reminders** | Daily / Weekly / Monthly / Yearly (configurable per institute) |
+
+### Reminder Behavior
+
+Only Pending payments are processed.
+Payments marked as Paid (including Cash mode) are ignored by all schedulers and subscribers.
+
+Each reminder email includes:
+
+- Outstanding amount
+- Updated due date or overdue warning
+- Payment link
+
+### Initial Notification Logic
+```Typescript
+    async sendDueFeesMail(dueFees: any, instituteId: number) {
+    // 1. Fetch Institue by Name then take Id and call another
+    const institute = await this.instituteService.findOne(instituteId || 0, {
+      populateMedia: ['logo']
+    });
+    // 5. Send mail
+      const mailService = this.mailServiceFactory.getMailService();
+      await mailService.sendEmailUsingTemplate(
+        dueFees.parentEmailAddress,
+        'new-payment-or-payment-reminder',
+        { 
+          dueDetails: dueFees,
+          instituteLogo:institute._media.logo[0]._full_url,
+          student: dueFees.student,
+        },
+        true,
+        [],
+        [],
+        null,
+        null,
+      );
+  }
+```
+
+:::tip Email Processing (Background Job)
+All payment notifications and reminders use SolidX’s  
+**`sendEmailUsingTemplate()`** method, which automatically pushes each email into the **internal queue** (DB queue or RabbitMQ, depending on configuration).
+
+This ensures:
+- Emails are processed **asynchronously**  
+- No blocking during Initiate Payment  
+- Automatic retry handling  
+- High-volume institutes can send thousands of emails without performance issues  
+- You can subscribe to the queue and process messages in the background
+
+The upcoming code example will show how the queue subscriber picks up email jobs and executes them efficiently.
+:::
+
+
+## Email Notification Queue – Architecture & Flow
+
+### (Database Queue / RabbitMQ Compatible – Using SolidX Publishers & Subscribers)
+
+This module handles asynchronous email notifications for payment initiation, reminders, and due-fee alerts.
+It uses SolidX’s DatabasePublisher / DatabaseSubscriber abstraction to push email jobs into a queue and process them in the background
+
+### 1. Queue Publisher (Database / RabbitMQ)
+
+Responsible for publishing email jobs to the queue.
+
+`mswipe-notify-api-email-publisher-database.service.ts`
+
+```Typescript
+  // MswipeNotifyApiEmailQueuePublisherDatabase
+import { Injectable } from '@nestjs/common';
+
+import mailQueueOptions from './mswipe-notify-api-email-queue-options-database';
+import {
+    MqMessageService,
+    MqMessageQueueService,
+    QueuesModuleOptions,
+    DatabasePublisher
+} from '@solidstarters/solid-core';
+
+@Injectable()
+export class MswipeNotifyApiEmailQueuePublisherDatabase extends DatabasePublisher<any> {
+    constructor(
+        protected readonly mqMessageService: MqMessageService,
+        protected readonly mqMessageQueueService: MqMessageQueueService,
+    ) {
+        super(mqMessageService, mqMessageQueueService);
+    }
+
+    options(): QueuesModuleOptions {
+        return {
+            ...mailQueueOptions,
+        };
+    }
+}
+```
+
+### 2. Queue Options File
+
+`mswipe-notify-api-email-queue-options-database.ts`
+
+```Typescript
+    import { BrokerType } from "@solidstarters/solid-core";
+
+const API_MAIL_QUEUE_NAME = 'mswipe_notify_api_email_queue_database';
+
+export default {
+    name: 'mswipeNotifyApiEmailQueueDatabase',
+    type: BrokerType.Database,       // Can be swapped with RabbitMQ without changing publisher/subscriber code
+    queueName: API_MAIL_QUEUE_NAME,
+};
+```
+### 3. Queue Subscriber (Background Worker)
+
+`mswipe-notify-api-email-subscriber-database.service.ts`
+
+```Typescript
+// mswipe-notify-api-email-subscriber-database.service
+import { Injectable } from '@nestjs/common';
+import {
+    MqMessageService,
+    MqMessageQueueService,
+    QueuesModuleOptions,
+    QueueMessage,
+    DatabaseSubscriber,
+    PollerService
+} from '@solidstarters/solid-core';
+
+import { MswipeNotifyApiEmailService } from 'src/fees-portal/services/mswipe-notify-api-email.service';
+import mailQueueOptions from './mswipe-notify-api-email-queue-options-database';
+
+@Injectable()
+export class MswipeNotifyApiEmailQueueSubscriberDatabase extends DatabaseSubscriber<any> {
+    constructor(
+        private readonly emailService: MswipeNotifyApiEmailService,
+        readonly mqMessageService: MqMessageService,
+        readonly mqMessageQueueService: MqMessageQueueService,
+        readonly pollerService: PollerService,
+    ) {
+        super(mqMessageService, mqMessageQueueService, pollerService);
+    }
+
+    options(): QueuesModuleOptions {
+        return {
+            ...mailQueueOptions,
+        };
+    }
+
+    subscribe(message: QueueMessage<any>) {
+        this.emailService.sendEmailSynchronously(message);
+    }
+}
+
+```

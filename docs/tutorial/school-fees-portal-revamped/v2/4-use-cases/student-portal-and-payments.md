@@ -2,155 +2,107 @@
 sidebar_position: 3
 ---
 
-# 3. Student Portal & Payments
+# 3. Student Portal Frontend (Next.js)
 
-This section details the student and parent-facing portal, covering everything from logging in to making payments and receiving notifications.
-
-## Getting the Frontend Code
+The Student Portal is a modern, responsive frontend application built with Next.js. It provides parents with a secure and easy-to-use interface to view and pay school fees.
 
 To build the student portal, we will use a separate frontend application built with Next.js. A starter repository is provided to give you the basic structure, UI components, and API service helpers.
 
 :::info
 **Action Required: Clone the Starter Repository**
 
-[➡️ TODO: Insert Git repository link here](https://github.com/solidstarters/school-fees-portal-frontend-starter)
+[➡️ TODO: Insert Git repository link here](https://git.logicloop.io/asifLogicloop/school-fees-portal-frontend)
 
 Clone this repository to your local machine.
 :::
 
-## Student/Parent Login Flow
+## 3.1 Login and Authentication
 
-The portal uses a secure, passwordless OTP (One-Time Password) login system.
+The portal uses a secure, OTP-based login system.
 
-### Login Sequence Diagram
+-   **Login Method**: Parents use their registered email address to log in.
+-   **OTP Verification**: Upon entering their email, they receive a One-Time Password (OTP) to that email address. Entering the correct OTP grants them access to the portal.
 
-```mermaid
-sequenceDiagram
-    participant User
-    participant Frontend
-    participant Backend API
-    participant Mail/SMS Service
+This method is secure and convenient, as parents don't need to remember a password.
 
-    User->>Frontend: Enters email/mobile and clicks 'Login'
-    Frontend->>Backend API: POST /api/auth/request-otp (email)
-    Backend API->>Backend API: Generate 4-digit OTP and expiry
-    Backend API->>Backend API: Save OTP hash and expiry on Student record
-    Backend API->>Mail/SMS Service: Send OTP to user's email/mobile
-    Mail/SMS Service-->>User: Delivers OTP
-    User->>Frontend: Enters the received OTP
-    Frontend->>Backend API: POST /api/auth/verify-otp (email, otp)
-    Backend API->>Backend API: 1. Find Student by email <br> 2. Verify OTP hash <br> 3. Check expiry
-    alt OTP is valid
-        Backend API->>Backend API: Generate JWT Session Token
-        Backend API-->>Frontend: Return JWT Token and User data
-        Frontend->>Frontend: Store JWT in localStorage
-        Frontend->>User: Redirect to Dashboard
-    else OTP is invalid
-        Backend API-->>Frontend: Return 401 Unauthorized Error
-        Frontend->>User: Show "Invalid OTP" message
-    end
+```Typescript
+// src/store/services/studentApi.ts
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
+export const studentApi = createApi({
+  reducerPath: "studentApi",
+  baseQuery: fetchBaseQuery({
+    baseUrl: process.env.NEXT_PUBLIC_BACKEND_API_URL,
+    prepareHeaders: (headers) => {
+      const token = localStorage.getItem("token"); // or sessionStorage
+      if (token) {
+        headers.set("Authorization", `Bearer ${token}`);
+      }
+      return headers;
+    },
+}),
+  endpoints: (builder) => ({
+    // Step 1: Validate student
+    validateStudent: builder.query({
+      query: (studentLoginId: string) => `api/student/login/initiate/${studentLoginId}`,
+    }),
+  })
+})
 ```
+![Initial Payment Notification Email](/img/tutorial/school-fees-portal/6-usecase/student.png)
 
-## The Student Dashboard
+## 3.2 Dashboard
 
-Once logged in, the parent is presented with a clear, concise dashboard showing:
--   **Student's Name and ID**
--   **Outstanding Fees:** A list of all fees that are `Pending` or `Partially Paid`, with amounts and due dates. Each item has a "Pay Now" button.
--   **Payment History:** A table showing all previous payments, their status (`Succeeded`, `Failed`), and dates.
+After logging in, the parent is directed to the main dashboard. The dashboard is designed to provide a clear overview of their fee status and payment history.
 
-## The Payment Flow
+A header is always visible at the top, containing a link to the user's profile section.
 
-When a user clicks "Pay Now", it initiates a multi-step process involving the frontend, the SolidX backend, and the Stripe payment gateway.
+The dashboard is organized into four tabs:
 
-### Payment Sequence Diagram
+### 1. Due Payments
+This is the default tab. It displays a list of all outstanding fee payments. Each item shows:
+- Fee Type (e.g., Tuition Fee, Sports Fee)
+- Amount Due
+- Due Date
+- A "Pay Now" button
 
-```mermaid
-sequenceDiagram
-    participant User
-    participant Frontend
-    participant SolidX Backend
-    participant Stripe API
 
-    User->>Frontend: Clicks "Pay Now" for one or more fee items
-    Frontend->>SolidX Backend: POST /api/payment/initiate (itemIds, amounts)
-    SolidX Backend->>SolidX Backend: 1. Create 'Payment' record (status: Pending) <br> 2. Create 'PaymentCollectionItemDetail' records
-    SolidX Backend->>Stripe API: Create Stripe Checkout Session (with amounts, success/cancel URLs, metadata)
-    Stripe API-->>SolidX Backend: Return Checkout Session with unique payment URL
-    SolidX Backend-->>Frontend: Return the unique payment URL from Stripe
-    Frontend->>User: Redirect browser to Stripe's payment page
-    User->>Stripe API: Enters card details and completes payment
-    Stripe API-->>User: Shows success/failure message and redirects back to Frontend
-    
-    %% --- The Webhook (Asynchronous) ---
-    Stripe API-->>SolidX Backend: POST /api/payment/webhook (payment success/failure event)
-    SolidX Backend->>SolidX Backend: **Verify Stripe Signature**
-    alt Signature is valid
-        SolidX Backend->>SolidX Backend: 1. Update 'Payment' record status <br> 2. Update 'PaymentCollectionItemDetail' status
-        SolidX Backend->>SolidX Backend: Trigger 'amountPaid' computed field on 'PaymentCollectionItem'
-        SolidX Backend->>SolidX Backend: Send "Payment Confirmation" email
-        SolidX Backend-->>Stripe API: Return 200 OK
-    else Signature is invalid
-        SolidX Backend-->>Stripe API: Return 400 Bad Request
-    end
-```
+![Initial Payment Notification Email](/img/tutorial/school-fees-portal/6-usecase/sp-due.png)
 
-### Consuming Webhooks Securely
+### 2. Transaction History
+This tab shows a complete history of all payment attempts made by the parent, including successful, failed, and pending transactions. This provides a comprehensive audit trail.
 
-A critical step in payment processing is handling the webhook from the payment gateway. You **must** verify that the webhook request actually came from Stripe.
+![Initial Payment Notification Email](/img/tutorial/school-fees-portal/6-usecase/sp-cash.png)
 
-**Example: Stripe Webhook Verification in a NestJS Controller**
-```typescript
-// school-fees-portal/solid-api/src/fees-portal/controllers/payment.controller.ts
-import { Headers, Controller, Post, Req, RawBodyRequest } from '@nestjs/common';
-import Stripe from 'stripe';
+### 3. Transactions Details
+This tab provides a view of all transactions associated with the student, which can be useful for reconciliation purposes.
 
-@Controller('payment')
-export class PaymentController {
-  private readonly stripe: Stripe;
-  private readonly webhookSecret: string = process.env.STRIPE_WEBHOOK_SECRET;
+![Initial Payment Notification Email](/img/tutorial/school-fees-portal/6-usecase/transaction-details.png)
 
-  // ... constructor
-  
-  @Post('webhook')
-  async handleStripeWebhook(@Headers('stripe-signature') signature: string, @Req() req: RawBodyRequest<Request>) {
-    let event: Stripe.Event;
+### 4. Cancelled Payments
+This tab lists any payments that were initiated but subsequently cancelled either by the user or the system.
 
-    try {
-      // Use the raw body to construct the event
-      event = this.stripe.webhooks.constructEvent(
-        req.rawBody,
-        signature,
-        this.webhookSecret,
-      );
-    } catch (err) {
-      console.error(`Webhook signature verification failed.`);
-      // On error, return a 400
-      return { error: `Webhook Error: ${err.message}` };
-    }
+![Initial Payment Notification Email](/img/tutorial/school-fees-portal/6-usecase/sp-cancel.png)
 
-    // Handle the event
-    switch (event.type) {
-      case 'checkout.session.completed':
-        const session = event.data.object;
-        // Payment was successful, find the Payment record via metadata
-        // and update its status in your database.
-        await this.paymentService.processSuccessfulPayment(session);
-        break;
-      // ... handle other event types
-      default:
-        console.log(`Unhandled event type ${event.type}`);
-    }
+## 3.3 Profile Management
 
-    // Return a 200 to acknowledge receipt of the event
-    return { received: true };
-  }
-}
-```
+The profile page allows parents to manage their contact information.
 
-## Automated Processes
+-   **URL**: `/profile`
+-   **Editable Fields**:
+    -   Parent's Name
+    -   Parent's Email Address (for login and notifications)
+    -   Parent's Mobile Number
 
-The student-facing experience is supported by automated backend processes built on SolidX's core features.
 
--   **Late Fee Calculation:** This is handled by a **Scheduled Job** (e.g., a `Cron` job) that runs nightly. The job queries for `PaymentCollectionItem` records that are past their `dueDate` and not `Fully Paid`. It then applies late fees according to the logic defined in the `FeeType`.
--   **Email Notifications:** All emails (OTP, payment confirmation, late fee reminders) are sent via the core `EmailService`. This service uses predefined templates, allowing you to manage your email content easily without changing the application code.
+![Initial Payment Notification Email](/img/tutorial/school-fees-portal/6-usecase/sp-profile-new.png)
+
+## 3.4 Other Pages
+
+The portal also includes standard static pages, which can be customized.
+
+-   `/privacyPolicy`: To display the institute's privacy policy.
+-   `/faq`: For frequently asked questions about the fee payment process.
+-   `/termsandcondition`: To display the institute's terms and conditions.
+
+These pages are essential for providing comprehensive information and support to the users.

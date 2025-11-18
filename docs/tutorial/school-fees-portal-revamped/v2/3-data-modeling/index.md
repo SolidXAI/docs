@@ -33,7 +33,7 @@ You will copy a complete JSON file that defines the entire module and all its mo
 
 First, we need a module to house all our new models.
 
-1.  Log in to the SolidX admin panel (e.g., `http://localhost:3001/admin`).
+1.  Log in to the SolidX admin panel (e.g., `http://localhost:3001/auth/login`).
 2.  Navigate to **Solid Core > App Builder > Module** from the sidebar menu.
 3.  Click the **Add** button.
 4.  Fill in the form with the following details:
@@ -71,8 +71,8 @@ Now, follow the guides in this section to create each of the required models one
 3.  [**Student**](./student.md)
 4.  [**Payment Collection**](./payment-collection.md)
 5.  [**Payment Collection Item**](./payment-collection-item.md)
-6.  [**Payment**](./payment.md)
-7.  [**Payment Collection Item Detail**](./payment-collection-item-detail.md)
+6.  [**Payment Collection Item Detail**](./payment-collection-item-detail.md)
+7.  [**Payment**](./payment.md)
 8.  [**Institute User**](./institute-user.md)
 
 --- 

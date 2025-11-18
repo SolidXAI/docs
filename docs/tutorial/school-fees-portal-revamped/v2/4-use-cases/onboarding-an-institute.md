@@ -6,50 +6,76 @@ sidebar_position: 1
 
 ## Business Reason
 
-The "Onboarding an Institute" use case is the foundational step in the school fees portal. It allows a super administrator to register a new educational institution onto the platform. This process is crucial because it captures all the essential details about the institute, including its name, contact information, payment gateway credentials, and branding assets. A well-defined onboarding process ensures that each institute is set up correctly and can operate independently within the multi-tenant environment of the portal.
+The **Onboarding an Institute** use-case enables the platform’s **Super Admin** (or a Third-Party Admin) to register and manage multiple institutes inside a **multi-tenant fees management platform**.
 
-## Onboarding Workflow
+This is the **core foundation** of the system, because each institute behaves as a completely independent tenant with its own:
 
-The onboarding process involves the Super Admin creating the institute, setting up its users, defining fee structures, and configuring technical details. The UI is broken down into logical tabs to make this manageable.
+- Dedicated institute admins  
+- Individual payment gateway credentials  
+- Custom fee types and fee rules  
+- Student records and fee mappings  
+- Branding (logo, theme colors, receipts)  
+- Transaction & settlement history  
+- Custom webhooks and email flows  
 
-```mermaid
-graph TD
-    A[Super Admin logs in] --> B{Go to <br/> 'fees-portal' -> Institute};
-    B --> C[Clicks 'Add Institute'];
-    C --> D[Fills in Institute Details & Branding];
-    D --> E[Fills in Payment Gateway Credentials];
-    E --> F[Saves Institute Record];
-    F --> G{Create Institute <br/> Admin User};
-    G --> H[Go to 'Solid Core' -> Users];
-    H --> I[Add New User (email, name)];
-    I --> J{Link User to Institute};
-    J --> K[In User form, go to 'Institute User' tab];
-    K --> L[Select Institute and User Type];
-    L --> M[Save User];
-    M --> N((Institute Onboarded));
-    N --> O[Institute Admin receives credentials <br/> and can now log in];
-
-```
+Once an institute is created, it becomes a *logically isolated tenant*—ensuring that all data, actions, and workflows within that institute remain fully isolated from all others.
 
 ---
 
+## Why a Multi-Tenant Architecture?
+
+The School Fees Portal is designed to onboard **N number of institutes**, each working independently.  
+This architecture provides:
+
+| Benefit | Explanation |
+|--------|-------------|
+| **Scalability** | Any number of institutes can be added without affecting others. |
+| **Data Isolation** | Record rules ensure one institute cannot access another’s data. |
+| **Customisation** | Each institute has its own fees, admins, branding, and PG setup. |
+| **Operational Independence** | If one institute faces issues, others remain unaffected. |
+| **Centralised Governance** | Super Admin retains global visibility and control. |
+
+---
+
+## Onboarding Workflow (Step-by-Step)
+
+The onboarding workflow is divided into **logical tabs** in the UI to simplify the data entry process and ensure correctness.
+
+```mermaid
+graph TD
+    A[Super Admin logs in] --> B{Navigate: <br/> Fees Portal → Institutes};
+    B --> C[Click 'Add Institute'];
+    C --> D[Enter Institute Details <br/> (name, address, branding)];
+    D --> E[Enter Payment Gateway Credentials <br/>(Razorpay/Paytm/Stripe)];
+    E --> F[Configure Institute Settings <br/> (Fee rules, currency, timezone)];
+    F --> G[Save Institute Record];
+    G --> H[Create Institute Admin User];
+    H --> I[Assign User Type under 'Institute User' Tab];
+    I --> J[Map User to Institute];
+    J --> K((Institute Onboarded));
+    K --> L[Institute Admin receives credentials];
+    L --> M[Institute Admin logs in to upload students, configure fees etc.]; 
+```
+
+The onboarding process is deliberately modular, allowing each institute to onboard at its own pace — starting with basic settings, and later configuring deeper features like customized fee types, late-fee rules, and payment workflows.
+
 ## Technical Deep-Dive: Advanced SolidX Concepts
+Below are the core SolidX features used during Institute Onboarding. These govern data automation, validation, indexing, and asynchronous flows across the system.
 
-This workflow leverages several powerful, advanced features of SolidX. Here’s how they work, with code examples.
+## 1. Subscribers — Background Processing on Uploads
+Subscribers allow you to respond to specific database events asynchronously, without blocking user actions.
 
-### 1. Subscribers (for Bulk Data Upload)
+Real Use-Case:
+When an institute uploads a student data Excel file or payment mapping file, the system uses a subscriber to parse and import the file in the background.
 
-**Concept:** Subscribers are services that listen for specific database events (like `afterInsert`, `afterUpdate`) and execute custom logic. This is perfect for automation. The `MediaTransactionSubscriber` is a key example for processing bulk student uploads.
+Why Subscribers?
 
-**Example:** When an admin uploads an Excel file to a `PaymentCollection`, this subscriber can automatically parse it.
+-  Excel parsing is time-consuming
+-  Avoid UI blocking
+-  Allow progress logs
+-  Automate import without manual triggers
 
 ```typescript
-// school-fees-portal/solid-api/src/fees-portal/subscribers/media-transaction.subscriber.ts
-
-import { EventSubscriber, EntitySubscriberInterface, InsertEvent } from 'typeorm';
-import { Media } from '@solid-softworks/solid-core';
-import { ExcelParserService } from '../services/excel-parser.service';
-
 @EventSubscriber()
 export class MediaTransactionSubscriber implements EntitySubscriberInterface<Media> {
   constructor(private readonly excelParserService: ExcelParserService) {}
@@ -58,128 +84,120 @@ export class MediaTransactionSubscriber implements EntitySubscriberInterface<Med
     return Media;
   }
 
-  /**
-   * Called after a Media entity is inserted.
-   */
   async afterInsert(event: InsertEvent<Media>) {
     const media = event.entity;
 
-    // Check if the uploaded file is for a PaymentCollection
     if (media.modelName === 'paymentCollection' && media.fieldName === 'paymentFile') {
-      console.log(`New payment file uploaded: ${media.fileName}. Starting processing...`);
-      
-      // Don't await this; let it run in the background
+      console.log(`Processing payment file: ${media.fileName}`);
       this.excelParserService.processStudentFeeFile(media);
     }
   }
 }
 ```
 
-### 2. Computed Fields (for Automatic Calculations)
 
-**Concept:** Computed fields dynamically calculate their values based on other data, often triggered by events on related models. This saves you from writing repetitive calculation logic.
+## 2. Computed Fields — Automatic Calculations
 
-**Example:** The `PaymentCollectionItemAmountProvider` automatically calculates the `amountPaid` and `amountPending` on a `PaymentCollectionItem` whenever a new `PaymentCollectionItemDetail` (a payment) is added.
+Computed fields allow the system to calculate values automatically instead of manually storing and updating them.
+
+### Why Computed Fields?
+
+- Prevents accidental inconsistencies
+- Guarantees latest values every time
+- Reduces repetitive logic
+- Perfect for payment-related calculations
+
+### Example: Auto-updating Fee Payment Status
+
+Every time a payment is recorded, the item’s amountPaid, amountPending, and paymentStatus are recalculated automatically.
 
 ```typescript
-// school-fees-portal/solid-api/src/fees-portal/providers/payment-collection-item-amount.provider.ts
-
-import { Injectable } from '@nestjs/common';
-import { IComputedFieldProvider } from '@solid-softworks/solid-core';
-
+@ComputedFieldProvider()
 @Injectable()
-export class PaymentCollectionItemAmountProvider implements IComputedFieldProvider {
-  
-  // This method is automatically called by SolidX when a trigger event occurs
-  async computeValue(context: any, ...args: any[]): Promise<any> {
-    const { paymentCollectionItem } = context;
+export class PaymentCollectionItemAmountProvider implements IEntityPostComputeFieldProvider<PaymentCollectionItemDetail, any> {
+  constructor(
+    @InjectEntityManager()
+    private readonly entityManager: EntityManager,
+  ) { }
 
-    // 1. Find all related payment details
-    const details = await this.itemDetailRepo.find({
-      where: { paymentCollectionItem: { id: paymentCollectionItem.id }, paymentStatus: 'Succeeded' },
-    });
-
-    // 2. Calculate the total amount paid
-    const amountPaid = details.reduce((sum, detail) => sum + Number(detail.amountPaid), 0);
-
-    // 3. Update the parent item's fields
-    paymentCollectionItem.amountPaid = amountPaid;
-    paymentCollectionItem.amountPending = paymentCollectionItem.amountToBePaid - amountPaid;
-
-    // 4. Update the status
-    if (paymentCollectionItem.amountPending <= 0) {
-      paymentCollectionItem.status = 'Fully Paid';
-    } else {
-      paymentCollectionItem.status = 'Partially Paid';
+  async postComputeAndSaveValue(
+    triggerEntity: PaymentCollectionItemDetail,
+    computedFieldMetadata: ComputedFieldMetadata<any>,
+  ): Promise<void> {
+    if (!triggerEntity?.paymentCollectionItem?.id) {
+      console.error('Payment Collection Item Id Missing');
     }
+    const paymentCollectionItemDetailId = triggerEntity?.id;
 
-    await this.itemRepo.save(paymentCollectionItem);
+    const { amountPaid, totalAmountToBePaid, amountPending, status } = await this.getPaymentCollectionItemAmounts(triggerEntity?.paymentCollectionItem?.id);
 
-    return amountPaid;
+    const result = await this.entityManager.update(
+      PaymentCollectionItem,
+      { id: triggerEntity?.paymentCollectionItem?.id },
+      {
+        amountPaid: String(amountPaid),
+        amountPending: String(amountPending),
+        totalAmountToBePaid: String(totalAmountToBePaid),
+        status: status,
+      },
+    );
   }
-}
 ```
 
-### 3. Composite Indexes (for Data Integrity)
+## 3. Composite Indexes — Multi-Column Uniqueness & Speed
 
-**Concept:** A composite index spans multiple columns. It's used to speed up queries that filter on those columns and, critically, to enforce multi-column uniqueness.
+Composite indexes guarantee data integrity and provide massive performance improvements on institute-scoped queries.
 
-**Example:** To ensure a `studentId` is unique *per institute* (but can be duplicated across different institutes), you would add a composite index to the `Student` entity.
+### Why Composite Indexes?
+
+Prevent duplicate records within a tenant
+
+- Improve query performance
+- Enforce unique constraints per institute
+- Example: Student ID Must Be Unique Within an Institute
 
 ```typescript
-// school-fees-portal/solid-api/src/fees-portal/entities/student.entity.ts
-
-import { Entity, Column, Index } from 'typeorm';
-import { BaseEntity } from '@solid-softworks/solid-core';
-
 @Entity('fees_portal_student')
-@Index(['institute', 'studentId'], { unique: true }) // <-- COMPOSITE INDEX
+@Index(['institute', 'studentId'], { unique: true })
 export class Student extends BaseEntity {
-  
   @Column()
   studentId: string;
-
-  // ... other columns and relations
 }
 ```
 
-### 4. Scheduled Jobs (for Automation)
+## 4. Scheduled Jobs — Nightly Automation
 
-**Concept:** SolidX uses the NestJS Schedule package to allow you to run tasks automatically at specific intervals (e.g., every night at 2 AM). This is ideal for maintenance, reminders, and report generation.
+Scheduled jobs keep the system clean and proactive without manual admin effort.
 
-**Example:** A scheduled job to find overdue payments and send email reminders.
+## Common Jobs During Onboarding Phase
+
+- Pre-calculate late fees
+- Send overdue payment reminders
+- Cleanup temporary media files
+- Generate institute reports
+- Example: Nightly Overdue Reminder Job
 
 ```typescript
-// school-fees-portal/solid-api/src/fees-portal/services/reminder.service.ts
+@Cron(CronExpression.EVERY_DAY_AT_8AM)
+async handleOverduePaymentReminders() {
+  const overdueItems = await this.findOverdueItems();
 
-import { Injectable } from '@nestjs/common';
-import { Cron, CronExpression } from '@nestjs/schedule';
-import { EmailService } from '@solid-softworks/solid-core';
-
-@Injectable()
-export class ReminderService {
-  constructor(private readonly emailService: EmailService) {}
-
-  @Cron(CronExpression.EVERY_DAY_AT_8AM)
-  async handleOverduePaymentReminders() {
-    console.log('Running daily check for overdue payments...');
-
-    // 1. Find all payment items that are past their due date and not fully paid
-    const overdueItems = await this.findOverdueItems();
-
-    // 2. Loop through and send an email for each
-    for (const item of overdueItems) {
-      await this.emailService.send({
-        to: item.student.parentEmailAddress,
-        subject: `Payment Reminder: Your fee for ${item.feeType.name} is overdue`,
-        template: 'overdue-reminder', // Uses a pre-defined email template
-        context: {
-          studentName: item.student.studentName,
-          amount: item.amountPending,
-          dueDate: item.dueDate,
-        },
-      });
-    }
+  for (const item of overdueItems) {
+    await this.emailService.send({
+      to: item.student.parentEmailAddress,
+      subject: `Payment Reminder: ${item.feeType.name} overdue`,
+      template: 'overdue-reminder',
+      context: {
+        studentName: item.student.studentName,
+        amount: item.amountPending,
+        dueDate: item.dueDate,
+      },
+    });
   }
 }
 ```
+:::tip Multi-Frequency Scheduler
+The platform supports flexible reminder scheduling for each institute.  
+You can configure reminders to run **Daily**, **Weekly**, **Monthly**, or **Yearly**, giving institutes full control over how often parents receive fee notifications.  
+This ensures every tenant can align the reminder cycle with their internal policies.
+:::
