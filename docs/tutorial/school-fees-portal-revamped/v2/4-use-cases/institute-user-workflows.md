@@ -360,12 +360,126 @@ This ensures that parents have a clear understanding of what has been paid and w
 
 The code that handles this logic has been enhanced to correctly process these scenarios.
 
-## 2.5 Media Transaction Subscriber
+## 2.5 Cancel Payment Workflow
+
+Institute administrators have the flexibility to cancel pending payments for one or more students. This can be done individually or in bulk.
+
+### How It Works
+
+1.  **Navigate to Payments**: The admin goes to **Fees Portal → Payment Collection** and selects a specific payment collection to view its items.
+
+2.  **Select Payments to Cancel**: The admin can select payments using two methods:
+    *   **Checkbox Selection**: Select individual rows by clicking the checkbox next to each payment record. A "select all" option is also available.
+    *   **Nested Filtering**: Use the advanced filter options to narrow down the list of payments (e.g., by class, fee type, or due date) and then select all filtered results.
+
+3.  **Cancel Action**: Once the desired records are selected, a **"Cancel Payment"** button becomes visible in the header.
+
+4.  **Confirmation**: Clicking the button will prompt the admin for confirmation to prevent accidental cancellations.
+
+### System Actions on Cancellation
+
+Upon confirmation, the system performs the following actions:
+
+-   **Status Update**: The `status` of the selected `PaymentCollectionItem` records is updated to `Cancelled`.
+-   **Email Notification**: For each cancelled payment, the system sends a **"Payment Cancelled"** email to the parent's registered email address. This email clearly states which fee has been cancelled.
+
+:::tip UI Preview
+You can add a screenshot here showing the payment collection list view with checkboxes, the filter, and the "Cancel Payment" button in the header.
+:::
+
+### Code Snippet: Cancel Payment Logic
+
+Here is a conceptual code snippet for the `cancelPayments` service method.
+
+```typescript
+@Injectable()
+export class PaymentCollectionItemService {
+  // ... other dependencies
+
+  async cancelPayments(paymentItemIds: number[], instituteId: number): Promise<void> {
+    // 1. Find the payment items to ensure they belong to the institute and are cancellable
+    const itemsToCancel = await this.paymentCollectionItemRepo.find({
+      where: {
+        id: In(paymentItemIds),
+        institute: { id: instituteId },
+        status: 'Pending', // Only pending payments can be cancelled
+      },
+      relations: ['student', 'feeType', 'institute'],
+    });
+
+    if (itemsToCancel.length === 0) {
+      throw new BadRequestException('No valid payments found for cancellation.');
+    }
+
+    // 2. Update the status of each item to 'Cancelled'
+    const cancelledItemIds = itemsToCancel.map(item => item.id);
+    await this.paymentCollectionItemRepo.update(cancelledItemIds, { status: 'Cancelled' });
+
+    // 3. Trigger email notifications for each cancelled payment
+    for (const item of itemsToCancel) {
+      await this.sendCancellationEmail(item);
+    }
+  }
+
+  private async sendCancellationEmail(item: PaymentCollectionItem) {
+    const { student, feeType, institute } = item;
+    
+    // Use a mail service to send a templated email
+    await this.mailService.sendPaymentCancelledMail({
+      to: student.parentEmailAddress,
+      studentName: student.studentName,
+      feeTypeName: feeType.feeType,
+      amount: item.amountToBePaid,
+      instituteName: institute.name,
+    });
+  }
+}
+```
+
+## 2.6 Media Transaction Subscriber
 
 This subscriber listens for new media uploads (the Excel file) and processes them.
 
 #### Subscriber Entry Point (`paymentCollectionTransaction`)
 This is the main method that gets triggered after the Excel file is uploaded. It reads the file and iterates through each row.
+```Typescript
+@EventSubscriber()
+@Injectable()
+export class MediaTransactionSubscriber implements EntitySubscriberInterface<Media> {
+
+  private duplicateError: boolean = false;
+
+  constructor(
+    @InjectDataSource()
+    private readonly dataSource: DataSource,
+    @InjectRepository(Student)
+    private readonly paymentService: PaymentService
+  ) {
+    this.dataSource.subscribers.push(this);
+  }
+
+  listenTo() {
+    return Media;
+  }
+
+  async afterInsert(event: InsertEvent<Media>): Promise<void> {
+    if (!event?.entity) {
+      return;
+    }
+    const media = event.entity;
+    const transactionManager = event.queryRunner?.manager;
+
+    if (media.modelMetadata.singularName === 'paymentCollection' && media.fieldMetadata.name === 'paymentFile') {
+      const isCompletedSuccessFully = await this.paymentCollectionTransaction(
+        event,
+        transactionManager
+      );
+    }
+  }
+}
+```
+### #Payment Collection Transaction Process
+
 ```Typescript
   private async paymentCollectionTransaction(event: InsertEvent<Media>, transactionManager: EntityManager) {
     const media = event.entity;
@@ -608,7 +722,7 @@ This function processes each row from the Excel file, creates student and paymen
 ```
 </details>
 
-## 2.6 Automated Due-Date Reminders
+## 2.7 Automated Due-Date Reminders
 
 The system also sends automated reminders for overdue or upcoming payment deadlines.
 
@@ -674,7 +788,7 @@ The upcoming code example will show how the queue subscriber picks up email jobs
 :::
 
 
-## 2.7 Email Notification Queue – Architecture & Flow
+## 2.8 Email Notification Queue – Architecture & Flow
 
 ### (Database Queue / RabbitMQ Compatible – Using SolidX Publishers & Subscribers)
 
@@ -772,4 +886,94 @@ export class MswipeNotifyApiEmailQueueSubscriberDatabase extends DatabaseSubscri
     }
 }
 
+```
+
+## 2.9 ❌ Cancel Payment Workflow
+
+The Cancel Payment feature allows Institute Admins to cancel one or multiple pending payment records.
+Admins can cancel:
+
+- Individual Payment Collection Items
+- Entire Payment Collections (parent records)
+- Bulk selections using checkboxes
+
+### Using nested UI filters (without selecting IDs manually)
+
+Once cancelled:
+
+- Payment status changes to Cancelled
+- Parent receives Cancellation Notification Email
+- Email is processed asynchronously using queue-based background workers
+
+```Typescript
+@ApiBearerAuth("jwt")
+@Post("/cancel-payment-collection")
+async cancelMany(@Body() body: { 
+  collectionIds: any[], 
+  ids: any[], 
+  filters?: any, 
+  modelName: string 
+}) {
+  return this.service.cancelPaymentCollectionItems(
+    body.collectionIds,
+    body.ids,
+    body.filters || {},
+    body.modelName
+  );
+}
+```
+
+### How Cancellation Works
+
+Payment Collection → Payment Collection Items → Cancel Button
+
+Supported actions:
+
+- Cancel by selecting checkboxes
+- Cancel all filtered records
+- Cancel entire fee collections
+- Cancel pending dues for specific fee types
+
+Only payments with status = Pending are eligible.
+
+### Backend Logic Summary
+
+```Typescript
+const pendingItemsData = await this.find(query);
+const pendingItems = pendingItemsData.records;
+```
+:::tip
+If no records are found → cancellation stops.
+:::
+
+### Bulk Cancel Operation
+
+```Typescript
+await this.repo.update(
+  { id: In(pendingIds) },
+  { status: "Cancelled" }
+);
+```
+### Group Cancelled Items by Parent Email
+
+Ensures one email per parent, even if multiple items were cancelled.
+
+```Typescript
+itemsByParent.set(parentEmail, { student, institute, items: [] });
+```
+
+### Cancel Email Notifications
+
+```Typescript
+{
+  "paymentDetails": {
+    "txnId": "MSW123456",
+    "totalAmountDue": "1200.00",
+    "feeTypes": ["Term Fee", "Library Fee"],
+    "status": "Cancelled"
+  },
+  "student": {
+    "studentName": "Rahul Sharma"
+  }
+}
 ```
