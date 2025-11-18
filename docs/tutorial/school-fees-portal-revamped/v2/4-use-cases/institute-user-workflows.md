@@ -928,13 +928,20 @@ async cancelMany(@Body() body: {
 Payment Collection → Payment Collection Items → Cancel Button
 
 Supported actions:
-
 - Cancel by selecting checkboxes
+
+![Initial Payment Notification Email](/img/tutorial/school-fees-portal/6-usecase/cancel1.png)
+
 - Cancel all filtered records
+
+![Initial Payment Notification Email](/img/tutorial/school-fees-portal/6-usecase/cancel2.png)
+
 - Cancel entire fee collections
 - Cancel pending dues for specific fee types
 
+:::tip
 Only payments with status = Pending are eligible.
+:::
 
 ### Backend Logic Summary
 
@@ -942,10 +949,6 @@ Only payments with status = Pending are eligible.
 const pendingItemsData = await this.find(query);
 const pendingItems = pendingItemsData.records;
 ```
-:::tip
-If no records are found → cancellation stops.
-:::
-
 ### Bulk Cancel Operation
 
 ```Typescript
