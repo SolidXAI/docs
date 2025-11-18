@@ -14,7 +14,7 @@ This is the **core foundation** of the system, because each institute behaves as
 - Individual payment gateway credentials  
 - Custom fee types and fee rules  
 - Student records and fee mappings  
-- Branding (logo, theme colors, receipts)  
+- Branding (Institutes Logo, Institutes Brochure, Intro Video etc.)  
 - Transaction & settlement history  
 - Custom webhooks and email flows  
 
@@ -39,23 +39,6 @@ This architecture provides:
 
 ## Onboarding Workflow (Step-by-Step)
 
-The onboarding workflow is divided into **logical tabs** in the UI to simplify the data entry process and ensure correctness.
-
-```mermaid
-graph TD
-    A[Super Admin logs in] --> B{Navigate: <br/> Fees Portal → Institutes};
-    B --> C[Click 'Add Institute'];
-    C --> D[Enter Institute Details <br/> (name, address, branding)];
-    D --> E[Enter Payment Gateway Credentials <br/>(Razorpay/Paytm/Stripe)];
-    E --> F[Configure Institute Settings <br/> (Fee rules, currency, timezone)];
-    F --> G[Save Institute Record];
-    G --> H[Create Institute Admin User];
-    H --> I[Assign User Type under 'Institute User' Tab];
-    I --> J[Map User to Institute];
-    J --> K((Institute Onboarded));
-    K --> L[Institute Admin receives credentials];
-    L --> M[Institute Admin logs in to upload students, configure fees etc.]; 
-```
 
 The onboarding process is deliberately modular, allowing each institute to onboard at its own pace — starting with basic settings, and later configuring deeper features like customized fee types, late-fee rules, and payment workflows.
 

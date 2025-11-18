@@ -52,7 +52,7 @@ To simplify this, the system provides a Sample Excel Template that the admin can
 ### How It Works
 
 The Institute Admin navigates to:
-Fees Portal → Payment Collection → Initiate Payment
+Fees Portal → Initiate Payment
 
 A button Download Sample Excel is shown.
 
@@ -108,26 +108,14 @@ When an Institute Admin clicks Initiate Payment, the system automatically create
 - Uploaded student Excel with Configured fee types
 - The system generates necessary payment entries (Pending status) for each student–fee type combination.
 
-### Automatic Email Notifications
-
-For each generated payment record: A unique payment link is created
-####  An email is sent to the parent with:
-- Fee details
-- Due date
-- “Pay Now” button
-
-Clicking the button redirects to the Student Portal Payment Page.
-
-:::tip 
-Initiate Payment removes manual work — all records and parent notifications are fully automated.
-:::
-
 ### Preview
 
 ![Default Login Page](/img/tutorial/school-fees-portal/6-usecase/initiate-payment.png)
 
-### Code Snippet
+### Code Snippets
 
+#### Controller Endpoint
+The controller receives the uploaded file and initiates the validation and creation process.
 ```Typescript
   @ApiTags('Fees Portal')
   @Controller('payment-collection')
@@ -148,7 +136,13 @@ Initiate Payment removes manual work — all records and parent notifications ar
 
 ```
 
-```Typescript
+#### Excel Validation Logic (`feeTypeValidation`)
+This function performs a series of validations on the uploaded Excel file before processing the data.
+
+<details>
+<summary>Step 1-3: Read Excel and Validate Fee Types</summary>
+
+```typescript
   //these validates both feetypes as well past due date
   async feeTypeValidation(
     createDto: CreatePaymentCollectionDto,
@@ -206,7 +200,13 @@ Initiate Payment removes manual work — all records and parent notifications ar
     if (!uniqueFeeTypes.length) {
       throw new BadRequestException('No fee types found in Excel headers.');
     }
+```
+</details>
 
+<details>
+<summary>Step 4: Validate against FeeType Master</summary>
+
+```typescript
     // Step 4: Validate against FeeType master for institute
     const existingFeeTypes = await this.feeTypeRepo
       .createQueryBuilder('fee_type')
@@ -225,7 +225,13 @@ Initiate Payment removes manual work — all records and parent notifications ar
         `These fee types are not configured for the institute: ${missingFeeTypes.join(', ')}`,
       );
     }
+```
+</details>
 
+<details>
+<summary>Step 5: Validate Due Dates</summary>
+
+```typescript
     // Step 5: Validate due dates are not in the past
     const today = new Date();
     today.setHours(0, 0, 0, 0); // Normalize to midnight
@@ -258,7 +264,13 @@ Initiate Payment removes manual work — all records and parent notifications ar
         }
       }
     }
+```
+</details>
 
+<details>
+<summary>Step 6: Validate Payment Mode</summary>
+
+```typescript
     // Step 6: Validate Payment Mode
     const paymentModeIndex = headers.findIndex(
       (h) => h.toLowerCase() === 'payment mode'.toLowerCase(),
@@ -291,7 +303,13 @@ Initiate Payment removes manual work — all records and parent notifications ar
         'Payment Mode column is missing in Excel file.',
       );
     }
+```
+</details>
 
+<details>
+<summary>Step 7: Validate Email Format</summary>
+
+```typescript
     //add validation : parent and student email value should be in lowarcase and both are mandatory
     const getEmailValue = (cell: ExcelJS.Cell): string => {
       if (!cell.value) return '';
@@ -321,11 +339,33 @@ Initiate Payment removes manual work — all records and parent notifications ar
     }
 
   }
-
 ```
+</details>
 
-## #Media Transaction Subscriber
+## 2.4 Email Notifications for PG and Cash Payments
 
+Once payments are initiated, the system sends out targeted email notifications based on the payment mode specified in the uploaded Excel file.
+
+-   **PG (Payment Gateway) Payments**: For fees marked as `PG`, the system creates a `Pending` payment record. It then automatically sends a "Fee Due" email to the parent. This email includes a unique payment link, allowing the parent to complete the transaction online through the student portal.
+
+-   **Cash Payments**: For fees marked as `CASH`, the system immediately creates a `Fully Paid` payment record. A "Payment Success" email is sent to the parent, confirming that the payment has been received and recorded. No further action is needed from the parent for this fee.
+
+### Handling Mixed Payment Modes
+
+The system is designed to handle cases where a student has both `PG` and `CASH` payments within the same bulk upload. In such scenarios, it ensures clarity by sending separate emails for each category:
+1.  One email for all outstanding payments with a link to pay.
+2.  A separate confirmation email for all payments that have been successfully recorded as paid.
+
+This ensures that parents have a clear understanding of what has been paid and what is still due.
+
+The code that handles this logic has been enhanced to correctly process these scenarios.
+
+## 2.5 Media Transaction Subscriber
+
+This subscriber listens for new media uploads (the Excel file) and processes them.
+
+#### Subscriber Entry Point (`paymentCollectionTransaction`)
+This is the main method that gets triggered after the Excel file is uploaded. It reads the file and iterates through each row.
 ```Typescript
   private async paymentCollectionTransaction(event: InsertEvent<Media>, transactionManager: EntityManager) {
     const media = event.entity;
@@ -366,7 +406,13 @@ Initiate Payment removes manual work — all records and parent notifications ar
   }
 ```
 
-```Typescript 
+#### Row Processing Logic (`processRow`)
+This function processes each row from the Excel file, creates student and payment records, and triggers email notifications.
+
+<details>
+<summary>Data Extraction and Student Creation</summary>
+
+```typescript
   private async processRow(row: ExcelJS.Row, paymentCollection: PaymentCollection, transactionManager: any, headers: Record<string, number>, event: InsertEvent<Media>) {
 
     const studentRepo = transactionManager.getRepository(Student);
@@ -436,7 +482,13 @@ Initiate Payment removes manual work — all records and parent notifications ar
     student.instituteId = paymentCollection?.institute;
 
     const studentResult = await studentRepo.save(student);
+```
+</details>
 
+<details>
+<summary>Payment Item Creation</summary>
+
+```typescript
     for (const feeType of paymentCollection.institute.feeTypes) {
       const amount = parseFloat(getCellValue(`${feeType.feeType}`) || '0');
       const dueDateStr = getCellValue(`${feeType.feeType} Due Date`);
@@ -477,9 +529,15 @@ Initiate Payment removes manual work — all records and parent notifications ar
       }
 
     }
+```
+</details>
 
+<details>
+<summary>Email Notification Logic</summary>
+
+```typescript
   // After saving items for this student...
-  // Fetch items for this student (both paid + pending)
+  // Fetch all newly created items for this student in this payment collection
   const allItems = await paymentCollectionItemRepo.find({
       where: { 
         student: { studentLoginId: student.studentLoginId },
@@ -491,8 +549,8 @@ Initiate Payment removes manual work — all records and parent notifications ar
     const fullyPaidItems = allItems.filter(i => i.status === 'Fully Paid');
     const pendingItems = allItems.filter(i => i.status === 'Pending');
 
+    // CASE 1: Student has fully paid items (CASH mode) -> send a Success mail.
     if (fullyPaidItems.length > 0) {
-      // ✅ CASE 1: Student has only fully paid items → send one Success mail
       const feeTypes = [...new Set(fullyPaidItems.map(i => i.feeType?.feeType))].join(', ');
       const paymentCollections = [...new Set(fullyPaidItems.map(i => i.paymentCollection?.name))].join(', ');
 
@@ -515,9 +573,10 @@ Initiate Payment removes manual work — all records and parent notifications ar
         null,
         'success',
       );
+    }
 
-    } else if (pendingItems.length > 0) {
-      // ✅ CASE 2: Student still has dues → send one Due mail
+    // CASE 2: Student has pending items (PG mode) -> send a Due mail.
+    if (pendingItems.length > 0) {
       const totalAmountDue = pendingItems.reduce((sum, i) => {
         const totalAmountToBePaid = Number(i.totalAmountToBePaid) || 0;
         const amountPaid = Number(i.amountPaid) || 0;
@@ -547,32 +606,9 @@ Initiate Payment removes manual work — all records and parent notifications ar
     }
   }
 ```
+</details>
 
-## 2.4 Automated Email Notifications & Reminders
-
-Once payments are initiated, the system automatically handles all communication with parents.
-This ensures parents are notified at the right time — without any manual intervention by the institute.
-
-### Initial Payment Notification (Immediately After Initiation)
-
-After the admin initiates payment collection:
-
-Each parent receives an email with:
-
-- Student details
-- Fee type & amount
-- Due date
-- A unique “Pay Now” Btn
-
-Clicking the link redirects the parent to the Student Portal Payment Page.
-
-This email is triggered by the system immediately after creating payment records.
-
-### 📩 Email Template Preview
-
-![Initial Payment Notification Email](/img/tutorial/school-fees-portal/6-usecase/email-remainder.png)
-
-### Automated Due-Date Reminders
+## 2.6 Automated Due-Date Reminders
 
 The system also sends automated reminders for overdue or upcoming payment deadlines.
 
@@ -592,6 +628,10 @@ Each reminder email includes:
 - Outstanding amount
 - Updated due date or overdue warning
 - Payment link
+
+### 📩 Email Template Preview
+
+![Initial Payment Notification Email](/img/tutorial/school-fees-portal/6-usecase/email-remainder.png)
 
 ### Initial Notification Logic
 ```Typescript
@@ -634,7 +674,7 @@ The upcoming code example will show how the queue subscriber picks up email jobs
 :::
 
 
-## Email Notification Queue – Architecture & Flow
+## 2.7 Email Notification Queue – Architecture & Flow
 
 ### (Database Queue / RabbitMQ Compatible – Using SolidX Publishers & Subscribers)
 
