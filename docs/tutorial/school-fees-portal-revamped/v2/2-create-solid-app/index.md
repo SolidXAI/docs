@@ -16,11 +16,7 @@ npx @solidstarters/create-solid-app
 
 The CLI will guide you through a series of prompts to configure your project.
 
-:::tip Tip
-Consider replacing the static image below with an animated GIF showing the CLI in action.
-:::
-
-![Create Solid App](/img/tutorial/school-fees-portal/1-bootstrap/school-fees-setup-bootstrap.png)
+![Create Solid App](/img/tutorial/school-fees-portal/1-bootstrap/create-solid-app-cli.png)
 
 ### Configuration Options
 
@@ -74,7 +70,7 @@ The backend server provides the API and serves the admin panel.
 # Still in school-fees-portal/solid-api
 
 # Start in development mode (with hot-reloading)
-npm run start:dev
+npm run solidx:dev
 ```
 
 Once started, you can access the interactive API documentation (Swagger UI) at `http://localhost:3000/docs`.
