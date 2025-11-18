@@ -90,15 +90,11 @@ This approach bypasses the manual UI creation process. You'll create a single JS
 ### Step 2: Run the Seeder
 
 1.  Open a terminal in your backend directory (`school-fees-portal/solid-api`).
-2.  Run the `solid seed` command with the `--reseed` flag. This tells SolidX to re-evaluate the metadata from files.
+2.  Run the `solid seed` command. This tells SolidX to re-evaluate the metadata from files.
 
     ```bash
-    solid seed --reseed
+    solid seed
     ```
-    
-    :::warning
-    The `--reseed` flag will update existing module and model definitions based on the content of the JSON files in the `module-metadata` directory. Be cautious when using this on a project with existing data.
-    :::
 
 3.  After the command finishes, your `fees-portal` module and all its models will be created. You may need to restart your backend server to see the changes in the UI.
 

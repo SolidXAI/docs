@@ -101,4 +101,3 @@ The default application and admin login page will be running at `http://localhos
 
 Now that your application is running, the next step is to model your business domain. You will use the powerful **App Builder** inside the admin panel to define the data structures for the school fees portal.
 
-➡️ **Proceed to [3. Data Modeling](./3-data-modeling/index.md)**

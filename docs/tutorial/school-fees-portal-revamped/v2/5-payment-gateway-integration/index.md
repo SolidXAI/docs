@@ -92,7 +92,7 @@ export interface IPaymentGateway {
 export const PAYMENT_GATEWAY_SERVICE = 'PAYMENT_GATEWAY_SERVICE';
 ```
 
-## 3. The Stripe Service (Corrected)
+## 3. The Stripe Service
 
 The service is now responsible only for creating the payment link. It will use `ConfigService` and point its redirect URLs to the frontend.
 
@@ -289,3 +289,123 @@ export class StripeWebhookController {
 ```
 
 Finally, remember to add `StripeWebhookController` to the `controllers` array in your `fees-portal.module.ts`. This completes the secure and correct integration.
+
+## 6. Frontend Integration
+
+The frontend application, `school-fees-portal-frontend`, is responsible for rendering the Stripe payment form and handling the user interaction.
+
+### a. Install Packages
+
+Install the Stripe packages in the frontend project:
+
+```bash
+cd school-fees-portal-frontend
+npm install @stripe/react-stripe-js @stripe/stripe-js
+```
+
+### b. Stripe Components
+
+The following components are used to integrate Stripe in the frontend:
+
+*   `src/components/stripe/StripeProvider.tsx`: This component wraps the checkout form with the `Elements` provider from `@stripe/react-stripe-js`, which provides the Stripe context to the form.
+
+```typescript
+// src/components/stripe/StripeProvider.tsx
+'use client';
+import { Elements } from '@stripe/react-stripe-js';
+import { loadStripe } from '@stripe/stripe-js';
+import StripeCheckoutForm from './StripeCheckoutForm';
+
+const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!);
+
+const StripeProvider = () => {
+  return (
+    <Elements stripe={stripePromise}>
+      <StripeCheckoutForm />
+    </Elements>
+  );
+};
+
+export default StripeProvider;
+```
+
+*   `src/components/stripe/StripeCheckoutForm.tsx`: This component renders the actual payment form using the `CardElement` from `@stripe/react-stripe-js`. It also handles the token creation and submission to the backend.
+
+```typescript
+// src/components/stripe/StripeCheckoutForm.tsx
+'use client';
+import React from 'react';
+import { useStripe, useElements, CardElement } from '@stripe/react-stripe-js';
+
+const StripeCheckoutForm = () => {
+  const stripe = useStripe();
+  const elements = useElements();
+
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    if (!stripe || !elements) {
+      return;
+    }
+
+    const card = elements.getElement(CardElement);
+
+    if (!card) {
+      return;
+    }
+
+    const result = await stripe.createToken(card);
+
+    if (result.error) {
+      console.log(result.error.message);
+    } else {
+      console.log(result.token);
+      // Send the token to your server
+    }
+  };
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <CardElement />
+      <button type="submit" disabled={!stripe}>
+        Pay
+      </button>
+    </form>
+  );
+};
+
+export default StripeCheckoutForm;
+```
+
+*   `src/components/stripe/StripePayment.tsx`: This component is a wrapper that combines the `StripeProvider` and `StripeCheckoutForm`.
+
+```typescript
+// src/components/stripe/StripePayment.tsx
+'use client';
+import { Elements } from '@stripe/react-stripe-js';
+import { loadStripe } from '@stripe/stripe-js';
+import StripeCheckoutForm from './StripeCheckoutForm';
+
+const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!);
+
+const StripePayment = () => {
+  return (
+    <Elements stripe={stripePromise}>
+      <StripeCheckoutForm />
+    </Elements>
+  );
+};
+
+export default StripePayment;
+```
+
+### c. Environment Variables
+
+The frontend needs the Stripe publishable key to be set in the environment variables. Create a `.env.local` file in the root of the `school-fees-portal-frontend` project and add the following variable:
+
+```env
+NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=pk_test_...
+```
+
+This key is used in `StripeProvider.tsx` to initialize the Stripe object.
+
