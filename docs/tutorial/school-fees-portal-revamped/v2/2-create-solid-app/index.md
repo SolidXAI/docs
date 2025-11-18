@@ -16,11 +16,7 @@ npx @solidstarters/create-solid-app
 
 The CLI will guide you through a series of prompts to configure your project.
 
-:::tip Tip
-Consider replacing the static image below with an animated GIF showing the CLI in action.
-:::
-
-![Create Solid App](/img/tutorial/school-fees-portal/1-bootstrap/school-fees-setup-bootstrap.png)
+![Create Solid App](/img/tutorial/school-fees-portal/1-bootstrap/create-solid-app-cli.png)
 
 ### Configuration Options
 
@@ -74,7 +70,7 @@ The backend server provides the API and serves the admin panel.
 # Still in school-fees-portal/solid-api
 
 # Start in development mode (with hot-reloading)
-npm run start:dev
+npm run solidx:dev
 ```
 
 Once started, you can access the interactive API documentation (Swagger UI) at `http://localhost:3000/docs`.
@@ -101,4 +97,3 @@ The default application and admin login page will be running at `http://localhos
 
 Now that your application is running, the next step is to model your business domain. You will use the powerful **App Builder** inside the admin panel to define the data structures for the school fees portal.
 
-➡️ **Proceed to [3. Data Modeling](./3-data-modeling/index.md)**
