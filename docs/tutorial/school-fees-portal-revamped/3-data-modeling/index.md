@@ -2,9 +2,17 @@
 sidebar_position: 3
 ---
 
-# 3. Data Modeling
+# Data Modeling
+In this step, we will design the data model for our school fees portal. This is the most critical part of building the application, where we define the structure of our data. We'll use SolidX's **App Builder**, a powerful visual tool within the admin panel, to do this.
 
-In this step, we will design the data model for our school fees portal by accessing the admin interface of our newly bootstrapped SolidX project.
+## Core Concepts of the App Builder
+
+Before we start, let's understand a few key terms:
+
+-   **Module:** A top-level container for a major feature of your application. It groups related data models, UI configurations, and business logic. We will create a `fees-portal` module.
+-   **Model:** Represents a single data entity, which translates to a database table. For example, `Student` or `Institute`.
+-   **Fields:** The attributes of a model, which translate to columns in a database table. For example, the `Student` model will have fields like `studentName` and `studentEmailAddress`.
+-   **Data Source:** A connection to a database. SolidX can connect to multiple databases, but for this tutorial, we'll use the `default` PostgreSQL connection you configured during setup.
 
 ## Create a Module
 
@@ -44,6 +52,14 @@ Confirm the action in the dialog box that appears.
 
 
 Confirming this will generate all the necessary code for the newly bootstrapped project.
+
+:::info What does "Generate Code" do?
+This powerful feature reads the metadata of your module and models and automatically writes the necessary boilerplate code in your `solid-api` project. This includes:
+- Database entity classes.
+- Service classes with CRUD (Create, Read, Update, Delete) methods.
+- Controller classes that expose REST API endpoints.
+- Basic UI views for the admin panel.
+:::
 
 **2. Via the CLI**
 

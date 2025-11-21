@@ -2,7 +2,7 @@
 sidebar_position: 1
 ---
 
-# School Fees Portal Tutorial - V1
+# School Fees Portal Tutorial
 
 ## Introduction
 

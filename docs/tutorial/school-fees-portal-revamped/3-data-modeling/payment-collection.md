@@ -4,7 +4,7 @@ sidebar_position: 4
 
 # Payment Collection Model
 
-**Business Purpose:** Represents a batch of fee collection requests, often initiated by uploading a file. It groups multiple fee items for an institute.
+**Business Purpose:** Represents a batch of fee collection requests, often initiated by uploading a file (e.g., an Excel sheet). It acts as a container for multiple individual fee items for an institute.
 
 **Fields:**
 
@@ -18,8 +18,38 @@ sidebar_position: 4
 | `dueDate` | [`date`](../../../admin-docs/module-builder/field-management#date) | The due date for the payments in this collection. |
 | `paymentCollectionId` | [`computed`](../../../admin-docs/module-builder/field-management#computed) | A unique ID for the payment collection, computed from its name. |
 
+---
 
-**Metadata JSON:**
+### Key Fields Explained
+
+-   **`paymentFile` (Media - File):** This field is central to the bulk-upload use case. An institute admin will upload an Excel or CSV file here. We will later write a **Subscriber** that listens for the creation of this record, parses the file, and automatically creates all the individual `PaymentCollectionItem` records for each student listed in the file.
+-   **`paymentCollectionItems` (Relation):** This defines the one-to-many link between a single collection batch and the many individual fee items it contains.
+-   **`paymentCollectionId` (Computed):** This serves as the unique, human-readable User Key for the collection batch, automatically generated from the `name` field (e.g., `annual-fees-2023-a4f81`).
+
+---
+
+### Creation Steps
+
+If you are following the manual "Guided Tour", follow these steps to create the `Payment Collection` model in the App Builder.
+
+1.  Navigate to **Fees Portal > App Builder > Model** and click **Add**.
+2.  Fill in the primary details for the model:
+    -   **Singular Name:** `paymentCollection`
+    -   **Plural Name:** `paymentCollections`
+    -   **Display Name:** `Payment Collection`
+3.  Go to the **Fields** tab.
+4.  Click **Add Field** and create each field exactly as defined in the table above.
+5.  Click **Save**.
+
+---
+
+:::tip For the Fast Track: Model Metadata
+The JSON block below contains the complete metadata definition for the **Payment Collection** model.
+
+This definition is structured with top-level properties for the model itself (like `singularName`, `pluralName`, `tableName`) and a `fields` array that defines every attribute you see in the table above.
+
+You can use this metadata as part of the "Fast Track" approach by including it in the main `fees-portal-metadata.json` file.
+:::
 
 <details>
 <summary>&emsp; View Metadata JSON</summary>
@@ -193,9 +223,7 @@ sidebar_position: 4
         }
       ],
       "computedFieldValueProvider": "AlphaNumExternalIdComputationProvider",
-      "computedFieldValueProviderCtxt": "{\n  \"dynamicFieldPrefix\": \"name\",
-  \"length\": 5
-}",
+      "computedFieldValueProviderCtxt": "{\n  \"dynamicFieldPrefix\": \"name\",\n  \"length\": 5\n}",
       "required": true,
       "unique": true,
       "index": false,
@@ -211,5 +239,3 @@ sidebar_position: 4
 ```
 
 </details>
-
-**Apply Changes:** Apply model changes as guided in Data Modeling page.

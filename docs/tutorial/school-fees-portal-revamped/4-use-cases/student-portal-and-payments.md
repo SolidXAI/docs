@@ -9,9 +9,7 @@ The Student Portal is a modern, responsive frontend application built with Next.
 To build the student portal, we will use a separate frontend application built with Next.js. A starter repository is provided to give you the basic structure, UI components, and API service helpers.
 
 :::info
-**Action Required: Clone the Starter Repository**
-
-[➡️ TODO: Insert Git repository link here](https://git.logicloop.io/asifLogicloop/school-fees-portal-frontend)
+**Action Required: Clone the [Starter Repository](https://git.logicloop.io/asifLogicloop/school-fees-portal-frontend)**
 
 Clone this repository to your local machine.
 :::

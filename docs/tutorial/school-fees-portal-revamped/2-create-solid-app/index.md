@@ -2,20 +2,21 @@
 sidebar_position: 2
 ---
 
-# 2. Create Solid App
+# Create Solid App
 
-In this step, we'll initialize a new SolidX project using the official starter CLI.
-
-SolidX provides a powerful CLI tool to scaffold a full-stack multi-tenant SaaS application with a backend API and frontend UI, pre-wired for PostgreSQL.
+In this step, we'll initialize a new SolidX project using the official starter CLI. This single command scaffolds a complete full-stack application, giving you a massive head start.
 
 ## Create Solid App
+
+Open your terminal and run the following command:
+
 ```bash
 npx @solidstarters/create-solid-app
 ```
 
 When you run this command, the CLI will guide you through a series of prompts. Here's an example interaction:
 
-![Create Solid App](/img/tutorial/school-fees-portal/1-bootstrap/school-fees-setup-bootstrap.png)
+![Create Solid App](/img/tutorial/school-fees-portal/1-bootstrap/school-fees-setup-bootstrap-new.png)
 
 ### Configuration Options
 
@@ -70,6 +71,10 @@ npm run start:debug
 npm run start
 ```
 
+:::danger SECURITY WARNING
+The `solid seed` command will create a default admin user and print the password **only once** to the terminal. **Save this password immediately** in a secure location. You will need it to log in to the admin panel.
+:::
+
 The SolidX backend allows you to generate all your REST API endpoints and comes pre-configured with Swagger documentation which you can access at `http://localhost:3000/docs`.
 
 **Swagger Docs:**
@@ -110,5 +115,14 @@ Inside this project folder, you will find two main subdirectories:
 Each of these folders has its own `.env` file, pre-filled with the configuration you provided during the setup process.
 
 
+## What You Get Out-of-the-Box
 
-### TODO: Out of the box features.
+This single command generates a feature-rich starting point. Here’s a look at what's included:
+
+-   **Full-Stack Application:** A complete project with a **NestJS backend** (`solid-api`) and a **Next.js frontend** (`solid-ui`).
+-   **Authentication & Users:** A pre-built module for user registration, JWT-based login, and password management.
+-   **Auto-Generated Admin UI:** A fully functional admin panel to manage your data as soon as you define your models.
+-   **Auto-Generated REST API:** Instant RESTful endpoints for all your data models, complete with interactive **Swagger documentation**.
+-   **Database Seeding:** A `solid seed` command to initialize your database with necessary system data and a default admin user.
+-   **Configured Environments:** Ready-to-use `.env` files for easy management of ports, database credentials, and other settings.
+-   **Extensible Architecture:** A clean, modular structure that's easy to extend with your own custom business logic.

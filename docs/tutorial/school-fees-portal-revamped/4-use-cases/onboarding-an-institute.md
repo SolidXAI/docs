@@ -133,6 +133,9 @@ export class PaymentCollectionItemAmountProvider implements IEntityPostComputeFi
   }
 ```
 
+## Generating `studentLoginId`
+!['Student Login Id'](/img/tutorial/school-fees-portal/6-usecase/studentLoginId.png)
+
 ## Composite Indexes — Multi-Column Uniqueness & Speed
 
 Composite indexes guarantee data integrity and provide massive performance improvements on institute-scoped queries.

@@ -53,7 +53,7 @@ The JSON block below contains the complete metadata definition for the **Payment
 
 This definition is structured with top-level properties for the model itself (like `singularName`, `pluralName`, `tableName`) and a `fields` array that defines every attribute you see in the table above.
 
-You can use this metadata as part of the "Fast Track" approach outlined in the [Data Modeling Overview](./index.md) by including it in the main `fees-portal-metadata.json` file.
+You can use this metadata as part of the "Fast Track" approach by including it in the main `fees-portal-metadata.json` file.
 :::
 
 <details>

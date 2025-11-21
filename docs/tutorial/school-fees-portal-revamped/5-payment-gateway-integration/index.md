@@ -2,7 +2,7 @@
 sidebar_position: 5
 ---
 
-# Payment Gateway Integration
+# Payment Gateway Integration - Stripe
 
 In this section, we will integrate the **Stripe** payment gateway into our school fees portal. This guide has been completely rewritten to follow modern best practices, ensuring the implementation is **secure, robust, and correct**.
 

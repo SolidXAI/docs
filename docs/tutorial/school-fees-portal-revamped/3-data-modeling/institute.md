@@ -4,7 +4,7 @@ sidebar_position: 1
 
 # Institute Model
 
-**Business Purpose:** Represents an educational institution that will use the platform. It stores details like the institute's name, branding, contact information, and payment gateway configuration.
+**Business Purpose:** Represents an educational institution that will use the platform. It stores details like the institute's name, branding, contact information, and payment gateway configuration. This is the central model to which most other data in this module will be linked.
 
 **Fields:**
 
@@ -30,6 +30,42 @@ sidebar_position: 1
 | `emailDomain` | [`shortText`](../../../admin-docs/module-builder/field-management#short-text) | The official email domain of the institute. |
 | `custUserId` | [`shortText`](../../../admin-docs/module-builder/field-management#short-text) | Customer User ID for the institute. |
 
+---
+
+### Key Fields Explained
+
+-   **`instituteName` (User Key):** This field is marked as the "User Key" (`isUserKey: true`). This means it's the primary human-readable identifier for an institute record. It must be unique.
+-   **`paymentGateway...` fields:** These fields store the credentials for the institute's specific payment gateway account. This allows the platform to process payments on behalf of each institute securely.
+-   **`feeTypes` & `instituteUsers` (Relations):** These fields don't store data directly. Instead, they define a one-to-many relationship, linking one institute to many fee types and many users. SolidX uses this metadata to automatically enable linked data management in the UI and API.
+
+---
+
+### Creation Steps
+
+If you are following the manual "Guided Tour", follow these steps to create the `Institute` model in the App Builder.
+
+1.  Navigate to **Fees Portal > App Builder > Model** and click **Add**.
+2.  Fill in the primary details for the model:
+    -   **Singular Name:** `institute`
+    -   **Plural Name:** `institutes`
+    -   **Display Name:** `Institute`
+3.  Go to the **Fields** tab.
+4.  Click **Add Field** and create each field exactly as defined in the table above. Pay close attention to the **Field Name** and **Type**.
+5.  Click **Save**.
+
+:::tip
+After you have created **all** the models for this module, you will need to run the code generation step again to create the files for them.
+:::
+
+---
+
+:::tip For the Fast Track: Model Metadata
+The JSON block below contains the complete metadata definition for the **Institute** model.
+
+This definition is structured with top-level properties for the model itself (like `singularName`, `pluralName`, `tableName`) and a `fields` array that defines every attribute you see in the table above.
+
+You can use this metadata as part of the "Fast Track" approach by including it in the main `fees-portal-metadata.json` file.
+:::
 
 <details>
 <summary>&emsp; View Metadata JSON</summary>
@@ -451,6 +487,3 @@ sidebar_position: 1
 ```
 
 </details>
-
-
-**Apply Changes:** Apply model changes as guided in Data Modeling page.
