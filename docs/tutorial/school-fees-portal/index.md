@@ -19,7 +19,7 @@ We'll explore how to develop a system that allows institutions to:
 - Send reminders and notifications
 - Generate reports and manage refunds
 
-Our end goal is to create a **modular, extensible platform** where each educational institution operates as an isolated tenant, but shares a unified infrastructure. This tutorial assumes a modern web stack and will walk through the architecture, workflows, and data modeling required to bring this solution to life.
+Our end goal is to create a **modular, extensible platform** where each educational institution operates as an isolated tenant, but shares a unified infrastructure. This tutorial assumes a modern web stack and will walk through the architecture, workflows, and data modeling required to bring this solution to life. 
 
 
 ## User Roles

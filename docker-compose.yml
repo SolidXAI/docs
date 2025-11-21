@@ -1,0 +1,23 @@
+services:
+  typesense:
+    image: typesense/typesense:26.0
+    container_name: typesense-server
+    restart: unless-stopped
+
+    ports:
+      - "${TYPESENSE_PORT}:${TYPESENSE_PORT}"
+
+    volumes:
+      - ./typesense-data:/data
+
+    environment:
+      TYPESENSE_API_KEY: ${TYPESENSE_API_KEY}
+
+    command: >
+      /opt/typesense-server
+      --data-dir=/data
+      --api-key=${TYPESENSE_API_KEY}
+      --enable-cors=true
+      --cors-allowed-origins=*
+      --cors-allow-all=true
+      --log-level=debug

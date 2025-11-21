@@ -3,6 +3,8 @@ import type { Config } from '@docusaurus/types';
 import type * as Preset from '@docusaurus/preset-classic';
 
 // This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
+import dotenv from 'dotenv';
+dotenv.config();
 
 const config: Config = {
   title: 'SolidX Docs',
@@ -30,6 +32,9 @@ const config: Config = {
     defaultLocale: 'en',
     locales: ['en'],
   },
+
+  //  ADDED THIS
+  themes: ['docusaurus-theme-search-typesense'],
 
   presets: [
     [
@@ -66,12 +71,35 @@ const config: Config = {
   ],
 
   themeConfig: {
+
+    //  ADDED TYPESENSE CONFIG
+    typesense: {
+      typesenseCollectionName: 'docusaurus_docs',
+
+      typesenseServerConfig: {
+        nodes: [
+          {
+            host: process.env.TYPESENSE_HOST ,
+            port: Number(process.env.TYPESENSE_PORT),
+            protocol: process.env.TYPESENSE_PROTOCOL ,
+          },
+        ],
+      
+        // IMPORTANT: USE SEARCH-ONLY KEY HERE
+        apiKey: process.env.TYPESENSE_API_KEY,
+      },
+      
+      searchParameters: {},
+    },
+
     colorMode: {
       defaultMode: 'light',
       disableSwitch: false,
-      respectPrefersColorScheme: true, // Respect user's system preference
+      respectPrefersColorScheme: true,
     },
+
     image: 'img/docusaurus-social-card.jpg',
+
     navbar: {
       title: '',
       logo: {
@@ -82,7 +110,7 @@ const config: Config = {
         {
           type: 'docSidebar',
           sidebarId: 'tutorialSidebar',
-          position: 'left', 
+          position: 'left',
           label: ' Tutorial',
           className: 'custom-center-item',
         },
@@ -98,6 +126,12 @@ const config: Config = {
         //   label: 'GitHub',
         //   position: 'right',
         // },
+
+        //  ADDED SEARCH BAR HERE
+        {
+          type: 'search',
+          position: 'right',
+        },
       ],
     },
 
@@ -109,7 +143,6 @@ const config: Config = {
       },
 
       links: [
-
         {
           title: 'Docs',
           items: [
@@ -154,8 +187,8 @@ const config: Config = {
       // copyright: `Copyright © ${new Date().getFullYear()} SolidX, LogicLoop Ventures LLP.`,
     },
     prism: {
-      theme: prismThemes.github,        
-      darkTheme: prismThemes.vsDark,  
+      theme: prismThemes.github,
+      darkTheme: prismThemes.vsDark,
       additionalLanguages: ['typescript', 'tsx', 'bash', 'json', 'http', 'diff'],
       magicComments: [
         {
@@ -165,6 +198,12 @@ const config: Config = {
         },
       ],
     },
+    plugins: [
+      [
+        '@docusaurus/plugin-sitemap',
+
+      ],
+    ],
 
   } satisfies Preset.ThemeConfig,
 };
