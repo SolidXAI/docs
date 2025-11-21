@@ -299,7 +299,9 @@ systems.
   export interface UuidExternalIdContext {
     prefix?: string; // alias -> staticPrefix
   }
-``` ts
+``` 
+</details>
+
 
 ### NoopsEntityComputedFieldProviderService
 
