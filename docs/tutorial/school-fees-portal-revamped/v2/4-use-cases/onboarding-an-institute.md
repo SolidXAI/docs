@@ -2,25 +2,25 @@
 sidebar_position: 1
 ---
 
-# 1. Onboarding an Institute
+# Onboarding an Institute
 
-## Business Reason
+### Foundation for Multi-Tenant School Fees Management
 
-The **Onboarding an Institute** use-case enables the platform’s **Super Admin** (or a Third-Party Admin) to register and manage multiple institutes inside a **multi-tenant fees management platform**.
+### Overview
 
-This is the **core foundation** of the system, because each institute behaves as a completely independent tenant with its own:
+Onboarding an Institute enables platform-level Super Admins (or Partner Admins) to register and configure multiple institutes inside a multi-tenant fees management platform.
 
-- Dedicated institute admins  
-- Individual payment gateway credentials  
-- Custom fee types and fee rules  
-- Student records and fee mappings  
-- Branding (Institutes Logo, Institutes Brochure, Intro Video etc.)  
-- Transaction & settlement history  
-- Custom webhooks and email flows  
+Each institute operates as an independent tenant with its own:
 
-Once an institute is created, it becomes a *logically isolated tenant*—ensuring that all data, actions, and workflows within that institute remain fully isolated from all others.
+- Admin users
+- Payment gateway credentials
+- Fee types & fee rules
+- Student records & mapping
+- Branding assets (logo, brochure, video, etc.)
+- Settlement & transaction logs
+- Notification/webhook flows
 
----
+### Once created, the institute becomes a fully isolated logical tenant, ensuring no cross-institute data leakage.
 
 ## Why a Multi-Tenant Architecture?
 
@@ -39,19 +39,25 @@ This architecture provides:
 
 ## Onboarding Workflow (Step-by-Step)
 
+The onboarding flow is intentionally modular. An institute can start with basic configuration and progressively enable:
 
-The onboarding process is deliberately modular, allowing each institute to onboard at its own pace — starting with basic settings, and later configuring deeper features like customized fee types, late-fee rules, and payment workflows.
+- Institute Profile & Branding
+- Admin Users
+- Academic Structure
+- Fee Types & Fee Rules
+- Student Imports
+- Payment Gateway Setup
+- Late Fee Rules
+- Notifications & Webhooks
+- Scheduled Automation Jobs
 
-## Technical Deep-Dive: Advanced SolidX Concepts
-Below are the core SolidX features used during Institute Onboarding. These govern data automation, validation, indexing, and asynchronous flows across the system.
-
-## 1. Subscribers — Background Processing on Uploads
+## Subscribers — Background Processing on Uploads
 Subscribers allow you to respond to specific database events asynchronously, without blocking user actions.
 
 Real Use-Case:
 When an institute uploads a student data Excel file or payment mapping file, the system uses a subscriber to parse and import the file in the background.
 
-Why Subscribers?
+### Why Subscribers?
 
 -  Excel parsing is time-consuming
 -  Avoid UI blocking
@@ -79,7 +85,7 @@ export class MediaTransactionSubscriber implements EntitySubscriberInterface<Med
 ```
 
 
-## 2. Computed Fields — Automatic Calculations
+## Computed Fields — Automatic Calculations
 
 Computed fields allow the system to calculate values automatically instead of manually storing and updating them.
 
@@ -127,7 +133,7 @@ export class PaymentCollectionItemAmountProvider implements IEntityPostComputeFi
   }
 ```
 
-## 3. Composite Indexes — Multi-Column Uniqueness & Speed
+## Composite Indexes — Multi-Column Uniqueness & Speed
 
 Composite indexes guarantee data integrity and provide massive performance improvements on institute-scoped queries.
 
@@ -148,39 +154,146 @@ export class Student extends BaseEntity {
 }
 ```
 
-## 4. Scheduled Jobs — Nightly Automation
+## Scheduled Jobs — Nightly Automation
 
-Scheduled jobs keep the system clean and proactive without manual admin effort.
+SolidX provides a powerful built-in scheduler that allows modules to run automated background tasks at configurable intervals.
+These jobs ensure that data remains consistent, fee cycles stay updated, and time-bound processes (such as late fee calculation or reminders) run without manual intervention.
 
-## Common Jobs During Onboarding Phase
+Scheduled jobs can be configured per-institute (tenant-level) or globally at the module level.
 
-- Pre-calculate late fees
-- Send overdue payment reminders
-- Cleanup temporary media files
-- Generate institute reports
-- Example: Nightly Overdue Reminder Job
+### SolidX allows two mechanisms for configuring scheduled jobs:
+
+### 1. Through the SolidX Admin UI (Preferred)
+
+Admins can enable or disable jobs, adjust frequency, and set execution windows directly in the SolidX Admin Panel.
+The UI validates values and helps ensure safe, tenant-compatible configurations.
+
+### 2. Through Module Metadata (Developer Mode)
+
+Developers can register scheduled jobs inside the module metadata JSON file.
+
+`/solid-api/module-metadata/fees-portal/fees-portal-metadata.json`
+
+### Example Definition 
 
 ```typescript
-@Cron(CronExpression.EVERY_DAY_AT_8AM)
-async handleOverduePaymentReminders() {
-  const overdueItems = await this.findOverdueItems();
+"scheduledJobs": [
+  {
+    "scheduleName": "Late Fee Calculation",
+    "isActive": true,
+    "frequency": "Hourly",
+    "startTime": null,
+    "endTime": null,
+    "startDate": null,
+    "endDate": null,
+    "dayOfMonth": 0,
+    "lastRunAt": "2025-09-05T07:09:00.009Z",
+    "nextRunAt": "2025-09-05T07:10:00.009Z",
+    "dayOfWeek": [
+      "Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"
+    ],
+    "job": "LateFeePaymentCalculatorScheduledJob",
+    "moduleUserKey": "fees-portal"
+  }
+]
+```
 
-  for (const item of overdueItems) {
-    await this.emailService.send({
-      to: item.student.parentEmailAddress,
-      subject: `Payment Reminder: ${item.feeType.name} overdue`,
-      template: 'overdue-reminder',
-      context: {
-        studentName: item.student.studentName,
-        amount: item.amountPending,
-        dueDate: item.dueDate,
+### Important Fields
+
+| Key                     | Description                                               |
+| ----------------------- | --------------------------------------------------------- |
+| `scheduleName`          | Label shown in UI and logs.                               |
+| `frequency`             | One of: `Hourly`, `Daily`, `Weekly`, `Monthly`, `Yearly`. |
+| `dayOfWeek`             | Days applicable (for weekly schedules).                   |
+| `startTime` / `endTime` | Optional execution window.                                |
+| `job`                   | The TypeScript class implementing the job.                |
+| `moduleUserKey`         | SolidX module owner of the job.                           |
+
+### Example: Late Fee Calculation Job
+
+```typescript
+@Injectable()
+@ScheduledJobProvider()
+export class LateFeePaymentCalculatorScheduledJob implements IScheduledJob {
+  private readonly logger = new Logger(LateFeePaymentCalculatorScheduledJob.name);
+
+  constructor(
+    @InjectEntityManager()
+    private readonly entityManager: EntityManager,
+  ) {}
+
+  async execute(reminder: ScheduledJob): Promise<void> {
+    this.logger.debug(`Executing job: ${reminder.job}`);
+    this.logger.debug(`Schedule: ${reminder.scheduleName} | ID: ${reminder.id}`);
+
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+
+    // Fetch overdue items
+    const items = await this.entityManager.find(PaymentCollectionItem, {
+      where: {
+        dueDate: LessThan(today),
+        status: Not(In(['Cancelled', 'Fully Paid'])),
       },
+      relations: ['feeType', 'institute'],
     });
+
+    this.logger.debug(`Found ${items.length} overdue payment collection items.`);
+
+    const filteredItems = items.filter(
+      item =>
+        item.feeType?.latePaymentFeesType &&
+        item.feeType.latePaymentFeesType !== 'None',
+    );
+
+    for (const item of filteredItems) {
+      const dueDate = new Date(item.dueDate);
+      dueDate.setHours(0, 0, 0, 0);
+
+      const now = new Date();
+      now.setHours(0, 0, 0, 0);
+
+      const overdueByDays = Math.floor(
+        (now.getTime() - dueDate.getTime()) / 86400000,
+      );
+
+      const amountToBePaid = Number(item.amountToBePaid || 0);
+      const amountPaid = Number(item.amountPaid || 0);
+      const basePending = amountToBePaid - amountPaid;
+
+      let lateAmountToBePaid = 0;
+
+      if (item.feeType.latePaymentFeesType === 'Percent') {
+        lateAmountToBePaid =
+          (basePending * Number(item.feeType.latePaymentFees || 0)) / 100;
+      } else if (item.feeType.latePaymentFeesType === 'Absolute') {
+        lateAmountToBePaid = Number(item.feeType.latePaymentFees || 0);
+      }
+
+      lateAmountToBePaid = Math.round(lateAmountToBePaid * 100) / 100;
+
+      const totalAmountToBePaid = amountToBePaid + lateAmountToBePaid;
+      const amountPending = totalAmountToBePaid - amountPaid;
+
+      await this.entityManager.update(
+        PaymentCollectionItem,
+        { id: item.id },
+        {
+          lateAmountToBePaid,
+          overdueByDays,
+          amountPending: String(amountPending),
+          totalAmountToBePaid: String(totalAmountToBePaid),
+        },
+      );
+    }
+
+    this.logger.debug(`Late fee calculation completed for ${filteredItems.length} items.`);
   }
 }
 ```
 :::tip Multi-Frequency Scheduler
-The platform supports flexible reminder scheduling for each institute.  
-You can configure reminders to run **Daily**, **Weekly**, **Monthly**, or **Yearly**, giving institutes full control over how often parents receive fee notifications.  
-This ensures every tenant can align the reminder cycle with their internal policies.
+SolidX allows each institute to configure reminder and automation jobs in multiple frequencies:
+Daily, Weekly, Monthly, Yearly, or even Hourly for internal calculations like late fees.
+
+This provides tenant-level flexibility so each institute can align automation with their internal fee policies.
 :::

@@ -2,7 +2,7 @@
 sidebar_position: 2
 ---
 
-# 2. Create Solid App
+# Create Solid App
 
 In this step, we'll initialize a new SolidX project using the official starter CLI. This single command scaffolds a complete full-stack application, giving you a massive head start.
 

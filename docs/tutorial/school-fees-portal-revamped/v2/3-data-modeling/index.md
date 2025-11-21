@@ -2,7 +2,7 @@
 sidebar_position: 3
 ---
 
-# 3. Data Modeling
+# Data Modeling
 
 In this step, we will design the data model for our school fees portal. This is the most critical part of building the application, where we define the structure of our data. We'll use SolidX's **App Builder**, a powerful visual tool within the admin panel, to do this.
 

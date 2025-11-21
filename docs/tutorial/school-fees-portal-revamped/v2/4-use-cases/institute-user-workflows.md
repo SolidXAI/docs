@@ -2,11 +2,11 @@
 sidebar_position: 2
 ---
 
-# 2. Institute User Workflows
+# Institute User Workflows
 
 This section covers the primary workflows for an institute's administrative user, from logging in to managing payments.
 
-## 2.1 User Login and Access Control
+## User Login and Access Control
 
 An `InstituteUser` is a user who belongs to a specific institute. Their access must be strictly limited to their own institute's data.
 
@@ -44,7 +44,7 @@ Dashboard feature will come shortly.
 
 ``` -->
 
-## 2.2 Institute User — Create / Download Excel for Upload
+## Institute User — Create / Download Excel for Upload
 
 Once the institute is onboarded and fee types are configured, the Institute Admin can upload student fee mappings in bulk.
 To simplify this, the system provides a Sample Excel Template that the admin can download, fill, and re-upload.
@@ -94,7 +94,7 @@ This ensures accurate tracking while preventing unnecessary notifications for ca
 :::
 
 
-## 2.3 Institute User — Initiate Payment
+## Institute User — Initiate Payment
 
 When an Institute Admin clicks Initiate Payment, the system automatically creates payment records for all students based on the institute’s configured fee types.
 
@@ -140,7 +140,7 @@ The controller receives the uploaded file and initiates the validation and creat
 This function performs a series of validations on the uploaded Excel file before processing the data.
 
 <details>
-<summary>Step 1-3: Read Excel and Validate Fee Types</summary>
+<summary>Step 1: Read Excel and Validate Fee Types</summary>
 
 ```typescript
   //these validates both feetypes as well past due date
@@ -204,7 +204,7 @@ This function performs a series of validations on the uploaded Excel file before
 </details>
 
 <details>
-<summary>Step 4: Validate against FeeType Master</summary>
+<summary>Step 2: Validate against FeeType Master</summary>
 
 ```typescript
     // Step 4: Validate against FeeType master for institute
@@ -229,7 +229,7 @@ This function performs a series of validations on the uploaded Excel file before
 </details>
 
 <details>
-<summary>Step 5: Validate Due Dates</summary>
+<summary>Step 3: Validate Due Dates</summary>
 
 ```typescript
     // Step 5: Validate due dates are not in the past
@@ -268,7 +268,7 @@ This function performs a series of validations on the uploaded Excel file before
 </details>
 
 <details>
-<summary>Step 6: Validate Payment Mode</summary>
+<summary>Step 4: Validate Payment Mode</summary>
 
 ```typescript
     // Step 6: Validate Payment Mode
@@ -307,7 +307,7 @@ This function performs a series of validations on the uploaded Excel file before
 </details>
 
 <details>
-<summary>Step 7: Validate Email Format</summary>
+<summary>Step 5: Validate Email Format</summary>
 
 ```typescript
     //add validation : parent and student email value should be in lowarcase and both are mandatory
@@ -342,7 +342,7 @@ This function performs a series of validations on the uploaded Excel file before
 ```
 </details>
 
-## 2.4 Email Notifications for PG and Cash Payments
+## Email Notifications for PG and Cash Payments
 
 Once payments are initiated, the system sends out targeted email notifications based on the payment mode specified in the uploaded Excel file.
 
@@ -353,28 +353,28 @@ Once payments are initiated, the system sends out targeted email notifications b
 ### Handling Mixed Payment Modes
 
 The system is designed to handle cases where a student has both `PG` and `CASH` payments within the same bulk upload. In such scenarios, it ensures clarity by sending separate emails for each category:
-1.  One email for all outstanding payments with a link to pay.
-2.  A separate confirmation email for all payments that have been successfully recorded as paid.
+One email for all outstanding payments with a link to pay.
+  A separate confirmation email for all payments that have been successfully recorded as paid.
 
 This ensures that parents have a clear understanding of what has been paid and what is still due.
 
 The code that handles this logic has been enhanced to correctly process these scenarios.
 
-## 2.5 Cancel Payment Workflow
+## Cancel Payment Workflow
 
 Institute administrators have the flexibility to cancel pending payments for one or more students. This can be done individually or in bulk.
 
 ### How It Works
 
-1.  **Navigate to Payments**: The admin goes to **Fees Portal → Payment Collection** and selects a specific payment collection to view its items.
+  **Navigate to Payments**: The admin goes to **Fees Portal → Payment Collection** and selects a specific payment collection to view its items.
 
-2.  **Select Payments to Cancel**: The admin can select payments using two methods:
+  **Select Payments to Cancel**: The admin can select payments using two methods:
     *   **Checkbox Selection**: Select individual rows by clicking the checkbox next to each payment record. A "select all" option is also available.
     *   **Nested Filtering**: Use the advanced filter options to narrow down the list of payments (e.g., by class, fee type, or due date) and then select all filtered results.
 
-3.  **Cancel Action**: Once the desired records are selected, a **"Cancel Payment"** button becomes visible in the header.
+  **Cancel Action**: Once the desired records are selected, a **"Cancel Payment"** button becomes visible in the header.
 
-4.  **Confirmation**: Clicking the button will prompt the admin for confirmation to prevent accidental cancellations.
+  **Confirmation**: Clicking the button will prompt the admin for confirmation to prevent accidental cancellations.
 
 ### System Actions on Cancellation
 
@@ -397,7 +397,7 @@ export class PaymentCollectionItemService {
   // ... other dependencies
 
   async cancelPayments(paymentItemIds: number[], instituteId: number): Promise<void> {
-    // 1. Find the payment items to ensure they belong to the institute and are cancellable
+    //  Find the payment items to ensure they belong to the institute and are cancellable
     const itemsToCancel = await this.paymentCollectionItemRepo.find({
       where: {
         id: In(paymentItemIds),
@@ -411,7 +411,7 @@ export class PaymentCollectionItemService {
       throw new BadRequestException('No valid payments found for cancellation.');
     }
 
-    // 2. Update the status of each item to 'Cancelled'
+    //  Update the status of each item to 'Cancelled'
     const cancelledItemIds = itemsToCancel.map(item => item.id);
     await this.paymentCollectionItemRepo.update(cancelledItemIds, { status: 'Cancelled' });
 
@@ -436,7 +436,7 @@ export class PaymentCollectionItemService {
 }
 ```
 
-## 2.6 Media Transaction Subscriber
+## Media Transaction Subscriber
 
 This subscriber listens for new media uploads (the Excel file) and processes them.
 
@@ -722,7 +722,7 @@ This function processes each row from the Excel file, creates student and paymen
 ```
 </details>
 
-## 2.7 Automated Due-Date Reminders
+## Automated Due-Date Reminders
 
 The system also sends automated reminders for overdue or upcoming payment deadlines.
 
@@ -750,7 +750,7 @@ Each reminder email includes:
 ### Initial Notification Logic
 ```Typescript
     async sendDueFeesMail(dueFees: any, instituteId: number) {
-    // 1. Fetch Institue by Name then take Id and call another
+    //  Fetch Institue by Name then take Id and call another
     const institute = await this.instituteService.findOne(instituteId || 0, {
       populateMedia: ['logo']
     });
@@ -788,14 +788,14 @@ The upcoming code example will show how the queue subscriber picks up email jobs
 :::
 
 
-## 2.8 Email Notification Queue – Architecture & Flow
+## Email Notification Queue – Architecture & Flow
 
 ### (Database Queue / RabbitMQ Compatible – Using SolidX Publishers & Subscribers)
 
 This module handles asynchronous email notifications for payment initiation, reminders, and due-fee alerts.
 It uses SolidX’s DatabasePublisher / DatabaseSubscriber abstraction to push email jobs into a queue and process them in the background
 
-### 1. Queue Publisher (Database / RabbitMQ)
+###  Queue Publisher (Database / RabbitMQ)
 
 Responsible for publishing email jobs to the queue.
 
@@ -830,7 +830,7 @@ export class MswipeNotifyApiEmailQueuePublisherDatabase extends DatabasePublishe
 }
 ```
 
-### 2. Queue Options File
+###  Queue Options File
 
 `mswipe-notify-api-email-queue-options-database.ts`
 
@@ -888,7 +888,7 @@ export class MswipeNotifyApiEmailQueueSubscriberDatabase extends DatabaseSubscri
 
 ```
 
-## 2.9 ❌ Cancel Payment Workflow
+## Cancel Payment Workflow
 
 The Cancel Payment feature allows Institute Admins to cancel one or multiple pending payment records.
 Admins can cancel:
