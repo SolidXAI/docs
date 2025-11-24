@@ -29,7 +29,7 @@ sidebar_position: 7
 
 -   **`paymentGateway...` Fields:** This group of fields is essential for traceability. They store all the unique IDs and status codes returned by the payment gateway (e.g., Stripe, PayPal) after a transaction attempt. This is critical for reconciling payments, handling disputes, and debugging transaction issues.
 -   **`paymentStatus` (Static Selection):** This is our internal status for the payment, which is updated based on the callback we receive from the payment gateway. It can be `Pending` (while the user is on the payment page), `Succeeded`, or `Failed`.
--   **`paymentCollectionItemDetails` (Relation):** This one-to-many relationship is key for partial payments. A single `Payment` of $100 could be linked to two `PaymentCollectionItemDetail` records: one for $70 towards "Tuition" and one for $30 towards "Bus Fee".
+-   **`paymentCollectionItemDetails` (Inverse Relation):** This field represents the "one-to-many" side of the relationship, linking one `Payment` transaction to the multiple fee items it covers. You do not create this field directly. When you define the `many-to-one` relationship from the `PaymentCollectionItemDetail` model back to the `Payment` model, SolidX automatically adds this `paymentCollectionItemDetails` field. For example, a single payment of $100 could be linked to two detail records: $70 for "Tuition Fee" and $30 for "Bus Fee".
 
 ---
 
@@ -315,33 +315,6 @@ You can use this metadata as part of the "Fast Track" approach by including it i
       "columnName": null,
       "enableAuditTracking": true,
       "isMultiSelect": false
-    },
-    {
-      "name": "paymentCollectionItemDetails",
-      "displayName": "PaymentCollectionItemDetails",
-      "description": null,
-      "type": "relation",
-      "ormType": "integer",
-      "isSystem": false,
-      "relationType": "one-to-many",
-      "relationCoModelFieldName": "payment",
-      "relationCreateInverse": true,
-      "relationCoModelSingularName": "paymentCollectionItemDetail",
-      "relationCoModelColumnName": null,
-      "relationModelModuleName": "fees-portal",
-      "relationCascade": "cascade",
-      "required": false,
-      "unique": false,
-      "index": false,
-      "private": false,
-      "encrypt": false,
-      "encryptionType": null,
-      "decryptWhen": null,
-      "columnName": null,
-      "relationJoinTableName": null,
-      "isRelationManyToManyOwner": null,
-      "relationFieldFixedFilter": "",
-      "enableAuditTracking": true
     }
   ]
 }

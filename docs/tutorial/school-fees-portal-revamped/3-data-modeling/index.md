@@ -73,15 +73,6 @@ solid refresh-module -n fees-portal
 
 > refresh-module is the SolidX CLI command which takes the name of the module name in -n flag.
 
-After the code is generated, the SolidX backend will have the necessary files for your new module. You should now see the "Fees Portal" module appear in the main sidebar menu with a default home page.
-
-:::info
-If you have started backend using `npm run solidx:dev` it automatically watches for code changes and restarts the backend. Currently SolidX only requires making code changes in backend.
-:::
-
-
-![Module Home Page](/img/tutorial/school-fees-portal/2-data-model/module-home-page-new.png)
-
 ## Create Models
 
 With the module in place, we can now define the data models for our application. For each model, you will:
@@ -108,11 +99,53 @@ The following diagram illustrates the relationships between the models in our `f
 
 ![ER-fees-portal](/img/tutorial/school-fees-portal/2-data-model/er-diagrams/fees-portal-er-diagram.png)
 
+### Applying Model Changes
+
+After defining or updating your models, you need to sync these changes with your database and generate the corresponding backend code (entities, DTOs, services, etc.).
+
+You can do this in two ways:
+
+**1. Via the UI**
+
+You can also generate code for each model individually directly from the admin panel. In the model list view, click the context menu on the model you want to generate code for and select **"Generate Code"**. This is the same process you followed for the module.
+
+
+**2. Via the Command Line**
+
+This is useful for applying changes to multiple models at once.
+
+```bash
+# Navigate to your backend directory
+cd school-fees-portal/solid-api
+
+# Apply all metadata changes to the database schema
+solid seed
+
+# Generate code for a specific model
+solid refresh-model -n <model-name>
+```
+
+
+
+
+## Fast Track: Using the Module Metadata JSON
+
+Instead of manually creating each model and its fields one-by-one through the App Builder UI, you can use a predefined JSON file to create the entire data structure for the `fees-portal` module in one go. This is a "fast track" method that saves significant time.
+
+The JSON file below contains the complete definition for the module, including all its models (Institute, Fee Type, Student, etc.) and their respective fields and relationships.
+
+**When to use this?**
+*   Use this method if you want to quickly set up the application's data model without going through the step-by-step UI process.
+*   If you prefer to understand the data modeling process in detail, you can skip this section and follow the manual model creation steps outlined previously.
+
+**Next Steps: Seeding the Database**
+
+1.  **Create the file:** In your project, create a new file at the following path:
+    `school-fees-portal/solid-api/module-metadata/fees-portal/fees-portal-metadata.json`
+
+2.  **Copy the JSON:** Copy the entire JSON content from the section below and paste it into the new file you just created.
 
 ### Module Metadata JSON
-
- Below is the sample metadata JSON for fees-portal module with all its models. You can copy it into your application at path: `school-fees-portal/solid-api/module-metadata/fees-portal/fees-portal-metadata.json` and run the `solid seed` command.
-
 
 <details>
 <summary>&emsp; View Module Metadata JSON</summary>
@@ -2153,28 +2186,915 @@ The following diagram illustrates the relationships between the models in our `f
 
 </details>
 
-### Applying Model Changes
+3.  **Run the seed command:** Navigate to your backend directory in your terminal and run the `solid seed` command.
 
-After defining or updating your models, you need to sync these changes with your database and generate the corresponding backend code (entities, DTOs, services, etc.).
+    ```bash
+    # Navigate to your backend directory
+    cd school-fees-portal/solid-api
 
-You can do this in two ways:
+    # Run the seed command
+    solid seed
+    ```
 
-**1. Via the UI**
+**What does `solid seed` do?**
 
-You can also generate code for each model individually directly from the admin panel. In the model list view, click the context menu on the model you want to generate code for and select **"Generate Code"**. This is the same process you followed for the module.
+The `solid seed` command reads the `fees-portal-metadata.json` file and automatically inserts all the module and model definitions into the SolidX database. This is the equivalent of creating each module and model manually via the App Builder UI.
+
+After the seed command completes successfully, the final step is to generate the application code based on this new metadata, just as you would have done if you created the module manually.
 
 
-**2. Via the Command Line**
-
-This is useful for applying changes to multiple models at once.
 
 ```bash
-# Navigate to your backend directory
-cd school-fees-portal/solid-api
 
-# Apply all metadata changes to the database schema
-solid seed
+# Generate code for the module
 
-# Generate code for a specific model
-solid refresh-model -n <model-name>
+solid refresh-module -n fees-portal
+
 ```
+
+
+
+This will create all the necessary entity, service, and controller files in your `solid-api` project.
+
+
+
+### Customizing Views: The Institute Form Example
+
+
+
+SolidX allows you to fully customize the layout of your forms and lists using a flexible JSON-based view definition. This means you can arrange fields, create tabs, and define complex structures directly within your module metadata, without writing any frontend code.
+
+
+
+The `institute-form-view` is defined within the `fees-portal-metadata.json` file. This view uses a tabbed layout to organize the numerous fields of the `Institute` model into logical groups, making the form more user-friendly.
+
+
+
+**Understanding the Layout Structure:**
+
+
+
+The `layout` object within a view definition uses a hierarchical structure:
+
+-   `type: "form"`: Indicates this is a form layout.
+
+-   `children`: An array that defines the main containers of the form.
+
+    -   `type: "sheet"`: A top-level container.
+
+    -   `type: "notebook"`: Represents a tabbed interface. Its `children` are `page`s.
+
+    -   `type: "page"`: Defines an individual tab. The `attrs.label` property sets the tab title.
+
+    -   `type: "row"`: Arranges elements horizontally.
+
+    -   `type: "column"`: Arranges elements vertically within a row, often defining column widths (`attrs.className: "col-6"` for half-width).
+
+    -   `type: "field"`: Represents a single field from your model. Its `attrs.name` refers to the model's field name.
+
+
+
+**Institute Form View Layout Snippet:**
+
+
+
+Below is the layout JSON for the `institute-form-view` found in your `fees-portal-metadata.json` file. This example demonstrates how fields are organized into tabs like "Institutes", "Payment Gateway Details", "Support", "Fee Types", and "Institute Users".
+
+
+<details>
+<summary>&emsp; View JSON</summary>
+
+```json
+
+{
+
+  "name": "institute-form-view",
+
+  "displayName": "Institute",
+
+  "type": "form",
+
+  "context": "{}",
+
+  "moduleUserKey": "fees-portal",
+
+  "modelUserKey": "institute",
+
+  "layout": {
+
+    "type": "form",
+
+    "attrs": {
+
+      "name": "form-1",
+
+      "label": "Institute",
+
+      "className": "grid",
+
+      "formButtons": [
+
+        {
+
+          "attrs": {
+
+            "className": "p-button-text",
+
+            "label": "Preview",
+
+            "action": "PreviewPortal",
+
+            "icon": "pi pi-image",
+
+            "actionInContextMenu": true,
+
+            "openInPopup": true,
+
+            "customComponentIsSystem": true,
+
+            "closable": true
+
+          }
+
+        },
+
+        {
+
+          "attrs": {
+
+            "icon": "pi pi-caret-right",
+
+            "name": "InstituteActivateById",
+
+            "className": "p-button-text",
+
+            "label": "Activate Institute",
+
+            "action": "InstituteActivateById",
+
+            "customComponentIsSystem": true,
+
+            "actionInContextMenu": true,
+
+            "openInPopup": true,
+
+            "visible": false
+
+          }
+
+        },
+
+        {
+
+          "attrs": {
+
+            "icon": "pi pi-circle-off",
+
+            "name": "InstituteDeactivateById",
+
+            "className": "p-button-text",
+
+            "label": "Deactivate Institute",
+
+            "action": "InstituteDeactivateById",
+
+            "customComponentIsSystem": true,
+
+            "actionInContextMenu": true,
+
+            "openInPopup": true,
+
+            "visible": false
+
+          }
+
+        }
+
+      ]
+
+    },
+
+    "onFormLayoutLoad": "instituteEditHandler",
+
+    "children": [
+
+      {
+
+        "type": "sheet",
+
+        "attrs": {
+
+          "name": "sheet-1"
+
+        },
+
+        "children": [
+
+          {
+
+            "type": "notebook",
+
+            "attrs": {
+
+              "name": "notebook-1"
+
+            },
+
+            "children": [
+
+              {
+
+                "type": "page",
+
+                "attrs": {
+
+                  "name": "page-1",
+
+                  "label": "Institutes"
+
+                },
+
+                "children": [
+
+                  {
+
+                    "type": "row",
+
+                    "attrs": {
+
+                      "name": "sheet-1"
+
+                    },
+
+                    "children": [
+
+                      {
+
+                        "type": "column",
+
+                        "attrs": {
+
+                          "name": "group-1",
+
+                          "label": "Institutes Basic",
+
+                          "className": "col-6"
+
+                        },
+
+                        "children": [
+
+                          {
+
+                            "type": "field",
+
+                            "attrs": {
+
+                              "name": "instituteName"
+
+                            }
+
+                          },
+
+                          {
+
+                            "type": "field",
+
+                            "attrs": {
+
+                              "name": "description"
+
+                            }
+
+                          }
+
+                        ]
+
+                      },
+
+                      {
+
+                        "type": "column",
+
+                        "attrs": {
+
+                          "name": "group-1",
+
+                          "label": "Institutes Contact",
+
+                          "className": "col-6"
+
+                        },
+
+                        "children": [
+
+                          {
+
+                            "type": "field",
+
+                            "attrs": {
+
+                              "name": "instituteAddress",
+
+                              "disabled": false
+
+                            }
+
+                          },
+
+                          {
+
+                            "type": "field",
+
+                            "attrs": {
+
+                              "name": "hostedPagePrefix"
+
+                            }
+
+                          },
+
+                          {
+
+                            "type": "field",
+
+                            "attrs": {
+
+                              "name": "status",
+
+                              "visible": false,
+
+                              "disabled": true
+
+                            }
+
+                          }
+
+                        ]
+
+                      },
+
+                      {
+
+                        "type": "column",
+
+                        "attrs": {
+
+                          "name": "group-1",
+
+                          "label": "Institutes Logo",
+
+                          "className": "col-12"
+
+                        },
+
+                        "children": [
+
+                          {
+
+                            "type": "field",
+
+                            "attrs": {
+
+                              "name": "logo",
+
+                              "disabled": false,
+
+                              "showLabel": false
+
+                            }
+
+                          }
+
+                        ]
+
+                      },
+
+                      {
+
+                        "type": "column",
+
+                        "attrs": {
+
+                          "name": "group-1",
+
+                          "label": "Institutes Brochure",
+
+                          "className": "col-12"
+
+                        },
+
+                        "children": [
+
+                          {
+
+                            "type": "field",
+
+                            "attrs": {
+
+                              "name": "instituteBrochure",
+
+                              "disabled": false,
+
+                              "showLabel": false
+
+                            }
+
+                          }
+
+                        ]
+
+                      },
+
+                      {
+
+                        "type": "column",
+
+                        "attrs": {
+
+                          "name": "group-1",
+
+                          "label": "Institute Intro Video",
+
+                          "className": "col-12"
+
+                        },
+
+                        "children": [
+
+                          {
+
+                            "type": "field",
+
+                            "attrs": {
+
+                              "name": "instituteIntroVideo",
+
+                              "disabled": false,
+
+                              "showLabel": false
+
+                            }
+
+                          }
+
+                        ]
+
+                      }
+
+                    ]
+
+                  }
+
+                ]
+
+              },
+
+              {
+
+                "type": "page",
+
+                "attrs": {
+
+                  "name": "page-2",
+
+                  "label": "Payment Gateway Details"
+
+                },
+
+                "children": [
+
+                  {
+
+                    "type": "row",
+
+                    "attrs": {
+
+                      "name": "sheet-1"
+
+                    },
+
+                    "children": [
+
+                      {
+
+                        "type": "column",
+
+                        "attrs": {
+
+                          "name": "group-1",
+
+                          "label": "Payment Gateway Details",
+
+                          "className": "col-6"
+
+                        },
+
+                        "children": [
+
+                          {
+
+                            "type": "field",
+
+                            "attrs": {
+
+                              "name": "paymentGatewayMerchantId"
+
+                            }
+
+                          },
+
+                          {
+
+                            "type": "field",
+
+                            "attrs": {
+
+                              "name": "paymentGatewayAccessKey"
+
+                            }
+
+                          },
+
+                          {
+
+                            "type": "field",
+
+                            "attrs": {
+
+                              "name": "paymentGatewayAccessSecret",
+
+                              "viewWidget": "maskedShortTextForm",
+
+                              "editWidget": "maskedShortTextEdit"
+
+                            }
+
+                          },
+
+                          {
+
+                            "type": "field",
+
+                            "attrs": {
+
+                              "name": "custUserId"
+
+                            }
+
+                          }
+
+                        ]
+
+                      }
+
+                    ]
+
+                  }
+
+                ]
+
+              },
+
+              {
+
+                "type": "page",
+
+                "attrs": {
+
+                  "name": "page-4",
+
+                  "label": "Support"
+
+                },
+
+                "children": [
+
+                  {
+
+                    "type": "row",
+
+                    "attrs": {
+
+                      "name": "sheet-1"
+
+                    },
+
+                    "children": [
+
+                      {
+
+                        "type": "column",
+
+                        "attrs": {
+
+                          "name": "group-1",
+
+                          "label": "Basic",
+
+                          "className": "col-6"
+
+                        },
+
+                        "children": [
+
+                          {
+
+                            "type": "field",
+
+                            "attrs": {
+
+                              "name": "emailDomain",
+
+                              "disabled": false
+
+                            }
+
+                          },
+
+                          {
+
+                            "type": "field",
+
+                            "attrs": {
+
+                              "name": "supportEmail"
+
+                            }
+
+                          },
+
+                          {
+
+                            "type": "field",
+
+                            "attrs": {
+
+                              "name": "supportMobile",
+
+                              "disabled": false
+
+                            }
+
+                          },
+
+                          {
+
+                            "type": "field",
+
+                            "attrs": {
+
+                              "name": "gst",
+
+                              "disabled": false
+
+                            }
+
+                          }
+
+                        ]
+
+                      },
+
+                      {
+
+                        "type": "column",
+
+                        "attrs": {
+
+                          "name": "group-1",
+
+                          "label": "Standard Informational",
+
+                          "className": "col-12"
+
+                        },
+
+                        "children": [
+
+                          {
+
+                            "type": "field",
+
+                            "attrs": {
+
+                              "name": "privacyPolicy",
+
+                              "disabled": false
+
+                            }
+
+                          },
+
+                          {
+
+                            "type": "field",
+
+                            "attrs": {
+
+                              "name": "faqs"
+
+                            }
+
+                          },
+
+                          {
+
+                            "type": "field",
+
+                            "attrs": {
+
+                              "name": "tnC",
+
+                              "disabled": false
+
+                            }
+
+                          }
+
+                        ]
+
+                      }
+
+                    ]
+
+                  }
+
+                ]
+
+              },
+
+              {
+
+                "type": "page",
+
+                "attrs": {
+
+                  "name": "page-5",
+
+                  "label": "Fee Types"
+
+                },
+
+                "children": [
+
+                  {
+
+                    "type": "row",
+
+                    "attrs": {
+
+                      "name": "sheet-1"
+
+                    },
+
+                    "children": [
+
+                      {
+
+                        "type": "column",
+
+                        "attrs": {
+
+                          "name": "group-1",
+
+                          "label": "Fee Types",
+
+                          "className": "col-12"
+
+                        },
+
+                        "children": [
+
+                          {
+
+                            "type": "field",
+
+                            "attrs": {
+
+                              "name": "feeTypes",
+
+                              "inlineCreate": "true",
+
+                              "showFieldLabel": false,
+
+                              "showLabel": false
+
+                            }
+
+                          }
+
+                        ]
+
+                      }
+
+                    ]
+
+                  }
+
+                ]
+
+              },
+
+              {
+
+                "type": "page",
+
+                "attrs": {
+
+                  "name": "page-6",
+
+                  "label": "Institute Users"
+
+                },
+
+                "children": [
+
+                  {
+
+                    "type": "row",
+
+                    "attrs": {
+
+                      "name": "sheet-1"
+
+                    },
+
+                    "children": [
+
+                      {
+
+                        "type": "column",
+
+                        "attrs": {
+
+                          "name": "group-1",
+
+                          "label": "Institute Users",
+
+                          "className": "col-12"
+
+                        },
+
+                        "children": [
+
+                          {
+
+                            "type": "field",
+
+                            "attrs": {
+
+                              "name": "instituteUsers",
+
+                              "inlineCreate": "false",
+
+                              "showFieldLabel": false,
+
+                              "showLabel": false
+
+                            }
+
+                          }
+
+                        ]
+
+                      }
+
+                    ]
+
+                  }
+
+                ]
+
+              }
+
+            ]
+
+          }
+
+        ]
+
+      }
+
+    }
+
+```
+</details>
+
+
+
+After the code is generated, the SolidX backend will have the necessary files for your new module. You should now see the "Fees Portal" module appear in the main sidebar menu with a default home page.
+
+
+
+:::info
+
+If you have started backend using `npm run solidx:dev` it automatically watches for code changes and restarts the backend. Currently SolidX only requires making code changes in backend.
+
+:::
+
+
+
+
+
+![Module Home Page](/img/tutorial/school-fees-portal/2-data-model/fees-portal-homepage.png)

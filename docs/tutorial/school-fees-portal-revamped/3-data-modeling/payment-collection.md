@@ -23,7 +23,7 @@ sidebar_position: 5
 ### Key Fields Explained
 
 -   **`paymentFile` (Media - File):** This field is central to the bulk-upload use case. An institute admin will upload an Excel or CSV file here. We will later write a **Subscriber** that listens for the creation of this record, parses the file, and automatically creates all the individual `PaymentCollectionItem` records for each student listed in the file.
--   **`paymentCollectionItems` (Relation):** This defines the one-to-many link between a single collection batch and the many individual fee items it contains.
+-   **`paymentCollectionItems` (Inverse Relation):** This field represents the "one-to-many" side of the relationship between a `PaymentCollection` and its `PaymentCollectionItems`. You do not create this field directly. Instead, when you define the `many-to-one` relationship from the `PaymentCollectionItem` model back to `PaymentCollection`, SolidX automatically adds this `paymentCollectionItems` field, which holds a list of all items belonging to this collection batch.
 -   **`paymentCollectionId` (Computed):** This serves as the unique, human-readable User Key for the collection batch, automatically generated from the `name` field (e.g., `annual-fees-2023-a4f81`).
 
 ---
@@ -159,33 +159,6 @@ You can use this metadata as part of the "Fast Track" approach by including it i
       "decryptWhen": null,
       "columnName": null,
       "mediaStorageProviderUserKey": "default-filesystem"
-    },
-    {
-      "name": "paymentCollectionItems",
-      "displayName": "PaymentCollectionItems",
-      "description": null,
-      "type": "relation",
-      "ormType": "integer",
-      "isSystem": false,
-      "relationType": "one-to-many",
-      "relationCoModelFieldName": "paymentCollection",
-      "relationCreateInverse": true,
-      "relationCoModelSingularName": "paymentCollectionItem",
-      "relationCoModelColumnName": null,
-      "relationModelModuleName": "fees-portal",
-      "relationCascade": "cascade",
-      "required": false,
-      "unique": false,
-      "index": false,
-      "private": false,
-      "encrypt": false,
-      "encryptionType": null,
-      "decryptWhen": null,
-      "columnName": null,
-      "relationJoinTableName": null,
-      "isRelationManyToManyOwner": null,
-      "relationFieldFixedFilter": "",
-      "enableAuditTracking": true
     },
     {
       "name": "dueDate",

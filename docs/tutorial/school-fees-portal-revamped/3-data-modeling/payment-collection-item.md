@@ -36,6 +36,7 @@ sidebar_position: 6
 -   **Computed Fields (`amountPaid`, `amountPending`, etc.):** These fields are where the magic happens. Instead of you writing code to calculate the paid or pending amount every time, SolidX does it for you.
     -   The `PaymentCollectionItemAmountProvider` is a piece of custom logic that listens for changes in the related `PaymentCollectionItemDetail` model.
     -   When a payment is made (i.e., a new "detail" record is created), this provider automatically runs, sums up the payments, and updates the `amountPaid` and `status` fields on this record. This keeps your data consistent without any effort.
+-   **`paymentCollectionItemDetails` (Inverse Relation):** This field represents the "one-to-many" side of the relationship between a `PaymentCollectionItem` and its `PaymentCollectionItemDetails`. You do not create this field directly. When you define the `many-to-one` relationship from the `PaymentCollectionItemDetail` model back to `PaymentCollectionItem`, SolidX automatically adds this `paymentCollectionItemDetails` field, which holds a list of all payment breakdown records for this specific fee item.
 
 ---
 
@@ -284,33 +285,6 @@ You can use this metadata as part of the "Fast Track" approach by including it i
       "encryptionType": null,
       "decryptWhen": null,
       "columnName": null,
-      "enableAuditTracking": true
-    },
-    {
-      "name": "paymentCollectionItemDetails",
-      "displayName": "PaymentCollectionItemDetails",
-      "description": null,
-      "type": "relation",
-      "ormType": "integer",
-      "isSystem": false,
-      "relationType": "one-to-many",
-      "relationCoModelFieldName": "paymentCollectionItem",
-      "relationCreateInverse": true,
-      "relationCoModelSingularName": "paymentCollectionItemDetail",
-      "relationCoModelColumnName": null,
-      "relationModelModuleName": "fees-portal",
-      "relationCascade": "cascade",
-      "required": false,
-      "unique": false,
-      "index": false,
-      "private": false,
-      "encrypt": false,
-      "encryptionType": null,
-      "decryptWhen": null,
-      "columnName": null,
-      "relationJoinTableName": null,
-      "isRelationManyToManyOwner": null,
-      "relationFieldFixedFilter": "",
       "enableAuditTracking": true
     },
     {
