@@ -4,7 +4,7 @@ sidebar_position: 4
 
 # Use Cases
 
-The SolidX platform supports a wide range of real-world academic operations. This section highlights key end-to-end use cases that demonstrate how institutes, administrators, and students interact with the system across different workflows. Each use case provides a structured view of objectives, user journeys, system behavior, and expected outcomes.
+The SolidX platform supports a wide range of real-world operations. This section highlights key end-to-end use cases that demonstrate how institutes, administrators, and students interact with the system across different workflows. Each use case provides a structured view of objectives, user journeys, system behavior, and expected outcomes.
 
 ## Onboarding an Institute
 

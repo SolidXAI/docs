@@ -22,8 +22,6 @@ In SolidX, a **Module** is a top-level container that groups related data models
 
 To do this, navigate to **Solid Core > App Builder > Module** from the sidebar menu, and then click the **Add** button.
 
-> TODO: describe App builder and other vague terms.
-
 This will open the new module form. Fill in the details as shown in the screenshot below. We will name our module `fees-portal`.
 
 ![Create Module](/img/tutorial/school-fees-portal/2-data-model/create-new-module.png)

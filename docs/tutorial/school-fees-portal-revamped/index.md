@@ -37,8 +37,6 @@ We'll support two main user types:
 - Uploads payment collection details
 - Tracks payments and generates reports
 
-### TODO: Other users e.g. Students, etc...
-
 
 ## Key Use Cases
 
@@ -64,9 +62,6 @@ Each Institute will have a institute payment portal where students or guardians 
 - Make due payments.
 
 > The page design will be standardized, with only the Institute branding (like logo) customized.
-
-
-> TODO: creating a sub-domain on solidxai.com
 
 
 ### 3. Initiating Payment Collections
