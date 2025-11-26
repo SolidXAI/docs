@@ -19,136 +19,18 @@ This guide provides a comprehensive walkthrough for deploying your SolidX applic
 
 ## 1. Dockerizing Your Application
 
-We will use multi-stage builds to create lean and secure production images for both the backend and frontend.
-
-<h3 className="card-headear-wrapper">
-    <HiOutlineCode size={22} />
-    &nbsp;Backend Dockerfile (`solid-api/Dockerfile`)
-</h3>
-
-```dockerfile
-# Stage 1: Build
-FROM node:18-alpine AS build
-
-WORKDIR /usr/src/app
-
-COPY package*.json ./
-RUN npm install
-
-COPY . .
-RUN npm run build
-
-# Stage 2: Production
-FROM node:18-alpine
-
-WORKDIR /usr/src/app
-
-COPY --from=build /usr/src/app/node_modules ./node_modules
-COPY --from=build /usr/src/app/dist ./dist
-
-EXPOSE 3000
-
-CMD ["node", "dist/main"]
-```
-
-<h3 className="card-headear-wrapper">
-    <HiOutlineCode size={22} />
-    &nbsp;Frontend Dockerfile (`solid-ui/Dockerfile`)
-</h3>
-
-```dockerfile
-# Stage 1: Build
-FROM node:18-alpine AS build
-
-WORKDIR /usr/src/app
-
-COPY package*.json ./
-RUN npm install
-
-COPY . .
-RUN npm run build
-
-# Stage 2: Production
-FROM node:18-alpine
-
-WORKDIR /usr/src/app
-
-COPY --from=build /usr/src/app/node_modules ./node_modules
-COPY --from=build /usr/src/app/.next ./.next
-COPY --from=build /usr/src/app/public ./public
-COPY --from=build /usr/src/app/package.json ./package.json
-
-EXPOSE 3001
-
-CMD ["npm", "start"]
-```
+The `create-solid-app` template already provides multi-stage Dockerfiles for both the backend (`solid-api/Dockerfile`) and frontend (`solid-ui/Dockerfile`) to create lean and secure production images.
 
 ## 2. Using Docker Compose for Production
 
-We will create a `docker-compose.yml` file to define and manage our multi-container application, including a database.
-
-<h3 className="card-headear-wrapper">
-    <HiOutlineCode size={22} />
-    &nbsp;Create `docker-compose.yml`
-</h3>
-
-```yaml
-version: '3.8'
-
-services:
-  api:
-    build:
-      context: ./solid-api
-      dockerfile: Dockerfile
-    ports:
-      - "3000:3000"
-    environment:
-      - PORT=3000
-      - DB_HOST=db
-      - DB_USER=${DB_USER}
-      - DB_PASSWORD=${DB_PASSWORD}
-      - DB_NAME=${DB_NAME}
-    depends_on:
-      - db
-    networks:
-      - solidx-net
-
-  ui:
-    build:
-      context: ./solid-ui
-      dockerfile: Dockerfile
-    ports:
-      - "3001:3001"
-    environment:
-      - NEXT_PUBLIC_API_URL=http://localhost:3000
-    depends_on:
-      - api
-    networks:
-      - solidx-net
-
-  db:
-    image: postgres:14-alpine
-    environment:
-      - POSTGRES_USER=${DB_USER}
-      - POSTGRES_PASSWORD=${DB_PASSWORD}
-      - POSTGRES_DB=${DB_NAME}
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
-    networks:
-      - solidx-net
-
-networks:
-  solidx-net:
-    driver: bridge
-
-volumes:
-  postgres_data:
-```
+The `create-solid-app` template includes a `docker-compose.yml` file to define and manage your multi-container application, including a database. You can find this file in the root of your generated project.
 
 <h3 className="card-headear-wrapper">
     <HiOutlineCog size={22} />
     &nbsp;Configure Environment Variables
 </h3>
+
+While the `Dockerfile` defines the environment *inside* the container, the `docker-compose.yml` file and the `.env` file are used to configure the services from the *outside*. This is crucial for security and portability, as it allows you to inject environment-specific variables like database credentials and API keys without hardcoding them into the Docker image.
 
 Create a `.env` file in the root of your project to store your database credentials:
 
@@ -159,7 +41,7 @@ DB_NAME=your_db_name
 ```
 
 <InfoBox>
-  Docker Compose automatically loads the `.env` file from the root directory. Remember to add `.env` to your `.gitignore` file.
+  Docker Compose automatically loads the `.env` file from the root directory and injects these variables into the containers at runtime. Remember to add `.env` to your `.gitignore` file to avoid committing sensitive information.
 </InfoBox>
 
 ## 3. Building and Running the Containers

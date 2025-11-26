@@ -28,7 +28,41 @@ sidebar_position: 7
 ### Key Fields Explained
 
 -   **`paymentGateway...` Fields:** This group of fields is essential for traceability. They store all the unique IDs and status codes returned by the payment gateway (e.g., Stripe, PayPal) after a transaction attempt. This is critical for reconciling payments, handling disputes, and debugging transaction issues.
--   **`paymentStatus` (Static Selection):** This is our internal status for the payment, which is updated based on the callback we receive from the payment gateway. It can be `Pending` (while the user is on the payment page), `Succeeded`, or `Failed`.
+-   **`paymentStatus` (Static Selection):** This is our internal status for the payment, which is updated based on the callback we receive from the payment gateway.
+
+### Status Flows Explained
+
+In the School Fees Portal, payment status is tracked at two different levels to provide a comprehensive view of a transaction's lifecycle. This logic is derived from the backend implementation and reflects how payments are processed.
+
+#### 1. Transaction-Level Status (`Payment` model)
+
+This is the status of an individual payment attempt, stored in the `paymentStatus` field of the `Payment` model itself. It represents the direct outcome of an interaction with the payment gateway.
+
+The flow is as follows:
+
+*   `Pending`: A payment record is created when a user initiates a transaction. This is the initial state while the payment is being processed by the gateway.
+*   `Succeeded`: The gateway has successfully processed the payment. This is a final state for a successful transaction.
+*   `Failed`: The gateway could not process the payment due to an error, insufficient funds, or cancellation by the user. This is a final state for a failed transaction.
+
+A simple representation of the flow:
+```
+[Pending] --(Gateway Confirms Success)--> [Succeeded]
+    |
+    +--(Gateway Confirms Failure)--> [Failed]
+```
+
+#### 2. Bill-Level Status (`PaymentCollectionItem` model)
+
+This is a higher-level, calculated status that reflects the overall state of a bill or fee item, which might be settled through one or more partial payments. This status is stored in the `status` field of the `PaymentCollectionItem` model.
+
+The flow is as follows:
+
+*   `Pending`: The bill has been issued, but no successful payments have been made yet.
+*   `Partially Paid`: At least one payment has `Succeeded`, but the total paid amount is still less than the total amount due for the bill.
+*   `Fully Paid`: The sum of all `Succeeded` payments now equals the total amount due for the bill.
+*   `Cancelled`: The bill has been administratively voided and is no longer payable.
+
+This status is automatically updated by the system whenever a linked `Payment` record's status changes. For example, when a `Payment` moves to `Succeeded`, the system recalculates the total paid amount for the corresponding `PaymentCollectionItem` and updates its status accordingly.
 -   **`paymentCollectionItemDetails` (Inverse Relation):** This field represents the "one-to-many" side of the relationship, linking one `Payment` transaction to the multiple fee items it covers. You do not create this field directly. When you define the `many-to-one` relationship from the `PaymentCollectionItemDetail` model back to the `Payment` model, SolidX automatically adds this `paymentCollectionItemDetails` field. For example, a single payment of $100 could be linked to two detail records: $70 for "Tuition Fee" and $30 for "Bus Fee".
 
 ---
