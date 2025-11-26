@@ -1,19 +1,45 @@
 ---
-sidebar_position: 4
+sidebar_position: 3
 ---
 
-# Use Cases
+# Usecase
 
-The SolidX platform supports a wide range of real-world operations. This section highlights key end-to-end use cases that demonstrate how institutes, administrators, and students interact with the system across different workflows. Each use case provides a structured view of objectives, user journeys, system behavior, and expected outcomes.
+Welcome to the SolidX tutorial where we will guide you through building a comprehensive School Fees Portal from the ground up. This tutorial is designed to showcase the power and flexibility of the SolidX platform by building a real-world application with complex business logic, data models, and user roles.
 
-## Onboarding an Institute
+## What You Will Build
 
-This use case explains how a new educational institute is onboarded into the SolidX ecosystem. It covers the complete lifecycle—from initial institute registration and approval to configuration of academic structures such as programs, batches, fee templates, and role assignments. Administrators will understand how the platform streamlines onboarding with guided steps, standardized configurations, and validation workflows.
+You will create a full-stack application that allows educational institutes to manage fee collections, student records, and payments. The portal will have the following key features:
 
-## Institute User Workflows
+-   **Multi-tenancy:** Onboard and manage multiple educational institutes.
+-   **Data Modeling:** Define the core data structures for students, fees, payments, and more.
+-   **Role-Based Access:** Different user roles for institute administrators and students.
+-   **Fee Management:** Create and manage different types of fees.
+-   **Payment Collections:** Initiate and track bulk fee payment requests.
+-   **Student Portal:** A dedicated portal for students to view their fee dues and make payments.
+-   **Payment Gateway Integration:** Securely process online payments using a payment gateway like Stripe.
 
-This use case focuses on the daily operational workflows performed by institute-level users such as admins, faculty, finance teams, and support staff. It outlines activities like managing student records, handling admissions, creating fee plans, processing payments, and maintaining academic data. The section illustrates how the platform provides role-based access, task automation, and seamless navigation across operational modules.
+By the end of this tutorial, you will have a functional, production-ready application and a solid understanding of how to leverage SolidX for your own projects.
 
-## Student Portal Frontend
+## Core Concepts of SolidX
 
-This use case describes the end-user experience from the student perspective. It covers how students log into the portal, view academic information, check attendance, access study materials, manage payments, download receipts, and track academic progress. It showcases how the student frontend is tailored for simplicity, transparency, and mobile-friendly interaction, ensuring an intuitive experience across devices.
+This tutorial will introduce you to the core concepts of SolidX, including:
+
+-   **App Builder:** A visual tool for rapid data modeling and API generation.
+-   **Modules and Models:** The building blocks of a SolidX application.
+-   **Auto-generated APIs:** Instantly create robust RESTful APIs from your data models.
+-   **Extensible Services:** Customize the business logic to fit your specific needs.
+-   **Transactional Operations:** Ensure data integrity with built-in transaction support.
+
+## Tutorial Sections
+
+This tutorial is divided into the following sections:
+
+1.  **[Pre-requisites](../1-prerequisites/index.md):** Set up your local development environment with all the necessary tools.
+2.  **[Create Solid App](../2-create-solid-app/index.md):** Bootstrap a new SolidX project with a single command.
+3.  **[Data Modeling](../3-data-modeling/index.md):** Define the data structure of our application using the visual App Builder.
+4.  **[Use Cases](../4-use-cases/index.md):** Implement the core business logic and user workflows.
+5.  **[Payment Gateway Integration](../5-payment-gateway-integration/index.md):** Integrate a third-party payment gateway to handle online payments.
+
+## Let's Get Started!
+
+Ready to dive in? Head over to the first section to set up your environment and begin your SolidX journey.
