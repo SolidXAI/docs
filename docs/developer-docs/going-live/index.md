@@ -75,4 +75,99 @@ This section provides guidance on how to deploy your SolidX applications to prod
   </div>
 </div>
 
+---
+
+## Going Live with a Solid App Template
+
+This guide provides instructions on how to deploy a Solid application generated from the `create-solid-app` template.
+
+We will cover two approaches: a manual deployment and an advanced deployment using Docker.
+
+### Manual Deployment
+
+This approach involves building the frontend and backend applications and running them as separate processes.
+
+#### Prerequisites
+
+*   Node.js and npm installed on your server.
+*   A database (e.g., PostgreSQL, MongoDB) running and accessible from your server.
+
+#### Steps
+
+1.  **Clone your project:**
+    ```bash
+    git clone <your-project-repository>
+    cd <your-project-directory>
+    ```
+
+2.  **Set up the backend:**
+    *   Navigate to the `solid-api` directory:
+        ```bash
+        cd solid-api
+        ```
+    *   Install dependencies:
+        ```bash
+        npm install
+        ```
+    *   Create a `.env` file and configure your database connection and other environment variables. You can use `.env.example` as a reference.
+    *   Build the application:
+        ```bash
+        npm run build
+        ```
+    *   Run the application:
+        ```bash
+        npm run start:prod
+        ```
+
+3.  **Set up the frontend:**
+    *   Navigate to the `solid-ui` directory:
+        ```bash
+        cd ../solid-ui
+        ```
+    *   Install dependencies:
+        ```bash
+        npm install
+        ```
+    *   Create a `.env` file and configure your API URL and other environment variables.
+    *   Build the application:
+        ```bash
+        npm run build
+        ```
+    *   Run the application:
+        ```bash
+        npm run start
+        ```
+
+Your Solid application should now be running. You may want to use a process manager like `pm2` to keep the applications running in the background.
+
+### Advanced Deployment (Docker)
+
+This approach uses Docker to containerize the frontend and backend applications.
+
+#### Prerequisites
+
+*   Docker and Docker Compose installed on your server.
+
+#### Steps
+
+1.  **Clone your project:**
+    ```bash
+    git clone <your-project-repository>
+    cd <your-project-directory>
+    ```
+
+2.  **Configure your environment:**
+    *   Create a `.env` file in the root of your project and configure your database connection, API URL, and other environment variables. The `docker-compose.yml` file is set up to use this file.
+
+3.  **Build and run the containers:**
+    ```bash
+    docker-compose up -d --build
+    ```
+
+This command will build the Docker images for the `solid-api` and `solid-ui` applications and run them in the background.
+
+Your Solid application is now running and accessible on the ports specified in your `docker-compose.yml` file.
+
+---
+
 Explore the guides to find the deployment strategy that best fits your project's needs. Each guide provides a step-by-step walkthrough to get your SolidX application up and running in a production environment.

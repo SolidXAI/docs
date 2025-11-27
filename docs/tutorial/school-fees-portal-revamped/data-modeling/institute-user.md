@@ -6,6 +6,23 @@ sidebar_position: 3
 
 **Business Purpose:** An extension of the base `User` model, specific to an institute. It links a core system user to an institute and defines their role within that institute (e.g., "Institute Admin").
 
+### Core Concept: Extending the Built-in User
+
+This design pattern is used to add application-specific information to the core user system without modifying it directly. Here’s how it works:
+
+1.  **Core `User` Model:** Your SolidX application has a built-in `User` model provided by the core framework. Its primary job is to handle authentication (i.e., verifying a user's identity with a username and password so they can log in).
+
+2.  **`InstituteUser` Model:** To give a user special permissions related to an institute, you create a new `InstituteUser` model. This model is defined as a "Child Model" of the core `User` model.
+
+3.  **The Connection:** The `InstituteUser` model doesn't replace the `User` model; it **extends** it. It holds additional information that is only relevant to your specific application, such as:
+    *   A link to the `User` it belongs to.
+    *   A link to the specific `institute` the user manages.
+    *   The user's role within that institute (e.g., "Institute Admin").
+
+In simple terms: A person can log in because they exist in the central `User` table. The system then checks the `InstituteUser` table to see if that logged-in user is linked to an institute. If a link exists, the system knows they are an "Institute Admin" and grants them the necessary permissions.
+
+This approach is a best practice because it keeps your application's logic separate from the core framework, making the system more modular, secure, and easier to upgrade.
+
 **Fields:**
 
 | Field Name | Type | Description |
