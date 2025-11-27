@@ -584,15 +584,17 @@ private async processRow(row: ExcelJS.Row, paymentCollection: PaymentCollection,
 
 ---
 
-### Step 5: Scheduled Job - Late Fee Calculation
+### Step 5: Automating Post-Payment Processes with Scheduled Jobs
 
 System uses scheduled background jobs to automate tasks such as calculating late fees and sending reminder emails to parents. After creating the job classes, each one must be registered in Solid UI.
 
-1. Late Fee Calculator Job
+---
 
-The `LateFeePaymentCalculatorScheduledJob` runs automatically (e.g.,every minute, hourly, daily, weekly, monthly) to apply late fees to overdue payments.
+#### 1. Late Fee Calculator Job
 
-#### `execute` Method
+The `LateFeePaymentCalculatorScheduledJob` runs automatically (e.g., every minute, hourly, daily, weekly, monthly) to apply late fees to overdue payments.
+
+##### `execute` Method
 This is the entry point for the scheduled job.
 
 **Chunk 1: Find Overdue Items**
@@ -762,86 +764,80 @@ export class LateFeePaymentCalculatorScheduledJob implements IScheduledJob {
 ```
 </details>
 
-### Registering the Scheduled Job
+---
 
-After creating the scheduled job class, register it through Solid UI to enable automatic execution at defined intervals.
+#### 2. Reminder Email Job
 
-1. **Navigate to Scheduled Jobs**  
-   Go to: `Solid → Other → Scheduled Jobs → Create New`
+The `SendEmailScheduleJobs` class is a scheduled job designed to automatically send reminder emails for pending or partially paid fees. It groups all outstanding payments for each student and sends a single, consolidated email to their parent or guardian.
 
-2. **Select the Job**  
-   In the Job Selector, choose: `LateFeePaymentCalculatorScheduledJob`
+##### `execute` Method
+This is the entry point for the scheduled job.
 
-3. **Configure Frequency**  
-   Select execution interval based on your requirements:
-   - Every Minute
-   - Hourly
-   - Daily
-   - Weekly
-   - Monthly
-
-4. **Optional Configuration**  
-   Set additional parameters as needed:
-   - Start Time
-   - End Time
-   - Start Date
-
-5. **Activate**  
-   Save the job to activate the scheduler.
-
-### Configuration Reference
-
-See the example screenshots below for configuration details:
-
-![Institute User Login Screens](/img/tutorial/school-fees-portal/6-usecase/sch-1.png)
-
-After Creation, verify in module-name.metadata.json 
+**Chunk 1: Find Due Items**
+The job queries the database for all `PaymentCollectionItem` records with a status of `Pending` or `Partially Paid`. It also fetches related student and fee information.
 
 ```typescript
-"scheduledJobs": [
-    {
-      "scheduleName": "Late Fee Calculation",
-      "isActive": true,
-      "frequency": "Hourly",
-      "startTime": null,
-      "endTime": null,
-      "startDate": null,
-      "endDate": null,
-      "dayOfMonth": 0,
-      "lastRunAt": "2025-09-05T07:09:00.009Z",
-      "nextRunAt": "2025-09-05T07:10:00.009Z",
-      "dayOfWeek": "[\"Monday\",\"Tuesday\",\"Wednesday\",\"Thursday\",\"Friday\",\"Saturday\",\"Sunday\"]",
-      "job": "LateFeePaymentCalculatorScheduledJob",
-      "moduleUserKey": "fees-portal"
-    }
-  ]
+@Injectable()
+@ScheduledJobProvider()
+export class SendEmailScheduleJobs implements IScheduledJob {
+  async execute(reminder: ScheduledJob): Promise<void> {
+    const dueItems = await this.entityManager.find(PaymentCollectionItem, {
+      where: {
+        status: In(['Pending', 'Partially Paid']),
+      },
+      relations: ['student', 'student.institute', 'feeType', 'paymentCollection'],
+    });
 ```
-2. Reminder Email Job
 
-![Institute User Login Screens](/img/tutorial/school-fees-portal/6-usecase/sch-2.png)
+**Chunk 2: Group Items by Student**
+The job iterates through the due items and groups them into a `Map`, where each key is a `studentLoginId` and the value is an object containing the student's details and a list of their pending payment items. This ensures that each student receives only one reminder email, even if they have multiple outstanding fees.
 
 ```typescript
-"scheduledJobs": [
-    {
-      "scheduleName": "Fees Due Email",
-      "isActive": true,
-      "frequency": "Daily",
-      "startTime": null,
-      "endTime": null,
-      "startDate": null,
-      "endDate": null,
-      "dayOfMonth": 0,
-      "lastRunAt": "2025-09-10T09:10:00.006Z",
-      "nextRunAt": "2025-09-10T09:11:00.006Z",
-      "dayOfWeek": "[\"Monday\",\"Tuesday\",\"Wednesday\",\"Thursday\",\"Friday\",\"Saturday\",\"Sunday\"]",
-      "job": "SendEmailScheduleJobs",
-      "moduleUserKey": "fees-portal"
+    const studentMap = new Map<string, { student: Student; items: PaymentCollectionItem[] }>();
+
+    for (const item of dueItems) {
+      const studentLoginId = item.student.studentLoginId;
+      if (!studentMap.has(studentLoginId)) {
+        studentMap.set(studentLoginId, { student: item.student, items: [item] });
+      } else {
+        studentMap.get(studentLoginId)!.items.push(item);
+      }
     }
-  ]
+```
+
+**Chunk 3: Send Consolidated Emails**
+Finally, the job iterates through the `studentMap`. For each student, it calculates the total amount due, compiles a list of the corresponding fee types, and constructs a redirect URL to the student's payment portal. It then uses the `MailFactory` to send a templated email (`new-payment-or-payment-reminder`) to the parent's email address with all the necessary details.
+
+```typescript
+    for (const { student, items } of studentMap.values()) {
+      if (!student.parentEmailAddress) continue;
+
+      let totalAmountDue = 0;
+      // ... calculate total amount and fee types ...
+
+      const redirectUrl = `https://${institute?.hostedPagePrefix}-${process.env.EDU_BASE_DOMAIN}/?id=${student?.studentLoginId}`;
+      
+      const dueFees = {
+        totalAmountDue,
+        feeTypes,
+        status: 'Pending',
+        redirectUrl,
+        // ... other details
+      };
+      
+      const mailService = this.mailServiceFactory.getMailService();
+      await mailService.sendEmailUsingTemplate(
+        student.parentEmailAddress,
+        'new-payment-or-payment-reminder',
+        { /* ... template variables ... */ },
+      );
+    }
+  }
+}
 ```
 
 <details>
-<summary>Full Code for <code>LateFeePaymentCalculatorScheduledJob</code></summary>
+<summary>Full Code for <code>SendEmailScheduleJobs</code></summary>
 
 ```typescript
 import { Injectable, Logger } from '@nestjs/common';
@@ -965,3 +961,69 @@ export class SendEmailScheduleJobs implements IScheduledJob {
 }
 ```
 </details>
+
+---
+
+### Registering Scheduled Jobs
+
+After creating the scheduled job classes, register them through Solid UI to enable automatic execution at defined intervals.
+
+1.  **Navigate to Scheduled Jobs**  
+    Go to: `Solid → Other → Scheduled Jobs → Create New`
+
+2.  **Select the Job**  
+    In the Job Selector, choose the job you want to schedule (e.g., `LateFeePaymentCalculatorScheduledJob` or `SendEmailScheduleJobs`).
+
+3.  **Configure Frequency**  
+    Select an execution interval based on your requirements (e.g., Daily, Hourly).
+
+4.  **Activate**  
+    Save the job to activate the scheduler.
+
+#### Configuration Examples
+
+Below are example configurations for both jobs.
+
+**Late Fee Calculation Job:**
+
+![Institute User Login Screens](/img/tutorial/school-fees-portal/6-usecase/sch-1.png)
+
+```json
+{
+  "scheduleName": "Late Fee Calculation",
+  "isActive": true,
+  "frequency": "Hourly",
+  "startTime": null,
+  "endTime": null,
+  "startDate": null,
+  "endDate": null,
+  "dayOfMonth": 0,
+  "lastRunAt": "2025-09-05T07:09:00.009Z",
+  "nextRunAt": "2025-09-05T07:10:00.009Z",
+  "dayOfWeek": "[\"Monday\",\"Tuesday\",\"Wednesday\",\"Thursday\",\"Friday\",\"Saturday\",\"Sunday\"]",
+  "job": "LateFeePaymentCalculatorScheduledJob",
+  "moduleUserKey": "fees-portal"
+}
+```
+
+**Fees Due Reminder Email Job:**
+
+![Institute User Login Screens](/img/tutorial/school-fees-portal/6-usecase/sch-2.png)
+
+```json
+{
+  "scheduleName": "Fees Due Email",
+  "isActive": true,
+  "frequency": "Daily",
+  "startTime": null,
+  "endTime": null,
+  "startDate": null,
+  "endDate": null,
+  "dayOfMonth": 0,
+  "lastRunAt": "2025-09-10T09:10:00.006Z",
+  "nextRunAt": "2025-09-10T09:11:00.006Z",
+  "dayOfWeek": "[\"Monday\",\"Tuesday\",\"Wednesday\",\"Thursday\",\"Friday\",\"Saturday\",\"Sunday\"]",
+  "job": "SendEmailScheduleJobs",
+  "moduleUserKey": "fees-portal"
+}
+```

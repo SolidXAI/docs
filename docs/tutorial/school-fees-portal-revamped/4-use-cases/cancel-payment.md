@@ -4,178 +4,270 @@ sidebar_position: 4
 
 # Cancel Payment Workflow
 
-In any financial system, flexibility is key. The Cancel Payment workflow provides Institute Administrators with the essential ability to reverse pending payment requests. This might be necessary due to data entry errors, duplicate requests, or changes in a student's enrollment status. This guide details the user-facing methods for cancellation and provides an in-depth explanation of the underlying backend logic.
+In any financial system, flexibility is key. The Cancel Payment workflow provides Institute Administrators with the essential ability to reverse pending payment requests. This might be necessary due to data entry errors, duplicate requests, or changes in a student's enrollment status.
 
-## User Journey: How to Cancel Payments
+This guide details the user-facing methods for cancellation, the underlying backend logic, UI implementation steps for developers, and the key business and security rules governing the process.
+
+## 1. The User Experience (For Institute Admins)
 
 An Institute Admin can cancel payments using two distinct methods, providing flexibility for both targeted and bulk actions.
 
-#### 1. Individual or Multiple Selection
+#### Method 1: Individual or Multiple Selection
 
-For precise control, the admin can select one or more payment items directly from the list using checkboxes and then click the "Cancel Payment" button.
+For precise control, the admin can select one or more payment items directly from the list using checkboxes and then click the **"Cancel"** button. This is ideal for correcting specific, isolated errors.
 
 ![Cancel by Checkbox](/img/tutorial/school-fees-portal/6-usecase/cancel1.png)
 
-#### 2. Bulk Cancellation by Filter
+#### Method 2: Bulk Cancellation by Filter
 
 For broader actions, the admin can first apply filters (e.g., by student, date range, or fee type) to narrow down the list of payments.
 
 ![Apply Filters for Cancellation](/img/tutorial/school-fees-portal/6-usecase/cancel3.png)
 
-After applying filters, clicking the "Cancel" button will trigger a confirmation pop-up. Confirming this action will cancel all the items matching the filter criteria.
+After applying filters, clicking the **"Cancel"** button will trigger a confirmation pop-up. Confirming this action will cancel all items currently matching the filter criteria.
 
 ![Confirm Bulk Cancellation](/img/tutorial/school-fees-portal/6-usecase/cancel2.png)
 
-## Backend Implementation Deep Dive
+---
 
-The core logic for this feature is handled by the `cancelPaymentCollectionItems` method in the backend service. Let's break down how it works.
+## 2. The Cancellation Process: A Technical Deep-Dive
 
-### Method Signature
+This section breaks down the technical implementation of the cancellation workflow, from the API endpoint to the final email notification.
 
-The method is designed to handle cancellations originating from different contexts, accepting IDs of parent `PaymentCollection` records, child `PaymentCollectionItem` records, or a set of filters.
+### Workflow Diagram
 
-```typescript
-async cancelPaymentCollectionItems(
-    collectionIds: string[] = [],  // IDs of parent PaymentCollection records
-    itemIds: string[] = [],        // IDs of child PaymentCollectionItem records
-    filters: Record<string, any> = {}, // Filters from the UI
-    modelName: string              // The context, e.g., "paymentCollection"
-) {
+The following diagram illustrates the end-to-end cancellation sequence:
+
+```mermaid
+sequenceDiagram
+    participant Admin as Institute Admin
+    participant Frontend as Solid-UI
+    participant Backend as Solid-API
+    participant DB as Database
+    participant MailService as Email Service
+
+    Admin->>Frontend: Selects payments and clicks "Cancel"
+    Frontend->>Frontend: Shows "CancelConfirmation" popup
+    Admin->>Frontend: Confirms cancellation (by selection or filter)
+    Frontend->>Backend: POST /api/payment-collection-item/cancel-payment-collection <br/> with item IDs or filters
+    
+    Backend->>DB: Build query to find 'Pending' items
+    DB-->>Backend: Return eligible PaymentCollectionItems
+    
+    alt No eligible items found
+        Backend-->>Frontend: Return BadRequestException
+    else Items found
+        Backend->>DB: UPDATE PaymentCollectionItem SET status = 'Cancelled'
+        DB-->>Backend: Confirm update
+        
+        Backend->>Backend: Group cancelled items by parent email
+        loop For each parent
+            Backend->>MailService: Send "cancel-payment" email template
+            MailService-->>Backend: Acknowledge email sent
+        end
+        
+        Backend-->>Frontend: Return success message with cancelled IDs
+        Frontend->>Admin: Show success toast and update UI
+    end
 ```
 
-### 1. Building the Query
+### Backend API Endpoint
 
-The first step is to construct a robust database query that correctly identifies the payment items to be cancelled. The logic handles multiple scenarios:
-
--   It validates that at least one source of filters (`collectionIds`, `itemIds`, or `filters`) is provided.
--   It ensures that only items with a `Pending` status are targeted.
--   It combines the provided IDs and UI filters into a single, cohesive query.
+The entire workflow is triggered by a `POST` request to the `/api/payment-collection-item/cancel-payment-collection` endpoint.
 
 ```typescript
-    let combinedFilters: any;
+// payment-collection-item.controller.ts
+@ApiBearerAuth("jwt")
+@Post("/cancel-payment-collection")
+async cancelMany(@Body() body: { collectionIds: any[], ids: any[], filters?: any, modelName: string }) {
+  return this.service.cancelPaymentCollectionItems(body.collectionIds, body.ids, body.filters || {}, body.modelName);
+}
+```
 
-    // Logic for cancellations initiated from the main PaymentCollection view
-    if (modelName === "paymentCollection") {
-      if (!collectionIds.length && (await this.isFiltersEmpty(filters))) {
-        throw new BadRequestException("Either collectionIds or filters must be provided");
-      }
-      const baseAnd = [
-        { status: { $eq: "Pending" } },
-        ...(collectionIds.length ? [{ paymentCollection: { id: { $in: collectionIds } } }] : []),
-      ];
-      const transformedFilters = collectionIds.length ? filters : await this.transformFilters(filters, "paymentCollection");
-      const filtersAndArray: any[] = [...baseAnd];
-      if (Object.keys(transformedFilters).length > 0) {
-        filtersAndArray.push(transformedFilters);
-      }
-      combinedFilters = { $and: filtersAndArray };
+### Core Service Logic (`cancelPaymentCollectionItems`)
 
-    // Logic for cancellations initiated from the PaymentCollectionItem view
-    } else if (modelName === "paymentCollectionItem") {
-      if (!itemIds.length && (await this.isFiltersEmpty(filters))) {
-        throw new BadRequestException("Either itemIds or filters must be provided");
-      }
-      const baseAnd = [
-        { status: { $eq: "Pending" } },
-        ...(itemIds.length ? [{ id: { $in: itemIds } }] : []),
-      ];
-      const filtersAndArray: any[] = [...baseAnd];
-      if (Object.keys(filters).length > 0) {
-        filtersAndArray.push(filters);
-      }
-      combinedFilters = { $and: filtersAndArray };
+The `cancelPaymentCollectionItems` method in the service layer orchestrates the core logic.
+
+#### a. Building the Query
+The method first constructs a database query to identify the exact items to be cancelled. It intelligently combines filters from the UI with any provided `collectionIds` or `itemIds`, while strictly ensuring that only items with a `Pending` status are targeted.
+
+#### b. Fetching and Validating Records
+Next, it executes the query to fetch all eligible `PaymentCollectionItem` records. It also populates related data (student, institute, fee type) needed for the email notifications. If no pending items match the criteria, it throws a `BadRequestException`.
+
+#### c. Bulk Update Operation
+The service performs an efficient bulk update, changing the `status` of all identified items to `"Cancelled"` in a single database transaction. This is a critical step for performance, especially during large bulk cancellations.
+
+#### d. Sending Email Notifications
+After successfully updating the database, the system groups the cancelled items by the parent's email address. This ensures that each parent receives a single, consolidated email notification, even if multiple fee items for their child were cancelled. It then sends a templated email (`cancel-payment`) with the relevant details.
+
+### Error Handling
+The system is designed to handle several error scenarios gracefully:
+-   **No Items Selected/Filtered:** If the admin tries to cancel without selecting any items or applying any filters, the backend will return a `400 Bad Request` error.
+-   **No Eligible Items Found:** If the selected items or filters do not match any `Pending` payment items, the backend will return a `400 Bad Request` with the message "No eligible records found for cancellation."
+-   **Unauthorized Access:** The API endpoint is protected by JWT authentication. Any request without a valid token will be rejected with a `401 Unauthorized` error.
+
+---
+
+## 3. Developer's Guide: UI Implementation
+
+To implement this feature in the frontend, a developer needs to add the cancel button, create a custom confirmation component, and register it.
+
+#### Step 1: Add the Cancel Button to the List View
+Navigate to `Solid -> Layout Builder -> View -> PaymentCollection-List-View -> Layout` and add the following `headerButtons` attribute to the layout JSON:
+
+```json
+"headerButtons": [
+  {
+    "attrs": {
+      "label": "Cancel",
+      "action": "CancelConfirmation",
+      "actionInContextMenu": false,
+      "openInPopup": true,
+      "icon": "pi pi-times",
+      "className": "p-button-danger p-button p-component",
+      "closable": true
     }
-    // ...
+  }
+]
 ```
 
-### 2. Fetching and Validating Records
-
-With the query constructed, the service fetches all matching `PaymentCollectionItem` records. It uses `populate` to also retrieve related data like student, institute, and fee type details, which are needed for sending email notifications. If no eligible records are found, it throws an error.
+#### Step 2: Register the Custom Action Component
+In the `solid-ui > app > solid-extension.ts` file, register your custom React component to handle the `CancelConfirmation` action.
 
 ```typescript
-    const cleanedFilters = cleanNullsFromObject(combinedFilters);
-    const query = {
-      filters: cleanedFilters,
-      populate: ["institute", "student", "feeType", "paymentCollection"],
-      populateMedia: ["institute.logo"],
-    };
+// solid-ui/app/solid-extension.ts
+import CancelConfirmation from './path/to/your/CancelConfirmation'; // Adjust the path
 
-    const pendingItemsData = await this.find(query);
-    const pendingItems = pendingItemsData.records;
+registerExtensionComponent('CancelConfirmation', CancelConfirmation);
+```
+:::tip
+`registerExtensionComponent` makes your custom component available to the Solid-UI renderer, allowing it to be invoked by actions defined in the Layout Builder.
+:::
 
-    if (!pendingItems?.length) {
-      throw new BadRequestException("No eligible records found for cancellation");
+#### Step 3: Create the `CancelConfirmation` Component
+This React component will render a dialog asking the user to confirm whether they want to cancel the *selected* records or all *filtered* records.
+
+<details>
+<summary>Full Code for the <code>CancelConfirmation</code> Component</summary>
+
+```jsx
+// Example Implementation
+import React, { useRef, useState } from "react";
+import { Dialog } from "primereact/dialog";
+import { RadioButton } from "primereact/radiobutton";
+import { Button } from "primereact/button";
+import { Toast } from "primereact/toast";
+import axios from "axios";
+import { getSession } from "next-auth/react";
+import { useDispatch } from "react-redux";
+import { closePopup } from "@solidstarters/solid-core-ui/dist/redux/features/popupSlice";
+
+const API_URL = process.env.NEXT_PUBLIC_BACKEND_API_URL;
+
+const cancelPaymentCollections = async (params: any) => {
+  const session: any = await getSession();
+  const token = session?.user?.accessToken || "";
+  const response = await axios.post(`${API_URL}/api/payment-collection-item/cancel-payment-collection`, params, {
+    headers: { Authorization: `Bearer ${token}` }
+  });
+  return response.data;
+};
+
+const CancelConfirmation: React.FC<any> = ({ params, selectedRecords = [], filters }) => {
+  const dispatch = useDispatch();
+  const toast = useRef<Toast>(null);
+  const [visible, setVisible] = useState(true);
+  const [option, setOption] = useState<string | null>(null);
+
+  const handleClose = () => dispatch(closePopup());
+
+  const showToast = (severity: any, summary: string, detail: string) => {
+    toast.current?.show({ severity, summary, detail, life: 4000 });
+  };
+
+  const handleConfirm = async () => {
+    if (!option) {
+      showToast("warn", "Validation Error", "Please choose one option.");
+      return;
     }
-```
 
-### 3. Bulk Update
-
-This is the critical step where the database is updated. The service performs a bulk update operation, changing the `status` of all identified payment items to `"Cancelled"` in a single, efficient query.
-
-```typescript
-    const pendingIds = pendingItems.map((item) => item.id);
+    const { modelName } = params;
+    const isPaymentCollection = modelName === "paymentCollection";
 
     try {
-      // Bulk cancel the items in the database
-      await this.repo.update({ id: In(pendingIds) }, { status: "Cancelled" });
-```
-
-### 4. Sending Email Notifications
-
-After successfully cancelling the items, the system notifies the parents.
-
--   The code groups the cancelled items by the parent's email address to send a single, consolidated email per parent.
--   It then iterates through this map, calculates the total cancelled amount for each parent, and constructs the payload for the email.
--   Finally, it uses a mail service to send an email based on the `cancel-payment` template, including all relevant details.
-
-```typescript
-      // Group items by parent email to send one notification per parent
-      const itemsByParent = new Map<string, any>();
-      pendingItems.forEach((item) => {
-        const parentEmail = item.student?.parentEmailAddress;
-        if (!parentEmail) return;
-
-        if (!itemsByParent.has(parentEmail)) {
-          itemsByParent.set(parentEmail, { student: item.student, institute: item.institute, items: [] });
+      let response;
+      if (option === "selected") {
+        if (!selectedRecords?.length) {
+          showToast("warn", "Validation Error", "Please select at least one record.");
+          return;
         }
-        itemsByParent.get(parentEmail).items.push(item);
-      });
+        const cancelIds = isPaymentCollection ? selectedRecords.map(r => r.id) : selectedRecords.filter(r => r.status === 'Pending').map(r => r.id);
+        if (!isPaymentCollection && cancelIds.length !== selectedRecords.length) {
+          showToast("warn", "Selection Warning", "Some selected records were not in 'Pending' status and were ignored.");
+        }
+        if (cancelIds.length === 0) {
+            showToast("warn", "No Eligible Records", "No selected records are eligible for cancellation.");
+            return;
+        }
+        response = await cancelPaymentCollections({ [isPaymentCollection ? "collectionIds" : "ids"]: cancelIds, modelName });
 
-      // Send email notifications asynchronously
-      const mailService = this.mailServiceFactory.getMailService();
-      for (const [parentEmail, data] of itemsByParent) {
-          // ... logic to calculate totalAmount, feeTypes etc. ...
-
-          await mailService.sendEmailUsingTemplate(
-              parentEmail,
-              "cancel-payment",
-              { /* ... email payload with student and payment details ... */ },
-              true
-            );
+      } else { // option === "filtered"
+        if (!filters?.$and?.length) {
+          showToast("warn", "Filter Not Found", "Please apply at least one filter.");
+          return;
+        }
+        response = await cancelPaymentCollections({ filters, modelName });
       }
-```
+      
+      showToast("success", "Success", response.message || "Cancellation processed.");
+      setTimeout(handleClose, 1500);
 
-### 5. Returning the Result
-
-The method returns a detailed success message, including a list of the cancelled items and their IDs, which the frontend can use to update the UI.
-
-```typescript
-      return {
-        success: true,
-        message: `Successfully cancelled ${pendingIds.length} payment collection item(s)`,
-        cancelledIds: pendingIds,
-        emailsSent: itemsByParent.size,
-      };
-    } catch (error) {
-      // ... error handling ...
+    } catch (error: any) {
+      const errorMessage = error?.response?.data?.data?.message || "Cancellation failed.";
+      showToast("error", "Error", errorMessage);
     }
+  };
+
+  return (
+    <>
+      <Toast ref={toast} />
+      <Dialog header="Confirm Cancellation" visible={visible} style={{ width: "30vw" }} modal onHide={handleClose}>
+        <p>How would you like to apply the cancellation?</p>
+        <div className="flex flex-column gap-3 my-3">
+          <div className="flex align-items-center">
+            <RadioButton inputId="optionSelected" value="selected" onChange={(e) => setOption(e.value)} checked={option === "selected"} disabled={!selectedRecords?.length}/>
+            <label htmlFor="optionSelected" className="ml-2">Cancel {selectedRecords?.length || 0} selected record(s)</label>
+          </div>
+          <div className="flex align-items-center">
+            <RadioButton inputId="optionFiltered" value="filtered" onChange={(e) => setOption(e.value)} checked={option === "filtered"} />
+            <label htmlFor="optionFiltered" className="ml-2">Cancel all records matching the current filter</label>
+          </div>
+        </div>
+        <div className="flex justify-content-end gap-2 mt-4">
+          <Button label="Cancel" icon="pi pi-times" onClick={handleClose} className="p-button-text" />
+          <Button label="Confirm" icon="pi pi-check" onClick={handleConfirm} className="p-button-danger" autoFocus />
+        </div>
+      </Dialog>
+    </>
+  );
+};
+
+export default CancelConfirmation;
 ```
+</details>
 
-## Key Business Rules
+---
 
+## 4. Key Business Rules & Security
+
+#### Business Rules
 The cancellation process adheres to the following critical rules:
 
 -   **Status Constraint:** Only payment items with a `Pending` status are eligible for cancellation.
 -   **Parental Notification:** The system automatically groups all cancelled items for a student and sends a single, consolidated email notification to the parent.
 -   **Data Integrity:** Cancelled payments are flagged and excluded from all future financial calculations and reports.
--   **Auditing:** Every cancellation action is logged, providing a clear audit trail for financial accountability.
+-   **Auditing:** Every cancellation action should be logged, providing a clear audit trail for financial accountability.
+
+#### Security & Permissions
+-   **Authentication:** The cancellation API endpoint is secured and requires a valid JSON Web Token (JWT) provided in the `Authorization` header.
+-   **Authorization:** This feature should be restricted to users with specific roles (e.g., 'Institute Admin'). While not detailed in the code snippets, role-based access control (RBAC) should be implemented using guards at the controller level to ensure only authorized personnel can cancel payments.
