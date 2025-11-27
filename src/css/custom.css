@@ -6,6 +6,7 @@
 /*==============================================================================
   ROOT VARIABLES - LIGHT MODE (DEFAULT)
 ==============================================================================*/
+/* @import "@docsearch/css/dist/style.css"; */
 
 :root {
   /* Primary Brand Colors */
@@ -15,33 +16,33 @@
   --solid-primary-light: #6B68FF;
   --solid-primary-lighter: #8E8CFF;
   --solid-primary-lightest: #E6E5FF;
-  
+
   /* Background Colors */
   --solid-bg-main: #ffffff;
   --solid-bg-secondary: #fafafa;
   --solid-bg-tertiary: #f6f6f9;
   --solid-bg-card: #ffffff;
   --solid-code-bg: #f6f6f9;
-  
+
   /* Text Colors */
   --solid-text-primary: #212134;
   --solid-text-secondary: #4a4a6a;
   --solid-text-tertiary: #666687;
   --solid-text-muted: #8e8ea9;
   --solid-color-white: #ffffff;
-  
+
   /* Link Colors */
   --solid-link: #4945FF;
   --solid-link-hover: #3832D2;
   --solid-link-visited: #6B68FF;
-  
+
   /* Border Colors */
   --solid-border-light: #eaeaef;
   --solid-border-subtle: #dcdce4;
   --solid-border-default: #c0c0cf;
   --solid-border-strong: #a5a5ba;
   --solid-border-highlight: #4945FF;
-  
+
   /* Semantic Colors */
   --solid-success: #5cb176;
   --solid-success-bg: #edf9f0;
@@ -51,13 +52,13 @@
   --solid-error-bg: #ffeee8;
   --solid-info: #4945FF;
   --solid-info-bg: #f0f0ff;
-  
+
   /* Navbar & Footer */
   --solid-navbar-bg: #ffffff;
   --solid-navbar-border: #eaeaef;
   --solid-footer-bg: #ffffff;
   --solid-footer-border: #eaeaef;
-  
+
   /* Sidebar */
   --solid-sidebar-bg: #fafafa;
   --solid-sidebar-text: #4a4a6a;
@@ -65,7 +66,7 @@
   --solid-sidebar-bg-hover: #f0f0ff;
   --solid-sidebar-bg-active: #4945FF;
   --solid-sidebar-text-active: #ffffff;
-  
+
   /* Code & Syntax */
   --solid-code-inline-bg: #f6f6f9;
   --solid-code-inline-text: #d63384;
@@ -84,33 +85,33 @@
   --solid-primary-light: #8E8CFF;
   --solid-primary-lighter: #B4B3FF;
   --solid-primary-lightest: #2D2859;
-  
+
   /* Background Colors - Strapi-inspired blue-gray palette */
   --solid-bg-main: #212134;
   --solid-bg-secondary: #2b2d42;
   --solid-bg-tertiary: #32344b;
   --solid-bg-card: #2b2d42;
   --solid-code-bg: #1a1b2e;
-  
+
   /* Text Colors - Better contrast with neutral tones */
   --solid-text-primary: #ffffff;
   --solid-text-secondary: #c0c0cf;
   --solid-text-tertiary: #a5a5ba;
   --solid-text-muted: #8e8ea9;
   --solid-color-white: #ffffff;
-  
+
   /* Link Colors - More subtle and readable */
   --solid-link: #7b79ff;
   --solid-link-hover: #a5a4ff;
   --solid-link-visited: #9190ff;
-  
+
   /* Border Colors - Improved visibility */
   --solid-border-light: #32344b;
   --solid-border-subtle: #3f4158;
   --solid-border-default: #4a4a6a;
   --solid-border-strong: #666687;
   --solid-border-highlight: #7b79ff;
-  
+
   /* Semantic Colors */
   --solid-success: #5cb176;
   --solid-success-bg: #1a2e23;
@@ -120,13 +121,13 @@
   --solid-error-bg: #2e1a1a;
   --solid-info: #6B68FF;
   --solid-info-bg: #1f1f3e;
-  
+
   /* Navbar & Footer - Consistent with new palette */
   --solid-navbar-bg: #2b2d42;
   --solid-navbar-border: #32344b;
   --solid-footer-bg: #1a1b2e;
   --solid-footer-border: #32344b;
-  
+
   /* Sidebar - Lighter than main content for better hierarchy */
   --solid-sidebar-bg: #2b2d42;
   --solid-sidebar-text: #c0c0cf;
@@ -134,7 +135,7 @@
   --solid-sidebar-bg-hover: rgba(73, 69, 255, 0.15);
   --solid-sidebar-bg-active: #4945FF;
   --solid-sidebar-text-active: #ffffff;
-  
+
   /* Code & Syntax */
   --solid-code-inline-bg: #2b2d42;
   --solid-code-inline-text: #ff7eb6;
@@ -147,15 +148,23 @@
 
 :root {
   /* Font Sizes */
-  --solid-font-size-xs: 0.75rem;    /* 12px */
-  --solid-font-size-sm: 0.875rem;   /* 14px */
-  --solid-font-size-base: 1rem;     /* 16px */
-  --solid-font-size-md: 1.125rem;   /* 18px */
-  --solid-font-size-lg: 1.25rem;    /* 20px */
-  --solid-font-size-xl: 1.5rem;     /* 24px */
-  --solid-font-size-2xl: 1.875rem;  /* 30px */
-  --solid-font-size-3xl: 2.25rem;   /* 36px */
-  
+  --solid-font-size-xs: 0.75rem;
+  /* 12px */
+  --solid-font-size-sm: 0.875rem;
+  /* 14px */
+  --solid-font-size-base: 1rem;
+  /* 16px */
+  --solid-font-size-md: 1.125rem;
+  /* 18px */
+  --solid-font-size-lg: 1.25rem;
+  /* 20px */
+  --solid-font-size-xl: 1.5rem;
+  /* 24px */
+  --solid-font-size-2xl: 1.875rem;
+  /* 30px */
+  --solid-font-size-3xl: 2.25rem;
+  /* 36px */
+
   /* Font Weights */
   --solid-font-thin: 100;
   --solid-font-extralight: 200;
@@ -166,38 +175,48 @@
   --solid-font-bold: 700;
   --solid-font-extrabold: 800;
   --solid-font-black: 900;
-  
+
   /* Line Heights */
   --solid-line-height-tight: 1.25;
   --solid-line-height-snug: 1.375;
   --solid-line-height-normal: 1.5;
   --solid-line-height-relaxed: 1.625;
   --solid-line-height-loose: 1.75;
-  
+
   /* Spacing Scale (8px base) */
   --solid-space-0: 0;
-  --solid-space-1: 0.25rem;   /* 4px */
-  --solid-space-2: 0.5rem;    /* 8px */
-  --solid-space-3: 0.75rem;   /* 12px */
-  --solid-space-4: 1rem;      /* 16px */
-  --solid-space-5: 1.25rem;   /* 20px */
-  --solid-space-6: 1.5rem;    /* 24px */
-  --solid-space-8: 2rem;      /* 32px */
-  --solid-space-10: 2.5rem;   /* 40px */
-  --solid-space-12: 3rem;     /* 48px */
-  --solid-space-16: 4rem;     /* 64px */
-  
+  --solid-space-1: 0.25rem;
+  /* 4px */
+  --solid-space-2: 0.5rem;
+  /* 8px */
+  --solid-space-3: 0.75rem;
+  /* 12px */
+  --solid-space-4: 1rem;
+  /* 16px */
+  --solid-space-5: 1.25rem;
+  /* 20px */
+  --solid-space-6: 1.5rem;
+  /* 24px */
+  --solid-space-8: 2rem;
+  /* 32px */
+  --solid-space-10: 2.5rem;
+  /* 40px */
+  --solid-space-12: 3rem;
+  /* 48px */
+  --solid-space-16: 4rem;
+  /* 64px */
+
   /* Border Radius */
   --solid-radius-sm: 4px;
   --solid-radius-md: 6px;
   --solid-radius-lg: 8px;
   --solid-radius-xl: 12px;
-  
+
   /* Shadows */
   --solid-shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
   --solid-shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
   --solid-shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-  
+
   /* Docusaurus Overrides */
   --ifm-font-size-base: 16px;
   --ifm-code-font-size: 0.9em;
@@ -340,7 +359,8 @@ p {
   color: var(--solid-text-secondary);
 }
 
-strong, b {
+strong,
+b {
   font-weight: var(--solid-font-semibold) !important;
   color: var(--solid-text-primary) !important;
 }
@@ -367,12 +387,14 @@ a.menu__link {
 }
 
 /* Lists */
-ul, ol {
+ul,
+ol {
   margin-bottom: var(--solid-space-4);
   padding-left: var(--solid-space-6);
 }
 
-ul li, ol li {
+ul li,
+ol li {
   color: var(--solid-text-secondary) !important;
   line-height: var(--solid-line-height-relaxed) !important;
   margin-bottom: var(--solid-space-2);
@@ -507,6 +529,15 @@ button[aria-label*="Switch between dark and light mode"]:hover svg {
   stroke: var(--solid-primary) !important;
 }
 
+
+
+@media(min-width:1024px){
+  .DocSearch.DocSearch-Button {
+    width: 18rem ;
+  }
+}
+
+
 /*==============================================================================
   SIDEBAR MENU
 ==============================================================================*/
@@ -545,13 +576,13 @@ button[aria-label*="Switch between dark and light mode"]:hover svg {
 }
 
 /* Parent menu items should not have active background, only child items */
-.menu__list-item-collapsible > .menu__link {
+.menu__list-item-collapsible>.menu__link {
   background-color: transparent !important;
   color: var(--solid-sidebar-text) !important;
   font-weight: var(--solid-font-medium) !important;
 }
 
-.menu__list-item-collapsible:hover > .menu__link {
+.menu__list-item-collapsible:hover>.menu__link {
   background-color: var(--solid-sidebar-bg-hover) !important;
   color: var(--solid-sidebar-text-hover) !important;
 }
@@ -564,7 +595,7 @@ button[aria-label*="Switch between dark and light mode"]:hover svg {
 }
 
 /* Parent items that contain active children should remain visible */
-.menu__list-item-collapsible--active > .menu__link {
+.menu__list-item-collapsible--active>.menu__link {
   background-color: transparent !important;
   color: var(--solid-sidebar-text) !important;
   font-weight: var(--solid-font-semibold) !important;
@@ -692,7 +723,7 @@ button[aria-label*="Switch between dark and light mode"]:hover svg {
 ==============================================================================*/
 
 /* Table wrapper for horizontal scrolling */
-.markdown > table,
+.markdown>table,
 article table,
 .theme-doc-markdown table {
   display: table !important;
@@ -1165,7 +1196,7 @@ summary .rotatable {
   color: var(--solid-text-tertiary);
 }
 
-details[open] > summary .rotatable {
+details[open]>summary .rotatable {
   transform: rotate(90deg) !important;
 }
 
@@ -1290,7 +1321,8 @@ blockquote p {
 ==============================================================================*/
 
 @media (min-width: 1024px) {
-  main article:first-child:not(.col) + nav,
+
+  main article:first-child:not(.col)+nav,
   main article:first-child:not(.col):not(.custom-doc-card) {
     --custom-main-width: 850px;
     margin-left: auto;
@@ -1330,6 +1362,7 @@ blockquote p {
 ==============================================================================*/
 
 @media (max-width: 996px) {
+
   /* Mobile Navigation */
   .navbar__toggle {
     border-radius: var(--solid-radius-sm) !important;
@@ -1494,7 +1527,7 @@ button:focus-visible,
 }
 
 /* Custom Tags */
-.custom-tag a > code {
+.custom-tag a>code {
   padding: var(--solid-space-1) var(--solid-space-2) !important;
   font-size: var(--solid-font-size-xs) !important;
   border: 1px solid var(--solid-border-light) !important;
@@ -1503,7 +1536,7 @@ button:focus-visible,
   transition: all 0.2s ease;
 }
 
-.custom-tag a > code:hover {
+.custom-tag a>code:hover {
   border-color: var(--solid-primary) !important;
   color: var(--solid-primary) !important;
 }
@@ -1521,4 +1554,3 @@ button:focus-visible,
   border-radius: var(--solid-radius-lg);
   box-shadow: var(--solid-shadow-sm);
 }
-

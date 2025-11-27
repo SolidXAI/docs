@@ -15,16 +15,23 @@
     "typecheck": "tsc"
   },
   "dependencies": {
+    "@docsearch/css": "^4.3.2",
     "@docusaurus/core": "3.7.0",
+    "@docusaurus/plugin-sitemap": "^3.9.2",
     "@docusaurus/preset-classic": "3.7.0",
     "@mdx-js/react": "^3.0.0",
     "clsx": "^2.0.0",
+    "docusaurus-theme-search-typesense": "^0.26.0",
+    "dotenv": "^17.2.3",
+    "instantsearch.css": "^8.8.0",
     "prism-react-renderer": "^2.3.0",
     "prismjs": "^1.30.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-icons": "^5.5.0",
-    "react-medium-image-zoom": "^5.3.0"
+    "react-medium-image-zoom": "^5.3.0",
+    "typesense": "^2.1.0",
+    "typesense-instantsearch-adapter": "^2.9.0"
   },
   "devDependencies": {
     "@docusaurus/module-type-aliases": "3.7.0",

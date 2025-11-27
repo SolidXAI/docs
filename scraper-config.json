@@ -1,0 +1,63 @@
+{
+  "index_name": "docusaurus_docs",
+  "allowed_domains": ["localhost"],
+
+  "start_urls": [
+    { "url": "http://localhost:3000/" }
+  ],
+
+  "sitemap_urls": [
+    "http://localhost:3000/sitemap.xml"
+  ],
+
+  "stop_urls": [
+    "/search",
+    "/tags",
+    "\\?",
+    "\\.pdf$"
+  ],
+
+  "selectors": {
+    "default": {
+      "lvl0": {
+        "selector": "nav.menu a.menu__link--active",
+        "default_value": "Documentation"
+      },
+      "lvl1": "article h1",
+      "lvl2": "article h2",
+      "lvl3": "article h3",
+      "lvl4": "article h4",
+      "lvl5": "article h5",
+      "lvl6": "article h6",
+      "text": "article p, article li, article td, article th, article blockquote",
+      "code": "article pre code"
+    }
+  },
+
+  "custom_settings": {
+    "separatorsToIndex": "_",
+    "attributesToRetrieve": [
+      "hierarchy",
+      "content",
+      "anchor",
+      "url",
+      "tags",
+      "type"
+    ],
+    "attributesToHighlight": ["hierarchy", "content"],
+    "attributesToSnippet": ["content:40"],
+    "searchableAttributes": [
+      "unordered(hierarchy.lvl0)",
+      "unordered(hierarchy.lvl1)",
+      "unordered(hierarchy.lvl2)",
+      "unordered(hierarchy.lvl3)",
+      "unordered(hierarchy.lvl4)",
+      "unordered(hierarchy.lvl5)",
+      "unordered(hierarchy.lvl6)",
+      "content"
+    ]
+  },
+
+  "min_indexed_level": 0,
+  "nb_hits": 30000
+}
