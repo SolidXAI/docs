@@ -391,6 +391,103 @@ After processing all fees for the student in the row, the code fetches all newly
 }
 ```
 
+<!-- explain how we handling email alert to all students asyncronously wiht publisher and subscriber and for email we have email-templates
+it dynamic handlerbars -->
+### step 5: Sending Mail asynchronously 
+
+Import MailFactory from Solid Core
+
+```typescript
+import { MailFactory } from '@solidstarters/solid-core';
+
+@Injectable()
+export class PaymentService extends CRUDService<Payment> {
+  //init nest logger
+  private readonly logger = new Logger(PaymentService.name);
+  constructor(
+        private readonly mailServiceFactory: MailFactory
+  )
+}
+
+const mailService = this.mailServiceFactory.getMailService();
+```
+
+Create `sendPaymentSuccessMail` in `payment.service.ts`
+
+```typescript
+ async sendPaymentSuccessMail(instituteId: number,payment:any,itemDetails:any,transactionStatus:string) {
+    const institute = await this.instituteService.findOne(instituteId || 0, {
+      populateMedia: ['logo']
+    });
+
+    // TODO: Trigger an email to the parent saying that payment confirmation received.
+    const mailService = this.mailServiceFactory.getMailService();
+    await mailService.sendEmailUsingTemplate(
+      payment.student.parentEmailAddress,
+      'confirm-payment',
+      {
+        paymentDetails: {
+          paymentCollection:payment.paymentCollections,
+          txnId: payment.mSwipeIpgTransId,
+          totalAmountDue: payment.amount,
+          createdAt: payment.createdAt,
+          feeTypes: itemDetails ? itemDetails.map(
+            (d) => d.paymentCollectionItem.feeType?.feeType || 'N/A',
+          ) : payment.feeTypes,
+          totalAmount: payment.amount,
+          status: transactionStatus === 'success' ? 'Paid' : 'Failed'
+        },
+        student: {
+          studentName: payment.student.studentName,
+          studentLoginId: payment.student.studentLoginId,
+          institute: {
+            instituteName: payment.institute.instituteName,
+            supportEmail:payment.institute.supportEmail,
+            supportMobile:payment.institute.supportMobile
+          },
+        },
+        instituteLogo: payment?.institute?._media?.logo?.[0]?._full_url ?? institute?._media?.logo?.[0]?._full_url  ?? null
+      },
+      true,
+      [],
+      [],
+      null,
+      null
+    );
+    this.logger.debug(`Confirmation sent to ${payment.student.parentEmailAddress}`);
+}
+```
+
+Same for  `sendDueFeesMail`
+
+```typescript
+  async sendDueFeesMail(dueFees: any, instituteId: number) {
+    // 1. Get unpaid items
+    //fetch institue by name then take id and call another
+    const institute = await this.instituteService.findOne(instituteId || 0, {
+      populateMedia: ['logo']
+    });
+    // 5. Send mail
+      const mailService = this.mailServiceFactory.getMailService();
+      await mailService.sendEmailUsingTemplate(
+        dueFees.parentEmailAddress,
+        'new-payment-or-payment-reminder',
+        { 
+          dueDetails: dueFees,
+          instituteLogo:institute._media.logo[0]._full_url,
+          student: dueFees.student,
+        },
+        true,
+        [],
+        [],
+        null,
+        null,
+      );
+}
+```
+
+Below is the complete source code for Process row
+
 <details>
 <summary>Full Code for <code>processRow</code></summary>
 
@@ -584,7 +681,7 @@ private async processRow(row: ExcelJS.Row, paymentCollection: PaymentCollection,
 
 ---
 
-### Step 5: Automating Post-Payment Processes with Scheduled Jobs
+### Step 6: Automating Post-Payment Processes with Scheduled Jobs
 
 System uses scheduled background jobs to automate tasks such as calculating late fees and sending reminder emails to parents. After creating the job classes, each one must be registered in Solid UI.
 
@@ -964,7 +1061,7 @@ export class SendEmailScheduleJobs implements IScheduledJob {
 
 ---
 
-### Registering Scheduled Jobs
+### step 7: Registering Scheduled Jobs
 
 After creating the scheduled job classes, register them through Solid UI to enable automatic execution at defined intervals.
 

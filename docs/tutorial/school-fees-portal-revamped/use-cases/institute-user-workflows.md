@@ -2,9 +2,9 @@
 sidebar_position: 2
 ---
 
-# Institute User Workflows
+# Institute Admin
 
-This section covers the primary workflows for an institute's administrative user, from logging in and managing users to initiating payments and handling cancellations.
+This section covers the primary workflows for an institute's administrative user, from creation to logging in and managing users to initiating payments and handling cancellations.
 
 :::info Pre-requisite
 This guide assumes you have the necessary data models configured, including a one-to-many relationship between `Institute` and `InstituteUser`, where `InstituteUser` is a child of the main `User` table.

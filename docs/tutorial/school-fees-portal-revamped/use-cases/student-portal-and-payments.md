@@ -34,16 +34,20 @@ you can run the development server:
 npm run dev
 ```
 
-This will start the application on `http://localhost:3002`.
+Your application will run on the following default ports:
 
-Assuming :
 ```info
-Solid Api server running on port: 3000
-solid UI running on port: 3001 
-and Student Portal running on: 3002 
+Solid API Server  : http://localhost:3000  
+Solid UI          : http://localhost:3001  
+Student Portal    : http://localhost:3002
 ```
 
-Now, since its multi tenant, we need to configure nginx proxy server setup that binds domain with port :3002 
+The Student Portal is now accessible at:
+
+```info
+http://localhost:3002
+```
+
 
 ## Local Development with Nginx Proxy
 
