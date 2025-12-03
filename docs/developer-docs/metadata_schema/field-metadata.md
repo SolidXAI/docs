@@ -822,7 +822,7 @@ Numeric id of the owning model (internal linkage).
 
 
 ### `ormType` *(PSQLType, optional)*
-Override database column type. Use only when the default mapping from `type` is insufficient.
+Override database column type based on dataSourcetype and field type. Use only when the default mapping from `type` is insufficient.
 
 | **Field Type**       | **Postgres (PSQLType)**                                 | **MSSQL (MSSQLType)**                            |
 |----------------------|---------------------------------------------------------|--------------------------------------------------|
