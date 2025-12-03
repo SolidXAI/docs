@@ -60,6 +60,8 @@ Each model is a semantic, configurable data structure that forms the basis of ad
         "enableSoftDelete": false,
         "draftPublishWorkflow": false,
         "internationalisation": false,
+        "isLegacyTable":false,
+        "isLegacyTableWithId":false
       },
       { // Child Model Example
         "singularName": "instituteUser",
@@ -75,6 +77,9 @@ Each model is a semantic, configurable data structure that forms the basis of ad
         "enableSoftDelete": false,
         "draftPublishWorkflow": false,
         "internationalisation": false,
+        "isLegacyTable":false,
+        "isLegacyTableWithId":false
+
       },
       ... // Other models
     ]
@@ -173,22 +178,22 @@ If set to `true`, records in this model will be "soft deleted" (marked as delete
 
 
 ### `draftPublishWorkflow` *(boolean, required)*
-If set to `true`, the model will support a draft and publish workflow, allowing records to be saved as drafts before being published. This is useful for content that requires review before going live. For such models, additional fields like `status`, `publishedAt`, and `publishedBy` will be automatically managed. 
+If set to `true`, the model will support a draft and publish workflow, allowing records to be saved as drafts before being published. This is useful for content that requires review before going live. For such models, additional fields like `status`, `publishedAt`, and `publishedBy` will be automatically managed.  
 **Default:** `false`
 
 
 ### `internationalisation` *(boolean, required)*
-If set to `true`, the model will support internationalization, allowing records to have translations in multiple languages. This is useful for applications that need to cater to a global audience. 
+If set to `true`, the model will support internationalization, allowing records to have translations in multiple languages. This is useful for applications that need to cater to a global audience.  
 **Default:** `false`
 
 
 ### `isLegacyTable` *(boolean, optional)*
-Indicates whether the table uses the legacy internationalization pattern and contains an IDENTITY (auto-increment) primary key.Set this to true only when the SQL DDL in the prompt defines a table with an IDENTITY column.When this is true, isLegacyTableWithId must be false.
+Indicates whether the table uses the legacy internationalization pattern and contains an IDENTITY (auto-increment) primary key.Set this to true only when the SQL DDL in the prompt defines a table with an IDENTITY column.When this is true, isLegacyTableWithId must be false. 
 **Default:** `false`
 
 
 ### `isLegacyTableWithId` *(boolean, optional)*
-Indicates whether the table uses the legacy internationalization pattern but does not contain any IDENTITY (auto-increment) column.Set this to true only when the SQL DDL in the prompt defines a table without an IDENTITY column.When this is true, isLegacyTable must be false.
+Indicates whether the table uses the legacy internationalization pattern but does not contain any IDENTITY (auto-increment) column.Set this to true only when the SQL DDL in the prompt defines a table without an IDENTITY column.When this is true, isLegacyTable must be false. 
 **Default:** `false`
 
 <br/>
