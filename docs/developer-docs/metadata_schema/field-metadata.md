@@ -822,7 +822,32 @@ Numeric id of the owning model (internal linkage).
 
 
 ### `ormType` *(PSQLType, optional)*
-Override database column type. Use only when the default mapping from `type` is insufficient.  
+Override database column type. Use only when the default mapping from `type` is insufficient.
+
+| **Field Type**       | **Postgres (PSQLType)**                                 | **MSSQL (MSSQLType)**                            |
+|----------------------|---------------------------------------------------------|--------------------------------------------------|
+| int                  | `integer`                                               | `int`                                            |
+| bigint               | `bigint`                                                | `bigint`                                         |
+| decimal              | `decimal`                                               | `numeric`, `decimal`                             |
+| shortText            | `varchar`                                               | `varchar`, `nvarchar`                            |
+| longText             | `text`                                                  | `nvarchar`                                       |
+| richText             | `text`                                                  | `nvarchar`                                       |
+| json                 | `simplejson`, `json`, `jsonb`                           | `simplejson`, `nvarchar`                         |
+| boolean              | `boolean`                                               | `bit`                                            |
+| date                 | `date`                                                  | `date`                                           |
+| datetime             | `timestamp`, `timestamptz`                              | `datetime`, `datetime2`                          |
+| time                 | `time`, `timestamp`, `timestamptz`                      | `time`                                           |
+| relation             | `integer`                                               | `int`                                            |
+| mediaSingle          | `varchar`                                               | `varchar`                                        |
+| mediaMultiple        | `varchar`                                               | `varchar`                                        |
+| email                | `varchar`                                               | `nvarchar`                                       |
+| password             | `varchar`                                               | `nvarchar`                                       |
+| selectionStatic      | `varchar`                                               | `nvarchar`                                       |
+| selectionDynamic     | `varchar`                                               | `nvarchar`                                       |
+| computed             | `varchar`                                               | `nvarchar`                                       |
+| uuid                 | `varchar`                                               | `uniqueidentifier`                               |
+
+<!-- Override database column type. Use only when the default mapping from `type` is insufficient.  
 **Values:** 
 - integer
 - decimal
@@ -836,7 +861,7 @@ Override database column type. Use only when the default mapping from `type` is 
 - date
 - json
 - jsonb  
-**Default:** Derived from `type`
+**Default:** Derived from `type` -->
 
 <!-- --- -->
 
