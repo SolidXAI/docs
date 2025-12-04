@@ -1,7 +1,7 @@
 {
   "tutorial/index.md": {
-    "hash": "5a60fa5e410fb0f780d21adbbb5726ed786651211c6359a2d64ad16485670ef4",
-    "document_id": "61e1f040-a4b7-48cf-8937-f85ad4a3811a",
+    "hash": "74092fa3859ee79684bf9c9a17932166083edb4dce74c45581cdd2b13800d210",
+    "document_id": "3c0cab40-022b-4dd6-809c-223dbfe0f823",
     "collection_id": "cd59267d-67e0-4897-91a6-1a338f5e83bf",
     "metadata": {
       "source": "docusaurus",
@@ -267,8 +267,8 @@
     }
   },
   "tutorial/school-fees-portal/index.md": {
-    "hash": "8bd4824dcf0d4a5f30168febe9784ea86c36918e31020cd8742c81d1de953071",
-    "document_id": "ff3b778c-f21d-4825-ab26-d0cf50a626a7",
+    "hash": "672a715ceffc6a017e4e1a8169c326f341982258fab59ab8304f8798bf073ff7",
+    "document_id": "a68fbab5-bc44-498c-97c2-8f12a4d4617d",
     "collection_id": "cd59267d-67e0-4897-91a6-1a338f5e83bf",
     "metadata": {
       "source": "docusaurus",
@@ -283,8 +283,8 @@
     }
   },
   "tutorial/school-fees-portal/1-bootstrap/index.md": {
-    "hash": "ec5cfbf70f5e927cb0d79c573fa165449fe0f55fbfe52f2467c4721356469509",
-    "document_id": "9a0410c0-ea43-4eab-ae51-4f2b8f7332cf",
+    "hash": "f679730a1516509fce077abb203f2fdcb2fdb9ed163b7811434d27d8b58f5300",
+    "document_id": "7e3483be-bcec-4ff0-9323-4b80f94dd9cc",
     "collection_id": "cd59267d-67e0-4897-91a6-1a338f5e83bf",
     "metadata": {
       "source": "docusaurus",
@@ -942,8 +942,8 @@
     }
   },
   "developer-docs/metadata_schema/field-metadata.md": {
-    "hash": "8417c24976253a2174b1e78191c1d892eec7d4442bbcf33e9559572a2b0d6287",
-    "document_id": "91c02cb9-f223-4755-80ef-a157c48bcb31",
+    "hash": "5747ddc7855f5b4ced0750d1160c4b2d407252791f18297c921148e973229487",
+    "document_id": "5395bff7-03e4-4ff5-a254-3a910bbfb797",
     "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
     "metadata": {
       "source": "docusaurus",
@@ -1052,8 +1052,8 @@
     }
   },
   "developer-docs/metadata_schema/model-metadata.md": {
-    "hash": "c63aa3d3a36c0cee38d196d6c6f5d7451d31b6f288ccb752247bb4ef26b0bb9d",
-    "document_id": "b8ad82bb-57df-4446-b1e2-53a2933cbb2d",
+    "hash": "69a4dd7fc9f6847692c153699e62efd98a50dd06295236ffbffc7881910ce341",
+    "document_id": "f2ead495-09f6-4589-bfd2-bf1ec82b9aeb",
     "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
     "metadata": {
       "source": "docusaurus",
@@ -1201,8 +1201,8 @@
     }
   },
   "developer-docs/rest-apis/retrieve/index.md": {
-    "hash": "e3593ea062a711fed36feab0fa83e11eedc43357fdc5973ba0fcb7493d61c486",
-    "document_id": "e55334a0-24ec-402e-8afc-97460a832300",
+    "hash": "f5c76babf289c5667b1b368e9ecb3848241340a1ead5a68b75921505f08381a8",
+    "document_id": "8c9ea110-5ea7-4491-ba08-8f04d2c121dd",
     "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
     "metadata": {
       "source": "docusaurus",
@@ -1213,6 +1213,16 @@
       "title": "Retrieve Endpoint",
       "description": "Information about the retrieve endpoint of the REST API, including usage, parameters, and responses",
       "summary": "This document covers the retrieve endpoints of the SolidX REST API, explaining how to fetch records from the system. The endpoints support both retrieving multiple records with advanced filtering, pagination, sorting, and field selection options, as well as retrieving single records by ID. The documentation includes sample requests and responses, required headers, body content structure, and comprehensive examples of the filtering capabilities available for data retrieval operations.",
+      "solidx_concerns": [
+        "add_full_custom_ui",
+        "onlayoutload_handler_function",
+        "ondataload_handler_function",
+        "add_form_button",
+        "add_list_header_button_with",
+        "add_list_row_button_with",
+        "create_custom_form_field_widget",
+        "create_custom_list_field_widget"
+      ],
       "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
       "collection_name": "developer-docs",
       "chunk_count": 1
@@ -1627,8 +1637,8 @@
     }
   },
   "developer-docs/extending/backend-customization/computation-providers.md": {
-    "hash": "5a0f59de4191a94d88f967ab711aefa6e80cc0781f981818f5307fbda25e3de6",
-    "document_id": "99998507-a61c-4779-905d-53ce1cc48aff",
+    "hash": "000d43997752fe6585546a214c74e306b3cf5198e26eb57cee18b4e5089d18bb",
+    "document_id": "7f356b91-447a-41d7-a014-ccc149722a3a",
     "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
     "metadata": {
       "source": "docusaurus",
@@ -2059,6 +2069,34 @@
       "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
       "collection_name": "developer-docs",
       "chunk_count": 4
+    }
+  },
+  "developer-docs/extending/frontend-customization/solid-entity-api.md": {
+    "hash": "5935187e4067e45cd7b0aff04284e4169eeeb8b96318a54f5b557850f825a2c7",
+    "document_id": "a3fe757f-7752-4cc3-80e4-4796a1d2cd7a",
+    "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
+    "metadata": {
+      "source": "docusaurus",
+      "project": "solidx-docs",
+      "section": "developer-docs",
+      "path": "developer-docs/extending/frontend-customization/solid-entity-api.md",
+      "doc_title": "developer-docs/extending/frontend-customization/solid-entity-api.md",
+      "title": "Solid Entity API",
+      "description": "Learn how to use the Solid Entity API to interact with entities in your application.",
+      "summary": "Guide to using the Solid Entity API for managing entities in SolidX applications. Covers importing and using the `SolidEntityApi` class, performing CRUD operations (create, read, update, delete), querying entities with filters, and handling relationships between entities. Includes code examples for common operations and best practices for effective entity management.",
+      "solidx_concerns": [
+        "add_full_custom_ui",
+        "onlayoutload_handler_function",
+        "ondataload_handler_function",
+        "add_form_button",
+        "add_list_header_button_with",
+        "add_list_row_button_with",
+        "create_custom_form_field_widget",
+        "create_custom_list_field_widget"
+      ],
+      "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
+      "collection_name": "developer-docs",
+      "chunk_count": 10
     }
   }
 }
