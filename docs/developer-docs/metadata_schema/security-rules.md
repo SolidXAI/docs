@@ -27,7 +27,7 @@ import { InfoBox } from '@site/src/common/InfoBox';
 ## Overview
 Security rules are crucial for controlling access to data in SolidX. By defining these rules, you can restrict visibility at the model level and ensure that only authorized users can access sensitive information.
 
-For a guide on how to create and manage security rules in SolidX, refer to the [Creating Security Rules](../../developer-docs/extending/backend-customization/security-rules/index.md).
+For a guide on how to create and manage security rules in SolidX, refer to the [Creating Security Rules](../extending/backend-customization/security-rules).
 
 ## Example: Security Rules Metadata
 <summary> Security Rules Schema </summary>
@@ -83,7 +83,7 @@ A JSON object defining the actual security rule configuration. This typically in
 Contains a json object with a `filters` key that defines the filtering logic. The filters object is consistent with the filter structure used in queries, allowing for complex conditions and relationships.
 
 ####  Further Reference
- -  Understanding Filters: See [Filters Documentation](../../developer-docs/rest-apis/retrieve/index.md) for details on constructing filter objects.
+ -  Understanding Filters: See [Filters Documentation](../rest-apis/retrieve) for details on constructing filter objects.
 
 
 

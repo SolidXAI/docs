@@ -1,5 +1,6 @@
 ---
 sidebar_position: 1
+title: Users
 ---
 
 import { NoteBoxs } from '@site/src/common/NoteBoxs';

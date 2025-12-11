@@ -1,5 +1,6 @@
 ---
 sidebar_position: 4
+title: Queues
 ---
 import { HiOutlineTemplate ,HiOutlinePaperAirplane,HiOutlineInbox} from "react-icons/hi";
 

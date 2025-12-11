@@ -319,7 +319,7 @@ h2 {
   font-weight: var(--solid-font-semibold) !important;
   line-height: var(--solid-line-height-snug) !important;
   color: var(--solid-text-primary) !important;
-  margin-top: var(--solid-space-10) !important;
+  margin-top: var(--solid-space-8) !important;
   margin-bottom: var(--solid-space-4) !important;
 }
 
@@ -531,9 +531,9 @@ button[aria-label*="Switch between dark and light mode"]:hover svg {
 
 
 
-@media(min-width:1024px){
+@media(min-width:1024px) {
   .DocSearch.DocSearch-Button {
-    width: 18rem ;
+    width: 18rem;
   }
 }
 
@@ -1043,6 +1043,7 @@ button[class*="copyButton"]:hover {
   border-radius: var(--solid-radius-lg);
   padding: var(--solid-space-6);
   background-color: var(--solid-success-bg);
+  padding-top: 0px;
 }
 
 .tips-box h4 {
@@ -1136,7 +1137,8 @@ button[class*="copyButton"]:hover {
 
 .tips-box p {
   color: var(--solid-text-secondary);
-  margin-bottom: var(--solid-space-3);
+  /* margin-bottom: var(--solid-space-3); */
+  margin-bottom: 0 !important;
 }
 
 .tips-box ul {
@@ -1151,7 +1153,12 @@ button[class*="copyButton"]:hover {
   border: 1px solid var(--solid-border-light);
   border-radius: var(--solid-radius-lg);
   padding: var(--solid-space-4);
+  padding-top: 0px;
   background-color: var(--solid-bg-card);
+}
+
+.tips-box .card-headear-wrapper svg {
+  margin-top: 0rem;
 }
 
 /*==============================================================================
@@ -1210,6 +1217,11 @@ details[open]>summary .rotatable {
   border-top: none !important;
   padding-top: var(--solid-space-2);
 }
+
+.details_lb9f>summary::before {
+  display: none;
+}
+
 
 /*==============================================================================
   BLOCKQUOTES
@@ -1466,6 +1478,11 @@ blockquote p {
     grid-template-columns: 1fr;
     gap: var(--solid-space-4);
   }
+
+
+  .card-headear-wrapper:has(h2) svg {
+    margin-top: 1.9rem !important;
+  }
 }
 
 @media (max-width: 768px) {
@@ -1553,4 +1570,82 @@ button:focus-visible,
   object-fit: contain;
   border-radius: var(--solid-radius-lg);
   box-shadow: var(--solid-shadow-sm);
+}
+
+
+
+/*==============================================================================
+  CARDS & FEATURE GRIDS
+==============================================================================*/
+
+.feature-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: var(--solid-space-6);
+  margin-top: var(--solid-space-8);
+}
+
+.feature-card {
+  border: 1px solid var(--solid-border-light);
+  background-color: var(--solid-bg-card);
+  padding: var(--solid-space-5);
+  border-radius: var(--solid-radius-lg);
+  box-shadow: var(--solid-shadow-sm);
+  transition: all 0.3s ease;
+  text-decoration: none !important;
+}
+
+.feature-card svg {
+  margin-bottom: 1rem;
+}
+
+.feature-card:hover {
+  border-color: var(--solid-primary);
+  box-shadow: var(--solid-shadow-md);
+  transform: translateY(-2px);
+  text-decoration: none !important;
+}
+
+.feature-card *,
+.feature-card:hover * {
+  text-decoration: none !important;
+}
+
+.card-tilte,
+.card-title {
+  color: var(--solid-text-primary) !important;
+  font-size: var(--solid-font-size-lg) !important;
+  font-weight: var(--solid-font-semibold) !important;
+  display: flex;
+  align-items: center;
+  gap: var(--solid-space-2);
+  margin: 0 !important;
+}
+
+.card-desc {
+  color: var(--solid-text-secondary) !important;
+  font-size: var(--solid-font-size-sm) !important;
+  line-height: var(--solid-line-height-relaxed);
+  margin: 0 !important;
+}
+
+.feature-card:hover .card-tilte,
+.feature-card:hover .card-title {
+  color: var(--solid-primary) !important;
+}
+
+.card-headear-wrapper {
+  display: flex;
+  gap: var(--solid-space-3);
+}
+
+.card-headear-wrapper:has(h3) svg {
+  margin-top: 0.6rem;
+  max-width: 1.4rem;
+  height: auto;
+}
+
+
+.card-headear-wrapper:has(h2) svg {
+  margin-top: 2.3rem;
 }

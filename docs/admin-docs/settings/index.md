@@ -1,5 +1,6 @@
 ---
 sidebar_position: 9
+title: Other Settings
 ---
 
 import { IoIosArrowForward } from "react-icons/io";

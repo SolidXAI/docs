@@ -1,5 +1,6 @@
 ---
 sidebar_position: 2
+title: 2. Data Model
 ---
 
 # 2. Data Model
@@ -48,7 +49,7 @@ After you click "Ok" SolidX backend will generate the necessary code to support 
 
 ![Module Home Page](/img/tutorial/school-fees-portal/2-data-model/module-home-page.png)
 
-> You can get rid of the default home page generated and instead put a custom [dashboard for this module](../custom-module-home/). We will be doing this in a later step in this tutorial.
+> You can get rid of the default home page generated and instead put a custom [dashboard for this module](../customisations/#custom-home-page-for-the-module). We will be doing this in a later step in this tutorial.
 
 Now we can move on to creating all the models in our system. 
 
@@ -66,7 +67,7 @@ On similar lines you can add all fields to the newly created model, more details
 
 For all the models listed below, please make sure to add all the fields, save the model and then use the row actions to generate the code for this model.
 
-### 1. nstitute 
+### 1. Institute 
 
 We need a model to store the institute details, the fields involved are. 
 

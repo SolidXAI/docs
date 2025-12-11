@@ -1,5 +1,6 @@
 ---
 sidebar_position: 2
+title: Kanban View
 ---
 
 import { FiSearch, FiFilter, FiArrowUp, FiList,FiUserCheck } from "react-icons/fi";

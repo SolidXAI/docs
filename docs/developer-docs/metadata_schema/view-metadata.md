@@ -747,8 +747,8 @@ Views support custom widgets to enhance field display and editing experiences. L
 </details>
 
 #### Further Reference
-- List View Widgets: [List View Widgets](../extending/frontend-customization/list-column-widgets.md)
-- Form View / Edit Widgets: [Form View Widgets](../extending/frontend-customization/form-view-field-widgets.md)
+- List View Widgets: [List View Widgets](/docs/developer-docs/extending/frontend-customization/list-view-field-widgets)
+- Form View / Edit Widgets: [Form View Widgets](/docs/developer-docs/extending/frontend-customization/form-view-field-widgets)
 
 ---
 
@@ -765,7 +765,7 @@ Views support custom widgets to enhance field display and editing experiences. L
 - `onFieldBlur`: Executed when a field loses focus
 - `onCustomWidgetRender`: Called when a custom widget is rendered
 
-Further reference: [Event Handlers Documentation](../extending/frontend-customization/form-view-event-listeners.md)
+Further reference: [Event Handlers Documentation](../extending/frontend-customization/form-view-events)
 
 ---
 
@@ -824,9 +824,9 @@ Defines the **layout and structure** of the view. Controls how fields, widgets, 
 **Default:** N/A
 
 #### Further Reference
-- **List View:** [List View Layout Attributes](../../recipes/view-configurations-guide#list-view-attributes)  
-- **Form View:** [Form View Layout Attributes](../../recipes/view-configurations-guide#form-view-attributes)  
-- **Kanban View:** [Kanban View Layout Attributes](../../recipes/view-configurations-guide#kanban-view-attributes)
+- **List View:** [List View Layout Attributes](../../admin-docs/layouts/list-view#list-view-attributes-type-list)  
+- **Form View:** [Form View Layout Attributes](../../admin-docs/layouts/form-view)  
+- **Kanban View:** [Kanban View Layout Attributes](../../admin-docs/layouts/kanban-view#kanban-view-attributes) 
 
 <InfoBox>
   Each view type has its own expected `layout` schema. Use the links above to understand required keys, optional properties, and usage examples.

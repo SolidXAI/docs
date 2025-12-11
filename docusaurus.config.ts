@@ -74,7 +74,7 @@ const config: Config = {
 
     //  ADDED TYPESENSE CONFIG
     typesense: {
-      typesenseCollectionName: 'docusaurus_docs',
+      typesenseCollectionName: process.env.NEXT_PUBLIC_TYPESENSE_COLLECTION_NAME,
 
       typesenseServerConfig: {
         nodes: [

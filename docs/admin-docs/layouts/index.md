@@ -1,5 +1,6 @@
 ---
 sidebar_position: 3
+title: Layout Editor
 ---
 
 import { FiList, FiColumns, FiEdit, FiFilter, FiSettings, FiCheckSquare, FiFileText, FiClock } from "react-icons/fi";

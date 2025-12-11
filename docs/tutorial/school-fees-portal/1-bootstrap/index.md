@@ -1,5 +1,6 @@
 ---
 sidebar_position: 1
+title: 1. Create Solid App
 ---
 
 # 1. Create Solid App

@@ -1,5 +1,6 @@
 ---
 sidebar_position: 2
+title: Admin Docs
 ---
 
 import { FiPackage, FiLayout, FiLayers, FiUsers, FiBell, FiImage, FiSettings, FiDatabase,FiGrid,FiInfo} from "react-icons/fi";
@@ -141,6 +142,6 @@ Below list of cards represent the core features of SolidX, we have arranged them
 
 <div className='extra-space'>
   <div className="custom-tag">
-    **Tags:** [`#introduction`](./strapi-guide) [`#concepts`](./beginner-guide)
+    **Tags:** `#introduction` `#concepts`
   </div>
 </div>

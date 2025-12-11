@@ -1,5 +1,6 @@
 ---
 sidebar_position: 2
+title: Roles
 ---
 
 import { FaUserShield, FaUser, FaUsersCog, FaEye, FaDatabase, FaTools } from "react-icons/fa";

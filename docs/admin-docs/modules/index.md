@@ -1,5 +1,6 @@
 ---
 sidebar_position: 3
+title: Modules
 ---
 
 import { FiPackage,FiSettings } from "react-icons/fi";
@@ -44,14 +45,15 @@ Apps in SOLID are modular units that encapsulate specific functionality and expo
 
 ## Components
 
-### [API Documentation](./api-docs.md)
+### [API Documentation](../../developer-docs/rest-apis/swagger-documentation)
 Comprehensive API documentation with Swagger/OpenAPI integration.
 
 ### Admin Interface
-- [Menu Structure](./admin/menu-structure.md)
-- [List View](./admin/list-view.md)
-- [Kanban View](./admin/kanban-view.md)
-- [Form View](./admin/form-view.md)
+- [Menu Structure](./menu-structure.md)
+- [List View](./list-view.md)
+- [Kanban View](./kanban-view.md)
+- [Form View](./form-view.md)
+
 
 
 ## Best Practices

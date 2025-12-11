@@ -156,7 +156,7 @@ Every SolidX model is composed of fields. Fields in SolidX go over and above the
 | Value    | Reference | Example |
 |----------|------------|---------|
 | `int`    | [Integer Field](../../admin-docs/module-builder/field-management#integer) | [See Example](#int) |
-| `bigint` | [BigInt Field](../../admin-docs/module-builder/field-management#bigint) | [See Example](#bigint-todo) |
+| `bigint` | [BigInt Field](../../admin-docs/module-builder/field-management#big-integer) | [See Example](#bigint-todo) |
 | `decimal`| [Decimal Field](../../admin-docs/module-builder/field-management#decimal) | [See Example](#decimal) |
 
 
@@ -169,9 +169,9 @@ Every SolidX model is composed of fields. Fields in SolidX go over and above the
 
 | Value       | Reference | Example |
 |-------------|-----------|---------|
-| `shortText` | [Short Text Field](../../admin-docs/module-builder/field-management#shorttext) | [See Example](#shorttext) |
-| `longText`  | [Long Text Field](../../admin-docs/module-builder/field-management#longtext) | [See Example](#longtext) |
-| `richText`  | [Rich Text Field](../../admin-docs/module-builder/field-management#richtext) | [See Example](#richtext) |
+| `shortText` | [Short Text Field](../../admin-docs/module-builder/field-management#short-text) | [See Example](#shorttext) |
+| `longText`  | [Long Text Field](../../admin-docs/module-builder/field-management#long-text) | [See Example](#longtext) |
+| `richText`  | [Rich Text Field](../../admin-docs/module-builder/field-management#rich-text) | [See Example](#richtext) |
 | `json`      | [JSON Field](../../admin-docs/module-builder/field-management#json) | [See Example](#json) |
 
 
@@ -210,9 +210,9 @@ Every SolidX model is composed of fields. Fields in SolidX go over and above the
 
 | Value         | Reference | Example |
 |---------------|-----------| --------|
-| `many-to-one`   | [Many To One](../../admin-docs/module-builder/field-management#many-to-one) | [See Example](#many-to-one-relation-child--parent) |
-| `one-to-many`   | [One To Many](../../admin-docs/module-builder/field-management#one-to-many) | [See Example](#one-to-many-relation-parent--children) |
-| `many-to-many`  | [Many To Many](../../admin-docs/module-builder/field-management#many-to-many) | [See Example](#many-to-many-relation) |
+| `many-to-one`   | [Many To One](../../admin-docs/module-builder/field-management#1-many-to-one) | [See Example](#many-to-one-relation-child--parent) |
+| `one-to-many`   | [One To Many](../../admin-docs/module-builder/field-management#3-one-to-many) | [See Example](#one-to-many-relation-parent--children) |
+| `many-to-many`  | [Many To Many](../../admin-docs/module-builder/field-management#2-many-to-many) | [See Example](#many-to-many-relation) |
 
 
   <h3 className=" card-headear-wrapper">

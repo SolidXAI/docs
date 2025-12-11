@@ -1,5 +1,6 @@
 ---
 sidebar_position: 1
+title: List View
 ---
 
 import { FiSearch, FiFilter, FiArrowUp, FiList,FiUserCheck } from "react-icons/fi";
