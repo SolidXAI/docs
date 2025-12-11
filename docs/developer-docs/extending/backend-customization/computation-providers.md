@@ -216,7 +216,7 @@ export interface IEntityComputedFieldProvider {
    - `preComputeValue()` is called **synchronously**  
    - Value is set directly on the entity and auto-saved  
 3. For **after** operations:  
-   - `postComputeAndSaveValue()` is called **asynchronously** via [Background Jobs](../background-jobs/index.md)  
+   - `postComputeAndSaveValue()` is called **asynchronously** via [Background Jobs](./background-jobs)  
    - Final saving happens via `ComputedFieldEvaluationSubscriber`  
 
 <NoteBoxs>

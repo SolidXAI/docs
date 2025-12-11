@@ -54,7 +54,7 @@ These widgets:
 - A **field value** (referenced by field name).  
 - A **custom variable**, set in the form data via a **form handler**.  
 
- Learn more here: [Form View Event Listeners](../form-view-event-listeners/index.md)
+ Learn more here: [Form View Event Listeners](./form-view-events)
 
 
 

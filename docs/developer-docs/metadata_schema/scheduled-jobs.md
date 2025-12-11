@@ -26,7 +26,7 @@ import { InfoBox } from '@site/src/common/InfoBox';
 ## Overview
 Scheduled jobs in SolidX allow you to run recurring tasks such as sending notifications, cleaning up records, syncing data, or performing regular maintenance.
 
-For a guide on how to create and manage scheduled jobs in SolidX, refer to the [Creating Scheduled Jobs](../../developer-docs/extending/backend-customization/scheduled-jobs/index.md).
+For a guide on how to create and manage scheduled jobs in SolidX, refer to the [Creating Scheduled Jobs](/docs/developer-docs/extending/backend-customization/scheduled-jobs).
 
 ## Example: Scheduled Jobs Metadata
 

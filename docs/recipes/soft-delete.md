@@ -1,5 +1,6 @@
 ---
 sidebar_position: 5
+title: Soft Delete
 ---
 
 # Soft Delete

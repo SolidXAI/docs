@@ -1,5 +1,6 @@
 ---
 sidebar_position: 4
+title: Menu Structure
 ---
 
 import { IoIosArrowForward } from "react-icons/io";

@@ -1,5 +1,6 @@
 ---
 sidebar_position: 3
+title: Form View
 ---
 
 import { FaWpforms } from "react-icons/fa";

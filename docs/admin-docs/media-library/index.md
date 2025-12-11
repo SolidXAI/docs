@@ -1,5 +1,6 @@
 ---
 sidebar_position: 4
+title: Media Library
 ---
 import { FaFileUpload, FaSitemap, FaImage, FaUserShield } from "react-icons/fa"
 import { IoIosArrowForward } from "react-icons/io";

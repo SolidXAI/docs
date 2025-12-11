@@ -1,5 +1,6 @@
 ---
 sidebar_position: 5
+title: Extending Users
 ---
 
 # Extending Users

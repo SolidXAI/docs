@@ -1,5 +1,6 @@
 ---
 sidebar_position: 2
+title: Module Builder
 ---
 
 import { FiPackage, FiLayout, FiGrid, FiFileText, FiDatabase, FiCheckCircle } from "react-icons/fi";

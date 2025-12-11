@@ -1,5 +1,6 @@
 ---
 sidebar_position: 3
+title: Fields
 ---
 
 import { FiDatabase } from "react-icons/fi";

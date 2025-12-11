@@ -1,5 +1,6 @@
 ---
 sidebar_position: 6
+title: Email & SMS Templates
 ---
 import { FaEnvelope, FaServer, FaSms, FaGlobe,FaFileAlt, FaEdit, FaTruck } from "react-icons/fa";
 import { IoIosArrowForward } from "react-icons/io";

@@ -30,7 +30,8 @@ SolidX Models represent the structure of your data within a module. Each model d
 
 Each model is a semantic, configurable data structure that forms the basis of adding custom business logic.
 
-👉 For a conceptual overview of what a model is, see [Model Management Documentation](../../admin-docs/module-builder/model-management.md).
+👉 For a conceptual overview of what a model is, see [Model Management Documentation](/docs/admin-docs/module-builder/model-management).
+
 
 
 
@@ -204,5 +205,5 @@ Indicates whether the table uses the legacy internationalization pattern but doe
 
 </div>
 
--	👉 [Model Type Recipes](../../recipes/solidx-metadata-complete-guide.md)  
+👉 [Model Type Recipes](../../admin-docs/module-builder/model-management#related-recipes)  
 **Default:** `false`

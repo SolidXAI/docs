@@ -1,5 +1,6 @@
 ---
 sidebar_position: 1
+title: Modules
 ---
 
 import { FiPlusCircle, FiDatabase, FiCode, FiLayers, FiFileText } from "react-icons/fi";

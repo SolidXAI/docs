@@ -1,5 +1,6 @@
 ---
 sidebar_position: 5
+title: IAM
 ---
 
 import { FaUser, FaUsersCog, FaDatabase, FaUserShield, FaKey, FaLock, FaSignInAlt, FaRegLightbulb,FaShieldAlt,FaShieldVirus,FaUserCog } from "react-icons/fa";
@@ -74,7 +75,8 @@ The IAM system consists of several key components:
      - Role-based filters
 </div>
 
-### [Authentication Providers](./auth-providers.md)
+### [Authentication Providers](/docs/developer-docs/rest-apis/authentication/oauth-authentication/)
+
 
 <div className="border-box">
     <h4 className="card-title card-headear-wrapper">

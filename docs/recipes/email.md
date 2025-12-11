@@ -1,5 +1,6 @@
 ---
 sidebar_position: 4
+title: Sending Emails
 ---
 
 import { MdOutlineSettings } from "react-icons/md";

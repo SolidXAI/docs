@@ -1,5 +1,6 @@
 ---
 sidebar_position: 4
+title: Record Rules
 ---
 
 import { IoIosArrowForward } from "react-icons/io";

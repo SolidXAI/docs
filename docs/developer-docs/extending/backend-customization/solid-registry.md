@@ -37,7 +37,7 @@ The following components are tracked by the Solid Registry:
 
 **Purpose:** Populate your database with initial or default data (e.g., system roles, default fee types).  
 **How it works:** The registry maintains a catalog of all available seeders. Developers can easily list, execute, or selectively run seeders.  
-**See also:** [Seeders Guide](../seeders)
+**See also:** [Seeders Guide](../../database-seeding)
 
 
 
@@ -48,7 +48,7 @@ The following components are tracked by the Solid Registry:
 
 **Purpose:** Define recurring tasks such as reminders, report generation, and cleanup jobs.  
 **How it works:** Registered jobs are tied into the scheduling engine. The registry ensures all jobs are loaded, discoverable, and can be managed or paused centrally.  
-**See also:** [Jobs & Scheduling](../jobs)
+**See also:** [Jobs & Scheduling](./scheduled-jobs)
 
 
 
@@ -59,7 +59,7 @@ The following components are tracked by the Solid Registry:
 
 **Purpose:** Provide dynamic values for selection fields in the UI (e.g., dropdowns, filters).  
 **How it works:** A `@SelectionProvider` class can be created, registered, and then consumed by form components. The registry ensures all providers are globally available without additional wiring.  
-**See also:** [Field Metadata](../fields)
+**See also:** [Field Metadata](../../metadata_schema/field-metadata)
 
 
 
@@ -70,7 +70,7 @@ The following components are tracked by the Solid Registry:
 
 **Purpose:** Derive field values dynamically based on logic (e.g., total amount, status based on conditions).  
 **How it works:** Each computed field provider is registered with metadata, making them discoverable by the runtime when evaluating entity fields.  
-**See also:** [Computed Fields](../computed-fields)
+**See also:** [Computed Fields](/docs/recipes/computed-fields)
 
 
 
@@ -81,7 +81,7 @@ The following components are tracked by the Solid Registry:
 
 **Purpose:** Define your application’s database schema, models, and relations.  
 **How it works:** Modules (like Fees, School, Library) are registered in the Solid Registry, ensuring schema consistency and discoverability across the application.  
-**See also:** [Modules Overview](../modules)
+**See also:** [Modules Overview](/docs/admin-docs/module-builder/module-management)
 
 
 
@@ -92,7 +92,7 @@ The following components are tracked by the Solid Registry:
 
 **Purpose:** Handle incoming HTTP requests and expose routes.  
 **How it works:** The registry tracks all controllers, enabling automated route mapping and simplifying metadata introspection for APIs.  
-**See also:** [Controllers](../controllers)
+**See also:** [Controllers](./extending-controllers)
 
 
 
@@ -103,7 +103,7 @@ The following components are tracked by the Solid Registry:
 
 **Purpose:** Restrict access to entities and fields based on roles and policies.  
 **How it works:** The registry stores all declared rules. Every query automatically applies these rules by resolving them from the registry.  
-**See also:** [Security Rules](../security-rules)
+**See also:** [Security Rules](./security-rules)
 
 
 
@@ -114,7 +114,7 @@ The following components are tracked by the Solid Registry:
 
 **Purpose:** Manage localization, translations, and regional formats.  
 **How it works:** Each locale configuration is registered at startup. Applications can dynamically switch or apply formats based on user preference.  
-**See also:** [Localization](../localization)
+**See also:** [Localization](/docs/developer-docs/extending/backend-customization/solid-registry)
 
 
 
@@ -125,7 +125,7 @@ The following components are tracked by the Solid Registry:
 
 **Purpose:** Provide dynamic lists of variables for dashboards (e.g., filters like branch, department, or timeframe).  
 **How it works:** Developers can implement new providers that populate variables at runtime. The registry ensures these providers are available to all dashboards.  
-**See also:** [Dashboards](../dashboards)
+**See also:** [Dashboards](./dashboard-providers)
 
 
 
@@ -136,7 +136,7 @@ The following components are tracked by the Solid Registry:
 
 **Purpose:** Supply data sources for dashboard questions (charts, KPIs, summaries).  
 **How it works:** Providers can query APIs, databases, or aggregates. The registry makes them available for dynamic dashboard rendering.  
-**See also:** [Dashboard Questions](../dashboard-questions)
+**See also:** [Dashboard Questions](/docs/developer-docs/extending/backend-customization/solid-registry)
 
 
 

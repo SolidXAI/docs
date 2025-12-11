@@ -1,5 +1,6 @@
 ---
 sidebar_position: 2
+title: Models
 ---
 
 import { FiTrash2, FiActivity, FiGlobe, FiLayers, FiDatabase, FiCode } from "react-icons/fi";
