@@ -34,7 +34,7 @@ const config: Config = {
   },
 
   //  ADDED THIS
-  themes: ['docusaurus-theme-search-typesense'],
+  // themes: ['docusaurus-theme-search-typesense'],
 
   presets: [
     [
@@ -73,30 +73,30 @@ const config: Config = {
   themeConfig: {
 
     //  ADDED TYPESENSE CONFIG
-    typesense: {
-      typesenseCollectionName: process.env.NEXT_PUBLIC_TYPESENSE_COLLECTION_NAME,
+    // typesense: {
+    //   typesenseCollectionName: process.env.NEXT_PUBLIC_TYPESENSE_COLLECTION_NAME,
 
-      typesenseServerConfig: {
-        nodes: [
-          {
-            host: process.env.NEXT_PUBLIC_TYPESENSE_HOST,
-            port: Number(process.env.NEXT_PUBLIC_TYPESENSE_PORT),
-            protocol: process.env.NEXT_PUBLIC_TYPESENSE_PROTOCOL,
-          },
-        ],
+    //   typesenseServerConfig: {
+    //     nodes: [
+    //       {
+    //         host: process.env.NEXT_PUBLIC_TYPESENSE_HOST,
+    //         port: Number(process.env.NEXT_PUBLIC_TYPESENSE_PORT),
+    //         protocol: process.env.NEXT_PUBLIC_TYPESENSE_PROTOCOL,
+    //       },
+    //     ],
       
-        // IMPORTANT: USE SEARCH-ONLY KEY HERE
-        apiKey: process.env.NEXT_PUBLIC_TYPESENSE_API_KEY,
-      },
+    //     // IMPORTANT: USE SEARCH-ONLY KEY HERE
+    //     apiKey: process.env.NEXT_PUBLIC_TYPESENSE_API_KEY,
+    //   },
       
-      searchParameters: {},
-    },
+    //   searchParameters: {},
+    // },
 
-    colorMode: {
-      defaultMode: 'light',
-      disableSwitch: false,
-      respectPrefersColorScheme: true,
-    },
+    // colorMode: {
+    //   defaultMode: 'light',
+    //   disableSwitch: false,
+    //   respectPrefersColorScheme: true,
+    // },
 
     image: 'img/docusaurus-social-card.jpg',
 
@@ -128,10 +128,10 @@ const config: Config = {
         // },
 
         //  ADDED SEARCH BAR HERE
-        {
-          type: 'search',
-          position: 'right',
-        },
+        // {
+        //   type: 'search',
+        //   position: 'right',
+        // },
       ],
     },
 
