@@ -1645,7 +1645,11 @@ button:focus-visible,
   height: auto;
 }
 
+.card-title.card-headear-wrapper:has(p) svg{
+  margin-bottom: 0.9rem;
+}
 
 .card-headear-wrapper:has(h2) svg {
   margin-top: 2.3rem;
 }
+
