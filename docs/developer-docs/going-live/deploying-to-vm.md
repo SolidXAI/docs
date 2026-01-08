@@ -1,265 +1,313 @@
 ---
 title: Virtual Machine
-description: Step-by-step guide to deploy SolidX applications on Ubuntu virtual machines.
+description: A step-by-step guide to deploying SolidX applications on Ubuntu virtual machines.
 summary: This comprehensive guide walks through deploying SolidX applications on Ubuntu virtual machines. It covers cloning the repository, configuring environment variables, verifying backend and frontend operation, deploying with PM2 process manager (including config files and deploy scripts), database seeding with the rebuild script, and setting up Nginx as a reverse proxy with SSL certificates via Certbot. The guide also includes firewall configuration, virtual host setup, log rotation setup, and automatic restart configuration for production-ready deployment.
 sidebar_position: 1
 ---
 
-import { HiOutlineCog, HiOutlineServer } from "react-icons/hi2"
-import { HiOutlineCode,HiOutlineDesktopComputer } from "react-icons/hi";
-import { FaLightbulb } from "react-icons/fa";
+import { HiOutlineCog, HiOutlineServer, HiOutlineCode, HiOutlineDesktopComputer, HiOutlineShieldCheck, HiOutlineDocumentText } from "react-icons/hi";
+import { FaLightbulb, FaShieldAlt } from "react-icons/fa";
 import { InfoBox } from '@site/src/common/InfoBox';
 
+# Deploying to a Virtual Machine
 
-
-
-# Deploying to VM
-
-This section provides guidance on how to deploy your SolidX applications to a virtual machine (VM).
-
+This guide provides a comprehensive walkthrough for deploying your SolidX application to a virtual machine (VM). We will cover everything from setting up your environment to deploying and securing your application.
 
 <InfoBox>
- Before continuing, make sure you've completed the [Prerequisites](/docs/developer-docs/prerequisites).
+  Before you begin, ensure you have completed the [Prerequisites](/docs/developer-docs/prerequisites) and have a running VM with root access.
 </InfoBox>
 
-## A) Run SolidX Application
+## 1. Initial Setup
 
-This section explains how to run the SolidX app on a virtual machine.
+This section covers the initial steps to get your SolidX application running on a VM.
 
+<h3 className="card-headear-wrapper">
+    <HiOutlineCode size={22} />
+    &nbsp;Clone Your Repository
+</h3>
 
- <h3 className=" card-headear-wrapper">
-    <HiOutlineCode size={22}  />
-
-### Clone Repository
-  </h3>
-
-
-
+First, clone your application's repository to your VM:
 ```bash
-git clone <repo http url>
+git clone <your_repository_url>
+cd <your_project_directory>
 ```
 
+<h3 className="card-headear-wrapper">
+    <HiOutlineCog size={22} />
+    &nbsp;Configure Environment Variables
+</h3>
 
- <h3 className=" card-headear-wrapper">
-    <HiOutlineCog size={22}  />
+Your application will need environment variables for configuration. Create `.env` files for both the backend and frontend.
 
-### Update Environment Variables
-  </h3>
+**Backend (`solid-api/.env`):**
+```
+# Server Configuration
+PORT=3000
 
-Create the `.env` files inside `solid-api` and `solid-ui` with your database credentials and other configs.
+# Database Configuration
+DB_HOST=localhost
+DB_PORT=5432
+DB_USER=your_db_user
+DB_PASSWORD=your_db_password
+DB_NAME=your_db_name
 
- <h3 className=" card-headear-wrapper">
-    <HiOutlineServer size={20}  />
+# JWT Configuration
+JWT_SECRET=your_jwt_secret
+```
 
-### Verify Backend is Running
-  </h3>
+**Frontend (`solid-ui/.env`):**
+```
+NEXT_PUBLIC_API_URL=http://localhost:3000
+```
 
+<InfoBox>
+  It is crucial to keep your `.env` files secure and out of version control. Add `.env` to your `.gitignore` file.
+</InfoBox>
+
+## 2. Running the Application Manually
+
+Before automating the deployment, let's run the backend and frontend manually to ensure everything is set up correctly.
+
+<h3 className="card-headear-wrapper">
+    <HiOutlineServer size={20} />
+    &nbsp;Verify Backend
+</h3>
 
 ```bash
 cd solid-api
-npm i
+npm install
 npm run build
 npm run start
 ```
+You should see a confirmation message that the server is running on port 3000.
 
-
- <h3 className=" card-headear-wrapper">
-    <HiOutlineDesktopComputer size={20}  />
-
-### Verify Frontend is Running
-  </h3>
-
+<h3 className="card-headear-wrapper">
+    <HiOutlineDesktopComputer size={20} />
+    &nbsp;Verify Frontend
+</h3>
 
 ```bash
 cd solid-ui
-npm i
+npm install
 npm run build
 npm run start
 ```
+The frontend application should now be running on port 3001.
 
-> Press `Ctrl + C` to exit; we will use `pm2` next.
+> Press `Ctrl + C` to stop the applications. We will use `pm2` to manage them in the next step.
 
-## B)  Deploy with Process Manager
+## 3. Deploying with PM2
 
-### 1. Install pm2 Globally
+PM2 is a process manager that will keep your application running and handle restarts.
+
+<h3 className="card-headear-wrapper">
+    <HiOutlineCog size={22} />
+    &nbsp;Install PM2
+</h3>
 
 ```bash
 npm install -g pm2
 ```
 
-### 2. Create pm2 Config File
+<h3 className="card-headear-wrapper">
+    <HiOutlineDocumentText size={22} />
+    &nbsp;Create PM2 Configuration Files
+</h3>
 
-Inside both `solid-api` and `solid-ui` folders, create `pm2.config.js`:
+Create `pm2.config.js` files for both the backend and frontend.
 
-```js
+**Backend (`solid-api/pm2.config.js`):**
+```javascript
 module.exports = {
   apps: [
     {
-      name: "solid_admin_frontend",
+      name: "solidx-api",
       script: "npm",
       args: "run start",
+      watch: true,
+      env: {
+        NODE_ENV: "production",
+      },
     },
   ],
 };
 ```
 
-### 3. Start apps with pm2
+**Frontend (`solid-ui/pm2.config.js`):**
+```javascript
+module.exports = {
+  apps: [
+    {
+      name: "solidx-ui",
+      script: "npm",
+      args: "run start",
+      watch: true,
+      env: {
+        NODE_ENV: "production",
+      },
+    },
+  ],
+};
+```
+
+<h3 className="card-headear-wrapper">
+    <HiOutlineCog size={22} />
+    &nbsp;Start Applications with PM2
+</h3>
 
 ```bash
-npm i && npm run build
+cd solid-api
 pm2 start pm2.config.js
-pm2 list
-```
 
-### 4. Create deploy scripts
-
-```bash
-#!/bin/bash
-git pull
-npm i
-npm run build
-pm2 stop solid_admin_frontend
-pm2 start solid_admin_frontend
-tail -100f ~/.pm2/logs/solid_admin_frontend-out.log
-```
-
-Make it executable:
-
-```bash
-chmod +x deploy.sh
-```
-
-### 5. Run the Deploy Scripts
-
-```bash
-cd solid-api
-./deploy.sh
 cd ../solid-ui
-./deploy.sh
+pm2 start pm2.config.js
 ```
 
-## C) Seed the Backend Database
+You can check the status of your applications with `pm2 list`.
 
-```bash
-cd solid-api
-./rebuild.sh
-solid seed
-```
+## 4. Setting Up Nginx as a Reverse Proxy
 
-## D) Setup Nginx & SSL
+Nginx will act as a reverse proxy, directing traffic to your backend and frontend applications.
 
-### 1. Install Nginx
+<h3 className="card-headear-wrapper">
+    <FaShieldAlt size={20} />
+    &nbsp;Install and Configure Nginx
+</h3>
 
 ```bash
 sudo apt update
 sudo apt install nginx -y
 sudo systemctl start nginx
 sudo systemctl enable nginx
-sudo systemctl status nginx
 ```
 
-### 2. Enable Firewall for Nginx
+<h3 className="card-headear-wrapper">
+    <HiOutlineShieldCheck size={22} />
+    &nbsp;Configure Firewall
+</h3>
 
 ```bash
 sudo ufw allow 'Nginx Full'
 sudo ufw enable
-sudo ufw status
 ```
 
-### 3. Create Virtual Host Files
+<h3 className="card-headear-wrapper">
+    <HiOutlineDocumentText size={22} />
+    &nbsp;Create Nginx Virtual Host Files
+</h3>
 
-```bash
-cd /etc/nginx/sites-available
-touch <api_domain_name>
-touch <ui_domain_name>
-```
+Create separate configuration files for your API and UI.
 
-Sample config for `api_domain_name`:
-
-```bash
+**Backend (`/etc/nginx/sites-available/api.your_domain.com`):**
+```nginx
 server {
-  server_name <api_domain_name>;
-  root /var/www/html;
-  index index.html index.htm;
+  server_name api.your_domain.com;
 
   location / {
-    proxy_pass http://127.0.0.1:<api_port>;
-    proxy_read_timeout 60;
-    proxy_connect_timeout 60;
-    proxy_redirect off;
-
+    proxy_pass http://localhost:3000;
     proxy_http_version 1.1;
     proxy_set_header Upgrade $http_upgrade;
     proxy_set_header Connection 'upgrade';
     proxy_set_header Host $host;
     proxy_cache_bypass $http_upgrade;
   }
-
-  listen 80;
 }
 ```
 
-Link and restart:
+**Frontend (`/etc/nginx/sites-available/your_domain.com`):**
+```nginx
+server {
+  server_name your_domain.com;
 
-```bash
-ln -s /etc/nginx/sites-available/<api_domain_name> /etc/nginx/sites-enabled/
-ln -s /etc/nginx/sites-available/<ui_domain_name> /etc/nginx/sites-enabled/
-sudo nginx -t
-sudo systemctl restart nginx
-sudo tail -f /var/log/nginx/error.log
+  location / {
+    proxy_pass http://localhost:3001;
+    proxy_http_version 1.1;
+    proxy_set_header Upgrade $http_upgrade;
+    proxy_set_header Connection 'upgrade';
+    proxy_set_header Host $host;
+    proxy_cache_bypass $http_upgrade;
+  }
+}
 ```
 
-Verify if the below urls are working over http before proceeding with installing the http certificate:
+<h3 className="card-headear-wrapper">
+    <HiOutlineCog size={22} />
+    &nbsp;Enable Virtual Hosts
+</h3>
 
-- api swagger docs - `http://<api_domain_name>/docs`
-- admin UI login - `http://<ui_domain_name>`
-- curl request - `curl -I http://<ui_domain_name>` (it should return something like a 200 OK response)
+```bash
+sudo ln -s /etc/nginx/sites-available/api.your_domain.com /etc/nginx/sites-enabled/
+sudo ln -s /etc/nginx/sites-available/your_domain.com /etc/nginx/sites-enabled/
 
-### 4. Install SSL with Certbot
+sudo nginx -t
+sudo systemctl restart nginx
+```
+
+## 5. Securing Your Application with SSL
+
+Secure your application by enabling HTTPS with SSL certificates from Let's Encrypt.
+
+<h3 className="card-headear-wrapper">
+    <FaShieldAlt size={20} />
+    &nbsp;Install Certbot
+</h3>
 
 ```bash
 sudo apt install certbot python3-certbot-nginx -y
-sudo certbot --nginx -d <api_domain_name>
-sudo certbot --nginx -d <ui_domain_name>
-sudo systemctl restart nginx
 ```
 
-Visit: `https://<domain_name>` to verify SSL.
-
-
-
-
-<div className="tips-box">
-  <h4 className="card-headear-wrapper">
-    <FaLightbulb className="feature-icon" />
-    Tip
-  </h4>
-  You can set up a cron job or use the commands below to ensure apps restart after reboot.
-
-</div>
-
-
-<br/>
+<h3 className="card-headear-wrapper">
+    <HiOutlineShieldCheck size={22} />
+    &nbsp;Obtain SSL Certificates
+</h3>
 
 ```bash
-pm2 save && pm2 startup
+sudo certbot --nginx -d your_domain.com -d api.your_domain.com
 ```
 
+Certbot will automatically update your Nginx configuration to use the SSL certificates.
 
-<div className="tips-box">
-  <h4 className="card-headear-wrapper">
+## 6. Post-Deployment
+
+Here are some additional steps to ensure your application runs smoothly in production.
+
+<h3 className="card-headear-wrapper">
     <FaLightbulb className="feature-icon" />
-    Tip
-  </h4>
-You can set up log rotation for pm2 logs using the following command. This will setup log rotation to rotate daily with a max size of <span className="color-green"> 10MB with 30 days </span> rotation by default and compress the rotated logs.
-</div>
+    &nbsp;Automatic Restart on Reboot
+</h3>
 
+To ensure your applications restart after a server reboot, run:
+```bash
+pm2 save
+pm2 startup
+```
 
-<br/>
+<h3 className="card-headear-wrapper">
+    <FaLightbulb className="feature-icon" />
+    &nbsp;Log Management
+</h3>
 
+PM2 can manage your application's logs. To view logs, run:
+```bash
+pm2 logs solidx-api
+pm2 logs solidx-ui
+```
 
+For log rotation, you can use `pm2-logrotate`:
 ```bash
 pm2 install pm2-logrotate
 pm2 set pm2-logrotate:max_size 10M
 pm2 set pm2-logrotate:compress true
 ```
+
+<h3 className="card-headear-wrapper">
+    <FaLightbulb className="feature-icon" />
+    &nbsp;Monitoring
+</h3>
+
+You can monitor your application's resource usage with:
+```bash
+pm2 monit
+```
+
+Congratulations! You have successfully deployed and secured your SolidX application on a VM.

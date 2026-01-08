@@ -1,265 +1,226 @@
 ---
-title: ECS
-description: Step-by-step guide to deploy SolidX applications on Ubuntu virtual machines.
-summary: This comprehensive guide walks through deploying SolidX applications on Ubuntu virtual machines. It covers cloning the repository, configuring environment variables, verifying backend and frontend operation, deploying with PM2 process manager (including config files and deploy scripts), database seeding with the rebuild script, and setting up Nginx as a reverse proxy with SSL certificates via Certbot. The guide also includes firewall configuration, virtual host setup, log rotation setup, and automatic restart configuration for production-ready deployment.
-sidebar_position: 1
+title: Deploying to ECS
+description: A comprehensive guide for deploying SolidX applications to Amazon ECS with Fargate.
+summary: This guide will walk you through the process of deploying your SolidX application to Amazon Elastic Container Service (ECS) using Fargate. We will cover containerizing your application, pushing it to ECR, and setting up the necessary ECS resources.
+sidebar_position: 2
 ---
 
-import { HiOutlineCog, HiOutlineServer } from "react-icons/hi2"
-import { HiOutlineCode,HiOutlineDesktopComputer } from "react-icons/hi";
-import { FaLightbulb } from "react-icons/fa";
+import { HiOutlineCloud, HiOutlineCog, HiOutlineServer, HiOutlineCloudUpload } from "react-icons/hi";
+import { FaAws } from "react-icons/fa";
 import { InfoBox } from '@site/src/common/InfoBox';
 
+# Deploying to Amazon ECS with Fargate
 
-
-
-# Deploying to VM
-
-This section provides guidance on how to deploy your SolidX applications to a virtual machine (VM).
-
+This guide will walk you through deploying your SolidX application to Amazon Elastic Container Service (ECS) with Fargate, a serverless compute engine that allows you to run containers without managing the underlying infrastructure.
 
 <InfoBox>
- Before continuing, make sure you've completed the [Prerequisites](/docs/developer-docs/prerequisites).
+  Before you begin, make sure you have an AWS account, the AWS CLI installed and configured, and Docker running on your local machine.
 </InfoBox>
 
-## A) Run SolidX Application
+## 1. Containerize and Push to ECR
 
-This section explains how to run the SolidX app on a virtual machine.
+First, we need to containerize our application and push the images to Amazon Elastic Container Registry (ECR).
 
+<h3 className="card-headear-wrapper">
+    <HiOutlineCloudUpload size={22} />
+    &nbsp;Create ECR Repositories
+</h3>
 
- <h3 className=" card-headear-wrapper">
-    <HiOutlineCode size={22}  />
-
-### Clone Repository
-  </h3>
-
-
-
+Create ECR repositories for both the backend and frontend:
 ```bash
-git clone <repo http url>
+aws ecr create-repository --repository-name solidx-api --region <your-region>
+aws ecr create-repository --repository-name solidx-ui --region <your-region>
 ```
 
+<h3 className="card-headear-wrapper">
+    <HiOutlineCog size={22} />
+    &nbsp;Authenticate Docker to ECR
+</h3>
 
- <h3 className=" card-headear-wrapper">
-    <HiOutlineCog size={22}  />
-
-### Update Environment Variables
-  </h3>
-
-Create the `.env` files inside `solid-api` and `solid-ui` with your database credentials and other configs.
-
- <h3 className=" card-headear-wrapper">
-    <HiOutlineServer size={20}  />
-
-### Verify Backend is Running
-  </h3>
-
-
+Authenticate your Docker client to your ECR registry:
 ```bash
-cd solid-api
-npm i
-npm run build
-npm run start
+aws ecr get-login-password --region <your-region> | docker login --username AWS --password-stdin <your-aws-account-id>.dkr.ecr.<your-region>.amazonaws.com
 ```
 
+<h3 className="card-headear-wrapper">
+    <HiOutlineCloudUpload size={22} />
+    &nbsp;Build, Tag, and Push Images
+</h3>
 
- <h3 className=" card-headear-wrapper">
-    <HiOutlineDesktopComputer size={20}  />
+Build, tag, and push the Docker images for both services.
 
-### Verify Frontend is Running
-  </h3>
-
-
-```bash
-cd solid-ui
-npm i
-npm run build
-npm run start
-```
-
-> Press `Ctrl + C` to exit; we will use `pm2` next.
-
-## B)  Deploy with Process Manager
-
-### 1. Install pm2 Globally
-
-```bash
-npm install -g pm2
-```
-
-### 2. Create pm2 Config File
-
-Inside both `solid-api` and `solid-ui` folders, create `pm2.config.js`:
-
-```js
-module.exports = {
-  apps: [
-    {
-      name: "solid_admin_frontend",
-      script: "npm",
-      args: "run start",
-    },
-  ],
-};
-```
-
-### 3. Start apps with pm2
-
-```bash
-npm i && npm run build
-pm2 start pm2.config.js
-pm2 list
-```
-
-### 4. Create deploy scripts
-
-```bash
-#!/bin/bash
-git pull
-npm i
-npm run build
-pm2 stop solid_admin_frontend
-pm2 start solid_admin_frontend
-tail -100f ~/.pm2/logs/solid_admin_frontend-out.log
-```
-
-Make it executable:
-
-```bash
-chmod +x deploy.sh
-```
-
-### 5. Run the Deploy Scripts
-
+**Backend (`solidx-api`):**
 ```bash
 cd solid-api
-./deploy.sh
+docker build -t <your-aws-account-id>.dkr.ecr.<your-region>.amazonaws.com/solidx-api:latest .
+docker push <your-aws-account-id>.dkr.ecr.<your-region>.amazonaws.com/solidx-api:latest
+```
+
+**Frontend (`solidx-ui`):**
+```bash
 cd ../solid-ui
-./deploy.sh
+docker build -t <your-aws-account-id>.dkr.ecr.<your-region>.amazonaws.com/solidx-ui:latest .
+docker push <your-aws-account-id>.dkr.ecr.<your-region>.amazonaws.com/solidx-ui:latest
 ```
 
-## C) Seed the Backend Database
+## 2. Set Up ECS Resources
 
+Now, let's create the necessary ECS resources to run our application.
+
+<h3 className="card-headear-wrapper">
+    <FaAws size={22} />
+    &nbsp;Create an ECS Cluster
+</h3>
+
+Create an ECS cluster to host your services:
 ```bash
-cd solid-api
-./rebuild.sh
-solid seed
+aws ecs create-cluster --cluster-name solidx-cluster --region <your-region>
 ```
 
-## D) Setup Nginx & SSL
+<h3 className="card-headear-wrapper">
+    <HiOutlineCog size={22} />
+    &nbsp;Create Task Definitions
+</h3>
 
-### 1. Install Nginx
+Create task definitions for the backend and frontend. A task definition is a blueprint for your application.
 
-```bash
-sudo apt update
-sudo apt install nginx -y
-sudo systemctl start nginx
-sudo systemctl enable nginx
-sudo systemctl status nginx
-```
-
-### 2. Enable Firewall for Nginx
-
-```bash
-sudo ufw allow 'Nginx Full'
-sudo ufw enable
-sudo ufw status
-```
-
-### 3. Create Virtual Host Files
-
-```bash
-cd /etc/nginx/sites-available
-touch <api_domain_name>
-touch <ui_domain_name>
-```
-
-Sample config for `api_domain_name`:
-
-```bash
-server {
-  server_name <api_domain_name>;
-  root /var/www/html;
-  index index.html index.htm;
-
-  location / {
-    proxy_pass http://127.0.0.1:<api_port>;
-    proxy_read_timeout 60;
-    proxy_connect_timeout 60;
-    proxy_redirect off;
-
-    proxy_http_version 1.1;
-    proxy_set_header Upgrade $http_upgrade;
-    proxy_set_header Connection 'upgrade';
-    proxy_set_header Host $host;
-    proxy_cache_bypass $http_upgrade;
-  }
-
-  listen 80;
+Create a `solidx-api-task-definition.json` file:
+```json
+{
+    "family": "solidx-api-task",
+    "networkMode": "awsvpc",
+    "containerDefinitions": [
+        {
+            "name": "solidx-api",
+            "image": "<your-aws-account-id>.dkr.ecr.<your-region>.amazonaws.com/solidx-api:latest",
+            "portMappings": [
+                {
+                    "containerPort": 3000,
+                    "hostPort": 3000
+                }
+            ],
+            "essential": true
+        }
+    ],
+    "requiresCompatibilities": [
+        "FARGATE"
+    ],
+    "cpu": "256",
+    "memory": "512"
 }
 ```
 
-Link and restart:
-
-```bash
-ln -s /etc/nginx/sites-available/<api_domain_name> /etc/nginx/sites-enabled/
-ln -s /etc/nginx/sites-available/<ui_domain_name> /etc/nginx/sites-enabled/
-sudo nginx -t
-sudo systemctl restart nginx
-sudo tail -f /var/log/nginx/error.log
+And a `solidx-ui-task-definition.json` file:
+```json
+{
+    "family": "solidx-ui-task",
+    "networkMode": "awsvpc",
+    "containerDefinitions": [
+        {
+            "name": "solidx-ui",
+            "image": "<your-aws-account-id>.dkr.ecr.<your-region>.amazonaws.com/solidx-ui:latest",
+            "portMappings": [
+                {
+                    "containerPort": 3001,
+                    "hostPort": 3001
+                }
+            ],
+            "essential": true
+        }
+    ],
+    "requiresCompatibilities": [
+        "FARGATE"
+    ],
+    "cpu": "256",
+    "memory": "512"
+}
 ```
 
-Verify if the below urls are working over http before proceeding with installing the http certificate:
-
-- api swagger docs - `http://<api_domain_name>/docs`
-- admin UI login - `http://<ui_domain_name>`
-- curl request - `curl -I http://<ui_domain_name>` (it should return something like a 200 OK response)
-
-### 4. Install SSL with Certbot
-
+Now, register the task definitions with ECS:
 ```bash
-sudo apt install certbot python3-certbot-nginx -y
-sudo certbot --nginx -d <api_domain_name>
-sudo certbot --nginx -d <ui_domain_name>
-sudo systemctl restart nginx
+aws ecs register-task-definition --cli-input-json file://solidx-api-task-definition.json --region <your-region>
+aws ecs register-task-definition --cli-input-json file://solidx-ui-task-definition.json --region <your-region>
 ```
 
-Visit: `https://<domain_name>` to verify SSL.
+## 3. Create Services and Load Balancer
 
+We will create an Application Load Balancer (ALB) to route traffic to our services.
 
+<h3 className="card-headear-wrapper">
+    <HiOutlineServer size={20} />
+    &nbsp;Create an ALB and Target Groups
+</h3>
 
+1.  Create a security group for your ALB.
+2.  Create an Application Load Balancer.
+3.  Create target groups for `solidx-api` and `solidx-ui`.
+4.  Create listeners for your ALB to forward traffic to the target groups (e.g., port 80 and 443).
 
-<div className="tips-box">
-  <h4 className="card-headear-wrapper">
-    <FaLightbulb className="feature-icon" />
-    Tip
-  </h4>
-  You can set up a cron job or use the commands below to ensure apps restart after reboot.
+<h3 className="card-headear-wrapper">
+    <HiOutlineCloud size={22} />
+    &nbsp;Create ECS Services
+</h3>
 
-</div>
+Create the services that will run and maintain your tasks.
 
-
-<br/>
-
-```bash
-pm2 save && pm2 startup
+Create a `solidx-api-service.json` file:
+```json
+{
+    "cluster": "solidx-cluster",
+    "serviceName": "solidx-api-service",
+    "taskDefinition": "solidx-api-task",
+    "desiredCount": 1,
+    "launchType": "FARGATE",
+    "networkConfiguration": {
+        "awsvpcConfiguration": {
+            "subnets": ["<your-subnet-id-1>", "<your-subnet-id-2>"],
+            "securityGroups": ["<your-security-group-id>"],
+            "assignPublicIp": "ENABLED"
+        }
+    },
+    "loadBalancers": [
+        {
+            "targetGroupArn": "<your-api-target-group-arn>",
+            "containerName": "solidx-api",
+            "containerPort": 3000
+        }
+    ]
+}
 ```
 
-
-<div className="tips-box">
-  <h4 className="card-headear-wrapper">
-    <FaLightbulb className="feature-icon" />
-    Tip
-  </h4>
-You can set up log rotation for pm2 logs using the following command. This will setup log rotation to rotate daily with a max size of <span className="color-green"> 10MB with 30 days </span> rotation by default and compress the rotated logs.
-</div>
-
-
-<br/>
-
-
-```bash
-pm2 install pm2-logrotate
-pm2 set pm2-logrotate:max_size 10M
-pm2 set pm2-logrotate:compress true
+And a `solidx-ui-service.json` file:
+```json
+{
+    "cluster": "solidx-cluster",
+    "serviceName": "solidx-ui-service",
+    "taskDefinition": "solidx-ui-task",
+    "desiredCount": 1,
+    "launchType": "FARGATE",
+    "networkConfiguration": {
+        "awsvpcConfiguration": {
+            "subnets": ["<your-subnet-id-1>", "<your-subnet-id-2>"],
+            "securityGroups": ["<your-security-group-id>"],
+            "assignPublicIp": "ENABLED"
+        }
+    },
+    "loadBalancers": [
+        {
+            "targetGroupArn": "<your-ui-target-group-arn>",
+            "containerName": "solidx-ui",
+            "containerPort": 3001
+        }
+    ]
+}
 ```
+
+Now, create the services:
+```bash
+aws ecs create-service --cli-input-json file://solidx-api-service.json --region <your-region>
+aws ecs create-service --cli-input-json file://solidx-ui-service.json --region <your-region>
+```
+
+## 4. Verify Your Deployment
+
+Once the services are running, you can access your application through the DNS name of your Application Load Balancer. You can find the DNS name in the EC2 console under "Load Balancers".
+
+Congratulations! You have successfully deployed your SolidX application to Amazon ECS with Fargate.

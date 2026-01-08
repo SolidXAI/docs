@@ -22,4 +22,4 @@ Installing `SolidX` is a breeze with our [create-solid-app](https://www.npmjs.co
 
 ##  Step-by-Step Tutorial
 For complete step-by-step installation guidance, including environment setup and configuration, follow the dedicated tutorial:
--  [Bootstrap SolidX for School Fees Portal](/docs/tutorial/school-fees-portal/bootstrap/)
+-  [Bootstrap SolidX for School Fees Portal](/docs/tutorial/revamped-school-fees-portal/index.md)
