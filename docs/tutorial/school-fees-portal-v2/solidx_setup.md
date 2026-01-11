@@ -112,3 +112,86 @@ docker start SolidX_DB
  - Running PostgreSQL using Docker is recommended for local development and testing environments.
  - For production deployments, it is advised to use a managed PostgreSQL service or a carefully maintained database setup with proper backups, monitoring, and high availability.
 :::
+
+## SolidX Scaffolding Script
+
+SolidX applications are **installed and initialized exclusively** using the official scaffolding script.
+
+To create a new SolidX application, run:
+
+```bash
+npx @solidstarters/create-solid-app
+```
+
+This command launches an interactive setup and generates a fully configured SolidX workspace, ready for development.
+
+### What the Script Does
+
+Running the SolidX scaffolding script results in a **fully working, end-to-end setup**.
+
+Specifically, it:
+
+1. **Bootstraps the backend (APIs)**  
+   - Sets up a fully functional backend application  
+   - Exposes a complete set of REST APIs  
+   - Generates Swagger / OpenAPI documentation for all APIs
+
+2. **Bootstraps the frontend (Admin Panel)**  
+   - Sets up a ready-to-use admin panel  
+   - Integrates the frontend with backend REST APIs out of the box
+
+3. **Applies correct SolidX project structure and conventions**  
+   - Backend and frontend projects follow SolidX-defined project structures and best practices  
+   - Configuration, environment files, and scripts are wired correctly
+
+4. **Provides the SolidX CLI utility**  
+   - Seeds/syncs database with metadata and model configurations from JSON files (**solid seed**)
+   - Generates code from model configurations (**solid refresh-model** - alternative to UI-based generation)
+
+### Prerequisites
+
+Ensure the following are available before running the starter script.
+
+#### Node.js (Required)
+
+- **Required:** Node.js 22 or later  
+- **Recommended:** Latest LTS version (via nvm or from https://nodejs.org)
+
+Verify installation:
+
+```bash
+node -v
+```
+
+> `npx` is bundled with Node.js and is used to run the SolidX starter without global installation.
+
+#### Recommended: Node Version Manager (nvm)
+
+We recommend installing Node.js using **nvm** to easily manage and switch Node versions, avoid system conflicts, and ensure compatibility with SolidX.
+
+Install `nvm` using the official instructions:  
+https://github.com/nvm-sh/nvm
+
+Once installed, set up the required Node version:
+
+```bash
+nvm install 22
+nvm use 22
+```
+
+#### npm
+
+`npm` is bundled with Node.js and is used by the starter script.
+
+Verify installation:
+
+```bash
+npm -v
+```
+
+### Terminal & Internet Access
+
+- Access to a command-line terminal (macOS, Linux, or Windows)
+- Active internet connection (required to download and run the starter)
+
+The next section walks through the starter script **step by step**, including each prompt and screenshots for reference.

@@ -1,0 +1,1 @@
+- rename solid to solidx i.e  cli 
