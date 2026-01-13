@@ -194,4 +194,71 @@ npm -v
 - Access to a command-line terminal (macOS, Linux, or Windows)
 - Active internet connection (required to download and run the starter)
 
-The next section walks through the starter script **step by step**, including each prompt and screenshots for reference.
+The next section walks through the scaffolding script **step by step**, including each prompt and screenshots for reference.
+
+## Bootstrapping Your Application
+To create a new SolidX application, run the following command in your terminal:
+
+```bash
+npx @solidstarters/create-solid-app
+```
+This command launches an interactive setup and generates a fully configured SolidX workspace, ready for development.
+Follow the prompts to configure your application:
+### Backend Configuration Prompts
+1. **Project Name**: Enter a name for your SolidX application.
+ - Example: `school-fees-portal`
+ - Default: `my-solid-app`
+2. **Backend API Port**: Enter the port for the backend API server.
+ - Default: `3000`
+3. **Database**: Select the database for your application.
+ - Options: `PostgreSQL`, `MSSQL`
+ - Default: `PostgreSQL`
+4. **Database Host**: Enter the database host address.
+ - Default: `localhost`
+5. **Database Port**: Enter the database port.
+ - Default for PostgreSQL: `5432`
+6. **Database Name**: Enter the database name.
+ - Default: `solidx_app_db`
+7. **Database Username**: Enter the database username.
+ - Default: `solidx_app_user`
+8. **Database Password**: Enter the database password.
+ - Default: `strongpassword`
+9. **Sync Database Schema**: Choose whether to automatically synchronize the database schema.
+ - Options: `Yes`, `No`
+ - Default: `Yes`
+ :::warning
+  This option is not recommended for production environments, since it modifies the database schema automatically. It is advisable to manage database migrations manually in production.
+ :::
+### Frontend Configuration Prompts
+10. **Admin Panel Port**: Enter the port for the admin panel frontend.
+   - Default: `3001`
+
+### SolidX Bootstrapping in Action
+![Bootstrapping SolidX](/img/tutorial/school-fees-portal-v2/bootstrapping_solidx.png)
+*Screenshot showing the bootstrapping process in the terminal*
+
+## Bootstrapping Application Metadata
+SolidX requires foundational metadata: system models, roles, users, email/SMS templates, dashboards, and lists of values. 
+The `solid seed` command automates this process by populating the database with all these essentials, making the application ready for immediate use.
+
+To seed the database, navigate to the `solid-api` project directory and run `solid seed`:
+
+```bash
+cd school-fees-portal/solid-api
+solid seed
+```
+
+The seed process also creates an `super admin` user, if one does not already exist. The credentials for this user are displayed in the terminal after seeding is complete.
+
+:::info
+`solid` is the SolidX CLI utility installed as part of the SolidX scaffolding process.
+:::
+:::tip
+You can run `solid --help` to see all available commands and options.
+:::
+
+This command reads predefined JSON files containing the necessary metadata and populates the database accordingly.
+
+### Seeding in Action
+![Seeding SolidX Metadata](/img/tutorial/school-fees-portal-v2/seeding_solidx.png)
+*Screenshot showing the seeding process in the terminal*
