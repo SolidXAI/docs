@@ -175,4 +175,6 @@ The platform requires integration with:
 
 ## Summary
 
-The School Fees & Payments Platform provides a complete solution for educational institutes to modernize their fee collection processes. By combining secure administrative tools with a user-friendly student portal, the platform reduces manual effort, improves accuracy, and enhances the payment experience for all stakeholders while maintaining strict security and compliance standards.
+The School Fees & Payments Platform provides a complete solution for educational institutes to modernize their fee collection processes.
+
+By combining secure administrative tools with a user-friendly student portal, the platform reduces manual effort, improves accuracy, and enhances the payment experience for all stakeholders while maintaining strict security and compliance standards.
