@@ -262,3 +262,25 @@ This command reads predefined JSON files containing the necessary metadata and p
 ### Seeding in Action
 ![Seeding SolidX Metadata](/img/tutorial/school-fees-portal-v2/seeding_solidx.png)
 *Screenshot showing the seeding process in the terminal*
+
+### Log In as Super Admin
+Use the credentials displayed after seeding to access the admin panel with full permissions.
+
+![SolidX Admin Panel Login](/img/tutorial/school-fees-portal-v2/admin_panel_login_page.png)
+*Screenshot showing the SolidX admin panel login screen*
+
+After logging in, you will be redirected to the default landing page of the admin panel. This page by default is configured to show the listing of all users in the system.
+
+![SolidX Admin Panel Landing Page](/img/tutorial/school-fees-portal-v2/admin_panel_post_login_redirect_page.png)
+*Screenshot showing the default landing page after successful login*
+
+---
+
+## Setup Complete - Ready to Build!
+
+Your SolidX environment is now configured and the admin panel is accessible.
+
+You're ready to build a fully functional **school fees portal** application using the SolidX App Builder. No coding required—just visual configuration to create entities, relationships, workflows, and business logic.
+
+Let's start building!
+

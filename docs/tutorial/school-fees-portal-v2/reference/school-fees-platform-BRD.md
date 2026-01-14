@@ -22,8 +22,8 @@ To provide a centralized, secure, and configurable platform for institutes to ma
 
 **User Roles**
 - **Platform Admin** – Manages institutes, institute users and global configuration
-- **Institute Admin** – Manages institute data, institute users, institute fee types, and collections and payment gateway settings for the institute.
-- **Student (Public User)** – Views dues and makes payments. Can also view the payment history and cancelled payments
+- **Institute Admin** – Manages institute data, institute users, institute fee types, and payment collections and payment gateway settings for the institute.
+- **Student (Public User)** – Views dues and makes payments. Can also view the payment history
 
 ## 3. In-Scope Features
 
@@ -34,13 +34,11 @@ To provide a centralized, secure, and configurable platform for institutes to ma
 - Payment collection initiation (bulk via Excel upload)
 - Student record creation and management
 - Payment monitoring, reconciliation
-- Cancellation handling
-- (Currently no refunds - future scope)
 
 
 ### User Platform
 - Student authentication via email otp
-- View pending dues and payment history and cancelled payments
+- View pending dues and payment history
 - Online payment initiation and confirmation
 
 ## 4. Key Business Use Cases
@@ -53,7 +51,6 @@ To provide a centralized, secure, and configurable platform for institutes to ma
 | Initiate Payment Collection | Institute Admin | Bulk payment demands created |
 | Student Login | Student | Secure access to dues |
 | Make Payment | Student | Payment completed and recorded |
-| Cancel Payment | Institute Admin | Revoke initiated payment |
 | Configure User Frontend | Institute Admin | Branded student experience |
 
 ## 5. Business Rules & Constraints
