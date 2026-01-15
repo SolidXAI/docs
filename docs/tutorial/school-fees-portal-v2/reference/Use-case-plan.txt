@@ -21,16 +21,16 @@ e.g Document the steps in text i.e
         - What advanced configurations to do for each field
         - Relationships
             - How to create relationships with other models and what each of the different relationship types mean
-e.g Show video of the above documented steps
-e.g Show screenshots of the outcome after model creation
+e.g Show video of the above documented steps [PENDING]
+e.g Show screenshots of the outcome after model creation [PENDING]
 
 # Explain how we will generate the code i.e (apis, frontends etc) using SolidX App Builder (i.e once the data model is created)
 Explain rationale of code generation i.e (why code generation is needed, what code gets generated etc)
 e.g Document the steps in text i.e
     - Which menu to access
     - Which CTA to click on the list page. i.e Generate Code
-e.g Show video of the above documented steps
-e.g Show screenshots of the outcome after code generation
+e.g Show video of the above documented steps [PENDING]
+e.g Show screenshots of the outcome after code generation [PENDING]
     - Show generated APIs in Swagger UI
     - Show generated Admin Frontend screens
 

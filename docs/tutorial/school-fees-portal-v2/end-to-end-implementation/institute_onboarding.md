@@ -687,6 +687,896 @@ After creating each model, verify:
 For more detailed guidance on creating Modules, Models, and Fields in SolidX, refer to the [Module Builder](../../admin-docs/module-builder/index.md) documentation.
 :::
 
+### Generating APIs and UI Components
+#### Overview
+- Once the data models are created, use SolidX's App Builder to auto-generate REST APIs and basic UI components (list / detail / kanban /menu views) for each model.
+- The generated APIs will allow you to perform CRUD operations on the Institute, Fee Type, and Institute User models. You can view the API documentation in the Swagger UI provided by SolidX at `/docs`.
+- The generated UI components will provide a basic interface for managing institutes, fee types, and users. You can access these components through the model menu item which will be automatically added to the menu within the Fees Portal module.
+- Ensure that the generated API's and components meet your requirements and customize them as needed.
+
+#### Code Generation Steps
+1. Navigate to the App Builder menu (within the Solid Core Module).
+2. Select the Modules sub-menu.
+3. Click on the context menu (three dots) for the Fees Portal module and select "Generate Code".
+4. Click Yes on the confirmation dialog to start the code generation process.
+5. The Code Generation process may take a few minutes. All models within the Fees Portal module will be processed one by one.
+6. It can result in creation / updation of multiple files within the `solid-api` folder. SolidX does not make any code changes in the `solid-ui` project, since the UI components are generated dynamically at runtime based on the metadata stored in the database.
+7. In dev mode, code changes will be picked up automatically.
+8. You can verify the generated REST APIs using Swagger UI at `/docs` endpoint.
+9. You can access the generated UI components through the model menu item within the Fees Portal module.
+:::tip
+In case you want to generate code for single model and your module has many other models, you can choose to generate code for only that specific model by navigating to the Models sub-menu instead, selecting the desired model, and using the "Generate Code" option from the context menu. In case this model has relations with other models, those related models will also be processed during code generation. This approach can help reduce the time taken for code generation.
+:::
+
+### Customizing the UI
+
+After generating the code using SolidX, default list and form views are automatically created for each model. However, these default views often need customization to match your specific business requirements and improve user experience. This section explains how to customize these views using the layout JSON configuration.
+
+#### Institute Form View Customizations
+![Institute Form View](/img/tutorial/school-fees-portal-v2/institute_form_view.png)
+*Screenshot showing the customized Institute Form View with tabs and organized fields.*
+
+**1. Tabbed Organization (Notebook with Multiple Pages)**
+
+The Institute model has 21 fields covering diverse information types. Displaying all fields on a single page would be overwhelming and difficult to navigate. We organized fields into 5 logical tabs:
+
+| Tab | Purpose | Fields Included |
+|-----|---------|-----------------|
+| **Institutes** | Core institution information | Name, logo, description, address, brochure, video, hosted page prefix |
+| **Payment Gateway Details** | Sensitive payment configuration | Merchant ID, access key, access secret, customer user ID |
+| **Support** | Contact and legal information | Email domain, support email/mobile, GST, privacy policy, FAQs, T&C |
+| **Fee Types** | Related fee types management | One-to-many relation showing all fee types |
+| **Institute Users** | User management | One-to-many relation showing all institute admins |
+
+**Benefits:**
+- Reduces cognitive load by grouping related fields
+- Separates sensitive payment information from general details
+- Makes forms easier to navigate and fill out
+- Improves performance by lazy-loading tab content
+
+**2. Two-Column Layout for Related Fields**
+
+Within the "Institutes" tab, we use a two-column layout:
+- **Left Column (col-6)**: "Institutes Basic" - Core identity fields (name, description)
+- **Right Column (col-6)**: "Institutes Contact" - Location and access info (address, hosted page prefix)
+
+**Layout JSON Snippet:**
+
+```json
+{
+  "type": "row",
+  "attrs": {
+    "name": "sheet-1"
+  },
+  "children": [
+    {
+      "type": "column",
+      "attrs": {
+        "name": "group-1",
+        "label": "Institutes Basic",
+        "className": "col-6"
+      },
+      "children": [
+        {
+          "type": "field",
+          "attrs": {
+            "name": "instituteName"
+          }
+        },
+        {
+          "type": "field",
+          "attrs": {
+            "name": "description"
+          }
+        }
+      ]
+    },
+    {
+      "type": "column",
+      "attrs": {
+        "name": "group-1",
+        "label": "Institutes Contact",
+        "className": "col-6"
+      },
+      "children": [
+        {
+          "type": "field",
+          "attrs": {
+            "name": "instituteAddress",
+            "disabled": false
+          }
+        },
+        {
+          "type": "field",
+          "attrs": {
+            "name": "hostedPagePrefix"
+          }
+        },
+        {
+          "type": "field",
+          "attrs": {
+            "name": "status",
+            "visible": false,
+            "disabled": true
+          }
+        }
+      ]
+    }
+  ]
+}
+```
+
+**Benefits:**
+- Utilizes screen real estate efficiently
+- Groups semantically related information
+- Creates visual balance and structure
+
+**3. Full-Width Layout for Media Fields**
+
+Logo, brochure, and intro video fields use full-width columns (`col-12`) with `showLabel: false`:
+
+```json
+{
+  "type": "column",
+  "attrs": {
+    "name": "group-1",
+    "label": "Institutes Logo",
+    "className": "col-12"
+  },
+  "children": [
+    {
+      "type": "field",
+      "attrs": {
+        "name": "logo",
+        "disabled": false,
+        "showLabel": false
+      }
+    }
+  ]
+}
+```
+
+**Benefits:**
+- Media fields need more space for preview/upload UI
+- Column label serves as the field label, avoiding redundancy
+- Creates cleaner, less cluttered appearance
+
+**4. Hidden Status Field**
+
+The `status` field is hidden and disabled in the form:
+
+```json
+{
+  "type": "field",
+  "attrs": {
+    "name": "status",
+    "visible": false,
+    "disabled": true
+  }
+}
+```
+
+**Rationale:**
+- Status changes are managed through custom action buttons ("Activate Institute", "Deactivate Institute")
+- Prevents users from manually editing workflow state
+- Ensures status transitions follow business rules
+
+**5. Masked Input for Sensitive Fields**
+
+Payment gateway access secret uses custom widgets:
+
+```json
+{
+  "type": "field",
+  "attrs": {
+    "name": "paymentGatewayAccessSecret",
+    "viewWidget": "maskedShortTextForm",
+    "editWidget": "maskedShortTextEdit"
+  }
+}
+```
+
+**Benefits:**
+- Protects sensitive credentials from shoulder surfing
+- Maintains security while allowing necessary access
+- Similar to password fields in standard forms
+
+**6. Inline Creation for Fee Types**
+
+Fee Types relation enables inline creation:
+
+```json
+{
+  "type": "field",
+  "attrs": {
+    "name": "feeTypes",
+    "inlineCreate": "true",
+    "showFieldLabel": false,
+    "showLabel": false
+  }
+}
+```
+
+**Benefits:**
+- Users can create fee types directly from institute form
+- Reduces navigation between different views
+- Maintains context during data entry
+- Speeds up initial setup process
+
+**7. Custom Action Buttons**
+
+Two custom buttons are added to the form:
+- **Activate Institute**: Transitions status from InActive to Active
+- **Deactivate Institute**: Transitions status from Active to InActive
+
+```json
+"formButtons": [
+  {
+    "attrs": {
+      "icon": "pi pi-caret-right",
+      "name": "InstituteActivateById",
+      "label": "Activate Institute",
+      "action": "InstituteActivateById",
+      "actionInContextMenu": true,
+      "openInPopup": true,
+      "visible": false
+    }
+  }
+]
+```
+
+**Benefits:**
+- Enforces workflow state machine
+- Provides audit trail for status changes
+- Prevents invalid status transitions
+- Makes actions discoverable in context menu
+
+#### Complete Institute Form Layout JSON
+
+Below is the complete form layout JSON for the Institute model. To apply this layout, replace your institute form layout JSON with the following:
+
+<details>
+<summary>Click to expand the complete JSON layout</summary>
+```json
+{
+  "type": "form",
+  "attrs": {
+    "name": "form-1",
+    "label": "Institute",
+    "className": "grid",
+    "formButtons": [
+      {
+        "attrs": {
+          "icon": "pi pi-caret-right",
+          "name": "InstituteActivateById",
+          "className": "p-button-text",
+          "label": "Activate Institute",
+          "action": "InstituteActivateById",
+          "customComponentIsSystem": true,
+          "actionInContextMenu": true,
+          "openInPopup": true,
+          "visible": false
+        }
+      },
+      {
+        "attrs": {
+          "icon": "pi pi-circle-off",
+          "name": "InstituteDeactivateById",
+          "className": "p-button-text",
+          "label": "Deactivate Institute",
+          "action": "InstituteDeactivateById",
+          "customComponentIsSystem": true,
+          "actionInContextMenu": true,
+          "openInPopup": true,
+          "visible": false
+        }
+      }
+    ]
+  },
+  "onFormLayoutLoad": "instituteEditHandler",
+  "children": [
+    {
+      "type": "sheet",
+      "attrs": {
+        "name": "sheet-1"
+      },
+      "children": [
+        {
+          "type": "notebook",
+          "attrs": {
+            "name": "notebook-1"
+          },
+          "children": [
+            {
+              "type": "page",
+              "attrs": {
+                "name": "page-1",
+                "label": "Institutes"
+              },
+              "children": [
+                {
+                  "type": "row",
+                  "attrs": {
+                    "name": "sheet-1"
+                  },
+                  "children": [
+                    {
+                      "type": "column",
+                      "attrs": {
+                        "name": "group-1",
+                        "label": "Institutes Basic",
+                        "className": "col-6"
+                      },
+                      "children": [
+                        {
+                          "type": "field",
+                          "attrs": {
+                            "name": "instituteName"
+                          }
+                        },
+                        {
+                          "type": "field",
+                          "attrs": {
+                            "name": "description"
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "type": "column",
+                      "attrs": {
+                        "name": "group-1",
+                        "label": "Institutes Contact",
+                        "className": "col-6"
+                      },
+                      "children": [
+                        {
+                          "type": "field",
+                          "attrs": {
+                            "name": "instituteAddress",
+                            "disabled": false
+                          }
+                        },
+                        {
+                          "type": "field",
+                          "attrs": {
+                            "name": "hostedPagePrefix"
+                          }
+                        },
+                        {
+                          "type": "field",
+                          "attrs": {
+                            "name": "status",
+                            "visible": false,
+                            "disabled": true
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "type": "column",
+                      "attrs": {
+                        "name": "group-1",
+                        "label": "Institutes Logo",
+                        "className": "col-12"
+                      },
+                      "children": [
+                        {
+                          "type": "field",
+                          "attrs": {
+                            "name": "logo",
+                            "disabled": false,
+                            "showLabel": false
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "type": "column",
+                      "attrs": {
+                        "name": "group-1",
+                        "label": "Institutes Brochure",
+                        "className": "col-12"
+                      },
+                      "children": [
+                        {
+                          "type": "field",
+                          "attrs": {
+                            "name": "instituteBrochure",
+                            "disabled": false,
+                            "showLabel": false
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "type": "column",
+                      "attrs": {
+                        "name": "group-1",
+                        "label": "Institute Intro Video",
+                        "className": "col-12"
+                      },
+                      "children": [
+                        {
+                          "type": "field",
+                          "attrs": {
+                            "name": "instituteIntroVideo",
+                            "disabled": false,
+                            "showLabel": false
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "page",
+              "attrs": {
+                "name": "page-2",
+                "label": "Payment Gateway Details"
+              },
+              "children": [
+                {
+                  "type": "row",
+                  "attrs": {
+                    "name": "sheet-1"
+                  },
+                  "children": [
+                    {
+                      "type": "column",
+                      "attrs": {
+                        "name": "group-1",
+                        "label": "Payment Gateway Details",
+                        "className": "col-6"
+                      },
+                      "children": [
+                        {
+                          "type": "field",
+                          "attrs": {
+                            "name": "paymentGatewayMerchantId"
+                          }
+                        },
+                        {
+                          "type": "field",
+                          "attrs": {
+                            "name": "paymentGatewayAccessKey"
+                          }
+                        },
+                        {
+                          "type": "field",
+                          "attrs": {
+                            "name": "paymentGatewayAccessSecret",
+                            "viewWidget": "maskedShortTextForm",
+                            "editWidget": "maskedShortTextEdit"
+                          }
+                        },
+                        {
+                          "type": "field",
+                          "attrs": {
+                            "name": "custUserId"
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "page",
+              "attrs": {
+                "name": "page-4",
+                "label": "Support"
+              },
+              "children": [
+                {
+                  "type": "row",
+                  "attrs": {
+                    "name": "sheet-1"
+                  },
+                  "children": [
+                    {
+                      "type": "column",
+                      "attrs": {
+                        "name": "group-1",
+                        "label": "Basic",
+                        "className": "col-6"
+                      },
+                      "children": [
+                        {
+                          "type": "field",
+                          "attrs": {
+                            "name": "emailDomain",
+                            "disabled": false
+                          }
+                        },
+                        {
+                          "type": "field",
+                          "attrs": {
+                            "name": "supportEmail"
+                          }
+                        },
+                        {
+                          "type": "field",
+                          "attrs": {
+                            "name": "supportMobile",
+                            "disabled": false
+                          }
+                        },
+                        {
+                          "type": "field",
+                          "attrs": {
+                            "name": "gst",
+                            "disabled": false
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "type": "column",
+                      "attrs": {
+                        "name": "group-1",
+                        "label": "Standard Informational",
+                        "className": "col-12"
+                      },
+                      "children": [
+                        {
+                          "type": "field",
+                          "attrs": {
+                            "name": "privacyPolicy",
+                            "disabled": false
+                          }
+                        },
+                        {
+                          "type": "field",
+                          "attrs": {
+                            "name": "faqs"
+                          }
+                        },
+                        {
+                          "type": "field",
+                          "attrs": {
+                            "name": "tnC",
+                            "disabled": false
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "page",
+              "attrs": {
+                "name": "page-5",
+                "label": "Fee Types"
+              },
+              "children": [
+                {
+                  "type": "row",
+                  "attrs": {
+                    "name": "sheet-1"
+                  },
+                  "children": [
+                    {
+                      "type": "column",
+                      "attrs": {
+                        "name": "group-1",
+                        "label": "Fee Types",
+                        "className": "col-12"
+                      },
+                      "children": [
+                        {
+                          "type": "field",
+                          "attrs": {
+                            "name": "feeTypes",
+                            "inlineCreate": "true",
+                            "showFieldLabel": false,
+                            "showLabel": false
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "page",
+              "attrs": {
+                "name": "page-6",
+                "label": "Institute Users"
+              },
+              "children": [
+                {
+                  "type": "row",
+                  "attrs": {
+                    "name": "sheet-1"
+                  },
+                  "children": [
+                    {
+                      "type": "column",
+                      "attrs": {
+                        "name": "group-1",
+                        "label": "Institute Users",
+                        "className": "col-12"
+                      },
+                      "children": [
+                        {
+                          "type": "field",
+                          "attrs": {
+                            "name": "instituteUsers",
+                            "inlineCreate": "false",
+                            "showFieldLabel": false,
+                            "showLabel": false
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
+```
+</details>
+
+#### Fee Type Form View Customizations
+
+**1. Grouped Fields Layout**
+
+Fee Type form organizes fields into three columns:
+
+| Column | Label | Width | Fields |
+|--------|-------|-------|--------|
+| Column 1 | "Fee Type" | col-6 (half) | Fee type name, part payment allowed |
+| Column 2 | "Late Payment" | col-6 (half) | Late payment type, late payment fees |
+| Column 3 | "Institute" | col-6 (half) | Institute relation (hidden) |
+
+**Layout JSON Snippet:**
+
+```json
+{
+  "type": "row",
+  "attrs": {
+    "name": "sheet-1"
+  },
+  "children": [
+    {
+      "type": "column",
+      "attrs": {
+        "name": "group-1",
+        "label": "Fee Type",
+        "className": "col-6"
+      },
+      "children": [
+        {
+          "type": "field",
+          "attrs": {
+            "name": "feeType"
+          }
+        },
+        {
+          "type": "field",
+          "attrs": {
+            "name": "partPaymentAllowed"
+          }
+        }
+      ]
+    },
+    {
+      "type": "column",
+      "attrs": {
+        "name": "group-1",
+        "label": "Late Payment",
+        "className": "col-6"
+      },
+      "children": [
+        {
+          "type": "field",
+          "attrs": {
+            "name": "latePaymentFeesType"
+          }
+        },
+        {
+          "type": "field",
+          "attrs": {
+            "name": "latePaymentFees"
+          }
+        }
+      ]
+    },
+    {
+      "type": "column",
+      "attrs": {
+        "name": "group-1",
+        "label": "Institute",
+        "className": "col-6",
+        "visible": false
+      },
+      "children": [
+        {
+          "type": "field",
+          "attrs": {
+            "name": "institute"
+          }
+        }
+      ]
+    }
+  ]
+}
+```
+
+**Benefits:**
+- Related payment settings grouped together
+- Visual separation between core info and payment rules
+- Efficient use of screen space
+
+**2. Hidden Institute Field**
+
+The institute relation is hidden (`visible: false`):
+
+```json
+{
+  "type": "column",
+  "attrs": {
+    "name": "group-1",
+    "label": "Institute",
+    "className": "col-6",
+    "visible": false
+  }
+}
+```
+
+**Rationale:**
+- Institute is already known from context (user's current institute)
+- Automatically set by form handler (`feeTypeEditHandler`)
+- Prevents users from accidentally assigning fees to wrong institute
+- Simplifies form interface
+
+---
+
+#### Complete Fee Type Form Layout JSON
+
+Below is the complete form layout JSON for the Fee Type model. You can use this to replace the entire form layout in the metadata:
+
+<details>
+<summary>Click to expand the complete JSON layout</summary>
+```json
+{
+  "type": "form",
+  "attrs": {
+    "name": "form-1",
+    "label": "Fee Type",
+    "className": "grid"
+  },
+  "onFormLayoutLoad": "feeTypeEditHandler",
+  "children": [
+    {
+      "type": "sheet",
+      "attrs": {
+        "name": "sheet-1"
+      },
+      "children": [
+        {
+          "type": "row",
+          "attrs": {
+            "name": "sheet-1"
+          },
+          "children": [
+            {
+              "type": "column",
+              "attrs": {
+                "name": "group-1",
+                "label": "Fee Type",
+                "className": "col-6"
+              },
+              "children": [
+                {
+                  "type": "field",
+                  "attrs": {
+                    "name": "feeType"
+                  }
+                },
+                {
+                  "type": "field",
+                  "attrs": {
+                    "name": "partPaymentAllowed"
+                  }
+                }
+              ]
+            },
+            {
+              "type": "column",
+              "attrs": {
+                "name": "group-1",
+                "label": "Late Payment",
+                "className": "col-6"
+              },
+              "children": [
+                {
+                  "type": "field",
+                  "attrs": {
+                    "name": "latePaymentFeesType"
+                  }
+                },
+                {
+                  "type": "field",
+                  "attrs": {
+                    "name": "latePaymentFees"
+                  }
+                }
+              ]
+            },
+            {
+              "type": "column",
+              "attrs": {
+                "name": "group-1",
+                "label": "Institute",
+                "className": "col-6",
+                "visible": false
+              },
+              "children": [
+                {
+                  "type": "field",
+                  "attrs": {
+                    "name": "institute"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
+```
+</details>
+
+#### List View Customizations
+
+**Role-Based Action Permissions**
+
+List views configure which roles can perform specific actions:
+
+```json
+"configureViewActions": {
+  "import": { "roles": ["Admin"] },
+  "showArchived": { "roles": ["Admin"] },
+  "export": { "roles": ["Admin", "Mswipe Admin", "Institute Admin"] },
+  "customizeLayout": { "roles": ["Admin", "Mswipe Admin", "Institute Admin"] },
+  "saveCustomFilter": { "roles": ["Admin"] }
+}
+```
+
+**Benefits:**
+- Enforces role-based access control at UI level
+- Reduces clutter by hiding unavailable actions
+- Improves security by limiting sensitive operations
+- Provides appropriate capabilities based on user role
+
+#### General Design Principles
+
+The customizations follow these principles:
+
+1. **Progressive Disclosure**: Show essential information first, details in tabs
+2. **Contextual Relevance**: Hide fields that are auto-populated or irrelevant
+3. **Guided Input**: Group related fields to guide users through data entry
+4. **Security by Design**: Mask sensitive data, control access to actions
+5. **Efficiency**: Enable inline operations to reduce navigation
+6. **Consistency**: Use similar patterns across related forms
+
+These customizations transform the auto-generated UI into a polished, user-friendly interface tailored to the fees portal domain.
+
 ### Data Setup
 
 Follow this order when implementing this feature:
