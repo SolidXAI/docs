@@ -27,19 +27,18 @@ Navigate to the module creation interface in SolidX and configure the following 
 
 | Attribute | Value | Description |
 |-----------|-------|-------------|
-| **Name** | fees-portal | The technical identifier for the module. Use lowercase with hyphens. This will be used in URLs, code, and file paths. |
 | **Display Name** | Fees Portal | The human-readable name shown in menus and UI. Can include spaces and capitalization. |
+| **Name** | fees-portal (Readonly) | . The technical identifier for the module. This is automatically generated based on the Display Name and cannot be changed. |
+| **Menu Sequence Number** | 2 | Controls the order of this module in the navigation menu. Lower numbers appear first. |
 | **Description** | Used to keep a track of all fees collections requests | A brief description explaining what this module does. Helps other developers understand its purpose. |
 | **Default Data Source** | default | The database connection to use for this module's models. Use "default" for the primary database. |
-| **Menu Icon URL** | null | Optional. URL or path to an icon displayed in the navigation menu. Leave empty if not needed. |
-| **Menu Sequence Number** | 2 | Controls the order of this module in the navigation menu. Lower numbers appear first. |
-| **Is System Module** | ☐ No | Set to "Yes" only for core platform modules. For custom applications like fees portal, keep this as "No". |
+| **Menu Icon** | None | Optional. Module Icon to display in the navigation menu. Leave this  empty if not needed. |
 
 ### Understanding Module Attributes
 
 **Name vs Display Name:**
-- **Name**: Must be unique, lowercase, and URL-friendly (e.g., `fees-portal`, `student-management`)
 - **Display Name**: User-facing label shown everywhere in the UI (e.g., "Fees Portal", "Student Management")
+- **Name**: Readonly and generated automatically. Must be unique, lowercase, and URL-friendly (e.g., `fees-portal`, `student-management`)
 
 **Default Data Source:**
 - Specifies which database connection all models in this module will use by default
@@ -52,11 +51,6 @@ Navigate to the module creation interface in SolidX and configure the following 
 - System modules typically use lower numbers (1-5)
 - Custom modules can use higher numbers (6+)
 
-**Is System Module:**
-- System modules are protected and have special privileges
-- Only mark as system if this is a core platform module (like user management, authentication)
-- Regular business applications should always be marked as "No"
-
 ### Module Creation Workflow
 
 1. **Navigate to Module Management**: Access the module creation interface in SolidX admin panel
@@ -68,15 +62,13 @@ Navigate to the module creation interface in SolidX and configure the following 
 ### What Happens After Module Creation
 
 Once you create the module:
-- A new entry appears in your navigation menu (if Menu Sequence Number is set)
-- The module becomes available as a target when creating new models
-- API endpoints will be generated under `/api/fees-portal/...`
-- A dedicated folder structure is created for module-specific code and metadata
+- A new entry appears in your primary navigation menu (order set by Menu Sequence Number)
+- API endpoints will be generated under `/api/fees-portal/...` whenever you create models
+- A dedicated folder structure is created for module-specific code and metadata in the backend codebase
 
 ### Important Notes
 
 - **Module Name Cannot Be Changed**: Once created, the module name is permanent. Choose carefully.
-- **Display Name Can Be Updated**: You can change the display name anytime without breaking functionality.
 - **All Models Must Belong to a Module**: You cannot create standalone models; they must be part of a module.
 - **Namespace Isolation**: Each module has its own namespace, preventing naming conflicts with other modules.
 
