@@ -200,8 +200,491 @@ Each Institute Admin User
 
 ### Building the Data Models
 
+This section provides step-by-step instructions for creating the Institute, Institute User, and Fee Type models using SolidX. Follow these instructions to implement the data models discussed in the previous section.
+
+#### 1. Creating the Institute Model
+
+Navigate to the model creation interface in SolidX and configure as follows:
+
+##### Model Configuration
+
+| Setting | Value |
+|---------|-------|
+| **Singular Name** | institute |
+| **Plural Name** | institutes |
+| **Display Name** | Institute |
+| **Description** | The institute name... |
+| **Data Source** | default |
+| **Data Source Type** | postgres |
+| **Table Name** | fees_portal_institute |
+| **Enable Audit Tracking** | ✓ Yes |
+| **Enable Soft Delete** | ☐ No |
+| **Draft Publish Workflow** | ☐ No |
+| **Internationalization** | ☐ No |
+| **Is Child Model** | ☐ No |
+
+##### Field Definitions
+
+Create the following fields in the order listed:
+
+**Field 1: Institute Name**
+
+| Attribute | Value |
+|-----------|-------|
+| **Name** | instituteName |
+| **Display Name** | Institute Name |
+| **Type** | Short Text |
+| **Required** | ✓ Yes |
+| **Unique** | ✓ Yes |
+| **Index** | ✓ Yes |
+| **Is User Key** | ✓ Yes |
+| **Enable Audit Tracking** | ✓ Yes |
+
+**Field 2: Logo**
+
+| Attribute | Value |
+|-----------|-------|
+| **Name** | logo |
+| **Display Name** | Logo |
+| **Type** | Media (Single) |
+| **Media Types** | image |
+| **Media Max Size (KB)** | 5120 |
+| **Required** | ✓ Yes |
+| **Storage Provider** | default-filesystem |
+
+**Field 3: Description**
+
+| Attribute | Value |
+|-----------|-------|
+| **Name** | description |
+| **Display Name** | Description |
+| **Type** | Long Text |
+| **Required** | ☐ No |
+
+**Field 4: Payment Gateway Merchant ID**
+
+| Attribute | Value |
+|-----------|-------|
+| **Name** | paymentGatewayMerchantId |
+| **Display Name** | Cust Code |
+| **Type** | Short Text |
+| **Required** | ✓ Yes |
+| **Unique** | ✓ Yes |
+| **Enable Audit Tracking** | ✓ Yes |
+
+**Field 5: Payment Gateway Access Key**
+
+| Attribute | Value |
+|-----------|-------|
+| **Name** | paymentGatewayAccessKey |
+| **Display Name** | Access Key |
+| **Type** | Short Text |
+| **Required** | ✓ Yes |
+| **Unique** | ✓ Yes |
+| **Enable Audit Tracking** | ✓ Yes |
+
+**Field 6: Payment Gateway Access Secret**
+
+| Attribute | Value |
+|-----------|-------|
+| **Name** | paymentGatewayAccessSecret |
+| **Display Name** | Access Secret |
+| **Description** | Access Secret Key |
+| **Type** | Short Text |
+| **Required** | ✓ Yes |
+| **Enable Audit Tracking** | ✓ Yes |
+
+**Field 7: Institute Address**
+
+| Attribute | Value |
+|-----------|-------|
+| **Name** | instituteAddress |
+| **Display Name** | Institute Address |
+| **Type** | Long Text |
+| **Required** | ☐ No |
+
+**Field 8: Fee Types Relation**
+
+| Attribute | Value |
+|-----------|-------|
+| **Name** | feeTypes |
+| **Display Name** | FeeTypes |
+| **Description** | FeeTypes |
+| **Type** | Relation |
+| **Relation Type** | One-to-Many |
+| **Related Model** | feeType |
+| **Related Module** | fees-portal |
+| **Related Field** | institute |
+| **Create Inverse** | ✓ Yes |
+| **Cascade** | cascade |
+| **Enable Audit Tracking** | ✓ Yes |
+
+**Field 9: Institute Users Relation**
+
+| Attribute | Value |
+|-----------|-------|
+| **Name** | instituteUsers |
+| **Display Name** | InstituteUsers |
+| **Description** | InstituteUsers |
+| **Type** | Relation |
+| **Relation Type** | One-to-Many |
+| **Related Model** | instituteUser |
+| **Related Module** | fees-portal |
+| **Related Field** | institute |
+| **Create Inverse** | ✓ Yes |
+| **Cascade** | cascade |
+| **Enable Audit Tracking** | ✓ Yes |
+
+**Field 10: Institute Brochure**
+
+| Attribute | Value |
+|-----------|-------|
+| **Name** | instituteBrochure |
+| **Display Name** | Institute Brochure |
+| **Type** | Media (Single) |
+| **Media Types** | file |
+| **Media Max Size (KB)** | 5120 |
+| **Required** | ☐ No |
+| **Storage Provider** | default-filesystem |
+
+**Field 11: Institute Intro Video**
+
+| Attribute | Value |
+|-----------|-------|
+| **Name** | instituteIntroVideo |
+| **Display Name** | Institute Intro Video |
+| **Type** | Media (Single) |
+| **Media Types** | video |
+| **Media Max Size (KB)** | 5120 |
+| **Required** | ☐ No |
+| **Storage Provider** | default-filesystem |
+
+**Field 12: Support Email**
+
+| Attribute | Value |
+|-----------|-------|
+| **Name** | supportEmail |
+| **Display Name** | Support Email |
+| **Type** | Short Text |
+| **Required** | ✓ Yes |
+| **Enable Audit Tracking** | ✓ Yes |
+
+**Field 13: Support Mobile**
+
+| Attribute | Value |
+|-----------|-------|
+| **Name** | supportMobile |
+| **Display Name** | Support Mobile |
+| **Type** | Short Text |
+| **Min Length** | 10 |
+| **Max Length** | 10 |
+| **Required** | ✓ Yes |
+| **Enable Audit Tracking** | ✓ Yes |
+
+**Field 14: GST**
+
+| Attribute | Value |
+|-----------|-------|
+| **Name** | gst |
+| **Display Name** | GST |
+| **Type** | Short Text |
+| **Required** | ☐ No |
+| **Enable Audit Tracking** | ✓ Yes |
+
+**Field 15: Terms and Conditions**
+
+| Attribute | Value |
+|-----------|-------|
+| **Name** | tnC |
+| **Display Name** | Terms and Conditions |
+| **Type** | Rich Text |
+| **Required** | ☐ No |
+
+**Field 16: FAQs**
+
+| Attribute | Value |
+|-----------|-------|
+| **Name** | faqs |
+| **Display Name** | FAQS |
+| **Type** | Rich Text |
+| **Required** | ☐ No |
+
+**Field 17: Privacy Policy**
+
+| Attribute | Value |
+|-----------|-------|
+| **Name** | privacyPolicy |
+| **Display Name** | Privacy Policy |
+| **Type** | Rich Text |
+| **Required** | ☐ No |
+
+**Field 18: Email Domain**
+
+| Attribute | Value |
+|-----------|-------|
+| **Name** | emailDomain |
+| **Display Name** | Email Domain |
+| **Type** | Short Text |
+| **Required** | ☐ No |
+| **Enable Audit Tracking** | ✓ Yes |
+
+**Field 19: Customer User ID**
+
+| Attribute | Value |
+|-----------|-------|
+| **Name** | custUserId |
+| **Display Name** | Cust UserID |
+| **Description** | Customer UserID |
+| **Type** | Short Text |
+| **Required** | ✓ Yes |
+| **Enable Audit Tracking** | ☐ No |
+
+**Field 20: Hosted Page Prefix**
+
+| Attribute | Value |
+|-----------|-------|
+| **Name** | hostedPagePrefix |
+| **Display Name** | Hosted Page Prefix |
+| **Description** | Final domain: hostedPagePrefix-baseSuffix.subdomain |
+| **Type** | Short Text |
+| **Required** | ✓ Yes |
+| **Unique** | ✓ Yes |
+| **Enable Audit Tracking** | ✓ Yes |
+
+**Field 21: Status**
+
+| Attribute | Value |
+|-----------|-------|
+| **Name** | status |
+| **Display Name** | Status |
+| **Description** | Workflow field used to track the workflow status of this Institute. |
+| **Type** | Selection (Static) |
+| **Default Value** | InActive |
+| **Selection Values** | InActive:InActive, Active:Active |
+| **Value Type** | string |
+| **Index** | ✓ Yes |
+| **Enable Audit Tracking** | ✓ Yes |
+| **Multi-Select** | ☐ No |
+
+#### 2. Creating the Fee Type Model
+
+##### Model Configuration
+
+| Setting | Value |
+|---------|-------|
+| **Singular Name** | feeType |
+| **Plural Name** | feeTypes |
+| **Display Name** | Fee Type |
+| **Description** | Model used to capture different fee types that a school, institute might use. |
+| **Data Source** | default |
+| **Data Source Type** | postgres |
+| **Table Name** | fees_portal_fee_type |
+| **Enable Audit Tracking** | ✓ Yes |
+| **Enable Soft Delete** | ☐ No |
+| **Draft Publish Workflow** | ☐ No |
+| **Internationalization** | ☐ No |
+| **Is Child Model** | ☐ No |
+
+##### Field Definitions
+
+**Field 1: Fee Type**
+
+| Attribute | Value |
+|-----------|-------|
+| **Name** | feeType |
+| **Display Name** | Fee Type |
+| **Description** | The actual fee type. Eg. Tuition Fees, Bus Fees |
+| **Type** | Short Text |
+| **Required** | ✓ Yes |
+| **Is User Key** | ✓ Yes |
+| **Enable Audit Tracking** | ✓ Yes |
+
+**Field 2: Institute Relation**
+
+| Attribute | Value |
+|-----------|-------|
+| **Name** | institute |
+| **Display Name** | Institute |
+| **Type** | Relation |
+| **Relation Type** | Many-to-One |
+| **Related Model** | institute |
+| **Related Module** | fees-portal |
+| **Related Field** | feeTypes |
+| **Create Inverse** | ✓ Yes |
+| **Cascade** | cascade |
+| **Required** | ✓ Yes |
+| **Enable Audit Tracking** | ✓ Yes |
+
+**Field 3: Part Payment Allowed**
+
+| Attribute | Value |
+|-----------|-------|
+| **Name** | partPaymentAllowed |
+| **Display Name** | Part Payment Allowed |
+| **Type** | Boolean |
+| **Required** | ✓ Yes |
+| **Enable Audit Tracking** | ✓ Yes |
+
+**Field 4: Late Payment Fees Type**
+
+| Attribute | Value |
+|-----------|-------|
+| **Name** | latePaymentFeesType |
+| **Display Name** | Late Payment Fees Type |
+| **Type** | Selection (Static) |
+| **Default Value** | None |
+| **Selection Values** | None:None, Percent:Percent, Absolute:Absolute |
+| **Value Type** | string |
+| **Enable Audit Tracking** | ✓ Yes |
+| **Multi-Select** | ☐ No |
+
+**Field 5: Late Payment Fees**
+
+| Attribute | Value |
+|-----------|-------|
+| **Name** | latePaymentFees |
+| **Display Name** | Late Payment Fees |
+| **Type** | Decimal |
+| **Default Value** | 0 |
+| **Required** | ☐ No |
+| **Enable Audit Tracking** | ✓ Yes |
+
+**Field 6: Fee Type User Key (Computed)**
+
+| Attribute | Value |
+|-----------|-------|
+| **Name** | feeTypeUserKey |
+| **Display Name** | Fee Type User Key |
+| **Description** | Concatenation of fee type and institute name |
+| **Type** | Computed |
+| **Computed Value Type** | string |
+| **Value Provider** | ConcatEntityComputedFieldProvider |
+| **Provider Context** | `{"fields": ["feeType", "institute.instituteName"], "separator": "-", "slugify": true}` |
+| **Trigger Operations** | before-insert |
+| **Trigger Model** | feeType |
+| **Trigger Module** | fees-portal |
+| **Required** | ✓ Yes |
+| **Unique** | ✓ Yes |
+| **Is User Key** | ✓ Yes |
+
+#### 3. Creating the Institute User Model
+
+##### Model Configuration
+
+| Setting | Value |
+|---------|-------|
+| **Singular Name** | instituteUser |
+| **Plural Name** | instituteUsers |
+| **Display Name** | Institute User |
+| **Description** | This table allows us to store institute user records |
+| **Data Source** | default |
+| **Data Source Type** | postgres |
+| **Table Name** | fees_portal_institute_user |
+| **Enable Audit Tracking** | ✓ Yes |
+| **Enable Soft Delete** | ☐ No |
+| **Draft Publish Workflow** | ☐ No |
+| **Internationalization** | ☐ No |
+| **Is Child Model** | ✓ Yes |
+| **Parent Model** | user |
+
+##### Field Definitions
+
+**Field 1: User Type**
+
+| Attribute | Value |
+|-----------|-------|
+| **Name** | userType |
+| **Display Name** | User Type |
+| **Type** | Selection (Static) |
+| **Default Value** | Institute Admin |
+| **Selection Values** | Mswipe Admin:Mswipe Admin, Institute Admin:Institute Admin |
+| **Value Type** | string |
+| **Required** | ✓ Yes |
+| **Enable Audit Tracking** | ✓ Yes |
+| **Multi-Select** | ☐ No |
+
+**Field 2: Institute Relation**
+
+| Attribute | Value |
+|-----------|-------|
+| **Name** | institute |
+| **Display Name** | Institute |
+| **Type** | Relation |
+| **Relation Type** | Many-to-One |
+| **Related Model** | institute |
+| **Related Module** | fees-portal |
+| **Create Inverse** | ☐ No |
+| **Cascade** | cascade |
+| **Required** | ☐ No |
+| **Enable Audit Tracking** | ✓ Yes |
+
+#### Field Type Reference
+
+When creating fields in SolidX, use this mapping guide:
+
+| Field Type in SolidX | When to Use | Key Attributes to Set |
+|---------------------|-------------|----------------------|
+| **Short Text** | Names, emails, IDs, brief content | `required`, `unique`, `min`, `max`, `isUserKey` |
+| **Long Text** | Addresses, descriptions | `required` |
+| **Rich Text** | Formatted content (T&C, FAQs) | `required` |
+| **Boolean** | Yes/No flags | `required`, `defaultValue` |
+| **Decimal** | Money amounts, percentages | `required`, `defaultValue`, `min`, `max` |
+| **Selection (Static)** | Fixed dropdown options | `selectionStaticValues`, `defaultValue`, `isMultiSelect` |
+| **Media (Single)** | File uploads | `mediaTypes`, `mediaMaxSizeKb`, `mediaStorageProviderUserKey` |
+| **Relation** | Links between models | `relationType`, `relationCoModelSingularName`, `relationCoModelFieldName`, `relationCascade` |
+| **Computed** | Auto-calculated fields | `computedFieldValueProvider`, `computedFieldValueProviderCtxt`, `computedFieldTriggerConfig` |
+| **Datetime** | Date and time values | `required` |
+
+#### Important Configuration Notes
+
+**Relation Types:**
+- **One-to-Many**: Parent has multiple children (Institute → Fee Types)
+- **Many-to-One**: Child belongs to parent (Fee Type → Institute)
+- Always set both sides when `relationCreateInverse` is true
+
+**Cascade Options:**
+- **cascade**: Delete children when parent is deleted
+- Use for tightly coupled data (Institute and its Fee Types)
+
+**Audit Tracking:**
+- Enable on fields that need change history
+- Typically enabled for business-critical fields
+- Not needed for computed or temporary fields
+
+**User Key Fields:**
+- Mark fields that uniquely identify records
+- Used in URLs and references
+- Should be human-readable and unique
+
+**Index Fields:**
+- Enable for fields used in searches and filters
+- Improves query performance
+- Typically applied to status fields and foreign keys
+
+**Media Storage:**
+- `default-filesystem`: Stored on local server disk
+- `default-aws-s3`: Cloud Storage (Amazon S3)
+- Set appropriate size limits based on content type
+
+**Child Models:**
+- Inherit from a parent model (Institute User extends User)
+- Share parent's primary key
+- Get base fields automatically from parent
+
+#### Validation After Creation
+
+After creating each model, verify:
+
+1. All required fields are marked correctly
+2. Unique constraints are set where needed
+3. Relations are bidirectional (if `relationCreateInverse` is true)
+4. Default values are appropriate
+5. Audit tracking is enabled on business-critical fields
+6. Media storage providers are configured
+7. Computed field triggers are set correctly
+
 :::info
-You can refer to the [Module Builder](../../admin-docs/module-builder/index.md) for additional details on creating data models in SolidX.
+For more detailed guidance on creating Modules, Models, and Fields in SolidX, refer to the [Module Builder](../../admin-docs/module-builder/index.md) documentation.
 :::
 
 ### Setup Sequence
