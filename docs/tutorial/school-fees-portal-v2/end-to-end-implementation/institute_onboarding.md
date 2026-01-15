@@ -687,11 +687,11 @@ After creating each model, verify:
 For more detailed guidance on creating Modules, Models, and Fields in SolidX, refer to the [Module Builder](../../admin-docs/module-builder/index.md) documentation.
 :::
 
-### Setup Sequence
+### Data Setup
 
 Follow this order when implementing this feature:
 
-#### Phase 1: Platform Admin Setup
+#### Phase 1: Login As Platform Admin 
 
 **Step 1: Login**
 - Log in to the SolidX platform using Platform Admin credentials
@@ -714,7 +714,7 @@ Follow this order when implementing this feature:
 - Change the status from "InActive" to "Active"
 - The institution portal is now ready for configuration
 
-#### Phase 2: Institute Admin Configuration
+#### Phase 2: Login As Institute Admin
 
 **Step 5: Login**
 - Institute Admin user logs in using the credentials created in Step 3
