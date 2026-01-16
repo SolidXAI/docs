@@ -896,8 +896,8 @@ Before processing the uploaded Excel file, validation ensures data quality and p
 
 **What It Does:**
 1. **Excel Structure Validation**
-   - Reads the uploaded Excel file using ExcelJS library
-   - Identifies header row (row 1) and extracts column names
+   - Reads the uploaded Excel file using the ExcelService's `readExcelFromStreamNonStreaming()` method
+   - Identifies header row and extracts column names
    - Known columns: Student Name, Student Id, Parent/Guardian Name/Email/Mobile, Payment Mode
    - Fee type columns: Any column not in known fields and not containing "Due Date"
 
@@ -927,17 +927,102 @@ Before processing the uploaded Excel file, validation ensures data quality and p
 **Key Code Pattern:**
 
 ```typescript
-// Fee type validation
-const excelFeeTypes = [...unique fee types from headers];
-const instituteFeeTypes = await database.getFeeTypes(instituteId);
-const invalidFeeTypes = excelFeeTypes.filter(ft => !instituteFeeTypes.includes(ft));
-if (invalidFeeTypes.length > 0) {
-  throw new Error(`Fee types not configured: ${invalidFeeTypes.join(', ')}`);
-}
+import { ExcelService } from 'src/services/excel.service';
+import { createReadStream } from 'fs';
 
-// Due date validation
-if (dueDate < today) {
-  throw new Error(`Row ${rowNumber}: Due date cannot be in the past`);
+@Injectable()
+export class PaymentCollectionService {
+  constructor(
+    private readonly excelService: ExcelService,
+    // ... other dependencies
+  ) {}
+
+  async feeTypeValidation(filePath: string, instituteId: number) {
+    // Create a readable stream from the file path
+    const fileStream = createReadStream(filePath);
+
+    // Read the entire Excel file using ExcelService
+    const { headers, rows } = await this.excelService.readExcelFromStreamNonStreaming(
+      fileStream,
+      {
+        hasHeaderRow: true,
+        worksheetIndex: 0
+      }
+    );
+
+    // Extract fee type columns from headers
+    const knownColumns = [
+      'Student Name', 'Student Id',
+      'Parent/Guardian Name', 'Parent/Guardian Email', 'Parent/Guardian Mobile',
+      'Payment Mode'
+    ];
+
+    const feeTypeColumns = headers.filter(header =>
+      !knownColumns.includes(header) &&
+      !header.includes('Due Date')
+    );
+
+    const excelFeeTypes = [...new Set(feeTypeColumns)]; // Get unique fee types
+
+    // Validate fee types against database
+    const instituteFeeTypes = await this.getFeeTypesForInstitute(instituteId);
+    const invalidFeeTypes = excelFeeTypes.filter(
+      ft => !instituteFeeTypes.map(f => f.feeType).includes(ft)
+    );
+
+    if (invalidFeeTypes.length > 0) {
+      throw new Error(`Fee types not configured: ${invalidFeeTypes.join(', ')}`);
+    }
+
+    // Validate each row
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+
+    for (let i = 0; i < rows.length; i++) {
+      const row = rows[i];
+      const rowNumber = i + 2; // +2 because Excel rows start at 1 and row 1 is headers
+
+      // Validate due dates for each fee type
+      for (const feeType of excelFeeTypes) {
+        const dueDateColumn = `${feeType} Due Date`;
+        const amountColumn = `${feeType} Amount`;
+
+        const amount = row[amountColumn];
+        const dueDate = row[dueDateColumn];
+
+        // Only validate if amount is provided
+        if (amount && parseFloat(amount) > 0) {
+          if (!dueDate) {
+            throw new Error(
+              `Row ${rowNumber}: Due date is required for '${feeType}' when amount is specified`
+            );
+          }
+
+          const dueDateObj = new Date(dueDate);
+          if (dueDateObj < today) {
+            throw new Error(
+              `Row ${rowNumber}: Due date for '${feeType}' cannot be in the past`
+            );
+          }
+        }
+      }
+
+      // Validate payment mode
+      const paymentMode = row['Payment Mode']?.toString().toUpperCase() || 'PG';
+      if (!['CASH', 'PG'].includes(paymentMode)) {
+        throw new Error(
+          `Row ${rowNumber}: Invalid payment mode '${row['Payment Mode']}'. Use 'CASH' or 'PG'`
+        );
+      }
+
+      // Validate required fields
+      if (!row['Parent/Guardian Email']) {
+        throw new Error(`Row ${rowNumber}: Parent/Guardian Email is required`);
+      }
+    }
+
+    return { headers, rows };
+  }
 }
 ```
 
@@ -990,7 +1075,7 @@ Media Entity Insert
     ↓
 afterInsert Event Fired
     ↓
-Read Excel from Filesystem
+Read Excel using ExcelService
     ↓
 For Each Row in Excel:
     ↓
@@ -1017,8 +1102,15 @@ For Each Row in Excel:
 **Key Code Pattern:**
 
 ```typescript
+import { ExcelService } from 'src/services/excel.service';
+import { createReadStream } from 'fs';
+
 @EventSubscriber()
 export class MediaTransactionSubscriber implements EntitySubscriberInterface<Media> {
+  constructor(
+    private readonly excelService: ExcelService,
+    // ... other dependencies
+  ) {}
 
   async afterInsert(event: InsertEvent<Media>) {
     const media = event.entity;
@@ -1029,16 +1121,44 @@ export class MediaTransactionSubscriber implements EntitySubscriberInterface<Med
   }
 
   async paymentCollectionTransaction(media: Media, entityManager: EntityManager) {
-    // Read Excel file
-    const workbook = new ExcelJS.Workbook();
-    await workbook.xlsx.readFile(filePath);
-    const worksheet = workbook.worksheets[0];
+    // Get file path from media entity
+    const filePath = media.filePath; // Adjust based on your Media entity structure
+
+    // Create a readable stream from the file path
+    const fileStream = createReadStream(filePath);
+
+    // Read the entire Excel file using ExcelService
+    const { headers, rows } = await this.excelService.readExcelFromStreamNonStreaming(
+      fileStream,
+      {
+        hasHeaderRow: true,
+        worksheetIndex: 0
+      }
+    );
 
     // Process each row
-    for (let rowNumber = 2; rowNumber <= worksheet.rowCount; rowNumber++) {
-      const row = worksheet.getRow(rowNumber);
-      await this.processRow(row, entityManager);
+    for (const row of rows) {
+      await this.processRow(row, headers, entityManager);
     }
+  }
+
+  async processRow(
+    row: Record<string, any>,
+    headers: string[],
+    entityManager: EntityManager
+  ) {
+    // Extract student data from row using header keys
+    const studentData = {
+      studentId: row['Student Id'],
+      studentName: row['Student Name'],
+      parentName: row['Parent/Guardian Name'],
+      parentEmailAddress: row['Parent/Guardian Email']?.toLowerCase(),
+      parentMobileNumber: row['Parent/Guardian Mobile'],
+      // ... other fields
+    };
+
+    // Process student and payment items
+    // ... (see next section for details)
   }
 }
 ```
@@ -1050,36 +1170,46 @@ export class MediaTransactionSubscriber implements EntitySubscriberInterface<Med
 **Student Creation/Update Logic:**
 
 ```typescript
-// Extract student data from Excel row
-const studentData = {
-  studentId: row.getCell('Student Id').value,
-  studentName: row.getCell('Student Name').value,
-  parentName: row.getCell('Parent/Guardian Name').value,
-  parentEmailAddress: row.getCell('Parent/Guardian Email').value.toLowerCase(),
-  parentMobileNumber: row.getCell('Parent/Guardian Mobile').value,
-  institute: { id: instituteId }
-};
-
-// Find existing student
-let student = await entityManager.findOne(Student, {
-  where: {
-    studentId: studentData.studentId,
+async processRow(
+  row: Record<string, any>,
+  headers: string[],
+  entityManager: EntityManager
+) {
+  // Extract student data from the row object
+  // The ExcelService returns rows as objects with header keys
+  const studentData = {
+    studentId: row['Student Id'],
+    studentName: row['Student Name'],
+    parentName: row['Parent/Guardian Name'],
+    parentEmailAddress: row['Parent/Guardian Email']?.toLowerCase(),
+    parentMobileNumber: row['Parent/Guardian Mobile'],
     institute: { id: instituteId }
+  };
+
+  // Find existing student
+  let student = await entityManager.findOne(Student, {
+    where: {
+      studentId: studentData.studentId,
+      institute: { id: instituteId }
+    }
+  });
+
+  if (student) {
+    // Update existing student
+    student.studentName = studentData.studentName;
+    student.parentName = studentData.parentName;
+    student.parentEmailAddress = studentData.parentEmailAddress;
+    student.parentMobileNumber = studentData.parentMobileNumber;
+  } else {
+    // Create new student
+    student = entityManager.create(Student, studentData);
   }
-});
 
-if (student) {
-  // Update existing student
-  student.studentName = studentData.studentName;
-  student.parentName = studentData.parentName;
-  student.parentEmailAddress = studentData.parentEmailAddress;
-  student.parentMobileNumber = studentData.parentMobileNumber;
-} else {
-  // Create new student
-  student = entityManager.create(Student, studentData);
+  await entityManager.save(Student, student);
+
+  // Continue processing payment items for this student
+  await this.createPaymentItems(row, headers, student, entityManager);
 }
-
-await entityManager.save(Student, student);
 ```
 
 **Important Notes:**
@@ -1087,61 +1217,85 @@ await entityManager.save(Student, student);
 - Updates overwrite existing data (name, parent info, contact details)
 - Student Login ID is generated separately (not from Excel)
 - Institute is always set from logged-in user's context
+- The ExcelService's `readExcelFromStreamNonStreaming()` returns rows as objects with column headers as keys, making data access simpler and more readable
 
 #### 5. Payment Collection Item Creation
 
 **For Each Fee Type in Excel:**
 
 ```typescript
-// Get fee types for this institute
-const instituteFeeTypes = await entityManager.find(FeeType, {
-  where: { institute: { id: instituteId } }
-});
-
-// Process each fee type
-for (const feeType of instituteFeeTypes) {
-  const amountColumnName = `${feeType.feeType} Amount`;
-  const dueDateColumnName = `${feeType.feeType} Due Date`;
-
-  const amount = row.getCell(amountColumnName).value;
-  const dueDate = row.getCell(dueDateColumnName).value;
-  const paymentMode = row.getCell('Payment Mode').value || 'PG';
-
-  // Skip if no amount
-  if (!amount || amount <= 0) continue;
-
-  // Determine status based on payment mode
-  let status, amountPaid, amountPending;
-
-  if (paymentMode.toUpperCase() === 'CASH') {
-    status = 'Fully Paid';
-    amountPaid = amount;
-    amountPending = 0;
-  } else {
-    status = 'Pending';
-    amountPaid = 0;
-    amountPending = amount;
-  }
-
-  // Create payment collection item
-  const item = entityManager.create(PaymentCollectionItem, {
-    student: student,
-    feeType: feeType,
-    paymentCollection: paymentCollection,
-    institute: { id: instituteId },
-    amountToBePaid: amount,
-    dueDate: dueDate,
-    partPaymentAllowed: feeType.partPaymentAllowed,
-    status: status,
-    amountPaid: amountPaid,
-    amountPending: amountPending,
-    totalAmountToBePaid: amount,
-    mode: paymentMode.toUpperCase()
+async createPaymentItems(
+  row: Record<string, any>,
+  headers: string[],
+  student: Student,
+  entityManager: EntityManager
+) {
+  // Get fee types for this institute
+  const instituteFeeTypes = await entityManager.find(FeeType, {
+    where: { institute: { id: instituteId } }
   });
 
-  await entityManager.save(PaymentCollectionItem, item);
+  // Extract fee type columns from headers
+  const feeTypeColumns = headers.filter(
+    header => !['Student Name', 'Student Id', 'Parent/Guardian Name',
+                'Parent/Guardian Email', 'Parent/Guardian Mobile',
+                'Payment Mode'].includes(header) &&
+                !header.includes('Due Date')
+  );
+
+  // Process each fee type
+  for (const feeType of instituteFeeTypes) {
+    const amountColumnName = `${feeType.feeType} Amount`;
+    const dueDateColumnName = `${feeType.feeType} Due Date`;
+
+    // Access data using the column names as object keys
+    const amount = row[amountColumnName];
+    const dueDate = row[dueDateColumnName];
+    const paymentMode = row['Payment Mode'] || 'PG';
+
+    // Skip if no amount
+    if (!amount || parseFloat(amount) <= 0) continue;
+
+    // Determine status based on payment mode
+    let status, amountPaid, amountPending;
+
+    if (paymentMode.toString().toUpperCase() === 'CASH') {
+      status = 'Fully Paid';
+      amountPaid = parseFloat(amount);
+      amountPending = 0;
+    } else {
+      status = 'Pending';
+      amountPaid = 0;
+      amountPending = parseFloat(amount);
+    }
+
+    // Create payment collection item
+    const item = entityManager.create(PaymentCollectionItem, {
+      student: student,
+      feeType: feeType,
+      paymentCollection: paymentCollection,
+      institute: { id: instituteId },
+      amountToBePaid: parseFloat(amount),
+      dueDate: new Date(dueDate),
+      partPaymentAllowed: feeType.partPaymentAllowed,
+      status: status,
+      amountPaid: amountPaid,
+      amountPending: amountPending,
+      totalAmountToBePaid: parseFloat(amount),
+      mode: paymentMode.toString().toUpperCase()
+    });
+
+    await entityManager.save(PaymentCollectionItem, item);
+  }
 }
 ```
+
+**Benefits of Using ExcelService:**
+- Clean object-based access to cell values using column headers as keys
+- Automatic handling of different Excel cell types (numbers, dates, strings)
+- Built-in support for rich text, formulas, and hyperlinks
+- No need to manage cell indices or column mappings manually
+- Consistent data normalization across the application
 
 #### 6. Email Notification Logic
 
@@ -1346,6 +1500,30 @@ Follow this sequence when implementing custom business logic:
 7. Create computed field provider for amount calculations
 8. Set up scheduled jobs for late fees and reminders
 9. Test end-to-end flow with sample Excel file
+:::
+
+:::info Excel Service Integration
+All Excel file operations in this feature use the centralized `ExcelService` for consistency:
+
+**Key Methods Used:**
+- **`readExcelFromStreamNonStreaming()`**: For validation and processing Excel files
+  - Returns `{ headers: string[], rows: Record<string, any>[] }`
+  - Handles complex cell types (rich text, formulas, dates)
+  - Provides clean object-based access using column headers as keys
+
+- **`createExcelStream()`**: For generating templates
+  - Accepts custom headers array
+  - Creates downloadable Excel files with proper formatting
+
+**Benefits:**
+- Consistent data normalization across the application
+- Automatic handling of Excel-specific data types
+- Built-in support for streaming large files
+- Clean, maintainable code without low-level ExcelJS complexity
+- Reusable service for all import/export operations
+
+**Alternative Approach:**
+For very large files that may cause memory issues, consider using `readExcelInPagesFromStream()` which returns an async generator for processing rows in chunks. However, for typical payment collection files (hundreds to thousands of rows), `readExcelFromStreamNonStreaming()` provides better performance and simpler code.
 :::
 
 ### Customizing the UI
