@@ -6,6 +6,7 @@ Allow entering the username instead of the email for login
 - Setting up SolidX
     - Give more details on each prompt in the solidx setup command
     - Give more detail on the outcome of the bootstrap command
+- Certain common sections like Field Type Reference, Important Configuration Notes, Generating APIs and UI Components are common and can be moved to a common location and linked from here    
 
 # Fix all below (Done)
 - in the screenshot, show npm run solidx:dev for the frontend as well [OK]
