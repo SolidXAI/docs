@@ -82,9 +82,9 @@ This section describes the data models you need to implement this feature.
 ##### What you can do with this model:
 - Create multiple payment collections throughout the year
 - Each collection can include multiple students and multiple fee types
-- Upload an Excel file to create all payment items at once
+- Upload an Excel file to create all payment collection items at once
 - Track which collections have been sent and when
-- When you delete a collection, all associated payment items are removed
+- When you delete a collection, all associated payment collection items are removed
 
 #### 3. Payment Collection Item Model
 
@@ -159,7 +159,6 @@ This section describes the data models you need to implement this feature.
 | **Payment Date** | Yes | When the payment was made | 2024-03-15 14:30:00 |
 | **Amount Paid** | Yes | Amount received in this transaction | 5000.00 |
 | **Payment Status** | Yes | Status of this transaction | "Success", "Pending", "Failed" |
-| **Is Refunded** | Auto-managed | Has this payment been refunded? | true/false |
 
 ##### Relationships
 
@@ -173,7 +172,6 @@ This section describes the data models you need to implement this feature.
 ##### What you can do with this model:
 - Track partial payments and installments
 - View complete payment history for each item
-- Handle refund scenarios
 - Reconcile with payment gateway transactions
 - Calculate total amount paid across multiple transactions
 
@@ -784,18 +782,7 @@ Create the following fields in the order listed:
 | **Required** | Yes |
 | **Enable Audit Tracking** | Yes |
 
-**Field 2: Is Refunded**
-
-| Attribute | Value |
-|-----------|-------|
-| **Name** | isRefunded |
-| **Display Name** | Is Refunded |
-| **Type** | Boolean |
-| **Default Value** | false |
-| **Required** | Yes |
-| **Enable Audit Tracking** | Yes |
-
-**Field 3: Payment Status**
+**Field 2: Payment Status**
 
 | Attribute | Value |
 |-----------|-------|
@@ -806,7 +793,7 @@ Create the following fields in the order listed:
 | **Required** | Yes |
 | **Enable Audit Tracking** | Yes |
 
-**Field 4: Amount Paid**
+**Field 3: Amount Paid**
 
 | Attribute | Value |
 |-----------|-------|
@@ -816,7 +803,7 @@ Create the following fields in the order listed:
 | **Required** | Yes |
 | **Enable Audit Tracking** | Yes |
 
-**Field 5: Institute Relation**
+**Field 4: Institute Relation**
 
 | Attribute | Value |
 |-----------|-------|
@@ -832,7 +819,7 @@ Create the following fields in the order listed:
 | **Index** | Yes |
 | **Enable Audit Tracking** | Yes |
 
-**Field 6: Student Relation**
+**Field 5: Student Relation**
 
 | Attribute | Value |
 |-----------|-------|
@@ -848,7 +835,7 @@ Create the following fields in the order listed:
 | **Index** | Yes |
 | **Enable Audit Tracking** | Yes |
 
-**Field 7: Payment Collection Item Relation**
+**Field 6: Payment Collection Item Relation**
 
 | Attribute | Value |
 |-----------|-------|
@@ -865,7 +852,7 @@ Create the following fields in the order listed:
 | **Index** | Yes |
 | **Enable Audit Tracking** | Yes |
 
-**Field 8: Payment Relation**
+**Field 7: Payment Relation**
 
 | Attribute | Value |
 |-----------|-------|
@@ -2059,11 +2046,11 @@ This section provides a comprehensive step-by-step guide for Institute Admins to
 
 Before initiating a payment collection, ensure:
 
-[ ]Institute is activated (status = "Active")
-[ ]Fee Types are configured for your institute
-[ ]Late payment rules are set for each fee type (if applicable)
-[ ]Payment gateway credentials are configured
-[ ]Email templates are configured
+[ ] Institute is activated (status = "Active")
+[ ] Fee Types are configured for your institute
+[ ] Late payment rules are set for each fee type (if applicable)
+[ ] Payment gateway credentials are configured
+[ ] Email templates are configured
 
 #### Phase 1: Prepare Payment Collection Data
 
@@ -2171,12 +2158,12 @@ Open the downloaded template and fill in the data:
 **Step 8: Save and Validate Excel**
 
 Before uploading:
-- [ ]Double-check all required fields are filled
-- [ ]Verify student IDs are unique
-- [ ]Confirm due dates are not in the past
-- [ ]Check email addresses are valid
-- [ ]Verify amounts are positive numbers
-- [ ]Confirm payment modes are "PG" or "CASH"
+- [ ] Double-check all required fields are filled
+- [ ] Verify student IDs are unique
+- [ ] Confirm due dates are not in the past
+- [ ] Check email addresses are valid
+- [ ] Verify amounts are positive numbers
+- [ ] Confirm payment modes are "PG" or "CASH"
 
 #### Phase 3: Upload Payment Collection
 
@@ -2230,12 +2217,12 @@ After successful upload:
 **Step 14: Verify Item Details**
 
 For a few sample students, check:
-- [ ]Student name and ID are correct
-- [ ]Fee type is correct
-- [ ]Amount to be paid matches Excel
-- [ ]Due date is correct
-- [ ]Payment mode (CASH or PG) is correct
-- [ ]Status is correct:
+- [ ] Student name and ID are correct
+- [ ] Fee type is correct
+- [ ] Amount to be paid matches Excel
+- [ ] Due date is correct
+- [ ] Payment mode (CASH or PG) is correct
+- [ ] Status is correct:
   - "Fully Paid" for CASH mode
   - "Pending" for PG mode
 
@@ -2305,7 +2292,6 @@ Regularly check Payment Collection Items list:
 - Options:
   - Cancel existing item
   - Create new payment collection with corrected data
-  - Or manually adjust amount after payment (refund/additional charge)
 
 #### Phase 6: Ongoing Management
 
@@ -2376,14 +2362,14 @@ Periodically reconcile payment records:
 
 You've successfully initiated a payment collection when:
 
-[ ]Excel template downloads with your fee types
-[ ]Excel validates without errors
-[ ]Payment Collection is created
-[ ]Correct number of Payment Collection Items created
-[ ]Students appear in system with correct details
-[ ]Email notifications sent to all parents
-[ ]Payment links work for PG mode students
-[ ]CASH mode students show "Fully Paid" status
-[ ]Payment status updates when students pay online
+[ ] Excel template downloads with your fee types
+[ ] Excel validates without errors
+[ ] Payment Collection is created
+[ ] Correct number of Payment Collection Items created
+[ ] Students appear in system with correct details
+[ ] Email notifications sent to all parents
+[ ] Payment links work for PG mode students
+[ ] CASH mode students show "Fully Paid" status
+[ ] Payment status updates when students pay online
 
 Congratulations! You've successfully initiated a payment collection. Students can now view and pay their fees through the student portal, and you can monitor payment status in real-time.
