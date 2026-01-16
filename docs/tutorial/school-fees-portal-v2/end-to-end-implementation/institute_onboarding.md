@@ -7,9 +7,8 @@ keywords: [TODO]
 concerns: TODO
 ---
 
-## Institute Onboarding
-
-Below are the key features related to managing educational institutes within the Fees Portal:
+### Overview
+Below are the key features related to managing educational institutes within the Fees Portal Platform:
 - Complete institute profile management (name, address, contact details)
 - Payment gateway configuration per institute
 - Custom branding and theming for student portals
@@ -149,9 +148,6 @@ These fields are automatically provided by the system's user management:
 | Field | Required? | Description | Options |
 |-------|-----------|-------------|---------|
 | **User Type** | Yes | What role should this user have? | • **Institute Admin**<br/>• **Platform Admin** |
-:::info
-Platform Admin needs to be created only once for the entire system. They can manage all institutes. This can be done using the SolidX IAM user management module.
-:::
 
 ###### Understanding User Roles:
 
@@ -163,19 +159,12 @@ Platform Admin needs to be created only once for the entire system. They can man
 - **Cannot:** Access other institutions' data
 - **Cannot:** Change system settings
 
-**Platform Admin** - Choose this for super administrators managing the entire platform
-- **Can:** Create and manage all institutions
-- **Can:** Access data across all institutions
-- **Can:** Activate/deactivate institution portals
-- **Can:** Perform system-wide operations
-
 ###### Who needs access?
 
 Typical users you'll create:
 - Principal or Admin Office staff → **Institute Admin**
 - Accounts department staff → **Institute Admin**
 - Fee collection desk staff → **Institute Admin**
-- Platform super administrator → **Platform Admin**
 
 #### How These Models Connect
 
@@ -689,7 +678,7 @@ For more detailed guidance on creating Modules, Models, and Fields in SolidX, re
 
 ### Generating APIs and UI Components
 #### Overview
-- Once the data models are created, use SolidX's App Builder to auto-generate REST APIs and basic UI components (list / detail / kanban /menu views) for each model.
+- Once the data models are created, use SolidX's App Builder to auto-generate REST APIs and basic UI components for each model.
 - The generated APIs will allow you to perform CRUD operations on the Institute, Fee Type, and Institute User models. You can view the API documentation in the Swagger UI provided by SolidX at `/docs`.
 - The generated UI components will provide a basic interface for managing institutes, fee types, and users. You can access these components through the model menu item which will be automatically added to the menu within the Fees Portal module.
 - Ensure that the generated API's and components meet your requirements and customize them as needed.
@@ -705,7 +694,13 @@ For more detailed guidance on creating Modules, Models, and Fields in SolidX, re
 8. You can verify the generated REST APIs using Swagger UI at `/docs` endpoint.
 9. You can access the generated UI components through the model menu item within the Fees Portal module.
 :::tip
-In case you want to generate code for single model and your module has many other models, you can choose to generate code for only that specific model by navigating to the Models sub-menu instead, selecting the desired model, and using the "Generate Code" option from the context menu. In case this model has relations with other models, those related models will also be processed during code generation. This approach can help reduce the time taken for code generation.
+In case you want to generate code for single model and your module has many other models, you can choose to generate code for only that specific model by navigating to the Models sub-menu instead.
+
+Select the desired model, and click on the "Generate Code" option from the context menu. 
+
+In case this model has relations with other models, those related models will also be processed during code generation.
+
+This approach can help reduce the time taken for code generation.
 :::
 
 ### Customizing the UI
@@ -926,10 +921,9 @@ Two custom buttons are added to the form:
 ```
 
 **Benefits:**
-- Enforces workflow state machine
-- Provides audit trail for status changes
-- Prevents invalid status transitions
+- Easily manage institute activation state
 - Makes actions discoverable in context menu
+- Provides audit trail for status changes
 
 #### Complete Institute Form Layout JSON
 
