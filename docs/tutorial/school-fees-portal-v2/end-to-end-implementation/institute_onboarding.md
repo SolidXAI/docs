@@ -1,5 +1,5 @@
 ---
-sidebar_position: 4
+sidebar_position: 1
 title: Institute Onboarding
 description: Learn how to onboard educational institutes to the Fees Portal.
 summary: TODO
