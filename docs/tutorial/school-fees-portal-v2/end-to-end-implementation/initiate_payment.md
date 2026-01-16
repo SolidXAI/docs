@@ -1164,10 +1164,10 @@ const allFullyPaid = items.every(item => item.status === 'Fully Paid');
 
 if (allFullyPaid) {
   // Send payment success email
-  await mailFactory.sendEmailUsingTemplate({
-    templateName: 'confirm-payment',
-    to: student.parentEmailAddress,
-    data: {
+  await mailFactory.sendEmailUsingTemplate(
+    student.parentEmailAddress, //to
+    'fees-portal-payment-success', //template name
+    { // templateParams
       student: student,
       paymentDetails: {
         totalAmount: items.reduce((sum, item) => sum + item.amountPaid, 0),
@@ -1175,17 +1175,18 @@ if (allFullyPaid) {
         status: 'Fully Paid',
         createdDate: new Date()
       },
-      instituteLogo: institute.logo
-    }
-  });
+      instituteLogo: institute.logo,
+    },
+    true //shouldQueueEmails
+  );
 } else {
   // Send due fees email with payment link
   const redirectUrl = `https://${institute.hostedPagePrefix}-${EDU_BASE_DOMAIN}/?id=${student.studentLoginId}`;
 
-  await mailFactory.sendEmailUsingTemplate({
-    templateName: 'new-payment-or-payment-reminder',
-    to: student.parentEmailAddress,
-    data: {
+  await mailFactory.sendEmailUsingTemplate(
+    student.parentEmailAddress, //to
+    'new-payment-or-payment-reminder', //template name
+    { // templateParams
       student: student,
       dueDetails: {
         totalAmount: items.reduce((sum, item) => sum + item.amountPending, 0),
@@ -1194,9 +1195,10 @@ if (allFullyPaid) {
         redirectUrl: redirectUrl,
         createdDate: new Date()
       },
-      instituteLogo: institute.logo
-    }
-  });
+      instituteLogo: institute.logo,
+    },
+    true //shouldQueueEmails
+  );
 }
 ```
 
@@ -1316,18 +1318,20 @@ for (const [studentId, items] of Object.entries(groupedByStudent)) {
   const student = items[0].student;
   const institute = items[0].institute;
 
-  await mailFactory.sendEmailUsingTemplate({
-    templateName: 'new-payment-or-payment-reminder',
-    to: student.parentEmailAddress,
-    data: {
+  await mailFactory.sendEmailUsingTemplate(
+    student.parentEmailAddress, //to
+    'new-payment-or-payment-reminder', //template name
+    { // templateParams
       student: student,
       dueDetails: {
         totalAmount: items.reduce((sum, item) => sum + parseFloat(item.amountPending), 0),
         feeTypes: items.map(item => item.feeType.feeType).join(', '),
         redirectUrl: `https://${institute.hostedPagePrefix}-${EDU_BASE_DOMAIN}/?id=${student.studentLoginId}`
-      }
-    }
-  });
+      },
+      instituteLogo: institute.logo,
+    },
+    true //shouldQueueEmails
+  );
 }
 ```
 
