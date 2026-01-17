@@ -1441,36 +1441,29 @@ async computeFieldValue(entity: PaymentCollectionItemDetail) {
 
 #### 8. Scheduled Jobs
 
-The payment collection feature uses SolidX's declarative scheduled jobs configuration. Jobs are defined in the module metadata and automatically registered by the platform.
+The payment collection feature uses two scheduled jobs to automate late fee calculation and email reminders.
 
-**Scheduled Jobs Configuration Location:**
-- **File:** `solid-api/module-metadata/fees-portal/fees-portal-metadata.json`
-- **Section:** `scheduledJobs` array
+:::tip Reference Documentation
+📋 For detailed information about scheduled jobs configuration, properties, and best practices, see [Scheduled Jobs Configuration](../common/scheduled-jobs.md)
+:::
 
 **Job 1: Late Fee Calculator**
 
-**Configuration:**
+- **File:** `solid-api/src/fees-portal/scheduled-jobs/late-fee-payment-calculator-scheduled-job.service.ts`
+- **Class Name:** `LateFeePaymentCalculatorScheduledJob`
+- **Frequency:** Hourly (runs every hour, all days of the week)
+- **Purpose:** Calculate and apply late fees for overdue payments
+
+**Configuration in metadata JSON:**
 ```json
 {
   "scheduleName": "Late Fee Calculation",
   "isActive": true,
   "frequency": "Hourly",
-  "startTime": null,
-  "endTime": null,
-  "startDate": null,
-  "endDate": null,
-  "dayOfMonth": 0,
-  "dayOfWeek": "[\"Monday\",\"Tuesday\",\"Wednesday\",\"Thursday\",\"Friday\",\"Saturday\",\"Sunday\"]",
   "job": "LateFeePaymentCalculatorScheduledJob",
   "moduleUserKey": "fees-portal"
 }
 ```
-
-**Implementation:**
-- **File:** `solid-api/src/fees-portal/scheduled-jobs/late-fee-payment-calculator-scheduled-job.service.ts`
-- **Class Name:** `LateFeePaymentCalculatorScheduledJob`
-- **Frequency:** Hourly (runs every hour, all days of the week)
-- **Purpose:** Calculate and apply late fees for overdue payments
 
 **What It Does:**
 ```typescript
@@ -1506,28 +1499,21 @@ for (const item of overdueItems) {
 
 **Job 2: Fees Due Email Reminder**
 
-**Configuration:**
+- **File:** `solid-api/src/fees-portal/scheduled-jobs/send-email-schedule-jobs.service.ts`
+- **Class Name:** `SendEmailScheduleJobs`
+- **Frequency:** Daily (runs once per day, all days of the week)
+- **Purpose:** Send payment reminders to parents with pending fees
+
+**Configuration in metadata JSON:**
 ```json
 {
   "scheduleName": "Fees Due Email",
   "isActive": true,
   "frequency": "Daily",
-  "startTime": null,
-  "endTime": null,
-  "startDate": null,
-  "endDate": null,
-  "dayOfMonth": 0,
-  "dayOfWeek": "[\"Monday\",\"Tuesday\",\"Wednesday\",\"Thursday\",\"Friday\",\"Saturday\",\"Sunday\"]",
   "job": "SendEmailScheduleJobs",
   "moduleUserKey": "fees-portal"
 }
 ```
-
-**Implementation:**
-- **File:** `solid-api/src/fees-portal/scheduled-jobs/send-email-schedule-jobs.service.ts`
-- **Class Name:** `SendEmailScheduleJobs`
-- **Frequency:** Daily (runs once per day, all days of the week)
-- **Purpose:** Send payment reminders to parents with pending fees
 
 **What It Does:**
 ```typescript
@@ -1548,9 +1534,9 @@ for (const [studentId, items] of Object.entries(groupedByStudent)) {
   const institute = items[0].institute;
 
   await mailFactory.sendEmailUsingTemplate(
-    student.parentEmailAddress, //to
-    'new-payment-or-payment-reminder', //template name
-    { // templateParams
+    student.parentEmailAddress,
+    'new-payment-or-payment-reminder',
+    {
       student: student,
       dueDetails: {
         totalAmount: items.reduce((sum, item) => sum + parseFloat(item.amountPending), 0),
@@ -1559,52 +1545,10 @@ for (const [studentId, items] of Object.entries(groupedByStudent)) {
       },
       instituteLogo: institute.logo,
     },
-    true //shouldQueueEmails
+    true
   );
 }
 ```
-
-**Scheduled Job Configuration Properties:**
-
-| Property | Description | Possible Values |
-|----------|-------------|-----------------|
-| **scheduleName** | Human-readable name for the job | Any string |
-| **isActive** | Whether the job is enabled | `true`, `false` |
-| **frequency** | How often the job runs | "Hourly", "Daily", "Weekly", "Monthly" |
-| **startTime** | Time of day to start (optional) | `null`, "HH:MM:SS" format |
-| **endTime** | Time of day to stop (optional) | `null`, "HH:MM:SS" format |
-| **startDate** | Date to begin running job (optional) | `null`, ISO date string |
-| **endDate** | Date to stop running job (optional) | `null`, ISO date string |
-| **dayOfMonth** | Day of month for monthly jobs | `0` (not used), `1-31` |
-| **dayOfWeek** | JSON array of days to run | `"[\"Monday\",\"Tuesday\",...]"` |
-| **job** | Class name of the job implementation | Must match TypeScript class name |
-| **moduleUserKey** | Module identifier | "fees-portal" |
-
-**How to Modify Job Schedules:**
-
-1. **Change Frequency**: Update the `frequency` field in the metadata JSON
-   - Example: Change "Hourly" to "Daily" for the late fee calculator
-
-2. **Restrict to Specific Days**: Modify the `dayOfWeek` array
-   - Example: `"[\"Monday\",\"Wednesday\",\"Friday\"]"` for specific weekdays
-
-3. **Add Time Windows**: Set `startTime` and `endTime`
-   - Example: `"startTime": "09:00:00", "endTime": "17:00:00"` for business hours only
-
-4. **Enable/Disable Jobs**: Toggle the `isActive` flag
-   - Set to `false` to temporarily disable a job without removing configuration
-
-5. **Set Date Ranges**: Use `startDate` and `endDate` for seasonal jobs
-   - Example: `"startDate": "2024-01-01", "endDate": "2024-12-31"`
-
-**Benefits of SolidX Scheduled Jobs:**
-
-- **Declarative Configuration**: No need to write cron expressions manually
-- **UI Management**: Jobs can be managed through SolidX admin interface
-- **Centralized Definition**: All job configurations in one place (metadata JSON)
-- **Easy Debugging**: Clear visibility of job schedules and status
-- **Automatic Registration**: Jobs are automatically registered when module loads
-- **Flexible Scheduling**: Multiple options for controlling when jobs run
 
 :::tip Implementation Order
 Follow this sequence when implementing custom business logic:
