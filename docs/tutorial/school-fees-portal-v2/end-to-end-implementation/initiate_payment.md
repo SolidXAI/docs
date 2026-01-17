@@ -2221,11 +2221,11 @@ This section provides a comprehensive step-by-step guide for Institute Admins to
 
 Before initiating a payment collection, ensure:
 
-[ ] Institute is activated (status = "Active")
-[ ] Fee Types are configured for your institute
-[ ] Late payment rules are set for each fee type (if applicable)
-[ ] Payment gateway credentials are configured
-[ ] Email templates are configured
+- [ ] Institute is activated (status = "Active")
+- [ ] Fee Types are configured for your institute
+- [ ] Late payment rules are set for each fee type (if applicable)
+- [ ] Payment gateway credentials are configured
+- [ ] Email templates are configured
 
 #### Phase 1: Prepare Payment Collection Data
 
@@ -2537,14 +2537,14 @@ Periodically reconcile payment records:
 
 You've successfully initiated a payment collection when:
 
-[ ] Excel template downloads with your fee types
-[ ] Excel validates without errors
-[ ] Payment Collection is created
-[ ] Correct number of Payment Collection Items created
-[ ] Students appear in system with correct details
-[ ] Email notifications sent to all parents
-[ ] Payment links work for PG mode students
-[ ] CASH mode students show "Fully Paid" status
-[ ] Payment status updates when students pay online
+- [ ] Excel template downloads with your fee types
+- [ ] Excel validates without errors
+- [ ] Payment Collection is created
+- [ ] Correct number of Payment Collection Items created
+- [ ] Students appear in system with correct details
+- [ ] Email notifications sent to all parents
+- [ ] Payment links work for PG mode students
+- [ ] CASH mode students show "Fully Paid" status
+- [ ] Payment status updates when students pay online
 
 Congratulations! You've successfully initiated a payment collection. Students can now view and pay their fees through the student portal, and you can monitor payment status in real-time.
