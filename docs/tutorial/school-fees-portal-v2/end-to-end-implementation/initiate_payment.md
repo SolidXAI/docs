@@ -1656,7 +1656,7 @@ The Payment Collection form displays only essential fields in a single-column la
 **Benefits:**
 - Simple, focused interface for primary task
 - No overwhelming options or tabs
-- Clear workflow: Name → Due Date → Upload
+- Clear workflow: Select Institute → Select Due Date → Upload
 
 **2. Form Load Handler for Conditional Field Behavior and Pre-filling**
 
@@ -1912,26 +1912,7 @@ The list view shows essential information for managing collections:
 - Import disabled (use Excel upload instead)
 - Export enabled for reporting
 
-**3. Custom Filters**
-
-```json
-"defaultFilters": [
-  {
-    "field": "createdDate",
-    "operator": "gte",
-    "value": "{{today - 30 days}}"
-  }
-]
-```
-
-**Benefits:**
-- Shows recent collections by default (last 30 days)
-- Users can adjust date range as needed
-- Improves performance by limiting initial data load
-
-#### Payment Collection Item List View Customizations
-
-**1. Comprehensive Column Display**
+#### Payment Collection Item List View Columns
 
 Shows all critical information for tracking payments:
 
@@ -1951,70 +1932,6 @@ Shows all critical information for tracking payments:
 | **Payment Mode** | CASH or PG | Badge |
 | **Payment Collection** | Which batch | Link to collection |
 
-**2. Status Badge Colors**
-
-```json
-"statusColors": {
-  "Pending": "warning",
-  "Partially Paid": "info",
-  "Fully Paid": "success",
-  "Cancelled": "danger"
-}
-```
-
-**3. Conditional Formatting**
-
-```json
-"conditionalFormatting": [
-  {
-    "field": "amountPending",
-    "condition": "{{value > 0}}",
-    "className": "text-danger font-bold"
-  },
-  {
-    "field": "isOverdue",
-    "condition": "{{value === true}}",
-    "rowClassName": "bg-red-50"
-  }
-]
-```
-
-**Benefits:**
-- Visual indicators for overdue items (red highlight)
-- Clear status identification with colored badges
-- Easy identification of partially paid items
-- Quick scanning of pending amounts
-
-**4. Advanced Filters**
-
-```json
-"quickFilters": [
-  {
-    "label": "Pending Payments",
-    "filters": [
-      { "field": "status", "operator": "in", "value": ["Pending", "Partially Paid"] }
-    ]
-  },
-  {
-    "label": "Overdue",
-    "filters": [
-      { "field": "isOverdue", "operator": "eq", "value": true }
-    ]
-  },
-  {
-    "label": "Payment Gateway",
-    "filters": [
-      { "field": "mode", "operator": "eq", "value": "PG" }
-    ]
-  }
-]
-```
-
-**Benefits:**
-- Quick access to common views
-- One-click filtering for urgent items
-- Reduces time to find specific records
-
 #### Student List View Customizations
 
 **1. Key Columns**
@@ -2028,21 +1945,59 @@ Shows all critical information for tracking payments:
 | **Parent/Guardian Mobile** | Phone contact |
 | **Institute** | Which institute |
 
-**2. Role-Based Visibility**
+**2. Role-Based Column Visibility**
+
+Column visibility is controlled by adding a `roles` key to individual field configurations in the list view layout JSON.
+
+**Example: Hiding Institute Column from Institute Admins**
+
+**View:** `student-list-view`
+
+**List View Layout Configuration:**
 
 ```json
-"columnVisibility": {
-  "institute": {
-    "roles": ["Admin"],
-    "default": true
+{
+  "name": "student-list-view",
+  "displayName": "Students",
+  "type": "list",
+  "moduleUserKey": "fees-portal",
+  "modelUserKey": "student",
+  "layout": {
+    "type": "list",
+    "attrs": {
+      // ... list configuration
+    },
+    "children": [
+      {
+        "type": "field",
+        "attrs": {
+          "name": "studentName"
+        }
+      },
+      {
+        "type": "field",
+        "attrs": {
+          "name": "institute",
+          "roles": ["Admin"]  // ← Add roles key here
+        }
+      }
+      // ... other fields
+    ]
   }
 }
 ```
 
+**Key Points:**
+- Add the `roles` property inside the field's `attrs` object
+- The `roles` array specifies which user roles can see this column
+- Only users with "Admin" role will see the institute column
+- Institute Admins (without "Admin" role) will not see this column
+- If `roles` is not specified, the column is visible to all users
+
 **Benefits:**
 - Platform Admins see institute column (multi-institute view)
 - Institute Admins don't see institute column (single institute context)
-- Cleaner interface for each role
+- Cleaner, role-appropriate interface for each user type
 
 #### General Design Principles
 
@@ -2050,11 +2005,9 @@ The customizations follow these principles:
 
 1. **Task-Oriented Workflow**: Form guides users through clear steps (Download → Upload)
 2. **Progressive Disclosure**: Only show fields relevant to current context
-3. **Visual Feedback**: Colors and badges communicate status at a glance
-4. **Role-Appropriate Views**: Show only what each role needs to see
-5. **Error Prevention**: Disable fields that shouldn't be changed after processing
-6. **Efficiency**: Quick filters and default views for common tasks
-7. **Clarity**: Clear labels and helper text guide users
+3. **Role-Appropriate Views**: Show only what each role needs to see
+4. **Error Prevention**: Disable fields that shouldn't be changed after processing
+5. **Clarity**: Clear labels and helper text guide users
 
 These customizations transform the auto-generated UI into an intuitive payment collection workflow that minimizes errors and maximizes efficiency.
 
@@ -2139,12 +2092,14 @@ Here's how a complete Excel file should look:
 - Bus Fees has no amount, so no item created
 - Lab Fees has different due date (2024-05-15)
 - Both items status "Pending"
+- Student will receive email with payment link
 
 **Row 4 (Amit Kumar):**
 - Will create 3 payment items: All three fee types
 - All items will have status "Fully Paid" (CASH mode)
 - Student will receive payment confirmation email
 - No payment link needed
+- Student receives payment confirmation email
 
 #### Common Validation Errors and Solutions
 
@@ -2422,22 +2377,16 @@ Verify emails were sent:
   - List of fee types
   - Payment confirmation message
 
-**Step 16: Spot Check with Parents (Optional)**
-
-- Contact 2-3 parents to confirm they received emails
-- Verify email content is clear and correct
-- Check payment link works (for PG mode)
-
 #### Phase 5: Monitor and Manage
 
-**Step 17: Track Payment Status**
+**Step 16: Track Payment Status**
 
 Regularly check Payment Collection Items list:
 - Filter by "Pending" or "Partially Paid" status
 - Monitor overdue items (Is Overdue = true)
 - Check late fees being applied (Late Amount To Be Paid > 0)
 
-**Step 18: Handle Common Scenarios**
+**Step 17: Handle Common Scenarios**
 
 **Scenario 1: Student Made Partial Payment**
 - Status will automatically change to "Partially Paid"
@@ -2451,26 +2400,9 @@ Regularly check Payment Collection Items list:
 - Total Amount To Be Paid = Base Amount + Late Fee
 - Student sees updated amount in portal
 
-**Scenario 3: Need to Cancel a Payment Item**
-- Navigate to the specific Payment Collection Item
-- Change status to "Cancelled"
-- Item will be excluded from reminders and reports
-
-**Scenario 4: Student Says Email Not Received**
-- Verify email address in Student record
-- Check email service logs (if available)
-- Manually send payment link: `https://{institute-prefix}-{domain}/?id={studentLoginId}`
-- Update Student record with correct email
-
-**Scenario 5: Need to Modify Amount or Due Date**
-- Cannot modify Payment Collection Item directly after creation
-- Options:
-  - Cancel existing item
-  - Create new payment collection with corrected data
-
 #### Phase 6: Ongoing Management
 
-**Step 19: Send Payment Reminders**
+**Step 18: Send Payment Reminders**
 
 The system automatically sends reminder emails on a schedule (typically weekly):
 - Targets students with "Pending" or "Partially Paid" status
@@ -2479,9 +2411,10 @@ The system automatically sends reminder emails on a schedule (typically weekly):
   - Days overdue (if applicable)
   - Payment link
 
+##### TODO
 You can also manually trigger reminders if needed.
 
-**Step 20: Generate Reports**
+**Step 19: Generate Reports**
 
 Use the export feature to download payment collection data:
 - Navigate to Payment Collection Items list
@@ -2490,7 +2423,7 @@ Use the export feature to download payment collection data:
 - Download Excel file with current data
 - Use for analysis, reporting, or record-keeping
 
-**Step 21: Reconcile Payments**
+**Step 20: Reconcile Payments**
 
 Periodically reconcile payment records:
 - Check Payment Collection Item Details for transaction history
@@ -2507,8 +2440,6 @@ Periodically reconcile payment records:
 | **Check payment status for a student** | Payment Collection Items → Filter by Student Name |
 | **View overdue payments** | Payment Collection Items → Filter by "Is Overdue = true" |
 | **Download payment report** | Payment Collection Items → Apply filters → Export |
-| **Resend notification to a student** | Manually send payment link or wait for scheduled reminder |
-| **Cancel incorrect payment item** | Open item → Change status to "Cancelled" |
 
 #### Troubleshooting Guide
 
@@ -2545,6 +2476,6 @@ You've successfully initiated a payment collection when:
 - [ ] Email notifications sent to all parents
 - [ ] Payment links work for PG mode students
 - [ ] CASH mode students show "Fully Paid" status
-- [ ] Payment status updates when students pay online
+- [ ] Payment status updates when students pay online (We will cover this in the next section)
 
 Congratulations! You've successfully initiated a payment collection. Students can now view and pay their fees through the student portal, and you can monitor payment status in real-time.
