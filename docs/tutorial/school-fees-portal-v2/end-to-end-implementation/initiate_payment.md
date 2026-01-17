@@ -39,7 +39,7 @@ This section describes the data models you need to implement this feature.
 | **Student ID** | Yes | Unique identifier for the student (roll number, admission number) | "STU2024001" |
 | **Student Email Address** | No | Student's personal email address | rahul.sharma@example.com |
 | **Student Mobile Number** | No | Student's contact number | 9876543210 |
-| **Student Login ID** | Auto-generated | System-generated unique identifier for portal access | Generated automatically |
+| **Student Login ID** | Computed (Auto-generated) | System-generated unique alphanumeric identifier for portal access based on student name | "RAHUL-A1B2C" |
 
 ##### Parent/Guardian Information
 
@@ -74,7 +74,7 @@ This section describes the data models you need to implement this feature.
 |-------|-----------|-------------|---------|
 | **Name** | Yes | Descriptive name for this collection batch | "Quarter 1 Tuition Fees 2024" |
 | **Description** | No | Additional details about the collection | "First quarter fees including tuition and lab charges" |
-| **Payment Collection ID** | Auto-generated | Unique identifier for this collection | Generated automatically |
+| **Payment Collection ID** | Computed (Auto-generated) | Unique alphanumeric identifier for this collection based on collection name | "QUART-X7Y8Z" |
 | **Due Date** | Yes | Default due date for all items in this collection | 2024-04-30 |
 | **Payment File** | Yes | Excel file containing student and payment details | Upload .xlsx file (max 5MB) |
 | **Institute** | Yes | Which institute this collection belongs to | Auto-filled based on logged-in user |
@@ -104,8 +104,8 @@ This section describes the data models you need to implement this feature.
 | Field | Required? | Description | Values |
 |-------|-----------|-------------|--------|
 | **Status** | Auto-managed | Current payment status | "Pending", "Partially Paid", "Fully Paid", "Cancelled" |
-| **Amount Paid** | Auto-calculated | Total amount paid so far | 5000.00 |
-| **Amount Pending** | Auto-calculated | Remaining amount to be paid | 5000.00 |
+| **Amount Paid** | Computed (Auto-calculated) | Total amount paid so far, calculated from payment collection item details | 5000.00 |
+| **Amount Pending** | Computed (Auto-calculated) | Remaining amount to be paid (total - paid) | 5000.00 |
 
 ##### Late Payment Tracking
 
@@ -114,7 +114,7 @@ This section describes the data models you need to implement this feature.
 | **Is Overdue** | Auto-managed | Is payment past due date? | true if today > due date |
 | **Overdue By Days** | Auto-calculated | Number of days overdue | today - due date |
 | **Late Amount To Be Paid** | Auto-calculated | Late fee penalty | Based on Fee Type's late fee configuration |
-| **Total Amount To Be Paid** | Auto-calculated | Base amount + late fees | amountToBePaid + lateAmountToBePaid |
+| **Total Amount To Be Paid** | Computed (Auto-calculated) | Base amount + late fees | amountToBePaid + lateAmountToBePaid |
 
 ##### Relationships
 
@@ -368,18 +368,24 @@ Create the following fields in the order listed:
 | **Index** | Yes |
 | **Enable Audit Tracking** | Yes |
 
-**Field 9: Student Login ID**
+**Field 9: Student Login ID (Computed Field)**
 
 | Attribute | Value |
 |-----------|-------|
 | **Name** | studentLoginId |
 | **Display Name** | Student Login Id |
 | **Description** | This is the unique login id for the student. This is used to login to the student portal. |
-| **Type** | Short Text |
-| **Required** | No |
+| **Type** | Computed |
+| **Computed Field Value Type** | String |
+| **Computed Field Value Provider** | AlphaNumExternalIdComputationProvider |
+| **Computed Field Value Provider Context** | `{"dynamicFieldPrefix": "studentName", "length": 5}` |
+| **Computed Field Trigger Config** | Model: student, Operation: before-insert |
+| **Required** | Yes |
 | **Unique** | Yes |
-| **Index** | Yes |
+| **Index** | No |
 | **Enable Audit Tracking** | Yes |
+
+**Note:** This field is automatically generated when a student is created, using an alphanumeric ID based on the student's name with a length of 5 characters.
 
 **Field 10: OTP**
 
@@ -475,17 +481,23 @@ Create the following fields in the order listed:
 | **Required** | Yes |
 | **Enable Audit Tracking** | Yes |
 
-**Field 4: Payment Collection ID**
+**Field 4: Payment Collection ID (Computed Field)**
 
 | Attribute | Value |
 |-----------|-------|
 | **Name** | paymentCollectionId |
 | **Display Name** | Payment Collection ID |
-| **Type** | Short Text |
-| **Required** | No |
+| **Type** | Computed |
+| **Computed Field Value Type** | String |
+| **Computed Field Value Provider** | AlphaNumExternalIdComputationProvider |
+| **Computed Field Value Provider Context** | `{"dynamicFieldPrefix": "name", "length": 5}` |
+| **Computed Field Trigger Config** | Model: paymentCollection, Operation: before-insert |
+| **Required** | Yes |
 | **Unique** | Yes |
 | **Index** | Yes |
 | **Enable Audit Tracking** | Yes |
+
+**Note:** This field is automatically generated when a payment collection is created, using an alphanumeric ID based on the collection's name with a length of 5 characters.
 
 **Field 5: Institute Relation**
 
@@ -585,27 +597,37 @@ Create the following fields in the order listed:
 | **Index** | Yes |
 | **Enable Audit Tracking** | Yes |
 
-**Field 4: Amount Paid**
+**Field 4: Amount Paid (Computed Field)**
 
 | Attribute | Value |
 |-----------|-------|
 | **Name** | amountPaid |
 | **Display Name** | Amount Paid |
-| **Type** | Short Text |
-| **Default Value** | 0 |
-| **Required** | No |
+| **Type** | Computed |
+| **Computed Field Value Type** | Decimal |
+| **Computed Field Value Provider** | PaymentCollectionItemAmountProvider |
+| **Computed Field Value Provider Context** | `{}` |
+| **Computed Field Trigger Config** | Model: paymentCollectionItemDetail, Operation: after-update |
+| **Required** | Yes |
 | **Enable Audit Tracking** | Yes |
 
-**Field 5: Amount Pending**
+**Note:** This field is automatically calculated when payment collection item details are updated. It sums all successful payments made for this item.
+
+**Field 5: Amount Pending (Computed Field)**
 
 | Attribute | Value |
 |-----------|-------|
 | **Name** | amountPending |
 | **Display Name** | Amount Pending |
-| **Type** | Short Text |
-| **Default Value** | 0 |
-| **Required** | No |
+| **Type** | Computed |
+| **Computed Field Value Type** | Decimal |
+| **Computed Field Value Provider** | NoopsEntityComputedFieldProviderService |
+| **Computed Field Value Provider Context** | `{}` |
+| **Computed Field Trigger Config** | Model: paymentCollectionItemDetail, Operation: before-insert |
+| **Required** | Yes |
 | **Enable Audit Tracking** | Yes |
+
+**Note:** This field uses a no-op provider as a placeholder. The actual value is calculated based on the difference between the total amount to be paid and the amount already paid.
 
 **Field 6: Is Overdue**
 
@@ -639,16 +661,21 @@ Create the following fields in the order listed:
 | **Required** | No |
 | **Enable Audit Tracking** | Yes |
 
-**Field 9: Total Amount To Be Paid**
+**Field 9: Total Amount To Be Paid (Computed Field)**
 
 | Attribute | Value |
 |-----------|-------|
 | **Name** | totalAmountToBePaid |
 | **Display Name** | Total Amount To Be Paid |
-| **Type** | Short Text |
-| **Default Value** | 0 |
+| **Type** | Computed |
+| **Computed Field Value Type** | Decimal |
+| **Computed Field Value Provider** | NoopsEntityComputedFieldProviderService |
+| **Computed Field Value Provider Context** | `{}` |
+| **Computed Field Trigger Config** | Model: paymentCollectionItemDetail, Operation: before-insert |
 | **Required** | No |
 | **Enable Audit Tracking** | Yes |
+
+**Note:** This field uses a no-op provider as a placeholder. The actual value represents the sum of the base amount and any late fees (amountToBePaid + lateAmountToBePaid).
 
 **Field 10: Amount To Be Paid**
 
@@ -1414,11 +1441,38 @@ async computeFieldValue(entity: PaymentCollectionItemDetail) {
 
 #### 8. Scheduled Jobs
 
-**Late Fee Calculator Job:**
+The payment collection feature uses SolidX's declarative scheduled jobs configuration. Jobs are defined in the module metadata and automatically registered by the platform.
+
+**Scheduled Jobs Configuration Location:**
+- **File:** `solid-api/module-metadata/fees-portal/fees-portal-metadata.json`
+- **Section:** `scheduledJobs` array
+
+**Job 1: Late Fee Calculator**
+
+**Configuration:**
+```json
+{
+  "scheduleName": "Late Fee Calculation",
+  "isActive": true,
+  "frequency": "Hourly",
+  "startTime": null,
+  "endTime": null,
+  "startDate": null,
+  "endDate": null,
+  "dayOfMonth": 0,
+  "dayOfWeek": "[\"Monday\",\"Tuesday\",\"Wednesday\",\"Thursday\",\"Friday\",\"Saturday\",\"Sunday\"]",
+  "job": "LateFeePaymentCalculatorScheduledJob",
+  "moduleUserKey": "fees-portal"
+}
+```
+
+**Implementation:**
 - **File:** `solid-api/src/fees-portal/scheduled-jobs/late-fee-payment-calculator-scheduled-job.service.ts`
-- **Frequency:** Daily (configured via cron schedule)
+- **Class Name:** `LateFeePaymentCalculatorScheduledJob`
+- **Frequency:** Hourly (runs every hour, all days of the week)
 - **Purpose:** Calculate and apply late fees for overdue payments
 
+**What It Does:**
 ```typescript
 // Find overdue items
 const overdueItems = await this.find({
@@ -1450,11 +1504,32 @@ for (const item of overdueItems) {
 }
 ```
 
-**Email Reminder Job:**
+**Job 2: Fees Due Email Reminder**
+
+**Configuration:**
+```json
+{
+  "scheduleName": "Fees Due Email",
+  "isActive": true,
+  "frequency": "Daily",
+  "startTime": null,
+  "endTime": null,
+  "startDate": null,
+  "endDate": null,
+  "dayOfMonth": 0,
+  "dayOfWeek": "[\"Monday\",\"Tuesday\",\"Wednesday\",\"Thursday\",\"Friday\",\"Saturday\",\"Sunday\"]",
+  "job": "SendEmailScheduleJobs",
+  "moduleUserKey": "fees-portal"
+}
+```
+
+**Implementation:**
 - **File:** `solid-api/src/fees-portal/scheduled-jobs/send-email-schedule-jobs.service.ts`
-- **Frequency:** Weekly (configured via cron schedule)
+- **Class Name:** `SendEmailScheduleJobs`
+- **Frequency:** Daily (runs once per day, all days of the week)
 - **Purpose:** Send payment reminders to parents with pending fees
 
+**What It Does:**
 ```typescript
 // Find pending items
 const pendingItems = await this.find({
@@ -1488,6 +1563,48 @@ for (const [studentId, items] of Object.entries(groupedByStudent)) {
   );
 }
 ```
+
+**Scheduled Job Configuration Properties:**
+
+| Property | Description | Possible Values |
+|----------|-------------|-----------------|
+| **scheduleName** | Human-readable name for the job | Any string |
+| **isActive** | Whether the job is enabled | `true`, `false` |
+| **frequency** | How often the job runs | "Hourly", "Daily", "Weekly", "Monthly" |
+| **startTime** | Time of day to start (optional) | `null`, "HH:MM:SS" format |
+| **endTime** | Time of day to stop (optional) | `null`, "HH:MM:SS" format |
+| **startDate** | Date to begin running job (optional) | `null`, ISO date string |
+| **endDate** | Date to stop running job (optional) | `null`, ISO date string |
+| **dayOfMonth** | Day of month for monthly jobs | `0` (not used), `1-31` |
+| **dayOfWeek** | JSON array of days to run | `"[\"Monday\",\"Tuesday\",...]"` |
+| **job** | Class name of the job implementation | Must match TypeScript class name |
+| **moduleUserKey** | Module identifier | "fees-portal" |
+
+**How to Modify Job Schedules:**
+
+1. **Change Frequency**: Update the `frequency` field in the metadata JSON
+   - Example: Change "Hourly" to "Daily" for the late fee calculator
+
+2. **Restrict to Specific Days**: Modify the `dayOfWeek` array
+   - Example: `"[\"Monday\",\"Wednesday\",\"Friday\"]"` for specific weekdays
+
+3. **Add Time Windows**: Set `startTime` and `endTime`
+   - Example: `"startTime": "09:00:00", "endTime": "17:00:00"` for business hours only
+
+4. **Enable/Disable Jobs**: Toggle the `isActive` flag
+   - Set to `false` to temporarily disable a job without removing configuration
+
+5. **Set Date Ranges**: Use `startDate` and `endDate` for seasonal jobs
+   - Example: `"startDate": "2024-01-01", "endDate": "2024-12-31"`
+
+**Benefits of SolidX Scheduled Jobs:**
+
+- **Declarative Configuration**: No need to write cron expressions manually
+- **UI Management**: Jobs can be managed through SolidX admin interface
+- **Centralized Definition**: All job configurations in one place (metadata JSON)
+- **Easy Debugging**: Clear visibility of job schedules and status
+- **Automatic Registration**: Jobs are automatically registered when module loads
+- **Flexible Scheduling**: Multiple options for controlling when jobs run
 
 :::tip Implementation Order
 Follow this sequence when implementing custom business logic:
@@ -1597,15 +1714,15 @@ The Payment Collection form displays only essential fields in a single-column la
 - No overwhelming options or tabs
 - Clear workflow: Name → Due Date → Upload
 
-**2. Form Handler for Conditional Field Behavior**
+**2. Form Load Handler for Conditional Field Behavior and Pre-filling**
 
-**Extension:** `paymentCollectionOnFormLayoutLoadHandler.ts`
+**Extension:** `paymentCollectionOnFormLoadHandler.ts`
 
-This handler controls field behavior based on context:
+This unified handler controls field behavior and pre-fills data based on context:
 
 ```typescript
-export function paymentCollectionOnFormLayoutLoadHandler(formContext) {
-  const { formData, userRole, isEditMode } = formContext;
+export function paymentCollectionOnFormLoadHandler(formContext) {
+  const { formData, userData, userRole, isEditMode } = formContext;
 
   // Disable fields when editing existing record
   if (isEditMode) {
@@ -1614,9 +1731,9 @@ export function paymentCollectionOnFormLayoutLoadHandler(formContext) {
     formContext.setFieldProperty('paymentFile', 'disabled', true);
   }
 
-  // Auto-fill institute for Institute Admin
-  if (userRole === 'Institute Admin') {
-    formContext.setFieldValue('institute', userContext.instituteId);
+  // Auto-fill institute for Institute Admin users on new records
+  if (!isEditMode && userRole === 'Institute Admin' && userData.institute) {
+    formContext.setFieldValue('institute', userData.institute.id);
   }
 }
 ```
@@ -1626,36 +1743,69 @@ export function paymentCollectionOnFormLayoutLoadHandler(formContext) {
 - **Disable institute when editing**: Institute cannot change after items are created
 - **Disable payment file when editing**: Excel is processed on upload; re-uploading would create duplicate items
 - **Auto-fill institute**: Institute Admins only manage their own institute
-
-**3. Data Load Handler for Pre-filling**
-
-**Extension:** `paymentCollectionOnDataLoadHandler.ts`
-
-```typescript
-export function paymentCollectionOnDataLoadHandler(dataContext) {
-  const { userData, userRole } = dataContext;
-
-  // Pre-fill institute field for Institute Admin users
-  if (userRole === 'Institute Admin' && userData.institute) {
-    return {
-      institute: userData.institute
-    };
-  }
-
-  return {};
-}
-```
+- **Unified handler**: Combines layout and data loading logic in a single handler for better maintainability
 
 **Benefits:**
+- Single handler for all form initialization logic
 - Reduces data entry for Institute Admins
 - Prevents accidental cross-institute data creation
 - Maintains data integrity
+- Follows current best practices
 
 **4. Excel Template Download Button**
 
-**Custom Component:** `generate-template-format.tsx`
+Add a button directly in the form header using the `formButtons` configuration. This button will trigger a custom action to download the Excel template.
 
-A custom React component added to the form provides template download functionality:
+**Step 1: Configure Form Button in Layout JSON**
+
+```json
+{
+  "name": "paymentCollection-form-view",
+  "displayName": "Initiate Payments",
+  "type": "form",
+  "context": "{}",
+  "moduleUserKey": "fees-portal",
+  "modelUserKey": "paymentCollection",
+  "layout": {
+    "type": "form",
+    "attrs": {
+      "name": "form-1",
+      "label": "Initiate Payments",
+      "className": "grid",
+      "showCogWheelFormButton": false,
+      "formButtons": [
+        {
+          "attrs": {
+            "className": "p-button p-component p-button-sm",
+            "icon": "pi pi-download",
+            "label": "Download Sample Excel",
+            "action": "GenerateTemplateFormat",
+            "customComponentIsSystem": true,
+            "actionInContextMenu": false,
+            "openInPopup": true
+          }
+        }
+      ]
+    },
+    "onFormLoad": "paymentCollectionOnFormLoadHandler",
+    "children": [
+      // ... rest of form layout
+    ]
+  }
+}
+```
+
+This configuration adds a "Download Sample Excel" button in the form header that:
+- Displays the download icon (`pi pi-download`)
+- Triggers the `GenerateTemplateFormat` action when clicked
+- Opens in a popup for better user experience
+- Appears alongside other form action buttons
+
+**Step 2: Implement the Custom Action Component**
+
+Create the action handler that will be triggered when the button is clicked. SolidX automatically maps the `action` name from the form button configuration to the corresponding component file.
+
+**File:** `generate-template-format.tsx`
 
 ```tsx
 import React from 'react';
@@ -1685,30 +1835,16 @@ export function GenerateTemplateFormat({ instituteId }) {
 }
 ```
 
-**Integration in Layout JSON:**
-
-```json
-{
-  "type": "custom-component",
-  "attrs": {
-    "name": "generate-template-format",
-    "componentPath": "extensions/generate-template-format",
-    "props": {
-      "instituteId": "{{formData.institute.id}}"
-    }
-  }
-}
-```
-
 **Benefits:**
+- Seamless integration with form header actions
 - Guides users through workflow (Download → Fill → Upload)
-- Template matches institute's fee types
+- Template matches institute's fee types dynamically
 - Reduces formatting errors
-- Improves user experience
+- Improves user experience with clear step-by-step instructions
 
 #### Complete Payment Collection Form Layout JSON
 
-Below is the complete form layout JSON for the Payment Collection model:
+Below is the complete form layout JSON for the Payment Collection model, including the formButtons configuration:
 
 <details>
 <summary>Click to expand the complete JSON layout</summary>
@@ -1719,10 +1855,23 @@ Below is the complete form layout JSON for the Payment Collection model:
   "attrs": {
     "name": "form-1",
     "label": "Payment Collection",
-    "className": "grid"
+    "className": "grid",
+    "showCogWheelFormButton": false,
+    "formButtons": [
+      {
+        "attrs": {
+          "className": "p-button p-component p-button-sm",
+          "icon": "pi pi-download",
+          "label": "Download Sample Excel",
+          "action": "GenerateTemplateFormat",
+          "customComponentIsSystem": true,
+          "actionInContextMenu": false,
+          "openInPopup": true
+        }
+      }
+    ]
   },
-  "onFormLayoutLoad": "paymentCollectionOnFormLayoutLoadHandler",
-  "onDataLoad": "paymentCollectionOnDataLoadHandler",
+  "onFormLoad": "paymentCollectionOnFormLoadHandler",
   "children": [
     {
       "type": "sheet",
@@ -1736,25 +1885,6 @@ Below is the complete form layout JSON for the Payment Collection model:
             "name": "row-1"
           },
           "children": [
-            {
-              "type": "column",
-              "attrs": {
-                "name": "col-1",
-                "className": "col-12"
-              },
-              "children": [
-                {
-                  "type": "custom-component",
-                  "attrs": {
-                    "name": "generate-template-format",
-                    "componentPath": "extensions/generate-template-format",
-                    "props": {
-                      "instituteId": "{{formData.institute.id}}"
-                    }
-                  }
-                }
-              ]
-            },
             {
               "type": "column",
               "attrs": {
