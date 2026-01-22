@@ -31,7 +31,7 @@ You can refer to the [User Roles & Responsibilities](./fees_portal_product_overv
 
 Activation is a multi-step infrastructure provisioning process that:
 
-1. **Creates a Subdomain**: Constructs a unique domain name for the institute (e.g., `stmary-edu.antpay.live`)
+1. **Creates a Subdomain**: Constructs a unique domain name for the institute (e.g., `stmary.sub-domain.edu`)
 2. **Configures Web Server**: Creates and enables an Nginx virtual host to serve the portal
 3. **Sets Up DNS**: Creates a DNS CNAME record pointing to the portal infrastructure
 4. **Updates Status**: Changes the institute's status from "InActive" to "Active"
@@ -88,13 +88,13 @@ New Institute Creation → Status: "InActive"
 
 The portal domain is automatically constructed as:
 ```
-{hostedPagePrefix}-{EDU_BASE_DOMAIN}
+{hostedPagePrefix}.{EDU_BASE_DOMAIN}
 ```
 
 **Examples:**
-- Hosted Page Prefix: `"stmary"` → Domain: `stmary-edu.antpay.live`
-- Hosted Page Prefix: `"dps-bangalore"` → Domain: `dps-bangalore-edu.antpay.live`
-- Hosted Page Prefix: `"kendriya-vidyalaya"` → Domain: `kendriya-vidyalaya-edu.antpay.live`
+- Hosted Page Prefix: `"stmary"` → Domain: `stmary.solidx.edu`
+- Hosted Page Prefix: `"dps-bangalore"` → Domain: `dps-bangalore.solidx.edu`
+- Hosted Page Prefix: `"kendriya-vidyalaya"` → Domain: `kendriya-vidyalaya.solidx.edu`
 
 **Important:** The `hostedPagePrefix` must be:
 - Unique across all institutes in the system
@@ -122,8 +122,8 @@ The following environment variables must be configured on the server:
 
 | Variable | Required | Description | Example |
 |----------|----------|-------------|---------|
-| **EDU_BASE_DOMAIN** | No (has default) | Base domain for all institute portals | `"edu.antpay.live"` |
-| **PORTAL_CNAME_DOMAIN** | Yes | CNAME target for DNS records | `"portal.antpay.live"` |
+| **EDU_BASE_DOMAIN** | No (has default) | Base domain for all institute portals | `"solidx.edu"` |
+| **PORTAL_CNAME_DOMAIN** | Yes | CNAME target for DNS records | `"portal.solidx.edu"` |
 | **DNS_PROVIDER** | No (defaults to "hosts") | DNS management provider | `"route53"` or `"hosts"` |
 | **EDU_FRONTEND_UPSTREAM** | No (has default) | Upstream server for Nginx proxy | `"http://127.0.0.1:3002"` |
 
@@ -190,7 +190,7 @@ The portal will be accessible at:
 
 Write down this domain - you'll verify it's accessible after activation.
 
-Example: If `hostedPagePrefix` is `"stmary"` and `EDU_BASE_DOMAIN` is `"edu.antpay.live"`, the portal will be at `stmary-edu.antpay.live`
+Example: If `hostedPagePrefix` is `"stmary"` and `EDU_BASE_DOMAIN` is `"solidx.edu"`, the portal will be at `stmary.solidx.edu`
 
 #### Phase 2: Activate the Institute
 
@@ -224,7 +224,7 @@ After clicking "Ok", the system will:
 
 1. **Construct Domain Name**
    - Combines `hostedPagePrefix` with base domain
-   - Example: `stmary-edu.antpay.live`
+   - Example: `stmary.solidx.edu`
 
 2. **Create Nginx Virtual Host**
    - Creates configuration file: `/etc/nginx/sites-available/{domain}.conf`
@@ -294,7 +294,7 @@ On failure:
 - Open `/etc/hosts` file
 - Look for an entry like:
   ```
-  127.0.0.1  stmary-edu.antpay.live # solidx-dns
+  127.0.0.1  stmary.solidx.edu # solidx-dns
   ```
 - Verify the domain is mapped to the correct IP
 
@@ -322,7 +322,7 @@ All commands should succeed without errors.
 
 **Method 1: Browser Test**
 - Open a web browser
-- Navigate to `http://{domain}` (e.g., `http://stmary-edu.antpay.live`)
+- Navigate to `http://{domain}` (e.g., `http://stmary.solidx.edu`)
 - The student portal should load
 - You should see the institute's fee payment interface
 
@@ -526,7 +526,7 @@ async activateInstitutePortal(id: number) {
   const institute = await this.findOne(id, {});
 
   // 2. Construct domain name
-  const baseDoamin = process.env.EDU_BASE_DOMAIN || 'edu.antpay.live';
+  const baseDoamin = process.env.EDU_BASE_DOMAIN || 'solidx.edu';
   const domainName = `${institute.hostedPagePrefix}-${baseDoamin}`;
 
   // 3. Create Nginx virtual host
@@ -569,7 +569,7 @@ Institute is now live on domain: <a href="${domainName}" target="_blank" rel="no
 ```typescript
 async deActivateInstitutePortal(id: number) {
   const institute = await this.findOne(id, {});
-  const baseDoamin = process.env.EDU_BASE_DOMAIN || 'edu.antpay.live';
+  const baseDoamin = process.env.EDU_BASE_DOMAIN || 'solidx.edu';
   const domainName = `${institute.hostedPagePrefix}-${baseDoamin}`;
 
   // 1. Remove Nginx virtual host
@@ -714,7 +714,7 @@ server {
 1. Constructs Route53 API request:
    - Action: UPSERT (create or update)
    - Type: CNAME
-   - Name: `{name}` (e.g., `stmary-edu.antpay.live`)
+   - Name: `{name}` (e.g., `stmary.solidx.edu`)
    - Value: `{value}` (PORTAL_CNAME_DOMAIN)
    - TTL: `{ttl}` seconds (default: 300)
 2. Calls Route53 API: `changeResourceRecordSets`
@@ -1019,7 +1019,7 @@ This section details all environment variables used by the activation system.
 **PORTAL_CNAME_DOMAIN**
 - **Description:** Target domain for CNAME records
 - **Required:** Yes
-- **Example:** `"portal.antpay.live"`
+- **Example:** `"portal.solidx.edu"`
 - **Used By:** DNS record creation
 - **Impact if Missing:** Activation fails with error
 
@@ -1028,7 +1028,7 @@ This section details all environment variables used by the activation system.
 **EDU_BASE_DOMAIN**
 - **Description:** Base domain for institute subdomains
 - **Required:** No
-- **Default:** `"edu.antpay.live"`
+- **Default:** `"solidx.edu"`
 - **Example:** `"edu.yourcompany.com"`
 - **Used By:** Domain name construction
 
@@ -1066,8 +1066,8 @@ This section details all environment variables used by the activation system.
 **Production Setup:**
 ```bash
 # Base configuration
-EDU_BASE_DOMAIN=edu.antpay.live
-PORTAL_CNAME_DOMAIN=portal.antpay.live
+EDU_BASE_DOMAIN=solidx.edu
+PORTAL_CNAME_DOMAIN=portal.solidx.edu
 DNS_PROVIDER=route53
 EDU_FRONTEND_UPSTREAM=http://127.0.0.1:3002
 
@@ -1238,13 +1238,13 @@ EDU_FRONTEND_UPSTREAM=http://localhost:3000
 **Check DNS Resolution:**
 ```bash
 # Using nslookup
-nslookup stmary-edu.antpay.live
+nslookup stmary.solidx.edu
 
 # Using dig
-dig stmary-edu.antpay.live
+dig stmary.solidx.edu
 
 # Check CNAME specifically
-dig CNAME stmary-edu.antpay.live
+dig CNAME stmary.solidx.edu
 ```
 
 **Check Nginx Configuration:**
@@ -1253,7 +1253,7 @@ dig CNAME stmary-edu.antpay.live
 sudo nginx -t
 
 # View configuration
-cat /etc/nginx/sites-available/stmary-edu.antpay.live.conf
+cat /etc/nginx/sites-available/stmary.solidx.edu.conf
 
 # Check if symlink exists
 ls -la /etc/nginx/sites-enabled/ | grep stmary
@@ -1290,16 +1290,16 @@ ls -la /etc/hosts
 **Test Portal Access:**
 ```bash
 # Simple GET request
-curl -I http://stmary-edu.antpay.live
+curl -I http://stmary.solidx.edu
 
 # Full response
-curl http://stmary-edu.antpay.live
+curl http://stmary.solidx.edu
 
 # With verbose output
-curl -v http://stmary-edu.antpay.live
+curl -v http://stmary.solidx.edu
 
 # Follow redirects
-curl -L http://stmary-edu.antpay.live
+curl -L http://stmary.solidx.edu
 ```
 
 ### Success Criteria
