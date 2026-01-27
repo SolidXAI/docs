@@ -133,7 +133,7 @@ SolidX applications are **installed and initialized exclusively** using the offi
 To create a new SolidX application, run:
 
 ```bash
-npx @solidstarters/create-solid-app
+npx @solidstarters/create-solid-app@latest
 ```
 
 This command launches an interactive setup and generates a fully configured SolidX workspace, ready for development.
