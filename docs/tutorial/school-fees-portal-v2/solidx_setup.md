@@ -112,6 +112,19 @@ docker start SolidX_DB
  - Running PostgreSQL using Docker is recommended for local development and testing environments.
  - For production deployments, it is advised to use a managed PostgreSQL service or a carefully maintained database setup with proper backups, monitoring, and high availability.
 :::
+:::tip
+ - If you want to reset the database and start afresh, you can remove the Docker volume storing the data.
+```bash
+# Stop the container first
+docker stop SolidX_DB
+# Remove the container
+docker rm SolidX_DB
+# Then remove the volume
+# Warning: This deletes all data in the database!
+docker volume rm solidx_pgdata
+```
+ - Then you can re-run the container using the command in Step 2 to create a fresh database.
+:::
 
 ## SolidX Scaffolding Script
 
