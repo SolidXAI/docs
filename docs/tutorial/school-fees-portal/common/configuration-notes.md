@@ -66,5 +66,5 @@ After creating each model, verify:
 7. Computed field triggers are set correctly (if applicable)
 
 :::info
-For more detailed guidance on creating Modules, Models, and Fields in SolidX, refer to the [Module Builder](../../admin-docs/module-builder/index.md) documentation.
+For more detailed guidance on creating Modules, Models, and Fields in SolidX, refer to the [Module Builder](../../../admin-docs/module-builder/index.md) documentation.
 :::

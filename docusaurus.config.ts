@@ -36,6 +36,7 @@ const config: Config = {
   //  ADDED THIS
   // themes: ['docusaurus-theme-search-typesense'],
 
+  
   presets: [
     [
       'classic',
@@ -61,8 +62,13 @@ const config: Config = {
           onInlineTags: 'warn',
           onInlineAuthors: 'warn',
           onUntruncatedBlogPosts: 'warn',
-
         },
+      sitemap: {
+        changefreq: 'weekly',
+        priority: 0.5,
+        filename: 'sitemap.xml',
+        ignorePatterns: ['/tags/**'],
+      },
         theme: {
           customCss: './src/css/custom.css',
         },
@@ -73,30 +79,30 @@ const config: Config = {
   themeConfig: {
 
     //  ADDED TYPESENSE CONFIG
-    // typesense: {
-    //   typesenseCollectionName: process.env.NEXT_PUBLIC_TYPESENSE_COLLECTION_NAME,
+    typesense: {
+      typesenseCollectionName: process.env.NEXT_PUBLIC_TYPESENSE_COLLECTION_NAME,
 
-    //   typesenseServerConfig: {
-    //     nodes: [
-    //       {
-    //         host: process.env.NEXT_PUBLIC_TYPESENSE_HOST,
-    //         port: Number(process.env.NEXT_PUBLIC_TYPESENSE_PORT),
-    //         protocol: process.env.NEXT_PUBLIC_TYPESENSE_PROTOCOL,
-    //       },
-    //     ],
+      typesenseServerConfig: {
+        nodes: [
+          {
+            host: process.env.NEXT_PUBLIC_TYPESENSE_HOST,
+            port: Number(process.env.NEXT_PUBLIC_TYPESENSE_PORT),
+            protocol: process.env.NEXT_PUBLIC_TYPESENSE_PROTOCOL,
+          },
+        ],
       
-    //     // IMPORTANT: USE SEARCH-ONLY KEY HERE
-    //     apiKey: process.env.NEXT_PUBLIC_TYPESENSE_API_KEY,
-    //   },
+        // IMPORTANT: USE SEARCH-ONLY KEY HERE
+        apiKey: process.env.NEXT_PUBLIC_TYPESENSE_API_KEY,
+      },
       
-    //   searchParameters: {},
-    // },
+      searchParameters: {},
+    },
 
-    // colorMode: {
-    //   defaultMode: 'light',
-    //   disableSwitch: false,
-    //   respectPrefersColorScheme: true,
-    // },
+    colorMode: {
+      defaultMode: 'light',
+      disableSwitch: false,
+      respectPrefersColorScheme: true,
+    },
 
     image: 'img/docusaurus-social-card.jpg',
 
@@ -198,14 +204,27 @@ const config: Config = {
         },
       ],
     },
-    plugins: [
-      [
-        '@docusaurus/plugin-sitemap',
 
-      ],
-    ],
 
   } satisfies Preset.ThemeConfig,
+
+  themes: ['docusaurus-theme-search-typesense'],
+
+  // plugins: [
+  //   [
+  //     'docusaurus-biel',
+  //     {
+  //       project: 'yrjmteh4r5',
+  //       headerTitle: 'Biel.ai chatbot',
+  //       version: 'latest',
+  //       bielButtonText: 'ASK AI',
+  //       buttonPosition: 'center-right',
+  //       modalPosition: 'sidebar-right',
+  //       buttonStyle: 'dark',
+  //       enable: true,
+  //     },
+  //   ],
+  // ],
 };
 
 export default config;

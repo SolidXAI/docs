@@ -1373,7 +1373,7 @@ Computed Updates:
   status: "Partially Paid"
 ```
 
-**Location:** [solid-api/src/fees-portal/computed-providers/payment-collection-item-amount-provider.ts](../solid-api/src/fees-portal/computed-providers/payment-collection-item-amount-provider.ts)
+**Location:** [solid-api/src/fees-portal/computed-providers/payment-collection-item-amount-provider.ts]
 
 ---
 
@@ -1495,7 +1495,7 @@ Updated State:
 - Updates payment amounts and overdue status
 - Affects what students see on their dashboard
 
-**Location:** [solid-api/src/fees-portal/scheduled-jobs/late-fee-payment-calculator-scheduled-job.service.ts](../solid-api/src/fees-portal/scheduled-jobs/late-fee-payment-calculator-scheduled-job.service.ts)
+**Location:** [solid-api/src/fees-portal/scheduled-jobs/late-fee-payment-calculator-scheduled-job.service.ts]
 
 #### Job 2: Send Email Reminders
 
@@ -1633,7 +1633,7 @@ St. Mary's School
 - Sends single reminder email per student (not per fee)
 - Includes direct login link to student portal
 
-**Location:** [solid-api/src/fees-portal/scheduled-jobs/send-email-schedule-jobs.service.ts](../solid-api/src/fees-portal/scheduled-jobs/send-email-schedule-jobs.service.ts)
+**Location:** [solid-api/src/fees-portal/scheduled-jobs/send-email-schedule-jobs.service.ts]
 
 ---
 
