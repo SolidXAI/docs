@@ -21,6 +21,7 @@
     "@docusaurus/preset-classic": "3.7.0",
     "@mdx-js/react": "^3.0.0",
     "clsx": "^2.0.0",
+    "docusaurus-biel": "^1.0.10",
     "docusaurus-theme-search-typesense": "^0.26.0",
     "dotenv": "^17.2.3",
     "instantsearch.css": "^8.8.0",

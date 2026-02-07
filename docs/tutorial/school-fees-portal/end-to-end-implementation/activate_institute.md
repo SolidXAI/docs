@@ -25,7 +25,7 @@ The Activate Institute functionality provisions the infrastructure needed to mak
 
 - **Platform Admin**: Can activate and deactivate institute portals
 
-You can refer to the [User Roles & Responsibilities](./fees_portal_product_overview#user-roles--responsibilities) in the Product Overview for more details on this role.
+You can refer to the [User Roles & Responsibilities](../fees_portal_product_overview/#user-roles--responsibilities) in the Product Overview for more details on this role.
 
 ### What "Activating" an Institute Means
 
@@ -1323,7 +1323,7 @@ You've successfully activated an institute when:
 
 - [Institute Onboarding](./institute_onboarding.md) - Complete guide to onboarding new institutes
 - [Initiate Payment Collection](./initiate_payment.md) - How to create payment collections after activation
-- [User Roles & Responsibilities](./fees_portal_product_overview#user-roles--responsibilities) - Understanding platform roles
+- [User Roles & Responsibilities](../fees_portal_product_overview/#user-roles--responsibilities) - Understanding platform roles
 
 ### Frequently Asked Questions
 

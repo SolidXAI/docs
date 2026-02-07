@@ -21,7 +21,7 @@ Below are the key features related to initiating payment collections within the 
 ### Roles Involved
 - Institute Admin
 
-You can refer to the [User Roles & Responsibilities](./fees_portal_product_overview#user-roles--responsibilities) in the Product Overview for more details on this role.
+You can refer to the [User Roles & Responsibilities](../fees_portal_product_overview/#user-roles--responsibilities) in the Product Overview for more details on this role.
 
 ### Data Models Involved
 

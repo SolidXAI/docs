@@ -19,7 +19,7 @@ Below are the key features related to managing educational institutes within the
 - Platform Admin
 - Institute Admin
 
-You can refer to the [User Roles & Responsibilities](./fees_portal_product_overview#user-roles--responsibilities) in the Product Overview for more details on these roles.
+You can refer to the [User Roles & Responsibilities](../fees_portal_product_overview/#user-roles--responsibilities) in the Product Overview for more details on these roles.
 
 ### Data Models Involved
 
