@@ -150,7 +150,7 @@ SolidX applications are **installed and initialized exclusively** using the offi
 To create a new SolidX application, run:
 
 ```bash
-npx @solidxai/solidctl create-app@latest
+npx @solidxai/solidctl create-app
 ```
 
 This command launches an interactive setup and generates a fully configured SolidX workspace, ready for development.
