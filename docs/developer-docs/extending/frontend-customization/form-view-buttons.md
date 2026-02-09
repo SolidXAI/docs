@@ -36,7 +36,7 @@ import { Toast } from 'primereact/toast';
 import axios from 'axios';
 import { getSession } from 'next-auth/react';
 import { useDispatch } from 'react-redux';
-import { closePopup } from '@solidstarters/solid-core-ui/dist/redux/features/popupSlice';
+import { closePopup } from '@solidxai/core-ui';
 import { Dialog } from 'primereact/dialog';
 
 const API_URL = process.env.NEXT_PUBLIC_BACKEND_API_URL;
@@ -127,7 +127,7 @@ You must register your button component so that SolidX can resolve and invoke it
 </summary>
 
 ```tsx
-import { registerExtensionComponent } from '@solidstarters/solid-core-ui';
+import { registerExtensionComponent } from '@solidxai/core-ui';
 import PreviewPortal from '@/app/admin/extensions/PreviewPortal';  
 
 registerExtensionComponent('PreviewPortal', PreviewPortal);

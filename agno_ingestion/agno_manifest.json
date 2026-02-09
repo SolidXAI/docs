@@ -198,7 +198,7 @@
       "doc_title": "developer-docs/database-seeding.md",
       "title": "Database Seeding",
       "description": "Overview of how the database is initialized with metadata in SolidX.",
-      "summary": "This document explains the database seeding process in SolidX, which initializes the database with essential metadata and data required for the application to function. The seeding is triggered via the 'solid seed' command and populates permissions, media storage providers, system fields, functional modules metadata, roles (Admin and Internal User), default users, views, actions, menus, email/SMS templates, settings, security rules, list of values, and dashboard configurations. The ModuleMetadataSeederService from the @solidstarters/solid-core package handles all the seeding operations automatically.",
+      "summary": "This document explains the database seeding process in SolidX, which initializes the database with essential metadata and data required for the application to function. The seeding is triggered via the 'solid seed' command and populates permissions, media storage providers, system fields, functional modules metadata, roles (Admin and Internal User), default users, views, actions, menus, email/SMS templates, settings, security rules, list of values, and dashboard configurations. The ModuleMetadataSeederService from the @solidxai/core package handles all the seeding operations automatically.",
       "chunk_count": 3,
       "uploaded_by": "migration_script",
       "uploaded_at": "2025-10-28T13:50:12.780381"
@@ -278,7 +278,7 @@
       "doc_title": "developer-docs/project-structure.md",
       "title": "Project Structure",
       "description": "Overview of the folder structure for the SolidX Fullstack Application.",
-      "summary": "This document provides a comprehensive overview of the SolidX project folder structure, organized into backend (solid-api) and frontend (solid-ui) components. The solid-api folder contains NestJS-based backend services with source code, module metadata, logs, and media storage. The solid-ui folder houses the Next.js frontend with PrimeReact components, including app routes, Redux state management, and static assets. The document also covers key dependencies including @solidstarters/solid-core for backend services, solid-code-builder for code generation, and solid-core-ui for frontend components. It includes debugging configurations and upgrade scripts.",
+      "summary": "This document provides a comprehensive overview of the SolidX project folder structure, organized into backend (solid-api) and frontend (solid-ui) components. The solid-api folder contains NestJS-based backend services with source code, module metadata, logs, and media storage. The solid-ui folder houses the Next.js frontend with PrimeReact components, including app routes, Redux state management, and static assets. The document also covers key dependencies including @solidxai/core for backend services, solid-code-builder for code generation, and solid-core-ui for frontend components. It includes debugging configurations and upgrade scripts.",
       "solidx_concerns": "",
       "chunk_count": 4,
       "uploaded_by": "migration_script",

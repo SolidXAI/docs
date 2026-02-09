@@ -71,7 +71,7 @@ export default paymentCollectionHandler;
 - After creating handler we have to register this handler in solid-extension.ts file.
 
 ```tsx
-import {registerExtensionFunction } from "@solidstarters/solid-core-ui";
+import {registerExtensionFunction } from "@solidxai/core-ui";
 import ImageGrid12Column from "./admin/extensions/ImageGrid12Column";
 import paymentCollectionHandler from "./admin/extensions/paymentCollectionChangeHandler";
 

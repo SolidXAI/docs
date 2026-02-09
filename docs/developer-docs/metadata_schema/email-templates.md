@@ -213,7 +213,7 @@ Below is a code snippet demonstrating how to send an email using the defined ema
 // Example: sending an email via the MailServiceFactory
 
 import { Injectable } from '@nestjs/common';
-import { MailFactory } from '@solidstarters/solid-core';
+import { MailFactory } from '@solidxai/core';
 
 @Injectable()
 export class MailerExampleService {

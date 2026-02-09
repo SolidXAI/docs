@@ -116,7 +116,7 @@ You can now use `WhatsAppFactory` to send WhatsApp messages either **via templat
 #### ✅ Example: Sending a WhatsApp Message 
 
 ```ts
-import { WhatsAppFactory } from "@solidstarters/solid-core";   
+import { WhatsAppFactory } from "@solidxai/core";   
 ...
 constructor(private readonly whatsappFactory: WhatsAppFactory) {}
 ...

@@ -44,7 +44,7 @@ import {
   MailProvider, 
   PublisherFactory, 
   QueueMessage 
-} from "@solidstarters/solid-core";
+} from "@solidxai/core";
 import * as Handlebars from "handlebars";
 
 @Injectable()
@@ -166,7 +166,7 @@ You can now use `MailFactory` to send emails either **via templates** or **manua
 #### ✅ Example: Using an Email Template
 
 ```ts
-import { MailFactory } from "@solidstarters/solid-core";   
+import { MailFactory } from "@solidxai/core";   
 ...
 constructor(private readonly mailFactory: MailFactory) {}
 ...
@@ -189,7 +189,7 @@ await mailService.sendEmailUsingTemplate(
 #### ✉️ Example: Sending a Manual Email (Without Template)
 
 ```ts
-import { MailFactory } from "@solidstarters/solid-core";   
+import { MailFactory } from "@solidxai/core";   
 ...
 constructor(private readonly mailFactory: MailFactory) {}
 ...

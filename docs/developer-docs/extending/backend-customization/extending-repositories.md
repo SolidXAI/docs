@@ -39,7 +39,7 @@ Most cases can be expressed with `find`/`findOne` since they’re already securi
 
 ```ts
 import { Injectable } from '@nestjs/common';
-import { RequestContextService, SecurityRuleRepository, SolidBaseRepository } from '@solidstarters/solid-core';
+import { RequestContextService, SecurityRuleRepository, SolidBaseRepository } from '@solidxai/core';
 import { DataSource } from 'typeorm';
 import { FeeType } from '../entities/fee-type.entity';
 

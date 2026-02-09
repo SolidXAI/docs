@@ -102,7 +102,7 @@ import {
   ComputedFieldMetadata,
   ComputedFieldProvider,
   IEntityPostComputeFieldProvider
-} from '@solidstarters/solid-core';
+} from '@solidxai/core';
 import { EntityManager } from 'typeorm';
 import { PaymentCollectionItemDetail } from '../entities/payment-collection-item-detail.entity';
 import { PaymentCollectionItem } from '../entities/payment-collection-item.entity';

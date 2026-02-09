@@ -184,7 +184,7 @@ export class FeeTypeController {
 ###  Service
 </h4>
 
-The generated service class contains the core business logic for the model and extends the generic `CRUDService<T>` provided by `@solidstarters/solid-core`.
+The generated service class contains the core business logic for the model and extends the generic `CRUDService<T>` provided by `@solidxai/core`.
 
 This base class provides reusable functionality such as:
 - CRUD operations
@@ -207,12 +207,12 @@ import { InjectEntityManager, InjectRepository } from '@nestjs/typeorm';
 import { DiscoveryService, ModuleRef  } from "@nestjs/core";
 import { EntityManager, Repository } from 'typeorm';
 
-import { CRUDService } from '@solidstarters/solid-core';
-import { ModelMetadataService } from '@solidstarters/solid-core';
-import { ModuleMetadataService } from '@solidstarters/solid-core';
+import { CRUDService } from '@solidxai/core';
+import { ModelMetadataService } from '@solidxai/core';
+import { ModuleMetadataService } from '@solidxai/core';
 import { ConfigService } from '@nestjs/config';
-import { FileService } from '@solidstarters/solid-core';
-import { CrudHelperService } from '@solidstarters/solid-core';
+import { FileService } from '@solidxai/core';
+import { CrudHelperService } from '@solidxai/core';
 
 import { FeeType } from '../entities/fee-type.entity';
 import { FeeTypeRepository } from '../repositories/fee-type.repository';
@@ -334,7 +334,7 @@ export class UpdateFeeTypeDto {
 </h4>
 
 
-The entity defines the database schema and extends `CommonEntity` from `@solidstarters/solid-core`, providing audit fields like `createdAt`, `updatedAt`, and soft-delete support.
+The entity defines the database schema and extends `CommonEntity` from `@solidxai/core`, providing audit fields like `createdAt`, `updatedAt`, and soft-delete support.
 
 Each field in the model is translated into a `@Column()` definition, and relationships like `@ManyToOne()` are generated based on the field configuration within the SolidX Admin Panel.
 
@@ -351,7 +351,7 @@ Key features include:
   </summary>
 
 ```ts
-import { CommonEntity } from '@solidstarters/solid-core';
+import { CommonEntity } from '@solidxai/core';
 import { Entity, Column, Index, JoinColumn, ManyToOne } from 'typeorm';
 import { Institute } from 'src/fees-portal/entities/institute.entity'
 
@@ -404,7 +404,7 @@ This class is the right place to define custom database queries and overrides be
 
 ```ts
 import { Injectable } from '@nestjs/common';
-import { RequestContextService, SecurityRuleRepository, SolidBaseRepository } from '@solidstarters/solid-core';
+import { RequestContextService, SecurityRuleRepository, SolidBaseRepository } from '@solidxai/core';
 import { DataSource } from 'typeorm';
 import { FeeType } from '../entities/fee-type.entity';
 

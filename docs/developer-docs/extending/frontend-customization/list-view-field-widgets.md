@@ -49,7 +49,7 @@ In the above example, the `viewWidget` attribute specifies the widget to use in 
 :::
 
  The widgets can be:
-- **Built-in** (provided by `@solidstarters/solid-core-ui`)
+- **Built-in** (provided by `@solidxai/core-ui`)
 - **Custom** (created by you)
 
 In the example above, `SolidShortTextAvatarWidget` is a **built-in widget** that displays the user's name and avatar.
@@ -68,7 +68,7 @@ If you need a custom display (e.g. a **score widget** with colors based on score
 </summary>
 
 ```tsx
-import { SolidListFieldWidgetProps } from "@solidstarters/solid-core-ui/dist/types/solid-core";
+import { SolidListFieldWidgetProps } from "@solidxai/core-ui";
 
 export const ScoreWidget = ({ rowData, solidListViewMetaData, fieldMetadata, column }: SolidListFieldWidgetProps) => {
     let labelColor;

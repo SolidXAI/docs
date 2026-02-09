@@ -63,21 +63,21 @@ After you click on "Generate Module" in the background SolidX does the following
 
 When the SolidX project is bootstrapped by default we expect at-least one data source to be configured. 
 
-This is taken care of when a new project is bootstrapped using `npx @solidstarters/create-solid-app`
+This is taken care of when a new project is bootstrapped using `npx @solidxai/solidctl create-app`
 
 As part of this bootstrapping a default data source is pre-configured in the file `<project-root>/solid-api/src/app-default-database.module.ts`
 
 ```ts
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import * as SolidCoreModuleExports from '@solidstarters/solid-core';
-import { DatasourceType, getDynamicModuleNames, ISolidDatabaseModule, SolidDatabaseModule } from '@solidstarters/solid-core';
+import * as SolidCoreModuleExports from '@solidxai/core';
+import { DatasourceType, getDynamicModuleNames, ISolidDatabaseModule, SolidDatabaseModule } from '@solidxai/core';
 import { WINSTON_MODULE_PROVIDER } from 'nest-winston';
 import { join } from 'path';
 import { getMetadataArgsStorage } from 'typeorm';
 import { SnakeNamingStrategy } from 'typeorm-naming-strategies';
 import { Logger } from 'winston';
-import { WinstonTypeORMLogger } from '@solidstarters/solid-core'; // Assuming you have this custom logger
+import { WinstonTypeORMLogger } from '@solidxai/core'; // Assuming you have this custom logger
 
 function getEntitiesFromExports(exports: Record&lt;string, any&gt;) {
     const metadataStorage = getMetadataArgsStorage();

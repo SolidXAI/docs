@@ -32,22 +32,33 @@ To try out SolidX on your local machine, ensure you have the following prerequis
 > especially when running development tools and containers.
 
 ## Database Setup
-SolidX requires a relational database to store application data / metadata. Currently supported databases include PostgreSQL and MSSQL. We will be using PostgreSQL for this tutorial.
+
+:::tip[Already have PostgreSQL?]
+If you already have a PostgreSQL database installed and running on your system, you can skip this section and proceed directly to [SolidX Scaffolding Script](#solidx-scaffolding-script). Just make sure you have your database connection details (host, port, username, password, and database name) ready for the scaffolding step.
+:::
+
+SolidX requires a relational database to store application data / metadata. Currently supported databases include **PostgreSQL** and **MSSQL**. 
+
+We will be using PostgreSQL for this tutorial. 
+
+Below are instructions to set up PostgreSQL locally using Docker, which provides an isolated and easy-to-manage environment for your database.
 
 ### Prerequisites
 Before proceeding, Docker must be installed and running on your system.
-  - **macOS / Windows**: Install **Docker Desktop**
-  - **Ubuntu / Linux**: Install **Docker Engine**
+  - **macOS / Windows**: Install [Docker Desktop](https://www.docker.com/products/docker-desktop)
+  - **Ubuntu / Linux**: Install [Docker Engine](https://docs.docker.com/engine/install/)
 
 After installation, ensure Docker is running and verify it by executing:
 
 ```bash
 docker --version
+
+# Expected output (version may vary):
+# Docker version 27.5.1, build 9f9e405
 ```
 
 ### Installing PostgreSQL
-This guide explains how to install and run **PostgreSQL 17** locally using Docker.  
-This approach avoids installing PostgreSQL directly on your system and provides a clean, reproducible setup.
+We will be installing **PostgreSQL 17** using the official Docker image.
 
 #### Step 1: Pull PostgreSQL 17 Image
 Pull the official PostgreSQL 17 image from Docker Hub.
@@ -56,7 +67,7 @@ docker pull postgres:17
 ```
 
 #### Step 2: Run the PostgreSQL Container
-Run PostgreSQL with a predefined username, password, database name, port binding, and persistent storage.
+Run PostgreSQL with a predefined username, password, database name, port binding, and persistent storage using the **postgres:17** image.
 
 ```bash
 docker run -d \
@@ -68,8 +79,10 @@ docker run -d \
   -v solidx_pgdata:/var/lib/postgresql/data \
   postgres:17
 ```
-:::info 
-PostgreSQL data is stored in the Docker volume **solidx_pgdata** using the `-v` flag.
+:::info
+Above step initializes an empty database with the specified credentials and configuration and starts the PostgreSQL server in a Docker container. 
+
+PostgreSQL data will be stored in the Docker volume **solidx_pgdata** which is specified using the `-v` flag. This is useful for the following reasons:
 	- Data persists across container restarts
 	- Removing the container does not delete the data
 	- Removing the volume deletes all stored data
@@ -80,6 +93,10 @@ Check the list of running containers.
 
 ```bash
 docker ps
+
+# Expected output should include a container named "SolidX_DB" with the postgres:17 image
+#CONTAINER ID   IMAGE         COMMAND                  CREATED          STATUS         PORTS                    NAMES
+#3aabaa074778   postgres:17   "docker-entrypoint.s…"   11 seconds ago   Up 9 seconds   0.0.0.0:5432->5432/tcp   SolidX_DB
 ```
 
 #### Step 4: Connect to PostgreSQL
@@ -133,7 +150,7 @@ SolidX applications are **installed and initialized exclusively** using the offi
 To create a new SolidX application, run:
 
 ```bash
-npx @solidstarters/create-solid-app@latest
+npx @solidxai/solidctl create-app@latest
 ```
 
 This command launches an interactive setup and generates a fully configured SolidX workspace, ready for development.
@@ -213,7 +230,7 @@ The next section walks through the scaffolding script **step by step**, includin
 To create a new SolidX application, run the following command in your terminal:
 
 ```bash
-npx @solidstarters/create-solid-app
+npx @solidxai/solidctl create-app
 ```
 This command launches an interactive setup and generates a fully configured SolidX workspace, ready for development.
 Follow the prompts to configure your application:

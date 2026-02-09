@@ -47,7 +47,7 @@ This document explains how to **extend** the `CRUDService<T>` for your models an
 
 ```ts
 import { Injectable } from "@nestjs/common";
-import { CRUDService } from "@solidstarters/solid-core";
+import { CRUDService } from "@solidxai/core";
 import { Person } from "../entities/person.entity";
 
 @Injectable()
@@ -301,7 +301,7 @@ const entity = await personService.findOne(
 );
 
 // Access media (example: mediaSingle field "fileLocation")
-import type { MediaWithFullUrl } from "@solidstarters/solid-core";
+import type { MediaWithFullUrl } from "@solidxai/core";
 const first = (entity as any)["_media"]["fileLocation"][0] as MediaWithFullUrl;
 console.log(first._full_url); // absolute URL to the file
 ```
@@ -435,7 +435,7 @@ const person = await personService.findOne(1, {
 });
 
 // Access the full URL for a mediaSingle field called "fileLocation"
-import type { MediaWithFullUrl } from "@solidstarters/solid-core";
+import type { MediaWithFullUrl } from "@solidxai/core";
 const media = (person as any)["_media"]["fileLocation"][0] as MediaWithFullUrl;
 console.log(media._full_url);
 ```

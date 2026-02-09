@@ -63,7 +63,7 @@ Here’s an example of an **integer slider widget**. This widget allows users to
 </summary>
 
 ```tsx
-import { SolidFormFieldWidgetProps } from "@solidstarters/solid-core-ui/dist/types/solid-core";
+import { SolidFormFieldWidgetProps } from "@solidxai/core-ui";
 
 export const SolidIntegerSliderStyleFormEditWidget = ({ formik, fieldContext }: SolidFormFieldWidgetProps) => {
     const fieldMetadata = fieldContext.fieldMetadata;

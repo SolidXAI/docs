@@ -41,7 +41,7 @@ Create a new service class that implements the `IScheduledJob` interface.
 
 ```ts
 import { Injectable, Logger } from '@nestjs/common';
-import { IScheduledJob, ScheduledJob, ScheduledJobProvider } from '@solidstarters/solid-core';
+import { IScheduledJob, ScheduledJob, ScheduledJobProvider } from '@solidxai/core';
 
 @Injectable()
 @ScheduledJobProvider()
@@ -104,7 +104,7 @@ Add the job definition in your metadata.json or job configuration file.
 
 ###  How It Works
 	- How job schedules are evaluated
-    - The SchedulerServiceImpl in @solidstarters/solid-core is responsible for evaluating and executing scheduled jobs.
+    - The SchedulerServiceImpl in @solidxai/core is responsible for evaluating and executing scheduled jobs.
     - Job Execution Flow:
       1. Fetch Active Jobs: The service retrieves all active scheduled jobs from the database.
       2. Determine Due Jobs: It checks each job's nextRunAt against the current time to identify jobs that are due for execution.

@@ -40,7 +40,7 @@ import {
   IEntityPreComputeFieldProvider,
   IEntityPostComputeFieldProvider,
   ComputedFieldMetadata,
-} from '@solidstarters/solid-core';
+} from '@solidxai/core';
 import { kebabCase } from 'lodash';
 import { PaymentCollectionItemDetail } from '../entities/payment-collection-item-detail.entity';
 import { EntityManager } from 'typeorm';

@@ -1,7 +1,7 @@
 ---
 title: Project Structure
 description: Overview of the folder structure for the SolidX Fullstack Application.
-summary: This document provides a comprehensive overview of the SolidX project folder structure, organized into backend (solid-api) and frontend (solid-ui) components. The solid-api folder contains NestJS-based backend services with source code, module metadata, logs, and media storage. The solid-ui folder houses the Next.js frontend with PrimeReact components, including app routes, Redux state management, and static assets. The document also covers key dependencies including @solidstarters/solid-core for backend services, solid-code-builder for code generation, and solid-core-ui for frontend components. It includes debugging configurations and upgrade scripts.
+summary: This document provides a comprehensive overview of the SolidX project folder structure, organized into backend (solid-api) and frontend (solid-ui) components. The solid-api folder contains NestJS-based backend services with source code, module metadata, logs, and media storage. The solid-ui folder houses the Next.js frontend with PrimeReact components, including app routes, Redux state management, and static assets. The document also covers key dependencies including @solidxai/core for backend services, solid-code-builder for code generation, and solid-core-ui for frontend components. It includes debugging configurations and upgrade scripts.
 sidebar_position: 3
 solidx_concerns: []
 ---
@@ -57,7 +57,7 @@ solid-api/
 
   ###  SolidX dependencies
    </h4>
-  - `@solidstarters/solid-core`
+  - `@solidxai/core`
     - Contains the core SolidX module which provides the core backend services for SolidX.
   - `@solidstarters/solid-code-builder`
     - Contains the functionality for generating the code in the SolidX backend.
@@ -115,7 +115,7 @@ solid-ui/
   ###  SolidX dependencies
    </h4>
 
-- `@solidstarters/solid-core-ui`
+- `@solidxai/core-ui`
   - Contains the core ui components for the SolidX UI.
   
 ##  Debugging - VS Code

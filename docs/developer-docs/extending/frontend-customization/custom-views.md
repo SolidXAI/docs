@@ -118,7 +118,7 @@ registerExtensionComponent("BookSimilarTitles", BookSimilarTitles);
 
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import { SolidFormWidgetProps } from '@solidstarters/solid-core-ui';
+import { SolidFormWidgetProps } from '@solidxai/core-ui';
 
 const BookSimilarTitles = ({ formData, field, fieldsMetadata, viewMetadata }: SolidFormWidgetProps) => {
     const [books, setBooks] = useState<any[]>([]);

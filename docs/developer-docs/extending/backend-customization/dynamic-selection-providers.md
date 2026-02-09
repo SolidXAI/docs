@@ -89,9 +89,9 @@ The most important method is `values()`, which fetches and returns the available
 
 ```ts
 import { Injectable, Logger } from "@nestjs/common";
-import { HttpService } from "@solidstarters/solid-core";
+import { HttpService } from "@solidxai/core";
 import { lastValueFrom } from "rxjs";
-import { SelectionProvider } from "@solidstarters/solid-core";
+import { SelectionProvider } from "@solidxai/core";
 import {
   ISelectionProvider,
   ISelectionProviderContext,

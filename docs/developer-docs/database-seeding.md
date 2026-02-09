@@ -1,7 +1,7 @@
 ---
 title: Database Seeding
 description: Overview of how the database is initialized with metadata in SolidX.
-summary: This document explains the database seeding process in SolidX, which initializes the database with essential metadata and data required for the application to function. The seeding is triggered via the 'solid seed' command and populates permissions, media storage providers, system fields, functional modules metadata, roles (Admin and Internal User), default users, views, actions, menus, email/SMS templates, settings, security rules, list of values, and dashboard configurations. The ModuleMetadataSeederService from the @solidstarters/solid-core package handles all the seeding operations automatically.
+summary: This document explains the database seeding process in SolidX, which initializes the database with essential metadata and data required for the application to function. The seeding is triggered via the 'solid seed' command and populates permissions, media storage providers, system fields, functional modules metadata, roles (Admin and Internal User), default users, views, actions, menus, email/SMS templates, settings, security rules, list of values, and dashboard configurations. The ModuleMetadataSeederService from the @solidxai/core package handles all the seeding operations automatically.
 sidebar_position: 4
 ---
 
@@ -26,7 +26,7 @@ To run the seeding process, execute the following command in the `solid-api` dir
 solid seed
 ```
 
-This command triggers the `ModuleMetadataSeederService`, provided by the [`@solidstarters/solid-core`](https://www.npmjs.com/package/@solidstarters/solid-core) package.  
+This command triggers the `ModuleMetadataSeederService`, provided by the [`@solidxai/core`](https://www.npmjs.com/package/@solidxai/core) package.  
 It is responsible for populating all the necessary metadata into the database.
 
 
@@ -60,7 +60,7 @@ The following metadata is populated during the seeding process:
 ### System Fields Metadata
 </h4>
 
-- All the system models and fields are defined in the solid-core-metadata.json file provided by the `@solidstarters/solid-core` package.
+- All the system models and fields are defined in the solid-core-metadata.json file provided by the `@solidxai/core` package.
 - The above configuration gets seeded as part of this step
 
 <h4 className="card-title card-headear-wrapper">

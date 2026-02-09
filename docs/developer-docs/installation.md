@@ -7,13 +7,13 @@ sidebar_position: 2
 
 #  Installing SolidX
 
-Installing `SolidX` is a breeze with our [create-solid-app](https://www.npmjs.com/package/@solidstarters/create-solid-app) starter template.  
+Installing `SolidX` is a breeze with our [create-solid-app](https://www.npmjs.com/package/@solidxai/solidctl create-app) starter template.  
 
 ##  Quick Overview
 - Run the command below to initialize your SolidX project:  
 
   ```tsx
-  npx @solidstarters/create-solid-app
+  npx @solidxai/solidctl create-app
   ```
 
 - Answer a few simple prompts to configure your project.

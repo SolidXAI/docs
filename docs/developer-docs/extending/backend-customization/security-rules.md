@@ -97,7 +97,7 @@ Add entries to the `securityRules` array in your module’s metadata JSON.
   How It Works
 </h2>
 
-1. Rules are evaluated inside **`SolidBaseRepository`** (`@solidstarters/solid-core`).  
+1. Rules are evaluated inside **`SolidBaseRepository`** (`@solidxai/core`).  
 2. Any repository **extending** `SolidBaseRepository` automatically enforces rules during query building.  
 3. All generated model repositories inherit this behavior.  
 4. Controller `find` → CRUD service → repository → query builder → **security filters applied**.  

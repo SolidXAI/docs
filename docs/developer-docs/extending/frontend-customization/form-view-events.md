@@ -61,9 +61,7 @@ Here’s a concise example that:
   </summary>
 
 ```ts
-import { SolidViewLayoutManager } from "@solidstarters/solid-core-ui";
-// import types if available in your project:
-// import { SolidUiEvent } from "@solidstarters/solid-core-ui/dist/types/...";
+import { SolidViewLayoutManager } from "@solidxai/core-ui";
 
 const handleBookFormViewChange = (event: SolidUiEvent) => {
   const { type, modifiedField, modifiedFieldValue, formData, viewMetadata } = event;
@@ -116,7 +114,7 @@ Register each exported function with an **alias** in `solid-extensions.ts`:
 
 ```ts
 import handleBookFormViewChange from "./bookFormViewChangeHandler";
-import { registerExtensionFunction } from "@solidstarters/solid-core-ui";
+import { registerExtensionFunction } from "@solidxai/core-ui";
 
 registerExtensionFunction("bookFormViewChangeHandler", handleBookFormViewChange);
 // Add more registrations as needed…

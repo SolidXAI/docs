@@ -180,7 +180,7 @@ You can now use `SmsServiceFactory` to send SMS via **templates** (recommended).
 <summary><strong>Show code: <code>usage-example.ts</code></strong></summary>
 
 ```ts title="usage-example.ts"
-import { SmsServiceFactory } from "@solidstarters/solid-core";
+import { SmsServiceFactory } from "@solidxai/core";
 
 export class SomeService {
   constructor(private readonly smsServiceFactory: SmsServiceFactory) {}
