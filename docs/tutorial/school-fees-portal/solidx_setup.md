@@ -309,7 +309,7 @@ Use the credentials displayed after seeding to access the admin panel with full 
 ![SolidX Admin Panel Login](/img/tutorial/school-fees-portal-v2/admin_panel_login_page.png)
 *Screenshot showing the SolidX admin panel login screen*
 
-After logging in, you will be redirected to the default landing page of the admin panel. This page by default is configured to show the listing of all users in the system.
+After logging in, you will be redirected to the default landing page of the admin panel. If no landing page is configured, you will see the default landing page as shown below.
 
 ![SolidX Admin Panel Landing Page](/img/tutorial/school-fees-portal-v2/admin_panel_post_login_redirect_page.png)
 *Screenshot showing the default landing page after successful login*
