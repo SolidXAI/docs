@@ -150,14 +150,12 @@ SolidX applications are **installed and initialized exclusively** using the offi
 To create a new SolidX application, run:
 
 ```bash
-npx @solidxai/solidctl create-app
+npx @solidxai/solidctl@latest create-app
 ```
+> `npx`, bundled with Node.js, runs packages directly without requiring a global install — ensuring you always use the latest version of `solidctl`.
 
-This command launches an interactive setup and generates a fully configured SolidX workspace, ready for development.
-
-### What the Script Does
-
-Running the SolidX scaffolding script results in a **fully working, end-to-end setup**.
+### What `create-app` Does
+Launches an interactive setup that produces a **fully working, end-to-end application**.
 
 Specifically, it:
 
@@ -174,9 +172,14 @@ Specifically, it:
    - Backend and frontend projects follow SolidX-defined project structures and best practices  
    - Configuration, environment files, and scripts are wired correctly
 
-4. **Provides the SolidX CLI utility**  
-   - Seeds/syncs database with metadata and model configurations from JSON files (**solid seed**)
-   - Generates code from model configurations (**solid refresh-model** - alternative to UI-based generation)
+4. **Other Control Plane CLI Commands**
+   - **npx @solidxai/solidctl@latest seed** — Seed the database with canonical models, settings, and system users from configuration files.
+   - **npx @solidxai/solidctl@latest build** — Builds the backend and updates the CLI to point to the latest codebase.
+   - **npx @solidxai/solidctl@latest upgrade** — Upgrade Solid dependencies belonging to the `@solidxai` organization in the `solid-api` and `solid-ui` projects to their latest published versions.
+
+:::tip
+See the full [solidctl Command Reference](common/solidctl-commands.md) for details on all available commands.
+:::
 
 ### Prerequisites
 
@@ -191,9 +194,10 @@ Verify installation:
 
 ```bash
 node -v
-```
 
-> `npx` is bundled with Node.js and is used to run the SolidX starter without global installation.
+# Expected output (version may vary):
+# v22.0.0
+```
 
 #### Recommended: Node Version Manager (nvm)
 
@@ -207,6 +211,9 @@ Once installed, set up the required Node version:
 ```bash
 nvm install 22
 nvm use 22
+
+# Verify the correct version is active
+# node -v
 ```
 
 #### npm
@@ -217,6 +224,9 @@ Verify installation:
 
 ```bash
 npm -v
+
+# Expected output (version may vary):
+# 10.0.0
 ```
 
 ### Terminal & Internet Access
@@ -224,16 +234,10 @@ npm -v
 - Access to a command-line terminal (macOS, Linux, or Windows)
 - Active internet connection (required to download and run the starter)
 
-The next section walks through the scaffolding script **step by step**, including each prompt and screenshots for reference.
+The next section walks you through the `create-app` command **step by step**, including each prompt and screenshots for reference.
 
 ## Bootstrapping Your Application
-To create a new SolidX application, run the following command in your terminal:
-
-```bash
-npx @solidxai/solidctl create-app
-```
-This command launches an interactive setup and generates a fully configured SolidX workspace, ready for development.
-Follow the prompts to configure your application:
+Run `npx @solidxai/solidctl@latest create-app` as described [above](#solidx-scaffolding-script) and follow the prompts below to configure your application:
 ### Backend Configuration Prompts
 1. **Project Name**: Enter a name for your SolidX application.
  - Example: `school-fees-portal`
@@ -267,27 +271,33 @@ Follow the prompts to configure your application:
 ![Bootstrapping SolidX](/img/tutorial/school-fees-portal-v2/bootstrapping_solidx.png)
 *Screenshot showing the bootstrapping process in the terminal*
 
-## Bootstrapping Application Metadata
-SolidX requires foundational metadata: system models, roles, users, email/SMS templates, dashboards, and lists of values. 
-The `solid seed` command automates this process by populating the database with all these essentials, making the application ready for immediate use.
-
-To seed the database, navigate to the `solid-api` project directory and run `solid seed`:
-
+:::tip[Troubleshooting]
+**Verbose logging** — Add `--verbose` for detailed output when diagnosing failures:
 ```bash
-cd school-fees-portal/solid-api
-solid seed
+npx @solidxai/solidctl@latest create-app --verbose
 ```
 
+**Package resolution errors** — Clear the npm cache and retry:
+```bash
+npm cache clean --force
+npx @solidxai/solidctl@latest create-app
+```
+:::
+
+
+## Bootstrapping Application Metadata
+SolidX requires foundational metadata: system models, roles, users, email/SMS templates, dashboards, and lists of values. 
+The `npx @solidxai/solidctl@latest seed` command automates this process by populating the database with all these essentials, making the application ready for immediate use.
+
+To seed the database, navigate to the project root directory and run:
+
+```bash
+cd school-fees-portal
+npx @solidxai/solidctl@latest seed
+```
+This command reads predefined JSON files containing the necessary metadata for a SolidX application and populates the database accordingly.
+
 The seed process also creates an `super admin` user, if one does not already exist. The credentials for this user are displayed in the terminal after seeding is complete.
-
-:::info
-`solid` is the SolidX CLI utility installed as part of the SolidX scaffolding process.
-:::
-:::tip
-You can run `solid --help` to see all available commands and options.
-:::
-
-This command reads predefined JSON files containing the necessary metadata and populates the database accordingly.
 
 ### Seeding in Action
 ![Seeding SolidX Metadata](/img/tutorial/school-fees-portal-v2/seeding_solidx.png)
@@ -304,8 +314,6 @@ After logging in, you will be redirected to the default landing page of the admi
 ![SolidX Admin Panel Landing Page](/img/tutorial/school-fees-portal-v2/admin_panel_post_login_redirect_page.png)
 *Screenshot showing the default landing page after successful login*
 
----
-
 ## Setup Complete - Ready to Build!
 
 Your SolidX environment is now configured and the admin panel is accessible.
@@ -313,4 +321,3 @@ Your SolidX environment is now configured and the admin panel is accessible.
 You're ready to build a fully functional **school fees portal** application using the SolidX App Builder. No coding required—just visual configuration to create entities, relationships, workflows, and business logic.
 
 Let's start building!
-
