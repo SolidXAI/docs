@@ -256,6 +256,13 @@ Upload Excel (CASH mode) → Status: "Fully Paid"
 
 This section provides step-by-step instructions for creating the Student, Payment Collection, Payment Collection Item, and Payment Collection Item Detail models using SolidX. Follow these instructions to implement the data models discussed in the previous section.
 
+:::tip New to the Module Builder?
+If you're unfamiliar with how modules, models, and fields work in SolidX, we recommend reviewing the [Module Builder](../../../admin-docs/module-builder/) documentation first. It covers:
+- [Module Management](../../../admin-docs/module-builder/module-management) - Creating and configuring modules
+- [Model Management](../../../admin-docs/module-builder/model-management) - Creating models and understanding model settings
+- [Field Management](../../../admin-docs/module-builder/field-management) - Understanding field types and configuration options
+:::
+
 #### 1. Creating the Student Model
 
 Navigate to the model creation interface in SolidX and configure as follows:
@@ -359,7 +366,7 @@ Create the following fields in the order listed:
 | **Name** | institute |
 | **Display Name** | Institute |
 | **Type** | Relation |
-| **Relation Type** | Many-to-One |
+| **Relation Type** | [Many-to-One](../../../admin-docs/module-builder/field-management#1-many-to-one) |
 | **Related Model** | institute |
 | **Related Module** | fees-portal |
 | **Create Inverse** | No |
@@ -421,7 +428,7 @@ Create the following fields in the order listed:
 | **Name** | payments |
 | **Display Name** | Payments |
 | **Type** | Relation |
-| **Relation Type** | One-to-Many |
+| **Relation Type** | [One-to-Many](../../../admin-docs/module-builder/field-management#3-one-to-many) |
 | **Related Model** | payment |
 | **Related Module** | fees-portal |
 | **Related Field** | student |
@@ -506,7 +513,7 @@ Create the following fields in the order listed:
 | **Name** | institute |
 | **Display Name** | Institute |
 | **Type** | Relation |
-| **Relation Type** | Many-to-One |
+| **Relation Type** | [Many-to-One](../../../admin-docs/module-builder/field-management#1-many-to-one) |
 | **Related Model** | institute |
 | **Related Module** | fees-portal |
 | **Create Inverse** | No |
@@ -535,7 +542,7 @@ Create the following fields in the order listed:
 | **Name** | paymentCollectionItems |
 | **Display Name** | Payment Collection Items |
 | **Type** | Relation |
-| **Relation Type** | One-to-Many |
+| **Relation Type** | [One-to-Many](../../../admin-docs/module-builder/field-management#3-one-to-many) |
 | **Related Model** | paymentCollectionItem |
 | **Related Module** | fees-portal |
 | **Related Field** | paymentCollection |
@@ -705,7 +712,7 @@ Create the following fields in the order listed:
 | **Name** | student |
 | **Display Name** | Student |
 | **Type** | Relation |
-| **Relation Type** | Many-to-One |
+| **Relation Type** | [Many-to-One](../../../admin-docs/module-builder/field-management#1-many-to-one) |
 | **Related Model** | student |
 | **Related Module** | fees-portal |
 | **Create Inverse** | No |
@@ -721,7 +728,7 @@ Create the following fields in the order listed:
 | **Name** | paymentCollection |
 | **Display Name** | Payment Collection |
 | **Type** | Relation |
-| **Relation Type** | Many-to-One |
+| **Relation Type** | [Many-to-One](../../../admin-docs/module-builder/field-management#1-many-to-one) |
 | **Related Model** | paymentCollection |
 | **Related Module** | fees-portal |
 | **Related Field** | paymentCollectionItems |
@@ -738,7 +745,7 @@ Create the following fields in the order listed:
 | **Name** | institute |
 | **Display Name** | Institute |
 | **Type** | Relation |
-| **Relation Type** | Many-to-One |
+| **Relation Type** | [Many-to-One](../../../admin-docs/module-builder/field-management#1-many-to-one) |
 | **Related Model** | institute |
 | **Related Module** | fees-portal |
 | **Create Inverse** | No |
@@ -754,7 +761,7 @@ Create the following fields in the order listed:
 | **Name** | feeType |
 | **Display Name** | Fee Type |
 | **Type** | Relation |
-| **Relation Type** | Many-to-One |
+| **Relation Type** | [Many-to-One](../../../admin-docs/module-builder/field-management#1-many-to-one) |
 | **Related Model** | feeType |
 | **Related Module** | fees-portal |
 | **Create Inverse** | No |
@@ -770,7 +777,7 @@ Create the following fields in the order listed:
 | **Name** | paymentCollectionItemDetails |
 | **Display Name** | Payment Collection Item Details |
 | **Type** | Relation |
-| **Relation Type** | One-to-Many |
+| **Relation Type** | [One-to-Many](../../../admin-docs/module-builder/field-management#3-one-to-many) |
 | **Related Model** | paymentCollectionItemDetail |
 | **Related Module** | fees-portal |
 | **Related Field** | paymentCollectionItem |
@@ -837,7 +844,7 @@ Create the following fields in the order listed:
 | **Name** | institute |
 | **Display Name** | Institute |
 | **Type** | Relation |
-| **Relation Type** | Many-to-One |
+| **Relation Type** | [Many-to-One](../../../admin-docs/module-builder/field-management#1-many-to-one) |
 | **Related Model** | institute |
 | **Related Module** | fees-portal |
 | **Create Inverse** | No |
@@ -853,7 +860,7 @@ Create the following fields in the order listed:
 | **Name** | student |
 | **Display Name** | Student |
 | **Type** | Relation |
-| **Relation Type** | Many-to-One |
+| **Relation Type** | [Many-to-One](../../../admin-docs/module-builder/field-management#1-many-to-one) |
 | **Related Model** | student |
 | **Related Module** | fees-portal |
 | **Create Inverse** | No |
@@ -869,7 +876,7 @@ Create the following fields in the order listed:
 | **Name** | paymentCollectionItem |
 | **Display Name** | Payment Collection Item |
 | **Type** | Relation |
-| **Relation Type** | Many-to-One |
+| **Relation Type** | [Many-to-One](../../../admin-docs/module-builder/field-management#1-many-to-one) |
 | **Related Model** | paymentCollectionItem |
 | **Related Module** | fees-portal |
 | **Related Field** | paymentCollectionItemDetails |
@@ -886,7 +893,7 @@ Create the following fields in the order listed:
 | **Name** | payment |
 | **Display Name** | Payment |
 | **Type** | Relation |
-| **Relation Type** | Many-to-One |
+| **Relation Type** | [Many-to-One](../../../admin-docs/module-builder/field-management#1-many-to-one) |
 | **Related Model** | payment |
 | **Related Module** | fees-portal |
 | **Create Inverse** | No |
@@ -895,10 +902,12 @@ Create the following fields in the order listed:
 | **Index** | Yes |
 | **Enable Audit Tracking** | Yes |
 
-:::tip Reference Documentation
-For detailed information about field types and configuration best practices, refer to these common reference documents:
-- 📚 [Field Type Reference](../common/field-types.md) - Complete guide to all available field types
-- ⚙️ [Configuration Notes](../common/configuration-notes.md) - Important guidelines for relations, cascading, audit tracking, and more
+:::tip Quick Reference
+For a handy summary of field types and configuration options used in this tutorial, see:
+- 📚 [Field Type Reference](../common/field-types.md) - Quick-reference table of field types and their key attributes
+- ⚙️ [Configuration Notes](../common/configuration-notes.md) - Quick tips on relations, cascading, audit tracking, and more
+
+For comprehensive documentation, refer to the [Module Builder](../../../admin-docs/module-builder/) section.
 :::
 
 ### Generating APIs and UI Components
@@ -1591,6 +1600,8 @@ For very large files that may cause memory issues, consider using `readExcelInPa
 
 After generating the code using SolidX, default list and form views are automatically created for each model. However, these default views need customization to provide a streamlined payment collection workflow. This section explains how to customize these views using layout JSON configuration and UI extensions.
 
+To learn how to apply these customizations, see [Applying View Customizations](../common/applying-view-customizations.md).
+
 #### Payment Collection Form View Customizations
 
 <!-- Image placeholder: payment_collection_form_view.png -->
@@ -2010,6 +2021,10 @@ The customizations follow these principles:
 5. **Clarity**: Clear labels and helper text guide users
 
 These customizations transform the auto-generated UI into an intuitive payment collection workflow that minimizes errors and maximizes efficiency.
+
+:::tip Applying Your Customizations
+Now that you have the customized layout JSONs ready, follow the steps in [Applying View Customizations](../common/applying-view-customizations.md) to apply them via the Layout Builder.
+:::
 
 ### Excel File Format and Requirements
 

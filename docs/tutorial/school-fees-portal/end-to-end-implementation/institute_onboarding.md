@@ -33,18 +33,18 @@ This section describes the data models you need to implement this feature.
 
 | Field | Required? | Description | Example |
 |-------|-----------|-------------|---------|
-| **Institute Name** | Yes | The official name of your institution. Must be unique. | "St. Mary's High School" |
+| **Institute Name** | Yes | The official name of your institution. Must be unique. | "Delhi Public School" |
 | **Logo** | Yes | Your institution's logo (image file, max 5MB) | Upload .jpg or .png file |
-| **Description** | No | Brief description of your institution | "A premier institution established in 1995..." |
-| **Institute Address** | No | Complete postal address | "123 Main Street, Mumbai, Maharashtra 400001" |
+| **Description** | No | Brief description of your institution | "Leading CBSE school in New Delhi" |
+| **Institute Address** | No | Complete postal address | "Delhi Public School, Mathura Road, New Delhi 110003" |
 
 ###### Contact Details
 
 | Field | Required? | Description | Example |
 |-------|-----------|-------------|---------|
-| **Support Email** | Yes | Email where parents/students can reach for help | support@stmaryschool.edu |
+| **Support Email** | Yes | Email where parents/students can reach for help | support@dpsdelhi.edu.in |
 | **Support Mobile** | Yes | 10-digit contact number for support | 9876543210 |
-| **Email Domain** | No | Your institution's email domain (for user validation) | stmaryschool.edu |
+| **Email Domain** | No | Your institution's email domain (for user validation) | dpsdelhi.edu.in |
 
 ###### Payment Gateway Configuration
 
@@ -61,7 +61,7 @@ These credentials will be provided by your payment gateway provider. You'll need
 
 | Field | Required? | Description | Example |
 |-------|-----------|-------------|---------|
-| **Hosted Page Prefix** | Yes | Subdomain for your payment page. Must be unique. | "stmary" creates stmary-edu.antpay.live |
+| **Hosted Page Prefix** | Yes | Unique subdomain prefix for the institute's payment portal. No two institutes can share the same prefix. | If set to `dps`, the portal URL becomes `dps.<your-configured-domain>` (e.g., `dps.dpsdelhi.edu.in`). The base domain is configured via environment variables. |
 | **Status** | Auto-set | Portal status (starts as "InActive", activate when ready) | InActive → Active |
 
 ###### Legal & Content (Optional)
@@ -89,7 +89,6 @@ These credentials will be provided by your payment gateway provider. You'll need
 | Field | Required? | Description | Example |
 |-------|-----------|-------------|---------|
 | **Fee Type** | Yes | Name of this fee category | "Tuition Fees", "Bus Fees", "Lab Fees" |
-| **Institute** | Yes | Which institute this fee type belongs to | Select from dropdown |
 
 ###### Payment Rules
 
@@ -134,20 +133,18 @@ Configure how you want to handle late payments:
 
 ###### Basic Information
 
-These fields are automatically provided by the system's user management:
-
 | Field | Required? | Description | Example |
 |-------|-----------|-------------|---------|
-| **Email** | Yes | Login email address (must be unique) | admin@stmaryschool.edu |
+| **Email** | Yes | Login email address (must be unique) | admin@dpsdelhi.edu.in |
 | **Password** | Yes | Secure login password | Set during user creation |
-| **First Name** | Yes | User's first name | John |
-| **Last Name** | Yes | User's last name | Smith |
+| **First Name** | Yes | User's first name | Rajesh |
+| **Last Name** | Yes | User's last name | Sharma |
 
 ###### Role & Access
 
 | Field | Required? | Description | Options |
 |-------|-----------|-------------|---------|
-| **User Type** | Yes | What role should this user have? | • **Institute Admin**<br/>• **Platform Admin** |
+| **User Type** | Yes | What role should this user have? | Institute Admin (readonly and defaulted) <br/> |
 
 ###### Understanding User Roles:
 
@@ -191,6 +188,13 @@ Each Institute Admin User
 
 This section provides step-by-step instructions for creating the Institute, Institute User, and Fee Type models using SolidX. Follow these instructions to implement the data models discussed in the previous section.
 
+:::tip New to the Module Builder?
+If you're unfamiliar with how modules, models, and fields work in SolidX, we recommend reviewing the [Module Builder](../../../admin-docs/module-builder/) documentation first. It covers:
+- [Module Management](../../../admin-docs/module-builder/module-management) - Creating and configuring modules
+- [Model Management](../../../admin-docs/module-builder/model-management) - Creating models and understanding model settings
+- [Field Management](../../../admin-docs/module-builder/field-management) - Understanding field types and configuration options
+:::
+
 #### 1. Creating the Institute Model
 
 Navigate to the model creation interface in SolidX and configure as follows:
@@ -222,7 +226,7 @@ Create the following fields in the order listed:
 |-----------|-------|
 | **Name** | instituteName |
 | **Display Name** | Institute Name |
-| **Type** | Short Text |
+| **Type** | [Short Text](../../../admin-docs/module-builder/field-management#short-text) |
 | **Required** | ✓ Yes |
 | **Unique** | ✓ Yes |
 | **Index** | ✓ Yes |
@@ -235,7 +239,7 @@ Create the following fields in the order listed:
 |-----------|-------|
 | **Name** | logo |
 | **Display Name** | Logo |
-| **Type** | Media (Single) |
+| **Type** | [Media (Single)](../../../admin-docs/module-builder/field-management#single-media) |
 | **Media Types** | image |
 | **Media Max Size (KB)** | 5120 |
 | **Required** | ✓ Yes |
@@ -247,7 +251,7 @@ Create the following fields in the order listed:
 |-----------|-------|
 | **Name** | description |
 | **Display Name** | Description |
-| **Type** | Long Text |
+| **Type** | [Long Text](../../../admin-docs/module-builder/field-management#long-text) |
 | **Required** | ☐ No |
 
 **Field 4: Payment Gateway Merchant ID**
@@ -256,7 +260,7 @@ Create the following fields in the order listed:
 |-----------|-------|
 | **Name** | paymentGatewayMerchantId |
 | **Display Name** | Cust Code |
-| **Type** | Short Text |
+| **Type** | [Short Text](../../../admin-docs/module-builder/field-management#short-text) |
 | **Required** | ✓ Yes |
 | **Unique** | ✓ Yes |
 | **Enable Audit Tracking** | ✓ Yes |
@@ -267,7 +271,7 @@ Create the following fields in the order listed:
 |-----------|-------|
 | **Name** | paymentGatewayAccessKey |
 | **Display Name** | Access Key |
-| **Type** | Short Text |
+| **Type** | [Short Text](../../../admin-docs/module-builder/field-management#short-text) |
 | **Required** | ✓ Yes |
 | **Unique** | ✓ Yes |
 | **Enable Audit Tracking** | ✓ Yes |
@@ -279,7 +283,7 @@ Create the following fields in the order listed:
 | **Name** | paymentGatewayAccessSecret |
 | **Display Name** | Access Secret |
 | **Description** | Access Secret Key |
-| **Type** | Short Text |
+| **Type** | [Short Text](../../../admin-docs/module-builder/field-management#short-text) |
 | **Required** | ✓ Yes |
 | **Enable Audit Tracking** | ✓ Yes |
 
@@ -289,7 +293,7 @@ Create the following fields in the order listed:
 |-----------|-------|
 | **Name** | instituteAddress |
 | **Display Name** | Institute Address |
-| **Type** | Long Text |
+| **Type** | [Long Text](../../../admin-docs/module-builder/field-management#long-text) |
 | **Required** | ☐ No |
 
 **Field 8: Fee Types Relation**
@@ -299,8 +303,8 @@ Create the following fields in the order listed:
 | **Name** | feeTypes |
 | **Display Name** | FeeTypes |
 | **Description** | FeeTypes |
-| **Type** | Relation |
-| **Relation Type** | One-to-Many |
+| **Type** | [Relation](../../../admin-docs/module-builder/field-management#relation) |
+| **Relation Type** | [One-to-Many](../../../admin-docs/module-builder/field-management#3-one-to-many) |
 | **Related Model** | feeType |
 | **Related Module** | fees-portal |
 | **Related Field** | institute |
@@ -315,8 +319,8 @@ Create the following fields in the order listed:
 | **Name** | instituteUsers |
 | **Display Name** | InstituteUsers |
 | **Description** | InstituteUsers |
-| **Type** | Relation |
-| **Relation Type** | One-to-Many |
+| **Type** | [Relation](../../../admin-docs/module-builder/field-management#relation) |
+| **Relation Type** | [One-to-Many](../../../admin-docs/module-builder/field-management#3-one-to-many) |
 | **Related Model** | instituteUser |
 | **Related Module** | fees-portal |
 | **Related Field** | institute |
@@ -330,7 +334,7 @@ Create the following fields in the order listed:
 |-----------|-------|
 | **Name** | instituteBrochure |
 | **Display Name** | Institute Brochure |
-| **Type** | Media (Single) |
+| **Type** | [Media (Single)](../../../admin-docs/module-builder/field-management#single-media) |
 | **Media Types** | file |
 | **Media Max Size (KB)** | 5120 |
 | **Required** | ☐ No |
@@ -342,7 +346,7 @@ Create the following fields in the order listed:
 |-----------|-------|
 | **Name** | instituteIntroVideo |
 | **Display Name** | Institute Intro Video |
-| **Type** | Media (Single) |
+| **Type** | [Media (Single)](../../../admin-docs/module-builder/field-management#single-media) |
 | **Media Types** | video |
 | **Media Max Size (KB)** | 5120 |
 | **Required** | ☐ No |
@@ -354,7 +358,7 @@ Create the following fields in the order listed:
 |-----------|-------|
 | **Name** | supportEmail |
 | **Display Name** | Support Email |
-| **Type** | Short Text |
+| **Type** | [Short Text](../../../admin-docs/module-builder/field-management#short-text) |
 | **Required** | ✓ Yes |
 | **Enable Audit Tracking** | ✓ Yes |
 
@@ -364,7 +368,7 @@ Create the following fields in the order listed:
 |-----------|-------|
 | **Name** | supportMobile |
 | **Display Name** | Support Mobile |
-| **Type** | Short Text |
+| **Type** | [Short Text](../../../admin-docs/module-builder/field-management#short-text) |
 | **Min Length** | 10 |
 | **Max Length** | 10 |
 | **Required** | ✓ Yes |
@@ -376,7 +380,7 @@ Create the following fields in the order listed:
 |-----------|-------|
 | **Name** | gst |
 | **Display Name** | GST |
-| **Type** | Short Text |
+| **Type** | [Short Text](../../../admin-docs/module-builder/field-management#short-text) |
 | **Required** | ☐ No |
 | **Enable Audit Tracking** | ✓ Yes |
 
@@ -386,7 +390,7 @@ Create the following fields in the order listed:
 |-----------|-------|
 | **Name** | tnC |
 | **Display Name** | Terms and Conditions |
-| **Type** | Rich Text |
+| **Type** | [Rich Text](../../../admin-docs/module-builder/field-management#rich-text) |
 | **Required** | ☐ No |
 
 **Field 16: FAQs**
@@ -395,7 +399,7 @@ Create the following fields in the order listed:
 |-----------|-------|
 | **Name** | faqs |
 | **Display Name** | FAQS |
-| **Type** | Rich Text |
+| **Type** | [Rich Text](../../../admin-docs/module-builder/field-management#rich-text) |
 | **Required** | ☐ No |
 
 **Field 17: Privacy Policy**
@@ -404,7 +408,7 @@ Create the following fields in the order listed:
 |-----------|-------|
 | **Name** | privacyPolicy |
 | **Display Name** | Privacy Policy |
-| **Type** | Rich Text |
+| **Type** | [Rich Text](../../../admin-docs/module-builder/field-management#rich-text) |
 | **Required** | ☐ No |
 
 **Field 18: Email Domain**
@@ -413,7 +417,7 @@ Create the following fields in the order listed:
 |-----------|-------|
 | **Name** | emailDomain |
 | **Display Name** | Email Domain |
-| **Type** | Short Text |
+| **Type** | [Short Text](../../../admin-docs/module-builder/field-management#short-text) |
 | **Required** | ☐ No |
 | **Enable Audit Tracking** | ✓ Yes |
 
@@ -424,7 +428,7 @@ Create the following fields in the order listed:
 | **Name** | custUserId |
 | **Display Name** | Cust UserID |
 | **Description** | Customer UserID |
-| **Type** | Short Text |
+| **Type** | [Short Text](../../../admin-docs/module-builder/field-management#short-text) |
 | **Required** | ✓ Yes |
 | **Enable Audit Tracking** | ☐ No |
 
@@ -435,7 +439,7 @@ Create the following fields in the order listed:
 | **Name** | hostedPagePrefix |
 | **Display Name** | Hosted Page Prefix |
 | **Description** | Final domain: hostedPagePrefix-baseSuffix.subdomain |
-| **Type** | Short Text |
+| **Type** | [Short Text](../../../admin-docs/module-builder/field-management#short-text) |
 | **Required** | ✓ Yes |
 | **Unique** | ✓ Yes |
 | **Enable Audit Tracking** | ✓ Yes |
@@ -447,7 +451,7 @@ Create the following fields in the order listed:
 | **Name** | status |
 | **Display Name** | Status |
 | **Description** | Workflow field used to track the workflow status of this Institute. |
-| **Type** | Selection (Static) |
+| **Type** | [Selection (Static)](../../../admin-docs/module-builder/field-management#static-selection) |
 | **Default Value** | InActive |
 | **Selection Values** | InActive:InActive, Active:Active |
 | **Value Type** | string |
@@ -483,7 +487,7 @@ Create the following fields in the order listed:
 | **Name** | feeType |
 | **Display Name** | Fee Type |
 | **Description** | The actual fee type. Eg. Tuition Fees, Bus Fees |
-| **Type** | Short Text |
+| **Type** | [Short Text](../../../admin-docs/module-builder/field-management#short-text) |
 | **Required** | ✓ Yes |
 | **Is User Key** | ✓ Yes |
 | **Enable Audit Tracking** | ✓ Yes |
@@ -494,8 +498,8 @@ Create the following fields in the order listed:
 |-----------|-------|
 | **Name** | institute |
 | **Display Name** | Institute |
-| **Type** | Relation |
-| **Relation Type** | Many-to-One |
+| **Type** | [Relation](../../../admin-docs/module-builder/field-management#relation) |
+| **Relation Type** | [Many-to-One](../../../admin-docs/module-builder/field-management#1-many-to-one) |
 | **Related Model** | institute |
 | **Related Module** | fees-portal |
 | **Related Field** | feeTypes |
@@ -510,7 +514,7 @@ Create the following fields in the order listed:
 |-----------|-------|
 | **Name** | partPaymentAllowed |
 | **Display Name** | Part Payment Allowed |
-| **Type** | Boolean |
+| **Type** | [Boolean](../../../admin-docs/module-builder/field-management#boolean) |
 | **Required** | ✓ Yes |
 | **Enable Audit Tracking** | ✓ Yes |
 
@@ -520,7 +524,7 @@ Create the following fields in the order listed:
 |-----------|-------|
 | **Name** | latePaymentFeesType |
 | **Display Name** | Late Payment Fees Type |
-| **Type** | Selection (Static) |
+| **Type** | [Selection (Static)](../../../admin-docs/module-builder/field-management#static-selection) |
 | **Default Value** | None |
 | **Selection Values** | None:None, Percent:Percent, Absolute:Absolute |
 | **Value Type** | string |
@@ -533,7 +537,7 @@ Create the following fields in the order listed:
 |-----------|-------|
 | **Name** | latePaymentFees |
 | **Display Name** | Late Payment Fees |
-| **Type** | Decimal |
+| **Type** | [Decimal](../../../admin-docs/module-builder/field-management#decimal) |
 | **Default Value** | 0 |
 | **Required** | ☐ No |
 | **Enable Audit Tracking** | ✓ Yes |
@@ -545,7 +549,7 @@ Create the following fields in the order listed:
 | **Name** | feeTypeUserKey |
 | **Display Name** | Fee Type User Key |
 | **Description** | Concatenation of fee type and institute name |
-| **Type** | Computed |
+| **Type** | [Computed](../../../admin-docs/module-builder/field-management#computed) |
 | **Computed Value Type** | string |
 | **Value Provider** | ConcatEntityComputedFieldProvider |
 | **Provider Context** | `{"fields": ["feeType", "institute.instituteName"], "separator": "-", "slugify": true}` |
@@ -557,6 +561,10 @@ Create the following fields in the order listed:
 | **Is User Key** | ✓ Yes |
 
 #### 3. Creating the Institute User Model
+
+:::info Why is this a child model?
+The Institute User extends SolidX's built-in User model, inheriting standard fields like email, password, first name, and last name. The child model adds only the fields specific to this application (user type and institute relation). For a deeper look at how child user models work — including overriding user creation logic and backend customization — see [Extending Users](../../../developer-docs/extending/backend-customization/extending-users).
+:::
 
 ##### Model Configuration
 
@@ -584,9 +592,9 @@ Create the following fields in the order listed:
 |-----------|-------|
 | **Name** | userType |
 | **Display Name** | User Type |
-| **Type** | Selection (Static) |
+| **Type** | [Selection (Static)](../../../admin-docs/module-builder/field-management#static-selection) |
 | **Default Value** | Institute Admin |
-| **Selection Values** | Mswipe Admin:Mswipe Admin, Institute Admin:Institute Admin |
+| **Selection Values** | Institute Admin:Institute Admin |
 | **Value Type** | string |
 | **Required** | ✓ Yes |
 | **Enable Audit Tracking** | ✓ Yes |
@@ -598,8 +606,8 @@ Create the following fields in the order listed:
 |-----------|-------|
 | **Name** | institute |
 | **Display Name** | Institute |
-| **Type** | Relation |
-| **Relation Type** | Many-to-One |
+| **Type** | [Relation](../../../admin-docs/module-builder/field-management#relation) |
+| **Relation Type** | [Many-to-One](../../../admin-docs/module-builder/field-management#1-many-to-one) |
 | **Related Model** | institute |
 | **Related Module** | fees-portal |
 | **Create Inverse** | ☐ No |
@@ -607,10 +615,12 @@ Create the following fields in the order listed:
 | **Required** | ☐ No |
 | **Enable Audit Tracking** | ✓ Yes |
 
-:::tip Reference Documentation
-For detailed information about field types and configuration best practices, refer to these common reference documents:
-- 📚 [Field Type Reference](../common/field-types.md) - Complete guide to all available field types
-- ⚙️ [Configuration Notes](../common/configuration-notes.md) - Important guidelines for relations, cascading, audit tracking, and more
+:::tip Quick Reference
+For a handy summary of field types and configuration options used in this tutorial, see:
+- 📚 [Field Type Reference](../common/field-types.md) - Quick-reference table of field types and their key attributes
+- ⚙️ [Configuration Notes](../common/configuration-notes.md) - Quick tips on relations, cascading, audit tracking, and more
+
+For comprehensive documentation, refer to the [Module Builder](../../../admin-docs/module-builder/) section.
 :::
 
 ### Generating APIs and UI Components
@@ -625,7 +635,9 @@ Once you've created the data models, you'll need to generate the REST APIs and U
 
 After generating the code using SolidX, default list and form views are automatically created for each model. However, these default views often need customization to match your specific business requirements and improve user experience. This section explains how to customize these views using the layout JSON configuration.
 
-#### Institute Form View Customizations
+To learn how to apply these customizations, see [Applying View Customizations](../common/applying-view-customizations.md).
+
+#### Institute Form View Customization (Expected Outcome)
 ![Institute Form View](/img/tutorial/school-fees-portal-v2/institute_form_view.png)
 *Screenshot showing the customized Institute Form View with tabs and organized fields.*
 
@@ -645,7 +657,6 @@ The Institute model has 21 fields covering diverse information types. Displaying
 - Reduces cognitive load by grouping related fields
 - Separates sensitive payment information from general details
 - Makes forms easier to navigate and fill out
-- Improves performance by lazy-loading tab content
 
 **2. Two-Column Layout for Related Fields**
 
@@ -845,7 +856,7 @@ Two custom buttons are added to the form:
 
 #### Complete Institute Form Layout JSON
 
-Below is the complete form layout JSON for the Institute model. To apply this layout, replace your institute form layout JSON with the following:
+Below is the complete form layout JSON for the Institute model:
 
 <details>
 <summary>Click to expand the complete JSON layout</summary>
@@ -1358,7 +1369,7 @@ The institute relation is hidden (`visible: false`):
 
 #### Complete Fee Type Form Layout JSON
 
-Below is the complete form layout JSON for the Fee Type model. You can use this to replace the entire form layout in the metadata:
+Below is the complete form layout JSON for the Fee Type model:
 
 <details>
 <summary>Click to expand the complete JSON layout</summary>
@@ -1488,6 +1499,10 @@ The customizations follow these principles:
 6. **Consistency**: Use similar patterns across related forms
 
 These customizations transform the auto-generated UI into a polished, user-friendly interface tailored to the fees portal domain.
+
+:::tip Applying Your Customizations
+Now that you have the customized layout JSONs ready, follow the steps in [Applying View Customizations](../common/applying-view-customizations.md) to apply them via the Layout Builder.
+:::
 
 ### Data Setup
 

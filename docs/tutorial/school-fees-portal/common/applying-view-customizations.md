@@ -1,0 +1,38 @@
+---
+sidebar_position: 5
+title: Applying View Customizations
+description: How to apply customized form and list view layouts using the Layout Builder
+---
+
+## Applying View Customizations
+
+After customizing your form or list view layout JSON, you need to apply it through the Layout Builder. This process is the same for all models — whether you're updating a form view or a list view.
+
+### Steps to Apply a Layout
+
+1. From the sidebar, navigate to **App Builder** under the **Solid Core** module.
+2. Select the **Layout Builder** sub-menu, then click on **View**.
+3. In the search bar, search for your model's view. For example, searching for `institute` will return results like:
+   - `institute-form-view` — the form layout used when creating or editing a record
+   - `institute-list-view` — the list layout used when viewing records in a table
+4. Click on the relevant view entry to open it (e.g., `institute-form-view` for form customizations).
+5. Navigate to the **Layout** tab within the view editor.
+6. Replace or edit the existing layout JSON with your customized layout JSON.
+7. Save the changes.
+
+### Form View vs List View
+
+The steps above apply to both form views and list views — the only difference is which view entry you select:
+
+| View Type | Naming Convention | When to Use |
+|-----------|-------------------|-------------|
+| **Form View** | `<model>-form-view` (e.g., `institute-form-view`) | To customize the create/edit form layout |
+| **List View** | `<model>-list-view` (e.g., `institute-list-view`) | To customize the table/list layout and column configuration |
+
+:::note Important
+The layout JSON structure differs between form views and list views. Each has its own set of supported properties and layout elements. Refer to the **Customizing the UI** section within each tutorial scenario for the specific layout JSON examples and explanations for both form and list views.
+:::
+
+:::tip
+If you've just generated code for a new model, the default form and list views will already exist. You only need to edit them — there's no need to create new view entries.
+:::

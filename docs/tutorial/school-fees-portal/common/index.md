@@ -19,6 +19,9 @@ Essential configuration guidelines for relations, cascading, audit tracking, ind
 ### [Generating APIs and UI Components](./code-generation.md)
 Step-by-step instructions for using SolidX's App Builder to auto-generate REST APIs and UI components from your data models.
 
+### [Applying View Customizations](./applying-view-customizations.md)
+Step-by-step instructions for applying customized form and list view layout JSON through the Layout Builder.
+
 ### [Scheduled Jobs Configuration](./scheduled-jobs.md)
 Comprehensive guide to configuring and managing scheduled jobs in SolidX, including configuration properties, examples, and best practices.
 
