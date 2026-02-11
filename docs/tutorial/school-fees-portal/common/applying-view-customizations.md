@@ -19,6 +19,7 @@ After customizing your form or list view layout JSON, you need to apply it throu
 5. Navigate to the **Layout** tab within the view editor.
 6. Replace or edit the existing layout JSON with your customized layout JSON.
 7. Save the changes.
+8. Navigate to the relevant page in your application (e.g., the create/edit form or the list view) to verify your applied customizations
 
 ### Form View vs List View
 

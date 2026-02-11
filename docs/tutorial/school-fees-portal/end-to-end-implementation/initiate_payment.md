@@ -103,7 +103,7 @@ This section describes the data models you need to implement this feature.
 
 | Field | Required? | Description | Values |
 |-------|-----------|-------------|--------|
-| **Status** | Auto-managed | Current payment status | "Pending", "Partially Paid", "Fully Paid", "Cancelled" |
+| **Status** | Auto-managed | Current payment status | "Pending", "Partially Paid", "Fully Paid" |
 | **Amount Paid** | Computed (Auto-calculated) | Total amount paid so far, calculated from payment collection item details | 5000.00 |
 | **Amount Pending** | Computed (Auto-calculated) | Remaining amount to be paid (total - paid) | 5000.00 |
 
@@ -294,7 +294,7 @@ Create the following fields in the order listed:
 |-----------|-------|
 | **Name** | studentName |
 | **Display Name** | Student Name |
-| **Type** | Short Text |
+| **Type** | [Short Text](../../../admin-docs/module-builder/field-management#short-text) |
 | **Required** | Yes |
 | **Enable Audit Tracking** | Yes |
 
@@ -304,7 +304,7 @@ Create the following fields in the order listed:
 |-----------|-------|
 | **Name** | studentEmailAddress |
 | **Display Name** | Student Email Address |
-| **Type** | Short Text |
+| **Type** | [Short Text](../../../admin-docs/module-builder/field-management#short-text) |
 | **Required** | No |
 | **Enable Audit Tracking** | Yes |
 
@@ -314,7 +314,7 @@ Create the following fields in the order listed:
 |-----------|-------|
 | **Name** | studentMobileNumber |
 | **Display Name** | Student Mobile Number |
-| **Type** | Short Text |
+| **Type** | [Short Text](../../../admin-docs/module-builder/field-management#short-text) |
 | **Required** | No |
 | **Enable Audit Tracking** | Yes |
 
@@ -324,7 +324,7 @@ Create the following fields in the order listed:
 |-----------|-------|
 | **Name** | parentName |
 | **Display Name** | Parent/Guardian Name |
-| **Type** | Short Text |
+| **Type** | [Short Text](../../../admin-docs/module-builder/field-management#short-text) |
 | **Required** | Yes |
 | **Enable Audit Tracking** | Yes |
 
@@ -334,7 +334,7 @@ Create the following fields in the order listed:
 |-----------|-------|
 | **Name** | parentMobileNumber |
 | **Display Name** | Parent/Guardian Mobile Number |
-| **Type** | Short Text |
+| **Type** | [Short Text](../../../admin-docs/module-builder/field-management#short-text) |
 | **Required** | Yes |
 | **Enable Audit Tracking** | Yes |
 
@@ -344,7 +344,7 @@ Create the following fields in the order listed:
 |-----------|-------|
 | **Name** | parentEmailAddress |
 | **Display Name** | Parent/Guardian Email Address |
-| **Type** | Short Text |
+| **Type** | [Short Text](../../../admin-docs/module-builder/field-management#short-text) |
 | **Required** | Yes |
 | **Enable Audit Tracking** | Yes |
 
@@ -354,7 +354,7 @@ Create the following fields in the order listed:
 |-----------|-------|
 | **Name** | studentId |
 | **Display Name** | Student Id |
-| **Type** | Short Text |
+| **Type** | [Short Text](../../../admin-docs/module-builder/field-management#short-text) |
 | **Required** | Yes |
 | **Is User Key** | Yes |
 | **Enable Audit Tracking** | Yes |
@@ -365,7 +365,7 @@ Create the following fields in the order listed:
 |-----------|-------|
 | **Name** | institute |
 | **Display Name** | Institute |
-| **Type** | Relation |
+| **Type** | [Relation](../../../admin-docs/module-builder/field-management#relation) |
 | **Relation Type** | [Many-to-One](../../../admin-docs/module-builder/field-management#1-many-to-one) |
 | **Related Model** | institute |
 | **Related Module** | fees-portal |
@@ -382,7 +382,7 @@ Create the following fields in the order listed:
 | **Name** | studentLoginId |
 | **Display Name** | Student Login Id |
 | **Description** | This is the unique login id for the student. This is used to login to the student portal. |
-| **Type** | Computed |
+| **Type** | [Computed](../../../admin-docs/module-builder/field-management#computed) |
 | **Computed Field Value Type** | String |
 | **Computed Field Value Provider** | AlphaNumExternalIdComputationProvider |
 | **Computed Field Value Provider Context** | `{"dynamicFieldPrefix": "studentName", "length": 5}` |
@@ -400,7 +400,7 @@ Create the following fields in the order listed:
 |-----------|-------|
 | **Name** | otp |
 | **Display Name** | OTP |
-| **Type** | Short Text |
+| **Type** | [Short Text](../../../admin-docs/module-builder/field-management#short-text) |
 | **Required** | No |
 
 **Field 11: OTP Expires At**
@@ -409,7 +409,7 @@ Create the following fields in the order listed:
 |-----------|-------|
 | **Name** | otpExpiresAt |
 | **Display Name** | OTP Expires At |
-| **Type** | Datetime |
+| **Type** | [Datetime](../../../admin-docs/module-builder/field-management#datetime) |
 | **Required** | No |
 
 **Field 12: Token**
@@ -418,7 +418,7 @@ Create the following fields in the order listed:
 |-----------|-------|
 | **Name** | token |
 | **Display Name** | Token |
-| **Type** | Long Text |
+| **Type** | [Long Text](../../../admin-docs/module-builder/field-management#long-text) |
 | **Required** | No |
 
 **Field 13: Payments Relation**
@@ -427,7 +427,7 @@ Create the following fields in the order listed:
 |-----------|-------|
 | **Name** | payments |
 | **Display Name** | Payments |
-| **Type** | Relation |
+| **Type** | [Relation](../../../admin-docs/module-builder/field-management#relation) |
 | **Relation Type** | [One-to-Many](../../../admin-docs/module-builder/field-management#3-one-to-many) |
 | **Related Model** | payment |
 | **Related Module** | fees-portal |
@@ -463,7 +463,7 @@ Create the following fields in the order listed:
 |-----------|-------|
 | **Name** | name |
 | **Display Name** | Name |
-| **Type** | Short Text |
+| **Type** | [Short Text](../../../admin-docs/module-builder/field-management#short-text) |
 | **Required** | Yes |
 | **Index** | Yes |
 | **Is User Key** | Yes |
@@ -475,7 +475,7 @@ Create the following fields in the order listed:
 |-----------|-------|
 | **Name** | description |
 | **Display Name** | Description |
-| **Type** | Long Text |
+| **Type** | [Long Text](../../../admin-docs/module-builder/field-management#long-text) |
 | **Required** | No |
 
 **Field 3: Due Date**
@@ -484,7 +484,7 @@ Create the following fields in the order listed:
 |-----------|-------|
 | **Name** | dueDate |
 | **Display Name** | Due Date |
-| **Type** | Datetime |
+| **Type** | [Datetime](../../../admin-docs/module-builder/field-management#datetime) |
 | **Required** | Yes |
 | **Enable Audit Tracking** | Yes |
 
@@ -494,7 +494,7 @@ Create the following fields in the order listed:
 |-----------|-------|
 | **Name** | paymentCollectionId |
 | **Display Name** | Payment Collection ID |
-| **Type** | Computed |
+| **Type** | [Computed](../../../admin-docs/module-builder/field-management#computed) |
 | **Computed Field Value Type** | String |
 | **Computed Field Value Provider** | AlphaNumExternalIdComputationProvider |
 | **Computed Field Value Provider Context** | `{"dynamicFieldPrefix": "name", "length": 5}` |
@@ -512,7 +512,7 @@ Create the following fields in the order listed:
 |-----------|-------|
 | **Name** | institute |
 | **Display Name** | Institute |
-| **Type** | Relation |
+| **Type** | [Relation](../../../admin-docs/module-builder/field-management#relation) |
 | **Relation Type** | [Many-to-One](../../../admin-docs/module-builder/field-management#1-many-to-one) |
 | **Related Model** | institute |
 | **Related Module** | fees-portal |
@@ -529,7 +529,7 @@ Create the following fields in the order listed:
 | **Name** | paymentFile |
 | **Display Name** | Payment File |
 | **Description** | The payment file that is uploaded by the institute admin |
-| **Type** | Media (Single) |
+| **Type** | [Media (Single)](../../../admin-docs/module-builder/field-management#single-media) |
 | **Media Types** | file |
 | **Media Max Size (KB)** | 5120 |
 | **Required** | Yes |
@@ -541,7 +541,7 @@ Create the following fields in the order listed:
 |-----------|-------|
 | **Name** | paymentCollectionItems |
 | **Display Name** | Payment Collection Items |
-| **Type** | Relation |
+| **Type** | [Relation](../../../admin-docs/module-builder/field-management#relation) |
 | **Relation Type** | [One-to-Many](../../../admin-docs/module-builder/field-management#3-one-to-many) |
 | **Related Model** | paymentCollectionItem |
 | **Related Module** | fees-portal |
@@ -577,7 +577,7 @@ Create the following fields in the order listed:
 |-----------|-------|
 | **Name** | dueDate |
 | **Display Name** | Due Date |
-| **Type** | Datetime |
+| **Type** | [Datetime](../../../admin-docs/module-builder/field-management#datetime) |
 | **Required** | Yes |
 | **Enable Audit Tracking** | Yes |
 
@@ -587,7 +587,7 @@ Create the following fields in the order listed:
 |-----------|-------|
 | **Name** | partPaymentAllowed |
 | **Display Name** | Part Payment Allowed |
-| **Type** | Boolean |
+| **Type** | [Boolean](../../../admin-docs/module-builder/field-management#boolean) |
 | **Default Value** | false |
 | **Required** | Yes |
 | **Enable Audit Tracking** | Yes |
@@ -598,7 +598,7 @@ Create the following fields in the order listed:
 |-----------|-------|
 | **Name** | status |
 | **Display Name** | Status |
-| **Type** | Short Text |
+| **Type** | [Short Text](../../../admin-docs/module-builder/field-management#short-text) |
 | **Default Value** | Pending |
 | **Required** | Yes |
 | **Index** | Yes |
@@ -610,7 +610,7 @@ Create the following fields in the order listed:
 |-----------|-------|
 | **Name** | amountPaid |
 | **Display Name** | Amount Paid |
-| **Type** | Computed |
+| **Type** | [Computed](../../../admin-docs/module-builder/field-management#computed) |
 | **Computed Field Value Type** | Decimal |
 | **Computed Field Value Provider** | PaymentCollectionItemAmountProvider |
 | **Computed Field Value Provider Context** | `{}` |
@@ -626,7 +626,7 @@ Create the following fields in the order listed:
 |-----------|-------|
 | **Name** | amountPending |
 | **Display Name** | Amount Pending |
-| **Type** | Computed |
+| **Type** | [Computed](../../../admin-docs/module-builder/field-management#computed) |
 | **Computed Field Value Type** | Decimal |
 | **Computed Field Value Provider** | NoopsEntityComputedFieldProviderService |
 | **Computed Field Value Provider Context** | `{}` |
@@ -642,7 +642,7 @@ Create the following fields in the order listed:
 |-----------|-------|
 | **Name** | isOverdue |
 | **Display Name** | Is Overdue |
-| **Type** | Boolean |
+| **Type** | [Boolean](../../../admin-docs/module-builder/field-management#boolean) |
 | **Default Value** | false |
 | **Required** | Yes |
 | **Enable Audit Tracking** | Yes |
@@ -653,7 +653,7 @@ Create the following fields in the order listed:
 |-----------|-------|
 | **Name** | overdueByDays |
 | **Display Name** | Overdue By Days |
-| **Type** | Integer |
+| **Type** | [Integer](../../../admin-docs/module-builder/field-management#integer) |
 | **Required** | No |
 | **Enable Audit Tracking** | Yes |
 
@@ -663,7 +663,7 @@ Create the following fields in the order listed:
 |-----------|-------|
 | **Name** | lateAmountToBePaid |
 | **Display Name** | Late Amount To Be Paid |
-| **Type** | Decimal |
+| **Type** | [Decimal](../../../admin-docs/module-builder/field-management#decimal) |
 | **Default Value** | 0 |
 | **Required** | No |
 | **Enable Audit Tracking** | Yes |
@@ -674,7 +674,7 @@ Create the following fields in the order listed:
 |-----------|-------|
 | **Name** | totalAmountToBePaid |
 | **Display Name** | Total Amount To Be Paid |
-| **Type** | Computed |
+| **Type** | [Computed](../../../admin-docs/module-builder/field-management#computed) |
 | **Computed Field Value Type** | Decimal |
 | **Computed Field Value Provider** | NoopsEntityComputedFieldProviderService |
 | **Computed Field Value Provider Context** | `{}` |
@@ -690,7 +690,7 @@ Create the following fields in the order listed:
 |-----------|-------|
 | **Name** | amountToBePaid |
 | **Display Name** | Amount To Be Paid |
-| **Type** | Decimal |
+| **Type** | [Decimal](../../../admin-docs/module-builder/field-management#decimal) |
 | **Required** | Yes |
 | **Enable Audit Tracking** | Yes |
 
@@ -701,7 +701,7 @@ Create the following fields in the order listed:
 | **Name** | mode |
 | **Display Name** | Mode |
 | **Description** | Mode of payment. Can be CASH or PG (Payment Gateway) |
-| **Type** | Short Text |
+| **Type** | [Short Text](../../../admin-docs/module-builder/field-management#short-text) |
 | **Required** | Yes |
 | **Enable Audit Tracking** | Yes |
 
@@ -711,7 +711,7 @@ Create the following fields in the order listed:
 |-----------|-------|
 | **Name** | student |
 | **Display Name** | Student |
-| **Type** | Relation |
+| **Type** | [Relation](../../../admin-docs/module-builder/field-management#relation) |
 | **Relation Type** | [Many-to-One](../../../admin-docs/module-builder/field-management#1-many-to-one) |
 | **Related Model** | student |
 | **Related Module** | fees-portal |
@@ -727,7 +727,7 @@ Create the following fields in the order listed:
 |-----------|-------|
 | **Name** | paymentCollection |
 | **Display Name** | Payment Collection |
-| **Type** | Relation |
+| **Type** | [Relation](../../../admin-docs/module-builder/field-management#relation) |
 | **Relation Type** | [Many-to-One](../../../admin-docs/module-builder/field-management#1-many-to-one) |
 | **Related Model** | paymentCollection |
 | **Related Module** | fees-portal |
@@ -744,7 +744,7 @@ Create the following fields in the order listed:
 |-----------|-------|
 | **Name** | institute |
 | **Display Name** | Institute |
-| **Type** | Relation |
+| **Type** | [Relation](../../../admin-docs/module-builder/field-management#relation) |
 | **Relation Type** | [Many-to-One](../../../admin-docs/module-builder/field-management#1-many-to-one) |
 | **Related Model** | institute |
 | **Related Module** | fees-portal |
@@ -760,7 +760,7 @@ Create the following fields in the order listed:
 |-----------|-------|
 | **Name** | feeType |
 | **Display Name** | Fee Type |
-| **Type** | Relation |
+| **Type** | [Relation](../../../admin-docs/module-builder/field-management#relation) |
 | **Relation Type** | [Many-to-One](../../../admin-docs/module-builder/field-management#1-many-to-one) |
 | **Related Model** | feeType |
 | **Related Module** | fees-portal |
@@ -776,7 +776,7 @@ Create the following fields in the order listed:
 |-----------|-------|
 | **Name** | paymentCollectionItemDetails |
 | **Display Name** | Payment Collection Item Details |
-| **Type** | Relation |
+| **Type** | [Relation](../../../admin-docs/module-builder/field-management#relation) |
 | **Relation Type** | [One-to-Many](../../../admin-docs/module-builder/field-management#3-one-to-many) |
 | **Related Model** | paymentCollectionItemDetail |
 | **Related Module** | fees-portal |
@@ -812,7 +812,7 @@ Create the following fields in the order listed:
 |-----------|-------|
 | **Name** | paymentDate |
 | **Display Name** | Payment Date |
-| **Type** | Datetime |
+| **Type** | [Datetime](../../../admin-docs/module-builder/field-management#datetime) |
 | **Required** | Yes |
 | **Enable Audit Tracking** | Yes |
 
@@ -822,7 +822,7 @@ Create the following fields in the order listed:
 |-----------|-------|
 | **Name** | paymentStatus |
 | **Display Name** | Payment Status |
-| **Type** | Short Text |
+| **Type** | [Short Text](../../../admin-docs/module-builder/field-management#short-text) |
 | **Default Value** | Pending |
 | **Required** | Yes |
 | **Enable Audit Tracking** | Yes |
@@ -833,7 +833,7 @@ Create the following fields in the order listed:
 |-----------|-------|
 | **Name** | amountPaid |
 | **Display Name** | Amount Paid |
-| **Type** | Decimal |
+| **Type** | [Decimal](../../../admin-docs/module-builder/field-management#decimal) |
 | **Required** | Yes |
 | **Enable Audit Tracking** | Yes |
 
@@ -843,7 +843,7 @@ Create the following fields in the order listed:
 |-----------|-------|
 | **Name** | institute |
 | **Display Name** | Institute |
-| **Type** | Relation |
+| **Type** | [Relation](../../../admin-docs/module-builder/field-management#relation) |
 | **Relation Type** | [Many-to-One](../../../admin-docs/module-builder/field-management#1-many-to-one) |
 | **Related Model** | institute |
 | **Related Module** | fees-portal |
@@ -859,7 +859,7 @@ Create the following fields in the order listed:
 |-----------|-------|
 | **Name** | student |
 | **Display Name** | Student |
-| **Type** | Relation |
+| **Type** | [Relation](../../../admin-docs/module-builder/field-management#relation) |
 | **Relation Type** | [Many-to-One](../../../admin-docs/module-builder/field-management#1-many-to-one) |
 | **Related Model** | student |
 | **Related Module** | fees-portal |
@@ -875,7 +875,7 @@ Create the following fields in the order listed:
 |-----------|-------|
 | **Name** | paymentCollectionItem |
 | **Display Name** | Payment Collection Item |
-| **Type** | Relation |
+| **Type** | [Relation](../../../admin-docs/module-builder/field-management#relation) |
 | **Relation Type** | [Many-to-One](../../../admin-docs/module-builder/field-management#1-many-to-one) |
 | **Related Model** | paymentCollectionItem |
 | **Related Module** | fees-portal |
@@ -892,7 +892,7 @@ Create the following fields in the order listed:
 |-----------|-------|
 | **Name** | payment |
 | **Display Name** | Payment |
-| **Type** | Relation |
+| **Type** | [Relation](../../../admin-docs/module-builder/field-management#relation) |
 | **Relation Type** | [Many-to-One](../../../admin-docs/module-builder/field-management#1-many-to-one) |
 | **Related Model** | payment |
 | **Related Module** | fees-portal |
@@ -935,7 +935,7 @@ Before processing the uploaded Excel file, validation ensures data quality and p
    - Reads the uploaded Excel file using the ExcelService's `readExcelFromStreamNonStreaming()` method
    - Identifies header row and extracts column names
    - Known columns: Student Name, Student Id, Parent/Guardian Name/Email/Mobile, Payment Mode
-   - Fee type columns: Any column not in known fields and not containing "Due Date"
+   - Fee type columns: Any column not in Known Columns and not containing "Due Date" or Payment Mode is treated as a fee type column
 
 2. **Fee Type Validation**
    - Extracts unique fee types from Excel headers
@@ -1086,7 +1086,7 @@ To help users format their Excel correctly, SolidX provides template generation.
 |-------------|-----------|---------------------|----------------------|----------------------|--------------------|--------------------|----------------|-----------------|--------------|
 | Rahul Sharma | STU001 | Mr. Rajesh Sharma | rajesh@example.com | 9123456789 | 10000 | 2024-04-30 | 3000 | 2024-04-30 | PG |
 
-#### 3. Background Processing with Event Subscriber
+#### 3. File Processing with TypeORM Event Subscriber
 
 The core processing logic uses TypeORM's Event Subscriber pattern to automatically process Excel files after upload.
 
@@ -1252,7 +1252,7 @@ async processRow(
 - Student uniqueness is determined by: Student ID + Institute
 - Updates overwrite existing data (name, parent info, contact details)
 - Student Login ID is generated separately (not from Excel)
-- Institute is always set from logged-in user's context
+- Institute is always set from logged-in user's context i.e (pre-populated on the frontend depending on the institute the Institute Admin belongs to)
 - The ExcelService's `readExcelFromStreamNonStreaming()` returns rows as objects with column headers as keys, making data access simpler and more readable
 
 #### 5. Payment Collection Item Creation
@@ -1703,7 +1703,6 @@ export function paymentCollectionOnFormLoadHandler(formContext) {
 **Benefits:**
 - Single handler for all form initialization logic
 - Reduces data entry for Institute Admins
-- Prevents accidental cross-institute data creation
 - Maintains data integrity
 - Follows current best practices
 
@@ -1919,7 +1918,7 @@ The list view shows essential information for managing collections:
 
 **Benefits:**
 - Institute Admins can create and edit collections
-- Only Platform Admins can delete collections (data integrity)
+- Only Super Admin can delete collections (data integrity)
 - Import disabled (use Excel upload instead)
 - Export enabled for reporting
 
@@ -2001,12 +2000,12 @@ Column visibility is controlled by adding a `roles` key to individual field conf
 **Key Points:**
 - Add the `roles` property inside the field's `attrs` object
 - The `roles` array specifies which user roles can see this column
-- Only users with "Admin" role will see the institute column
+- Only users with "Admin" role will see the institute column i.e Super Admin, since Super Admin is implicitly given "Admin" role in the system
 - Institute Admins (without "Admin" role) will not see this column
 - If `roles` is not specified, the column is visible to all users
 
 **Benefits:**
-- Platform Admins see institute column (multi-institute view)
+- Super Admin sees institute column (multi-institute view)
 - Institute Admins don't see institute column (single institute context)
 - Cleaner, role-appropriate interface for each user type
 
@@ -2240,12 +2239,12 @@ Choose a clear, descriptive name for this batch:
 
 - Click on "Fees Portal" module in the sidebar
 - Select "Payment Collections" from the menu
-- Click "Create New" button
+- Click on the "Add" button
 
 **Step 6: Download Excel Template**
 
-- In the form, locate the "Download Template" section at the top
-- Click "Download Template" button
+- In the form, locate the "Download Sample Excel" section at the top
+- Click "Download Sample Excel" button
 - Save the Excel file to your computer
 
 **The template will contain:**
@@ -2446,16 +2445,6 @@ Periodically reconcile payment records:
 - Investigate any discrepancies
 - Update records if needed
 
-#### Common Tasks Quick Reference
-
-| Task | Steps |
-|------|-------|
-| **Create payment collection for all students** | Phase 1 → Phase 2 → Phase 3 |
-| **Add payment collection for specific students** | Create new collection with subset of students in Excel |
-| **Check payment status for a student** | Payment Collection Items → Filter by Student Name |
-| **View overdue payments** | Payment Collection Items → Filter by "Is Overdue = true" |
-| **Download payment report** | Payment Collection Items → Apply filters → Export |
-
 #### Troubleshooting Guide
 
 | Issue | Possible Cause | Solution |
@@ -2468,16 +2457,6 @@ Periodically reconcile payment records:
 | **Payment link doesn't work** | Student Login ID not generated | Check Student record for studentLoginId field |
 | **Status not updating** | Payment gateway webhook not configured | Contact technical team to verify webhook setup |
 | **Late fees not calculated** | Scheduled job not running | Contact technical team to verify job configuration |
-
-:::tip Best Practices
-1. **Start small**: For your first collection, upload 5-10 students to test the workflow
-2. **Consistent Student IDs**: Always use the same Student ID format across all collections
-3. **Regular monitoring**: Check payment status at least weekly
-4. **Timely reminders**: Don't wait too long to follow up on pending payments
-5. **Clear communication**: Send reminder to parents a week before due date
-6. **Documentation**: Keep a copy of each uploaded Excel file for your records
-7. **Reconciliation**: Match payment records with your accounting system regularly
-:::
 
 #### Success Criteria
 

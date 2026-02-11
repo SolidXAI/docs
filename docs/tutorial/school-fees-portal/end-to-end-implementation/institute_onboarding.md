@@ -1506,30 +1506,24 @@ Now that you have the customized layout JSONs ready, follow the steps in [Applyi
 
 ### Data Setup
 
-Follow this order when implementing this feature:
+Follow this order to set up your data and test if the portal is ready for use:
 
-#### Phase 1: Login As Platform Admin 
+#### Phase 1: Login As Super Admin 
 
 **Step 1: Login**
-- Log in to the SolidX platform using Platform Admin credentials
+- Log in to the SolidX platform using Super Admin credentials i.e (`sa` credentials, created during the initial application setup).
 
 **Step 2: Create the Institution**
 - Enter basic details (name, address, contact info)
 - Upload your logo
 - Enter payment gateway credentials (from your provider)
 - Choose a unique subdomain prefix for your payment page
-- Your portal will start in "InActive" status
 
 **Step 3: Create Institute Admin Users**
 - Add staff members who will manage the portal
 - Set their role as "Institute Admin"
 - Link them to the institution created in Step 2
 - Note the login credentials for these users
-
-**Step 4: Activate the Institute**
-- Access the Institute from the Institute listing page
-- Change the status from "InActive" to "Active"
-- The institution portal is now ready for configuration
 
 #### Phase 2: Login As Institute Admin
 
