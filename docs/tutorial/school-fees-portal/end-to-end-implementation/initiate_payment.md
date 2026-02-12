@@ -2445,7 +2445,7 @@ Periodically reconcile payment records:
 - Investigate any discrepancies
 - Update records if needed
 
-#### Troubleshooting Guide
+### Troubleshooting Reference
 
 | Issue | Possible Cause | Solution |
 |-------|---------------|----------|
@@ -2458,7 +2458,7 @@ Periodically reconcile payment records:
 | **Status not updating** | Payment gateway webhook not configured | Contact technical team to verify webhook setup |
 | **Late fees not calculated** | Scheduled job not running | Contact technical team to verify job configuration |
 
-#### Success Criteria
+### Success Criteria
 
 You've successfully initiated a payment collection when:
 

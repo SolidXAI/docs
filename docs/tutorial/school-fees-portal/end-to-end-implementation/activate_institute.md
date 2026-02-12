@@ -7,6 +7,10 @@ keywords: [institute activation, portal deployment, DNS configuration, multi-ten
 concerns: Infrastructure provisioning, domain management, activation workflow
 ---
 
+:::warning[Platform Requirement]
+The activation functionality requires a Unix-based operating system (e.g., Ubuntu, macOS). It is not supported on Windows as it depends on Nginx site management via `/etc/nginx/` and DNS configuration via `/etc/hosts`.
+:::
+
 ### Overview
 
 The Activate Institute functionality provisions the infrastructure needed to make an institute's fee portal accessible to students and parents. This feature automates the creation of DNS records and web server configurations, transforming an inactive institute into a live, operational fee collection portal.
@@ -17,13 +21,13 @@ The Activate Institute functionality provisions the infrastructure needed to mak
 - Automated DNS record management (CNAME creation)
 - Status-based UI controls (activate/deactivate toggle)
 - Audit trail of all activation/deactivation events
-- Role-based access control (Platform Admin only)
+- Role-based access control (Institute Admin only)
 - Confirmation dialogs to prevent accidental changes
 - Support for both production (Route53) and local (hosts file) DNS management
 
 ### Roles Involved
 
-- **Platform Admin**: Can activate and deactivate institute portals
+- **Institute Admin**: Can activate and deactivate institute portals
 
 You can refer to the [User Roles & Responsibilities](../fees_portal_product_overview/#user-roles--responsibilities) in the Product Overview for more details on this role.
 
@@ -31,7 +35,7 @@ You can refer to the [User Roles & Responsibilities](../fees_portal_product_over
 
 Activation is a multi-step infrastructure provisioning process that:
 
-1. **Creates a Subdomain**: Constructs a unique domain name for the institute (e.g., `stmary.sub-domain.edu`)
+1. **Creates a Subdomain**: Constructs a unique domain name for the institute (e.g., `delhi.dpsschools.edu.in`)
 2. **Configures Web Server**: Creates and enables an Nginx virtual host to serve the portal
 3. **Sets Up DNS**: Creates a DNS CNAME record pointing to the portal infrastructure
 4. **Updates Status**: Changes the institute's status from "InActive" to "Active"
@@ -52,8 +56,8 @@ This section describes the data model used for institute activation.
 | Field | Required? | Description | Example |
 |-------|-----------|-------------|---------|
 | **Status** | Yes (Default: "InActive") | Current activation state of the portal | "InActive", "Active" |
-| **Hosted Page Prefix** | Yes | Unique subdomain prefix for the institute's portal | "stmary", "dps-bangalore" |
-| **Support Email** | Yes | Email address for portal support inquiries | "support@stmaryschool.edu" |
+| **Hosted Page Prefix** | Yes | Unique subdomain prefix for the institute's portal | "delhi", "mumbai" |
+| **Support Email** | Yes | Email address for portal support inquiries | "support@dpsschools.edu.in" |
 | **Support Mobile** | Yes | Phone number for portal support | "9123456789" |
 | **Payment Gateway Merchant ID** | Yes | Merchant identifier for payment processing | "MERCHANT_001" |
 | **Payment Gateway Access Key** | Yes | API key for payment gateway | "ak_live_xxxxx" |
@@ -71,13 +75,13 @@ The `status` field is the state machine that controls the activation lifecycle:
 ```
 New Institute Creation → Status: "InActive"
                               ↓
-                    Platform Admin clicks "Activate"
+                    Institute Admin clicks "Activate"
                               ↓
                     Infrastructure Provisioning
                               ↓
                          Status: "Active"
                               ↓
-                    Platform Admin clicks "Deactivate"
+                    Institute Admin clicks "Deactivate"
                               ↓
                     Infrastructure Removal
                               ↓
@@ -92,9 +96,8 @@ The portal domain is automatically constructed as:
 ```
 
 **Examples:**
-- Hosted Page Prefix: `"stmary"` → Domain: `stmary.solidx.edu`
-- Hosted Page Prefix: `"dps-bangalore"` → Domain: `dps-bangalore.solidx.edu`
-- Hosted Page Prefix: `"kendriya-vidyalaya"` → Domain: `kendriya-vidyalaya.solidx.edu`
+- Hosted Page Prefix: `"delhi"` → Domain: `delhi.dpsschools.edu.in`
+- Hosted Page Prefix: `"navi-mumbai"` → Domain: `navi-mumbai.dpsschools.edu.in`
 
 **Important:** The `hostedPagePrefix` must be:
 - Unique across all institutes in the system
@@ -122,17 +125,17 @@ The following environment variables must be configured on the server:
 
 | Variable | Required | Description | Example |
 |----------|----------|-------------|---------|
-| **EDU_BASE_DOMAIN** | No (has default) | Base domain for all institute portals | `"solidx.edu"` |
-| **PORTAL_CNAME_DOMAIN** | Yes | CNAME target for DNS records | `"portal.solidx.edu"` |
+| **EDU_BASE_DOMAIN** | No (has default) | Base domain for all institute portals | `"dpsschools.edu.in"` |
+| **PORTAL_CNAME_DOMAIN** | Yes | CNAME target for DNS records | `"portal.dpsschools.edu.in"` |
 | **DNS_PROVIDER** | No (defaults to "hosts") | DNS management provider | `"route53"` or `"hosts"` |
 | **EDU_FRONTEND_UPSTREAM** | No (has default) | Upstream server for Nginx proxy | `"http://127.0.0.1:3002"` |
 
-**For Route53 DNS Provider (Production):**
+**For Live/Production Domains:**
 - [ ] AWS credentials configured (IAM role or environment variables)
 - [ ] Route53 hosted zone ID available
 - [ ] Route53 hosted zone matches `EDU_BASE_DOMAIN`
 
-**For Hosts File DNS Provider (Local Development):**
+**For Local Testing (No Real Domain):**
 - [ ] Application has sudo/root privileges to modify `/etc/hosts`
 - [ ] `/etc/hosts` file is writable
 
@@ -142,17 +145,18 @@ The following environment variables must be configured on the server:
 - [ ] Application has permissions to create files in `/etc/nginx/sites-available/`
 - [ ] Application has permissions to create symlinks in `/etc/nginx/sites-enabled/`
 - [ ] Application can reload Nginx (`systemctl reload nginx`)
-- [ ] Ports 80 and 443 are not blocked by firewall
+- [ ] Port 80 is not blocked by firewall
+- [ ] Port 443 is not blocked by firewall (only required if HTTPS/SSL is configured; the default activation creates HTTP-only virtual hosts)
 
 ### Activation Workflow
 
-This section provides a step-by-step guide for Platform Admins to activate an institute portal.
+This section provides a step-by-step guide for Institute Admins to activate an institute portal.
 
 #### Phase 1: Pre-Activation Verification
 
 **Step 1: Navigate to Institute Record**
 
-- Login to the Fees Portal admin interface with Platform Admin credentials
+- Login to the Fees Portal admin interface with Institute Admin credentials
 - Navigate to "Fees Portal" module in the sidebar
 - Select "Institutes" from the menu
 - Find the institute you want to activate
@@ -169,8 +173,8 @@ Check that all required fields are configured:
 
 **Portal Configuration:**
 - Hosted Page Prefix: Filled with a unique, valid identifier
-  - Good examples: `"stmary"`, `"dps-bangalore"`, `"greenwood-school"`
-  - Bad examples: `"st.mary"` (no dots), `"St Mary"` (no spaces), `"school@1"` (no special chars)
+  - Good examples: `"delhi"`, `"mumbai"`, `"greenwood-school"`
+  - Bad examples: `"delhi.branch"` (no dots), `"Delhi Branch"` (no spaces), `"school@1"` (no special chars)
 
 **Payment Gateway:**
 - Payment Gateway Merchant ID: Configured
@@ -190,7 +194,7 @@ The portal will be accessible at:
 
 Write down this domain - you'll verify it's accessible after activation.
 
-Example: If `hostedPagePrefix` is `"stmary"` and `EDU_BASE_DOMAIN` is `"solidx.edu"`, the portal will be at `stmary.solidx.edu`
+Example: If `hostedPagePrefix` is `"delhi"` and `EDU_BASE_DOMAIN` is `"dpsschools.edu.in"`, the portal will be at `delhi.dpsschools.edu.in`
 
 #### Phase 2: Activate the Institute
 
@@ -224,7 +228,7 @@ After clicking "Ok", the system will:
 
 1. **Construct Domain Name**
    - Combines `hostedPagePrefix` with base domain
-   - Example: `stmary.solidx.edu`
+   - Example: `delhi.dpsschools.edu.in`
 
 2. **Create Nginx Virtual Host**
    - Creates configuration file: `/etc/nginx/sites-available/{domain}.conf`
@@ -294,7 +298,7 @@ On failure:
 - Open `/etc/hosts` file
 - Look for an entry like:
   ```
-  127.0.0.1  stmary.solidx.edu # solidx-dns
+  127.0.0.1  delhi.dpsschools.edu.in # solidx-dns
   ```
 - Verify the domain is mapped to the correct IP
 
@@ -319,19 +323,9 @@ sudo systemctl status nginx
 All commands should succeed without errors.
 
 **Step 12: Test Portal Access**
-
-**Method 1: Browser Test**
 - Open a web browser
-- Navigate to `http://{domain}` (e.g., `http://stmary.solidx.edu`)
+- Navigate to `http://{domain}` (e.g., `http://delhi.dpsschools.edu.in`)
 - The student portal should load
-- You should see the institute's fee payment interface
-
-**Method 2: Curl Test**
-```bash
-curl -I http://{domain}
-```
-- Should return `HTTP/1.1 200 OK` or `HTTP/1.1 302 Found`
-- Should not return `404 Not Found` or connection errors
 
 **Expected Result:**
 - Portal loads successfully
@@ -339,134 +333,7 @@ curl -I http://{domain}
 - Institute branding appears correct
 - No error messages visible
 
-**Step 13: Notify Institute Admin**
-
-Once activation is verified:
-- Contact the Institute Admin via email or phone
-- Provide the live portal URL
-- Share any login credentials or setup instructions
-- Confirm they can access the admin panel
-
-#### Phase 4: Troubleshooting Failed Activation
-
-If activation fails or portal is not accessible:
-
-**Issue: "Failed to activate institute" Error**
-
-**Possible Causes:**
-1. Missing `PORTAL_CNAME_DOMAIN` environment variable
-2. DNS provider configuration error
-3. Nginx reload failure
-4. Insufficient server permissions
-
-**Solutions:**
-1. Check environment variables on server:
-   ```bash
-   echo $PORTAL_CNAME_DOMAIN
-   ```
-   - Should return a valid domain
-   - If empty, set in `.env` file or server configuration
-
-2. Check DNS provider configuration:
-   ```bash
-   # For Route53
-   aws route53 list-hosted-zones
-   # Verify hosted zone exists
-
-   # For hosts file
-   ls -la /etc/hosts
-   # Verify file is writable
-   ```
-
-3. Check Nginx status:
-   ```bash
-   sudo nginx -t
-   sudo systemctl status nginx
-   sudo journalctl -u nginx -n 50
-   ```
-   - Look for syntax errors or reload failures
-
-4. Check application logs:
-   ```bash
-   # API logs
-   pm2 logs solid-api
-   # Or check log files
-   tail -f /path/to/api/logs/error.log
-   ```
-
-**Issue: Portal Returns 404 Not Found**
-
-**Possible Causes:**
-1. Nginx configuration not created
-2. Nginx not reloaded after configuration
-3. Virtual host not enabled (symlink missing)
-
-**Solutions:**
-1. Verify configuration file exists:
-   ```bash
-   cat /etc/nginx/sites-available/{domain}.conf
-   ```
-
-2. Verify symlink exists:
-   ```bash
-   ls -la /etc/nginx/sites-enabled/ | grep {domain}
-   ```
-
-3. Manually reload Nginx:
-   ```bash
-   sudo systemctl reload nginx
-   ```
-
-**Issue: DNS Not Resolving**
-
-**Possible Causes:**
-1. DNS record not created
-2. DNS propagation delay (Route53)
-3. Wrong hosted zone (Route53)
-4. Hosts file not updated (local)
-
-**Solutions:**
-1. For Route53, check record exists:
-   ```bash
-   aws route53 list-resource-record-sets --hosted-zone-id {zone-id}
-   ```
-
-2. For hosts file, check entry:
-   ```bash
-   cat /etc/hosts | grep {domain}
-   ```
-
-3. Wait 10-15 minutes for DNS propagation (production)
-
-4. Flush DNS cache on client:
-   ```bash
-   # macOS
-   sudo dscacheutil -flushcache
-
-   # Windows
-   ipconfig /flushdns
-
-   # Linux
-   sudo systemd-resolve --flush-caches
-   ```
-
-**Issue: Portal Loads But Shows Wrong Institute**
-
-**Possible Causes:**
-1. Nginx upstream configuration pointing to wrong instance
-2. Frontend routing not matching domain to institute
-
-**Solutions:**
-1. Verify Nginx proxy configuration:
-   ```bash
-   cat /etc/nginx/sites-available/{domain}.conf
-   ```
-   - Check `proxy_pass` directive
-   - Should point to `EDU_FRONTEND_UPSTREAM`
-
-2. Check frontend routing logic in application code
-
-3. Verify `hostedPagePrefix` uniqueness in database
+If activation fails or the portal is not accessible, see the [Troubleshooting Reference](#troubleshooting-reference) section for common issues and solutions.
 
 ### Deactivating an Institute
 
@@ -526,7 +393,7 @@ async activateInstitutePortal(id: number) {
   const institute = await this.findOne(id, {});
 
   // 2. Construct domain name
-  const baseDoamin = process.env.EDU_BASE_DOMAIN || 'solidx.edu';
+  const baseDoamin = process.env.EDU_BASE_DOMAIN || 'dpsschools.edu.in';
   const domainName = `${institute.hostedPagePrefix}-${baseDoamin}`;
 
   // 3. Create Nginx virtual host
@@ -569,7 +436,7 @@ Institute is now live on domain: <a href="${domainName}" target="_blank" rel="no
 ```typescript
 async deActivateInstitutePortal(id: number) {
   const institute = await this.findOne(id, {});
-  const baseDoamin = process.env.EDU_BASE_DOMAIN || 'solidx.edu';
+  const baseDoamin = process.env.EDU_BASE_DOMAIN || 'dpsschools.edu.in';
   const domainName = `${institute.hostedPagePrefix}-${baseDoamin}`;
 
   // 1. Remove Nginx virtual host
@@ -714,7 +581,7 @@ server {
 1. Constructs Route53 API request:
    - Action: UPSERT (create or update)
    - Type: CNAME
-   - Name: `{name}` (e.g., `stmary.solidx.edu`)
+   - Name: `{name}` (e.g., `delhi.dpsschools.edu.in`)
    - Value: `{value}` (PORTAL_CNAME_DOMAIN)
    - TTL: `{ttl}` seconds (default: 300)
 2. Calls Route53 API: `changeResourceRecordSets`
@@ -770,22 +637,35 @@ server {
 
 **File:** `solid-api/src/fees-portal/fees-portal.module.ts`
 
+The DNS provider is selected via a factory provider that should be added to the `providers` array in the module:
+
 ```typescript
-const which = (cfg.get<string>('DNS_PROVIDER') ?? 'hosts').toLowerCase();
-if (which === 'route53') {
-  return new Route53WebsiteDnsManager(hostedZoneId);
+{
+  provide: WEBSITE_DNS_MANAGER,
+  useFactory: (): IWebsiteDnsManager => {
+    // 'route53' | 'hosts'
+    const which = (process.env.DNS_PROVIDER ?? 'hosts').toLowerCase();
+    if (which === 'route53') {
+      const hostedZoneId = process.env.ROUTE53_HOSTED_ZONE_ID;
+      if (!hostedZoneId) {
+        throw new Error('ROUTE53_HOSTED_ZONE_ID is required when DNS_PROVIDER=route53');
+      }
+      return new Route53WebsiteDnsManager(hostedZoneId);
+    }
+    return new HostsFileWebsiteDnsManager();
+  },
 }
-return new HostsFileWebsiteDnsManager();
 ```
 
 **Logic:**
-- Checks `DNS_PROVIDER` environment variable
-- If `"route53"`: Uses Route53WebsiteDnsManager
-- If `"hosts"` or not set: Uses HostsFileWebsiteDnsManager
+- Reads `DNS_PROVIDER` from `process.env` (defaults to `"hosts"` if not set)
+- If `"route53"`: Validates that `ROUTE53_HOSTED_ZONE_ID` is set, then uses `Route53WebsiteDnsManager`
+- If `"hosts"` or not set: Uses `HostsFileWebsiteDnsManager`
 - Case-insensitive comparison
+- Throws an error at startup if Route53 is selected but the hosted zone ID is missing
 
 **Recommended Setup:**
-- **Production:** `DNS_PROVIDER=route53`
+- **Production:** `DNS_PROVIDER=route53` (ensure `ROUTE53_HOSTED_ZONE_ID` is also set)
 - **Local Development:** `DNS_PROVIDER=hosts` (or omit)
 
 #### UI Components
@@ -961,42 +841,19 @@ Both buttons are configured as header buttons in the institute form view layout:
 **Endpoint Security:**
 - All activation/deactivation endpoints require JWT authentication
 - Bearer token must be included in request headers
-- Token validated by NestJS authentication guards
 
 **Role-Based Access Control:**
-- Only Platform Admin role can activate/deactivate institutes
-- Institute Admins cannot activate their own institute
-- Role check enforced at framework level
-
-**Recommended Enhancement:**
-Add explicit role guard to controller:
-```typescript
-@ApiBearerAuth("jwt")
-@UseGuards(JwtAuthGuard, RolesGuard)
-@Roles('Platform Admin')
-@Post('activate/:id')
-async activateFeePortal(@Param('id') id: number) {
-  return this.service.activateInstitutePortal(id);
-}
-```
-
-#### Infrastructure Security
-
-**Nginx Configuration:**
-- Virtual hosts isolated per institute
-- No cross-domain access
-- Proxy headers sanitized
-- HTTP only (upgrade to HTTPS recommended)
-
-**DNS Security:**
-- CNAME records validated before creation
-- Domain name sanitized (conservative regex)
-- TTL set to reasonable value (300s)
-
-**File System Security:**
-- Configuration files created with restricted permissions
-- Only application service account can modify
-- Nginx runs as separate user (www-data)
+- Only Institute Admin role can activate/deactivate institutes
+- Role check is enforced by assigning the necessary permissions to the activation / deactivation endpoints for the Institute Admin role.
+:::info[How to Configure RBAC for Activation Endpoints]
+To control access to the activation and deactivation endpoints using SolidX RBAC, you would typically follow these steps:
+1. Create the endpoints in your controller (as shown in the code snippets) i.e InstituteController with appropriate route and method decorators.
+2. Run `npx @solidxai/solidctl build && npx @solidxai/solidctl seed` from the project root directory. This will automatically create permissions for the new endpoints based on the controller and method names.
+3. Go to the SolidX Admin UI and navigate to the Roles section.
+4. Edit the Institute Admin role and assign the newly created permissions for the activation and deactivation endpoints to this role.
+5. Save the role configuration.
+After these steps, only users with the Institute Admin role will be able to access the activation and deactivation endpoints, ensuring that only authorized personnel can perform these actions.
+:::
 
 #### Audit & Compliance
 
@@ -1019,18 +876,25 @@ This section details all environment variables used by the activation system.
 **PORTAL_CNAME_DOMAIN**
 - **Description:** Target domain for CNAME records
 - **Required:** Yes
-- **Example:** `"portal.solidx.edu"`
+- **Example:** `"portal.dpsschools.edu.in"`
 - **Used By:** DNS record creation
 - **Impact if Missing:** Activation fails with error
-
-#### Optional Environment Variables
 
 **EDU_BASE_DOMAIN**
 - **Description:** Base domain for institute subdomains
 - **Required:** No
-- **Default:** `"solidx.edu"`
+- **Default:** `"dpsschools.edu.in"`
 - **Example:** `"edu.yourcompany.com"`
 - **Used By:** Domain name construction
+
+**EDU_FRONTEND_UPSTREAM**
+- **Description:** Upstream server for Nginx proxy i.e (the school portal frontend application)
+- **Required:** No
+- **Default:** `"http://127.0.0.1:3002"`
+- **Example:** `"http://localhost:3000"`
+- **Used By:** Nginx virtual host configuration
+
+#### Optional Environment Variables
 
 **DNS_PROVIDER**
 - **Description:** DNS management provider
@@ -1039,13 +903,6 @@ This section details all environment variables used by the activation system.
 - **Allowed Values:** `"route53"`, `"hosts"`
 - **Example:** `"route53"`
 - **Used By:** DNS provider selection
-
-**EDU_FRONTEND_UPSTREAM**
-- **Description:** Upstream server for Nginx proxy
-- **Required:** No
-- **Default:** `"http://127.0.0.1:3002"`
-- **Example:** `"http://localhost:3000"`
-- **Used By:** Nginx virtual host configuration
 
 #### Route53-Specific Configuration
 
@@ -1056,7 +913,7 @@ This section details all environment variables used by the activation system.
   - `AWS_SECRET_ACCESS_KEY`
   - `AWS_REGION` (e.g., `"us-east-1"`)
 
-**Hosted Zone ID:**
+**ROUTE53_HOSTED_ZONE_ID**
 - Provided programmatically to Route53WebsiteDnsManager constructor
 - Must match the hosted zone for `EDU_BASE_DOMAIN`
 - Example: `"Z1234567890ABC"`
@@ -1066,8 +923,8 @@ This section details all environment variables used by the activation system.
 **Production Setup:**
 ```bash
 # Base configuration
-EDU_BASE_DOMAIN=solidx.edu
-PORTAL_CNAME_DOMAIN=portal.solidx.edu
+EDU_BASE_DOMAIN=dpsschools.edu.in
+PORTAL_CNAME_DOMAIN=portal.dpsschools.edu.in
 DNS_PROVIDER=route53
 EDU_FRONTEND_UPSTREAM=http://127.0.0.1:3002
 
@@ -1075,6 +932,8 @@ EDU_FRONTEND_UPSTREAM=http://127.0.0.1:3002
 AWS_ACCESS_KEY_ID=AKIA...
 AWS_SECRET_ACCESS_KEY=...
 AWS_REGION=us-east-1
+
+ROUTE53_HOSTED_ZONE_ID=Z1234567890ABC
 ```
 
 **Local Development Setup:**
@@ -1085,87 +944,6 @@ PORTAL_CNAME_DOMAIN=portal.local
 DNS_PROVIDER=hosts
 EDU_FRONTEND_UPSTREAM=http://localhost:3000
 ```
-
-### Best Practices
-
-#### Before Activation
-
-1. **Validate Configuration**
-   - Verify all required institute fields are filled
-   - Test payment gateway credentials
-   - Confirm support contact information is correct
-
-2. **Plan Domain Name**
-   - Choose a clear, memorable hosted page prefix
-   - Verify uniqueness before setting
-   - Avoid special characters and spaces
-
-3. **Test in Staging**
-   - Activate a test institute first
-   - Verify DNS resolution
-   - Test portal access
-   - Check payment flow end-to-end
-
-#### During Activation
-
-1. **Monitor Progress**
-   - Watch for success/error messages
-   - Check server logs if activation fails
-   - Verify each step completes successfully
-
-2. **Document Configuration**
-   - Record domain name
-   - Note activation date and user
-   - Save configuration details
-
-#### After Activation
-
-1. **Verify Infrastructure**
-   - Test DNS resolution from multiple locations
-   - Check Nginx configuration
-   - Verify portal accessibility
-   - Test on multiple devices/browsers
-
-2. **Functional Testing**
-   - Login as Institute Admin
-   - Create a test payment collection
-   - Verify student portal loads
-   - Test payment flow (in test mode)
-
-3. **Communication**
-   - Notify Institute Admin of activation
-   - Provide portal URL and credentials
-   - Share user documentation
-   - Schedule training if needed
-
-4. **Monitoring**
-   - Set up uptime monitoring for the domain
-   - Monitor server resources (CPU, memory, disk)
-   - Check error logs regularly
-   - Track payment transaction success rates
-
-#### Operational Best Practices
-
-1. **Backup Before Changes**
-   - Backup Nginx configuration before bulk activations
-   - Export institute data before major changes
-   - Keep DNS records documented
-
-2. **Batch Operations**
-   - Activate institutes during low-traffic hours
-   - Allow time between activations for verification
-   - Limit concurrent activations to avoid resource exhaustion
-
-3. **Documentation**
-   - Maintain list of active institutes and domains
-   - Document any custom configuration per institute
-   - Keep activation dates and responsible admin recorded
-
-4. **Regular Audits**
-   - Review active institutes monthly
-   - Check for orphaned Nginx configurations
-   - Verify DNS records match database status
-   - Clean up inactive configurations
 
 ### Troubleshooting Reference
 
@@ -1228,7 +1006,7 @@ EDU_FRONTEND_UPSTREAM=http://localhost:3000
 **Issue: Cannot deactivate institute**
 - **Cause:** Permission issue or configuration locked
 - **Solution:**
-  - Verify you're logged in as Platform Admin
+  - Verify you're logged in as Institute Admin
   - Check if there are active payment collections
   - Review server logs for specific error
   - Try deactivating from API directly (debugging)
@@ -1238,13 +1016,13 @@ EDU_FRONTEND_UPSTREAM=http://localhost:3000
 **Check DNS Resolution:**
 ```bash
 # Using nslookup
-nslookup stmary.solidx.edu
+nslookup delhi.dpsschools.edu.in
 
 # Using dig
-dig stmary.solidx.edu
+dig delhi.dpsschools.edu.in
 
 # Check CNAME specifically
-dig CNAME stmary.solidx.edu
+dig CNAME delhi.dpsschools.edu.in
 ```
 
 **Check Nginx Configuration:**
@@ -1253,10 +1031,10 @@ dig CNAME stmary.solidx.edu
 sudo nginx -t
 
 # View configuration
-cat /etc/nginx/sites-available/stmary.solidx.edu.conf
+cat /etc/nginx/sites-available/delhi.dpsschools.edu.in.conf
 
 # Check if symlink exists
-ls -la /etc/nginx/sites-enabled/ | grep stmary
+ls -la /etc/nginx/sites-enabled/ | grep delhi
 
 # Reload Nginx
 sudo systemctl reload nginx
@@ -1281,7 +1059,7 @@ tail -f /var/log/solid-api/combined.log
 cat /etc/hosts
 
 # Search for specific domain
-cat /etc/hosts | grep stmary
+cat /etc/hosts | grep delhi
 
 # Check file permissions
 ls -la /etc/hosts
@@ -1290,16 +1068,16 @@ ls -la /etc/hosts
 **Test Portal Access:**
 ```bash
 # Simple GET request
-curl -I http://stmary.solidx.edu
+curl -I http://delhi.dpsschools.edu.in
 
 # Full response
-curl http://stmary.solidx.edu
+curl http://delhi.dpsschools.edu.in
 
 # With verbose output
-curl -v http://stmary.solidx.edu
+curl -v http://delhi.dpsschools.edu.in
 
 # Follow redirects
-curl -L http://stmary.solidx.edu
+curl -L http://delhi.dpsschools.edu.in
 ```
 
 ### Success Criteria
@@ -1318,45 +1096,5 @@ You've successfully activated an institute when:
 - [ ] Student portal login page accessible
 - [ ] Audit trail entry created in Chatter
 - [ ] Institute Admin notified of activation
-
-### Related Documentation
-
-- [Institute Onboarding](./institute_onboarding.md) - Complete guide to onboarding new institutes
-- [Initiate Payment Collection](./initiate_payment.md) - How to create payment collections after activation
-- [User Roles & Responsibilities](../fees_portal_product_overview/#user-roles--responsibilities) - Understanding platform roles
-
-### Frequently Asked Questions
-
-**Q: Can I activate multiple institutes at once?**
-A: No, activation must be done one institute at a time through the UI. Bulk activation would require a custom script using the API endpoints.
-
-**Q: How long does activation take?**
-A: Typically 5-30 seconds for infrastructure provisioning. DNS propagation can take 5-15 minutes depending on your provider and TTL settings.
-
-**Q: Can I change the domain after activation?**
-A: No, the domain is based on `hostedPagePrefix` which cannot be changed after activation. You would need to deactivate, change the prefix, and reactivate.
-
-**Q: What happens to data when I deactivate?**
-A: All data (students, payments, configuration) remains in the database. Only the infrastructure (Nginx config and DNS) is removed. Reactivating restores access to the same data.
-
-**Q: Can Institute Admins activate their own institute?**
-A: No, only Platform Admins have permission to activate/deactivate institutes.
-
-**Q: What if activation fails halfway through?**
-A: The system attempts to maintain consistency, but partial failures can occur. Check server logs, clean up manually if needed (remove Nginx config/DNS record), then try again.
-
-**Q: Do I need HTTPS/SSL certificates?**
-A: The basic activation creates HTTP configuration. For production, you should configure SSL/TLS certificates (Let's Encrypt recommended) separately.
-
-**Q: Can I use a custom domain instead of subdomain?**
-A: The current implementation uses subdomains only. Custom domain support would require code modifications to the DNS and Nginx providers.
-
-**Q: How many institutes can I activate?**
-A: No hard limit, but consider server resources (Nginx can handle thousands of virtual hosts) and DNS provider limits.
-
-**Q: What are the server requirements for 100 active institutes?**
-A: Nginx overhead is minimal. Main consideration is application server resources. Monitor CPU/memory usage and scale horizontally if needed.
-
----
 
 **This completes the Activate Institute guide. For questions or issues not covered here, contact the platform development team.**

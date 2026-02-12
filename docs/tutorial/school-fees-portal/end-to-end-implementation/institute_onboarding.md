@@ -42,9 +42,9 @@ This section describes the data models you need to implement this feature.
 
 | Field | Required? | Description | Example |
 |-------|-----------|-------------|---------|
-| **Support Email** | Yes | Email where parents/students can reach for help | support@dpsdelhi.edu.in |
+| **Support Email** | Yes | Email where parents/students can reach for help | support@dpsschools.edu.in |
 | **Support Mobile** | Yes | 10-digit contact number for support | 9876543210 |
-| **Email Domain** | No | Your institution's email domain (for user validation) | dpsdelhi.edu.in |
+| **Email Domain** | No | Your institution's email domain (for user validation) | dpsschools.edu.in |
 
 ###### Payment Gateway Configuration
 
@@ -61,7 +61,7 @@ These credentials will be provided by your payment gateway provider. You'll need
 
 | Field | Required? | Description | Example |
 |-------|-----------|-------------|---------|
-| **Hosted Page Prefix** | Yes | Unique subdomain prefix for the institute's payment portal. No two institutes can share the same prefix. | If set to `dps`, the portal URL becomes `dps.<your-configured-domain>` (e.g., `dps.dpsdelhi.edu.in`). The base domain is configured via environment variables. |
+| **Hosted Page Prefix** | Yes | Unique subdomain prefix for the institute's payment portal. No two institutes can share the same prefix. | If set to `delhi`, the portal URL becomes `delhi.<your-configured-domain>` (e.g., `delhi.dpsschools.edu.in`). The base domain is configured via environment variables. |
 | **Status** | Auto-set | Portal status (starts as "InActive", activate when ready) | InActive → Active |
 
 ###### Legal & Content (Optional)
@@ -135,7 +135,7 @@ Configure how you want to handle late payments:
 
 | Field | Required? | Description | Example |
 |-------|-----------|-------------|---------|
-| **Email** | Yes | Login email address (must be unique) | admin@dpsdelhi.edu.in |
+| **Email** | Yes | Login email address (must be unique) | admin@dpsschools.edu.in |
 | **Password** | Yes | Secure login password | Set during user creation |
 | **First Name** | Yes | User's first name | Rajesh |
 | **Last Name** | Yes | User's last name | Sharma |
