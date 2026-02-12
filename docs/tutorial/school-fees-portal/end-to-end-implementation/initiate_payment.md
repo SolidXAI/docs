@@ -1,5 +1,5 @@
 ---
-sidebar_position: 2
+sidebar_position: 3
 title: Initiate Payment Collection
 description: Learn how to create and manage payment collections for students in the Fees Portal.
 summary: TODO

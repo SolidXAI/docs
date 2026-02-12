@@ -1,15 +1,17 @@
-# Making Payment (Student Portal)
+# Student Payment Portal
 
 ## Overview
 
-This document provides comprehensive documentation for the **Student Payment Flow** in the school fees portal. This use case enables students and parents to view pending fees, make online payments through an integrated payment gateway, and track payment history through a dedicated student portal.
+This use case enables students and parents to view pending fees, make online payments through an integrated payment gateway, and track payment history through a dedicated student portal.
+
+We will be creating a separate frontend application for the student portal that interacts with the SolidX backend APIs. The portal will use a custom OTP-based authentication mechanism to allow students to log in without traditional user accounts.
 
 ### Key Features
 
 - **Custom Authentication**: OTP-based authentication for students without traditional user accounts
 - **Payment Dashboard**: View all pending fees with detailed breakdowns
 - **Flexible Payment Options**: Support for full and partial payments (where allowed)
-- **Integrated Payment Gateway**: Seamless Mswipe payment gateway integration
+- **Integrated Payment Gateway**: Seamless [Stripe](https://stripe.com) payment gateway integration
 - **Payment Tracking**: Complete payment history with transaction details
 - **Automated Calculations**: Computed fields for amount tracking and late fee calculations
 - **Email Notifications**: OTP delivery, payment confirmations, and reminders
@@ -35,30 +37,11 @@ This document provides comprehensive documentation for the **Student Payment Flo
         ┌──────┴───────┐
         ↓              ↓
 ┌─────────────┐  ┌──────────────┐
-│   Mswipe    │  │   Email      │
+│   Stripe    |  |              | 
+|   Payment   │  │   Email      │
 │   Gateway   │  │   Service    │
 └─────────────┘  └──────────────┘
 ```
-
-### User Roles and Access
-
-| Role | Access Level | Interface |
-|------|-------------|-----------|
-| **Student/Parent** | Public access via custom authentication | Student Portal (separate frontend) |
-| **System** | Automated processing | Scheduled jobs, webhooks, computed fields |
-
-### What This Documentation Covers
-
-1. **Student Authentication Flow** - OTP-based login system
-2. **Payment Dashboard** - Viewing pending and completed payments
-3. **Payment Initiation** - Generating payment gateway links
-4. **Payment Processing** - Webhook handling and status updates
-5. **Payment History** - Transaction tracking and reporting
-6. **Automated Systems** - Computed fields and scheduled jobs
-7. **Technical Implementation** - API endpoints, request/response formats
-8. **Complete Workflow** - Step-by-step process from login to payment
-
----
 
 ## Roles Involved
 
@@ -73,7 +56,7 @@ This document provides comprehensive documentation for the **Student Payment Flo
 
 **Access:**
 - Student Portal (separate frontend application)
-- Public endpoints with custom authentication
+- Public SolidX API endpoints with custom authentication
 
 **Typical Workflow:**
 1. Enter student login ID
@@ -90,92 +73,18 @@ This document provides comprehensive documentation for the **Student Payment Flo
 - Calculate late fees for overdue payments
 - Send payment reminders
 - Update payment statuses
-- Process webhook callbacks from payment gateway
+- Process redirect callbacks from Stripe payment gateway
 
----
 
 ## Data Models Involved
 
-### 1. Student Model
+The following models from the [Initiate Payment](./initiate_payment.md#data-models-involved) documentation are also used in this workflow:
 
-**What it represents:** A student enrolled in an institute who needs to make fee payments through the student portal.
+- **[Student Model](./initiate_payment.md#1-student-model)** — includes authentication fields (OTP, Token) used for portal login
+- **[Payment Collection Item Model](./initiate_payment.md#3-payment-collection-item-model)** — the fee items students view and pay in the portal
+- **[Payment Collection Item Detail Model](./initiate_payment.md#4-payment-collection-item-detail-model)** — tracks how much of each fee was paid per transaction
 
-#### Authentication & Access
-
-| Field | Required? | Description | Example |
-|-------|-----------|-------------|---------|
-| **Student Login ID** | Computed (Auto-generated) | Unique identifier for portal login | "JOHND-A1B2C" |
-| **OTP** | System-managed | One-time password for authentication (valid 5 minutes) | "123456" |
-| **OTP Expires At** | System-managed | OTP expiration timestamp | 2024-01-15T10:35:00Z |
-| **Token** | System-managed | JWT authentication token (valid 12 hours) | "eyJhbGciOiJIUzI1NiIsInR..." |
-
-#### Basic Information
-
-| Field | Required? | Description | Example |
-|-------|-----------|-------------|---------|
-| **Student Name** | Yes | Full name of the student | "John Doe" |
-| **Student ID** | Yes | Institute-specific student identifier | "STU2024001" |
-| **Student Email Address** | No | Student's personal email | john.doe@example.com |
-| **Student Mobile Number** | No | Student's contact number | 9876543210 |
-
-#### Parent/Guardian Information
-
-| Field | Required? | Description | Example |
-|-------|-----------|-------------|---------|
-| **Parent Name** | Yes | Name of parent or guardian | "Mr. Robert Doe" |
-| **Parent Email Address** | Yes | Email for OTPs and payment notifications | robert.doe@example.com |
-| **Parent Mobile Number** | Yes | Contact number for notifications | 9123456789 |
-
-#### Relationships
-
-| Relationship | Description |
-|--------------|-------------|
-| **Institute** | Which institute the student belongs to |
-| **Payment Collection Items** | All fee items assigned to this student |
-| **Payments** | Payment transactions made by this student |
-
-### 2. Payment Collection Item Model
-
-**What it represents:** A specific fee item assigned to a student (e.g., "Tuition Fee for Q1 2024"). This is what students see and pay in the portal.
-
-#### Fee Details
-
-| Field | Required? | Description | Example |
-|-------|-----------|-------------|---------|
-| **Fee Type** | Yes | Type of fee (Tuition, Bus, Lab, etc.) | "Tuition Fee" |
-| **Amount To Be Paid** | Yes | Base fee amount before late fees | 30000.00 |
-| **Due Date** | Yes | Payment deadline | 2024-02-15 |
-| **Part Payment Allowed** | Yes | Can student pay in installments? | true/false |
-| **Payment Mode** | Yes | How payment should be made | "PG" (Payment Gateway) or "CASH" |
-
-#### Status Tracking
-
-| Field | Required? | Description | Values |
-|-------|-----------|-------------|--------|
-| **Status** | Auto-managed | Current payment status | "Pending", "Partially Paid", "Fully Paid", "Cancelled" |
-| **Amount Paid** | Computed (Auto-calculated) | Total amount paid so far | 15000.00 |
-| **Amount Pending** | Computed (Auto-calculated) | Remaining amount to be paid | 15000.00 |
-
-#### Late Payment Tracking
-
-| Field | Required? | Description | How It's Calculated |
-|-------|-----------|-------------|---------------------|
-| **Is Overdue** | Auto-managed | Is payment past due date? | true if today > due date AND status != "Fully Paid" |
-| **Overdue By Days** | Auto-calculated | Number of days overdue | floor((today - dueDate) / 86400000) |
-| **Late Amount To Be Paid** | Auto-calculated | Late fee penalty | Based on Fee Type's late fee configuration |
-| **Total Amount To Be Paid** | Computed (Auto-calculated) | Base amount + late fees | amountToBePaid + lateAmountToBePaid |
-
-#### Relationships
-
-| Relationship | Description |
-|--------------|-------------|
-| **Student** | Which student owes this payment |
-| **Fee Type** | What type of fee this is |
-| **Payment Collection** | Which batch this item belongs to |
-| **Institute** | Which institute this belongs to |
-| **Payment Collection Item Details** | Individual payment transactions for this item |
-
-### 3. Payment Model
+### Payment Model
 
 **What it represents:** A single payment transaction initiated by a student through the payment gateway.
 
@@ -185,18 +94,15 @@ This document provides comprehensive documentation for the **Student Payment Flo
 |-------|-----------|-------------|---------|
 | **Amount** | Yes | Total amount in this payment | 50000.00 |
 | **Payment Status** | Auto-managed | Current status | "Pending", "Succeeded", "Failed" |
-| **Is Refunded** | Auto-managed | Has this payment been refunded? | true/false |
 
-#### Payment Gateway Details (Mswipe)
+#### Payment Gateway Details (Stripe)
 
 | Field | Required? | Description | Example |
 |-------|-----------|-------------|---------|
-| **MSwipe IPG Order ID** | Auto-generated | Internal order identifier | "ABC School_P1705329600000" |
-| **MSwipe IPG Invoice ID** | Auto-generated | Invoice identifier sent to gateway | "ABC School_P1705329600000" |
-| **MSwipe IPG Trans ID** | From gateway | Transaction ID from Mswipe | "TXN123456789" |
-| **MSwipe IPG Payment ID** | From gateway | Payment ID from Mswipe | "PAY987654321" |
-| **MSwipe Encoded IPG ID** | From gateway | Encoded transaction ID | "ENC_ABC123..." |
-| **MSwipe IPG Status** | From gateway | Gateway status response | "success", "failed" |
+| **Stripe Session ID** | Auto-generated | Stripe Checkout Session identifier | "cs_test_a1B2c3D4..." |
+| **Stripe Payment Intent ID** | From gateway | Stripe Payment Intent identifier | "pi_3N..." |
+| **Stripe Invoice ID** | Auto-generated | Internal invoice identifier | "DPS Delhi_P1705329600000" |
+| **Stripe Payment Status** | From gateway | Gateway payment status | "complete", "expired" |
 
 #### Relationships
 
@@ -206,33 +112,203 @@ This document provides comprehensive documentation for the **Student Payment Flo
 | **Institute** | Which institute this payment is for |
 | **Payment Collection Item Details** | Fee items included in this payment |
 
-### 4. Payment Collection Item Detail Model
 
-**What it represents:** A link between a Payment transaction and a specific Payment Collection Item, tracking how much of a particular fee was paid in a specific transaction.
+## Payment Gateway Integration (Stripe)
 
-#### Transaction Details
+This section covers the Stripe payment gateway integration used to process student fee payments. The application uses [Stripe Checkout](https://stripe.com/docs/payments/checkout) to provide a secure, Stripe-hosted payment page.
 
-| Field | Required? | Description | Example |
-|-------|-----------|-------------|---------|
-| **Amount Paid** | Yes | Amount paid for this specific fee item in this transaction | 30000.00 |
-| **Payment Date** | Yes | When this payment was made | 2024-01-15T10:30:00Z |
-| **Payment Status** | Auto-managed | Status of this payment | "Pending", "Succeeded", "Failed" |
-| **Is Refunded** | Auto-managed | Has this been refunded? | true/false |
+### Stripe SDK Setup
 
-#### Relationships
+Install the Stripe Node.js SDK in your project:
 
-| Relationship | Description |
-|--------------|-------------|
-| **Payment** | Which payment transaction this belongs to |
-| **Payment Collection Item** | Which fee item this payment is for |
-| **Student** | Which student made this payment |
-| **Institute** | Which institute this is for |
+```bash
+npm install stripe
+```
 
-#### What you can do with this model:
-- Track multiple payments for the same fee item (partial payments)
-- View complete payment history for each fee
-- Calculate total amounts paid across all transactions
-- Support refund processing
+Import it in your service:
+
+```typescript
+import Stripe from 'stripe';
+```
+
+### IPaymentGateway Interface
+
+The application uses an interface-based approach, allowing different payment gateways to be swapped via configuration:
+
+```typescript
+// interfaces/ipayment-gateway.interface.ts
+export interface IPaymentGateway {
+  generatePaymentLink(
+    paymentId: number,
+    totalAmount: number,
+    custCode: string,
+    userName: string,
+    password: string,
+    custUserId: string,
+    options: any,
+  ): Promise<any>;
+
+  handlePaymentCallback(data: any): Promise<any>;
+}
+
+export const PAYMENT_GATEWAY_SERVICE = 'PAYMENT_GATEWAY_SERVICE';
+```
+
+**Purpose:**
+- `generatePaymentLink()` — Creates a payment session on the gateway and returns a URL to redirect the student
+- `handlePaymentCallback()` — Processes the callback after the student completes (or cancels) payment
+
+### StripeService Implementation
+
+```typescript
+// services/stripe.service.ts
+import { Injectable } from '@nestjs/common';
+import { IPaymentGateway } from '../interfaces/ipayment-gateway.interface';
+import Stripe from 'stripe';
+
+@Injectable()
+export class StripeService implements IPaymentGateway {
+  private readonly stripe: Stripe;
+
+  constructor() {
+    this.stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
+      apiVersion: '2023-10-16',
+    });
+  }
+
+  async generatePaymentLink(
+    paymentId: number,
+    totalAmount: number,
+    custCode: string,
+    userName: string,
+    password: string,
+    custUserId: string,
+    options: any,
+  ): Promise<any> {
+    const session = await this.stripe.checkout.sessions.create({
+      payment_method_types: ['card'],
+      line_items: [
+        {
+          price_data: {
+            currency: 'inr',
+            product_data: { name: 'Fees' },
+            unit_amount: totalAmount * 100, // Convert to paise
+          },
+          quantity: 1,
+        },
+      ],
+      mode: 'payment',
+      success_url: `${process.env.BASE_URL}/api/payment/payment-callback?session_id={CHECKOUT_SESSION_ID}`,
+      cancel_url: `${process.env.BASE_URL}/payment-failed`,
+      metadata: { paymentId: paymentId.toString() },
+    });
+
+    return { url: session.url };
+  }
+
+  async handlePaymentCallback(data: any): Promise<any> {
+    const sessionId = data.query.session_id;
+    const session = await this.stripe.checkout.sessions.retrieve(sessionId);
+    return session;
+  }
+}
+```
+
+**Key points:**
+- **No separate authentication step** — Stripe uses your secret key directly; there is no login/token exchange
+- **Checkout Sessions** — Stripe Checkout handles the entire payment UI on a Stripe-hosted page
+- **Callback via redirect** — After payment, Stripe redirects to the `success_url` with a `session_id` query parameter. The backend retrieves the session to confirm payment status
+- **Amount in paise** — Stripe expects the smallest currency unit (paise for INR), so the amount is multiplied by 100
+- **Metadata** — The `paymentId` is stored in session metadata to link the Stripe session back to the internal payment record
+- **Cancel URL** — If the student cancels payment, they are redirected to the `cancel_url`
+
+### Module Configuration
+
+Register the Stripe service as a provider using a factory pattern:
+
+```typescript
+// fees-portal.module.ts
+{
+  provide: PAYMENT_GATEWAY_SERVICE,
+  useFactory: () => {
+    const gateway = process.env.PAYMENT_GATEWAY;
+    if (gateway === 'stripe') {
+      return new StripeService();
+    }
+    // Fallback to other gateways if needed
+    return new StripeService();
+  },
+}
+```
+
+### API Endpoints
+
+| Endpoint | Method | Access | Purpose |
+|----------|--------|--------|---------|
+| `/api/payment/payment-gateway` | POST | @StudentAuth | Generate Stripe Checkout session and return payment URL |
+| `/api/payment/payment-callback` | GET | Public | Handle Stripe redirect after payment completion |
+
+### Controller Code
+
+```typescript
+// controllers/payment.controller.ts
+
+// Generate Stripe Checkout session
+@Post('payment-gateway')
+@Public()
+@StudentAuth()
+async generatePaymentGateway(@Body() body: GeneratePaymentGatewayDto) {
+  const paymentCollectionItemIds = Object.keys(body.amountMap).map(Number);
+  const url = await this.service.generatePaymentGatewayLink(
+    body.studentLoginId,
+    paymentCollectionItemIds,
+    body.amountMap,
+    body.totalAmount,
+  );
+  return { url };
+}
+
+// Handle Stripe callback (GET redirect from Stripe Checkout)
+@Get('payment-callback')
+@Public()
+async handlePaymentCallbackGet(
+  @Req() request: Request,
+  @Res() response: Response,
+) {
+  const result = await this.service.handleStripePaymentCallback({
+    method: 'GET',
+    query: request.query,
+    body: request.body,
+  });
+
+  const redirectUrl = result.success
+    ? `https://${result.hostedPagePrefix}.${process.env.EDU_BASE_DOMAIN}/dashboard?paymentStatus=success&txnId=${result.payment.stripeSessionId}`
+    : `https://${result.hostedPagePrefix}.${process.env.EDU_BASE_DOMAIN}/dashboard?paymentStatus=failed&txnId=${result.payment.stripeSessionId}`;
+
+  return response.redirect(redirectUrl);
+}
+```
+
+### GeneratePaymentGatewayDto
+
+```typescript
+// dtos/generate-payment-gateway.dto.ts
+import { IsString, IsNotEmpty, IsObject, IsNumber } from 'class-validator';
+import { Type } from 'class-transformer';
+
+export class GeneratePaymentGatewayDto {
+  @IsString()
+  @IsNotEmpty()
+  studentLoginId: string;
+
+  @IsObject()
+  amountMap: Record<number, number>;
+
+  @IsNumber()
+  @Type(() => Number)
+  totalAmount: number;
+}
+```
 
 ---
 
@@ -244,14 +320,12 @@ Before students can make payments through the portal, ensure the following prere
 
 - [ ] **Institute is Activated** (status = "Active")
   - Institute must have completed activation workflow
-  - Subdomain configured (e.g., `stmary-edu.antpay.live`)
+  - Subdomain configured (e.g., `delhi.dpsschools.edu.in`)
 
 - [ ] **Payment Gateway Credentials Configured**
-  - Mswipe merchant credentials set up
-  - `paymentGatewayAccessKey` configured
-  - `paymentGatewayAccessSecret` configured
-  - `paymentGatewayMerchantId` configured
-  - `paymentGatewayUserId` configured
+  - Stripe account created and API keys obtained
+  - `STRIPE_SECRET_KEY` environment variable configured
+  - `PAYMENT_GATEWAY=stripe` environment variable configured
 
 - [ ] **Email Configuration**
   - Email templates configured for:
@@ -279,8 +353,8 @@ Before students can make payments through the portal, ensure the following prere
 - [ ] **Environment Variables Set**
   ```bash
   IAM_JWT_SECRET=<jwt_secret_key>
-  MSWIPE_LOGIN_URL=<mswipe_login_endpoint>
-  MSWIPE_PAYMENT_GATEWAY_URL=<mswipe_gateway_endpoint>
+  STRIPE_SECRET_KEY=<stripe_secret_key>
+  PAYMENT_GATEWAY=stripe
   BASE_URL=<backend_api_base_url>
   EDU_BASE_DOMAIN=<student_portal_base_domain>
   ```
@@ -293,7 +367,6 @@ Before students can make payments through the portal, ensure the following prere
   - CORS settings allow cross-origin requests
   - Hosted on separate port/domain
 
----
 
 ## Student Payment Workflow
 
@@ -304,14 +377,14 @@ This section provides a comprehensive step-by-step guide for students/parents to
 #### Step 1: Navigate to Student Portal
 
 **Student Action:**
-- Open student portal URL: `https://{institute.hostedPagePrefix}-{EDU_BASE_DOMAIN}`
-- Example: `https://stmary-edu.antpay.live`
+- Open student portal URL: `https://{institute.hostedPagePrefix}.{EDU_BASE_DOMAIN}`
+- Example: `https://delhi.dpsschools.edu.in`
 
 #### Step 2: Enter Student Login ID
 
 **Student Action:**
 - Enter student login ID (provided by school)
-- Example: `JOHND-A1B2C`
+- Example: `RAHUL-A1B2C`
 
 **Frontend Action:**
 ```
@@ -320,16 +393,16 @@ GET /api/student/login/initiate/:id
 
 **API Request:**
 ```http
-GET /api/student/login/initiate/JOHND-A1B2C
+GET /api/student/login/initiate/RAHUL-A1B2C
 ```
 
 **API Response (Success):**
 ```json
 {
   "isValid": true,
-  "maskedEmail": "ro****@example.com",
+  "maskedEmail": "ra****@example.com",
   "maskedPhone": "91******89",
-  "studentLoginId": "JOHND-A1B2C",
+  "studentLoginId": "RAHUL-A1B2C",
   "id": 123,
   "message": "Student ID is valid"
 }
@@ -368,7 +441,7 @@ POST /api/student/initiate-otp
 Content-Type: application/json
 
 {
-  "studentLoginId": "JOHND-A1B2C"
+  "studentLoginId": "RAHUL-A1B2C"
 }
 ```
 
@@ -420,7 +493,7 @@ POST /api/student/verify-otp
 Content-Type: application/json
 
 {
-  "studentLoginId": "JOHND-A1B2C",
+  "studentLoginId": "RAHUL-A1B2C",
   "otp": "123456"
 }
 ```
@@ -430,8 +503,8 @@ Content-Type: application/json
 {
   "success": true,
   "message": "OTP verified successfully",
-  "studentId": "STU2024001",
-  "studentLoginId": "JOHND-A1B2C",
+  "studentId": "STU001",
+  "studentLoginId": "RAHUL-A1B2C",
   "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
 }
 ```
@@ -462,7 +535,6 @@ Content-Type: application/json
 - Student is redirected to dashboard
 - Token is stored for future requests
 
----
 
 ### Phase 2: View Pending Payments (Dashboard)
 
@@ -484,17 +556,17 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
 ```json
 {
   "id": 123,
-  "studentName": "John Doe",
-  "studentEmailAddress": "john@example.com",
+  "studentName": "Rahul Sharma",
+  "studentEmailAddress": "rahul.sharma@example.com",
   "studentMobileNumber": "9876543210",
-  "parentName": "Robert Doe",
+  "parentName": "Mr. Rajesh Sharma",
   "parentMobileNumber": "9123456789",
-  "parentEmailAddress": "robert.doe@example.com",
-  "studentId": "STU2024001",
-  "studentLoginId": "JOHND-A1B2C",
+  "parentEmailAddress": "rajesh.sharma@example.com",
+  "studentId": "STU001",
+  "studentLoginId": "RAHUL-A1B2C",
   "institute": {
-    "instituteName": "St. Mary's School",
-    "supportEmail": "support@stmary.edu",
+    "instituteName": "DPS Delhi",
+    "supportEmail": "support@dpsschools.edu.in",
     "supportMobile": "+919876543210",
     "tnC": "Terms and conditions content...",
     "privacyPolicy": "Privacy policy content...",
@@ -502,7 +574,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
     "_media": {
       "logo": [
         {
-          "_full_url": "https://s3.amazonaws.com/school-logos/stmary.png"
+          "_full_url": "https://s3.amazonaws.com/school-logos/dps-delhi.png"
         }
       ]
     }
@@ -546,7 +618,7 @@ const collections = await find(PaymentCollection, {
     "description": "Q1 fees including tuition and lab charges",
     "institute": {
       "id": 1,
-      "instituteName": "St. Mary's School"
+      "instituteName": "DPS Delhi"
     },
     "totalAmountToBePaid": 50000,
     "paymentCollectionItems": [
@@ -629,7 +701,6 @@ Status: Pending
 - Late fees are calculated and displayed
 - Part payment option is clearly indicated
 
----
 
 ### Phase 3: Initiate Payment
 
@@ -648,7 +719,7 @@ Build payment request with selected items:
 ```javascript
 // Example: Student selects to pay both items in full
 const paymentRequest = {
-  studentLoginId: "JOHND-A1B2C",
+  studentLoginId: "RAHUL-A1B2C",
   amountMap: {
     "101": 30000,  // Tuition Fee
     "102": 20000   // Lab Fee
@@ -658,7 +729,7 @@ const paymentRequest = {
 
 // Example: Student pays partial amount for Tuition Fee
 const partialPaymentRequest = {
-  studentLoginId: "JOHND-A1B2C",
+  studentLoginId: "RAHUL-A1B2C",
   amountMap: {
     "101": 15000  // Paying half of Tuition Fee
   },
@@ -686,7 +757,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
 Content-Type: application/json
 
 {
-  "studentLoginId": "JOHND-A1B2C",
+  "studentLoginId": "RAHUL-A1B2C",
   "amountMap": {
     "101": 30000,
     "102": 20000
@@ -703,16 +774,14 @@ INSERT INTO payment (
   institute_id,
   student_id,
   amount,
-  mSwipeIpgOrderId,
-  mSwipeIpgInvoiceId,
+  stripeInvoiceId,
   paymentStatus,
   createdAt
 ) VALUES (
   1,
   123,
   50000,
-  'St. Mary\'s School_P1705329600000',
-  'St. Mary\'s School_P1705329600000',
+  'DPS Delhi_P1705329600000',
   'Pending',
   NOW()
 )
@@ -760,134 +829,103 @@ INSERT INTO payment_collection_item_detail (
 )
 ```
 
-**Step 8c: Call Mswipe Gateway**
+**Step 8c: Create Stripe Checkout Session**
 
-**Mswipe Authentication:**
-```http
-POST https://mswipe.api/login
-Content-Type: application/json
+The backend calls the Stripe SDK to create a Checkout Session:
 
-{
-  "clientId": "merchant_username",
-  "password": "merchant_password",
-  "applId": "api",
-  "channelId": "pbl"
-}
+```typescript
+const session = await stripe.checkout.sessions.create({
+  payment_method_types: ['card'],
+  line_items: [
+    {
+      price_data: {
+        currency: 'inr',
+        product_data: { name: 'Fees' },
+        unit_amount: 50000 * 100, // ₹50,000 = 5,000,000 paise
+      },
+      quantity: 1,
+    },
+  ],
+  mode: 'payment',
+  success_url: 'https://api.dpsschools.edu.in/api/payment/payment-callback?session_id={CHECKOUT_SESSION_ID}',
+  cancel_url: 'https://api.dpsschools.edu.in/payment-failed',
+  metadata: { paymentId: '1001' },
+});
 ```
 
-**Mswipe Response:**
+**Stripe Response:**
 ```json
 {
-  "status": true,
-  "token": "MSWIPE_AUTH_TOKEN_123..."
+  "id": "cs_test_a1B2c3D4e5F6g7H8i9J0...",
+  "url": "https://checkout.stripe.com/c/pay/cs_test_a1B2c3D4...",
+  "payment_status": "unpaid",
+  "status": "open",
+  "metadata": { "paymentId": "1001" }
 }
 ```
 
-**Mswipe Payment Link Request:**
-```http
-POST https://mswipe.api/payment/createlink
-Content-Type: application/json
-
-{
-  "amount": "50000",
-  "mobileno": "9123456789",
-  "custcode": "MERCHANT_ID",
-  "user_id": "INST_USER_ID",
-  "sessiontoken": "MSWIPE_AUTH_TOKEN_123...",
-  "versionno": "VER4.0.0",
-  "email_id": "robert.doe@example.com",
-  "invoice_id": "St. Mary's School_P1705329600000",
-  "request_id": "1705329600000",
-  "ApplicationId": "api",
-  "ChannelId": "pbl",
-  "ClientId": "merchant_username",
-  "redirect_url": "https://api.school-portal.com/api/payment/payment-callback",
-  "IsSendSMS": true
-}
-```
-
-**Mswipe Response:**
-```json
-{
-  "status": "True",
-  "smslink": "https://upi.mswipe.com/pay/ABC123?key=value",
-  "txn_id": "TXN987654321",
-  "orderId": "St. Mary's School_P1705329600000"
-}
-```
-
-**Step 8d: Update Payment Record with Transaction ID**
+**Step 8d: Store Session ID in Payment Record**
 ```sql
 UPDATE payment
-SET mSwipeIpgTransId = 'TXN987654321'
+SET stripeSessionId = 'cs_test_a1B2c3D4e5F6g7H8i9J0...'
 WHERE id = 1001
 ```
 
 **API Response:**
 ```json
 {
-  "url": "https://upi.mswipe.com/pay/ABC123?key=value"
+  "url": "https://checkout.stripe.com/c/pay/cs_test_a1B2c3D4..."
 }
 ```
 
 **What to verify:**
 - Payment record created with status "Pending"
 - Payment Collection Item Details created for all selected items
-- Mswipe payment link generated successfully
-- Transaction ID stored in Payment record
+- Stripe Checkout session created successfully
+- Session ID stored in Payment record
 
 #### Step 9: Redirect to Payment Gateway
 
 **Frontend Action:**
-- Redirect student to payment gateway URL
-- Student leaves student portal and goes to Mswipe payment page
+- Redirect student to Stripe Checkout URL
+- Student leaves student portal and goes to Stripe's hosted payment page
 
-**Payment Gateway (Mswipe) Page:**
+**Payment Gateway (Stripe Checkout) Page:**
 - Student sees payment details:
   - Amount: ₹50,000
-  - Merchant: St. Mary's School
-  - Invoice ID: St. Mary's School_P1705329600000
-- Student selects payment method:
-  - UPI (Google Pay, PhonePe, Paytm, etc.)
-  - Credit/Debit Card
-  - Net Banking
+  - Product: Fees
+- Student enters card details on Stripe's secure, PCI-compliant page
 - Student completes payment
+- On success, Stripe redirects to the `success_url` with a `session_id`
+- On cancel, Stripe redirects to the `cancel_url`
 
----
 
-### Phase 4: Payment Processing (Webhook Callback)
+### Phase 4: Payment Processing (Redirect Callback)
 
 #### Step 10: Payment Gateway Callback
 
 **After Payment Completion:**
 
-Mswipe sends callback to backend (both GET and POST supported)
+After the student completes payment on Stripe Checkout, Stripe redirects them to the `success_url` with a `session_id` query parameter:
 
-**Callback Format (GET):**
+**Callback Format (GET redirect):**
 ```http
-GET /api/payment/payment-callback?status=success&ipgid=TXN987654321&encIpgId=ENC_ABC123&invoiceID=St.%20Mary's%20School_P1705329600000
+GET /api/payment/payment-callback?session_id=cs_test_a1B2c3D4e5F6g7H8i9J0...
 ```
 
-**Callback Format (POST):**
-```http
-POST /api/payment/payment-callback
-Content-Type: application/json
-
-{
-  "Status": "success",
-  "TransID": "TXN987654321",
-  "EncID": "ENC_ABC123",
-  "InvoiceID": "St. Mary's School_P1705329600000",
-  "PaymentID": "PAY123456"
-}
-```
+> **Note:** Unlike webhook-based gateways, Stripe Checkout uses a redirect-based callback. The backend retrieves the session details from Stripe's API using the `session_id`.
 
 **Backend Processing:**
 
-**Step 10a: Find Payment Record**
+**Step 10a: Retrieve Session and Find Payment Record**
 ```typescript
+// Retrieve the Checkout Session from Stripe
+const session = await stripe.checkout.sessions.retrieve(session_id);
+const paymentId = session.metadata.paymentId;
+
+// Find the internal payment record
 const payment = await find(Payment, {
-  where: { mSwipeIpgInvoiceId: "St. Mary's School_P1705329600000" },
+  where: { id: paymentId },
   relations: ['student', 'institute']
 })
 ```
@@ -896,13 +934,12 @@ const payment = await find(Payment, {
 ```sql
 UPDATE payment
 SET
-  mSwipeIpgStatus = 'success',
-  mSwipeIpgTransId = 'TXN987654321',
-  mSwipeEncodedIpgId = 'ENC_ABC123',
-  mSwipeIpgPaymentId = 'PAY123456',
+  stripePaymentStatus = 'complete',
+  stripePaymentIntentId = 'pi_3N...',
+  stripeSessionId = 'cs_test_a1B2c3D4e5F6g7H8i9J0...',
   paymentStatus = 'Succeeded',
   updatedAt = NOW()
-WHERE mSwipeIpgInvoiceId = 'St. Mary''s School_P1705329600000'
+WHERE id = 1001
 ```
 
 **Step 10c: Update Payment Collection Item Details**
@@ -977,14 +1014,14 @@ After Payment Updates:
 
 **Email Template:** `confirm-payment`
 **To:** Parent email address
-**Subject:** "Payment Confirmation - St. Mary's School"
+**Subject:** "Payment Confirmation - DPS Delhi"
 
 **Email Context:**
 ```json
 {
   "paymentDetails": {
     "paymentCollection": "Quarter 1 2024 Fees",
-    "txnId": "TXN987654321",
+    "txnId": "cs_test_a1B2c3D4e5F6g7H8i9J0...",
     "totalAmountDue": 50000,
     "createdAt": "2024-01-15T10:30:00Z",
     "feeTypes": ["Tuition Fee", "Lab Fee"],
@@ -992,54 +1029,53 @@ After Payment Updates:
     "status": "Paid"
   },
   "student": {
-    "studentName": "John Doe",
-    "studentLoginId": "JOHND-A1B2C",
+    "studentName": "Rahul Sharma",
+    "studentLoginId": "RAHUL-A1B2C",
     "institute": {
-      "instituteName": "St. Mary's School",
-      "supportEmail": "support@stmary.edu",
+      "instituteName": "DPS Delhi",
+      "supportEmail": "support@dpsschools.edu.in",
       "supportMobile": "+919876543210"
     }
   },
-  "instituteLogo": "https://s3.amazonaws.com/school-logos/stmary.png"
+  "instituteLogo": "https://s3.amazonaws.com/school-logos/dps-delhi.png"
 }
 ```
 
 **Email Content:**
 ```
-Dear Robert Doe,
+Dear Mr. Rajesh Sharma,
 
 Payment Confirmed!
 
-Your payment for John Doe (Login ID: JOHND-A1B2C) has been successfully processed.
+Your payment for Rahul Sharma (Login ID: RAHUL-A1B2C) has been successfully processed.
 
 Payment Details:
 - Collection: Quarter 1 2024 Fees
 - Fee Types: Tuition Fee, Lab Fee
 - Amount Paid: ₹50,000
-- Transaction ID: TXN987654321
+- Session ID: cs_test_a1B2c3D4...
 - Date: 15 Jan 2024, 10:30 AM
 - Status: Paid
 
 Thank you for your payment.
 
 For any queries, contact:
-Email: support@stmary.edu
+Email: support@dpsschools.edu.in
 Phone: +919876543210
 
----
-St. Mary's School
+DPS Delhi
 ```
 
 **Step 10f: Redirect Student Back to Portal**
 
 **Redirect URL (Success):**
 ```
-https://stmary-edu.antpay.live/dashboard?paymentStatus=success&txnId=TXN987654321
+https://delhi.dpsschools.edu.in/dashboard?paymentStatus=success&txnId=cs_test_a1B2c3D4
 ```
 
 **Redirect URL (Failure):**
 ```
-https://stmary-edu.antpay.live/dashboard?paymentStatus=failed&txnId=TXN987654321
+https://delhi.dpsschools.edu.in/dashboard?paymentStatus=failed&txnId=cs_test_a1B2c3D4
 ```
 
 **Frontend Processing:**
@@ -1058,14 +1094,15 @@ https://stmary-edu.antpay.live/dashboard?paymentStatus=failed&txnId=TXN987654321
 
 #### Step 11: Payment Failure Handling
 
-**If Payment Fails:**
+**If Payment Fails or is Cancelled:**
 
-**Callback Parameters:**
+If the student cancels payment on the Stripe Checkout page, they are redirected to the `cancel_url`:
+
 ```
-status=failed
-ipgid=TXN987654321
-invoiceID=St. Mary's School_P1705329600000
+GET https://api.dpsschools.edu.in/payment-failed
 ```
+
+If the Checkout Session expires (sessions expire after 24 hours by default), the payment remains in "Pending" status. The backend can also detect failed payments when the session status is not `complete`:
 
 **Backend Processing:**
 
@@ -1073,10 +1110,10 @@ invoiceID=St. Mary's School_P1705329600000
 ```sql
 UPDATE payment
 SET
-  mSwipeIpgStatus = 'failed',
+  stripePaymentStatus = 'expired',
   paymentStatus = 'Failed',
   updatedAt = NOW()
-WHERE mSwipeIpgInvoiceId = 'St. Mary''s School_P1705329600000'
+WHERE id = 1001
 ```
 
 **Update Payment Collection Item Details:**
@@ -1095,7 +1132,7 @@ WHERE payment_id = 1001
 
 **Redirect:**
 ```
-https://stmary-edu.antpay.live/dashboard?paymentStatus=failed&txnId=TXN987654321
+https://delhi.dpsschools.edu.in/dashboard?paymentStatus=failed&txnId=cs_test_a1B2c3D4
 ```
 
 **Frontend Display:**
@@ -1109,7 +1146,6 @@ https://stmary-edu.antpay.live/dashboard?paymentStatus=failed&txnId=TXN987654321
 - Student receives failure notification
 - Student can initiate new payment for same fees
 
----
 
 ### Phase 5: View Payment History
 
@@ -1125,7 +1161,7 @@ GET /api/payment/payment-transaction-history?studentLoginId={studentLoginId}
 
 **API Request:**
 ```http
-GET /api/payment/payment-transaction-history?studentLoginId=JOHND-A1B2C
+GET /api/payment/payment-transaction-history?studentLoginId=RAHUL-A1B2C
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
 ```
 
@@ -1136,17 +1172,17 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
     "id": 1001,
     "student": {
       "id": 123,
-      "studentLoginId": "JOHND-A1B2C"
+      "studentLoginId": "RAHUL-A1B2C"
     },
     "institute": {
       "id": 1,
-      "instituteName": "St. Mary's School"
+      "instituteName": "DPS Delhi"
     },
     "amount": 50000,
-    "mSwipeIpgOrderId": "St. Mary's School_P1705329600000",
-    "mSwipeIpgTransId": "TXN987654321",
-    "mSwipeIpgInvoiceId": "St. Mary's School_P1705329600000",
-    "mSwipeIpgStatus": "success",
+    "stripeSessionId": "cs_test_a1B2c3D4e5F6g7H8i9J0...",
+    "stripePaymentIntentId": "pi_3N1abc...",
+    "stripeInvoiceId": "DPS Delhi_P1705329600000",
+    "stripePaymentStatus": "complete",
     "paymentStatus": "Succeeded",
     "isRefunded": false,
     "createdAt": "2024-01-15T10:30:00Z"
@@ -1155,17 +1191,17 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
     "id": 1002,
     "student": {
       "id": 123,
-      "studentLoginId": "JOHND-A1B2C"
+      "studentLoginId": "RAHUL-A1B2C"
     },
     "institute": {
       "id": 1,
-      "instituteName": "St. Mary's School"
+      "instituteName": "DPS Delhi"
     },
     "amount": 15000,
-    "mSwipeIpgOrderId": "St. Mary's School_P1705329700000",
-    "mSwipeIpgTransId": "TXN987654322",
-    "mSwipeIpgInvoiceId": "St. Mary's School_P1705329700000",
-    "mSwipeIpgStatus": "success",
+    "stripeSessionId": "cs_test_x9Y8z7W6v5U4t3S2...",
+    "stripePaymentIntentId": "pi_3N2def...",
+    "stripeInvoiceId": "DPS Delhi_P1705329700000",
+    "stripePaymentStatus": "complete",
     "paymentStatus": "Succeeded",
     "isRefunded": false,
     "createdAt": "2024-01-10T14:20:00Z"
@@ -1175,10 +1211,10 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
 
 **Frontend Display:**
 
-| Date | Transaction ID | Amount | Status | Invoice ID |
-|------|---------------|--------|--------|------------|
-| 15 Jan 2024, 10:30 AM | TXN987654321 | ₹50,000 | Succeeded | St. Mary's School_P1705329600000 |
-| 10 Jan 2024, 02:20 PM | TXN987654322 | ₹15,000 | Succeeded | St. Mary's School_P1705329700000 |
+| Date | Session ID | Amount | Status | Invoice ID |
+|------|-----------|--------|--------|------------|
+| 15 Jan 2024, 10:30 AM | cs_test_a1B2c3D4... | ₹50,000 | Succeeded | DPS Delhi_P1705329600000 |
+| 10 Jan 2024, 02:20 PM | cs_test_x9Y8z7W6... | ₹15,000 | Succeeded | DPS Delhi_P1705329700000 |
 
 **Status Indicators:**
 - ✅ Succeeded (green)
@@ -1204,21 +1240,21 @@ POST /api/payment/download-student-fee-report?studentLoginId={studentLoginId}
 
 **API Request:**
 ```http
-POST /api/payment/download-student-fee-report?studentLoginId=JOHND-A1B2C
+POST /api/payment/download-student-fee-report?studentLoginId=RAHUL-A1B2C
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
 ```
 
 **API Response:**
 - Content-Type: `application/vnd.openxmlformats-officedocument.spreadsheetml.sheet`
-- Content-Disposition: `attachment; filename="payment-history-JOHND-A1B2C.xlsx"`
+- Content-Disposition: `attachment; filename="payment-history-RAHUL-A1B2C.xlsx"`
 - Body: Binary Excel file
 
 **Excel File Structure:**
 
 | Ref No | Institute | Created On | Description | Fee Type | Due Date | Amount Paid | Status | Payment Mode |
 |--------|-----------|------------|-------------|----------|----------|-------------|--------|--------------|
-| Quarter 1 2024 Fees | St. Mary's School | 15 Jan 2024 | Q1 fees including tuition and lab charges | Tuition Fee | 15 Feb 2024 | ₹30,000 | Fully Paid | PG |
-| Quarter 1 2024 Fees | St. Mary's School | 15 Jan 2024 | Q1 fees including tuition and lab charges | Lab Fee | 15 Feb 2024 | ₹20,000 | Fully Paid | PG |
+| Quarter 1 2024 Fees | DPS Delhi | 15 Jan 2024 | Q1 fees including tuition and lab charges | Tuition Fee | 15 Feb 2024 | ₹30,000 | Fully Paid | PG |
+| Quarter 1 2024 Fees | DPS Delhi | 15 Jan 2024 | Q1 fees including tuition and lab charges | Lab Fee | 15 Feb 2024 | ₹20,000 | Fully Paid | PG |
 
 **What to verify:**
 - Excel file downloads successfully
@@ -1226,7 +1262,6 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
 - Data is accurate and complete
 - File can be opened in Excel/Google Sheets
 
----
 
 ## Automated Systems
 
@@ -1375,7 +1410,6 @@ Computed Updates:
 
 **Location:** [solid-api/src/fees-portal/computed-providers/payment-collection-item-amount-provider.ts]
 
----
 
 ### 2. Scheduled Jobs
 
@@ -1560,7 +1594,7 @@ for (const [studentId, items] of Object.entries(groupedByStudent)) {
       totalAmountDue: totalAmountDue,
       feeTypes: feeTypes,
       status: 'Pending',
-      redirectUrl: `https://${institute.hostedPagePrefix}-${process.env.EDU_BASE_DOMAIN}/?id=${student.studentLoginId}`,
+      redirectUrl: `https://${institute.hostedPagePrefix}.${process.env.EDU_BASE_DOMAIN}/?id=${student.studentLoginId}`,
       createdAt: new Date().toLocaleDateString('en-GB', {
         day: '2-digit',
         month: 'short',
@@ -1587,17 +1621,17 @@ for (const [studentId, items] of Object.entries(groupedByStudent)) {
     "totalAmountDue": 35000,
     "feeTypes": "Tuition Fee, Lab Fee",
     "status": "Pending",
-    "redirectUrl": "https://stmary-edu.antpay.live/?id=JOHND-A1B2C",
+    "redirectUrl": "https://delhi.dpsschools.edu.in/?id=RAHUL-A1B2C",
     "createdAt": "25-JAN-2024",
     "paymentCollections": "Quarter 1 2024 Fees"
   },
   "student": {
-    "studentName": "John Doe",
-    "studentId": "STU2024001",
-    "studentLoginId": "JOHND-A1B2C"
+    "studentName": "Rahul Sharma",
+    "studentId": "STU001",
+    "studentLoginId": "RAHUL-A1B2C"
   },
-  "instituteLogo": "https://s3.amazonaws.com/school-logos/stmary.png",
-  "supportEmail": "support@stmary.edu",
+  "instituteLogo": "https://s3.amazonaws.com/school-logos/dps-delhi.png",
+  "supportEmail": "support@dpsschools.edu.in",
   "supportMobile": "+919876543210"
 }
 ```
@@ -1608,7 +1642,7 @@ Dear Parent/Guardian,
 
 Payment Reminder - Pending Fees
 
-This is a reminder that the following fees for John Doe (STU2024001) are pending:
+This is a reminder that the following fees for Rahul Sharma (STU001) are pending:
 
 Payment Collections: Quarter 1 2024 Fees
 Fee Types: Tuition Fee, Lab Fee
@@ -1616,14 +1650,13 @@ Total Amount Due: ₹35,000
 Status: Pending
 
 Please log in to the student portal to make the payment:
-https://stmary-edu.antpay.live/?id=JOHND-A1B2C
+https://delhi.dpsschools.edu.in/?id=RAHUL-A1B2C
 
 For any queries, contact:
-Email: support@stmary.edu
+Email: support@dpsschools.edu.in
 Phone: +919876543210
 
----
-St. Mary's School
+DPS Delhi
 ```
 
 **What This Job Does:**
@@ -1635,7 +1668,6 @@ St. Mary's School
 
 **Location:** [solid-api/src/fees-portal/scheduled-jobs/send-email-schedule-jobs.service.ts]
 
----
 
 ## Technical Implementation Details
 
@@ -1752,8 +1784,8 @@ export class StudentController {
 {
   "success": true,
   "message": "Operation successful",
-  "studentId": "STU2024001",
-  "studentLoginId": "JOHND-A1B2C",
+  "studentId": "STU001",
+  "studentLoginId": "RAHUL-A1B2C",
   "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
 }
 ```
@@ -1779,7 +1811,7 @@ export class StudentController {
 **Success:**
 ```json
 {
-  "url": "https://upi.mswipe.com/pay/ABC123?key=value"
+  "url": "https://checkout.stripe.com/c/pay/cs_test_a1B2c3D4..."
 }
 ```
 
@@ -1794,20 +1826,9 @@ export class StudentController {
 
 #### Payment Callback Parameters
 
-**GET Request:**
+**GET Request (Stripe redirect):**
 ```
-/api/payment/payment-callback?status=success&ipgid=TXN123&encIpgId=ENC_ABC&invoiceID=School_P123
-```
-
-**POST Request:**
-```json
-{
-  "Status": "success",
-  "TransID": "TXN123",
-  "EncID": "ENC_ABC",
-  "InvoiceID": "School_P123",
-  "PaymentID": "PAY456"
-}
+/api/payment/payment-callback?session_id=cs_test_a1B2c3D4...
 ```
 
 ### Error Handling
@@ -1844,20 +1865,19 @@ export class StudentController {
 # JWT Authentication
 IAM_JWT_SECRET=your_jwt_secret_key_here
 
-# Mswipe Payment Gateway
-MSWIPE_LOGIN_URL=https://api.mswipe.com/login
-MSWIPE_PAYMENT_GATEWAY_URL=https://api.mswipe.com/payment/createlink
-MSWIPE_PAYMENT_TRANSACTION_URL=https://api.mswipe.com/transaction/status
+# Stripe Payment Gateway
+STRIPE_SECRET_KEY=sk_test_your_stripe_secret_key
+PAYMENT_GATEWAY=stripe
 
 # Application URLs
-BASE_URL=https://api.school-fees-portal.com
-EDU_BASE_DOMAIN=edu.antpay.live
-STUDENT_PORTAL_FRONTEND_BASE_URL=https://student.edu.antpay.live
+BASE_URL=https://api.dpsschools.edu.in
+EDU_BASE_DOMAIN=dpsschools.edu.in
+STUDENT_PORTAL_FRONTEND_BASE_URL=https://delhi.dpsschools.edu.in
 
 # Email Service
 SMTP_HOST=smtp.gmail.com
 SMTP_PORT=587
-SMTP_USER=noreply@school.com
+SMTP_USER=noreply@dpsschools.edu.in
 SMTP_PASSWORD=smtp_password
 
 # AWS S3 (for media files)
@@ -1871,10 +1891,10 @@ S3_AWS_SECRET_KEY=your_secret_key
 **Payment Table:**
 ```sql
 ALTER TABLE payment
-ADD COLUMN mSwipeIpgTransId VARCHAR(255),
-ADD COLUMN mSwipeIpgPaymentId VARCHAR(255),
-ADD COLUMN mSwipeEncodedIpgId VARCHAR(255),
-ADD COLUMN mSwipeIpgStatus VARCHAR(50);
+ADD COLUMN stripeSessionId VARCHAR(255),
+ADD COLUMN stripePaymentIntentId VARCHAR(255),
+ADD COLUMN stripeInvoiceId VARCHAR(255),
+ADD COLUMN stripePaymentStatus VARCHAR(50);
 ```
 
 **Student Table:**
@@ -1885,7 +1905,6 @@ ADD COLUMN otpExpiresAt TIMESTAMP,
 ADD COLUMN token TEXT;
 ```
 
----
 
 ## Security Considerations
 
@@ -1925,21 +1944,21 @@ const token = jwt.sign(
 
 **Payment Gateway Integration:**
 - No payment card data stored on backend
-- All card transactions handled by PCI-compliant Mswipe
-- Redirect to gateway for payment processing
-- Webhook validation to prevent tampering
+- All card transactions handled by PCI-compliant Stripe Checkout
+- Redirect to Stripe-hosted checkout page for payment processing
+- Session verification on callback to prevent tampering
 
 **Invoice ID Generation:**
 ```typescript
 // Unique invoice ID format
 const invoiceId = `${instituteName}_P${Date.now()}`
-// Example: "St. Mary's School_P1705329600000"
+// Example: "DPS Delhi_P1705329600000"
 ```
 
-**Webhook Security:**
-- Accept callbacks only from Mswipe IP ranges
-- Validate invoice ID matches existing payment
-- Verify transaction ID from gateway
+**Callback Security:**
+- Verify Stripe Checkout Session via `stripe.checkout.sessions.retrieve()`
+- Validate payment metadata matches existing payment record
+- Verify session payment status from Stripe API
 - Check payment amount matches original request
 
 ### 3. Authorization
@@ -2000,7 +2019,6 @@ async verifyOtp(@Body() dto: VerifyOtpDto) {
 }
 ```
 
----
 
 ## Best Practices
 
@@ -2119,7 +2137,6 @@ if (error.message === 'Invalid OTP') {
 showError(error.message) // "Token validation failed at line 42"
 ```
 
----
 
 ## Troubleshooting
 
@@ -2138,7 +2155,7 @@ showError(error.message) // "Token validation failed at line 42"
 **Diagnostic Steps:**
 ```bash
 # Check student email address
-curl -X GET "http://localhost:3000/api/student/login/initiate/JOHND-A1B2C"
+curl -X GET "http://localhost:3000/api/student/login/initiate/RAHUL-A1B2C"
 
 # Check email service logs
 docker logs solid-api | grep "OTP email"
@@ -2170,38 +2187,37 @@ env | grep SMTP
 **Issue:** "Generate payment link" fails
 
 **Possible Causes:**
-- Mswipe credentials incorrect
-- Mswipe service down
+- Stripe API key incorrect or missing
+- Stripe service down
 - Network connectivity issue
 - Invalid payment amount
 
 **Diagnostic Steps:**
 ```bash
-# Check Mswipe credentials
-env | grep MSWIPE
+# Check Stripe environment variables
+env | grep STRIPE
 
-# Test Mswipe login
-curl -X POST "https://api.mswipe.com/login" \
-  -H "Content-Type: application/json" \
-  -d '{"clientId":"username","password":"password","applId":"api","channelId":"pbl"}'
+# Test Stripe API connectivity
+curl https://api.stripe.com/v1/checkout/sessions \
+  -u sk_test_your_key: \
+  -d "limit=1"
 
 # Check backend logs
-docker logs solid-api | grep "Mswipe"
+docker logs solid-api | grep "Stripe"
 ```
 
 **Solution:**
-- Verify Mswipe credentials in environment
-- Test Mswipe API connectivity
-- Contact Mswipe support if service is down
+- Verify `STRIPE_SECRET_KEY` in environment
+- Test Stripe API connectivity
+- Check [Stripe Status](https://status.stripe.com/) if service is down
 
 #### 4. Payment Callback Not Received
 
 **Issue:** Payment completed but status not updated
 
 **Possible Causes:**
-- Callback URL incorrect in Mswipe config
-- Firewall blocking Mswipe IP
-- Backend service down during callback
+- `success_url` incorrect in Stripe Checkout Session config
+- Backend service down when student was redirected back
 - Callback endpoint error
 
 **Diagnostic Steps:**
@@ -2213,13 +2229,12 @@ docker logs solid-api | grep "payment-callback"
 echo $BASE_URL/api/payment/payment-callback
 
 # Check if callback endpoint is accessible
-curl -X GET "http://localhost:3000/api/payment/payment-callback?status=success&ipgid=TEST&invoiceID=TEST_P123"
+curl -X GET "http://localhost:3000/api/payment/payment-callback?session_id=cs_test_123"
 ```
 
 **Solution:**
-- Verify BASE_URL environment variable
-- Check firewall allows Mswipe IPs
-- Contact Mswipe to resend webhook
+- Verify `BASE_URL` environment variable matches the `success_url` used in Checkout Session creation
+- Check Stripe Dashboard for payment status and session details
 - Manually update payment status if needed
 
 #### 5. Computed Fields Not Updating
@@ -2288,7 +2303,7 @@ docker logs solid-api | grep "LateFeePaymentCalculatorScheduledJob"
 ```bash
 # Verify token in database
 psql -U postgres -d school_fees -c \
-  "SELECT studentLoginId, token FROM student WHERE studentLoginId = 'JOHND-A1B2C'"
+  "SELECT studentLoginId, token FROM student WHERE studentLoginId = 'RAHUL-A1B2C'"
 
 # Check JWT secret
 env | grep IAM_JWT_SECRET
@@ -2308,14 +2323,14 @@ SELECT
   parentEmailAddress, otp, otpExpiresAt,
   LEFT(token, 20) as token_preview
 FROM student
-WHERE studentLoginId = 'JOHND-A1B2C';
+WHERE studentLoginId = 'RAHUL-A1B2C';
 ```
 
 **Check Payment Status:**
 ```sql
 SELECT
   p.id, p.amount, p.paymentStatus,
-  p.mSwipeIpgTransId, p.createdAt
+  p.stripeSessionId, p.createdAt
 FROM payment p
 WHERE p.student_id = 123
 ORDER BY p.createdAt DESC;
@@ -2338,7 +2353,7 @@ ORDER BY pci.dueDate;
 ```sql
 SELECT
   pcid.id, pcid.amountPaid, pcid.paymentStatus,
-  pcid.paymentDate, p.mSwipeIpgTransId
+  pcid.paymentDate, p.stripeSessionId
 FROM payment_collection_item_detail pcid
 JOIN payment p ON pcid.payment_id = p.id
 WHERE pcid.paymentCollectionItem_id = 101
@@ -2356,12 +2371,11 @@ WHERE moduleUserKey = 'fees-portal';
 docker logs solid-api | grep "sendEmail" | tail -20
 ```
 
-**Check Mswipe Integration:**
+**Check Stripe Integration:**
 ```bash
-docker logs solid-api | grep "Mswipe" | tail -20
+docker logs solid-api | grep "Stripe" | tail -20
 ```
 
----
 
 ## FAQ
 
@@ -2385,16 +2399,16 @@ A: Late fees will be automatically calculated and added to the total amount base
 A: Yes, if the fee type allows partial payments (`partPaymentAllowed = true`). Otherwise, the full amount must be paid.
 
 **Q: What payment methods are supported?**
-A: Mswipe gateway supports UPI, Credit/Debit cards, and Net Banking. The specific methods available depend on the institute's Mswipe configuration.
+A: Stripe Checkout supports card payments (Credit/Debit cards). Additional payment methods can be configured via the Stripe Dashboard.
 
 **Q: How long does payment processing take?**
-A: Most payments are processed instantly. The webhook callback typically arrives within seconds of payment completion.
+A: Most payments are processed instantly. The student is redirected back to the portal immediately after payment completion on Stripe Checkout.
 
 **Q: What if payment fails?**
 A: If payment fails, the student will be redirected back to the portal with a failure message. The payment record will be marked as "Failed" and the student can retry.
 
 **Q: Can students get refunds?**
-A: Refunds must be initiated by the institute admin through the Mswipe merchant dashboard. The `isRefunded` flag will be updated accordingly.
+A: Refunds must be initiated by the institute admin through the Stripe Dashboard. The `isRefunded` flag will be updated accordingly.
 
 ### Technical Questions
 
@@ -2402,10 +2416,10 @@ A: Refunds must be initiated by the institute admin through the Mswipe merchant 
 A: Yes, the student portal is a separate frontend application and can run on any domain. CORS must be configured on the backend to allow requests from the frontend domain.
 
 **Q: How is payment security ensured?**
-A: Payments are processed through PCI-compliant Mswipe gateway. No card data is stored on the backend. JWT tokens ensure only authenticated students can initiate payments.
+A: Payments are processed through PCI-compliant Stripe Checkout. No card data is stored on the backend. JWT tokens ensure only authenticated students can initiate payments.
 
 **Q: What happens if webhook is missed?**
-A: If the webhook is missed (e.g., backend down), the payment status won't update automatically. Admins can manually verify the payment status through Mswipe merchant dashboard and update records.
+A: Since callbacks are redirect-based (not webhooks), the callback is missed if the student closes the browser before being redirected back. Admins can verify the payment status through the Stripe Dashboard and manually update records if needed.
 
 **Q: Can computed fields be triggered manually?**
 A: Computed fields are triggered automatically on configured database operations. For manual recalculation, you can update the triggering entity (e.g., update PaymentCollectionItemDetail to trigger amount recalculation).
@@ -2422,11 +2436,10 @@ A:
 
 **Q: Payment shows as pending but was completed - what to do?**
 A:
-1. Check backend logs for webhook callback
-2. Verify callback URL is accessible from Mswipe
-3. Contact Mswipe to resend webhook
-4. Manually verify payment in Mswipe dashboard
-5. Update payment status manually if needed
+1. Check backend logs for redirect callback
+2. Verify `BASE_URL` and `success_url` configuration
+3. Check Stripe Dashboard for session and payment status
+4. Manually update payment status if needed
 
 **Q: Late fees not showing - what to check?**
 A:
@@ -2436,7 +2449,6 @@ A:
 4. Verify payment is past due date
 5. Manually run late fee calculator job
 
----
 
 ## Summary
 
@@ -2455,9 +2467,9 @@ This documentation covers the complete **Making Payment** use case for the stude
    - Track payment history
 
 3. **Payment Processing**
-   - Integrated Mswipe payment gateway
+   - Integrated Stripe payment gateway
    - Support for full and partial payments
-   - Webhook-based status updates
+   - Redirect-based status updates via Stripe Checkout
 
 4. **Automated Systems**
    - Computed fields for amount calculations

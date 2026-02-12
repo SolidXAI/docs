@@ -1,5 +1,5 @@
 ---
-sidebar_position: 3
+sidebar_position: 2
 title: Activate Institute Portal
 description: Learn how to activate an institute's fee portal and make it live for students and parents.
 summary: Complete guide to activating institute portals with automatic DNS and web server configuration
@@ -13,7 +13,9 @@ The activation functionality requires a Unix-based operating system (e.g., Ubunt
 
 ### Overview
 
-The Activate Institute functionality provisions the infrastructure needed to make an institute's fee portal accessible to students and parents. This feature automates the creation of DNS records and web server configurations, transforming an inactive institute into a live, operational fee collection portal.
+The Activate Institute functionality provisions the infrastructure needed to make an institute's fee portal accessible to students and parents.
+
+This feature automates the creation of DNS records and web server configurations, transforming an inactive institute into a live, operational fee collection portal.
 
 **Key Features:**
 - Automatic subdomain creation based on institute's hosted page prefix
