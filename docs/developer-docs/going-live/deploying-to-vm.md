@@ -190,6 +190,9 @@ sudo systemctl enable nginx
 sudo ufw allow 'Nginx Full'
 sudo ufw enable
 ```
+:::info
+ This step might not be necessary if you have an external firewall or security group configured for your VM. Ensure that ports 80 and 443 are open for HTTP and HTTPS traffic.
+:::
 
 <h3 className="card-headear-wrapper">
     <HiOutlineDocumentText size={22} />
