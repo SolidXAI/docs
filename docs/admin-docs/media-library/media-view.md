@@ -209,7 +209,7 @@ The Media View provides an intuitive interface for managing and organizing your 
 
 ## Best Practices
 
-<details>
+<details open>
   <summary className="card-title card-headear-wrapper">
     <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
     Organization
@@ -222,7 +222,7 @@ The Media View provides an intuitive interface for managing and organizing your 
   </ul>
 </details>
 
-<details>
+<details open>
   <summary className="card-title card-headear-wrapper">
     <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
     Performance
@@ -235,7 +235,7 @@ The Media View provides an intuitive interface for managing and organizing your 
   </ul>
 </details>
 
-<details>
+<details open>
   <summary className="card-title card-headear-wrapper">
     <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
     Security
@@ -248,7 +248,7 @@ The Media View provides an intuitive interface for managing and organizing your 
   </ul>
 </details>
 
-<details>
+<details open>
   <summary className="card-title card-headear-wrapper">
     <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
     Workflow

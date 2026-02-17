@@ -1800,7 +1800,7 @@ export function GenerateTemplateFormat({ instituteId }) {
 
 Below is the complete form layout JSON for the Payment Collection model, including the formButtons configuration:
 
-<details>
+<details open>
 <summary>Click to expand the complete JSON layout</summary>
 
 ```json

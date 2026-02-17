@@ -185,7 +185,7 @@ All API errors follow a consistent format:
    - Include response examples
    - Note any limitations -->
 
-  <details>
+  <details open>
     <summary className="card-title card-headear-wrapper">
       <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
       Authentication
@@ -198,7 +198,7 @@ All API errors follow a consistent format:
     </ul>
   </details>
 
-  <details>
+  <details open>
     <summary className="card-title card-headear-wrapper">
       <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
        Request Optimization
@@ -211,7 +211,7 @@ All API errors follow a consistent format:
     </ul>
   </details>
 
-  <details>
+  <details open>
     <summary className="card-title card-headear-wrapper">
       <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
        Error Handling
@@ -224,7 +224,7 @@ All API errors follow a consistent format:
     </ul>
   </details>
 
-  <details>
+  <details open>
     <summary className="card-title card-headear-wrapper">
       <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
        Documentation

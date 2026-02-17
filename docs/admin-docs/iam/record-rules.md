@@ -210,7 +210,7 @@ Rules are evaluated in priority order:
 
 ## Best Practices
 
-<details>
+<details open>
   <summary className="card-title card-headear-wrapper">
     <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
     Rule Design
@@ -223,7 +223,7 @@ Rules are evaluated in priority order:
   </ul>
 </details>
 
-<details>
+<details open>
   <summary className="card-title card-headear-wrapper">
     <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
     Security
@@ -236,7 +236,7 @@ Rules are evaluated in priority order:
   </ul>
 </details>
 
-<details>
+<details open>
   <summary className="card-title card-headear-wrapper">
     <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
     Maintenance
@@ -249,7 +249,7 @@ Rules are evaluated in priority order:
   </ul>
 </details>
 
-<details>
+<details open>
   <summary className="card-title card-headear-wrapper">
     <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
     Testing

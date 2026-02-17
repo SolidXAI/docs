@@ -333,7 +333,7 @@ The Settings module includes:
 ## Best Practices
 
 
-<details>
+<details open>
   <summary className="card-title card-headear-wrapper">
     <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
     List of Values
@@ -347,7 +347,7 @@ The Settings module includes:
   </ul>
 </details>
 
-<details>
+<details open>
   <summary className="card-title card-headear-wrapper">
     <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
     Logging
@@ -361,7 +361,7 @@ The Settings module includes:
   </ul>
 </details>
 
-<details>
+<details open>
   <summary className="card-title card-headear-wrapper">
     <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
     Import/Export
@@ -375,7 +375,7 @@ The Settings module includes:
   </ul>
 </details>
 
-<details>
+<details open>
   <summary className="card-title card-headear-wrapper">
     <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
     Saved Views

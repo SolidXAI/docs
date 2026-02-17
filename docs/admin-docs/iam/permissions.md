@@ -241,7 +241,7 @@ Permissions can be grouped for easier management:
 
 ### Best Practices 
 
-<details>
+<details open>
   <summary className="card-title card-headear-wrapper">
     <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
     Permission Design
@@ -254,7 +254,7 @@ Permissions can be grouped for easier management:
   </ul>
 </details>
 
-<details>
+<details open>
   <summary className="card-title card-headear-wrapper">
     <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
     Permission Assignment
@@ -267,7 +267,7 @@ Permissions can be grouped for easier management:
   </ul>
 </details>
 
-<details>
+<details open>
   <summary className="card-title card-headear-wrapper">
     <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
     Security
@@ -280,7 +280,7 @@ Permissions can be grouped for easier management:
   </ul>
 </details>
 
-<details>
+<details open>
   <summary className="card-title card-headear-wrapper">
     <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
     Maintenance

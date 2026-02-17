@@ -268,7 +268,7 @@ Customize form layout and behavior through JSON configuration:
 
 ## Best Practices
 
-  <details>
+  <details open>
     <summary className="card-title card-headear-wrapper">
     <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
       Layout Design
@@ -281,7 +281,7 @@ Customize form layout and behavior through JSON configuration:
     </ul>
   </details>
 
-  <details>
+  <details open>
     <summary className="card-title card-headear-wrapper">
     <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
       Validation
@@ -294,7 +294,7 @@ Customize form layout and behavior through JSON configuration:
     </ul>
   </details>
 
-  <details>
+  <details open>
     <summary className="card-title card-headear-wrapper">
     <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
       Performance
@@ -307,7 +307,7 @@ Customize form layout and behavior through JSON configuration:
     </ul>
   </details>
 
-  <details>
+  <details open>
     <summary className="card-title card-headear-wrapper">
     <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
       User Experience
@@ -320,7 +320,7 @@ Customize form layout and behavior through JSON configuration:
     </ul>
   </details>
 
-  <details>
+  <details open>
     <summary className="card-title card-headear-wrapper">
     <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
       Workflow Integration
@@ -333,7 +333,7 @@ Customize form layout and behavior through JSON configuration:
     </ul>
   </details>
 
-  <details>
+  <details open>
     <summary className="card-title card-headear-wrapper">
     <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
       Chatter/Comments

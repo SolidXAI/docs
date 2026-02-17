@@ -30,7 +30,7 @@ As an example, consider extending the `User` model into an `InstituteUser` model
 2. Specify `User` as the `parentModelUserKey`.  
 3. Add your custom fields and relationships.  
 
-<details>
+<details open>
   <summary className="card-title card-headear-wrapper">
     <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
     Sample Field Metadata for <code>instituteUser</code>
@@ -84,7 +84,7 @@ User creation involves more than a simple insert (password encryption, password 
 
 ### Default Generated Code
 
-<details>
+<details open>
   <summary className="card-title card-headear-wrapper">
     <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
     Default Implementation
@@ -104,7 +104,7 @@ async create(@Body() createDto: CreateInstituteUserDto, @UploadedFiles() files: 
 
 Replace the default with logic that validates input, converts DTOs, and calls `signupForExtensionUser`:
 
-<details>
+<details open>
   <summary className="card-title card-headear-wrapper">
     <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
     Revised Implementation (InstituteController)
@@ -133,7 +133,7 @@ async create(@Body() createDto: CreateInstituteUserDto, @UploadedFiles() files: 
 
 ### Supporting Methods in Service
 
-<details>
+<details open>
   <summary className="card-title card-headear-wrapper">
     <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
     Methods Implementation (InstituteService)
@@ -178,7 +178,7 @@ async validateEmailDomain(instituteId: number, email: string) {
 
 When `isChild: true` and `User` is the parent model, SolidX generates DTOs and Entities extending the base User model:
 
-<details>
+<details open>
   <summary className="card-title card-headear-wrapper">
     <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
     DTOs & Entity

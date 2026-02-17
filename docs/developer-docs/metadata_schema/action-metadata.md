@@ -50,7 +50,7 @@ In case a custom action is not associated with a model, the model user key can b
 
 ### `Solid` Action Example
 Below is an example of a `solid` action configuration, which links to a standard SolidX view for listing institutes.
-<details>
+<details open>
 <summary className="card-title card-headear-wrapper">
     <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
  Click to expand
@@ -80,7 +80,7 @@ Below is an example of a `solid` action configuration, which links to a standard
 
 ### `Custom` Action Example
 Below is an example of a `custom` action configuration, which links to a custom frontend component for the fees portal home page.
-<details>
+<details open>
 <summary className="card-title card-headear-wrapper">
     <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
  Click to expand
@@ -111,7 +111,7 @@ Below is an example of a `custom` action configuration, which links to a custom 
 ## Complete Navigation Structure Example
 
 Here's a complete navigation structure example from the fees-portal, illustrating how menus and actions are defined together:
-<details>
+<details open>
 <summary className="card-title card-headear-wrapper">
     <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
  Click to expand

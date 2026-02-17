@@ -37,7 +37,7 @@ It listens to events such as:
 
 ## Example: Creating a Subscriber
 Below is an example of a subscriber that listens to `afterInsert` and `afterUpdate` events on a `User` entity. It logs the events and calls a dedicated audit service to handle the business logic.
-<details>
+<details open>
 <summary>user-subscriber.ts</summary>
 ```ts
 import { Injectable, Logger } from "@nestjs/common";
@@ -72,7 +72,7 @@ export class UserSubscriber implements EntitySubscriberInterface<User> {
 </details>
 
 ### Registering the Subscriber
-<details>
+<details open>
 <summary>myModule.module.ts</summary>
 ```ts
 @Module({

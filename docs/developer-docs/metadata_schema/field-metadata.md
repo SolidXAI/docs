@@ -36,7 +36,7 @@ Every SolidX model is composed of fields. Fields in SolidX go over and above the
 
 
 ### Example: Institute + Fee Type Model fields
-<details>
+<details open>
  <summary className="card-title card-headear-wrapper">
     <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
     Field Schema
@@ -1102,7 +1102,7 @@ At least one side must be the owner, otherwise the many-to-many relation will no
 Fixed filter (JSON) applied when fetching related records from the admin ui. This can be used to apply static as well as dynamic filters when we want to conditionally filter the values shown for the related records
 
 The filter is a JSON object of schema type BasicFilterDto:
-<details>
+<details open>
  <summary className="card-title card-headear-wrapper">
     <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
     Filter schema

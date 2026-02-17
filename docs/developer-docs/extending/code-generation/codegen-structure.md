@@ -77,7 +77,7 @@ Each endpoint is decorated for:
 -  **Swagger documentation** via `@ApiTags` and `@ApiQuery`
 -  **File uploads** via `@UseInterceptors(AnyFilesInterceptor())`
 
-<details>
+<details open>
  <summary className="card-title card-headear-wrapper">
     <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
     Click to view full sample controller code
@@ -195,7 +195,7 @@ This base class provides reusable functionality such as:
 - Soft delete and recovery support
 - Seamless integration with metadata-driven configuration
 
-<details>
+<details open>
  <summary className="card-title card-headear-wrapper">
     <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
     Click to view full sample service code
@@ -254,7 +254,7 @@ They include:
 -  `Update` DTO includes all fields from the `Create` DTO, but marked as optional
 -  `Update` DTO also includes an `id` field used for identifying the record to update
 
-<details>
+<details open>
  <summary className="card-title card-headear-wrapper">
     <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
    Click to view full sample Create DTO
@@ -288,7 +288,7 @@ export class CreateFeeTypeDto {
 ```
 </details>
 
-<details>
+<details open>
  <summary className="card-title card-headear-wrapper">
     <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
     Click to view full sample Update DTO
@@ -344,7 +344,7 @@ Key features include:
 -  Nullable and unique constraints
 -  Index support for optimized querying
 
-<details>
+<details open>
  <summary className="card-title card-headear-wrapper">
     <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
     Click to view entity code
@@ -396,7 +396,7 @@ It extends `SolidBaseRepository<T>`, which provides:
 
 This class is the right place to define custom database queries and overrides beyond standard CRUD operations.
 
-<details>
+<details open>
  <summary className="card-title card-headear-wrapper">
     <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
     Click to view repository code
@@ -511,7 +511,7 @@ Each model includes auto-generated layout JSON files to define UI behavior in th
 Defines table columns, sorting, filtering, and global search settings.  
 Refer to [List View](../../../admin-docs/layouts/list-view.md) for full documentation.
 
-<details>
+<details open>
  <summary className="card-title card-headear-wrapper">
     <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
    Default list layout for the `Fee Type` model
@@ -558,7 +558,7 @@ Refer to [List View](../../../admin-docs/layouts/list-view.md) for full document
 Defines how fields are grouped and rendered in create/edit screens.  
 Refer to [Form View](../../../admin-docs/layouts/form-view.md) for full documentation.
 
-<details>
+<details open>
  <summary className="card-title card-headear-wrapper">
     <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
     Default form layout for the `Fee Type` model

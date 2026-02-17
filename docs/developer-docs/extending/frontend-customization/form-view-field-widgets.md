@@ -20,7 +20,7 @@ You can use either:
 - **Custom widgets** (that you create).
 
  Example: Display an integer field `score` as a **slider** using the built-in `integerSlider` widget.
-<details>
+<details open>
     <summary className="card-title card-headear-wrapper">
         <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
         <code>Using Built-in Widget</code>
@@ -56,7 +56,7 @@ In the above example, the `editWidget` attribute specifies the widget to use in 
 
 ### 1. Create the Widget Component
 Here’s an example of an **integer slider widget**. This widget allows users to select an integer value using a slider.
-<details>
+<details open>
  <summary className="card-title card-headear-wrapper">
     <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
     <code>SolidIntegerSliderStyleFormEditWidget</code>
@@ -165,7 +165,7 @@ export const SolidIntegerSliderStyleFormEditWidget = ({ formik, fieldContext }: 
 
 ### 2. Register the Widget
 Widgets must be **registered** in `solid-extensions.ts`:
-<details>
+<details open>
  <summary className="card-title card-headear-wrapper">
     <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
    <code>Registering the Widget</code>
@@ -187,7 +187,7 @@ registerExtensionComponent(
 
 ### 3. Use in Layout 
 Now you can configure the widget within the form view layout configuration in the module metadata schema JSON file:
-<details>
+<details open>
  <summary className="card-title card-headear-wrapper">
     <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
    <code>Using Custom Widget in Layout</code>
@@ -224,7 +224,7 @@ File Path:
 2. It identifies fields with an `editWidget`.  
 3. It dynamically imports the corresponding widget component.  
 4. The widget is rendered with props of type `SolidFormFieldWidgetProps`:
-<details>
+<details open>
  <summary className="card-title card-headear-wrapper">
     <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
    <code>SolidFormFieldWidgetProps</code>
@@ -260,7 +260,7 @@ export type SolidFieldProps = {
 Similarly, you can create **view widgets** for **read-only mode** using `viewWidget` instead of `editWidget`.
 
 ### Example: Boolean View Widget
-<details>
+<details open>
  <summary className="card-title card-headear-wrapper">
     <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
    <code>CustomBooleanFormViewWidget</code>

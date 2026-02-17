@@ -78,7 +78,7 @@ Below are the key components of the metadata schema. All the functionality conce
 
 ##  Best Practices
 
-<details>
+<details open>
   <summary className="card-title card-headear-wrapper">
     <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
     Naming Conventions
@@ -90,7 +90,7 @@ Below are the key components of the metadata schema. All the functionality conce
   </ul>
 </details>
 
-<details>
+<details open>
   <summary className="card-title card-headear-wrapper">
     <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
     Security First
@@ -103,7 +103,7 @@ Below are the key components of the metadata schema. All the functionality conce
   </ul>
 </details>
 
-<details>
+<details open>
   <summary className="card-title card-headear-wrapper">
     <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
     Performance Optimization
@@ -116,7 +116,7 @@ Below are the key components of the metadata schema. All the functionality conce
   </ul>
 </details>
 
-<details>
+<details open>
   <summary className="card-title card-headear-wrapper">
     <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
     User Experience
@@ -129,7 +129,7 @@ Below are the key components of the metadata schema. All the functionality conce
   </ul>
 </details>
 
-<details>
+<details open>
   <summary className="card-title card-headear-wrapper">
     <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
     Maintainability
@@ -142,7 +142,7 @@ Below are the key components of the metadata schema. All the functionality conce
   </ul>
 </details>
 
-<details>
+<details open>
   <summary className="card-title card-headear-wrapper">
     <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
     Data Integrity

@@ -19,7 +19,7 @@ This section explains how to use the **delete endpoints** of the REST API in Sol
 When soft delete is enabled on a m<summary> Example: Bulk Delete Fee Types</summary>
 odel (like `fee-type`), the record is not permanently removed — instead, the `deletedAt` and `deletedTracker` fields are populated.
 
-<details>
+<details open>
  <summary className="card-title card-headear-wrapper">
     <IoIosArrowForward  size={20} style={{ marginRight: "8px" }}  className="rotatable"  />
      Example: Delete a Fee Type Record
@@ -85,7 +85,7 @@ DELETE /api/fee-type/{id}
 
 SolidX also supports deleting multiple records in a single request.
 
-<details>
+<details open>
 <summary className="card-title card-headear-wrapper">
     <IoIosArrowForward  size={20} style={{ marginRight: "8px" }}  className="rotatable"  />
      Example: Bulk Delete Fee Types

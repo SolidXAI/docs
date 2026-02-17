@@ -34,7 +34,7 @@ Extending repositories lets you:
 
 Most cases can be expressed with `find`/`findOne` since they’re already security-scoped.
 
-<details>
+<details open>
   <summary><strong>Repository: add custom find-based method</strong></summary>
 
 ```ts
@@ -83,7 +83,7 @@ export class FeeTypeRepository extends SolidBaseRepository<FeeType> {
 
 For more complex cases (aggregations, raw joins, advanced conditions), fall back to `createQueryBuilder()`.
 
-<details>
+<details open>
   <summary><strong>Repository: add query builder method</strong></summary>
 
 ```ts
@@ -106,7 +106,7 @@ async totalsByCategory(instituteId: number) {
 
 ### 3) Consume your custom repository methods
 
-<details>
+<details open>
   <summary><strong>Service: use find-based and query builder methods</strong></summary>
 
 ```ts
@@ -142,7 +142,7 @@ export class FeesService {
 
 ## Quick reference
 
-<details>
+<details open>
   <summary><strong>Example: security-aware find</strong></summary>
 
 ```ts
@@ -154,7 +154,7 @@ await feeTypeRepo.find({
 ```
 </details>
 
-<details>
+<details open>
   <summary><strong>Example: fallback to query builder</strong></summary>
 
 ```ts

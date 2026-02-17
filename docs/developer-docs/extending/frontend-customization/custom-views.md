@@ -28,7 +28,7 @@ They can be embedded into form views or used to build specialized UI.
    Register it in `solid-ui/app/admin/extensions/index.ts` using `registerExtensionComponent`.
 
 
-<details>
+<details open>
  <summary className="card-title card-headear-wrapper">
     <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
     Code: Registering the Component
@@ -43,7 +43,7 @@ registerExtensionComponent("BookSimilarTitles", BookSimilarTitles);
 3. **Add the custom view to the form layout**  
    You can embed the custom widget in your form JSON layout.
 
-<details>
+<details open>
 
  <summary className="card-title card-headear-wrapper">
     <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
@@ -107,7 +107,7 @@ registerExtensionComponent("BookSimilarTitles", BookSimilarTitles);
 
 ##  Example: `BookSimilarTitles` Component
 
-<details>
+<details open>
  <summary className="card-title card-headear-wrapper">
     <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
      Code: BookSimilarTitles.tsx
@@ -181,7 +181,7 @@ export default BookSimilarTitles;
 2. The **custom view** is injected into the form layout at the specified location.  
 3. The custom view receives props of type `SolidFormWidgetProps`.  
 
-<details>
+<details open>
  <summary className="card-title card-headear-wrapper">
     <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
      Code: Props Types

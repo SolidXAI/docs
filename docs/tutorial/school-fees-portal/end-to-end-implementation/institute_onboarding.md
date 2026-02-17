@@ -858,7 +858,7 @@ Two custom buttons are added to the form:
 
 Below is the complete form layout JSON for the Institute model:
 
-<details>
+<details open>
 <summary>Click to expand the complete JSON layout</summary>
 ```json
 {
@@ -1371,7 +1371,7 @@ The institute relation is hidden (`visible: false`):
 
 Below is the complete form layout JSON for the Fee Type model:
 
-<details>
+<details open>
 <summary>Click to expand the complete JSON layout</summary>
 ```json
 {

@@ -33,7 +33,7 @@ You can also create an entirely new controller by adding a new file in the `cont
 
 ### Example: Extending `InstituteController`
 
-<details>
+<details open>
   <summary className="card-title card-headear-wrapper">
     <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
     Add New Endpoints to <code>InstituteController</code>

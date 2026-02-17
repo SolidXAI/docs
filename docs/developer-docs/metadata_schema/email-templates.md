@@ -29,7 +29,7 @@ Email Templates in `SolidX` allow you to create and manage HTML/Text based email
 
 ### Example: Email Templates Metadata
 Below is an example configuration for two email templates: one for sending payment reminders and another for OTP verification. The body of the email templates is stored in separate HTML files i.e (specified in the `body` attribute)
-<details>
+<details open>
 
 <summary className="card-title card-headear-wrapper">
     <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
@@ -71,7 +71,7 @@ This example uses Handlebars syntax for dynamic content insertion.
 
 The variables used in this template (like `{{student.studentName}}`, `{{dueDetails.totalAmountDue}}`, etc.) should correspond to the data structure passed when sending the email.
 
-<details>
+<details open>
   <summary className="card-title card-headear-wrapper">
     <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
    Email Template File 
@@ -174,7 +174,7 @@ The variables used in this template (like `{{student.studentName}}`, `{{dueDetai
 </html>
 ```
 </details>
-<details>
+<details open>
  <summary className="card-title card-headear-wrapper">
     <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
    Email Template File (Text)
@@ -203,7 +203,7 @@ The {{ solidAppName }} Team
 
 Below is a code snippet demonstrating how to send an email using the defined email templates via the `MailServiceFactory`. This example shows how to send an OTP verification email to a user.
 
-<details>
+<details open>
 <summary className="card-title card-headear-wrapper">
     <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
    Email Sending Code Snippet

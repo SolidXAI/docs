@@ -37,7 +37,7 @@ It implements the `ISMS` interface, uses `SmsTemplateService` for template handl
 All your custom SMS I/O (API calls, provider SDKs, etc.) should be coded inside **`sendSMSSynchronously()`**.
 The rest (template rendering, queueing) is reusable across providers.
 
-<details>
+<details open>
 <summary><strong>Show code: <code>custom-sms.service.ts</code></strong></summary>
 
 ```ts title="custom-sms.service.ts"
@@ -155,7 +155,7 @@ export class CustomSMSService implements ISMS {
 
 ### 2) Register Your Custom Provider
 
-<details>
+<details open>
 <summary><strong>Show code: <code>app.module.ts</code></strong></summary>
 
 ```ts title="app.module.ts"
@@ -176,7 +176,7 @@ export class AppModule {}
 
 You can now use `SmsServiceFactory` to send SMS via **templates** (recommended).
 
-<details>
+<details open>
 <summary><strong>Show code: <code>usage-example.ts</code></strong></summary>
 
 ```ts title="usage-example.ts"
@@ -209,7 +209,7 @@ export class SomeService {
 
 Your custom service must implement the `ISMS` interface:
 
-<details>
+<details open>
 <summary><strong>Show code: <code>interfaces.ts</code></strong></summary>
 
 ```ts title="interfaces.ts"

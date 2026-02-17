@@ -19,7 +19,7 @@ Layouts are generated automatically once a model and its fields are configured. 
 ## Layouts
 
 SolidX supports three primary layout types:
-<details>
+<details open>
 <summary><FiList size={18} style={{ marginRight: "10px" }} />List View</summary>
 
 Is usually used to render a collection of records.  
@@ -35,7 +35,7 @@ The List View provides a **tabular, grid-like presentation** of multiple records
 
 </details>
 
-<details>
+<details open>
 <summary><FiColumns size={18} style={{ marginRight: "10px" }} />Kanban View</summary>
 
 Is usually used to render a collection of records.  
@@ -51,7 +51,7 @@ The Kanban View offers a **board-style layout** that groups records into columns
 
 </details>
 
-<details>
+<details open>
 <summary><FiEdit size={18} style={{ marginRight: "10px" }} />Form View</summary>
 
 Is usually used to render a **single record**. The Form View serves a dual purpose of allowing users to **view and edit** the record.

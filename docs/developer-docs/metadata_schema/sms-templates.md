@@ -31,7 +31,7 @@ SMS Templates in SOLID allow you to create and manage SMS templates with dynamic
 
 ### Example: SMS Templates Metadata
 Below is an example of configuring an SMS template which sends an OTP when a user logs in.
-<details>
+<details open>
   <summary className="card-title card-headear-wrapper">
     <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
     SMS Templates Schema
@@ -58,7 +58,7 @@ Below is an example of configuring an SMS template which sends an OTP when a use
 
 ### Example : SMS Template File
 Below is an example of the content of the SMS template file `otp-on-login-custom.handlebars.txt` referenced in the above metadata. This file contains the actual SMS message with dynamic placeholders.
-<details>
+<details open>
  <summary className="card-title card-headear-wrapper">
     <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
    SMS Template File 
@@ -71,7 +71,7 @@ Hi {{ firstName }}, Login to {{ solidAppName }}, using {{ mobileVerificationToke
 
 ### Example : Sending SMS Using Template (TODO ticket)
 Below is a code snippet demonstrating how to send an SMS using the defined SMS templates via the `SmsServiceFactory`. This example shows how to send an OTP verification SMS to a user.
-<details>
+<details open>
   <summary className="card-title card-headear-wrapper">
     <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
     SMS Sending Code Snippet

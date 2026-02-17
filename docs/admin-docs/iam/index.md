@@ -155,7 +155,7 @@ The IAM system consists of several key components:
 </div>
 
 ## Best Practices
-<details>
+<details open>
   <summary className="card-title card-headear-wrapper">
     <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
     User Management
@@ -168,7 +168,7 @@ The IAM system consists of several key components:
   </ul>
 </details>
 
-<details>
+<details open>
   <summary className="card-title card-headear-wrapper">
     <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
     Role Design
@@ -181,7 +181,7 @@ The IAM system consists of several key components:
   </ul>
 </details>
 
-<details>
+<details open>
   <summary className="card-title card-headear-wrapper">
     <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
     Permissions
@@ -194,7 +194,7 @@ The IAM system consists of several key components:
   </ul>
 </details>
 
-<details>
+<details open>
   <summary className="card-title card-headear-wrapper">
     <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
     Security

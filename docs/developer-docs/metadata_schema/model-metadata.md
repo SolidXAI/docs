@@ -36,7 +36,7 @@ Each model is a semantic, configurable data structure that forms the basis of ad
 
 
 ### Example: Institute Model
-<details>
+<details open>
   <summary className="card-title card-headear-wrapper">
     <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
     Model Schema

@@ -256,7 +256,7 @@ SMS Templates in SolidX enable you to create and manage text message templates w
 
 ## Best Practices
 
-<details>
+<details open>
   <summary className="card-title card-headear-wrapper">
     <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
     Content
@@ -270,7 +270,7 @@ SMS Templates in SolidX enable you to create and manage text message templates w
   </ul>
 </details>
 
-<details>
+<details open>
   <summary className="card-title card-headear-wrapper">
     <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
     Variables
@@ -284,7 +284,7 @@ SMS Templates in SolidX enable you to create and manage text message templates w
   </ul>
 </details>
 
-<details>
+<details open>
   <summary className="card-title card-headear-wrapper">
     <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
     Links
@@ -298,7 +298,7 @@ SMS Templates in SolidX enable you to create and manage text message templates w
   </ul>
 </details>
 
-<details>
+<details open>
   <summary className="card-title card-headear-wrapper">
     <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
     Compliance

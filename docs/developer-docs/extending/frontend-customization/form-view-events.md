@@ -54,7 +54,7 @@ Here’s a concise example that:
 - Listens to **any form event**
 - On `onFieldChange` of `title`, shows a hidden node and injects a **character count** into form data
 
-<details>
+<details open>
   <summary className="card-title card-headear-wrapper">
     <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
     <code>bookFormViewChangeHandler.ts</code>
@@ -106,7 +106,7 @@ If you are setting dataChanged to true, ensure you return the full newFormData o
 
 Register each exported function with an **alias** in `solid-extensions.ts`:
 
-<details>
+<details open>
   <summary className="card-title card-headear-wrapper">
     <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
     <code>solid-extensions.ts</code>
@@ -127,7 +127,7 @@ registerExtensionFunction("bookFormViewChangeHandler", handleBookFormViewChange)
 
 Reference your handler **aliases** in the layout JSON for the form view.
 
-<details>
+<details open>
   <summary className="card-title card-headear-wrapper">
     <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
     <code>module-metadata/&lt;module-name&gt;/&lt;module-name&gt;-metadata.json</code>
@@ -166,7 +166,7 @@ Your handler can be **one function** that switches on `event.type`, or **multipl
 
 Handlers receive a **`SolidUiEvent`** payload.
 
-<details>
+<details open>
   <summary className="card-title card-headear-wrapper">
     <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
     <code>SolidUiEvent</code>

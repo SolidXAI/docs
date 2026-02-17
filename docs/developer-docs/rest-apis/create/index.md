@@ -41,7 +41,7 @@ Authorization: Bearer <token>
 
 `POST /api/fee-type`
 
-<details>
+<details open>
  <summary className="card-title card-headear-wrapper">
     <IoIosArrowForward  size={20} style={{ marginRight: "8px" }}  className="rotatable"  />
      Request Body
@@ -60,7 +60,7 @@ Authorization: Bearer <token>
 
 </details>
 
-<details>
+<details open>
  <summary className="card-title card-headear-wrapper">
     <IoIosArrowForward  size={20} style={{ marginRight: "8px" }}  className="rotatable"  />
      Sample Request
@@ -76,7 +76,7 @@ Authorization: Bearer <token>
 
 </details>
 
-<details>
+<details open>
  <summary className="card-title card-headear-wrapper">
     <IoIosArrowForward  size={20} style={{ marginRight: "8px" }}  className="rotatable"  />
      Sample Response
@@ -133,7 +133,7 @@ To create multiple records at once:
 
 `POST /api/fee-type/bulk`
 
-<details>
+<details open>
  <summary className="card-title card-headear-wrapper">
     <IoIosArrowForward  size={20} style={{ marginRight: "8px" }}  className="rotatable"  />
      Sample Bulk Request
@@ -170,7 +170,7 @@ Content-Type: multipart/form-data
 Authorization: Bearer <token>
 ```
 
-<details>
+<details open>
  <summary className="card-title card-headear-wrapper">
     <IoIosArrowForward  size={20} style={{ marginRight: "8px" }}  className="rotatable"  />
      Multipart Form Data Example

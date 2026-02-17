@@ -143,7 +143,7 @@ _Figure 5: View Roles list_
 
 ## Best Practices
 
-<details>
+<details open>
   <summary className="card-title card-headear-wrapper">
     <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
     Role Assignment
@@ -155,7 +155,7 @@ _Figure 5: View Roles list_
   </ul>
 </details>
 
-<details>
+<details open>
   <summary className="card-title card-headear-wrapper">
     <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
     Maintenance

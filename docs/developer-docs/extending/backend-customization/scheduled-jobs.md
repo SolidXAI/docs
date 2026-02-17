@@ -33,7 +33,7 @@ Follow these steps to define and use a custom scheduled job:
 
 Create a new service class that implements the `IScheduledJob` interface.
 
-<details>
+<details open>
  <summary className="card-title card-headear-wrapper">
     <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
     Example: HelloWorld Scheduled Job
@@ -64,7 +64,7 @@ Ensure the job service is registered in the appropriate module under the provide
 
 Add the job definition in your metadata.json or job configuration file.
 
-<details>
+<details open>
  <summary className="card-title card-headear-wrapper">
     <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
     Example Metadata Configuration

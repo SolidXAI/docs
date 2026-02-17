@@ -147,7 +147,7 @@ You can customize the menu structure through configuration:
 
 ## Best Practices
 
-  <details>
+  <details open>
     <summary className="card-title card-headear-wrapper">
     <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
       Organization
@@ -160,7 +160,7 @@ You can customize the menu structure through configuration:
     </ul>
   </details>
 
-  <details>
+  <details open>
     <summary className="card-title card-headear-wrapper">
     <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
       Permissions
@@ -173,7 +173,7 @@ You can customize the menu structure through configuration:
     </ul>
   </details>
 
-   <details>
+   <details open>
     <summary className="card-title card-headear-wrapper">
     <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
       User Experience
@@ -186,7 +186,7 @@ You can customize the menu structure through configuration:
     </ul>
   </details>
 
-   <details>
+   <details open>
     <summary className="card-title card-headear-wrapper">
     <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
       Maintenance

@@ -26,7 +26,7 @@ For example, you might want to populate a dropdown with **stock symbols fetched 
 Here’s an example field configuration using a custom provider named `StockApiSelectionProvider`.  
 The `selectionDynamicProviderCtxt` specifies which fields from the API response should be used as labels and values.
 
-<details>
+<details open>
  <summary className="card-title card-headear-wrapper">
     <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
     Example Configuration
@@ -81,7 +81,7 @@ The most important method is `values()`, which fetches and returns the available
 
 <br/>
 
-<details>
+<details open>
  <summary className="card-title card-headear-wrapper">
     <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
     Example: <code>StockApiSelectionProvider</code>
@@ -181,7 +181,7 @@ Since providers are standard NestJS providers, register them in the module where
 
 Below are the core interfaces used when implementing a dynamic selection provider.
 
-<details>
+<details open>
  <summary className="card-title card-headear-wrapper">
     <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
     <code>ISelectionProvider</code> Interface

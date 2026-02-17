@@ -253,7 +253,7 @@ npm install @solid/storage-provider-name
 
 ## Best Practices
 
-<details>
+<details open>
   <summary className="card-title card-headear-wrapper">
     <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
      Provider Selection
@@ -266,7 +266,7 @@ npm install @solid/storage-provider-name
   </ul>
 </details>
 
-<details>
+<details open>
   <summary className="card-title card-headear-wrapper">
     <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
      Security
@@ -279,7 +279,7 @@ npm install @solid/storage-provider-name
   </ul>
 </details>
 
-<details>
+<details open>
   <summary className="card-title card-headear-wrapper">
     <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
      Performance
@@ -292,7 +292,7 @@ npm install @solid/storage-provider-name
   </ul>
 </details>
 
-<details>
+<details open>
   <summary className="card-title card-headear-wrapper">
     <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
      Maintenance

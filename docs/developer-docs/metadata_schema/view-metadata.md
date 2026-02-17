@@ -37,7 +37,7 @@ Views define UI presentation of models and automatically generate:
 ## Example: Fee Portal List/Form Views
 **What this shows:** A combined example of a **list** view and a **form** view for an *Institute* model inside a *Fees Portal* module. The list section demonstrates pagination, search and row actions. The form section demonstrates the hierarchical layout (sheet → notebook → page → row → column → field) and how to attach a form handler.
 
-<details>
+<details open>
   <summary className="card-title card-headear-wrapper">
     <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
     View Schema (List + Form)
@@ -193,7 +193,7 @@ List views display records in tabular format with advanced features like search,
 ### 1) Basic List View Structure
 **What this shows:** The minimal configuration for a list view. Connect to a module/model and define a `layout` with `attrs` (behavior) and `children` (columns).
 
-<details>
+<details open>
 <summary className="card-title card-header-wrapper">
   <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
   List View Structure
@@ -223,7 +223,7 @@ List views display records in tabular format with advanced features like search,
 ### 2) List View Attributes
 **What this shows:** How to toggle pagination and CRUD actions from the list, and how to restrict actions to specific roles.
 
-<details>
+<details open>
 <summary className="card-title card-header-wrapper">
   <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
   List View Attributes
@@ -249,7 +249,7 @@ List views display records in tabular format with advanced features like search,
 ### 3) List View Field Configuration
 **What this shows:** Each item in `children` is a column. Control sort, filter and search participation; `viewWidget` customizes how the value renders.
 
-<details>
+<details open>
 <summary className="card-title card-header-wrapper">
   <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
   Field Configuration
@@ -301,7 +301,7 @@ Form views handle data entry and editing with complex layout structures using sh
 ### 1) Basic Form View Structure
 **What this shows:** A `form` view with a base layout and optional `onFormLayoutLoad` handler. `children` will hold sheets/notebooks/pages/rows/columns/fields.
 
-<details>
+<details open>
 <summary className="card-title card-header-wrapper">
   <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
   Form View Structure
@@ -332,7 +332,7 @@ Form views handle data entry and editing with complex layout structures using sh
 ### 2) Form View Attributes
 **What this shows:** Configure visual details and attach custom buttons that trigger actions or popups.
 
-<details>
+<details open>
 <summary className="card-title card-header-wrapper">
   <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
   Form View Attributes
@@ -377,7 +377,7 @@ Form
 #### Sheet Component
 **What this shows:** A top-level container for your form sections.
 
-<details>
+<details open>
 <summary className="card-title card-header-wrapper">
   <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
   Sheet Component
@@ -397,7 +397,7 @@ Form
 #### Notebook Component (Tabs)
 **What this shows:** A tab container that groups multiple pages.
 
-<details>
+<details open>
 <summary className="card-title card-header-wrapper">
   <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
   Notebook Component
@@ -417,7 +417,7 @@ Form
 #### Page Component (Individual Tab)
 **What this shows:** A single tab with its own content.
 
-<details>
+<details open>
 <summary className="card-title card-header-wrapper">
   <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
   Page Component
@@ -437,7 +437,7 @@ Form
 #### Row Component (Horizontal Layout)
 **What this shows:** A horizontal group of columns.
 
-<details>
+<details open>
 <summary className="card-title card-header-wrapper">
   <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
   Row Component
@@ -457,7 +457,7 @@ Form
 #### Column Component (Vertical Container)
 **What this shows:** A vertical container with optional label and grid classes.
 
-<details>
+<details open>
 <summary className="card-title card-header-wrapper">
   <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
   Column Component
@@ -481,7 +481,7 @@ Form
 #### Field Component (Form Input)
 **What this shows:** A single form input with view/edit widget overrides.
 
-<details>
+<details open>
 <summary className="card-title card-header-wrapper">
   <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
   Field Component
@@ -504,7 +504,7 @@ Form
 #### Complete Form Layout Example
 **What this shows:** A full, multi-tab form bringing together all components.
 
-<details>
+<details open>
 <summary className="card-title card-header-wrapper">
   <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
   Complete Form Layout Example
@@ -589,7 +589,7 @@ Kanban views display records as cards with drag-and-drop functionality.
 ### 1) Basic Kanban View Structure
 **What this shows:** Declares a `kanban` view and the places where swimlane and card configuration live.
 
-<details>
+<details open>
 <summary className="card-title card-header-wrapper">
   <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
   Kanban View Structure
@@ -619,7 +619,7 @@ Kanban views display records as cards with drag-and-drop functionality.
 ### 2) Kanban View Attributes
 **What this shows:** Controls lane count, records per lane, the grouping field, and drag-and-drop.
 
-<details>
+<details open>
 <summary className="card-title card-header-wrapper">
   <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
   Kanban View Attributes
@@ -643,7 +643,7 @@ Kanban views display records as cards with drag-and-drop functionality.
 ### 3) Kanban Card Template
 **What this shows:** Maps model fields to parts of the card: header, content, badges.
 
-<details>
+<details open>
 <summary className="card-title card-header-wrapper">
   <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
   Kanban Card Template
@@ -677,7 +677,7 @@ Views support role-based access control (RBAC) to restrict actions and field-lev
 
 **What this shows:** Limit visibility of list-level actions (import/export/layout customization) to specific roles.
 
-<details>
+<details open>
   <summary className="card-title card-header-wrapper">
     <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
     View Actions
@@ -700,7 +700,7 @@ Views support role-based access control (RBAC) to restrict actions and field-lev
 
 **What this shows:** Hide or show sensitive fields per role.
 
-<details>
+<details open>
   <summary className="card-title card-header-wrapper">
     <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
     Field-Level Permissions
@@ -728,7 +728,7 @@ Views support custom widgets to enhance field display and editing experiences. L
 
 **What this shows:** Override default rendering/editing of a field using specific named widgets.
 
-<details>
+<details open>
   <summary className="card-title card-header-wrapper">
     <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
     Custom View Widgets
@@ -777,7 +777,7 @@ Further reference: [Event Handlers Documentation](../extending/frontend-customiz
 ### CSS Grid Classes
 **What this shows:** Use grid utility classes to control width across breakpoints.
 
-<details>
+<details open>
   <summary className="card-title card-header-wrapper">
     <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
     CSS Grid Classes
@@ -844,7 +844,7 @@ User key of the model this view is associated with.
 
 ## Best Practices
 
-<details>
+<details open>
   <summary className="card-title card-header-wrapper">
     <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
     Layout Organization
@@ -857,7 +857,7 @@ User key of the model this view is associated with.
   </ul>
 </details>
 
-<details>
+<details open>
   <summary className="card-title card-header-wrapper">
     <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
     Security Considerations
@@ -869,7 +869,7 @@ User key of the model this view is associated with.
   </ul>
 </details>
 
-<details>
+<details open>
   <summary className="card-title card-header-wrapper">
     <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
     Performance Optimization

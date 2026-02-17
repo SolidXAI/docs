@@ -61,7 +61,7 @@ In the example above, `SolidShortTextAvatarWidget` is a **built-in widget** that
 If you need a custom display (e.g. a **score widget** with colors based on score values), follow these steps:
 
 ### 1. Create the Widget Component
-<details>
+<details open>
  <summary className="card-title card-headear-wrapper">
     <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
     <code>ScoreWidget</code>

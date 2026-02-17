@@ -29,7 +29,7 @@ Providers are triggered automatically when relevant data changes, ensuring that 
 
 Below is an example configuration for a computed field named `amountPaid` in the `paymentCollectionItemDetail` model. The field computes the total amount paid based on related payment records.
 
-<details>
+<details open>
   <summary className="card-title card-headear-wrapper">
     <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
     Example: Configuration for <code>amountPaid</code> computed field
@@ -89,7 +89,7 @@ You can:
 
 Here is a sample implementation of the `PaymentCollectionItemAmountProvider`:
 
-<details>
+<details open>
   <summary className="card-title card-headear-wrapper">
     <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
     Example: <code>PaymentCollectionItemAmountProvider</code> Implementation
@@ -181,7 +181,7 @@ export class PaymentCollectionItemAmountProvider implements IEntityPostComputeFi
 
 To implement a custom computation provider, you need to implement one or both of the following interfaces:
 
-<details>
+<details open>
   <summary className="card-title card-headear-wrapper">
     <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
     Interfaces to Implement
@@ -237,7 +237,7 @@ pattern.\
 Useful for creating unique, human-readable identifiers (like invoice
 numbers or record codes).
 
-<details>
+<details open>
   <summary className="card-title card-headear-wrapper">
     <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
     View Context Interface
@@ -258,7 +258,7 @@ Ideal for building display names, codes, or composite labels derived
 from existing fields.
 
 
-<details>
+<details open>
   <summary className="card-title card-headear-wrapper">
     <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
     View Context Interface
@@ -290,7 +290,7 @@ Useful for creating globally unique identifiers for records.
 Ideal for entities requiring unique references across distributed
 systems.
 
-<details>
+<details open>
   <summary className="card-title card-headear-wrapper">
     <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
     View Context Interface

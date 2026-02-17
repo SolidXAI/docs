@@ -40,7 +40,7 @@ To add custom buttons in a list view, follow these steps:
 Below are examples of how to configure both header and row buttons in the module metadata JSON file.
 
 ### Header Button Example
-<details>
+<details open>
 <summary className="card-title card-headear-wrapper">
   <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
   <code>Generate Report Header Button</code>
@@ -76,7 +76,7 @@ Below are examples of how to configure both header and row buttons in the module
 ---
 
 ### Row Button Example
-<details>
+<details open>
 <summary className="card-title card-headear-wrapper">
   <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
   <code>Refund Payment Row Button</code>
@@ -121,7 +121,7 @@ Below are examples of how to configure both header and row buttons in the module
 Each list button component receives a consistent set of props from the SolidX list engine.  
 Header buttons receive the **selected records** and **filters**, while row buttons receive the **row data**.
 
-<details>
+<details open>
 <summary className="card-title card-headear-wrapper">
   <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
   <code>Action Component Props</code>

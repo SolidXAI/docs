@@ -24,7 +24,7 @@ These buttons can be rendered **inline** or inside a **context menu**, and can e
 Below is a complete example of a **custom form view button** that redirects to an external hosted page (for example, a portal for an institute).  
 It reads the `id` from form data or row context, calls an API to get the hosted prefix, and opens the page in a new browser tab.
 
-<details>
+<details open>
 <summary className="card-title card-headear-wrapper">
   <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
   <code>PreviewPortal.tsx</code>
@@ -120,7 +120,7 @@ export default PreviewPortal;
 
 You must register your button component so that SolidX can resolve and invoke it when the form button is clicked.
 
-<details>
+<details open>
 <summary className="card-title card-headear-wrapper">
   <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
   <code>solid-extensions.ts</code>
@@ -145,7 +145,7 @@ registerExtensionComponent('PreviewPortal', PreviewPortal);
 
 Now, you can use this button inside your form layout metadata JSON configuration.
 
-<details>
+<details open>
 <summary className="card-title card-headear-wrapper">
   <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
   <code>Using in Layout JSON</code>
@@ -186,7 +186,7 @@ Now, you can use this button inside your form layout metadata JSON configuration
 ### Action Component Props
 
 Each form button component receives a consistent set of props from the SolidX form engine.
-<details>
+<details open>
 <summary className="card-title card-headear-wrapper">
   <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
   <code>Action Component Props</code>
