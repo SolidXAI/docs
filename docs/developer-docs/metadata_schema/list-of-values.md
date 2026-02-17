@@ -115,6 +115,7 @@ To utilize the defined list of values in a dynamic selection field, you can conf
 
 ####  Further Reference
  -  Understanding Dynamic Selection Fields: See [Dynamic Selection Fields Documentation](../../admin-docs/module-builder/field-management#dynamic-selection)
+ -  Built-in Selection Providers: See [Built-in Selection Providers](../extending/reference/built-in-selection-providers) for full documentation on `ListOfValuesSelectionProvider` and `PseudoForeignKeySelectionProvider`
 
 ### List of Values Metadata Attributes
 

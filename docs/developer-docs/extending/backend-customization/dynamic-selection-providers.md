@@ -63,7 +63,7 @@ The `selectionDynamicProviderCtxt` specifies which fields from the API response 
     Tip
   </h4>
 
-- Use the built-in **`ListOfValuesSelectionProvider`** when you just need to fetch options from your database.  
+- SolidX ships with built-in providers for common use cases — see [Built-in Selection Providers](../reference/built-in-selection-providers) for details on **`ListOfValuesSelectionProvider`** and **`PseudoForeignKeySelectionProvider`**.
 - Create a **custom provider** when the logic for fetching or filtering is more complex, or when data comes from an external source like an API.
 </div>
 
