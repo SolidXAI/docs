@@ -5,7 +5,16 @@ title: Recipes
 
 # Recipes
 
-TODO: Change the introduction to the recipes, eventually maybe we can also add a table to this page with 2 columns, one with the name of the recipe and another with a description of the recipe. 
-The name can link to the respective recipe page.
+Practical how-to guides for common SolidX tasks. Each recipe focuses on a single topic you can apply to your own project.
 
-Welcome to SolidX admin documentation! SolidX is an enterprise-focused, low-code development platform engineered for today's web applications. 
+| Recipe | Description |
+|--------|-------------|
+| [Additional Datasources](./additional-datasources) | Connect to extra databases beyond the default datasource |
+| [Computed Fields](./computed-fields) | Derive field values automatically from other data |
+| [Email](./email) | Send transactional emails from your application |
+| [Extending Users](./extending-users) | Add custom fields and behaviour to the built-in User model |
+| [Filtering Data](./filtering) | Use filter operators to query records via the REST API or CRUD service |
+| [Handlers](./handlers) | Hook into lifecycle events with handler functions |
+| [Media Providers](./media-providers) | Configure storage backends for file uploads |
+| [Queue](./queue) | Process background jobs with the queue system |
+| [Soft Delete](./soft-delete) | Archive and recover records instead of permanently deleting them |

@@ -42,7 +42,7 @@ This document explains how to **extend** the `CRUDService<T>` for your models an
 
 **What this shows:** How to define a model‑specific service (e.g., `PersonService`) that **inherits** all CRUD methods and optionally adds custom methods like `findByEmail`. You typically inject this service into a controller to expose REST endpoints.
 
-<details>
+<details open>
 <summary>Show example</summary>
 
 ```ts
@@ -98,7 +98,7 @@ export class PersonService extends CRUDService<Person> {
 
 ### `PaginationQueryDto`
 
-<details>
+<details open>
 <summary>Show example</summary>
 
 ```ts
@@ -110,7 +110,7 @@ filters?: Record<string, any>;
 
 ### `BasicFilterDto` (extends `PaginationQueryDto`)
 
-<details>
+<details open>
 <summary>Show example</summary>
 
 ```ts
@@ -133,7 +133,7 @@ status?: string; // publish | draft (when draft/publish workflow is enabled)
 
 **Note:** The optional `context` parameter accepts an **ActiveUser** object. It is generally auto‑populated by controllers from the request context to perform permission checks for the logged‑in user before CRUD operations. If you call service methods manually, `context` is optional.
 
-<details>
+<details open>
 <summary>ActiveUser shape</summary>
 
 ```ts
@@ -180,7 +180,7 @@ Below are **explained** examples for each method. Read the **explanation** first
 
 **What this shows:** How to create an entity, including optional media uploads (`files`). Field managers validate & transform values (e.g., hashing passwords, enforcing regex/length).
 
-<details>
+<details open>
 <summary>Show code</summary>
 
 ```ts
@@ -207,7 +207,7 @@ await personService.create(
 
 **What this shows:** How to update an entity by ID. Set `isPartial = true` for PATCH‑style updates; leave it `false` (default) for PUT‑style behavior. Media updates can be supplied via `files` when your model has media fields.
 
-<details>
+<details open>
 <summary>Show code</summary>
 
 ```ts
@@ -230,7 +230,7 @@ await personService.update(
 
 **What this shows:** How to delete a record. If your model has soft delete enabled, the row is archived instead of hard‑removed.
 
-<details>
+<details open>
 <summary>Show code</summary>
 
 ```ts
@@ -244,7 +244,9 @@ await personService.delete(12 /*, context? */);
 
 **What this shows:** How to list entities with pagination, selective fields, relation population, media population, sorting, grouping, and optional filter expressions. The return value includes a `meta` block with paging info.
 
-<details>
+> For the full list of filter operators and examples, see the [Filtering Data](/recipes/filtering) recipe.
+
+<details open>
 <summary>Show code</summary>
 
 ```ts
@@ -284,7 +286,9 @@ console.log(result.records);  // Entity[] with optional `_media` key added
 
 **What this shows:** How to fetch one entity by ID with relations populated and media URLs resolved into the non-persistent `_media` key.
 
-<details>
+> The `query` parameter accepts the same filter syntax as `find()`. See the [Filtering Data](/recipes/filtering) recipe for all available operators.
+
+<details open>
 <summary>Show code</summary>
 
 ```ts
@@ -313,7 +317,7 @@ console.log(first._full_url); // absolute URL to the file
 
 **What this shows:** How to bulk insert records. The base implementation ignores `filesArray` (kept as `[]`) — add your own override if you need per-row media support.
 
-<details>
+<details open>
 <summary>Show code</summary>
 
 ```ts
@@ -336,7 +340,7 @@ console.log(saved.length); // 2
 
 **What this shows:** How to bulk delete by IDs. Honors soft delete if enabled.
 
-<details>
+<details open>
 <summary>Show code</summary>
 
 ```ts
@@ -350,7 +354,7 @@ await personService.deleteMany([101, 102, 103]);
 
 **What this shows:** How to restore a single soft‑deleted record by ID. If a conflicting unique constraint exists, the service throws a conflict error so you can resolve it first.
 
-<details>
+<details open>
 <summary>Show code</summary>
 
 ```ts
@@ -365,7 +369,7 @@ console.log(res.message); // "Record recovered" (per SUCCESS_MESSAGES)
 
 **What this shows:** How to restore multiple soft‑deleted records at once. The response includes the list of recovered IDs.
 
-<details>
+<details open>
 <summary>Show code</summary>
 
 ```ts
@@ -382,7 +386,7 @@ console.log(res.recoveredIds); // [101, 102, 103]
 
 The media types look like:
 
-<details>
+<details open>
 <summary>Media types</summary>
 
 ```ts
@@ -425,7 +429,7 @@ export class Media extends CommonEntity {
 ```
 </details>
 
-<details>
+<details open>
 <summary>Show example</summary>
 
 ```ts
@@ -449,7 +453,7 @@ console.log(media._full_url);
 
 <!-- Also see the REST API filter guide: **[REST Filters](../rest-api/filters.md)**. -->
 
-<details>
+<details open>
 <summary>Filters group by example</summary>
 
 ```ts
