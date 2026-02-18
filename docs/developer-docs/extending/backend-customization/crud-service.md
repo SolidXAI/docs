@@ -244,7 +244,7 @@ await personService.delete(12 /*, context? */);
 
 **What this shows:** How to list entities with pagination, selective fields, relation population, media population, sorting, grouping, and optional filter expressions. The return value includes a `meta` block with paging info.
 
-> For the full list of filter operators and examples, see the [Filtering Data](/recipes/filtering) recipe.
+> For the full list of filter operators and examples, see the [Filtering Data](../../../recipes/filtering.md) recipe.
 
 <details open>
 <summary>Show code</summary>
