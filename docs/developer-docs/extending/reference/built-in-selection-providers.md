@@ -20,7 +20,7 @@ If you need something more advanced, see [Dynamic Selection Providers](../backen
 
 | Provider | Use case |
 |---|---|
-| `ListOfValuesSelectionProvider` | Populate a dropdown from [List of Values](../../../metadata_schema/list-of-values) metadata entries |
+| `ListOfValuesSelectionProvider` | Populate a dropdown from [List of Values](../../metadata_schema/list-of-values.md) metadata entries |
 | `PseudoForeignKeySelectionProvider` | Populate a dropdown from records in **any existing model**, creating a lightweight foreign-key-style relationship without a formal database relation |
 
 ---

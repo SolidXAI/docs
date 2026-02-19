@@ -286,7 +286,7 @@ console.log(result.records);  // Entity[] with optional `_media` key added
 
 **What this shows:** How to fetch one entity by ID with relations populated and media URLs resolved into the non-persistent `_media` key.
 
-> The `query` parameter accepts the same filter syntax as `find()`. See the [Filtering Data](/recipes/filtering) recipe for all available operators.
+> The `query` parameter accepts the same filter syntax as `find()`. See the [Filtering Data](../../../recipes/filtering) recipe for all available operators.
 
 <details open>
 <summary>Show code</summary>

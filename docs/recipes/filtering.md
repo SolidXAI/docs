@@ -9,8 +9,8 @@ keywords: [filters, query, operators, REST API, CRUD service]
 
 SolidX provides a powerful filtering syntax that works consistently across two layers:
 
-- **REST API** — pass filters as query-string parameters when calling the [Retrieve endpoints](/developer-docs/rest-apis/retrieve).
-- **CRUD Service** — pass a `filters` object inside the DTO when calling [`find()`](/developer-docs/extending/backend-customization/crud-service#4-findfilterdto-context) or [`findOne()`](/developer-docs/extending/backend-customization/crud-service#5-findoneid-query-context) from backend code.
+- **REST API** — pass filters as query-string parameters when calling the [Retrieve endpoints](../developer-docs/rest-apis/retrieve).
+- **CRUD Service** — pass a `filters` object inside the DTO when calling [`find()`](../developer-docs/extending/backend-customization/crud-service#4-findfilterdto-context) or [`findOne()`](../developer-docs/extending/backend-customization/crud-service#5-findoneid-query-context) from backend code.
 
 The syntax and available operators are identical in both cases.
 

@@ -31,7 +31,7 @@ Returns a paginated list of records for a given model.
 | `sort` | string[] | Columns to sort by (prefix with `-` for descending, e.g. `sort[0]=-createdAt`) |
 | `populate` | string[] | Relations to load (e.g. `populate[0]=department&populate[1]=roles.permissions`) |
 | `populateMedia` | string[] | Media fields whose URLs should be resolved (e.g. `populateMedia[0]=avatar`) |
-| `filters` | object | Filter expressions — see [Filtering Data](/recipes/filtering) for the full syntax and operators |
+| `filters` | object | Filter expressions — see [Filtering Data](../../../recipes/filtering) for the full syntax and operators |
 
 ### Example Request
 
@@ -102,6 +102,6 @@ GET /api/persons/12?populate[0]=department&populate[1]=manager&populateMedia[0]=
 
 ## Filtering
 
-Both the **Find** endpoint and the backend [CRUD Service `find()` method](/developer-docs/extending/backend-customization/crud-service#4-findfilterdto-context) share the same filter syntax and operators.
+Both the **Find** endpoint and the backend [CRUD Service `find()` method](../../extending/backend-customization/crud-service#4-findfilterdto-context) share the same filter syntax and operators.
 
-For the complete operators reference, examples (simple and nested), and usage from both REST and service layers, see the **[Filtering Data](/recipes/filtering)** recipe.
+For the complete operators reference, examples (simple and nested), and usage from both REST and service layers, see the **[Filtering Data](../../../recipes/filtering)** recipe.
