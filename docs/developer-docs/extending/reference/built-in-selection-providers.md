@@ -41,8 +41,8 @@ The context object passed via `selectionDynamicProviderCtxt` accepts:
 ### Field Metadata Example
 
 <details open>
- <summary className="card-title card-headear-wrapper">
-    <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
+ <summary className="card-title ">
+    <!-- <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" /> -->
     Example: Dynamic selection field using <code>ListOfValuesSelectionProvider</code>
 </summary>
 
@@ -116,8 +116,8 @@ The context object passed via `selectionDynamicProviderCtxt` accepts:
 ### Field Metadata Example
 
 <details open>
- <summary className="card-title card-headear-wrapper">
-    <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
+ <summary className="card-title ">
+    <!-- <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" /> -->
     Example: Dynamic selection field using <code>PseudoForeignKeySelectionProvider</code>
 </summary>
 

@@ -28,8 +28,8 @@ Create a new service class that:
 - Has a `seed()` method containing your seeding logic
 
 <details open>
- <summary className="card-title card-headear-wrapper">
-    <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
+ <summary className="card-title ">
+    <!-- <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" /> -->
     Example: Country Seeder
 </summary>
 

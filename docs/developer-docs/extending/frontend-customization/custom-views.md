@@ -29,8 +29,8 @@ They can be embedded into form views or used to build specialized UI.
 
 
 <details open>
- <summary className="card-title card-headear-wrapper">
-    <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
+ <summary className="card-title ">
+    <!-- <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" /> -->
     Code: Registering the Component
 </summary>
 
@@ -45,8 +45,8 @@ registerExtensionComponent("BookSimilarTitles", BookSimilarTitles);
 
 <details open>
 
- <summary className="card-title card-headear-wrapper">
-    <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
+ <summary className="card-title ">
+    <!-- <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" /> -->
      Code: Form Layout Example
 </summary>
 
@@ -108,8 +108,8 @@ registerExtensionComponent("BookSimilarTitles", BookSimilarTitles);
 ##  Example: `BookSimilarTitles` Component
 
 <details open>
- <summary className="card-title card-headear-wrapper">
-    <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
+ <summary className="card-title ">
+    <!-- <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" /> -->
      Code: BookSimilarTitles.tsx
 </summary>
 
@@ -182,8 +182,8 @@ export default BookSimilarTitles;
 3. The custom view receives props of type `SolidFormWidgetProps`.  
 
 <details open>
- <summary className="card-title card-headear-wrapper">
-    <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
+ <summary className="card-title ">
+    <!-- <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" /> -->
      Code: Props Types
 </summary>
 

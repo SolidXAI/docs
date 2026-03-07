@@ -129,8 +129,8 @@ Flexible storage options including:
 ## Best Practices
 
   <details >
-    <summary className="card-title card-headear-wrapper">
-      <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
+    <summary className="card-title ">
+      <!-- <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" /> -->
        Organization
     </summary>
     <ul className="card-desc">
@@ -142,8 +142,8 @@ Flexible storage options including:
   </details>
 
   <details >
-    <summary className="card-title card-headear-wrapper">
-      <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
+    <summary className="card-title ">
+      <!-- <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" /> -->
        Performance
     </summary>
     <ul className="card-desc">
@@ -155,8 +155,8 @@ Flexible storage options including:
   </details>
 
   <details >
-    <summary className="card-title card-headear-wrapper">
-      <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
+    <summary className="card-title ">
+      <!-- <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" /> -->
        Security
     </summary>
     <ul className="card-desc">
@@ -168,8 +168,8 @@ Flexible storage options including:
   </details>
 
   <details >
-    <summary className="card-title card-headear-wrapper">
-      <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
+    <summary className="card-title ">
+      <!-- <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" /> -->
       Maintenance
     </summary>
     <ul className="card-desc">

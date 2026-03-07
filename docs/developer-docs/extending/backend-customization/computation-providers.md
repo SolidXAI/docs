@@ -30,8 +30,8 @@ Providers are triggered automatically when relevant data changes, ensuring that 
 Below is an example configuration for a computed field named `amountPaid` in the `paymentCollectionItemDetail` model. The field computes the total amount paid based on related payment records.
 
 <details open>
-  <summary className="card-title card-headear-wrapper">
-    <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
+  <summary className="card-title">
+    <!-- <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" /> -->
     Example: Configuration for <code>amountPaid</code> computed field
   </summary>
 
@@ -90,8 +90,8 @@ You can:
 Here is a sample implementation of the `PaymentCollectionItemAmountProvider`:
 
 <details open>
-  <summary className="card-title card-headear-wrapper">
-    <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
+  <summary className="card-title ">
+    <!-- <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" /> -->
     Example: <code>PaymentCollectionItemAmountProvider</code> Implementation
   </summary>
 
@@ -182,8 +182,8 @@ export class PaymentCollectionItemAmountProvider implements IEntityPostComputeFi
 To implement a custom computation provider, you need to implement one or both of the following interfaces:
 
 <details open>
-  <summary className="card-title card-headear-wrapper">
-    <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
+  <summary className="card-title ">
+    <!-- <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" /> -->
     Interfaces to Implement
   </summary>
 
@@ -238,8 +238,8 @@ Useful for creating unique, human-readable identifiers (like invoice
 numbers or record codes).
 
 <details open>
-  <summary className="card-title card-headear-wrapper">
-    <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
+  <summary className="card-title ">
+    <!-- <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" /> -->
     View Context Interface
   </summary>
 ``` ts
@@ -259,8 +259,8 @@ from existing fields.
 
 
 <details open>
-  <summary className="card-title card-headear-wrapper">
-    <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
+  <summary className="card-title ">
+    <!-- <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" /> -->
     View Context Interface
   </summary>
 ``` ts
@@ -291,8 +291,8 @@ Ideal for entities requiring unique references across distributed
 systems.
 
 <details open>
-  <summary className="card-title card-headear-wrapper">
-    <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
+  <summary className="card-title ">
+    <!-- <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" /> -->
     View Context Interface
   </summary>
 ``` ts  

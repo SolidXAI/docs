@@ -21,8 +21,8 @@ This section provides details about the **Update Endpoints** of the REST API, in
 - Purpose: Update specific fields of a record without affecting the rest.
 
 <details open>
-<summary className="card-title card-headear-wrapper">
-    <IoIosArrowForward  size={20} style={{ marginRight: "8px" }}  className="rotatable"  />
+<summary className="card-title ">
+    <!-- <IoIosArrowForward  size={20} style={{ marginRight: "8px" }}  className="rotatable"  /> -->
       Example: Update <code>feeType</code> Field
   </summary>
 
@@ -98,8 +98,8 @@ PATCH /api/fee-type/1
 - Idempotent: Yes (repeated calls with the same payload have the same effect).
 
 <details open>
-<summary className="card-title card-headear-wrapper">
-    <IoIosArrowForward  size={20} style={{ marginRight: "8px" }}  className="rotatable"  />
+<summary className="card-title ">
+    <!-- <IoIosArrowForward  size={20} style={{ marginRight: "8px" }}  className="rotatable"  /> -->
       Example: Full Update of Fee Type
   </summary>
 
@@ -175,8 +175,8 @@ PUT /api/fee-type/1
 Used when no files (like images or documents) are uploaded.
 
 <details open>
-<summary className="card-title card-headear-wrapper">
-    <IoIosArrowForward  size={20} style={{ marginRight: "8px" }}  className="rotatable"  />
+<summary className="card-title ">
+    <!-- <IoIosArrowForward  size={20} style={{ marginRight: "8px" }}  className="rotatable"  /> -->
        Example: JSON-only Update
   </summary>
 
@@ -203,8 +203,8 @@ Authorization: Bearer <token>
 Used when the request includes file uploads (e.g., profile pictures, attachments).
 
 <details open>
-<summary className="card-title card-headear-wrapper">
-    <IoIosArrowForward  size={20} style={{ marginRight: "8px" }}  className="rotatable"  />
+<summary className="card-title ">
+    <!-- <IoIosArrowForward  size={20} style={{ marginRight: "8px" }}  className="rotatable"  /> -->
        Example: Update with Multipart Form Data
 </summary>
 

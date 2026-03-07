@@ -51,8 +51,8 @@ In case a custom action is not associated with a model, the model user key can b
 ### `Solid` Action Example
 Below is an example of a `solid` action configuration, which links to a standard SolidX view for listing institutes.
 <details open>
-<summary className="card-title card-headear-wrapper">
-    <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
+<summary className="card-title ">
+    <!-- <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" /> -->
  Click to expand
 </summary>
 ```json
@@ -81,8 +81,8 @@ Below is an example of a `solid` action configuration, which links to a standard
 ### `Custom` Action Example
 Below is an example of a `custom` action configuration, which links to a custom frontend component for the fees portal home page.
 <details open>
-<summary className="card-title card-headear-wrapper">
-    <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
+<summary className="card-title ">
+    <!-- <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" /> -->
  Click to expand
   </summary>
 ```json
@@ -112,8 +112,8 @@ Below is an example of a `custom` action configuration, which links to a custom 
 
 Here's a complete navigation structure example from the fees-portal, illustrating how menus and actions are defined together:
 <details open>
-<summary className="card-title card-headear-wrapper">
-    <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
+<summary className="card-title ">
+    <!-- <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" /> -->
  Click to expand
   </summary>
 

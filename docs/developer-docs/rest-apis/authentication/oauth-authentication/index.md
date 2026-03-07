@@ -469,8 +469,8 @@ export class GoogleAuthenticationController {
 ## Best Practices
 
   <details open>
-    <summary className="card-title card-headear-wrapper">
-      <IoIosArrowForward  size={20} style={{ marginRight: "8px" }}  className="rotatable"  />
+    <summary className="card-title c">
+      <!-- <IoIosArrowForward  size={20} style={{ marginRight: "8px" }}  className="rotatable"  /> -->
       Provider Selection
     </summary>
     <ul className="card-desc">
@@ -482,8 +482,8 @@ export class GoogleAuthenticationController {
   </details>
 
   <details open>
-    <summary className="card-title card-headear-wrapper">
-      <IoIosArrowForward  size={20} style={{ marginRight: "8px" }}  className="rotatable"  />
+    <summary className="card-title ">
+      <!-- <IoIosArrowForward  size={20} style={{ marginRight: "8px" }}  className="rotatable"  /> -->
       Configuration
     </summary>
     <ul className="card-desc">
@@ -495,8 +495,8 @@ export class GoogleAuthenticationController {
   </details>
 
   <details open>
-    <summary className="card-title card-headear-wrapper">
-      <IoIosArrowForward  size={20} style={{ marginRight: "8px" }}  className="rotatable"  />
+    <summary className="card-title ">
+      <!-- <IoIosArrowForward  size={20} style={{ marginRight: "8px" }}  className="rotatable"  /> -->
       User Experience
     </summary>
     <ul className="card-desc">
@@ -508,8 +508,8 @@ export class GoogleAuthenticationController {
   </details>
 
   <details open>
-    <summary className="card-title card-headear-wrapper">
-      <IoIosArrowForward  size={20} style={{ marginRight: "8px" }}  className="rotatable"  />
+    <summary className="card-title ">
+      <!-- <IoIosArrowForward  size={20} style={{ marginRight: "8px" }}  className="rotatable"  /> -->
       Security
     </summary>
     <ul className="card-desc">

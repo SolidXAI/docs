@@ -21,8 +21,8 @@ You can use either:
 
  Example: Display an integer field `score` as a **slider** using the built-in `integerSlider` widget.
 <details open>
-    <summary className="card-title card-headear-wrapper">
-        <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
+    <summary className="card-title ">
+        <!-- <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" /> -->
         <code>Using Built-in Widget</code>
     </summary>
 ```json
@@ -57,8 +57,8 @@ In the above example, the `editWidget` attribute specifies the widget to use in 
 ### 1. Create the Widget Component
 Here’s an example of an **integer slider widget**. This widget allows users to select an integer value using a slider.
 <details open>
- <summary className="card-title card-headear-wrapper">
-    <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
+ <summary className="card-title ">
+    <!-- <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" /> -->
     <code>SolidIntegerSliderStyleFormEditWidget</code>
 </summary>
 
@@ -166,8 +166,8 @@ export const SolidIntegerSliderStyleFormEditWidget = ({ formik, fieldContext }: 
 ### 2. Register the Widget
 Widgets must be **registered** in `solid-extensions.ts`:
 <details open>
- <summary className="card-title card-headear-wrapper">
-    <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
+ <summary className="card-title ">
+    <!-- <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" /> -->
    <code>Registering the Widget</code>
    </summary>
 ```tsx
@@ -188,8 +188,8 @@ registerExtensionComponent(
 ### 3. Use in Layout 
 Now you can configure the widget within the form view layout configuration in the module metadata schema JSON file:
 <details open>
- <summary className="card-title card-headear-wrapper">
-    <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
+ <summary className="card-title ">
+    <!-- <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" /> -->
    <code>Using Custom Widget in Layout</code>
    </summary>
 ```json
@@ -225,10 +225,11 @@ File Path:
 3. It dynamically imports the corresponding widget component.  
 4. The widget is rendered with props of type `SolidFormFieldWidgetProps`:
 <details open>
- <summary className="card-title card-headear-wrapper">
-    <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
+ <summary className="card-title ">
+    <!-- <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" /> -->
    <code>SolidFormFieldWidgetProps</code>
    </summary>
+   
 ``` tsx
 export type SolidFormFieldWidgetProps = {
     formik: any; // Formik instance for form state management
@@ -248,6 +249,7 @@ export type SolidFieldProps = {
     // Used in embedded views i.e for relation fields
     parentData?: any, // Data of the parent entity
 }
+
 ```
 </details>
 5. The widget then applies your **custom rendering logic**.  
@@ -261,8 +263,8 @@ Similarly, you can create **view widgets** for **read-only mode** using `viewWid
 
 ### Example: Boolean View Widget
 <details open>
- <summary className="card-title card-headear-wrapper">
-    <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
+ <summary className="card-title ">
+    <!-- <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" /> -->
    <code>CustomBooleanFormViewWidget</code>
 </summary>
 

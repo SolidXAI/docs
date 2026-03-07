@@ -41,8 +41,8 @@ To add a new method to an existing service:
 3. Update the corresponding controller if you want to expose this functionality via an API endpoint.  
 
 <details open>
-  <summary className="card-title card-headear-wrapper">
-    <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
+  <summary className="card-title ">
+    <!-- <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" /> -->
     Example: Add <code>activateInstitutePortal</code> to <code>InstituteService</code>
   </summary>
 

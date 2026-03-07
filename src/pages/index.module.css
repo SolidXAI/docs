@@ -1,66 +1,321 @@
 /**
- * CSS files with the .module.css suffix will be treated as CSS modules
- * and scoped locally.
+ * Hero Banner - CSS Module
+ * SolidX themed with fixes and enhancements
  */
 
 .heroBanner {
-  padding: 6rem 2rem;
+  padding: clamp(4rem, 8vw, 6rem) 2rem;
   text-align: center;
   position: relative;
   overflow: hidden;
-  background: linear-gradient(135deg, var(--solid-bg-main) 0%, var(--solid-bg-tertiary) 100%);
+  
+  /* SolidX gradient background */
+  background: linear-gradient(
+    135deg,
+    var(--solid-bg-main, #0A0A14) 0%,
+    var(--solid-bg-tertiary, #16162A) 100%
+  );
+  
+  /* Animated background gradient */
+  background-size: 200% 200%;
+  animation: gradientShift 15s ease infinite;
+  
+  /* Dark mode */
+  @media (prefers-color-scheme: dark) {
+    background: linear-gradient(
+      135deg,
+      var(--solid-bg-main, #0A0A14) 0%,
+      var(--solid-bg-tertiary, #16162A) 100%
+    );
+  }
+  
+  /* Light mode */
+  @media (prefers-color-scheme: light) {
+    background: linear-gradient(
+      135deg,
+      #F8F7FF 0%,
+      #F0EEFF 100%
+    );
+  }
+  
+  /* Reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    animation: none;
+    background-size: 100% 100%;
+  }
 }
+
+/* Animated gradient effect */
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/*==============================================================================
+  HERO TITLE
+==============================================================================*/
 
 .heroBanner h1 {
-  font-size: clamp(2.5rem, 6vw, 3.5rem);
+  font-size: clamp(2rem, 6vw, 3.5rem);
   font-weight: 700;
   margin-bottom: 1.5rem;
-  color: var(--solid-text-primary);
-  background: linear-gradient(135deg, var(--solid-primary) 0%, var(--solid-primary-light) 100%);
+  margin-top: 0;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  
+  /* SolidX gradient text */
+  background: linear-gradient(
+    135deg,
+    var(--solid-primary, #7C3AED) 0%,
+    var(--solid-primary-light, #A78BFA) 50%,
+    var(--solid-accent, #EC4899) 100%
+  );
+  
+  /* Proper background-clip implementation */
+  background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  background-clip: text;
+  
+  /* Fallback color for older browsers */
+  color: var(--solid-primary, #7C3AED);
+  
+
 }
 
-/* Fallback for browsers that don't support background-clip */
-@supports not (background-clip: text) or not (-webkit-background-clip: text) {
+/* Alternative fallback - simpler approach */
+@supports not (background-clip: text) {
   .heroBanner h1 {
-    color: var(--solid-primary);
     background: none;
+    -webkit-background-clip: unset;
+    -webkit-text-fill-color: unset;
+    color: var(--solid-primary, #7C3AED);
   }
 }
+
+
+
+/*==============================================================================
+  HERO SUBTITLE
+==============================================================================*/
 
 .heroBanner p {
-  font-size: clamp(1.125rem, 3vw, 1.5rem);
+  font-size: clamp(1rem, 3vw, 1.5rem);
   max-width: 700px;
   margin: 0 auto 2.5rem;
-  color: var(--solid-text-secondary);
+  color: var(--solid-text-secondary, #94A3B8);
   line-height: 1.6;
+  letter-spacing: 0.3px;
+  font-weight: 400;
+  
 }
 
-@media screen and (max-width: 996px) {
-  .heroBanner {
-    padding: 4rem 2rem;
-  }
-  
-  .heroBanner h1 {
-    font-size: 2rem;
-  }
-  
-  .heroBanner p {
-    font-size: 1.125rem;
-  }
-}
+
+
+/*==============================================================================
+  BUTTONS CONTAINER
+==============================================================================*/
 
 .buttons {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 1rem;
+  gap: clamp(0.75rem, 2vw, 1.5rem);
   flex-wrap: wrap;
-  margin-top: 2rem;
+  margin-top: 2.5rem;
+  padding-top: 1rem;
 }
 
+/*==============================================================================
+  BUTTON STYLING
+==============================================================================*/
+
 .buttons a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   min-width: 160px;
+  padding: 18px 40px;
+  font-size: 1.2rem;
+  font-weight: 600;
+  border-radius: var(--solid-radius-lg, 8px);
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 1px solid transparent;
+  white-space: nowrap;
+}
+
+/* Primary button */
+.buttons a:nth-child(1) {
+  background: linear-gradient(
+    135deg,
+    var(--solid-primary, #7C3AED) 0%,
+    var(--solid-primary-light, #A78BFA) 100%
+  );
+  color: white;
+  box-shadow: 0 4px 15px rgba(124, 58, 237, 0.3);
+}
+
+.buttons a:nth-child(1):hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(124, 58, 237, 0.4);
+}
+
+.buttons a:nth-child(1):active {
+  transform: translateY(0);
+  box-shadow: 0 2px 10px rgba(124, 58, 237, 0.2);
+}
+
+/* Secondary button */
+.buttons a:nth-child(2) {
+  background: transparent;
+  color: var(--solid-primary, #7C3AED);
+  border: 2px solid var(--solid-primary, #7C3AED);
+}
+
+.buttons a:nth-child(2):hover {
+  background: var(--solid-primary, #7C3AED);
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(124, 58, 237, 0.2);
+}
+
+.buttons a:nth-child(2):active {
+  transform: translateY(0);
+}
+
+/* Focus visible for accessibility */
+.buttons a:focus-visible {
+  outline: 2px solid var(--solid-primary, #7C3AED);
+  outline-offset: 2px;
+  border-radius: var(--solid-radius-lg, 8px);
+}
+
+/*==============================================================================
+  RESPONSIVE DESIGN
+==============================================================================*/
+
+@media screen and (max-width: 996px) {
+  .heroBanner {
+    padding: clamp(3rem, 6vw, 4rem) 1.5rem;
+  }
+  
+  .heroBanner h1 {
+    font-size: clamp(1.75rem, 5vw, 2.5rem);
+    margin-bottom: 1.25rem;
+  }
+  
+  .heroBanner p {
+    font-size: clamp(0.95rem, 2.5vw, 1.25rem);
+    margin-bottom: 2rem;
+  }
+  
+  .buttons {
+    gap: 0.75rem;
+    margin-top: 2rem;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .heroBanner {
+    padding: 2.5rem 1rem;
+  }
+  
+  .heroBanner h1 {
+    font-size: 1.75rem;
+    margin-bottom: 1rem;
+  }
+  
+  .heroBanner p {
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .buttons {
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 1.5rem;
+  }
+  
+  .buttons a {
+    width: 100%;
+    max-width: 300px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .heroBanner h1 {
+    font-size: 1.5rem;
+  }
+  
+  .heroBanner p {
+    font-size: 0.95rem;
+  }
+  
+  .buttons a {
+    padding: 10px 20px;
+    font-size: 0.95rem;
+    min-width: 140px;
+  }
+}
+
+/*==============================================================================
+  DARK MODE
+==============================================================================*/
+
+@media (prefers-color-scheme: dark) {
+  .heroBanner h1 {
+    color: var(--solid-primary, #7C3AED);
+  }
+  
+  .heroBanner p {
+    color: var(--solid-text-secondary, #94A3B8);
+  }
+}
+
+/*==============================================================================
+  LIGHT MODE
+==============================================================================*/
+
+@media (prefers-color-scheme: light) {
+  .heroBanner h1 {
+    color: var(--solid-primary, #7C3AED);
+  }
+  
+  .heroBanner p {
+    color: var(--solid-text-secondary-light, #64748B);
+  }
+  
+  .buttons a:nth-child(2) {
+    color: var(--solid-primary-dark, #6D28D9);
+    border-color: var(--solid-primary-dark, #6D28D9);
+  }
+  
+  .buttons a:nth-child(2):hover {
+    background: var(--solid-primary-dark, #6D28D9);
+  }
+}
+
+/*==============================================================================
+  PRINT STYLES
+==============================================================================*/
+
+@media print {
+  .heroBanner {
+    background: none;
+    animation: none;
+  }
+  
+  .buttons a {
+    border: 1px solid #000;
+    color: #000;
+    background: white;
+  }
 }

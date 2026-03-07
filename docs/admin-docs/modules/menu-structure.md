@@ -148,8 +148,8 @@ You can customize the menu structure through configuration:
 ## Best Practices
 
   <details open>
-    <summary className="card-title card-headear-wrapper">
-    <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
+    <summary className="card-title ">
+    <!-- <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" /> -->
       Organization
     </summary>
     <ul className="card-desc">
@@ -161,8 +161,8 @@ You can customize the menu structure through configuration:
   </details>
 
   <details open>
-    <summary className="card-title card-headear-wrapper">
-    <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
+    <summary className="card-title ">
+    <!-- <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" /> -->
       Permissions
     </summary>
     <ul className="card-desc">
@@ -174,8 +174,8 @@ You can customize the menu structure through configuration:
   </details>
 
    <details open>
-    <summary className="card-title card-headear-wrapper">
-    <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
+    <summary className="card-title ">
+    <!-- <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" /> -->
       User Experience
     </summary>
    <ul className="card-desc">
@@ -187,8 +187,8 @@ You can customize the menu structure through configuration:
   </details>
 
    <details open>
-    <summary className="card-title card-headear-wrapper">
-    <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
+    <summary className="card-title ">
+    <!-- <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" /> -->
       Maintenance
     </summary>
       <ul className="card-desc">

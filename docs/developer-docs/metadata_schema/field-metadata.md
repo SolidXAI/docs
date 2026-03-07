@@ -37,8 +37,8 @@ Every SolidX model is composed of fields. Fields in SolidX go over and above the
 
 ### Example: Institute + Fee Type Model fields
 <details open>
- <summary className="card-title card-headear-wrapper">
-    <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
+ <summary className="card-title ">
+    <!-- <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" /> -->
     Field Schema
   </summary>
 
@@ -1103,8 +1103,8 @@ Fixed filter (JSON) applied when fetching related records from the admin ui. Thi
 
 The filter is a JSON object of schema type BasicFilterDto:
 <details open>
- <summary className="card-title card-headear-wrapper">
-    <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
+ <summary className="card-title ">
+    <!-- <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" /> -->
     Filter schema
   </summary>
 

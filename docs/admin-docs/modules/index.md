@@ -59,8 +59,8 @@ Comprehensive API documentation with Swagger/OpenAPI integration.
 ## Best Practices
 
 <details open>
-  <summary className="card-title card-headear-wrapper">
-    <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
+  <summary className="card-title ">
+    <!-- <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" /> -->
     App Organization
   </summary>
   <ul className="card-desc">
@@ -72,8 +72,8 @@ Comprehensive API documentation with Swagger/OpenAPI integration.
 </details>
 
 <details open>
-  <summary className="card-title card-headear-wrapper">
-    <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
+  <summary className="card-title ">
+    <!-- <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" /> -->
     API Design
   </summary>
   <ul className="card-desc">
@@ -85,8 +85,8 @@ Comprehensive API documentation with Swagger/OpenAPI integration.
 </details>
 
 <details open>
-  <summary className="card-title card-headear-wrapper">
-    <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
+  <summary className="card-title ">
+    <!-- <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" /> -->
     Security
   </summary>
   <ul className="card-desc">
@@ -98,8 +98,8 @@ Comprehensive API documentation with Swagger/OpenAPI integration.
 </details>
 
 <details open>
-  <summary className="card-title card-headear-wrapper">
-    <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
+  <summary className="card-title ">
+    <!-- <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" /> -->
     Performance
   </summary>
   <ul className="card-desc">

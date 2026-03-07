@@ -25,8 +25,8 @@ Below is a complete example of a **custom form view button** that redirects to a
 It reads the `id` from form data or row context, calls an API to get the hosted prefix, and opens the page in a new browser tab.
 
 <details open>
-<summary className="card-title card-headear-wrapper">
-  <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
+<summary className="card-title ">
+  <!-- <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" /> -->
   <code>PreviewPortal.tsx</code>
 </summary>
 
@@ -121,8 +121,8 @@ export default PreviewPortal;
 You must register your button component so that SolidX can resolve and invoke it when the form button is clicked.
 
 <details open>
-<summary className="card-title card-headear-wrapper">
-  <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
+<summary className="card-title ">
+  <!-- <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" /> -->
   <code>solid-extensions.ts</code>
 </summary>
 
@@ -146,8 +146,8 @@ registerExtensionComponent('PreviewPortal', PreviewPortal);
 Now, you can use this button inside your form layout metadata JSON configuration.
 
 <details open>
-<summary className="card-title card-headear-wrapper">
-  <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
+<summary className="card-title ">
+  <!-- <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" /> -->
   <code>Using in Layout JSON</code>
 </summary>
 
@@ -187,8 +187,8 @@ Now, you can use this button inside your form layout metadata JSON configuration
 
 Each form button component receives a consistent set of props from the SolidX form engine.
 <details open>
-<summary className="card-title card-headear-wrapper">
-  <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
+<summary className="card-title ">
+  <!-- <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" /> -->
   <code>Action Component Props</code>
 </summary>
 ```ts

@@ -20,8 +20,8 @@ When soft delete is enabled on a m<summary> Example: Bulk Delete Fee Types</summ
 odel (like `fee-type`), the record is not permanently removed — instead, the `deletedAt` and `deletedTracker` fields are populated.
 
 <details open>
- <summary className="card-title card-headear-wrapper">
-    <IoIosArrowForward  size={20} style={{ marginRight: "8px" }}  className="rotatable"  />
+ <summary className="card-title ">
+    <!-- <IoIosArrowForward  size={20} style={{ marginRight: "8px" }}  className="rotatable"  /> -->
      Example: Delete a Fee Type Record
   </summary>
 
@@ -86,8 +86,8 @@ DELETE /api/fee-type/{id}
 SolidX also supports deleting multiple records in a single request.
 
 <details open>
-<summary className="card-title card-headear-wrapper">
-    <IoIosArrowForward  size={20} style={{ marginRight: "8px" }}  className="rotatable"  />
+<summary className="card-title ">
+    <!-- <IoIosArrowForward  size={20} style={{ marginRight: "8px" }}  className="rotatable"  /> -->
      Example: Bulk Delete Fee Types
   </summary>
 

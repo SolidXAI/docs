@@ -62,8 +62,8 @@ If you need a custom display (e.g. a **score widget** with colors based on score
 
 ### 1. Create the Widget Component
 <details open>
- <summary className="card-title card-headear-wrapper">
-    <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
+ <summary className="card-title ">
+    <!-- <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" /> -->
     <code>ScoreWidget</code>
 </summary>
 
