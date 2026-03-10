@@ -210,8 +210,8 @@ The Media View provides an intuitive interface for managing and organizing your 
 ## Best Practices
 
 <details open>
-  <summary className="card-title card-headear-wrapper">
-    <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
+  <summary className="card-title ">
+    <!-- <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" /> -->
     Organization
   </summary>
   <ul className="card-desc">
@@ -223,8 +223,8 @@ The Media View provides an intuitive interface for managing and organizing your 
 </details>
 
 <details open>
-  <summary className="card-title card-headear-wrapper">
-    <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
+  <summary className="card-title ">
+    <!-- <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" /> -->
     Performance
   </summary>
   <ul className="card-desc">
@@ -236,8 +236,8 @@ The Media View provides an intuitive interface for managing and organizing your 
 </details>
 
 <details open>
-  <summary className="card-title card-headear-wrapper">
-    <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
+  <summary className="card-title">
+    <!-- <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" /> -->
     Security
   </summary>
   <ul className="card-desc">
@@ -249,8 +249,8 @@ The Media View provides an intuitive interface for managing and organizing your 
 </details>
 
 <details open>
-  <summary className="card-title card-headear-wrapper">
-    <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
+  <summary className="card-title ">
+    <!-- <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" /> -->
     Workflow
   </summary>
   <ul className="card-desc">

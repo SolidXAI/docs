@@ -9,7 +9,7 @@ dotenv.config();
 const config: Config = {
   title: 'SolidX Docs',
   tagline: 'Enterprise-focussed low-code development platform',
-  favicon: 'img/tab-logo.png',
+  favicon: 'img/tab-logo.svg',
 
   // Set the production url of your site here
   url: 'https://docs.solidstarters.com',
@@ -110,7 +110,7 @@ const config: Config = {
       title: '',
       logo: {
         alt: 'SolidX Alt Logo',
-        src: 'img/NavbarLogo.png',
+        src: 'img/NavbarLogo.svg',
       },
       items: [
         {
@@ -144,7 +144,7 @@ const config: Config = {
     footer: {
       style: 'dark',
       logo: {
-        src: 'img/NavbarLogo.png',
+        src: 'img/NavbarLogo.svg',
         className: 'footer-bottom-icon'
       },
 
@@ -210,21 +210,7 @@ const config: Config = {
 
   themes: ['docusaurus-theme-search-typesense'],
 
-  // plugins: [
-  //   [
-  //     'docusaurus-biel',
-  //     {
-  //       project: 'yrjmteh4r5',
-  //       headerTitle: 'Biel.ai chatbot',
-  //       version: 'latest',
-  //       bielButtonText: 'ASK AI',
-  //       buttonPosition: 'center-right',
-  //       modalPosition: 'sidebar-right',
-  //       buttonStyle: 'dark',
-  //       enable: true,
-  //     },
-  //   ],
-  // ],
+
 };
 
 export default config;

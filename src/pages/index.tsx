@@ -26,7 +26,7 @@ function HomepageHeader() {
           <Link
             className="button button--secondary button--lg"
             to="/docs/admin-docs/"
-            style={{ marginLeft: '1rem' }}>
+            >
             Admin Guide
           </Link>
         </div>

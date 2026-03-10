@@ -31,8 +31,8 @@ Email Templates in `SolidX` allow you to create and manage HTML/Text based email
 Below is an example configuration for two email templates: one for sending payment reminders and another for OTP verification. The body of the email templates is stored in separate HTML files i.e (specified in the `body` attribute)
 <details open>
 
-<summary className="card-title card-headear-wrapper">
-    <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
+<summary className="card-title ">
+    <!-- <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" /> -->
  Email Templates Schema
   </summary>
 
@@ -72,8 +72,8 @@ This example uses Handlebars syntax for dynamic content insertion.
 The variables used in this template (like `{{student.studentName}}`, `{{dueDetails.totalAmountDue}}`, etc.) should correspond to the data structure passed when sending the email.
 
 <details open>
-  <summary className="card-title card-headear-wrapper">
-    <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
+  <summary className="card-title ">
+    <!-- <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" /> -->
    Email Template File 
   </summary>
 
@@ -175,8 +175,8 @@ The variables used in this template (like `{{student.studentName}}`, `{{dueDetai
 ```
 </details>
 <details open>
- <summary className="card-title card-headear-wrapper">
-    <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
+ <summary className="card-title ">
+    <!-- <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" /> -->
    Email Template File (Text)
   </summary>
 
@@ -204,8 +204,8 @@ The {{ solidAppName }} Team
 Below is a code snippet demonstrating how to send an email using the defined email templates via the `MailServiceFactory`. This example shows how to send an OTP verification email to a user.
 
 <details open>
-<summary className="card-title card-headear-wrapper">
-    <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
+<summary className="card-title ">
+    <!-- <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" /> -->
    Email Sending Code Snippet
   </summary>
 

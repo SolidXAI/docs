@@ -41,8 +41,8 @@ Below are examples of how to configure both header and row buttons in the module
 
 ### Header Button Example
 <details open>
-<summary className="card-title card-headear-wrapper">
-  <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
+<summary className="card-title ">
+  <!-- <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" /> -->
   <code>Generate Report Header Button</code>
 </summary>
 
@@ -77,8 +77,8 @@ Below are examples of how to configure both header and row buttons in the module
 
 ### Row Button Example
 <details open>
-<summary className="card-title card-headear-wrapper">
-  <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
+<summary className="card-title \">
+  <!-- <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" /> -->
   <code>Refund Payment Row Button</code>
 </summary>
 
@@ -122,8 +122,8 @@ Each list button component receives a consistent set of props from the SolidX li
 Header buttons receive the **selected records** and **filters**, while row buttons receive the **row data**.
 
 <details open>
-<summary className="card-title card-headear-wrapper">
-  <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
+<summary className="card-title ">
+  <!-- <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" /> -->
   <code>Action Component Props</code>
 </summary>
 

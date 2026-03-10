@@ -62,8 +62,8 @@ Add entries to the `securityRules` array in your module’s metadata JSON.
 3) Put your access logic under `securityRuleConfig.filters`.
 
 <details open>
-  <summary className="card-title card-header-wrapper">
-    <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
+  <summary className="card-title ">
+    <!-- <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" /> -->
     Example: <code>Institute Admin</code> sees only their institute
   </summary>
 

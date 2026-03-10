@@ -77,7 +77,6 @@ You can explore the **core functionality** of the Module Builder via the cards b
 </div>
 
 Define and manage your **data models** through an intuitive interface:
-<br/>
 
 - **Modules**: Organize your app into logical modules for clean architecture. [Learn More](./module-management.md)
 - **Models**: Efficiently define data structures aligned to your business requirements. [Learn More](./model-management.md)
@@ -97,7 +96,6 @@ Define and manage your **data models** through an intuitive interface:
 </div>
 
 Arrange models & fields to generate **powerful, metadata-driven admin UIs**. Features include:
-<br/>
 
 -  **Menu Items**: Define navigational elements.
 -  **Views**: Create custom perspectives (List, Kanban, Form).

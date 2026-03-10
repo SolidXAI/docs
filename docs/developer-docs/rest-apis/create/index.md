@@ -42,8 +42,8 @@ Authorization: Bearer <token>
 `POST /api/fee-type`
 
 <details open>
- <summary className="card-title card-headear-wrapper">
-    <IoIosArrowForward  size={20} style={{ marginRight: "8px" }}  className="rotatable"  />
+ <summary className="card-title ">
+    <!-- <IoIosArrowForward  size={20} style={{ marginRight: "8px" }}  className="rotatable"  /> -->
      Request Body
   </summary>
 
@@ -61,8 +61,8 @@ Authorization: Bearer <token>
 </details>
 
 <details open>
- <summary className="card-title card-headear-wrapper">
-    <IoIosArrowForward  size={20} style={{ marginRight: "8px" }}  className="rotatable"  />
+ <summary className="card-title ">
+    <!-- <IoIosArrowForward  size={20} style={{ marginRight: "8px" }}  className="rotatable"  /> -->
      Sample Request
   </summary>
 
@@ -77,8 +77,8 @@ Authorization: Bearer <token>
 </details>
 
 <details open>
- <summary className="card-title card-headear-wrapper">
-    <IoIosArrowForward  size={20} style={{ marginRight: "8px" }}  className="rotatable"  />
+ <summary className="card-title ">
+    <!-- <IoIosArrowForward  size={20} style={{ marginRight: "8px" }}  className="rotatable"  /> -->
      Sample Response
   </summary>
 
@@ -134,8 +134,8 @@ To create multiple records at once:
 `POST /api/fee-type/bulk`
 
 <details open>
- <summary className="card-title card-headear-wrapper">
-    <IoIosArrowForward  size={20} style={{ marginRight: "8px" }}  className="rotatable"  />
+ <summary className="card-title ">
+    <!-- <IoIosArrowForward  size={20} style={{ marginRight: "8px" }}  className="rotatable"  /> -->
      Sample Bulk Request
   </summary>
 
@@ -171,8 +171,8 @@ Authorization: Bearer <token>
 ```
 
 <details open>
- <summary className="card-title card-headear-wrapper">
-    <IoIosArrowForward  size={20} style={{ marginRight: "8px" }}  className="rotatable"  />
+ <summary className="card-title ">
+    <!-- <IoIosArrowForward  size={20} style={{ marginRight: "8px" }}  className="rotatable"  /> -->
      Multipart Form Data Example
   </summary>
 

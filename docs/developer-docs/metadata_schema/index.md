@@ -79,8 +79,8 @@ Below are the key components of the metadata schema. All the functionality conce
 ##  Best Practices
 
 <details open>
-  <summary className="card-title card-headear-wrapper">
-    <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
+  <summary className="card-title ">
+    <!-- <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" /> -->
     Naming Conventions
   </summary>
   <ul className="card-desc">
@@ -91,8 +91,8 @@ Below are the key components of the metadata schema. All the functionality conce
 </details>
 
 <details open>
-  <summary className="card-title card-headear-wrapper">
-    <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
+  <summary className="card-title ">
+    <!-- <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" /> -->
     Security First
   </summary>
   <ul className="card-desc">
@@ -104,8 +104,8 @@ Below are the key components of the metadata schema. All the functionality conce
 </details>
 
 <details open>
-  <summary className="card-title card-headear-wrapper">
-    <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
+  <summary className="card-title ">
+    <!-- <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" /> -->
     Performance Optimization
   </summary>
   <ul className="card-desc">
@@ -117,8 +117,8 @@ Below are the key components of the metadata schema. All the functionality conce
 </details>
 
 <details open>
-  <summary className="card-title card-headear-wrapper">
-    <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
+  <summary className="card-title ">
+    <!-- <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" /> -->
     User Experience
   </summary>
   <ul className="card-desc">
@@ -130,8 +130,8 @@ Below are the key components of the metadata schema. All the functionality conce
 </details>
 
 <details open>
-  <summary className="card-title card-headear-wrapper">
-    <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
+  <summary className="card-title ">
+    <!-- <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" /> -->
     Maintainability
   </summary>
   <ul className="card-desc">
@@ -143,8 +143,8 @@ Below are the key components of the metadata schema. All the functionality conce
 </details>
 
 <details open>
-  <summary className="card-title card-headear-wrapper">
-    <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
+  <summary className="card-title ">
+    <!-- <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" /> -->
     Data Integrity
   </summary>
   <ul className="card-desc">

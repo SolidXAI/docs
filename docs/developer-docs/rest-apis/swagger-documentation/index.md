@@ -186,8 +186,8 @@ All API errors follow a consistent format:
    - Note any limitations -->
 
   <details open>
-    <summary className="card-title card-headear-wrapper">
-      <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
+    <summary className="card-title ">
+      <!-- <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" /> -->
       Authentication
     </summary>
     <ul className="card-desc">
@@ -199,8 +199,8 @@ All API errors follow a consistent format:
   </details>
 
   <details open>
-    <summary className="card-title card-headear-wrapper">
-      <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
+    <summary className="card-title ">
+      <!-- <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" /> -->
        Request Optimization
     </summary>
     <ul className="card-desc">
@@ -212,8 +212,8 @@ All API errors follow a consistent format:
   </details>
 
   <details open>
-    <summary className="card-title card-headear-wrapper">
-      <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
+    <summary className="card-title">
+      <!-- <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" /> -->
        Error Handling
     </summary>
     <ul className="card-desc">
@@ -225,8 +225,8 @@ All API errors follow a consistent format:
   </details>
 
   <details open>
-    <summary className="card-title card-headear-wrapper">
-      <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
+    <summary className="card-title ">
+      <!-- <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" /> -->
        Documentation
     </summary>
     <ul className="card-desc">

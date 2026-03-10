@@ -27,8 +27,8 @@ Here’s an example field configuration using a custom provider named `StockApiS
 The `selectionDynamicProviderCtxt` specifies which fields from the API response should be used as labels and values.
 
 <details open>
- <summary className="card-title card-headear-wrapper">
-    <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
+ <summary className="card-title ">
+    <!-- <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" /> -->
     Example Configuration
 </summary>
 
@@ -82,8 +82,8 @@ The most important method is `values()`, which fetches and returns the available
 <br/>
 
 <details open>
- <summary className="card-title card-headear-wrapper">
-    <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
+ <summary className="card-title ">
+    <!-- <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" /> -->
     Example: <code>StockApiSelectionProvider</code>
 </summary>
 
@@ -182,8 +182,8 @@ Since providers are standard NestJS providers, register them in the module where
 Below are the core interfaces used when implementing a dynamic selection provider.
 
 <details open>
- <summary className="card-title card-headear-wrapper">
-    <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
+ <summary className="card-title ">
+    <!-- <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" /> -->
     <code>ISelectionProvider</code> Interface
 </summary>
 

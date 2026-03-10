@@ -89,8 +89,8 @@ Paginate large datasets efficiently with options to set default and allowed page
 Data can be exported in standard formats such as CSV or Excel. This allows external analysis or record-keeping. The export functionality is completely dynamic and metadata driven based on how you have configured your model & fields.
 
 <details open>
-  <summary className="card-title card-headear-wrapper ">
-    <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
+  <summary className="card-title  ">
+    <!-- <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" /> -->
     Step 1
   </summary>
 One can access the export functionality from the cog wheel on the list view
@@ -102,8 +102,8 @@ DEV TODO: Make export button access controlled by roles & permissions. We should
 </details>
 
 <details open>
-  <summary className="card-title card-headear-wrapper ">
-    <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
+  <summary className="card-title ">
+    <!-- <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" /> -->
     Step 2
   </summary>
 
@@ -116,8 +116,8 @@ Also note that all fields are exportable except for media fields. Media fields a
 </details>
 
 <details open>
-  <summary className="card-title card-headear-wrapper ">
-    <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
+  <summary className="card-title  ">
+    <!-- <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" /> -->
     Step 3
   </summary>
 
@@ -130,8 +130,8 @@ One can choose to save this export configuration as a named template to be re-us
 </details>
 
 <details open>
-  <summary className="card-title card-headear-wrapper ">
-    <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
+  <summary className="card-title  ">
+    <!-- <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" /> -->
     Step 4
   </summary>
 
@@ -154,8 +154,8 @@ TODO: Show a screenshot of the export transactions screen and how the user can d
 Users can import records in bulk via structured files. Field mapping, validations, and error handling are supported out of the box. The import functionality is completely dynamic and metadata driven based on how you have configured your model & fields.
 
 <details open>
-  <summary className="card-title card-headear-wrapper ">
-    <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
+  <summary className="card-title ">
+    <!-- <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" /> -->
     Step 1
   </summary>
 
@@ -168,8 +168,8 @@ DEV TODO: Make import button access controlled by roles & permissions. We should
 </details>
 
 <details open>
-  <summary className="card-title card-headear-wrapper ">
-    <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
+  <summary className="card-title ">
+    <!-- <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" /> -->
     Step 2
   </summary>
 
@@ -184,8 +184,8 @@ This screen also displays other instructions around validations etc that will be
 </details>
 
 <details open>
-  <summary className="card-title card-headear-wrapper ">
-    <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
+  <summary className="card-title  ">
+    <!-- <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" /> -->
     Step 3
   </summary>
 
@@ -196,8 +196,8 @@ Here we upload the actual file which is to be imported.
 </details>
 
 <details open>
-  <summary className="card-title card-headear-wrapper ">
-    <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
+  <summary className="card-title  ">
+    <!-- <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" /> -->
     Step 4
   </summary>
 Here we provide the mapping for the import, basically fields from the excel header are mapped against fields from SolidX field metadata for this model. 
@@ -207,8 +207,8 @@ TODO: Mapping screen screenshot is pending.
 </details>
 
 <details open>
-  <summary className="card-title card-headear-wrapper ">
-    <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
+  <summary className="card-title  ">
+    <!-- <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" /> -->
     Step 5
   </summary>
 
@@ -245,8 +245,8 @@ TODO: Screenshots pending from Sapphire or anywhere we have action buttons on th
 The SolidX list view lets you apply custom filters and then save them using saved filters.
 
 <details open>
-  <summary className="card-title card-headear-wrapper ">
-    <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
+  <summary className="card-title  ">
+    <!-- <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" /> -->
     Step 1
   </summary>
 Start with choosing a custom filter (or search based filter)
@@ -256,8 +256,8 @@ Start with choosing a custom filter (or search based filter)
 </details>
 
 <details open>
-  <summary className="card-title card-headear-wrapper ">
-    <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
+  <summary className="card-title  ">
+    <!-- <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" /> -->
     Step 2
   </summary>
 Next we click on the cogwheel on the upper right corner, choose "Save Custom Filter", and in the popup that opens give it a name and decide if this is going to be private or not. If marked as private this saved filter is visible only to the user who is creating it.
@@ -269,8 +269,8 @@ Next we click on the cogwheel on the upper right corner, choose "Save Custom Fil
 </details>
 
 <details open>
-  <summary className="card-title card-headear-wrapper ">
-    <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
+  <summary className="card-title ">
+    <!-- <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" /> -->
     Step 2
   </summary>
 After you save the filter it is now available to be applied in the list of saved filters in the dropdown that opens under the search area.

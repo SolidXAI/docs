@@ -33,8 +33,8 @@ A module groups together related models and functionality under a **unified doma
 ###  Example: Fees Portal Module
 Below is a module metadata example for a "Fees Portal" module that tracks fee collection requests.
 <details open>
-  <summary className="card-title card-headear-wrapper">
-    <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
+  <summary className="card-title ">
+    <!-- <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" /> -->
     Module Schema
   </summary>
 

@@ -46,8 +46,8 @@ Specify the queue name and broker type in an options object.
 Below is an example configuration for a database-backed queue for sending emails.
 
 <details open>
- <summary className="card-title card-headear-wrapper">
-    <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
+ <summary className="card-title ">
+    <!-- <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" /> -->
      <code>email-queue-options-database.ts</code>
   </summary>
 
@@ -73,8 +73,8 @@ export default {
 We need to create a publisher class which extends the appropriate base publisher class based on the broker type and specify the queue options.
 
 <details open>
- <summary className="card-title card-headear-wrapper">
-    <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
+ <summary className="card-title">
+    <!-- <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" /> -->
     <code>email-queue-publisher-database.ts</code>  
 </summary>
 
@@ -118,8 +118,8 @@ Subscribers process messages from the queue. They house the actual job processin
 Below is an example subscriber that sends emails using the SMTP service.
 
 <details open>
- <summary className="card-title card-headear-wrapper">
-    <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
+ <summary className="card-title ">
+    <!-- <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" /> -->
     <code>email-queue-subscriber-database.ts</code>  
 </summary>
 

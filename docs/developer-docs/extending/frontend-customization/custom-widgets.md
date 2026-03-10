@@ -26,8 +26,8 @@ These widgets:
  Example: Display how many characters a user has typed in a text field.
 
 <details open>
- <summary className="card-title card-headear-wrapper">
-    <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
+ <summary className="card-title ">
+    <!-- <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" /> -->
     Code: CustomHtml Widget Configuration
 </summary>
 
@@ -66,8 +66,8 @@ These widgets:
 4. The widget is rendered with the following props:  
 
 <details open>
- <summary className="card-title card-headear-wrapper">
-    <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" />
+ <summary className="card-title ">
+    <!-- <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" /> -->
     Code: Props Interface
 </summary>
 
