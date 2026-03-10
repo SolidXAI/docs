@@ -52,6 +52,80 @@ In the above example, the `editWidget` attribute specifies the widget to use in 
 
 
 
+## Built-in Widgets
+
+SolidX ships with a set of pre-built widgets for every field type. You can reference these directly in the layout JSON without writing or registering any code.
+
+### Edit Widgets (`editWidget`)
+
+Used in **edit mode** via the `editWidget` attribute on a form field.
+
+| Widget Name | Alias | Field Type | Description |
+|---|---|---|---|
+| `DefaultShortTextFormEditWidget` | — | `shortText` | Default single-line text input |
+| `MaskedShortTextFormEditWidget` | `maskedShortTextEdit` | `shortText` | Password-style masked input |
+| `SolidIconEditWidget` | — | `shortText` | Google Material Symbols icon picker dialog |
+| `DefaultLongTextFormEditWidget` | — | `longText` | Default multi-line textarea |
+| `DynamicJsonEditorFormEditWidget` | `jsonEditor` | `longText` | JSON editor with syntax highlighting |
+| `CodeEditorFormEditWidget` | `codeEditor` | `longText` | Code editor with syntax highlighting |
+| `DefaultIntegerFormEditWidget` | — | `integer` | Default number input for integers |
+| `SolidIntegerSliderStyleFormEditWidget` | `integerSlider` | `integer` | Range slider for integer values |
+| `DefaultDecimalFormEditWidget` | — | `decimal` | Decimal number input |
+| `DefaultEmailFormEditWidget` | — | `email` | Email input with format validation |
+| `DefaultPasswordFormEditWidget` | — | `password` | Password input (edit mode) |
+| `DefaultPasswordFormCreateWidget` | — | `password` | Password + confirm-password input (create mode) |
+| `DefaultTimeFormEditWidget` | — | `time` | Time picker |
+| `DefaultDateFormEditWidget` | — | `date` | Date picker (calendar) |
+| `DefaultDateTimeFormEditWidget` | — | `datetime` | Combined date and time picker |
+| `DefaultBooleanFormEditWidget` | `booleanSelectbox` | `boolean` | Dropdown select (Yes / No) |
+| `SolidBooleanCheckboxStyleFormEditWidget` | `booleanCheckbox` | `boolean` | Checkbox style |
+| `SolidBooleanSwitchStyleFormEditWidget` | — | `boolean` | Toggle switch style |
+| `DefaultJsonFormEditWidget` | — | `json` | JSON field editor |
+| `DefaultRichTextFormEditWidget` | — | `richText` | WYSIWYG rich text editor |
+| `DefaultSelectionStaticAutocompleteFormEditWidget` | — | `selectionStatic` | Autocomplete dropdown for static options |
+| `SolidSelectionStaticRadioFormEditWidget` | — | `selectionStatic` | Radio button group |
+| `SolidSelectionStaticSelectButtonFormEditWidget` | — | `selectionStatic` | Segmented select buttons |
+| `DefaultSelectionDynamicFormEditWidget` | — | `selectionDynamic` | Autocomplete for API-driven dynamic options |
+| `DefaultMediaSingleFormEditWidget` | — | `mediaSingle` | Single file / image upload |
+| `DefaultMediaMultipleFormEditWidget` | — | `mediaMultiple` | Multiple files / images upload |
+| `DefaultRelationManyToOneFormEditWidget` | — | `relation.many2one` | Autocomplete relation selector |
+| `PseudoRelationManyToOneFormWidget` | — | `relation.many2one` | Short-text field wired to a many-to-one value |
+| `DefaultRelationManyToManyAutoCompleteFormEditWidget` | — | `relation.many2many` | Many-to-many autocomplete chips |
+| `DefaultRelationManyToManyCheckBoxFormEditWidget` | — | `relation.many2many` | Checkbox list for many-to-many selection |
+| `RolePermissionsManyToManyFieldWidget` | `inputSwitch` | `relation.many2many` | Toggle-switch grid for role permissions |
+| `DefaultRelationOneToManyFormEditWidget` | — | `relation.one2many` | Embedded editable table for one-to-many |
+| `PseudoRelationOneToManyFormWidget` | — | `relation.one2many` | Pseudo one-to-many form widget |
+
+### View Widgets (`viewWidget`)
+
+Used in **view (read-only) mode** via the `viewWidget` attribute on a form field.
+
+| Widget Name | Alias | Field Type | Description |
+|---|---|---|---|
+| `DefaultShortTextFormViewWidget` | — | `shortText`, `longText`, `email` | Default plain text display |
+| `MaskedShortTextFormViewWidget` | `maskedShortTextForm` | `shortText` | Masked text display |
+| `SolidShortTextFieldAvatarWidget` | — | `shortText` | Text with a colored initials avatar |
+| `SolidIconViewWidget` | — | `shortText` | Renders a stored icon name as a Material Symbols icon |
+| `DefaultIntegerFormViewWidget` | — | `integer` | Plain integer display |
+| `DefaultDecimalFormViewWidget` | — | `decimal` | Plain decimal display |
+| `DefaultTimeFormViewWidget` | — | `time` | Formatted time display |
+| `DefaultDateFormViewWidget` | — | `date` | Formatted date display |
+| `DefaultDateTimeFormViewWidget` | — | `datetime` | Formatted date and time display |
+| `DefaultBooleanFormViewWidget` | — | `boolean` | Boolean display |
+| `DefaultJsonFormViewWidget` | — | `json` | JSON read-only display |
+| `DynamicJsonEditorFormViewWidget` | `jsonViewer` | `longText` | Read-only JSON viewer with syntax highlighting |
+| `DefaultPasswordFormViewWidget` | — | `password` | Masked password display |
+| `DefaultRichTextFormViewWidget` | — | `richText` | Rendered rich text (HTML) |
+| `DefaultSelectionStaticFormViewWidget` | — | `selectionStatic` | Static selection label display |
+| `DefaultSelectionDynamicFormViewWidget` | — | `selectionDynamic` | Dynamic selection label display |
+| `DefaultMediaSingleFormViewWidget` | — | `mediaSingle` | Single media preview |
+| `DefaultMediaMultipleFormViewWidget` | — | `mediaMultiple` | Multiple media thumbnails |
+| `DefaultRelationManyToOneFormViewWidget` | — | `relation.many2one` | Many-to-one relation label |
+| `SolidRelationFieldAvatarFormWidget` | — | `relation` | Relation value(s) rendered as avatar chips |
+| `DefaultRelationOneToManyFormViewWidget` | — | `relation.one2many` | Read-only embedded table for one-to-many |
+
+
+
 ##  Creating a Custom Widget
 
 ### 1. Create the Widget Component
@@ -294,3 +368,9 @@ This allows you to render a **boolean field as "Yes/No"** in view mode.
 
 
  With this approach, you can **seamlessly extend** SolidX form views using custom widgets for both **edit** and **view** modes.
+
+## Related
+
+- [List View Field Widgets](./list-view-field-widgets) — built-in and custom widgets for list column display
+- [Kanban Field Widgets](./kanban-field-widgets) — widgets for kanban card fields
+- [Custom Widgets](./custom-widgets) — general guide to registering extension components

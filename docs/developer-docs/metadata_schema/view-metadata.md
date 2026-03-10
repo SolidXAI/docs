@@ -83,7 +83,6 @@ Views define UI presentation of models and automatically generate:
           "attrs": {
             "name": "id",
             "sortable": true,
-            "filterable": true,
             "isSearchable": true
           }
         }
@@ -221,7 +220,7 @@ List views display records in tabular format with advanced features like search,
 </details>
 
 ### 2) List View Attributes
-**What this shows:** How to toggle pagination and CRUD actions from the list, and how to restrict actions to specific roles.
+**What this shows:** How to toggle pagination and CRUD actions from the list, how to restrict actions to specific roles, and how to add custom row/header buttons.
 
 <details open>
 <summary className="card-title ">
@@ -231,20 +230,24 @@ List views display records in tabular format with advanced features like search,
 
 ```json
 "attrs": {
-  "pagination": true,
-  "pageSizeOptions": [10, 25, 50],
-  "enableGlobalSearch": true,
-  "create": true,
-  "edit": true,
-  "delete": true,
-  "import": { "roles": ["Admin"] },
-  "showArchived": { "roles": ["Admin"] },
-  "export": { "roles": ["Admin", "Institute Admin"] },
-  "customizeLayout": { "roles": ["Admin"] },
-  "saveCustomFilter": { "roles": ["Admin"] }
+  "pagination": true,                                   // Enables pagination controls at the bottom of the list
+  "pageSizeOptions": [10, 25, 50],                      // Dropdown options for how many records to show per page
+  "enableGlobalSearch": true,                           // Shows a search bar that queries across all searchable fields
+  "create": true,                                       // Shows a "Create" button to add new records
+  "edit": true,                                         // Shows an "Edit" action on each row
+  "delete": true,                                       // Shows a "Delete" action on each row
+  "import": { "roles": ["Admin"] },                     // Restricts the CSV/bulk import action to the specified roles
+  "showArchived": { "roles": ["Admin"] },               // Shows a toggle to include archived records, visible to specified roles
+  "export": { "roles": ["Admin", "Institute Admin"] },  // Restricts the data export action to the specified roles
+  "customizeLayout": { "roles": ["Admin"] },            // Allows the specified roles to reorder or hide columns
+  "saveCustomFilter": { "roles": ["Admin"] },           // Allows the specified roles to save filter presets
+  "rowButtons": [...],                                  // Custom action buttons rendered on each row — see List View Buttons
+  "headerButtons": [...]                                // Custom action buttons rendered in the list header — see List View Buttons
 }
 ```
 </details>
+
+> For `rowButtons` and `headerButtons` configuration and component registration, see [List View Buttons](../extending/frontend-customization/list-view-buttons).
 
 ### 3) List View Field Configuration
 **What this shows:** Each item in `children` is a column. Control sort, filter and search participation; `viewWidget` customizes how the value renders.
@@ -260,29 +263,26 @@ List views display records in tabular format with advanced features like search,
   {
     "type": "field",
     "attrs": {
-      "name": "instituteName",
-      "sortable": true,
-      "filterable": true,
-      "isSearchable": true
+      "name": "instituteName",      // The model field name to display as a column
+      "sortable": true,             // Allows the column header to be clicked to sort records
+      "isSearchable": true          // Makes this field searchable in the list view of the model
     }
   },
   {
     "type": "field",
     "attrs": {
-      "name": "logo",
-      "sortable": true,
-      "filterable": true,
-      "isSearchable": true
+      "name": "logo",               // The model field name to display as a column
+      "sortable": true,             // Allows the column header to be clicked to sort records
+      "isSearchable": true          // Makes this field searchable in the list view of the model
     }
   },
   {
     "type": "field",
     "attrs": {
-      "name": "paymentGatewayAccessSecret",
-      "viewWidget": "maskedShortTextList",
-      "sortable": true,
-      "filterable": true,
-      "isSearchable": true
+      "name": "paymentGatewayAccessSecret", // The model field name to display as a column
+      "viewWidget": "maskedShortTextList",  // Overrides the default cell renderer with a custom widget
+      "sortable": true,                     // Allows the column header to be clicked to sort records
+      "isSearchable": true                  // Makes this field searchable in the list view of the model
     }
   }
 ]
@@ -330,7 +330,7 @@ Form views handle data entry and editing with complex layout structures using sh
 </details>
 
 ### 2) Form View Attributes
-**What this shows:** Configure visual details and attach custom buttons that trigger actions or popups.
+**What this shows:** Configure visual details, workflow status display, and custom buttons that trigger actions or popups.
 
 <details open>
 <summary className="card-title ">
@@ -340,26 +340,30 @@ Form views handle data entry and editing with complex layout structures using sh
 
 ```json
 "attrs": {
-  "name": "form-1",
-  "label": "Institute",
-  "className": "grid",
-  "formButtons": [
+  "name": "form-1",                      // Unique identifier for this form layout
+  "label": "Institute",                  // Display title shown at the top of the form
+  "className": "grid",                   // CSS class applied to the form wrapper ("grid" enables grid-based layout)
+  "workflowField": "status",             // The model field that drives the workflow (e.g. pending, active, inactive) — renders a workflow status indicator at the top of the form
+  "workflowFieldUpdateEnabled": false,   // When true, allows the user to click the workflow status indicator on the form to update the workflow directly — see Workflow Status on a Form
+  "formButtons": [                       // Custom action buttons rendered in the form header
     {
       "attrs": {
-        "className": "",
-        "label": "Preview",
-        "action": "PreviewPortal",
-        "icon": "pi",
-        "actionInContextMenu": true,
-        "openInPopup": true,
-        "customComponentIsSystem": true,
-        "closable": true
+        "className": "",              // Additional CSS classes for the button
+        "label": "Preview",          // Text displayed on the button
+        "action": "PreviewPortal",   // Registered component name rendered when the button is clicked
+        "icon": "pi",                // PrimeIcons class for the button icon
+        "actionInContextMenu": true, // Whether to also show this action in the row context menu
+        "openInPopup": true,         // Opens the action component in a modal popup
+        "customComponentIsSystem": true, // Marks the component as a system-level component
+        "closable": true             // Whether the popup can be closed by the user
       }
     }
   ]
 }
 ```
 </details>
+
+> For full workflow configuration details and examples, see [Workflow Status on a Form](../../recipes/workflow-status).
 
 ### 3) Form Layout Components Hierarchy
 **What this shows:** How layout blocks nest to build rich, organized forms.
@@ -627,15 +631,15 @@ Kanban views display records as cards with drag-and-drop functionality.
 
 ```json
 "attrs": {
-  "swimlanesCount": 10,
-  "recordsInSwimlane": 5,
-  "enableGlobalSearch": true,
-  "create": true,
-  "edit": true,
-  "delete": true,
-  "groupBy": "status",
-  "draggable": true,
-  "allowedViews": ["list", "kanban"]
+  "swimlanesCount": 10,              // Maximum number of swimlane columns to display
+  "recordsInSwimlane": 5,            // Number of records loaded per swimlane
+  "enableGlobalSearch": true,        // Shows a search bar that filters cards across all lanes
+  "create": true,                    // Shows a "Create" button to add new records
+  "edit": true,                      // Allows editing a record by clicking its card
+  "delete": true,                    // Allows deleting a record from its card
+  "groupBy": "status",               // Field used to group records into swimlane columns
+  "draggable": true,                 // Enables drag-and-drop to move cards between lanes
+  "allowedViews": ["list", "kanban"] // View-switcher options shown to the user
 }
 ```
 </details>

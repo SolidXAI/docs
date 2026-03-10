@@ -56,6 +56,27 @@ In the example above, `SolidShortTextAvatarWidget` is a **built-in widget** that
 
 
 
+## Built-in Widgets
+
+SolidX ships with a set of pre-built list column widgets. Reference them directly in your layout JSON via the `viewWidget` attribute — no registration required.
+
+| Widget Name | Alias | Field Type | Description |
+|---|---|---|---|
+| `DefaultTextListWidget` | — | `shortText` | Default plain text column |
+| `MaskedShortTextListViewWidget` | `maskedShortTextList` | `shortText` | Masked text (e.g., for sensitive data) |
+| `SolidShortTextAvatarWidget` | — | `shortText`, `relation` | Text with a colored initials avatar badge |
+| `SolidShortTextFieldImageListWidget` | — | `shortText` | Renders the field value as a thumbnail image (`src` URL) |
+| `DefaultBooleanListWidget` | — | `boolean` | Boolean column display |
+| `PublishedStatusListViewWidget` | `publishedStatus` | `date` | Renders a date field as a Published / Draft status tag |
+| `DefaultMediaSingleListWidget` | — | `mediaSingle` | Single media thumbnail |
+| `DefaultMediaMultipleListWidget` | — | `mediaMultiple` | Multiple media thumbnails |
+| `DefaultRelationManyToOneListWidget` | — | `relation.many2one` | Many-to-one relation label |
+| `SolidManyToOneRelationAvatarListWidget` | — | `relation.many2one` | Many-to-one with colored initials avatar |
+| `DefaultRelationManyToManyListWidget` | — | `relation.many2many` | Many-to-many comma-separated labels |
+| `SolidManyToManyRelationAvatarListWidget` | — | `relation.many2many` | Many-to-many with colored initials avatars |
+| `DefaultRelationOneToManyListWidget` | — | `relation.one2many` | One-to-many relation column |
+
+
 ##  Creating a Custom Widget
 
 If you need a custom display (e.g. a **score widget** with colors based on score values), follow these steps:
@@ -176,4 +197,10 @@ export type FieldMetadata = CommonEntity & {
   - `solidListViewMetaData`
   - `fieldMetadata`
   - `column`
+
+## Related
+
+- [Form View Field Widgets](./form-view-field-widgets) — built-in and custom widgets for form fields (edit and view mode)
+- [Kanban Field Widgets](./kanban-field-widgets) — widgets for kanban card fields
+- [Custom Widgets](./custom-widgets) — general guide to registering extension components
 <!-- ```tsx -->
