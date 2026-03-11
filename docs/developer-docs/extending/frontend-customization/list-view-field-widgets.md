@@ -60,21 +60,25 @@ In the example above, `SolidShortTextAvatarWidget` is a **built-in widget** that
 
 SolidX ships with a set of pre-built list column widgets. Reference them directly in your layout JSON via the `viewWidget` attribute — no registration required.
 
-| Widget Name | Alias | Field Type | Description |
+<div style={{overflowX: 'auto'}}>
+
+| Field Type | Description | Widget Name | Alias |
 |---|---|---|---|
-| `DefaultTextListWidget` | — | `shortText` | Default plain text column |
-| `MaskedShortTextListViewWidget` | `maskedShortTextList` | `shortText` | Masked text (e.g., for sensitive data) |
-| `SolidShortTextAvatarWidget` | — | `shortText`, `relation` | Text with a colored initials avatar badge |
-| `SolidShortTextFieldImageListWidget` | — | `shortText` | Renders the field value as a thumbnail image (`src` URL) |
-| `DefaultBooleanListWidget` | — | `boolean` | Boolean column display |
-| `PublishedStatusListViewWidget` | `publishedStatus` | `date` | Renders a date field as a Published / Draft status tag |
-| `DefaultMediaSingleListWidget` | — | `mediaSingle` | Single media thumbnail |
-| `DefaultMediaMultipleListWidget` | — | `mediaMultiple` | Multiple media thumbnails |
-| `DefaultRelationManyToOneListWidget` | — | `relation.many2one` | Many-to-one relation label |
-| `SolidManyToOneRelationAvatarListWidget` | — | `relation.many2one` | Many-to-one with colored initials avatar |
-| `DefaultRelationManyToManyListWidget` | — | `relation.many2many` | Many-to-many comma-separated labels |
-| `SolidManyToManyRelationAvatarListWidget` | — | `relation.many2many` | Many-to-many with colored initials avatars |
-| `DefaultRelationOneToManyListWidget` | — | `relation.one2many` | One-to-many relation column |
+| `shortText` | Default plain text column | `DefaultTextListWidget` | — |
+| `shortText` | Masked text (e.g., for sensitive data) | `MaskedShortTextListViewWidget` | `maskedShortTextList` |
+| `shortText`, `relation` | Text with a colored initials avatar badge | `SolidShortTextAvatarWidget` | — |
+| `shortText` | Renders the field value as a thumbnail image (`src` URL) | `SolidShortTextFieldImageListWidget` | — |
+| `boolean` | Boolean column display | `DefaultBooleanListWidget` | — |
+| `date` | Renders a date field as a Published / Draft status tag | `PublishedStatusListViewWidget` | `publishedStatus` |
+| `mediaSingle` | Single media thumbnail | `DefaultMediaSingleListWidget` | — |
+| `mediaMultiple` | Multiple media thumbnails | `DefaultMediaMultipleListWidget` | — |
+| `relation.many2one` | Many-to-one relation label | `DefaultRelationManyToOneListWidget` | — |
+| `relation.many2one` | Many-to-one with colored initials avatar | `SolidManyToOneRelationAvatarListWidget` | — |
+| `relation.many2many` | Many-to-many comma-separated labels | `DefaultRelationManyToManyListWidget` | — |
+| `relation.many2many` | Many-to-many with colored initials avatars | `SolidManyToManyRelationAvatarListWidget` | — |
+| `relation.one2many` | One-to-many relation column | `DefaultRelationOneToManyListWidget` | — |
+
+</div>
 
 
 ##  Creating a Custom Widget

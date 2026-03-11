@@ -60,69 +60,77 @@ SolidX ships with a set of pre-built widgets for every field type. You can refer
 
 Used in **edit mode** via the `editWidget` attribute on a form field.
 
-| Widget Name | Alias | Field Type | Description |
+<div style={{overflowX: 'auto'}}>
+
+| Field Type | Description | Widget Name | Alias |
 |---|---|---|---|
-| `DefaultShortTextFormEditWidget` | — | `shortText` | Default single-line text input |
-| `MaskedShortTextFormEditWidget` | `maskedShortTextEdit` | `shortText` | Password-style masked input |
-| `SolidIconEditWidget` | — | `shortText` | Google Material Symbols icon picker dialog |
-| `DefaultLongTextFormEditWidget` | — | `longText` | Default multi-line textarea |
-| `DynamicJsonEditorFormEditWidget` | `jsonEditor` | `longText` | JSON editor with syntax highlighting |
-| `CodeEditorFormEditWidget` | `codeEditor` | `longText` | Code editor with syntax highlighting |
-| `DefaultIntegerFormEditWidget` | — | `integer` | Default number input for integers |
-| `SolidIntegerSliderStyleFormEditWidget` | `integerSlider` | `integer` | Range slider for integer values |
-| `DefaultDecimalFormEditWidget` | — | `decimal` | Decimal number input |
-| `DefaultEmailFormEditWidget` | — | `email` | Email input with format validation |
-| `DefaultPasswordFormEditWidget` | — | `password` | Password input (edit mode) |
-| `DefaultPasswordFormCreateWidget` | — | `password` | Password + confirm-password input (create mode) |
-| `DefaultTimeFormEditWidget` | — | `time` | Time picker |
-| `DefaultDateFormEditWidget` | — | `date` | Date picker (calendar) |
-| `DefaultDateTimeFormEditWidget` | — | `datetime` | Combined date and time picker |
-| `DefaultBooleanFormEditWidget` | `booleanSelectbox` | `boolean` | Dropdown select (Yes / No) |
-| `SolidBooleanCheckboxStyleFormEditWidget` | `booleanCheckbox` | `boolean` | Checkbox style |
-| `SolidBooleanSwitchStyleFormEditWidget` | — | `boolean` | Toggle switch style |
-| `DefaultJsonFormEditWidget` | — | `json` | JSON field editor |
-| `DefaultRichTextFormEditWidget` | — | `richText` | WYSIWYG rich text editor |
-| `DefaultSelectionStaticAutocompleteFormEditWidget` | — | `selectionStatic` | Autocomplete dropdown for static options |
-| `SolidSelectionStaticRadioFormEditWidget` | — | `selectionStatic` | Radio button group |
-| `SolidSelectionStaticSelectButtonFormEditWidget` | — | `selectionStatic` | Segmented select buttons |
-| `DefaultSelectionDynamicFormEditWidget` | — | `selectionDynamic` | Autocomplete for API-driven dynamic options |
-| `DefaultMediaSingleFormEditWidget` | — | `mediaSingle` | Single file / image upload |
-| `DefaultMediaMultipleFormEditWidget` | — | `mediaMultiple` | Multiple files / images upload |
-| `DefaultRelationManyToOneFormEditWidget` | — | `relation.many2one` | Autocomplete relation selector |
-| `PseudoRelationManyToOneFormWidget` | — | `relation.many2one` | Short-text field wired to a many-to-one value |
-| `DefaultRelationManyToManyAutoCompleteFormEditWidget` | — | `relation.many2many` | Many-to-many autocomplete chips |
-| `DefaultRelationManyToManyCheckBoxFormEditWidget` | — | `relation.many2many` | Checkbox list for many-to-many selection |
-| `RolePermissionsManyToManyFieldWidget` | `inputSwitch` | `relation.many2many` | Toggle-switch grid for role permissions |
-| `DefaultRelationOneToManyFormEditWidget` | — | `relation.one2many` | Embedded editable table for one-to-many |
-| `PseudoRelationOneToManyFormWidget` | — | `relation.one2many` | Pseudo one-to-many form widget |
+| `shortText` | Default single-line text input | `DefaultShortTextFormEditWidget` | — |
+| `shortText` | Password-style masked input | `MaskedShortTextFormEditWidget` | `maskedShortTextEdit` |
+| `shortText` | Google Material Symbols icon picker dialog | `SolidIconEditWidget` | — |
+| `longText` | Default multi-line textarea | `DefaultLongTextFormEditWidget` | — |
+| `longText` | JSON editor with syntax highlighting | `DynamicJsonEditorFormEditWidget` | `jsonEditor` |
+| `longText` | Code editor with syntax highlighting | `CodeEditorFormEditWidget` | `codeEditor` |
+| `integer` | Default number input for integers | `DefaultIntegerFormEditWidget` | — |
+| `integer` | Range slider for integer values | `SolidIntegerSliderStyleFormEditWidget` | `integerSlider` |
+| `decimal` | Decimal number input | `DefaultDecimalFormEditWidget` | — |
+| `email` | Email input with format validation | `DefaultEmailFormEditWidget` | — |
+| `password` | Password input (edit mode) | `DefaultPasswordFormEditWidget` | — |
+| `password` | Password + confirm-password input (create mode) | `DefaultPasswordFormCreateWidget` | — |
+| `time` | Time picker | `DefaultTimeFormEditWidget` | — |
+| `date` | Date picker (calendar) | `DefaultDateFormEditWidget` | — |
+| `datetime` | Combined date and time picker | `DefaultDateTimeFormEditWidget` | — |
+| `boolean` | Dropdown select (Yes / No) | `DefaultBooleanFormEditWidget` | `booleanSelectbox` |
+| `boolean` | Checkbox style | `SolidBooleanCheckboxStyleFormEditWidget` | `booleanCheckbox` |
+| `boolean` | Toggle switch style | `SolidBooleanSwitchStyleFormEditWidget` | — |
+| `json` | JSON field editor | `DefaultJsonFormEditWidget` | — |
+| `richText` | WYSIWYG rich text editor | `DefaultRichTextFormEditWidget` | — |
+| `selectionStatic` | Autocomplete dropdown for static options | `DefaultSelectionStaticAutocompleteFormEditWidget` | — |
+| `selectionStatic` | Radio button group | `SolidSelectionStaticRadioFormEditWidget` | — |
+| `selectionStatic` | Segmented select buttons | `SolidSelectionStaticSelectButtonFormEditWidget` | — |
+| `selectionDynamic` | Autocomplete for API-driven dynamic options | `DefaultSelectionDynamicFormEditWidget` | — |
+| `mediaSingle` | Single file / image upload | `DefaultMediaSingleFormEditWidget` | — |
+| `mediaMultiple` | Multiple files / images upload | `DefaultMediaMultipleFormEditWidget` | — |
+| `relation.many2one` | Autocomplete relation selector | `DefaultRelationManyToOneFormEditWidget` | — |
+| `relation.many2one` | Short-text field wired to a many-to-one value | `PseudoRelationManyToOneFormWidget` | — |
+| `relation.many2many` | Many-to-many autocomplete chips | `DefaultRelationManyToManyAutoCompleteFormEditWidget` | — |
+| `relation.many2many` | Checkbox list for many-to-many selection | `DefaultRelationManyToManyCheckBoxFormEditWidget` | — |
+| `relation.many2many` | Toggle-switch grid for role permissions | `RolePermissionsManyToManyFieldWidget` | `inputSwitch` |
+| `relation.one2many` | Embedded editable table for one-to-many | `DefaultRelationOneToManyFormEditWidget` | — |
+| `relation.one2many` | Embedded list view of child records linked via a pseudo foreign-key relationship | `PseudoRelationOneToManyFormWidget` | — |
+
+</div>
 
 ### View Widgets (`viewWidget`)
 
 Used in **view (read-only) mode** via the `viewWidget` attribute on a form field.
 
-| Widget Name | Alias | Field Type | Description |
+<div style={{overflowX: 'auto'}}>
+
+| Field Type | Description | Widget Name | Alias |
 |---|---|---|---|
-| `DefaultShortTextFormViewWidget` | — | `shortText`, `longText`, `email` | Default plain text display |
-| `MaskedShortTextFormViewWidget` | `maskedShortTextForm` | `shortText` | Masked text display |
-| `SolidShortTextFieldAvatarWidget` | — | `shortText` | Text with a colored initials avatar |
-| `SolidIconViewWidget` | — | `shortText` | Renders a stored icon name as a Material Symbols icon |
-| `DefaultIntegerFormViewWidget` | — | `integer` | Plain integer display |
-| `DefaultDecimalFormViewWidget` | — | `decimal` | Plain decimal display |
-| `DefaultTimeFormViewWidget` | — | `time` | Formatted time display |
-| `DefaultDateFormViewWidget` | — | `date` | Formatted date display |
-| `DefaultDateTimeFormViewWidget` | — | `datetime` | Formatted date and time display |
-| `DefaultBooleanFormViewWidget` | — | `boolean` | Boolean display |
-| `DefaultJsonFormViewWidget` | — | `json` | JSON read-only display |
-| `DynamicJsonEditorFormViewWidget` | `jsonViewer` | `longText` | Read-only JSON viewer with syntax highlighting |
-| `DefaultPasswordFormViewWidget` | — | `password` | Masked password display |
-| `DefaultRichTextFormViewWidget` | — | `richText` | Rendered rich text (HTML) |
-| `DefaultSelectionStaticFormViewWidget` | — | `selectionStatic` | Static selection label display |
-| `DefaultSelectionDynamicFormViewWidget` | — | `selectionDynamic` | Dynamic selection label display |
-| `DefaultMediaSingleFormViewWidget` | — | `mediaSingle` | Single media preview |
-| `DefaultMediaMultipleFormViewWidget` | — | `mediaMultiple` | Multiple media thumbnails |
-| `DefaultRelationManyToOneFormViewWidget` | — | `relation.many2one` | Many-to-one relation label |
-| `SolidRelationFieldAvatarFormWidget` | — | `relation` | Relation value(s) rendered as avatar chips |
-| `DefaultRelationOneToManyFormViewWidget` | — | `relation.one2many` | Read-only embedded table for one-to-many |
+| `shortText`, `longText`, `email` | Default plain text display | `DefaultShortTextFormViewWidget` | — |
+| `shortText` | Masked text display | `MaskedShortTextFormViewWidget` | `maskedShortTextForm` |
+| `shortText` | Text with a colored initials avatar | `SolidShortTextFieldAvatarWidget` | — |
+| `shortText` | Renders a stored icon name as a Material Symbols icon | `SolidIconViewWidget` | — |
+| `integer` | Plain integer display | `DefaultIntegerFormViewWidget` | — |
+| `decimal` | Plain decimal display | `DefaultDecimalFormViewWidget` | — |
+| `time` | Formatted time display | `DefaultTimeFormViewWidget` | — |
+| `date` | Formatted date display | `DefaultDateFormViewWidget` | — |
+| `datetime` | Formatted date and time display | `DefaultDateTimeFormViewWidget` | — |
+| `boolean` | Boolean display | `DefaultBooleanFormViewWidget` | — |
+| `json` | JSON read-only display | `DefaultJsonFormViewWidget` | — |
+| `longText` | Read-only JSON viewer with syntax highlighting | `DynamicJsonEditorFormViewWidget` | `jsonViewer` |
+| `password` | Masked password display | `DefaultPasswordFormViewWidget` | — |
+| `richText` | Rendered rich text (HTML) | `DefaultRichTextFormViewWidget` | — |
+| `selectionStatic` | Static selection label display | `DefaultSelectionStaticFormViewWidget` | — |
+| `selectionDynamic` | Dynamic selection label display | `DefaultSelectionDynamicFormViewWidget` | — |
+| `mediaSingle` | Single media preview | `DefaultMediaSingleFormViewWidget` | — |
+| `mediaMultiple` | Multiple media thumbnails | `DefaultMediaMultipleFormViewWidget` | — |
+| `relation.many2one` | Many-to-one relation label | `DefaultRelationManyToOneFormViewWidget` | — |
+| `relation` | Relation value(s) rendered as avatar chips | `SolidRelationFieldAvatarFormWidget` | — |
+| `relation.one2many` | Read-only embedded table for one-to-many | `DefaultRelationOneToManyFormViewWidget` | — |
+
+</div>
 
 
 
