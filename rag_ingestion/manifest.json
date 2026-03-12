@@ -1,7 +1,7 @@
 {
   "tutorial/index.md": {
-    "hash": "74092fa3859ee79684bf9c9a17932166083edb4dce74c45581cdd2b13800d210",
-    "document_id": "3c0cab40-022b-4dd6-809c-223dbfe0f823",
+    "hash": "51ae4cddc4e29598bfbd39d408195e5ed2bf08f454bd419299b36fc33cfa8511",
+    "document_id": "a91ce646-aa11-4fe1-9522-70fbd7ec0fff",
     "collection_id": "cd59267d-67e0-4897-91a6-1a338f5e83bf",
     "metadata": {
       "source": "docusaurus",
@@ -9,15 +9,15 @@
       "section": "tutorial",
       "path": "tutorial/index.md",
       "doc_title": "tutorial/index.md",
+      "title": "Tutorial",
       "collection_id": "cd59267d-67e0-4897-91a6-1a338f5e83bf",
       "collection_name": "tutorial",
-      "title": "tutorial/index.md",
       "chunk_count": 1
     }
   },
   "admin-docs/index.md": {
-    "hash": "89f4e18eaf2bad4f8d844a140bf68219b86feaadb40cc8fe1d95c95f81d2284c",
-    "document_id": "985e5ca3-a5e1-4684-9563-9717898d8006",
+    "hash": "7950394d92d1bcc73a60f39aea6fd0ff2c20031751f70d38f5eb3b67439d506e",
+    "document_id": "696e4c56-7382-4e3d-9103-ccec8c99589c",
     "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
     "metadata": {
       "source": "docusaurus",
@@ -25,15 +25,15 @@
       "section": "admin-docs",
       "path": "admin-docs/index.md",
       "doc_title": "admin-docs/index.md",
+      "title": "Admin Docs",
       "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
       "collection_name": "admin-docs",
-      "title": "admin-docs/index.md",
       "chunk_count": 3
     }
   },
   "recipes/email.md": {
-    "hash": "0b3033ba8ba54bd517a4a8d0266a7a6230c1869e12c30bf53e9e33d3040ed08c",
-    "document_id": "c3c3c5b5-1bef-46e1-8fa7-6844d3214b14",
+    "hash": "96225e3055416f8c510a0be54f728c068adccdff501dce6b12333770a3dad0b9",
+    "document_id": "92d23e39-34d7-4df8-bc2d-3a6bafb4fbbf",
     "collection_id": "f0935ef1-c3c4-403d-b32f-2a2d52861db1",
     "metadata": {
       "source": "docusaurus",
@@ -41,15 +41,15 @@
       "section": "recipes",
       "path": "recipes/email.md",
       "doc_title": "recipes/email.md",
+      "title": "Sending Emails",
       "collection_id": "f0935ef1-c3c4-403d-b32f-2a2d52861db1",
       "collection_name": "recipes",
-      "title": "recipes/email.md",
       "chunk_count": 3
     }
   },
   "recipes/computed-fields.md": {
-    "hash": "2ba513ac1d515d7602ad14d9fcbab20532187652ac263ef1877f1004e490c2d3",
-    "document_id": "f3bea14d-739e-4e9e-b893-07694700c690",
+    "hash": "f4eea7efb87452f97b07243a0f417daf803bdec43e26cde7c5d306d4e90c80ea",
+    "document_id": "47fe64f1-a609-4ed6-940a-a0074168f2fb",
     "collection_id": "f0935ef1-c3c4-403d-b32f-2a2d52861db1",
     "metadata": {
       "source": "docusaurus",
@@ -57,15 +57,15 @@
       "section": "recipes",
       "path": "recipes/computed-fields.md",
       "doc_title": "recipes/computed-fields.md",
+      "title": "Computed Fields",
       "collection_id": "f0935ef1-c3c4-403d-b32f-2a2d52861db1",
       "collection_name": "recipes",
-      "title": "recipes/computed-fields.md",
       "chunk_count": 1
     }
   },
   "recipes/media-providers.md": {
-    "hash": "5812dd8914d8e21bd8c4b3cd0385ca2f4e215675e5ec30bb3aedd9fec51039f3",
-    "document_id": "3ebb965f-de08-4c9a-b0c3-7312f1aba6f1",
+    "hash": "e10e35affb87d2a518bc62da8b77ae2c21d528013f78c713095ed9e06ae47cf2",
+    "document_id": "b371b210-a36a-410e-9b9a-60df744f65f0",
     "collection_id": "f0935ef1-c3c4-403d-b32f-2a2d52861db1",
     "metadata": {
       "source": "docusaurus",
@@ -73,15 +73,15 @@
       "section": "recipes",
       "path": "recipes/media-providers.md",
       "doc_title": "recipes/media-providers.md",
+      "title": "Media Providers",
       "collection_id": "f0935ef1-c3c4-403d-b32f-2a2d52861db1",
       "collection_name": "recipes",
-      "title": "recipes/media-providers.md",
       "chunk_count": 2
     }
   },
   "recipes/extending-users.md": {
-    "hash": "6685c0db971b30319fcb27aed29ddbb81cba138476fa6ad2aa7f0a8ff0a506de",
-    "document_id": "7c01e4d6-0b46-452a-9440-7adedd31cb22",
+    "hash": "844c71bb4322c72ddcb13a194411c153c7b0ecc4bc06e546eb8bc25d862e03c6",
+    "document_id": "2837dc5a-ed2d-4a0e-8591-7852438f64ce",
     "collection_id": "f0935ef1-c3c4-403d-b32f-2a2d52861db1",
     "metadata": {
       "source": "docusaurus",
@@ -89,15 +89,15 @@
       "section": "recipes",
       "path": "recipes/extending-users.md",
       "doc_title": "recipes/extending-users.md",
+      "title": "Extending Users",
       "collection_id": "f0935ef1-c3c4-403d-b32f-2a2d52861db1",
       "collection_name": "recipes",
-      "title": "recipes/extending-users.md",
       "chunk_count": 1
     }
   },
   "recipes/index.md": {
-    "hash": "0d72d575b21eb24ccc2c8242cc860f39805ae58f972c13e0eb86e8fbc9a4fff9",
-    "document_id": "0c8aad16-cdaf-44bd-9d19-69707102b0e1",
+    "hash": "337b9e2be394bf62f1c2b203625934b9fe854322aa3242d0194bbbfd5f8e61ce",
+    "document_id": "ae42b73d-019e-4f27-80cf-1b2bb856a897",
     "collection_id": "f0935ef1-c3c4-403d-b32f-2a2d52861db1",
     "metadata": {
       "source": "docusaurus",
@@ -105,15 +105,15 @@
       "section": "recipes",
       "path": "recipes/index.md",
       "doc_title": "recipes/index.md",
+      "title": "Recipes",
       "collection_id": "f0935ef1-c3c4-403d-b32f-2a2d52861db1",
       "collection_name": "recipes",
-      "title": "recipes/index.md",
       "chunk_count": 1
     }
   },
   "recipes/soft-delete.md": {
-    "hash": "b47296a0febe076b020d2c09f5fce86b88a8753cda1a8dff5837a927f76c8721",
-    "document_id": "003938a7-406f-4833-b3b3-c06a47eff549",
+    "hash": "a43709525380738d608543e732c28af2ae6e7e9c191ca448407f1fabb7020249",
+    "document_id": "cb37d01e-9434-4bff-9786-6387c763b0e8",
     "collection_id": "f0935ef1-c3c4-403d-b32f-2a2d52861db1",
     "metadata": {
       "source": "docusaurus",
@@ -121,15 +121,15 @@
       "section": "recipes",
       "path": "recipes/soft-delete.md",
       "doc_title": "recipes/soft-delete.md",
+      "title": "Soft Delete",
       "collection_id": "f0935ef1-c3c4-403d-b32f-2a2d52861db1",
       "collection_name": "recipes",
-      "title": "recipes/soft-delete.md",
       "chunk_count": 1
     }
   },
   "recipes/queue.md": {
-    "hash": "d44836f63c8937f8362065743a7260652edefc76f2234ae22766bbc0e02168c9",
-    "document_id": "66073a7e-81aa-4c0f-9128-509f27374e94",
+    "hash": "884cea112874dcad7bcd3d63bb2c916550fc878c1d51ff64dbb965374e47ce81",
+    "document_id": "e03b0eae-06f5-403d-94d9-c3bbc735671e",
     "collection_id": "f0935ef1-c3c4-403d-b32f-2a2d52861db1",
     "metadata": {
       "source": "docusaurus",
@@ -137,15 +137,15 @@
       "section": "recipes",
       "path": "recipes/queue.md",
       "doc_title": "recipes/queue.md",
+      "title": "Queues",
       "collection_id": "f0935ef1-c3c4-403d-b32f-2a2d52861db1",
       "collection_name": "recipes",
-      "title": "recipes/queue.md",
       "chunk_count": 4
     }
   },
   "recipes/handlers.md": {
-    "hash": "1370d7e24131ae267c88a5ecd30fc4bd1a916f82a60d2a7693fe00fe2be9fc34",
-    "document_id": "f5dd0989-4cb9-4839-922e-0ae5885d3424",
+    "hash": "d2b8dcbf755670b2a3ef7eaa45e4d2aa8fa153443715cac65614ed3aad435588",
+    "document_id": "6a381fca-a99b-4376-9ff4-36614b53d7dc",
     "collection_id": "f0935ef1-c3c4-403d-b32f-2a2d52861db1",
     "metadata": {
       "source": "docusaurus",
@@ -153,15 +153,15 @@
       "section": "recipes",
       "path": "recipes/handlers.md",
       "doc_title": "recipes/handlers.md",
+      "title": "SolidX Handlers",
       "collection_id": "f0935ef1-c3c4-403d-b32f-2a2d52861db1",
       "collection_name": "recipes",
-      "title": "recipes/handlers.md",
       "chunk_count": 1
     }
   },
   "recipes/additional-datasources.md": {
-    "hash": "11a02a076db439d55971ea92671ce46d8aca155961b52b4305f0a2bd1224546a",
-    "document_id": "e7aec0af-b9b7-4d45-864d-97287e19cfec",
+    "hash": "309e66c81f63da9151c2f43bf3a6be107176d80d55475628d2a9020cbe40a7e5",
+    "document_id": "dcb927db-83ac-4206-98a3-878d760ea431",
     "collection_id": "f0935ef1-c3c4-403d-b32f-2a2d52861db1",
     "metadata": {
       "source": "docusaurus",
@@ -169,15 +169,15 @@
       "section": "recipes",
       "path": "recipes/additional-datasources.md",
       "doc_title": "recipes/additional-datasources.md",
+      "title": "Additional Datasources",
       "collection_id": "f0935ef1-c3c4-403d-b32f-2a2d52861db1",
       "collection_name": "recipes",
-      "title": "recipes/additional-datasources.md",
       "chunk_count": 1
     }
   },
   "developer-docs/database-seeding.md": {
-    "hash": "a21bfabfa04f2c4b3fcf308ce8bf4fbc197b390208b2c654dafed4f55b3d81d9",
-    "document_id": "e6e46957-59c0-45f6-a12b-ecbf74253a4f",
+    "hash": "6d07b5cc0f4a36b0f0967f6059d8e26d91b75284e05a7dc4da7a1c7b15e627ad",
+    "document_id": "8dcbde33-be87-4d90-a49a-041b91aa7a96",
     "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
     "metadata": {
       "source": "docusaurus",
@@ -230,8 +230,8 @@
     }
   },
   "developer-docs/installation.md": {
-    "hash": "a4ce861ba229cb3148a3c61e7c637f98b0d087ee8735e7786fe34f410864cc78",
-    "document_id": "9ce0da1d-05a6-4d2a-b518-d8a54ed5d16b",
+    "hash": "fbb84c0a50bab1969e6f41e65a8389b8211c50bf7ed915c48191f5da3d4f1813",
+    "document_id": "b6d5ee0f-8f36-46ef-97d3-92e0dfed8728",
     "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
     "metadata": {
       "source": "docusaurus",
@@ -248,8 +248,8 @@
     }
   },
   "developer-docs/project-structure.md": {
-    "hash": "f6cc97136817caf24c09896cdcf59cc20de7b3b2114a9c5b8eef0b3b20350460",
-    "document_id": "3166f114-b258-423a-b687-914b2c04313f",
+    "hash": "6f0e9e71a980fb2b1d5a3e28028cbc2281a54ad8ed6afc824c2dd9d76c518590",
+    "document_id": "a87254ff-f5a8-4a54-aa61-5d2b9329835c",
     "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
     "metadata": {
       "source": "docusaurus",
@@ -267,8 +267,8 @@
     }
   },
   "tutorial/school-fees-portal/index.md": {
-    "hash": "672a715ceffc6a017e4e1a8169c326f341982258fab59ab8304f8798bf073ff7",
-    "document_id": "a68fbab5-bc44-498c-97c2-8f12a4d4617d",
+    "hash": "3fc9316f1a589e440f40ecbfa769c559880b21c4adc24339230d35f75947f535",
+    "document_id": "24b39931-81eb-4a3b-b232-8809374f0db3",
     "collection_id": "cd59267d-67e0-4897-91a6-1a338f5e83bf",
     "metadata": {
       "source": "docusaurus",
@@ -276,10 +276,15 @@
       "section": "tutorial",
       "path": "tutorial/school-fees-portal/index.md",
       "doc_title": "tutorial/school-fees-portal/index.md",
+      "title": "School Fees Portal",
+      "description": "A comprehensive tutorial on building a school fees collection platform using SolidX.",
+      "summary": "TODO",
+      "keywords": [
+        "TODO"
+      ],
       "collection_id": "cd59267d-67e0-4897-91a6-1a338f5e83bf",
       "collection_name": "tutorial",
-      "title": "tutorial/school-fees-portal/index.md",
-      "chunk_count": 5
+      "chunk_count": 1
     }
   },
   "tutorial/school-fees-portal/1-bootstrap/index.md": {
@@ -347,8 +352,8 @@
     }
   },
   "admin-docs/settings/index.md": {
-    "hash": "474fc676ef5992c0cb02fc86699ceae148c3bcf2f3ae75d522cd2de69ac623b9",
-    "document_id": "3d92a297-f375-4339-82bb-d0d62fc76001",
+    "hash": "276a9c6f1575390e12e089a4eccdcca65a64ef8daf0eadbfed7c070f6b13a872",
+    "document_id": "fd990a09-f923-41c3-ab98-24d311e3ecdd",
     "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
     "metadata": {
       "source": "docusaurus",
@@ -356,15 +361,15 @@
       "section": "admin-docs",
       "path": "admin-docs/settings/index.md",
       "doc_title": "admin-docs/settings/index.md",
+      "title": "Other Settings",
       "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
       "collection_name": "admin-docs",
-      "title": "admin-docs/settings/index.md",
       "chunk_count": 7
     }
   },
   "admin-docs/module-builder/module-management.md": {
-    "hash": "73c708b5afd71174b3d8ef47d728839af7b92d2f2a14822e0c75d82a7bd158f3",
-    "document_id": "2c92f724-0a42-4ff2-8a32-563747076c59",
+    "hash": "9e4263cd82a6c9ca87b940ed93d4167d1a9a327c1d3ffad29f8dc406c786843e",
+    "document_id": "2bdc80b5-25f2-4dcc-8c49-b9e399b3de85",
     "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
     "metadata": {
       "source": "docusaurus",
@@ -372,15 +377,15 @@
       "section": "admin-docs",
       "path": "admin-docs/module-builder/module-management.md",
       "doc_title": "admin-docs/module-builder/module-management.md",
+      "title": "Modules",
       "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
       "collection_name": "admin-docs",
-      "title": "admin-docs/module-builder/module-management.md",
       "chunk_count": 3
     }
   },
   "admin-docs/module-builder/model-management.md": {
-    "hash": "bc17091da05712f138c0974d8fd2dc81b628a20e55c167413c79562990510aac",
-    "document_id": "8d256136-696c-4fb7-be35-69f217809318",
+    "hash": "8c47ae83413da51f2680aa9cc57201f0787c9b26ceb7c05a3a0b9f5949cf2362",
+    "document_id": "e1a94f38-f47b-4f35-b7ce-652396fa5936",
     "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
     "metadata": {
       "source": "docusaurus",
@@ -388,15 +393,15 @@
       "section": "admin-docs",
       "path": "admin-docs/module-builder/model-management.md",
       "doc_title": "admin-docs/module-builder/model-management.md",
+      "title": "Models",
       "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
       "collection_name": "admin-docs",
-      "title": "admin-docs/module-builder/model-management.md",
       "chunk_count": 3
     }
   },
   "admin-docs/module-builder/field-management.md": {
-    "hash": "769d917b0188261efb3330e62667076b5bb0fed8529a825bf64311f87b36bba8",
-    "document_id": "858cb344-3cf8-4aab-bf0c-563181b10c95",
+    "hash": "874cd663ad20a91259ace84211891923cb2e946500a8c0e9ee3acd4c1208d0b4",
+    "document_id": "b5143109-d3bc-44e7-85e3-7d9d728f35b9",
     "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
     "metadata": {
       "source": "docusaurus",
@@ -404,15 +409,15 @@
       "section": "admin-docs",
       "path": "admin-docs/module-builder/field-management.md",
       "doc_title": "admin-docs/module-builder/field-management.md",
+      "title": "Fields",
       "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
       "collection_name": "admin-docs",
-      "title": "admin-docs/module-builder/field-management.md",
       "chunk_count": 8
     }
   },
   "admin-docs/module-builder/index.md": {
-    "hash": "a2332fd851dc01c2e26ccbc3dcb4f7b76d3085ead5f5da4bbb65b2b7991d6372",
-    "document_id": "f6a163df-aa44-46a5-a41a-b7cf737c28aa",
+    "hash": "238384551a6d7b3a2533ff6b355b4e4618af222e1300aba85d0efe92a7e8d6f9",
+    "document_id": "d9c156de-0c95-4613-a3b6-493bab932f41",
     "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
     "metadata": {
       "source": "docusaurus",
@@ -420,15 +425,15 @@
       "section": "admin-docs",
       "path": "admin-docs/module-builder/index.md",
       "doc_title": "admin-docs/module-builder/index.md",
+      "title": "Module Builder",
       "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
       "collection_name": "admin-docs",
-      "title": "admin-docs/module-builder/index.md",
       "chunk_count": 2
     }
   },
   "admin-docs/iam/permissions.md": {
-    "hash": "71c86a875ff1dbb7a7b944c2bf943abd8665a56c91462ffd922d1cfcbc695780",
-    "document_id": "ffff5301-a6be-4bcd-8296-4cf3ad8e63d9",
+    "hash": "ad034397219c29f816a94f4641c2b1d88d85fa55c8b050c566aefc64f650983b",
+    "document_id": "df3678b0-21de-48fd-9908-902059eaf08e",
     "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
     "metadata": {
       "source": "docusaurus",
@@ -436,15 +441,15 @@
       "section": "admin-docs",
       "path": "admin-docs/iam/permissions.md",
       "doc_title": "admin-docs/iam/permissions.md",
+      "title": "Permissions",
       "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
       "collection_name": "admin-docs",
-      "title": "admin-docs/iam/permissions.md",
       "chunk_count": 4
     }
   },
   "admin-docs/iam/record-rules.md": {
-    "hash": "f90dbdc9344af80d57fb1a3ec6b589d9f1aa0d83847e1c46367fa098a75b76bc",
-    "document_id": "ebafb19a-fd3e-467a-98cd-679a0c8526a9",
+    "hash": "2a4ba5a3a8ddedd1ac90ab8de56f66f471612cc426b959de1160167a5513dd6a",
+    "document_id": "f9169b88-be04-4b56-96b0-bebf8d05f8b2",
     "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
     "metadata": {
       "source": "docusaurus",
@@ -452,15 +457,15 @@
       "section": "admin-docs",
       "path": "admin-docs/iam/record-rules.md",
       "doc_title": "admin-docs/iam/record-rules.md",
+      "title": "Record Rules",
       "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
       "collection_name": "admin-docs",
-      "title": "admin-docs/iam/record-rules.md",
       "chunk_count": 6
     }
   },
   "admin-docs/iam/roles.md": {
-    "hash": "b9ce1f5981e758c46f81280f4b69790f38be3602cd03ba87e532e1f44d09300e",
-    "document_id": "c5a9c6c1-25d1-47ba-a218-f0961d0d9098",
+    "hash": "b6b04f0d76d841f6c41afafd703ffcafba5e7c480903b2e113eb0f95080450a0",
+    "document_id": "7d67c790-7307-42ce-989e-552a5998f953",
     "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
     "metadata": {
       "source": "docusaurus",
@@ -468,15 +473,15 @@
       "section": "admin-docs",
       "path": "admin-docs/iam/roles.md",
       "doc_title": "admin-docs/iam/roles.md",
+      "title": "Roles",
       "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
       "collection_name": "admin-docs",
-      "title": "admin-docs/iam/roles.md",
       "chunk_count": 3
     }
   },
   "admin-docs/iam/users.md": {
-    "hash": "efa3e00fc33126f7bf10f74290dc0e81e971bac8480d1bd2cea033caf663ea7a",
-    "document_id": "166ec9aa-7ec3-4583-a8df-6bd94feb3701",
+    "hash": "9562250265f5c66262d7e86e824a2dd1bc4a99a2479759dd943501e6a6f8a09c",
+    "document_id": "5fecc926-8663-4b8b-8d2a-aaec79467016",
     "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
     "metadata": {
       "source": "docusaurus",
@@ -484,15 +489,15 @@
       "section": "admin-docs",
       "path": "admin-docs/iam/users.md",
       "doc_title": "admin-docs/iam/users.md",
+      "title": "Users",
       "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
       "collection_name": "admin-docs",
-      "title": "admin-docs/iam/users.md",
       "chunk_count": 4
     }
   },
   "admin-docs/iam/index.md": {
-    "hash": "2286b63cecfc374fa30a35492eeb5fe0ebd52f59906bf92f545292d9c6f60f43",
-    "document_id": "abd50b19-573d-42d7-af84-0d9b69533bee",
+    "hash": "de611f3bd9c4f35ba0e3ad2eb770b7639539ad512b45542546ac22410228298b",
+    "document_id": "ef0ec7af-ad70-45cb-a32a-d23f38294a30",
     "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
     "metadata": {
       "source": "docusaurus",
@@ -500,15 +505,15 @@
       "section": "admin-docs",
       "path": "admin-docs/iam/index.md",
       "doc_title": "admin-docs/iam/index.md",
+      "title": "IAM",
       "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
       "collection_name": "admin-docs",
-      "title": "admin-docs/iam/index.md",
       "chunk_count": 4
     }
   },
   "admin-docs/layouts/form-view.md": {
-    "hash": "af4d1c87974e970ce6ae14ab1a1bc1f578880606da5a7858648521fb3540be6d",
-    "document_id": "c6043b18-30c4-49b9-948a-f7fd04522b85",
+    "hash": "8d2a0abb4d571b168ae7048383bcf873212700cca6ab2b848941b29e73b42c7b",
+    "document_id": "2185bbe1-7e38-4daa-a01a-5668a1db79ff",
     "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
     "metadata": {
       "source": "docusaurus",
@@ -516,15 +521,15 @@
       "section": "admin-docs",
       "path": "admin-docs/layouts/form-view.md",
       "doc_title": "admin-docs/layouts/form-view.md",
+      "title": "Form View",
       "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
       "collection_name": "admin-docs",
-      "title": "admin-docs/layouts/form-view.md",
       "chunk_count": 4
     }
   },
   "admin-docs/layouts/index.md": {
-    "hash": "bff718c804501412a60de28ea24c108161ddaadab2634c0b867a004ff4010dfd",
-    "document_id": "20fcaea9-49df-462c-9251-4c68f94973bb",
+    "hash": "6c55cc74bd5605519077663cbfbfd405c35415bd2b72924b9c7a30787b6d5272",
+    "document_id": "5f8accf9-47e5-4380-a0d5-0d8abf9ece0d",
     "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
     "metadata": {
       "source": "docusaurus",
@@ -532,15 +537,15 @@
       "section": "admin-docs",
       "path": "admin-docs/layouts/index.md",
       "doc_title": "admin-docs/layouts/index.md",
+      "title": "Layout Editor",
       "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
       "collection_name": "admin-docs",
-      "title": "admin-docs/layouts/index.md",
       "chunk_count": 5
     }
   },
   "admin-docs/layouts/kanban-view.md": {
-    "hash": "20bb01e5d091657fff9b3215e0bbcec776bc9dd469e3117730338e692780216e",
-    "document_id": "29e9aa47-f3f3-48e1-8a81-ac9481a7d5ae",
+    "hash": "01b1800ad14a74bb2c365a567616ee2b2e7b602db481ceab5b12fb6f0e43671a",
+    "document_id": "2d940bd6-c175-46d4-8aba-b03ad7bb00ec",
     "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
     "metadata": {
       "source": "docusaurus",
@@ -548,15 +553,15 @@
       "section": "admin-docs",
       "path": "admin-docs/layouts/kanban-view.md",
       "doc_title": "admin-docs/layouts/kanban-view.md",
+      "title": "Kanban View",
       "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
       "collection_name": "admin-docs",
-      "title": "admin-docs/layouts/kanban-view.md",
       "chunk_count": 10
     }
   },
   "admin-docs/layouts/list-view.md": {
-    "hash": "a1b7ddb02a52b9958febf7e2d95c827d349adeb8310f03f0742d5e4fa38c9cda",
-    "document_id": "3a5520c4-c3d8-4331-8740-0a489289e063",
+    "hash": "6b58d53f979e0e1943d8f49530148e795c9f9f09f909088a9163988f455a992f",
+    "document_id": "ee0a80e9-1043-4a3a-ab83-d4de17974c8b",
     "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
     "metadata": {
       "source": "docusaurus",
@@ -564,15 +569,15 @@
       "section": "admin-docs",
       "path": "admin-docs/layouts/list-view.md",
       "doc_title": "admin-docs/layouts/list-view.md",
+      "title": "List View",
       "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
       "collection_name": "admin-docs",
-      "title": "admin-docs/layouts/list-view.md",
       "chunk_count": 6
     }
   },
   "admin-docs/media-library/index.md": {
-    "hash": "2b4869fd5d2ba76ef746965d9469dad991095dfb21d0a540484c60ab53209f63",
-    "document_id": "b2ed7bcd-b03e-4421-b625-abff5ee39503",
+    "hash": "50e751cdccec53f07423b63984198e767855c014e3f947ec3d5d7af2fa401baa",
+    "document_id": "935729c7-57fa-4ed5-9051-91aa9701fe9c",
     "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
     "metadata": {
       "source": "docusaurus",
@@ -580,15 +585,15 @@
       "section": "admin-docs",
       "path": "admin-docs/media-library/index.md",
       "doc_title": "admin-docs/media-library/index.md",
+      "title": "Media Library",
       "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
       "collection_name": "admin-docs",
-      "title": "admin-docs/media-library/index.md",
       "chunk_count": 4
     }
   },
   "admin-docs/media-library/storage-providers.md": {
-    "hash": "b10bcabd9257c984462771e61ff2a7fd68a51cd5378caf7ba0e2755a6a39c5ea",
-    "document_id": "a85c5ba4-8ac0-4105-acf0-e995d2e40ce1",
+    "hash": "e56e1e26bed5ce7dd3a096b3087fa2e59d3472500330d8a66ea51e8f1acb366a",
+    "document_id": "bed607d1-e3c3-47f1-82c9-e3050512fce5",
     "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
     "metadata": {
       "source": "docusaurus",
@@ -604,8 +609,8 @@
     }
   },
   "admin-docs/media-library/media-view.md": {
-    "hash": "6d454f4f8447ebb1d2d0993bdd076c5e80c3cf201fd56db64307cf75939936b4",
-    "document_id": "f1a82af9-3e17-4ed5-b683-39248269d88f",
+    "hash": "81e2023287568f04143687c580f190b4f425dcbafe38170935f5165a6538c534",
+    "document_id": "2751b510-5de9-4149-92f9-1f8e24ee3e2a",
     "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
     "metadata": {
       "source": "docusaurus",
@@ -613,15 +618,15 @@
       "section": "admin-docs",
       "path": "admin-docs/media-library/media-view.md",
       "doc_title": "admin-docs/media-library/media-view.md",
+      "title": "Media View",
       "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
       "collection_name": "admin-docs",
-      "title": "admin-docs/media-library/media-view.md",
       "chunk_count": 4
     }
   },
   "admin-docs/modules/form-view.md": {
-    "hash": "cbd18a9b56b8884c32f2ce526478d1c237aa2c44f386b4c1890952f8b2db6d50",
-    "document_id": "e81b9c2b-f91a-4aec-9f99-c70ff325ef82",
+    "hash": "98670b4d3ee92c8a7297187a2105087d05c3541a87407e0634fca110c9c1f079",
+    "document_id": "b18b0143-8138-4ccc-8d38-5a60ad4410d5",
     "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
     "metadata": {
       "source": "docusaurus",
@@ -629,15 +634,15 @@
       "section": "admin-docs",
       "path": "admin-docs/modules/form-view.md",
       "doc_title": "admin-docs/modules/form-view.md",
+      "title": "Form View",
       "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
       "collection_name": "admin-docs",
-      "title": "admin-docs/modules/form-view.md",
       "chunk_count": 1
     }
   },
   "admin-docs/modules/menu-structure.md": {
-    "hash": "61947d0f2e4e9cfc19332cde6029ba13f5fb46768a640689f3783decafce2db7",
-    "document_id": "b23b3462-1ca4-4e10-9790-14194bf7bdde",
+    "hash": "e7f7fd20097a9d32d61b45e4b2154e7f885ccfd4a39de589f0212329a2e7b0aa",
+    "document_id": "0747e36a-d5ee-4244-ae88-4a077313e5d8",
     "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
     "metadata": {
       "source": "docusaurus",
@@ -645,15 +650,15 @@
       "section": "admin-docs",
       "path": "admin-docs/modules/menu-structure.md",
       "doc_title": "admin-docs/modules/menu-structure.md",
+      "title": "Menu Structure",
       "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
       "collection_name": "admin-docs",
-      "title": "admin-docs/modules/menu-structure.md",
       "chunk_count": 4
     }
   },
   "admin-docs/modules/index.md": {
-    "hash": "1dc12518c0896b75954fa0aec4eccaa848ddf31c5876cf4a6f98784414bb4054",
-    "document_id": "367bb5d2-3793-4ea5-ae7a-d1bdb2b8db48",
+    "hash": "ce7fa86df696e828cb60e0a9ea1f1f9d364ebc9bce793cf2494185cda63caa71",
+    "document_id": "765f5dde-e0e2-492e-bf71-b189049aad96",
     "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
     "metadata": {
       "source": "docusaurus",
@@ -661,15 +666,15 @@
       "section": "admin-docs",
       "path": "admin-docs/modules/index.md",
       "doc_title": "admin-docs/modules/index.md",
+      "title": "Modules",
       "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
       "collection_name": "admin-docs",
-      "title": "admin-docs/modules/index.md",
       "chunk_count": 3
     }
   },
   "admin-docs/modules/kanban-view.md": {
-    "hash": "a716a690d30466a787a7f2b4b77af8535a4d54f92cb18a4405e286d65b3bafb4",
-    "document_id": "c2538da6-4cbb-4511-8d79-951d7528b9aa",
+    "hash": "52013743ac25205bcbc9c60f3c66fdcbe2332ab4417098d5fa251131a22bcb9e",
+    "document_id": "310fdc39-97e9-40b6-94ac-1c42b569208a",
     "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
     "metadata": {
       "source": "docusaurus",
@@ -677,15 +682,15 @@
       "section": "admin-docs",
       "path": "admin-docs/modules/kanban-view.md",
       "doc_title": "admin-docs/modules/kanban-view.md",
+      "title": "Kanban View",
       "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
       "collection_name": "admin-docs",
-      "title": "admin-docs/modules/kanban-view.md",
       "chunk_count": 2
     }
   },
   "admin-docs/modules/list-view.md": {
-    "hash": "97fe8b2fbef28b503b58812fe66437d5973ca90c4b221f77d10d14e90b39b436",
-    "document_id": "7d955a2b-6b7a-456b-944c-c7acce4e2bd0",
+    "hash": "95df3ed8f41dcf59d03cbbdd16284704c527b6a36b97c6a05fee6c16f5514a43",
+    "document_id": "0a77a997-e40a-4ab0-987e-2ccaef48f157",
     "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
     "metadata": {
       "source": "docusaurus",
@@ -693,15 +698,15 @@
       "section": "admin-docs",
       "path": "admin-docs/modules/list-view.md",
       "doc_title": "admin-docs/modules/list-view.md",
+      "title": "List View",
       "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
       "collection_name": "admin-docs",
-      "title": "admin-docs/modules/list-view.md",
       "chunk_count": 2
     }
   },
   "admin-docs/notifications/sms-templates.md": {
-    "hash": "f166778768277141f210db1909cd80b7ea24a9be6855908e7aec7119fe2dc918",
-    "document_id": "3332a026-8051-4da1-975f-a2f60a1805a3",
+    "hash": "12bfde1e8ed16bca2209c31b7a03f03e0b352e26d0f7486ebacf4f52f32d9e20",
+    "document_id": "5c3bcf7d-3994-4ff4-8f0b-2271d620c271",
     "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
     "metadata": {
       "source": "docusaurus",
@@ -717,8 +722,8 @@
     }
   },
   "admin-docs/notifications/index.md": {
-    "hash": "c4c4aaa53e869dcad6ca0b1266cc0633738e9d53c1b4c0c03519c0e8c20b1e81",
-    "document_id": "232e6c7e-ec6e-453e-b05f-d7ff3c8c91d7",
+    "hash": "59ac58c97b64b66ff4b6cff65c758d12a71af0c05428d4297634b361680de9ef",
+    "document_id": "8470fa42-503a-4621-9089-16d6d884b60c",
     "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
     "metadata": {
       "source": "docusaurus",
@@ -726,15 +731,15 @@
       "section": "admin-docs",
       "path": "admin-docs/notifications/index.md",
       "doc_title": "admin-docs/notifications/index.md",
+      "title": "Email & SMS Templates",
       "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
       "collection_name": "admin-docs",
-      "title": "admin-docs/notifications/index.md",
       "chunk_count": 6
     }
   },
   "admin-docs/notifications/email-templates.md": {
-    "hash": "3695f51366c5c990f738918f11d014f7f5aabb921ee57265de5b51135f8642c4",
-    "document_id": "247555c2-bd59-4b9d-a5ce-a3bfe72d4607",
+    "hash": "f7a6ab7ceadd1671f77c3944aae4ee598957a75e633a29ad638a5c62593206f2",
+    "document_id": "a47e4558-ec31-40f6-ae71-f938d43cae76",
     "collection_id": "83a1a8df-aed3-4d80-b391-d52c1ccf5563",
     "metadata": {
       "source": "docusaurus",
@@ -750,8 +755,8 @@
     }
   },
   "developer-docs/metadata_schema/action-metadata.md": {
-    "hash": "a6d684b4d897ec5cb53f23b826c632caf0557a7ec12fc9afec55b6e5f0e7906f",
-    "document_id": "bc5bcdc7-0039-47ae-b7b5-8b0b641454b9",
+    "hash": "20532535257071bc3e53f6c0d81171f448e4a0260239eec2c5590b6d4803974c",
+    "document_id": "43335eef-6966-44a0-a559-1d2cf9625dcd",
     "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
     "metadata": {
       "source": "docusaurus",
@@ -794,8 +799,8 @@
     }
   },
   "developer-docs/metadata_schema/view-metadata.md": {
-    "hash": "d37cef75f52c20182842aaee1928c94129eff8dc7ddae56e22b717f505159eac",
-    "document_id": "871c9d79-d079-4517-acac-a86e42a95a57",
+    "hash": "a1b9aec9309e9e6cb6e6db4fd34d4f87894908c94df3c5bdc67fa4dd3df28b4a",
+    "document_id": "7930e7b7-9b6d-44b5-828d-3311e5b88926",
     "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
     "metadata": {
       "source": "docusaurus",
@@ -840,8 +845,8 @@
     }
   },
   "developer-docs/metadata_schema/security-rules.md": {
-    "hash": "57a7494d64d4986bf349c048f14a837d9b1069ce814081126eda838ae8dcb57a",
-    "document_id": "6b7486b3-3111-4700-90e2-8584a13948b8",
+    "hash": "7067d5c40a49db137eea83702eeb50135bd07881f8b609070ed5ca0f6b4107fd",
+    "document_id": "452eb12e-0366-4700-a3a0-7251caf419ff",
     "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
     "metadata": {
       "source": "docusaurus",
@@ -861,8 +866,8 @@
     }
   },
   "developer-docs/metadata_schema/scheduled-jobs.md": {
-    "hash": "e89d7ae93078587fb5c556f25695036bf435965c8ed5056c11ba58f52e0d174c",
-    "document_id": "7b3d5e76-d6b4-4710-b33e-6604d2ef51f9",
+    "hash": "e3ad6fed703046764909bf9f245cc2d7388b323f74488b716133dc4ce57dbc2a",
+    "document_id": "0a590fc8-5edf-4df5-98a8-1e1245a8036c",
     "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
     "metadata": {
       "source": "docusaurus",
@@ -882,8 +887,8 @@
     }
   },
   "developer-docs/metadata_schema/sms-templates.md": {
-    "hash": "43380c0fe329e226da2ed15e6de7589be75a8027059357263ffa4e1b846bd08a",
-    "document_id": "09ca766e-4dd3-434a-b59f-70688cb2ff75",
+    "hash": "14667ebd9e13d4744e8327cb54af78257843d72b8cf88153009a5150842cdd11",
+    "document_id": "8104b315-3ccb-4605-bbb5-4125be149361",
     "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
     "metadata": {
       "source": "docusaurus",
@@ -942,8 +947,8 @@
     }
   },
   "developer-docs/metadata_schema/field-metadata.md": {
-    "hash": "5747ddc7855f5b4ced0750d1160c4b2d407252791f18297c921148e973229487",
-    "document_id": "5395bff7-03e4-4ff5-a254-3a910bbfb797",
+    "hash": "050e45ec37207e0c59bb7dd5fa1f9ba94498733c782b7e97b651d6f7fe5211b7",
+    "document_id": "425e80c5-cc03-4c78-ab9f-0b05a16ca122",
     "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
     "metadata": {
       "source": "docusaurus",
@@ -965,8 +970,8 @@
     }
   },
   "developer-docs/metadata_schema/index.md": {
-    "hash": "781088f29a29070d29fad9aebecbbecca520c2911da3fdcebbae401075e0c75e",
-    "document_id": "d8c0dc0d-bef6-432f-9f1b-a45fc6d2769e",
+    "hash": "189dda864b6c02b851cdd01610694cb0e33835aeb2bd7e5e6b64b3bac0109787",
+    "document_id": "8ce42df4-d4ab-4610-b839-d33881809402",
     "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
     "metadata": {
       "source": "docusaurus",
@@ -988,8 +993,8 @@
     }
   },
   "developer-docs/metadata_schema/module-metadata.md": {
-    "hash": "eed52942d4271f5a61c1a47b23a28af35cb9e611cc653bb51203ac410c457850",
-    "document_id": "ec7767fc-5f60-42a8-a09d-28d9755a64f6",
+    "hash": "a6a01e6e35ec31f664b19c6b4ef0ce65930bb6ac13a1c2969923f7180e85c5fe",
+    "document_id": "46c4c52c-1a8e-459f-b1d2-9b4eacff3a1b",
     "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
     "metadata": {
       "source": "docusaurus",
@@ -1009,8 +1014,8 @@
     }
   },
   "developer-docs/metadata_schema/list-of-values.md": {
-    "hash": "589f4b5ac13f44aeda96a48e4f60f2d2a1dd79f1a6ad44c917235ebef3ab120a",
-    "document_id": "6e2efbcd-5d95-496d-9741-f2a79bb10f05",
+    "hash": "8731daf8b30ca0bc0c7d62b37debbf71bfbe59b8f55ac02fb375553490cdca71",
+    "document_id": "3d401d88-28fb-4aa8-aedc-962d292b0e12",
     "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
     "metadata": {
       "source": "docusaurus",
@@ -1030,8 +1035,8 @@
     }
   },
   "developer-docs/metadata_schema/email-templates.md": {
-    "hash": "ff0760f3c1caf91919475f68d7c6640867f73962fc5861577e024d5476c3cf10",
-    "document_id": "0d853f63-fc13-4688-9522-e7a70055fe5a",
+    "hash": "9484b244fad749a1fef67cf2cc92ff4e7a314b7ba10de060bed4c69e6355a83c",
+    "document_id": "e1f0e104-e63d-4cfa-b165-bc59a7b15570",
     "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
     "metadata": {
       "source": "docusaurus",
@@ -1052,8 +1057,8 @@
     }
   },
   "developer-docs/metadata_schema/model-metadata.md": {
-    "hash": "69a4dd7fc9f6847692c153699e62efd98a50dd06295236ffbffc7881910ce341",
-    "document_id": "f2ead495-09f6-4589-bfd2-bf1ec82b9aeb",
+    "hash": "f4f1dc557aeab543ecbd2f7c824fa5cd47a8b93ef4c6e37f2e1a95b4ef7c896f",
+    "document_id": "cf6d0edc-e4b8-47f1-91f1-695836b75635",
     "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
     "metadata": {
       "source": "docusaurus",
@@ -1075,8 +1080,8 @@
     }
   },
   "developer-docs/going-live/deploying-to-vm.md": {
-    "hash": "ed6f3c4a351d30a5853e74c38a2dc15ac4ed25f4bed6f1e5c13c0d1fc4ecb100",
-    "document_id": "83f505c0-1438-4602-a4ae-b54ae4612e63",
+    "hash": "04fcf0637fc39d3e085d66e22b2c4c89cd7d9f16d8225d7d20f75ba35e17f4de",
+    "document_id": "0bd2ab82-365d-42fc-a606-f33e90caddc0",
     "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
     "metadata": {
       "source": "docusaurus",
@@ -1085,16 +1090,16 @@
       "path": "developer-docs/going-live/deploying-to-vm.md",
       "doc_title": "developer-docs/going-live/deploying-to-vm.md",
       "title": "Virtual Machine",
-      "description": "Step-by-step guide to deploy SolidX applications on Ubuntu virtual machines.",
+      "description": "A step-by-step guide to deploying SolidX applications on Ubuntu virtual machines.",
       "summary": "This comprehensive guide walks through deploying SolidX applications on Ubuntu virtual machines. It covers cloning the repository, configuring environment variables, verifying backend and frontend operation, deploying with PM2 process manager (including config files and deploy scripts), database seeding with the rebuild script, and setting up Nginx as a reverse proxy with SSL certificates via Certbot. The guide also includes firewall configuration, virtual host setup, log rotation setup, and automatic restart configuration for production-ready deployment.",
       "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
       "collection_name": "developer-docs",
-      "chunk_count": 4
+      "chunk_count": 6
     }
   },
   "developer-docs/going-live/index.md": {
-    "hash": "0f0188f6c087c25b134eed7849fd637e2e6bb2da7b73de841659607c9b14e284",
-    "document_id": "95c78462-0927-464a-960c-47ea77ee929d",
+    "hash": "6c388de7e062bf5b8e58ca84aa79d326912f1513e73e95e1705dd9906b4e7355",
+    "document_id": "9ddcb55d-5341-42fd-b3e9-e87c8b5f1518",
     "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
     "metadata": {
       "source": "docusaurus",
@@ -1147,8 +1152,8 @@
     }
   },
   "developer-docs/rest-apis/swagger-documentation/index.md": {
-    "hash": "1170dae5dbfed84dd8e8d4b25edf3e5178ade02f22578d4de232deaa01f0ae09",
-    "document_id": "e246d69f-e1cc-4306-a546-3a6215a6edbc",
+    "hash": "0d1291dbef9c92c64c9933a4ef6b2e71177334b8a5372ada2f703c6771e5ec9a",
+    "document_id": "24eec5df-7fcf-451b-9cf2-f7c55fce658a",
     "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
     "metadata": {
       "source": "docusaurus",
@@ -1165,8 +1170,8 @@
     }
   },
   "developer-docs/rest-apis/update/index.md": {
-    "hash": "ebd6727d1bae68b5d4655db9cc060a01d4b1e7fc047552194b374ee2033e1987",
-    "document_id": "95f48565-cb4f-454b-aaa6-d65211ef5ee6",
+    "hash": "26e93f889520706137b67b94eeb8a575040aeeb3f27b957611893688fc3873b7",
+    "document_id": "6ebffe64-8310-45c4-bace-6773e9727fa7",
     "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
     "metadata": {
       "source": "docusaurus",
@@ -1183,8 +1188,8 @@
     }
   },
   "developer-docs/rest-apis/delete/index.md": {
-    "hash": "2e270e653d682df94fe38a33bf72630ea99240d9abce147e38c79db685c3fd6e",
-    "document_id": "8971fcbf-b807-43b0-8c0a-8e86a1db59c4",
+    "hash": "c05d21985c285f21cfea7d5074063659c7bede3d9c4e8a46c6d6d0e1aa5aead4",
+    "document_id": "ffab5e10-96e2-4a56-9533-d635664529c0",
     "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
     "metadata": {
       "source": "docusaurus",
@@ -1201,8 +1206,8 @@
     }
   },
   "developer-docs/rest-apis/retrieve/index.md": {
-    "hash": "f5c76babf289c5667b1b368e9ecb3848241340a1ead5a68b75921505f08381a8",
-    "document_id": "8c9ea110-5ea7-4491-ba08-8f04d2c121dd",
+    "hash": "3d0260bb8e7a5af94602a0c81cab4c7b9d0a4f81738d9aa7f15be9ee01aac1d8",
+    "document_id": "f8358c5c-854b-453c-b8ce-8c43b619bcf3",
     "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
     "metadata": {
       "source": "docusaurus",
@@ -1225,12 +1230,12 @@
       ],
       "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
       "collection_name": "developer-docs",
-      "chunk_count": 1
+      "chunk_count": 3
     }
   },
   "developer-docs/rest-apis/create/index.md": {
-    "hash": "ccf26a02b8b6c5af2d29d1bc668e8f54ddcf17e41b121d34c05962c36f710bcd",
-    "document_id": "b74c0220-bf79-4d25-9096-2040c1d665a6",
+    "hash": "9d77b70822cb1ce6bba658105dccc199a739fc07de38fedf634352285b4e7f4a",
+    "document_id": "3e09eaa2-4a0b-4e64-8a30-ce4560f6d481",
     "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
     "metadata": {
       "source": "docusaurus",
@@ -1283,8 +1288,8 @@
     }
   },
   "developer-docs/rest-apis/authentication/oauth-authentication/index.md": {
-    "hash": "6f31ccd7e49e971234a9ea300cda9fd61b78a472f1daafa80ab81fa84f7f2696",
-    "document_id": "95dedee9-c1e2-4374-8377-78f8f5c821ef",
+    "hash": "ecd6ce01311656c55007d8bdb6e94820a7cbc64c1c0a2ec70e8b6b48329bef35",
+    "document_id": "7274d5e2-d1cd-48ac-86ed-8b5c24dafd1b",
     "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
     "metadata": {
       "source": "docusaurus",
@@ -1355,8 +1360,8 @@
     }
   },
   "developer-docs/extending/code-generation/codegen-structure.md": {
-    "hash": "a97383b41ffb58f52570fc8f7a61d200a1b28a1db45a6658871a60e02e2526dc",
-    "document_id": "14425d52-e520-42c4-9e05-5705498b7bf0",
+    "hash": "708d29019168c5831906ccd1bdd2dbf196a9387864f549322743e69147339a3a",
+    "document_id": "bddf4151-f2dd-443e-bd53-232a20999d6e",
     "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
     "metadata": {
       "source": "docusaurus",
@@ -1391,8 +1396,8 @@
     }
   },
   "developer-docs/extending/frontend-customization/custom-views.md": {
-    "hash": "636b34e64e59812c9c95604e7ed6547f2caf8b3c7f9e9689518f1136d9e34526",
-    "document_id": "1124d00a-cac3-4796-ab07-d8fefdf619aa",
+    "hash": "5aecca33c7226d0009303058d9cde013cfd3b19d59a7122e44a2656d03fe3bb6",
+    "document_id": "e5e75b9d-a4fa-4e9c-92ce-caebcca700b2",
     "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
     "metadata": {
       "source": "docusaurus",
@@ -1420,8 +1425,8 @@
     }
   },
   "developer-docs/extending/frontend-customization/form-view-buttons.md": {
-    "hash": "f2b1f33221f0e37db426e811bee1c2974c629cbe66551cbb329dee5fb3e81f9c",
-    "document_id": "fea0c625-b575-4ba4-a43a-80704adb409d",
+    "hash": "ef16ee86365bb2db7502483f04622b702edc3b7efe5063cabb8f39b582224e0a",
+    "document_id": "f4a190d2-4298-4c7b-a71e-4dd2d4ff1768",
     "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
     "metadata": {
       "source": "docusaurus",
@@ -1441,8 +1446,8 @@
     }
   },
   "developer-docs/extending/frontend-customization/form-view-field-widgets.md": {
-    "hash": "f65d0ede7ae15f2d218e8b93ed2437b2ede93e35c8dd524a0c24f64c97b6d741",
-    "document_id": "8a08440c-173a-44a6-8f5d-83189c8f037c",
+    "hash": "b828c616a664c3d4ec5a978214e991571b820c5925a90a902487fdc37b7e2032",
+    "document_id": "4f706f13-a5fe-4a85-904b-cd7c9642ec77",
     "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
     "metadata": {
       "source": "docusaurus",
@@ -1458,12 +1463,12 @@
       ],
       "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
       "collection_name": "developer-docs",
-      "chunk_count": 4
+      "chunk_count": 6
     }
   },
   "developer-docs/extending/frontend-customization/list-view-buttons.md": {
-    "hash": "3f00a3fbfe1a1a163c5b219f8bedae0c29fb943713358485bcb43368212fa8ba",
-    "document_id": "7b348406-1250-4ead-8d65-429b33485871",
+    "hash": "99563804ec6931433718192a614bcb1f1f638c4aa54c85202a940ab4e2678b9d",
+    "document_id": "e7da7ad9-b126-484a-b214-b2db356288a7",
     "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
     "metadata": {
       "source": "docusaurus",
@@ -1484,8 +1489,8 @@
     }
   },
   "developer-docs/extending/frontend-customization/list-view-field-widgets.md": {
-    "hash": "7e2ca7f734ac9117a33c47c90cc71194bc2e6988d0f9b100e5e27c0569241746",
-    "document_id": "63e42f93-1932-4b56-b570-96591f4aed24",
+    "hash": "fced231fb5865256f6628cf7a30451a63b2bd5ee6e8383323b8196d0a736bc61",
+    "document_id": "b080e041-517a-4367-9cf2-2613f6359fe6",
     "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
     "metadata": {
       "source": "docusaurus",
@@ -1503,7 +1508,7 @@
       ],
       "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
       "collection_name": "developer-docs",
-      "chunk_count": 5
+      "chunk_count": 7
     }
   },
   "developer-docs/extending/frontend-customization/index.md": {
@@ -1539,8 +1544,8 @@
     }
   },
   "developer-docs/extending/frontend-customization/custom-widgets.md": {
-    "hash": "e341d9cc0c95f33eb0b4e26730357a2aef57398ca819d21ce4a131ebc362f241",
-    "document_id": "873f842a-c2c9-4322-a1ea-e0f848b00f58",
+    "hash": "e6e163dc698f33df28c2605803691769f0b72a1e12709609db4d05182a910004",
+    "document_id": "85a1d561-84e9-46b1-9bd6-b710fce47c5e",
     "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
     "metadata": {
       "source": "docusaurus",
@@ -1580,8 +1585,8 @@
     }
   },
   "developer-docs/extending/frontend-customization/form-view-events.md": {
-    "hash": "3a6c59aa762043b83e8708f6dd91a1cf55b307e02f7f0ed8029b82da2842dfa1",
-    "document_id": "88cf7bf3-f0bb-4470-92c3-ccdc88d9e138",
+    "hash": "bcc13c3b64ea3af44e2e1e3705c6387c2d5027d2a8ad67ea025f6004308d776c",
+    "document_id": "3f506cd2-936c-4e99-bc3d-69496301cf18",
     "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
     "metadata": {
       "source": "docusaurus",
@@ -1603,8 +1608,8 @@
     }
   },
   "developer-docs/extending/backend-customization/background-jobs.md": {
-    "hash": "de848946025452637e650208ba120f09a1aa8ebc577b296d1f0021cf5b6cba4d",
-    "document_id": "913b200e-9236-48c3-a22f-7bd92098899c",
+    "hash": "4363a9df272f96db3c9871c514d72a21a6276e1d01916867191e26ff51005497",
+    "document_id": "a65cf7a3-9e88-4e74-8629-4fa90769eb23",
     "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
     "metadata": {
       "source": "docusaurus",
@@ -1637,8 +1642,8 @@
     }
   },
   "developer-docs/extending/backend-customization/computation-providers.md": {
-    "hash": "000d43997752fe6585546a214c74e306b3cf5198e26eb57cee18b4e5089d18bb",
-    "document_id": "7f356b91-447a-41d7-a014-ccc149722a3a",
+    "hash": "0d8124aa65564a19da92514995555114ee5c44c8c8e079966d4afb87a648e73b",
+    "document_id": "f538a924-164e-4f73-b97e-ea660fb319cd",
     "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
     "metadata": {
       "source": "docusaurus",
@@ -1665,8 +1670,8 @@
     }
   },
   "developer-docs/extending/backend-customization/security-rules.md": {
-    "hash": "f7e6549ff233c2c109162de04176be58f5e5abbb21ce864336a103b3c4beae4a",
-    "document_id": "aabf978c-94ae-42d1-94b6-f685b5910eda",
+    "hash": "924857c3d8761abcea758feb5c9fc4293c6760274a7917b8d6a90ecaf486297c",
+    "document_id": "c9f9bcfd-811b-4996-95f2-6760090b2c05",
     "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
     "metadata": {
       "source": "docusaurus",
@@ -1691,8 +1696,8 @@
     }
   },
   "developer-docs/extending/backend-customization/typeorm-subscribers.md": {
-    "hash": "2ae1ac1c19374fc72395017edd86316f9033bdb219cb5bae3d23aac8ba05d3cd",
-    "document_id": "fd1359b1-b46d-48a3-bf83-b247e6a8c473",
+    "hash": "0eaa5bb907cc66087a66203573b344bbfe733ea56096689196e7d68712245ace",
+    "document_id": "1398e028-f71b-4256-946a-5bdff178b344",
     "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
     "metadata": {
       "source": "docusaurus",
@@ -1717,8 +1722,8 @@
     }
   },
   "developer-docs/extending/backend-customization/scheduled-jobs.md": {
-    "hash": "d4409ba7f5cb9c3fe4849b17e8dafd0a2bd27a32a52f15887e63bcdd2faa6fd2",
-    "document_id": "64b21139-9814-42ec-94d5-781f6dc8042c",
+    "hash": "28c511006abda00c17a83565a0c3fb7001fe12267dda1a014bda7dba7012fa5f",
+    "document_id": "442f876a-ee55-4602-9680-1473919c8c8f",
     "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
     "metadata": {
       "source": "docusaurus",
@@ -1739,12 +1744,12 @@
       ],
       "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
       "collection_name": "developer-docs",
-      "chunk_count": 1
+      "chunk_count": 5
     }
   },
   "developer-docs/extending/backend-customization/sms-providers.md": {
-    "hash": "4f70f2b14b7d728ac094cf5bfa5403b8edb3368f8d202729097425e474a34d79",
-    "document_id": "8a96ad05-2dc0-45c3-a7c7-6a5eea6367b5",
+    "hash": "51ea93b06128ff5a032669d24f9b07229097574e748747a1a6baa5e69d38d634",
+    "document_id": "e93217da-937b-4107-9a1c-0542e56dbc47",
     "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
     "metadata": {
       "source": "docusaurus",
@@ -1769,8 +1774,8 @@
     }
   },
   "developer-docs/extending/backend-customization/extending-users.md": {
-    "hash": "b3da4cb0da5ece478c9428ceac25e84d1b8845dcbe74e3db15503427a2d1e868",
-    "document_id": "02b8f74e-3954-4e0b-a828-eb3a3f6d0703",
+    "hash": "aa430693ac739ddf1f89e9a6344c58af7595333d54028feb1bc6eeb3b77a0004",
+    "document_id": "8cb6f9a5-afa8-4ddf-af4b-33ad63276efe",
     "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
     "metadata": {
       "source": "docusaurus",
@@ -1795,8 +1800,8 @@
     }
   },
   "developer-docs/extending/backend-customization/dynamic-selection-providers.md": {
-    "hash": "bac6a7a7b97389344d9a6845c2beab864ebdfc203808687040b1eb454dcf3cbd",
-    "document_id": "7b9cfae0-a4e1-49e1-be0c-ede2115828ec",
+    "hash": "a429729e692a13ee71684ae8abc64613c90e1692f202a038caebe27d23a80362",
+    "document_id": "07eb1f1e-54ce-4108-8b6c-f61eb13c0180",
     "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
     "metadata": {
       "source": "docusaurus",
@@ -1822,8 +1827,8 @@
     }
   },
   "developer-docs/extending/backend-customization/crud-service.md": {
-    "hash": "431f2e8d162c86a0442caffb465f90920718248de054b7a19f6ac1aab2dfc5be",
-    "document_id": "2f865710-13a9-44d0-92b7-1f01152c534f",
+    "hash": "03f4975caeb7ce967309da9d9547e788376259e80d804bd8831f9b120c1581af",
+    "document_id": "e6279203-28c8-4eda-bd96-173c752a859e",
     "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
     "metadata": {
       "source": "docusaurus",
@@ -1851,8 +1856,8 @@
     }
   },
   "developer-docs/extending/backend-customization/solid-registry.md": {
-    "hash": "945c1a5498498c0c8365a6ca21b1ee80ff0dc151d6da35034ce48cfaae9edf94",
-    "document_id": "bfd24626-59a8-483a-9929-dd60cad22136",
+    "hash": "a7f86c30993cc791f71aa227fc001f6acff8b5e55aa5f8bb68fd2f4e5b90dc3b",
+    "document_id": "2bc16baa-d871-491c-b458-7b881ff24094",
     "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
     "metadata": {
       "source": "docusaurus",
@@ -1875,8 +1880,8 @@
     }
   },
   "developer-docs/extending/backend-customization/extending-repositories.md": {
-    "hash": "fb2a6808dcc145afda2ad7ee3fa8759c542bbcefd0c72ad632cc1ebe148c4114",
-    "document_id": "df6f9e3d-18be-4f21-b71c-8e45de950d1f",
+    "hash": "e157a3929176c7357d9644aad758a3c6dfe74a2e09b2e57a25d66e13834c1a43",
+    "document_id": "3f5eae66-c0e4-413b-843d-e0033a237b7f",
     "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
     "metadata": {
       "source": "docusaurus",
@@ -1903,8 +1908,8 @@
     }
   },
   "developer-docs/extending/backend-customization/extending-services.md": {
-    "hash": "4fd456614227c86a461c759e9a8c5109d153676a3827a79387e9e7066b48bc26",
-    "document_id": "6dd6b8e9-1422-4ec1-b4f5-7c8452d4b53a",
+    "hash": "5db43262c51a160682f57ac39524bedc707b2f38257ae6c1f531e912611a71de",
+    "document_id": "339099e5-a7ad-4550-bef6-18820e66d4f4",
     "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
     "metadata": {
       "source": "docusaurus",
@@ -1931,8 +1936,8 @@
     }
   },
   "developer-docs/extending/backend-customization/extending-controllers.md": {
-    "hash": "9c92102444b10f8d7701031fb02a7c4a34707549f2488a189d7464a80f78e56a",
-    "document_id": "db880629-a67e-48a0-9b9c-407ce736de43",
+    "hash": "c8bf765e506002b8d093afe08d1f00c386398ccd376359550ba30f70e154d488",
+    "document_id": "352aad99-bdfb-489d-bf27-e7fbdf560956",
     "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
     "metadata": {
       "source": "docusaurus",
@@ -2002,8 +2007,8 @@
     }
   },
   "developer-docs/extending/backend-customization/email-providers.md": {
-    "hash": "522a0b0fae42fc463673c3430104d554fccedd0e15723cf99f07cd38a31a80be",
-    "document_id": "0c802771-cbc3-4e8f-8760-268be22927c6",
+    "hash": "b5b37b6d90446c4494c153ecc646ffc0ab0be757c29b7e42dd3e9fbb532d75fa",
+    "document_id": "59fc2d8d-f1cc-466c-8fbd-937eb082c4f4",
     "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
     "metadata": {
       "source": "docusaurus",
@@ -2028,8 +2033,8 @@
     }
   },
   "developer-docs/extending/backend-customization/whatsapp-providers.md": {
-    "hash": "c2b1d32bdc5fdc0fb87bfe354f2c17d335cc8a67a2dba88dbb7baeb692133b2d",
-    "document_id": "26816bdf-16aa-44d2-8eed-903e9269788d",
+    "hash": "5c7e2ca1ee4c83a51ce7e60e404f0c5b2bfd5ac1e14c98f8efbfa3382a1013b2",
+    "document_id": "a1d97517-5b70-462e-b796-53496df155f2",
     "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
     "metadata": {
       "source": "docusaurus",
@@ -2054,8 +2059,8 @@
     }
   },
   "developer-docs/going-live/deploying-to-ecs.md": {
-    "hash": "f5057646d46b4734cb2075ec41bae6d76af89fa244d01e05eaa06bad76a72458",
-    "document_id": "be719213-7ed1-48ea-8f48-6f9fd37d82d5",
+    "hash": "36f7c38a0e0495129fd50c2af1f2881b30803808e30a62996aac474234a242f4",
+    "document_id": "a7173fd3-e1ec-4df2-917e-9b82a5f3df49",
     "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
     "metadata": {
       "source": "docusaurus",
@@ -2063,9 +2068,9 @@
       "section": "developer-docs",
       "path": "developer-docs/going-live/deploying-to-ecs.md",
       "doc_title": "developer-docs/going-live/deploying-to-ecs.md",
-      "title": "ECS",
-      "description": "Step-by-step guide to deploy SolidX applications on Ubuntu virtual machines.",
-      "summary": "This comprehensive guide walks through deploying SolidX applications on Ubuntu virtual machines. It covers cloning the repository, configuring environment variables, verifying backend and frontend operation, deploying with PM2 process manager (including config files and deploy scripts), database seeding with the rebuild script, and setting up Nginx as a reverse proxy with SSL certificates via Certbot. The guide also includes firewall configuration, virtual host setup, log rotation setup, and automatic restart configuration for production-ready deployment.",
+      "title": "Deploying to ECS",
+      "description": "A comprehensive guide for deploying SolidX applications to Amazon ECS with Fargate.",
+      "summary": "This guide will walk you through the process of deploying your SolidX application to Amazon Elastic Container Service (ECS) using Fargate. We will cover containerizing your application, pushing it to ECR, and setting up the necessary ECS resources.",
       "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
       "collection_name": "developer-docs",
       "chunk_count": 4
@@ -2097,6 +2102,418 @@
       "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
       "collection_name": "developer-docs",
       "chunk_count": 10
+    }
+  },
+  "recipes/workflow-status.md": {
+    "hash": "b3ba6a30f62cf151e02e94c28a425e0c066d9b0f990d6b24cb202bc609385498",
+    "document_id": "9c51bb17-9c56-4ffe-a2ef-4c11493d20a5",
+    "collection_id": "f0935ef1-c3c4-403d-b32f-2a2d52861db1",
+    "metadata": {
+      "source": "docusaurus",
+      "project": "solidx-docs",
+      "section": "recipes",
+      "path": "recipes/workflow-status.md",
+      "doc_title": "recipes/workflow-status.md",
+      "title": "Workflow Status on a Form",
+      "description": "Display and update a record's workflow status (e.g. pending, active, inactive) directly from its form view.",
+      "keywords": [
+        "workflow",
+        "status",
+        "form view",
+        "workflowField",
+        "workflowFieldUpdateEnabled"
+      ],
+      "collection_id": "f0935ef1-c3c4-403d-b32f-2a2d52861db1",
+      "collection_name": "recipes",
+      "chunk_count": 5
+    }
+  },
+  "recipes/filtering.md": {
+    "hash": "a42ca3afb5022c82c556796cc97b288a781e2aee96ee7dddfe14d19a121a66b6",
+    "document_id": "379dedf9-b9a0-4bb7-9244-42384a1a7513",
+    "collection_id": "f0935ef1-c3c4-403d-b32f-2a2d52861db1",
+    "metadata": {
+      "source": "docusaurus",
+      "project": "solidx-docs",
+      "section": "recipes",
+      "path": "recipes/filtering.md",
+      "doc_title": "recipes/filtering.md",
+      "title": "Filtering Data",
+      "description": "Learn how to use filter operators to query records via the REST API or the CRUD service.",
+      "keywords": [
+        "filters",
+        "query",
+        "operators",
+        "REST API",
+        "CRUD service"
+      ],
+      "collection_id": "f0935ef1-c3c4-403d-b32f-2a2d52861db1",
+      "collection_name": "recipes",
+      "chunk_count": 4
+    }
+  },
+  "tutorial/school-fees-portal/solidx_setup.md": {
+    "hash": "8d14ab89fdc97ff8a68deddf051f4b8a7e388612af1a6dec441eac0775daf427",
+    "document_id": "5ba1483f-c165-4559-b108-d173ba730b47",
+    "collection_id": "cd59267d-67e0-4897-91a6-1a338f5e83bf",
+    "metadata": {
+      "source": "docusaurus",
+      "project": "solidx-docs",
+      "section": "tutorial",
+      "path": "tutorial/school-fees-portal/solidx_setup.md",
+      "doc_title": "tutorial/school-fees-portal/solidx_setup.md",
+      "title": "Setting Up SolidX",
+      "description": "Learn how to set up the SolidX platform for your project, including installation, configuration, and initial setup steps.",
+      "summary": "TODO",
+      "keywords": [
+        "TODO"
+      ],
+      "collection_id": "cd59267d-67e0-4897-91a6-1a338f5e83bf",
+      "collection_name": "tutorial",
+      "chunk_count": 6
+    }
+  },
+  "tutorial/school-fees-portal/fees_portal_product_overview.md": {
+    "hash": "9c155e304a0500abc9df0ebec9af2da7e89c3dc6ab18cc48f188221ab642d948",
+    "document_id": "f5840932-dacb-4551-842c-66ced39dc403",
+    "collection_id": "cd59267d-67e0-4897-91a6-1a338f5e83bf",
+    "metadata": {
+      "source": "docusaurus",
+      "project": "solidx-docs",
+      "section": "tutorial",
+      "path": "tutorial/school-fees-portal/fees_portal_product_overview.md",
+      "doc_title": "tutorial/school-fees-portal/fees_portal_product_overview.md",
+      "title": "Product Overview",
+      "description": "Overview of the School Fees & Payments Platform - a comprehensive solution for educational institutes to digitize fee collection and payment processing.",
+      "summary": "A centralized platform enabling institutes to manage fee collection through secure admin and student portals with role-based access, online payments, and bulk processing capabilities.",
+      "keywords": [
+        "school fees",
+        "payment platform",
+        "institute management",
+        "online payments",
+        "fee collection",
+        "student portal",
+        "admin portal"
+      ],
+      "collection_id": "cd59267d-67e0-4897-91a6-1a338f5e83bf",
+      "collection_name": "tutorial",
+      "chunk_count": 11
+    }
+  },
+  "tutorial/school-fees-portal/end-to-end-implementation/making_payment.md": {
+    "hash": "252cf1c8f9425aa0cb4902d99030205b46defab975e799f67c288af74c8d727d",
+    "document_id": "d2dab482-f0a5-4c30-9bea-72a335f2a13a",
+    "collection_id": "cd59267d-67e0-4897-91a6-1a338f5e83bf",
+    "metadata": {
+      "source": "docusaurus",
+      "project": "solidx-docs",
+      "section": "tutorial",
+      "path": "tutorial/school-fees-portal/end-to-end-implementation/making_payment.md",
+      "doc_title": "tutorial/school-fees-portal/end-to-end-implementation/making_payment.md",
+      "collection_id": "cd59267d-67e0-4897-91a6-1a338f5e83bf",
+      "collection_name": "tutorial",
+      "title": "tutorial/school-fees-portal/end-to-end-implementation/making_payment.md",
+      "chunk_count": 13
+    }
+  },
+  "tutorial/school-fees-portal/end-to-end-implementation/institute_onboarding.md": {
+    "hash": "9d5a8602b1782f6bf0c8d4000ecaa1bfcf6b6bbe860602b4163ad4dbbdd4eb83",
+    "document_id": "3b5bec03-7ed4-4377-a864-f8a16298a01c",
+    "collection_id": "cd59267d-67e0-4897-91a6-1a338f5e83bf",
+    "metadata": {
+      "source": "docusaurus",
+      "project": "solidx-docs",
+      "section": "tutorial",
+      "path": "tutorial/school-fees-portal/end-to-end-implementation/institute_onboarding.md",
+      "doc_title": "tutorial/school-fees-portal/end-to-end-implementation/institute_onboarding.md",
+      "title": "Institute Onboarding",
+      "description": "Learn how to onboard educational institutes to the Fees Portal.",
+      "summary": "TODO",
+      "keywords": [
+        "TODO"
+      ],
+      "collection_id": "cd59267d-67e0-4897-91a6-1a338f5e83bf",
+      "collection_name": "tutorial",
+      "chunk_count": 1
+    }
+  },
+  "tutorial/school-fees-portal/end-to-end-implementation/initiate_payment.md": {
+    "hash": "c2b4c68b273ffe8cc94abf68e9bf3e838524d658648fcb92d24055a92ff02fd4",
+    "document_id": "18770ff3-1f0e-43b2-b679-919bbd03c955",
+    "collection_id": "cd59267d-67e0-4897-91a6-1a338f5e83bf",
+    "metadata": {
+      "source": "docusaurus",
+      "project": "solidx-docs",
+      "section": "tutorial",
+      "path": "tutorial/school-fees-portal/end-to-end-implementation/initiate_payment.md",
+      "doc_title": "tutorial/school-fees-portal/end-to-end-implementation/initiate_payment.md",
+      "title": "Initiate Payment Collection",
+      "description": "Learn how to create and manage payment collections for students in the Fees Portal.",
+      "summary": "TODO",
+      "keywords": [
+        "TODO"
+      ],
+      "collection_id": "cd59267d-67e0-4897-91a6-1a338f5e83bf",
+      "collection_name": "tutorial",
+      "chunk_count": 1
+    }
+  },
+  "tutorial/school-fees-portal/end-to-end-implementation/activate_institute.md": {
+    "hash": "7387e868406e2c9684c2071606bd2998539320061d46158ed360130810e60a97",
+    "document_id": "d2e19896-ab87-4a80-bc3b-3e28c9bed49d",
+    "collection_id": "cd59267d-67e0-4897-91a6-1a338f5e83bf",
+    "metadata": {
+      "source": "docusaurus",
+      "project": "solidx-docs",
+      "section": "tutorial",
+      "path": "tutorial/school-fees-portal/end-to-end-implementation/activate_institute.md",
+      "doc_title": "tutorial/school-fees-portal/end-to-end-implementation/activate_institute.md",
+      "title": "Activate Institute Portal",
+      "description": "Learn how to activate an institute's fee portal and make it live for students and parents.",
+      "summary": "Complete guide to activating institute portals with automatic DNS and web server configuration",
+      "keywords": [
+        "institute activation",
+        "portal deployment",
+        "DNS configuration",
+        "multi-tenant setup"
+      ],
+      "collection_id": "cd59267d-67e0-4897-91a6-1a338f5e83bf",
+      "collection_name": "tutorial",
+      "chunk_count": 1
+    }
+  },
+  "tutorial/school-fees-portal/end-to-end-implementation/index.md": {
+    "hash": "26f86f962b9be66995db49d86d0276711f4f16c9a5091a89dfe769ea087d77ff",
+    "document_id": "8dd93857-c96c-456b-aa7c-0d8ede26f1c6",
+    "collection_id": "cd59267d-67e0-4897-91a6-1a338f5e83bf",
+    "metadata": {
+      "source": "docusaurus",
+      "project": "solidx-docs",
+      "section": "tutorial",
+      "path": "tutorial/school-fees-portal/end-to-end-implementation/index.md",
+      "doc_title": "tutorial/school-fees-portal/end-to-end-implementation/index.md",
+      "title": "End-to-End Implementation",
+      "description": "Step-by-step guide to implementing the Fees Portal using SolidX.",
+      "summary": "TODO",
+      "keywords": [
+        "TODO"
+      ],
+      "collection_id": "cd59267d-67e0-4897-91a6-1a338f5e83bf",
+      "collection_name": "tutorial",
+      "chunk_count": 4
+    }
+  },
+  "tutorial/school-fees-portal/common/applying-view-customizations.md": {
+    "hash": "96ac740581fd21c05ad80c2fc05f677138414541d82d180a495bc13b98cf6890",
+    "document_id": "28504b61-ff27-4181-8265-874338fa03b7",
+    "collection_id": "cd59267d-67e0-4897-91a6-1a338f5e83bf",
+    "metadata": {
+      "source": "docusaurus",
+      "project": "solidx-docs",
+      "section": "tutorial",
+      "path": "tutorial/school-fees-portal/common/applying-view-customizations.md",
+      "doc_title": "tutorial/school-fees-portal/common/applying-view-customizations.md",
+      "title": "Applying View Customizations",
+      "description": "How to apply customized form and list view layouts using the Layout Builder",
+      "collection_id": "cd59267d-67e0-4897-91a6-1a338f5e83bf",
+      "collection_name": "tutorial",
+      "chunk_count": 1
+    }
+  },
+  "tutorial/school-fees-portal/common/solidctl-commands.md": {
+    "hash": "08f1ad73689874e44c4e577c3cdc83c02e314ca3ca865f906a7382a2f06ec8ea",
+    "document_id": "d16be64e-a8e4-4b4c-ac78-dc8793f20d20",
+    "collection_id": "cd59267d-67e0-4897-91a6-1a338f5e83bf",
+    "metadata": {
+      "source": "docusaurus",
+      "project": "solidx-docs",
+      "section": "tutorial",
+      "path": "tutorial/school-fees-portal/common/solidctl-commands.md",
+      "doc_title": "tutorial/school-fees-portal/common/solidctl-commands.md",
+      "title": "SolidX Control Plane CLI Reference",
+      "description": "Comprehensive reference for using the SolidX Control Plane CLI (solidctl) to manage your SolidX application.",
+      "collection_id": "cd59267d-67e0-4897-91a6-1a338f5e83bf",
+      "collection_name": "tutorial",
+      "chunk_count": 1
+    }
+  },
+  "tutorial/school-fees-portal/common/field-types.md": {
+    "hash": "eaae79dce8d7f699430c2a71c4d26852b7c59604030230b17181cf880ef9969d",
+    "document_id": "5f73988a-7d08-48b8-ba78-dd28b17993da",
+    "collection_id": "cd59267d-67e0-4897-91a6-1a338f5e83bf",
+    "metadata": {
+      "source": "docusaurus",
+      "project": "solidx-docs",
+      "section": "tutorial",
+      "path": "tutorial/school-fees-portal/common/field-types.md",
+      "doc_title": "tutorial/school-fees-portal/common/field-types.md",
+      "title": "Field Type Reference",
+      "description": "Reference guide for field types when creating models in SolidX",
+      "collection_id": "cd59267d-67e0-4897-91a6-1a338f5e83bf",
+      "collection_name": "tutorial",
+      "chunk_count": 1
+    }
+  },
+  "tutorial/school-fees-portal/common/index.md": {
+    "hash": "a1641e291d8e53857b65bd49961ff9d8c952eb702941cb3f2ca89f68ec09a95e",
+    "document_id": "3e0a4ee9-e76b-4177-92ca-9238a0a09c37",
+    "collection_id": "cd59267d-67e0-4897-91a6-1a338f5e83bf",
+    "metadata": {
+      "source": "docusaurus",
+      "project": "solidx-docs",
+      "section": "tutorial",
+      "path": "tutorial/school-fees-portal/common/index.md",
+      "doc_title": "tutorial/school-fees-portal/common/index.md",
+      "title": "Common Reference",
+      "description": "Shared documentation for common concepts across all use cases",
+      "collection_id": "cd59267d-67e0-4897-91a6-1a338f5e83bf",
+      "collection_name": "tutorial",
+      "chunk_count": 2
+    }
+  },
+  "tutorial/school-fees-portal/common/configuration-notes.md": {
+    "hash": "abf9d9c4d985ddf76e7902600736a422cb6a76d66d1c35443f62952931d88ee3",
+    "document_id": "647c3167-2f7f-45d9-9f26-471ece2d3dcf",
+    "collection_id": "cd59267d-67e0-4897-91a6-1a338f5e83bf",
+    "metadata": {
+      "source": "docusaurus",
+      "project": "solidx-docs",
+      "section": "tutorial",
+      "path": "tutorial/school-fees-portal/common/configuration-notes.md",
+      "doc_title": "tutorial/school-fees-portal/common/configuration-notes.md",
+      "title": "Important Configuration Notes",
+      "description": "Essential configuration guidelines for creating models in SolidX",
+      "collection_id": "cd59267d-67e0-4897-91a6-1a338f5e83bf",
+      "collection_name": "tutorial",
+      "chunk_count": 2
+    }
+  },
+  "tutorial/school-fees-portal/common/code-generation.md": {
+    "hash": "04ddeb404648363d082521f1f313282f0f3438e1a1e6781d2237c4735adaad50",
+    "document_id": "2b1f6cff-da92-47bd-90c0-4a3eddc7255d",
+    "collection_id": "cd59267d-67e0-4897-91a6-1a338f5e83bf",
+    "metadata": {
+      "source": "docusaurus",
+      "project": "solidx-docs",
+      "section": "tutorial",
+      "path": "tutorial/school-fees-portal/common/code-generation.md",
+      "doc_title": "tutorial/school-fees-portal/common/code-generation.md",
+      "title": "Generating APIs and UI Components",
+      "description": "Guide for auto-generating code from your data models",
+      "collection_id": "cd59267d-67e0-4897-91a6-1a338f5e83bf",
+      "collection_name": "tutorial",
+      "chunk_count": 1
+    }
+  },
+  "developer-docs/metadata_schema/predefined-searches.md": {
+    "hash": "7e8d2864494711823cba9eeca295682aa28cd96495e747e1ff234b016761a4dd",
+    "document_id": "42b16019-e360-4986-8509-7a8f5a4a1596",
+    "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
+    "metadata": {
+      "source": "docusaurus",
+      "project": "solidx-docs",
+      "section": "developer-docs",
+      "path": "developer-docs/metadata_schema/predefined-searches.md",
+      "doc_title": "developer-docs/metadata_schema/predefined-searches.md",
+      "title": "Predefined Searches",
+      "description": "Metadata schema for defining predefined searches in SolidX list views.",
+      "summary": "This document describes predefined searches metadata in SolidX, which enables configuration of named search presets that appear by default in the search dialog on list views. Each predefined search has a name, an optional description, and a filter expression using query operators. The filters support dynamic placeholders such as {{search}} for user input. Examples demonstrate configuring searches for book titles and availability status. This is useful for surfacing common or business-critical search patterns without requiring users to build filters manually.",
+      "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
+      "collection_name": "developer-docs",
+      "chunk_count": 3
+    }
+  },
+  "developer-docs/going-live/deploying-to-docker.md": {
+    "hash": "92cea8fda1d6959c735ea240df8d0249c69f4e1296f3082efa0ab53a527e864d",
+    "document_id": "102ae3a3-2d96-4501-b9c5-42030eac2ae3",
+    "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
+    "metadata": {
+      "source": "docusaurus",
+      "project": "solidx-docs",
+      "section": "developer-docs",
+      "path": "developer-docs/going-live/deploying-to-docker.md",
+      "doc_title": "developer-docs/going-live/deploying-to-docker.md",
+      "title": "Docker",
+      "description": "This guide provides a comprehensive walkthrough for deploying SolidX applications using Docker for production.",
+      "summary": "Learn how to containerize your SolidX application with Docker. This guide covers creating multi-stage Dockerfiles for both the backend and frontend, setting up a production-ready Docker Compose file to manage your multi-container application, and provides instructions for building, running, and pushing your container images.",
+      "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
+      "collection_name": "developer-docs",
+      "chunk_count": 5
+    }
+  },
+  "developer-docs/extending/backend-customization/custom-seeders.md": {
+    "hash": "4e2340e4b7d7e0f918e0ec3e1a26fad07dd44bee5287373e76dec18be1b59094",
+    "document_id": "70e4ecfc-3178-41b8-a1a7-6fcf4543f672",
+    "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
+    "metadata": {
+      "source": "docusaurus",
+      "project": "solidx-docs",
+      "section": "developer-docs",
+      "path": "developer-docs/extending/backend-customization/custom-seeders.md",
+      "doc_title": "developer-docs/extending/backend-customization/custom-seeders.md",
+      "title": "Custom Seeders",
+      "description": "Learn how to create and run custom database seeders in SolidX.",
+      "summary": "Guide to creating custom seeders for populating your database with initial or test data. Covers implementing a service with a `seed()` method, decorating it with `@SolidSeeder`, registering it in a module, and executing it via the CLI `seed` command.",
+      "keywords": [
+        "backend",
+        "seeders",
+        "customization",
+        "database",
+        "seed data"
+      ],
+      "solidx_concerns": [
+        "custom_seeders"
+      ],
+      "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
+      "collection_name": "developer-docs",
+      "chunk_count": 5
+    }
+  },
+  "developer-docs/extending/reference/built-in-selection-providers.md": {
+    "hash": "cf5e4135791cf6ae3c04583d205682e6a70b2a700ccfcc8367aa5908c0e4e057",
+    "document_id": "22a03074-9498-4b4d-aa4e-595b1fb4604f",
+    "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
+    "metadata": {
+      "source": "docusaurus",
+      "project": "solidx-docs",
+      "section": "developer-docs",
+      "path": "developer-docs/extending/reference/built-in-selection-providers.md",
+      "doc_title": "developer-docs/extending/reference/built-in-selection-providers.md",
+      "title": "Built-in Selection Providers",
+      "description": "Learn about the built-in selection providers available in SolidX — ListOfValuesSelectionProvider and PseudoForeignKeySelectionProvider.",
+      "summary": "Documents the two built-in dynamic selection providers shipped with SolidX. ListOfValuesSelectionProvider populates dropdowns from List of Values (LOV) metadata entries filtered by type, while PseudoForeignKeySelectionProvider fetches options from any existing model to create lightweight foreign-key-style relationships without a formal database relation. Covers context configuration, field metadata examples, and search/query behaviour for both providers.",
+      "keywords": [
+        "backend",
+        "dynamic selection",
+        "providers",
+        "built-in",
+        "list of values",
+        "pseudo foreign key"
+      ],
+      "solidx_concerns": [
+        "dynamic_selection_provider"
+      ],
+      "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
+      "collection_name": "developer-docs",
+      "chunk_count": 2
+    }
+  },
+  "developer-docs/extending/reference/index.md": {
+    "hash": "9973d6f8a9f5396d0b02385dce4fb76c89c8f3cd1f215febad0ee46993a185e5",
+    "document_id": "383f6bd5-c007-4955-b956-5ca0f348b1b5",
+    "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
+    "metadata": {
+      "source": "docusaurus",
+      "project": "solidx-docs",
+      "section": "developer-docs",
+      "path": "developer-docs/extending/reference/index.md",
+      "doc_title": "developer-docs/extending/reference/index.md",
+      "title": "Reference",
+      "description": "Reference documentation for built-in providers and components shipped with SolidX.",
+      "summary": "Reference section for built-in SolidX providers and components. Contains detailed documentation on built-in selection providers, and other pre-built extensibility points that ship with the platform.",
+      "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
+      "collection_name": "developer-docs",
+      "chunk_count": 1
     }
   }
 }
