@@ -1453,7 +1453,7 @@ async computeFieldValue(entity: PaymentCollectionItemDetail) {
 The payment collection feature uses two scheduled jobs to automate late fee calculation and email reminders.
 
 :::tip Reference Documentation
-📋 For detailed information about scheduled jobs configuration, properties, and best practices, see [Scheduled Jobs Configuration](../common/scheduled-jobs.md)
+📋 For detailed information about scheduled jobs configuration, properties, and best practices, see [Scheduled Jobs](/docs/developer-docs/extending/backend-customization/scheduled-jobs)
 :::
 
 **Job 1: Late Fee Calculator**

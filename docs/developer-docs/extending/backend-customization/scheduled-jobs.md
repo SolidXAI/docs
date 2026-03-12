@@ -7,8 +7,8 @@ keywords: [backend, scheduled jobs, customization]
 solidx_concerns: [add_scheduled_job]
 ---
 
-import { IoIosArrowForward } from "react-icons/io";
 import { IoIosAlarm } from "react-icons/io";
+import { InfoBox } from '@site/src/common/InfoBox';
 
 
 
@@ -18,7 +18,7 @@ Scheduled jobs in SolidX allow you to run recurring tasks such as sending notifi
 
 This section walks you through how to create and integrate custom scheduled jobs into your application.
 
-
+> For the full metadata schema reference, see [Scheduled Jobs Metadata](/docs/developer-docs/metadata_schema/scheduled-jobs).
 
 <h4 className="card-title card-headear-wrapper">
   <IoIosAlarm size={24} style={{ marginRight: "10px" }} />
@@ -26,88 +26,175 @@ This section walks you through how to create and integrate custom scheduled jobs
 ##  Adding a New Scheduled Job
 </h4>
 
-
 Follow these steps to define and use a custom scheduled job:
 
-### 1 Create a Job Service
+### 1. Create a Job Service
 
-Create a new service class that implements the `IScheduledJob` interface.
+Create a new service class that implements the `IScheduledJob` interface and decorate it with `@ScheduledJobProvider()`.
 
 <details open>
- <summary className="card-title ">
-    <!-- <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" /> -->
-    Example: HelloWorld Scheduled Job
-</summary>
+  <summary className="card-title">Example: Late Fee Calculator Job</summary>
 
 ```ts
 import { Injectable, Logger } from '@nestjs/common';
 import { IScheduledJob, ScheduledJob, ScheduledJobProvider } from '@solidxai/core';
+import { FeesService } from '../fees/fees.service';
 
 @Injectable()
 @ScheduledJobProvider()
-export class HelloWorldJobService implements IScheduledJob {
-  private readonly logger = new Logger(HelloWorldJobService.name);
+export class LateFeeCalculatorJob implements IScheduledJob {
+  private readonly logger = new Logger(LateFeeCalculatorJob.name);
 
-  async execute(reminder: ScheduledJob): Promise<void> {
-    this.logger.log(`Hello from job: ${reminder.job}`);
-    this.logger.log(`Reminder Name: ${reminder.scheduleName}, ID: ${reminder.id}`);
+  constructor(private readonly feesService: FeesService) {}
+
+  async execute(job: ScheduledJob): Promise<void> {
+    this.logger.log(`Running job: ${job.scheduleName}`);
+    try {
+      const overdueAccounts = await this.feesService.findOverdue();
+      for (const account of overdueAccounts) {
+        await this.feesService.applyLateFee(account);
+      }
+      this.logger.log(`Late fees applied to ${overdueAccounts.length} accounts`);
+    } catch (err) {
+      this.logger.error('Late fee calculation failed', err.stack);
+    }
   }
 }
 ```
 </details>
 
-### 2 Register the Service
+### 2. Register the Service
 
-Ensure the job service is registered in the appropriate module under the providers array.
+Add the job class to the `providers` array of its NestJS module so the framework can inject and resolve it.
 
-### 3 Define the Job in Metadata
+### 3. Define the Job in Metadata
 
-Add the job definition in your metadata.json or job configuration file.
+Add an entry to the `scheduledJobs` array in your module metadata file:
+`solid-api/module-metadata/{module-name}/{module-name}-metadata.json`
 
 <details open>
- <summary className="card-title ">
-    <!-- <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" /> -->
-    Example Metadata Configuration
-</summary>
+  <summary className="card-title">Example: Daily job with a time window</summary>
 
 ```json
 {
   "scheduledJobs": [
     {
-      "scheduleName": "Fees Due Email",
-      "isActive": false,
+      "scheduleName": "Late Fee Calculation",
+      "isActive": true,
       "frequency": "Daily",
-      "startTime": null,
-      "endTime": null,
+      "startTime": "08:00:00",
+      "endTime": "18:00:00",
       "startDate": null,
       "endDate": null,
       "dayOfMonth": null,
-      "lastRunAt": null,
-      "nextRunAt": null,
-      "dayOfWeek": ["Thursday", "Friday"],
-      "job": "SendEmailScheduleJobs",
+      "job": "LateFeeCalculatorJob",
       "moduleUserKey": "fees-portal"
     }
   ]
 }
 ```
+
+This runs `LateFeeCalculatorJob` every day (including weekends — `dayOfWeek` is only enforced for `Weekly` frequency). The `startTime`/`endTime` window means the scheduler will hold off executing the job until 08:00 if it comes due earlier, and will skip it entirely if it comes due after 18:00 (waiting for the next day's window to open). No date range is set, so the job runs indefinitely.
+
 </details>
 
+<details open>
+  <summary className="card-title">Example: Weekly job on specific days</summary>
 
+```json
+{
+  "scheduledJobs": [
+    {
+      "scheduleName": "Weekly Overdue Report",
+      "isActive": true,
+      "frequency": "Weekly",
+      "startTime": "07:00:00",
+      "endTime": null,
+      "startDate": null,
+      "endDate": null,
+      "dayOfMonth": null,
+      "dayOfWeek": "[\"Monday\",\"Thursday\"]",
+      "job": "OverdueReportJob",
+      "moduleUserKey": "fees-portal"
+    }
+  ]
+}
+```
 
-### Supported Frequencies
-- Every Minute
-- Hourly
-- Daily
-- Weekly
-- Monthly
+This runs `OverdueReportJob` once every 7 days, but only if the due date falls on a Monday or Thursday — if it doesn't, the scheduler skips it every minute until an eligible day arrives, then runs and resets the 7-day clock from that point. It will not execute before 07:00, and has no upper time boundary. No date range is set, so it runs indefinitely.
 
-###  How It Works
-	- How job schedules are evaluated
-    - The SchedulerServiceImpl in @solidxai/core is responsible for evaluating and executing scheduled jobs.
-    - Job Execution Flow:
-      1. Fetch Active Jobs: The service retrieves all active scheduled jobs from the database.
-      2. Determine Due Jobs: It checks each job's nextRunAt against the current time to identify jobs that are due for execution.
-      3. Execute Jobs: For each due job, it invokes the corresponding job service's execute method.
-      4. Update Job Metadata: After execution, it updates the job's lastRunAt and nextRunAt fields based on the defined frequency.  
-	-	Triggering mechanism and intervals
+</details>
+
+---
+
+## Configuration Reference
+
+| Property | Type | Description |
+|----------|------|-------------|
+| `scheduleName` | string | Human-readable name for the job |
+| `isActive` | boolean | Whether the job is enabled. Defaults to `false` |
+| `frequency` | string | How often the job runs — see [Supported Frequencies](#supported-frequencies) |
+| `cronExpression` | string | Required when `frequency` is `"Custom"` — a valid cron expression |
+| `startTime` | string \| null | Earliest time of day to run, in `HH:MM:SS` format |
+| `endTime` | string \| null | Latest time of day to run, in `HH:MM:SS` format |
+| `startDate` | string \| null | ISO date — job will not run before this date |
+| `endDate` | string \| null | ISO date — job will not run after this date |
+| `dayOfWeek` | string | Stringified JSON array of day names, e.g. `"[\"Monday\",\"Friday\"]"` |
+| `dayOfMonth` | number \| null | Day of the month for `Monthly` jobs (1–31) |
+| `job` | string | Exact class name of the job implementation (case-sensitive) |
+| `moduleUserKey` | string | User key of the module this job belongs to |
+
+---
+
+## Supported Frequencies
+
+| Value | Interval |
+|-------|----------|
+| `Every Minute` | Every 60 seconds |
+| `Hourly` | Every 60 minutes |
+| `Daily` | Every 24 hours |
+| `Weekly` | Every 7 days, filtered by `dayOfWeek` |
+| `Monthly` | Same day next month, filtered by `dayOfMonth` |
+| `Custom` | Arbitrary schedule defined by a cron expression |
+
+---
+
+## Custom Cron Expressions
+
+When the built-in frequencies aren't precise enough, set `frequency` to `"Custom"` and provide a standard cron expression in the `cronExpression` field.
+
+```json
+{
+  "scheduleName": "Bi-hourly Sync",
+  "isActive": true,
+  "frequency": "Custom",
+  "cronExpression": "0 */2 * * *",
+  "job": "DataSyncJob",
+  "moduleUserKey": "my-module"
+}
+```
+
+**Notes:**
+- Cron expressions are evaluated in **UTC**.
+- The minimum allowed interval is **1 minute**. Expressions that resolve to a shorter interval are rejected and the job falls back to a daily schedule.
+- If the expression is invalid or missing, the platform logs an error and falls back to a 24-hour interval.
+
+<InfoBox>
+  Use a tool like <a href="https://crontab.guru" target="_blank">crontab.guru</a> to build and validate your cron expressions before adding them to metadata.
+</InfoBox>
+
+---
+
+## How It Works
+
+The SolidX scheduler runs an internal polling loop every minute (powered by `@Cron(CronExpression.EVERY_MINUTE)` under the hood). On each tick it:
+
+1. **Fetches due jobs** — queries all active jobs where `nextRunAt ≤ now` or `nextRunAt` is null (newly created jobs that haven't run yet).
+2. **Applies scheduling gates** — each job is checked against `startDate`/`endDate` (date range), `startTime`/`endTime` (time-of-day window), `dayOfWeek` (for Weekly), and `dayOfMonth` (for Monthly) before being allowed to execute.
+3. **Guards against overlap** — if a job is still running from a previous tick it is skipped, preventing concurrent duplicate executions.
+4. **Dispatches execution** — the job's `execute(job)` method is called with the full `ScheduledJob` entity, giving the handler access to all metadata.
+5. **Updates tracking fields** — after a successful run, `lastRunAt` is stamped and `nextRunAt` is computed based on the configured frequency, so the scheduler knows exactly when to pick it up next.
+
+### Environment Control
+
+Set `SOLID_SCHEDULER_ENABLED=false` in your environment to disable the scheduler entirely (useful for CLI contexts or environments where background jobs should not run).

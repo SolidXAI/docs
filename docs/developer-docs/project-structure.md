@@ -59,7 +59,7 @@ solid-api/
    </h4>
   - `@solidxai/core`
     - Contains the core SolidX module which provides the core backend services for SolidX.
-  - `@solidstarters/solid-code-builder`
+  - `@solidxai/code-builder`
     - Contains the functionality for generating the code in the SolidX backend.
 
 

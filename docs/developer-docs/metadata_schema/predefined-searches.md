@@ -1,0 +1,120 @@
+---
+title: Predefined Searches
+description: Metadata schema for defining predefined searches in SolidX list views.
+summary: This document describes predefined searches metadata in SolidX, which enables configuration of named search presets that appear by default in the search dialog on list views. Each predefined search has a name, an optional description, and a filter expression using query operators. The filters support dynamic placeholders such as {{search}} for user input. Examples demonstrate configuring searches for book titles and availability status. This is useful for surfacing common or business-critical search patterns without requiring users to build filters manually.
+sidebar_position: 15
+json_pointer: "/views/{index}/layout/attrs/predefinedSearches"
+jsonpath: "$.views[*].layout.attrs.predefinedSearches"
+parent_component: views
+type: array
+items_type: "object"
+items_attributes_doc: "#predefined-searches-attributes"
+---
+
+# Predefined Searches
+> **Where it lives**
+> **JSON Pointer:** `/views/{index}/layout/attrs/predefinedSearches`
+> **JSONPath:** `$.views[*].layout.attrs.predefinedSearches`
+> **Parent:** `views[].layout.attrs`
+
+import { MdSearch } from "react-icons/md";
+import { InfoBox } from '@site/src/common/InfoBox';
+
+## Overview
+Predefined searches let you configure named search presets that appear in the search dialog on list views. Instead of requiring users to build filters from scratch each time, you can expose a curated set of searches tailored to common workflows — for example, finding all overdue records, filtering by a specific status, or searching within a particular field.
+
+Each preset is displayed as a selectable option in the list view's search panel. When a user selects one, the associated filter is applied automatically, with any `{{search}}` placeholder replaced by the value the user types in the search input.
+
+## Example: Predefined Searches Metadata
+
+<summary> Predefined Searches Schema </summary>
+
+``` json
+{
+  "views": [
+    {
+      "name": "book-list-view",
+      "layout": {
+        "type": "list",
+        "attrs": {
+          "predefinedSearches": [
+            {
+              "name": "Book Title",
+              "description": "Search for books by their title.",
+              "filters": {
+                "$and": [
+                  {
+                    "title": {
+                      "$containsi": "{{search}}"
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "name": "Available Books",
+              "description": "Shows all published or available books, excluding drafts.",
+              "filters": {
+                "$and": [
+                  {
+                    "status": {
+                      "$containsi": "{{search}}"
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      }
+    }
+  ]
+}
+```
+
+<h2 className="card-headear-wrapper">
+    <MdSearch size={24} style={{ marginRight: "10px" }} />
+
+## Predefined Searches Attributes
+</h2>
+
+### `name` *(string, required, unique within view)*
+The label displayed for this search preset in the search dialog. Users will see this name when selecting a search option from the list.
+
+### `description` *(string, optional)*
+A short human-readable explanation of what this search does. Displayed as a subtitle or tooltip alongside the search name to help users understand when to use it.
+
+### `filters` *(object, required)*
+The filter expression applied when this search preset is selected. Uses the SolidX query filter syntax with standard operators such as `$and`, `$or`, `$containsi`, `$eq`, `$gt`, etc.
+
+**Dynamic placeholder:** Use `{{search}}` anywhere within the filter values to inject the user's live search input at runtime.
+
+**Example — filter by a field containing the search term:**
+```json
+{
+  "$and": [
+    {
+      "title": {
+        "$containsi": "{{search}}"
+      }
+    }
+  ]
+}
+```
+
+**Example — static filter with no user input:**
+```json
+{
+  "$and": [
+    {
+      "status": {
+        "$eq": "published"
+      }
+    }
+  ]
+}
+```
+
+<InfoBox>
+  The <code>{"{{search}}"}</code> placeholder is replaced at runtime with whatever the user types in the search input. If no placeholder is used, the filter acts as a static preset that does not depend on user input.
+</InfoBox>

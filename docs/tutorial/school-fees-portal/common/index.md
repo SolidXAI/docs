@@ -22,9 +22,6 @@ Step-by-step instructions for using SolidX's App Builder to auto-generate REST A
 ### [Applying View Customizations](./applying-view-customizations.md)
 Step-by-step instructions for applying customized form and list view layout JSON through the Layout Builder.
 
-### [Scheduled Jobs Configuration](./scheduled-jobs.md)
-Comprehensive guide to configuring and managing scheduled jobs in SolidX, including configuration properties, examples, and best practices.
-
 ## When to Reference These Docs
 
 You'll find links to these common reference documents throughout the use case documentation, particularly in the "Building the Data Models" and "Implementing Custom Business Logic" sections. Whenever you see a reference like:
