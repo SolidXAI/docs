@@ -14,11 +14,12 @@ To try out SolidX on your local machine, ensure you have the following prerequis
 ### Prerequisites
 - **Node.js**: Latest **Active LTS**
 - **npm**: Included with Node.js
-- **Docker**: Latest stable version
+- **Docker**: Latest stable version *(Optional)*
 
 ### Supported Systems
 - macOS
 - Linux
+- Windows
 
 ### System Requirements
 - **CPU**: 2 cores  
@@ -37,7 +38,7 @@ To try out SolidX on your local machine, ensure you have the following prerequis
 If you already have a PostgreSQL database installed and running on your system, you can skip this section and proceed directly to [SolidX Scaffolding Script](#solidx-scaffolding-script). Just make sure you have your database connection details (host, port, username, password, and database name) ready for the scaffolding step.
 :::
 
-SolidX requires a relational database to store application data / metadata. Currently supported databases include **PostgreSQL** and **MSSQL**. 
+SolidX requires a relational database to store application data / metadata. Currently supported databases include **PostgreSQL**, **MSSQL**, and **MySQL**.
 
 We will be using PostgreSQL for this tutorial. 
 
@@ -289,22 +290,62 @@ npx @solidxai/solidctl@latest create-app
 SolidX requires foundational metadata: system models, roles, users, email/SMS templates, dashboards, and lists of values. 
 The `npx @solidxai/solidctl@latest seed` command automates this process by populating the database with all these essentials, making the application ready for immediate use.
 
-To seed the database, navigate to the project root directory and run:
+To seed the database, navigate to the project root directory and run the `build` command first, then the `seed` command:
 
 ```bash
 cd school-fees-portal
+npx @solidxai/solidctl@latest build
 npx @solidxai/solidctl@latest seed
 ```
-This command reads predefined JSON files containing the necessary metadata for a SolidX application and populates the database accordingly.
 
-The seed process also creates an `super admin` user, if one does not already exist. The credentials for this user are displayed in the terminal after seeding is complete.
+:::warning[Using a local PostgreSQL without Docker?]
+If you skipped the Docker setup and are using an existing local PostgreSQL instance, make sure you have **manually created the target database** before running the seed command. You can do this using a database client (e.g. DBeaver, pgAdmin) or via the `psql` CLI:
+```sql
+CREATE DATABASE solidx_app_db;
+```
+:::
+
+The `build` command compiles the backend and ensures the CLI points to the latest codebase. The `seed` command then reads predefined JSON files containing the necessary metadata for a SolidX application and populates the database accordingly.
+
+The seed process also creates a `super admin` user, if one does not already exist.
+
+:::tip[Seed command failing?]
+If the seed command fails, you can re-run it with `--verbose` for detailed output to help diagnose the issue:
+```bash
+npx @solidxai/solidctl@latest seed --verbose
+```
+:::
 
 ### Seeding in Action
 ![Seeding SolidX Metadata](/img/tutorial/school-fees-portal-v2/seeding_solidx.png)
 *Screenshot showing the seeding process in the terminal*
 
+### Starting the Application
+Once seeding is complete, open **two separate terminal windows** and run the following commands:
+
+**Terminal 1 — Backend API:**
+```bash
+cd school-fees-portal/solid-api
+npm run solidx:dev
+```
+
+**Terminal 2 — Frontend Admin Panel:**
+```bash
+cd school-fees-portal/solid-ui
+npm run solidx:dev
+```
+
+Both services must be running before you can access the admin panel.
+
 ### Log In as Super Admin
-Use the credentials displayed after seeding to access the admin panel with full permissions.
+The super admin account is seeded with the following fixed credentials:
+
+| Field    | Value             |
+|----------|-------------------|
+| Username | `admin`           |
+| Password | `Admin@3214$`       |
+
+Use these credentials to access the admin panel with full permissions.
 
 ![SolidX Admin Panel Login](/img/tutorial/school-fees-portal-v2/admin_panel_login_page.png)
 *Screenshot showing the SolidX admin panel login screen*
@@ -317,6 +358,10 @@ After logging in, you will be redirected to the default landing page of the admi
 ## Setup Complete - Ready to Build!
 
 Your SolidX environment is now configured and the admin panel is accessible.
+
+:::info[Project Root Convention]
+Throughout the rest of this tutorial, we will refer to the root directory of your project (i.e. `school-fees-portal/`) as **`<consuming-project-root>`**.
+:::
 
 You're ready to build a fully functional **school fees portal** application using the SolidX App Builder. No coding required—just visual configuration to create entities, relationships, workflows, and business logic.
 
