@@ -48,34 +48,26 @@ This document explains how to **extend** the `CRUDService<T>` for your models an
 ```ts
 import { Injectable } from "@nestjs/common";
 import { CRUDService } from "@solidxai/core";
+import { EntityManager } from "typeorm";
+import { ModuleRef } from "@nestjs/core";
+import { InjectEntityManager } from "@nestjs/typeorm";
 import { Person } from "../entities/person.entity";
+import { PersonRepository } from "../repositories/person.repository";
 
 @Injectable()
 export class PersonService extends CRUDService<Person> {
 
   constructor(
-    readonly modelMetadataService: ModelMetadataService,
-    readonly moduleMetadataService: ModuleMetadataService,
-    readonly configService: ConfigService,
-    readonly fileService: FileService,
-    readonly discoveryService: DiscoveryService,
-    readonly crudHelperService: CrudHelperService,
     @InjectEntityManager()
     readonly entityManager: EntityManager,
     readonly repo: PersonRepository,
     readonly moduleRef: ModuleRef,
   ) {
     super(
-      modelMetadataService,
-      moduleMetadataService,
-      configService,
-      fileService,
-      discoveryService,
-      crudHelperService,
       entityManager,
       repo,
-      "person",
-      "myModule",
+      "person",   // model singular name
+      "myModule", // module name
       moduleRef
     );
   }
@@ -88,7 +80,7 @@ export class PersonService extends CRUDService<Person> {
 ```
 </details>
 
-> Any subclass automatically inherits all CRUD methods and can call `this.repo`, `this.entityManager`, etc.
+> Any subclass automatically inherits all CRUD methods and can call `this.repo`, `this.entityManager`, etc. Internal services like `ModelMetadataService`, `CrudHelperService`, and `DiscoveryService` are resolved lazily by the base class via `ModuleRef` — you do not need to inject or forward them.
 
 ---
 
@@ -131,7 +123,7 @@ status?: string; // publish | draft (when draft/publish workflow is enabled)
 
 ## Permissions & Context
 
-**Note:** The optional `context` parameter accepts an **ActiveUser** object. It is generally auto‑populated by controllers from the request context to perform permission checks for the logged‑in user before CRUD operations. If you call service methods manually, `context` is optional.
+**Note:** The optional `context` parameter (internally called `solidRequestContext`) is an object with an `activeUser` property holding the `ActiveUserData` for the current user. It is generally auto‑populated by controllers from the request context to perform permission checks before CRUD operations. If you call service methods manually, `context` is optional and defaults to `{}`.
 
 <details open>
 <summary>ActiveUser shape</summary>
