@@ -3,7 +3,7 @@ sidebar_position: 2
 title: Form View Buttons
 description: Learn how to customize form view buttons in your frontend application.
 summary: Explains customizing SolidX form view buttons to enhance user interaction. Covers adding custom buttons, modifying existing buttons, and handling button actions using `registerExtensionComponent`. Includes a working example `PreviewPortal` button that redirects to an external hosted page.
-solidx_concerns: [add_form_button]
+solidx_concerns: [frontend.extensions.form_buttons, add_form_button]
 ---
 
 import { IoIosArrowForward } from "react-icons/io";

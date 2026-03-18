@@ -4,7 +4,7 @@ title: Built-in Selection Providers
 description: Learn about the built-in selection providers available in SolidX — ListOfValuesSelectionProvider and PseudoForeignKeySelectionProvider.
 summary: Documents the two built-in dynamic selection providers shipped with SolidX. ListOfValuesSelectionProvider populates dropdowns from List of Values (LOV) metadata entries filtered by type, while PseudoForeignKeySelectionProvider fetches options from any existing model to create lightweight foreign-key-style relationships without a formal database relation. Covers context configuration, field metadata examples, and search/query behaviour for both providers.
 keywords: [backend, dynamic selection, providers, built-in, list of values, pseudo foreign key]
-solidx_concerns: [dynamic_selection_provider]
+solidx_concerns: [backend.custom_dynamic_selection_providers, dynamic_selection_provider]
 ---
 
 import { IoIosArrowForward } from "react-icons/io";

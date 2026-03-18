@@ -3,7 +3,7 @@ sidebar_position: 9
 title: Solid HTTP API
 description: Learn how to use the Solid HTTP API helpers to interact with backend APIs in your application.
 summary: Guide to using the `solidAxios` HTTP helpers in SolidX applications. Covers importing and using `solidGet`, `solidPost`, `solidPut`, `solidPatch`, and `solidDelete`, building filter query strings, handling loading and errors, and implementing multi-step API flows in custom frontend components.
-solidx_concerns: [add_full_custom_ui,onlayoutload_handler_function,ondataload_handler_function,add_form_button,add_list_header_button_with,add_list_row_button_with,create_custom_form_field_widget,create_custom_list_field_widget]
+solidx_concerns: [frontend.custom_pages, add_full_custom_ui]
 ---
 
 ## Overview

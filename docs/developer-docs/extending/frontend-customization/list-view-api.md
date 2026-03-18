@@ -3,7 +3,7 @@ sidebar_position: 5
 title: List View API
 description: Learn how to access and control SolidX list views programmatically from external components.
 summary: Documents how SolidX exposes list view handles through `listViewRegistry` for external usage. Covers `getListView`, `getRegisteredListViewIds`, list ID format, `SolidListViewHandle` methods (`refresh`, `clearFilters`, `applyFilter`, `setPagination`, `setSort`, `setShowArchived`, `getState`), and practical integration patterns.
-solidx_concerns: [add_list_header_button_with, add_list_row_button_with, create_custom_widget]
+solidx_concerns: [frontend.extensions.list_buttons, frontend.extensions.row_buttons, frontend.custom_pages, add_list_header_button_with, add_list_row_button_with, create_custom_widget]
 ---
 
 ## Overview

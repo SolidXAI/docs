@@ -3,7 +3,7 @@ sidebar_position: 3
 description: Information about the retrieve endpoint of the REST API, including usage, parameters, and responses
 title: Retrieve Endpoint
 summary: This document covers the retrieve endpoints of the SolidX REST API, explaining how to fetch records from the system. The endpoints support both retrieving multiple records with advanced filtering, pagination, sorting, and field selection options, as well as retrieving single records by ID. The documentation includes sample requests and responses, required headers, body content structure, and comprehensive examples of the filtering capabilities available for data retrieval operations.
-solidx_concerns: [add_full_custom_ui,onlayoutload_handler_function,ondataload_handler_function,add_form_button,add_list_header_button_with,add_list_row_button_with,create_custom_form_field_widget,create_custom_list_field_widget]
+solidx_concerns: [frontend.custom_pages, add_full_custom_ui]
 ---
 
 # Retrieve Endpoints

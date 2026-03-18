@@ -4,7 +4,7 @@ title: Extending Services
 description: Learn how to extend backend services in SolidX.
 summary: Explains extending NestJS services in SolidX to implement custom business logic beyond default CRUD operations. Covers creating service methods for domain-specific operations (e.g., activating portals, sending notifications), benefits of separation of concerns, reusability across controllers and scheduled jobs, improved testability, and consistency. Includes examples like `activateInstitutePortal()` with database updates and event publishing.
 keywords: [backend, services, customization]
-solidx_concerns: [add_custom_service_method, using_crud_service_method, add_controller_endpoint]
+solidx_concerns: [backend.service_changes, add_custom_service_method, using_crud_service_method]
 ---
 
 import { IoIosArrowForward } from "react-icons/io";
@@ -90,4 +90,3 @@ async activateInstitute(@Body() ids: (number | string)[]) {
 ```
 
 Here, the controller method simply delegates to the **service method**, ensuring a clean separation of responsibilities.
-

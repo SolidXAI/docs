@@ -4,7 +4,7 @@ title: Dynamic Selection Providers
 description: Learn how to create dynamic selection providers to customize the selection options in your application.
 summary: Explains creating dynamic selection providers for runtime option fetching from databases or APIs, replacing static lists. Covers field metadata configuration with `selectionDynamicProvider` and `selectionDynamicProviderCtxt`, implementing `ISelectionProvider` interface with `values()` method, provider registration, context handling, multi-select support, and examples like `StockApiSelectionProvider` for live exchange data. Highlights built-in `ListOfValuesSelectionProvider` for database queries.
 keywords: [backend, dynamic selection, providers, customization]
-solidx_concerns: [dynamic_selection_provider]
+solidx_concerns: [backend.custom_dynamic_selection_providers, dynamic_selection_provider]
 ---
 
 import { NoteBoxs } from '@site/src/common/NoteBoxs';

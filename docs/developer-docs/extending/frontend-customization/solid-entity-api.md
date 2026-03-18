@@ -3,7 +3,7 @@ sidebar_position: 7
 title: Solid Entity API
 description: Learn how to use the Solid Entity API to interact with entities in your application.
 summary: Guide to using the Solid Entity API for managing entities in SolidX applications. Covers importing and using the `SolidEntityApi` class, performing CRUD operations (create, read, update, delete), querying entities with filters, and handling relationships between entities. Includes code examples for common operations and best practices for effective entity management.
-solidx_concerns: [add_full_custom_ui,onlayoutload_handler_function,ondataload_handler_function,add_form_button,add_list_header_button_with,add_list_row_button_with,create_custom_form_field_widget,create_custom_list_field_widget]
+solidx_concerns: [frontend.custom_pages, add_full_custom_ui]
 ---
 
 ## Overview

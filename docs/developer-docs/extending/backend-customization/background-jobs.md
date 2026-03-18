@@ -12,7 +12,7 @@ keywords:
     RabbitMQ,
     database broker,
   ]
-solidx_concerns: [new_background_job,add_new_sms_provider, add_new_email_provider, add_new_whatsapp_provider, add_custom_service_method, add_scheduled_job]
+solidx_concerns: [backend.background_jobs, new_background_job, new_sms_provider, new_email_provider, new_whatsapp_provider, add_custom_service_method, add_scheduled_job]
 ---
 
 import { FaTag, FaDatabase, FaCode, FaProjectDiagram,FaLightbulb } from "react-icons/fa";

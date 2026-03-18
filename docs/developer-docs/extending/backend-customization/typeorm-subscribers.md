@@ -4,7 +4,7 @@ title: TypeORM Subscribers
 description: Learn how to create and use TypeORM subscribers in your SolidX application.
 summary: Covers TypeORM subscribers for listening to entity lifecycle events (beforeInsert, afterInsert, beforeUpdate, afterUpdate, beforeRemove, afterRemove, afterLoad, transaction events). Explains creating subscribers implementing `EntitySubscriberInterface` with `@Injectable()` decorator for dependency injection, keeping business logic in dedicated services, registering subscribers in TypeORM configuration, and includes examples like `UserSubscriber` for audit logging. Recommends SolidX computed fields for most use cases.
 keywords: [backend, TypeORM subscribers, customization]
-solidx_concerns: [typeorm_subscribers]
+solidx_concerns: [typeorm_subscriber]
 ---
 
 # TypeORM Subscribers

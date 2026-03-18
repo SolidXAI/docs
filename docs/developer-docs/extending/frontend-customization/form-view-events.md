@@ -3,7 +3,7 @@ sidebar_position: 1
 title: Form View Events
 description: Learn how to create event listeners for form view events in your frontend application.
 summary: Explains creating event listeners for SolidX form view events to extend frontend functionality. Covers supported events (`onFormLoad`, `onFieldChange`, `onFieldBlur`), registering handlers using `registerExtensionFunction`, accessing event data, and returning layout/data updates. Includes a dedicated deprecated section for `onFormLayoutLoad` and `onFormDataLoad`.
-solidx_concerns: [add_change_handler_function, onlayoutload_handler_function, ondataload_handler_function]
+solidx_concerns: [frontend.extensions.form_event_listeners, add_change_handler_function, onlayoutload_handler_function, ondataload_handler_function]
 ---
 
 ## Overview

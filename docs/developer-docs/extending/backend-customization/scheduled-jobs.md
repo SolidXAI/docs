@@ -4,7 +4,7 @@ title: Scheduled Jobs
 description: Learn how to write the scheduled jobs in your SolidX application.
 summary: Explains creating scheduled jobs in SolidX for recurring tasks like notifications, cleanup, syncing, or maintenance. Covers implementing `IScheduledJob` interface with `@ScheduledJobProvider()` decorator, registering job services in modules, defining job metadata with schedule name, frequency, days of week, job class name, and module reference. Includes examples like `HelloWorldJobService` and late fee calculation jobs.
 keywords: [backend, scheduled jobs, customization]
-solidx_concerns: [add_scheduled_job]
+solidx_concerns: [backend.scheduled_jobs, add_scheduled_job]
 ---
 
 import { IoIosAlarm } from "react-icons/io";

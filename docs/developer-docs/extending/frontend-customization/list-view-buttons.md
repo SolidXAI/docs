@@ -3,7 +3,7 @@ sidebar_position: 3
 title: List View Buttons
 description: Learn how to customize list view buttons in your frontend application.
 summary: Explains how to add and customize list view buttons in SolidX. Covers creating header buttons for list-wide actions and row buttons for record-specific actions, including configuration examples and prop details.
-solidx_concerns: [add_list_header_button_with, add_list_row_button_with]
+solidx_concerns: [frontend.extensions.list_buttons, frontend.extensions.row_buttons, add_list_header_button_with, add_list_row_button_with]
 ---
 
 import { IoIosArrowForward } from "react-icons/io";

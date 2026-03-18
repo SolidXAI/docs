@@ -4,7 +4,7 @@ description: Learn how to create custom views in the frontend of your applicatio
 summary: Explains creating custom pages in SolidX frontend applications. Covers creating custom view components in the extensions folder, registering them using `registerExtensionComponent`, embedding custom views in form layouts using JSON configuration (notebooks, pages, custom widgets), accessing form data and metadata via props, and building specialized UI like `BookSimilarTitles` for displaying related data with filtering and action handlers.
 keywords: [custom views, frontend customization, custom actions, custom components]
 sidebar_position: 6
-solidx_concerns: [ add_full_custom_ui, add_custom_menu_action_combo,create_custom_widget]
+solidx_concerns: [frontend.custom_pages, add_full_custom_ui, create_custom_widget]
 ---
 
 import { IoIosArrowForward } from "react-icons/io";

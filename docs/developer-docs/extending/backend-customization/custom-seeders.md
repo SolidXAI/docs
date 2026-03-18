@@ -4,7 +4,7 @@ title: Custom Seeders
 description: Learn how to create and run custom database seeders in SolidX.
 summary: Guide to creating custom seeders for populating your database with initial or test data. Covers implementing a service with a `seed()` method, decorating it with `@SolidSeeder`, registering it in a module, and executing it via the CLI `seed` command.
 keywords: [backend, seeders, customization, database, seed data]
-solidx_concerns: [custom_seeders]
+solidx_concerns: []
 ---
 
 import { IoIosArrowForward } from "react-icons/io";
