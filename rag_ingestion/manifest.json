@@ -1,7 +1,7 @@
 {
   "tutorial/index.md": {
-    "hash": "51ae4cddc4e29598bfbd39d408195e5ed2bf08f454bd419299b36fc33cfa8511",
-    "document_id": "a91ce646-aa11-4fe1-9522-70fbd7ec0fff",
+    "hash": "97c152df84903f9faaa5f4a1fbfc552899798b4eaf298a5621da02c4937d5f15",
+    "document_id": "8a3fe3e5-7e65-4459-8aa3-7d388c0cca8c",
     "collection_id": "cd59267d-67e0-4897-91a6-1a338f5e83bf",
     "metadata": {
       "source": "docusaurus",
@@ -1206,8 +1206,8 @@
     }
   },
   "developer-docs/rest-apis/retrieve/index.md": {
-    "hash": "3d0260bb8e7a5af94602a0c81cab4c7b9d0a4f81738d9aa7f15be9ee01aac1d8",
-    "document_id": "f8358c5c-854b-453c-b8ce-8c43b619bcf3",
+    "hash": "7ebb8b496a73102ed950948a30eaca981f320ef58fd442e46ffb852b05f865e6",
+    "document_id": "e0adff1e-37b5-4141-af64-13034c016134",
     "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
     "metadata": {
       "source": "docusaurus",
@@ -1219,14 +1219,8 @@
       "description": "Information about the retrieve endpoint of the REST API, including usage, parameters, and responses",
       "summary": "This document covers the retrieve endpoints of the SolidX REST API, explaining how to fetch records from the system. The endpoints support both retrieving multiple records with advanced filtering, pagination, sorting, and field selection options, as well as retrieving single records by ID. The documentation includes sample requests and responses, required headers, body content structure, and comprehensive examples of the filtering capabilities available for data retrieval operations.",
       "solidx_concerns": [
-        "add_full_custom_ui",
-        "onlayoutload_handler_function",
-        "ondataload_handler_function",
-        "add_form_button",
-        "add_list_header_button_with",
-        "add_list_row_button_with",
-        "create_custom_form_field_widget",
-        "create_custom_list_field_widget"
+        "frontend.custom_pages",
+        "add_full_custom_ui"
       ],
       "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
       "collection_name": "developer-docs",
@@ -1396,8 +1390,8 @@
     }
   },
   "developer-docs/extending/frontend-customization/custom-views.md": {
-    "hash": "5aecca33c7226d0009303058d9cde013cfd3b19d59a7122e44a2656d03fe3bb6",
-    "document_id": "e5e75b9d-a4fa-4e9c-92ce-caebcca700b2",
+    "hash": "c8e1000d46f9c0aa8d26fc48445c77c0eaab19b4a2dcdeaacdda2cdbdf08963c",
+    "document_id": "1dfd2fb2-0b69-46a7-a31e-fa0d00f30449",
     "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
     "metadata": {
       "source": "docusaurus",
@@ -1415,8 +1409,8 @@
         "custom components"
       ],
       "solidx_concerns": [
+        "frontend.custom_pages",
         "add_full_custom_ui",
-        "add_custom_menu_action_combo",
         "create_custom_widget"
       ],
       "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
@@ -1425,8 +1419,8 @@
     }
   },
   "developer-docs/extending/frontend-customization/form-view-buttons.md": {
-    "hash": "ef16ee86365bb2db7502483f04622b702edc3b7efe5063cabb8f39b582224e0a",
-    "document_id": "f4a190d2-4298-4c7b-a71e-4dd2d4ff1768",
+    "hash": "951afc08e5996e9c7ffb4f574fdaab60e8ba130c21ccc62253a489a9566aa2b3",
+    "document_id": "79eacbe9-1c59-42d1-b547-8ec3b23d2167",
     "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
     "metadata": {
       "source": "docusaurus",
@@ -1438,6 +1432,7 @@
       "description": "Learn how to customize form view buttons in your frontend application.",
       "summary": "Explains customizing SolidX form view buttons to enhance user interaction. Covers adding custom buttons, modifying existing buttons, and handling button actions using `registerExtensionComponent`. Includes a working example `PreviewPortal` button that redirects to an external hosted page.",
       "solidx_concerns": [
+        "frontend.extensions.form_buttons",
         "add_form_button"
       ],
       "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
@@ -1446,8 +1441,8 @@
     }
   },
   "developer-docs/extending/frontend-customization/form-view-field-widgets.md": {
-    "hash": "b828c616a664c3d4ec5a978214e991571b820c5925a90a902487fdc37b7e2032",
-    "document_id": "4f706f13-a5fe-4a85-904b-cd7c9642ec77",
+    "hash": "c95ae2e069f3e8acace337b5513661ca30c66ef0f4e4f0d644b146bcc300018c",
+    "document_id": "50c87aa3-081a-4ec0-978a-29d335323382",
     "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
     "metadata": {
       "source": "docusaurus",
@@ -1459,6 +1454,7 @@
       "description": "Learn how to create form view field widgets for the frontend of your application.",
       "summary": "Details creating custom form view field widgets in SolidX for customizing field display in view and edit modes. Covers using built-in widgets (e.g., `integerSlider`) or creating custom ones, implementing components with `SolidFormFieldWidgetProps` (formik, fieldContext, metadata), registering widgets via `registerExtensionComponent`, configuring `editWidget`/`viewWidget` in form layout JSON, handling field validation, labels, and examples like slider widgets with tooltips and color-coded values.",
       "solidx_concerns": [
+        "frontend.extensions.custom_widgets",
         "create_custom_form_field_widget"
       ],
       "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
@@ -1467,8 +1463,8 @@
     }
   },
   "developer-docs/extending/frontend-customization/list-view-buttons.md": {
-    "hash": "99563804ec6931433718192a614bcb1f1f638c4aa54c85202a940ab4e2678b9d",
-    "document_id": "e7da7ad9-b126-484a-b214-b2db356288a7",
+    "hash": "da8a4748906801eb9f1b80f438467be362ba57c5397e851406e6f15fc50838a4",
+    "document_id": "7bddc675-4223-4f67-9a75-800cdbf23cf0",
     "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
     "metadata": {
       "source": "docusaurus",
@@ -1480,6 +1476,8 @@
       "description": "Learn how to customize list view buttons in your frontend application.",
       "summary": "Explains how to add and customize list view buttons in SolidX. Covers creating header buttons for list-wide actions and row buttons for record-specific actions, including configuration examples and prop details.",
       "solidx_concerns": [
+        "frontend.extensions.list_buttons",
+        "frontend.extensions.row_buttons",
         "add_list_header_button_with",
         "add_list_row_button_with"
       ],
@@ -1489,8 +1487,8 @@
     }
   },
   "developer-docs/extending/frontend-customization/list-view-field-widgets.md": {
-    "hash": "fced231fb5865256f6628cf7a30451a63b2bd5ee6e8383323b8196d0a736bc61",
-    "document_id": "b080e041-517a-4367-9cf2-2613f6359fe6",
+    "hash": "002bba865581590268ec6a7b9252d582a9c73491b13a785c0ecdf8fbb611cf4c",
+    "document_id": "47624da4-37ba-4815-8e66-53512254d2bb",
     "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
     "metadata": {
       "source": "docusaurus",
@@ -1502,9 +1500,8 @@
       "description": "Learn how to create list column widgets for the frontend of your application.",
       "summary": "Guide to customizing field display in SolidX list views using built-in or custom widgets. Covers configuring `viewWidget` in list layout JSON (e.g., `SolidShortTextAvatarWidget` for name/avatar display), creating custom widgets implementing `SolidListFieldWidgetProps` (rowData, solidListViewMetaData, fieldMetadata, column), registering with `registerExtensionComponent`, and examples like `ScoreWidget` with color-coded labels and conditional styling based on field values.",
       "solidx_concerns": [
-        "create_custom_list_field_widget",
-        "add_list_header_button_with",
-        "add_list_row_button_with"
+        "frontend.extensions.custom_widgets",
+        "create_custom_list_field_widget"
       ],
       "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
       "collection_name": "developer-docs",
@@ -1544,8 +1541,8 @@
     }
   },
   "developer-docs/extending/frontend-customization/custom-widgets.md": {
-    "hash": "e6e163dc698f33df28c2605803691769f0b72a1e12709609db4d05182a910004",
-    "document_id": "85a1d561-84e9-46b1-9bd6-b710fce47c5e",
+    "hash": "81951ef11954f8defd9e7b5cc6ba8f966161e6617981bf1795bcfb7816c4d0af",
+    "document_id": "e99df4a3-df60-49d7-b978-8c26bceed4d8",
     "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
     "metadata": {
       "source": "docusaurus",
@@ -1557,8 +1554,8 @@
       "description": "Learn how to create custom widgets for the frontend of your application.",
       "summary": "Guide to creating custom widgets in SolidX using the built-in `CustomHtml` widget for extending UI functionality without field associations. Covers configuring widgets in form layouts with dynamic HTML rendering, using placeholders for field values and custom variables (e.g., `{{ctxtTitleAlphpabetCount}}`), receiving `SolidFormWidgetProps`, and setting custom variables via form event handlers for enhanced UI interactions.",
       "solidx_concerns": [
-        "create_custom_widget",
-        "add_form_button"
+        "frontend.extensions.custom_widgets",
+        "create_custom_widget"
       ],
       "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
       "collection_name": "developer-docs",
@@ -1566,8 +1563,8 @@
     }
   },
   "developer-docs/extending/frontend-customization/kanban-field-widgets.md": {
-    "hash": "c0bc1b5ac99508efb043b10226814dd0bb65f50544c17a65678d5bd8597edbd0",
-    "document_id": "15092df9-4e6c-47d1-8472-316eb9d14d07",
+    "hash": "875c62183ac5da47d8123252b46e0aaec4ba2e187bd76d4d4dc5020ed4f6f09e",
+    "document_id": "3935a53a-cbc7-4f95-bf83-4bc0e33c9808",
     "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
     "metadata": {
       "source": "docusaurus",
@@ -1578,15 +1575,18 @@
       "title": "Kanban Field Widgets",
       "description": "Learn how to create form view field widgets for the frontend of your application.",
       "summary": "Overview of creating custom widgets for Kanban views in SolidX, similar to custom widget implementation patterns for other view types.",
-      "solidx_concerns": [],
+      "solidx_concerns": [
+        "frontend.extensions.custom_widgets",
+        "create_custom_widget"
+      ],
       "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
       "collection_name": "developer-docs",
       "chunk_count": 1
     }
   },
   "developer-docs/extending/frontend-customization/form-view-events.md": {
-    "hash": "bcc13c3b64ea3af44e2e1e3705c6387c2d5027d2a8ad67ea025f6004308d776c",
-    "document_id": "3f506cd2-936c-4e99-bc3d-69496301cf18",
+    "hash": "048f2c69157859545030664f870a1fb426da9772caa1196a3ebe6135e2b0d3b3",
+    "document_id": "895eaab2-2138-48be-bb84-7930f3de6afc",
     "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
     "metadata": {
       "source": "docusaurus",
@@ -1596,20 +1596,21 @@
       "doc_title": "developer-docs/extending/frontend-customization/form-view-events.md",
       "title": "Form View Events",
       "description": "Learn how to create event listeners for form view events in your frontend application.",
-      "summary": "Explains creating event listeners for SolidX form view events to extend frontend functionality. Covers supported events (onFormLayoutLoad, onFormDataLoad, onFieldChange, onFieldBlur, onCustomWidgetRender), registering handlers using `registerExtensionFunction`, accessing event data (type, modifiedField, modifiedFieldValue, formData, viewMetadata, fieldsMetadata), modifying UI layout dynamically with `SolidViewLayoutManager`, returning changes (layoutChanged, dataChanged, newFormData, newLayout), and examples like character count tracking.",
+      "summary": "Explains creating event listeners for SolidX form view events to extend frontend functionality. Covers supported events (`onFormLoad`, `onFieldChange`, `onFieldBlur`), registering handlers using `registerExtensionFunction`, accessing event data, and returning layout/data updates. Includes a dedicated deprecated section for `onFormLayoutLoad` and `onFormDataLoad`.",
       "solidx_concerns": [
+        "frontend.extensions.form_event_listeners",
         "add_change_handler_function",
         "onlayoutload_handler_function",
         "ondataload_handler_function"
       ],
       "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
       "collection_name": "developer-docs",
-      "chunk_count": 11
+      "chunk_count": 13
     }
   },
   "developer-docs/extending/backend-customization/background-jobs.md": {
-    "hash": "4363a9df272f96db3c9871c514d72a21a6276e1d01916867191e26ff51005497",
-    "document_id": "a65cf7a3-9e88-4e74-8629-4fa90769eb23",
+    "hash": "f2589bf735816a64d1c5c6e53da8ad4994c4e60e4bc44995244ad8358370acc5",
+    "document_id": "8dd3fd4a-ebc4-417f-b2bb-c0050f1eed88",
     "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
     "metadata": {
       "source": "docusaurus",
@@ -1629,10 +1630,11 @@
         "database broker"
       ],
       "solidx_concerns": [
+        "backend.background_jobs",
         "new_background_job",
-        "add_new_sms_provider",
-        "add_new_email_provider",
-        "add_new_whatsapp_provider",
+        "new_sms_provider",
+        "new_email_provider",
+        "new_whatsapp_provider",
         "add_custom_service_method",
         "add_scheduled_job"
       ],
@@ -1642,8 +1644,8 @@
     }
   },
   "developer-docs/extending/backend-customization/computation-providers.md": {
-    "hash": "0d8124aa65564a19da92514995555114ee5c44c8c8e079966d4afb87a648e73b",
-    "document_id": "f538a924-164e-4f73-b97e-ea660fb319cd",
+    "hash": "53d134ad89e039667b26c63c81a736656efce70bb01056e98bb909fa12b94a03",
+    "document_id": "c656d473-8fed-4322-90d9-d74ee58c86bb",
     "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
     "metadata": {
       "source": "docusaurus",
@@ -1660,6 +1662,7 @@
         "customization"
       ],
       "solidx_concerns": [
+        "backend.custom_computed_fields",
         "add_computed_field_provider",
         "create_model_with_fields",
         "add_field_to_a_model"
@@ -1696,8 +1699,8 @@
     }
   },
   "developer-docs/extending/backend-customization/typeorm-subscribers.md": {
-    "hash": "0eaa5bb907cc66087a66203573b344bbfe733ea56096689196e7d68712245ace",
-    "document_id": "1398e028-f71b-4256-946a-5bdff178b344",
+    "hash": "2440cb93615c323e63d3126044dba24680a6186ae43d3307245877c08e2fc947",
+    "document_id": "fb7f651e-b68b-478b-aca2-05b46fa80074",
     "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
     "metadata": {
       "source": "docusaurus",
@@ -1714,7 +1717,7 @@
         "customization"
       ],
       "solidx_concerns": [
-        "typeorm_subscribers"
+        "typeorm_subscriber"
       ],
       "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
       "collection_name": "developer-docs",
@@ -1722,8 +1725,8 @@
     }
   },
   "developer-docs/extending/backend-customization/scheduled-jobs.md": {
-    "hash": "28c511006abda00c17a83565a0c3fb7001fe12267dda1a014bda7dba7012fa5f",
-    "document_id": "442f876a-ee55-4602-9680-1473919c8c8f",
+    "hash": "165ee478773f031f327f16de31255e5d1f163a790a99d31f01a8a02c9d07b365",
+    "document_id": "39282b16-8007-4330-b9d8-7ab79a469db7",
     "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
     "metadata": {
       "source": "docusaurus",
@@ -1740,6 +1743,7 @@
         "customization"
       ],
       "solidx_concerns": [
+        "backend.scheduled_jobs",
         "add_scheduled_job"
       ],
       "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
@@ -1748,8 +1752,8 @@
     }
   },
   "developer-docs/extending/backend-customization/sms-providers.md": {
-    "hash": "51ea93b06128ff5a032669d24f9b07229097574e748747a1a6baa5e69d38d634",
-    "document_id": "e93217da-937b-4107-9a1c-0542e56dbc47",
+    "hash": "3b38ce76ceec412f627db2fb320152d1d3c3150235b1fc78f4baac9cd967d346",
+    "document_id": "e42d12fb-bf3a-4bc2-ac90-fb6ae167fa77",
     "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
     "metadata": {
       "source": "docusaurus",
@@ -1759,7 +1763,7 @@
       "doc_title": "developer-docs/extending/backend-customization/sms-providers.md",
       "title": "SMS Providers",
       "description": "Learn how to create and configure custom SMS providers in SolidX.",
-      "summary": "Introduction to creating and configuring custom SMS providers in SolidX for sending text messages via third-party services. Implementation details pending future documentation updates.",
+      "summary": "Overview of the built-in SMS providers shipped with SolidX (Twilio, Msg91 transactional, Msg91 OTP) and how to implement a custom SMS provider using the ISMS interface.",
       "keywords": [
         "backend",
         "sms providers",
@@ -1770,7 +1774,7 @@
       ],
       "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
       "collection_name": "developer-docs",
-      "chunk_count": 4
+      "chunk_count": 5
     }
   },
   "developer-docs/extending/backend-customization/extending-users.md": {
@@ -1800,8 +1804,8 @@
     }
   },
   "developer-docs/extending/backend-customization/dynamic-selection-providers.md": {
-    "hash": "a429729e692a13ee71684ae8abc64613c90e1692f202a038caebe27d23a80362",
-    "document_id": "07eb1f1e-54ce-4108-8b6c-f61eb13c0180",
+    "hash": "d192848687add17ec958edc256b567101f2bc16ca3c529a7d20d96e1e9c711eb",
+    "document_id": "23063a28-c393-43b8-a86f-990bf8e9ea3d",
     "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
     "metadata": {
       "source": "docusaurus",
@@ -1819,6 +1823,7 @@
         "customization"
       ],
       "solidx_concerns": [
+        "backend.custom_dynamic_selection_providers",
         "dynamic_selection_provider"
       ],
       "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
@@ -1827,8 +1832,8 @@
     }
   },
   "developer-docs/extending/backend-customization/crud-service.md": {
-    "hash": "03f4975caeb7ce967309da9d9547e788376259e80d804bd8831f9b120c1581af",
-    "document_id": "e6279203-28c8-4eda-bd96-173c752a859e",
+    "hash": "fe25f57cfc06213623f46fc3666e0387c157058323d2c02182724db46296fbae",
+    "document_id": "a5104800-be95-4716-a0cf-1f14775ddbcc",
     "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
     "metadata": {
       "source": "docusaurus",
@@ -1846,9 +1851,9 @@
         "customization"
       ],
       "solidx_concerns": [
+        "backend.service_changes",
         "using_crud_service_method",
-        "add_custom_service_method",
-        "add_controller_endpoint"
+        "add_custom_service_method"
       ],
       "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
       "collection_name": "developer-docs",
@@ -1880,8 +1885,8 @@
     }
   },
   "developer-docs/extending/backend-customization/extending-repositories.md": {
-    "hash": "e157a3929176c7357d9644aad758a3c6dfe74a2e09b2e57a25d66e13834c1a43",
-    "document_id": "3f5eae66-c0e4-413b-843d-e0033a237b7f",
+    "hash": "88fcefcfa22e3dbfa42c7a204d05184eae04895a62202d6aeabbe228895928b6",
+    "document_id": "47800a93-7ad6-4d8e-b13c-8c1e098fb65f",
     "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
     "metadata": {
       "source": "docusaurus",
@@ -1898,9 +1903,8 @@
         "customization"
       ],
       "solidx_concerns": [
-        "extending_repository",
-        "add_custom_service_method",
-        "add_controller_endpoint"
+        "backend.repository_changes",
+        "extending_repository"
       ],
       "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
       "collection_name": "developer-docs",
@@ -1908,8 +1912,8 @@
     }
   },
   "developer-docs/extending/backend-customization/extending-services.md": {
-    "hash": "5db43262c51a160682f57ac39524bedc707b2f38257ae6c1f531e912611a71de",
-    "document_id": "339099e5-a7ad-4550-bef6-18820e66d4f4",
+    "hash": "11f520418d786a5ec82c4f410f89f175d60add8dc7f42bc03004d0e0c4590bc6",
+    "document_id": "cdd2f2f8-f5c3-41be-855c-ebc85a87d0da",
     "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
     "metadata": {
       "source": "docusaurus",
@@ -1926,9 +1930,9 @@
         "customization"
       ],
       "solidx_concerns": [
+        "backend.service_changes",
         "add_custom_service_method",
-        "using_crud_service_method",
-        "add_controller_endpoint"
+        "using_crud_service_method"
       ],
       "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
       "collection_name": "developer-docs",
@@ -1936,8 +1940,8 @@
     }
   },
   "developer-docs/extending/backend-customization/extending-controllers.md": {
-    "hash": "c8bf765e506002b8d093afe08d1f00c386398ccd376359550ba30f70e154d488",
-    "document_id": "352aad99-bdfb-489d-bf27-e7fbdf560956",
+    "hash": "12d63205c0b35fdd80ea105566a0b8bc552aa84642da0452627b20a1f5387602",
+    "document_id": "ed14ea93-aeb1-4503-8860-1a7b20701658",
     "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
     "metadata": {
       "source": "docusaurus",
@@ -1954,6 +1958,7 @@
         "customization"
       ],
       "solidx_concerns": [
+        "backend.controller_changes",
         "add_controller_endpoint"
       ],
       "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
@@ -2077,8 +2082,8 @@
     }
   },
   "developer-docs/extending/frontend-customization/solid-entity-api.md": {
-    "hash": "5935187e4067e45cd7b0aff04284e4169eeeb8b96318a54f5b557850f825a2c7",
-    "document_id": "a3fe757f-7752-4cc3-80e4-4796a1d2cd7a",
+    "hash": "13a79ac5b3e2de0198f2eeed269781091e57fa9243a5bbc8443349544508b400",
+    "document_id": "2d2c043c-edbc-4a4f-b924-d821cc0d1640",
     "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
     "metadata": {
       "source": "docusaurus",
@@ -2090,14 +2095,8 @@
       "description": "Learn how to use the Solid Entity API to interact with entities in your application.",
       "summary": "Guide to using the Solid Entity API for managing entities in SolidX applications. Covers importing and using the `SolidEntityApi` class, performing CRUD operations (create, read, update, delete), querying entities with filters, and handling relationships between entities. Includes code examples for common operations and best practices for effective entity management.",
       "solidx_concerns": [
-        "add_full_custom_ui",
-        "onlayoutload_handler_function",
-        "ondataload_handler_function",
-        "add_form_button",
-        "add_list_header_button_with",
-        "add_list_row_button_with",
-        "create_custom_form_field_widget",
-        "create_custom_list_field_widget"
+        "frontend.custom_pages",
+        "add_full_custom_ui"
       ],
       "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
       "collection_name": "developer-docs",
@@ -2153,8 +2152,8 @@
     }
   },
   "tutorial/school-fees-portal/solidx_setup.md": {
-    "hash": "8d14ab89fdc97ff8a68deddf051f4b8a7e388612af1a6dec441eac0775daf427",
-    "document_id": "5ba1483f-c165-4559-b108-d173ba730b47",
+    "hash": "58b153507632336964f4b5255d394e7daa8d1b2f861aa7950d525de9bbbbfad0",
+    "document_id": "1ed7c046-86ba-42ec-a550-4598eb0700dd",
     "collection_id": "cd59267d-67e0-4897-91a6-1a338f5e83bf",
     "metadata": {
       "source": "docusaurus",
@@ -2174,8 +2173,8 @@
     }
   },
   "tutorial/school-fees-portal/fees_portal_product_overview.md": {
-    "hash": "9c155e304a0500abc9df0ebec9af2da7e89c3dc6ab18cc48f188221ab642d948",
-    "document_id": "f5840932-dacb-4551-842c-66ced39dc403",
+    "hash": "3e185e77c9cd4db6cb9fbe2aae88c7854cf59aa755fb81e7da7dc355f8fb0b92",
+    "document_id": "8510fcd7-e292-4fc2-9f93-4811ce90df85",
     "collection_id": "cd59267d-67e0-4897-91a6-1a338f5e83bf",
     "metadata": {
       "source": "docusaurus",
@@ -2197,7 +2196,7 @@
       ],
       "collection_id": "cd59267d-67e0-4897-91a6-1a338f5e83bf",
       "collection_name": "tutorial",
-      "chunk_count": 11
+      "chunk_count": 8
     }
   },
   "tutorial/school-fees-portal/end-to-end-implementation/making_payment.md": {
@@ -2283,8 +2282,8 @@
     }
   },
   "tutorial/school-fees-portal/end-to-end-implementation/index.md": {
-    "hash": "26f86f962b9be66995db49d86d0276711f4f16c9a5091a89dfe769ea087d77ff",
-    "document_id": "8dd93857-c96c-456b-aa7c-0d8ede26f1c6",
+    "hash": "e393edd3ecd5686b5bed45b16a178ac475379085db9de3c79b5305df6ed18431",
+    "document_id": "7b92933a-8dbe-419a-87a6-9c953c32826c",
     "collection_id": "cd59267d-67e0-4897-91a6-1a338f5e83bf",
     "metadata": {
       "source": "docusaurus",
@@ -2442,8 +2441,8 @@
     }
   },
   "developer-docs/extending/backend-customization/custom-seeders.md": {
-    "hash": "4e2340e4b7d7e0f918e0ec3e1a26fad07dd44bee5287373e76dec18be1b59094",
-    "document_id": "70e4ecfc-3178-41b8-a1a7-6fcf4543f672",
+    "hash": "1963656d2eea70bd931cc64fe8087a278db21c0ef6c6ffb4a74f78714361cd77",
+    "document_id": "879c4eff-a6ab-4df9-ab7e-7bd5b22061e7",
     "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
     "metadata": {
       "source": "docusaurus",
@@ -2461,17 +2460,15 @@
         "database",
         "seed data"
       ],
-      "solidx_concerns": [
-        "custom_seeders"
-      ],
+      "solidx_concerns": [],
       "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
       "collection_name": "developer-docs",
       "chunk_count": 5
     }
   },
   "developer-docs/extending/reference/built-in-selection-providers.md": {
-    "hash": "cf5e4135791cf6ae3c04583d205682e6a70b2a700ccfcc8367aa5908c0e4e057",
-    "document_id": "22a03074-9498-4b4d-aa4e-595b1fb4604f",
+    "hash": "41fcc11e08457d7cbd8c8072908ce45cd5d4c7d4e86bf4145c367d23679a2af2",
+    "document_id": "af720aff-9dbc-4509-984a-52ba6d93697c",
     "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
     "metadata": {
       "source": "docusaurus",
@@ -2491,6 +2488,7 @@
         "pseudo foreign key"
       ],
       "solidx_concerns": [
+        "backend.custom_dynamic_selection_providers",
         "dynamic_selection_provider"
       ],
       "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
@@ -2514,6 +2512,97 @@
       "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
       "collection_name": "developer-docs",
       "chunk_count": 1
+    }
+  },
+  "developer-docs/extending/frontend-customization/list-view-events.md": {
+    "hash": "e8cf7e32ec2556f1663914be3bc9a3b9f2f8b5f0e696c0cf2ea441fdb8fa71c1",
+    "document_id": "6974fd44-e548-4b13-afdd-509c8bcbbcd6",
+    "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
+    "metadata": {
+      "source": "docusaurus",
+      "project": "solidx-docs",
+      "section": "developer-docs",
+      "path": "developer-docs/extending/frontend-customization/list-view-events.md",
+      "doc_title": "developer-docs/extending/frontend-customization/list-view-events.md",
+      "title": "List View Events",
+      "description": "Learn how to create event listeners for list view events in your frontend application.",
+      "summary": "Explains creating event listeners for SolidX list view events to extend frontend functionality. Covers supported events (`onBeforeListDataLoad`, `onListLoad`), registering handlers using `registerExtensionFunction`, event payload/response contracts, and updating filters, list data, or layout dynamically.",
+      "solidx_concerns": [
+        "frontend.extensions.list_event_listeners"
+      ],
+      "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
+      "collection_name": "developer-docs",
+      "chunk_count": 12
+    }
+  },
+  "developer-docs/extending/frontend-customization/bespoke-frontend-ui.md": {
+    "hash": "d07eb49330d8a5ad906d83266250471dd4b0b70004cfca7ac768872db24e9cac",
+    "document_id": "fec0234b-a955-4c8b-8611-bfa5fd261b03",
+    "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
+    "metadata": {
+      "source": "docusaurus",
+      "project": "solidx-docs",
+      "section": "developer-docs",
+      "path": "developer-docs/extending/frontend-customization/bespoke-frontend-ui.md",
+      "doc_title": "developer-docs/extending/frontend-customization/bespoke-frontend-ui.md",
+      "title": "Bespoke Frontend UI (Vite + React)",
+      "description": "Build fully custom React applications inside Solid using dedicated page layouts, route injection, and Solid HTTP helpers.",
+      "summary": "Comprehensive guide for creating 100% bespoke frontend experiences in SolidX using Vite + React. Covers folder conventions under `pages`, creating layout wrappers with isolated CSS, wiring routes via `AppRoutes.tsx` and `getSolidRoutes`, and building pages with `solid-http` helpers (`solidGet`, `solidPost`, etc.).",
+      "solidx_concerns": [
+        "frontend.custom_pages",
+        "add_full_custom_ui"
+      ],
+      "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
+      "collection_name": "developer-docs",
+      "chunk_count": 14
+    }
+  },
+  "developer-docs/extending/frontend-customization/list-view-api.md": {
+    "hash": "462c9d34e607d7abe9f8c2f19a122869c637022152522dc31c129e0293b6e9b4",
+    "document_id": "f2a8f6e6-14b0-44ec-9568-1f867ac5c41b",
+    "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
+    "metadata": {
+      "source": "docusaurus",
+      "project": "solidx-docs",
+      "section": "developer-docs",
+      "path": "developer-docs/extending/frontend-customization/list-view-api.md",
+      "doc_title": "developer-docs/extending/frontend-customization/list-view-api.md",
+      "title": "List View API",
+      "description": "Learn how to access and control SolidX list views programmatically from external components.",
+      "summary": "Documents how SolidX exposes list view handles through `listViewRegistry` for external usage. Covers `getListView`, `getRegisteredListViewIds`, list ID format, `SolidListViewHandle` methods (`refresh`, `clearFilters`, `applyFilter`, `setPagination`, `setSort`, `setShowArchived`, `getState`), and practical integration patterns.",
+      "solidx_concerns": [
+        "frontend.extensions.list_buttons",
+        "frontend.extensions.row_buttons",
+        "frontend.custom_pages",
+        "add_list_header_button_with",
+        "add_list_row_button_with",
+        "create_custom_widget"
+      ],
+      "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
+      "collection_name": "developer-docs",
+      "chunk_count": 9
+    }
+  },
+  "developer-docs/extending/frontend-customization/solid-http-api.md": {
+    "hash": "572f4195c268ad3b4757b132ea9732acaddb5aa1660bf5c8603f771d6abd75b2",
+    "document_id": "a4991296-57f3-47e3-911a-3ab0b8873661",
+    "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
+    "metadata": {
+      "source": "docusaurus",
+      "project": "solidx-docs",
+      "section": "developer-docs",
+      "path": "developer-docs/extending/frontend-customization/solid-http-api.md",
+      "doc_title": "developer-docs/extending/frontend-customization/solid-http-api.md",
+      "title": "Solid HTTP API",
+      "description": "Learn how to use the Solid HTTP API helpers to interact with backend APIs in your application.",
+      "summary": "Guide to using the `solidAxios` HTTP helpers in SolidX applications. Covers importing and using `solidGet`, `solidPost`, `solidPut`, `solidPatch`, and `solidDelete`, building filter query strings, handling loading and errors, and implementing multi-step API flows in custom frontend components.",
+      "solidx_concerns": [
+        "frontend.custom_pages",
+        "add_full_custom_ui"
+      ],
+      "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
+      "collection_name": "developer-docs",
+      "chunk_count": 10
     }
   }
 }
