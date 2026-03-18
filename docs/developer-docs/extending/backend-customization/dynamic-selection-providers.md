@@ -89,14 +89,14 @@ The most important method is `values()`, which fetches and returns the available
 
 ```ts
 import { Injectable, Logger } from "@nestjs/common";
-import { HttpService } from "@solidxai/core";
+import { HttpService } from "@nestjs/axios";
 import { lastValueFrom } from "rxjs";
 import { SelectionProvider } from "@solidxai/core";
 import {
   ISelectionProvider,
   ISelectionProviderContext,
   ISelectionProviderValues,
-} from "../interfaces";
+} from "@solidxai/core";
 
 interface StockApiSelectionProviderContext extends ISelectionProviderContext {
   labelField: string; // Field to use as label
