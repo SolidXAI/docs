@@ -175,7 +175,7 @@ Specifically, it:
 
 4. **Other Control Plane CLI Commands**
    - **npx @solidxai/solidctl@latest seed** — Seed the database with canonical models, settings, and system users from configuration files.
-   - **npx @solidxai/solidctl@latest build** — Builds the backend and updates the CLI to point to the latest codebase.
+   - **npx @solidxai/solidctl@latest build** — Builds both the frontend and backend, and updates the CLI to point to the latest codebase.
    - **npx @solidxai/solidctl@latest upgrade** — Upgrade Solid dependencies belonging to the `@solidxai` organization in the `solid-api` and `solid-ui` projects to their latest published versions.
 
 :::tip
@@ -305,7 +305,7 @@ CREATE DATABASE solidx_app_db;
 ```
 :::
 
-The `build` command compiles the backend and ensures the CLI points to the latest codebase. The `seed` command then reads predefined JSON files containing the necessary metadata for a SolidX application and populates the database accordingly.
+The `build` command compiles both the frontend and backend, and ensures the CLI points to the latest codebase. The `seed` command then reads predefined JSON files containing the necessary metadata for a SolidX application and populates the database accordingly.
 
 The seed process also creates a `super admin` user, if one does not already exist.
 
@@ -342,7 +342,7 @@ The super admin account is seeded with the following fixed credentials:
 
 | Field    | Value             |
 |----------|-------------------|
-| Username | `admin`           |
+| Username | `sa`           |
 | Password | `Admin@3214$`       |
 
 Use these credentials to access the admin panel with full permissions.

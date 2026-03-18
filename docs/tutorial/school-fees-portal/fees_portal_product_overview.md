@@ -12,22 +12,14 @@ keywords: [school fees, payment platform, institute management, online payments,
 
 The School Fees & Payments Platform is a centralized, secure, and configurable solution designed to help educational institutes digitize their fee collection and payment workflows. The platform provides dedicated portals for both administrative users and students, enabling efficient fee management, online payments, and complete auditability.
 
-## Business Value
+## Platform Overview
 
-The platform delivers key business benefits for educational institutes:
-
-- **Digital Transformation** - Move from manual, paper-based fee collection to a fully digital workflow
-- **Accuracy & Efficiency** - Reduce manual errors in payment tracking and reconciliation
-- **Self-Service Experience** - Enable students and parents to view dues and make payments online
-- **Security & Compliance** - Provide role-based access, data isolation, and complete audit trails
-- **Customization** - Allow institutes to configure and brand their student-facing portal
-
-## Platform Architecture
+This is a **multi-tenant platform** — a single deployment serves multiple educational institutes, all sharing one database. Data segregation is enforced at the platform level, ensuring each institute can only access and manage its own data.
 
 The solution consists of two main portals:
 
 ### Admin Portal
-A secure management interface for platform and institute administrators to:
+A secure management interface for super admins and institute administrators to:
 - Onboard and manage institutes
 - Configure fee structures and types
 - Invite and manage institute administrative users
@@ -45,7 +37,7 @@ A user-friendly interface where students and parents can:
 
 ## User Roles & Responsibilities
 
-### Platform Admin
+### Super Admin
 - Manages multiple institutes on the platform
 - Controls global configuration and settings
 - Oversees institute onboarding and activation
@@ -109,23 +101,24 @@ A user-friendly interface where students and parents can:
 
 ## Data Model
 
-The platform's data model consists of interconnected entities:
+The platform is built around these core domain entities:
 
-**Core Entities:**
-- **Institute** - Educational institution details, settings, and branding
-- **Institute User** - Administrative users associated with institutes
-- **Fee Type** - Configurable fee structures with payment rules
-- **Student** - Student records with contact information
-- **Payment Collection** - Bulk collection events with due dates
-- **Payment Collection Item** - Individual student fee obligations
-- **Payment Collection Item Detail** - Payment details and partial payment tracking
-- **Payment** - Actual payment transactions with gateway details
+| Entity | What it represents |
+|--------|-------------------|
+| **Institute** | Your educational institution (school, college, university) that will collect fees through the portal |
+| **Fee Type** | Different categories of fees your institution collects (e.g., Tuition Fees, Bus Fees, Hostel Fees, Library Fees, Sports Fees) |
+| **Institute User** | Administrative staff who will manage the fees portal for your institution |
+| **Student** | Individual students enrolled at your institution whose parents/guardians will receive payment collection requests |
+| **Payment Collection** | A batch of fee collection requests sent to multiple students at once (e.g., "Q1 2024 Fees", "Annual Sports Fees 2024") |
+| **Payment Collection Item** | An individual payment request for one student for one fee type within a collection (e.g., "Rahul Sharma needs to pay ₹10,000 for Tuition Fees") |
+| **Payment Collection Item Detail** | Tracks each installment or payment attempt recorded against a payment collection item |
+| **Payment** | A single payment transaction initiated by a student through the payment gateway |
 
 **Key Relationships:**
-- One Institute → Many Institute Users, Fee Types, Students, Payment Collections
-- One Payment Collection → Many Payment Collection Items (per student per fee type)
-- One Payment Collection Item → Many Payment Collection Item Details (for partial payments)
-- One Payment → Many Payment Collection Item Details (consolidated payments)
+- One Institute has many Institute Users, Fee Types, Students, and Payment Collections
+- One Payment Collection has many Payment Collection Items — one per student per fee type
+- One Payment Collection Item has many Payment Collection Item Details — one per installment or partial payment
+- One Payment can settle multiple Payment Collection Item Details in a single transaction
 
 ## Security & Access Control
 
@@ -157,24 +150,13 @@ The platform implements comprehensive security measures:
 - Payment gateway APIs for transaction processing
 - Excel file processing for bulk uploads
 
-## Platform Assumptions
+## What You'll Build with SolidX
 
-The platform operates under these key assumptions:
+This tutorial demonstrates the following SolidX platform capabilities as you build the Fees Portal:
 
-- Institutes maintain accurate and up-to-date student records
-- Students and parents have access to email for communication
-- Online payment gateways are available and properly configured
-- Internet connectivity is available for online operations
-
-## Dependencies
-
-The platform requires integration with:
-
-- **Email Service** - SMTP server for sending notifications and OTPs
-- **Payment Gateway** - Third-party payment processor for online transactions
-
-## Summary
-
-The School Fees & Payments Platform provides a complete solution for educational institutes to modernize their fee collection processes.
-
-By combining secure administrative tools with a user-friendly student portal, the platform reduces manual effort, improves accuracy, and enhances the payment experience for all stakeholders while maintaining strict security and compliance standards.
+- **Data Model Configuration** — Define entities, fields, and relationships using the SolidX App Builder without writing code
+- **Role & Permission Setup** — Configure roles (Super Admin, Institute Admin, Student) and control what each role can see and do
+- **List & Form View Customization** — Tailor how records are displayed and edited using layout configuration
+- **Workflows & Actions** — Set up business logic such as institute activation and payment status transitions
+- **Bulk Upload** — Use Excel-based bulk upload to create payment collection requests for multiple students at once
+- **Student Portal** — Configure a public-facing portal where students authenticate via email OTP and make online payments
