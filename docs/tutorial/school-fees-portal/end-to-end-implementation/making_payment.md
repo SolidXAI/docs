@@ -80,9 +80,9 @@ We will be creating a separate frontend application for the student portal that 
 - Process redirect callbacks from Stripe payment gateway
 
 
-## Data Models Involved
+## Data Models
 
-The following models from the [Initiate Payment](./initiate_payment.md#data-models-involved) documentation are also used in this workflow:
+The following models from the [Initiate Payment](./initiate_payment.md#data-models) documentation are also used in this workflow:
 
 - **[Student Model](./initiate_payment.md#1-student-model)** — includes authentication fields (OTP, Token) used for portal login
 - **[Payment Collection Item Model](./initiate_payment.md#3-payment-collection-item-model)** — the fee items students view and pay in the portal
@@ -90,32 +90,44 @@ The following models from the [Initiate Payment](./initiate_payment.md#data-mode
 
 ### Payment Model
 
-**What it represents:** A single payment transaction initiated by a student through the payment gateway.
+A single payment transaction initiated by a student through the payment gateway.
 
-#### Payment Information
+#### Model Configuration
 
-| Field | Required? | Description | Example |
-|-------|-----------|-------------|---------|
-| **Amount** | Yes | Total amount in this payment | 50000.00 |
-| **Payment Status** | Auto-managed | Current status | "Pending", "Succeeded", "Failed" |
+| Setting | Value |
+|---------|-------|
+| **Singular Name** | payment |
+| **Plural Name** | payments |
+| **Display Name** | Payment |
+| **Description** | Model used to capture payment transactions initiated by students through the payment gateway |
+| **Data Source** | default |
+| **Data Source Type** | postgres |
+| **Table Name** | fees_portal_payment |
+| **Enable Audit Tracking** | Yes |
+| **Enable Soft Delete** | No |
+| **Draft Publish Workflow** | No |
+| **Internationalization** | No |
+| **Is Child Model** | No |
 
-#### Payment Gateway Details (Stripe)
+#### Fields
 
-| Field | Required? | Description | Example |
-|-------|-----------|-------------|---------|
-| **Stripe Session ID** | Auto-generated | Stripe Checkout Session identifier | "cs_test_a1B2c3D4..." |
-| **Stripe Payment Intent ID** | From gateway | Stripe Payment Intent identifier | "pi_3N..." |
-| **Stripe Invoice ID** | Auto-generated | Internal invoice identifier | "DPS Delhi_P1705329600000" |
-| **Stripe Payment Status** | From gateway | Gateway payment status | "complete", "expired" |
+<div style={{overflowX: 'auto'}}>
 
-#### Relationships
+| # | Name | Display Name | Type | Req? | Key Config |
+|---|------|-------------|------|------|------------|
+| 1 | `amount` | Amount | [Decimal](../../../admin-docs/module-builder/field-management#decimal) | Yes | Total amount for this payment transaction |
+| 2 | `paymentStatus` | Payment Status | [Short Text](../../../admin-docs/module-builder/field-management#short-text) | Yes | Default: `Pending`<br/>Values: `Pending`, `Succeeded`, `Failed`<br/>Audit |
+| 3 | `stripeSessionId` | Stripe Session ID | [Short Text](../../../admin-docs/module-builder/field-management#short-text) | No | Stripe Checkout Session identifier — populated after session creation |
+| 4 | `stripePaymentIntentId` | Stripe Payment Intent ID | [Short Text](../../../admin-docs/module-builder/field-management#short-text) | No | Stripe Payment Intent identifier — populated from callback |
+| 5 | `stripeInvoiceId` | Stripe Invoice ID | [Short Text](../../../admin-docs/module-builder/field-management#short-text) | No | Internal invoice ID, format: `{instituteName}_P{timestamp}` |
+| 6 | `stripePaymentStatus` | Stripe Payment Status | [Short Text](../../../admin-docs/module-builder/field-management#short-text) | No | Gateway payment status — `complete` or `expired` |
+| 7 | `student` | Student | [Relation](../../../admin-docs/module-builder/field-management#relation) | Yes | Many-to-One → `student` (fees-portal)<br/>Inverse field: `payments`<br/>Create Inverse: Yes<br/>Cascade<br/>Index<br/>Audit |
+| 8 | `institute` | Institute | [Relation](../../../admin-docs/module-builder/field-management#relation) | Yes | Many-to-One → `institute` (fees-portal)<br/>Create Inverse: No<br/>Cascade<br/>Index<br/>Audit |
+| 9 | `paymentCollectionItemDetails` | Payment Collection Item Details | [Relation](../../../admin-docs/module-builder/field-management#relation) | — | One-to-Many → `paymentCollectionItemDetail` (fees-portal)<br/>Inverse field: `payment`<br/>Create Inverse: Yes<br/>Cascade |
 
-| Relationship | Description |
-|--------------|-------------|
-| **Student** | Which student made this payment |
-| **Institute** | Which institute this payment is for |
-| **Payment Collection Item Details** | Fee items included in this payment |
+</div>
 
+> A Payment record is created with `paymentStatus: "Pending"` before the student is redirected to Stripe. Status is updated to `"Succeeded"` or `"Failed"` via the callback endpoints after Stripe confirms the outcome.
 
 ## Payment Gateway Integration (Stripe)
 

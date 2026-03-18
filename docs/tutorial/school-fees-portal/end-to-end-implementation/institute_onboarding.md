@@ -21,158 +21,22 @@ Below are the key features related to managing educational institutes within the
 
 You can refer to the [User Roles & Responsibilities](../fees_portal_product_overview/#user-roles--responsibilities) in the Product Overview for more details on these roles.
 
-### Data Models Involved
+### Data Models
 
-This section describes the data models you need to implement this feature.
+This section describes the three models you need to implement for institute onboarding, along with step-by-step instructions to create them in SolidX.
 
-#### 1. Institute Model
-
-**What it represents:** Your educational institution (school, college, university) that will collect fees through the portal.
-
-###### Basic Information
-
-| Field | Required? | Description | Example |
-|-------|-----------|-------------|---------|
-| **Institute Name** | Yes | The official name of your institution. Must be unique. | "Delhi Public School" |
-| **Logo** | Yes | Your institution's logo (image file, max 5MB) | Upload .jpg or .png file |
-| **Description** | No | Brief description of your institution | "Leading CBSE school in New Delhi" |
-| **Institute Address** | No | Complete postal address | "Delhi Public School, Mathura Road, New Delhi 110003" |
-
-###### Contact Details
-
-| Field | Required? | Description | Example |
-|-------|-----------|-------------|---------|
-| **Support Email** | Yes | Email where parents/students can reach for help | support@dpsschools.edu.in |
-| **Support Mobile** | Yes | 10-digit contact number for support | 9876543210 |
-| **Email Domain** | No | Your institution's email domain (for user validation) | dpsschools.edu.in |
-
-###### Payment Gateway Configuration
-
-These credentials will be provided by your payment gateway provider. You'll need them to process payments.
-
-| Field | Required? | Description |
-|-------|-----------|-------------|
-| **Cust Code** | Yes | Your unique merchant ID from the payment gateway |
-| **Access Key** | Yes | API access key for authentication |
-| **Access Secret** | Yes | Secret key for secure authentication (keep confidential) |
-| **Cust UserID** | Yes | Your customer user identifier |
-
-###### Website & Portal Settings
-
-| Field | Required? | Description | Example |
-|-------|-----------|-------------|---------|
-| **Hosted Page Prefix** | Yes | Unique subdomain prefix for the institute's payment portal. No two institutes can share the same prefix. | If set to `delhi`, the portal URL becomes `delhi.<your-configured-domain>` (e.g., `delhi.dpsschools.edu.in`). The base domain is configured via environment variables. |
-| **Status** | Auto-set | Portal status (starts as "InActive", activate when ready) | InActive → Active |
-
-###### Legal & Content (Optional)
-
-| Field | Required? | Description |
-|-------|-----------|-------------|
-| **GST Number** | No | Your institution's GST registration number |
-| **Terms and Conditions** | No | Legal terms users must accept during payment |
-| **FAQs** | No | Frequently asked questions to help users |
-| **Privacy Policy** | No | Your data privacy policy |
-| **Institute Brochure** | No | Downloadable brochure document (max 5MB) |
-| **Institute Intro Video** | No | Introduction video about your institution (max 5MB) |
-
-###### What you can do with this model:
-- Each institute can manage multiple fee types (tuition, bus fees, etc.)
-- Each institute can have multiple admin users
-- When you delete an institute, all its fee types and users are automatically removed
-
-#### 2. Fee Type Model
-
-**What it represents:** Different categories of fees your institution collects (e.g., Tuition Fees, Bus Fees, Hostel Fees, Library Fees, Sports Fees).
-
-###### Basic Information
-
-| Field | Required? | Description | Example |
-|-------|-----------|-------------|---------|
-| **Fee Type** | Yes | Name of this fee category | "Tuition Fees", "Bus Fees", "Lab Fees" |
-
-###### Payment Rules
-
-| Field | Required? | Description | When to Use |
-|-------|-----------|-------------|-------------|
-| **Part Payment Allowed** | Yes | Can students pay in installments? | • Select **Yes** for expensive fees (like tuition)<br/>• Select **No** for smaller fees that should be paid in full |
-
-###### Late Payment Policy
-
-Configure how you want to handle late payments:
-
-| Field | Required? | Description | Options & Examples |
-|-------|-----------|-------------|-------------------|
-| **Late Payment Fees Type** | No | How to calculate late fees | • **None**: No penalty<br/>• **Percent**: Percentage of amount (e.g., 5% of ₹10,000 = ₹500)<br/>• **Absolute**: Fixed amount (e.g., ₹100 flat fee) |
-| **Late Payment Fees** | No | The fee amount or percentage | • If Percent: Enter 5 (for 5%)<br/>• If Absolute: Enter 100 (for ₹100) |
-
-###### Important Notes:
-
-**Uniqueness Rule:** You cannot create duplicate fee types for the same institute. For example:
-- **Valid:** ABC School can have "Tuition Fees"
-- **Valid:** XYZ School can also have "Tuition Fees"
-- **Invalid:** ABC School cannot have two "Tuition Fees" entries
-
-**Auto-Generated Field:** The system automatically creates a unique identifier by combining the fee type and institute name (e.g., "tuition-fees-abc-school"). You don't need to enter this.
-
-###### Decision Guide:
-
-**When to allow partial payments:**
-- **Yes:** Large annual fees (tuition, annual bus fees)
-- **Yes:** Fees where families might need flexibility
-- **No:** Small one-time fees (exam fees, certificate fees)
-- **No:** Fees that must be paid upfront (admission fees)
-
-**Choosing a late fee strategy:**
-- **None**: Good for short-term collections where you follow up personally
-- **Percent**: Fair for larger amounts (late fee scales with amount owed)
-- **Absolute**: Simple and predictable for any amount
-
-#### 3. Institute User Model
-
-**What it represents:** Administrative staff who will manage the fees portal for your institution.
-
-###### Basic Information
-
-| Field | Required? | Description | Example |
-|-------|-----------|-------------|---------|
-| **Email** | Yes | Login email address (must be unique) | admin@dpsschools.edu.in |
-| **Password** | Yes | Secure login password | Set during user creation |
-| **First Name** | Yes | User's first name | Rajesh |
-| **Last Name** | Yes | User's last name | Sharma |
-
-###### Role & Access
-
-| Field | Required? | Description | Options |
-|-------|-----------|-------------|---------|
-| **User Type** | Yes | What role should this user have? | Institute Admin (readonly and defaulted) <br/> |
-
-###### Understanding User Roles:
-
-**Institute Admin** - Choose this for regular staff managing a single institution
-- **Can:** Create and manage fee types for their institution
-- **Can:** Create payment collection requests
-- **Can:** Manage student records
-- **Cannot:** Create new institutions
-- **Cannot:** Access other institutions' data
-- **Cannot:** Change system settings
-
-###### Who needs access?
-
-Typical users you'll create:
-- Principal or Admin Office staff → **Institute Admin**
-- Accounts department staff → **Institute Admin**
-- Fee collection desk staff → **Institute Admin**
+:::tip New to the Module Builder?
+If you're unfamiliar with how modules, models, and fields work in SolidX, review the [Module Builder](../../../admin-docs/module-builder/) documentation first — it covers [Module Management](../../../admin-docs/module-builder/module-management), [Model Management](../../../admin-docs/module-builder/model-management), and [Field Management](../../../admin-docs/module-builder/field-management).
+:::
 
 #### How These Models Connect
-
-Understanding the relationships between your data:
 
 ```
 Your Institution
   ├── Collects multiple types of fees
   │   └── Example: Tuition, Bus, Hostel, Lab, Sports fees
   │
-  └── Has multiple admin users managing it
+  └── Has multiple institute admin userss managing it
       └── Example: Principal, Accountant, Desk Staff
 
 Each Fee Type
@@ -184,20 +48,11 @@ Each Institute Admin User
       └── Cannot access other institutions' data
 ```
 
-### Building the Data Models
+---
 
-This section provides step-by-step instructions for creating the Institute, Institute User, and Fee Type models using SolidX. Follow these instructions to implement the data models discussed in the previous section.
+#### 1. Institute Model
 
-:::tip New to the Module Builder?
-If you're unfamiliar with how modules, models, and fields work in SolidX, we recommend reviewing the [Module Builder](../../../admin-docs/module-builder/) documentation first. It covers:
-- [Module Management](../../../admin-docs/module-builder/module-management) - Creating and configuring modules
-- [Model Management](../../../admin-docs/module-builder/model-management) - Creating models and understanding model settings
-- [Field Management](../../../admin-docs/module-builder/field-management) - Understanding field types and configuration options
-:::
-
-#### 1. Creating the Institute Model
-
-Navigate to the model creation interface in SolidX and configure as follows:
+Represents your educational institution — the top-level entity that owns fee types, payment configuration, and institute admin userss.
 
 ##### Model Configuration
 
@@ -216,250 +71,43 @@ Navigate to the model creation interface in SolidX and configure as follows:
 | **Internationalization** | ☐ No |
 | **Is Child Model** | ☐ No |
 
-##### Field Definitions
+##### Fields
 
-Create the following fields in the order listed:
+<div style={{overflowX: 'auto'}}>
 
-**Field 1: Institute Name**
+| # | Name | Display Name | Type | Req? | Key Config |
+|---|------|-------------|------|------|------------|
+| 1 | `instituteName` | Institute Name | [Short Text](../../../admin-docs/module-builder/field-management#short-text) | Yes | Unique<br/>Index<br/>Is User Key<br/>Audit |
+| 2 | `logo` | Logo | [Media (Single)](../../../admin-docs/module-builder/field-management#single-media) | Yes | image<br/>max 5120 KB<br/>default-filesystem |
+| 3 | `description` | Description | [Long Text](../../../admin-docs/module-builder/field-management#long-text) | No | — |
+| 4 | `paymentGatewayMerchantId` | Cust Code | [Short Text](../../../admin-docs/module-builder/field-management#short-text) | Yes | Unique<br/>Audit |
+| 5 | `paymentGatewayAccessKey` | Access Key | [Short Text](../../../admin-docs/module-builder/field-management#short-text) | Yes | Unique<br/>Audit |
+| 6 | `paymentGatewayAccessSecret` | Access Secret | [Short Text](../../../admin-docs/module-builder/field-management#short-text) | Yes | Audit |
+| 7 | `instituteAddress` | Institute Address | [Long Text](../../../admin-docs/module-builder/field-management#long-text) | No | — |
+| 8 | `feeTypes` | Fee Types | [Relation](../../../admin-docs/module-builder/field-management#relation) | — | One-to-Many → `feeType` (fees-portal)<br/>Inverse field: `institute`<br/>Create Inverse: ✓ Yes<br/>Cascade<br/>Audit |
+| 9 | `instituteUsers` | Institute Users | [Relation](../../../admin-docs/module-builder/field-management#relation) | — | One-to-Many → `instituteUser` (fees-portal)<br/>Inverse field: `institute`<br/>Create Inverse: ✓ Yes<br/>Cascade<br/>Audit |
+| 10 | `instituteBrochure` | Institute Brochure | [Media (Single)](../../../admin-docs/module-builder/field-management#single-media) | No | file<br/>max 5120 KB<br/>default-filesystem |
+| 11 | `instituteIntroVideo` | Institute Intro Video | [Media (Single)](../../../admin-docs/module-builder/field-management#single-media) | No | video<br/>max 5120 KB<br/>default-filesystem |
+| 12 | `supportEmail` | Support Email | [Short Text](../../../admin-docs/module-builder/field-management#short-text) | Yes | Audit |
+| 13 | `supportMobile` | Support Mobile | [Short Text](../../../admin-docs/module-builder/field-management#short-text) | Yes | Min/Max Length: 10<br/>Audit |
+| 14 | `gst` | GST | [Short Text](../../../admin-docs/module-builder/field-management#short-text) | No | Audit |
+| 15 | `tnC` | Terms and Conditions | [Rich Text](../../../admin-docs/module-builder/field-management#rich-text) | No | — |
+| 16 | `faqs` | FAQs | [Rich Text](../../../admin-docs/module-builder/field-management#rich-text) | No | — |
+| 17 | `privacyPolicy` | Privacy Policy | [Rich Text](../../../admin-docs/module-builder/field-management#rich-text) | No | — |
+| 18 | `emailDomain` | Email Domain | [Short Text](../../../admin-docs/module-builder/field-management#short-text) | No | Audit |
+| 19 | `custUserId` | Cust UserID | [Short Text](../../../admin-docs/module-builder/field-management#short-text) | Yes | — |
+| 20 | `hostedPagePrefix` | Hosted Page Prefix | [Short Text](../../../admin-docs/module-builder/field-management#short-text) | Yes | Unique<br/>Audit<br/>Subdomain prefix — e.g. `delhi` → `delhi.<base-domain>` |
+| 21 | `status` | Status | [Selection (Static)](../../../admin-docs/module-builder/field-management#static-selection) | Auto | Default: `InActive`<br/>Values: `InActive, Active`<br/>Index<br/>Audit |
 
-| Attribute | Value |
-|-----------|-------|
-| **Name** | instituteName |
-| **Display Name** | Institute Name |
-| **Type** | [Short Text](../../../admin-docs/module-builder/field-management#short-text) |
-| **Required** | ✓ Yes |
-| **Unique** | ✓ Yes |
-| **Index** | ✓ Yes |
-| **Is User Key** | ✓ Yes |
-| **Enable Audit Tracking** | ✓ Yes |
+</div>
 
-**Field 2: Logo**
+> Deleting an Institute cascades to all its fee types and users (via fields 8 and 9).
 
-| Attribute | Value |
-|-----------|-------|
-| **Name** | logo |
-| **Display Name** | Logo |
-| **Type** | [Media (Single)](../../../admin-docs/module-builder/field-management#single-media) |
-| **Media Types** | image |
-| **Media Max Size (KB)** | 5120 |
-| **Required** | ✓ Yes |
-| **Storage Provider** | default-filesystem |
+---
 
-**Field 3: Description**
+#### 2. Fee Type Model
 
-| Attribute | Value |
-|-----------|-------|
-| **Name** | description |
-| **Display Name** | Description |
-| **Type** | [Long Text](../../../admin-docs/module-builder/field-management#long-text) |
-| **Required** | ☐ No |
-
-**Field 4: Payment Gateway Merchant ID**
-
-| Attribute | Value |
-|-----------|-------|
-| **Name** | paymentGatewayMerchantId |
-| **Display Name** | Cust Code |
-| **Type** | [Short Text](../../../admin-docs/module-builder/field-management#short-text) |
-| **Required** | ✓ Yes |
-| **Unique** | ✓ Yes |
-| **Enable Audit Tracking** | ✓ Yes |
-
-**Field 5: Payment Gateway Access Key**
-
-| Attribute | Value |
-|-----------|-------|
-| **Name** | paymentGatewayAccessKey |
-| **Display Name** | Access Key |
-| **Type** | [Short Text](../../../admin-docs/module-builder/field-management#short-text) |
-| **Required** | ✓ Yes |
-| **Unique** | ✓ Yes |
-| **Enable Audit Tracking** | ✓ Yes |
-
-**Field 6: Payment Gateway Access Secret**
-
-| Attribute | Value |
-|-----------|-------|
-| **Name** | paymentGatewayAccessSecret |
-| **Display Name** | Access Secret |
-| **Description** | Access Secret Key |
-| **Type** | [Short Text](../../../admin-docs/module-builder/field-management#short-text) |
-| **Required** | ✓ Yes |
-| **Enable Audit Tracking** | ✓ Yes |
-
-**Field 7: Institute Address**
-
-| Attribute | Value |
-|-----------|-------|
-| **Name** | instituteAddress |
-| **Display Name** | Institute Address |
-| **Type** | [Long Text](../../../admin-docs/module-builder/field-management#long-text) |
-| **Required** | ☐ No |
-
-**Field 8: Fee Types Relation**
-
-| Attribute | Value |
-|-----------|-------|
-| **Name** | feeTypes |
-| **Display Name** | FeeTypes |
-| **Description** | FeeTypes |
-| **Type** | [Relation](../../../admin-docs/module-builder/field-management#relation) |
-| **Relation Type** | [One-to-Many](../../../admin-docs/module-builder/field-management#3-one-to-many) |
-| **Related Model** | feeType |
-| **Related Module** | fees-portal |
-| **Related Field** | institute |
-| **Create Inverse** | ✓ Yes |
-| **Cascade** | cascade |
-| **Enable Audit Tracking** | ✓ Yes |
-
-**Field 9: Institute Users Relation**
-
-| Attribute | Value |
-|-----------|-------|
-| **Name** | instituteUsers |
-| **Display Name** | InstituteUsers |
-| **Description** | InstituteUsers |
-| **Type** | [Relation](../../../admin-docs/module-builder/field-management#relation) |
-| **Relation Type** | [One-to-Many](../../../admin-docs/module-builder/field-management#3-one-to-many) |
-| **Related Model** | instituteUser |
-| **Related Module** | fees-portal |
-| **Related Field** | institute |
-| **Create Inverse** | ✓ Yes |
-| **Cascade** | cascade |
-| **Enable Audit Tracking** | ✓ Yes |
-
-**Field 10: Institute Brochure**
-
-| Attribute | Value |
-|-----------|-------|
-| **Name** | instituteBrochure |
-| **Display Name** | Institute Brochure |
-| **Type** | [Media (Single)](../../../admin-docs/module-builder/field-management#single-media) |
-| **Media Types** | file |
-| **Media Max Size (KB)** | 5120 |
-| **Required** | ☐ No |
-| **Storage Provider** | default-filesystem |
-
-**Field 11: Institute Intro Video**
-
-| Attribute | Value |
-|-----------|-------|
-| **Name** | instituteIntroVideo |
-| **Display Name** | Institute Intro Video |
-| **Type** | [Media (Single)](../../../admin-docs/module-builder/field-management#single-media) |
-| **Media Types** | video |
-| **Media Max Size (KB)** | 5120 |
-| **Required** | ☐ No |
-| **Storage Provider** | default-filesystem |
-
-**Field 12: Support Email**
-
-| Attribute | Value |
-|-----------|-------|
-| **Name** | supportEmail |
-| **Display Name** | Support Email |
-| **Type** | [Short Text](../../../admin-docs/module-builder/field-management#short-text) |
-| **Required** | ✓ Yes |
-| **Enable Audit Tracking** | ✓ Yes |
-
-**Field 13: Support Mobile**
-
-| Attribute | Value |
-|-----------|-------|
-| **Name** | supportMobile |
-| **Display Name** | Support Mobile |
-| **Type** | [Short Text](../../../admin-docs/module-builder/field-management#short-text) |
-| **Min Length** | 10 |
-| **Max Length** | 10 |
-| **Required** | ✓ Yes |
-| **Enable Audit Tracking** | ✓ Yes |
-
-**Field 14: GST**
-
-| Attribute | Value |
-|-----------|-------|
-| **Name** | gst |
-| **Display Name** | GST |
-| **Type** | [Short Text](../../../admin-docs/module-builder/field-management#short-text) |
-| **Required** | ☐ No |
-| **Enable Audit Tracking** | ✓ Yes |
-
-**Field 15: Terms and Conditions**
-
-| Attribute | Value |
-|-----------|-------|
-| **Name** | tnC |
-| **Display Name** | Terms and Conditions |
-| **Type** | [Rich Text](../../../admin-docs/module-builder/field-management#rich-text) |
-| **Required** | ☐ No |
-
-**Field 16: FAQs**
-
-| Attribute | Value |
-|-----------|-------|
-| **Name** | faqs |
-| **Display Name** | FAQS |
-| **Type** | [Rich Text](../../../admin-docs/module-builder/field-management#rich-text) |
-| **Required** | ☐ No |
-
-**Field 17: Privacy Policy**
-
-| Attribute | Value |
-|-----------|-------|
-| **Name** | privacyPolicy |
-| **Display Name** | Privacy Policy |
-| **Type** | [Rich Text](../../../admin-docs/module-builder/field-management#rich-text) |
-| **Required** | ☐ No |
-
-**Field 18: Email Domain**
-
-| Attribute | Value |
-|-----------|-------|
-| **Name** | emailDomain |
-| **Display Name** | Email Domain |
-| **Type** | [Short Text](../../../admin-docs/module-builder/field-management#short-text) |
-| **Required** | ☐ No |
-| **Enable Audit Tracking** | ✓ Yes |
-
-**Field 19: Customer User ID**
-
-| Attribute | Value |
-|-----------|-------|
-| **Name** | custUserId |
-| **Display Name** | Cust UserID |
-| **Description** | Customer UserID |
-| **Type** | [Short Text](../../../admin-docs/module-builder/field-management#short-text) |
-| **Required** | ✓ Yes |
-| **Enable Audit Tracking** | ☐ No |
-
-**Field 20: Hosted Page Prefix**
-
-| Attribute | Value |
-|-----------|-------|
-| **Name** | hostedPagePrefix |
-| **Display Name** | Hosted Page Prefix |
-| **Description** | Final domain: hostedPagePrefix-baseSuffix.subdomain |
-| **Type** | [Short Text](../../../admin-docs/module-builder/field-management#short-text) |
-| **Required** | ✓ Yes |
-| **Unique** | ✓ Yes |
-| **Enable Audit Tracking** | ✓ Yes |
-
-**Field 21: Status**
-
-| Attribute | Value |
-|-----------|-------|
-| **Name** | status |
-| **Display Name** | Status |
-| **Description** | Workflow field used to track the workflow status of this Institute. |
-| **Type** | [Selection (Static)](../../../admin-docs/module-builder/field-management#static-selection) |
-| **Default Value** | InActive |
-| **Selection Values** | InActive:InActive, Active:Active |
-| **Value Type** | string |
-| **Index** | ✓ Yes |
-| **Enable Audit Tracking** | ✓ Yes |
-| **Multi-Select** | ☐ No |
-
-#### 2. Creating the Fee Type Model
+Represents a category of fees collected by an institution (e.g. Tuition, Bus, Hostel). Each fee type belongs to exactly one institution.
 
 ##### Model Configuration
 
@@ -478,92 +126,45 @@ Create the following fields in the order listed:
 | **Internationalization** | ☐ No |
 | **Is Child Model** | ☐ No |
 
-##### Field Definitions
+##### Fields
 
-**Field 1: Fee Type**
+<div style={{overflowX: 'auto'}}>
 
-| Attribute | Value |
-|-----------|-------|
-| **Name** | feeType |
-| **Display Name** | Fee Type |
-| **Description** | The actual fee type. Eg. Tuition Fees, Bus Fees |
-| **Type** | [Short Text](../../../admin-docs/module-builder/field-management#short-text) |
-| **Required** | ✓ Yes |
-| **Is User Key** | ✓ Yes |
-| **Enable Audit Tracking** | ✓ Yes |
+| # | Name | Display Name | Type | Req? | Key Config |
+|---|------|-------------|------|------|------------|
+| 1 | `feeType` | Fee Type | [Short Text](../../../admin-docs/module-builder/field-management#short-text) | Yes | Is User Key<br/>Audit |
+| 2 | `institute` | Institute | [Relation](../../../admin-docs/module-builder/field-management#relation) | Yes | Many-to-One → `institute` (fees-portal)<br/>Inverse field: `feeTypes`<br/>Create Inverse: ✓ Yes<br/>Cascade<br/>Audit |
+| 3 | `partPaymentAllowed` | Part Payment Allowed | [Boolean](../../../admin-docs/module-builder/field-management#boolean) | Yes | Audit |
+| 4 | `latePaymentFeesType` | Late Payment Fees Type | [Selection (Static)](../../../admin-docs/module-builder/field-management#static-selection) | No | Default: `None`<br/>Values: `None, Percent, Absolute`<br/>Audit |
+| 5 | `latePaymentFees` | Late Payment Fees | [Decimal](../../../admin-docs/module-builder/field-management#decimal) | No | Default: `0`<br/>Audit |
+| 6 | `feeTypeUserKey` | Fee Type User Key | [Computed](../../../admin-docs/module-builder/field-management#computed) | Yes | Unique<br/>Is User Key<br/>Type: string<br/>Provider: `ConcatEntityComputedFieldProvider`<br/>Concatenates `feeType` + `institute.instituteName` → hyphen-separated slug ([full config ↓](#feetypeuserkey-provider-context))<br/>Trigger: before-insert on `feeType` (fees-portal) |
 
-**Field 2: Institute Relation**
+</div>
 
-| Attribute | Value |
-|-----------|-------|
-| **Name** | institute |
-| **Display Name** | Institute |
-| **Type** | [Relation](../../../admin-docs/module-builder/field-management#relation) |
-| **Relation Type** | [Many-to-One](../../../admin-docs/module-builder/field-management#1-many-to-one) |
-| **Related Model** | institute |
-| **Related Module** | fees-portal |
-| **Related Field** | feeTypes |
-| **Create Inverse** | ✓ Yes |
-| **Cascade** | cascade |
-| **Required** | ✓ Yes |
-| **Enable Audit Tracking** | ✓ Yes |
+> Two institutes can each have a "Tuition Fees" entry. A single institute cannot have two entries with the same name — `feeTypeUserKey` (field 6) enforces this by concatenating the fee type name and institute name into a unique slug.
 
-**Field 3: Part Payment Allowed**
+<span id="feetypeuserkey-provider-context"></span>
+<details open>
+<summary>feeTypeUserKey — Full provider context JSON</summary>
 
-| Attribute | Value |
-|-----------|-------|
-| **Name** | partPaymentAllowed |
-| **Display Name** | Part Payment Allowed |
-| **Type** | [Boolean](../../../admin-docs/module-builder/field-management#boolean) |
-| **Required** | ✓ Yes |
-| **Enable Audit Tracking** | ✓ Yes |
+```json
+{
+  "fields": ["feeType", "institute.instituteName"],
+  "separator": "-",
+  "slugify": true
+}
+```
 
-**Field 4: Late Payment Fees Type**
+</details>
 
-| Attribute | Value |
-|-----------|-------|
-| **Name** | latePaymentFeesType |
-| **Display Name** | Late Payment Fees Type |
-| **Type** | [Selection (Static)](../../../admin-docs/module-builder/field-management#static-selection) |
-| **Default Value** | None |
-| **Selection Values** | None:None, Percent:Percent, Absolute:Absolute |
-| **Value Type** | string |
-| **Enable Audit Tracking** | ✓ Yes |
-| **Multi-Select** | ☐ No |
+---
 
-**Field 5: Late Payment Fees**
+#### 3. Institute User Model
 
-| Attribute | Value |
-|-----------|-------|
-| **Name** | latePaymentFees |
-| **Display Name** | Late Payment Fees |
-| **Type** | [Decimal](../../../admin-docs/module-builder/field-management#decimal) |
-| **Default Value** | 0 |
-| **Required** | ☐ No |
-| **Enable Audit Tracking** | ✓ Yes |
-
-**Field 6: Fee Type User Key (Computed)**
-
-| Attribute | Value |
-|-----------|-------|
-| **Name** | feeTypeUserKey |
-| **Display Name** | Fee Type User Key |
-| **Description** | Concatenation of fee type and institute name |
-| **Type** | [Computed](../../../admin-docs/module-builder/field-management#computed) |
-| **Computed Value Type** | string |
-| **Value Provider** | ConcatEntityComputedFieldProvider |
-| **Provider Context** | `{"fields": ["feeType", "institute.instituteName"], "separator": "-", "slugify": true}` |
-| **Trigger Operations** | before-insert |
-| **Trigger Model** | feeType |
-| **Trigger Module** | fees-portal |
-| **Required** | ✓ Yes |
-| **Unique** | ✓ Yes |
-| **Is User Key** | ✓ Yes |
-
-#### 3. Creating the Institute User Model
+Represents an administrative staff member who manages a single institution's portal. Extends SolidX's built-in User model, inheriting standard fields (email, password, first name, last name).
 
 :::info Why is this a child model?
-The Institute User extends SolidX's built-in User model, inheriting standard fields like email, password, first name, and last name. The child model adds only the fields specific to this application (user type and institute relation). For a deeper look at how child user models work — including overriding user creation logic and backend customization — see [Extending Users](../../../developer-docs/extending/backend-customization/extending-users).
+The child model adds only the institute-specific fields below, without duplicating standard user fields. For a deeper look — including overriding user creation logic — see [Extending Users](../../../developer-docs/extending/backend-customization/extending-users).
 :::
 
 ##### Model Configuration
@@ -584,36 +185,16 @@ The Institute User extends SolidX's built-in User model, inheriting standard fie
 | **Is Child Model** | ✓ Yes |
 | **Parent Model** | user |
 
-##### Field Definitions
+##### Fields
 
-**Field 1: User Type**
+<div style={{overflowX: 'auto'}}>
 
-| Attribute | Value |
-|-----------|-------|
-| **Name** | userType |
-| **Display Name** | User Type |
-| **Type** | [Selection (Static)](../../../admin-docs/module-builder/field-management#static-selection) |
-| **Default Value** | Institute Admin |
-| **Selection Values** | Institute Admin:Institute Admin |
-| **Value Type** | string |
-| **Required** | ✓ Yes |
-| **Enable Audit Tracking** | ✓ Yes |
-| **Multi-Select** | ☐ No |
+| # | Name | Display Name | Type | Req? | Key Config |
+|---|------|-------------|------|------|------------|
+| 1 | `userType` | User Type | [Selection (Static)](../../../admin-docs/module-builder/field-management#static-selection) | Yes | Default: `Institute Admin`<br/>Values: `Institute Admin`<br/>Audit |
+| 2 | `institute` | Institute | [Relation](../../../admin-docs/module-builder/field-management#relation) | No | Many-to-One → `institute` (fees-portal)<br/>Create Inverse: ☐ No<br/>Cascade<br/>Audit |
 
-**Field 2: Institute Relation**
-
-| Attribute | Value |
-|-----------|-------|
-| **Name** | institute |
-| **Display Name** | Institute |
-| **Type** | [Relation](../../../admin-docs/module-builder/field-management#relation) |
-| **Relation Type** | [Many-to-One](../../../admin-docs/module-builder/field-management#1-many-to-one) |
-| **Related Model** | institute |
-| **Related Module** | fees-portal |
-| **Create Inverse** | ☐ No |
-| **Cascade** | cascade |
-| **Required** | ☐ No |
-| **Enable Audit Tracking** | ✓ Yes |
+</div>
 
 :::tip Quick Reference
 For a handy summary of field types and configuration options used in this tutorial, see:

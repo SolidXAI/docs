@@ -23,157 +23,16 @@ Below are the key features related to initiating payment collections within the 
 
 You can refer to the [User Roles & Responsibilities](../fees_portal_product_overview/#user-roles--responsibilities) in the Product Overview for more details on this role.
 
-### Data Models Involved
+### Data Models
 
-This section describes the data models you need to implement this feature.
+This section describes the data models you need to implement this feature, along with step-by-step instructions to create them in SolidX.
 
-#### 1. Student Model
-
-**What it represents:** Individual students enrolled at your institution whose parents/guardians will receive payment collection requests.
-
-##### Basic Information
-
-| Field | Required? | Description | Example |
-|-------|-----------|-------------|---------|
-| **Student Name** | Yes | Full name of the student | "Rahul Sharma" |
-| **Student ID** | Yes | Unique identifier for the student (roll number, admission number) | "STU2024001" |
-| **Student Email Address** | No | Student's personal email address | rahul.sharma@example.com |
-| **Student Mobile Number** | No | Student's contact number | 9876543210 |
-| **Student Login ID** | Computed (Auto-generated) | System-generated unique alphanumeric identifier for portal access based on student name | "RAHUL-A1B2C" |
-
-##### Parent/Guardian Information
-
-| Field | Required? | Description | Example |
-|-------|-----------|-------------|---------|
-| **Parent/Guardian Name** | Yes | Name of parent or guardian | "Mr. Rajesh Sharma" |
-| **Parent/Guardian Email** | Yes | Email where payment notifications will be sent | rajesh.sharma@example.com |
-| **Parent/Guardian Mobile** | Yes | Contact number for SMS notifications | 9123456789 |
-
-##### Authentication Fields
-
-| Field | Required? | Description |
-|-------|-----------|-------------|
-| **OTP** | Auto-managed | One-time password for portal login |
-| **OTP Expires At** | Auto-managed | Expiration timestamp for OTP |
-| **Token** | Auto-managed | Authentication token after successful login |
-
-##### What you can do with this model:
-- Students are automatically created when you upload a payment collection Excel file
-- If a student already exists (matched by Student ID), their information is updated
-- Each student belongs to one institute
-- Students receive payment notifications via parent/guardian email
-- Students can log in to the portal to view and pay their dues
-
-#### 2. Payment Collection Model
-
-**What it represents:** A batch of fee collection requests sent to multiple students at once (e.g., "Q1 2024 Fees", "Annual Sports Fees 2024").
-
-##### Basic Information
-
-| Field | Required? | Description | Example |
-|-------|-----------|-------------|---------|
-| **Name** | Yes | Descriptive name for this collection batch | "Quarter 1 Tuition Fees 2024" |
-| **Description** | No | Additional details about the collection | "First quarter fees including tuition and lab charges" |
-| **Payment Collection ID** | Computed (Auto-generated) | Unique alphanumeric identifier for this collection based on collection name | "QUART-X7Y8Z" |
-| **Due Date** | Yes | Default due date for all items in this collection | 2024-04-30 |
-| **Payment File** | Yes | Excel file containing student and payment details | Upload .xlsx file (max 5MB) |
-| **Institute** | Yes | Which institute this collection belongs to | Auto-filled based on logged-in user |
-
-##### What you can do with this model:
-- Create multiple payment collections throughout the year
-- Each collection can include multiple students and multiple fee types
-- Upload an Excel file to create all payment collection items at once
-- Track which collections have been sent and when
-- When you delete a collection, all associated payment collection items are removed
-
-#### 3. Payment Collection Item Model
-
-**What it represents:** An individual payment request for one student for one fee type within a collection (e.g., "Rahul Sharma needs to pay ₹10,000 for Tuition Fees").
-
-##### Payment Details
-
-| Field | Required? | Description | Example |
-|-------|-----------|-------------|---------|
-| **Amount To Be Paid** | Yes | Base fee amount (without late fees) | 10000.00 |
-| **Due Date** | Yes | When this payment is due | 2024-04-30 |
-| **Part Payment Allowed** | Yes | Can student pay in installments? | true/false (copied from Fee Type) |
-| **Payment Mode** | Yes | How payment should be made | "PG" (Payment Gateway) or "CASH" |
-
-##### Status Tracking
-
-| Field | Required? | Description | Values |
-|-------|-----------|-------------|--------|
-| **Status** | Auto-managed | Current payment status | "Pending", "Partially Paid", "Fully Paid" |
-| **Amount Paid** | Computed (Auto-calculated) | Total amount paid so far, calculated from payment collection item details | 5000.00 |
-| **Amount Pending** | Computed (Auto-calculated) | Remaining amount to be paid (total - paid) | 5000.00 |
-
-##### Late Payment Tracking
-
-| Field | Required? | Description | How It's Calculated |
-|-------|-----------|-------------|---------------------|
-| **Is Overdue** | Auto-managed | Is payment past due date? | true if today > due date |
-| **Overdue By Days** | Auto-calculated | Number of days overdue | today - due date |
-| **Late Amount To Be Paid** | Auto-calculated | Late fee penalty | Based on Fee Type's late fee configuration |
-| **Total Amount To Be Paid** | Computed (Auto-calculated) | Base amount + late fees | amountToBePaid + lateAmountToBePaid |
-
-##### Relationships
-
-| Relationship | Description |
-|--------------|-------------|
-| **Student** | Which student owes this payment |
-| **Fee Type** | What type of fee this is (Tuition, Bus, etc.) |
-| **Payment Collection** | Which batch this item belongs to |
-| **Institute** | Which institute is collecting this fee |
-
-##### Understanding Payment Modes:
-
-**Payment Gateway (PG)** - Choose this when:
-- Parents/guardians will pay online through the portal
-- Initial status: "Pending"
-- Students receive email with payment link
-- Payment processed through configured payment gateway
-- Status updates automatically when payment succeeds
-
-**Cash (CASH)** - Choose this when:
-- Payment has already been collected offline (at school counter, bank deposit)
-- Initial status: "Fully Paid"
-- Amount paid = full amount
-- Students receive payment confirmation email
-- No further action needed from parent/guardian
-
-##### What you can do with this model:
-- Track individual payment obligations for each student
-- Monitor payment status in real-time
-- Calculate late fees automatically when due date passes
-- View payment history through related Payment Collection Item Details
-- Send reminder emails for pending payments
-
-#### 4. Payment Collection Item Detail Model
-
-**What it represents:** Individual payment transactions recorded against a payment collection item (tracks each installment or payment attempt).
-
-##### Transaction Details
-
-| Field | Required? | Description | Example |
-|-------|-----------|-------------|---------|
-| **Payment Date** | Yes | When the payment was made | 2024-03-15 14:30:00 |
-| **Amount Paid** | Yes | Amount received in this transaction | 5000.00 |
-| **Payment Status** | Yes | Status of this transaction | "Success", "Pending", "Failed" |
-
-##### Relationships
-
-| Relationship | Description |
-|--------------|-------------|
-| **Payment Collection Item** | Which payment request this transaction is for |
-| **Student** | Which student made this payment |
-| **Institute** | Which institute received this payment |
-| **Payment** | Link to payment gateway transaction record |
-
-##### What you can do with this model:
-- Track partial payments and installments
-- View complete payment history for each item
-- Reconcile with payment gateway transactions
-- Calculate total amount paid across multiple transactions
+:::tip New to the Module Builder?
+If you're unfamiliar with how modules, models, and fields work in SolidX, we recommend reviewing the [Module Builder](../../../admin-docs/module-builder/) documentation first. It covers:
+- [Module Management](../../../admin-docs/module-builder/module-management) - Creating and configuring modules
+- [Model Management](../../../admin-docs/module-builder/model-management) - Creating models and understanding model settings
+- [Field Management](../../../admin-docs/module-builder/field-management) - Understanding field types and configuration options
+:::
 
 #### How These Models Connect
 
@@ -252,20 +111,11 @@ Upload Excel (CASH mode) → Status: "Fully Paid"
   - **None**: No late fees applied
 - Updates total amount to be paid automatically
 
-### Building the Data Models
+---
 
-This section provides step-by-step instructions for creating the Student, Payment Collection, Payment Collection Item, and Payment Collection Item Detail models using SolidX. Follow these instructions to implement the data models discussed in the previous section.
+#### 1. Student Model
 
-:::tip New to the Module Builder?
-If you're unfamiliar with how modules, models, and fields work in SolidX, we recommend reviewing the [Module Builder](../../../admin-docs/module-builder/) documentation first. It covers:
-- [Module Management](../../../admin-docs/module-builder/module-management) - Creating and configuring modules
-- [Model Management](../../../admin-docs/module-builder/model-management) - Creating models and understanding model settings
-- [Field Management](../../../admin-docs/module-builder/field-management) - Understanding field types and configuration options
-:::
-
-#### 1. Creating the Student Model
-
-Navigate to the model creation interface in SolidX and configure as follows:
+Individual students enrolled at your institution whose parents/guardians will receive payment collection requests.
 
 ##### Model Configuration
 
@@ -284,159 +134,45 @@ Navigate to the model creation interface in SolidX and configure as follows:
 | **Internationalization** | No |
 | **Is Child Model** | No |
 
-##### Field Definitions
+##### Fields
 
-Create the following fields in the order listed:
+<div style={{overflowX: 'auto'}}>
 
-**Field 1: Student Name**
+| # | Name | Display Name | Type | Req? | Key Config |
+|---|------|-------------|------|------|------------|
+| 1 | `studentName` | Student Name | [Short Text](../../../admin-docs/module-builder/field-management#short-text) | Yes | Audit |
+| 2 | `studentEmailAddress` | Student Email Address | [Short Text](../../../admin-docs/module-builder/field-management#short-text) | No | Audit |
+| 3 | `studentMobileNumber` | Student Mobile Number | [Short Text](../../../admin-docs/module-builder/field-management#short-text) | No | Audit |
+| 4 | `parentName` | Parent/Guardian Name | [Short Text](../../../admin-docs/module-builder/field-management#short-text) | Yes | Audit |
+| 5 | `parentMobileNumber` | Parent/Guardian Mobile Number | [Short Text](../../../admin-docs/module-builder/field-management#short-text) | Yes | Audit |
+| 6 | `parentEmailAddress` | Parent/Guardian Email Address | [Short Text](../../../admin-docs/module-builder/field-management#short-text) | Yes | Audit |
+| 7 | `studentId` | Student Id | [Short Text](../../../admin-docs/module-builder/field-management#short-text) | Yes | Is User Key<br/>Audit |
+| 8 | `institute` | Institute | [Relation](../../../admin-docs/module-builder/field-management#relation) | Yes | Many-to-One → `institute` (fees-portal)<br/>Create Inverse: No<br/>Cascade<br/>Index<br/>Audit |
+| 9 | `studentLoginId` | Student Login Id | [Computed](../../../admin-docs/module-builder/field-management#computed) | Yes | Unique<br/>Type: string<br/>Provider: `AlphaNumExternalIdComputationProvider`<br/>Generates unique alphanumeric login ID from student name, length 5 ([full config ↓](#studentloginid-provider-context))<br/>Trigger: before-insert on `student` (fees-portal)<br/>Audit |
+| 10 | `otp` | OTP | [Short Text](../../../admin-docs/module-builder/field-management#short-text) | No | — |
+| 11 | `otpExpiresAt` | OTP Expires At | [Datetime](../../../admin-docs/module-builder/field-management#datetime) | No | — |
+| 12 | `token` | Token | [Long Text](../../../admin-docs/module-builder/field-management#long-text) | No | — |
+| 13 | `payments` | Payments | [Relation](../../../admin-docs/module-builder/field-management#relation) | — | One-to-Many → `payment` (fees-portal)<br/>Inverse field: `student`<br/>Create Inverse: Yes<br/>Cascade |
 
-| Attribute | Value |
-|-----------|-------|
-| **Name** | studentName |
-| **Display Name** | Student Name |
-| **Type** | [Short Text](../../../admin-docs/module-builder/field-management#short-text) |
-| **Required** | Yes |
-| **Enable Audit Tracking** | Yes |
+</div>
 
-**Field 2: Student Email Address**
+> Students are automatically created (or updated) when you upload a payment collection Excel file — matched by Student ID. Students can log in to the portal using their `studentLoginId` and OTP.
 
-| Attribute | Value |
-|-----------|-------|
-| **Name** | studentEmailAddress |
-| **Display Name** | Student Email Address |
-| **Type** | [Short Text](../../../admin-docs/module-builder/field-management#short-text) |
-| **Required** | No |
-| **Enable Audit Tracking** | Yes |
+<span id="studentloginid-provider-context"></span>
+<details open>
+<summary>studentLoginId — Full provider context JSON</summary>
 
-**Field 3: Student Mobile Number**
+```json
+{"dynamicFieldPrefix": "studentName", "length": 5}
+```
 
-| Attribute | Value |
-|-----------|-------|
-| **Name** | studentMobileNumber |
-| **Display Name** | Student Mobile Number |
-| **Type** | [Short Text](../../../admin-docs/module-builder/field-management#short-text) |
-| **Required** | No |
-| **Enable Audit Tracking** | Yes |
+</details>
 
-**Field 4: Parent/Guardian Name**
+---
 
-| Attribute | Value |
-|-----------|-------|
-| **Name** | parentName |
-| **Display Name** | Parent/Guardian Name |
-| **Type** | [Short Text](../../../admin-docs/module-builder/field-management#short-text) |
-| **Required** | Yes |
-| **Enable Audit Tracking** | Yes |
+#### 2. Payment Collection Model
 
-**Field 5: Parent/Guardian Mobile Number**
-
-| Attribute | Value |
-|-----------|-------|
-| **Name** | parentMobileNumber |
-| **Display Name** | Parent/Guardian Mobile Number |
-| **Type** | [Short Text](../../../admin-docs/module-builder/field-management#short-text) |
-| **Required** | Yes |
-| **Enable Audit Tracking** | Yes |
-
-**Field 6: Parent/Guardian Email Address**
-
-| Attribute | Value |
-|-----------|-------|
-| **Name** | parentEmailAddress |
-| **Display Name** | Parent/Guardian Email Address |
-| **Type** | [Short Text](../../../admin-docs/module-builder/field-management#short-text) |
-| **Required** | Yes |
-| **Enable Audit Tracking** | Yes |
-
-**Field 7: Student ID**
-
-| Attribute | Value |
-|-----------|-------|
-| **Name** | studentId |
-| **Display Name** | Student Id |
-| **Type** | [Short Text](../../../admin-docs/module-builder/field-management#short-text) |
-| **Required** | Yes |
-| **Is User Key** | Yes |
-| **Enable Audit Tracking** | Yes |
-
-**Field 8: Institute Relation**
-
-| Attribute | Value |
-|-----------|-------|
-| **Name** | institute |
-| **Display Name** | Institute |
-| **Type** | [Relation](../../../admin-docs/module-builder/field-management#relation) |
-| **Relation Type** | [Many-to-One](../../../admin-docs/module-builder/field-management#1-many-to-one) |
-| **Related Model** | institute |
-| **Related Module** | fees-portal |
-| **Create Inverse** | No |
-| **Cascade** | cascade |
-| **Required** | Yes |
-| **Index** | Yes |
-| **Enable Audit Tracking** | Yes |
-
-**Field 9: Student Login ID (Computed Field)**
-
-| Attribute | Value |
-|-----------|-------|
-| **Name** | studentLoginId |
-| **Display Name** | Student Login Id |
-| **Description** | This is the unique login id for the student. This is used to login to the student portal. |
-| **Type** | [Computed](../../../admin-docs/module-builder/field-management#computed) |
-| **Computed Field Value Type** | String |
-| **Computed Field Value Provider** | AlphaNumExternalIdComputationProvider |
-| **Computed Field Value Provider Context** | `{"dynamicFieldPrefix": "studentName", "length": 5}` |
-| **Computed Field Trigger Config** | Model: student, Operation: before-insert |
-| **Required** | Yes |
-| **Unique** | Yes |
-| **Index** | No |
-| **Enable Audit Tracking** | Yes |
-
-**Note:** This field is automatically generated when a student is created, using an alphanumeric ID based on the student's name with a length of 5 characters.
-
-**Field 10: OTP**
-
-| Attribute | Value |
-|-----------|-------|
-| **Name** | otp |
-| **Display Name** | OTP |
-| **Type** | [Short Text](../../../admin-docs/module-builder/field-management#short-text) |
-| **Required** | No |
-
-**Field 11: OTP Expires At**
-
-| Attribute | Value |
-|-----------|-------|
-| **Name** | otpExpiresAt |
-| **Display Name** | OTP Expires At |
-| **Type** | [Datetime](../../../admin-docs/module-builder/field-management#datetime) |
-| **Required** | No |
-
-**Field 12: Token**
-
-| Attribute | Value |
-|-----------|-------|
-| **Name** | token |
-| **Display Name** | Token |
-| **Type** | [Long Text](../../../admin-docs/module-builder/field-management#long-text) |
-| **Required** | No |
-
-**Field 13: Payments Relation**
-
-| Attribute | Value |
-|-----------|-------|
-| **Name** | payments |
-| **Display Name** | Payments |
-| **Type** | [Relation](../../../admin-docs/module-builder/field-management#relation) |
-| **Relation Type** | [One-to-Many](../../../admin-docs/module-builder/field-management#3-one-to-many) |
-| **Related Model** | payment |
-| **Related Module** | fees-portal |
-| **Related Field** | student |
-| **Create Inverse** | Yes |
-| **Cascade** | cascade |
-| **Enable Audit Tracking** | No |
-
-#### 2. Creating the Payment Collection Model
+A batch of fee collection requests sent to multiple students at once (e.g., "Q1 2024 Fees", "Annual Sports Fees 2024").
 
 ##### Model Configuration
 
@@ -455,102 +191,39 @@ Create the following fields in the order listed:
 | **Internationalization** | No |
 | **Is Child Model** | No |
 
-##### Field Definitions
+##### Fields
 
-**Field 1: Name**
+<div style={{overflowX: 'auto'}}>
 
-| Attribute | Value |
-|-----------|-------|
-| **Name** | name |
-| **Display Name** | Name |
-| **Type** | [Short Text](../../../admin-docs/module-builder/field-management#short-text) |
-| **Required** | Yes |
-| **Index** | Yes |
-| **Is User Key** | Yes |
-| **Enable Audit Tracking** | Yes |
+| # | Name | Display Name | Type | Req? | Key Config |
+|---|------|-------------|------|------|------------|
+| 1 | `name` | Name | [Short Text](../../../admin-docs/module-builder/field-management#short-text) | Yes | Index<br/>Is User Key<br/>Audit |
+| 2 | `description` | Description | [Long Text](../../../admin-docs/module-builder/field-management#long-text) | No | — |
+| 3 | `dueDate` | Due Date | [Datetime](../../../admin-docs/module-builder/field-management#datetime) | Yes | Audit |
+| 4 | `paymentCollectionId` | Payment Collection ID | [Computed](../../../admin-docs/module-builder/field-management#computed) | Yes | Unique<br/>Index<br/>Type: string<br/>Provider: `AlphaNumExternalIdComputationProvider`<br/>Generates unique alphanumeric ID from collection name, length 5 ([full config ↓](#paymentcollectionid-provider-context))<br/>Trigger: before-insert on `paymentCollection` (fees-portal)<br/>Audit |
+| 5 | `institute` | Institute | [Relation](../../../admin-docs/module-builder/field-management#relation) | Yes | Many-to-One → `institute` (fees-portal)<br/>Create Inverse: No<br/>Cascade<br/>Index<br/>Audit |
+| 6 | `paymentFile` | Payment File | [Media (Single)](../../../admin-docs/module-builder/field-management#single-media) | Yes | file<br/>max 5120 KB<br/>default-filesystem |
+| 7 | `paymentCollectionItems` | Payment Collection Items | [Relation](../../../admin-docs/module-builder/field-management#relation) | — | One-to-Many → `paymentCollectionItem` (fees-portal)<br/>Inverse field: `paymentCollection`<br/>Create Inverse: Yes<br/>Cascade |
 
-**Field 2: Description**
+</div>
 
-| Attribute | Value |
-|-----------|-------|
-| **Name** | description |
-| **Display Name** | Description |
-| **Type** | [Long Text](../../../admin-docs/module-builder/field-management#long-text) |
-| **Required** | No |
+> Deleting a Payment Collection cascades to all its Payment Collection Items (via field 7).
 
-**Field 3: Due Date**
+<span id="paymentcollectionid-provider-context"></span>
+<details open>
+<summary>paymentCollectionId — Full provider context JSON</summary>
 
-| Attribute | Value |
-|-----------|-------|
-| **Name** | dueDate |
-| **Display Name** | Due Date |
-| **Type** | [Datetime](../../../admin-docs/module-builder/field-management#datetime) |
-| **Required** | Yes |
-| **Enable Audit Tracking** | Yes |
+```json
+{"dynamicFieldPrefix": "name", "length": 5}
+```
 
-**Field 4: Payment Collection ID (Computed Field)**
+</details>
 
-| Attribute | Value |
-|-----------|-------|
-| **Name** | paymentCollectionId |
-| **Display Name** | Payment Collection ID |
-| **Type** | [Computed](../../../admin-docs/module-builder/field-management#computed) |
-| **Computed Field Value Type** | String |
-| **Computed Field Value Provider** | AlphaNumExternalIdComputationProvider |
-| **Computed Field Value Provider Context** | `{"dynamicFieldPrefix": "name", "length": 5}` |
-| **Computed Field Trigger Config** | Model: paymentCollection, Operation: before-insert |
-| **Required** | Yes |
-| **Unique** | Yes |
-| **Index** | Yes |
-| **Enable Audit Tracking** | Yes |
+---
 
-**Note:** This field is automatically generated when a payment collection is created, using an alphanumeric ID based on the collection's name with a length of 5 characters.
+#### 3. Payment Collection Item Model
 
-**Field 5: Institute Relation**
-
-| Attribute | Value |
-|-----------|-------|
-| **Name** | institute |
-| **Display Name** | Institute |
-| **Type** | [Relation](../../../admin-docs/module-builder/field-management#relation) |
-| **Relation Type** | [Many-to-One](../../../admin-docs/module-builder/field-management#1-many-to-one) |
-| **Related Model** | institute |
-| **Related Module** | fees-portal |
-| **Create Inverse** | No |
-| **Cascade** | cascade |
-| **Required** | Yes |
-| **Index** | Yes |
-| **Enable Audit Tracking** | Yes |
-
-**Field 6: Payment File**
-
-| Attribute | Value |
-|-----------|-------|
-| **Name** | paymentFile |
-| **Display Name** | Payment File |
-| **Description** | The payment file that is uploaded by the institute admin |
-| **Type** | [Media (Single)](../../../admin-docs/module-builder/field-management#single-media) |
-| **Media Types** | file |
-| **Media Max Size (KB)** | 5120 |
-| **Required** | Yes |
-| **Storage Provider** | default-filesystem |
-
-**Field 7: Payment Collection Items Relation**
-
-| Attribute | Value |
-|-----------|-------|
-| **Name** | paymentCollectionItems |
-| **Display Name** | Payment Collection Items |
-| **Type** | [Relation](../../../admin-docs/module-builder/field-management#relation) |
-| **Relation Type** | [One-to-Many](../../../admin-docs/module-builder/field-management#3-one-to-many) |
-| **Related Model** | paymentCollectionItem |
-| **Related Module** | fees-portal |
-| **Related Field** | paymentCollection |
-| **Create Inverse** | Yes |
-| **Cascade** | cascade |
-| **Enable Audit Tracking** | No |
-
-#### 3. Creating the Payment Collection Item Model
+An individual payment request for one student for one fee type within a collection (e.g., "Rahul Sharma needs to pay ₹10,000 for Tuition Fees").
 
 ##### Model Configuration
 
@@ -569,223 +242,38 @@ Create the following fields in the order listed:
 | **Internationalization** | No |
 | **Is Child Model** | No |
 
-##### Field Definitions
+##### Fields
 
-**Field 1: Due Date**
+<div style={{overflowX: 'auto'}}>
 
-| Attribute | Value |
-|-----------|-------|
-| **Name** | dueDate |
-| **Display Name** | Due Date |
-| **Type** | [Datetime](../../../admin-docs/module-builder/field-management#datetime) |
-| **Required** | Yes |
-| **Enable Audit Tracking** | Yes |
+| # | Name | Display Name | Type | Req? | Key Config |
+|---|------|-------------|------|------|------------|
+| 1 | `dueDate` | Due Date | [Datetime](../../../admin-docs/module-builder/field-management#datetime) | Yes | Audit |
+| 2 | `partPaymentAllowed` | Part Payment Allowed | [Boolean](../../../admin-docs/module-builder/field-management#boolean) | Yes | Default: `false`<br/>Audit |
+| 3 | `status` | Status | [Short Text](../../../admin-docs/module-builder/field-management#short-text) | Yes | Default: `Pending`<br/>Index<br/>Audit |
+| 4 | `amountPaid` | Amount Paid | [Computed](../../../admin-docs/module-builder/field-management#computed) | Yes | Type: Decimal<br/>Provider: `PaymentCollectionItemAmountProvider`<br/>Sums all successful payments for this item (provider context: `{}`)<br/>Trigger: after-update on `paymentCollectionItemDetail`<br/>Audit |
+| 5 | `amountPending` | Amount Pending | [Computed](../../../admin-docs/module-builder/field-management#computed) | Yes | Type: Decimal<br/>Provider: `NoopsEntityComputedFieldProviderService`<br/>Placeholder — actual value is `amountToBePaid - amountPaid` (provider context: `{}`)<br/>Trigger: before-insert on `paymentCollectionItemDetail`<br/>Audit |
+| 6 | `isOverdue` | Is Overdue | [Boolean](../../../admin-docs/module-builder/field-management#boolean) | Yes | Default: `false`<br/>Audit |
+| 7 | `overdueByDays` | Overdue By Days | [Integer](../../../admin-docs/module-builder/field-management#integer) | No | Audit |
+| 8 | `lateAmountToBePaid` | Late Amount To Be Paid | [Decimal](../../../admin-docs/module-builder/field-management#decimal) | No | Default: `0`<br/>Audit |
+| 9 | `totalAmountToBePaid` | Total Amount To Be Paid | [Computed](../../../admin-docs/module-builder/field-management#computed) | No | Type: Decimal<br/>Provider: `NoopsEntityComputedFieldProviderService`<br/>Placeholder — actual value is `amountToBePaid + lateAmountToBePaid` (provider context: `{}`)<br/>Trigger: before-insert on `paymentCollectionItemDetail`<br/>Audit |
+| 10 | `amountToBePaid` | Amount To Be Paid | [Decimal](../../../admin-docs/module-builder/field-management#decimal) | Yes | Audit |
+| 11 | `mode` | Mode | [Short Text](../../../admin-docs/module-builder/field-management#short-text) | Yes | `CASH` or `PG` (Payment Gateway)<br/>Audit |
+| 12 | `student` | Student | [Relation](../../../admin-docs/module-builder/field-management#relation) | Yes | Many-to-One → `student` (fees-portal)<br/>Create Inverse: No<br/>Cascade<br/>Index<br/>Audit |
+| 13 | `paymentCollection` | Payment Collection | [Relation](../../../admin-docs/module-builder/field-management#relation) | Yes | Many-to-One → `paymentCollection` (fees-portal)<br/>Inverse field: `paymentCollectionItems`<br/>Create Inverse: Yes<br/>Cascade<br/>Index<br/>Audit |
+| 14 | `institute` | Institute | [Relation](../../../admin-docs/module-builder/field-management#relation) | Yes | Many-to-One → `institute` (fees-portal)<br/>Create Inverse: No<br/>Cascade<br/>Index<br/>Audit |
+| 15 | `feeType` | Fee Type | [Relation](../../../admin-docs/module-builder/field-management#relation) | Yes | Many-to-One → `feeType` (fees-portal)<br/>Create Inverse: No<br/>Cascade<br/>Index<br/>Audit |
+| 16 | `paymentCollectionItemDetails` | Payment Collection Item Details | [Relation](../../../admin-docs/module-builder/field-management#relation) | — | One-to-Many → `paymentCollectionItemDetail` (fees-portal)<br/>Inverse field: `paymentCollectionItem`<br/>Create Inverse: Yes<br/>Cascade |
 
-**Field 2: Part Payment Allowed**
+</div>
 
-| Attribute | Value |
-|-----------|-------|
-| **Name** | partPaymentAllowed |
-| **Display Name** | Part Payment Allowed |
-| **Type** | [Boolean](../../../admin-docs/module-builder/field-management#boolean) |
-| **Default Value** | false |
-| **Required** | Yes |
-| **Enable Audit Tracking** | Yes |
+> **Payment Modes:** Choose `PG` when parents will pay online (initial status: `Pending`); choose `CASH` when payment has already been collected offline (initial status: `Fully Paid`).
 
-**Field 3: Status**
+---
 
-| Attribute | Value |
-|-----------|-------|
-| **Name** | status |
-| **Display Name** | Status |
-| **Type** | [Short Text](../../../admin-docs/module-builder/field-management#short-text) |
-| **Default Value** | Pending |
-| **Required** | Yes |
-| **Index** | Yes |
-| **Enable Audit Tracking** | Yes |
+#### 4. Payment Collection Item Detail Model
 
-**Field 4: Amount Paid (Computed Field)**
-
-| Attribute | Value |
-|-----------|-------|
-| **Name** | amountPaid |
-| **Display Name** | Amount Paid |
-| **Type** | [Computed](../../../admin-docs/module-builder/field-management#computed) |
-| **Computed Field Value Type** | Decimal |
-| **Computed Field Value Provider** | PaymentCollectionItemAmountProvider |
-| **Computed Field Value Provider Context** | `{}` |
-| **Computed Field Trigger Config** | Model: paymentCollectionItemDetail, Operation: after-update |
-| **Required** | Yes |
-| **Enable Audit Tracking** | Yes |
-
-**Note:** This field is automatically calculated when payment collection item details are updated. It sums all successful payments made for this item.
-
-**Field 5: Amount Pending (Computed Field)**
-
-| Attribute | Value |
-|-----------|-------|
-| **Name** | amountPending |
-| **Display Name** | Amount Pending |
-| **Type** | [Computed](../../../admin-docs/module-builder/field-management#computed) |
-| **Computed Field Value Type** | Decimal |
-| **Computed Field Value Provider** | NoopsEntityComputedFieldProviderService |
-| **Computed Field Value Provider Context** | `{}` |
-| **Computed Field Trigger Config** | Model: paymentCollectionItemDetail, Operation: before-insert |
-| **Required** | Yes |
-| **Enable Audit Tracking** | Yes |
-
-**Note:** This field uses a no-op provider as a placeholder. The actual value is calculated based on the difference between the total amount to be paid and the amount already paid.
-
-**Field 6: Is Overdue**
-
-| Attribute | Value |
-|-----------|-------|
-| **Name** | isOverdue |
-| **Display Name** | Is Overdue |
-| **Type** | [Boolean](../../../admin-docs/module-builder/field-management#boolean) |
-| **Default Value** | false |
-| **Required** | Yes |
-| **Enable Audit Tracking** | Yes |
-
-**Field 7: Overdue By Days**
-
-| Attribute | Value |
-|-----------|-------|
-| **Name** | overdueByDays |
-| **Display Name** | Overdue By Days |
-| **Type** | [Integer](../../../admin-docs/module-builder/field-management#integer) |
-| **Required** | No |
-| **Enable Audit Tracking** | Yes |
-
-**Field 8: Late Amount To Be Paid**
-
-| Attribute | Value |
-|-----------|-------|
-| **Name** | lateAmountToBePaid |
-| **Display Name** | Late Amount To Be Paid |
-| **Type** | [Decimal](../../../admin-docs/module-builder/field-management#decimal) |
-| **Default Value** | 0 |
-| **Required** | No |
-| **Enable Audit Tracking** | Yes |
-
-**Field 9: Total Amount To Be Paid (Computed Field)**
-
-| Attribute | Value |
-|-----------|-------|
-| **Name** | totalAmountToBePaid |
-| **Display Name** | Total Amount To Be Paid |
-| **Type** | [Computed](../../../admin-docs/module-builder/field-management#computed) |
-| **Computed Field Value Type** | Decimal |
-| **Computed Field Value Provider** | NoopsEntityComputedFieldProviderService |
-| **Computed Field Value Provider Context** | `{}` |
-| **Computed Field Trigger Config** | Model: paymentCollectionItemDetail, Operation: before-insert |
-| **Required** | No |
-| **Enable Audit Tracking** | Yes |
-
-**Note:** This field uses a no-op provider as a placeholder. The actual value represents the sum of the base amount and any late fees (amountToBePaid + lateAmountToBePaid).
-
-**Field 10: Amount To Be Paid**
-
-| Attribute | Value |
-|-----------|-------|
-| **Name** | amountToBePaid |
-| **Display Name** | Amount To Be Paid |
-| **Type** | [Decimal](../../../admin-docs/module-builder/field-management#decimal) |
-| **Required** | Yes |
-| **Enable Audit Tracking** | Yes |
-
-**Field 11: Payment Mode**
-
-| Attribute | Value |
-|-----------|-------|
-| **Name** | mode |
-| **Display Name** | Mode |
-| **Description** | Mode of payment. Can be CASH or PG (Payment Gateway) |
-| **Type** | [Short Text](../../../admin-docs/module-builder/field-management#short-text) |
-| **Required** | Yes |
-| **Enable Audit Tracking** | Yes |
-
-**Field 12: Student Relation**
-
-| Attribute | Value |
-|-----------|-------|
-| **Name** | student |
-| **Display Name** | Student |
-| **Type** | [Relation](../../../admin-docs/module-builder/field-management#relation) |
-| **Relation Type** | [Many-to-One](../../../admin-docs/module-builder/field-management#1-many-to-one) |
-| **Related Model** | student |
-| **Related Module** | fees-portal |
-| **Create Inverse** | No |
-| **Cascade** | cascade |
-| **Required** | Yes |
-| **Index** | Yes |
-| **Enable Audit Tracking** | Yes |
-
-**Field 13: Payment Collection Relation**
-
-| Attribute | Value |
-|-----------|-------|
-| **Name** | paymentCollection |
-| **Display Name** | Payment Collection |
-| **Type** | [Relation](../../../admin-docs/module-builder/field-management#relation) |
-| **Relation Type** | [Many-to-One](../../../admin-docs/module-builder/field-management#1-many-to-one) |
-| **Related Model** | paymentCollection |
-| **Related Module** | fees-portal |
-| **Related Field** | paymentCollectionItems |
-| **Create Inverse** | Yes |
-| **Cascade** | cascade |
-| **Required** | Yes |
-| **Index** | Yes |
-| **Enable Audit Tracking** | Yes |
-
-**Field 14: Institute Relation**
-
-| Attribute | Value |
-|-----------|-------|
-| **Name** | institute |
-| **Display Name** | Institute |
-| **Type** | [Relation](../../../admin-docs/module-builder/field-management#relation) |
-| **Relation Type** | [Many-to-One](../../../admin-docs/module-builder/field-management#1-many-to-one) |
-| **Related Model** | institute |
-| **Related Module** | fees-portal |
-| **Create Inverse** | No |
-| **Cascade** | cascade |
-| **Required** | Yes |
-| **Index** | Yes |
-| **Enable Audit Tracking** | Yes |
-
-**Field 15: Fee Type Relation**
-
-| Attribute | Value |
-|-----------|-------|
-| **Name** | feeType |
-| **Display Name** | Fee Type |
-| **Type** | [Relation](../../../admin-docs/module-builder/field-management#relation) |
-| **Relation Type** | [Many-to-One](../../../admin-docs/module-builder/field-management#1-many-to-one) |
-| **Related Model** | feeType |
-| **Related Module** | fees-portal |
-| **Create Inverse** | No |
-| **Cascade** | cascade |
-| **Required** | Yes |
-| **Index** | Yes |
-| **Enable Audit Tracking** | Yes |
-
-**Field 16: Payment Collection Item Details Relation**
-
-| Attribute | Value |
-|-----------|-------|
-| **Name** | paymentCollectionItemDetails |
-| **Display Name** | Payment Collection Item Details |
-| **Type** | [Relation](../../../admin-docs/module-builder/field-management#relation) |
-| **Relation Type** | [One-to-Many](../../../admin-docs/module-builder/field-management#3-one-to-many) |
-| **Related Model** | paymentCollectionItemDetail |
-| **Related Module** | fees-portal |
-| **Related Field** | paymentCollectionItem |
-| **Create Inverse** | Yes |
-| **Cascade** | cascade |
-| **Enable Audit Tracking** | No |
-
-#### 4. Creating the Payment Collection Item Detail Model
+Individual payment transactions recorded against a payment collection item — tracks each installment or payment attempt.
 
 ##### Model Configuration
 
@@ -804,103 +292,21 @@ Create the following fields in the order listed:
 | **Internationalization** | No |
 | **Is Child Model** | No |
 
-##### Field Definitions
+##### Fields
 
-**Field 1: Payment Date**
+<div style={{overflowX: 'auto'}}>
 
-| Attribute | Value |
-|-----------|-------|
-| **Name** | paymentDate |
-| **Display Name** | Payment Date |
-| **Type** | [Datetime](../../../admin-docs/module-builder/field-management#datetime) |
-| **Required** | Yes |
-| **Enable Audit Tracking** | Yes |
+| # | Name | Display Name | Type | Req? | Key Config |
+|---|------|-------------|------|------|------------|
+| 1 | `paymentDate` | Payment Date | [Datetime](../../../admin-docs/module-builder/field-management#datetime) | Yes | Audit |
+| 2 | `paymentStatus` | Payment Status | [Short Text](../../../admin-docs/module-builder/field-management#short-text) | Yes | Default: `Pending`<br/>Audit |
+| 3 | `amountPaid` | Amount Paid | [Decimal](../../../admin-docs/module-builder/field-management#decimal) | Yes | Audit |
+| 4 | `institute` | Institute | [Relation](../../../admin-docs/module-builder/field-management#relation) | Yes | Many-to-One → `institute` (fees-portal)<br/>Create Inverse: No<br/>Cascade<br/>Index<br/>Audit |
+| 5 | `student` | Student | [Relation](../../../admin-docs/module-builder/field-management#relation) | Yes | Many-to-One → `student` (fees-portal)<br/>Create Inverse: No<br/>Cascade<br/>Index<br/>Audit |
+| 6 | `paymentCollectionItem` | Payment Collection Item | [Relation](../../../admin-docs/module-builder/field-management#relation) | Yes | Many-to-One → `paymentCollectionItem` (fees-portal)<br/>Inverse field: `paymentCollectionItemDetails`<br/>Create Inverse: Yes<br/>Cascade<br/>Index<br/>Audit |
+| 7 | `payment` | Payment | [Relation](../../../admin-docs/module-builder/field-management#relation) | No | Many-to-One → `payment` (fees-portal)<br/>Create Inverse: No<br/>Cascade<br/>Index<br/>Audit |
 
-**Field 2: Payment Status**
-
-| Attribute | Value |
-|-----------|-------|
-| **Name** | paymentStatus |
-| **Display Name** | Payment Status |
-| **Type** | [Short Text](../../../admin-docs/module-builder/field-management#short-text) |
-| **Default Value** | Pending |
-| **Required** | Yes |
-| **Enable Audit Tracking** | Yes |
-
-**Field 3: Amount Paid**
-
-| Attribute | Value |
-|-----------|-------|
-| **Name** | amountPaid |
-| **Display Name** | Amount Paid |
-| **Type** | [Decimal](../../../admin-docs/module-builder/field-management#decimal) |
-| **Required** | Yes |
-| **Enable Audit Tracking** | Yes |
-
-**Field 4: Institute Relation**
-
-| Attribute | Value |
-|-----------|-------|
-| **Name** | institute |
-| **Display Name** | Institute |
-| **Type** | [Relation](../../../admin-docs/module-builder/field-management#relation) |
-| **Relation Type** | [Many-to-One](../../../admin-docs/module-builder/field-management#1-many-to-one) |
-| **Related Model** | institute |
-| **Related Module** | fees-portal |
-| **Create Inverse** | No |
-| **Cascade** | cascade |
-| **Required** | Yes |
-| **Index** | Yes |
-| **Enable Audit Tracking** | Yes |
-
-**Field 5: Student Relation**
-
-| Attribute | Value |
-|-----------|-------|
-| **Name** | student |
-| **Display Name** | Student |
-| **Type** | [Relation](../../../admin-docs/module-builder/field-management#relation) |
-| **Relation Type** | [Many-to-One](../../../admin-docs/module-builder/field-management#1-many-to-one) |
-| **Related Model** | student |
-| **Related Module** | fees-portal |
-| **Create Inverse** | No |
-| **Cascade** | cascade |
-| **Required** | Yes |
-| **Index** | Yes |
-| **Enable Audit Tracking** | Yes |
-
-**Field 6: Payment Collection Item Relation**
-
-| Attribute | Value |
-|-----------|-------|
-| **Name** | paymentCollectionItem |
-| **Display Name** | Payment Collection Item |
-| **Type** | [Relation](../../../admin-docs/module-builder/field-management#relation) |
-| **Relation Type** | [Many-to-One](../../../admin-docs/module-builder/field-management#1-many-to-one) |
-| **Related Model** | paymentCollectionItem |
-| **Related Module** | fees-portal |
-| **Related Field** | paymentCollectionItemDetails |
-| **Create Inverse** | Yes |
-| **Cascade** | cascade |
-| **Required** | Yes |
-| **Index** | Yes |
-| **Enable Audit Tracking** | Yes |
-
-**Field 7: Payment Relation**
-
-| Attribute | Value |
-|-----------|-------|
-| **Name** | payment |
-| **Display Name** | Payment |
-| **Type** | [Relation](../../../admin-docs/module-builder/field-management#relation) |
-| **Relation Type** | [Many-to-One](../../../admin-docs/module-builder/field-management#1-many-to-one) |
-| **Related Model** | payment |
-| **Related Module** | fees-portal |
-| **Create Inverse** | No |
-| **Cascade** | cascade |
-| **Required** | No |
-| **Index** | Yes |
-| **Enable Audit Tracking** | Yes |
+</div>
 
 :::tip Quick Reference
 For a handy summary of field types and configuration options used in this tutorial, see:

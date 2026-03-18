@@ -45,7 +45,7 @@ Activation is a multi-step infrastructure provisioning process that:
 
 **Important:** This is not just a database status change - it actually provisions real infrastructure that makes the portal accessible on the internet.
 
-### Data Models Involved
+### Data Models
 
 This section describes the data model used for institute activation.
 
@@ -53,21 +53,27 @@ This section describes the data model used for institute activation.
 
 **What it represents:** An educational institution that uses the fee portal platform to collect payments from students.
 
-##### Activation-Related Fields
+##### Fields
 
-| Field | Required? | Description | Example |
-|-------|-----------|-------------|---------|
-| **Status** | Yes (Default: "InActive") | Current activation state of the portal | "InActive", "Active" |
-| **Hosted Page Prefix** | Yes | Unique subdomain prefix for the institute's portal | "delhi", "mumbai" |
-| **Support Email** | Yes | Email address for portal support inquiries | "support@dpsschools.edu.in" |
-| **Support Mobile** | Yes | Phone number for portal support | "9123456789" |
-| **Payment Gateway Merchant ID** | Yes | Merchant identifier for payment processing | "MERCHANT_001" |
-| **Payment Gateway Access Key** | Yes | API key for payment gateway | "ak_live_xxxxx" |
-| **Payment Gateway Access Secret** | Yes | Secret key for payment gateway | "as_live_xxxxx" |
+The following fields of the Institute model are relevant to activation:
 
-##### Status Field Details
+<div style={{overflowX: 'auto'}}>
 
-The `status` field is the state machine that controls the activation lifecycle:
+| # | Field | Required? | Notes |
+|---|-------|-----------|-------|
+| 1 | `status` | Yes | Default: `InActive`. Controls the activation lifecycle — `InActive` or `Active`. |
+| 2 | `hostedPagePrefix` | Yes | Unique subdomain prefix used to construct the institute's portal domain (e.g. `"delhi"` → `delhi.<base-domain>`). Must be alphanumeric/hyphens only and unique across all institutes. |
+| 3 | `supportEmail` | Yes | Email address for portal support inquiries. |
+| 4 | `supportMobile` | Yes | Phone number for portal support. |
+| 5 | `paymentGatewayMerchantId` | Yes | Merchant identifier for the payment gateway. |
+| 6 | `paymentGatewayAccessKey` | Yes | API access key for the payment gateway. |
+| 7 | `paymentGatewayAccessSecret` | Yes | Secret key for the payment gateway. |
+
+</div>
+
+##### Status Field — State Machine
+
+The `status` field controls the activation lifecycle:
 
 **Possible Values:**
 - `"InActive"` (default): Institute portal is not accessible, infrastructure not provisioned
