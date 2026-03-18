@@ -129,7 +129,7 @@ export const ScoreWidget = ({ rowData, solidListViewMetaData, fieldMetadata, col
 
  **File Path:**
 ```
-/solid-ui/app/admin/extensions/ScoreWidget.tsx
+/solid-ui/src/extensions/<module-name>/<model-name>/custom-widgets/ScoreWidget.tsx
 ```
 
 
@@ -147,7 +147,7 @@ registerExtensionComponent(
 
  **File Path:**
 ```
-/solid-ui/app/admin/extensions/solid-extensions.ts
+/solid-ui/src/extensions/solid-extensions.ts
 ```
 
 

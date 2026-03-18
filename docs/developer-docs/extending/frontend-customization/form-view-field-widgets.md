@@ -240,7 +240,7 @@ export const SolidIntegerSliderStyleFormEditWidget = ({ formik, fieldContext }: 
  As per project structure, place the widget component in the `extensions` folder:
 
 ```bash
-/solid-ui/app/admin/extensions/SolidIntegerSliderStyleFormEditWidget.tsx
+/solid-ui/src/extensions/<module-name>/<model-name>/custom-widgets/SolidIntegerSliderStyleFormEditWidget.tsx
 ```
 
 
@@ -263,7 +263,7 @@ registerExtensionComponent(
 
  **File Path:**
 ```
-/solid-ui/app/admin/extensions/solid-extensions.ts
+/solid-ui/src/extensions/solid-extensions.ts
 ```
 
 

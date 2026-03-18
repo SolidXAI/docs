@@ -22,10 +22,10 @@ They can be embedded into form views or used to build specialized UI.
 
 1. **Create the custom view component**  
    Place it inside your extensions folder:  
-    `solid-ui/app/admin/extensions/BookSimilarTitles.tsx`
+    `solid-ui/src/extensions/<module-name>/<model-name>/custom-widgets/BookSimilarTitles.tsx`
 
 2. **Register the custom view**  
-   Register it in `solid-ui/app/admin/extensions/index.ts` using `registerExtensionComponent`.
+   Register it in `solid-ui/src/extensions/solid-extensions.ts` using `registerExtensionComponent`.
 
 
 <details open>

@@ -111,7 +111,7 @@ export default PreviewPortal;
 
 **File Path**
 ```bash
-/solid-ui/app/admin/extensions/PreviewPortal.tsx
+/solid-ui/src/extensions/<module-name>/<model-name>/form-buttons/PreviewPortal.tsx
 ```
 
 
@@ -128,7 +128,7 @@ You must register your button component so that SolidX can resolve and invoke it
 
 ```tsx
 import { registerExtensionComponent } from '@solidxai/core-ui';
-import PreviewPortal from '@/app/admin/extensions/PreviewPortal';  
+import PreviewPortal from './<module-name>/<model-name>/form-buttons/PreviewPortal';
 
 registerExtensionComponent('PreviewPortal', PreviewPortal);
 ```
@@ -136,7 +136,7 @@ registerExtensionComponent('PreviewPortal', PreviewPortal);
 
 **File Path**
 ```bash
-/solid-ui/app/admin/extensions/solid-extensions.ts
+/solid-ui/src/extensions/solid-extensions.ts
 ```
 
 
