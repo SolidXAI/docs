@@ -381,7 +381,7 @@ On the existing **`Institute Admin`** role, grant the following additional permi
 - **Payment Collection Item Detail** — Purely a read-only view for Institute Admin; details are recorded by the payment gateway callback process, not manually.
 
 :::tip Reference Documentation
-📋 For step-by-step instructions on editing a role and assigning permissions in SolidX, see [Role Management](../../../admin-docs/role-management).
+📋 For step-by-step instructions on editing a role and assigning permissions in SolidX, see [Role Management](../../../admin-docs/iam/roles.md).
 :::
 
 ### Implementing Custom Business Logic
