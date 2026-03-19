@@ -345,6 +345,33 @@ Register them as standard Nest providers in the relevant module.
 When publishing, pass the logical publisher name to `PublisherFactory`.
 The factory resolves `<PublisherName><Broker>` (with backward compatibility fallback for RabbitMQ naming).
 
+## Subscriber Logging (Quick Note)
+
+Base subscriber classes provide a lazy logger via a protected accessor:
+
+- `RabbitMqSubscriber` and `DatabaseSubscriber` expose `this.logger`
+- Logger context defaults to `this.constructor.name`
+- You can optionally override `loggerContext` in subclasses for custom labels
+
+Example:
+
+```ts
+@Injectable()
+export class OcrRequestSubscriberRabbitmq extends RabbitMqSubscriber<OcrRequestPayload> {
+  protected get loggerContext(): string {
+    return "OcrRequestSubscriber";
+  }
+
+  async subscribe(message: QueueMessage<OcrRequestPayload>) {
+    this.logger.log(`Processing OCR request ${message.payload.ocrRequestId}`);
+    this.logger.debug(`messageId=${message.messageId}`);
+    return { success: true };
+  }
+}
+```
+
+This avoids redeclaring `private readonly logger = new Logger(...)` in each subclass and keeps logs consistently namespaced.
+
 ## Environment Variables
 
 ### Broker selection
