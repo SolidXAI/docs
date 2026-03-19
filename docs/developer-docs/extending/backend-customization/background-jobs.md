@@ -302,6 +302,7 @@ The factory resolves the broker-specific implementation.
 import { Injectable } from "@nestjs/common";
 import {
   DatabaseSubscriber,
+  PollerService,
   MqMessageQueueService,
   MqMessageService,
   QueueMessage,
@@ -313,9 +314,10 @@ import mailQueueOptions from "./email-queue-options-database";
 export class EmailQueueSubscriberDatabase extends DatabaseSubscriber<any> {
   constructor(
     readonly mqMessageService: MqMessageService,
-    readonly mqMessageQueueService: MqMessageQueueService
+    readonly mqMessageQueueService: MqMessageQueueService,
+    readonly poller: PollerService
   ) {
-    super(mqMessageService, mqMessageQueueService);
+    super(mqMessageService, mqMessageQueueService, poller);
   }
 
   options(): QueuesModuleOptions {
