@@ -131,7 +131,7 @@ Here's a complete navigation structure example from the fees-portal, illustratin
       "name": "institute-menu-item",
       "sequenceNumber": 2,
       "actionUserKey": "institute-list-action",
-      "roles": ["Institute Admin", "Mswipe Admin"]
+      "roles": ["Institute Admin", "App Admin"]
     },
     ... // Additional menus
   ],

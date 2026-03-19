@@ -1,8 +1,8 @@
 ---
 sidebar_position: 6
 title: Background Jobs
-description: Learn how to set up and manage background jobs in SolidX, including configuration for different brokers like Database and RabbitMQ.
-summary: Comprehensive guide to implementing asynchronous task processing in SolidX using background jobs. Covers the Work Queue/Competing Consumers pattern with database-backed and RabbitMQ brokers. Details publisher/subscriber setup, queue configuration, message handling, job tracking via `ss_mq_message` tables, retry mechanisms, and integration with email/SMS/WhatsApp providers. Includes code examples for both broker types and job execution patterns.
+description: Learn how to set up and manage background jobs in SolidX using database and RabbitMQ brokers.
+summary: Comprehensive guide to asynchronous processing in SolidX with the Work Queue/Competing Consumers pattern. Covers typed queue payloads, queue options, publishers/subscribers, environment setup, and broker-specific examples for Database and RabbitMQ. Includes a dedicated RabbitMQ section for `prefetch` and parallel consumption behavior.
 keywords:
   [
     background jobs,
@@ -11,80 +11,197 @@ keywords:
     job queues,
     RabbitMQ,
     database broker,
+    prefetch,
   ]
 solidx_concerns: [backend.background_jobs, new_background_job, new_sms_provider, new_email_provider, new_whatsapp_provider, add_custom_service_method, add_scheduled_job]
 ---
 
-import { FaTag, FaDatabase, FaCode, FaProjectDiagram,FaLightbulb } from "react-icons/fa";
-import { IoIosArrowForward } from "react-icons/io";
 import { InfoBox } from '@site/src/common/InfoBox';
 
+Background jobs in SolidX let you offload non-blocking work from request/response flows.
 
+Common use cases:
 
-Background jobs in SolidX enable asynchronous task processing, making it easy to offload work that doesn’t need to run immediately. Common use cases include:
-	-	Sending emails or notifications
-	-	Deferring non-urgent tasks
-	-	Handling heavy computations in the background
+- Notification delivery (email/SMS/WhatsApp)
+- External API callbacks/webhooks
+- OCR/LLM processing and other long-running tasks
+- Retryable integrations
 
-SolidX implements this using a message queue system based on the Work Queue / Competing Consumers pattern:
-	-	Publishers push jobs into a queue
-	-	Subscribers pick up and process jobs asynchronously
+SolidX uses a Work Queue / Competing Consumers model:
 
-Job execution is fully tracked with support for status updates, retries, and failures:
-	-	ss_mq_message → stores individual queue messages
-	-	ss_mq_message_queue → stores job queue definitions
+- Publishers enqueue jobs
+- Subscribers consume jobs asynchronously
 
-SolidX supports both:
-	- Database-backed queues – simple, lightweight, no external dependencies
-	- RabbitMQ – robust, production-ready, and recommended for high-throughput systems
+Job execution state is tracked in:
 
-## Setting Up a Background Job
+- `ss_mq_message_queue` (queue definitions)
+- `ss_mq_message` (message payload/status/retries)
 
-### 1. Define Queue Options
+## Core Building Blocks
 
-Specify the queue name and broker type in an options object.
-Below is an example configuration for a database-backed queue for sending emails.
+Every background job setup usually contains:
 
-<details open>
- <summary className="card-title ">
-    <!-- <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" /> -->
-     <code>email-queue-options-database.ts</code>
-  </summary>
+1. Queue options file (broker type, queue name, etc.)
+2. Publisher class
+3. Subscriber class
+4. Module provider wiring
+
+Typed payloads are recommended for safer publish/subscribe contracts.
+
+## 1) Queue Options + Payload Contract
+
+```ts
+import { ActiveUserData, BrokerType } from "@solidxai/core";
+
+const OCR_REQUEST_QUEUE_NAME = "ocr_request_queue";
+
+export interface OcrRequestPayload {
+  ocrRequestId: number;
+  loggedInUser?: ActiveUserData;
+}
+
+export default {
+  name: "ocrRequestQueueRabbitmq",
+  type: BrokerType.RabbitMQ,
+  queueName: OCR_REQUEST_QUEUE_NAME,
+  prefetch: 5,
+};
+```
+
+`prefetch` is only applicable to RabbitMQ (details below).
+
+## 2) Publisher Example (RabbitMQ)
+
+```ts
+import { Injectable } from "@nestjs/common";
+import {
+  MqMessageService,
+  MqMessageQueueService,
+  QueuesModuleOptions,
+  RabbitMqPublisher,
+} from "@solidxai/core";
+import ocrRequestQueueOptions, { OcrRequestPayload } from "../ocr-request-queue-options";
+
+@Injectable()
+export class OcrRequestPublisherRabbitmq extends RabbitMqPublisher<OcrRequestPayload> {
+  constructor(
+    protected readonly mqMessageService: MqMessageService,
+    protected readonly mqMessageQueueService: MqMessageQueueService
+  ) {
+    super(mqMessageService, mqMessageQueueService);
+  }
+
+  options(): QueuesModuleOptions {
+    return {
+      ...ocrRequestQueueOptions,
+    };
+  }
+}
+```
+
+## 3) Subscriber Example (RabbitMQ, OCR Workflow)
+
+```ts
+import { Injectable, Logger } from "@nestjs/common";
+import { InjectEntityManager } from "@nestjs/typeorm";
+import { EntityManager } from "typeorm";
+import {
+  MqMessageService,
+  MqMessageQueueService,
+  QueueMessage,
+  QueuesModuleOptions,
+  RabbitMqSubscriber,
+  S3FileService,
+  SettingService,
+  SolidMicroserviceAdapter,
+} from "@solidxai/core";
+import ocrRequestQueueOptions, { OcrRequestPayload } from "../ocr-request-queue-options";
+
+@Injectable()
+export class OcrRequestSubscriberRabbitmq extends RabbitMqSubscriber<OcrRequestPayload> {
+  private readonly logger = new Logger(OcrRequestSubscriberRabbitmq.name);
+
+  constructor(
+    readonly mqMessageService: MqMessageService,
+    readonly mqMessageQueueService: MqMessageQueueService,
+    @InjectEntityManager() readonly entityManager: EntityManager,
+    private readonly settingService: SettingService,
+    private readonly solidMicroserviceAdapter: SolidMicroserviceAdapter,
+    private readonly s3FileService: S3FileService
+  ) {
+    super(mqMessageService, mqMessageQueueService);
+  }
+
+  options(): QueuesModuleOptions {
+    return {
+      ...ocrRequestQueueOptions,
+    };
+  }
+
+  async subscribe(message: QueueMessage<OcrRequestPayload>) {
+    const { ocrRequestId } = message.payload;
+    this.logger.log(`Processing OCR request ${ocrRequestId}`);
+
+    // 1) Load request data from DB
+    // 2) Update status -> Started
+    // 3) Fetch signed S3 URL
+    // 4) Invoke OCR/LLM pipeline
+    // 5) Persist output/status
+    // 6) Invoke callback URL
+    // 7) Handle failure status + callback failure separately
+
+    return { success: true };
+  }
+}
+```
+
+The subscriber above is intentionally condensed. Keep the heavy business logic in dedicated services and call them from `subscribe(...)`.
+
+## RabbitMQ-Specific: `prefetch` (Important)
+
+`prefetch` controls how many unacknowledged messages a subscriber can process concurrently per channel.
+
+Example:
+
+- `prefetch: 1` -> strict one-by-one processing
+- `prefetch: 5` -> up to 5 in-flight messages
+- higher values -> higher throughput, but also higher concurrent load on DB/API dependencies
+
+Use `prefetch` to tune parallelism for your workload.
+
+<InfoBox>
+  `prefetch` is a RabbitMQ concept and is not used by the Database broker implementation.
+</InfoBox>
+
+## Database Broker Example (Reference)
+
+For lightweight setups without RabbitMQ, use database-backed queues.
+
+### Queue options (Database)
 
 ```ts
 import { BrokerType } from "@solidxai/core";
 
-const MAIL_QUEUE_NAME = "solidx.email.db"; 
-//const MAIL_QUEUE_NAME = "solidx.email.rabbitmq"; //For RabbitMQ
+const MAIL_QUEUE_NAME = "solidx.email.db";
 
 export default {
   name: "solidEmailInstance",
   type: BrokerType.Database,
-  //type: BrokerType.Rabbitmq //For RabbitMQ
   queueName: MAIL_QUEUE_NAME,
 };
 ```
-</details>
 
-
-
-### 2. Configure a Publisher
-
-We need to create a publisher class which extends the appropriate base publisher class based on the broker type and specify the queue options.
-
-<details open>
- <summary className="card-title">
-    <!-- <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" /> -->
-    <code>email-queue-publisher-database.ts</code>  
-</summary>
+### Publisher (Database)
 
 ```ts
 import { Injectable } from "@nestjs/common";
+import {
+  DatabasePublisher,
+  MqMessageQueueService,
+  MqMessageService,
+  QueuesModuleOptions,
+} from "@solidxai/core";
 import mailQueueOptions from "./email-queue-options-database";
-import { MqMessageQueueService } "@solidxai/core";
-import { MqMessageService } from "@solidxai/core";
-import { QueuesModuleOptions } from "@solidxai/core";
-import { DatabasePublisher } from "@solidxai/core";
 
 @Injectable()
 export class EmailQueuePublisherDatabase extends DatabasePublisher<any> {
@@ -103,40 +220,22 @@ export class EmailQueuePublisherDatabase extends DatabasePublisher<any> {
 }
 ```
 
-</details>
-
-<!-- //FIXME: -->
-
-<InfoBox>
-  In the near future, you need not create a publisher. Only subscriber needs to be created.
-</InfoBox>
-
-
-### 3. Configure a Subscriber
-
-Subscribers process messages from the queue. They house the actual job processing logic.
-Below is an example subscriber that sends emails using the SMTP service.
-
-<details open>
- <summary className="card-title ">
-    <!-- <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" /> -->
-    <code>email-queue-subscriber-database.ts</code>  
-</summary>
+### Subscriber (Database)
 
 ```ts
 import { Injectable } from "@nestjs/common";
+import {
+  DatabaseSubscriber,
+  MqMessageQueueService,
+  MqMessageService,
+  QueueMessage,
+  QueuesModuleOptions,
+} from "@solidxai/core";
 import mailQueueOptions from "./email-queue-options-database";
-import { QueueMessage } from "@solidxai/core";
-import { MqMessageService } from "@solidxai/core";
-import { MqMessageQueueService } from "@solidxai/core";
-import { DatabaseSubscriber } from "@solidxai/core";
-import { SMTPEMailService } from "@solidxai/core";
-import { QueuesModuleOptions } from "@solidxai/core";
 
 @Injectable()
 export class EmailQueueSubscriberDatabase extends DatabaseSubscriber<any> {
   constructor(
-    private readonly mailFactory: MailServiceFactory,
     readonly mqMessageService: MqMessageService,
     readonly mqMessageQueueService: MqMessageQueueService
   ) {
@@ -150,113 +249,182 @@ export class EmailQueueSubscriberDatabase extends DatabaseSubscriber<any> {
   }
 
   subscribe(message: QueueMessage<any>) {
-    const mailService = this.mailFactory.getMailService();
-    return mailService.sendEmailSynchronously(message);
+    // Delegate to application service
+    return { success: true };
   }
 }
 ```
 
-</details>
-
-<div className="tips-box">
-  <h4 className="card-headear-wrapper">
-    <FaLightbulb className="feature-icon" />
-    Tip
-  </h4>
-Keep your subscribe method clean and simple. Keep the actual logic in a separate service and call it from the subscribe method.
-</div>
-
-<InfoBox>
-  The above examples use a database broker. For RabbitMQ, simply switch the base classes to `RabbitmqPublisher` and `RabbitmqSubscriber`, and update the queue options accordingly.
-</InfoBox>
-
-
-<h4 className="card-title card-headear-wrapper">
-  <FaTag size={18} style={{ marginRight: "10px" }} />
-
 ## Naming Convention
-</h4>
 
-The publisher and subscriber names should follow a convention based on the broker type:
+Use clear broker-specific class names:
 
-- `NameDatabase` for database broker
-- `NameRabbitmq` for RabbitMQ broker
+- `NamePublisherDatabase`, `NameSubscriberDatabase`
+- `NamePublisherRabbitmq`, `NameSubscriberRabbitmq`
 
-They are standard NestJS providers and must be registered in their respective modules.
+Register them as standard Nest providers in the relevant module.
 
+## Environment Variables
 
-<h4 className="card-title card-headear-wrapper">
-  <FaDatabase size={20} style={{ marginRight: "10px" }} />
+### Broker selection
 
-## Database Tables
-</h4>
+- `QUEUES_DEFAULT_BROKER`
+  - `database` (default)
+  - `rabbitmq`
 
-- `ss_mq_message_queue`: Queue names registry
-- `ss_mq_message`: Stores message details including status, retries, payload
+- `QUEUES_RABBIT_MQ_URL` (RabbitMQ only)
+  - example: `amqp://guest:guest@127.0.0.1:5672`
 
+### Service role
 
+- `QUEUES_SERVICE_ROLE`
+  - `subscriber` -> only consumes
+  - `both` -> publishes and consumes
 
-<h4 className="card-title card-headear-wrapper">
-  <FaCode size={20} style={{ marginRight: "10px" }} />
+### Queue enablement filter
 
-## Environment Variable
-</h4>
+- `QUEUES_QUEUE_NAME_REGEX_TO_ENABLE`
+  - Regex used at subscriber startup to decide whether a subscriber should start for a queue.
+  - `all` (or empty) means no queue-name filtering.
+  - Examples:
+    - `^solid_` -> only queues starting with `solid_`
+    - `^(?!solid_).+` -> queues not starting with `solid_`
 
-### Broker
-- **`QUEUES_DEFAULT_BROKER`**  
-  Choose the broker for background jobs:  
-  - `"database"` → Database broker (**default**)  
-  - `"rabbitmq"` → RabbitMQ broker  
+### Startup guards used by subscribers
 
-- **`QUEUES_RABBIT_MQ_URL`** *(RabbitMQ only)*  
-  RabbitMQ connection string, e.g.:  
-  `amqp://guest:guest@127.0.0.1:5672`
+- `SOLID_CLI_RUNNING`
+  - Subscribers skip startup when this is `"true"`.
+- `QUEUES_DEFAULT_BROKER`
+  - Database subscribers start only when broker is `database`.
+  - RabbitMQ subscribers start only when broker is `rabbitmq`.
 
+### Notification queue toggles
 
-###  Service Role
-- **`QUEUES_SERVICE_ROLE`**  
-  Defines how this service instance participates:  
-  - `"subscriber"` → Only processes jobs  
-  - `"both"` → Publishes **and** processes jobs  
-    _(useful for distributed job handling)_
+- `COMMON_EMAIL_SHOULD_QUEUE`
+- `COMMON_SMS_SHOULD_QUEUE`
 
+## Scaling and Workload Isolation
 
-<InfoBox>
-  In a distributed setup, you can have some instances only processing jobs while others handle both publishing and processing. This is useful for load balancing and scaling for e.g (you can set the `QUEUES_SERVICE_ROLE` to `subscriber` on multiple instances to only process jobs, while having one instance set to `both` to handle publishing/subscribing).
-</InfoBox>
+SolidX background jobs can be scaled using the same codebase by combining:
 
+1. Role-based startup (`QUEUES_SERVICE_ROLE`)
+2. Queue-name filtering (`QUEUES_QUEUE_NAME_REGEX_TO_ENABLE`)
+3. RabbitMQ concurrency tuning (`prefetch`)
+4. Horizontal replicas (multiple worker processes/containers)
 
-###  Email Jobs
-- **`COMMON_EMAIL_SHOULD_QUEUE`**  
-  - `true` → Send emails via background jobs  
-  - `false` → Send emails synchronously (**default**)  
+### 1) Role-based process split
 
+- Keep API nodes as `both` when load is small.
+- For higher load, run dedicated worker nodes with:
+  - `QUEUES_SERVICE_ROLE=subscriber`
+- This isolates queue processing from HTTP request traffic.
 
-###  SMS Jobs
-- **`COMMON_SMS_SHOULD_QUEUE`**  
-  - `true` → Send SMS via background jobs  
-  - `false` → Send SMS synchronously (**default**)  
+### 2) Queue-based workload split
 
+Use queue-name regex to route different queue groups to different worker pools.
 
+Examples:
 
-<h4 className="card-title card-headear-wrapper">
-  <FaProjectDiagram size={20} style={{ marginRight: "10px" }} />
+- Worker pool A: `QUEUES_QUEUE_NAME_REGEX_TO_ENABLE=^solid_`
+- Worker pool B: `QUEUES_QUEUE_NAME_REGEX_TO_ENABLE=^(?!solid_).+`
 
-## Supported Brokers
-</h4>
+This lets you scale specific business workloads independently.
 
+### 3) RabbitMQ throughput tuning with `prefetch`
 
-### 1 Database Broker
+`prefetch` (RabbitMQ only) controls in-flight messages per subscriber instance.
 
-- Jobs are stored in `ss_mq_message`
-- Uses polling to fetch and process jobs every second
-- Best for lightweight or dependency-free setups
+- Increase `prefetch` to improve parallelism per process.
+- Keep it aligned with downstream capacity (DB, external APIs, CPU/memory).
+- Combine with multiple process replicas for horizontal scaling.
 
-### 2 RabbitMQ Broker
+### 4) Horizontal replicas
 
-- Jobs processed via RabbitMQ queues
-- Uses `amqplib` for message handling
-- Best for larger-scale systems requiring reliability and routing
-- Management UI: [http://localhost:15672](http://localhost:15672)
-- Default login: `guest / guest`
-- Set `QUEUES_RABBIT_MQ_URL` to connect to your RabbitMQ instance
+Run multiple instances of the same subscriber service (PM2, ECS tasks, Kubernetes pods, etc.).
+
+- Same queue + multiple replicas -> competing consumers distribution.
+- Different regex filters + dedicated replicas -> isolated queue domains.
+
+## Deployment Note
+
+A practical deployment pattern is to run:
+
+1. Main backend service (API + optional publisher role)
+2. One or more dedicated subscriber services
+3. Optional subscriber pools per queue regex group
+
+### PM2 example: main backend
+
+```js
+module.exports = {
+  apps: [
+    {
+      name: "erp_solid_backend",
+      script: "npm",
+      args: "run start",
+    },
+  ],
+};
+```
+
+### PM2 example: solid_* subscriber pool
+
+```js
+module.exports = {
+  apps: [
+    {
+      name: "solid_subscribers",
+      script: "npm",
+      args: "run start",
+      env: {
+        PORT: "5000",
+        QUEUES_SERVICE_ROLE: "subscriber",
+        QUEUES_QUEUE_NAME_REGEX_TO_ENABLE: "^solid_",
+        SOLID_SCHEDULER_ENABLED: "false",
+      },
+    },
+  ],
+};
+```
+
+### PM2 example: non-solid subscriber pool
+
+```js
+module.exports = {
+  apps: [
+    {
+      name: "app_subscribers",
+      script: "npm",
+      args: "run start",
+      env: {
+        PORT: "4000",
+        QUEUES_SERVICE_ROLE: "subscriber",
+        QUEUES_QUEUE_NAME_REGEX_TO_ENABLE: "^(?!solid_).+",
+        SOLID_SCHEDULER_ENABLED: "false",
+      },
+    },
+  ],
+};
+```
+
+The same model maps directly to ECS:
+
+- Build one container image from the same codebase.
+- Create separate ECS task definitions/services with different environment variables.
+- Scale task count independently per subscriber service based on queue pressure.
+
+## Broker Selection Guidance
+
+Use Database broker when:
+
+- You want zero external queue infrastructure
+- Throughput is moderate
+- Simplicity is preferred
+
+Use RabbitMQ when:
+
+- Throughput is high
+- You need stronger queueing characteristics
+- You want fine-grained concurrency control using `prefetch`
+
+RabbitMQ management UI (default local setup): `http://localhost:15672` (`guest/guest`).

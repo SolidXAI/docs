@@ -128,8 +128,8 @@
     }
   },
   "recipes/queue.md": {
-    "hash": "884cea112874dcad7bcd3d63bb2c916550fc878c1d51ff64dbb965374e47ce81",
-    "document_id": "e03b0eae-06f5-403d-94d9-c3bbc735671e",
+    "hash": "cb0ace30c9e4787486086ee5c14e67ca74e75f09ff1f8eb87fefd4e97cd036f6",
+    "document_id": "d528ff29-64b0-4284-ae83-819ecf9ef893",
     "collection_id": "f0935ef1-c3c4-403d-b32f-2a2d52861db1",
     "metadata": {
       "source": "docusaurus",
@@ -1609,8 +1609,8 @@
     }
   },
   "developer-docs/extending/backend-customization/background-jobs.md": {
-    "hash": "f2589bf735816a64d1c5c6e53da8ad4994c4e60e4bc44995244ad8358370acc5",
-    "document_id": "8dd3fd4a-ebc4-417f-b2bb-c0050f1eed88",
+    "hash": "1c897d2576a329fde91cb218456afa552a8b3e81832086388b7dd3e36144d163",
+    "document_id": "b15d3c70-5a3f-4481-8c0d-b22d41c7c7c9",
     "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
     "metadata": {
       "source": "docusaurus",
@@ -1752,8 +1752,8 @@
     }
   },
   "developer-docs/extending/backend-customization/sms-providers.md": {
-    "hash": "3b38ce76ceec412f627db2fb320152d1d3c3150235b1fc78f4baac9cd967d346",
-    "document_id": "e42d12fb-bf3a-4bc2-ac90-fb6ae167fa77",
+    "hash": "a94ef6a15921d6d7416aa91790fbcb82709a42e9dd2583e10b6028353b62450a",
+    "document_id": "4d8cd9fa-284b-454e-aefe-7162c1eefb23",
     "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
     "metadata": {
       "source": "docusaurus",
@@ -2038,8 +2038,8 @@
     }
   },
   "developer-docs/extending/backend-customization/whatsapp-providers.md": {
-    "hash": "5c7e2ca1ee4c83a51ce7e60e404f0c5b2bfd5ac1e14c98f8efbfa3382a1013b2",
-    "document_id": "a1d97517-5b70-462e-b796-53496df155f2",
+    "hash": "7df962e9e11a616980acc6e6bdd7afb7d000c739b98bd642e26c7fd6c9923da1",
+    "document_id": "467268bd-0c78-4402-a367-1cbdaa80af7f",
     "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
     "metadata": {
       "source": "docusaurus",
@@ -2200,8 +2200,8 @@
     }
   },
   "tutorial/school-fees-portal/end-to-end-implementation/making_payment.md": {
-    "hash": "252cf1c8f9425aa0cb4902d99030205b46defab975e799f67c288af74c8d727d",
-    "document_id": "d2dab482-f0a5-4c30-9bea-72a335f2a13a",
+    "hash": "1dec0623ea85fd833f66fd314ac7bc9a95aaf85b01f0aa09674bd11f8e51f725",
+    "document_id": "b7576d2a-080e-466e-b0e5-95fb760c869a",
     "collection_id": "cd59267d-67e0-4897-91a6-1a338f5e83bf",
     "metadata": {
       "source": "docusaurus",
@@ -2212,12 +2212,12 @@
       "collection_id": "cd59267d-67e0-4897-91a6-1a338f5e83bf",
       "collection_name": "tutorial",
       "title": "tutorial/school-fees-portal/end-to-end-implementation/making_payment.md",
-      "chunk_count": 13
+      "chunk_count": 12
     }
   },
   "tutorial/school-fees-portal/end-to-end-implementation/institute_onboarding.md": {
-    "hash": "9d5a8602b1782f6bf0c8d4000ecaa1bfcf6b6bbe860602b4163ad4dbbdd4eb83",
-    "document_id": "3b5bec03-7ed4-4377-a864-f8a16298a01c",
+    "hash": "35d826414a0e0136d0990e8a33fcb46c13023229b96dfd49315b651dca6e8cdf",
+    "document_id": "ecc0bfed-6052-44ea-9822-9b5f3ac79921",
     "collection_id": "cd59267d-67e0-4897-91a6-1a338f5e83bf",
     "metadata": {
       "source": "docusaurus",
@@ -2237,8 +2237,8 @@
     }
   },
   "tutorial/school-fees-portal/end-to-end-implementation/initiate_payment.md": {
-    "hash": "c2b4c68b273ffe8cc94abf68e9bf3e838524d658648fcb92d24055a92ff02fd4",
-    "document_id": "18770ff3-1f0e-43b2-b679-919bbd03c955",
+    "hash": "e205327a1227e43ae4f7a093a2ea187ad5a69adca9e592e8be617e6e73f95a84",
+    "document_id": "2ba92607-44c8-4f22-af94-622a09388ae5",
     "collection_id": "cd59267d-67e0-4897-91a6-1a338f5e83bf",
     "metadata": {
       "source": "docusaurus",
@@ -2258,8 +2258,8 @@
     }
   },
   "tutorial/school-fees-portal/end-to-end-implementation/activate_institute.md": {
-    "hash": "7387e868406e2c9684c2071606bd2998539320061d46158ed360130810e60a97",
-    "document_id": "d2e19896-ab87-4a80-bc3b-3e28c9bed49d",
+    "hash": "56b28d0846771f4174b558b64d571031554ee4715a4f88074f6612e062cfbaf8",
+    "document_id": "4a31baf4-37b0-44b4-9e41-0e4fa51c1023",
     "collection_id": "cd59267d-67e0-4897-91a6-1a338f5e83bf",
     "metadata": {
       "source": "docusaurus",
@@ -2282,8 +2282,8 @@
     }
   },
   "tutorial/school-fees-portal/end-to-end-implementation/index.md": {
-    "hash": "e393edd3ecd5686b5bed45b16a178ac475379085db9de3c79b5305df6ed18431",
-    "document_id": "7b92933a-8dbe-419a-87a6-9c953c32826c",
+    "hash": "5787801c6869dc0c0f2e1fccc6e162fe80ff4aae5667359cb17519d3c245c4c5",
+    "document_id": "6fd5ad42-4c0f-448f-a48f-d5958ab0de64",
     "collection_id": "cd59267d-67e0-4897-91a6-1a338f5e83bf",
     "metadata": {
       "source": "docusaurus",

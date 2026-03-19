@@ -75,7 +75,7 @@ Views define UI presentation of models and automatically generate:
         }
       ],
       "configureViewActions": {
-        "import": { "roles": ["Admin", "Mswipe Admin"] }
+        "import": { "roles": ["Admin", "App Admin"] }
       },
       "children": [
         {

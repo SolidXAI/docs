@@ -54,7 +54,7 @@ As an example, consider extending the `User` model into an `InstituteUser` model
       "ormType": "varchar",
       "defaultValue": "Institute Admin",
       "selectionStaticValues": [
-        "Mswipe Admin:Mswipe Admin",
+        "App Admin:App Admin",
         "Institute Admin:Institute Admin"
       ],
       "required": true

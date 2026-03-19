@@ -998,7 +998,7 @@ GET /api/payment/checkout/success?session_id={CHECKOUT_SESSION_ID}
 GET /api/payment/checkout/cancel?session_id={CHECKOUT_SESSION_ID}
 ```
 
-The backend has separate handlers for each outcome. Both delegate to the same `handleMswipePaymentCallback` service method:
+The backend has separate handlers for each outcome. Both delegate to the same `handlePaymentCallback` service method:
 
 ```typescript
 // controllers/payment.controller.ts
@@ -1009,7 +1009,7 @@ async handleCheckoutSuccess(
   @Req() request: Request,
   @Res() response: Response,
 ) {
-  const result = await this.service.handleMswipePaymentCallback({
+  const result = await this.service.handlePaymentCallback({
     method: 'GET',
     query: request.query,
     body: request.body,
@@ -1017,7 +1017,7 @@ async handleCheckoutSuccess(
 
   const status = result.success ? 'success' : 'failed';
   return response.redirect(
-    `https://${result.hostedPagePrefix}${process.env.EDU_BASE_DOMAIN}/dashboard?paymentStatus=${status}&txnId=${result.payment.mSwipeIpgTransId}`,
+    `https://${result.hostedPagePrefix}${process.env.EDU_BASE_DOMAIN}/dashboard?paymentStatus=${status}&txnId=${result.payment.transId}`,
   );
 }
 
@@ -1027,30 +1027,30 @@ async handleCheckoutCancel(
   @Req() request: Request,
   @Res() response: Response,
 ) {
-  const result = await this.service.handleMswipePaymentCallback({
+  const result = await this.service.handlePaymentCallback({
     method: 'GET',
     query: request.query,
     body: request.body,
   });
 
   return response.redirect(
-    `https://${result.hostedPagePrefix}${process.env.EDU_BASE_DOMAIN}/dashboard?paymentStatus=failed&txnId=${result.payment.mSwipeIpgTransId}`,
+    `https://${result.hostedPagePrefix}${process.env.EDU_BASE_DOMAIN}/dashboard?paymentStatus=failed&txnId=${result.payment.transId}`,
   );
 }
 ```
 
-**Backend Processing — `handleMswipePaymentCallback`:**
+**Backend Processing — `handlePaymentCallback`:**
 
 The service method handles the entire callback flow — parsing the gateway response, updating records, sending emails, and returning the redirect info:
 
 ```typescript
 // services/payment.service.ts
 
-async handleMswipePaymentCallback(data: any) {
+async handlePaymentCallback(data: any) {
   // Step 10a: Parse callback data from the payment gateway
   const callbackData = await this.paymentGateway.handlePaymentCallback(data);
-  const txnId = callbackData.mswipeIpgTransId;
-  const transactionStatus = callbackData.mswipeIpgStatus;
+  const txnId = callbackData.transId;
+  const transactionStatus = callbackData.status;
 
   // Step 10b: Find the Payment record using the invoice ID
   const paymentData = await this.find({
@@ -1058,7 +1058,7 @@ async handleMswipePaymentCallback(data: any) {
       $and: [
         {
           $or: [
-            { mSwipeIpgInvoiceId: { $eqi: callbackData.mswipeIpgInvoiceId } },
+            { invoiceId: { $eqi: callbackData.invoiceId } },
           ],
         },
       ],
@@ -1072,15 +1072,15 @@ async handleMswipePaymentCallback(data: any) {
   }
 
   const payment = paymentData.records?.find(
-    (p) => p.mSwipeIpgInvoiceId === callbackData.mswipeIpgInvoiceId,
+    (p) => p.invoiceId === callbackData.invoiceId,
   );
 
   // Step 10c: Update the Payment record with gateway response data
   if (payment) {
-    payment.mSwipeIpgTransId = callbackData.mswipeIpgTransId;
-    payment.mSwipeIpgStatus = transactionStatus;
-    payment.mSwipeEncodedIpgId = callbackData.mswipeEncodedIpgId;
-    payment.mSwipeIpgInvoiceId = callbackData.mswipeIpgInvoiceId;
+    payment.transId = callbackData.transId;
+    payment.status = transactionStatus;
+    payment.encodedIpgId = callbackData.encodedIpgId;
+    payment.invoiceId = callbackData.invoiceId;
     payment.paymentStatus = transactionStatus === 'success' ? 'Succeeded' : 'Failed';
     await this.repo.save(payment);
   }
@@ -1142,7 +1142,7 @@ https://delhi.dpsschools.edu.in/dashboard?paymentStatus=failed&txnId=TXN123456
 
 #### Step 11: Payment Failure Handling
 
-If the student cancels payment on the Stripe Checkout page, Stripe redirects to the `cancel_url` (`/api/payment/checkout/cancel`). The `handleCheckoutCancel` controller shown above calls the same `handleMswipePaymentCallback` service method. Since the transaction status from the gateway will not be `'success'`, the following happens within the same code flow:
+If the student cancels payment on the Stripe Checkout page, Stripe redirects to the `cancel_url` (`/api/payment/checkout/cancel`). The `handleCheckoutCancel` controller shown above calls the same `handlePaymentCallback` service method. Since the transaction status from the gateway will not be `'success'`, the following happens within the same code flow:
 
 1. **Payment record** is updated with `paymentStatus: 'Failed'` (via the `transactionStatus === 'success' ? 'Succeeded' : 'Failed'` check)
 2. **All PaymentCollectionItemDetail records** are updated to `'Failed'` status (the `for` loop sets `detail.paymentStatus = payment.paymentStatus`)

@@ -52,7 +52,7 @@ For a conceptual overview of menus in SolidX, refer to the [Menu System Overview
       "parentMenuItemUserKey": "",
       "roles": [
         "Institute Admin",
-        "Mswipe Admin"
+        "App Admin"
       ],
       "iconName": "school"
     },
@@ -65,7 +65,7 @@ For a conceptual overview of menus in SolidX, refer to the [Menu System Overview
       "parentMenuItemUserKey": "",
       "roles": [
         "Institute Admin",
-        "Mswipe Admin"
+        "App Admin"
       ],
       "iconName": "payments"
     },
@@ -78,7 +78,7 @@ For a conceptual overview of menus in SolidX, refer to the [Menu System Overview
       "parentMenuItemUserKey": "paymentCollection-menu-item",
       "roles": [
         "Institute Admin",
-        "Mswipe Admin"
+        "App Admin"
       ],
       "iconName": "receipt"
     },

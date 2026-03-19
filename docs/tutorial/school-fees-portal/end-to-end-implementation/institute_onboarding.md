@@ -1099,8 +1099,8 @@ List views configure which roles can perform specific actions:
 "configureViewActions": {
   "import": { "roles": ["Admin"] },
   "showArchived": { "roles": ["Admin"] },
-  "export": { "roles": ["Admin", "Mswipe Admin", "Institute Admin"] },
-  "customizeLayout": { "roles": ["Admin", "Mswipe Admin", "Institute Admin"] },
+  "export": { "roles": ["Admin", "App Admin", "Institute Admin"] },
+  "customizeLayout": { "roles": ["Admin", "App Admin", "Institute Admin"] },
   "saveCustomFilter": { "roles": ["Admin"] }
 }
 ```
