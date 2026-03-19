@@ -44,7 +44,7 @@ First we create a config object to represent our job, we are essentially only gi
 Eg. 
 
 ```tsx
-import { BrokerType } from '../../interfaces';
+import { BrokerType } from "@solidxai/core";
 
 const QUEUE_NAME = 'test_queue_db';
 
@@ -70,10 +70,10 @@ Eg.
 ```tsx
 import { Injectable } from '@nestjs/common';
 import testQueueConfig from './test-queue-options-database';
-import { MqMessageQueueService } from '../../services/mq-message-queue.service';
-import { MqMessageService } from '../../services/mq-message.service';
-import { QueuesModuleOptions } from '../../interfaces';
-import { DatabasePublisher } from 'src/services/queues/database-publisher.service';
+import { MqMessageQueueService } from "@solidxai/core";
+import { MqMessageService } from "@solidxai/core";
+import { QueuesModuleOptions } from "@solidxai/core";
+import { DatabasePublisher } from "@solidxai/core";
 
 @Injectable()
 export class TestQueuePublisherDatabase extends DatabasePublisher<any> {
@@ -106,12 +106,12 @@ Eg.
 
 ```tsx
 import { Injectable, Logger } from '@nestjs/common';
-import { QueueMessage } from 'src/interfaces/mq';
+import { QueueMessage } from "@solidxai/core";
 import testQueueConfig from './test-queue-options-database';
-import { MqMessageService } from '../../services/mq-message.service';
-import { MqMessageQueueService } from '../../services/mq-message-queue.service';
-import { QueuesModuleOptions } from "../../interfaces";
-import { DatabaseSubscriber } from 'src/services/queues/database-subscriber.service';
+import { MqMessageService } from "@solidxai/core";
+import { MqMessageQueueService } from "@solidxai/core";
+import { QueuesModuleOptions } from "@solidxai/core";
+import { DatabaseSubscriber } from "@solidxai/core";
 
 @Injectable()
 export class TestQueueSubscriberDatabase extends DatabaseSubscriber<any> {
@@ -155,9 +155,9 @@ Eg.
 ```tsx
 import { Logger } from '@nestjs/common';
 import { Injectable } from '@nestjs/common';
-import { QueueMessage, QueuePublisher } from 'src/interfaces/mq';
+import { QueueMessage, QueuePublisher } from "@solidxai/core";
 import { classify } from '@angular-devkit/core/src/utils/strings';
-import { SolidIntrospectService } from '../solid-introspect.service';
+import { SolidIntrospectService } from "@solidxai/core";
 
 @Injectable()
 export class PublisherFactory<T> {

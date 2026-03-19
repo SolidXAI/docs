@@ -178,13 +178,13 @@ The rest (template rendering, queueing) is reusable across providers.
 ```ts title="custom-sms.service.ts"
 import { Injectable, Logger } from "@nestjs/common";
 import Handlebars from "handlebars";
-import { QueueMessage } from "src/interfaces/mq";
-import { SmsTemplateService } from "../sms-template.service";
-import { ISMS } from "../../interfaces";
-import { PublisherFactory } from "../queues/publisher-factory.service";
-import { SettingService } from "../setting.service";
-import { SmsProvider } from "src/decorators/sms-provider.decorator";
-import type { SolidCoreSetting } from "src/services/settings/default-settings-provider.service";
+import { QueueMessage } from "@solidxai/core";
+import { SmsTemplateService } from "@solidxai/core";
+import { ISMS } from "@solidxai/core";
+import { PublisherFactory } from "@solidxai/core";
+import { SettingService } from "@solidxai/core";
+import { SmsProvider } from "@solidxai/core";
+import type { SolidCoreSetting } from "@solidxai/core";
 
 /**
  * Example Custom SMS Service

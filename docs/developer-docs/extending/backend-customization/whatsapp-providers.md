@@ -40,11 +40,11 @@ Below is a sample implementation of a custom WhatsApp provider using a hypotheti
 import { HttpService } from '@nestjs/axios';
 import { Inject, Injectable, Logger } from '@nestjs/common';
 import { ConfigType } from '@nestjs/config';
-import commonConfig from 'src/config/common.config';
-import { QueueMessage } from 'src/interfaces/mq';
-import { IWhatsAppTransport } from "../../interfaces";
-import { PublisherFactory } from '../queues/publisher-factory.service';
-import { WhatsAppProvider } from 'src/decorators/whatsapp-provider.decorator';
+import commonConfig from "@solidxai/core";
+import { QueueMessage } from "@solidxai/core";
+import { IWhatsAppTransport } from "@solidxai/core";
+import { PublisherFactory } from "@solidxai/core";
+import { WhatsAppProvider } from "@solidxai/core";
 
 @Injectable()
 @WhatsAppProvider()

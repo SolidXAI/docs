@@ -429,7 +429,7 @@ Before processing the uploaded Excel file, validation ensures data quality and p
 **Key Code Pattern:**
 
 ```typescript
-import { ExcelService } from 'src/services/excel.service';
+import { ExcelService } from "@solidxai/core";
 import { createReadStream } from 'fs';
 
 @Injectable()
@@ -604,7 +604,7 @@ For Each Row in Excel:
 **Key Code Pattern:**
 
 ```typescript
-import { ExcelService } from 'src/services/excel.service';
+import { ExcelService } from "@solidxai/core";
 import { createReadStream } from 'fs';
 
 @EventSubscriber()

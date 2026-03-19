@@ -52,7 +52,7 @@ Below is an example configuration for a database-backed queue for sending emails
   </summary>
 
 ```ts
-import { BrokerType } from "src/interfaces";
+import { BrokerType } from "@solidxai/core";
 
 const MAIL_QUEUE_NAME = "solidx.email.db"; 
 //const MAIL_QUEUE_NAME = "solidx.email.rabbitmq"; //For RabbitMQ
@@ -81,10 +81,10 @@ We need to create a publisher class which extends the appropriate base publisher
 ```ts
 import { Injectable } from "@nestjs/common";
 import mailQueueOptions from "./email-queue-options-database";
-import { MqMessageQueueService } from "src/services/mq-message-queue.service";
-import { MqMessageService } from "src/services/mq-message.service";
-import { QueuesModuleOptions } from "src/interfaces";
-import { DatabasePublisher } from "src/services/queues/database-publisher.service";
+import { MqMessageQueueService } "@solidxai/core";
+import { MqMessageService } from "@solidxai/core";
+import { QueuesModuleOptions } from "@solidxai/core";
+import { DatabasePublisher } from "@solidxai/core";
 
 @Injectable()
 export class EmailQueuePublisherDatabase extends DatabasePublisher<any> {
@@ -126,12 +126,12 @@ Below is an example subscriber that sends emails using the SMTP service.
 ```ts
 import { Injectable } from "@nestjs/common";
 import mailQueueOptions from "./email-queue-options-database";
-import { QueueMessage } from "src/interfaces/mq";
-import { MqMessageService } from "src/services/mq-message.service";
-import { MqMessageQueueService } from "src/services/mq-message-queue.service";
-import { DatabaseSubscriber } from "src/services/queues/database-subscriber.service";
-import { SMTPEMailService } from "src/services/mail/SMTPEmailService";
-import { QueuesModuleOptions } from "src/interfaces";
+import { QueueMessage } from "@solidxai/core";
+import { MqMessageService } from "@solidxai/core";
+import { MqMessageQueueService } from "@solidxai/core";
+import { DatabaseSubscriber } from "@solidxai/core";
+import { SMTPEMailService } from "@solidxai/core";
+import { QueuesModuleOptions } from "@solidxai/core";
 
 @Injectable()
 export class EmailQueueSubscriberDatabase extends DatabaseSubscriber<any> {
