@@ -149,11 +149,13 @@ Individual students enrolled at your institution whose parents/guardians will re
 | 10 | `otp` | OTP | [Short Text](../../../admin-docs/module-builder/field-management#short-text) | No | — |
 | 11 | `otpExpiresAt` | OTP Expires At | [Datetime](../../../admin-docs/module-builder/field-management#datetime) | No | — |
 | 12 | `token` | Token | [Long Text](../../../admin-docs/module-builder/field-management#long-text) | No | — |
-| 13 | `payments` | Payments | [Relation](../../../admin-docs/module-builder/field-management#relation) | — | One-to-Many → `payment` (fees-portal)<br/>Inverse field: `student`<br/>Create Inverse: Yes<br/>Cascade |
-
 </div>
 
 > Students are automatically created (or updated) when you upload a payment collection Excel file — matched by Student ID. Students can log in to the portal using their `studentLoginId` and OTP.
+
+:::info Deferred relation
+The `payments` (One-to-Many → `payment`) field is not added here because the `payment` model does not exist yet. It is auto-created when you add the `student` field on the Payment model in [Student Payment Portal](./making_payment.md) (field 7, Create Inverse: Yes).
+:::
 
 <span id="studentloginid-provider-context"></span>
 <details open>
@@ -200,11 +202,9 @@ A batch of fee collection requests sent to multiple students at once (e.g., "Q1 
 | 4 | `paymentCollectionId` | Payment Collection ID | [Computed](../../../admin-docs/module-builder/field-management#computed) | Yes | Unique<br/>Index<br/>Type: string<br/>Provider: `AlphaNumExternalIdComputationProvider`<br/>Generates unique alphanumeric ID from collection name, length 5 ([full config ↓](#paymentcollectionid-provider-context))<br/>Trigger: before-insert on `paymentCollection` (fees-portal)<br/>Audit |
 | 5 | `institute` | Institute | [Relation](../../../admin-docs/module-builder/field-management#relation) | Yes | Many-to-One → `institute` (fees-portal)<br/>Create Inverse: No<br/>Cascade<br/>Index<br/>Audit |
 | 6 | `paymentFile` | Payment File | [Media (Single)](../../../admin-docs/module-builder/field-management#single-media) | Yes | file<br/>max 5120 KB<br/>default-filesystem |
-| 7 | `paymentCollectionItems` | Payment Collection Items | [Relation](../../../admin-docs/module-builder/field-management#relation) | — | One-to-Many → `paymentCollectionItem` (fees-portal)<br/>Inverse field: `paymentCollection`<br/>Create Inverse: Yes<br/>Cascade |
-
 </div>
 
-> Deleting a Payment Collection cascades to all its Payment Collection Items (via field 7).
+> The `paymentCollectionItems` relation is added in [Step 5](#5-adding-relation-fields) after the `paymentCollectionItem` model exists. Deleting a Payment Collection cascades to all its Payment Collection Items via that relation.
 
 <span id="paymentcollectionid-provider-context"></span>
 <details open>
@@ -260,11 +260,10 @@ An individual payment request for one student for one fee type within a collecti
 | 13 | `paymentCollection` | Payment Collection | [Relation](../../../admin-docs/module-builder/field-management#relation) | Yes | Many-to-One → `paymentCollection` (fees-portal)<br/>Inverse field: `paymentCollectionItems`<br/>Create Inverse: Yes<br/>Cascade<br/>Index<br/>Audit |
 | 14 | `institute` | Institute | [Relation](../../../admin-docs/module-builder/field-management#relation) | Yes | Many-to-One → `institute` (fees-portal)<br/>Create Inverse: No<br/>Cascade<br/>Index<br/>Audit |
 | 15 | `feeType` | Fee Type | [Relation](../../../admin-docs/module-builder/field-management#relation) | Yes | Many-to-One → `feeType` (fees-portal)<br/>Create Inverse: No<br/>Cascade<br/>Index<br/>Audit |
-| 16 | `paymentCollectionItemDetails` | Payment Collection Item Details | [Relation](../../../admin-docs/module-builder/field-management#relation) | — | One-to-Many → `paymentCollectionItemDetail` (fees-portal)<br/>Inverse field: `paymentCollectionItem`<br/>Create Inverse: Yes<br/>Cascade |
-
 </div>
 
 > **Payment Modes:** Choose `PG` when parents will pay online (initial status: `Pending`); choose `CASH` when payment has already been collected offline (initial status: `Fully Paid`).
+> The `paymentCollectionItemDetails` relation is added in [Step 5](#5-adding-relation-fields) after the `paymentCollectionItemDetail` model exists.
 
 ---
 
@@ -301,9 +300,43 @@ Individual payment transactions recorded against a payment collection item — t
 | 4 | `institute` | Institute | [Relation](../../../admin-docs/module-builder/field-management#relation) | Yes | Many-to-One → `institute` (fees-portal)<br/>Create Inverse: No<br/>Cascade<br/>Index<br/>Audit |
 | 5 | `student` | Student | [Relation](../../../admin-docs/module-builder/field-management#relation) | Yes | Many-to-One → `student` (fees-portal)<br/>Create Inverse: No<br/>Cascade<br/>Index<br/>Audit |
 | 6 | `paymentCollectionItem` | Payment Collection Item | [Relation](../../../admin-docs/module-builder/field-management#relation) | Yes | Many-to-One → `paymentCollectionItem` (fees-portal)<br/>Inverse field: `paymentCollectionItemDetails`<br/>Create Inverse: Yes<br/>Cascade<br/>Index<br/>Audit |
-| 7 | `payment` | Payment | [Relation](../../../admin-docs/module-builder/field-management#relation) | No | Many-to-One → `payment` (fees-portal)<br/>Create Inverse: No<br/>Cascade<br/>Index<br/>Audit |
+</div>
+
+:::info Deferred relation
+The `payment` (Many-to-One → `payment`) field is not added here because the `payment` model does not exist yet. It is auto-created when you add the `paymentCollectionItemDetails` field on the Payment model in [Student Payment Portal](./making_payment.md) (field 9, Create Inverse: Yes).
+:::
+
+---
+
+#### 5. Adding Relation Fields
+
+Now that all four models exist, return to the following models and add the deferred relation fields.
+
+:::info Why add these last?
+SolidX requires the co-model to already exist before you can create a relation pointing to it. The two One-to-Many fields below reference models that were not yet created when their parent models were built.
+:::
+
+**Payment Collection — add field 7:**
+
+<div style={{overflowX: 'auto'}}>
+
+| # | Name | Display Name | Type | Req? | Key Config |
+|---|------|-------------|------|------|------------|
+| 7 | `paymentCollectionItems` | Payment Collection Items | [Relation](../../../admin-docs/module-builder/field-management#relation) | — | One-to-Many → `paymentCollectionItem` (fees-portal)<br/>Inverse field: `paymentCollection`<br/>Create Inverse: Yes<br/>Cascade |
 
 </div>
+
+**Payment Collection Item — add field 16:**
+
+<div style={{overflowX: 'auto'}}>
+
+| # | Name | Display Name | Type | Req? | Key Config |
+|---|------|-------------|------|------|------------|
+| 16 | `paymentCollectionItemDetails` | Payment Collection Item Details | [Relation](../../../admin-docs/module-builder/field-management#relation) | — | One-to-Many → `paymentCollectionItemDetail` (fees-portal)<br/>Inverse field: `paymentCollectionItem`<br/>Create Inverse: Yes<br/>Cascade |
+
+</div>
+
+> The `payments` field on Student and the `payment` field on Payment Collection Item Detail are handled automatically in [Student Payment Portal](./making_payment.md) when the `payment` model is created (via Create Inverse: Yes on fields 7 and 9 respectively).
 
 :::tip Quick Reference
 For a handy summary of field types and configuration options used in this tutorial, see:

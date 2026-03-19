@@ -101,6 +101,12 @@ A single payment transaction initiated by a student through the payment gateway.
 
 > A Payment record is created with `paymentStatus: "Pending"` before the student is redirected to Stripe. Status is updated to `"Succeeded"` or `"Failed"` via the callback endpoints after Stripe confirms the outcome.
 
+:::info Deferred relations completed here
+Creating this model completes two relations that were deferred in [Initiate Payment](./initiate_payment.md):
+- **Field 7** (`student`, Many-to-One, Create Inverse: Yes) auto-creates the `payments` field on the **Student** model.
+- **Field 9** (`paymentCollectionItemDetails`, One-to-Many, Create Inverse: Yes) auto-creates the `payment` field on the **Payment Collection Item Detail** model.
+:::
+
 ## Payment Gateway Integration (Stripe)
 
 This section covers the Stripe payment gateway integration used to process student fee payments. The application uses [Stripe Checkout](https://stripe.com/docs/payments/checkout) to provide a secure, Stripe-hosted payment page.

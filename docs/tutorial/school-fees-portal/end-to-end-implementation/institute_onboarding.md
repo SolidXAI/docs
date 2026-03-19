@@ -80,24 +80,22 @@ Represents your educational institution — the top-level entity that owns fee t
 | 5 | `paymentGatewayAccessKey` | Access Key | [Short Text](../../../admin-docs/module-builder/field-management#short-text) | Yes | Unique<br/>Audit |
 | 6 | `paymentGatewayAccessSecret` | Access Secret | [Short Text](../../../admin-docs/module-builder/field-management#short-text) | Yes | Audit |
 | 7 | `instituteAddress` | Institute Address | [Long Text](../../../admin-docs/module-builder/field-management#long-text) | No | — |
-| 8 | `feeTypes` | Fee Types | [Relation](../../../admin-docs/module-builder/field-management#relation) | — | One-to-Many → `feeType` (fees-portal)<br/>Inverse field: `institute`<br/>Create Inverse: ✓ Yes<br/>Cascade<br/>Audit |
-| 9 | `instituteUsers` | Institute Users | [Relation](../../../admin-docs/module-builder/field-management#relation) | — | One-to-Many → `instituteUser` (fees-portal)<br/>Inverse field: `institute`<br/>Create Inverse: ✓ Yes<br/>Cascade<br/>Audit |
-| 10 | `instituteBrochure` | Institute Brochure | [Media (Single)](../../../admin-docs/module-builder/field-management#single-media) | No | file<br/>max 5120 KB<br/>default-filesystem |
-| 11 | `instituteIntroVideo` | Institute Intro Video | [Media (Single)](../../../admin-docs/module-builder/field-management#single-media) | No | video<br/>max 5120 KB<br/>default-filesystem |
-| 12 | `supportEmail` | Support Email | [Short Text](../../../admin-docs/module-builder/field-management#short-text) | Yes | Audit |
-| 13 | `supportMobile` | Support Mobile | [Short Text](../../../admin-docs/module-builder/field-management#short-text) | Yes | Min/Max Length: 10<br/>Audit |
-| 14 | `gst` | GST | [Short Text](../../../admin-docs/module-builder/field-management#short-text) | No | Audit |
-| 15 | `tnC` | Terms and Conditions | [Rich Text](../../../admin-docs/module-builder/field-management#rich-text) | No | — |
-| 16 | `faqs` | FAQs | [Rich Text](../../../admin-docs/module-builder/field-management#rich-text) | No | — |
-| 17 | `privacyPolicy` | Privacy Policy | [Rich Text](../../../admin-docs/module-builder/field-management#rich-text) | No | — |
-| 18 | `emailDomain` | Email Domain | [Short Text](../../../admin-docs/module-builder/field-management#short-text) | No | Audit |
-| 19 | `custUserId` | Cust UserID | [Short Text](../../../admin-docs/module-builder/field-management#short-text) | Yes | — |
-| 20 | `hostedPagePrefix` | Hosted Page Prefix | [Short Text](../../../admin-docs/module-builder/field-management#short-text) | Yes | Unique<br/>Audit<br/>Subdomain prefix — e.g. `delhi` → `delhi.<base-domain>` |
-| 21 | `status` | Status | [Selection (Static)](../../../admin-docs/module-builder/field-management#static-selection) | Auto | Default: `InActive`<br/>Values: `InActive, Active`<br/>Index<br/>Audit |
+| 8 | `instituteBrochure` | Institute Brochure | [Media (Single)](../../../admin-docs/module-builder/field-management#single-media) | No | file<br/>max 5120 KB<br/>default-filesystem |
+| 9 | `instituteIntroVideo` | Institute Intro Video | [Media (Single)](../../../admin-docs/module-builder/field-management#single-media) | No | video<br/>max 5120 KB<br/>default-filesystem |
+| 10 | `supportEmail` | Support Email | [Short Text](../../../admin-docs/module-builder/field-management#short-text) | Yes | Audit |
+| 11 | `supportMobile` | Support Mobile | [Short Text](../../../admin-docs/module-builder/field-management#short-text) | Yes | Min/Max Length: 10<br/>Audit |
+| 12 | `gst` | GST | [Short Text](../../../admin-docs/module-builder/field-management#short-text) | No | Audit |
+| 13 | `tnC` | Terms and Conditions | [Rich Text](../../../admin-docs/module-builder/field-management#rich-text) | No | — |
+| 14 | `faqs` | FAQs | [Rich Text](../../../admin-docs/module-builder/field-management#rich-text) | No | — |
+| 15 | `privacyPolicy` | Privacy Policy | [Rich Text](../../../admin-docs/module-builder/field-management#rich-text) | No | — |
+| 16 | `emailDomain` | Email Domain | [Short Text](../../../admin-docs/module-builder/field-management#short-text) | No | Audit |
+| 17 | `custUserId` | Cust UserID | [Short Text](../../../admin-docs/module-builder/field-management#short-text) | Yes | — |
+| 18 | `hostedPagePrefix` | Hosted Page Prefix | [Short Text](../../../admin-docs/module-builder/field-management#short-text) | Yes | Unique<br/>Audit<br/>Subdomain prefix — e.g. `delhi` → `delhi.<base-domain>` |
+| 19 | `status` | Status | [Selection (Static)](../../../admin-docs/module-builder/field-management#static-selection) | Auto | Default: `InActive`<br/>Values: `InActive, Active`<br/>Index<br/>Audit |
 
 </div>
 
-> Deleting an Institute cascades to all its fee types and users (via fields 8 and 9).
+> The relation fields (`feeTypes` and `instituteUsers`) are added in [Step 4](#4-adding-relation-fields-to-institute) after the co-models exist. Deleting an Institute cascades to all its fee types and users via those relations.
 
 ---
 
@@ -192,6 +190,27 @@ The child model adds only the institute-specific fields below, without duplicati
 
 </div>
 
+---
+
+#### 4. Adding Relation Fields to Institute
+
+Now that both `feeType` and `instituteUser` models exist, return to the **Institute** model and add the following two relation fields.
+
+:::info Why add these last?
+SolidX requires the co-model to already exist before you can create a relation pointing to it. Adding these fields now ensures `feeType` and `instituteUser` are in place and selectable.
+:::
+
+<div style={{overflowX: 'auto'}}>
+
+| # | Name | Display Name | Type | Req? | Key Config |
+|---|------|-------------|------|------|------------|
+| 20 | `feeTypes` | Fee Types | [Relation](../../../admin-docs/module-builder/field-management#relation) | — | One-to-Many → `feeType` (fees-portal)<br/>Inverse field: `institute`<br/>Create Inverse: ✓ Yes<br/>Cascade<br/>Audit |
+| 21 | `instituteUsers` | Institute Users | [Relation](../../../admin-docs/module-builder/field-management#relation) | — | One-to-Many → `instituteUser` (fees-portal)<br/>Inverse field: `institute`<br/>Create Inverse: ✓ Yes<br/>Cascade<br/>Audit |
+
+</div>
+
+> Deleting an Institute cascades to all its fee types and users (via fields 20 and 21).
+
 :::tip Quick Reference
 For a handy summary of field types and configuration options used in this tutorial, see:
 - 📚 [Field Type Reference](../common/field-types.md) - Quick-reference table of field types and their key attributes
@@ -233,7 +252,7 @@ Create a role named exactly **`Institute Admin`** and grant the following permis
 - **Institute User** — Institute Admin can invite staff individually or in bulk (`insertMany`), but cannot delete user accounts — individually or in bulk — as that is a destructive action reserved for Super Admin.
 
 :::tip Reference Documentation
-📋 For step-by-step instructions on creating a role and assigning permissions in SolidX, see [Role Management](../../../admin-docs/role-management).
+📋 For step-by-step instructions on creating a role and assigning permissions in SolidX, see [Role Management](../../../admin-docs/iam/roles.md).
 :::
 
 ### Customizing the UI
