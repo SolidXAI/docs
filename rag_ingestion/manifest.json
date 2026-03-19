@@ -755,8 +755,8 @@
     }
   },
   "developer-docs/metadata_schema/action-metadata.md": {
-    "hash": "20532535257071bc3e53f6c0d81171f448e4a0260239eec2c5590b6d4803974c",
-    "document_id": "43335eef-6966-44a0-a559-1d2cf9625dcd",
+    "hash": "c7a7270d2a38bc950bd4904773ada8d8b3dbb8929a6f4434f44c8de5dc15e48b",
+    "document_id": "7fa892dd-fabc-45f9-aaf5-7f4094ddac28",
     "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
     "metadata": {
       "source": "docusaurus",
@@ -776,8 +776,8 @@
     }
   },
   "developer-docs/metadata_schema/menu-item-metadata.md": {
-    "hash": "f528a8affaac6be31fa732eab045f6c29240e25d477c107ee6bfe9a63ea48a44",
-    "document_id": "ca9d10c0-6b8a-411c-a529-1e3aa0eecfc8",
+    "hash": "6e8c7a291d978bb8453ae8275becf5af4a63be66af26baa67955d29a2cf8cf18",
+    "document_id": "4fb743c5-68aa-4c0a-8eb0-5a2df43a157f",
     "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
     "metadata": {
       "source": "docusaurus",
@@ -799,8 +799,8 @@
     }
   },
   "developer-docs/metadata_schema/view-metadata.md": {
-    "hash": "a1b9aec9309e9e6cb6e6db4fd34d4f87894908c94df3c5bdc67fa4dd3df28b4a",
-    "document_id": "7930e7b7-9b6d-44b5-828d-3311e5b88926",
+    "hash": "eae84e112a2f730dc388b3ad478779260fb583751263115913e665298d358a57",
+    "document_id": "e0798b31-244f-441f-9b4e-e54348116801",
     "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
     "metadata": {
       "source": "docusaurus",
@@ -1609,8 +1609,8 @@
     }
   },
   "developer-docs/extending/backend-customization/background-jobs.md": {
-    "hash": "1c897d2576a329fde91cb218456afa552a8b3e81832086388b7dd3e36144d163",
-    "document_id": "b15d3c70-5a3f-4481-8c0d-b22d41c7c7c9",
+    "hash": "6aedf83ba3bf5c1afe29642d6ed1a183d3dae5634f061c2b7ee5d3c3a062897a",
+    "document_id": "74790d27-df50-498b-bc75-c696a0dbcdb1",
     "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
     "metadata": {
       "source": "docusaurus",
@@ -1619,15 +1619,16 @@
       "path": "developer-docs/extending/backend-customization/background-jobs.md",
       "doc_title": "developer-docs/extending/backend-customization/background-jobs.md",
       "title": "Background Jobs",
-      "description": "Learn how to set up and manage background jobs in SolidX, including configuration for different brokers like Database and RabbitMQ.",
-      "summary": "Comprehensive guide to implementing asynchronous task processing in SolidX using background jobs. Covers the Work Queue/Competing Consumers pattern with database-backed and RabbitMQ brokers. Details publisher/subscriber setup, queue configuration, message handling, job tracking via `ss_mq_message` tables, retry mechanisms, and integration with email/SMS/WhatsApp providers. Includes code examples for both broker types and job execution patterns.",
+      "description": "Learn how to set up and manage background jobs in SolidX using database and RabbitMQ brokers.",
+      "summary": "Comprehensive guide to asynchronous processing in SolidX with the Work Queue/Competing Consumers pattern. Covers typed queue payloads, queue options, PublisherFactory-based publishing, subscribers, environment setup, and broker-specific examples for Database and RabbitMQ. Includes a dedicated RabbitMQ section for `prefetch` and parallel consumption behavior.",
       "keywords": [
         "background jobs",
         "SolidX",
         "asynchronous processing",
         "job queues",
         "RabbitMQ",
-        "database broker"
+        "database broker",
+        "prefetch"
       ],
       "solidx_concerns": [
         "backend.background_jobs",
@@ -1640,7 +1641,7 @@
       ],
       "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
       "collection_name": "developer-docs",
-      "chunk_count": 5
+      "chunk_count": 12
     }
   },
   "developer-docs/extending/backend-customization/computation-providers.md": {
@@ -1699,8 +1700,8 @@
     }
   },
   "developer-docs/extending/backend-customization/typeorm-subscribers.md": {
-    "hash": "2440cb93615c323e63d3126044dba24680a6186ae43d3307245877c08e2fc947",
-    "document_id": "fb7f651e-b68b-478b-aca2-05b46fa80074",
+    "hash": "8576dcb7ddae798c678bf1cac67c62fc8d32e54c57e52188b1f1b8c331af7aad",
+    "document_id": "eb513df6-7b0b-445b-85f6-dc1f0c956d79",
     "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
     "metadata": {
       "source": "docusaurus",
@@ -1709,19 +1710,22 @@
       "path": "developer-docs/extending/backend-customization/typeorm-subscribers.md",
       "doc_title": "developer-docs/extending/backend-customization/typeorm-subscribers.md",
       "title": "TypeORM Subscribers",
-      "description": "Learn how to create and use TypeORM subscribers in your SolidX application.",
-      "summary": "Covers TypeORM subscribers for listening to entity lifecycle events (beforeInsert, afterInsert, beforeUpdate, afterUpdate, beforeRemove, afterRemove, afterLoad, transaction events). Explains creating subscribers implementing `EntitySubscriberInterface` with `@Injectable()` decorator for dependency injection, keeping business logic in dedicated services, registering subscribers in TypeORM configuration, and includes examples like `UserSubscriber` for audit logging. Recommends SolidX computed fields for most use cases.",
+      "description": "Recommended pattern for TypeORM subscribers in SolidX: publish a background job via PublisherFactory from subscriber hooks and execute business logic in queue subscribers.",
+      "summary": "Updated guidance for SolidX TypeORM subscribers. Recommends keeping overridden entity hooks thin and always triggering a publisher-subscriber background job pair through PublisherFactory, instead of executing heavy side effects inline. Covers rationale, transaction-boundary safety, implementation pattern, and code examples.",
       "keywords": [
         "backend",
         "TypeORM subscribers",
-        "customization"
+        "background jobs",
+        "transaction safety"
       ],
       "solidx_concerns": [
-        "typeorm_subscriber"
+        "typeorm_subscriber",
+        "backend.background_jobs",
+        "new_background_job"
       ],
       "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
       "collection_name": "developer-docs",
-      "chunk_count": 5
+      "chunk_count": 8
     }
   },
   "developer-docs/extending/backend-customization/scheduled-jobs.md": {
@@ -1778,8 +1782,8 @@
     }
   },
   "developer-docs/extending/backend-customization/extending-users.md": {
-    "hash": "aa430693ac739ddf1f89e9a6344c58af7595333d54028feb1bc6eeb3b77a0004",
-    "document_id": "8cb6f9a5-afa8-4ddf-af4b-33ad63276efe",
+    "hash": "54ffca50eb3c1e5c83e0e17a8145dbe13666b2a4f629a45cfcb57add5fb71619",
+    "document_id": "fe0be1a4-1c09-438f-9b9b-de24596fd8d3",
     "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
     "metadata": {
       "source": "docusaurus",
@@ -2200,8 +2204,8 @@
     }
   },
   "tutorial/school-fees-portal/end-to-end-implementation/making_payment.md": {
-    "hash": "1dec0623ea85fd833f66fd314ac7bc9a95aaf85b01f0aa09674bd11f8e51f725",
-    "document_id": "b7576d2a-080e-466e-b0e5-95fb760c869a",
+    "hash": "0a4d5b7367773f5b8ae7573a4794ef9de23b37b3d4e6b616d211fc9bd3fc8e6a",
+    "document_id": "4a972861-7c92-48b3-a163-036ad024aea3",
     "collection_id": "cd59267d-67e0-4897-91a6-1a338f5e83bf",
     "metadata": {
       "source": "docusaurus",
@@ -2216,8 +2220,8 @@
     }
   },
   "tutorial/school-fees-portal/end-to-end-implementation/institute_onboarding.md": {
-    "hash": "35d826414a0e0136d0990e8a33fcb46c13023229b96dfd49315b651dca6e8cdf",
-    "document_id": "ecc0bfed-6052-44ea-9822-9b5f3ac79921",
+    "hash": "e370181f079e8bee3d3b83a0feb0791cdb81a84827f41bec8b58b1336f6a8c41",
+    "document_id": "f443f4e1-b51f-44a3-8232-dbe62f6d5397",
     "collection_id": "cd59267d-67e0-4897-91a6-1a338f5e83bf",
     "metadata": {
       "source": "docusaurus",

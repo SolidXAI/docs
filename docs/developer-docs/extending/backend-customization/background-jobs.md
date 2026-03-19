@@ -2,7 +2,7 @@
 sidebar_position: 6
 title: Background Jobs
 description: Learn how to set up and manage background jobs in SolidX using database and RabbitMQ brokers.
-summary: Comprehensive guide to asynchronous processing in SolidX with the Work Queue/Competing Consumers pattern. Covers typed queue payloads, queue options, publishers/subscribers, environment setup, and broker-specific examples for Database and RabbitMQ. Includes a dedicated RabbitMQ section for `prefetch` and parallel consumption behavior.
+summary: Comprehensive guide to asynchronous processing in SolidX with the Work Queue/Competing Consumers pattern. Covers typed queue payloads, queue options, PublisherFactory-based publishing, subscribers, environment setup, and broker-specific examples for Database and RabbitMQ. Includes a dedicated RabbitMQ section for `prefetch` and parallel consumption behavior.
 keywords:
   [
     background jobs,
@@ -43,10 +43,43 @@ Every background job setup usually contains:
 
 1. Queue options file (broker type, queue name, etc.)
 2. Publisher class
-3. Subscriber class
-4. Module provider wiring
+3. PublisherFactory-based publish call from service/subscriber hook
+4. Subscriber class
+5. Module provider wiring
 
 Typed payloads are recommended for safer publish/subscribe contracts.
+
+## Folder Conventions (Must Follow)
+
+Based on the Solid monorepo conventions, background job code should be organized under:
+
+- `solid-api/src/<module>/background-jobs`
+- `solid-api/src/<module>/background-jobs/database`
+- `solid-api/src/<module>/background-jobs/rabbitmq`
+
+Directory intent:
+
+- `background-jobs/` -> queue contracts and shared job artifacts (for example queue option files and payload interfaces)
+- `background-jobs/rabbitmq/` -> RabbitMQ publisher/subscriber implementations
+- `background-jobs/database/` -> Database broker publisher/subscriber implementations
+
+Recommended file naming:
+
+- Queue options:
+  - `<feature>-queue-options.ts`
+- RabbitMQ:
+  - `<feature>-publisher-rabbitmq.service.ts`
+  - `<feature>-subscriber-rabbitmq.service.ts`
+- Database:
+  - `<feature>-publisher-database.service.ts`
+  - `<feature>-subscriber-database.service.ts`
+
+Typical edit sequence for new jobs:
+
+1. Add queue options file under `background-jobs/`.
+2. Add broker-specific publisher/subscriber files under `background-jobs/<broker>/`.
+3. Register providers in the owning module.
+4. Publish from service/subscriber-hook code via `PublisherFactory`.
 
 ## 1) Queue Options + Payload Contract
 
@@ -70,7 +103,7 @@ export default {
 
 `prefetch` is only applicable to RabbitMQ (details below).
 
-## 2) Publisher Example (RabbitMQ)
+## 2) Publisher Class Example (RabbitMQ)
 
 ```ts
 import { Injectable } from "@nestjs/common";
@@ -99,7 +132,47 @@ export class OcrRequestPublisherRabbitmq extends RabbitMqPublisher<OcrRequestPay
 }
 ```
 
-## 3) Subscriber Example (RabbitMQ, OCR Workflow)
+## 3) Recommended Publishing Pattern: `PublisherFactory`
+
+In application code, publish through `PublisherFactory` instead of injecting publisher classes directly.
+
+```ts
+import { Injectable } from "@nestjs/common";
+import { PublisherFactory } from "@solidxai/core";
+import { OcrRequestPayload } from "../jobs/ocr-request-queue-options";
+
+@Injectable()
+export class OcrRequestService {
+  constructor(
+    private readonly publisherFactory: PublisherFactory<OcrRequestPayload>
+  ) {}
+
+  async triggerOcr(ocrRequestId: number) {
+    await this.publisherFactory.publish(
+      {
+        payload: { ocrRequestId },
+        parentEntity: "ocrRequest",
+        parentEntityId: ocrRequestId,
+      },
+      "OcrRequestPublisher"
+    );
+  }
+}
+```
+
+Why this is preferred:
+
+- Broker-specific publisher resolution is centralized
+- Code remains stable when `QUEUES_DEFAULT_BROKER` changes
+- No direct dependency on RabbitMQ/Database publisher implementation in business services
+
+Publisher name guidance:
+
+- Prefer passing a logical base name (example: `OcrRequestPublisher`).
+- `PublisherFactory` resolves the broker-specific provider (`...Database` / `...Rabbitmq`) using `QUEUES_DEFAULT_BROKER`.
+- Legacy RabbitMQ-suffixed names may still work (backward compatibility), but base names are recommended.
+
+## 4) Subscriber Example (RabbitMQ, OCR Workflow)
 
 ```ts
 import { Injectable, Logger } from "@nestjs/common";
@@ -220,6 +293,9 @@ export class EmailQueuePublisherDatabase extends DatabasePublisher<any> {
 }
 ```
 
+Publish invocation for database broker should still use `PublisherFactory.publish(...)` with the logical publisher name.
+The factory resolves the broker-specific implementation.
+
 ### Subscriber (Database)
 
 ```ts
@@ -263,6 +339,9 @@ Use clear broker-specific class names:
 - `NamePublisherRabbitmq`, `NameSubscriberRabbitmq`
 
 Register them as standard Nest providers in the relevant module.
+
+When publishing, pass the logical publisher name to `PublisherFactory`.
+The factory resolves `<PublisherName><Broker>` (with backward compatibility fallback for RabbitMQ naming).
 
 ## Environment Variables
 
