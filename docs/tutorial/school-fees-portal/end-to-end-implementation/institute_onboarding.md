@@ -8,18 +8,14 @@ concerns: TODO
 ---
 
 ### Overview
-Below are the key features related to managing educational institutes within the Fees Portal Platform:
+
+This feature is configured by the **Super Admin** and subsequently managed by **Institute Admins**. The Super Admin onboards the institute and creates its admin users; Institute Admins then take ownership — adding fee types, managing branding, and maintaining their institute's configuration. Key capabilities include:
+
 - Complete institute profile management (name, address, contact details)
 - Payment gateway configuration per institute
 - Custom branding and theming for student portals
 - Support personnel information setup
 - Multi-tenant architecture supporting multiple institutes i.e (Institute Admins can only see/ manage their own institute data)
-
-### Roles Involved
-- Platform Admin
-- Institute Admin
-
-You can refer to the [User Roles & Responsibilities](../fees_portal_product_overview/#user-roles--responsibilities) in the Product Overview for more details on these roles.
 
 ### Data Models
 
@@ -210,6 +206,34 @@ Once you've created the data models, you'll need to generate the REST APIs and U
 
 :::tip Reference Documentation
 📋 For detailed step-by-step instructions, see [Generating APIs and UI Components](../common/code-generation.md)
+:::
+
+### Creating Roles & Permissions
+
+With the models and APIs in place, configure who can access them. Permissions are granted per model and map directly to the controller methods generated in the previous step.
+
+:::info Super Admin
+Super Admin is granted all permissions by default. No role configuration needed.
+:::
+
+#### Institute Admin
+
+Create a role named exactly **`Institute Admin`** and grant the following permissions:
+
+| Model | Permissions |
+|-------|-------------|
+| **Institute** | `InstituteController.findOne` `InstituteController.findMany` `InstituteController.update` `InstituteController.partialUpdate` |
+| **Fee Type** | `FeeTypeController.create` `FeeTypeController.insertMany` `FeeTypeController.findOne` `FeeTypeController.findMany` `FeeTypeController.update` `FeeTypeController.partialUpdate` `FeeTypeController.delete` `FeeTypeController.deleteMany` |
+| **Institute User** | `InstituteUserController.create` `InstituteUserController.insertMany` `InstituteUserController.findOne` `InstituteUserController.findMany` `InstituteUserController.update` `InstituteUserController.partialUpdate` |
+
+**Why these permissions?**
+
+- **Institute** — Institute Admin can view and edit their own institute's profile, but cannot create or delete institutes (individually or in bulk). Only Super Admin onboards new institutes.
+- **Fee Type** — Institute Admin has full control over their institute's fee structure, including bulk-creating fee types at setup time (`insertMany`) and bulk-deleting them when restructuring (`deleteMany`).
+- **Institute User** — Institute Admin can invite staff individually or in bulk (`insertMany`), but cannot delete user accounts — individually or in bulk — as that is a destructive action reserved for Super Admin.
+
+:::tip Reference Documentation
+📋 For step-by-step instructions on creating a role and assigning permissions in SolidX, see [Role Management](../../../admin-docs/role-management).
 :::
 
 ### Customizing the UI

@@ -13,9 +13,9 @@ This guide walks you through building a complete Fees Portal from scratch using 
 
 By following this implementation guide, you'll create a multi-tenant system where multiple educational institutes can independently manage their fee collection, each with their own payment gateway integration, custom branding, and administrative staff.
 
-## Log In As Super Admin (Platform Admin)
+## Log In As Super Admin
 
-The default setup of SolidX platform includes a `sa` (super admin) user with full access to all modules. This user acts as the Platform Admin for the Fees Portal.
+The default setup of SolidX platform includes a `sa` (super admin) user with full access to all modules. This user acts as the Super Admin for the Fees Portal.
 
 :::info[Default Super Admin Credentials]
 | Field    | Value         |

@@ -13,7 +13,7 @@ The activation functionality requires a Unix-based operating system (e.g., Ubunt
 
 ### Overview
 
-The Activate Institute functionality provisions the infrastructure needed to make an institute's fee portal accessible to students and parents.
+The Activate Institute functionality provisions the infrastructure needed to make an institute's fee portal accessible to students and parents. This is an **Institute Admin** action — once the Super Admin has onboarded the institute, the Institute Admin triggers activation to make their portal live.
 
 This feature automates the creation of DNS records and web server configurations, transforming an inactive institute into a live, operational fee collection portal.
 
@@ -23,15 +23,8 @@ This feature automates the creation of DNS records and web server configurations
 - Automated DNS record management (CNAME creation)
 - Status-based UI controls (activate/deactivate toggle)
 - Audit trail of all activation/deactivation events
-- Role-based access control (Institute Admin only)
 - Confirmation dialogs to prevent accidental changes
 - Support for both production (Route53) and local (hosts file) DNS management
-
-### Roles Involved
-
-- **Institute Admin**: Can activate and deactivate institute portals
-
-You can refer to the [User Roles & Responsibilities](../fees_portal_product_overview/#user-roles--responsibilities) in the Product Overview for more details on this role.
 
 ### What "Activating" an Institute Means
 
@@ -111,6 +104,30 @@ The portal domain is automatically constructed as:
 - Unique across all institutes in the system
 - Valid for use in DNS (alphanumeric and hyphens only)
 - Set before activation (cannot activate without it)
+
+### Creating Roles & Permissions
+
+This feature introduces two custom controller endpoints — activate and deactivate — that are not part of standard CRUD. You need to explicitly grant Institute Admin access to these endpoints.
+
+:::info Super Admin
+Super Admin is granted all permissions by default. No role configuration needed.
+:::
+
+#### Institute Admin
+
+On the existing **`Institute Admin`** role, grant the following additional permissions:
+
+| Model | Permissions |
+|-------|-------------|
+| **Institute** | `InstituteController.activateFeePortal` `InstituteController.deactivateFeePortal` |
+
+**Why these permissions?**
+
+- **Institute** — The activate and deactivate actions trigger real infrastructure changes (DNS records, Nginx virtual hosts). They are intentionally separate from the standard update permission so that access can be granted independently from general profile editing.
+
+:::tip Reference Documentation
+📋 For step-by-step instructions on editing a role and assigning permissions in SolidX, see [Role Management](../../../admin-docs/role-management).
+:::
 
 ### Prerequisites for Activation
 
@@ -852,16 +869,7 @@ Both buttons are configured as header buttons in the institute form view layout:
 
 **Role-Based Access Control:**
 - Only Institute Admin role can activate/deactivate institutes
-- Role check is enforced by assigning the necessary permissions to the activation / deactivation endpoints for the Institute Admin role.
-:::info[How to Configure RBAC for Activation Endpoints]
-To control access to the activation and deactivation endpoints using SolidX RBAC, you would typically follow these steps:
-1. Create the endpoints in your controller (as shown in the code snippets) i.e InstituteController with appropriate route and method decorators.
-2. Run `npx @solidxai/solidctl build && npx @solidxai/solidctl seed` from the project root directory. This will automatically create permissions for the new endpoints based on the controller and method names.
-3. Go to the SolidX Admin UI and navigate to the Roles section.
-4. Edit the Institute Admin role and assign the newly created permissions for the activation and deactivation endpoints to this role.
-5. Save the role configuration.
-After these steps, only users with the Institute Admin role will be able to access the activation and deactivation endpoints, ensuring that only authorized personnel can perform these actions.
-:::
+- This is enforced by the `InstituteController.activateFeePortal` and `InstituteController.deactivateFeePortal` permissions granted in the [Creating Roles & Permissions](#creating-roles--permissions) section above
 
 #### Audit & Compliance
 

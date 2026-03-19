@@ -8,7 +8,9 @@ concerns: TODO
 ---
 
 ### Overview
-Below are the key features related to initiating payment collections within the Fees Portal Platform:
+
+This feature is exclusively operated by **Institute Admins** — they upload the Excel file that generates payment requests for their students. Key capabilities include:
+
 - Bulk payment collection creation via Excel upload
 - Automatic student record creation and updates
 - Support for multiple fee types in a single collection
@@ -17,11 +19,6 @@ Below are the key features related to initiating payment collections within the 
 - Due date management with late fee calculations
 - Payment status tracking (Pending, Partially Paid, Fully Paid)
 - Excel template generation based on institute's configured fee types
-
-### Roles Involved
-- Institute Admin
-
-You can refer to the [User Roles & Responsibilities](../fees_portal_product_overview/#user-roles--responsibilities) in the Product Overview for more details on this role.
 
 ### Data Models
 
@@ -322,6 +319,36 @@ Once you've created the data models, you'll need to generate the REST APIs and U
 
 :::tip Reference Documentation
 📋 For detailed step-by-step instructions, see [Generating APIs and UI Components](../common/code-generation.md)
+:::
+
+### Creating Roles & Permissions
+
+With the models and APIs in place, configure who can access them. Permissions are granted per model and map directly to the controller methods generated in the previous step.
+
+:::info Super Admin
+Super Admin is granted all permissions by default. No role configuration needed.
+:::
+
+#### Institute Admin
+
+On the existing **`Institute Admin`** role, grant the following additional permissions:
+
+| Model | Permissions |
+|-------|-------------|
+| **Student** | `StudentController.create` `StudentController.insertMany` `StudentController.findOne` `StudentController.findMany` `StudentController.update` `StudentController.partialUpdate` |
+| **Payment Collection** | `PaymentCollectionController.create` `PaymentCollectionController.findOne` `PaymentCollectionController.findMany` `PaymentCollectionController.update` `PaymentCollectionController.partialUpdate` |
+| **Payment Collection Item** | `PaymentCollectionItemController.findOne` `PaymentCollectionItemController.findMany` `PaymentCollectionItemController.cancelMany` |
+| **Payment Collection Item Detail** | `PaymentCollectionItemDetailController.findOne` `PaymentCollectionItemDetailController.findMany` |
+
+**Why these permissions?**
+
+- **Student** — Institute Admin needs to view student records and make manual corrections. Students are primarily created via Excel upload (`insertMany`) but can also be added individually. No delete, as student records should persist for payment history.
+- **Payment Collection** — Institute Admin creates and manages collection batches. No `insertMany` (collections are always created one at a time with a specific Excel file) and no delete (collections are permanent audit records).
+- **Payment Collection Item** — Items are generated automatically by the Excel upload; Institute Admin never creates them manually. `cancelMany` allows bulk-cancelling items when a collection needs to be voided.
+- **Payment Collection Item Detail** — Purely a read-only view for Institute Admin; details are recorded by the payment gateway callback process, not manually.
+
+:::tip Reference Documentation
+📋 For step-by-step instructions on editing a role and assigning permissions in SolidX, see [Role Management](../../../admin-docs/role-management).
 :::
 
 ### Implementing Custom Business Logic
@@ -1305,7 +1332,7 @@ The list view shows essential information for managing collections:
 |--------|---------|----------|------------|
 | **Name** | Collection identifier | Yes | Yes |
 | **Due Date** | When payments are due | Yes | Yes |
-| **Institute** | Which institute (Platform Admin view) | Yes | Yes |
+| **Institute** | Which institute (Super Admin view) | Yes | Yes |
 | **Created Date** | When collection was created | Yes | Yes |
 | **Created By** | Who created the collection | No | Yes |
 

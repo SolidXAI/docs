@@ -6,9 +6,13 @@ toc_max_heading_level: 2
 
 ## Overview
 
-This use case enables students and parents to view pending fees, make online payments through an integrated payment gateway, and track payment history through a dedicated student portal.
+This use case enables **students and parents** to view pending fees, make online payments through an integrated payment gateway, and track payment history through a dedicated student portal. Automated system jobs handle OTP generation, late fee calculations, and payment reminders without manual intervention.
 
 We will be creating a separate frontend application for the student portal that interacts with the SolidX backend APIs. The portal will use a custom OTP-based authentication mechanism to allow students to log in without traditional user accounts.
+
+:::note No SolidX RBAC Configuration Required
+The student portal uses custom token-based authentication — not SolidX's role-based access control. Students are not SolidX users and have no admin portal access. All backend endpoints used by the student portal are secured via custom JWT tokens issued after OTP verification.
+:::
 
 ### Key Features
 
@@ -41,43 +45,11 @@ We will be creating a separate frontend application for the student portal that 
         ┌──────┴───────┐
         ↓              ↓
 ┌─────────────┐  ┌──────────────┐
-│   Stripe    |  |              | 
+│   Stripe    |  |              |
 |   Payment   │  │   Email      │
 │   Gateway   │  │   Service    │
 └─────────────┘  └──────────────┘
 ```
-
-## Roles Involved
-
-### Student/Parent (Primary User)
-
-**Responsibilities:**
-- Log in using student login ID and OTP
-- View pending fee collections
-- Make payments through payment gateway
-- Track payment history
-- Download payment reports
-
-**Access:**
-- Student Portal (separate frontend application)
-- Public SolidX API endpoints with custom authentication
-
-**Typical Workflow:**
-1. Enter student login ID
-2. Receive and verify OTP via email
-3. View dashboard with pending fees
-4. Select fees to pay
-5. Complete payment via gateway
-6. Receive payment confirmation
-
-### System (Automated)
-
-**Responsibilities:**
-- Generate and validate OTPs
-- Calculate late fees for overdue payments
-- Send payment reminders
-- Update payment statuses
-- Process redirect callbacks from Stripe payment gateway
 
 
 ## Data Models
