@@ -6,6 +6,20 @@ import type * as Preset from '@docusaurus/preset-classic';
 import dotenv from 'dotenv';
 dotenv.config();
 
+const typesenseCollectionName = process.env.NEXT_PUBLIC_TYPESENSE_COLLECTION_NAME;
+const typesenseHost = process.env.NEXT_PUBLIC_TYPESENSE_HOST;
+const typesensePort = process.env.NEXT_PUBLIC_TYPESENSE_PORT;
+const typesenseProtocol = process.env.NEXT_PUBLIC_TYPESENSE_PROTOCOL;
+const typesenseApiKey = process.env.NEXT_PUBLIC_TYPESENSE_API_KEY;
+
+const hasTypesenseConfig = Boolean(
+  typesenseCollectionName &&
+    typesenseHost &&
+    typesensePort &&
+    typesenseProtocol &&
+    typesenseApiKey
+);
+
 const config: Config = {
   title: 'SolidX Docs',
   tagline: 'Enterprise-focussed low-code development platform',
@@ -78,25 +92,25 @@ const config: Config = {
 
   themeConfig: {
 
-    //  ADDED TYPESENSE CONFIG
-    typesense: {
-      typesenseCollectionName: process.env.NEXT_PUBLIC_TYPESENSE_COLLECTION_NAME,
-
-      typesenseServerConfig: {
-        nodes: [
-          {
-            host: process.env.NEXT_PUBLIC_TYPESENSE_HOST,
-            port: Number(process.env.NEXT_PUBLIC_TYPESENSE_PORT),
-            protocol: process.env.NEXT_PUBLIC_TYPESENSE_PROTOCOL,
+    ...(hasTypesenseConfig
+      ? {
+          typesense: {
+            typesenseCollectionName,
+            typesenseServerConfig: {
+              nodes: [
+                {
+                  host: typesenseHost,
+                  port: Number(typesensePort),
+                  protocol: typesenseProtocol,
+                },
+              ],
+              // IMPORTANT: USE SEARCH-ONLY KEY HERE
+              apiKey: typesenseApiKey,
+            },
+            searchParameters: {},
           },
-        ],
-      
-        // IMPORTANT: USE SEARCH-ONLY KEY HERE
-        apiKey: process.env.NEXT_PUBLIC_TYPESENSE_API_KEY,
-      },
-      
-      searchParameters: {},
-    },
+        }
+      : {}),
 
     colorMode: {
       defaultMode: 'light',
@@ -208,7 +222,7 @@ const config: Config = {
 
   } satisfies Preset.ThemeConfig,
 
-  themes: ['docusaurus-theme-search-typesense'],
+  themes: hasTypesenseConfig ? ['docusaurus-theme-search-typesense'] : [],
 
 
 };

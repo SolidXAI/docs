@@ -1,228 +1,134 @@
 ---
 sidebar_position: 2
 title: Form View Buttons
-description: Learn how to customize form view buttons in your frontend application.
-summary: Explains customizing SolidX form view buttons to enhance user interaction. Covers adding custom buttons, modifying existing buttons, and handling button actions using `registerExtensionComponent`. Includes a working example `PreviewPortal` button that redirects to an external hosted page.
+description: Build model-scoped form action buttons for SolidX form views.
+summary: Documents folder conventions, action component props, registration, metadata wiring, and Solid API patterns for form-view button extensions.
 solidx_concerns: [frontend.extensions.form_buttons, add_form_button]
 ---
 
-import { IoIosArrowForward } from "react-icons/io";
+## Scope
 
-<!-- #  Form View Buttons -->
+Form View Buttons are form-level action components for a specific `<module, model>` pair.
 
-## Overview
+Mandatory location:
 
-Form View Buttons let you add **custom actions** to form views.  
-You can use them to trigger navigation, open dialogs, or perform API-based operations.
+- `solid-ui/src/extensions/<module-name>/<model-name>/form-buttons/`
 
-These buttons can be rendered **inline** or inside a **context menu**, and can either open a **popup dialog** or redirect the user elsewhere.
+Do not place model-scoped form button components in generic folders.
 
+## Default Implementation Flow
 
+1. Create/update a React TSX component under:
+   - `solid-ui/src/extensions/<module-name>/<model-name>/form-buttons/`
+2. Keep export/import style consistent with neighboring extension files.
+3. Register in:
+   - `solid-ui/src/extensions/solid-extensions.ts`
+4. Keep registration key aligned with layout metadata `action` value.
 
-## Example: PreviewPortal Button
+## Component Props Contract
 
-Below is a complete example of a **custom form view button** that redirects to an external hosted page (for example, a portal for an institute).  
-It reads the `id` from form data or row context, calls an API to get the hosted prefix, and opens the page in a new browser tab.
+Form button action components receive extension context with shape equivalent to:
 
-<details open>
-<summary className="card-title ">
-  <!-- <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" /> -->
-  <code>PreviewPortal.tsx</code>
-</summary>
-
-```tsx
-import React, { useEffect, useRef, useState } from 'react';
-import { Toast } from 'primereact/toast';
-import axios from 'axios';
-import { getSession } from 'next-auth/react';
-import { useDispatch } from 'react-redux';
-import { closePopup } from '@solidxai/core-ui';
-import { Dialog } from 'primereact/dialog';
-
-const API_URL = process.env.NEXT_PUBLIC_BACKEND_API_URL;
-
-/**
- * This component is triggered when the user clicks a custom button in a form view.
- * It fetches the hosted page prefix for an entity and redirects the user to that hosted page.
- */
-const PreviewPortal = (action: any) => { // View Props Reference section for shape
-  const id = action?.params?.id;
-  const dispatch = useDispatch();
-  const toast = useRef<Toast>(null);
-  const [visible, setVisible] = useState(true);
-
-  useEffect(() => {
-    const fetchAndRedirect = async () => {
-      try {
-        const session: any = await getSession();
-        const token = session?.user?.accessToken || '';
-
-        // Fetch hosted page prefix for the record
-        const response = await axios.get(`${API_URL}/api/institute/${id}`, {
-          headers: {
-            Authorization: \`Bearer \${token}\`,
-          },
-        });
-
-        const hostedPagePrefix = response.data?.data?.hostedPagePrefix;
-        if (!hostedPagePrefix) throw new Error('hostedPagePrefix not found');
-
-        // Open the hosted page in a new tab and close the popup
-        window.open(\`https://\${hostedPagePrefix}.com\`, '_blank');
-        dispatch(closePopup());
-      } catch (error) {
-        console.error('Redirect failed:', error);
-        toast.current?.show({
-          severity: 'error',
-          summary: 'Error',
-          detail: 'Failed to redirect',
-          life: 3000,
-        });
-        dispatch(closePopup());
-      }
-    };
-
-    fetchAndRedirect();
-  }, [id, dispatch]);
-
-  return (
-    <>
-      <Toast ref={toast} />
-      <Dialog
-        header=""
-        visible={visible}
-        style={{ width: '25vw' }}
-        modal
-        onHide={() => dispatch(closePopup())}
-        dismissableMask={false}
-      >
-        <div className="flex flex-column align-items-center gap-3 py-5">
-          <i className="pi pi-spin pi-spinner" style={{ fontSize: '2rem' }}></i>
-          <h4 className="m-0">Redirecting...</h4>
-        </div>
-      </Dialog>
-    </>
-  );
-};
-
-export default PreviewPortal;
-```
-</details>
-
-**File Path**
-```bash
-/solid-ui/src/extensions/<module-name>/<model-name>/form-buttons/PreviewPortal.tsx
+```ts
+{
+  action: any;
+  params: {
+    moduleName: string;
+    modelName: string;
+    id?: string | number;
+    handlePopupClose?: () => void;
+    [key: string]: any;
+  };
+  formik: any;
+  solidFormViewMetaData: any;
+}
 ```
 
+Guidance:
 
+- Use `params.id` (or equivalent context field) for record-specific actions.
+- Guard missing IDs for create mode / embedded contexts.
 
-## Register the Component
+## Registration
 
-You must register your button component so that SolidX can resolve and invoke it when the form button is clicked.
+```ts
+import { registerExtensionComponent } from "@solidxai/core-ui";
+import { ApproveApplicationButton } from "./venue/application/form-buttons/ApproveApplicationButton";
 
-<details open>
-<summary className="card-title ">
-  <!-- <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" /> -->
-  <code>solid-extensions.ts</code>
-</summary>
-
-```tsx
-import { registerExtensionComponent } from '@solidxai/core-ui';
-import PreviewPortal from './<module-name>/<model-name>/form-buttons/PreviewPortal';
-
-registerExtensionComponent('PreviewPortal', PreviewPortal);
-```
-</details>
-
-**File Path**
-```bash
-/solid-ui/src/extensions/solid-extensions.ts
+registerExtensionComponent("ApproveApplicationButton", ApproveApplicationButton);
 ```
 
+## Layout Metadata Wiring
 
-
-## Configure in Layout JSON
-
-Now, you can use this button inside your form layout metadata JSON configuration.
-
-<details open>
-<summary className="card-title ">
-  <!-- <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" /> -->
-  <code>Using in Layout JSON</code>
-</summary>
+Buttons are triggered from form layout metadata (`formButtons` + `attrs.action`):
 
 ```json
 {
-  "name": "institute-form-view",
   "layout": {
     "type": "form",
     "formButtons": [
       {
         "attrs": {
-          "label": "Preview Portal",
-          "icon": "pi pi-external-link",
-          "action": "PreviewPortal",
-          "actionInContextMenu": true,
+          "label": "Approve",
+          "action": "ApproveApplicationButton",
           "openInPopup": true,
-          "customComponentIsSystem": false,
-          "closable": true
+          "actionInContextMenu": false
         }
       }
     ]
   }
 }
 ```
-</details>
 
-**File Path**
-```bash
-/solid-api/module-metadata/<module-name>/<module-name>-metadata.json
-```
+## API Call Guidance
 
+When a form button calls backend APIs, use `@solidxai/core-ui` helpers:
 
+- `solidGet`, `solidPost`, `solidPut`, `solidPatch`, `solidDelete`, `solidAxios`
 
-## Props Reference
+Guidelines:
 
-### Action Component Props
+- Use paths like `/resource` instead of `/api/resource`.
+- Derive IDs/context from `params` or `formik.values`.
+- Handle loading, success, error explicitly.
+- Apply follow-up refresh behavior where required.
+- Keep popup close behavior safe and deterministic on both success and error paths.
 
-Each form button component receives a consistent set of props from the SolidX form engine.
-<details open>
-<summary className="card-title ">
-  <!-- <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" /> -->
-  <code>Action Component Props</code>
-</summary>
-```ts
-{
-  action, // action component name i.e PreviewPortal
-  params : {
-    moduleName: string;       // e.g. "fees-portal"
-    modelName: string;        // e.g. "institute"
-    id: string;               // record ID in edit mode
-    embeded: boolean;         // true if the form is embedded
-    handlePopupClose?: any;   // function to close popup
-    customCreateHandler?: any; // custom create handler function
-    inlineCreateAutoSave?: boolean; // true if inline create auto save is enabled
-    customLayout?: any; // custom layout JSON if any
-    parentData?: any; // parent data if any (for embedded forms)
-    redirectToPath?: string; // path to redirect after save
-    onEmbeddedFormSave?: () => void; // callback after embedded form save
-  }
-  formik, // contains formik props like values, setFieldValue, handleSubmit, etc.
-  solidFormViewMetaData: solidFormViewMetaData.data // contains the form view metadata
+## Example
+
+```tsx
+import { useState } from "react";
+import { solidPost } from "@solidxai/core-ui";
+import { useDispatch } from "react-redux";
+import { closePopup } from "@solidxai/core-ui";
+
+export function ApproveApplicationButton({ params }: any) {
+  const dispatch = useDispatch();
+  const [loading, setLoading] = useState(false);
+
+  const onApprove = async () => {
+    if (!params?.id) return;
+
+    setLoading(true);
+    try {
+      await solidPost(`/application/${params.id}/approve`, {});
+      dispatch(closePopup());
+    } catch {
+      dispatch(closePopup());
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <button disabled={loading} onClick={onApprove}>
+      {loading ? "Approving..." : "Approve"}
+    </button>
+  );
 }
 ```
-</details>
 
+## See Also
 
-
-## How It Works
-
-1. SolidX renders the **form view** and identifies buttons in the layout.  
-2. When a button is clicked, it looks up the registered component i.e action (e.g., `PreviewPortal`).  
-3. SolidX passes relevant **context props** to that component.  
-4. The component executes its logic — calling APIs, opening pages, etc.  
-5. If the button was configured with `"openInPopup": true`, the component runs inside a modal dialog and can close itself via `closePopup()`.
-
-
-
-This pattern lets you **add interactive buttons** in your form views that can trigger **custom logic**, such as navigating to hosted portals or previewing related content dynamically.
+- [Form View Events](./form-view-events.md)
+- [Solid HTTP API](./solid-http-api.md)

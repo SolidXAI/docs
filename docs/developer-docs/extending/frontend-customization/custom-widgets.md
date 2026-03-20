@@ -1,90 +1,99 @@
 ---
 sidebar_position: 2
 title: Custom Widgets
-description: Learn how to create custom widgets for the frontend of your application.
-summary: Guide to creating custom widgets in SolidX using the built-in `CustomHtml` widget for extending UI functionality without field associations. Covers configuring widgets in form layouts with dynamic HTML rendering, using placeholders for field values and custom variables (e.g., `{{ctxtTitleAlphpabetCount}}`), receiving `SolidFormWidgetProps`, and setting custom variables via form event handlers for enhanced UI interactions.
+description: Build and register metadata-driven custom widgets in SolidX.
+summary: Defines where custom widgets should live, how to register them, how to wire them in layout metadata, and how to use Solid API helpers safely inside widget logic.
 solidx_concerns: [frontend.extensions.custom_widgets, create_custom_widget]
 ---
 
-import { IoIosArrowForward } from "react-icons/io";
+## Overview
 
+Custom widgets are metadata-driven extension components rendered from layout nodes such as `type: "custom"`.
 
-#  Custom Widgets
+Use them when you want targeted UI enhancements inside generated form/list views.
 
-##  Overview
-Custom widgets allow you to **extend the UI functionality** of your frontend application by adding new components to your view layouts.  
-These widgets:
-- Are **not associated with any fields** in the model.  
-- Are used to **enhance the UI** by providing **custom rendering** or **interaction capabilities**.  
+## Location and Registration
 
- SolidX provides a built-in way to create custom widgets using the **`CustomHtml`** widget.
+For model-scoped widgets, use:
 
+- `solid-ui/src/extensions/<module-name>/<model-name>/custom-widgets/`
 
+Register in:
 
-##  How to Configure the `CustomHtml` Widget
+- `solid-ui/src/extensions/solid-extensions.ts`
 
- Example: Display how many characters a user has typed in a text field.
+with:
 
-<details open>
- <summary className="card-title ">
-    <!-- <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" /> -->
-    Code: CustomHtml Widget Configuration
-</summary>
+```ts
+import { registerExtensionComponent } from "@solidxai/core-ui";
+registerExtensionComponent("MyCustomWidget", MyCustomWidget);
+```
+
+## Layout Wiring
+
+Reference your registered widget in layout metadata:
 
 ```json
 {
   "type": "custom",
   "attrs": {
-    "name": "page-1-row-1-div-1-div-1-title-custom",
-    "widget": "CustomHtml",
-    "html": "<span>You have typed {{ctxtTitleAlphpabetCount}}</span>",
-    "visible": false
+    "name": "book-custom-1",
+    "widget": "MyCustomWidget"
   }
 }
 ```
-</details>
 
-###  Explanation
-- Uses the `CustomHtml` widget to show a dynamic message.  
-- Displays the **number of characters typed** in a text field.  
-- Receives props of type `SolidFormWidgetProps`.  
-- The variable `{{ctxtTitleAlphpabetCount}}` is replaced dynamically.  
+## Props Contract
 
- This placeholder can represent:  
-- A **field value** (referenced by field name).  
-- A **custom variable**, set in the form data via a **form handler**.  
+Custom form widgets typically receive a `SolidFormWidgetProps`-style payload, including:
 
- Learn more here: [Form View Event Listeners](./form-view-events)
+- `field`
+- `formData`
+- `viewMetadata`
+- `fieldsMetadata`
+- `formViewData`
 
+Always derive context from incoming props (for example `formData` or metadata) instead of hardcoded values.
 
+## API Calls in Widgets
 
-##  How It Works
+When widgets need backend calls, use Solid HTTP helpers from `@solidxai/core-ui`:
 
-1. SolidX loads the **form layout** in edit/view mode.  
-2. It identifies **custom fields** (`type: custom`).  
-3. It dynamically imports the corresponding widget component.  
-4. The widget is rendered with the following props:  
+- `solidGet`, `solidPost`, `solidPut`, `solidPatch`, `solidDelete`, `solidAxios`
 
-<details open>
- <summary className="card-title ">
-    <!-- <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" /> -->
-    Code: Props Interface
-</summary>
+Guidelines:
+
+- Use endpoint paths like `/resource` (no hardcoded `/api`).
+- Handle loading/error state explicitly in component logic.
+- For list/filter requests, use `qs.stringify(..., { encodeValuesOnly: true })` or Axios `params`.
+- Use context IDs/values from props instead of constants.
+
+## Example
 
 ```tsx
-export type SolidFormWidgetProps = {
-    field: any;
-    // This comes from Formik...
-    formData: Record<string, any>;
-    viewMetadata: SolidView;
-    fieldsMetadata: FieldsMetadata;
-    formViewData: any;
-};
+import { useEffect, useState } from "react";
+import { solidGet } from "@solidxai/core-ui";
+import type { SolidFormWidgetProps } from "@solidxai/core-ui";
+
+export function TitleStatsWidget({ formData }: SolidFormWidgetProps) {
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    const title = String(formData?.title || "");
+    setCount(title.length);
+  }, [formData?.title]);
+
+  return <span>Title length: {count}</span>;
+}
+
+export async function loadTitleHints(query: string) {
+  const resp = await solidGet("/title-hints", { params: { query } });
+  return resp?.data?.data?.records || [];
+}
 ```
-</details>
 
-5. The widget applies your **custom rendering logic**.  
+## See Also
 
-
-
- With this approach, you can create **reusable UI enhancements** and extend your SolidX frontend with ease.
+- [Form View Field Widgets](./form-view-field-widgets.md)
+- [List View Field Widgets](./list-view-field-widgets.md)
+- [Form View Events](./form-view-events.md)

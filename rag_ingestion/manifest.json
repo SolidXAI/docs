@@ -1609,8 +1609,8 @@
     }
   },
   "developer-docs/extending/backend-customization/background-jobs.md": {
-    "hash": "6aedf83ba3bf5c1afe29642d6ed1a183d3dae5634f061c2b7ee5d3c3a062897a",
-    "document_id": "74790d27-df50-498b-bc75-c696a0dbcdb1",
+    "hash": "b41f99c1ff82787f666d737750525af00e264509dfa121feb000a27db5f97282",
+    "document_id": "450c7ca0-80b7-47b2-addc-b9ef8f706b84",
     "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
     "metadata": {
       "source": "docusaurus",
@@ -1641,7 +1641,7 @@
       ],
       "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
       "collection_name": "developer-docs",
-      "chunk_count": 12
+      "chunk_count": 14
     }
   },
   "developer-docs/extending/backend-customization/computation-providers.md": {
@@ -1700,8 +1700,8 @@
     }
   },
   "developer-docs/extending/backend-customization/typeorm-subscribers.md": {
-    "hash": "8576dcb7ddae798c678bf1cac67c62fc8d32e54c57e52188b1f1b8c331af7aad",
-    "document_id": "eb513df6-7b0b-445b-85f6-dc1f0c956d79",
+    "hash": "1916c0b5dd09281088b9c0d1b3400c17701620c2d74bc48961dca8be5d222a54",
+    "document_id": "3377a076-77f5-4c7a-802a-c932105fe272",
     "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
     "metadata": {
       "source": "docusaurus",
@@ -1719,6 +1719,7 @@
         "transaction safety"
       ],
       "solidx_concerns": [
+        "backend.typeorm_subscriber",
         "typeorm_subscriber",
         "backend.background_jobs",
         "new_background_job"

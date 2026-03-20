@@ -195,12 +195,12 @@ export type FieldMetadata = CommonEntity & {
 
 
 
-##  TODO
-- Add detailed explanation of each parameter passed to the widget:
-  - `rowData`
-  - `solidListViewMetaData`
-  - `fieldMetadata`
-  - `column`
+## Parameter Notes
+
+- `rowData`: current row record being rendered.
+- `solidListViewMetaData`: list metadata and layout context.
+- `fieldMetadata`: model field definition for the current column.
+- `column`: resolved column config from the active list layout.
 
 ## Related
 

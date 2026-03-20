@@ -1,56 +1,94 @@
 ---
 sidebar_position: 3
 title: List View Buttons
-description: Learn how to customize list view buttons in your frontend application.
-summary: Explains how to add and customize list view buttons in SolidX. Covers creating header buttons for list-wide actions and row buttons for record-specific actions, including configuration examples and prop details.
+description: Build header and row action buttons for SolidX list views.
+summary: Documents mandatory file locations, props contracts, registration, metadata wiring, and API conventions for list header and row button extensions.
 solidx_concerns: [frontend.extensions.list_buttons, frontend.extensions.row_buttons, add_list_header_button_with, add_list_row_button_with]
 ---
 
-import { IoIosArrowForward } from "react-icons/io";
+## Scope
 
-<!-- #  List View Buttons -->
+List button customizations are model-scoped and split into two subtypes:
 
-## Overview
+1. Header/list-wide buttons (`list-buttons`)
+2. Row-level buttons (`row-buttons`)
 
-List View Buttons enable you to add **custom actions** in list views.  
-They can be used to trigger navigation, open dialogs, or perform API-based operations.
+## List Header Buttons
 
-These buttons can appear at two levels:
+Mandatory location:
 
-1. **Header Buttons** — actions for the entire list (e.g., “Generate Report”).  
-2. **Row Buttons** — actions for specific records (e.g., “Refund Payment”).  
+- `solid-ui/src/extensions/<module-name>/<model-name>/list-buttons/`
 
----
+Use for list-wide actions (export, bulk action, filtered processing).
 
-## Adding Custom List Buttons
+### Header Button Props
 
-To add custom buttons in a list view, follow these steps:
+Action context can include:
 
-1. **Create the button component.**  
-2. **Register the component.**  
-3. **Configure the layout JSON.**  
+- `action`
+- `params`
+- `selectedRecords`
+- `filters`
 
-> The process is similar to [Form View Buttons](./form-view-buttons.md).  
-> You can reuse the same registration and component creation logic; only the props differ slightly.
+Guidance:
 
----
+- For selection-based operations, guard empty `selectedRecords`.
+- Prefer `selectedRecords` and `filters` over hardcoded assumptions.
 
-## Configure in Layout JSON
+## Row Buttons
 
-Below are examples of how to configure both header and row buttons in the module metadata JSON file.
+Mandatory location:
 
-### Header Button Example
-<details open>
-<summary className="card-title ">
-  <!-- <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" /> -->
-  <code>Generate Report Header Button</code>
-</summary>
+- `solid-ui/src/extensions/<module-name>/<model-name>/row-buttons/`
+
+Use for record-specific actions triggered from a clicked row.
+
+### Row Button Props
+
+Action context can include:
+
+- `action`
+- `params`
+- `rowData`
+
+Guidance:
+
+- Use `rowData` as source of truth for record-level actions.
+- Guard missing `rowData`/ID and show clear user feedback.
+
+## Registration
+
+Register components in:
+
+- `solid-ui/src/extensions/solid-extensions.ts`
+
+using:
+
+```ts
+import { registerExtensionComponent } from "@solidxai/core-ui";
+import { GenerateReportButton } from "./venue/payment/list-buttons/GenerateReportButton";
+import { RefundPaymentButton } from "./venue/payment/row-buttons/RefundPaymentButton";
+
+registerExtensionComponent("GenerateReportButton", GenerateReportButton);
+registerExtensionComponent("RefundPaymentButton", RefundPaymentButton);
+```
+
+Keep action names aligned with metadata.
+
+## Metadata Wiring
+
+Header buttons are typically configured in list layout metadata at:
+
+- `layout.attrs.headerButtons[]`
+
+Row buttons are typically configured at:
+
+- `layout.attrs.rowButtons[]`
+
+Example:
 
 ```json
 {
-  "name": "paymentCollectionItem-list-view",
-  "displayName": "Created Payments",
-  "type": "list",
   "layout": {
     "type": "list",
     "attrs": {
@@ -58,48 +96,15 @@ Below are examples of how to configure both header and row buttons in the module
         {
           "attrs": {
             "label": "Generate Report",
-            "action": "GenerateReport",
-            "actionInContextMenu": false,
-            "openInPopup": true,
-            "icon": "pi pi-chart-bar",
-            "className": "p-button-success p-button p-component",
-            "closable": true
+            "action": "GenerateReportButton"
           }
         }
-      ]
-    }
-  }
-}
-```
-</details>
-
----
-
-### Row Button Example
-<details open>
-<summary className="card-title \">
-  <!-- <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" /> -->
-  <code>Refund Payment Row Button</code>
-</summary>
-
-```json
-{
-  "name": "institute-list-view",
-  "displayName": "Institutes",
-  "type": "list",
-  "layout": {
-    "type": "list",
-    "attrs": {
+      ],
       "rowButtons": [
         {
           "attrs": {
-            "label": "Refund Payment",
-            "action": "RefundPayment",
-            "actionInContextMenu": true,
-            "openInPopup": true,
-            "icon": "pi pi-undo",
-            "className": "p-button-info p-button p-component",
-            "closable": true
+            "label": "Refund",
+            "action": "RefundPaymentButton"
           }
         }
       ]
@@ -107,77 +112,22 @@ Below are examples of how to configure both header and row buttons in the module
   }
 }
 ```
-</details>
 
-**File Path**
-```bash
-/solid-api/module-metadata/<module-name>/<module-name>-metadata.json
-```
+## API Guidance
 
----
+If list/row button actions require backend calls, use:
 
-## Props Reference
+- `solidGet`, `solidPost`, `solidPut`, `solidPatch`, `solidDelete`, `solidAxios`
 
-Each list button component receives a consistent set of props from the SolidX list engine.  
-Header buttons receive the **selected records** and **filters**, while row buttons receive the **row data**.
+Rules:
 
-<details open>
-<summary className="card-title ">
-  <!-- <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" /> -->
-  <code>Action Component Props</code>
-</summary>
+- Use `/resource` paths (no hardcoded `/api`).
+- Handle loading/success/error explicitly.
+- Apply explicit refresh behavior after mutation as needed.
+- Follow project conventions for popup close and global/toast error handling.
 
-```ts
-{
-  action, // action component name e.g., "GenerateReport" or "RefundPayment"
-  params: {
-    moduleName: string;       // e.g. "fees-portal"
-    modelName: string;        // e.g. "institute"
-    id: string;               // record ID in edit mode
-    embeded: boolean;         // true if the form is embedded
-    handlePopupClose?: any;   // function to close popup
-    customCreateHandler?: any;
-    inlineCreateAutoSave?: boolean;
-    customLayout?: any; 
-    parentData?: any; 
-    redirectToPath?: string;
-    onEmbeddedFormSave?: () => void;
-  },
-  solidFormViewMetaData: solidFormViewMetaData.data, // form metadata
-  selectedRecords: selectedRecords, // Header button only: selected list records
-  filters, // Header button only: active filters applied on list
-  rowData // Row button only: data of the specific row where button was clicked
-}
-```
-</details>
+## See Also
 
-:::info
-**Note:**  
-- **Header Buttons** → Linked Components receives `selectedRecords` and `filters`.  
-- **Row Buttons** → Linked Components receive `rowData` for the clicked record.  
-:::
-
----
-
-## How It Works
-
-1. SolidX renders the **list view** and identifies buttons in the layout.  
-2. When a button is clicked, it resolves the registered component by its `action` name.  
-3. The component receives contextual props (`rowData`, `selectedRecords`, etc.).  
-4. The button component executes custom logic (API call, navigation, etc.).  
-5. If `"openInPopup": true`, the component runs inside a modal and can close itself via `closePopup()`.
-
----
-
-## Example Use Cases
-
-### Header Buttons
-- 🧾 **Generate Report** — Generate and download a summary report for all selected transactions.  
-
-### Row Buttons
-- 💸 **Refund Payment** — Initiate a refund process for that record.  
-- ✉️ **Send Receipt** — Email a payment receipt for that transaction.
-
----
-
-With this approach, you can **extend your list views** with interactive, contextual buttons that perform powerful actions across the list or on specific rows.
+- [List View Events](./list-view-events.md)
+- [Form View Buttons](./form-view-buttons.md)
+- [Solid HTTP API](./solid-http-api.md)

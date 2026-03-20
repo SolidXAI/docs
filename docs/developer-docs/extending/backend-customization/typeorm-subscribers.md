@@ -1,7 +1,7 @@
 ---
 sidebar_position: 8
 title: TypeORM Subscribers
-description: Recommended pattern for TypeORM subscribers in SolidX: publish a background job via PublisherFactory from subscriber hooks and execute business logic in queue subscribers.
+description: "Recommended pattern for TypeORM subscribers in SolidX: publish a background job via PublisherFactory from subscriber hooks and execute business logic in queue subscribers."
 summary: Updated guidance for SolidX TypeORM subscribers. Recommends keeping overridden entity hooks thin and always triggering a publisher-subscriber background job pair through PublisherFactory, instead of executing heavy side effects inline. Covers rationale, transaction-boundary safety, implementation pattern, and code examples.
 keywords: [backend, TypeORM subscribers, background jobs, transaction safety]
 solidx_concerns: [backend.typeorm_subscriber, typeorm_subscriber, backend.background_jobs, new_background_job]
