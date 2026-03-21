@@ -55,6 +55,7 @@ Guidance:
 
 - Use `rowData` as source of truth for record-level actions.
 - Guard missing `rowData`/ID and show clear user feedback.
+- For directly visible inline row actions, set `actionInContextMenu: false` in layout metadata.
 
 ## Registration
 
@@ -126,8 +127,49 @@ Rules:
 - Apply explicit refresh behavior after mutation as needed.
 - Follow project conventions for popup close and global/toast error handling.
 
+## UI/Styling Guidance (PrimeReact)
+
+For row-level buttons, default to compact inline actions:
+
+- Use PrimeReact `Button` (avoid raw `<button>`).
+- Prefer `size="small"` and `className="p-button-sm"`.
+- Keep width content-based (`width: "auto"`, `minWidth: "unset"`).
+- Keep text single-line (`whiteSpace: "nowrap"`).
+- Keep labels short (1-3 words).
+
+Example:
+
+```tsx
+<Button
+  label="Seed Rates"
+  icon="pi pi-refresh"
+  size="small"
+  className="p-button-sm"
+  style={{ width: "auto", minWidth: "unset", whiteSpace: "nowrap" }}
+/>
+```
+
+## Popup UX and `closePopup`
+
+If action metadata uses `openInPopup: true`, SolidX already mounts your component inside a popup shell.
+
+- Render popup content only (header/body/footer); do not render another full-screen modal wrapper unless explicitly needed.
+- Always provide an explicit close path on cancel and after completion.
+- Use `closePopup` from `@solidxai/core-ui` for dismissal.
+
+Pattern:
+
+```ts
+import { closePopup } from "@solidxai/core-ui";
+import { useDispatch } from "react-redux";
+
+const dispatch = useDispatch();
+const onClose = () => dispatch(closePopup());
+```
+
 ## See Also
 
 - [List View Events](./list-view-events.md)
 - [Form View Buttons](./form-view-buttons.md)
+- [Extension UI Guidelines](./extension-ui-guidelines.md)
 - [Solid HTTP API](./solid-http-api.md)

@@ -94,6 +94,35 @@ Guidelines:
 - Apply follow-up refresh behavior where required.
 - Keep popup close behavior safe and deterministic on both success and error paths.
 
+## UI/Styling Guidance (PrimeReact)
+
+For form action components:
+
+- Prefer PrimeReact controls (`Button`, `Message`, `ProgressSpinner`, `Toast`) over raw HTML controls.
+- Keep action areas compact (`p-3`/`p-4`, `gap-2`/`gap-3`).
+- Use clear call-to-action hierarchy:
+  - Secondary/outlined `Cancel`
+  - Primary `Confirm` or `Submit`
+- Disable confirm action during async execution and surface loading state.
+
+## Popup Lifecycle and `closePopup`
+
+When `openInPopup: true` is used in metadata:
+
+- SolidX opens the popup container; your component should render clean inner content.
+- Always wire cancel/close to `closePopup`.
+- On success, either auto-close immediately or show success state with a `Close` button.
+
+Pattern:
+
+```ts
+import { closePopup } from "@solidxai/core-ui";
+import { useDispatch } from "react-redux";
+
+const dispatch = useDispatch();
+const onClose = () => dispatch(closePopup());
+```
+
 ## Example
 
 ```tsx
@@ -131,4 +160,5 @@ export function ApproveApplicationButton({ params }: any) {
 ## See Also
 
 - [Form View Events](./form-view-events.md)
+- [Extension UI Guidelines](./extension-ui-guidelines.md)
 - [Solid HTTP API](./solid-http-api.md)

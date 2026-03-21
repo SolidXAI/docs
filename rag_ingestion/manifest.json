@@ -1390,8 +1390,8 @@
     }
   },
   "developer-docs/extending/frontend-customization/custom-views.md": {
-    "hash": "c8e1000d46f9c0aa8d26fc48445c77c0eaab19b4a2dcdeaacdda2cdbdf08963c",
-    "document_id": "1dfd2fb2-0b69-46a7-a31e-fa0d00f30449",
+    "hash": "827bb70ac162c43124f5840f9827a446aa6c0a112ccd07c8b172f9d37c4dd44f",
+    "document_id": "ba947cd6-8438-4349-a4ba-a0125e02a5ff",
     "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
     "metadata": {
       "source": "docusaurus",
@@ -1399,14 +1399,14 @@
       "section": "developer-docs",
       "path": "developer-docs/extending/frontend-customization/custom-views.md",
       "doc_title": "developer-docs/extending/frontend-customization/custom-views.md",
-      "title": "Custom Views",
-      "description": "Learn how to create custom views in the frontend of your application.",
-      "summary": "Explains creating custom pages in SolidX frontend applications. Covers creating custom view components in the extensions folder, registering them using `registerExtensionComponent`, embedding custom views in form layouts using JSON configuration (notebooks, pages, custom widgets), accessing form data and metadata via props, and building specialized UI like `BookSimilarTitles` for displaying related data with filtering and action handlers.",
+      "title": "Custom Views (Legacy Term)",
+      "description": "Clarifies how to choose between metadata-driven custom widgets and bespoke route-level pages.",
+      "summary": "Legacy \"custom views\" requests should be implemented either as form/list custom widgets in `src/extensions` or as bespoke pages in `src/pages`. Includes location, registration, and API usage conventions.",
       "keywords": [
         "custom views",
         "frontend customization",
-        "custom actions",
-        "custom components"
+        "custom widgets",
+        "custom pages"
       ],
       "solidx_concerns": [
         "frontend.custom_pages",
@@ -1415,12 +1415,12 @@
       ],
       "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
       "collection_name": "developer-docs",
-      "chunk_count": 4
+      "chunk_count": 5
     }
   },
   "developer-docs/extending/frontend-customization/form-view-buttons.md": {
-    "hash": "951afc08e5996e9c7ffb4f574fdaab60e8ba130c21ccc62253a489a9566aa2b3",
-    "document_id": "79eacbe9-1c59-42d1-b547-8ec3b23d2167",
+    "hash": "fee31aa8ee4f55a7870bb0e004e4217ef346a224090043a80ec107c903a6cdb1",
+    "document_id": "aa431771-1f68-494a-81ae-e618746fb996",
     "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
     "metadata": {
       "source": "docusaurus",
@@ -1429,15 +1429,15 @@
       "path": "developer-docs/extending/frontend-customization/form-view-buttons.md",
       "doc_title": "developer-docs/extending/frontend-customization/form-view-buttons.md",
       "title": "Form View Buttons",
-      "description": "Learn how to customize form view buttons in your frontend application.",
-      "summary": "Explains customizing SolidX form view buttons to enhance user interaction. Covers adding custom buttons, modifying existing buttons, and handling button actions using `registerExtensionComponent`. Includes a working example `PreviewPortal` button that redirects to an external hosted page.",
+      "description": "Build model-scoped form action buttons for SolidX form views.",
+      "summary": "Documents folder conventions, action component props, registration, metadata wiring, and Solid API patterns for form-view button extensions.",
       "solidx_concerns": [
         "frontend.extensions.form_buttons",
         "add_form_button"
       ],
       "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
       "collection_name": "developer-docs",
-      "chunk_count": 6
+      "chunk_count": 10
     }
   },
   "developer-docs/extending/frontend-customization/form-view-field-widgets.md": {
@@ -1463,8 +1463,8 @@
     }
   },
   "developer-docs/extending/frontend-customization/list-view-buttons.md": {
-    "hash": "da8a4748906801eb9f1b80f438467be362ba57c5397e851406e6f15fc50838a4",
-    "document_id": "7bddc675-4223-4f67-9a75-800cdbf23cf0",
+    "hash": "764892479a1666ea1d205a128185d6b22551dbf22661e8c0ad1eca907281edd4",
+    "document_id": "ebb46be4-7aa7-43b5-8813-e6f3062b73d0",
     "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
     "metadata": {
       "source": "docusaurus",
@@ -1473,8 +1473,8 @@
       "path": "developer-docs/extending/frontend-customization/list-view-buttons.md",
       "doc_title": "developer-docs/extending/frontend-customization/list-view-buttons.md",
       "title": "List View Buttons",
-      "description": "Learn how to customize list view buttons in your frontend application.",
-      "summary": "Explains how to add and customize list view buttons in SolidX. Covers creating header buttons for list-wide actions and row buttons for record-specific actions, including configuration examples and prop details.",
+      "description": "Build header and row action buttons for SolidX list views.",
+      "summary": "Documents mandatory file locations, props contracts, registration, metadata wiring, and API conventions for list header and row button extensions.",
       "solidx_concerns": [
         "frontend.extensions.list_buttons",
         "frontend.extensions.row_buttons",
@@ -1483,12 +1483,12 @@
       ],
       "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
       "collection_name": "developer-docs",
-      "chunk_count": 6
+      "chunk_count": 9
     }
   },
   "developer-docs/extending/frontend-customization/list-view-field-widgets.md": {
-    "hash": "002bba865581590268ec6a7b9252d582a9c73491b13a785c0ecdf8fbb611cf4c",
-    "document_id": "47624da4-37ba-4815-8e66-53512254d2bb",
+    "hash": "49ae779d203887f8f4a9ea00e0605edfcfabe3c9cf66be0d103f1c2273d3c626",
+    "document_id": "120797bf-fc97-40a0-a3c8-09e5ae4f792b",
     "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
     "metadata": {
       "source": "docusaurus",
@@ -1509,8 +1509,8 @@
     }
   },
   "developer-docs/extending/frontend-customization/index.md": {
-    "hash": "e92efa5353122f7f2c9e636f428487fa05d50390dc503ca158e9583b60aa5671",
-    "document_id": "7c4d6f48-1e82-4cfb-97a6-b6f180aa1cbd",
+    "hash": "7e22b3c463bae3022923f6cebe27889bf2f6d7685a1f2637239331d659581dcb",
+    "document_id": "0667e81c-3458-4908-8c63-408f0fe90724",
     "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
     "metadata": {
       "source": "docusaurus",
@@ -1518,15 +1518,17 @@
       "section": "developer-docs",
       "path": "developer-docs/extending/frontend-customization/index.md",
       "doc_title": "developer-docs/extending/frontend-customization/index.md",
+      "title": "Frontend Customization",
+      "description": "Catalog of frontend customization patterns in SolidX.",
+      "summary": "Entry point for metadata-driven extensions and bespoke frontend pages in SolidX, including file-location rules, registration patterns, and API-call conventions.",
       "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
       "collection_name": "developer-docs",
-      "title": "developer-docs/extending/frontend-customization/index.md",
       "chunk_count": 1
     }
   },
   "developer-docs/extending/frontend-customization/layout-manager.md": {
-    "hash": "a570a4d08639dec5ec09b198d9199df3d642eb021db242e5273ee72a9f0074d9",
-    "document_id": "c29f29ff-42ac-4177-b5f0-5e6561511594",
+    "hash": "d6e4af7dcddb0daf0c789b0a206bf04b6d1f347b33b405b96f9d4746ae13060d",
+    "document_id": "fc14f022-11b6-467b-aa3b-7000e7df2878",
     "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
     "metadata": {
       "source": "docusaurus",
@@ -1534,15 +1536,21 @@
       "section": "developer-docs",
       "path": "developer-docs/extending/frontend-customization/layout-manager.md",
       "doc_title": "developer-docs/extending/frontend-customization/layout-manager.md",
+      "title": "Layout Manager",
+      "description": "Use SolidViewLayoutManager for safe runtime layout mutation in frontend listeners.",
+      "summary": "Documents runtime layout updates using SolidViewLayoutManager in form/list event handlers, including return flag contracts required for UI updates to be applied.",
+      "solidx_concerns": [
+        "frontend.extensions.form_event_listeners",
+        "frontend.extensions.list_event_listeners"
+      ],
       "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
       "collection_name": "developer-docs",
-      "title": "developer-docs/extending/frontend-customization/layout-manager.md",
-      "chunk_count": 1
+      "chunk_count": 7
     }
   },
   "developer-docs/extending/frontend-customization/custom-widgets.md": {
-    "hash": "81951ef11954f8defd9e7b5cc6ba8f966161e6617981bf1795bcfb7816c4d0af",
-    "document_id": "e99df4a3-df60-49d7-b978-8c26bceed4d8",
+    "hash": "38cf51cfed6e1536f79a38bb5b4efe6f086b2b5359c219d9522ed00e1c81be3a",
+    "document_id": "dbee18f7-a5a0-47be-9626-0b1263e3e5e5",
     "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
     "metadata": {
       "source": "docusaurus",
@@ -1551,20 +1559,20 @@
       "path": "developer-docs/extending/frontend-customization/custom-widgets.md",
       "doc_title": "developer-docs/extending/frontend-customization/custom-widgets.md",
       "title": "Custom Widgets",
-      "description": "Learn how to create custom widgets for the frontend of your application.",
-      "summary": "Guide to creating custom widgets in SolidX using the built-in `CustomHtml` widget for extending UI functionality without field associations. Covers configuring widgets in form layouts with dynamic HTML rendering, using placeholders for field values and custom variables (e.g., `{{ctxtTitleAlphpabetCount}}`), receiving `SolidFormWidgetProps`, and setting custom variables via form event handlers for enhanced UI interactions.",
+      "description": "Build and register metadata-driven custom widgets in SolidX.",
+      "summary": "Defines where custom widgets should live, how to register them, how to wire them in layout metadata, and how to use Solid API helpers safely inside widget logic.",
       "solidx_concerns": [
         "frontend.extensions.custom_widgets",
         "create_custom_widget"
       ],
       "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
       "collection_name": "developer-docs",
-      "chunk_count": 3
+      "chunk_count": 7
     }
   },
   "developer-docs/extending/frontend-customization/kanban-field-widgets.md": {
-    "hash": "875c62183ac5da47d8123252b46e0aaec4ba2e187bd76d4d4dc5020ed4f6f09e",
-    "document_id": "3935a53a-cbc7-4f95-bf83-4bc0e33c9808",
+    "hash": "0d0f5f8b959eb4bb2d08fa9d0dc28a4e3d4fa01370def295b523d0439b11017a",
+    "document_id": "7ab52b84-4ea6-44c7-a4fe-02096d2adce3",
     "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
     "metadata": {
       "source": "docusaurus",
@@ -1573,15 +1581,15 @@
       "path": "developer-docs/extending/frontend-customization/kanban-field-widgets.md",
       "doc_title": "developer-docs/extending/frontend-customization/kanban-field-widgets.md",
       "title": "Kanban Field Widgets",
-      "description": "Learn how to create form view field widgets for the frontend of your application.",
-      "summary": "Overview of creating custom widgets for Kanban views in SolidX, similar to custom widget implementation patterns for other view types.",
+      "description": "Customize kanban card field rendering in SolidX.",
+      "summary": "Explains how to apply built-in or custom field widgets for kanban cards, where to place custom widget components, and how to register and wire them in metadata.",
       "solidx_concerns": [
         "frontend.extensions.custom_widgets",
         "create_custom_widget"
       ],
       "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
       "collection_name": "developer-docs",
-      "chunk_count": 1
+      "chunk_count": 6
     }
   },
   "developer-docs/extending/frontend-customization/form-view-events.md": {
@@ -1700,8 +1708,8 @@
     }
   },
   "developer-docs/extending/backend-customization/typeorm-subscribers.md": {
-    "hash": "1916c0b5dd09281088b9c0d1b3400c17701620c2d74bc48961dca8be5d222a54",
-    "document_id": "3377a076-77f5-4c7a-802a-c932105fe272",
+    "hash": "15fcaf2f79283d5a193ea757bafe4616ec5579c0b1e726ebbca1f9eed0324160",
+    "document_id": "05ca84d8-554d-4160-be38-04d07eed83e8",
     "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
     "metadata": {
       "source": "docusaurus",
@@ -2608,6 +2616,32 @@
       "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
       "collection_name": "developer-docs",
       "chunk_count": 10
+    }
+  },
+  "developer-docs/extending/frontend-customization/extension-ui-guidelines.md": {
+    "hash": "7f9c8a247138f098e83eda30119b4f986593dce8dcdb3d61fe305af468c8f03c",
+    "document_id": "95ed9619-f48f-4edc-a543-10bcd1e20f58",
+    "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
+    "metadata": {
+      "source": "docusaurus",
+      "project": "solidx-docs",
+      "section": "developer-docs",
+      "path": "developer-docs/extending/frontend-customization/extension-ui-guidelines.md",
+      "doc_title": "developer-docs/extending/frontend-customization/extension-ui-guidelines.md",
+      "title": "Extension UI Guidelines",
+      "description": "UI baseline and popup patterns for SolidX frontend extensions built with PrimeReact.",
+      "summary": "Practical style and interaction defaults for SolidX extension components (form buttons, list buttons, row buttons, widgets). Covers button sizing, popup composition, `closePopup` usage, loading/success/error UX, and a reusable confirmation pattern.",
+      "solidx_concerns": [
+        "frontend.extensions.form_buttons",
+        "frontend.extensions.list_buttons",
+        "frontend.extensions.row_buttons",
+        "frontend.extensions.custom_widgets",
+        "frontend.extensions.popup_ui",
+        "frontend.extensions.close_popup"
+      ],
+      "collection_id": "1d90f2d7-97fa-4aff-8b1f-9b5d4c9d9357",
+      "collection_name": "developer-docs",
+      "chunk_count": 9
     }
   }
 }

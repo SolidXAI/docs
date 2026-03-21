@@ -97,3 +97,4 @@ export async function loadTitleHints(query: string) {
 - [Form View Field Widgets](./form-view-field-widgets.md)
 - [List View Field Widgets](./list-view-field-widgets.md)
 - [Form View Events](./form-view-events.md)
+- [Extension UI Guidelines](./extension-ui-guidelines.md)

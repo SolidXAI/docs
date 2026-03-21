@@ -28,6 +28,7 @@ Use endpoint paths like `/resource` and do not hardcode `/api` in request paths.
 - [Form View Events](./form-view-events.md)
 - [List View Buttons](./list-view-buttons.md)
 - [List View Events](./list-view-events.md)
+- [Extension UI Guidelines](./extension-ui-guidelines.md)
 - [Custom Widgets](./custom-widgets.md)
 - [Form View Field Widgets](./form-view-field-widgets.md)
 - [List View Field Widgets](./list-view-field-widgets.md)
