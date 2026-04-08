@@ -126,7 +126,7 @@ On the existing **`Institute Admin`** role, grant the following additional permi
 - **Institute** — The activate and deactivate actions trigger real infrastructure changes (DNS records, Nginx virtual hosts). They are intentionally separate from the standard update permission so that access can be granted independently from general profile editing.
 
 :::tip Reference Documentation
-📋 For step-by-step instructions on editing a role and assigning permissions in SolidX, see [Role Management](../../../admin-docs/role-management).
+📋 For step-by-step instructions on editing a role and assigning permissions in SolidX, see [Role Management](../../../admin-docs/iam/roles.md).
 :::
 
 ### Prerequisites for Activation

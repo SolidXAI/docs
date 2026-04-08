@@ -176,10 +176,10 @@ Specifically, it:
 4. **Other Control Plane CLI Commands**
    - **npx @solidxai/solidctl@latest seed** — Seed the database with canonical models, settings, and system users from configuration files.
    - **npx @solidxai/solidctl@latest build** — Builds both the frontend and backend, and updates the CLI to point to the latest codebase.
-   - **npx @solidxai/solidctl@latest upgrade** — Upgrade Solid dependencies belonging to the `@solidxai` organization in the `solid-api` and `solid-ui` projects to their latest published versions.
+   - **npx @solidxai/solidctl@latest upgrade** — Upgrade SolidX dependencies to their latest stable versions.
 
 :::tip
-See the full [solidctl Command Reference](common/solidctl-commands.md) for details on all available commands.
+See the full [solidctl Command Reference](../../developer-docs/solidctl-commands.md) for details on all available commands.
 :::
 
 ### Prerequisites
