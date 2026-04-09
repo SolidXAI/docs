@@ -157,8 +157,7 @@ Individual students enrolled at your institution whose parents/guardians will re
 The `payments` (One-to-Many → `payment`) field is not added here because the `payment` model does not exist yet. It is auto-created when you add the `student` field on the Payment model in [Student Payment Portal](./making_payment.md) (field 7, Create Inverse: Yes).
 :::
 
-<span id="studentloginid-provider-context"></span>
-<details open>
+<details id="studentloginid-provider-context" open>
 <summary>studentLoginId — Full provider context JSON</summary>
 
 ```json
@@ -206,8 +205,7 @@ A batch of fee collection requests sent to multiple students at once (e.g., "Q1 
 
 > The `paymentCollectionItems` relation is added in [Step 5](#5-adding-relation-fields) after the `paymentCollectionItem` model exists. Deleting a Payment Collection cascades to all its Payment Collection Items via that relation.
 
-<span id="paymentcollectionid-provider-context"></span>
-<details open>
+<details id="paymentcollectionid-provider-context" open>
 <summary>paymentCollectionId — Full provider context JSON</summary>
 
 ```json

@@ -271,7 +271,7 @@ Every SolidX model is composed of fields. Fields in SolidX go over and above the
 ###  Numeric Types
 </h3>
 
-#### 1. int
+#### int
 **Purpose**: For whole numbers (positive/negative)  
 **Database**: `integer` column  
 **UI Component**: Number input field  
@@ -295,7 +295,7 @@ Every SolidX model is composed of fields. Fields in SolidX go over and above the
 - `defaultValue`: Initial value on create
 
 
-#### 2. decimal
+#### decimal
 **Purpose**: For decimal/floating point numbers  
 **Database**: `decimal` column  
 **UI Component**: Decimal input field  
@@ -318,7 +318,7 @@ Every SolidX model is composed of fields. Fields in SolidX go over and above the
 - `max`: Upper bound
 - `defaultValue`: Initial value on create
 
-#### 3. bigint (TODO)
+#### bigint (TODO)
 
   <h3 className=" card-headear-wrapper">
     <MdTextFields size={24}  />
@@ -327,7 +327,7 @@ Every SolidX model is composed of fields. Fields in SolidX go over and above the
 </h3>
 
 
-#### 1. shortText
+#### shortText
 **Purpose**: For shorter text content (typically up to 1000 characters)  
 **Database**: `varchar` column  
 **UI Component**: Text input field  
@@ -354,7 +354,7 @@ Every SolidX model is composed of fields. Fields in SolidX go over and above the
 - `index`: Database performance optimization
 - `isUserKey`: Use as record identifier
 
-#### 2. longText
+#### longText
 **Purpose**: For multi-line text content of any length  
 **Database**: `text` column  
 **UI Component**: Textarea field  
@@ -379,7 +379,7 @@ Every SolidX model is composed of fields. Fields in SolidX go over and above the
 - `regexPatternNotMatchingErrorMsg`: Custom validation error message
 - Supports longer content than `shortText`
 
-#### 3. richText
+#### richText
 **Purpose**: For formatted text with HTML support  
 **Database**: `text` column  
 **UI Component**: Rich text editor (HTML)  
@@ -433,7 +433,7 @@ Every SolidX model is composed of fields. Fields in SolidX go over and above the
 ### Date / Time Types
 </h3>
 
-#### 1. date
+#### date
 **Purpose**: For date values only (no time)  
 **Database**: `date` column  
 **UI Component**: Date picker  
@@ -450,7 +450,7 @@ Every SolidX model is composed of fields. Fields in SolidX go over and above the
 }
 ```
 
-#### 2. datetime
+#### datetime
 **Purpose**: For date and time values  
 **Database**: `timestamp` column  
 **UI Component**: DateTime picker  
@@ -467,7 +467,7 @@ Every SolidX model is composed of fields. Fields in SolidX go over and above the
 }
 ```
 
-#### 3. time (TODO)
+#### time (TODO)
 
 <h3 className=" card-headear-wrapper">
     <MdMerge size={24}  />
@@ -485,7 +485,7 @@ Every SolidX model is composed of fields. Fields in SolidX go over and above the
  - `one-to-many`: One record has many children (e.g., Customer → Orders)
  - `many-to-many`: Many records link to many others via a junction table (e.g., Students ↔ Courses)
 
-#### 1. Many-to-One Relation (Child → Parent)
+#### Many-to-One Relation (Child → Parent)
 ```json
 {
   "name": "institute",
@@ -500,7 +500,7 @@ Every SolidX model is composed of fields. Fields in SolidX go over and above the
 }
 ```
 
-#### 2. One-to-Many Relation (Parent → Children)
+#### One-to-Many Relation (Parent → Children)
 ```json
 {
   "name": "feeTypes",
@@ -515,7 +515,7 @@ Every SolidX model is composed of fields. Fields in SolidX go over and above the
 }
 ```
 
-#### 3. Many-to-Many Relation
+#### Many-to-Many Relation
 ```json
 {
   "name": "categories",
@@ -547,7 +547,7 @@ Give an example of inverse vs non-inverse relation creation (TODO)
 </h3>
 
 
-#### 1. mediaSingle
+#### mediaSingle
 **Purpose**: Single file/image upload  
 **UI Component**: File upload with preview  
 **Use Cases**: Profile pictures, logos, single documents
@@ -564,7 +564,7 @@ Give an example of inverse vs non-inverse relation creation (TODO)
 }
 ```
 
-#### 2. mediaMultiple
+#### mediaMultiple
 **Purpose**: Multiple file uploads  
 **UI Component**: Multi-file upload with gallery  
 **Use Cases**: Photo galleries, document collections, attachments
@@ -592,7 +592,7 @@ Give an example of inverse vs non-inverse relation creation (TODO)
 ###  Specialized Types
 </h3>
 
-#### 1. email
+#### email
 **Purpose**: Email addresses with validation  
 **Database**: `varchar`  
 **UI Component**: Email input field  
@@ -610,7 +610,7 @@ Give an example of inverse vs non-inverse relation creation (TODO)
 }
 ```
 
-#### 2. json
+#### json
 **Purpose**: Store complex JSON data structures  
 **Database**: `text`/`jsonb`  
 **UI Component**: JSON editor or code field  
@@ -627,7 +627,7 @@ Give an example of inverse vs non-inverse relation creation (TODO)
 }
 ```
 
-#### 3. password
+#### password
 **Purpose**: Secure password storage with hashing  
 **Database**: `varchar` (hashed)  
 **UI Component**: Password input field  
@@ -652,7 +652,7 @@ Give an example of inverse vs non-inverse relation creation (TODO)
 ###  Selection Types
 </h3>
 
-#### 1. selectionStatic
+#### selectionStatic
 **Purpose**: Dropdown with predefined options  
 **Database**: `varchar` column  
 **UI Component**: Dropdown/select field  
@@ -677,7 +677,7 @@ Give an example of inverse vs non-inverse relation creation (TODO)
 
 **Format**: `"value:label"` where value is stored in DB, label is displayed in UI
 
-#### 2. selectionDynamic
+#### selectionDynamic
 **Purpose**: Dropdown populated from API/database query  
 **Database**: `varchar` column  
 **UI Component**: Dynamic dropdown field  
@@ -809,7 +809,7 @@ Short help/purpose text shown in UI or docs.
 
 
 ### `type` *(SolidFieldType, required)*
-Refer to [Field Type](#-field-type-type) section above.
+Refer to [Field Type](#field-type-type) section above.
 
 **Default:** N/A
 

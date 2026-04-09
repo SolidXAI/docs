@@ -137,8 +137,7 @@ Represents a category of fees collected by an institution (e.g. Tuition, Bus, Ho
 
 > Two institutes can each have a "Tuition Fees" entry. A single institute cannot have two entries with the same name — `feeTypeUserKey` (field 6) enforces this by concatenating the fee type name and institute name into a unique slug.
 
-<span id="feetypeuserkey-provider-context"></span>
-<details open>
+<details id="feetypeuserkey-provider-context" open>
 <summary>feeTypeUserKey — Full provider context JSON</summary>
 
 ```json

@@ -2465,9 +2465,7 @@ Dashboard (/dashboard):
 
 **Configuration:**
 
-This configuration is added to the `amountPaid` field definition in the **Payment Collection Item** model's metadata configuration file. The computed field setup for this model was covered in detail in the [Initiate Payment — Payment Collection Item Model - Amount Paid (Computed Field)](./initiate_payment.md#field-definitions-2) section.
-
-school-fees-portal/end-to-end-implementation/initiate_payment#field-definitions-2
+This configuration is added to the `amountPaid` field definition in the **Payment Collection Item** model's metadata configuration file. The computed field setup for this model was covered in detail in the [Initiate Payment — Payment Collection Item Model - Amount Paid (Computed Field)](./initiate_payment.md#7-computed-field-for-amount-calculations) section.
 ```json
 {
   "name": "amountPaid",
