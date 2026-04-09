@@ -1,6 +1,6 @@
 ---
 sidebar_position: 3
-title: Generating APIs and UI Components
+title: Code Generation
 description: Guide for auto-generating code from your data models
 ---
 

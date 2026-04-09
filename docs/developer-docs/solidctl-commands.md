@@ -1,6 +1,6 @@
 ---
 sidebar_position: 2
-title: SolidX Control Plane CLI Reference
+title: solidctl Reference
 description: Comprehensive reference for using the SolidX Control Plane CLI (solidctl) to manage your SolidX application.
 ---
 

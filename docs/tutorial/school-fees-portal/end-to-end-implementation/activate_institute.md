@@ -1,6 +1,6 @@
 ---
 sidebar_position: 2
-title: Activate Institute Portal
+title: Activate Institute
 description: Learn how to activate an institute's fee portal and make it live for students and parents.
 summary: Complete guide to activating institute portals with automatic DNS and web server configuration
 keywords: [institute activation, portal deployment, DNS configuration, multi-tenant setup]

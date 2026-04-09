@@ -1,6 +1,6 @@
 ---
 sidebar_position: 2
-title: Important Configuration Notes
+title: Config Notes
 description: Essential configuration guidelines for creating models in SolidX
 ---
 

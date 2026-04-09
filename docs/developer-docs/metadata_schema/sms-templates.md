@@ -1,5 +1,5 @@
 ---
-title: SMS Templates
+title: SMS
 
 description: Metadata schema for populating SMS templates in SolidX applications.
 summary: This document describes SMS template metadata in SolidX, which allows creation and management of SMS templates with dynamic content using Handlebars syntax. Templates are stored in separate text files referenced by the metadata and support variables for personalization. Key attributes include template name, display name, body file reference, description, SMS provider template ID, active status, and type (text). The document provides examples of OTP login templates with dynamic variable substitution, file organization guidelines, and links to implementing custom SMS providers for integration with external SMS services like Twilio or AWS SNS.

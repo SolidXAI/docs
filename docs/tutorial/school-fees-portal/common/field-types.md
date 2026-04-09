@@ -1,6 +1,6 @@
 ---
 sidebar_position: 1
-title: Field Type Reference
+title: Field Types
 description: Reference guide for field types when creating models in SolidX
 ---
 

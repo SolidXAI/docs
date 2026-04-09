@@ -1,5 +1,5 @@
 ---
-title: Create Endpoint
+title: Create
 description: Information about the create endpoint of the REST API, including usage, parameters, and responses
 summary: This document details the create endpoints in SolidX's REST API, covering single record creation, bulk record creation, and record creation with media files. It provides comprehensive examples including HTTP headers (Content-Type and Authorization), request body structures, and sample responses for each scenario. The create endpoints support both JSON payloads for standard data and multipart/form-data for media uploads. All endpoints require proper create permissions and JWT bearer authentication for security.
 sidebar_position: 1

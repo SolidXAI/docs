@@ -1,5 +1,5 @@
 ---
-title: SMS Templates
+title: SMS
 description: Learn how to create and manage SMS templates in SolidX, including dynamic content
 sidebar_position: 2
 ---

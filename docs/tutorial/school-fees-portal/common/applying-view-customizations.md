@@ -1,6 +1,6 @@
 ---
 sidebar_position: 5
-title: Applying View Customizations
+title: View Customizations
 description: How to apply customized form and list view layouts using the Layout Builder
 ---
 

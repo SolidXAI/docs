@@ -1,6 +1,6 @@
 ---
 sidebar_position: 1
-title: Media View
+title: View
 ---
 
 import { FaFolder, FaFileUpload, FaSearch, FaThList, FaTh, FaCopy, FaShareAlt, FaShieldAlt, FaCogs } from "react-icons/fa";

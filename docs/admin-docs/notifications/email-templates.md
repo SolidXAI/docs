@@ -1,5 +1,5 @@
 ---
-title: Email Templates
+title: Email
 description: Learn how to create and manage email templates in SOLID, including dynamic content
 sidebar_position: 1
 ---

@@ -1,5 +1,5 @@
 ---
-title: Update Endpoints
+title: Update
 description: Information about the update endpoints of the REST API, including usage, parameters, and responses.
 summary: This document explains the update endpoints in SolidX's REST API, covering both partial updates (PATCH method for updating specific fields) and full updates (PUT method for replacing entire records). It provides detailed examples of updates without media files (using JSON content type) and updates with media files (using multipart/form-data). Each section includes HTTP headers, request formats, sample payloads, and response structures. Both update methods are idempotent and require JWT bearer authentication.
 sidebar_position: 2

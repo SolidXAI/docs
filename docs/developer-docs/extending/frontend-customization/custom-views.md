@@ -1,5 +1,5 @@
 ---
-title: Custom Views (Legacy Term)
+title: Custom Views
 description: Clarifies how to choose between metadata-driven custom widgets and bespoke route-level pages.
 summary: Legacy "custom views" requests should be implemented either as form/list custom widgets in `src/extensions` or as bespoke pages in `src/pages`. Includes location, registration, and API usage conventions.
 keywords: [custom views, frontend customization, custom widgets, custom pages]

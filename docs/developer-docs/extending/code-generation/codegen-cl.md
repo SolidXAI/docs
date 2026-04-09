@@ -1,5 +1,5 @@
 ---
-title: Code Generation CLI
+title: CLI
 description: This page provides a list of CLI commands that can be used as an alternative to generate backend code in SolidX.
 summary: This document details the CLI commands for code generation in SolidX using Angular Schematics. The primary command is 'solid refresh-model' which creates or updates a model and its related files within an existing module, keeping code synchronized with metadata. Additional commands include 'solid add-module' for generating new modules (rarely needed as modules are auto-scaffolded), and other specialized commands for field operations. The refresh-model command accepts options like modelName, modelId, and dryRun mode, and is the most frequently used command for maintaining code-metadata alignment.
 sidebar_position: 2

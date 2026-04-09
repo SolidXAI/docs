@@ -1,6 +1,6 @@
 ---
 sidebar_position: 10
-title: Bespoke Frontend UI (Vite + React)
+title: Bespoke Frontend
 description: Build fully custom React applications inside Solid using dedicated page layouts, route injection, and Solid HTTP helpers.
 summary: Comprehensive guide for creating 100% bespoke frontend experiences in SolidX using Vite + React. Covers folder conventions under `pages`, creating layout wrappers with isolated CSS, wiring routes via `AppRoutes.tsx` and `getSolidRoutes`, and building pages with `solid-http` helpers (`solidGet`, `solidPost`, etc.).
 solidx_concerns: [frontend.custom_pages, add_full_custom_ui]

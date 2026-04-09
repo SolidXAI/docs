@@ -1,6 +1,6 @@
 ---
 sidebar_position: 2
-title: Extending Services
+title: Custom Services
 description: Learn how to extend backend services in SolidX.
 summary: Explains extending NestJS services in SolidX to implement custom business logic beyond default CRUD operations. Covers creating service methods for domain-specific operations (e.g., activating portals, sending notifications), benefits of separation of concerns, reusability across controllers and scheduled jobs, improved testability, and consistency. Includes examples like `activateInstitutePortal()` with database updates and event publishing.
 keywords: [backend, services, customization]

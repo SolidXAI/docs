@@ -1,5 +1,5 @@
 ---
-title: Setting Up SolidX
+title: SolidX Setup
 sidebar_position: 1
 description: Learn how to set up the SolidX platform for your project, including installation, configuration, and initial setup steps.
 summary: TODO

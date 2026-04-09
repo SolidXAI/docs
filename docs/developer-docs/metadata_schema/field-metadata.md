@@ -1,5 +1,5 @@
 ---
-title: Field Metadata Schema
+title: Fields
 description: Overview of the field metadata schema used in SolidX.
 summary: This comprehensive document details field metadata in SolidX, which treats fields as semantic attributes that define how users interact with data in the admin interface. It covers extensive field types including numeric (integer, bigInteger, decimal), text (shortText, longText, richText), temporal (date, dateTime, time), boolean, JSON, media (singleMedia, multipleMedia), specialized types (email, GUID, computed fields), selection fields (static and dynamic), and relation fields (manyToOne, oneToMany, manyToMany). Each field type includes configuration options for validation, default values, encryption, indexing, uniqueness, privacy, and audit tracking, with detailed examples and attribute documentation.
 sidebar_position: 3

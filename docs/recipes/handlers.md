@@ -1,6 +1,6 @@
 ---
 sidebar_position: 5
-title: SolidX Handlers
+title: Handlers
 ---
 
 # SolidX Handlers

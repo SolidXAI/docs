@@ -1,6 +1,6 @@
 ---
 sidebar_position: 11
-title: Extension UI Guidelines
+title: UI Guidelines
 description: UI baseline and popup patterns for SolidX frontend extensions built with PrimeReact.
 summary: Practical style and interaction defaults for SolidX extension components (form buttons, list buttons, row buttons, widgets). Covers button sizing, popup composition, `closePopup` usage, loading/success/error UX, and a reusable confirmation pattern.
 solidx_concerns: [frontend.extensions.form_buttons, frontend.extensions.list_buttons, frontend.extensions.row_buttons, frontend.extensions.custom_widgets, frontend.extensions.popup_ui, frontend.extensions.close_popup]

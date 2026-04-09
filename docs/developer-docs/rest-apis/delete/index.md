@@ -1,6 +1,6 @@
 ---
 sidebar_position: 1
-title: Delete Endpoint
+title: Delete
 description: Information about the delete endpoint of the REST API, including usage, parameters, and responses
 summary: This document describes the delete endpoints in SolidX's REST API, covering both single record and bulk deletion operations. When soft delete is enabled on a model, records are not permanently removed but marked as deleted with deletedAt and deletedTracker fields populated. The documentation includes detailed examples of delete requests and responses, showing the HTTP headers required (Content-Type and Authorization), endpoint URLs, and the structure of returned data including soft delete metadata and tracking information.
 ---

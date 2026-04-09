@@ -1,6 +1,6 @@
 ---
 sidebar_position: 6
-title: Workflow Status on a Form
+title: Workflow Status
 description: Display and update a record's workflow status (e.g. pending, active, inactive) directly from its form view.
 keywords: [workflow, status, form view, workflowField, workflowFieldUpdateEnabled]
 ---

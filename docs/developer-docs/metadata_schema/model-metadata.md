@@ -1,5 +1,5 @@
 ---
-title: Model Metadata Schema
+title: Models
 description: Overview of the model metadata schema used in SolidX.
 summary: This document details the model metadata schema in SolidX, where models represent data structures (entities/tables) within modules. Each model is a semantic, configurable structure that defines specific data types, their attributes, and relationships with other models. Key properties include singular/plural names, display name, data source configuration, table name, soft delete settings, audit logging, internationalization support, exportability, and user key field designation. The metadata also specifies which fields serve as unique identifiers for records and controls various behavioral aspects like draft-publish workflows.
 sidebar_position: 2

@@ -1,5 +1,5 @@
 ---
-title: Menu Item Metadata
+title: Menu Items
 description: Metadata schema for defining menus in SolidX applications.
 summary: This document describes menu item metadata in SolidX, which automatically generates and manages the admin panel's navigation structure based on modules and resources. Menu metadata includes display name, unique name, sequence number for ordering, associated action, module reference, parent menu item for hierarchical navigation, role-based access control, and icon names. The system supports nested menu structures through parent-child relationships, enabling complex navigation hierarchies. Examples demonstrate creating multi-level menus for modules like the Fees Portal with home pages, list views, and nested submenus.
 sidebar_position: 6

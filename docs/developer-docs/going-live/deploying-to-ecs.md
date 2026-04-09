@@ -1,5 +1,5 @@
 ---
-title: Deploying to ECS
+title: ECS
 description: A comprehensive guide for deploying SolidX applications to Amazon ECS with Fargate.
 summary: This guide will walk you through the process of deploying your SolidX application to Amazon Elastic Container Service (ECS) using Fargate. We will cover containerizing your application, pushing it to ECR, and setting up the necessary ECS resources.
 sidebar_position: 2

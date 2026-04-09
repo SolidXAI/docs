@@ -1,6 +1,6 @@
 ---
 sidebar_position: 9
-title: Filtering Data
+title: Filtering
 description: Learn how to use filter operators to query records via the REST API or the CRUD service.
 keywords: [filters, query, operators, REST API, CRUD service]
 ---

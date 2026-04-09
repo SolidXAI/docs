@@ -1,5 +1,5 @@
 ---
-title: Extending Controllers
+title: Custom Controllers
 description: Learn how to extend backend controllers in SolidX.
 summary: Covers extending NestJS controllers in SolidX to add custom endpoints or modify existing ones. Explains adding new methods with HTTP decorators (`@Get()`, `@Post()`), using `@ApiBearerAuth()` for JWT authentication, `@UseInterceptors(AnyFilesInterceptor())` for file uploads, creating DTOs with `@ApiProperty()` for Swagger documentation and validation, delegating business logic to services, and handling multipart/form-data requests with files.
 keywords: [backend, controllers, customization]

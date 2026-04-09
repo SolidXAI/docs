@@ -1,6 +1,6 @@
 ---
 sidebar_position: 5
-title: Swagger Documentation
+title: Swagger
 description: This section provides details on how to access and use the Swagger documentation for SolidX REST APIs.
 summary: This document provides comprehensive information about accessing and using SolidX's auto-generated Swagger/OpenAPI documentation. It explains how to access the documentation at the /api/docs endpoint, authenticate using JWT tokens via the login endpoint, and utilize the standard RESTful endpoints automatically generated for each resource. The documentation covers query parameters for filtering, sorting, pagination, population, and field selection, provides example requests for common operations, explains the standardized error handling format with common HTTP status codes, and outlines best practices for authentication, request optimization, error handling, and API documentation maintenance.
 ---
