@@ -32,7 +32,7 @@ Use endpoint paths like `/resource` and do not hardcode `/api` in request paths.
 - [Custom Widgets](./custom-widgets.md)
 - [Form View Field Widgets](./form-view-field-widgets.md)
 - [List View Field Widgets](./list-view-field-widgets.md)
-- [Kanban Field Widgets](./kanban-field-widgets.md)
+- [Kanban Card Widgets](./kanban-card-widgets.md)
 
 ### Bespoke UI
 

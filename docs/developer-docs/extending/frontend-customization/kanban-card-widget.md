@@ -1,14 +1,14 @@
 ---
 sidebar_position: 2
-title: Kanban Field Widgets
-description: Customize kanban card field rendering in SolidX.
-summary: Explains how to apply built-in or custom field widgets for kanban cards, where to place custom widget components, and how to register and wire them in metadata.
+title: Kanban Card Widgets
+description: Customize kanban card rendering in SolidX.
+summary: Explains how to apply built-in or custom widget for kanban cards, where to place custom widget components, and how to register and wire them in metadata.
 solidx_concerns: [frontend.extensions.custom_widgets, create_custom_widget]
 ---
 
 ## Overview
 
-Kanban field widgets control how values are rendered inside kanban cards.
+Kanban card widgets control how values are rendered inside kanban cards.
 
 For project-specific widgets, use model-scoped extension files and register them through `solid-extensions.ts`.
 
@@ -35,7 +35,47 @@ registerExtensionComponent("PriorityBadgeKanbanWidget", PriorityBadgeKanbanWidge
 
 ## Metadata Wiring
 
-Use the registered name in kanban layout JSON where widget override is supported by your layout schema.
+Use the registered name in the Kanban layout JSON. The `cardWidget` attribute must be placed inside the `attrs` of the `card` type child within the `kanban` layout.
+
+```json
+{
+  "name": "task-kanban-view",
+  "displayName": "Tasks Kanban",
+  "type": "kanban",
+  "layout": {
+    "type": "kanban",
+    "attrs": {
+      "groupBy": "stage",
+      "draggable": true
+    },
+    "children": [
+      {
+        "type": "card",
+        "attrs": {
+          "name": "Card",
+          "cardWidget": "PriorityBadgeKanbanWidget"
+        },
+        "children": [
+          {
+            "type": "field",
+            "attrs": {
+              "name": "name",
+              "isSearchable": true
+            }
+          },
+          {
+            "type": "field",
+            "attrs": {
+              "name": "priority",
+              "isSearchable": true
+            }
+          }
+        ]
+      }
+    ]
+  }
+}
+```
 
 ## API Guidance
 

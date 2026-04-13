@@ -389,5 +389,5 @@ This allows you to render a **boolean field as "Yes/No"** in view mode.
 ## Related
 
 - [List View Field Widgets](./list-view-field-widgets) — built-in and custom widgets for list column display
-- [Kanban Field Widgets](./kanban-field-widgets) — widgets for kanban card fields
+- [Kanban Card Widgets](./kanban-card-widgets) — widgets for kanban card fields
 - [Custom Widgets](./custom-widgets) — general guide to registering extension components

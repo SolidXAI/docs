@@ -126,7 +126,7 @@ Use a stable base route namespace such as:
 
 Inside bespoke pages you can use any React patterns and libraries:
 
-- PrimeReact, MUI, Chakra, Tailwind, plain CSS, CSS Modules, etc.
+- Shadcn, MUI, Chakra, Primereact, Tailwind, plain CSS, CSS Modules, etc.
 - React hooks/state machines/context
 - Any reusable local component architecture
 

@@ -213,6 +213,6 @@ export type FieldMetadata = CommonEntity & {
 ## Related
 
 - [Form View Field Widgets](./form-view-field-widgets) — built-in and custom widgets for form fields (edit and view mode)
-- [Kanban Field Widgets](./kanban-field-widgets) — widgets for kanban card fields
+- [Kanban Card Widgets](./kanban-card-widgets) — widgets for kanban card fields
 - [Custom Widgets](./custom-widgets) — general guide to registering extension components
 <!-- ```tsx -->
