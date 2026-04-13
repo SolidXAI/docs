@@ -22,9 +22,15 @@ For model-scoped widgets:
 
 ```ts
 import { registerExtensionComponent } from "@solidxai/core-ui";
+import {
+    ExtensionComponentTypes,
+    ExtensionFunctionTypes,
+    type ExtensionComponentType,
+    type ExtensionFunctionType,
+} from "../types/extension-registry";
 import { PriorityBadgeKanbanWidget } from "./venue/task/custom-widgets/PriorityBadgeKanbanWidget";
 
-registerExtensionComponent("PriorityBadgeKanbanWidget", PriorityBadgeKanbanWidget);
+registerExtensionComponent("PriorityBadgeKanbanWidget", PriorityBadgeKanbanWidget, ExtensionComponentTypes.kanban_card_widget);
 ```
 
 ## Metadata Wiring

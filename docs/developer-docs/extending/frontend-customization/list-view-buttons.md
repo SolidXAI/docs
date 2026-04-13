@@ -67,11 +67,17 @@ using:
 
 ```ts
 import { registerExtensionComponent } from "@solidxai/core-ui";
+import {
+    ExtensionComponentTypes,
+    ExtensionFunctionTypes,
+    type ExtensionComponentType,
+    type ExtensionFunctionType,
+} from "../types/extension-registry";
 import { GenerateReportButton } from "./venue/payment/list-buttons/GenerateReportButton";
 import { RefundPaymentButton } from "./venue/payment/row-buttons/RefundPaymentButton";
 
-registerExtensionComponent("GenerateReportButton", GenerateReportButton);
-registerExtensionComponent("RefundPaymentButton", RefundPaymentButton);
+registerExtensionComponent("GenerateReportButton", GenerateReportButton, ExtensionComponentTypes.list_header_action);
+registerExtensionComponent("RefundPaymentButton", RefundPaymentButton, ExtensionComponentTypes.list_row_action);
 ```
 
 Keep action names aligned with metadata.

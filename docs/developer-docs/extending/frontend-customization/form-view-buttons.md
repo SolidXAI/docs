@@ -53,9 +53,15 @@ Guidance:
 
 ```ts
 import { registerExtensionComponent } from "@solidxai/core-ui";
+import {
+    ExtensionComponentTypes,
+    ExtensionFunctionTypes,
+    type ExtensionComponentType,
+    type ExtensionFunctionType,
+} from "../types/extension-registry";
 import { ApproveApplicationButton } from "./venue/application/form-buttons/ApproveApplicationButton";
 
-registerExtensionComponent("ApproveApplicationButton", ApproveApplicationButton);
+registerExtensionComponent("ApproveApplicationButton", ApproveApplicationButton, ExtensionComponentTypes.form_action);
 ```
 
 ## Layout Metadata Wiring

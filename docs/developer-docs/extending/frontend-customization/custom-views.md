@@ -87,9 +87,15 @@ Registration:
 
 ```ts
 import { registerExtensionComponent } from "@solidxai/core-ui";
+import {
+    ExtensionComponentTypes,
+    ExtensionFunctionTypes,
+    type ExtensionComponentType,
+    type ExtensionFunctionType,
+} from "../types/extension-registry";
 import { BookSimilarTitles } from "./library/book/custom-widgets/BookSimilarTitles";
 
-registerExtensionComponent("BookSimilarTitles", BookSimilarTitles);
+registerExtensionComponent("BookSimilarTitles", BookSimilarTitles, ExtensionComponentTypes.form_widget);
 ```
 
 Layout usage:

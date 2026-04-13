@@ -26,7 +26,13 @@ with:
 
 ```ts
 import { registerExtensionComponent } from "@solidxai/core-ui";
-registerExtensionComponent("MyCustomWidget", MyCustomWidget);
+import {
+    ExtensionComponentTypes,
+    ExtensionFunctionTypes,
+    type ExtensionComponentType,
+    type ExtensionFunctionType,
+} from "../types/extension-registry";
+registerExtensionComponent("MyCustomWidget", MyCustomWidget, ExtensionComponentTypes.form_widget);
 ```
 
 ## Layout Wiring

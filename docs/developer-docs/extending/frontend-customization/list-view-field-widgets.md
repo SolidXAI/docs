@@ -138,9 +138,17 @@ export const ScoreWidget = ({ rowData, solidListViewMetaData, fieldMetadata, col
 Register the widget in `solid-extensions.ts` so the framework recognizes it.
 
 ```tsx
+import { registerExtensionComponent } from "@solidxai/core-ui";
+import {
+    ExtensionComponentTypes,
+    ExtensionFunctionTypes,
+    type ExtensionComponentType,
+    type ExtensionFunctionType,
+} from "../types/extension-registry";
 registerExtensionComponent(
 "ScoreWidget",
  ScoreWidget,
+ ExtensionComponentTypes.list_field_widget,
 //["score"] //alias to use in layout JSON
  );
 ```

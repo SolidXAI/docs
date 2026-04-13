@@ -253,9 +253,18 @@ Widgets must be **registered** in `solid-extensions.ts`:
    <code>Registering the Widget</code>
    </summary>
 ```tsx
+import { registerExtensionComponent } from "@solidxai/core-ui";
+import {
+    ExtensionComponentTypes,
+    ExtensionFunctionTypes,
+    type ExtensionComponentType,
+    type ExtensionFunctionType,
+} from "../types/extension-registry";
+
 registerExtensionComponent(
   "SolidIntegerSliderStyleFormEditWidget", // component name
   SolidIntegerSliderStyleFormEditWidget, // component reference
+  ExtensionComponentTypes.form_field_edit_widget, // component type
   ["integerSlider"]   // alias name
 );
 ```
