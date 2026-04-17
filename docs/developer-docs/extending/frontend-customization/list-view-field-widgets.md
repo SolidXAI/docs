@@ -138,9 +138,17 @@ export const ScoreWidget = ({ rowData, solidListViewMetaData, fieldMetadata, col
 Register the widget in `solid-extensions.ts` so the framework recognizes it.
 
 ```tsx
+import { registerExtensionComponent } from "@solidxai/core-ui";
+import {
+    ExtensionComponentTypes,
+    ExtensionFunctionTypes,
+    type ExtensionComponentType,
+    type ExtensionFunctionType,
+} from "../types/extension-registry";
 registerExtensionComponent(
 "ScoreWidget",
  ScoreWidget,
+ ExtensionComponentTypes.list_field_widget,
 //["score"] //alias to use in layout JSON
  );
 ```
@@ -205,6 +213,6 @@ export type FieldMetadata = CommonEntity & {
 ## Related
 
 - [Form View Field Widgets](./form-view-field-widgets) — built-in and custom widgets for form fields (edit and view mode)
-- [Kanban Field Widgets](./kanban-field-widgets) — widgets for kanban card fields
+- [Kanban Card Widgets](./kanban-card-widgets) — widgets for kanban card fields
 - [Custom Widgets](./custom-widgets) — general guide to registering extension components
 <!-- ```tsx -->

@@ -1,20 +1,20 @@
 ---
 sidebar_position: 11
 title: UI Guidelines
-description: UI baseline and popup patterns for SolidX frontend extensions built with PrimeReact.
-summary: Practical style and interaction defaults for SolidX extension components (form buttons, list buttons, row buttons, widgets). Covers button sizing, popup composition, `closePopup` usage, loading/success/error UX, and a reusable confirmation pattern.
+description: UI baseline and popup patterns for SolidX frontend extensions built with Solid Primitives (Radix UI/Shadcn).
+summary: Practical style and interaction defaults for SolidX extension components (form buttons, list buttons, row buttons, widgets). Covers button sizing, popup composition, `closePopup` usage, loading/success/error UX, and a reusable confirmation pattern using Solid Primitives.
 solidx_concerns: [frontend.extensions.form_buttons, frontend.extensions.list_buttons, frontend.extensions.row_buttons, frontend.extensions.custom_widgets, frontend.extensions.popup_ui, frontend.extensions.close_popup]
 ---
 
 ## Purpose
 
-Use these defaults so extension UI generated from prompts looks clean and consistent with PrimeReact-based SolidX screens.
+Use these defaults so extension UI generated from prompts looks clean and consistent with the Shadcn-based SolidX screens.
 
-## PrimeReact Baseline
+## Solid Primitives Baseline
 
-- Prefer PrimeReact components (`Button`, `Dialog`, `Message`, `ProgressSpinner`, `Toast`) over raw HTML controls.
-- Reuse existing utility classes used in SolidX projects (`p-*`, `flex`, `gap-*`, `surface-*`, `border-round`, `text-*`).
-- Keep spacing consistent: `p-3`/`p-4` for container padding, `gap-2`/`gap-3` for item spacing.
+- Prefer Solid Primitives (`SolidButton`, `SolidDialog`, `SolidMessage`, `SolidSpinner`, `SolidToast`) over raw HTML or legacy PrimeReact controls.
+- Reuse existing utility classes used in SolidX projects (`flex`, `gap-*`, `p-*`, `m-*`, `text-*`, `w-full`).
+- Keep spacing consistent: `p-6` for larger container padding, `gap-4` for logical sections, `gap-2` for action groups.
 
 ## Row Button Visual Rules
 
@@ -22,21 +22,21 @@ Row-level actions should look like compact inline actions, not full-width bars.
 
 Recommended defaults:
 
-- `size="small"`
-- `className="p-button-sm"`
-- Keep width content-based (`width: "auto"`, `minWidth: "unset"`)
-- Keep label on one line (`whiteSpace: "nowrap"`)
+- `size="sm"` or `size="small"`
+- `variant="outline"` or `variant="ghost"` for secondary actions
+- Keep width content-based (`w-auto`)
+- Keep label on one line (`whitespace-nowrap`)
 - Use concise labels (1-3 words)
 
 Example:
 
 ```tsx
-<Button
+<SolidButton
   label="Seed Rates"
-  icon="pi pi-refresh"
-  size="small"
-  className="p-button-sm"
-  style={{ width: "auto", minWidth: "unset", whiteSpace: "nowrap" }}
+  icon="si-refresh"
+  size="sm"
+  variant="outline"
+  className="w-auto whitespace-nowrap"
 />
 ```
 
@@ -44,18 +44,18 @@ Example:
 
 ### If metadata uses `openInPopup: true`
 
-SolidX already opens a popup container for your extension component. Render only popup content (header/body/footer), not another full-screen modal wrapper.
+SolidX already opens a popup container (via `SolidDialog`) for your extension component. Render only popup content (header/body/footer), not another full-screen modal wrapper.
 
 ### Popup content structure
 
-- Header: icon + title
-- Body: clear confirmation/success/error message
-- Footer: right-aligned actions (`Cancel`, `Confirm` or `Close`)
+- Header: icon + title (use `SolidDialogHeader`)
+- Body: clear confirmation/success/error message (use `SolidDialogBody`)
+- Footer: right-aligned actions (`Cancel`, `Confirm` or `Close`) (use `SolidDialogFooter`)
 
 Recommended popup content wrapper:
 
 ```tsx
-<div className="p-4" style={{ width: "min(560px, 92vw)" }}>
+<div className="flex flex-col gap-6 p-6" style={{ width: "min(560px, 92vw)" }}>
   {/* header */}
   {/* body */}
   {/* footer actions */}
@@ -84,18 +84,21 @@ const close = () => dispatch(closePopup());
 
 ## Async UX Rules
 
-- Disable confirm action while request is in-flight.
-- Show loading feedback (`Confirming...` label or spinner).
-- Use project-standard toast/global error behavior for server failures.
+- Disable confirm action while request is in-flight (handled automatically by `loading` prop on `SolidButton`).
+- Show loading feedback (use `loading` prop on `SolidButton` which shows a spinner).
+- Use project-standard toast (`SolidToast`) or global error behavior for server failures.
 - Avoid duplicate submissions with a loading guard.
 
 ## Confirmation Template (Row/Form/List Actions)
 
 ```tsx
 import { useState } from "react";
-import { Button } from "primereact/button";
-import { Message } from "primereact/message";
-import { solidPost, closePopup } from "@solidxai/core-ui";
+import { 
+  SolidButton, 
+  SolidMessage, 
+  solidPost, 
+  closePopup 
+} from "@solidxai/core-ui";
 import { useDispatch } from "react-redux";
 
 export function SeedCurrencyRates({ rowData }: any) {
@@ -118,24 +121,30 @@ export function SeedCurrencyRates({ rowData }: any) {
   };
 
   return (
-    <div className="p-4 flex flex-column gap-3" style={{ width: "min(560px, 92vw)" }}>
+    <div className="flex flex-col gap-4 p-6" style={{ width: "min(560px, 92vw)" }}>
       {!done ? (
         <>
-          <Message severity="warn" text="Confirm Action" />
-          <p className="m-0">
+          <SolidMessage severity="warn" text="Confirm Action" />
+          <p className="text-sm text-muted-foreground m-0">
             Confirming will trigger currency fluctuation fetch for this country.
           </p>
-          <div className="flex justify-content-end gap-2 pt-2">
-            <Button label="Cancel" severity="secondary" outlined onClick={onCancel} />
-            <Button label={loading ? "Confirming..." : "Confirm"} onClick={onConfirm} loading={loading} />
+          <div className="flex justify-end gap-2 pt-2">
+            <SolidButton label="Cancel" variant="outline" onClick={onCancel} />
+            <SolidButton 
+              label={loading ? "Confirming..." : "Confirm"} 
+              onClick={onConfirm} 
+              loading={loading} 
+            />
           </div>
         </>
       ) : (
         <>
-          <Message severity="success" text="Success" />
-          <p className="m-0">Currency fluctuation fetch was triggered successfully.</p>
-          <div className="flex justify-content-end pt-2">
-            <Button label="Close" onClick={onCancel} />
+          <SolidMessage severity="success" text="Success" />
+          <p className="text-sm text-muted-foreground m-0">
+            Currency fluctuation fetch was triggered successfully.
+          </p>
+          <div className="flex justify-end pt-2">
+            <SolidButton label="Close" onClick={onCancel} />
           </div>
         </>
       )}

@@ -53,9 +53,15 @@ Guidance:
 
 ```ts
 import { registerExtensionComponent } from "@solidxai/core-ui";
+import {
+    ExtensionComponentTypes,
+    ExtensionFunctionTypes,
+    type ExtensionComponentType,
+    type ExtensionFunctionType,
+} from "../types/extension-registry";
 import { ApproveApplicationButton } from "./venue/application/form-buttons/ApproveApplicationButton";
 
-registerExtensionComponent("ApproveApplicationButton", ApproveApplicationButton);
+registerExtensionComponent("ApproveApplicationButton", ApproveApplicationButton, ExtensionComponentTypes.form_action);
 ```
 
 ## Layout Metadata Wiring
@@ -94,16 +100,16 @@ Guidelines:
 - Apply follow-up refresh behavior where required.
 - Keep popup close behavior safe and deterministic on both success and error paths.
 
-## UI/Styling Guidance (PrimeReact)
+## UI/Styling Guidance (Shadcn/Solid Primitives)
 
 For form action components:
 
-- Prefer PrimeReact controls (`Button`, `Message`, `ProgressSpinner`, `Toast`) over raw HTML controls.
+- Prefer Solid primitives (`SolidButton`, `SolidMessage`, `SolidSpinner`, `SolidToast`) over raw HTML controls.
 - Keep action areas compact (`p-3`/`p-4`, `gap-2`/`gap-3`).
 - Use clear call-to-action hierarchy:
   - Secondary/outlined `Cancel`
   - Primary `Confirm` or `Submit`
-- Disable confirm action during async execution and surface loading state.
+- Disable confirm action during async execution and surface loading state using the `loading` prop.
 
 ## Popup Lifecycle and `closePopup`
 
@@ -127,7 +133,7 @@ const onClose = () => dispatch(closePopup());
 
 ```tsx
 import { useState } from "react";
-import { solidPost } from "@solidxai/core-ui";
+import { solidPost, SolidButton } from "@solidxai/core-ui";
 import { useDispatch } from "react-redux";
 import { closePopup } from "@solidxai/core-ui";
 
@@ -150,9 +156,7 @@ export function ApproveApplicationButton({ params }: any) {
   };
 
   return (
-    <button disabled={loading} onClick={onApprove}>
-      {loading ? "Approving..." : "Approve"}
-    </button>
+    <SolidButton loading={loading} onClick={onApprove} label="Approve" />
   );
 }
 ```

@@ -128,8 +128,57 @@ Register each exported function with an alias in `solid-extensions.ts`:
 ```ts
 import handleBookFormViewChange from "./library/book/form-event-listeners/bookFormViewChangeHandler";
 import { registerExtensionFunction } from "@solidxai/core-ui";
+import {
+    ExtensionComponentTypes,
+    ExtensionFunctionTypes,
+    type ExtensionComponentType,
+    type ExtensionFunctionType,
+} from "../types/extension-registry";
 
-registerExtensionFunction("bookFormViewChangeHandler", handleBookFormViewChange);
+registerExtensionFunction("bookFormViewChangeHandler", handleBookFormViewChange,ExtensionFunctionTypes.onFormLoad);
+```
+ 
+## Extension Types
+
+When registering components or functions, you must specify the appropriate type using `ExtensionComponentTypes` or `ExtensionFunctionTypes`. These types are imported from `../types/extension-registry`.
+
+### ExtensionComponentTypes
+
+Choose the type that matches the purpose of your component:
+
+```ts
+export const ExtensionComponentTypes = {
+    list_field_widget: "list_field_widget",
+    list_row_action: "list_row_action",
+    list_header_action: "list_header_action",
+    form_field_view_widget: "form_field_view_widget",
+    form_field_edit_widget: "form_field_edit_widget",
+    form_action: "form_action",
+    form_widget: "form_widget",
+    kanban_card_widget: "kanban_card_widget",
+    card_widget: "card_widget",
+} as const;
+```
+
+### ExtensionFunctionTypes
+
+Choose the type that matches the lifecycle event your function handles:
+
+```ts
+export const ExtensionFunctionTypes = {
+    onFieldChange: "onFieldChange",
+    onFieldBlur: "onFieldBlur",
+    onFormDataLoad: "onFormDataLoad",
+    onFormLayoutLoad: "onFormLayoutLoad",
+    onFormLoad: "onFormLoad",
+    onListLoad: "onListLoad",
+    onBeforeListDataLoad: "onBeforeListDataLoad",
+    onTreeLoad: "onTreeLoad",
+    onBeforeTreeDataLoad: "onBeforeTreeDataLoad",
+    afterLogin: "afterLogin",
+    beforeLogout: "beforeLogout",
+    onApplicationMount: "onApplicationMount",
+} as const;
 ```
 
 ## Using Handlers in Layout Metadata

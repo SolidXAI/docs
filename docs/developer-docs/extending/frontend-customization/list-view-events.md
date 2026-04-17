@@ -113,8 +113,13 @@ Register the listener with an alias in `solid-extensions.ts`:
 ```ts
 import handleBookListViewChange from "./library/book/list-event-listeners/bookListViewChangeHandler";
 import { registerExtensionFunction } from "@solidxai/core-ui";
-
-registerExtensionFunction("bookListViewChangeHandler", handleBookListViewChange);
+import {
+    ExtensionComponentTypes,
+    ExtensionFunctionTypes,
+    type ExtensionComponentType,
+    type ExtensionFunctionType,
+} from "../types/extension-registry";
+registerExtensionFunction("bookListViewChangeHandler", handleBookListViewChange, ExtensionFunctionTypes.onListLoad);
 ```
 
 ## Using Handlers in Layout Metadata

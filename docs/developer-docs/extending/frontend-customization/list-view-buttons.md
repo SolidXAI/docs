@@ -67,11 +67,17 @@ using:
 
 ```ts
 import { registerExtensionComponent } from "@solidxai/core-ui";
+import {
+    ExtensionComponentTypes,
+    ExtensionFunctionTypes,
+    type ExtensionComponentType,
+    type ExtensionFunctionType,
+} from "../types/extension-registry";
 import { GenerateReportButton } from "./venue/payment/list-buttons/GenerateReportButton";
 import { RefundPaymentButton } from "./venue/payment/row-buttons/RefundPaymentButton";
 
-registerExtensionComponent("GenerateReportButton", GenerateReportButton);
-registerExtensionComponent("RefundPaymentButton", RefundPaymentButton);
+registerExtensionComponent("GenerateReportButton", GenerateReportButton, ExtensionComponentTypes.list_header_action);
+registerExtensionComponent("RefundPaymentButton", RefundPaymentButton, ExtensionComponentTypes.list_row_action);
 ```
 
 Keep action names aligned with metadata.
@@ -97,18 +103,31 @@ Example:
         {
           "attrs": {
             "label": "Generate Report",
-            "action": "GenerateReportButton"
+            "action": "GenerateReportButton",
+            "actionInContextMenu": false,
+            "openInPopup": true,
+            "icon": "si-file-excel",
+            "closable": true,
+            "roles": [
+              "Admin",
+              "Venue Admin"
+            ]
           }
         }
       ],
-      "rowButtons": [
+     "rowButtons": [
         {
           "attrs": {
+            "className": "p-button-danger p-button-text",
+            "icon": "si-rotate-ccw",
             "label": "Refund",
-            "action": "RefundPaymentButton"
+            "action": "RefundPaymentButton",
+            "openInPopup": true,
+            "actionInContextMenu": true,
+            "customComponentIsSystem": true
           }
         }
-      ]
+      ]  
     }
   }
 }
@@ -127,25 +146,26 @@ Rules:
 - Apply explicit refresh behavior after mutation as needed.
 - Follow project conventions for popup close and global/toast error handling.
 
-## UI/Styling Guidance (PrimeReact)
+## UI/Styling Guidance (Shadcn/Solid Primitives)
 
 For row-level buttons, default to compact inline actions:
 
-- Use PrimeReact `Button` (avoid raw `<button>`).
-- Prefer `size="small"` and `className="p-button-sm"`.
-- Keep width content-based (`width: "auto"`, `minWidth: "unset"`).
-- Keep text single-line (`whiteSpace: "nowrap"`).
+- Use `SolidButton` (avoid raw `<button>` or legacy PrimeReact `Button`).
+- Prefer `size="sm"` for list rows.
+- Use `variant="ghost"` or `variant="outline"` for subtle secondary actions.
+- Keep width content-based and text single-line.
 - Keep labels short (1-3 words).
 
 Example:
 
 ```tsx
-<Button
+import { SolidButton } from "@/components/shad-cn-ui/SolidButton";
+
+<SolidButton
   label="Seed Rates"
-  icon="pi pi-refresh"
-  size="small"
-  className="p-button-sm"
-  style={{ width: "auto", minWidth: "unset", whiteSpace: "nowrap" }}
+  icon="si-refresh"
+  size="sm"
+  variant="outline"
 />
 ```
 

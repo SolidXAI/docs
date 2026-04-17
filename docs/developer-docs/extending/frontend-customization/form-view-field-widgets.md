@@ -253,9 +253,18 @@ Widgets must be **registered** in `solid-extensions.ts`:
    <code>Registering the Widget</code>
    </summary>
 ```tsx
+import { registerExtensionComponent } from "@solidxai/core-ui";
+import {
+    ExtensionComponentTypes,
+    ExtensionFunctionTypes,
+    type ExtensionComponentType,
+    type ExtensionFunctionType,
+} from "../types/extension-registry";
+
 registerExtensionComponent(
   "SolidIntegerSliderStyleFormEditWidget", // component name
   SolidIntegerSliderStyleFormEditWidget, // component reference
+  ExtensionComponentTypes.form_field_edit_widget, // component type
   ["integerSlider"]   // alias name
 );
 ```
@@ -380,5 +389,5 @@ This allows you to render a **boolean field as "Yes/No"** in view mode.
 ## Related
 
 - [List View Field Widgets](./list-view-field-widgets) — built-in and custom widgets for list column display
-- [Kanban Field Widgets](./kanban-field-widgets) — widgets for kanban card fields
+- [Kanban Card Widgets](./kanban-card-widgets) — widgets for kanban card fields
 - [Custom Widgets](./custom-widgets) — general guide to registering extension components
