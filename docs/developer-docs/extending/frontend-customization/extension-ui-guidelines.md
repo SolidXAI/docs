@@ -1,20 +1,20 @@
 ---
 sidebar_position: 11
 title: UI Guidelines
-description: UI baseline and popup patterns for SolidX frontend extensions built with Solid Primitives (Radix UI/Shadcn).
-summary: Practical style and interaction defaults for SolidX extension components (form buttons, list buttons, row buttons, widgets). Covers button sizing, popup composition, `closePopup` usage, loading/success/error UX, and a reusable confirmation pattern using Solid Primitives.
+description: UI baseline and popup patterns for SolidX frontend extensions built with Solid Primitives.
+summary: "Practical style and interaction defaults for SolidX extension components and function-driven popup UIs. Covers button sizing, popup composition, `closePopup` usage, loading and error UX, and where these conventions apply in the UI module system."
 solidx_concerns: [frontend.extensions.form_buttons, frontend.extensions.list_buttons, frontend.extensions.row_buttons, frontend.extensions.custom_widgets, frontend.extensions.popup_ui, frontend.extensions.close_popup]
 ---
 
 ## Purpose
 
-Use these defaults so extension UI generated from prompts looks clean and consistent with the Shadcn-based SolidX screens.
+Use these defaults so frontend extensions generated from prompts look clean and consistent with the SolidX UI.
 
 ## Solid Primitives Baseline
 
-- Prefer Solid Primitives (`SolidButton`, `SolidDialog`, `SolidMessage`, `SolidSpinner`, `SolidToast`) over raw HTML or legacy PrimeReact controls.
-- Reuse existing utility classes used in SolidX projects (`flex`, `gap-*`, `p-*`, `m-*`, `text-*`, `w-full`).
-- Keep spacing consistent: `p-6` for larger container padding, `gap-4` for logical sections, `gap-2` for action groups.
+- Prefer Solid primitives such as `SolidButton`, `SolidDialog`, `SolidMessage`, `SolidSpinner`, and `SolidToast` over raw HTML or legacy controls.
+- Reuse existing utility classes already used in SolidX projects.
+- Keep spacing consistent: `p-6` for container padding, `gap-4` for logical sections, and `gap-2` for action groups.
 
 ## Row Button Visual Rules
 
@@ -22,11 +22,11 @@ Row-level actions should look like compact inline actions, not full-width bars.
 
 Recommended defaults:
 
-- `size="sm"` or `size="small"`
-- `variant="outline"` or `variant="ghost"` for secondary actions
-- Keep width content-based (`w-auto`)
-- Keep label on one line (`whitespace-nowrap`)
-- Use concise labels (1-3 words)
+- `size="sm"`
+- `variant="outline"` or `variant="ghost"`
+- content-based width
+- single-line labels
+- concise text
 
 Example:
 
@@ -44,21 +44,21 @@ Example:
 
 ### If metadata uses `openInPopup: true`
 
-SolidX already opens a popup container (via `SolidDialog`) for your extension component. Render only popup content (header/body/footer), not another full-screen modal wrapper.
+SolidX already opens a popup container for your extension component. Render popup content only, not another full-screen modal wrapper.
 
 ### Popup content structure
 
-- Header: icon + title (use `SolidDialogHeader`)
-- Body: clear confirmation/success/error message (use `SolidDialogBody`)
-- Footer: right-aligned actions (`Cancel`, `Confirm` or `Close`) (use `SolidDialogFooter`)
+- header: icon and title
+- body: clear confirmation, success, or error message
+- footer: right-aligned actions such as `Cancel`, `Confirm`, or `Close`
 
-Recommended popup content wrapper:
+Recommended wrapper:
 
 ```tsx
 <div className="flex flex-col gap-6 p-6" style={{ width: "min(560px, 92vw)" }}>
   {/* header */}
   {/* body */}
-  {/* footer actions */}
+  {/* footer */}
 </div>
 ```
 
@@ -66,11 +66,9 @@ Recommended popup content wrapper:
 
 Always support explicit dismissal in extension popups.
 
-- Cancel button should close popup immediately.
-- Success flows should either:
-  - auto-close after action, or
-  - show success state with a clear `Close` button.
-- Error state should keep popup open for user visibility unless product conventions say otherwise.
+- Cancel closes immediately.
+- Success flows should auto-close or show a clear `Close` button.
+- Error state should usually stay open long enough for the user to read it.
 
 Pattern:
 
@@ -84,21 +82,16 @@ const close = () => dispatch(closePopup());
 
 ## Async UX Rules
 
-- Disable confirm action while request is in-flight (handled automatically by `loading` prop on `SolidButton`).
-- Show loading feedback (use `loading` prop on `SolidButton` which shows a spinner).
-- Use project-standard toast (`SolidToast`) or global error behavior for server failures.
-- Avoid duplicate submissions with a loading guard.
+- Disable confirm actions while a request is in flight.
+- Show loading state via the `loading` prop on `SolidButton`.
+- Use project-standard toast or global error behavior for failures.
+- Avoid duplicate submissions.
 
-## Confirmation Template (Row/Form/List Actions)
+## Confirmation Template
 
 ```tsx
 import { useState } from "react";
-import { 
-  SolidButton, 
-  SolidMessage, 
-  solidPost, 
-  closePopup 
-} from "@solidxai/core-ui";
+import { SolidButton, SolidMessage, solidPost, closePopup } from "@solidxai/core-ui";
 import { useDispatch } from "react-redux";
 
 export function SeedCurrencyRates({ rowData }: any) {
@@ -130,11 +123,7 @@ export function SeedCurrencyRates({ rowData }: any) {
           </p>
           <div className="flex justify-end gap-2 pt-2">
             <SolidButton label="Cancel" variant="outline" onClick={onCancel} />
-            <SolidButton 
-              label={loading ? "Confirming..." : "Confirm"} 
-              onClick={onConfirm} 
-              loading={loading} 
-            />
+            <SolidButton label={loading ? "Confirming..." : "Confirm"} onClick={onConfirm} loading={loading} />
           </div>
         </>
       ) : (
@@ -155,10 +144,11 @@ export function SeedCurrencyRates({ rowData }: any) {
 
 ## Where To Apply These Guidelines
 
-- `form-buttons/` components
-- `list-buttons/` components
-- `row-buttons/` components
-- popup-style action components rendered by extension metadata
+Apply these conventions to:
+
+- `solid-ui/src/<module-name>/admin-layout/<model-name>/extension-components/`
+- popup-style action components rendered by metadata
+- UI rendered by handlers in `extension-functions/` when they drive popup or dynamic extension behavior
 
 ## See Also
 

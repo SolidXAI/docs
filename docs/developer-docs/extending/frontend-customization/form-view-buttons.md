@@ -2,7 +2,7 @@
 sidebar_position: 2
 title: Form View Buttons
 description: Build model-scoped form action buttons for SolidX form views.
-summary: Documents folder conventions, action component props, registration, metadata wiring, and Solid API patterns for form-view button extensions.
+summary: "Documents folder conventions, action component props, module-manifest registration, metadata wiring, and Solid API patterns for form-view button extensions."
 solidx_concerns: [frontend.extensions.form_buttons, add_form_button]
 ---
 
@@ -12,18 +12,18 @@ Form View Buttons are form-level action components for a specific `<module, mode
 
 Mandatory location:
 
-- `solid-ui/src/extensions/<module-name>/<model-name>/form-buttons/`
+- `solid-ui/src/<module-name>/admin-layout/<model-name>/extension-components/`
 
 Do not place model-scoped form button components in generic folders.
 
 ## Default Implementation Flow
 
-1. Create/update a React TSX component under:
-   - `solid-ui/src/extensions/<module-name>/<model-name>/form-buttons/`
-2. Keep export/import style consistent with neighboring extension files.
-3. Register in:
-   - `solid-ui/src/extensions/solid-extensions.ts`
-4. Keep registration key aligned with layout metadata `action` value.
+1. Create or update a React TSX component under:
+   - `solid-ui/src/<module-name>/admin-layout/<model-name>/extension-components/`
+2. Keep export/import style consistent with neighboring files in that model folder.
+3. Register the component in the owning UI module manifest:
+   - `solid-ui/src/<module-name>/<module-name>.ui-module.ts`
+4. Keep the registration name aligned with the form layout metadata `action` value.
 
 ## Component Props Contract
 
@@ -47,21 +47,28 @@ Form button action components receive extension context with shape equivalent to
 Guidance:
 
 - Use `params.id` (or equivalent context field) for record-specific actions.
-- Guard missing IDs for create mode / embedded contexts.
+- Guard missing IDs for create mode or embedded contexts.
 
 ## Registration
 
-```ts
-import { registerExtensionComponent } from "@solidxai/core-ui";
-import {
-    ExtensionComponentTypes,
-    ExtensionFunctionTypes,
-    type ExtensionComponentType,
-    type ExtensionFunctionType,
-} from "../types/extension-registry";
-import { ApproveApplicationButton } from "./venue/application/form-buttons/ApproveApplicationButton";
+Register form action components in the owning module manifest:
 
-registerExtensionComponent("ApproveApplicationButton", ApproveApplicationButton, ExtensionComponentTypes.form_action);
+```ts
+import { ExtensionComponentTypes, type SolidUiModule } from "@solidxai/core-ui";
+import { ApproveApplicationButton } from "./admin-layout/application/extension-components/ApproveApplicationButton";
+
+const merchantOnboardingUiModule = {
+  name: "merchant-onboarding",
+  extensionComponents: [
+    {
+      name: "ApproveApplicationButton",
+      component: ApproveApplicationButton,
+      type: ExtensionComponentTypes.form_action,
+    },
+  ],
+} satisfies SolidUiModule;
+
+export default merchantOnboardingUiModule;
 ```
 
 ## Layout Metadata Wiring
@@ -88,17 +95,40 @@ Buttons are triggered from form layout metadata (`formButtons` + `attrs.action`)
 
 ## API Call Guidance
 
-When a form button calls backend APIs, use `@solidxai/core-ui` helpers:
+When a form button calls backend APIs, SolidX supports two valid integration styles.
 
-- `solidGet`, `solidPost`, `solidPut`, `solidPatch`, `solidDelete`, `solidAxios`
+### Option A: Solid HTTP Helpers
+
+Use `@solidxai/core-ui` helpers such as:
+
+- `solidGet`
+- `solidPost`
+- `solidPut`
+- `solidPatch`
+- `solidDelete`
+- `solidAxios`
+
+Use this when the action is localized and you do not need shared cached API state.
 
 Guidelines:
 
 - Use paths like `/resource` instead of `/api/resource`.
 - Derive IDs/context from `params` or `formik.values`.
-- Handle loading, success, error explicitly.
+- Handle loading, success, and error explicitly.
 - Apply follow-up refresh behavior where required.
 - Keep popup close behavior safe and deterministic on both success and error paths.
+
+### Option B: Redux / RTK Query
+
+If your form action belongs to a larger module-owned API integration strategy, you can also place RTK Query APIs, reducers, and middleware under:
+
+- `solid-ui/src/<module-name>/redux/`
+
+and register them through the same module manifest.
+
+Use this when the button participates in shared cached state, invalidation, or module-level orchestration.
+
+See also: [Redux Module Integration](./redux-module-integration.md) and [Solid HTTP API](./solid-http-api.md)
 
 ## UI/Styling Guidance (Shadcn/Solid Primitives)
 
@@ -107,7 +137,7 @@ For form action components:
 - Prefer Solid primitives (`SolidButton`, `SolidMessage`, `SolidSpinner`, `SolidToast`) over raw HTML controls.
 - Keep action areas compact (`p-3`/`p-4`, `gap-2`/`gap-3`).
 - Use clear call-to-action hierarchy:
-  - Secondary/outlined `Cancel`
+  - Secondary or outlined `Cancel`
   - Primary `Confirm` or `Submit`
 - Disable confirm action during async execution and surface loading state using the `loading` prop.
 
@@ -133,9 +163,8 @@ const onClose = () => dispatch(closePopup());
 
 ```tsx
 import { useState } from "react";
-import { solidPost, SolidButton } from "@solidxai/core-ui";
+import { closePopup, solidPost, SolidButton } from "@solidxai/core-ui";
 import { useDispatch } from "react-redux";
-import { closePopup } from "@solidxai/core-ui";
 
 export function ApproveApplicationButton({ params }: any) {
   const dispatch = useDispatch();
@@ -165,4 +194,5 @@ export function ApproveApplicationButton({ params }: any) {
 
 - [Form View Events](./form-view-events.md)
 - [Extension UI Guidelines](./extension-ui-guidelines.md)
+- [Redux Module Integration](./redux-module-integration.md)
 - [Solid HTTP API](./solid-http-api.md)

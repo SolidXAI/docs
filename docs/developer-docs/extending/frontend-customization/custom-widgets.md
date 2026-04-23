@@ -1,43 +1,66 @@
 ---
 sidebar_position: 2
 title: Custom Widgets
-description: Build and register metadata-driven custom widgets in SolidX.
-summary: Defines where custom widgets should live, how to register them, how to wire them in layout metadata, and how to use Solid API helpers safely inside widget logic.
+description: Build and register form-view custom widgets in SolidX.
+summary: "Defines where form-view custom widgets should live in the UI module system, how to register them in `<module-name>.ui-module.ts`, how to wire them through `type: \"custom\"` layout nodes, and how to use Solid API helpers safely inside widget logic."
 solidx_concerns: [frontend.extensions.custom_widgets, create_custom_widget]
 ---
 
+
 ## Overview
 
-Custom widgets are metadata-driven extension components rendered from layout nodes such as `type: "custom"`.
+Custom widgets in SolidX are form-view extension components rendered through layout nodes with:
 
-Use them when you want targeted UI enhancements inside generated form/list views.
+```json
+{
+  "type": "custom"
+}
+```
+
+Use them when you want a targeted custom UI block inside a generated form view.
+
+This page is specifically about form-view `custom` nodes. It is not the reference page for:
+
+- form buttons
+- list buttons
+- row actions
+- field widgets
+- kanban card widgets
 
 ## Location and Registration
 
 For model-scoped widgets, use:
 
-- `solid-ui/src/extensions/<module-name>/<model-name>/custom-widgets/`
+- `solid-ui/src/<module-name>/admin-layout/<model-name>/extension-components/`
 
-Register in:
+Register them in the owning module manifest:
 
-- `solid-ui/src/extensions/solid-extensions.ts`
+- `solid-ui/src/<module-name>/<module-name>.ui-module.ts`
 
 with:
 
 ```ts
-import { registerExtensionComponent } from "@solidxai/core-ui";
-import {
-    ExtensionComponentTypes,
-    ExtensionFunctionTypes,
-    type ExtensionComponentType,
-    type ExtensionFunctionType,
-} from "../types/extension-registry";
-registerExtensionComponent("MyCustomWidget", MyCustomWidget, ExtensionComponentTypes.form_widget);
+import { ExtensionComponentTypes, type SolidUiModule } from "@solidxai/core-ui";
+import { MyCustomWidget } from "./admin-layout/book/extension-components/MyCustomWidget";
+
+const libraryUiModule = {
+  name: "library",
+  extensionComponents: [
+    {
+      name: "MyCustomWidget",
+      component: MyCustomWidget,
+      type: ExtensionComponentTypes.formWidget,
+    },
+  ],
+} satisfies SolidUiModule;
+
+export default libraryUiModule;
 ```
+
 
 ## Layout Wiring
 
-Reference your registered widget in layout metadata:
+Reference your registered widget in form-view layout metadata:
 
 ```json
 {
@@ -51,7 +74,7 @@ Reference your registered widget in layout metadata:
 
 ## Props Contract
 
-Custom form widgets typically receive a `SolidFormWidgetProps`-style payload, including:
+Custom widgets receive a `SolidFormWidgetProps`-style payload in form contexts, including:
 
 - `field`
 - `formData`
@@ -59,11 +82,18 @@ Custom form widgets typically receive a `SolidFormWidgetProps`-style payload, in
 - `fieldsMetadata`
 - `formViewData`
 
-Always derive context from incoming props (for example `formData` or metadata) instead of hardcoded values.
+Always derive context from incoming props (for example `formData`, `field`, or metadata) instead of hardcoded values.
 
 ## API Calls in Widgets
 
-When widgets need backend calls, use Solid HTTP helpers from `@solidxai/core-ui`:
+When widgets need backend calls, Solid supports both of these patterns:
+
+1. Direct Solid HTTP helpers from `@solidxai/core-ui`
+2. Module-owned Redux / RTK Query integration under `solid-ui/src/<module-name>/redux/`
+
+### Option A: Solid HTTP Helpers
+
+Use:
 
 - `solidGet`, `solidPost`, `solidPut`, `solidPatch`, `solidDelete`, `solidAxios`
 
@@ -73,6 +103,14 @@ Guidelines:
 - Handle loading/error state explicitly in component logic.
 - For list/filter requests, use `qs.stringify(..., { encodeValuesOnly: true })` or Axios `params`.
 - Use context IDs/values from props instead of constants.
+
+### Option B: Redux / RTK Query
+
+If the app prefers store-backed integration, keep RTK Query APIs in the owning module's `redux/` folder and register the module's reducers and middleware in `<module-name>.ui-module.ts`.
+
+Choose this when you want shared API state, caching, invalidation, and generated hooks.
+
+See [Redux Module Integration](./redux-module-integration.md) for the full pattern.
 
 ## Example
 
@@ -104,3 +142,5 @@ export async function loadTitleHints(query: string) {
 - [List View Field Widgets](./list-view-field-widgets.md)
 - [Form View Events](./form-view-events.md)
 - [Extension UI Guidelines](./extension-ui-guidelines.md)
+- [Solid HTTP API](./solid-http-api.md)
+- [Redux Module Integration](./redux-module-integration.md)

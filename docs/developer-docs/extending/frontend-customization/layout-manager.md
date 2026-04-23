@@ -2,20 +2,26 @@
 sidebar_position: 8
 title: Layout Manager
 description: Use SolidViewLayoutManager for safe runtime layout mutation in frontend listeners.
-summary: Documents runtime layout updates using SolidViewLayoutManager in form/list event handlers, including return flag contracts required for UI updates to be applied.
+summary: "Documents runtime layout updates using `SolidViewLayoutManager` in form and list event handlers, including the return flag contracts required for UI updates to be applied."
 solidx_concerns: [frontend.extensions.form_event_listeners, frontend.extensions.list_event_listeners]
 ---
 
 ## Overview
 
-`SolidViewLayoutManager` should be the default utility for runtime layout mutation in extension listeners.
+`SolidViewLayoutManager` should be the default utility for runtime layout mutation in frontend event handlers.
 
 Use it instead of deep-mutating raw layout objects.
 
 ## Where It Is Used
 
-- Form listeners (`onFormLoad`, `onFieldChange`, `onFieldBlur`)
-- List listeners (`onBeforeListDataLoad`, `onListLoad`) when layout updates are needed
+Typical locations in the UI module system:
+
+- `solid-ui/src/<module-name>/admin-layout/<model-name>/extension-functions/`
+
+Typical event hooks:
+
+- form listeners such as `onFormLoad`, `onFieldChange`, and `onFieldBlur`
+- list listeners such as `onBeforeListDataLoad` and `onListLoad` when layout updates are needed
 
 ## Form Example
 
@@ -57,15 +63,15 @@ export function handleBookListEvents(event: any) {
 
 Without flags, changes are ignored by the runtime.
 
-- Layout mutation: return `layoutChanged: true` with `newLayout`
-- Data mutation: return `dataChanged: true` with full `newFormData` or `newListData`
-- Filter override (list prefetch): return `filterApplied: true` with `newFilter`
+- layout mutation: return `layoutChanged: true` with `newLayout`
+- data mutation: return `dataChanged: true` with full `newFormData` or `newListData`
+- filter override for list prefetch: return `filterApplied: true` with `newFilter`
 
 ## Safety Guidance
 
 - Ensure node IDs exist before update operations.
 - Keep mutations deterministic.
-- For frequent events (for example `onFieldChange`), avoid heavy synchronous logic.
+- For frequent events such as `onFieldChange`, avoid heavy synchronous logic.
 
 ## See Also
 

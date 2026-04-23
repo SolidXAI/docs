@@ -2,24 +2,30 @@
 sidebar_position: 3
 title: List View Buttons
 description: Build header and row action buttons for SolidX list views.
-summary: Documents mandatory file locations, props contracts, registration, metadata wiring, and API conventions for list header and row button extensions.
+summary: "Documents model-based file location, module-manifest registration, metadata wiring, and API conventions for list header and row button extensions."
 solidx_concerns: [frontend.extensions.list_buttons, frontend.extensions.row_buttons, add_list_header_button_with, add_list_row_button_with]
 ---
 
 ## Scope
 
-List button customizations are model-scoped and split into two subtypes:
+List button customizations are model-scoped and split into two UI patterns:
 
-1. Header/list-wide buttons (`list-buttons`)
-2. Row-level buttons (`row-buttons`)
+1. Header or list-wide actions
+2. Row-level actions
+
+Both should live under the owning module's `admin-layout` folder.
+
+## File Location
+
+For model-scoped list actions, use:
+
+- `solid-ui/src/<module-name>/admin-layout/<model-name>/extension-components/`
+
+You may organize files by naming convention inside that folder, but the module system does not require separate `list-buttons/` and `row-buttons/` folders.
 
 ## List Header Buttons
 
-Mandatory location:
-
-- `solid-ui/src/extensions/<module-name>/<model-name>/list-buttons/`
-
-Use for list-wide actions (export, bulk action, filtered processing).
+Use header buttons for list-wide actions such as export, bulk processing, sync, or filtered operations.
 
 ### Header Button Props
 
@@ -37,11 +43,7 @@ Guidance:
 
 ## Row Buttons
 
-Mandatory location:
-
-- `solid-ui/src/extensions/<module-name>/<model-name>/row-buttons/`
-
-Use for record-specific actions triggered from a clicked row.
+Use row buttons for record-specific actions triggered from a clicked row.
 
 ### Row Button Props
 
@@ -53,31 +55,36 @@ Action context can include:
 
 Guidance:
 
-- Use `rowData` as source of truth for record-level actions.
-- Guard missing `rowData`/ID and show clear user feedback.
-- For directly visible inline row actions, set `actionInContextMenu: false` in layout metadata.
+- Use `rowData` as the source of truth for record-level actions.
+- Guard missing `rowData` or ID and show clear user feedback.
+- For directly visible inline actions, set `actionInContextMenu: false` in layout metadata.
 
 ## Registration
 
-Register components in:
-
-- `solid-ui/src/extensions/solid-extensions.ts`
-
-using:
+Register list action components in the owning UI module manifest:
 
 ```ts
-import { registerExtensionComponent } from "@solidxai/core-ui";
-import {
-    ExtensionComponentTypes,
-    ExtensionFunctionTypes,
-    type ExtensionComponentType,
-    type ExtensionFunctionType,
-} from "../types/extension-registry";
-import { GenerateReportButton } from "./venue/payment/list-buttons/GenerateReportButton";
-import { RefundPaymentButton } from "./venue/payment/row-buttons/RefundPaymentButton";
+import { ExtensionComponentTypes, type SolidUiModule } from "@solidxai/core-ui";
+import { GenerateReportButton } from "./admin-layout/payment/extension-components/GenerateReportButton";
+import { RefundPaymentButton } from "./admin-layout/payment/extension-components/RefundPaymentButton";
 
-registerExtensionComponent("GenerateReportButton", GenerateReportButton, ExtensionComponentTypes.list_header_action);
-registerExtensionComponent("RefundPaymentButton", RefundPaymentButton, ExtensionComponentTypes.list_row_action);
+const paymentUiModule = {
+  name: "payment",
+  extensionComponents: [
+    {
+      name: "GenerateReportButton",
+      component: GenerateReportButton,
+      type: ExtensionComponentTypes.list_header_action,
+    },
+    {
+      name: "RefundPaymentButton",
+      component: RefundPaymentButton,
+      type: ExtensionComponentTypes.list_row_action,
+    },
+  ],
+} satisfies SolidUiModule;
+
+export default paymentUiModule;
 ```
 
 Keep action names aligned with metadata.
@@ -106,28 +113,20 @@ Example:
             "action": "GenerateReportButton",
             "actionInContextMenu": false,
             "openInPopup": true,
-            "icon": "si-file-excel",
-            "closable": true,
-            "roles": [
-              "Admin",
-              "Venue Admin"
-            ]
+            "icon": "si-file-excel"
           }
         }
       ],
-     "rowButtons": [
+      "rowButtons": [
         {
           "attrs": {
-            "className": "p-button-danger p-button-text",
-            "icon": "si-rotate-ccw",
             "label": "Refund",
             "action": "RefundPaymentButton",
             "openInPopup": true,
-            "actionInContextMenu": true,
-            "customComponentIsSystem": true
+            "actionInContextMenu": true
           }
         }
-      ]  
+      ]
     }
   }
 }
@@ -135,45 +134,43 @@ Example:
 
 ## API Guidance
 
-If list/row button actions require backend calls, use:
+If list or row button actions require backend calls, SolidX supports two valid integration styles.
 
-- `solidGet`, `solidPost`, `solidPut`, `solidPatch`, `solidDelete`, `solidAxios`
+### Option A: Solid HTTP Helpers
+
+Use `solidGet`, `solidPost`, `solidPut`, `solidPatch`, `solidDelete`, or `solidAxios` when the action is localized and does not need shared cached API state.
 
 Rules:
 
-- Use `/resource` paths (no hardcoded `/api`).
-- Handle loading/success/error explicitly.
+- Use `/resource` paths rather than hardcoded `/api/resource`.
+- Handle loading, success, and error explicitly.
 - Apply explicit refresh behavior after mutation as needed.
-- Follow project conventions for popup close and global/toast error handling.
+- Follow project conventions for popup close and toast error handling.
 
-## UI/Styling Guidance (Shadcn/Solid Primitives)
+### Option B: Redux / RTK Query
+
+If the list action belongs to a module-owned API strategy, place RTK Query APIs, reducers, and middleware under:
+
+- `solid-ui/src/<module-name>/redux/`
+
+and register them through the same module manifest.
+
+Use this when actions participate in shared cached state, invalidation, or coordinated refresh flows.
+
+## UI Guidance
 
 For row-level buttons, default to compact inline actions:
 
-- Use `SolidButton` (avoid raw `<button>` or legacy PrimeReact `Button`).
-- Prefer `size="sm"` for list rows.
-- Use `variant="ghost"` or `variant="outline"` for subtle secondary actions.
-- Keep width content-based and text single-line.
-- Keep labels short (1-3 words).
-
-Example:
-
-```tsx
-import { SolidButton } from "@/components/shad-cn-ui/SolidButton";
-
-<SolidButton
-  label="Seed Rates"
-  icon="si-refresh"
-  size="sm"
-  variant="outline"
-/>
-```
+- use `SolidButton`
+- prefer `size="sm"`
+- use `variant="ghost"` or `variant="outline"` for secondary actions
+- keep width content-based and labels short
 
 ## Popup UX and `closePopup`
 
 If action metadata uses `openInPopup: true`, SolidX already mounts your component inside a popup shell.
 
-- Render popup content only (header/body/footer); do not render another full-screen modal wrapper unless explicitly needed.
+- Render popup content only.
 - Always provide an explicit close path on cancel and after completion.
 - Use `closePopup` from `@solidxai/core-ui` for dismissal.
 
@@ -192,4 +189,5 @@ const onClose = () => dispatch(closePopup());
 - [List View Events](./list-view-events.md)
 - [Form View Buttons](./form-view-buttons.md)
 - [Extension UI Guidelines](./extension-ui-guidelines.md)
+- [Redux Module Integration](./redux-module-integration.md)
 - [Solid HTTP API](./solid-http-api.md)
