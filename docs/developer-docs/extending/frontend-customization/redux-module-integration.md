@@ -1,6 +1,6 @@
 ---
 sidebar_position: 11
-title: Redux Module Integration
+title: Redux Integration
 description: Register module-owned Redux reducers and middleware in SolidX frontend modules.
 summary: "Documents how to organize RTK Query APIs, reducers, and middleware under `solid-ui/src/<module-name>/redux/`, register them in `<module-name>.ui-module.ts`, and let the UI module runtime aggregate them into `StoreProvider`. Covers the NBF-style pattern for module-owned API integration and when to choose Redux over direct Solid HTTP helpers."
 solidx_concerns: [frontend.custom_pages, add_full_custom_ui, frontend.redux_module_integration]

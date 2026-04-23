@@ -1,6 +1,6 @@
 ---
 sidebar_position: 4
-title: List View Events
+title: List Events
 description: Learn how to create event listeners for list view events in your frontend application.
 summary: "Explains creating function extensions for SolidX list view events. Covers supported events (`onBeforeListDataLoad`, `onListLoad`), module-based file location, manifest registration, and event payload and response contracts."
 solidx_concerns: [frontend.extensions.list_event_listeners]

@@ -1,5 +1,5 @@
 ---
-title: Frontend Customization
+title: Frontend
 description: Catalog of frontend customization patterns in SolidX.
 summary: "Entry point for metadata-driven extensions and bespoke frontend UIs in SolidX, including module-based file-location rules, manifest registration patterns, and API-call conventions."
 sidebar_position: 3

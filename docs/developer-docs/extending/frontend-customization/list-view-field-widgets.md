@@ -1,6 +1,6 @@
 ---
 sidebar_position: 5
-title: List View Field Widgets
+title: List Column Widgets
 description: Learn how to create list column widgets for the frontend of your application.
 summary: "Guide to customizing list field display in SolidX using built-in or custom widgets. Covers module-based file location, manifest registration, `viewWidget` wiring, `SolidListFieldWidgetProps`, and examples like score widgets with aliases."
 solidx_concerns: [frontend.extensions.custom_widgets, create_custom_list_field_widget]

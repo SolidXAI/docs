@@ -1,6 +1,6 @@
 ---
 sidebar_position: 2
-title: Admin Docs
+title: Admin Manual
 ---
 
 import { FiPackage, FiLayout, FiLayers, FiUsers, FiBell, FiImage, FiSettings, FiDatabase,FiGrid,FiInfo} from "react-icons/fi";

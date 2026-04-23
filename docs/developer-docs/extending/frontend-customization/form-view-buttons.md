@@ -1,6 +1,6 @@
 ---
 sidebar_position: 2
-title: Form View Buttons
+title: Form Buttons
 description: Build model-scoped form action buttons for SolidX form views.
 summary: "Documents folder conventions, action component props, module-manifest registration, metadata wiring, and Solid API patterns for form-view button extensions."
 solidx_concerns: [frontend.extensions.form_buttons, add_form_button]

@@ -1,79 +1,95 @@
 ---
 sidebar_position: 2
 title: solidctl Reference
-description: Comprehensive reference for using the SolidX Control Plane CLI (solidctl) to manage your SolidX application.
+description: Reference for the SolidX CLI (`solidctl`) used to scaffold, build, upgrade, inspect, seed, test, generate, and run agent tasks in a SolidX project.
 ---
 
-The `solidctl` CLI is the primary tool for scaffolding, building, and maintaining SolidX projects. Run it from your project root using `npx @solidxai/solidctl@latest <command>`.
+# solidctl Reference
 
-For help on any command:
+The `solidctl` CLI is the main command-line entry point for working with SolidX projects.
+
+Run it from your project root:
+
 ```bash
-# List all available commands
-npx @solidxai/solidctl@latest --help
-
-# Show detailed options for a specific command
-npx @solidxai/solidctl@latest help <command>
+npx @solidxai/solidctl@latest <command>
 ```
 
-:::info Under the hood
-`solidctl` wraps the `solid` CLI that is built into your project, providing a consistent top-level interface regardless of your project setup.
+For help:
+
+```bash
+# Top-level help
+npx @solidxai/solidctl@latest --help
+
+# Command-specific help
+npx @solidxai/solidctl@latest <command> --help
+```
+
+:::info
+This page intentionally documents the most commonly used commands and skips a few internal or less commonly needed ones. In particular, it does **not** document `mcp`, `legacy-migrate`, `local-upgrade`, or `release`.
 :::
 
-
-### Quick Reference
+## Quick Reference
 
 | Command | Description |
 |---|---|
-| [`create-app`](#create-app) | Scaffold a new SolidX project with backend (NestJS) and frontend (React). |
-| [`build`](#build) | Compiles the latest code changes in `solid-api` and `solid-ui` into executable output — run this before other `solidctl` commands to ensure they pick up your latest changes. |
-| [`seed`](#seed) | Bootstrap SolidX metadata, settings, and the system user. |
-| [`generate`](#generate) | Generate code from model and module metadata definitions. |
-| [`upgrade`](#upgrade) | Upgrade `@solidxai` dependencies to their latest published versions. |
-| [`info`](#info) | Print information about the current SolidX project. |
-| [`test`](#test) | Run the SolidX metadata-driven test suite. |
-| [`mcp`](#mcp) | Start the SolidX MCP server for AI integrations. |
-
----
+| [`create-app`](#create-app) | Scaffold a new SolidX project. |
+| [`build`](#build) | Build the project and set up the Solid CLI. |
+| [`upgrade`](#upgrade) | Upgrade SolidX package dependencies. |
+| [`seed`](#seed) | Install or refresh seeded metadata and platform settings. |
+| [`info`](#info) | Print information about the current project. |
+| [`test`](#test) | Seed test data or run metadata-driven testing scenarios. |
+| [`generate`](#generate) | Generate backend code boilerplate from metadata. |
+| [`agent`](#agent) | Start the SolidX AI agent server or run a single task. |
 
 ## Typical Workflow
 
-**First-time setup:**
+### First-time setup
+
 ```bash
-# Scaffold a new SolidX project
+# Scaffold a new project
 npx @solidxai/solidctl@latest create-app
 
-# Compile the project
+# Build the project
 npx @solidxai/solidctl@latest build
 
-# Bootstrap metadata, settings, and the system user
+# Seed metadata, settings, and the system user
 npx @solidxai/solidctl@latest seed
 ```
 
-**Generating code from model metadata definitions:**
-```bash
-# Generate code for all models within a module
-npx @solidxai/solidctl@latest generate module <module-name>
+### Day-to-day development
 
-# Generate code for a single model
-npx @solidxai/solidctl@latest generate model <model-name>
+```bash
+# Regenerate code from metadata
+npx @solidxai/solidctl@latest generate module
+
+# Build after upgrades or major changes
+npx @solidxai/solidctl@latest build
+
+# Inspect project information
+npx @solidxai/solidctl@latest info --detailed
 ```
 
-**Keeping dependencies up to date:**
+### Testing workflow
+
 ```bash
-# Upgrade to the latest beta release (default behaviour)
-npx @solidxai/solidctl@latest upgrade
+# Set up test datasource files and databases
+npx @solidxai/solidctl@latest test data --setup
 
-# Upgrade to the latest stable release
-npx @solidxai/solidctl@latest upgrade --stable
+# Seed test data
+npx @solidxai/solidctl@latest test data --load
+
+# Run module scenarios
+npx @solidxai/solidctl@latest test run --module Fees
 ```
-
----
 
 ## create-app
 
-Scaffolds a new SolidX project, creating a `solid-api` (NestJS backend) and `solid-ui` (React frontend) in a new project directory.
+Scaffolds a new SolidX project with:
 
-By default, runs an interactive setup wizard that prompts you for configuration. Use `--no-interactive` to skip prompts and supply everything via flags.
+- `solid-api` for the backend
+- `solid-ui` for the frontend
+
+By default, `create-app` runs interactively. Use `--no-interactive` to skip prompts and rely on flags/defaults instead.
 
 ```bash
 npx @solidxai/solidctl@latest create-app [options]
@@ -83,49 +99,37 @@ npx @solidxai/solidctl@latest create-app [options]
 
 | Flag | Default | Description |
 |---|---|---|
-| `--no-interactive` | — | Skip all prompts; use flags or defaults |
-| `--name <name>` | `my-solid-app` | Project name (used as directory name in kebab-case) |
-| `--api-port <port>` | `3000` | Port for the backend API server |
-| `--ui-port <port>` | `3001` | Port for the frontend dev server |
+| `--verbose` | — | Show detailed logs during installation |
+| `--no-interactive` | — | Skip all prompts and use defaults or provided flags |
+| `--name <name>` | `my-solid-app` | Project name |
+| `--api-port <port>` | `3000` | Backend API port |
 | `--db-client <client>` | `PostgreSQL` | Database type: `PostgreSQL` or `MSSQL` |
 | `--db-host <host>` | `localhost` | Database host |
-| `--db-port <port>` | `5432` / `1433` | Database port (auto-set based on client) |
+| `--db-port <port>` | `5432` / `1433` | Database port |
 | `--db-name <name>` | `solidx_app_db` | Database name |
 | `--db-username <username>` | `solidx_app_user` | Database username |
-| `--db-password <password>` | `strongpassword` | Database password (change this for any non-local environment) |
-| `--db-synchronize <yes\|no>` | `No` | Auto-sync DB schema on startup |
-| `--verbose` | — | Show detailed logs during installation |
+| `--db-password <password>` | `strongpassword` | Database password |
+| `--db-synchronize <yes\|no>` | `Yes` | Auto-sync DB schema |
+| `--ui-port <port>` | `3001` | Frontend port |
 
 ### What it does
 
-1. Creates a new directory for your project (kebab-cased from `--name`)
-2. Copies the `solid-api` and `solid-ui` boilerplate templates into the directory
-3. Installs npm dependencies for both projects
-4. Generates `.env` files for the backend and frontend from your configuration
-5. Prints next steps including how to build, seed, and run the development servers
+1. Creates a new project directory.
+2. Scaffolds `solid-api` and `solid-ui`.
+3. Installs dependencies.
+4. Writes environment configuration.
+5. Prints the next commands to run.
 
-### After running
+### Recommended next steps
 
-Your project will have the following structure:
+```bash
+npx @solidxai/solidctl@latest build
+npx @solidxai/solidctl@latest seed
 ```
-<project-name>/
-├── solid-api/   (NestJS backend)
-└── solid-ui/    (React frontend)
-```
-
-The default system admin credentials are:
-- **Username:** `sa`
-- **Password:** `Admin@3214$`
-
-:::tip
-After `create-app`, your next steps are [`build`](#build) then [`seed`](#seed).
-:::
-
----
 
 ## build
 
-Builds both `solid-api` (backend) and `solid-ui` (frontend), so that your latest code changes are ready to be used when running other `solidctl` commands.
+Builds SolidX and sets up the Solid CLI.
 
 ```bash
 npx @solidxai/solidctl@latest build [options]
@@ -137,74 +141,15 @@ npx @solidxai/solidctl@latest build [options]
 |---|---|
 | `--ui-only` | Build only `solid-ui` and skip the `solid-api` build |
 
-Re-run `build` after making code changes or after running [`upgrade`](#upgrade) to ensure everything is up to date.
+### Notes
 
----
-
-## seed
-
-Bootstraps the SolidX platform in your database — populating core metadata, default settings, and creating the initial system user account.
-
-```bash
-npx @solidxai/solidctl@latest seed
-```
-
-:::note Prerequisites
-[`build`](#build) must be run before `seed`.
-:::
-
-Run `seed`:
-- Once when setting up a new project
-- After manually editing module metadata JSON configuration files, to seed the changes to the database
-- After certain version upgrades, if new platform metadata needs to be bootstrapped
-
----
-
-## generate
-
-Generates backend and frontend code from your model and module metadata definitions. This is the core command you use during feature development — after defining or updating metadata, you run `generate` to produce the corresponding TypeScript/React code.
-
-`generate` has two subcommands:
-
-### generate module
-
-Generates code for all models within an entire module. This is the recommended approach.
-
-```bash
-npx @solidxai/solidctl@latest generate module <module-name>
-```
-
-**Example:**
-```bash
-npx @solidxai/solidctl@latest generate module Fees
-```
-
-### generate model
-
-Generates code for a single model and its directly related models. Use this for a quicker, more targeted refresh when only one model has changed.
-
-```bash
-npx @solidxai/solidctl@latest generate model <model-name>
-```
-
-**Example:**
-```bash
-npx @solidxai/solidctl@latest generate model FeeStructure
-```
-
-:::note
-Code generation uses AST-level file updates, meaning it intelligently merges generated code with any custom logic you have added to the generated files, rather than overwriting them entirely.
-
-If you are running `solid-api` and `solid-ui` in development mode (`npm run solidx:dev`), the dev server will pick up the file changes and hot-reload automatically — but that is the dev server's behaviour, not part of this command itself.
-:::
-
----
+- Run this after scaffolding a new project.
+- Run this again after upgrades.
+- Run this if CLI-backed commands are not seeing your latest local code.
 
 ## upgrade
 
-Upgrades the `@solidxai` packages (`@solidxai/core`, `@solidxai/code-builder`, `@solidxai/core-ui`) in your `solid-api` and `solid-ui` projects to the latest published versions.
-
-By default, upgrades to the latest **beta** pre-release. Use `--stable` to upgrade to the latest stable release.
+Upgrades SolidX dependencies. By default, this upgrades to the latest **beta** pre-release.
 
 ```bash
 npx @solidxai/solidctl@latest upgrade [options]
@@ -214,140 +159,234 @@ npx @solidxai/solidctl@latest upgrade [options]
 
 | Flag | Description |
 |---|---|
+| `--core` | Upgrade `solid-core` only |
+| `--ui` | Upgrade `solid-ui` only |
+| `--code-builder` | Upgrade `solid-code-builder` only |
+| `--dry-run` | Show commands without executing |
 | `--stable` | Upgrade to the latest stable release instead of beta |
-| `--tag <tag>` | Upgrade to a specific pre-release tag (e.g. `alpha`, `rc`) |
-| `--dry-run` | Print the commands that would run without executing them |
+| `--tag <tag>` | Install a specific pre-release tag such as `alpha` or `rc` |
 
 ### Examples
 
 ```bash
-# Upgrade to latest beta (default)
+# Upgrade everything to latest beta
 npx @solidxai/solidctl@latest upgrade
 
-# Upgrade to latest stable release
+# Upgrade only solid-core
+npx @solidxai/solidctl@latest upgrade --core
+
+# Upgrade only solid-ui
+npx @solidxai/solidctl@latest upgrade --ui
+
+# Upgrade only solid-code-builder
+npx @solidxai/solidctl@latest upgrade --code-builder
+
+# Upgrade to latest stable
 npx @solidxai/solidctl@latest upgrade --stable
 
-# Upgrade to a specific pre-release tag
+# Upgrade to a specific pre-release track
 npx @solidxai/solidctl@latest upgrade --tag alpha
 
-# Preview what would be upgraded without making changes
+# Preview without changing anything
 npx @solidxai/solidctl@latest upgrade --dry-run
 ```
 
-After upgrading, run [`build`](#build) again to recompile `solid-api` with the updated packages.
+### Recommended follow-up
 
----
+After upgrading, run:
+
+```bash
+npx @solidxai/solidctl@latest build
+```
+
+## seed
+
+Seeds metadata and platform-level data into the application.
+
+```bash
+npx @solidxai/solidctl@latest seed [options]
+```
+
+### Options
+
+| Flag | Default | Description |
+|---|---|---|
+| `-m, --modules-to-seed [module names]` | all modules | Comma-separated list of module names to seed |
+| `-s, --seeder [seeder name]` | `ModuleMetadataSeederService` | Seeder to run |
+| `--prune` | — | Remove metadata that is no longer present in JSON |
+
+### When to use it
+
+- after initial project setup
+- after changing metadata JSON files
+- after upgrades that introduce new platform metadata
+
+### Examples
+
+```bash
+# Seed everything
+npx @solidxai/solidctl@latest seed
+
+# Seed only selected modules
+npx @solidxai/solidctl@latest seed --modules-to-seed Fees,Onboarding
+
+# Seed and prune removed metadata
+npx @solidxai/solidctl@latest seed --prune
+```
 
 ## info
 
-Prints information about the current SolidX project — versions, configuration, and environment details.
+Prints information about the consuming project.
 
 ```bash
-npx @solidxai/solidctl@latest info [args]
+npx @solidxai/solidctl@latest info [options]
 ```
 
-This is a pass-through to `solid info` inside `solid-api/`. Use it when diagnosing issues or when asked for project details by the SolidX support team.
-
----
-
-## test
-
-Runs testing scenarios and manages test data for your SolidX project. Tests are defined in the `testing` section of your module metadata configuration.
-
-The `test` command has two subcommands:
-
-### test run
-
-Runs testing scenarios defined in a module's metadata.
-
-```bash
-npx @solidxai/solidctl@latest test run --module <module-name> [options]
-```
-
-#### Options
+### Options
 
 | Flag | Description |
 |---|---|
-| `-m, --module <name>` | **(Required)** Module name to load test scenarios from |
-| `--scenario-ids <ids>` | Comma-separated list of scenario IDs to run (runs all if omitted) |
-| `--include-tags <tags>` | Comma-separated list of tags — only scenarios matching all tags are run |
-| `--skip-scenario-ids <ids>` | Comma-separated list of scenario IDs to skip |
-| `--api-base-url <url>` | API base URL (defaults to `BASE_URL` env variable) |
-| `--ui-base-url <url>` | Frontend base URL (defaults to `FRONTEND_BASE_URL` env variable) |
-| `--headless <true\|false>` | Run browser in headless mode (default: `true`) |
-| `--timeout-ms <number>` | Default scenario timeout in milliseconds |
-| `--retries <number>` | Default number of retries per scenario |
-| `--list-specs` | List all registered test specs and exit without running |
-| `--print-api-logs` | Print full API request/response logs for each step |
+| `-d, --detailed` | Print more details about the consuming project |
 
-#### Examples
+Use this when debugging project configuration, versions, or runtime setup.
+
+## test
+
+The `test` command has two main areas:
+
+- `test data` for test data and datasource lifecycle tasks
+- `test run` for scenario execution
+
+For the broader testing architecture, vocabulary, and workflow, see [Testing](./testing/index.md).
 
 ```bash
-# Run all test scenarios for a module
-npx @solidxai/solidctl@latest test run --module Fees
-
-# Run specific scenarios by ID
-npx @solidxai/solidctl@latest test run --module Fees --scenario-ids sc-001,sc-002
-
-# Run only scenarios matching a tag
-npx @solidxai/solidctl@latest test run --module Fees --include-tags smoke
-
-# Run with browser visible and verbose API logs
-npx @solidxai/solidctl@latest test run --module Fees --headless false --print-api-logs
-
-# List all registered test specs without running
-npx @solidxai/solidctl@latest test run --module Fees --list-specs
+npx @solidxai/solidctl@latest test [command]
 ```
 
 ### test data
 
-Manages test data for your project — seeding, setting up, or tearing down test database environments.
+Seeds test data from metadata or manages test datasource setup and teardown.
 
 ```bash
-npx @solidxai/solidctl@latest test data <--load|--setup|--teardown> [options]
+npx @solidxai/solidctl@latest test data [options]
 ```
-
-Exactly one of `--load`, `--setup`, or `--teardown` must be specified.
 
 #### Options
 
 | Flag | Description |
 |---|---|
-| `--load` | Seed test data from the `testing.data` sections of module metadata |
-| `--setup` | Create a new test datasource environment file and manifest |
-| `--teardown` | Delete the test datasource environment/manifest and drop test databases |
-| `--modules-to-test <names>` | Comma-separated list of module names to load test data for (used with `--load`; defaults to all modules) |
+| `--load` | Seed test data from `testing.data` sections |
+| `--setup` | Create a new `.env.<dbRunName>` and test datasource manifest |
+| `--teardown` | Delete the test datasource env/manifest and drop test databases |
+| `--modules-to-test [module names]` | Comma-separated list of module names to test; defaults to all modules |
 
 #### Examples
 
 ```bash
-# Set up test database environment
+# Set up test environment
 npx @solidxai/solidctl@latest test data --setup
 
-# Load test data for all modules
+# Load all test data
 npx @solidxai/solidctl@latest test data --load
 
-# Load test data for specific modules only
+# Load only selected modules
 npx @solidxai/solidctl@latest test data --load --modules-to-test Fees,Onboarding
 
-# Tear down test databases after testing
+# Tear down test environment
 npx @solidxai/solidctl@latest test data --teardown
 ```
 
----
+### test run
 
-## mcp
-
-Starts the SolidX MCP (Model Context Protocol) server, which exposes your project's metadata to AI tooling.
+Runs testing scenarios from module metadata.
 
 ```bash
-npx @solidxai/solidctl@latest mcp [args]
+npx @solidxai/solidctl@latest test run [options]
 ```
 
-This is a pass-through to `solid mcp` inside `solid-api/`. Any additional arguments are forwarded to the underlying command.
+#### Options
 
----
+| Flag | Description |
+|---|---|
+| `-m, --module [module name]` | Module name to load metadata from |
+| `--scenario-ids [ids]` | Comma-separated list of scenario ids to run |
+| `--include-tags [tags]` | Comma-separated list of tags; scenario must include all |
+| `--skip-scenario-ids [ids]` | Comma-separated list of scenario ids to skip |
+| `--reporter [name]` | Reporter name; currently `console` |
+| `--list-specs [true\|false]` | List registered test specs and exit |
+| `--print-api-logs [true\|false]` | Print full API request/response logs for `api.request` steps |
+| `--api-base-url [url]` | API base URL; defaults to `process.env.BASE_URL` |
+| `--ui-base-url [url]` | UI base URL; defaults to `process.env.FRONTEND_BASE_URL` |
+| `--headless [true\|false]` | Run UI browser in headless mode; default `true` |
+| `--timeout-ms [number]` | Default scenario timeout in milliseconds |
+| `--retries [number]` | Default scenario retries |
 
-:::tip Legacy Migration
-If your project was previously using `@solidstarters` packages (the older package namespace), run `npx @solidxai/solidctl@latest legacy-migrate` to automatically update your dependencies and import paths to the current `@solidxai` namespace.
-:::
+#### Examples
+
+```bash
+# Run all scenarios for a module
+npx @solidxai/solidctl@latest test run --module Fees
+
+# Run specific scenarios
+npx @solidxai/solidctl@latest test run --module Fees --scenario-ids sc-001,sc-002
+
+# Run tagged scenarios only
+npx @solidxai/solidctl@latest test run --module Fees --include-tags smoke
+
+# Run with visible browser and verbose API logs
+npx @solidxai/solidctl@latest test run --module Fees --headless false --print-api-logs true
+
+# List registered specs
+npx @solidxai/solidctl@latest test run --module Fees --list-specs true
+```
+
+## generate
+
+Generates code boilerplate from model metadata configurations.
+
+```bash
+npx @solidxai/solidctl@latest generate [command]
+```
+
+### Subcommands
+
+| Subcommand | Description |
+|---|---|
+| `model` | Generate code for a single model and its related models |
+| `module` | Generate code for an entire module; this is the recommended path |
+
+### Guidance
+
+- Prefer `generate module` for most workflows.
+- Use `generate model` when you want a smaller, targeted refresh.
+- This command is about metadata-driven code generation, primarily for generated backend structure.
+
+For a deeper explanation of generated structure and the surrounding conventions, see [Code Generation](./extending/code-generation/index.md).
+
+## agent
+
+Runs the SolidX AI agent.
+
+```bash
+npx @solidxai/solidctl@latest agent [command]
+```
+
+### Subcommands
+
+| Subcommand | Description |
+|---|---|
+| `start` | Start the AI agent server |
+| `run <task>` | Run a single agent task |
+
+### Examples
+
+```bash
+# Show help for the agent command
+npx @solidxai/solidctl@latest agent --help
+
+# Show help for starting the agent server
+npx @solidxai/solidctl@latest agent start --help
+
+# Run a single task
+npx @solidxai/solidctl@latest agent run "summarise project metadata"
+```

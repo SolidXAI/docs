@@ -1,6 +1,6 @@
 ---
 sidebar_position: 3
-title: List View Buttons
+title: List Buttons
 description: Build header and row action buttons for SolidX list views.
 summary: "Documents model-based file location, module-manifest registration, metadata wiring, and API conventions for list header and row button extensions."
 solidx_concerns: [frontend.extensions.list_buttons, frontend.extensions.row_buttons, add_list_header_button_with, add_list_row_button_with]

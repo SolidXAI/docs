@@ -544,13 +544,16 @@ button[aria-label*="Switch between dark and light mode"]:hover svg {
   background-color: var(--solid-sidebar-bg-active);
   color: var(--solid-sidebar-text-active);
   font-weight: var(--solid-font-semibold);
-  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+  box-shadow: none;
+  border: none;
 }
 
 .menu__list-item-collapsible--active>.menu__link {
   background-color: transparent;
   color: var(--solid-sidebar-text-hover);
   font-weight: var(--solid-font-semibold);
+  box-shadow: none;
+  border: none;
 }
 
 .menu__caret:before,

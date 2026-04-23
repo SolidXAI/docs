@@ -1,6 +1,6 @@
 ---
 sidebar_position: 12
-title: Dynamic Selection Providers
+title: Dynamic Dropdowns
 description: Learn how to create dynamic selection providers to customize the selection options in your application.
 summary: Explains creating dynamic selection providers for runtime option fetching from databases or APIs, replacing static lists. Covers field metadata configuration with `selectionDynamicProvider` and `selectionDynamicProviderCtxt`, implementing `ISelectionProvider` interface with `values()` method, provider registration, context handling, multi-select support, and examples like `StockApiSelectionProvider` for live exchange data. Highlights built-in `ListOfValuesSelectionProvider` for database queries.
 keywords: [backend, dynamic selection, providers, customization]

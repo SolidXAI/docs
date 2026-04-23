@@ -1,7 +1,7 @@
 ---
 title: Database Seeding
 description: Overview of how the database is initialized with metadata in SolidX.
-summary: This document explains the database seeding process in SolidX, which initializes the database with essential metadata and data required for the application to function. The seeding is triggered via the 'solid seed' command and populates permissions, media storage providers, system fields, functional modules metadata, roles (Admin and Internal User), default users, views, actions, menus, email/SMS templates, settings, security rules, list of values, and dashboard configurations. The ModuleMetadataSeederService from the @solidxai/core package handles all the seeding operations automatically.
+summary: This document explains the database seeding process in SolidX, which initializes the database with essential metadata and data required for the application to function. The seeding is triggered via the `npx @solidxai/solidctl@latest seed` command and populates permissions, media storage providers, system fields, functional modules metadata, roles (Admin and Internal User), default users, views, actions, menus, email/SMS templates, settings, security rules, list of values, and dashboard configurations. The ModuleMetadataSeederService from the @solidxai/core package handles all the seeding operations automatically.
 sidebar_position: 4
 ---
 
@@ -20,10 +20,10 @@ Seeding is the process of initializing the database with the **essential metadat
 
 ##  Running the seed Command
 
-To run the seeding process, execute the following command in the `solid-api` directory:
+To run the seeding process, execute the following command from your project root:
 
 ```bash
-solid seed
+npx @solidxai/solidctl@latest seed
 ```
 
 This command triggers the `ModuleMetadataSeederService`, provided by the [`@solidxai/core`](https://www.npmjs.com/package/@solidxai/core) package.  
@@ -169,4 +169,3 @@ The following metadata is populated during the seeding process:
 
 The seeding process is **essential for bootstrapping** a SolidX instance with all necessary metadata.  
 Make sure to verify seeded users and assign proper permissions for any additional roles.
-

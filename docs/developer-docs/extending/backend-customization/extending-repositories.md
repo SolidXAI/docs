@@ -11,7 +11,7 @@ solidx_concerns: [backend.repository_changes, extending_repository]
 
 ## Overview
 
-[Generated repositories](../code-generation/codegen-structure#repository) inherit from `SolidBaseRepository<T>`, which already:
+[Generated repositories](../code-generation#repository) inherit from `SolidBaseRepository<T>`, which already:
 - wraps TypeORM with metadata-aware behavior,
 - enforces query-level access control via `SecurityRuleRepository`,
 - provides contextual access with `RequestContextService`, and
