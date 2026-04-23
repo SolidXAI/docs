@@ -27,6 +27,23 @@ import { InfoBox } from '@site/src/common/InfoBox';
 ## Overview
 Security rules are crucial for controlling access to data in SolidX. By defining these rules, you can restrict visibility at the model level and ensure that only authorized users can access sensitive information.
 
+<div className="tips-box information-box">
+  <h4 className="card-headear-wrapper">
+    Mental Model
+  </h4>
+  <p>
+    Roles and permissions decide whether a user can invoke an action at all. Security rules answer a second question: which records should that user actually be able to see or act on?
+  </p>
+  <ul>
+    <li>Use permissions for action-level access.</li>
+    <li>Use security rules for record-level visibility and filtering.</li>
+    <li>Treat security rules as business visibility policy encoded in metadata.</li>
+  </ul>
+  <p>
+    So the intuition is: <strong>security rules are the row-level guardrails layered on top of role-based access</strong>.
+  </p>
+</div>
+
 For a guide on how to create and manage security rules in SolidX, refer to the [Creating Security Rules](../extending/backend-customization/security-rules).
 
 ## Example: Security Rules Metadata

@@ -17,6 +17,23 @@ SolidX provides a **metadata-driven testing system** that supports:
 
 The important idea is that API and UI tests are not treated as two unrelated systems. They run through a shared testing engine and a shared scenario model, while using different adapters underneath.
 
+<div className="tips-box information-box">
+  <h4 className="card-headear-wrapper">
+    Mental Model
+  </h4>
+  <p>
+    SolidX testing is best understood as a <strong>single metadata-driven test system</strong> with multiple execution modes.
+  </p>
+  <ul>
+    <li><strong>Metadata</strong> defines fixtures, scenarios, and custom specs.</li>
+    <li><strong>The workflow</strong> prepares the system under test through setup, seed, load, run, and teardown.</li>
+    <li><strong>The engine</strong> executes API, UI, or mixed scenarios through shared primitives.</li>
+  </ul>
+  <p>
+    So the intuition is: API testing, UI testing, and test data management are all parts of the same testing architecture, not separate disconnected tools.
+  </p>
+</div>
+
 ## What This Section Covers
 
 This Testing section is split into a few focused pages:

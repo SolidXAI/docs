@@ -9,6 +9,23 @@ import { FaCode, FaDesktop, FaServer } from "react-icons/fa";
 
 # Extending SolidX
 
+<div className="tips-box information-box">
+  <h4 className="card-headear-wrapper">
+    Mental Model
+  </h4>
+  <p>
+    Extending SolidX is about deciding <strong>where to keep the platform default behaviour</strong> and <strong>where to introduce project-specific logic</strong>.
+  </p>
+  <ul>
+    <li><strong>Generated code</strong> gives you a strong starting structure.</li>
+    <li><strong>Frontend customization</strong> lets you tailor the user experience and module-specific UI.</li>
+    <li><strong>Backend customization</strong> lets you add domain logic, integrations, and behaviour beyond the generated defaults.</li>
+  </ul>
+  <p>
+    So the intuition is: SolidX gives you a metadata-driven base, and this section explains the supported places where you should extend it instead of fighting the framework.
+  </p>
+</div>
+
 This section outlines how to extend **SolidX** to build your own functional modules, such as a `school-fees-portal`.
 
 SolidX offers a **powerful code generation tool** that enables rapid scaffolding of new modules with all the essential boilerplate. This accelerates your development by letting you focus directly on your specific **business logic**, without worrying about foundational setup.

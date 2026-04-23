@@ -17,7 +17,7 @@ type FeatureItem = {
 
 const FeatureList: FeatureItem[] = [
   {
-    title: 'Admin Documentation',
+    title: 'Admin',
     imgs: require('@site/static/img/homeImage-11.png').default,
     description: (
       <>
@@ -28,7 +28,7 @@ const FeatureList: FeatureItem[] = [
     to: 'docs/admin-docs/',
   },
   {
-    title: 'Developer Documentation',
+    title: 'Dev Docs',
     imgs: require('@site/static/img/homeImage-22.png').default,
     description: (
       <>

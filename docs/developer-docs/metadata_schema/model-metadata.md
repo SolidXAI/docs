@@ -30,6 +30,23 @@ SolidX Models represent the structure of your data within a module. Each model d
 
 Each model is a semantic, configurable data structure that forms the basis of adding custom business logic.
 
+<div className="tips-box information-box">
+  <h4 className="card-headear-wrapper">
+    Mental Model
+  </h4>
+  <p>
+    If a module is a business domain, a model is one important noun inside that domain. Models do more than define storage. They become the anchor for generated APIs, permissions, layouts, relations, and backend behavior.
+  </p>
+  <ul>
+    <li>Think in terms of business records such as venue, institute, fee type, or booking.</li>
+    <li>Use model metadata to express identity, persistence, and lifecycle behavior.</li>
+    <li>Choose model boundaries carefully because many platform features build on top of them.</li>
+  </ul>
+  <p>
+    So the intuition is: <strong>a model is the platform's unit of record and behavior inside a module</strong>.
+  </p>
+</div>
+
 👉 For a conceptual overview of what a model is, see [Model Management Documentation](/docs/admin-docs/module-builder/model-management).
 
 

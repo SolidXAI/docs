@@ -32,6 +32,23 @@ import { WarningBox } from '@site/src/common/WarningBox';
 
 Every SolidX model is composed of fields. Fields in SolidX go over and above the standard fields one expects, instead we treat fields as semantic attributes with relevance to how the users interact with that data in our admin interface. 
 
+<div className="tips-box information-box">
+  <h4 className="card-headear-wrapper">
+    Mental Model
+  </h4>
+  <p>
+    In SolidX, a field is not just a database column. A field carries meaning that the platform uses across validation, generated UI, API behavior, filtering, relations, and user experience.
+  </p>
+  <ul>
+    <li>Choose a field type based on business semantics, not just storage format.</li>
+    <li>Assume field metadata will influence both backend and frontend behavior.</li>
+    <li>Treat field configuration as part of the user experience, not only the schema.</li>
+  </ul>
+  <p>
+    So the intuition is: <strong>fields are semantic contracts that shape how data is stored, shown, and interacted with</strong>.
+  </p>
+</div>
+
 👉 For a conceptual overview of fields supported in a model, see [Field Management Documentation](../../admin-docs/module-builder/field-management.md).
 
 

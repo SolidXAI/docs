@@ -1,7 +1,7 @@
 ---
 title: Views
-description: Metadata schema for defining views in SolidX applications — with explanations before each code snippet.
-summary: This document explains view metadata in SolidX, which defines UI presentations of models and automatically generates list views (tabular displays with search, filter, pagination), form views (input forms for create/edit operations), and kanban views (card-based displays with drag-and-drop). Each example below now starts with a short “What this shows” explanation.
+description: Metadata schema for defining generated UI views in SolidX.
+summary: This document explains the current SolidX view model. SolidX UI supports many-record views (`list`, `tree`, `kanban`, and `card`) plus the single-record `form` view. The page explains how to think about view metadata, shows the common metadata shape, and documents the key layout patterns and attributes used by each view type.
 sidebar_position: 4
 json_pointer: "/views"
 jsonpath: "$.views"
@@ -12,12 +12,6 @@ items_attributes_doc: "#view-metadata-attributes"
 solidx_concerns: [update_layout, add_field_to_existing_layout, remove_field_from_existing_layout, modify_layout_field_attribute]
 ---
 
-import { MdViewList,MdDescription,MdViewKanban,MdSecurity,MdWidgets,MdViewQuilt } from "react-icons/md";
-import { RiLockLine } from "react-icons/ri";
-import { FaBolt } from "react-icons/fa";            
-import { IoIosArrowForward } from "react-icons/io";
-import { InfoBox } from '@site/src/common/InfoBox';
-
 # View Metadata
 > **Where it lives**  
 > **JSON Pointer:** `/views`  
@@ -25,141 +19,459 @@ import { InfoBox } from '@site/src/common/InfoBox';
 > **Parent:** Root of the metadata file
 
 ## Overview
-Views define UI presentation of models and automatically generate:
-- **List Views:** Tabular display with search, filter, pagination
-- **Form Views:** Input forms for create/edit operations
-- **Kanban Views:** Card-based display with drag-and-drop
 
-> **How to read this page**: Each code sample below is preceded by a short explanation of what the snippet configures and how it affects the generated UI.
+View metadata is the layer where SolidX turns model metadata into an actual generated UI.
 
----
+<div className="tips-box information-box">
+  <h4 className="card-headear-wrapper">
+    Mental Model
+  </h4>
+  <p>
+    Models and fields define what the application knows about. Views define how users see and work with that data.
+    You are not hand-building pages here. You are declaring the interaction pattern the generated UI should follow.
+  </p>
+  <ul>
+    <li>Use many-record views when users are browsing, comparing, or moving through collections of records.</li>
+    <li>Use single-record views when users are creating, inspecting, or editing one record at a time.</li>
+    <li>Think of view metadata as the presentation contract between your domain model and the SolidX UI runtime.</li>
+  </ul>
+  <p>
+    So the intuition is: <strong>view metadata decides how a model becomes a usable screen</strong>.
+  </p>
+</div>
 
-## Example: Fee Portal List/Form Views
-**What this shows:** A combined example of a **list** view and a **form** view for an *Institute* model inside a *Fees Portal* module. The list section demonstrates pagination, search and row actions. The form section demonstrates the hierarchical layout (sheet → notebook → page → row → column → field) and how to attach a form handler.
+## Supported View Families
 
-<details open>
-  <summary className="card-title">
-    <!-- <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" /> -->
-    View Schema (List + Form)
-  </summary>
+SolidX currently supports the following view types:
+
+### Many-Record Views
+- `list`
+- `tree`
+- `kanban`
+- `card`
+
+### Single-Record Views
+- `form`
+
+This is the high-level split to keep in mind:
+
+- many-record views are for collections
+- single-record views are for one entity instance
+
+## Common View Shape
+
+Every view record follows the same overall structure:
 
 ```json
-{ // List View for Institute Model
-  "name": "institute-list-view",
-  "displayName": "Institute",
+{
+  "name": "application-list-view",
+  "displayName": "Applications",
   "type": "list",
   "context": "{}",
-  "moduleUserKey": "fees-portal",
-  "modelUserKey": "institute",
+  "moduleUserKey": "merchant-onboarding",
+  "modelUserKey": "application",
+  "layout": {
+    "type": "list",
+    "attrs": {},
+    "children": []
+  }
+}
+```
+
+### Common Top-Level Attributes
+
+#### `name`
+Internal identifier for the view. This should be unique within the metadata set.
+
+#### `displayName`
+Human-friendly label for the view in the generated UI.
+
+#### `type`
+The view type. Must be one of:
+- `list`
+- `tree`
+- `kanban`
+- `card`
+- `form`
+
+#### `context`
+JSON-stringified context configuration. In many examples this is simply `"{}"`.
+
+#### `moduleUserKey`
+The module the view belongs to.
+
+#### `modelUserKey`
+The model the view renders.
+
+#### `layout`
+The layout definition for the view. This contains:
+- `type`: should match the view type
+- `attrs`: view-level behavior and configuration
+- `children`: layout nodes, field nodes, or card/form structure depending on the view type
+
+#### Optional Top-Level Hooks
+Some views also include additional behavior hooks at the top level.
+
+Examples seen in real metadata:
+- `onFieldChange`
+- `onFormLayoutLoad`
+
+These are typically used with form-driven workflows where the generated UI needs custom runtime behavior.
+
+## How To Think About Layouts
+
+The layout shape varies by view family:
+
+- `list` and `tree` usually contain `field` children directly
+- `card` and `kanban` contain a nested `card` node
+- `form` contains a richer hierarchical structure such as `sheet -> notebook -> page -> row -> column -> field`
+
+So while the outer wrapper is consistent, the inner layout tree depends on the interaction pattern you are choosing.
+
+## Many-Record Views
+
+Many-record views are for exploring and acting on collections of records.
+
+### List View
+
+Use `list` when users need a classic tabular experience with search, sorting, pagination, and row-level actions.
+
+#### Typical Shape
+
+```json
+{
+  "name": "mqMessage-list-view",
+  "displayName": "Messages",
+  "type": "list",
+  "context": "{}",
+  "moduleUserKey": "solid-core",
+  "modelUserKey": "mqMessage",
   "layout": {
     "type": "list",
     "attrs": {
       "pagination": true,
       "pageSizeOptions": [10, 25, 50],
       "enableGlobalSearch": true,
+      "create": false,
+      "edit": false,
+      "delete": false
+    },
+    "children": [
+      {
+        "type": "field",
+        "attrs": {
+          "name": "messageId",
+          "isSearchable": true
+        }
+      }
+    ]
+  }
+}
+```
+
+#### Common `list` Layout Attributes
+- `pagination`
+- `pageSizeOptions`
+- `enableGlobalSearch`
+- `create`
+- `edit`
+- `delete`
+- `rowButtons`
+- `headerButtons`
+- `allowedViews`
+- `truncateAfter`
+
+#### Common `list` Child Pattern
+`list` layouts typically contain direct `field` children:
+
+```json
+{
+  "type": "field",
+  "attrs": {
+    "name": "createdAt",
+    "isSearchable": true,
+    "sortable": true
+  }
+}
+```
+
+#### Real Patterns Seen In Metadata
+- row-level custom actions using `rowButtons`
+- top-level actions using `headerButtons`
+- view switching using `allowedViews`, for example `["list", "kanban"]` or `["list", "card"]`
+
+### Tree View
+
+Use `tree` when the records are better understood in a hierarchical browsing experience rather than a flat table.
+
+#### Typical Shape
+
+```json
+{
+  "name": "nbfTransaction-tree-view",
+  "displayName": "NBF Transaction",
+  "type": "tree",
+  "context": "{}",
+  "moduleUserKey": "tranaction",
+  "modelUserKey": "nbfTransaction",
+  "layout": {
+    "type": "tree",
+    "attrs": {
+      "pagination": true,
+      "pageSizeOptions": [10, 25, 50],
+      "enableGlobalSearch": true,
+      "create": true,
+      "edit": true,
+      "delete": true
+    },
+    "children": [
+      {
+        "type": "field",
+        "attrs": {
+          "name": "status"
+        }
+      }
+    ]
+  }
+}
+```
+
+#### Common `tree` Layout Attributes
+- `pagination`
+- `pageSizeOptions`
+- `enableGlobalSearch`
+- `create`
+- `edit`
+- `delete`
+
+#### Common `tree` Child Pattern
+Like `list`, `tree` layouts usually contain direct `field` children.
+
+The difference is not the metadata wrapper so much as the UI presentation mode and the way the records are visualized.
+
+### Card View
+
+Use `card` when a collection should be shown as tiles or cards rather than rows.
+
+This is especially useful for media-heavy or visually-oriented records.
+
+#### Typical Shape
+
+```json
+{
+  "name": "media-card-view",
+  "displayName": "Media Card",
+  "type": "card",
+  "context": "{}",
+  "moduleUserKey": "solid-core",
+  "modelUserKey": "media",
+  "layout": {
+    "type": "card",
+    "attrs": {
+      "pagination": true,
+      "pageSize": 24,
+      "pageSizeOptions": [12, 24, 48],
+      "enableGlobalSearch": true,
       "create": true,
       "edit": true,
       "delete": true,
-      "rowButtons": [
-        {
-          "attrs": {
-            "className": "",
-            "label": "Enable",
-            "action": "ActivatePortal",
-            "icon": "pi",
-            "actionInContextMenu": false,
-            "customComponentIsSystem": true,
-            "openInPopup": true,
-            "closable": true
+      "allowedViews": ["list", "card"]
+    },
+    "children": [
+      {
+        "type": "card",
+        "attrs": {
+          "name": "Card",
+          "cardWidget": "MediaCardWidget"
+        },
+        "children": [
+          {
+            "type": "field",
+            "attrs": {
+              "name": "relativeUri",
+              "widget": "image",
+              "isSearchable": true
+            }
           }
-        }
-      ],
-      "configureViewActions": {
-        "import": { "roles": ["Admin", "App Admin"] }
-      },
-      "children": [
-        {
-          "type": "field",
-          "attrs": {
-            "name": "id",
-            "sortable": true,
-            "isSearchable": true
-          }
-        }
-      ]
-    }
+        ]
+      }
+    ]
   }
-},
-{ // Form View for Institute Model
-  "name": "institute-form-view",
-  "displayName": "Institute",
+}
+```
+
+#### Common `card` Layout Attributes
+- `pagination`
+- `pageSize`
+- `pageSizeOptions`
+- `enableGlobalSearch`
+- `create`
+- `edit`
+- `delete`
+- `allowedViews`
+
+#### Common `card` Child Pattern
+Unlike `list` and `tree`, a `card` view contains a nested `card` node:
+
+```json
+{
+  "type": "card",
+  "attrs": {
+    "name": "Card",
+    "cardWidget": "MediaCardWidget"
+  },
+  "children": [
+    {
+      "type": "field",
+      "attrs": {
+        "name": "originalFileName"
+      }
+    }
+  ]
+}
+```
+
+The nested `card` node is where you define the fields and widget used to render each record tile.
+
+### Kanban View
+
+Use `kanban` when records move through stages, statuses, or workflows and users benefit from a board-style experience.
+
+#### Typical Shape
+
+```json
+{
+  "name": "application-kanban-view",
+  "displayName": "Applications Kanban",
+  "type": "kanban",
+  "context": "{}",
+  "moduleUserKey": "merchant-onboarding",
+  "modelUserKey": "application",
+  "layout": {
+    "type": "kanban",
+    "attrs": {
+      "swimlanesCount": 5,
+      "recordsInSwimlane": 10,
+      "enableGlobalSearch": true,
+      "create": true,
+      "edit": true,
+      "delete": true,
+      "groupBy": "status",
+      "draggable": true,
+      "allowedViews": ["list", "kanban"]
+    },
+    "children": [
+      {
+        "type": "card",
+        "attrs": {
+          "name": "Card",
+          "cardWidget": "ApplicationKanbanCardWidget"
+        },
+        "children": [
+          {
+            "type": "field",
+            "attrs": {
+              "name": "displayName",
+              "isSearchable": true
+            }
+          }
+        ]
+      }
+    ]
+  }
+}
+```
+
+#### Common `kanban` Layout Attributes
+- `swimlanesCount`
+- `recordsInSwimlane`
+- `enableGlobalSearch`
+- `create`
+- `edit`
+- `delete`
+- `groupBy`
+- `draggable`
+- `allowedViews`
+
+#### Common `kanban` Child Pattern
+Like `card` views, `kanban` uses a nested `card` child.
+
+The key difference is that the surrounding view organizes cards into grouped swimlanes based on `groupBy`.
+
+## Single-Record Views
+
+### Form View
+
+Use `form` when a user is working with a single record at a time, whether creating, editing, reviewing, or progressing a workflow.
+
+#### Typical Shape
+
+```json
+{
+  "name": "application-form-view",
+  "displayName": "Application",
   "type": "form",
   "context": "{}",
-  "moduleUserKey": "fees-portal",
-  "modelUserKey": "institute",
+  "moduleUserKey": "merchant-onboarding",
+  "modelUserKey": "application",
+  "onFieldChange": "OnProductTypeChangeHandler",
   "layout": {
     "type": "form",
     "attrs": {
       "name": "form-1",
-      "label": "Institute",
+      "label": "Application",
       "className": "grid",
+      "workflowField": "status",
+      "workflowFieldUpdateEnabled": false,
+      "showAddFormButton": false,
       "formButtons": [
         {
           "attrs": {
-            "className": "",
-            "label": "Preview",
-            "action": "PreviewPortal",
-            "icon": "pi",
-            "actionInContextMenu": true,
+            "label": "Send to Checker",
+            "action": "ValidateApplication",
             "openInPopup": true,
-            "customComponentIsSystem": true,
-            "closable": true
+            "roles": ["Admin", "Maker"]
           }
         }
       ]
     },
-    "onFormLayoutLoad": "instituteEditHandler",
     "children": [
       {
         "type": "sheet",
-        "attrs": { "name": "sheet-1" },
+        "attrs": {
+          "name": "sheet-1"
+        },
         "children": [
           {
             "type": "notebook",
-            "attrs": { "name": "notebook-1" },
+            "attrs": {
+              "name": "notebook-1"
+            },
             "children": [
               {
                 "type": "page",
-                "attrs": { "name": "page-1", "label": "Institutes" },
+                "attrs": {
+                  "name": "general-info",
+                  "label": "General Info"
+                },
                 "children": [
                   {
                     "type": "row",
-                    "attrs": { "name": "sheet-1" },
+                    "attrs": {
+                      "name": "row-1"
+                    },
                     "children": [
                       {
                         "type": "column",
                         "attrs": {
-                          "name": "group-1",
-                          "label": "Institutes Basic",
-                          "className": "col-6"
-                        },
-                        "children": [
-                          { "type": "field", "attrs": { "name": "instituteName" } }
-                        ]
-                      },
-                      {
-                        "type": "column",
-                        "attrs": {
-                          "name": "group-1",
-                          "label": "Institutes Contact",
+                          "name": "col-1",
                           "className": "col-6"
                         },
                         "children": [
                           {
                             "type": "field",
                             "attrs": {
-                              "name": "instituteAddress",
-                              "disabled": false
+                              "name": "displayName"
                             }
                           }
                         ]
@@ -176,710 +488,100 @@ Views define UI presentation of models and automatically generate:
   }
 }
 ```
-</details>
 
----
+#### Common `form` Layout Attributes
+- `name`
+- `label`
+- `className`
+- `workflowField`
+- `workflowFieldUpdateEnabled`
+- `disabled`
+- `readonly`
+- `showAddFormButton`
+- `showEditFormButton`
+- `showDeleteFormButton`
+- `formButtons`
 
-## View Configurations
+#### Common `form` Layout Structure
+The most common hierarchy is:
 
-<h3 className=" card-headear-wrapper">
-  <MdViewList size={22} />
-  <span style={{marginLeft: 8}}>List View</span>
-</h3>
-
-List views display records in tabular format with advanced features like search, filtering, and pagination.
-
-### 1) Basic List View Structure
-**What this shows:** The minimal configuration for a list view. Connect to a module/model and define a `layout` with `attrs` (behavior) and `children` (columns).
-
-<details open>
-<summary className="card-title ">
-  <!-- <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" /> -->
-  List View Structure
-</summary>
-
-```json
-{
-  "name": "institute-list-view",
-  "displayName": "Institute",
-  "type": "list",
-  "context": "{}",
-  "moduleUserKey": "fees-portal",
-  "modelUserKey": "institute",
-  "layout": {
-    "type": "list",
-    "attrs": {
-      // List view attributes
-    },
-    "children": [
-      // Field configurations
-    ]
-  }
-}
-```
-</details>
-
-### 2) List View Attributes
-**What this shows:** How to toggle pagination and CRUD actions from the list, how to restrict actions to specific roles, and how to add custom row/header buttons.
-
-<details open>
-<summary className="card-title ">
-  <!-- <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" /> -->
-  List View Attributes
-</summary>
-
-```json
-"attrs": {
-  "pagination": true,                                   // Enables pagination controls at the bottom of the list
-  "pageSizeOptions": [10, 25, 50],                      // Dropdown options for how many records to show per page
-  "enableGlobalSearch": true,                           // Shows a search bar that queries across all searchable fields
-  "create": true,                                       // Shows a "Create" button to add new records
-  "edit": true,                                         // Shows an "Edit" action on each row
-  "delete": true,                                       // Shows a "Delete" action on each row
-  "import": { "roles": ["Admin"] },                     // Restricts the CSV/bulk import action to the specified roles
-  "showArchived": { "roles": ["Admin"] },               // Shows a toggle to include archived records, visible to specified roles
-  "export": { "roles": ["Admin", "Institute Admin"] },  // Restricts the data export action to the specified roles
-  "customizeLayout": { "roles": ["Admin"] },            // Allows the specified roles to reorder or hide columns
-  "saveCustomFilter": { "roles": ["Admin"] },           // Allows the specified roles to save filter presets
-  "rowButtons": [...],                                  // Custom action buttons rendered on each row — see List View Buttons
-  "headerButtons": [...]                                // Custom action buttons rendered in the list header — see List View Buttons
-}
-```
-</details>
-
-> For `rowButtons` and `headerButtons` configuration and component registration, see [List View Buttons](../extending/frontend-customization/list-view-buttons).
-
-### 3) List View Field Configuration
-**What this shows:** Each item in `children` is a column. Control sort, filter and search participation; `viewWidget` customizes how the value renders.
-
-<details open>
-<summary className="card-title ">
-  <!-- <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" /> -->
-  Field Configuration
-</summary>
-
-```json
-"children": [
-  {
-    "type": "field",
-    "attrs": {
-      "name": "instituteName",      // The model field name to display as a column
-      "sortable": true,             // Allows the column header to be clicked to sort records
-      "isSearchable": true          // Makes this field searchable in the list view of the model
-    }
-  },
-  {
-    "type": "field",
-    "attrs": {
-      "name": "logo",               // The model field name to display as a column
-      "sortable": true,             // Allows the column header to be clicked to sort records
-      "isSearchable": true          // Makes this field searchable in the list view of the model
-    }
-  },
-  {
-    "type": "field",
-    "attrs": {
-      "name": "paymentGatewayAccessSecret", // The model field name to display as a column
-      "viewWidget": "maskedShortTextList",  // Overrides the default cell renderer with a custom widget
-      "sortable": true,                     // Allows the column header to be clicked to sort records
-      "isSearchable": true                  // Makes this field searchable in the list view of the model
-    }
-  }
-]
-```
-</details>
-
----
-
-<h3 className=" card-headear-wrapper">
-  <MdDescription size={22} />
-  <span style={{marginLeft: 8}}>Form View</span>
-</h3>
-
-Form views handle data entry and editing with complex layout structures using sheets, notebooks, and pages.
-
-### 1) Basic Form View Structure
-**What this shows:** A `form` view with a base layout and optional `onFormLayoutLoad` handler. `children` will hold sheets/notebooks/pages/rows/columns/fields.
-
-<details open>
-<summary className="card-title ">
-  <!-- <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" /> -->
-  Form View Structure
-</summary>
-
-```json
-{
-  "name": "institute-form-view",
-  "displayName": "Institute",
-  "type": "form",
-  "context": "{}",
-  "moduleUserKey": "fees-portal",
-  "modelUserKey": "institute",
-  "layout": {
-    "type": "form",
-    "attrs": {
-      // Form view attributes
-    },
-    "onFormLayoutLoad": "instituteEditHandler",
-    "children": [
-      // Layout components (sheets, notebooks, etc.)
-    ]
-  }
-}
-```
-</details>
-
-### 2) Form View Attributes
-**What this shows:** Configure visual details, workflow status display, and custom buttons that trigger actions or popups.
-
-<details open>
-<summary className="card-title ">
-  <!-- <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" /> -->
-  Form View Attributes
-</summary>
-
-```json
-"attrs": {
-  "name": "form-1",                      // Unique identifier for this form layout
-  "label": "Institute",                  // Display title shown at the top of the form
-  "className": "grid",                   // CSS class applied to the form wrapper ("grid" enables grid-based layout)
-  "workflowField": "status",             // The model field that drives the workflow (e.g. pending, active, inactive) — renders a workflow status indicator at the top of the form
-  "workflowFieldUpdateEnabled": false,   // When true, allows the user to click the workflow status indicator on the form to update the workflow directly — see Workflow Status on a Form
-  "formButtons": [                       // Custom action buttons rendered in the form header
-    {
-      "attrs": {
-        "className": "",              // Additional CSS classes for the button
-        "label": "Preview",          // Text displayed on the button
-        "action": "PreviewPortal",   // Registered component name rendered when the button is clicked
-        "icon": "pi",                // PrimeIcons class for the button icon
-        "actionInContextMenu": true, // Whether to also show this action in the row context menu
-        "openInPopup": true,         // Opens the action component in a modal popup
-        "customComponentIsSystem": true, // Marks the component as a system-level component
-        "closable": true             // Whether the popup can be closed by the user
-      }
-    }
-  ]
-}
-```
-</details>
-
-> For full workflow configuration details and examples, see [Workflow Status on a Form](../../recipes/workflow-status).
-
-### 3) Form Layout Components Hierarchy
-**What this shows:** How layout blocks nest to build rich, organized forms.
-
-```
-Form
-└── Sheet (top-level container)
-    └── Notebook (tab container)
-        └── Page (individual tab)
-            └── Row (horizontal layout)
-                └── Column (vertical container)
-                    └── Field (input component)
+```text
+form
+  sheet
+    notebook
+      page
+        row
+          column
+            field
 ```
 
-#### Sheet Component
-**What this shows:** A top-level container for your form sections.
+You may also see variants such as `group` in some real metadata, but the main idea stays the same: forms are composed as nested layout containers ending in `field` nodes.
 
-<details open>
-<summary className="card-title ">
-  <!-- <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" /> -->
-  Sheet Component
-</summary>
+#### Real Patterns Seen In Metadata
+- workflow-aware forms using `workflowField`
+- read-only review screens using `disabled` and `readonly`
+- custom action buttons using `formButtons`
+- dynamic runtime behavior using top-level hooks such as `onFieldChange` or `onFormLayoutLoad`
 
-```json
-{
-  "type": "sheet",
-  "attrs": { "name": "sheet-1" },
-  "children": [
-    // Notebook or Row components
-  ]
-}
-```
-</details>
+## Choosing The Right View Type
 
-#### Notebook Component (Tabs)
-**What this shows:** A tab container that groups multiple pages.
+Use this rule of thumb:
 
-<details open>
-<summary className="card-title ">
-  <!-- <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" /> -->
-  Notebook Component
-</summary>
+- choose `list` when the primary need is table-like browsing
+- choose `tree` when the same data is better understood hierarchically
+- choose `card` when each record should be presented visually as a tile
+- choose `kanban` when records move through workflow stages
+- choose `form` when the user is working on one record in depth
 
-```json
-{
-  "type": "notebook",
-  "attrs": { "name": "notebook-1" },
-  "children": [
-    // Page components (tabs)
-  ]
-}
-```
-</details>
+## Recommended Mental Model
 
-#### Page Component (Individual Tab)
-**What this shows:** A single tab with its own content.
+When designing views, think in this order:
 
-<details open>
-<summary className="card-title ">
-  <!-- <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" /> -->
-  Page Component
-</summary>
+1. What is the user's job on this screen: browse many records or work on one record?
+2. If it is many records, which interaction pattern fits best: table, hierarchy, cards, or board?
+3. Which actions should the generated UI expose directly?
+4. Which fields should be visible and searchable in that view?
 
-```json
-{
-  "type": "page",
-  "attrs": { "name": "page-1", "label": "Institutes" },
-  "children": [
-    // Row components
-  ]
-}
-```
-</details>
-
-#### Row Component (Horizontal Layout)
-**What this shows:** A horizontal group of columns.
-
-<details open>
-<summary className="card-title c">
-  <!-- <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" /> -->
-  Row Component
-</summary>
-
-```json
-{
-  "type": "row",
-  "attrs": { "name": "row-1" },
-  "children": [
-    // Column components
-  ]
-}
-```
-</details>
-
-#### Column Component (Vertical Container)
-**What this shows:** A vertical container with optional label and grid classes.
-
-<details open>
-<summary className="card-title ">
-  <!-- <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" /> -->
-  Column Component
-</summary>
-
-```json
-{
-  "type": "column",
-  "attrs": {
-    "name": "column-1",
-    "label": "Institutes Basic",
-    "className": "col-6"
-  },
-  "children": [
-    // Field components
-  ]
-}
-```
-</details>
-
-#### Field Component (Form Input)
-**What this shows:** A single form input with view/edit widget overrides.
-
-<details open>
-<summary className="card-title ">
-  <!-- <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" /> -->
-  Field Component
-</summary>
-
-```json
-{
-  "type": "field",
-  "attrs": {
-    "name": "instituteName",
-    "disabled": false,
-    "showLabel": true,
-    "viewWidget": "default",
-    "editWidget": "default"
-  }
-}
-```
-</details>
-
-#### Complete Form Layout Example
-**What this shows:** A full, multi-tab form bringing together all components.
-
-<details open>
-<summary className="card-title ">
-  <!-- <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" /> -->
-  Complete Form Layout Example
-</summary>
-
-```json
-{
-  "type": "form",
-  "attrs": {
-    "name": "form-1",
-    "label": "Institute",
-    "className": "grid"
-  },
-  "onFormLayoutLoad": "instituteEditHandler",
-  "children": [
-    {
-      "type": "sheet",
-      "attrs": { "name": "sheet-1" },
-      "children": [
-        {
-          "type": "notebook",
-          "attrs": { "name": "notebook-1" },
-          "children": [
-            {
-              "type": "page",
-              "attrs": { "name": "page-1", "label": "Institutes" },
-              "children": [
-                {
-                  "type": "row",
-                  "attrs": { "name": "row-1" },
-                  "children": [
-                    {
-                      "type": "column",
-                      "attrs": {
-                        "name": "column-1",
-                        "label": "Institutes Basic",
-                        "className": "col-6"
-                      },
-                      "children": [
-                        { "type": "field", "attrs": { "name": "instituteName" } },
-                        { "type": "field", "attrs": { "name": "description" } }
-                      ]
-                    },
-                    {
-                      "type": "column",
-                      "attrs": {
-                        "name": "column-2",
-                        "label": "Institutes Contact",
-                        "className": "col-6"
-                      },
-                      "children": [
-                        { "type": "field", "attrs": { "name": "instituteAddress", "disabled": false } }
-                      ]
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              "type": "page",
-              "attrs": { "name": "page-2", "label": "Payment Gateway Details" },
-              "children": []
-            }
-          ]
-        }
-      ]
-    }
-  ]
-}
-```
-</details>
-
----
-
-<h3 className=" card-headear-wrapper">
-  <MdViewKanban size={22} />
-  <span style={{marginLeft: 8}}>Kanban View</span>
-</h3>
-
-Kanban views display records as cards with drag-and-drop functionality.
-
-### 1) Basic Kanban View Structure
-**What this shows:** Declares a `kanban` view and the places where swimlane and card configuration live.
-
-<details open>
-<summary className="card-title ">
-  <!-- <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" /> -->
-  Kanban View Structure
-</summary>
-
-```json
-{
-  "name": "task-kanban-view",
-  "displayName": "Task Board",
-  "type": "kanban",
-  "context": "{}",
-  "moduleUserKey": "fees-portal",
-  "modelUserKey": "task",
-  "layout": {
-    "type": "kanban",
-    "attrs": {
-      // Kanban view attributes
-    },
-    "children": [
-      // Card template configuration
-    ]
-  }
-}
-```
-</details>
-
-### 2) Kanban View Attributes
-**What this shows:** Controls lane count, records per lane, the grouping field, and drag-and-drop.
-
-<details open>
-<summary className="card-title ">
-  <!-- <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" /> -->
-  Kanban View Attributes
-</summary>
-
-```json
-"attrs": {
-  "swimlanesCount": 10,              // Maximum number of swimlane columns to display
-  "recordsInSwimlane": 5,            // Number of records loaded per swimlane
-  "enableGlobalSearch": true,        // Shows a search bar that filters cards across all lanes
-  "create": true,                    // Shows a "Create" button to add new records
-  "edit": true,                      // Allows editing a record by clicking its card
-  "delete": true,                    // Allows deleting a record from its card
-  "groupBy": "status",               // Field used to group records into swimlane columns
-  "draggable": true,                 // Enables drag-and-drop to move cards between lanes
-  "allowedViews": ["list", "kanban"] // View-switcher options shown to the user
-}
-```
-</details>
-
-### 3) Kanban Card Template
-**What this shows:** Maps model fields to parts of the card: header, content, badges.
-
-<details open>
-<summary className="card-title ">
-  <!-- <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" /> -->
-  Kanban Card Template
-</summary>
-
-```json
-"children": [
-  {
-    "type": "cardTemplate",
-    "attrs": { "name": "task-card" },
-    "children": [
-      { "type": "field", "attrs": { "name": "title", "displayType": "header" } },
-      { "type": "field", "attrs": { "name": "description", "displayType": "content" } },
-      { "type": "field", "attrs": { "name": "priority", "displayType": "badge" } }
-    ]
-  }
-]
-```
-</details>
-
----
-
-## View RBAC
-
-Views support role-based access control (RBAC) to restrict actions and field-level permissions based on user roles.
-
-<h3 className=" card-headear-wrapper">
-  <MdSecurity size={21} />
-  <span style={{marginLeft: 8}}>Role-Based View Actions</span>
-</h3>
-
-**What this shows:** Limit visibility of list-level actions (import/export/layout customization) to specific roles.
-
-<details open>
-  <summary className="card-title ">
-    <!-- <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" /> -->
-    View Actions
-  </summary>
-
-```json
-"configureViewActions": {
-  "import": { "roles": ["Admin", "Manager"] },
-  "export": { "roles": ["Admin", "Manager", "User"] },
-  "customizeLayout": { "roles": ["Admin"] },
-  "saveCustomFilter": { "roles": ["Admin", "Manager"] }
-}
-```
-</details>
-
-<h3 className=" card-headear-wrapper">
-  <RiLockLine size={21} />
-  <span style={{marginLeft: 8}}>Field-Level Permissions in Views</span>
-</h3>
-
-**What this shows:** Hide or show sensitive fields per role.
-
-<details open>
-  <summary className="card-title">
-    <!-- <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" /> -->
-    Field-Level Permissions
-  </summary>
-
-```json
-{
-  "type": "field",
-  "attrs": {
-    "name": "salary",
-    "roles": ["Admin", "HR"]
-  }
-}
-```
-</details>
-
----
-
-<h3 className=" card-headear-wrapper">
-  <MdWidgets size={21} />
-  <span style={{marginLeft: 8}}>View Widgets</span>
-</h3>
-
-Views support custom widgets to enhance field display and editing experiences. List view supports `viewWidget` and form views support `viewWidget` (view mode) and `editWidget` (edit mode).
-
-**What this shows:** Override default rendering/editing of a field using specific named widgets.
-
-<details open>
-  <summary className="card-title ">
-    <!-- <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" /> -->
-    Custom View Widgets
-  </summary>
-
-```json
-{
-  "type": "field",
-  "attrs": {
-    "name": "password",
-    "viewWidget": "maskedShortTextList",
-    "editWidget": "maskedShortTextEdit"
-  }
-}
-```
-</details>
-
-#### Further Reference
-- List View Widgets: [List View Widgets](/docs/developer-docs/extending/frontend-customization/list-view-field-widgets)
-- Form View / Edit Widgets: [Form View Widgets](/docs/developer-docs/extending/frontend-customization/form-view-field-widgets)
-
----
-
-<h3 className=" card-headear-wrapper">
-  <FaBolt size={21} />
-  <span style={{marginLeft: 8}}>View Event Handlers (TODO)</span>
-</h3>
-
-**What this shows:** Hook into lifecycle events to preprocess layout/data or react to user input.
-
-- `onFormLayoutLoad`: Executed when form loads
-- `onFormDataLoad`: Executed after form data is loaded
-- `onFieldChange`: Triggered on field value changes
-- `onFieldBlur`: Executed when a field loses focus
-- `onCustomWidgetRender`: Called when a custom widget is rendered
-
-Further reference: [Event Handlers Documentation](../extending/frontend-customization/form-view-events)
-
----
-
-<h3 className=" card-headear-wrapper">
-  <MdViewQuilt size={24} />
-  <span style={{marginLeft: 8}}>View Layout Responsive Design</span>
-</h3>
-
-### CSS Grid Classes
-**What this shows:** Use grid utility classes to control width across breakpoints.
-
-<details open>
-  <summary className="card-title ">
-    <!-- <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" /> -->
-    CSS Grid Classes
-  </summary>
-
-```json
-{
-  "type": "column",
-  "attrs": { "className": "col-12 col-md-6 col-lg-4" }
-}
-```
-</details>
-
-#### Layout Breakpoints
-- `col-12`: Full width on all screens
-- `col-md-6`: Half width on medium screens and up
-- `col-lg-4`: Third width on large screens and up
-
----
+That sequence usually leads to cleaner metadata decisions than starting with low-level layout details.
 
 ## View Metadata Attributes
 
-### `name` *(string, required, unique)*
-Name of the view (used for referencing).  
-**Default:** N/A
+### Top-Level View Attributes
 
-### `displayName` *(string, required)*
-Display name of the view (shown in the UI).  
-**Default:** N/A
+#### `name`
+Unique internal name of the view.
 
-### `type` *(string, required)*
-Type of view. Supported types:
-- `list`: List view for displaying multiple records in a tabular format.
-- `form`: Form view for creating/editing a single record.
-- `kanban`: Kanban view for visualizing records as cards in columns.
-**Default:** N/A
+#### `displayName`
+Human-readable label shown in the UI.
 
-### `context` *(JSON, optional)*
-JSON object defining context-specific parameters for the view.  
-**Default:** N/A
+#### `type`
+The view type:
+- `list`
+- `tree`
+- `kanban`
+- `card`
+- `form`
 
-### `layout` *(JSON, required)*
-Defines the **layout and structure** of the view. Controls how fields, widgets, buttons, and other UI elements are organized.  
-**Default:** N/A
+#### `context`
+Serialized view context, commonly `"{}"`.
 
-#### Further Reference
-- **List View:** [List View Layout Attributes](../../admin-docs/layouts/list-view#list-view-attributes-type-list)  
-- **Form View:** [Form View Layout Attributes](../../admin-docs/layouts/form-view)  
-- **Kanban View:** [Kanban View Layout Attributes](../../admin-docs/layouts/kanban-view#kanban-view-attributes) 
+#### `moduleUserKey`
+The owning module.
 
-<InfoBox>
-  Each view type has its own expected `layout` schema. Use the links above to understand required keys, optional properties, and usage examples.
-</InfoBox>
+#### `modelUserKey`
+The target model.
 
-### `moduleUserKey` *(string, optional)*
-User key of the module this view belongs to.  
-**Default:** N/A
+#### `layout`
+The layout definition, including `type`, `attrs`, and `children`.
 
-### `modelUserKey` *(string, optional)*
-User key of the model this view is associated with.  
-**Default:** N/A    
+#### `onFieldChange` *(optional)*
+Runtime handler hook used by some form views.
 
----
+#### `onFormLayoutLoad` *(optional)*
+Runtime handler hook used when the form layout needs custom initialization behavior.
 
-## Best Practices
+#### Layout Notes By View Type
 
-<details open>
-  <summary className="card-title ">
-    <!-- <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" /> -->
-    Layout Organization
-  </summary>
-  <ul className="card-desc">
-    <li><strong>Use logical grouping</strong>: Group related fields in columns with descriptive labels</li>
-    <li><strong>Progressive disclosure</strong>: Use tabs (notebooks) for complex forms</li>
-    <li><strong>Responsive design</strong>: Use appropriate grid classes for different screen sizes</li>
-    <li><strong>Field ordering</strong>: Place important fields first, follow logical workflow</li>
-  </ul>
-</details>
-
-<details open>
-  <summary className="card-title ">
-    <!-- <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" /> -->
-    Security Considerations
-  </summary>
-  <ul className="card-desc">
-    <li><strong>Role-based access</strong>: Configure view actions based on user roles</li>
-    <li><strong>Field-level security</strong>: Hide sensitive fields from unauthorized users</li>
-    <li><strong>Audit trails</strong>: Enable audit tracking for sensitive operations</li>
-  </ul>
-</details>
-
-<details open>
-  <summary className="card-title ">
-    <!-- <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" /> -->
-    Performance Optimization
-  </summary>
-  <ul className="card-desc">
-    <li><strong>Pagination</strong>: Always enable pagination for large datasets</li>
-    <li><strong>Field selection</strong>: Only display necessary fields in list views</li>
-  </ul>
-</details>
+- `list` and `tree` expect `field` children
+- `card` and `kanban` expect a nested `card` child
+- `form` expects nested layout containers ending in `field` nodes

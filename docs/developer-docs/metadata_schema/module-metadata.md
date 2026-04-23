@@ -28,6 +28,23 @@ import { InfoBox } from '@site/src/common/InfoBox';
 When creating a new module in SolidX, you're defining a **core building block** of your application.  
 A module groups together related models and functionality under a **unified domain**.
 
+<div className="tips-box information-box">
+  <h4 className="card-headear-wrapper">
+    Mental Model
+  </h4>
+  <p>
+    A module is the top-level business boundary in SolidX. It is not just a folder or namespace. It is the container that tells the platform which models, views, menu entries, and behaviors belong to one domain.
+  </p>
+  <ul>
+    <li>Start by asking: what business capability are we modelling?</li>
+    <li>Put closely related models inside the same module.</li>
+    <li>Use the module to define the identity of that domain inside the app.</li>
+  </ul>
+  <p>
+    So the intuition is: <strong>a module is the platform's unit of business ownership</strong>.
+  </p>
+</div>
+
 👉 For a conceptual overview of what a module is, see [Module Management Documentation](../../admin-docs/module-builder/module-management.md).
 
 ###  Example: Fees Portal Module

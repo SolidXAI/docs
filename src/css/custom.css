@@ -899,33 +899,45 @@ button[class*="copyButton"]:hover {
   background-color: var(--solid-footer-bg);
   border-top: 1px solid var(--solid-footer-border);
   color: var(--solid-text-tertiary);
-  padding: var(--solid-space-12) 0 var(--solid-space-8) !important;
-  /* margin-top: var(--solid-space-16); */
+  padding: var(--solid-space-3) 0 !important;
   margin-top: 0 !important;
 }
 
-.footer__logo {
-  max-width: 120px;
+.footer__links {
+  display: none;
 }
 
 .footer__title {
   color: var(--solid-text-primary);
   font-weight: var(--solid-font-semibold);
-  font-size: var(--solid-font-size-sm);
+  font-size: 0.72rem;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  margin-bottom: var(--solid-space-3);
+  margin-bottom: var(--solid-space-2);
 }
 
 .footer__item {
   color: var(--solid-text-tertiary);
-  font-size: var(--solid-font-size-sm);
-  line-height: var(--solid-line-height-relaxed);
+  font-size: 0.82rem;
+  line-height: 1.5;
+}
+
+.footer__link-item {
+  color: var(--solid-text-secondary);
 }
 
 .footer__link-item:hover {
   color: var(--solid-text-primary);
   text-decoration: none;
+}
+
+.footer__copyright {
+  border-top: 0;
+  color: var(--solid-text-tertiary);
+  font-size: 0.76rem;
+  margin-top: 0;
+  padding-top: 0;
+  text-align: center;
 }
 
 /*==============================================================================

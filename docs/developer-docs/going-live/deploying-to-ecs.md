@@ -13,6 +13,23 @@ import { InfoBox } from '@site/src/common/InfoBox';
 
 This guide will walk you through deploying your SolidX application to Amazon Elastic Container Service (ECS) with Fargate, a serverless compute engine that allows you to run containers without managing the underlying infrastructure.
 
+<div className="tips-box information-box">
+  <h4 className="card-headear-wrapper">
+    Mental Model
+  </h4>
+  <p>
+    ECS with Fargate is the managed-container version of the Docker story. You still package the application as containers, but AWS takes over the responsibility of running them on infrastructure you do not manage directly.
+  </p>
+  <ul>
+    <li>Choose this path when you want container-based deployment with less host management.</li>
+    <li>Think in terms of images, task definitions, services, networking, and load balancing.</li>
+    <li>This model moves the operational focus from servers to cloud resources and deployment topology.</li>
+  </ul>
+  <p>
+    So the intuition is: <strong>ECS/Fargate lets you keep container discipline while outsourcing server management to AWS</strong>.
+  </p>
+</div>
+
 <InfoBox>
   Before you begin, make sure you have an AWS account, the AWS CLI installed and configured, and Docker running on your local machine.
 </InfoBox>

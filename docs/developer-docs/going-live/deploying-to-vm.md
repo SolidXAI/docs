@@ -13,6 +13,23 @@ import { InfoBox } from '@site/src/common/InfoBox';
 
 This guide provides a comprehensive walkthrough for deploying your SolidX application to a virtual machine (VM). We will cover everything from setting up your environment to deploying and securing your application.
 
+<div className="tips-box information-box">
+  <h4 className="card-headear-wrapper">
+    Mental Model
+  </h4>
+  <p>
+    VM deployment is the most explicit hosting model in this section. You manage the machine, the processes, the reverse proxy, and the operating-system-level concerns yourself.
+  </p>
+  <ul>
+    <li>Choose this path when you want maximum control over the host.</li>
+    <li>Expect to manage process lifecycle, networking, SSL, logs, and patching.</li>
+    <li>This is often the easiest model to reason about if your team is comfortable with Linux operations.</li>
+  </ul>
+  <p>
+    So the intuition is: <strong>a VM gives you the most control, but also the most operational responsibility</strong>.
+  </p>
+</div>
+
 <InfoBox>
   Before you begin, ensure you have completed the [Prerequisites](/docs/developer-docs/prerequisites) and have a running VM with root access.
 </InfoBox>

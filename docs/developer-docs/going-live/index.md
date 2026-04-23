@@ -12,6 +12,23 @@ import { FaDocker } from "react-icons/fa";
 
 This section provides guidance on how to deploy your SolidX applications to production. We cover a range of deployment strategies to suit your needs, from traditional virtual machines to modern container-based workflows.
 
+<div className="tips-box information-box">
+  <h4 className="card-headear-wrapper">
+    Mental Model
+  </h4>
+  <p>
+    Going live with SolidX is really about taking a working full-stack project and making it <strong>repeatable, secure, and operable in a real environment</strong>.
+  </p>
+  <ul>
+    <li>You are deploying both the backend and frontend parts of the application.</li>
+    <li>You are also carrying across environment configuration, database access, and operational concerns such as process management or container orchestration.</li>
+    <li>The right deployment strategy depends more on your hosting model and team workflow than on SolidX itself.</li>
+  </ul>
+  <p>
+    So the intuition is: these guides are not about one “correct” deployment path, but about choosing the production shape that best fits your infrastructure.
+  </p>
+</div>
+
 <div className="row">
   <div className="col col--4">
     <div className="card">

@@ -13,6 +13,23 @@ import { InfoBox } from '@site/src/common/InfoBox';
 
 This guide provides a comprehensive walkthrough for deploying your SolidX application using Docker. Containerizing your application is a best practice for creating a consistent and reproducible production environment.
 
+<div className="tips-box information-box">
+  <h4 className="card-headear-wrapper">
+    Mental Model
+  </h4>
+  <p>
+    Docker is the packaging boundary for a SolidX application. Instead of relying on a manually prepared host, you define the runtime once and move that same containerized setup across environments.
+  </p>
+  <ul>
+    <li>Choose Docker when reproducibility matters across local, staging, and production.</li>
+    <li>Think of images as portable runtime snapshots.</li>
+    <li>Use Compose when you want to run the app stack as coordinated services.</li>
+  </ul>
+  <p>
+    So the intuition is: <strong>Docker reduces environment drift by making the application runtime explicit and portable</strong>.
+  </p>
+</div>
+
 <InfoBox>
   Before you begin, ensure you have Docker and Docker Compose installed on your system. You can find installation instructions on the official Docker website.
 </InfoBox>

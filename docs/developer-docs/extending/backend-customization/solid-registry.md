@@ -37,7 +37,7 @@ The following components are tracked by the Solid Registry:
 
 **Purpose:** Populate your database with initial or default data (e.g., system roles, default fee types).  
 **How it works:** The registry maintains a catalog of all available seeders. Developers can easily list, execute, or selectively run seeders.  
-**See also:** [Seeders Guide](../../database-seeding)
+**See also:** [Metadata Schema Overview](../../metadata_schema)
 
 
 
@@ -151,5 +151,4 @@ All components are registered **at application startup**.
 :::note
 If you are running the application in a dev mode i.e using `npm run solidx:dev`, the application will automatically restart when it detects file changes, so you don't need to manually restart it for registry changes to take effect.
 :::
-
 

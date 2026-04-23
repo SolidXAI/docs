@@ -28,6 +28,23 @@ Permissions in SOLID are automatically discovered based on controller actions an
 
 By Default `Admin` role is created with all permissions.
 
+<div className="tips-box information-box">
+  <h4 className="card-headear-wrapper">
+    Mental Model
+  </h4>
+  <p>
+    Roles and permissions in SolidX work as a two-layer access model. Permissions represent the fine-grained actions the platform knows about, while roles are the business-facing bundles you assign to users.
+  </p>
+  <ul>
+    <li>Think of permissions as capabilities discovered from the backend.</li>
+    <li>Think of roles as the practical packaging of those capabilities for real users.</li>
+    <li>Use roles to express job function, not just technical access flags.</li>
+  </ul>
+  <p>
+    So the intuition is: <strong>permissions describe what the system can do, and roles describe who should be allowed to do it</strong>.
+  </p>
+</div>
+
 
 
 ### Example: Fee Portal Module Roles & Permissions Metadata
@@ -87,5 +104,4 @@ An array of permission strings associated with the role. Each permission corresp
 <InfoBox>
 Permissions are automatically discovered based on controller methods in the codebase. So for e.g., if you have a controller for managing institutes with methods like create, the permission `InstituteController.create` will be automatically created.
 </InfoBox>
-
 

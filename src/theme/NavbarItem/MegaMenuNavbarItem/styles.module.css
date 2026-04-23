@@ -1,0 +1,215 @@
+.megaMenuItem {
+  position: relative;
+  padding-bottom: 1rem;
+  margin-bottom: -1rem;
+}
+
+.megaMenuItemOpen::after,
+.megaMenuItem:hover::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 100%;
+  height: 1rem;
+}
+
+.megaMenuTrigger {
+  align-items: center;
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  display: inline-flex;
+  gap: 0.45rem;
+}
+
+.megaMenuCaret {
+  color: var(--solid-text-tertiary);
+  font-size: 0.78rem;
+  transform: translateY(-1px);
+}
+
+.megaMenuPanel {
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--solid-bg-card) 94%, white 6%) 0%,
+    var(--solid-bg-card) 100%
+  );
+  border: 1px solid var(--solid-border-subtle);
+  border-radius: 18px;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.28);
+  display: grid;
+  gap: 1.25rem;
+  grid-template-columns: minmax(210px, 240px) minmax(460px, 1fr);
+  left: 0;
+  min-width: min(860px, calc(100vw - 3rem));
+  opacity: 0;
+  padding: 1.1rem;
+  pointer-events: none;
+  position: absolute;
+  top: calc(100% + 0.2rem);
+  transform: translateY(8px);
+  transition:
+    opacity 0.18s ease,
+    transform 0.18s ease;
+  visibility: hidden;
+  z-index: 50;
+}
+
+.megaMenuPanelOpen {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+  visibility: visible;
+}
+
+.megaMenuIntro {
+  background:
+    radial-gradient(circle at top right, rgba(124, 58, 237, 0.14), transparent 55%),
+    linear-gradient(180deg, rgba(124, 58, 237, 0.08), rgba(124, 58, 237, 0.03));
+  border: 1px solid var(--solid-border-light);
+  border-radius: 14px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 0.85rem;
+  min-height: 100%;
+  padding: 1rem;
+}
+
+.megaMenuEyebrow {
+  color: var(--solid-link);
+  font-size: 0.72rem;
+  font-weight: var(--solid-font-semibold);
+  letter-spacing: 0.08em;
+  margin-bottom: 0.45rem;
+  text-transform: uppercase;
+}
+
+.megaMenuTitle {
+  color: var(--solid-text-primary);
+  font-size: 1.25rem;
+  font-weight: var(--solid-font-semibold);
+  line-height: 1.2;
+}
+
+.megaMenuDescription {
+  color: var(--solid-text-secondary);
+  font-size: 0.9rem;
+  line-height: 1.6;
+  margin: 0.15rem 0 0;
+}
+
+.megaMenuCta,
+.megaMenuMobileCta {
+  align-self: flex-start;
+  background: rgba(124, 58, 237, 0.12);
+  border: 1px solid rgba(124, 58, 237, 0.22);
+  border-radius: 999px;
+  color: var(--solid-text-primary);
+  display: inline-flex;
+  font-size: 0.84rem;
+  font-weight: var(--solid-font-medium);
+  margin-top: auto;
+  padding: 0.5rem 0.8rem;
+  text-decoration: none;
+}
+
+.megaMenuCta:hover,
+.megaMenuMobileCta:hover {
+  background: rgba(124, 58, 237, 0.2);
+  color: var(--solid-text-primary);
+  text-decoration: none;
+}
+
+.megaMenuSections {
+  display: grid;
+  gap: 0.75rem 1rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.megaMenuSection {
+  min-width: 0;
+}
+
+.megaMenuSectionTitle,
+.megaMenuMobileSectionTitle {
+  color: var(--solid-text-primary);
+  font-size: 0.78rem;
+  font-weight: var(--solid-font-semibold);
+  letter-spacing: 0.06em;
+  margin-bottom: 0.6rem;
+  text-transform: uppercase;
+}
+
+.megaMenuList {
+  display: grid;
+  gap: 0.35rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.megaMenuLink {
+  border: 1px solid transparent;
+  border-radius: 12px;
+  color: inherit;
+  display: block;
+  padding: 0.7rem 0.75rem;
+  text-decoration: none;
+  transition:
+    background-color 0.15s ease,
+    border-color 0.15s ease,
+    transform 0.15s ease;
+}
+
+.megaMenuLink:hover {
+  background: var(--solid-navbar-hover-bg);
+  border-color: var(--solid-border-light);
+  text-decoration: none;
+  transform: translateY(-1px);
+}
+
+.megaMenuLinkLabel {
+  color: var(--solid-text-primary);
+  display: block;
+  font-size: 0.92rem;
+  font-weight: var(--solid-font-medium);
+  line-height: 1.35;
+}
+
+.megaMenuLinkDescription {
+  color: var(--solid-text-secondary);
+  display: block;
+  font-size: 0.8rem;
+  line-height: 1.45;
+  margin-top: 0.18rem;
+}
+
+.megaMenuMobileTrigger {
+  width: 100%;
+}
+
+.megaMenuMobilePanel {
+  border-left: 1px solid var(--solid-border-light);
+  margin: 0.35rem 0 0.4rem 0.85rem;
+  padding: 0.4rem 0 0.2rem 0.95rem;
+}
+
+.megaMenuMobileDescription {
+  color: var(--solid-text-secondary);
+  font-size: 0.84rem;
+  line-height: 1.55;
+  margin: 0 0 0.75rem;
+}
+
+.megaMenuMobileSection {
+  margin-top: 0.95rem;
+}
+
+@media (max-width: 1200px) {
+  .megaMenuPanel {
+    grid-template-columns: minmax(190px, 220px) minmax(400px, 1fr);
+    min-width: min(760px, calc(100vw - 2rem));
+  }
+}

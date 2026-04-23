@@ -9,6 +9,24 @@ sidebar_position: 3
 
 Use this section as the source of truth for where each customization type belongs and how it should be wired in the UI module system.
 
+<div className="tips-box information-box">
+  <h4 className="card-headear-wrapper">
+    Mental Model
+  </h4>
+  <p>
+    The SolidX frontend is designed so that custom UI code stays close to the module that owns the business feature.
+    Instead of scattering custom screens, reducers, and extension widgets across the app, the convention keeps each feature grouped together.
+  </p>
+  <ul>
+    <li>Use metadata-driven extensions when you are augmenting generated admin screens.</li>
+    <li>Use bespoke UI when you need full route-level control.</li>
+    <li>Keep ownership module-local so discovery, registration, and maintenance stay predictable.</li>
+  </ul>
+  <p>
+    So the intuition is: <strong>the UI stays flexible because SolidX combines generated structure with module-owned custom code</strong>.
+  </p>
+</div>
+
 ## UI Module Convention
 
 In the current SolidX frontend model, custom frontend code should be organized inside module folders under `solid-ui/src/<module-name>/`.

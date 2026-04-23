@@ -8,6 +8,25 @@ description: Reference for the SolidX CLI (`solidctl`) used to scaffold, build, 
 
 The `solidctl` CLI is the main command-line entry point for working with SolidX projects.
 
+<div className="tips-box information-box">
+  <h4 className="card-headear-wrapper">
+    Mental Model
+  </h4>
+  <p>
+    Think of <code>solidctl</code> as the <strong>operational control surface</strong> for a SolidX project.
+  </p>
+  <ul>
+    <li><strong>Bootstrap commands</strong> create and build the project.</li>
+    <li><strong>Platform commands</strong> seed metadata and inspect project state.</li>
+    <li><strong>Development commands</strong> regenerate code and update package versions.</li>
+    <li><strong>Testing commands</strong> prepare isolated test environments and run scenarios.</li>
+    <li><strong>Agent commands</strong> run the SolidX AI agent.</li>
+  </ul>
+  <p>
+    So the intuition is: <strong><code>solidctl</code> is not just a scaffolding command</strong>. It is the main CLI you use across the entire lifecycle of a SolidX app, from project creation to testing and maintenance.
+  </p>
+</div>
+
 Run it from your project root:
 
 ```bash
@@ -40,6 +59,16 @@ This page intentionally documents the most commonly used commands and skips a fe
 | [`test`](#test) | Seed test data or run metadata-driven testing scenarios. |
 | [`generate`](#generate) | Generate backend code boilerplate from metadata. |
 | [`agent`](#agent) | Start the SolidX AI agent server or run a single task. |
+
+## Command Families
+
+It can help to group the commands mentally before reading the detailed reference:
+
+- **Bootstrap:** `create-app`, `build`
+- **Platform lifecycle:** `seed`, `info`
+- **Development workflow:** `generate`, `upgrade`
+- **Testing workflow:** `test`
+- **AI workflow:** `agent`
 
 ## Typical Workflow
 

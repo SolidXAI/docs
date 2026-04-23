@@ -23,12 +23,12 @@ function HomepageHeader() {
             to="/docs/developer-docs/prerequisites">
             Get Started →
           </Link>
-          <Link
+          {/* <Link
             className="button button--secondary button--lg"
             to="/docs/admin-docs/"
             >
             Admin Guide
-          </Link>
+          </Link> */}
         </div>
       </div>
     </header>

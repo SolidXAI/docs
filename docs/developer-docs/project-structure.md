@@ -13,6 +13,23 @@ import { FaFolder,FaBoxOpen,FaPuzzlePiece,FaLightbulb } from "react-icons/fa";
 
 This project is organized into a backend API (`solid-api`) and a frontend UI (`solid-ui`) along with supporting scripts and configurations.
 
+<div className="tips-box information-box">
+  <h4 className="card-headear-wrapper">
+    Mental Model
+  </h4>
+  <p>
+    SolidX is designed to help you build <strong>full-stack applications</strong>, not just isolated backend services or isolated frontend sites.
+  </p>
+  <ul>
+    <li><strong><code>solid-api</code>:</strong> owns metadata, persistence, APIs, business logic, and backend execution.</li>
+    <li><strong><code>solid-ui</code>:</strong> owns the browser application, project-specific UI modules, routes, and user-facing workflows.</li>
+    <li><strong>Shared SolidX packages:</strong> connect those two layers through metadata, generated structure, shared UI building blocks, and common conventions.</li>
+  </ul>
+  <p>
+    So the intuition is: a SolidX project is a <strong>coordinated full-stack workspace</strong> where backend and frontend evolve together, rather than two unrelated folders living side by side.
+  </p>
+</div>
+
 ```bash
 .
 ├── .vscode/                  # VS Code settings
@@ -24,6 +41,23 @@ This project is organized into a backend API (`solid-api`) and a frontend UI (`s
 ##  solid-api/ - Backend (NestJS & TypeORM)
 
 This folder contains all backend services, business logic, and configurations.
+
+<div className="tips-box information-box">
+  <h4 className="card-headear-wrapper">
+    API Mental Model
+  </h4>
+  <p>
+    Think of <code>solid-api</code> as the <strong>system-of-record</strong> side of a SolidX application.
+  </p>
+  <ul>
+    <li>It owns your domain models and metadata.</li>
+    <li>It exposes the generated and custom API surface.</li>
+    <li>It contains the backend extension points for business logic, security, workflows, and integrations.</li>
+  </ul>
+  <p>
+    So when you look at the backend folder structure, you should read it as: <strong>metadata + generated structure + custom backend logic</strong>.
+  </p>
+</div>
 
 ```bash
 solid-api/
@@ -77,6 +111,23 @@ solid-api/
 ##  solid-ui/ - Frontend (Vite & React)
 
 The frontend is built as a Vite + React application. The generated app is intentionally thin: it bootstraps routing, theming, and Redux wiring, then layers project-specific UI modules on top of the shared `@solidxai/core-ui` package.
+
+<div className="tips-box information-box">
+  <h4 className="card-headear-wrapper">
+    UI Mental Model
+  </h4>
+  <p>
+    Think of <code>solid-ui</code> as the <strong>application shell and user-experience layer</strong> of your SolidX project.
+  </p>
+  <ul>
+    <li>The shared SolidX UI package provides the common runtime, layouts, and extension points.</li>
+    <li>Your project adds module-specific routes, dashboards, widgets, Redux integrations, and custom pages on top of that shell.</li>
+    <li>The frontend is convention-driven: it is intentionally lightweight at the root, and most project-specific behaviour is added through module folders and <code>*.ui-module.ts</code> registration.</li>
+  </ul>
+  <p>
+    So when you read the frontend structure, the key idea is: <strong>small app shell, project-specific modules layered on top</strong>.
+  </p>
+</div>
 
 ```bash
 solid-ui/

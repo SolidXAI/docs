@@ -1,23 +1,41 @@
 ---
 title: Installation
 description: Overview of how to initialize a SolidX project with links to the full step-by-step tutorial.
-summary: This document provides a quick overview of installing SolidX using the create-solid-app starter template. Users can initialize a project by running a single npx command, answering configuration prompts, and the system creates the complete project structure with both solid-api (backend) and solid-ui (frontend) folders. The page includes a link to a comprehensive step-by-step tutorial for detailed installation guidance including environment setup and configuration.
+summary: This document provides a quick overview of installing SolidX using `solidctl create-app`. It explains the installation flow at a high level, then shows the command used to scaffold a new project containing both `solid-api` and `solid-ui`, along with a link to a full guided tutorial.
 sidebar_position: 2
 ---
 
 #  Installing SolidX
 
-Installing `SolidX` is a breeze with our [create-solid-app](https://www.npmjs.com/package/@solidxai/solidctl create-app) starter template.  
+Installing `SolidX` is a breeze with our [`solidctl create-app`](https://www.npmjs.com/package/@solidxai/solidctl) workflow.  
+
+<div className="tips-box information-box">
+  <h4 className="card-headear-wrapper">
+    Mental Model
+  </h4>
+  <p>
+    Installing SolidX is really a <strong>project bootstrap</strong> step, not just a package installation step.
+  </p>
+  <ul>
+    <li><strong><code>create-app</code></strong> scaffolds a new SolidX application workspace.</li>
+    <li>That workspace includes both <code>solid-api</code> and <code>solid-ui</code>.</li>
+    <li>You then build the project, seed metadata, and start development from there.</li>
+  </ul>
+  <p>
+    So the intuition is: <strong>you are creating a working SolidX project skeleton</strong>, not merely adding a dependency to an existing folder.
+  </p>
+</div>
 
 ##  Quick Overview
 - Run the command below to initialize your SolidX project:  
 
-  ```tsx
-  npx @solidxai/solidctl create-app
+  ```bash
+  npx @solidxai/solidctl@latest create-app
   ```
 
 - Answer a few simple prompts to configure your project.
-- Voila! Your SolidX project should be up and running.
+- This scaffolds a new project with both backend and frontend applications.
+- After scaffolding, the usual next steps are to build the project and seed metadata.
 - Customize SolidX to fit your needs!
 
 ##  Step-by-Step Tutorial
