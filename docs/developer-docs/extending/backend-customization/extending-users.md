@@ -2,7 +2,7 @@
 sidebar_position: 9
 title: Custom Users
 description: Learn how to extend user functionality in SolidX.
-summary: Guide to extending the default User model in SolidX by creating custom user models as children. Covers metadata configuration with isChild true and parentModelUserKey, adding custom fields and relationships (for example InstituteUser with userType and institute relation), overriding user creation logic for password encryption, validation, and persistence, and registering custom services in NestJS modules for handling extended user functionality.
+summary: Guide to extending the default User model in SolidX by creating custom user models as children. Covers metadata configuration with isChild true and parentModelUserKey, adding custom fields and relationships, and registering an ExtensionUserCreationProvider to handle password hashing, role assignment, and any project-specific creation logic automatically.
 keywords: [backend, users, customization]
 solidx_concerns: [extending_user]
 ---
@@ -14,10 +14,10 @@ import { NoteBoxs } from '@site/src/common/NoteBoxs';
 
 In some cases, you may need to extend the default **User** model in SolidX to accommodate additional attributes or relationships specific to your application. This is achieved by creating a **custom user model** as a child of the base `User` model provided by SolidX.
 
-This guide covers how to:  
-- Create a custom user model  
-- Add custom fields and relationships  
-- Override user creation logic to handle password encryption, validation, and persistence  
+This guide covers how to:
+- Create a custom user model
+- Add custom fields and relationships
+- Register an `ExtensionUserCreationProvider` to handle user creation automatically
 
 ---
 
@@ -26,13 +26,12 @@ This guide covers how to:
 As an example, consider extending the `User` model into an `InstituteUser` model. The `InstituteUser` includes fields such as `userType` and a relation to an `Institute`.
 
 ### Steps to Create a Custom User Model
-1. Set `isChild: true` in your model metadata.  
-2. Specify `User` as the `parentModelUserKey`.  
-3. Add your custom fields and relationships.  
+1. Set `isChild: true` in your model metadata.
+2. Specify `User` as the `parentModelUserKey`.
+3. Add your custom fields and relationships.
 
 <details open>
   <summary className="card-title ">
-    <!-- <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" /> -->
     Sample Field Metadata for <code>instituteUser</code>
   </summary>
 
@@ -78,114 +77,17 @@ This configuration generates list and form views in SolidX to manage your custom
 
 ---
 
-## Overriding User Creation Logic
-
-User creation involves more than a simple insert (password encryption, password history, email notifications). Therefore, you must override the generated `create` method in your custom user controller.
-
-### Default Generated Code
-
-<details open>
-  <summary className="card-title ">
-    <!-- <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" /> -->
-    Default Implementation
-  </summary>
-
-```ts
-@ApiBearerAuth("jwt")
-@Post()
-@UseInterceptors(AnyFilesInterceptor())
-async create(@Body() createDto: CreateInstituteUserDto, @UploadedFiles() files: Array<Express.Multer.File>) {
-  return this.service.create(createDto, files);
-}
-```
-</details>
-
-### Revised Implementation
-
-Replace the default with logic that validates input, converts DTOs, and calls `signupForExtensionUser`:
-
-<details open>
-  <summary className="card-title ">
-    <!-- <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" /> -->
-    Revised Implementation (InstituteController)
-  </summary>
-
-```ts
-@ApiBearerAuth("jwt")
-@Post()
-@UseInterceptors(AnyFilesInterceptor())
-async create(@Body() createDto: CreateInstituteUserDto, @UploadedFiles() files: Array<Express.Multer.File>) {
-  // Custom validation
-  const result = await this.service.validateEmailDomain(createDto.instituteId, createDto.email);
-  if (result === false) {
-    throw new BadRequestException('Email Domain is not Valid');
-  }
-
-  // Convert DTOs
-  const signupDto = this.service.toSignUpDto(createDto);
-  const extensionUserDto = await this.service.toExtensionUserDto(createDto);
-
-  // Persist user
-  return this.authenticationService.signupForExtensionUser(signupDto, extensionUserDto, this.repo);
-}
-```
-</details>
-
-### Supporting Methods in Service
-
-<details open>
-  <summary className="card-title ">
-    <!-- <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" /> -->
-    Methods Implementation (InstituteService)
-  </summary>
-
-```ts
-async toExtensionUserDto(createDto: CreateInstituteUserDto): Promise<any> {
-  let institute = null;
-  if (createDto.instituteId) {
-    institute = await this.InstituteRepo.findOne({ where: { id: createDto.instituteId } });
-  }
-  return { ...createDto, institute };
-}
-
-toSignUpDto(createDto: CreateInstituteUserDto): SignUpDto {
-  return {
-    fullName: createDto.fullName,
-    username: createDto.username,
-    email: createDto.email,
-    password: createDto.password,
-    mobile: createDto.mobile,
-    roles: [createDto.userType], // role name = userType
-  };
-}
-
-async validateEmailDomain(instituteId: number, email: string) {
-  const institute = await this.InstituteRepo.findOne({ where: { id: instituteId } });
-  if (!institute) return false;
-  if (!institute.emailDomain) return true;
-
-  const emailDomain = email.split('@')[1]?.toLowerCase();
-  return emailDomain === institute.emailDomain.toLowerCase();
-}
-```
-</details>
-
-> ⚠️ Use the generated code for other CRUD operations as-is. Only `create()` requires overriding.
-
----
-
 ## Generated Code for Custom User Models
 
-When `isChild: true` and `User` is the parent model, SolidX generates DTOs and Entities extending the base User model:
+When `isChild: true` and `User` is the parent model, SolidX generates DTOs and an entity extending the base User model:
 
 <details open>
   <summary className="card-title ">
-    <!-- <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" /> -->
     DTOs & Entity
   </summary>
 
 ```ts
-// Create DTO
+// Create DTO — extends CreateUserDto so all base user fields are available
 export class CreateInstituteUserDto extends CreateUserDto { ... }
 
 // Update DTO
@@ -199,16 +101,154 @@ export class InstituteUser extends User { ... }
 
 ---
 
+## Registering an Extension User Creation Provider
+
+User creation involves more than a simple insert — password hashing, role assignment, and email notifications all need to run correctly. 
+
+To handle this for your custom user, you need to register an **`ExtensionUserCreationProvider`**. This provider allows you to inject custom logic while creating a custom user
+
+You will need to provide the custom logic to handle the additional fields and relationships of your custom user, while SolidX takes care of the standard user creation flow.
+
+SolidX discovers this provider at startup and uses it automatically for every creation path: the API endpoint, the test data seeder, and any direct repository save. You never need to wire it up manually.
+
+### 1. Create the provider
+
+Implement `IExtensionUserCreationProvider<TEntity, TDto>` and decorate it with `@ExtensionUserCreationProvider()`:
+
+| Type parameter | Constraint | Purpose |
+|---|---|---|
+| `TEntity` | `extends User` | Your custom user entity (e.g. `InstituteUser`) |
+| `TDto` | `extends CreateUserDto` | Your generated create DTO (e.g. `CreateInstituteUserDto`) |
+
+The interface requires three members:
+
+| Member | Purpose |
+|---|---|
+| `readonly repo` | The repository SolidX uses to save the entity |
+| `buildExtensionEntity(dto)` | Builds and returns the extension entity with its custom fields populated. Base user fields (password, roles, etc.) are handled by SolidX — only set extension-specific columns here. |
+| `roles(dto)` | Returns the roles to assign to the user, derived from the incoming DTO |
+
+<details open>
+  <summary className="card-title ">
+    <code>InstituteUserCreationProvider</code>
+  </summary>
+
+```ts
+import { Injectable, BadRequestException } from '@nestjs/common';
+import {
+  ExtensionUserCreationProvider,
+  IExtensionUserCreationProvider,
+} from '@solidxai/core';
+import { CreateInstituteUserDto } from '../dtos/create-institute-user.dto';
+import { InstituteUser } from '../entities/institute-user.entity';
+import { InstituteUserRepository } from '../repositories/institute-user.repository';
+import { InstituteRepository } from '../repositories/institute.repository';
+
+@ExtensionUserCreationProvider()
+@Injectable()
+export class InstituteUserCreationProvider
+  implements IExtensionUserCreationProvider<InstituteUser, CreateInstituteUserDto> {
+
+  constructor(
+    readonly repo: InstituteUserRepository,
+    private readonly instituteRepository: InstituteRepository,
+  ) {}
+
+  async buildExtensionEntity(dto: CreateInstituteUserDto): Promise<InstituteUser> {
+    if (dto.instituteId) {
+      const valid = await this.validateEmailDomain(dto.instituteId, dto.email);
+      if (!valid) {
+        throw new BadRequestException('Email domain is not valid for this institute');
+      }
+    }
+
+    const institute = dto.instituteId
+      ? await this.instituteRepository.findOne({ where: { id: dto.instituteId } })
+      : null;
+
+    return this.repo.merge(this.repo.create(), {
+      userType: dto.userType,
+      institute,
+    });
+  }
+
+  roles(dto: CreateInstituteUserDto): string[] {
+    if (!dto.userType) {
+      throw new BadRequestException('userType is required to determine roles');
+    }
+    return [dto.userType];
+  }
+
+  private async validateEmailDomain(instituteId: number, email: string): Promise<boolean> {
+    const institute = await this.instituteRepository.findOne({ where: { id: instituteId } });
+    if (!institute) return false;
+    if (!institute.emailDomain) return true;
+    const emailDomain = email.split('@')[1]?.toLowerCase();
+    return emailDomain === institute.emailDomain.toLowerCase();
+  }
+}
+```
+</details>
+
+`buildExtensionEntity` is responsible only for the extension-specific columns — do not set `username`, `email`, `password`, or other base user fields here. SolidX merges those in during its standard signup flow (password hashing, `activateUserOnRegistration` setting, role initialisation, and notifications).
+
+### 2. Register the provider in your module
+
+Add `InstituteUserCreationProvider` to your module's `providers` array:
+
+```ts
+@Module({
+  providers: [
+    InstituteUserService,
+    InstituteUserRepository,
+    InstituteUserCreationProvider, // <-- add this
+    InstituteRepository,
+    ...
+  ],
+})
+export class FeesPortalModule {}
+```
+
+That is all that is required. The generated `InstituteUserService` needs no `create()` override.
+
+---
+
+## Test Data Seeding
+
+Add `userType` (and any other extension fields) to your test user specs in `<module>-metadata.json`. SolidX passes the full spec to `buildExtensionEntity` and `roles`, so any fields present in the JSON are available:
+
+```json
+{
+  "testing": {
+    "users": [
+      {
+        "username": "testInstAdmin",
+        "email": "testInstAdmin@test.local",
+        "password": "Test@1234",
+        "fullName": "Test Institute Admin",
+        "userType": "Institute Admin",
+        "instituteUserKey": "Test Institute" 
+      }
+    ]
+  }
+}
+```
+
+No extra seeding code is needed — SolidX detects the extension fields and routes through the registered provider automatically.
+
+---
+
 ## How It Works
 
-1. The generated custom model extends `User`, inheriting all base fields and methods.  
-2. `AuthenticationService.signupForExtensionUser()` handles:  
-   - Persistence of user fields  
-   - Password encryption & history  
-   - Email notifications  
-3. SolidX generates both UI and API endpoints for managing custom users.
+1. At startup, SolidX discovers any class decorated with `@ExtensionUserCreationProvider()` and registers it in the `SolidRegistry`.
+2. When `AuthenticationService.signUp()` is called (from the API endpoint, the seeder, or anywhere else), it inspects the incoming spec for fields beyond the base `SignUpDto` properties.
+3. If extension fields are present, SolidX looks up the registered provider. If no provider is found, an `InternalServerErrorException` is thrown immediately.
+4. `buildExtensionEntity(dto)` is called to obtain the correctly-typed extension entity with its custom columns populated.
+5. `roles(dto)` is called to determine the roles to assign.
+6. SolidX then runs the standard signup flow — password hashing, `activateUserOnRegistration` setting, role initialisation, and notifications — against the prepared entity using the provider's `repo`.
+7. If no extension fields are present, `signUp` creates a plain `User` as before, and the provider is never consulted.
 
 <NoteBoxs>
-All user records, including custom ones, are stored in the same `ss_user` table.  
+All user records, including custom ones, are stored in the same `ss_user` table.
 SolidX uses a discriminator column (`type`) to differentiate between custom user types.
 </NoteBoxs>
