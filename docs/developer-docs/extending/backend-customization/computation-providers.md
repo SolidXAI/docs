@@ -8,31 +8,65 @@ solidx_concerns: [backend.custom_computed_fields, add_computed_field_provider, c
 ---
 
 import { NoteBoxs } from '@site/src/common/NoteBoxs';
+import { TipBox } from '@site/src/common/TipBox';
 import { IoIosArrowForward } from "react-icons/io";
-import { MdSettings, MdBuildCircle } from "react-icons/md";
 
 # Computation Providers
 
-In **SolidX**, computed fields are fields whose values are automatically derived from other data — for example, `totalPrice`, `fullName`, or `age`. They eliminate the need to store redundant values and ensure consistency across your models.
+## Overview
 
-Computed fields are powered by **computation providers**, which encapsulate the business logic required to calculate and assign values to these fields.
+In SolidX, a **computed field** is a field whose value is always derived from other data — never set manually. Common examples include `totalPrice` (summed from line items), `fullName` (concatenated from first and last name), or `amountPaid` (aggregated from child payment records).
 
-Providers are triggered automatically when relevant data changes, ensuring that the computed field always reflects the correct value without manual intervention.
+A **computation provider** is the TypeScript class that implements the derivation logic. You register it once, and SolidX calls it automatically whenever the relevant data changes — ensuring computed values stay consistent without any manual intervention.
 
-## How to Configure a Computed Field
+## Mental Model
 
-<h3 className="card-headear-wrapper">
-  <MdSettings size={24} />
-  
-### Sample Metadata Configuration
-</h3>
+<div className="tips-box information-box">
+  <h4 className="card-headear-wrapper">
+    Mental Model
+  </h4>
+  <p>
+    Think of a computed field as a spreadsheet formula applied to a database record. You define the formula once (in the provider), declare which events should re-evaluate it (in the trigger config), and the platform handles execution automatically.
+  </p>
+  <ul>
+    <li>The <strong>computed field</strong> in metadata is the contract — it declares <em>what</em> to compute and <em>when</em>.</li>
+    <li>The <strong>computation provider</strong> is the class that contains the logic — it receives the triggering entity and computes the new value.</li>
+    <li><strong>Before operations</strong> run synchronously in the same transaction and are ideal when the value depends only on the entity itself.</li>
+    <li><strong>After operations</strong> run asynchronously after the save and are ideal when the value depends on related records or requires cross-entity writes.</li>
+  </ul>
+  <p>
+    So the intuition is: <strong>declare what triggers recomputation and write the logic once — SolidX handles when and how it runs.</strong>
+  </p>
+</div>
 
-Below is an example configuration for a computed field named `amountPaid` in the `paymentCollectionItemDetail` model. The field computes the total amount paid based on related payment records.
+### Before vs. After
+
+The trigger timing determines which interface your provider implements and how the value gets saved:
+
+| Timing | Operations | Method called | How it runs | When to use |
+|---|---|---|---|---|
+| **Before** | `before-insert`, `before-update`, `before-delete` | `preComputeValue()` | Synchronously, in the same transaction | Value depends only on the triggering entity |
+| **After** | `after-insert`, `after-update`, `after-delete` | `postComputeAndSaveValue()` | Asynchronously, via a [background job](./background-jobs) | Value depends on related records or requires additional writes |
+
+> For `before-*` triggers, `modelName` in the trigger config must match the model that owns the computed field.  
+> For `after-*` triggers, `modelName` can be any model — related or otherwise.
+
+---
+
+## Configuration
+
+### Step 1 — Define the field in metadata
+
+Add the field to your model's metadata with `"type": "computed"` and specify:
+- `computedFieldValueProvider` — the name of the provider class to invoke
+- `computedFieldTriggerConfig` — which entity events trigger the computation
+- `computedFieldValueProviderCtxt` — a JSON string passed as context to the provider
+
+**Example scenario:** `paymentCollectionItemDetail` records represent individual payment transactions. When a detail is inserted or updated (i.e., a payment comes in), the parent `paymentCollectionItem` needs its aggregate totals recalculated — `amountPaid`, `amountPending`, `totalAmountToBePaid`, and `status`. Since this involves writing to a related parent entity, `after-*` operations are the right choice here.
 
 <details open>
   <summary className="card-title">
-    <!-- <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" /> -->
-    Example: Configuration for <code>amountPaid</code> computed field
+    Example: <code>amountPaid</code> computed field on <code>paymentCollectionItemDetail</code>
   </summary>
 
 ```json
@@ -49,10 +83,7 @@ Below is an example configuration for a computed field named `amountPaid` in the
         {
           "modelName": "paymentCollectionItemDetail",
           "moduleName": "fees-portal",
-          "operations": [
-            "after-update",
-            "after-insert"
-          ]
+          "operations": ["after-update", "after-insert"]
         }
       ],
       "computedFieldValueProvider": "PaymentCollectionItemAmountProvider",
@@ -64,35 +95,21 @@ Below is an example configuration for a computed field named `amountPaid` in the
 
 </details>
 
-- `computedFieldValueProvider` specifies the **provider class** responsible for the computation logic.  
-- `computedFieldTriggerConfig` defines the **entities and operations** that trigger the computation.
+<NoteBoxs>
+Computed field configurations are loaded from the database and cached in the Solid Registry at startup. Any changes require a server restart to take effect.
+</NoteBoxs>
 
-Supported operations include:
-- `before-update`
-- `before-insert`
-- `before-delete`
-- `after-update`
-- `after-insert`
-- `after-delete`
+---
 
-🔸 **Before operations** trigger `preComputeValue()` of `IEntityPreComputeFieldProvider`.  
-🔸 **After operations** trigger `postComputeAndSaveValue()` of `IEntityPostComputeFieldProvider`.  
+### Step 2 — Implement the provider
 
-> **Note:** For before operations, `modelName` must be the same as the model with the computed field. For after operations, it can be any model, related or unrelated.
+Implement `IEntityPreComputeFieldProvider` for before operations, or `IEntityPostComputeFieldProvider` for after operations. Decorate the class with `@ComputedFieldProvider()`.
 
-You can:
-- Access the triggering entity and metadata
-- Set the computed value (auto-saved in `preComputeValue`)
-- Execute logic and persist data in `postComputeAndSaveValue`
-
-### Sample Provider Implementation
-
-Here is a sample implementation of the `PaymentCollectionItemAmountProvider`:
+**In this example**, `PaymentCollectionItemAmountProvider` implements `IEntityPostComputeFieldProvider` because it needs to query all related detail records and write aggregated totals back to the parent — work that can only happen after the triggering detail has been saved.
 
 <details open>
-  <summary className="card-title ">
-    <!-- <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" /> -->
-    Example: <code>PaymentCollectionItemAmountProvider</code> Implementation
+  <summary className="card-title">
+    Example: <code>PaymentCollectionItemAmountProvider</code>
   </summary>
 
 ```ts
@@ -109,7 +126,9 @@ import { PaymentCollectionItem } from '../entities/payment-collection-item.entit
 
 @ComputedFieldProvider()
 @Injectable()
-export class PaymentCollectionItemAmountProvider implements IEntityPostComputeFieldProvider<PaymentCollectionItemDetail, any> {
+export class PaymentCollectionItemAmountProvider
+  implements IEntityPostComputeFieldProvider<PaymentCollectionItemDetail, any> {
+
   constructor(
     @InjectEntityManager()
     private readonly entityManager: EntityManager,
@@ -143,7 +162,7 @@ export class PaymentCollectionItemAmountProvider implements IEntityPostComputeFi
   }
 
   help(): string {
-    return 'Provider used to compute payment collection item amounts based on related details.';
+    return 'Computes payment collection item amounts based on related details.';
   }
 
   private async getPaymentCollectionItemAmounts(itemId: number): Promise<{
@@ -175,152 +194,83 @@ export class PaymentCollectionItemAmountProvider implements IEntityPostComputeFi
   }
 }
 ```
+
 </details>
 
-## Computation Provider Interfaces
+---
 
-To implement a custom computation provider, you need to implement one or both of the following interfaces:
+### Step 3 — Register the provider
 
-<details open>
-  <summary className="card-title ">
-    <!-- <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" /> -->
-    Interfaces to Implement
-  </summary>
+Register the provider as a NestJS provider in the module it belongs to.
 
 ```ts
-export interface IEntityPreComputeFieldProvider<TTriggerEntity, TContext, TValue=void> extends IEntityComputedFieldProvider {
-  preComputeValue(triggerEntity: TTriggerEntity, computedFieldMetadata: ComputedFieldMetadata<TContext>): Promise<TValue>;
-}
+// fees-portal.module.ts
+@Module({
+  providers: [PaymentCollectionItemAmountProvider],
+})
+```
 
-export interface IEntityPostComputeFieldProvider<TTriggerEntity, TContext> extends IEntityComputedFieldProvider {
-  postComputeAndSaveValue(triggerEntity: TTriggerEntity, computedFieldMetadata: ComputedFieldMetadata<TContext>): Promise<void>;
-}
+---
 
-export interface IEntityComputedFieldProvider {
-  help(): string;
-  name(): string;
+## Provider Interfaces
+
+SolidX provides two interfaces for computation providers. The key difference is in **who performs the save** and **when the logic runs**.
+
+### `IEntityPreComputeFieldProvider` — before operations
+
+```ts
+export interface IEntityPreComputeFieldProvider<TTriggerEntity, TContext, TValue = void>
+  extends IEntityComputedFieldProvider {
+  preComputeValue(
+    triggerEntity: TTriggerEntity,
+    computedFieldMetadata: ComputedFieldMetadata<TContext>
+  ): Promise<TValue>;
 }
 ```
-</details>
+
+- Runs **synchronously** before the entity is saved, inside the same database transaction.
+- Your implementation sets the computed value **directly on `triggerEntity`** (e.g., `triggerEntity.fullName = ...`). Because the entity is saved immediately after, those mutations are persisted automatically — no `entityManager` call needed.
+- Use this when the computation depends only on the **triggering entity's own fields**.
+- The `modelName` in `computedFieldTriggerConfig` **must** be the same model that owns the computed field.
+
+### `IEntityPostComputeFieldProvider` — after operations
+
+```ts
+export interface IEntityPostComputeFieldProvider<TTriggerEntity, TContext>
+  extends IEntityComputedFieldProvider {
+  postComputeAndSaveValue(
+    triggerEntity: TTriggerEntity,
+    computedFieldMetadata: ComputedFieldMetadata<TContext>
+  ): Promise<void>;
+}
+```
+
+- Runs **asynchronously** after the entity is saved, via a [background job](./background-jobs).
+- Returns `void` — **you are responsible for all persistence**. The platform does not set or save any field value on your behalf.
+- Use this when the computation needs to **query related records**, or when the result must be **written to a different entity** (like rolling up child totals to a parent).
+- The `modelName` in `computedFieldTriggerConfig` can be **any model** — it does not need to be the model that owns the computed field.
+
+### Shared base interface
+
+Both interfaces extend `IEntityComputedFieldProvider`, which requires two methods:
+
+```ts
+export interface IEntityComputedFieldProvider {
+  name(): string;  // Must exactly match computedFieldValueProvider in the field metadata
+  help(): string;  // Human-readable description of the provider and expected context shape
+}
+```
+
+---
 
 ## How It Works
 
-<h3 className="card-headear-wrapper">
-  <MdBuildCircle size={20} />
-  
-### Core Mechanism
-</h3>
+1. `ComputedEntityFieldSubscriber` listens to `insert`, `update`, and `delete` events across all entities.
+2. On a **before** event — `preComputeValue()` runs synchronously. The returned value is set on the entity and persisted in the same transaction.
+3. On an **after** event — `postComputeAndSaveValue()` is queued as a [background job](./background-jobs) and runs asynchronously. The `ComputedFieldEvaluationSubscriber` handles persistence once the job completes.
 
-1. `ComputedEntityFieldSubscriber` listens to `insert`, `update`, and `delete` events across all entities.  
-2. For **before** operations:  
-   - `preComputeValue()` is called **synchronously**  
-   - Value is set directly on the entity and auto-saved  
-3. For **after** operations:  
-   - `postComputeAndSaveValue()` is called **asynchronously** via [Background Jobs](./background-jobs)  
-   - Final saving happens via `ComputedFieldEvaluationSubscriber`  
+---
 
-<NoteBoxs>
-Computed field configurations are loaded from the database and cached in the Solid Registry at application startup. Any changes require a server restart to take effect.
-</NoteBoxs>
+## Built-in Providers
 
-## In-Built Providers
-
-This section describes the **built-in computation providers** available
-in SolidX for common use cases. Each provider includes a short
-description and the corresponding **context interface** for
-configuration.
-
-### AlphaNumExternalIdComputationProvider
-
-Generates an **alphanumeric external ID** based on a configurable
-pattern.\
-Useful for creating unique, human-readable identifiers (like invoice
-numbers or record codes).
-
-<details open>
-  <summary className="card-title ">
-    <!-- <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" /> -->
-    View Context Interface
-  </summary>
-``` ts
-export interface AlphaNumExternalIdContext {
-  prefix?: string;                  // alias -> staticPrefix
-  length?: number; // i.e default=5 // generated code length
-  dynamicFieldPrefix?: string;      // field name on the entity
-}
-```
-</details>
-
-### ConcatEntityComputedFieldProvider
-
-Concatenates **multiple entity fields** into a single string.\
-Ideal for building display names, codes, or composite labels derived
-from existing fields.
-
-
-<details open>
-  <summary className="card-title ">
-    <!-- <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" /> -->
-    View Context Interface
-  </summary>
-``` ts
-export interface ConcatComputedFieldContext {
-  separator: string; // concatenated values separator
-  // The fields to concatenate
-  fields: string[]; // supports "city.name" for nested paths (1-level deep)
-  // Optional: if true, slugify each field value before concatenation
-  slugify?: boolean; 
-}
-```
-</details>
-
-### UuidExternalIdEntityComputedFieldProvider
-  <!-- async preComputeValue(
-    triggerEntity: CommonEntity,
-    computedFieldMetadata: ComputedFieldMetadata<any>
-  ): Promise<string> {
-    const { computedFieldValueProviderCtxt } = computedFieldMetadata;
-    const prefix = computedFieldValueProviderCtxt?.prefix ?? "";
-    const generated = `${prefix}-${uuidv4()}`;
-    return generated;
-  } -->
-
-Generates a **UUID-based external ID** with an optional prefix.\
-Useful for creating globally unique identifiers for records.
-Ideal for entities requiring unique references across distributed
-systems.
-
-<details open>
-  <summary className="card-title ">
-    <!-- <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" /> -->
-    View Context Interface
-  </summary>
-``` ts  
-  export interface UuidExternalIdContext {
-    prefix?: string; // alias -> staticPrefix
-  }
-``` 
-</details>
-
-
-### NoopsEntityComputedFieldProviderService
-
-A **no-operation (noop)** provider that does not modify entity fields.\
-It allows tagging fields as computed without performing redundant
-calculations.
-
-This is particularly useful when one provider performs the main
-computation, and other computed fields are only "placeholders".
-
-#### Example Use Case
-
--   Suppose you have multiple amount fields: `amount`, `taxes`, and
-    `totalAmount`.
--   You create a computed field `totalAmount` linked to a provider like
-    `CalculateTotalAmountProvider` that performs all computations.
--   The fields `amount` and `taxes` can still be tagged as computed but
-    linked to **NoopsEntityComputedFieldProviderService**, so they don't
-    re-compute independently.
-
-This ensures the logic resides only in one provider while maintaining
-metadata consistency.
+SolidX ships with several providers for common patterns — generating IDs, concatenating fields, and no-op placeholders. See [Built-in Computation Providers](../reference/built-in-computation-providers) for the full reference with configuration examples and sample outputs.
