@@ -175,7 +175,7 @@ Once your project is running, you can start the SolidX AI agent to build modules
 npx @solidxai/solidctl@latest agent start
 ```
 
-The agent auto-installs its Python package into `~/.solidx/venv` on first run if `solidx-agent` is not already in PATH. Open the Chat UI at `http://localhost:8765`.
+The agent auto-installs its Python package into `~/.solidx/venv` on first run if `solidx-agent` is not already in PATH. Open the Chat UI at `http://localhost:8768`.
 
 ### Run a single task (CLI)
 
