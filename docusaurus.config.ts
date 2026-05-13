@@ -128,6 +128,11 @@ const config: Config = {
       },
       items: [
         {
+          to: '/docs/quick-start',
+          label: 'Quick Start',
+          position: 'left',
+        },
+        {
           type: 'custom-megaMenu',
           position: 'left',
           label: 'Tutorial',
@@ -305,6 +310,11 @@ const config: Config = {
             {
               title: 'Getting Started',
               items: [
+                {
+                  label: 'Quick Start',
+                  to: '/docs/quick-start',
+                  description: 'Get a SolidX project running in under 10 minutes.',
+                },
                 {
                   label: 'Overview',
                   to: '/docs/developer-docs/',
