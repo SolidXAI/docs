@@ -52,6 +52,10 @@ docker run -d \
 
 Remember these credentials. The scaffolding prompts will ask for them.
 
+:::warning Change the default credentials
+The username (`solidx_app_user`), password (`strongpassword`), and database name (`solidx_app_db`) shown above are provided only for quick reference and a fast first run. **You are expected to change them to values of your own choosing** before using this in any real environment. Replace them in the `docker run` command above (and in the scaffolding inputs in Step 2) with credentials you control.
+:::
+
 ### Step 2: Scaffold the project
 
 Choose the path that matches your database setup:
@@ -130,16 +134,18 @@ First, ask me for the project name I want to use.
 
 Prerequisite checks:
 - Verify Node.js 22+ is installed. If missing, install it via nvm (curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash && source ~/.nvm/nvm.sh && nvm install 22). If nvm is also missing and cannot be installed, stop and tell me to install Node.js 22+ manually.
-- Verify Docker is installed and running (docker info). If Docker is missing, stop and tell me to install Docker Desktop.
 
 Database setup:
 - Check if something is already listening on port 5432 (e.g. lsof -i :5432 or netstat).
-- If port 5432 is FREE:
-  - Run: docker run -d --name SolidX_DB -e POSTGRES_USER=solidx_app_user -e POSTGRES_PASSWORD=strongpassword -e POSTGRES_DB=solidx_app_db -p 5432:5432 -v solidx_pgdata:/var/lib/postgresql/data postgres:17
-  - Use these DB credentials in the next step: host=localhost, port=5432, user=solidx_app_user, password=strongpassword, database=solidx_app_db
-- If port 5432 is OCCUPIED (existing PostgreSQL):
+- If port 5432 is OCCUPIED (assume an existing native or remote PostgreSQL instance is already running):
+  - Do NOT check for or require Docker. Skip Docker entirely for this setup.
   - Ask me for the database host, port, username, password, and database name.
   - Use the credentials I provide in the next step.
+- If port 5432 is FREE (no existing PostgreSQL):
+  - Verify Docker is installed and running (docker info). Docker is only required in this case (when there is no native PostgreSQL on port 5432). If Docker is missing, stop and tell me to install Docker Desktop.
+  - Ask me whether I want to use the default reference credentials (user=solidx_app_user, password=strongpassword, database=solidx_app_db) or provide my own. The defaults are for quick reference only and I am expected to change them for any real use. Use whichever values I confirm.
+  - Run: docker run -d --name SolidX_DB -e POSTGRES_USER=<DB_USER> -e POSTGRES_PASSWORD=<DB_PASSWORD> -e POSTGRES_DB=<DB_NAME> -p 5432:5432 -v solidx_pgdata:/var/lib/postgresql/data postgres:17
+  - Use these DB credentials in the next step: host=localhost, port=5432, and the user/password/database I confirmed above.
 
 Project scaffold (this step takes 5-10 minutes; npm installs all dependencies for both backend and frontend):
 - Run: npx @solidxai/solidctl@latest create-app --name <PROJECT_NAME> --no-interactive --db-client PostgreSQL --db-host <DB_HOST> --db-port <DB_PORT> --db-name <DB_NAME> --db-username <DB_USER> --db-password <DB_PASSWORD>
