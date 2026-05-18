@@ -30,7 +30,7 @@ const taskUiModule = {
     {
       name: "PriorityBadgeKanbanWidget",
       component: PriorityBadgeKanbanWidget,
-      type: ExtensionComponentTypes.kanban_card_widget,
+      type: ExtensionComponentTypes.kanbanCardWidget,
     },
   ],
 } satisfies SolidUiModule;

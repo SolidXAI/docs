@@ -124,7 +124,7 @@ const libraryUiModule = {
     {
       name: "ScoreWidget",
       component: ScoreWidget,
-      type: ExtensionComponentTypes.list_field_widget,
+      type: ExtensionComponentTypes.listFieldWidget,
       aliases: ["score"],
     },
   ],

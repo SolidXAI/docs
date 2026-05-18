@@ -187,7 +187,7 @@ const instituteUiModule = {
     {
       name: "SolidIntegerSliderStyleFormEditWidget",
       component: SolidIntegerSliderStyleFormEditWidget,
-      type: ExtensionComponentTypes.form_field_edit_widget,
+      type: ExtensionComponentTypes.formFieldEditWidget,
       aliases: ["integerSlider"],
     },
   ],
@@ -295,7 +295,7 @@ export const CustomBooleanFormViewWidget = ({ formik, fieldContext }: SolidFormF
 };
 ```
 
-Register a read-only widget in the same manifest using `ExtensionComponentTypes.form_field_view_widget`.
+Register a read-only widget in the same manifest using `ExtensionComponentTypes.formFieldViewWidget`.
 
 ## API Integration Inside Widgets
 

@@ -74,12 +74,12 @@ const paymentUiModule = {
     {
       name: "GenerateReportButton",
       component: GenerateReportButton,
-      type: ExtensionComponentTypes.list_header_action,
+      type: ExtensionComponentTypes.listHeaderAction,
     },
     {
       name: "RefundPaymentButton",
       component: RefundPaymentButton,
-      type: ExtensionComponentTypes.list_row_action,
+      type: ExtensionComponentTypes.listRowAction,
     },
   ],
 } satisfies SolidUiModule;

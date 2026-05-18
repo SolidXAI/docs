@@ -63,7 +63,7 @@ const merchantOnboardingUiModule = {
     {
       name: "ApproveApplicationButton",
       component: ApproveApplicationButton,
-      type: ExtensionComponentTypes.form_action,
+      type: ExtensionComponentTypes.formAction,
     },
   ],
 } satisfies SolidUiModule;

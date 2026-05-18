@@ -209,95 +209,6 @@ const config: Config = {
         {
           type: 'custom-megaMenu',
           position: 'left',
-          label: 'Admin',
-          activeBasePath: '/docs/admin-docs',
-          description:
-            'Use the admin manual to model business domains, manage layouts, configure access, and run the platform.',
-          cta: {
-            label: 'Open Admin Manual',
-            to: '/docs/admin-docs/',
-          },
-          sections: [
-            {
-              title: 'Module Builder',
-              items: [
-                {
-                  label: 'Overview',
-                  to: '/docs/admin-docs/module-builder/',
-                  description: 'The conceptual center of metadata-driven app building.',
-                },
-                {
-                  label: 'Module Management',
-                  to: '/docs/admin-docs/module-builder/module-management',
-                  description: 'Create and organize business domains.',
-                },
-                {
-                  label: 'Model Management',
-                  to: '/docs/admin-docs/module-builder/model-management',
-                  description: 'Define the records and relationships in each module.',
-                },
-                {
-                  label: 'Field Management',
-                  to: '/docs/admin-docs/module-builder/field-management',
-                  description: 'Configure field types and platform semantics.',
-                },
-              ],
-            },
-            {
-              title: 'Layouts',
-              items: [
-                {
-                  label: 'Layouts Overview',
-                  to: '/docs/admin-docs/layouts/',
-                  description: 'Understand how generated screens are structured.',
-                },
-                {
-                  label: 'List View',
-                  to: '/docs/admin-docs/layouts/list-view',
-                  description: 'Configure many-record browsing experiences.',
-                },
-                {
-                  label: 'Form View',
-                  to: '/docs/admin-docs/layouts/form-view',
-                  description: 'Shape single-record editing experiences.',
-                },
-                {
-                  label: 'Kanban View',
-                  to: '/docs/admin-docs/layouts/kanban-view',
-                  description: 'Configure workflow-style board layouts.',
-                },
-              ],
-            },
-            {
-              title: 'Access & Operations',
-              items: [
-                {
-                  label: 'IAM',
-                  to: '/docs/admin-docs/iam/',
-                  description: 'Manage users, roles, permissions, and record rules.',
-                },
-                {
-                  label: 'Notifications',
-                  to: '/docs/admin-docs/notifications/',
-                  description: 'Configure email and SMS template behavior.',
-                },
-                {
-                  label: 'Media Library',
-                  to: '/docs/admin-docs/media-library/',
-                  description: 'Handle uploaded media and storage providers.',
-                },
-                {
-                  label: 'Settings',
-                  to: '/docs/admin-docs/settings/',
-                  description: 'Manage platform-level operational settings.',
-                },
-              ],
-            },
-          ],
-        },
-        {
-          type: 'custom-megaMenu',
-          position: 'left',
           label: 'Reference',
           activeBasePath: '/docs/developer-docs',
           description:
@@ -468,6 +379,95 @@ const config: Config = {
                   label: 'Extending Users',
                   to: '/docs/recipes/extending-users',
                   description: 'Add custom behavior around the user model.',
+                },
+              ],
+            },
+          ],
+        },
+        {
+          type: 'custom-megaMenu',
+          position: 'left',
+          label: 'Admin',
+          activeBasePath: '/docs/admin-docs',
+          description:
+            'Use the admin manual to model business domains, manage layouts, configure access, and run the platform.',
+          cta: {
+            label: 'Open Admin Manual',
+            to: '/docs/admin-docs/',
+          },
+          sections: [
+            {
+              title: 'Module Builder',
+              items: [
+                {
+                  label: 'Overview',
+                  to: '/docs/admin-docs/module-builder/',
+                  description: 'The conceptual center of metadata-driven app building.',
+                },
+                {
+                  label: 'Module Management',
+                  to: '/docs/admin-docs/module-builder/module-management',
+                  description: 'Create and organize business domains.',
+                },
+                {
+                  label: 'Model Management',
+                  to: '/docs/admin-docs/module-builder/model-management',
+                  description: 'Define the records and relationships in each module.',
+                },
+                {
+                  label: 'Field Management',
+                  to: '/docs/admin-docs/module-builder/field-management',
+                  description: 'Configure field types and platform semantics.',
+                },
+              ],
+            },
+            {
+              title: 'Layouts',
+              items: [
+                {
+                  label: 'Layouts Overview',
+                  to: '/docs/admin-docs/layouts/',
+                  description: 'Understand how generated screens are structured.',
+                },
+                {
+                  label: 'List View',
+                  to: '/docs/admin-docs/layouts/list-view',
+                  description: 'Configure many-record browsing experiences.',
+                },
+                {
+                  label: 'Form View',
+                  to: '/docs/admin-docs/layouts/form-view',
+                  description: 'Shape single-record editing experiences.',
+                },
+                {
+                  label: 'Kanban View',
+                  to: '/docs/admin-docs/layouts/kanban-view',
+                  description: 'Configure workflow-style board layouts.',
+                },
+              ],
+            },
+            {
+              title: 'Access & Operations',
+              items: [
+                {
+                  label: 'IAM',
+                  to: '/docs/admin-docs/iam/',
+                  description: 'Manage users, roles, permissions, and record rules.',
+                },
+                {
+                  label: 'Notifications',
+                  to: '/docs/admin-docs/notifications/',
+                  description: 'Configure email and SMS template behavior.',
+                },
+                {
+                  label: 'Media Library',
+                  to: '/docs/admin-docs/media-library/',
+                  description: 'Handle uploaded media and storage providers.',
+                },
+                {
+                  label: 'Settings',
+                  to: '/docs/admin-docs/settings/',
+                  description: 'Manage platform-level operational settings.',
                 },
               ],
             },
