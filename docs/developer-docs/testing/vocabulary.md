@@ -109,6 +109,10 @@ Read this as:
 
 - `testing`
   the root testing block for a module
+- `testing.roles`
+  test role definitions with permissions
+- `testing.users`
+  test user definitions with credentials and role assignments
 - `testing.data`
   reusable fixtures loaded before execution
 - `testing.specs`
@@ -169,6 +173,22 @@ This is different from a scenario:
 
 For example, the `venue` module registers `venue.customHealth` and then invokes it from a scenario through `test.spec`.
 
+### Testing Roles
+
+Role definitions declared in `testing.roles`.
+
+Each entry names a role and lists the permissions to bind to it. Permissions can be exact (`ControllerName.methodName`) or wildcard (`ControllerName.*`).
+
+Roles are created by `test data --load` and are skipped if they already exist.
+
+### Testing Users
+
+User definitions declared in `testing.users`.
+
+Each entry provides credentials and an optional list of role names to assign.
+
+Users are created by `test data --load` and are skipped if a user with the same username already exists.
+
 ### Tag
 
 A label attached to a scenario for filtering and grouping.
@@ -214,7 +234,9 @@ Read the hierarchy like this:
 
 BDD-style step phases used for readability.
 
-These phases are normalised before execution, so they are mostly a writing and reporting convenience rather than different execution modes.
+These phases are normalised before execution — the engine treats all four identically.
+
+Use `given` for preconditions, `when` for the action under test, `then` for assertions, and `and` to continue the previous phase without repeating it. The choice is a reading aid, not a rule.
 
 ### saveAs
 

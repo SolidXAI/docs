@@ -61,19 +61,29 @@ The step returns:
 
 It also updates the last API response in the runtime context, which is useful for follow-up assertions.
 
-### `api.auth.bearerFromLogin`
+### Authentication
 
-This is a convenience step for login flows that return a bearer token.
+The standard pattern for authenticated scenarios is to POST to `/api/iam/authenticate` using `api.request`, save the full response as `loginSuccess`, and let all dependent scenarios read the token from there.
 
-Use it when a scenario needs authenticated requests but you do not want to hand-code token extraction logic in every case.
+```json
+{
+  "given": {
+    "op": "api.request",
+    "with": {
+      "method": "POST",
+      "url": "${env:TEST_API_BASE_URL}/api/iam/authenticate",
+      "json": {
+        "email": "libTestEditor@test.local",
+        "username": "",
+        "password": "Test@1234"
+      }
+    },
+    "saveAs": "loginSuccess"
+  }
+}
+```
 
-Typical inputs:
-
-- `url`
-- `username`
-- `password`
-
-The returned token is often stored using `saveAs`.
+Dependent scenarios start with `util.require` to guard the resource, then read the token via `${res:loginSuccess.bodyJson.data.accessToken}`.
 
 ## Assertions Commonly Used With API Steps
 
@@ -121,6 +131,39 @@ The `venue` module follows this pattern directly:
 
 ## Example Flow
 
+The bootstrap scenario authenticates and saves `loginSuccess`. All dependent scenarios use `util.require` to guard it, then read the token from the saved response.
+
+**Bootstrap:**
+
+```json
+{
+  "id": "api-authenticate-success",
+  "type": "api",
+  "tags": ["smoke"],
+  "steps": [
+    {
+      "given": {
+        "op": "api.request",
+        "with": {
+          "method": "POST",
+          "url": "${env:TEST_API_BASE_URL}/api/iam/authenticate",
+          "json": {
+            "email": "libTestEditor@test.local",
+            "username": "",
+            "password": "Test@1234"
+          }
+        },
+        "saveAs": "loginSuccess"
+      }
+    },
+    { "then": { "op": "assert.httpStatus", "with": { "is": 200 } } },
+    { "and": { "op": "assert.contains", "with": { "actual": "${res:loginSuccess.bodyText}", "expected": "accessToken" } } }
+  ]
+}
+```
+
+**Dependent scenario:**
+
 ```json
 {
   "id": "api-create-example",
@@ -128,13 +171,8 @@ The `venue` module follows this pattern directly:
   "steps": [
     {
       "given": {
-        "op": "api.auth.bearerFromLogin",
-        "with": {
-          "url": "${env:API_BASE_URL}/auth/login",
-          "username": "alice",
-          "password": "secret"
-        },
-        "saveAs": "auth.token"
+        "op": "util.require",
+        "with": { "resource": "loginSuccess" }
       }
     },
     {
@@ -142,13 +180,11 @@ The `venue` module follows this pattern directly:
         "op": "api.request",
         "with": {
           "method": "POST",
-          "url": "${env:API_BASE_URL}/api/example",
+          "url": "${env:TEST_API_BASE_URL}/api/example",
           "headers": {
-            "Authorization": "Bearer ${res:auth.token}"
+            "Authorization": "Bearer ${res:loginSuccess.bodyJson.data.accessToken}"
           },
-          "json": {
-            "name": "Example"
-          }
+          "json": { "name": "Example" }
         },
         "saveAs": "example.create"
       }
@@ -156,9 +192,7 @@ The `venue` module follows this pattern directly:
     {
       "then": {
         "op": "assert.httpStatus",
-        "with": {
-          "is": 201
-        }
+        "with": { "is": 201 }
       }
     }
   ]
@@ -209,7 +243,7 @@ A representative pattern looks like this:
     "op": "api.request",
     "with": {
       "method": "GET",
-      "url": "${env:API_BASE_URL}/api/state-master",
+      "url": "${env:TEST_API_BASE_URL}/api/state-master",
       "headers": {
         "Authorization": "Bearer ${res:loginSuccess.bodyJson.data.accessToken}"
       },
