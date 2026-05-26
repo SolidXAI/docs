@@ -1,5 +1,6 @@
 {
   "title": "REST APIs",
+  "icon": "globe",
   "pages": [
     "authentication",
     "create",

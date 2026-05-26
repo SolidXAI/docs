@@ -1,5 +1,6 @@
 {
   "title": "School Fees Portal V2 Tutorial",
+  "icon": "book",
   "pages": [
     "solidx_setup",
     "fees_portal_product_overview",

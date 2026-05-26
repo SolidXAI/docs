@@ -1,5 +1,6 @@
 {
   "title": "Metadata Schema",
+  "icon": "file-json-2",
   "pages": [
     "module-metadata",
     "model-metadata",

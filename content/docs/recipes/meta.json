@@ -1,5 +1,6 @@
 {
   "title": "Recipes",
+  "icon": "chef-hat",
   "pages": [
     "additional-datasources",
     "email",

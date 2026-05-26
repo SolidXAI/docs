@@ -1,5 +1,6 @@
 {
   "title": "Going Live",
+  "icon": "rocket",
   "pages": [
     "deploying-to-vm",
     "deploying-to-ecs",

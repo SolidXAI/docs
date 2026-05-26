@@ -1,5 +1,6 @@
 {
   "title": "Email & SMS Templates",
+  "icon": "bell",
   "pages": [
     "email-templates",
     "sms-templates"

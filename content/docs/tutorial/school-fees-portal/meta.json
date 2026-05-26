@@ -1,5 +1,6 @@
 {
   "title": "School Fees Portal",
+  "icon": "book",
   "pages": [
     "1-bootstrap",
     "2-data-model",

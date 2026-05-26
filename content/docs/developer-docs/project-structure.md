@@ -1,5 +1,6 @@
 ---
 title: Project Structure
+icon: "folder-tree"
 description: Overview of the folder structure for the SolidX Fullstack Application.
 summary: This document provides a comprehensive overview of the SolidX project folder structure, organized into backend (solid-api) and frontend (solid-ui) components. The solid-api folder contains NestJS-based backend services with source code, module metadata, logs, and media storage. The solid-ui folder houses the Next.js frontend with PrimeReact components, including app routes, Redux state management, and static assets. The document also covers key dependencies including @solidstarters/solid-core for backend services, solid-code-builder for code generation, and solid-core-ui for frontend components. It includes debugging configurations and upgrade scripts.
 solidx_concerns: []

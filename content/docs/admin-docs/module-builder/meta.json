@@ -1,5 +1,6 @@
 {
   "title": "Module Builder",
+  "icon": "hammer",
   "pages": [
     "module-management",
     "model-management",

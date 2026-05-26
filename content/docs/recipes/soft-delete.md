@@ -1,5 +1,6 @@
 ---
 title: Soft Delete
+icon: "trash-2"
 ---
 
 # Soft Delete

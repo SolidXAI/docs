@@ -1,5 +1,6 @@
 {
   "title": "Admin Manual",
+  "icon": "shield",
   "pages": [
     "module-builder",
     "layouts",

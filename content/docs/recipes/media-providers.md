@@ -1,5 +1,6 @@
 ---
 title: Media Providers
+icon: "image"
 ---
 
 # Media Providers

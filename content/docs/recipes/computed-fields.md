@@ -1,5 +1,6 @@
 ---
 title: Computed Fields
+icon: "calculator"
 ---
 
 # Computed Fields

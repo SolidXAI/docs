@@ -1,5 +1,6 @@
 {
   "title": "IAM",
+  "icon": "lock",
   "pages": [
     "users",
     "roles",

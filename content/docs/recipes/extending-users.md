@@ -1,5 +1,6 @@
 ---
 title: Extending Users
+icon: "user-plus"
 ---
 
 # Extending Users

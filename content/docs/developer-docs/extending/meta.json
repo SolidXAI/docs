@@ -1,5 +1,6 @@
 {
   "title": "Extending SolidX",
+  "icon": "puzzle",
   "pages": [
     "code-generation",
     "backend-customization",

@@ -1,5 +1,6 @@
 ---
 title: Sending Emails
+icon: "mail"
 ---
 
 # Sending Emails

@@ -2,6 +2,7 @@
 title: Quick Start
 description: "Get a SolidX project running in under 10 minutes, manually or let your AI agent do it."
 summary: "Two paths to a working SolidX project. Manual mode walks you through every step. Agentic mode gives you a copy-paste prompt for Claude Code, Cursor, Codex, or any AI coding assistant."
+icon: "rocket"
 ---
 
 # Quick Start

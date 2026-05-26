@@ -1,5 +1,6 @@
 {
   "title": "Media Library",
+  "icon": "image",
   "pages": [
     "media-view",
     "storage-providers"

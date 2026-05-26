@@ -1,5 +1,6 @@
 ---
 title: Additional Datasources
+icon: "database"
 ---
 
 # Additional Datasources

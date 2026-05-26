@@ -1,5 +1,6 @@
 {
   "title": "School Fees Portal Revamped",
+  "icon": "book",
   "pages": [
     "prerequisites",
     "create-solid-app",
