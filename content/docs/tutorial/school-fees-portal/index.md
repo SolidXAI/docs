@@ -1,5 +1,8 @@
 ---
 title: School Fees Portal
+description: A comprehensive tutorial on building a school fees collection platform using SolidX.
+summary: TODO
+keywords: [TODO]
 ---
 
 # School Fees Portal
