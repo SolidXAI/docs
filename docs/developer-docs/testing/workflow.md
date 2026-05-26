@@ -86,16 +86,24 @@ Command:
 npx @solidxai/solidctl@latest test data --load
 ```
 
-This step ingests test fixtures from module metadata.
+This step ingests testing identity and fixture data from module metadata.
 
-The system reads `testing.data` and loads records into the freshly prepared test databases.
+In order, it:
+
+- creates test roles from `testing.roles` and binds their permissions,
+- creates test users from `testing.users`,
+- and loads fixture records from `testing.data` into the test databases.
 
 Key characteristics:
 
 - data stays close to the module that owns it,
-- loading is metadata-aware,
-- inserts behave more like test-fixture upserts than blind raw SQL imports,
+- loading is metadata-aware and idempotent — existing roles and users are not duplicated,
+- record inserts behave like upserts,
 - and relations can be resolved using user-key based conventions.
+
+:::note
+`solid seed` must complete before running `--load`. Controller permissions are registered during seeding, and role binding will fail if they are not yet in the database.
+:::
 
 You can also limit the load to certain modules:
 

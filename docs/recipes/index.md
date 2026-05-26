@@ -14,6 +14,7 @@ Practical how-to guides for common SolidX tasks. Each recipe focuses on a single
 | [Email](./email) | Send transactional emails from your application |
 | [Extending Users](./extending-users) | Add custom fields and behaviour to the built-in User model |
 | [Filtering Data](./filtering) | Use filter operators to query records via the REST API or CRUD service |
+| [Filtering Relation Field Options](./relation-field-filtering) | Restrict the options shown in a relation field dropdown using field-level and layout-level filters |
 | [Handlers](./handlers) | Hook into lifecycle events with handler functions |
 | [Media Providers](./media-providers) | Configure storage backends for file uploads |
 | [Queue](./queue) | Process background jobs with the queue system |

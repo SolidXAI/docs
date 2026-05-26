@@ -36,11 +36,72 @@ These are used when you want to invoke `test.spec` from a scenario.
 
 ### `roles`
 
-Optional testing role definitions used for automation-oriented identity setup.
+Optional role definitions that `test data --load` creates in the database.
+
+Each entry names a role and lists the permissions to bind to it:
+
+```json
+{
+  "name": "Editor",
+  "permissions": [
+    "BookController.*",
+    "LoanController.*",
+    "DashboardController.findMany",
+    "DashboardController.findOne"
+  ]
+}
+```
+
+Fields:
+- `name` (required): role name, created if it does not already exist
+- `permissions` (optional): list of permission names to bind to this role
+
+Permission syntax:
+- Exact: `ControllerName.methodName` — binds a single action
+- Wildcard: `ControllerName.*` — binds all actions on that controller
+- Global: `*` — binds every registered permission to the role
+
+Roles are seeded idempotently — created if absent, left unchanged if they already exist.
+
+:::note
+`solid seed` must run before `test data --load`. Controller permissions are registered during seeding, and role binding will fail if they are not yet in the database.
+:::
 
 ### `users`
 
-Optional testing user definitions used for automation-oriented identity setup.
+Optional user definitions that `test data --load` creates in the database.
+
+Each entry provides credentials and an optional list of roles to assign:
+
+```json
+{
+  "username": "libTestEditor",
+  "email": "libTestEditor@test.local",
+  "password": "Test@1234",
+  "fullName": "Library Test Editor",
+  "roles": ["Editor"]
+}
+```
+
+Fields:
+- `username` (required): unique username
+- `email` (required): email address
+- `password` (required): login password
+- `fullName` (optional): display name
+- `mobile` (optional): mobile number
+- `roles` (optional): list of role names to assign — declare these in `testing.roles` first
+
+Users are skipped if a user with the same username already exists. They are not deleted during teardown.
+
+A typical module defines one user per role category to support access-level scenario coverage:
+
+```json
+"users": [
+  { "username": "libTestEditor", "email": "libTestEditor@test.local", "password": "Test@1234", "roles": ["Editor"] },
+  { "username": "libTestViewer", "email": "libTestViewer@test.local", "password": "Test@1234", "roles": ["Viewer"] },
+  { "username": "libTestNoRole", "email": "libTestNoRole@test.local", "password": "Test@1234", "roles": ["NoRole"] }
+]
+```
 
 ### `data`
 
@@ -115,7 +176,20 @@ Steps can be written in two ways.
 }
 ```
 
-The engine normalises both forms before execution.
+The engine normalises both forms before execution — there is no runtime difference between them.
+
+Use `given` for setup steps, `when` for the action being tested, `then` for assertions, and `and` to continue the previous phase without repeating it.
+
+`then` also accepts an array, which is useful when you want to group multiple assertions after a single action:
+
+```json
+{
+  "then": [
+    { "op": "assert.httpStatus", "with": { "is": 201 } },
+    { "op": "assert.jsonPath", "with": { "from": "${res:created}", "path": "$.name", "equals": "Test" } }
+  ]
+}
+```
 
 ## Step Fields
 
@@ -196,35 +270,33 @@ That keeps scenarios short and readable, because large request bodies stay in `t
 
 When a step returns a value you want later, use `saveAs`.
 
-Example:
+The standard pattern is to save the full login response as `loginSuccess`:
 
 ```json
 {
-  "when": {
-    "op": "api.auth.bearerFromLogin",
+  "given": {
+    "op": "api.request",
     "with": {
-      "url": "${env:API_BASE_URL}/auth/login",
-      "username": "alice",
-      "password": "secret"
+      "method": "POST",
+      "url": "${env:TEST_API_BASE_URL}/api/iam/authenticate",
+      "json": {
+        "email": "libTestEditor@test.local",
+        "username": "",
+        "password": "Test@1234"
+      }
     },
-    "saveAs": "auth.token"
+    "saveAs": "loginSuccess"
   }
 }
 ```
 
-Later steps can then use:
+Later steps read the token via:
 
 ```json
-"Authorization": "Bearer ${res:auth.token}"
+"Authorization": "Bearer ${res:loginSuccess.bodyJson.data.accessToken}"
 ```
 
-In practice, many teams save the full login response rather than only the token. The `venue` module saves the response as `loginSuccess` and then reads the token later via:
-
-```json
-"Bearer ${res:loginSuccess.bodyJson.data.accessToken}"
-```
-
-That is a useful pattern because it preserves the entire auth response for later steps.
+Saving the full response rather than only the token preserves everything the API returns — useful when later steps need other response fields.
 
 ## Scenario Chaining With `util.require`
 
