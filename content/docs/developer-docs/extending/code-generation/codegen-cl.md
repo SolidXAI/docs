@@ -1,0 +1,101 @@
+---
+title: Code Generation CLI
+description: This page provides a list of CLI commands that can be used as an alternative to generate backend code in SolidX.
+summary: This document details the CLI commands for code generation in SolidX using Angular Schematics. The primary command is 'solid refresh-model' which creates or updates a model and its related files within an existing module, keeping code synchronized with metadata. Additional commands include 'solid add-module' for generating new modules (rarely needed as modules are auto-scaffolded), and other specialized commands for field operations. The refresh-model command accepts options like modelName, modelId, and dryRun mode, and is the most frequently used command for maintaining code-metadata alignment.
+---
+
+#  Code Generation CLI
+
+The SolidX code builder—invoked either from the SolidX Admin UI or the CLI—uses Angular Schematics to scaffold backend code.  
+
+While multiple commands exist, **`refresh-model` is the primary and most frequently used command**.  
+Other commands such as `add-module` or `remove-fields` are available but are typically required only in special cases.
+
+---
+
+##  Refresh Model (Most Important)
+
+Creates or updates a model and its related files within an existing module.  
+This is the **main command you’ll use** to keep code in sync with metadata.
+
+### Command
+
+```tsx
+solid refresh-model <options>
+
+Example:
+solid refresh-model -n myNewModelSingularName
+```
+
+### Options
+
+- `-n modelName`, `--modelName <modelName>`  
+  The name of the model to be generated.
+
+- `-i modelId`, `--modelId <modelId>`  
+  The ID of the model to be generated.
+
+- `-d dryRun`, `--dryRun <dryRun>`  
+  Whether to run the command in dry-run mode.
+
+👉 Refer to [Generated code](../index.md) for a breakdown of the files and structure generated.
+
+---
+
+##  Add Module (Rarely Needed)
+
+Generates a new module in the SolidX backend.  
+Mostly useful during **initial setup**, as modules are usually scaffolded automatically when creating metadata.
+
+### Command
+
+```tsx
+solid add-module <options>
+
+Example:
+solid add-module -n myNewModule
+```
+
+### Options
+
+- `-n moduleName`, `--moduleName <moduleName>`  
+  The name of the module to be generated.
+
+- `-i moduleId`, `--moduleId <moduleId>`  
+  The ID of the module to be generated.
+
+- `-d dryRun`, `--dryRun <dryRun>`  
+  Whether to run the command in dry-run mode.
+
+---
+
+##  Remove Fields (Edge Case)
+
+Removes fields from an existing model in the SolidX backend.  
+Rarely required — mostly used for cleanup when metadata and generated code need alignment.
+
+### Command
+
+```bash
+solid remove-fields <options>
+
+Example:
+solid remove-fields -fids "[myFieldId]" -mid myModelId
+```
+
+### Options
+
+- `-fids fieldIds`, `--fieldIds <fieldIds>`  
+  The IDs of the fields to be removed. This needs to be a JSON stringified array e.g "[1]" or "[2,3]".
+
+- `-mid modelId`, `--modelId <modelId>`  
+  The ID of the model from which the fields will be removed.
+
+- `-d dryRun`, `--dryRun <dryRun>`  
+  Whether to run the command in dry-run mode.
+
+👉 Refer to [Generated code](../index.md) for a breakdown of the files and structure after running this command.
+
+---
+
+>  The underlying implementation leverages Angular schematics and schema definitions to validate and process these operations.

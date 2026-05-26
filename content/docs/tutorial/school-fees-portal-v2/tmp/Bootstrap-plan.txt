@@ -1,0 +1,19 @@
+- talk a bit about system requirements
+    - Overview of required software (Node.js, database, etc, memory required)
+- create database 
+    - Rationale of creating a dedicated database for the app
+    - Use a docker image of postgres to create a local database
+- use npx @solidstarters/solidctl create-app
+    - Rationale of using a starter script to bootstrap the app
+    - prerequisites for running npx command
+- show how to seed 
+    - Rationale of seeding data for initial setup
+    - Steps to run the seed command
+    - Outcome of seeding the database
+    - screenshots
+        - Console success message
+        - Database tables with seeded data
+- show how to login 
+    - Highlight the admin user created via seeding
+    - Show screenshot of pre-login with the seeded admin user
+    - Show screenshot of post-login with the seeded admin user

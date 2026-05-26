@@ -1,0 +1,10 @@
+{
+  "title": "School Fees Portal Revamped",
+  "pages": [
+    "prerequisites",
+    "create-solid-app",
+    "data-modeling",
+    "views-and-layouts",
+    "use-cases"
+  ]
+}

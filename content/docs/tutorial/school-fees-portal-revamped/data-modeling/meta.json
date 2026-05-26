@@ -1,0 +1,13 @@
+{
+  "title": "Data Modeling",
+  "pages": [
+    "institute",
+    "fee-type",
+    "institute-user",
+    "student",
+    "payment-collection",
+    "payment-collection-item",
+    "payment",
+    "payment-collection-item-detail"
+  ]
+}

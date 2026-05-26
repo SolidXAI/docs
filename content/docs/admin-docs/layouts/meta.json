@@ -1,0 +1,8 @@
+{
+  "title": "Layout Editor",
+  "pages": [
+    "list-view",
+    "kanban-view",
+    "form-view"
+  ]
+}

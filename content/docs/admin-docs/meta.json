@@ -1,0 +1,12 @@
+{
+  "title": "Admin Manual",
+  "pages": [
+    "module-builder",
+    "layouts",
+    "modules",
+    "media-library",
+    "iam",
+    "notifications",
+    "settings"
+  ]
+}

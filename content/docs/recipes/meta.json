@@ -1,0 +1,13 @@
+{
+  "title": "Recipes",
+  "pages": [
+    "additional-datasources",
+    "email",
+    "media-providers",
+    "queue",
+    "computed-fields",
+    "extending-users",
+    "handlers",
+    "soft-delete"
+  ]
+}

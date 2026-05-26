@@ -1,0 +1,10 @@
+{
+  "title": "SolidX Docs",
+  "pages": [
+    "quick-start",
+    "developer-docs",
+    "recipes",
+    "tutorial",
+    "admin-docs"
+  ]
+}

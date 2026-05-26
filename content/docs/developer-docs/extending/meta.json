@@ -1,0 +1,8 @@
+{
+  "title": "Extending SolidX",
+  "pages": [
+    "code-generation",
+    "backend-customization",
+    "frontend-customization"
+  ]
+}

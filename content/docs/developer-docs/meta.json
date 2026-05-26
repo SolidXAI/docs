@@ -1,0 +1,13 @@
+{
+  "title": "Reference",
+  "pages": [
+    "prerequisites",
+    "installation",
+    "project-structure",
+    "metadata_schema",
+    "database-seeding",
+    "extending",
+    "rest-apis",
+    "going-live"
+  ]
+}

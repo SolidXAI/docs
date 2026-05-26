@@ -1,0 +1,15 @@
+{
+  "title": "Frontend Customization",
+  "pages": [
+    "form-view-events",
+    "custom-widgets",
+    "form-view-buttons",
+    "kanban-field-widgets",
+    "list-view-buttons",
+    "form-view-field-widgets",
+    "list-view-field-widgets",
+    "custom-views",
+    "solid-entity-api",
+    "layout-manager"
+  ]
+}

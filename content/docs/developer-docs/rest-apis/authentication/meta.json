@@ -1,0 +1,8 @@
+{
+  "title": "Authentication APIs",
+  "pages": [
+    "password-authentication",
+    "otp-authentication",
+    "oauth-authentication"
+  ]
+}

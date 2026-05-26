@@ -1,0 +1,9 @@
+{
+  "title": "IAM",
+  "pages": [
+    "users",
+    "roles",
+    "permissions",
+    "record-rules"
+  ]
+}

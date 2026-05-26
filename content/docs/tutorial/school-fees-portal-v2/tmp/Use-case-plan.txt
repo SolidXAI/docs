@@ -1,0 +1,60 @@
+# Explain use case
+e.g Institute Onboarding    
+
+# Explain the roles which will be involves in this use case
+e.g Platform Admin, Institute Admin
+
+# Explain the data model entities involved in this use case (Overview)
+e.g Institute, Institute User, Fee Type
+
+# Explain the data model enties involved in this use case (Details alongwith fields & relationships)
+e.g Institute
+    Fields: name, address, contact info, payment gateway settings, support personnel info, branding details etc
+    Relationships: one-to-many with Institute User, one-to-many with Fee Type
+
+# Explain how we will create the data model using the SolidX App Builder
+e.g Document the steps in text i.e
+    - Which menu to access
+    - Which CTA to click on the list page. i.e Add Model
+    - Which field type to select for each field and why
+        - What basic configurations to do for each field
+        - What advanced configurations to do for each field
+        - Relationships
+            - How to create relationships with other models and what each of the different relationship types mean
+e.g Show video of the above documented steps [PENDING]
+e.g Show screenshots of the outcome after model creation [PENDING]
+
+# Explain how we will generate the code i.e (apis, frontends etc) using SolidX App Builder (i.e once the data model is created)
+Explain rationale of code generation i.e (why code generation is needed, what code gets generated etc)
+e.g Document the steps in text i.e
+    - Which menu to access
+    - Which CTA to click on the list page. i.e Generate Code
+e.g Show video of the above documented steps [PENDING]
+e.g Show screenshots of the outcome after code generation [PENDING]
+    - Show generated APIs in Swagger UI
+    - Show generated Admin Frontend screens
+
+# Explain how we will customize the frontend form & list views using SolidX App Builder
+Give overview of the layout customisation capabilities of layout json
+Give rationale of what kind of customization we will be doing for this use case
+e.g Document the steps in text i.e
+    - Which menu to access
+    - Which CTA to click on the list page. i.e Customize Layout
+    - How to customize form view
+    - How to customize list view
+e.g Show screenshot of the ui outcome after layout customization    
+    - For form view
+    - For list view
+
+# Explain how we can now use the generated & customized Admin Frontend to perform the use case e.g onboard the institute
+e.g Document the steps in text i.e
+    - Login as Platform Admin
+    - Create Institute (screenshot)
+    - Create Fee Types (screenshot)
+    - Invite Institute Admin User (screenshot)
+e.g Show video of the above documented steps
+
+# RBAC & Security Rules (as required for the use case)??
+
+Show show the final outcome of the use case i.e a record of the created institute
+Highlight the achievment of the user who performed this use case in the tutorial till the end 

@@ -1,0 +1,21 @@
+{
+  "title": "Backend Customization",
+  "pages": [
+    "extending-controllers",
+    "extending-services",
+    "crud-service",
+    "extending-repositories",
+    "computation-providers",
+    "background-jobs",
+    "scheduled-jobs",
+    "typeorm-subscribers",
+    "extending-users",
+    "solid-registry",
+    "security-rules",
+    "dynamic-selection-providers",
+    "dashboard-providers",
+    "sms-providers",
+    "email-providers",
+    "whatsapp-providers"
+  ]
+}

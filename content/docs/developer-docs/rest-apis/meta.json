@@ -1,0 +1,12 @@
+{
+  "title": "REST APIs",
+  "pages": [
+    "authentication",
+    "create",
+    "delete",
+    "recover",
+    "update",
+    "retrieve",
+    "swagger-documentation"
+  ]
+}

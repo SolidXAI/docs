@@ -1,0 +1,9 @@
+{
+  "title": "Modules",
+  "pages": [
+    "list-view",
+    "kanban-view",
+    "form-view",
+    "menu-structure"
+  ]
+}

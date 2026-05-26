@@ -1,0 +1,19 @@
+{
+  "title": "Metadata Schema",
+  "pages": [
+    "module-metadata",
+    "model-metadata",
+    "field-metadata",
+    "view-metadata",
+    "action-metadata",
+    "menu-item-metadata",
+    "roles-permissions-metadata",
+    "users-metadata",
+    "email-templates",
+    "sms-templates",
+    "media-storage-providers",
+    "scheduled-jobs",
+    "security-rules",
+    "list-of-values"
+  ]
+}
