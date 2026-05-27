@@ -1,0 +1,64 @@
+---
+title: SMS Templates
+description: Learn how to create and manage SMS templates in SolidX, including dynamic content
+---
+
+import { Palette, FileText, Variable, TestTube } from 'lucide-react';
+
+SMS Templates in SolidX enable you to create and manage text message templates with dynamic content and integrated link shortening capabilities.
+
+## Template Creation
+
+### Basic Structure
+
+```json
+{
+  "name": "verification_code",
+  "description": "SMS template for sending verification codes",
+  "content": "Your verification code is {{code}}. Valid for {{validity}} minutes.",
+  "variables": {
+    "code": {
+      "type": "string",
+      "required": true,
+      "description": "Verification code"
+    },
+    "validity": {
+      "type": "number",
+      "required": true,
+      "description": "Code validity in minutes"
+    }
+  }
+}
+```
+
+## Best Practices
+<Cards>
+  <Card icon={<Palette />} title="Design">
+    - Use responsive layouts
+    - Test across email clients
+    - Include plain text version
+    - Optimize images
+    - Follow email standards
+  </Card>
+  <Card icon={<FileText />} title="Content">
+    - Clear subject lines
+    - Consistent branding
+    - Mobile-friendly design
+    - Accessible content
+    - Valid links
+  </Card>
+  <Card icon={<Variable />} title="Variables">
+    - Document all variables
+    - Provide defaults when possible
+    - Validate data types
+    - Handle missing values
+    - Use clear naming
+  </Card>
+  <Card icon={<TestTube />} title="Testing">
+    - Test all variables
+    - Check responsiveness
+    - Verify attachments
+    - Monitor delivery
+    - Track engagement
+  </Card>
+</Cards>

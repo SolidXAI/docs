@@ -1,0 +1,68 @@
+---
+title: Modules
+---
+
+import { Box, Layout, Activity, FileJson, Monitor, Menu } from 'lucide-react';
+
+Apps in SOLID are modular units that encapsulate specific functionality and expose RESTful API endpoints, services, and user interfaces. Each app represents a logical unit of functionality that can be managed independently.
+
+## Key Concepts
+
+<Cards>
+  <Card icon={<Box />} title="Modularity">
+    - Self-contained functionality
+    - Independent deployment
+    - Reusable components
+    - Pluggable architecture
+  </Card>
+  <Card icon={<Layout />} title="Features">
+    - **RESTful APIs**: Auto-generated endpoints for data access
+    - **Admin Interface**: Built-in UI for data management
+    - **Swagger Documentation**: Interactive API documentation
+    - **Menu Integration**: Automatic menu structure generation
+  </Card>
+</Cards>
+
+## Components
+
+### API Documentation
+
+→ [API Documentation](../../developer-docs/rest-apis/swagger-documentation)
+
+Comprehensive API documentation with Swagger/OpenAPI integration.
+
+### Admin Interface
+
+- [Menu Structure](./menu-structure.md)
+- [List View](./list-view.md)
+- [Kanban View](./kanban-view.md)
+- [Form View](./form-view.md)
+
+## Best Practices
+
+<Cards>
+  <Card title="App Organization">
+    - Keep apps focused and single-purpose
+    - Follow consistent naming conventions
+    - Document dependencies clearly
+    - Maintain clear boundaries between apps
+  </Card>
+  <Card title="API Design">
+    - Follow RESTful principles
+    - Version your APIs
+    - Implement proper error handling
+    - Include comprehensive documentation
+  </Card>
+  <Card title="Security">
+    - Implement proper authentication
+    - Define granular permissions
+    - Validate all inputs
+    - Log security events
+  </Card>
+  <Card title="Performance">
+    - Optimize database queries
+    - Implement caching where appropriate
+    - Monitor API usage
+    - Handle rate limiting
+  </Card>
+</Cards>

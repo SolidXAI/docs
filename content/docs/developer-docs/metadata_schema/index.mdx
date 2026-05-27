@@ -5,6 +5,8 @@ summary: This document provides an overview of SolidX's metadata-driven architec
 solidx_concerns: [add_field_to_existing_layout, add_field_to_a_model, add/update_security_record_rule]
 ---
 
+import { Box, Database, ToggleLeft, Eye, Zap, Menu, Shield, Users, Mail, Image, Clock, FileWarning, List, LayoutDashboard, CheckCheck } from 'lucide-react';
+
 ## Overview
 
 The metadata schema in `SolidX` is designed to provide a flexible and extensible way to define the structure and behavior of various application components. By using a metadata-driven approach, developers can easily customize and extend the functionality of the `SolidX`platform without modifying the core codebase.
@@ -43,78 +45,59 @@ This step ensures the generated code reflects the latest metadata. Typical cases
 
 Below are the key components of the metadata schema. All the functionality concerning the below components is driven by the metadata schema.
 
-- Module Metadata
-- Model Metadata
-- Field Metadata
-- View Metadata
-- Action Metadata
-- Menu Item Metadata
-- Roles & Permissions
-- Users
-- Email Templates
-- SMS Templates
-- Media Storage Providers
-- Scheduled Jobs
-- Security Rules
-- List of Values
-- Dashboard Metadata
+<Cards>
+  <Card icon={<Box />} title="Module Metadata">The root configuration for each module, defining its identity, scope, and lifecycle.</Card>
+  <Card icon={<Database />} title="Model Metadata">Defines the data structures (entities) for each module.</Card>
+  <Card icon={<ToggleLeft />} title="Field Metadata">Specifies the individual fields for each model.</Card>
+  <Card icon={<Eye />} title="View Metadata">Configures how models are displayed (List, Form, Kanban views).</Card>
+  <Card icon={<Zap />} title="Action Metadata">Defines custom actions tied to models.</Card>
+  <Card icon={<Menu />} title="Menu Item Metadata">Configures the admin menu structure.</Card>
+  <Card icon={<Shield />} title="Roles & Permissions">Defines access control rules.</Card>
+  <Card icon={<Users />} title="Users">Manages user accounts and profiles.</Card>
+  <Card icon={<Mail />} title="Email Templates">Configures email notification templates.</Card>
+  <Card icon={<Image />} title="SMS Templates">Configures SMS notification templates.</Card>
+  <Card icon={<Clock />} title="Media Storage Providers">Defines storage backends for media assets.</Card>
+  <Card icon={<FileWarning />} title="Scheduled Jobs">Configures recurring background tasks.</Card>
+  <Card icon={<List />} title="Security Rules">Record-level access control rules.</Card>
+  <Card icon={<LayoutDashboard />} title="List of Values">Manages reusable dropdown options.</Card>
+  <Card icon={<CheckCheck />} title="Dashboard Metadata">Configures admin dashboard widgets and analytics.</Card>
+</Cards>
 
 ## Best Practices
 
-<details>
-<summary>Naming Conventions</summary>
-
-- Use kebab-case for internal names (`fees-portal`, `institute-list-view`)
-- Use PascalCase for display names (`Fees Portal`, `Institute List View`)
-- Use camelCase for field names (`instituteName`, `feeAmount`)
-
-</details>
-
-<details>
-<summary>Security First</summary>
-
-- Always configure roles and security rules
-- Use principle of least privilege
-- Implement proper data filtering
-- Enable audit tracking for sensitive operations
-
-</details>
-
-<details>
-<summary>Performance Optimization</summary>
-
-- Use database indexes for frequently queried fields
-
-</details>
-
-<details>
-<summary>User Experience</summary>
-
-- Group related fields logically in forms
-- Use appropriate field types for data validation
-- Provide helpful field descriptions
-
-</details>
-
-<details>
-<summary>Maintainability</summary>
-
-- Use consistent field configurations
-- Version control metadata changes
-- Test security rules thoroughly
-
-</details>
-
-<details>
-<summary>Data Integrity</summary>
-
-- Configure proper field validations
-- Use appropriate data types
-- Ensure unique constraints where necessary
-- Choose appropriate user keys for models. User keys should be unique and stable (i.e should not change over time) for a model
-- Use appropriate relation cascading rules
-
-</details>
+<Cards>
+  <Card title="Naming Conventions">
+    - Use kebab-case for internal names (`fees-portal`, `institute-list-view`)
+    - Use PascalCase for display names (`Fees Portal`, `Institute List View`)
+    - Use camelCase for field names (`instituteName`, `feeAmount`)
+  </Card>
+  <Card title="Security First">
+    - Always configure roles and security rules
+    - Use principle of least privilege
+    - Implement proper data filtering
+    - Enable audit tracking for sensitive operations
+  </Card>
+  <Card title="Performance Optimization">
+    - Use database indexes for frequently queried fields
+  </Card>
+  <Card title="User Experience">
+    - Group related fields logically in forms
+    - Use appropriate field types for data validation
+    - Provide helpful field descriptions
+  </Card>
+  <Card title="Maintainability">
+    - Use consistent field configurations
+    - Version control metadata changes
+    - Test security rules thoroughly
+  </Card>
+  <Card title="Data Integrity">
+    - Configure proper field validations
+    - Use appropriate data types
+    - Ensure unique constraints where necessary
+    - Choose appropriate user keys for models
+    - Use appropriate relation cascading rules
+  </Card>
+</Cards>
 
 ## What's Coming Up
 

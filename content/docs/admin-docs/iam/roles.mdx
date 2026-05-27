@@ -2,6 +2,8 @@
 title: Roles
 ---
 
+import { Shield, User, FileEdit, Eye, Database, Settings } from 'lucide-react';
+
 Roles in SolidX provide a way to group permissions and manage access control at a high level. Each role represents a set of permissions that can be assigned to users.
 
 ## Role Management
@@ -12,38 +14,47 @@ Below are some typical roles you can find in SOLID:
 
 ### System Roles
 
-**Administrator**
-- Full system access
-- User management
-
-**User**
-- Basic system access
-- Profile management
-- Limited model permission
+<Cards>
+  <Card icon={<Shield />} title="Administrator">
+    - Full system access
+    - User management
+  </Card>
+  <Card icon={<User />} title="User">
+    - Basic system access
+    - Profile management
+    - Limited model permission
+  </Card>
+</Cards>
 
 ### Custom Roles
 
 Examples of common custom roles:
 
-**Content Manager**
-- Content creation
-- Content editing
-
-**Viewer**
-- Read-only access
-- Report viewing
-- Basic dashboards
+<Cards>
+  <Card icon={<FileEdit />} title="Content Manager">
+    - Content creation
+    - Content editing
+  </Card>
+  <Card icon={<Eye />} title="Viewer">
+    - Read-only access
+    - Report viewing
+    - Basic dashboards
+  </Card>
+</Cards>
 
 ### Permission Categories
 
-**Model Resource Permissions**
-- CRUD operations
-- Import/Export
-
-**Administrative Permissions**
-- User management
-- Role management
-- System settings
+<Cards>
+  <Card icon={<Database />} title="Model Resource Permissions">
+    - CRUD operations
+    - Import/Export
+  </Card>
+  <Card icon={<Settings />} title="Administrative Permissions">
+    - User management
+    - Role management
+    - System settings
+  </Card>
+</Cards>
 
 ### Creating a New Role
 
@@ -81,19 +92,14 @@ Examples of common custom roles:
 
 ## Best Practices
 
-<details>
-<summary>Role Assignment</summary>
-
-- Assign minimum necessary roles
-- Regular access reviews
-- Document role assignments
-
-</details>
-
-<details>
-<summary>Maintenance</summary>
-
-- Archive unused roles
-- Monitor role changes
-
-</details>
+<Cards>
+  <Card title="Role Assignment">
+    - Assign minimum necessary roles
+    - Regular access reviews
+    - Document role assignments
+  </Card>
+  <Card title="Maintenance">
+    - Archive unused roles
+    - Monitor role changes
+  </Card>
+</Cards>

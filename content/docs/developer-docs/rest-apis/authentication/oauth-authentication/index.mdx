@@ -4,42 +4,33 @@ description: Information about OAuth-based authentication providers
 summary: Comprehensive guide to OAuth authentication in SolidX supporting multiple providers (Password, OTP, Google, Meta/Facebook, LinkedIn, Twitter/X, custom OAuth). Covers standard OAuth flow (frontend redirect, backend callback), environment variable configuration per provider (client IDs, secrets, callback URLs), securing OAuth with state validation, token exchange, user profile retrieval, session management with JWT tokens, frontend implementation patterns, and examples for Google OAuth integration.
 ---
 
+import { KeyRound, Smartphone, Globe, ShieldCheck, Lock, RefreshCw, HelpCircle } from 'lucide-react';
+
 SOLID supports multiple authentication methods through its provider system, offering flexibility in how users can sign up and log in to your application.
 
 ## Supported Providers
 
-<div>
-
-  <div>
-      Section Management
-    <ul>
-      <li>Traditional username/password</li>
-      <li>Password policies</li>
-      <li>Password reset flow</li>
-      <li>Account recovery</li>
-    </ul>
-  </div>
-
-  <div>
-    Section Management
-    <ul>
-      <li>Email-based OTP</li>
-      <li>SMS-based OTP</li>
-      <li>Time-based tokens</li>
-      <li>Recovery codes</li>
-    </ul>
-  </div>
-
-  <div>
-    Section Management
-1. **Google**
-2. **Meta/Facebook**
-3. **LinkedIn**
-4. **Twitter/X**
-5. **Custom OAuth providers**
-  </div>
-
-</div>
+<Cards>
+  <Card title="Password Authentication">
+    - Traditional username/password
+    - Password policies
+    - Password reset flow
+    - Account recovery
+  </Card>
+  <Card title="OTP Authentication">
+    - Email-based OTP
+    - SMS-based OTP
+    - Time-based tokens
+    - Recovery codes
+  </Card>
+  <Card title="OAuth Providers">
+    1. **Google**
+    2. **Meta/Facebook**
+    3. **LinkedIn**
+    4. **Twitter/X**
+    5. **Custom OAuth providers**
+  </Card>
+</Cards>
 
 ## Authentication Flow
 
@@ -135,77 +126,49 @@ GET https://solid.website.com/api/iam/[provider]/auth?accessCode=[code]
 
 ## Features
 
-<div>
-
-<div>
-  Multi-factor Authentication (MFA)
-  <ul>
-    <li>Enable/disable per user</li>
-    <li>Multiple MFA methods</li>
-    <li>Backup codes</li>
-    <li>Remember device option</li>
-  </ul>
-</div>
-
-<div>
-  Session Management
-  <ul>
-    <li>JWT tokens</li>
-    <li>Refresh tokens</li>
-    <li>Token expiry</li>
-    <li>Session invalidation</li>
-  </ul>
-</div>
-
-<div>
-  Account Recovery
-  <ul>
-    <li>Email recovery</li>
-    <li>Security questions</li>
-    <li>Admin assistance</li>
-    <li>Recovery codes</li>
-  </ul>
-</div>
-
-</div>
+<Cards>
+  <Card title="Multi-factor Authentication (MFA)">
+    - Enable/disable per user
+    - Multiple MFA methods
+    - Backup codes
+    - Remember device option
+  </Card>
+  <Card title="Session Management">
+    - JWT tokens
+    - Refresh tokens
+    - Token expiry
+    - Session invalidation
+  </Card>
+  <Card title="Account Recovery">
+    - Email recovery
+    - Security questions
+    - Admin assistance
+    - Recovery codes
+  </Card>
+</Cards>
 
 ## Security Features
 
-  
-
-<div>
-
-  <div>
-    Password Security
-    <ul>
-      <li>Secure hashing (bcrypt)</li>
-      <li>Password policies</li>
-      <li>Brute force protection</li>
-      <li>Password history</li>
-    </ul>
-  </div>
-
-  <div>
-    OAuth Security
-    <ul>
-      <li>State parameter</li>
-      <li>PKCE support</li>
-      <li>Scope validation</li>
-      <li>Token validation</li>
-    </ul>
-  </div>
-
-  <div>
-    General Security
-    <ul>
-      <li>Rate limiting</li>
-      <li>IP blocking</li>
-      <li>Audit logging</li>
-      <li>Session monitoring</li>
-    </ul>
-  </div>
-
-</div>
+<Cards>
+  <Card title="Password Security">
+    - Secure hashing (bcrypt)
+    - Password policies
+    - Brute force protection
+    - Password history
+  </Card>
+  <Card title="OAuth Security">
+    - State parameter
+    - PKCE support
+    - Scope validation
+    - Token validation
+  </Card>
+  <Card title="General Security">
+    - Rate limiting
+    - IP blocking
+    - Audit logging
+    - Session monitoring
+  </Card>
+</Cards>
 
 ## Implementation Examples
 
@@ -372,40 +335,31 @@ export class GoogleAuthenticationController {
 ```
 
 ## Best Practices
-<details>
-    <summary>Provider Selection</summary>
-    <ul>
-      <li>Consider user base</li>
-      <li>Evaluate security needs</li>
-      <li>Plan backup methods</li>
-      <li>Test all flows</li>
-    </ul>
-</details>
-<details>
-    <summary>Configuration</summary>
-    <ul>
-      <li>Secure credentials</li>
-      <li>Set proper timeouts</li>
-      <li>Configure rate limits</li>
-      <li>Enable logging</li>
-    </ul>
-</details>
-<details>
-    <summary>User Experience</summary>
-    <ul>
-      <li>Clear error messages</li>
-      <li>Simple recovery flows</li>
-      <li>Multiple auth options</li>
-      <li>Remember user preferences</li>
-    </ul>
-</details>
-<details>
-    <summary>Security</summary>
-    <ul>
-      <li>Regular audits</li>
-      <li>Monitor failed attempts</li>
-      <li>Review permissions</li>
-      <li>Update configurations</li>
-    </ul>
-</details>
+
+<Cards>
+  <Card title="Provider Selection">
+    - Consider user base
+    - Evaluate security needs
+    - Plan backup methods
+    - Test all flows
+  </Card>
+  <Card title="Configuration">
+    - Secure credentials
+    - Set proper timeouts
+    - Configure rate limits
+    - Enable logging
+  </Card>
+  <Card title="User Experience">
+    - Clear error messages
+    - Simple recovery flows
+    - Multiple auth options
+    - Remember user preferences
+  </Card>
+  <Card title="Security">
+    - Regular audits
+    - Monitor failed attempts
+    - Review permissions
+    - Update configurations
+  </Card>
+</Cards>
 

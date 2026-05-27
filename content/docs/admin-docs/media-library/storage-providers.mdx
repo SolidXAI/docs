@@ -1,0 +1,71 @@
+---
+title: Storage Providers
+description: Overview of supported media storage providers in SolidX applications.
+---
+
+import { HardDrive, Cloud } from 'lucide-react';
+
+SOLID supports multiple storage providers for media files, offering flexibility in how and where your media assets are stored.
+
+## Supported Providers
+
+<Cards>
+  <Card icon={<HardDrive />} title="Local Filesystem">
+    - **Description**: Store files directly on the server's filesystem
+    - **Use Case**: Development environments, small applications
+    - **Configuration**:
+    ```json
+    {
+      "provider": "local",
+      "config": {
+        "rootPath": "/path/to/uploads",
+        "baseUrl": "http://your-domain.com/uploads"
+      }
+    }
+    ```
+  </Card>
+  <Card icon={<Cloud />} title="Amazon S3">
+    - **Description**: Store files in Amazon S3 buckets
+    - **Use Case**: Production environments, scalable applications
+    - **Configuration**:
+    ```json
+    {
+      "provider": "s3",
+      "config": {
+        "bucket": "your-bucket-name",
+        "region": "us-west-2",
+        "accessKeyId": "YOUR_ACCESS_KEY",
+        "secretAccessKey": "YOUR_SECRET_KEY"
+      }
+    }
+    ```
+  </Card>
+</Cards>
+
+## Best Practices
+<Cards>
+  <Card title="Organization">
+    - Use clear folder names
+    - Maintain consistent structure
+    - Apply relevant tags
+    - Update metadata regularly
+  </Card>
+  <Card title="Performance">
+    - Optimize file sizes
+    - Use appropriate formats
+    - Limit folder sizes
+    - Regular cleanup
+  </Card>
+  <Card title="Security">
+    - Set proper permissions
+    - Use secure sharing
+    - Monitor access
+    - Regular audits
+  </Card>
+  <Card title="Workflow">
+    - Document naming conventions
+    - Define folder structure
+    - Establish backup procedures
+    - Create usage guidelines
+  </Card>
+</Cards>

@@ -2,6 +2,8 @@
 title: Email & SMS Templates
 ---
 
+import { FileText, MessageSquare, Box, Layout, Truck, Globe, Server, Smartphone, Siren, Puzzle } from 'lucide-react';
+
 SOLID provides a powerful template management system for sending emails and SMS messages, with support for dynamic content, attachments, and multiple providers.
 
 ## Overview
@@ -34,55 +36,64 @@ The notification system offers:
 - Link shortening
 - Provider abstraction (Twilio, Msg91, Gupshup)
 
-**Template Management**
-- Version control
-- Preview functionality
-- Test sending
-- Template variables
-- Template inheritance
-
-**Content Features**
-- Rich text editing
-- Variable validation
-- Conditional content
-- Multi-language support
-- Template categories
-
-**Delivery Features**
-- Queue management
-- Retry handling
-- Delivery tracking
-- Bounce handling
-- Analytics
+<Cards>
+  <Card icon={<Box />} title="Template Management">
+    - Version control
+    - Preview functionality
+    - Test sending
+    - Template variables
+    - Template inheritance
+  </Card>
+  <Card icon={<Layout />} title="Content Features">
+    - Rich text editing
+    - Variable validation
+    - Conditional content
+    - Multi-language support
+    - Template categories
+  </Card>
+  <Card icon={<Truck />} title="Delivery Features">
+    - Queue management
+    - Retry handling
+    - Delivery tracking
+    - Bounce handling
+    - Analytics
+  </Card>
+</Cards>
 
 ## Provider Support
 
 ### Email Providers
 
-**Amazon SES**
-- High deliverability
-- Detailed analytics
-- Bounce management
-- Reputation monitoring
-
-**SMTP**
-- Standard protocol
-- Wide compatibility
-- Custom server support
-- TLS encryption
+<Cards>
+  <Card icon={<Globe />} title="Amazon SES">
+    - High deliverability
+    - Detailed analytics
+    - Bounce management
+    - Reputation monitoring
+  </Card>
+  <Card icon={<Server />} title="SMTP">
+    - Standard protocol
+    - Wide compatibility
+    - Custom server support
+    - TLS encryption
+  </Card>
+</Cards>
 
 ### SMS Providers
 
-**Twilio**
-- Global coverage
-- High reliability
-- Delivery tracking
-- Two-way messaging
-
-**Additional Providers**
-- Msg91
-- Gupshup
-- Custom providers
+<Cards>
+  <Card icon={<Smartphone />} title="Twilio">
+    - Global coverage
+    - High reliability
+    - Delivery tracking
+    - Two-way messaging
+  </Card>
+  <Card icon={<Siren />} title="Additional Providers">
+    - Msg91
+    - Gupshup
+    - Custom providers
+  </Card>
+</Cards>
 
 ## Provider Abstraction
 
@@ -107,10 +118,8 @@ The provider abstraction allows easy switching between providers:
           "host": "smtp.example.com",
           "port": 587,
           "secure": true,
-          "auth": {
-            "user": "username",
-            "pass": "password"
-          }
+          "user": "username",
+          "pass": "password"
         }
       }
     }
@@ -200,43 +209,30 @@ await sendSMS({
 
 ## Best Practices
 
-<details>
-<summary>Template Design</summary>
-
-- Use clear layouts
-- Test responsiveness
-- Include plain text
-- Follow email standards
-- Optimize for mobile
-
-</details>
-
-<details>
-<summary>Content Management</summary>
-
-- Document variables
-- Version templates
-- Test thoroughly
-- Monitor performance
-
-</details>
-
-<details>
-<summary>Delivery</summary>
-
-- Configure SPF/DKIM
-- Monitor bounces
-- Track engagement
-- Handle failures
-
-</details>
-
-<details>
-<summary>Maintenance</summary>
-
-- Regular updates
-- Clean old templates
-- Update providers
-- Review analytics
-
-</details>
+<Cards>
+  <Card title="Template Design">
+    - Use clear layouts
+    - Test responsiveness
+    - Include plain text
+    - Follow email standards
+    - Optimize for mobile
+  </Card>
+  <Card title="Content Management">
+    - Document variables
+    - Version templates
+    - Test thoroughly
+    - Monitor performance
+  </Card>
+  <Card title="Delivery">
+    - Configure SPF/DKIM
+    - Monitor bounces
+    - Track engagement
+    - Handle failures
+  </Card>
+  <Card title="Maintenance">
+    - Regular updates
+    - Clean old templates
+    - Update providers
+    - Review analytics
+  </Card>
+</Cards>

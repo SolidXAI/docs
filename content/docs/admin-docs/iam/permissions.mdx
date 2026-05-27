@@ -2,6 +2,8 @@
 title: Permissions
 ---
 
+import { Shield, Users, Settings, Wrench, KeyRound } from 'lucide-react';
+
 Permissions in SOLID are automatically discovered based on controller actions and provide fine-grained control over what users can do within the system.
 
 ## Permission System
@@ -25,65 +27,50 @@ Examples:
 
 ### Resource Permissions
 
-<div>
-
-  <div>
-    CRUD Operations
-    - Create: `resource:create`  
-    - Read: `resource:read`  
-    - Update: `resource:update`  
+<Cards>
+  <Card icon={<KeyRound />} title="CRUD Operations">
+    - Create: `resource:create`
+    - Read: `resource:read`
+    - Update: `resource:update`
     - Delete: `resource:delete`
-  </div>
-
-  <div>
-    Special Operations
-    - Import: `resource:import`  
-    - Export: `resource:export`  
-    - Archive: `resource:archive`  
+  </Card>
+  <Card icon={<Wrench />} title="Special Operations">
+    - Import: `resource:import`
+    - Export: `resource:export`
+    - Archive: `resource:archive`
     - Restore: `resource:restore`
-  </div>
-
-</div>
+  </Card>
+</Cards>
 
 ### Administrative Permissions
 
-<div>
-
-  <div>
-    User Management
-    - Create users: `users:create`  
-    - Manage roles: `roles:manage`  
+<Cards>
+  <Card icon={<Users />} title="User Management">
+    - Create users: `users:create`
+    - Manage roles: `roles:manage`
     - Assign permissions: `permissions:assign`
-  </div>
-
-  <div>
-    System Settings
-    - Configure system: `settings:manage`  
-    - Manage modules: `modules:manage`  
+  </Card>
+  <Card icon={<Settings />} title="System Settings">
+    - Configure system: `settings:manage`
+    - Manage modules: `modules:manage`
     - View logs: `logs:read`
-  </div>
-
-</div>
+  </Card>
+</Cards>
 
 ### Feature Permissions
 
-<div>
-
-  <div>
-    Module Access
-    - Access module: `module:access`  
-    - Configure module: `module:configure`  
+<Cards>
+  <Card icon={<Shield />} title="Module Access">
+    - Access module: `module:access`
+    - Configure module: `module:configure`
     - Manage module data: `module:manage`
-  </div>
-
-  <div>
-    Tool Access
-    - Use import tool: `tools:import:use`  
-    - Use export tool: `tools:export:use`  
+  </Card>
+  <Card icon={<Wrench />} title="Tool Access">
+    - Use import tool: `tools:import:use`
+    - Use export tool: `tools:export:use`
     - Use admin tools: `tools:admin:use`
-  </div>
-
-</div>
+  </Card>
+</Cards>
 
 ## Permission Management
 
@@ -144,9 +131,9 @@ Permissions can be grouped for easier management:
 {
   "roleId": "content_admin",
   "patterns": [
-    "content:*:*",      // All content permissions
-    "media:images:*",    // All image permissions
-    "!*.delete"         // Exclude delete permissions
+    "content:*:*",
+    "media:images:*",
+    "!*.delete"
   ]
 }
 ```
@@ -200,40 +187,30 @@ Permissions can be grouped for easier management:
 }
 ```
 
-### Best Practices 
-<details>
-  <summary>Permission Design</summary>
-  <ul>
-    <li>Use clear, descriptive names</li>
-    <li>Follow naming conventions</li>
-    <li>Document permission purposes</li>
-    <li>Consider dependencies between permissions</li>
-  </ul>
-</details>
-<details>
-  <summary>Permission Assignment</summary>
-  <ul>
-    <li>Follow the principle of least privilege</li>
-    <li>Group related permissions logically</li>
-    <li>Perform regular permission audits</li>
-    <li>Document assignments and changes</li>
-  </ul>
-</details>
-<details>
-  <summary>Security</summary>
-  <ul>
-    <li>Validate permission checks programmatically</li>
-    <li>Log permission changes</li>
-    <li>Monitor usage patterns for anomalies</li>
-    <li>Perform regular security reviews</li>
-  </ul>
-</details>
-<details>
-  <summary>Maintenance</summary>
-  <ul>
-    <li>Clean up unused permissions</li>
-    <li>Update permission documentation</li>
-    <li>Review dependencies when modifying permissions</li>
-    <li>Monitor performance and access patterns</li>
-  </ul>
-</details>
+### Best Practices
+<Cards>
+  <Card title="Permission Design">
+    - Use clear, descriptive names
+    - Follow naming conventions
+    - Document permission purposes
+    - Consider dependencies between permissions
+  </Card>
+  <Card title="Permission Assignment">
+    - Follow the principle of least privilege
+    - Group related permissions logically
+    - Perform regular permission audits
+    - Document assignments and changes
+  </Card>
+  <Card title="Security">
+    - Validate permission checks programmatically
+    - Log permission changes
+    - Monitor usage patterns for anomalies
+    - Perform regular security reviews
+  </Card>
+  <Card title="Maintenance">
+    - Clean up unused permissions
+    - Update permission documentation
+    - Review dependencies when modifying permissions
+    - Monitor performance and access patterns
+  </Card>
+</Cards>

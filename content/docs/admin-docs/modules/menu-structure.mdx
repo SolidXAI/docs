@@ -2,6 +2,8 @@
 title: Menu Structure
 ---
 
+import { RefreshCw, Shield, Settings } from 'lucide-react';
+
 SOLID automatically generates and manages the admin panel's menu structure based on your modules and resources. The menu system provides an intuitive way to navigate through your application's features.
 
 ## Menu Organization
@@ -74,75 +76,51 @@ You can customize the menu structure through configuration:
 
 ## Features
 
-<div>
-
-<div>
-  Dynamic Updates
-  <ul>
-    <li>Menu updates automatically when modules/resources change</li>
-    <li>Real-time permission checks</li>
-    <li>Responsive to user role changes</li>
-    <li>Support for dynamic sub-menus</li>
-  </ul>
-</div>
-
-<div>
-  Access Control
-  <ul>
-    <li>Menu items respect user permissions</li>
-    <li>Role-based visibility</li>
-    <li>Resource-level access control</li>
-    <li>Custom permission rules</li>
-  </ul>
-</div>
-
-<div>
-  Customization
-  <ul>
-    <li>Custom icons</li>
-    <li>Custom ordering</li>
-    <li>Custom labels</li>
-    <li>Nested menu structures</li>
-  </ul>
-</div>
-
-</div>
+<Cards>
+  <Card icon={<RefreshCw />} title="Dynamic Updates">
+    - Menu updates automatically when modules/resources change
+    - Real-time permission checks
+    - Responsive to user role changes
+    - Support for dynamic sub-menus
+  </Card>
+  <Card icon={<Shield />} title="Access Control">
+    - Menu items respect user permissions
+    - Role-based visibility
+    - Resource-level access control
+    - Custom permission rules
+  </Card>
+  <Card icon={<Settings />} title="Customization">
+    - Custom icons
+    - Custom ordering
+    - Custom labels
+    - Nested menu structures
+  </Card>
+</Cards>
 
 ## Best Practices
-<details>
-    <summary>Organization</summary>
-    <ul>
-      <li>Group related items together</li>
-      <li>Use clear, descriptive labels</li>
-      <li>Keep menu depth manageable</li>
-      <li>Consider user workflow</li>
-    </ul>
-</details>
-<details>
-    <summary>Permissions</summary>
-    <ul>
-      <li>Set appropriate access levels</li>
-      <li>Group similar permissions</li>
-      <li>Document permission requirements</li>
-      <li>Regular permission audits</li>
-    </ul>
-</details>
-<details>
-    <summary>User Experience</summary>
-   <ul>
-      <li>Use meaningful icons</li>
-      <li>Maintain consistent naming</li>
-      <li>Optimize menu depth</li>
-      <li>Consider mobile users</li>
-    </ul>
-</details>
-<details>
-    <summary>Maintenance</summary>
-      <ul>
-      <li>Regular menu audits</li>
-      <li>Update outdated labels</li>
-      <li>Remove unused items</li>
-      <li>Monitor access patterns</li>
-    </ul>
-</details>
-
+<Cards>
+  <Card title="Organization">
+    - Group related items together
+    - Use clear, descriptive labels
+    - Keep menu depth manageable
+    - Consider user workflow
+  </Card>
+  <Card title="Permissions">
+    - Set appropriate access levels
+    - Group similar permissions
+    - Document permission requirements
+    - Regular permission audits
+  </Card>
+  <Card title="User Experience">
+    - Use meaningful icons
+    - Maintain consistent naming
+    - Optimize menu depth
+    - Consider mobile users
+  </Card>
+  <Card title="Maintenance">
+    - Regular menu audits
+    - Update outdated labels
+    - Remove unused items
+    - Monitor access patterns
+  </Card>
+</Cards>

@@ -1,0 +1,184 @@
+---
+title: Form View
+---
+
+import { Layout, Type, ListChecks, ShieldCheck, GitBranch, MessageSquare, FileText } from 'lucide-react';
+
+The Form View provides a comprehensive interface for creating and editing individual records, with support for complex data entry, validation, and workflow management.
+
+## Core Features
+
+<Cards>
+  <Card icon={<Layout />} title="Form Layout — Section Management">
+    - Logical grouping of fields
+    - Collapsible sections
+    - Conditional visibility
+    - Custom styling
+  </Card>
+  <Card icon={<Layout />} title="Form Layout — Field Arrangement">
+    - Responsive grid layout
+    - Field sizing and spacing
+    - Label positioning
+    - Help text support
+  </Card>
+  <Card icon={<Type />} title="Data Entry — Field Types">
+    - All supported field types
+    - Custom field components
+    - Rich text editing
+    - File uploads
+  </Card>
+  <Card icon={<ListChecks />} title="Data Entry — Validation">
+    - Real-time validation
+    - Custom validation rules
+    - Cross-field validation
+    - Error messaging
+  </Card>
+  <Card icon={<ShieldCheck />} title="Advanced — Audit Trail">
+    - Change history
+    - User tracking
+    - Timestamp logging
+    - Change comments
+  </Card>
+  <Card icon={<GitBranch />} title="Advanced — Workflow Integration">
+    - Status management
+    - Stage transitions
+    - Approval processes
+    - Action triggers
+  </Card>
+  <Card icon={<MessageSquare />} title="Advanced — Chatter/Comments">
+    - Threaded discussions
+    - @mentions
+    - File attachments
+    - Activity log
+  </Card>
+</Cards>
+
+## Form Configuration
+
+Customize form layout and behavior through JSON configuration:
+
+```json
+{
+  "layout": {
+    "sections": [
+      {
+        "title": "Basic Information",
+        "collapsible": true,
+        "defaultOpen": true,
+        "columns": 2,
+        "fields": [
+          { "name": "title", "size": "full" },
+          { "name": "status", "size": "half" },
+          { "name": "priority", "size": "half" }
+        ]
+      },
+      {
+        "title": "Details",
+        "condition": "status === 'active'",
+        "fields": [
+          { "name": "description", "size": "full" },
+          { "name": "attachments", "size": "full" }
+        ]
+      }
+    ],
+    "sidebar": {
+      "sections": [
+        { "type": "workflow", "position": "top" },
+        { "type": "audit", "position": "middle" },
+        { "type": "chatter", "position": "bottom" }
+      ]
+    }
+  },
+  "actions": {
+    "save": { "label": "Save", "position": "top", "validation": true },
+    "custom": [
+      {
+        "name": "approve",
+        "label": "Approve",
+        "condition": "status === 'pending'",
+        "confirmation": {
+          "title": "Confirm Approval",
+          "message": "Are you sure you want to approve this record?"
+        }
+      }
+    ]
+  }
+}
+```
+
+## Form Components
+
+### Main Form Area
+- Field groups and sections
+- Dynamic field rendering
+- Conditional visibility
+- Validation feedback
+
+### Sidebar Components
+
+<Cards>
+  <Card icon={<GitBranch />} title="Workflow Ribbon">
+    - Current status
+    - Available transitions
+    - Stage history
+    - Action buttons
+  </Card>
+  <Card icon={<ShieldCheck />} title="Audit Trail">
+    - Change history
+    - User actions
+    - Timestamps
+    - Field changes
+  </Card>
+  <Card icon={<MessageSquare />} title="Chatter/Comments">
+    - Discussion threads
+    - File attachments
+    - User mentions
+    - Activity feed
+  </Card>
+</Cards>
+
+### Action Bar
+- Primary actions (Save, Delete)
+- Custom actions
+- Workflow actions
+- Quick links
+
+## Best Practices
+<Cards>
+  <Card title="Layout Design">
+    - Group related fields
+    - Use logical sections
+    - Consider field dependencies
+    - Optimize for readability
+  </Card>
+  <Card title="Validation">
+    - Provide clear error messages
+    - Validate in real-time
+    - Handle edge cases
+    - Consider field relationships
+  </Card>
+  <Card title="Performance">
+    - Load data efficiently
+    - Cache form state
+    - Optimize validations
+    - Handle large forms
+  </Card>
+  <Card title="User Experience">
+    - Clear navigation
+    - Consistent styling
+    - Helpful tooltips
+    - Keyboard shortcuts
+  </Card>
+  <Card title="Workflow Integration">
+    - Clear status indicators
+    - Intuitive transitions
+    - Proper validations
+    - Audit trail tracking
+  </Card>
+  <Card title="Chatter/Comments">
+    - Discussion threads
+    - File attachments
+    - User mentions
+    - Activity feed
+  </Card>
+</Cards>

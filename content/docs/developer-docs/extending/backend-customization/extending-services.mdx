@@ -6,6 +6,8 @@ keywords: [backend, services, customization]
 solidx_concerns: [add_custom_service_method, using_crud_service_method, add_controller_endpoint]
 ---
 
+import { KanbanSquare, Redo2, Beaker, CheckCheck } from 'lucide-react';
+
 In SolidX, **services** are responsible for implementing **business logic** and handling **data manipulation**.  
 By extending services, you can introduce custom logic that goes beyond the default CRUD behavior provided by SolidX.  
 
@@ -18,10 +20,20 @@ This is especially useful when:
 
 Creating methods inside services provides several benefits:  
 
-- **Separation of Concerns** → Business logic resides in services, keeping controllers simple.  
-- **Reusability** → The same service method can be reused by multiple controllers or scheduled jobs.  
-- **Testability** → Service methods are easier to unit test compared to full controller logic.  
-- **Consistency** → Centralized service methods reduce duplication across your codebase.  
+<Cards>
+  <Card icon={<KanbanSquare />} title="Separation of Concerns">
+    Business logic resides in services, keeping controllers simple.
+  </Card>
+  <Card icon={<Redo2 />} title="Reusability">
+    The same service method can be reused by multiple controllers or scheduled jobs.
+  </Card>
+  <Card icon={<Beaker />} title="Testability">
+    Service methods are easier to unit test compared to full controller logic.
+  </Card>
+  <Card icon={<CheckCheck />} title="Consistency">
+    Centralized service methods reduce duplication across your codebase.
+  </Card>
+</Cards>
 
 ## Adding a New Method
 
@@ -54,12 +66,12 @@ export class InstituteService {
 ```
 </details>
 
-This method encapsulates the logic required to **activate an institute’s portal**.  
+This method encapsulates the logic required to **activate an institute's portal**.  
 It could include **database updates, event publishing, or notification sending**.  
 
 ## Using Service Methods in Controllers
 
-Once you’ve created a service method, you can call it from a controller endpoint.  
+Once you've created a service method, you can call it from a controller endpoint.  
 This keeps the controller lightweight while delegating heavy logic to the service.
 
 See the [Extending Controllers](./extending-controllers.md) guide for details on adding endpoints.  
@@ -75,4 +87,3 @@ async activateInstitute(@Body() ids: (number | string)[]) {
 ```
 
 Here, the controller method simply delegates to the **service method**, ensuring a clean separation of responsibilities.
-
