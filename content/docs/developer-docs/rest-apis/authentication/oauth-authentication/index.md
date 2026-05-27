@@ -4,8 +4,6 @@ description: Information about OAuth-based authentication providers
 summary: Comprehensive guide to OAuth authentication in SolidX supporting multiple providers (Password, OTP, Google, Meta/Facebook, LinkedIn, Twitter/X, custom OAuth). Covers standard OAuth flow (frontend redirect, backend callback), environment variable configuration per provider (client IDs, secrets, callback URLs), securing OAuth with state validation, token exchange, user profile retrieval, session management with JWT tokens, frontend implementation patterns, and examples for Google OAuth integration.
 ---
 
-# Authentication Providers
-
 SOLID supports multiple authentication methods through its provider system, offering flexibility in how users can sign up and log in to your application.
 
 ## Supported Providers
@@ -374,56 +372,40 @@ export class GoogleAuthenticationController {
 ```
 
 ## Best Practices
-
-  <details>
-    <summary>
-      
-      Provider Selection
-    </summary>
+<details>
+    <summary>Provider Selection</summary>
     <ul>
       <li>Consider user base</li>
       <li>Evaluate security needs</li>
       <li>Plan backup methods</li>
       <li>Test all flows</li>
     </ul>
-  </details>
-
-  <details>
-    <summary>
-      
-      Configuration
-    </summary>
+</details>
+<details>
+    <summary>Configuration</summary>
     <ul>
       <li>Secure credentials</li>
       <li>Set proper timeouts</li>
       <li>Configure rate limits</li>
       <li>Enable logging</li>
     </ul>
-  </details>
-
-  <details>
-    <summary>
-      
-      User Experience
-    </summary>
+</details>
+<details>
+    <summary>User Experience</summary>
     <ul>
       <li>Clear error messages</li>
       <li>Simple recovery flows</li>
       <li>Multiple auth options</li>
       <li>Remember user preferences</li>
     </ul>
-  </details>
-
-  <details>
-    <summary>
-      
-      Security
-    </summary>
+</details>
+<details>
+    <summary>Security</summary>
     <ul>
       <li>Regular audits</li>
       <li>Monitor failed attempts</li>
       <li>Review permissions</li>
       <li>Update configurations</li>
     </ul>
-  </details>
+</details>
 

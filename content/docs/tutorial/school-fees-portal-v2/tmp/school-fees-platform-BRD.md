@@ -2,7 +2,6 @@
 title: School Fees & Payments Platform
 ---
 
-# School Fees & Payments Platform  
 **Business Requirements Document (BRD)**
 
 ## 1. Purpose & Business Objective

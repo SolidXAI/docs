@@ -15,10 +15,7 @@ You can use either:
 
  Example: Display an integer field `score` as a **slider** using the built-in `integerSlider` widget.
 <details>
-    <summary>
-        
-        `Using Built-in Widget`
-    </summary>
+    <summary>`Using Built-in Widget`</summary>
 ```json
 {
   "name": "model-form-view",
@@ -48,10 +45,7 @@ You can use either:
 ### 1. Create the Widget Component
 Here’s an example of an **integer slider widget**. This widget allows users to select an integer value using a slider.
 <details>
- <summary>
-    
-    `SolidIntegerSliderStyleFormEditWidget`
-</summary>
+ <summary>`SolidIntegerSliderStyleFormEditWidget`</summary>
 
 ```tsx
 import { SolidFormFieldWidgetProps } from "@solidstarters/solid-core-ui/dist/types/solid-core";
@@ -155,10 +149,7 @@ export const SolidIntegerSliderStyleFormEditWidget = ({ formik, fieldContext }: 
 ### 2. Register the Widget
 Widgets must be **registered** in `solid-extensions.ts`:
 <details>
- <summary>
-    
-   `Registering the Widget`
-   </summary>
+ <summary>`Registering the Widget`</summary>
 ```tsx
 registerExtensionComponent(
   "SolidIntegerSliderStyleFormEditWidget", // component name
@@ -176,10 +167,7 @@ registerExtensionComponent(
 ### 3. Use in Layout 
 Now you can configure the widget within the form view layout configuration in the module metadata schema JSON file:
 <details>
- <summary>
-    
-   `Using Custom Widget in Layout`
-   </summary>
+ <summary>`Using Custom Widget in Layout`</summary>
 ```json
 {
   "name": "institute-form-view",
@@ -212,10 +200,7 @@ File Path:
 3. It dynamically imports the corresponding widget component.  
 4. The widget is rendered with props of type `SolidFormFieldWidgetProps`:
 <details>
- <summary>
-    
-   `SolidFormFieldWidgetProps`
-   </summary>
+ <summary>`SolidFormFieldWidgetProps`</summary>
 ``` tsx
 export type SolidFormFieldWidgetProps = {
     formik: any; // Formik instance for form state management
@@ -246,10 +231,7 @@ Similarly, you can create **view widgets** for **read-only mode** using `viewWid
 
 ### Example: Boolean View Widget
 <details>
- <summary>
-    
-   `CustomBooleanFormViewWidget`
-</summary>
+ <summary>`CustomBooleanFormViewWidget`</summary>
 
 ```tsx
 export const CustomBooleanFormViewWidget = ({ formik, fieldContext }: SolidFormFieldWidgetProps) => {

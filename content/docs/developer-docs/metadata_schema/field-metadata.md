@@ -11,7 +11,6 @@ items_attributes_doc: "#field-metadata-attributes"
 solidx_concerns: [add_field_to_a_model, remove_field_from_a_model, create_model_with_fields]
 ---
 
-# Field Metadata
 > **Where it lives**  
 > **JSON Pointer:** `/moduleMetadata/models/fields`  
 > **JSONPath:** `$.moduleMetadata.models[*].fields[*]`  
@@ -25,10 +24,7 @@ Every SolidX model is composed of fields. Fields in SolidX go over and above the
 
 ### Example: Institute + Fee Type Model fields
 <details>
- <summary>
-    
-    Field Schema
-  </summary>
+ <summary>Field Schema</summary>
 
 ```json
 {
@@ -865,10 +861,7 @@ Fixed filter (JSON) applied when fetching related records from the admin ui. Thi
 
 The filter is a JSON object of schema type BasicFilterDto:
 <details>
- <summary>
-    
-    Filter schema
-  </summary>
+ <summary>Filter schema</summary>
 
 ```ts
 export enum SoftDeleteFilter {

@@ -282,8 +282,6 @@ After logging in, you will be redirected to the default landing page of the admi
 ![SolidX Admin Panel Landing Page](/img/tutorial/school-fees-portal-v2/admin_panel_post_login_redirect_page.png)
 *Screenshot showing the default landing page after successful login*
 
----
-
 ## Setup Complete - Ready to Build!
 
 Your SolidX environment is now configured and the admin panel is accessible.

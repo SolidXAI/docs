@@ -6,8 +6,6 @@ keywords: [backend, TypeORM subscribers, customization]
 solidx_concerns: [typeorm_subscribers]
 ---
 
-# TypeORM Subscribers
-
 TypeORM **subscribers** are a powerful feature that allow you to listen to and react to various lifecycle events of your entities.  
 
 They can be used to perform side effects such as logging, auditing, triggering workflows, or maintaining consistency across related entities.  

@@ -6,15 +6,11 @@ keywords: [backend, services, CRUD, customization]
 solidx_concerns: [using_crud_service_method, add_custom_service_method, add_controller_endpoint]
 ---
 
-# CRUD Service — Usage & Extension Guide
-
 The **CRUD Service** is the backbone of data management in **SolidX**. It standardizes Create, Read, Update, and Delete operations for any model and adds niceties like permission checks, field-level validation/transformations, media handling, and soft-delete recovery.
 
 This document explains how to **extend** the `CRUDService<T>` for your models and how **clients** (controllers, other services) can call each **public API**. Every section first **explains what the example demonstrates**, followed by a **collapsible code block** you can copy‑paste.
 
 > The generated service classes for SolidX models already extend the CRUD service. You can also extend it manually for your own modules.
-
----
 
 ## What You Get Out‑of‑the‑Box
 
@@ -35,12 +31,9 @@ This document explains how to **extend** the `CRUDService<T>` for your models an
 - **Soft delete** & **recovery** flows supported  
 - **Permission checks** via `CrudHelperService`
 
----
-
 ## Extending the CRUD Service
 
 **What this shows:** How to define a model‑specific service (e.g., `PersonService`) that **inherits** all CRUD methods and optionally adds custom methods like `findByEmail`. You typically inject this service into a controller to expose REST endpoints.
-
 <details>
 <summary>Show example</summary>
 
@@ -89,14 +82,11 @@ export class PersonService extends CRUDService<Person> {
 
 > Any subclass automatically inherits all CRUD methods and can call `this.repo`, `this.entityManager`, etc.
 
----
-
 ## DTOs You’ll Use When Reading
 
 **What this shows:** The shape of pagination & filtering DTOs your **clients** pass to `find`/`findOne`. You can extend or narrow these DTOs in your own app, but the base service already understands them via `CrudHelperService`.
 
 ### `PaginationQueryDto`
-
 <details>
 <summary>Show example</summary>
 
@@ -108,7 +98,6 @@ filters?: Record<string, any>;
 </details>
 
 ### `BasicFilterDto` (extends `PaginationQueryDto`)
-
 <details>
 <summary>Show example</summary>
 
@@ -126,12 +115,9 @@ status?: string; // publish | draft (when draft/publish workflow is enabled)
 ```
 </details>
 
----
-
 ## Permissions & Context
 
 **Note:** The optional `context` parameter accepts an **ActiveUser** object. It is generally auto‑populated by controllers from the request context to perform permission checks for the logged‑in user before CRUD operations. If you call service methods manually, `context` is optional.
-
 <details>
 <summary>ActiveUser shape</summary>
 
@@ -169,8 +155,6 @@ export interface ActiveUserData {
 ```
 </details>
 
----
-
 ## CrudService API (with Examples )
 
 Below are **explained** examples for each method. Read the **explanation** first, then expand the **closeable** snippet.
@@ -178,7 +162,6 @@ Below are **explained** examples for each method. Read the **explanation** first
 ### 1) `create(createDto, files?, context?)`
 
 **What this shows:** How to create an entity, including optional media uploads (`files`). Field managers validate & transform values (e.g., hashing passwords, enforcing regex/length).
-
 <details>
 <summary>Show code</summary>
 
@@ -200,12 +183,9 @@ await personService.create(
 ```
 </details>
 
----
-
 ### 2) `update(id, updateDto, files?, isPartial?, context?)`
 
 **What this shows:** How to update an entity by ID. Set `isPartial = true` for PATCH‑style updates; leave it `false` (default) for PUT‑style behavior. Media updates can be supplied via `files` when your model has media fields.
-
 <details>
 <summary>Show code</summary>
 
@@ -223,12 +203,9 @@ await personService.update(
 ```
 </details>
 
----
-
 ### 3) `delete(id, context?)`
 
 **What this shows:** How to delete a record. If your model has soft delete enabled, the row is archived instead of hard‑removed.
-
 <details>
 <summary>Show code</summary>
 
@@ -237,12 +214,9 @@ await personService.delete(12 /*, context? */);
 ```
 </details>
 
----
-
 ### 4) `find(filterDto, context?)`
 
 **What this shows:** How to list entities with pagination, selective fields, relation population, media population, sorting, grouping, and optional filter expressions. The return value includes a `meta` block with paging info.
-
 <details>
 <summary>Show code</summary>
 
@@ -277,12 +251,9 @@ console.log(result.records);  // Entity[] with optional `_media` key added
 ```
 </details>
 
----
-
 ### 5) `findOne(id, query, context?)`
 
 **What this shows:** How to fetch one entity by ID with relations populated and media URLs resolved into the non-persistent `_media` key.
-
 <details>
 <summary>Show code</summary>
 
@@ -306,12 +277,9 @@ console.log(first._full_url); // absolute URL to the file
 ```
 </details>
 
----
-
 ### 6) `insertMany(createDtos, filesArray?, context?)`
 
 **What this shows:** How to bulk insert records. The base implementation ignores `filesArray` (kept as `[]`) — add your own override if you need per-row media support.
-
 <details>
 <summary>Show code</summary>
 
@@ -329,12 +297,9 @@ console.log(saved.length); // 2
 ```
 </details>
 
----
-
 ### 7) `deleteMany(ids, context?)`
 
 **What this shows:** How to bulk delete by IDs. Honors soft delete if enabled.
-
 <details>
 <summary>Show code</summary>
 
@@ -343,12 +308,9 @@ await personService.deleteMany([101, 102, 103]);
 ```
 </details>
 
----
-
 ### 8) `recover(id, context?)`
 
 **What this shows:** How to restore a single soft‑deleted record by ID. If a conflicting unique constraint exists, the service throws a conflict error so you can resolve it first.
-
 <details>
 <summary>Show code</summary>
 
@@ -358,12 +320,9 @@ console.log(res.message); // "Record recovered" (per SUCCESS_MESSAGES)
 ```
 </details>
 
----
-
 ### 9) `recoverMany(ids, context?)`
 
 **What this shows:** How to restore multiple soft‑deleted records at once. The response includes the list of recovered IDs.
-
 <details>
 <summary>Show code</summary>
 
@@ -373,14 +332,11 @@ console.log(res.recoveredIds); // [101, 102, 103]
 ```
 </details>
 
----
-
 ## Media Population Cheat‑Sheet
 
 **What this shows:** How to request media URLs for single and nested media fields; the service attaches a runtime `_media` object per entity (and nested entities) without persisting it to the DB.
 
 The media types look like:
-
 <details>
 <summary>Media types</summary>
 
@@ -423,7 +379,6 @@ export class Media extends CommonEntity {
 }
 ```
 </details>
-
 <details>
 <summary>Show example</summary>
 
@@ -440,12 +395,9 @@ console.log(media._full_url);
 ```
 </details>
 
----
-
 ## Filters & Grouping Tips
 
 **What this shows:** How `filters`, `groupBy`, and `showSoftDeleted` affect results. Your `CrudHelperService` defines the exact grammar for `filters` and grouping, so adjust the payload to match your implementation.
-
 <details>
 <summary>Filters group by example</summary>
 
@@ -476,16 +428,12 @@ console.log(response);
 ```
 </details>
 
----
-
 ## Best Practices
 
 - Prefer `find({ fields: [...] })` to limit selected columns on heavy entities.
 - Use `isPartial = true` for PATCH-like updates; otherwise the service assumes a PUT-like update.
 - When adding media fields to models, configure a `MediaStorageProvider` in metadata.
 - Keep custom logic (side effects, complex computed values) in  **Computation Providers** preferably or **TypeORM Subscribers** if necessary.
-
----
 
 ## Summary
 

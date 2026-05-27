@@ -2,8 +2,6 @@
 title: Menu Structure
 ---
 
-# Menu Structure
-
 SOLID automatically generates and manages the admin panel's menu structure based on your modules and resources. The menu system provides an intuitive way to navigate through your application's features.
 
 ## Menu Organization
@@ -111,56 +109,40 @@ You can customize the menu structure through configuration:
 </div>
 
 ## Best Practices
-
-  <details>
-    <summary>
-    
-      Organization
-    </summary>
+<details>
+    <summary>Organization</summary>
     <ul>
       <li>Group related items together</li>
       <li>Use clear, descriptive labels</li>
       <li>Keep menu depth manageable</li>
       <li>Consider user workflow</li>
     </ul>
-  </details>
-
-  <details>
-    <summary>
-    
-      Permissions
-    </summary>
+</details>
+<details>
+    <summary>Permissions</summary>
     <ul>
       <li>Set appropriate access levels</li>
       <li>Group similar permissions</li>
       <li>Document permission requirements</li>
       <li>Regular permission audits</li>
     </ul>
-  </details>
-
-   <details>
-    <summary>
-    
-      User Experience
-    </summary>
+</details>
+<details>
+    <summary>User Experience</summary>
    <ul>
       <li>Use meaningful icons</li>
       <li>Maintain consistent naming</li>
       <li>Optimize menu depth</li>
       <li>Consider mobile users</li>
     </ul>
-  </details>
-
-   <details>
-    <summary>
-    
-      Maintenance
-    </summary>
+</details>
+<details>
+    <summary>Maintenance</summary>
       <ul>
       <li>Regular menu audits</li>
       <li>Update outdated labels</li>
       <li>Remove unused items</li>
       <li>Monitor access patterns</li>
     </ul>
-  </details>
+</details>
 

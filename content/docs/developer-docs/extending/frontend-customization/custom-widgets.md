@@ -5,8 +5,6 @@ summary: Guide to creating custom widgets in SolidX using the built-in `CustomHt
 solidx_concerns: [create_custom_widget, add_form_button]
 ---
 
-#  Custom Widgets
-
 ##  Overview
 Custom widgets allow you to **extend the UI functionality** of your frontend application by adding new components to your view layouts.  
 These widgets:
@@ -18,12 +16,8 @@ These widgets:
 ##  How to Configure the `CustomHtml` Widget
 
  Example: Display how many characters a user has typed in a text field.
-
 <details>
- <summary>
-    
-    Code: CustomHtml Widget Configuration
-</summary>
+ <summary>Code: CustomHtml Widget Configuration</summary>
 
 ```json
 {
@@ -56,12 +50,8 @@ These widgets:
 2. It identifies **custom fields** (`type: custom`).  
 3. It dynamically imports the corresponding widget component.  
 4. The widget is rendered with the following props:  
-
 <details>
- <summary>
-    
-    Code: Props Interface
-</summary>
+ <summary>Code: Props Interface</summary>
 
 ```tsx
 export type SolidFormWidgetProps = {

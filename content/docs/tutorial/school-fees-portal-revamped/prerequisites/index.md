@@ -2,8 +2,6 @@
 title: Pre-requisites
 ---
 
-# Pre-requisites
-
  **Note:** These installation instructions are provided as a **guideline**. Environments differ, so if you run into issues, you can troubleshoot by consulting the relevant official documentation or searching for solutions on the internet.
  
 ## 1. Database Setup (PostgreSQL)
@@ -63,8 +61,6 @@ title: Pre-requisites
   </TabItem>
 </Tabs>
 
----
-
 ## 2. Git Installation
 
 <Tabs>
@@ -104,8 +100,6 @@ git config --global user.email "youremail@example.com"
 # Check your configuration
 git config --list
 ```
-
----
 
 ## 3. Node.js & npm (via nvm)
 
@@ -156,8 +150,6 @@ We highly recommend using **Node Version Manager (nvm)** to manage multiple Node
 node -v
 npm -v
 ```
-
----
 
 ## 4. Project-Specific Tools
 

@@ -2,8 +2,6 @@
 title: Onboarding an Institute
 ---
 
-# Onboarding an Institute
-
 ## Introduction
 
 Onboarding an Institute allows platform-level Admins to create and configure new institutes within a multi-tenant fees management ecosystem.
@@ -37,8 +35,6 @@ This architecture provides:
 | **Customisation** | Each institute has its own fees, admins, branding, and PG setup. |
 | **Operational Independence** | If one institute faces issues, others remain unaffected. |
 | **Centralised Governance** | Super Admin retains global visibility and control. |
-
----
 
 ## Onboarding Workflow (Step-by-Step)
 
@@ -511,8 +507,6 @@ export interface IWebsiteDnsManager {
 // src/dns/tokens.ts
 export const WEBSITE_DNS_MANAGER = Symbol('WEBSITE_DNS_MANAGER');
 ```
-
----
 
 create route53-website-dns.manager.ts
 

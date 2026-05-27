@@ -5,7 +5,6 @@ summary: This document covers the retrieve endpoints of the SolidX REST API, exp
 solidx_concerns: [add_full_custom_ui,onlayoutload_handler_function,ondataload_handler_function,add_form_button,add_list_header_button_with,add_list_row_button_with,create_custom_form_field_widget,create_custom_list_field_widget]
 ---
 
-# Overview
 This section will give information about the retrieve endpoint of the REST API, including how to use it, what parameters it accepts, and what responses it returns.
 
 The retrieve endpoints allows you to fetch one or more records from the system.

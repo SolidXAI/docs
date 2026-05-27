@@ -2,8 +2,6 @@
 title: 2. Data Model
 ---
 
-# 2. Data Model
-
 In this step we will access the newly bootstrapped SolidX projects admin interface and start designing our data model.
 
 ## Login 

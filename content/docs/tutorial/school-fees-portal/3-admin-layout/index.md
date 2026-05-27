@@ -2,8 +2,6 @@
 title: 3. Admin Layout
 ---
 
-# 3. Admin Layout
-
 When a new model is added to a SolidX module the system automatically generates the following metadata for the admin ui. 
 
 1. A menu is created 

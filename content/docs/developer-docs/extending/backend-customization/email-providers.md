@@ -6,8 +6,6 @@ keywords: [backend, email providers, customization]
 solidx_concerns: [new_email_provider]
 ---
 
-# 📧 Email Providers
-
 ## 🧩 Overview
 
 SolidX provides an `SMTP` email provider out of the box, which supports sending emails **both synchronously** and **asynchronously** (via background jobs).  

@@ -11,7 +11,6 @@ items_attributes_doc: "#users-metadata-attributes"
 solidx_concerns: []
 ---
 
-# Users 
 > **Where it lives**  
 > **JSON Pointer:** `/users`  
 > **JSONPath:** `$.users`  

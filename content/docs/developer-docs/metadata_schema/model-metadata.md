@@ -11,7 +11,6 @@ items_attributes_doc: "#model-metadata-attributes"
 solidx_concerns: [create_model_with_fields, add_field_to_a_model, remove_field_from_a_model]
 ---
 
-# Model Metadata
 > **Where it lives**  
 > **JSON Pointer:** `/moduleMetadata/models`  
 > **JSONPath:** `$.moduleMetadata.models`  
@@ -27,10 +26,7 @@ Each model is a semantic, configurable data structure that forms the basis of ad
 
 ### Example: Institute Model
 <details>
-  <summary>
-    
-    Model Schema
-  </summary>
+  <summary>Model Schema</summary>
 
 ```json
 {

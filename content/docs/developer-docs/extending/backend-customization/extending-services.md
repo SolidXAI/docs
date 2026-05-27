@@ -6,8 +6,6 @@ keywords: [backend, services, customization]
 solidx_concerns: [add_custom_service_method, using_crud_service_method, add_controller_endpoint]
 ---
 
-# Extending Services
-
 In SolidX, **services** are responsible for implementing **business logic** and handling **data manipulation**.  
 By extending services, you can introduce custom logic that goes beyond the default CRUD behavior provided by SolidX.  
 
@@ -32,12 +30,8 @@ To add a new method to an existing service:
 1. Identify the service you want to extend.  
 2. Add a method in the service class that implements your business logic.  
 3. Update the corresponding controller if you want to expose this functionality via an API endpoint.  
-
 <details>
-  <summary>
-    
-    Example: Add `activateInstitutePortal` to `InstituteService`
-  </summary>
+  <summary>Example: Add `activateInstitutePortal` to `InstituteService`</summary>
 
 ```ts
 @Injectable()

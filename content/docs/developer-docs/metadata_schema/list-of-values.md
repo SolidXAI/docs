@@ -11,7 +11,6 @@ items_attributes_doc: "#list-of-values-metadata-attributes"
 solidx_concerns: [add_lov_record]
 ---
 
-# List of Values
 > **Where it lives**  
 > **JSON Pointer:** `/listOfValues`  
 > **JSONPath:** `$.listOfValues`  

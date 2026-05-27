@@ -2,11 +2,7 @@
 title: Initiate Payments
 ---
 
-# Initiate Payments
-
 This guide explains how institute admin can initiate fee payments through bulk Excel uploads, including automated processing, validations, email notifications, and scheduled automation.
-
----
 
 ## Step-by-Step Workflow
 
@@ -28,8 +24,6 @@ Ensure the format and column structure remain unchanged so the system can valida
 Open the file and fill in all required details like sample below:
 
 ![Institute User Login Screens](/img/tutorial/school-fees-portal/6-usecase/excel.png)
-
----
 
 ### Step 2: Upload Excel and Initiate Payment
 Upload the completed Excel file and click **"Save"**.
@@ -54,11 +48,8 @@ export class PaymentCollectionController {
 }
 ```
 
----
-
 ### Step 3: Automated Validation (`feeTypeValidation`)
 Before processing, the system validates the Excel file's contents, checking for correct fee types, valid due dates, correct payment modes, and proper email formats.
-
 <details>
 <summary>Click to see the full validation code</summary>
 
@@ -150,8 +141,6 @@ async feeTypeValidation(
 }
 ```
 </details>
-
----
 
 ### Step 4: Background Processing with `MediaTransactionSubscriber`
 
@@ -261,7 +250,6 @@ Next, it uses `ExcelJS` to open the workbook, read the headers, and then loop th
   }
 }
 ```
-
 <details>
 <summary>Full Code for  `paymentCollectionTransaction`</summary>
 
@@ -481,7 +469,6 @@ Same for  `sendDueFeesMail`
 ```
 
 Below is the complete source code for Process row
-
 <details>
 <summary>Full Code for `processRow`</summary>
 
@@ -673,13 +660,9 @@ private async processRow(row: ExcelJS.Row, paymentCollection: PaymentCollection,
 ```
 </details>
 
----
-
 ### Step 6: Automating Post-Payment Processes with Scheduled Jobs
 
 System uses scheduled background jobs to automate tasks such as calculating late fees and sending reminder emails to parents. After creating the job classes, each one must be registered in Solid UI.
-
----
 
 #### 1. Late Fee Calculator Job
 
@@ -747,7 +730,6 @@ Finally, it updates the `PaymentCollectionItem` with the new `lateAmountToBePaid
   }
 }
 ```
-
 <details>
 <summary>Full Code for `LateFeePaymentCalculatorScheduledJob`</summary>
 
@@ -855,8 +837,6 @@ export class LateFeePaymentCalculatorScheduledJob implements IScheduledJob {
 ```
 </details>
 
----
-
 #### 2. Reminder Email Job
 
 The `SendEmailScheduleJobs` class is a scheduled job designed to automatically send reminder emails for pending or partially paid fees. It groups all outstanding payments for each student and sends a single, consolidated email to their parent or guardian.
@@ -926,7 +906,6 @@ Finally, the job iterates through the `studentMap`. For each student, it calcula
   }
 }
 ```
-
 <details>
 <summary>Full Code for `SendEmailScheduleJobs`</summary>
 
@@ -1052,8 +1031,6 @@ export class SendEmailScheduleJobs implements IScheduledJob {
 }
 ```
 </details>
-
----
 
 ### step 7: Registering Scheduled Jobs
 

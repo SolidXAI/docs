@@ -2,8 +2,6 @@
 title: Fee Type Model
 ---
 
-# Fee Type Model
-
 **Business Purpose:** Defines the different types of fees an institute can charge (e.g., "Tuition", "Bus Fee", "Library Fee"). This allows for categorization and flexible management of fees.
 
 **Fields:**
@@ -17,15 +15,11 @@ title: Fee Type Model
 | `latePaymentFees` | [`decimal`](../../../admin-docs/module-builder/field-management#decimal) | The amount or percentage for the late fee. |
 | `feeTypeUserKey` | [`computed`](../../../admin-docs/module-builder/field-management#computed) | A unique key for the fee type, computed from the fee type and institute name. |
 
---- 
-
 ### Key Fields Explained
 
 -   **`institute` (Relation):** This is a crucial field that links each fee type to a specific institute. This `many-to-one` relationship ensures that "Tuition Fee" for "Institute A" is distinct from "Tuition Fee" for "Institute B".
 -   **`latePaymentFeesType` & `latePaymentFees`:** This pair of fields allows for flexible late fee policies. An admin can choose to apply no late fee, a fixed amount (`Absolute`), or a percentage of the due amount (`Percent`).
 -   **`feeTypeUserKey` (Computed):** This is a powerful SolidX feature. It automatically generates a unique, human-readable ID for the record before it's saved. In this case, it combines the `feeType` and the related `institute.instituteName` (e.g., "tuition-fee-institute-a") to guarantee that a fee type name is unique *within* a single institute.
-
---- 
 
 ### Creation Steps
 
@@ -40,17 +34,13 @@ If you are following the manual "Guided Tour", follow these steps to create the 
 4.  Click **Add Field** and create each field exactly as defined in the table above.
 5.  Click **Save**.
 
----
-
 > **For the Fast Track: Model Metadata**
 > The JSON block below contains the complete metadata definition for the **Fee Type** model.
 > 
 > This definition is structured with top-level properties for the model itself (like `singularName`, `pluralName`, `tableName`) and a `fields` array that defines every attribute you see in the table above.
 > 
 > You can use this metadata as part of the "Fast Track" approach by including it in the main `fees-portal-metadata.json` file.
-
 <details>
-
 <summary>&emsp; View Metadata JSON</summary>
 
 ```json
@@ -212,5 +202,4 @@ If you are following the manual "Guided Tour", follow these steps to create the 
   ]
 }
 ```
-
 </details>

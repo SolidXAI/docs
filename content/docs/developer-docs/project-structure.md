@@ -6,8 +6,6 @@ summary: This document provides a comprehensive overview of the SolidX project f
 solidx_concerns: []
 ---
 
-#  Project Structure
-
 This project is organized into a backend API (`solid-api`) and frontend UI (`solid-ui`) along with supporting scripts and configurations.
 
 ```bash
@@ -18,7 +16,7 @@ This project is organized into a backend API (`solid-api`) and frontend UI (`sol
 └── upgrade.sh                # SolidX upgrade script
 ```
 
-##  solid-api/ - Backend (NestJS & TypeORM)
+## solid-api/ - Backend (NestJS & TypeORM)
 
 This folder contains all backend services, business logic, and configurations.
 
@@ -34,29 +32,26 @@ solid-api/
 ├── rebuild*.sh / refresh.bat    # Rebuild and refresh scripts
 ```
 
-   ###  Notable Subfolders
+### Notable Subfolders
 
-  - `src/`
-    - Contains `main.ts` (entry point for the SolidX backend) and all SolidX modules like:
-      - `fees-portal/`
-    - `main-cli.ts` -> entry point for the SolidX cli commands.
-    - `app.module.ts` ->  Contains the application module configuration.
-    - `app-default-database.module.ts` -> Contains all the database configuration.
+- `src/`
+  - Contains `main.ts` (entry point for the SolidX backend) and all SolidX modules like `fees-portal/`
+  - `main-cli.ts` — entry point for the SolidX CLI commands
+  - `app.module.ts` — contains the application module configuration
+  - `app-default-database.module.ts` — contains all the database configuration
 
-   ###  SolidX dependencies
-  - `@solidstarters/solid-core`
-    - Contains the core SolidX module which provides the core backend services for SolidX.
-  - `@solidstarters/solid-code-builder`
-    - Contains the functionality for generating the code in the SolidX backend.
+### SolidX Dependencies
 
-  ###  SolidX modules
+- `@solidstarters/solid-core` — contains the core SolidX module which provides the core backend services for SolidX
+- `@solidstarters/solid-code-builder` — contains the functionality for generating the code in the SolidX backend
 
-  
-  - A SolidX module is a logical container that groups together related models and functionality under a unified domain or feature area e.g `fees-portal`.
-  - You can find the structure for a SolidX module here [Generated Code](../developer-docs/extending/code-generation/index.md).  
-  ---
+### SolidX Modules
 
-##  solid-ui/ - Frontend (Next.js & Prime React)
+A SolidX module is a logical container that groups together related models and functionality under a unified domain or feature area (e.g., `fees-portal`).
+
+You can find the structure for a SolidX module here: [Generated Code](../developer-docs/extending/code-generation/index.md)
+
+## solid-ui/ - Frontend (Next.js & Prime React)
 
 The frontend is built using Next.js and Prime React components.
 
@@ -72,30 +67,22 @@ solid-ui/
 ├── middleware.ts          # App-wide config and middlewares
 ```
 
-   ###  Notable Subfolders
+### Notable Subfolders
 
-  - `app/`
-    - Entry point for routes like `/admin`, `/auth`, etc.
-    - layout and providers via `layout.tsx` and `GlobalProvider.tsx`.
-  - `public/`
-    - Contains static files and theme assets.
-  - `redux/`
-    - Global state configuration.
+- `app/` — entry point for routes like `/admin`, `/auth`, etc. Layout and providers via `layout.tsx` and `GlobalProvider.tsx`
+- `public/` — contains static files and theme assets
+- `redux/` — global state configuration
 
-   ###  SolidX dependencies
+### SolidX Dependencies
 
-- `@solidstarters/solid-core-ui`
-  - Contains the core ui components for the SolidX UI.
-  
-##  Debugging - VS Code
+- `@solidstarters/solid-core-ui` — contains the core UI components for the SolidX UI
+
+## Debugging - VS Code
+
 Contains editor-specific configurations like `launch.json` for debugging and IDE behavior.
 
-##  Upgrade Scripts
+## Upgrade Scripts
+
 `upgrade.sh`: Used for upgrading the core SolidX backend/frontend dependencies.
 
-<div>
-  Tips
-  <ul>
-    <li>All environment variables are stored in <span> .env </span> files within each app folder.</li>
-  </ul>
-</div>
+> **Tip:** All environment variables are stored in `.env` files within each app folder.

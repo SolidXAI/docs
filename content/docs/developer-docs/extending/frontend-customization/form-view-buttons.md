@@ -16,12 +16,8 @@ These buttons can be rendered **inline** or inside a **context menu**, and can e
 
 Below is a complete example of a **custom form view button** that redirects to an external hosted page (for example, a portal for an institute).  
 It reads the `id` from form data or row context, calls an API to get the hosted prefix, and opens the page in a new browser tab.
-
 <details>
-<summary>
-  
-  `PreviewPortal.tsx`
-</summary>
+<summary>`PreviewPortal.tsx`</summary>
 
 ```tsx
 import React, { useEffect, useRef, useState } from 'react';
@@ -110,12 +106,8 @@ export default PreviewPortal;
 ## Register the Component
 
 You must register your button component so that SolidX can resolve and invoke it when the form button is clicked.
-
 <details>
-<summary>
-  
-  `solid-extensions.ts`
-</summary>
+<summary>`solid-extensions.ts`</summary>
 
 ```tsx
 import { registerExtensionComponent } from '@solidstarters/solid-core-ui';
@@ -133,12 +125,8 @@ registerExtensionComponent('PreviewPortal', PreviewPortal);
 ## Configure in Layout JSON
 
 Now, you can use this button inside your form layout metadata JSON configuration.
-
 <details>
-<summary>
-  
-  `Using in Layout JSON`
-</summary>
+<summary>`Using in Layout JSON`</summary>
 
 ```json
 {
@@ -174,10 +162,7 @@ Now, you can use this button inside your form layout metadata JSON configuration
 
 Each form button component receives a consistent set of props from the SolidX form engine.
 <details>
-<summary>
-  
-  `Action Component Props`
-</summary>
+<summary>`Action Component Props`</summary>
 ```ts
 {
   action, // action component name i.e PreviewPortal

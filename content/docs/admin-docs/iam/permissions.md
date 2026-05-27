@@ -2,13 +2,6 @@
 title: Permissions
 ---
 
-import { 
-  FaDatabase, FaCogs, FaUsers, FaTools, 
-  FaKey, FaArchive 
-} from "react-icons/fa";
-
-# Permissions
-
 Permissions in SOLID are automatically discovered based on controller actions and provide fine-grained control over what users can do within the system.
 
 ## Permission System
@@ -208,12 +201,8 @@ Permissions can be grouped for easier management:
 ```
 
 ### Best Practices 
-
 <details>
-  <summary>
-    
-    Permission Design
-  </summary>
+  <summary>Permission Design</summary>
   <ul>
     <li>Use clear, descriptive names</li>
     <li>Follow naming conventions</li>
@@ -221,12 +210,8 @@ Permissions can be grouped for easier management:
     <li>Consider dependencies between permissions</li>
   </ul>
 </details>
-
 <details>
-  <summary>
-    
-    Permission Assignment
-  </summary>
+  <summary>Permission Assignment</summary>
   <ul>
     <li>Follow the principle of least privilege</li>
     <li>Group related permissions logically</li>
@@ -234,12 +219,8 @@ Permissions can be grouped for easier management:
     <li>Document assignments and changes</li>
   </ul>
 </details>
-
 <details>
-  <summary>
-    
-    Security
-  </summary>
+  <summary>Security</summary>
   <ul>
     <li>Validate permission checks programmatically</li>
     <li>Log permission changes</li>
@@ -247,12 +228,8 @@ Permissions can be grouped for easier management:
     <li>Perform regular security reviews</li>
   </ul>
 </details>
-
 <details>
-  <summary>
-    
-    Maintenance
-  </summary>
+  <summary>Maintenance</summary>
   <ul>
     <li>Clean up unused permissions</li>
     <li>Update permission documentation</li>

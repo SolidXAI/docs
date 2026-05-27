@@ -4,11 +4,9 @@ description: This guide provides a comprehensive walkthrough for deploying Solid
 summary: Learn how to containerize your SolidX application with Docker. This guide covers creating multi-stage Dockerfiles for both the backend and frontend, setting up a production-ready Docker Compose file to manage your multi-container application, and provides instructions for building, running, and pushing your container images.
 ---
 
-# Deploying with Docker
-
 This guide provides a comprehensive walkthrough for deploying your SolidX application using Docker. Containerizing your application is a best practice for creating a consistent and reproducible production environment.
 
-  Before you begin, ensure you have Docker and Docker Compose installed on your system. You can find installation instructions on the official Docker website.
+> Before you begin, ensure you have Docker and Docker Compose installed on your system. You can find installation instructions on the official Docker website.
 
 ## 1. Dockerizing Your Application
 
@@ -18,7 +16,7 @@ The `create-solid-app` template already provides multi-stage Dockerfiles for bot
 
 The `create-solid-app` template includes a `docker-compose.yml` file to define and manage your multi-container application, including a database. You can find this file in the root of your generated project.
 
-&nbsp;Configure Environment Variables
+### Configure Environment Variables
 
 While the `Dockerfile` defines the environment *inside* the container, the `docker-compose.yml` file and the `.env` file are used to configure the services from the *outside*. This is crucial for security and portability, as it allows you to inject environment-specific variables like database credentials and API keys without hardcoding them into the Docker image.
 
@@ -30,54 +28,59 @@ DB_PASSWORD=your_db_password
 DB_NAME=your_db_name
 ```
 
-  Docker Compose automatically loads the `.env` file from the root directory and injects these variables into the containers at runtime. Remember to add `.env` to your `.gitignore` file to avoid committing sensitive information.
+> Docker Compose automatically loads the `.env` file from the root directory and injects these variables into the containers at runtime. Remember to add `.env` to your `.gitignore` file to avoid committing sensitive information.
 
 ## 3. Building and Running the Containers
 
 Now you can build and run your entire application stack with a single command.
 
-&nbsp;Build and Run
+### Build and Run
 
 ```bash
 docker-compose up --build -d
 ```
+
 This command will build the images and start the containers in detached mode.
 
-&nbsp;View Logs
+### View Logs
 
 To view the logs from your running containers:
+
 ```bash
 docker-compose logs -f
 ```
 
 ## 4. Verifying the Deployment
 
-&nbsp;Backend API
+### Backend API
 
 The backend API should be accessible at `http://localhost:3000`, and the Swagger documentation at `http://localhost:3000/docs`.
 
-&nbsp;Frontend Application
+### Frontend Application
 
 The frontend should be running at `http://localhost:3001`.
 
 ## 5. Post-Deployment
 
-&nbsp;Pushing Images to a Container Registry
+### Pushing Images to a Container Registry
 
 To deploy your application to a cloud provider, you'll need to push your images to a container registry like Docker Hub or AWS ECR.
 
 **1. Log in to your container registry:**
+
 ```bash
 docker login your_registry_url
 ```
 
 **2. Tag your images:**
+
 ```bash
 docker-compose build
 docker-compose push
 ```
 
 You can also manually tag and push your images:
+
 ```bash
 docker tag <local_image_name>:<tag> <registry_url>/<image_name>:<tag>
 docker push <registry_url>/<image_name>:<tag>

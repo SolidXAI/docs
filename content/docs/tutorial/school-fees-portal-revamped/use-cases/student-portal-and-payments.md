@@ -2,8 +2,6 @@
 title: Student Portal Frontend (Next.js)
 ---
 
-#  Student Portal Frontend (Next.js)
-
 The Student Portal is a modern, responsive frontend application built with Next.js. It provides parents with a secure and easy-to-use interface to view and pay school fees.
 
 To build the student portal, we will use a separate frontend application built with Next.js. A starter repository is provided to give you the basic structure, UI components, and API service helpers.
@@ -141,7 +139,6 @@ This passwordless method is both secure and convenient.
 To implement this, you can create a login page at `src/app/page.tsx` with two states: one for entering the student login id and another for verifying the OTP.
 
 Here is an example of how you can structure the component:
-
 <details>
 <summary>Complete Source Code for Student Login Screen</summary>
 
@@ -389,7 +386,6 @@ export default function HomePage() {
 }
 
 ```
-
 </details>
 
 This component manages the UI state for the login process. When the user first lands on the page, they see the email form. After submitting their email, the UI switches to the OTP verification form. The `handleEmailSubmit` and `handleOtpSubmit` functions are where you would integrate your API calls.
@@ -418,7 +414,6 @@ This component does the following:
 -   Handles loading and error states.
 -   Renders a list of payments, each with a "Pay Now" button.
 -   Includes a `handlePayNow` function to initiate the payment process.
-
 <details>
 <summary>Complete Source Code for Dashboard Screen includes Due Payments</summary>
 
@@ -1163,7 +1158,6 @@ This tab shows a complete history of all payment attempts made by the parent, in
 Downloaded Payment History 
 
 ![Initial Payment Notification Email](/img/tutorial/school-fees-portal/6-usecase/stu-8.png)
-
 <details>
 <summary>Complete Source Code for Payment Screen Tab Component</summary>
 
@@ -1555,7 +1549,6 @@ export default function PaymentHistoryPage() {
 This tab provides a view of all transactions associated with the student, which can be useful for reconciliation purposes.
 
 ![Initial Payment Notification Email](/img/tutorial/school-fees-portal/6-usecase/transaction-details.png)
-
 <details>
 <summary>Complete Source Code for Transaction Details Tab Component</summary>
 
@@ -1819,7 +1812,6 @@ export default function PaymentsPage() {
 This tab lists any payments that were initiated but subsequently cancelled either by the user or the system.
 
 ![Initial Payment Notification Email](/img/tutorial/school-fees-portal/6-usecase/sp-cancel.png)
-
 <details>
 <summary>Complete Source Code for Cancelled Tab Component</summary>
 
@@ -2023,7 +2015,6 @@ export default function CancelledPaymentPage() {
 }
 
 ```
-
 </details>
 
 ## Profile Management
@@ -2040,7 +2031,6 @@ The profile page allows parents to view and update their personal and contact in
 ![Initial Payment Notification Email](/img/tutorial/school-fees-portal/6-usecase/stu-7.png)
 
 Here's an example of how you can structure the profile page at `src/app/dashboard/profile/page.tsx`:
-
 <details>
 <summary>Complete Source Code for Profile Component</summary>
 
@@ -2285,7 +2275,6 @@ export default function ProfilePage() {
 }
 
 ```
-
 </details>
 
 # Student API Endpoints
@@ -2295,8 +2284,6 @@ export default function ProfilePage() {
 baseUrl: process.env.NEXT_PUBLIC_BACKEND_API_URL
 Authorization: Bearer {token} // Stored in localStorage
 ```
-
----
 
 ## Endpoints
 
@@ -2317,8 +2304,6 @@ Authorization: Bearer {token} // Stored in localStorage
 { studentLoginId: "STUDENT123", otp: "123456" }
 ```
 
----
-
 ### Student Records
 
 | Method | Endpoint | Hook | Description |
@@ -2331,15 +2316,12 @@ Authorization: Bearer {token} // Stored in localStorage
 ```typescript
 { id: "123", studentData: { name: "John", phone: "+123" } }
 ```
----
 
 ### Institute Records
 
 | Method | Endpoint | Hook | Description |
 |--------|----------|------|-------------|
 | `GET` | `/api/student/get-institute-record?userId={userId}` | `useLazyGetInstituteRecordQuery()` | Get institute details |
-
----
 
 ### Payments
 
@@ -2360,8 +2342,6 @@ Authorization: Bearer {token} // Stored in localStorage
 }
 ```
 
----
-
 ## Quick Reference
 ```typescript
 import {
@@ -2378,8 +2358,6 @@ import {
   useLazyGetStudentPaymentCancelRecordQuery
 } from '@/store/services/studentApi';
 ```
-
----
 
 ## Usage Pattern
 ```typescript

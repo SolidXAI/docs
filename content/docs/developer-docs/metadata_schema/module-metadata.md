@@ -10,8 +10,6 @@ items_attributes_doc: "#module-metadata-attributes"
 solidx_concerns: [create_module]
 ---
 
-#  Module Metadata
-
 > **Where it lives**  
 > **JSON Pointer:** `/moduleMetadata`  
 > **JSONPath:** `$.moduleMetadata`  
@@ -27,10 +25,7 @@ A module groups together related models and functionality under a **unified doma
 ###  Example: Fees Portal Module
 Below is a module metadata example for a "Fees Portal" module that tracks fee collection requests.
 <details>
-  <summary>
-    
-    Module Schema
-  </summary>
+  <summary>Module Schema</summary>
 
 ```json
 {

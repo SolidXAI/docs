@@ -3,7 +3,6 @@ title: Media Providers
 icon: "image"
 ---
 
-# Media Providers
 Storing files is a commonly repeated activity in any enterprise application, a modern cloud native enterprise application will use a storage provider like AWS S3 for this purpose. SolidX currently supports storing and retrieving files on a traditional filesystem or on AWS S3. 
 
 In the near future we will also support Azure Blob storage. 

@@ -4,36 +4,37 @@ description: A comprehensive guide for deploying SolidX applications to Amazon E
 summary: This guide will walk you through the process of deploying your SolidX application to Amazon Elastic Container Service (ECS) using Fargate. We will cover containerizing your application, pushing it to ECR, and setting up the necessary ECS resources.
 ---
 
-# Deploying to Amazon ECS with Fargate
-
 This guide will walk you through deploying your SolidX application to Amazon Elastic Container Service (ECS) with Fargate, a serverless compute engine that allows you to run containers without managing the underlying infrastructure.
 
-  Before you begin, make sure you have an AWS account, the AWS CLI installed and configured, and Docker running on your local machine.
+> Before you begin, make sure you have an AWS account, the AWS CLI installed and configured, and Docker running on your local machine.
 
 ## 1. Containerize and Push to ECR
 
 First, we need to containerize our application and push the images to Amazon Elastic Container Registry (ECR).
 
-&nbsp;Create ECR Repositories
+### Create ECR Repositories
 
 Create ECR repositories for both the backend and frontend:
+
 ```bash
 aws ecr create-repository --repository-name solidx-api --region <your-region>
 aws ecr create-repository --repository-name solidx-ui --region <your-region>
 ```
 
-&nbsp;Authenticate Docker to ECR
+### Authenticate Docker to ECR
 
 Authenticate your Docker client to your ECR registry:
+
 ```bash
 aws ecr get-login-password --region <your-region> | docker login --username AWS --password-stdin <your-aws-account-id>.dkr.ecr.<your-region>.amazonaws.com
 ```
 
-&nbsp;Build, Tag, and Push Images
+### Build, Tag, and Push Images
 
 Build, tag, and push the Docker images for both services.
 
 **Backend (`solidx-api`):**
+
 ```bash
 cd solid-api
 docker build -t <your-aws-account-id>.dkr.ecr.<your-region>.amazonaws.com/solidx-api:latest .
@@ -41,6 +42,7 @@ docker push <your-aws-account-id>.dkr.ecr.<your-region>.amazonaws.com/solidx-api
 ```
 
 **Frontend (`solidx-ui`):**
+
 ```bash
 cd ../solid-ui
 docker build -t <your-aws-account-id>.dkr.ecr.<your-region>.amazonaws.com/solidx-ui:latest .
@@ -51,18 +53,20 @@ docker push <your-aws-account-id>.dkr.ecr.<your-region>.amazonaws.com/solidx-ui:
 
 Now, let's create the necessary ECS resources to run our application.
 
-&nbsp;Create an ECS Cluster
+### Create an ECS Cluster
 
 Create an ECS cluster to host your services:
+
 ```bash
 aws ecs create-cluster --cluster-name solidx-cluster --region <your-region>
 ```
 
-&nbsp;Create Task Definitions
+### Create Task Definitions
 
 Create task definitions for the backend and frontend. A task definition is a blueprint for your application.
 
 Create a `solidx-api-task-definition.json` file:
+
 ```json
 {
     "family": "solidx-api-task",
@@ -89,6 +93,7 @@ Create a `solidx-api-task-definition.json` file:
 ```
 
 And a `solidx-ui-task-definition.json` file:
+
 ```json
 {
     "family": "solidx-ui-task",
@@ -115,6 +120,7 @@ And a `solidx-ui-task-definition.json` file:
 ```
 
 Now, register the task definitions with ECS:
+
 ```bash
 aws ecs register-task-definition --cli-input-json file://solidx-api-task-definition.json --region <your-region>
 aws ecs register-task-definition --cli-input-json file://solidx-ui-task-definition.json --region <your-region>
@@ -124,18 +130,19 @@ aws ecs register-task-definition --cli-input-json file://solidx-ui-task-definiti
 
 We will create an Application Load Balancer (ALB) to route traffic to our services.
 
-&nbsp;Create an ALB and Target Groups
+### Create an ALB and Target Groups
 
-1.  Create a security group for your ALB.
-2.  Create an Application Load Balancer.
-3.  Create target groups for `solidx-api` and `solidx-ui`.
-4.  Create listeners for your ALB to forward traffic to the target groups (e.g., port 80 and 443).
+1. Create a security group for your ALB.
+2. Create an Application Load Balancer.
+3. Create target groups for `solidx-api` and `solidx-ui`.
+4. Create listeners for your ALB to forward traffic to the target groups (e.g., port 80 and 443).
 
-&nbsp;Create ECS Services
+### Create ECS Services
 
 Create the services that will run and maintain your tasks.
 
 Create a `solidx-api-service.json` file:
+
 ```json
 {
     "cluster": "solidx-cluster",
@@ -161,6 +168,7 @@ Create a `solidx-api-service.json` file:
 ```
 
 And a `solidx-ui-service.json` file:
+
 ```json
 {
     "cluster": "solidx-cluster",
@@ -186,6 +194,7 @@ And a `solidx-ui-service.json` file:
 ```
 
 Now, create the services:
+
 ```bash
 aws ecs create-service --cli-input-json file://solidx-api-service.json --region <your-region>
 aws ecs create-service --cli-input-json file://solidx-ui-service.json --region <your-region>

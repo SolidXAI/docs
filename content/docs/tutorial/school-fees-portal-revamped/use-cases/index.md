@@ -2,8 +2,6 @@
 title: Use Cases
 ---
 
-# Use Cases
-
 This section outlines the various use cases and user workflows for the revamped School Fees Portal. Each document details a specific scenario, from a high-level overview of the use cases to onboarding an institute and processing student payments.
 
 Welcome to the SolidX tutorial where we will guide you through building a comprehensive School Fees Portal from the ground up. This tutorial is designed to showcase the power and flexibility of the SolidX platform by building a real-world application with complex business logic, data models, and user roles.

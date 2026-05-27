@@ -2,8 +2,6 @@
 title: Cancel Payment Workflow
 ---
 
-# Cancel Payment Workflow
-
 In any financial system, flexibility is key. The Cancel Payment workflow provides Institute Administrators with the essential ability to reverse pending payment requests. This might be necessary due to data entry errors, duplicate requests, or changes in a student's enrollment status.
 
 This guide details the user-facing methods for cancellation, the underlying backend logic, UI implementation steps for developers, and the key business and security rules governing the process.
@@ -27,8 +25,6 @@ For broader actions, the admin can first apply filters (e.g., by student, date r
 After applying filters, clicking the **"Cancel"** button will trigger a confirmation pop-up. Confirming this action will cancel all items currently matching the filter criteria.
 
 ![Confirm Bulk Cancellation](/img/tutorial/school-fees-portal/6-usecase/cancel2.png)
-
----
 
 ## 2. The Cancellation Process: A Technical Deep-Dive
 
@@ -106,8 +102,6 @@ The system is designed to handle several error scenarios gracefully:
 -   **No Eligible Items Found:** If the selected items or filters do not match any `Pending` payment items, the backend will return a `400 Bad Request` with the message "No eligible records found for cancellation."
 -   **Unauthorized Access:** The API endpoint is protected by JWT authentication. Any request without a valid token will be rejected with a `401 Unauthorized` error.
 
----
-
 ## 3. Developer's Guide: UI Implementation
 
 To implement this feature in the frontend, a developer needs to add the cancel button, create a custom confirmation component, and register it.
@@ -145,7 +139,6 @@ registerExtensionComponent('CancelConfirmation', CancelConfirmation);
 
 #### Step 3: Create the `CancelConfirmation` Component
 This React component will render a dialog asking the user to confirm whether they want to cancel the *selected* records or all *filtered* records.
-
 <details>
 <summary>Full Code for the `CancelConfirmation` Component</summary>
 
@@ -254,8 +247,6 @@ const CancelConfirmation: React.FC<any> = ({ params, selectedRecords = [], filte
 export default CancelConfirmation;
 ```
 </details>
-
----
 
 ## 4. Key Business Rules & Security
 

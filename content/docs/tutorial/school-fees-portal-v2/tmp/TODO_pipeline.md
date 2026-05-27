@@ -2,10 +2,6 @@
 title: Pending
 ---
 
-- rename solid to solidx i.e  cli 
-- in the cli prompt, rename solid> to solidx>
-
-# Pending
 1. Allow entering the username instead of the email for login
 - Setting up SolidX
     - Give more details on each prompt in the solidx setup command

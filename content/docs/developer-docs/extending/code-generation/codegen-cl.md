@@ -4,14 +4,10 @@ description: This page provides a list of CLI commands that can be used as an al
 summary: This document details the CLI commands for code generation in SolidX using Angular Schematics. The primary command is 'solid refresh-model' which creates or updates a model and its related files within an existing module, keeping code synchronized with metadata. Additional commands include 'solid add-module' for generating new modules (rarely needed as modules are auto-scaffolded), and other specialized commands for field operations. The refresh-model command accepts options like modelName, modelId, and dryRun mode, and is the most frequently used command for maintaining code-metadata alignment.
 ---
 
-#  Code Generation CLI
-
 The SolidX code builder—invoked either from the SolidX Admin UI or the CLI—uses Angular Schematics to scaffold backend code.  
 
 While multiple commands exist, **`refresh-model` is the primary and most frequently used command**.  
 Other commands such as `add-module` or `remove-fields` are available but are typically required only in special cases.
-
----
 
 ##  Refresh Model (Most Important)
 
@@ -40,8 +36,6 @@ solid refresh-model -n myNewModelSingularName
 
 👉 Refer to [Generated code](../index.md) for a breakdown of the files and structure generated.
 
----
-
 ##  Add Module (Rarely Needed)
 
 Generates a new module in the SolidX backend.  
@@ -66,8 +60,6 @@ solid add-module -n myNewModule
 
 - `-d dryRun`, `--dryRun <dryRun>`  
   Whether to run the command in dry-run mode.
-
----
 
 ##  Remove Fields (Edge Case)
 
@@ -95,7 +87,5 @@ solid remove-fields -fids "[myFieldId]" -mid myModelId
   Whether to run the command in dry-run mode.
 
 👉 Refer to [Generated code](../index.md) for a breakdown of the files and structure after running this command.
-
----
 
 >  The underlying implementation leverages Angular schematics and schema definitions to validate and process these operations.

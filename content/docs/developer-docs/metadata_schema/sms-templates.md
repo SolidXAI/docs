@@ -13,7 +13,6 @@ solidx_concerns: [create/update_sms_template, new_sms_provider]
 
 ---
 
-# SMS Templates
 > **Where it lives**  
 > **JSON Pointer:** `/smsTemplates`  
 > **JSONPath:** `$.smsTemplates`  
@@ -25,10 +24,7 @@ SMS Templates in SOLID allow you to create and manage SMS templates with dynamic
 ### Example: SMS Templates Metadata
 Below is an example of configuring an SMS template which sends an OTP when a user logs in.
 <details>
-  <summary>
-    
-    SMS Templates Schema
-  </summary>
+  <summary>SMS Templates Schema</summary>
 
 ``` json
 {
@@ -52,10 +48,7 @@ Below is an example of configuring an SMS template which sends an OTP when a use
 ### Example : SMS Template File
 Below is an example of the content of the SMS template file `otp-on-login-custom.handlebars.txt` referenced in the above metadata. This file contains the actual SMS message with dynamic placeholders.
 <details>
- <summary>
-    
-   SMS Template File 
-  </summary>
+ <summary>SMS Template File</summary>
 
 ```text
 Hi {{ firstName }}, Login to {{ solidAppName }}, using {{ mobileVerificationTokenOnLogin }} as your verification code.
@@ -65,10 +58,7 @@ Hi {{ firstName }}, Login to {{ solidAppName }}, using {{ mobileVerificationToke
 ### Example : Sending SMS Using Template (TODO ticket)
 Below is a code snippet demonstrating how to send an SMS using the defined SMS templates via the `SmsServiceFactory`. This example shows how to send an OTP verification SMS to a user.
 <details>
-  <summary>
-    
-    SMS Sending Code Snippet
-  </summary>
+  <summary>SMS Sending Code Snippet</summary>
 
 ``` ts
 import { SmsServiceFactory } from 'your-sms-service';

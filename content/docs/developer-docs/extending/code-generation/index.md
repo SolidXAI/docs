@@ -4,8 +4,6 @@ description: This section provides an overview of the code generation capabiliti
 summary: This document introduces SolidX's code generation feature, which enables developers to quickly bootstrap modules by automatically generating essential boilerplate code. The system provides modular architecture generation, model generation (including database entities, DTOs, services, and controllers based on metadata), field management capabilities with automatic file updates, and CLI support for triggering code generation tasks. This feature dramatically improves productivity and consistency by reducing repetitive setup work and allowing developers to focus on implementing unique business logic.
 ---
 
-#  Code Generation Overview
-
 The **SolidX Code Generation** feature empowers developers to bootstrap SolidX modules quickly by generating essential boilerplate code. This allows you to focus on implementing your application's unique business logic rather than spending time on repetitive setup tasks.
 
 ##  Why Use Code Generation?

@@ -4,8 +4,6 @@ description: Information about the recover endpoint of the REST API, including u
 summary: This document explains the recover endpoints in SolidX's REST API, which allow restoration of soft-deleted records. It covers both single record recovery (by ID) and bulk recovery (using an array of IDs) operations. The documentation provides complete examples including HTTP headers, request formats, and sample responses. It also notes a known issue where the response may still contain deletedAt and deletedTracker fields even though the record is successfully recovered in the database, which is expected to be fixed in future releases.
 ---
 
-#  Recover Endpoint
-
 ##  Overview
 The recover endpoint allows you to restore one or more records that have been soft-deleted in your application.
 

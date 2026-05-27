@@ -11,7 +11,6 @@ items_attributes_doc: "#menu-item-metadata-attributes"
 solidx_concerns: [add_custom_menu_action_combo, add_new_role_with_permission, modify_role]
 ---
 
-# Menu Item Metadata
 > **Where it lives**  
 > **JSON Pointer:** `/menus`  
 > **JSONPath:** `$.menus`  
@@ -87,8 +86,6 @@ For a conceptual overview of menus in SolidX, refer to the [Menu System Overview
 ### `name` *(string, required, unique)*
 Name of the menu item (column/property).  
 **Default:** N/A
-
---- 
 
 ### `displayName` *(string, required)*
 Display name of the menu item (shown in the UI).  

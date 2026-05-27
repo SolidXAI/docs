@@ -3,10 +3,6 @@ title: Storage Providers
 description: Overview of supported media storage providers in SolidX applications.
 ---
 
-  Work in Progress - This document is currently being updated. Some sections may be incomplete or subject to change.
-
-# Storage Providers
-
 SOLID supports multiple storage providers for media files, offering flexibility in how and where your media assets are stored.
 
 ## Supported Providers
@@ -201,12 +197,8 @@ npm install @solid/storage-provider-name
 </div>
 
 ## Best Practices
-
 <details>
-  <summary>
-    
-     Provider Selection
-  </summary>
+  <summary>Provider Selection</summary>
   <ul>
     <li>Consider scalability needs</li>
     <li>Evaluate cost implications</li>
@@ -214,12 +206,8 @@ npm install @solid/storage-provider-name
     <li>Plan for redundancy</li>
   </ul>
 </details>
-
 <details>
-  <summary>
-    
-     Security
-  </summary>
+  <summary>Security</summary>
   <ul>
     <li>Use secure credentials</li>
     <li>Implement proper ACLs</li>
@@ -227,12 +215,8 @@ npm install @solid/storage-provider-name
     <li>Regular security audits</li>
   </ul>
 </details>
-
 <details>
-  <summary>
-    
-     Performance
-  </summary>
+  <summary>Performance</summary>
   <ul>
     <li>Configure caching</li>
     <li>Optimize file sizes</li>
@@ -240,12 +224,8 @@ npm install @solid/storage-provider-name
     <li>Monitor usage patterns</li>
   </ul>
 </details>
-
 <details>
-  <summary>
-    
-     Maintenance
-  </summary>
+  <summary>Maintenance</summary>
   <ul>
     <li>Regular backups</li>
     <li>Monitor storage usage</li>

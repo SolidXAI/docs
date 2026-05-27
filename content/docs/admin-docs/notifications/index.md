@@ -2,8 +2,6 @@
 title: Email & SMS Templates
 ---
 
-# Email & SMS Templates
-
 SOLID provides a powerful template management system for sending emails and SMS messages, with support for dynamic content, attachments, and multiple providers.
 
 ## Overview
@@ -17,114 +15,74 @@ The notification system offers:
 
 ## Components
 
-### [Email Templates](./email-templates.md)
+### Email Templates
 
-<div>
-      - HTML/Text templates
-      - Dynamic placeholders
-      - Stattachments
-      - Dynamic attachments (Reports)
-      - Provider abstraction (SMTP, Amazon SES)ic at
-</div>
+→ [Email Templates documentation](./email-templates.md)
 
-### [SMS Templates](./sms-templates.md)
+- HTML/Text templates
+- Dynamic placeholders
+- Static attachments
+- Dynamic attachments (Reports)
+- Provider abstraction (SMTP, Amazon SES)
 
-<div>
-      - Text templates
-      - Dynamic placeholders
-      - Link shortening
-      - Provider abstraction (Twilio, Msg91, Gupshup)
-</div>
+### SMS Templates
 
-<div>
+→ [SMS Templates documentation](./sms-templates.md)
 
-  <div>
-    Template Management
-    <ul>
-      <li>Version control</li>
-      <li>Preview functionality</li>
-      <li>Test sending</li>
-      <li>Template variables</li>
-      <li>Template inheritance</li>
-    </ul>
-  </div>
+- Text templates
+- Dynamic placeholders
+- Link shortening
+- Provider abstraction (Twilio, Msg91, Gupshup)
 
-  <div>
-    Content Features
-    <ul>
-      <li>Rich text editing</li>
-      <li>Variable validation</li>
-      <li>Conditional content</li>
-      <li>Multi-language support</li>
-      <li>Template categories</li>
-    </ul>
-  </div>
+**Template Management**
+- Version control
+- Preview functionality
+- Test sending
+- Template variables
+- Template inheritance
 
-  <div>
-    Delivery Features
-    <ul>
-      <li>Queue management</li>
-      <li>Retry handling</li>
-      <li>Delivery tracking</li>
-      <li>Bounce handling</li>
-      <li>Analytics</li>
-    </ul>
-  </div>
+**Content Features**
+- Rich text editing
+- Variable validation
+- Conditional content
+- Multi-language support
+- Template categories
 
-</div>
+**Delivery Features**
+- Queue management
+- Retry handling
+- Delivery tracking
+- Bounce handling
+- Analytics
 
 ## Provider Support
 
 ### Email Providers
 
-<div>
+**Amazon SES**
+- High deliverability
+- Detailed analytics
+- Bounce management
+- Reputation monitoring
 
-  <div>
-    Amazon SES
-    <ul>
-      <li>High deliverability</li>
-      <li>Detailed analytics</li>
-      <li>Bounce management</li>
-      <li>Reputation monitoring</li>
-    </ul>
-  </div>
-
-  <div>
-    SMTP
-    <ul>
-      <li>Standard protocol</li>
-      <li>Wide compatibility</li>
-      <li>Custom server support</li>
-      <li>TLS encryption</li>
-    </ul>
-  </div>
-
-</div>
+**SMTP**
+- Standard protocol
+- Wide compatibility
+- Custom server support
+- TLS encryption
 
 ### SMS Providers
 
-<div>
+**Twilio**
+- Global coverage
+- High reliability
+- Delivery tracking
+- Two-way messaging
 
-  <div>
-    Twilio
-    <ul>
-      <li>Global coverage</li>
-      <li>High reliability</li>
-      <li>Delivery tracking</li>
-      <li>Two-way messaging</li>
-    </ul>
-  </div>
-
-  <div>
-    Additional Providers
-    <ul>
-      <li>Msg91</li>
-      <li>Gupshup</li>
-      <li>Custom providers</li>
-    </ul>
-  </div>
-
-</div>
+**Additional Providers**
+- Msg91
+- Gupshup
+- Custom providers
 
 ## Provider Abstraction
 
@@ -243,54 +201,42 @@ await sendSMS({
 ## Best Practices
 
 <details>
-  <summary>
-    
-    Template Design
-  </summary>
-  <ul>
-    <li>Use clear layouts</li>
-    <li>Test responsiveness</li>
-    <li>Include plain text</li>
-    <li>Follow email standards</li>
-    <li>Optimize for mobile</li>
-  </ul>
+<summary>Template Design</summary>
+
+- Use clear layouts
+- Test responsiveness
+- Include plain text
+- Follow email standards
+- Optimize for mobile
+
 </details>
 
 <details>
-  <summary>
-    
-    Content Management
-  </summary>
-  <ul>
-    <li>Document variables</li>
-    <li>Version templates</li>
-    <li>Test thoroughly</li>
-    <li>Monitor performance</li>
-  </ul>
+<summary>Content Management</summary>
+
+- Document variables
+- Version templates
+- Test thoroughly
+- Monitor performance
+
 </details>
 
 <details>
-  <summary>
-    
-    Delivery
-  </summary>
-  <ul>
-    <li>Configure SPF/DKIM</li>
-    <li>Monitor bounces</li>
-    <li>Track engagement</li>
-    <li>Handle failures</li>
-  </ul>
+<summary>Delivery</summary>
+
+- Configure SPF/DKIM
+- Monitor bounces
+- Track engagement
+- Handle failures
+
 </details>
 
 <details>
-  <summary>
-    
-    Maintenance
-  </summary>
-  <ul>
-    <li>Regular updates</li>
-    <li>Clean old templates</li>
-    <li>Update providers</li>
-    <li>Review analytics</li>
-  </ul>
+<summary>Maintenance</summary>
+
+- Regular updates
+- Clean old templates
+- Update providers
+- Review analytics
+
 </details>

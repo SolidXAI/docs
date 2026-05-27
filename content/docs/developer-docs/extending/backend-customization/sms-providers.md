@@ -18,8 +18,6 @@ If you prefer another provider, SolidX exposes **clean abstractions** so you can
 > **Note**
 > While you can store SMS templates in SolidX, most providers (including Msg91) require you to **register and pre‑approve** transactional templates on their platform before you can use them.
 
----
-
 ## ⚙️ Steps to Create a Custom SMS Provider
 
 ### 1) Implement a Custom SMS Service
@@ -29,7 +27,6 @@ It implements the `ISMS` interface, uses `SmsTemplateService` for template handl
 
 All your custom SMS I/O (API calls, provider SDKs, etc.) should be coded inside **`sendSMSSynchronously()`**.
 The rest (template rendering, queueing) is reusable across providers.
-
 <details>
 <summary>**Show code: `custom-sms.service.ts`**</summary>
 
@@ -144,10 +141,7 @@ export class CustomSMSService implements ISMS {
 ```
 </details>
 
----
-
 ### 2) Register Your Custom Provider
-
 <details>
 <summary>**Show code: `app.module.ts`**</summary>
 
@@ -163,12 +157,9 @@ export class AppModule {}
 ```
 </details>
 
----
-
 ### 3) Use the `SmsServiceFactory` to Send SMS
 
 You can now use `SmsServiceFactory` to send SMS via **templates** (recommended).
-
 <details>
 <summary>**Show code: `usage-example.ts`**</summary>
 
@@ -196,12 +187,9 @@ export class SomeService {
 ```
 </details>
 
----
-
 ## 🧠 Interface Definition
 
 Your custom service must implement the `ISMS` interface:
-
 <details>
 <summary>**Show code: `interfaces.ts`**</summary>
 
@@ -218,8 +206,6 @@ export interface ISMS {
 }
 ```
 </details>
-
----
 
 ## ✅ Summary
 

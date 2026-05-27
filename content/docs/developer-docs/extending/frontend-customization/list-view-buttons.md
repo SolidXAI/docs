@@ -15,8 +15,6 @@ These buttons can appear at two levels:
 1. **Header Buttons** — actions for the entire list (e.g., “Generate Report”).  
 2. **Row Buttons** — actions for specific records (e.g., “Refund Payment”).  
 
----
-
 ## Adding Custom List Buttons
 
 To add custom buttons in a list view, follow these steps:
@@ -28,18 +26,13 @@ To add custom buttons in a list view, follow these steps:
 > The process is similar to [Form View Buttons](./form-view-buttons.md).  
 > You can reuse the same registration and component creation logic; only the props differ slightly.
 
----
-
 ## Configure in Layout JSON
 
 Below are examples of how to configure both header and row buttons in the module metadata JSON file.
 
 ### Header Button Example
 <details>
-<summary>
-  
-  `Generate Report Header Button`
-</summary>
+<summary>`Generate Report Header Button`</summary>
 
 ```json
 {
@@ -68,14 +61,9 @@ Below are examples of how to configure both header and row buttons in the module
 ```
 </details>
 
----
-
 ### Row Button Example
 <details>
-<summary>
-  
-  `Refund Payment Row Button`
-</summary>
+<summary>`Refund Payment Row Button`</summary>
 
 ```json
 {
@@ -109,18 +97,12 @@ Below are examples of how to configure both header and row buttons in the module
 /solid-api/module-metadata/<module-name>/<module-name>-metadata.json
 ```
 
----
-
 ## Props Reference
 
 Each list button component receives a consistent set of props from the SolidX list engine.  
 Header buttons receive the **selected records** and **filters**, while row buttons receive the **row data**.
-
 <details>
-<summary>
-  
-  `Action Component Props`
-</summary>
+<summary>`Action Component Props`</summary>
 
 ```ts
 {
@@ -151,8 +133,6 @@ Header buttons receive the **selected records** and **filters**, while row butto
 > - **Header Buttons** → Linked Components receives `selectedRecords` and `filters`.  
 > - **Row Buttons** → Linked Components receive `rowData` for the clicked record.  
 
----
-
 ## How It Works
 
 1. SolidX renders the **list view** and identifies buttons in the layout.  
@@ -160,8 +140,6 @@ Header buttons receive the **selected records** and **filters**, while row butto
 3. The component receives contextual props (`rowData`, `selectedRecords`, etc.).  
 4. The button component executes custom logic (API call, navigation, etc.).  
 5. If `"openInPopup": true`, the component runs inside a modal and can close itself via `closePopup()`.
-
----
 
 ## Example Use Cases
 
@@ -171,7 +149,5 @@ Header buttons receive the **selected records** and **filters**, while row butto
 ### Row Buttons
 - 💸 **Refund Payment** — Initiate a refund process for that record.  
 - ✉️ **Send Receipt** — Email a payment receipt for that transaction.
-
----
 
 With this approach, you can **extend your list views** with interactive, contextual buttons that perform powerful actions across the list or on specific rows.

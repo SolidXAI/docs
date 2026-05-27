@@ -6,8 +6,6 @@ keywords: [backend, repositories, customization]
 solidx_concerns: [extending_repository, add_custom_service_method, add_controller_endpoint]
 ---
 
-# Extending Repositories
-
 ## Overview
 
 [Generated repositories](../code-generation/codegen-structure#repository) inherit from `SolidBaseRepository<T>`, which already:
@@ -25,14 +23,11 @@ Extending repositories lets you:
 - reuse the same queries across multiple services, and
 - maintain a clean separation between *data access* and *business logic*.
 
----
-
 ## Step-by-step: add a custom method
 
 ### 1) Add a method using `find`
 
 Most cases can be expressed with `find`/`findOne` since they’re already security-scoped.
-
 <details>
   <summary>Repository: add custom find-based method</summary>
 
@@ -76,12 +71,9 @@ export class FeeTypeRepository extends SolidBaseRepository<FeeType> {
 ```
 </details>
 
----
-
 ### 2) Add a method using Query Builder
 
 For more complex cases (aggregations, raw joins, advanced conditions), fall back to `createQueryBuilder()`.
-
 <details>
   <summary>Repository: add query builder method</summary>
 
@@ -101,10 +93,7 @@ async totalsByCategory(instituteId: number) {
 ```
 </details>
 
----
-
 ### 3) Consume your custom repository methods
-
 <details>
   <summary>Service: use find-based and query builder methods</summary>
 
@@ -127,8 +116,6 @@ export class FeesService {
 ```
 </details>
 
----
-
 ## Best practices
 
 - **Prefer `find` / `findOne` / `findAndCount`** when possible. They are overridden in `SolidBaseRepository` to remain security-aware and easier to read.
@@ -137,10 +124,7 @@ export class FeesService {
 - **Return typed results** (entities for reads, raw objects for aggregates).
 - **Unit-test repository methods** to validate filtering, ordering, and joins.
 
----
-
 ## Quick reference
-
 <details>
   <summary>Example: security-aware find</summary>
 
@@ -152,7 +136,6 @@ await feeTypeRepo.find({
 });
 ```
 </details>
-
 <details>
   <summary>Example: fallback to query builder</summary>
 

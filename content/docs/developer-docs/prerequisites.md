@@ -5,8 +5,6 @@ description: Describes the tools needed before installing SolidX.
 summary: This document outlines the essential tools and software required before installing SolidX. It covers installation and setup instructions for PostgreSQL database (including user and database creation), Git version control, Node.js and npm via nvm, schematics-cli for Angular schematics-based code generation, and copyfiles utility. Each section provides platform-specific installation commands for Ubuntu/macOS along with validation steps to ensure proper setup. These prerequisites are necessary for development machines to support SolidX's low-code platform functionality.
 ---
 
-#  Prerequisites
-
 >  **Note:** These installation instructions are provided as a **guideline**. Environments differ, so if you run into issues, you can troubleshoot by consulting the relevant official documentation or searching for solutions on the internet.
 
 ##  1. Database Setup
@@ -62,8 +60,6 @@ Create a PostgreSQL User and Database
 
    > Validate: inside psql, run `\dt` to check available tables.
 
----
-
 ## 2. Git Installation
 
 On Ubuntu / macOS
@@ -82,8 +78,6 @@ git config --global user.name "<User Name>"
 git config --global user.email "<User Email>"
 git config --list   # Validate configuration
 ```
-
----
 
 ## 3. Node.js & npm Setup (via nvm)
 
@@ -107,8 +101,6 @@ node -v
 npm -v
 ```
 
----
-
 ## 4.  Install schematics-cli
 
 This is only required on development machines, not on production servers. SolidX uses Angular schematics for generating backend controllers and services.
@@ -121,8 +113,6 @@ npm install -g @angular-devkit/schematics-cli
 # Validate installation:
 schematics --version
 ```
-
----
 
 ##  5.  Install copyfiles
 

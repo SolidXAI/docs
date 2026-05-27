@@ -2,8 +2,6 @@
 title: Payment Collection Item Detail Model
 ---
 
-# Payment Collection Item Detail Model
-
 **Business Purpose:** Stores the breakdown of a payment, linking a payment transaction to one or more fee items. This model is the key to enabling partial payments.
 
 **Fields:**
@@ -19,8 +17,6 @@ title: Payment Collection Item Detail Model
 | `paymentStatus` | [`selectionStatic`](../../../admin-docs/module-builder/field-management#static-selection) | The status of this payment detail (e.g., Succeeded, Failed). |
 | `payment` | [`relation`](../../../admin-docs/module-builder/field-management#relation) | Many-to-one relationship to the `payment` model. |
 
----
-
 ### Key Fields Explained
 
 -   **The "Glue" Model:** This model's primary purpose is to connect a `Payment` with a `PaymentCollectionItem`. It acts as a "line item" for a payment.
@@ -30,8 +26,6 @@ title: Payment Collection Item Detail Model
         1.  One linking the $600 `Payment` to the "Tuition Fee" `PaymentCollectionItem`, with an `amountPaid` of $500.
         2.  Another linking the same $600 `Payment` to the "Library Fee" `PaymentCollectionItem`, with an `amountPaid` of $100.
 -   **Trigger for Computed Fields:** The creation of records in this model is what triggers the `computed` fields (like `amountPaid`) on the `PaymentCollectionItem` to automatically update.
-
----
 
 ### Creation Steps
 
@@ -46,15 +40,12 @@ If you are following the manual "Guided Tour", follow these steps to create the 
 4.  Click **Add Field** and create each field exactly as defined in the table above.
 5.  Click **Save**.
 
----
-
 > **For the Fast Track: Model Metadata**
 > The JSON block below contains the complete metadata definition for the **Payment Collection Item Detail** model.
 > 
 > This definition is structured with top-level properties for the model itself (like `singularName`, `pluralName`, `tableName`) and a `fields` array that defines every attribute you see in the table above.
 > 
 > You can use this metadata as part of the "Fast Track" approach outlined in the [Data Modeling Overview](./index.md) by including it in the main `fees-portal-metadata.json` file.
-
 <details>
 <summary>&emsp; View Metadata JSON</summary>
 
@@ -264,5 +255,4 @@ If you are following the manual "Guided Tour", follow these steps to create the 
   ]
 }
 ```
-
 </details>

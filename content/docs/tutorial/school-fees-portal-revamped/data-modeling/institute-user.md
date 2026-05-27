@@ -2,8 +2,6 @@
 title: Institute User Model
 ---
 
-# Institute User Model
-
 **Business Purpose:** An extension of the base `User` model, specific to an institute. It links a core system user to an institute and defines their role within that institute (e.g., "Institute Admin").
 
 ### Core Concept: Extending the Built-in User
@@ -30,14 +28,10 @@ This approach is a best practice because it keeps your application's logic separ
 | `userType` | [`selectionStatic`](../../../admin-docs/module-builder/field-management#static-selection) | The type of user (e.g., Institute Admin). |
 | `institute` | [`relation`](../../../admin-docs/module-builder/field-management#relation) | A many-to-one relationship to the `institute` model. |
 
----
-
 ### Key Fields Explained
 
 -   **Child Model (`isChild: true`):** This is a special type of model in SolidX. Notice the `isChild: true` and `parentModelUserKey: "user"` properties in the JSON. This tells SolidX that `InstituteUser` is not a standalone entity; instead, it **extends** the built-in `User` model from the Solid Core module.
 -   **How it Works:** When you create a new `User` in the system, you can now also create an associated `InstituteUser` record for them. This allows you to add institute-specific properties (like `userType` and the `institute` they belong to) to a core user, which is a powerful pattern for multi-tenancy. A single user could potentially have roles in multiple institutes by having multiple `InstituteUser` records.
-
----
 
 ### Creation Steps
 
@@ -61,15 +55,12 @@ If you are following the manual "Guided Tour", follow these steps to create the 
 > 
 > This command will create all the necessary backend files for your new models. After it completes and the server restarts, you will see all your new models appear in the sidebar under the "Fees Portal" menu.
 
----
-
 > **For the Fast Track: Model Metadata**
 > The JSON block below contains the complete metadata definition for the **Institute User** model.
 > 
 > This definition is structured with top-level properties for the model itself (like `singularName`, `pluralName`, `tableName`) and a `fields` array that defines every attribute you see in the table above.
 > 
 > You can use this metadata as part of the "Fast Track" approach by including it in the main `fees-portal-metadata.json` file.
-
 <details>
 <summary>&emsp; View Metadata JSON</summary>
 
@@ -142,5 +133,4 @@ If you are following the manual "Guided Tour", follow these steps to create the 
   ]
 }
 ```
-
 </details>

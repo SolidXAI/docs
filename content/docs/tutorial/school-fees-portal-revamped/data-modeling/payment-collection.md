@@ -2,8 +2,6 @@
 title: Payment Collection Model
 ---
 
-# Payment Collection Model
-
 **Business Purpose:** Represents a batch of fee collection requests, often initiated by uploading a file (e.g., an Excel sheet). It acts as a container for multiple individual fee items for an institute.
 
 **Fields:**
@@ -18,15 +16,11 @@ title: Payment Collection Model
 | `dueDate` | [`date`](../../../admin-docs/module-builder/field-management#date) | The due date for the payments in this collection. |
 | `paymentCollectionId` | [`computed`](../../../admin-docs/module-builder/field-management#computed) | A unique ID for the payment collection, computed from its name. |
 
----
-
 ### Key Fields Explained
 
 -   **`paymentFile` (Media - File):** This field is central to the bulk-upload use case. An institute admin will upload an Excel or CSV file here. We will later write a **Subscriber** that listens for the creation of this record, parses the file, and automatically creates all the individual `PaymentCollectionItem` records for each student listed in the file.
 -   **`paymentCollectionItems` (Inverse Relation):** This field represents the "one-to-many" side of the relationship between a `PaymentCollection` and its `PaymentCollectionItems`. You do not create this field directly. Instead, when you define the `many-to-one` relationship from the `PaymentCollectionItem` model back to `PaymentCollection`, SolidX automatically adds this `paymentCollectionItems` field, which holds a list of all items belonging to this collection batch.
 -   **`paymentCollectionId` (Computed):** This serves as the unique, human-readable User Key for the collection batch, automatically generated from the `name` field (e.g., `annual-fees-2023-a4f81`).
-
----
 
 ### Creation Steps
 
@@ -41,15 +35,12 @@ If you are following the manual "Guided Tour", follow these steps to create the 
 4.  Click **Add Field** and create each field exactly as defined in the table above.
 5.  Click **Save**.
 
----
-
 > **For the Fast Track: Model Metadata**
 > The JSON block below contains the complete metadata definition for the **Payment Collection** model.
 > 
 > This definition is structured with top-level properties for the model itself (like `singularName`, `pluralName`, `tableName`) and a `fields` array that defines every attribute you see in the table above.
 > 
 > You can use this metadata as part of the "Fast Track" approach by including it in the main `fees-portal-metadata.json` file.
-
 <details>
 <summary>&emsp; View Metadata JSON</summary>
 
@@ -209,5 +200,4 @@ If you are following the manual "Guided Tour", follow these steps to create the 
   ]
 }
 ```
-
 </details>

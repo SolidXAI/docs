@@ -5,8 +5,6 @@ summary: A centralized platform enabling institutes to manage fee collection thr
 keywords: [school fees, payment platform, institute management, online payments, fee collection, student portal, admin portal]
 ---
 
-# School Fees & Payments Platform
-
 ## Overview
 
 The School Fees & Payments Platform is a centralized, secure, and configurable solution designed to help educational institutes digitize their fee collection and payment workflows. The platform provides dedicated portals for both administrative users and students, enabling efficient fee management, online payments, and complete auditability.

@@ -3,10 +3,6 @@ title: SMS Templates
 description: Learn how to create and manage SMS templates in SolidX, including dynamic content
 ---
 
-  Work in Progress - This document is currently being updated. Some sections may be incomplete or subject to change.
-
-# SMS Templates
-
 SMS Templates in SolidX enable you to create and manage text message templates with dynamic content and integrated link shortening capabilities.
 
 ## Template Creation
@@ -243,12 +239,8 @@ SMS Templates in SolidX enable you to create and manage text message templates w
 ```
 
 ## Best Practices
-
 <details>
-  <summary>
-    
-    Content
-  </summary>
+  <summary>Content</summary>
   <ul>
     <li>Keep messages concise</li>
     <li>Clear call-to-action</li>
@@ -257,12 +249,8 @@ SMS Templates in SolidX enable you to create and manage text message templates w
     <li>Respect time zones</li>
   </ul>
 </details>
-
 <details>
-  <summary>
-    
-    Variables
-  </summary>
+  <summary>Variables</summary>
   <ul>
     <li>Validate input length</li>
     <li>Handle special characters</li>
@@ -271,12 +259,8 @@ SMS Templates in SolidX enable you to create and manage text message templates w
     <li>Test edge cases</li>
   </ul>
 </details>
-
 <details>
-  <summary>
-    
-    Links
-  </summary>
+  <summary>Links</summary>
   <ul>
     <li>Use link shortening</li>
     <li>Track click rates</li>
@@ -285,12 +269,8 @@ SMS Templates in SolidX enable you to create and manage text message templates w
     <li>Secure URLs</li>
   </ul>
 </details>
-
 <details>
-  <summary>
-    
-    Compliance
-  </summary>
+  <summary>Compliance</summary>
   <ul>
     <li>Follow regulations</li>
     <li>Honor opt-outs</li>

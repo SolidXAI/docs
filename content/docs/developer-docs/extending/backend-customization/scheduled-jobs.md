@@ -6,8 +6,6 @@ keywords: [backend, scheduled jobs, customization]
 solidx_concerns: [add_scheduled_job]
 ---
 
-#  Creating Scheduled Jobs
-
 Scheduled jobs in SolidX allow you to run recurring tasks such as sending notifications, cleaning up records, syncing data, or performing regular maintenance.
 
 This section walks you through how to create and integrate custom scheduled jobs into your application.
@@ -19,12 +17,8 @@ Follow these steps to define and use a custom scheduled job:
 ### 1 Create a Job Service
 
 Create a new service class that implements the `IScheduledJob` interface.
-
 <details>
- <summary>
-    
-    Example: HelloWorld Scheduled Job
-</summary>
+ <summary>Example: HelloWorld Scheduled Job</summary>
 
 ```ts
 import { Injectable, Logger } from '@nestjs/common';
@@ -50,12 +44,8 @@ Ensure the job service is registered in the appropriate module under the provide
 ### 3 Define the Job in Metadata
 
 Add the job definition in your metadata.json or job configuration file.
-
 <details>
- <summary>
-    
-    Example Metadata Configuration
-</summary>
+ <summary>Example Metadata Configuration</summary>
 
 ```json
 {

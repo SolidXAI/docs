@@ -15,8 +15,6 @@ This guide covers how to:
 - Add custom fields and relationships  
 - Override user creation logic to handle password encryption, validation, and persistence  
 
----
-
 ## Configuring a Custom User Model
 
 As an example, consider extending the `User` model into an `InstituteUser` model. The `InstituteUser` includes fields such as `userType` and a relation to an `Institute`.
@@ -25,12 +23,8 @@ As an example, consider extending the `User` model into an `InstituteUser` model
 1. Set `isChild: true` in your model metadata.  
 2. Specify `User` as the `parentModelUserKey`.  
 3. Add your custom fields and relationships.  
-
 <details>
-  <summary>
-    
-    Sample Field Metadata for `instituteUser`
-  </summary>
+  <summary>Sample Field Metadata for `instituteUser`</summary>
 
 ```json
 {
@@ -72,19 +66,13 @@ As an example, consider extending the `User` model into an `InstituteUser` model
 
 This configuration generates list and form views in SolidX to manage your custom users.
 
----
-
 ## Overriding User Creation Logic
 
 User creation involves more than a simple insert (password encryption, password history, email notifications). Therefore, you must override the generated `create` method in your custom user controller.
 
 ### Default Generated Code
-
 <details>
-  <summary>
-    
-    Default Implementation
-  </summary>
+  <summary>Default Implementation</summary>
 
 ```ts
 @ApiBearerAuth("jwt")
@@ -99,12 +87,8 @@ async create(@Body() createDto: CreateInstituteUserDto, @UploadedFiles() files: 
 ### Revised Implementation
 
 Replace the default with logic that validates input, converts DTOs, and calls `signupForExtensionUser`:
-
 <details>
-  <summary>
-    
-    Revised Implementation (InstituteController)
-  </summary>
+  <summary>Revised Implementation (InstituteController)</summary>
 
 ```ts
 @ApiBearerAuth("jwt")
@@ -128,12 +112,8 @@ async create(@Body() createDto: CreateInstituteUserDto, @UploadedFiles() files: 
 </details>
 
 ### Supporting Methods in Service
-
 <details>
-  <summary>
-    
-    Methods Implementation (InstituteService)
-  </summary>
+  <summary>Methods Implementation (InstituteService)</summary>
 
 ```ts
 async toExtensionUserDto(createDto: CreateInstituteUserDto): Promise<any> {
@@ -168,17 +148,11 @@ async validateEmailDomain(instituteId: number, email: string) {
 
 > ⚠️ Use the generated code for other CRUD operations as-is. Only `create()` requires overriding.
 
----
-
 ## Generated Code for Custom User Models
 
 When `isChild: true` and `User` is the parent model, SolidX generates DTOs and Entities extending the base User model:
-
 <details>
-  <summary>
-    
-    DTOs & Entity
-  </summary>
+  <summary>DTOs & Entity</summary>
 
 ```ts
 // Create DTO
@@ -192,8 +166,6 @@ export class UpdateInstituteUserDto extends UpdateUserDto { ... }
 export class InstituteUser extends User { ... }
 ```
 </details>
-
----
 
 ## How It Works
 

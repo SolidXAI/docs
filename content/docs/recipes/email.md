@@ -3,8 +3,6 @@ title: Sending Emails
 icon: "mail"
 ---
 
-# Sending Emails
-
 ## SMTP 
 SolidX email configuration allows you to send emails using any SMTP credentials. Use the below environment variables to configure the same.
 

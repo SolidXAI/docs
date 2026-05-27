@@ -6,8 +6,6 @@ keywords: [backend, security, customization]
 solidx_concerns: [add/update_security_record_rule]
 ---
 
-# Security Rules in SolidX
-
 Security rules control **who can see which records**. You attach rules **per role** and **per model** so different roles get different visibility.
 
 By default, **no security rules are enforced** — all authenticated users can access all data for all models. Add rules in your module metadata to restrict access.
@@ -45,12 +43,8 @@ Adding a New Security Rule
 1) In your module metadata, add a rule to `securityRules`.  
 2) Fill in the required fields above.  
 3) Put your access logic under `securityRuleConfig.filters`.
-
 <details>
-  <summary>
-    
-    Example: `Institute Admin` sees only their institute
-  </summary>
+  <summary>Example: `Institute Admin` sees only their institute</summary>
 
 ```json
 {
@@ -71,7 +65,6 @@ Adding a New Security Rule
   ]
 }
 ```
-
 </details>
 
 How It Works

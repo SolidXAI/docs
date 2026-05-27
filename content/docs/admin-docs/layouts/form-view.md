@@ -2,8 +2,6 @@
 title: Form View
 ---
 
-# Form View
-
 The Form View provides a comprehensive interface for creating and editing individual records, with support for complex data entry, validation, and workflow management.
 
 ## Core Features
@@ -228,82 +226,58 @@ Customize form layout and behavior through JSON configuration:
 - Quick links
 
 ## Best Practices
-
-  <details>
-    <summary>
-    
-      Layout Design
-    </summary>
+<details>
+    <summary>Layout Design</summary>
     <ul>
       <li>Group related fields</li>
       <li>Use logical sections</li>
       <li>Consider field dependencies</li>
       <li>Optimize for readability</li>
     </ul>
-  </details>
-
-  <details>
-    <summary>
-    
-      Validation
-    </summary>
+</details>
+<details>
+    <summary>Validation</summary>
     <ul>
       <li>Provide clear error messages</li>
       <li>Validate in real-time</li>
       <li>Handle edge cases</li>
       <li>Consider field relationships</li>
     </ul>
-  </details>
-
-  <details>
-    <summary>
-    
-      Performance
-    </summary>
+</details>
+<details>
+    <summary>Performance</summary>
     <ul>
       <li>Load data efficiently</li>
       <li>Cache form state</li>
       <li>Optimize validations</li>
       <li>Handle large forms</li>
     </ul>
-  </details>
-
-  <details>
-    <summary>
-    
-      User Experience
-    </summary>
+</details>
+<details>
+    <summary>User Experience</summary>
     <ul>
       <li>Clear navigation</li>
       <li>Consistent styling</li>
       <li>Helpful tooltips</li>
       <li>Keyboard shortcuts</li>
     </ul>
-  </details>
-
-  <details>
-    <summary>
-    
-      Workflow Integration
-    </summary>
+</details>
+<details>
+    <summary>Workflow Integration</summary>
     <ul>
       <li>Clear status indicators</li>
       <li>Intuitive transitions</li>
       <li>Proper validations</li>
       <li>Audit trail tracking</li>
     </ul>
-  </details>
-
-  <details>
-    <summary>
-    
-      Chatter/Comments
-    </summary>
+</details>
+<details>
+    <summary>Chatter/Comments</summary>
     <ul>
       <li>Discussion threads</li>
       <li>File attachments</li>
       <li>User mentions</li>
       <li>Activity feed</li>
     </ul>
-  </details>
+</details>
 

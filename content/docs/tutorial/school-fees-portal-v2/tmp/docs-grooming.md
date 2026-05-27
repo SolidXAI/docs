@@ -2,8 +2,6 @@
 title: Solid Features
 ---
 
-# Solid Features 
-
 - Backend
   - Data modeling 
     - Importance of user key 

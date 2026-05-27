@@ -4,8 +4,6 @@ description: Information about password-based authentication APIs
 summary: Comprehensive documentation of SolidX password-based authentication APIs. Covers seven endpoints - Register (with environment variables for enabling registration), Authenticate (login with username and password, returns JWT tokens), Refresh Tokens (obtain new tokens using refresh token), Forgot Password (password reset flow), Change Password (for authenticated users), Get User Info (retrieve current user details), and Logout. Includes HTTP headers, request and response formats, error codes, and security considerations.
 ---
 
-#  Password Authentication
-
 This section covers the password-based authentication APIs available in SolidX.
 
 ##  Implementation Overview

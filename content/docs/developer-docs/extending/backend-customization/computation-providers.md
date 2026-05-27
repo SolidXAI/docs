@@ -6,8 +6,6 @@ keywords: [backend, computation providers, customization]
 solidx_concerns: [add_computed_field_provider,create_model_with_fields, add_field_to_a_model]
 ---
 
-# Computation Providers
-
 In **SolidX**, computed fields are fields whose values are automatically derived from other data — for example, `totalPrice`, `fullName`, or `age`. They eliminate the need to store redundant values and ensure consistency across your models.
 
 Computed fields are powered by **computation providers**, which encapsulate the business logic required to calculate and assign values to these fields.
@@ -19,12 +17,8 @@ Providers are triggered automatically when relevant data changes, ensuring that 
 ### Sample Metadata Configuration
 
 Below is an example configuration for a computed field named `amountPaid` in the `paymentCollectionItemDetail` model. The field computes the total amount paid based on related payment records.
-
 <details>
-  <summary>
-    
-    Example: Configuration for `amountPaid` computed field
-  </summary>
+  <summary>Example: Configuration for `amountPaid` computed field</summary>
 
 ```json
 {
@@ -52,7 +46,6 @@ Below is an example configuration for a computed field named `amountPaid` in the
   ]
 }
 ```
-
 </details>
 
 - `computedFieldValueProvider` specifies the **provider class** responsible for the computation logic.  
@@ -79,12 +72,8 @@ You can:
 ### Sample Provider Implementation
 
 Here is a sample implementation of the `PaymentCollectionItemAmountProvider`:
-
 <details>
-  <summary>
-    
-    Example: `PaymentCollectionItemAmountProvider` Implementation
-  </summary>
+  <summary>Example: `PaymentCollectionItemAmountProvider` Implementation</summary>
 
 ```ts
 import { Injectable } from '@nestjs/common';
@@ -171,12 +160,8 @@ export class PaymentCollectionItemAmountProvider implements IEntityPostComputeFi
 ## Computation Provider Interfaces
 
 To implement a custom computation provider, you need to implement one or both of the following interfaces:
-
 <details>
-  <summary>
-    
-    Interfaces to Implement
-  </summary>
+  <summary>Interfaces to Implement</summary>
 
 ```ts
 export interface IEntityPreComputeFieldProvider<TTriggerEntity, TContext, TValue=void> extends IEntityComputedFieldProvider {
@@ -221,12 +206,8 @@ Generates an **alphanumeric external ID** based on a configurable
 pattern.\
 Useful for creating unique, human-readable identifiers (like invoice
 numbers or record codes).
-
 <details>
-  <summary>
-    
-    View Context Interface
-  </summary>
+  <summary>View Context Interface</summary>
 ``` ts
 export interface AlphaNumExternalIdContext {
   prefix?: string;                  // alias -> staticPrefix
@@ -241,12 +222,8 @@ export interface AlphaNumExternalIdContext {
 Concatenates **multiple entity fields** into a single string.\
 Ideal for building display names, codes, or composite labels derived
 from existing fields.
-
 <details>
-  <summary>
-    
-    View Context Interface
-  </summary>
+  <summary>View Context Interface</summary>
 ``` ts
 export interface ConcatComputedFieldContext {
   separator: string; // concatenated values separator
@@ -265,12 +242,8 @@ Generates a **UUID-based external ID** with an optional prefix.\
 Useful for creating globally unique identifiers for records.
 Ideal for entities requiring unique references across distributed
 systems.
-
 <details>
-  <summary>
-    
-    View Context Interface
-  </summary>
+  <summary>View Context Interface</summary>
 ``` ts  
   export interface UuidExternalIdContext {
     prefix?: string; // alias -> staticPrefix

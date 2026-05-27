@@ -11,7 +11,6 @@ items_attributes_doc: "#scheduled-jobs-metadata-attributes"
 solidx_concerns: [add_scheduled_job]
 ---
 
-# Scheduled Jobs
 > **Where it lives**  
 > **JSON Pointer:** `/scheduledJobs`  
 > **JSONPath:** `$.scheduledJobs`  

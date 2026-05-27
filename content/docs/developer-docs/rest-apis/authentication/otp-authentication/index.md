@@ -4,10 +4,6 @@ description: Information about OTP-based authentication APIs
 summary: Details SolidX OTP-based authentication mechanism with comprehensive API documentation. Covers two-step registration (Initiate Registration sends OTP to email/mobile with customizable validationSources, Confirm Registration verifies OTP) and two-step login (Initiate Login sends OTP, Confirm Login verifies and returns JWT tokens). Includes environment variables for OTP expiry, validation sources, request/response formats, error handling, and transactional override options.
 ---
 
-  
-
-#  OTP Authentication
-
 This section covers the OTP-based authentication APIs available in SolidX.
 
 ##  Implementation Overview

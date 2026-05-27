@@ -3,8 +3,6 @@ title: SolidX Handlers
 icon: "webhook"
 ---
 
-# SolidX Handlers
-
 SolidX Handlers let you add custom logic and behavior to forms, lists, or pages in the SolidX UI. They’re ideal for things like validations, dynamic field updates, or workflow automation. Handlers work through the SolidX extension system, so you can customize without touching core code.
 
 ### Creating a SolidX Handler

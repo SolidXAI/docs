@@ -4,8 +4,6 @@ description: This section provides details on how to access and use the Swagger 
 summary: This document provides comprehensive information about accessing and using SolidX's auto-generated Swagger/OpenAPI documentation. It explains how to access the documentation at the /api/docs endpoint, authenticate using JWT tokens via the login endpoint, and utilize the standard RESTful endpoints automatically generated for each resource. The documentation covers query parameters for filtering, sorting, pagination, population, and field selection, provides example requests for common operations, explains the standardized error handling format with common HTTP status codes, and outlines best practices for authentication, request optimization, error handling, and API documentation maintenance.
 ---
 
-# API Documentation
-
 SOLID automatically generates comprehensive API documentation for all your endpoints using Swagger/OpenAPI specification. This documentation provides developers with an interactive interface to explore and test the APIs.
 
 ## Accessing API Documentation
@@ -134,56 +132,40 @@ All API errors follow a consistent format:
 | 500 | Internal Server Error |
 
 ## Best Practices
-
-  <details>
-    <summary>
-      
-      Authentication
-    </summary>
+<details>
+    <summary>Authentication</summary>
     <ul>
       <li>Always use HTTPS</li>
       <li>Keep tokens secure</li>
       <li>Implement token refresh</li>
       <li>Handle token expiration</li>
     </ul>
-  </details>
-
-  <details>
-    <summary>
-      
-       Request Optimization
-    </summary>
+</details>
+<details>
+    <summary>Request Optimization</summary>
     <ul>
       <li>Use field selection</li>
       <li>Implement pagination</li>
       <li>Optimize queries</li>
       <li>Cache responses</li>
     </ul>
-  </details>
-
-  <details>
-    <summary>
-      
-       Error Handling
-    </summary>
+</details>
+<details>
+    <summary>Error Handling</summary>
     <ul>
       <li>Validate input data</li>
       <li>Return meaningful errors</li>
       <li>Log API errors</li>
       <li>Handle rate limiting</li>
     </ul>
-  </details>
-
-  <details>
-    <summary>
-      
-       Documentation
-    </summary>
+</details>
+<details>
+    <summary>Documentation</summary>
     <ul>
       <li>Keep examples up-to-date</li>
       <li>Document all parameters</li>
       <li>Include response examples</li>
       <li>Note any limitations</li>
     </ul>
-  </details>
+</details>
 

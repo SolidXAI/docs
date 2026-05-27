@@ -2,8 +2,6 @@
 title: Other Settings
 ---
 
-# Other Settings
-
 SOLID provides various system-wide settings and configurations to manage your application's behavior and functionality.
 
 ## Overview
@@ -325,12 +323,8 @@ The Settings module includes:
 ```
 
 ## Best Practices
-
 <details>
-  <summary>
-    
-    List of Values
-  </summary>
+  <summary>List of Values</summary>
   <ul>
     <li>Use meaningful names</li>
     <li>Document purpose</li>
@@ -339,12 +333,8 @@ The Settings module includes:
     <li>Version control</li>
   </ul>
 </details>
-
 <details>
-  <summary>
-    
-    Logging
-  </summary>
+  <summary>Logging</summary>
   <ul>
     <li>Set retention periods</li>
     <li>Monitor storage</li>
@@ -353,12 +343,8 @@ The Settings module includes:
     <li>Performance monitoring</li>
   </ul>
 </details>
-
 <details>
-  <summary>
-    
-    Import/Export
-  </summary>
+  <summary>Import/Export</summary>
   <ul>
     <li>Validate data</li>
     <li>Handle errors gracefully</li>
@@ -367,12 +353,8 @@ The Settings module includes:
     <li>Backup data</li>
   </ul>
 </details>
-
 <details>
-  <summary>
-    
-    Saved Views
-  </summary>
+  <summary>Saved Views</summary>
   <ul>
     <li>Clear naming</li>
     <li>Document purpose</li>

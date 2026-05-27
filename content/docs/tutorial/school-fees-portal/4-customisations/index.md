@@ -2,8 +2,6 @@
 title: 4. Use-cases
 ---
 
-# 4. Use-cases
-
 We will now implement all the use-cases mentioned in our original scope. 
 
 ## Institute Onboarding

@@ -2,7 +2,6 @@
 title: Customizing UI (Colors, Formatting, Filters)
 ---
 
-# Customizing UI (Colors, Formatting, Filters)
 **2. Status Badge Colors**
 
 ```json

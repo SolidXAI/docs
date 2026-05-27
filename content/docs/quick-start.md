@@ -5,8 +5,6 @@ summary: "Two paths to a working SolidX project. Manual mode walks you through e
 icon: "rocket"
 ---
 
-# Quick Start
-
 Get a SolidX project running in under 10 minutes.
 
 Two modes are available:
@@ -15,8 +13,6 @@ Two modes are available:
 - **Agentic mode**: you paste a prompt into your AI coding assistant (Claude Code, Cursor, Codex CLI, etc.) and it handles the entire setup automatically.
 
 Both paths produce the same result: a working SolidX project with backend and frontend.
-
----
 
 ## Prerequisites
 
@@ -28,8 +24,6 @@ Both paths produce the same result: a working SolidX project with backend and fr
 | **Python** | 3.11+ | Agent & MCP only | `python3 --version` |
 
 Node.js and a PostgreSQL database are the only hard requirements. Docker is the easiest way to get PostgreSQL running if you don't already have one. Python is only needed if you plan to use the SolidX AI Agent or MCP server.
-
----
 
 ## Mode 1: Manual
 
@@ -113,8 +107,6 @@ Open the admin panel at `http://localhost:3001` and log in:
 
 That's it. Your SolidX project is running. Start building modules via the admin panel, or extend the generated code directly.
 
----
-
 ## Mode 2: Agentic
 
 Paste the prompt below into your AI coding assistant (Claude Code, Cursor Agent, Codex CLI, Windsurf, etc.) from the directory where you want the project created.
@@ -163,8 +155,6 @@ Final verification:
 
 Your AI agent will execute all the steps and report back when the project is ready to use.
 
----
-
 ## Optional: SolidX AI Agent
 
 Once your project is running, you can start the SolidX AI agent to build modules, models, and features through natural language.
@@ -189,8 +179,6 @@ Options:
 |---|---|---|
 | `-m, --mode` | `native` | Tool mode: `native` or `mcp` |
 | `-l, --log-level` | `INFO` | Logging level |
-
----
 
 ## Optional: MCP Server
 
@@ -242,8 +230,6 @@ http://localhost:9000/mcp
 
 Include the header `solidx-api-key: sldx_...` on every request.
 
----
-
 ## Common solidctl Commands
 
 | Command | What it does |
@@ -259,8 +245,6 @@ Include the header `solidx-api-key: sldx_...` on every request.
 | `info --detailed` | Show project info |
 
 Full reference: [solidctl Commands](/docs/developer-docs/solidctl-commands)
-
----
 
 ## Next Steps
 

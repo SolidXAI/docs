@@ -11,7 +11,6 @@ items_attributes_doc: "#action-metadata-attributes"
 solidx_concerns: [add_custom_menu_action_combo]
 ---
 
-# Action Metadata
 > **Where it lives**  
 > **JSON Pointer:** `/actions`  
 > **JSONPath:** `$.actions`  
@@ -44,10 +43,7 @@ Key Configuration Points:
 ### `Solid` Action Example
 Below is an example of a `solid` action configuration, which links to a standard SolidX view for listing institutes.
 <details>
-<summary>
-    
- Click to expand
-</summary>
+<summary>Click to expand</summary>
 ```json
 {
     ..., // Other metadata
@@ -74,10 +70,7 @@ Below is an example of a `solid` action configuration, which links to a standard
 ### `Custom` Action Example
 Below is an example of a `custom` action configuration, which links to a custom frontend component for the fees portal home page.
 <details>
-<summary>
-    
- Click to expand
-  </summary>
+<summary>Click to expand</summary>
 ```json
 {
     ..., // Other metadata
@@ -105,10 +98,7 @@ Below is an example of a `custom` action configuration, which links to a custom 
 
 Here's a complete navigation structure example from the fees-portal, illustrating how menus and actions are defined together:
 <details>
-<summary>
-    
- Click to expand
-  </summary>
+<summary>Click to expand</summary>
 
 ```json
 {
@@ -172,8 +162,6 @@ Type of action. Supported types:
 ### `domain` *(JSON, optional)*
 JSON object defining domain-specific parameters for the action.  
 **Default:** N/A
-
---- 
 
 ### `context` *(JSON, optional)*
 JSON object defining context-specific parameters for the action.  

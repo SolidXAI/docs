@@ -2,8 +2,6 @@
 title: Institute Admin
 ---
 
-# Institute Admin
-
 This section covers the primary workflows for an institute's administrative user, from creation to logging in and managing users to initiating payments and handling cancellations.
 
 > **Pre-requisite**

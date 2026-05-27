@@ -2,10 +2,6 @@
 title: Layout Editor
 ---
 
-# Layout Editor
-
-## Intro
-
 SolidX automatically generates powerful and intuitive UI layouts for each model based on the metadata defined at the module, model, and field levels. These layouts form the core of the user interface and make interacting with data seamless, efficient, and consistent across the platform.
 
 Layouts are generated automatically once a model and its fields are configured. They adapt dynamically to the semantics of each field, ensuring each data type is handled appropriately in both display and interaction contexts.
@@ -13,62 +9,63 @@ Layouts are generated automatically once a model and its fields are configured. 
 ## Layouts
 
 SolidX supports three primary layout types:
+
 <details>
 <summary>List View</summary>
 
-Is usually used to render a collection of records.  
+Usually used to render a collection of records.
 
 The List View provides a **tabular, grid-like presentation** of multiple records in a model. It is ideal for **data-dense interfaces** where **sorting, filtering, and scanning rows quickly** is a priority.
 
--  **Sorting & Filtering:** Columns can be sorted and filtered dynamically.  
--  **Pagination & Infinite Scroll:** Handles large datasets efficiently.  
-- **Customizable Columns :** Show/hide or reorder columns based on roles or user preference.  
-- **Inline Actions :** Perform actions like edit, delete, or view directly from the list.  
-- **Bulk Operations :** Select multiple rows for batch updates or deletions.  
+- **Sorting & Filtering:** Columns can be sorted and filtered dynamically.
+- **Pagination & Infinite Scroll:** Handles large datasets efficiently.
+- **Customizable Columns:** Show/hide or reorder columns based on roles or user preference.
+- **Inline Actions:** Perform actions like edit, delete, or view directly from the list.
+- **Bulk Operations:** Select multiple rows for batch updates or deletions.
 
 </details>
 
 <details>
 <summary>Kanban View</summary>
 
-Is usually used to render a collection of records.  
+Usually used to render a collection of records.
 
-The Kanban View offers a **board-style layout** that groups records into columns based on a specific field (such as **status** or **category**). It’s perfect for **workflows, pipelines, and status tracking**.
+The Kanban View offers a **board-style layout** that groups records into columns based on a specific field (such as **status** or **category**). It's perfect for **workflows, pipelines, and status tracking**.
 
--  **Drag & Drop:** Move cards between columns to update status.  
-- **Column Customization:** Show/hide columns or change the grouping field dynamically.  
-- **Card Details:** Quick view of record information on each card.  
-- **Filters & Search:** Easily filter cards by fields or search keywords.  
-- **Real-Time Updates:** Supports live updates if multiple users are interacting simultaneously.  
+- **Drag & Drop:** Move cards between columns to update status.
+- **Column Customization:** Show/hide columns or change the grouping field dynamically.
+- **Card Details:** Quick view of record information on each card.
+- **Filters & Search:** Easily filter cards by fields or search keywords.
+- **Real-Time Updates:** Supports live updates if multiple users are interacting simultaneously.
 
 </details>
 
 <details>
 <summary>Form View</summary>
 
-Is usually used to render a **single record**. The Form View serves a dual purpose of allowing users to **view and edit** the record.
+Usually used to render a **single record**. The Form View serves a dual purpose of allowing users to **view and edit** the record.
 
 The Form View renders each field with **context-aware input controls** based on the field type and its metadata, such as:
 
-- Autocomplete for **Many-to-One** fields  
-- Embedded sub-lists or tabs for **One-to-Many / Many-to-Many** fields  
-- File/media upload interfaces with previews and validations  
-- Rich text and long text editors  
-- Date/Time pickers with timezone handling  
+- Autocomplete for **Many-to-One** fields
+- Embedded sub-lists or tabs for **One-to-Many / Many-to-Many** fields
+- File/media upload interfaces with previews and validations
+- Rich text and long text editors
+- Date/Time pickers with timezone handling
 
-- **Validation & Feedback:** Immediate field validation and inline error messages.  
-- **Dynamic Field Visibility:** Show or hide fields based on user role or record state.  
-- **Custom Actions:** Add buttons or workflow triggers specific to the record.  
-- **Audit & History:** Track changes and modifications for sensitive records.  
-- **Responsive Design:** Works well on desktop, tablet, and mobile screens.  
+- **Validation & Feedback:** Immediate field validation and inline error messages.
+- **Dynamic Field Visibility:** Show or hide fields based on user role or record state.
+- **Custom Actions:** Add buttons or workflow triggers specific to the record.
+- **Audit & History:** Track changes and modifications for sensitive records.
+- **Responsive Design:** Works well on desktop, tablet, and mobile screens.
 
 </details>
 
 ## Metadata-Aware Rendering
 
-Each layout leverages the rich metadata attached to models and fields to deliver intelligent and dynamic behavior, below are a few examples (not an exhaustive list) of use-cases where the layouts use the rich metadata to bring type specific behavior.
+Each layout leverages the rich metadata attached to models and fields to deliver intelligent and dynamic behavior. Below are a few examples (not an exhaustive list) of use-cases where the layouts use the rich metadata to bring type-specific behavior.
 
- Type-Specific Filtering (List & Kanban Views)
+### Type-Specific Filtering (List & Kanban Views)
 
 Fields are rendered with filter options tailored to their semantic type:
 
@@ -77,11 +74,10 @@ Fields are rendered with filter options tailored to their semantic type:
 - Boolean fields allow filtering by true/false values with toggleable options.
 - Selection fields (static or dynamic) offer dropdowns with multiple select support.
 - Relation fields support search and filter by linked records.
-- And much more...
 
 This allows users to slice, search, and interact with collections in a highly productive way.
 
- Intelligent Field Rendering (Form View)
+### Intelligent Field Rendering (Form View)
 
 In Form Views, each field type is rendered using components optimized for its data and usage context:
 
@@ -104,19 +100,10 @@ Each layout is customizable at the configuration or code level, allowing develop
 - Provide different render modes for existing fields.
 - Create completely custom user interfaces.
 
-<div>
-
-<div>
-     
-
-## Next Steps 
-
-</div>
+## Next Steps
 
 Explore each layout in detail to understand its features, configuration options, and extensibility:
 
--  [List View](./list-view.md): learn how to display and manage collections of records efficiently, including sorting, filtering, and bulk operations.  
--  [Kanban View](./kanban-view.md): learn how to organize records in board-style columns, track workflows, and update statuses with drag-and-drop.  
--  [Form View](./form-view.md): learn how to view and edit single records with context-aware inputs, validation, and dynamic field behavior.  
-
-</div>
+- [List View](./list-view.md) — learn how to display and manage collections of records efficiently, including sorting, filtering, and bulk operations.
+- [Kanban View](./kanban-view.md) — learn how to organize records in board-style columns, track workflows, and update statuses with drag-and-drop.
+- [Form View](./form-view.md) — learn how to view and edit single records with context-aware inputs, validation, and dynamic field behavior.

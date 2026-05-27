@@ -6,25 +6,17 @@ keywords: [backend, dynamic selection, providers, customization]
 solidx_concerns: [dynamic_selection_provider]
 ---
 
-# Dynamic Selection Providers
-
 Dynamic selection providers let you **fetch options at runtime**, rather than relying on static lists.  
 They are useful when options need to come from a database, an API, or some logic that changes based on context.  
 
 For example, you might want to populate a dropdown with **stock symbols fetched from a live exchange API**, or with **filtered database values**.
 
----
-
 ## 1. Example Field Metadata
 
 Here’s an example field configuration using a custom provider named `StockApiSelectionProvider`.  
 The `selectionDynamicProviderCtxt` specifies which fields from the API response should be used as labels and values.
-
 <details>
- <summary>
-    
-    Example Configuration
-</summary>
+ <summary>Example Configuration</summary>
 
 ```json
 {
@@ -47,7 +39,6 @@ The `selectionDynamicProviderCtxt` specifies which fields from the API response 
   "isMultiSelect": true
 }
 ```
-
 </details>
 
 <div>
@@ -57,20 +48,14 @@ The `selectionDynamicProviderCtxt` specifies which fields from the API response 
 - Create a **custom provider** when the logic for fetching or filtering is more complex, or when data comes from an external source like an API.
 </div>
 
----
-
 ## 2. Creating the Provider
 
 Your provider class must implement the `ISelectionProvider` interface.  
 The most important method is `values()`, which fetches and returns the available options.
 
   The `value()` method is deprecated. It can simply throw a `NotImplementedException` and is kept only for backward compatibility.
-
 <details>
- <summary>
-    
-    Example: `StockApiSelectionProvider`
-</summary>
+ <summary>Example: `StockApiSelectionProvider`</summary>
 
 ```ts
 import { Injectable, Logger } from "@nestjs/common";
@@ -145,8 +130,6 @@ export class StockApiSelectionProvider
 ```
 </details>
 
----
-
 ## 3. Registering the Provider
 
 Since providers are standard NestJS providers, register them in the module where they should be available.
@@ -160,17 +143,11 @@ Since providers are standard NestJS providers, register them in the module where
 })
 ```
 
----
-
 ## 4. Interfaces
 
 Below are the core interfaces used when implementing a dynamic selection provider.
-
 <details>
- <summary>
-    
-    `ISelectionProvider` Interface
-</summary>
+ <summary>`ISelectionProvider` Interface</summary>
 
 ```ts
 export interface ISelectionProvider<T extends ISelectionProviderContext> {

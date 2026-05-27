@@ -3,7 +3,6 @@ title: Queues
 icon: "list-ordered"
 ---
 
-# Queues
 Queues allow any enterprise system to implement scalability allowing long running tasks to be done as background jobs. Queues being a commonly seen pattern in high performance enterprise applications SolidX has an inbuilt abstraction around queues. 
 SolidX uses the following brokers to enable queues 
 

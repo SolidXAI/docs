@@ -6,8 +6,6 @@ keywords: [backend, whatsapp providers, customization]
 solidx_concerns: [new_whatsapp_provider]
 ---
 
-# 📧 WhatsApp Providers
-
 ## 🧩 Overview
 
 SolidX provides a `Msg91` WhatsApp provider out of the box, which supports sending WhatsApp messages **both synchronously** and **asynchronously** (via background jobs).

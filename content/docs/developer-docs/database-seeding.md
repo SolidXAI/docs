@@ -5,17 +5,11 @@ description: Overview of how the database is initialized with metadata in SolidX
 summary: This document explains the database seeding process in SolidX, which initializes the database with essential metadata and data required for the application to function. The seeding is triggered via the 'solid seed' command and populates permissions, media storage providers, system fields, functional modules metadata, roles (Admin and Internal User), default users, views, actions, menus, email/SMS templates, settings, security rules, list of values, and dashboard configurations. The ModuleMetadataSeederService from the @solidstarters/solid-core package handles all the seeding operations automatically.
 ---
 
-import { 
-  FaKey, FaDatabase, FaPuzzlePiece, FaUserShield, FaUsers, FaEye, FaPlayCircle, FaBars, FaEnvelope, FaSms, FaSlidersH, FaShieldAlt, FaList, FaChartBar 
-} from "react-icons/fa";
-
-#  Seeding the Database
-
 Seeding is the process of initializing the database with the **essential metadata and data** required for the application to function correctly.
 
->  The result of the seeding step is a **fully functional database** with all necessary metadata populated.
+> The result of the seeding step is a **fully functional database** with all necessary metadata populated.
 
-##  Running the seed Command
+## Running the seed Command
 
 To run the seeding process, execute the following command in the `solid-api` directory:
 
@@ -23,8 +17,7 @@ To run the seeding process, execute the following command in the `solid-api` dir
 solid seed
 ```
 
-This command triggers the `ModuleMetadataSeederService`, provided by the [`@solidstarters/solid-core`](https://www.npmjs.com/package/@solidstarters/solid-core) package.  
-It is responsible for populating all the necessary metadata into the database.
+This command triggers the `ModuleMetadataSeederService`, provided by the [`@solidstarters/solid-core`](https://www.npmjs.com/package/@solidstarters/solid-core) package. It is responsible for populating all the necessary metadata into the database.
 
 ## What Gets Seeded?
 
@@ -37,9 +30,9 @@ The following metadata is populated during the seeding process:
 
 ### Media Storage Providers
 
-  - Sets up providers used for storing media files.
-  - Default providers include:
-    - `default-filesystem`: For local file storage.
+- Sets up providers used for storing media files.
+- Default providers include:
+  - `default-filesystem`: For local file storage.
 
 ### System Fields Metadata
 
@@ -98,8 +91,6 @@ The following metadata is populated during the seeding process:
 
 - Dashboard configuration providing visual summaries and KPIs
 
-##  Summary
+## Summary
 
-The seeding process is **essential for bootstrapping** a SolidX instance with all necessary metadata.  
-Make sure to verify seeded users and assign proper permissions for any additional roles.
-
+The seeding process is **essential for bootstrapping** a SolidX instance with all necessary metadata. Make sure to verify seeded users and assign proper permissions for any additional roles.

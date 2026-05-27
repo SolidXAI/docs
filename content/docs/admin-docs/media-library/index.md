@@ -2,8 +2,6 @@
 title: Media Library
 ---
 
-# Media Library
-
 The Media Library in SOLID provides a centralized system for managing all your media assets with support for multiple storage providers.
 
 ## Overview
@@ -16,125 +14,94 @@ The Media Library offers:
 
 ## Components
 
-### [Storage Providers](./storage-providers.md)
-<div>
-    Flexible storage options including:
-      - Browsing media files
-      - Organizing assets
-      - Managing metadata
-      - Performing bulk operations
-</div>
+### Storage Providers
 
-### [Media View](./media-view.md)
-<div>
-    A powerful interface for:
-    - Local filesystem
-    - Amazon S3
-    - Future support for:
-      - Azure Blob Storage
-      - Google Cloud Storage
-      - SFTP
-</div>
+→ [Storage Providers documentation](./storage-providers.md)
+
+Flexible storage options including:
+- Browsing media files
+- Organizing assets
+- Managing metadata
+- Performing bulk operations
+
+### Media View
+
+→ [Media View documentation](./media-view.md)
+
+A powerful interface for:
+- Local filesystem
+- Amazon S3
+- Future support for:
+  - Azure Blob Storage
+  - Google Cloud Storage
+  - SFTP
 
 ## Features
 
-<div>
+**Asset Management**
+- Upload multiple files
+- Create folders
+- Move/copy files
+- Delete assets
+- Rename files
 
-  <div>
-    Asset Management
-    <ul>
-      <li>Upload multiple files</li>
-      <li>Create folders</li>
-      <li>Move/copy files</li>
-      <li>Delete assets</li>
-      <li>Rename files</li>
-    </ul>
-  </div>
+**Organization**
+- Folder structure
+- Tags and categories
+- Search functionality
+- Filter by type
+- Sort options
 
-  <div>
-    Organization
-    <ul>
-      <li>Folder structure</li>
-      <li>Tags and categories</li>
-      <li>Search functionality</li>
-      <li>Filter by type</li>
-      <li>Sort options</li>
-    </ul>
-  </div>
+**Image Processing**
+- Automatic thumbnail generation
+- Image resizing
+- Format conversion
+- Metadata extraction
 
-  <div>
-    Image Processing
-    <ul>
-      <li>Automatic thumbnail generation</li>
-      <li>Image resizing</li>
-      <li>Format conversion</li>
-      <li>Metadata extraction</li>
-    </ul>
-  </div>
-
-  <div>
-    Access Control
-    <ul>
-      <li>Role-based permissions</li>
-      <li>Folder-level access</li>
-      <li>Share links</li>
-      <li>Download controls</li>
-    </ul>
-  </div>
-
-</div>
+**Access Control**
+- Role-based permissions
+- Folder-level access
+- Share links
+- Download controls
 
 ## Best Practices
 
-  <
-    <summary>
-      
-       Organization
-    </summary>
-    <ul>
-      <li>Use consistent naming</li>
-      <li>Create logical folders</li>
-      <li>Apply relevant tags</li>
-      <li>Document usage guidelines</li>
-    </ul>
-  </details>
+<details>
+<summary>Organization</summary>
 
-  <
-    <summary>
-      
-       Performance
-    </summary>
-    <ul>
-      <li>Optimize file sizes</li>
-      <li>Use appropriate formats</li>
-      <li>Configure caching</li>
-      <li>Monitor storage usage</li>
-    </ul>
-  </details>
+- Use consistent naming
+- Create logical folders
+- Apply relevant tags
+- Document usage guidelines
 
-  <
-    <summary>
-      
-       Security
-    </summary>
-    <ul>
-      <li>Set proper permissions</li>
-      <li>Regular access audits</li>
-      <li>Secure share links</li>
-      <li>Monitor usage</li>
-    </ul>
-  </details>
+</details>
 
-  <
-    <summary>
-      
-      Maintenance
-    </summary>
-    <ul>
-      <li>Regular cleanup</li>
-      <li>Version management</li>
-      <li>Backup strategy</li>
-      <li>Usage monitoring</li>
-    </ul>
-  </details>
+<details>
+<summary>Performance</summary>
 
+- Optimize file sizes
+- Use appropriate formats
+- Configure caching
+- Monitor storage usage
+
+</details>
+
+<details>
+<summary>Security</summary>
+
+- Set proper permissions
+- Regular access audits
+- Secure share links
+- Monitor usage
+
+</details>
+
+<details>
+<summary>Maintenance</summary>
+
+- Regular cleanup
+- Version management
+- Backup strategy
+- Usage monitoring
+
+</details>

@@ -11,7 +11,6 @@ items_attributes_doc: "#security-rules-metadata-attributes"
 solidx_concerns: [add/update_security_record_rule]
 ---
 
-# Security Rules
 > **Where it lives**  
 > **JSON Pointer:** `/securityRules`  
 > **JSONPath:** `$.securityRules`  

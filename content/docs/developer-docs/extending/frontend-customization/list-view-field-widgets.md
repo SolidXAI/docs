@@ -5,8 +5,6 @@ summary: Guide to customizing field display in SolidX list views using built-in 
 solidx_concerns: [create_custom_list_field_widget, add_list_header_button_with, add_list_row_button_with]
 ---
 
-#  List Column Widgets
-
 ##  Overview
 List view widgets allow you to **customize the display of fields** in a list view.  
 You can render fields using **built-in widgets** or by creating your own **custom widgets**.
@@ -53,10 +51,7 @@ If you need a custom display (e.g. a **score widget** with colors based on score
 
 ### 1. Create the Widget Component
 <details>
- <summary>
-    
-    `ScoreWidget`
-</summary>
+ <summary>`ScoreWidget`</summary>
 
 ```tsx
 import { SolidListFieldWidgetProps } from "@solidstarters/solid-core-ui/dist/types/solid-core";

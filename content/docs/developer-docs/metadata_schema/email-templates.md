@@ -11,7 +11,6 @@ items_attributes_doc: "#email-templates-metadata-attributes"
 solidx_concerns: [create/update_email_template, new_email_provider]
 ---
 
-# Email Templates
 > **Where it lives**  
 > **JSON Pointer:** `/emailTemplates`  
 > **JSONPath:** `$.emailTemplates`  
@@ -23,11 +22,7 @@ Email Templates in `SolidX` allow you to create and manage HTML/Text based email
 ### Example: Email Templates Metadata
 Below is an example configuration for two email templates: one for sending payment reminders and another for OTP verification. The body of the email templates is stored in separate HTML files i.e (specified in the `body` attribute)
 <details>
-
-<summary>
-    
- Email Templates Schema
-  </summary>
+<summary>Email Templates Schema</summary>
 
 ``` json
 {
@@ -63,12 +58,8 @@ Below are examples of email template files that can be referenced in the `body` 
 This example uses Handlebars syntax for dynamic content insertion.
 
 The variables used in this template (like `{{student.studentName}}`, `{{dueDetails.totalAmountDue}}`, etc.) should correspond to the data structure passed when sending the email.
-
 <details>
-  <summary>
-    
-   Email Template File 
-  </summary>
+  <summary>Email Template File</summary>
 
 ``` html
 <!DOCTYPE html>
@@ -168,10 +159,7 @@ The variables used in this template (like `{{student.studentName}}`, `{{dueDetai
 ```
 </details>
 <details>
- <summary>
-    
-   Email Template File (Text)
-  </summary>
+ <summary>Email Template File (Text)</summary>
 
 ```tsx
 Hi {{ fullName }},
@@ -195,12 +183,8 @@ The {{ solidAppName }} Team
 ### Example : Sending Email Using Template
 
 Below is a code snippet demonstrating how to send an email using the defined email templates via the `MailServiceFactory`. This example shows how to send an OTP verification email to a user.
-
 <details>
-<summary>
-    
-   Email Sending Code Snippet
-  </summary>
+<summary>Email Sending Code Snippet</summary>
 
 ``` ts
 // Example: sending an email via the MailServiceFactory

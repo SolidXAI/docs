@@ -2,8 +2,6 @@
 title: Payment Model
 ---
 
-# Payment Model
-
 **Business Purpose:** Records the details of a single, complete payment transaction made by a student. This model acts as a log, capturing the total amount paid and all the identifiers returned by the external payment gateway.
 
 **Fields:**
@@ -22,8 +20,6 @@ title: Payment Model
 | `isRefunded` | [`boolean`](../../../admin-docs/module-builder/field-management#boolean) | A flag indicating if the payment has been refunded. |
 | `paymentStatus` | [`selectionStatic`](../../../admin-docs/module-builder/field-management#static-selection) | The status of the payment (e.g., Pending, Succeeded, Failed). |
 | `paymentCollectionItemDetails` | [`relation`](../../../admin-docs/module-builder/field-management#relation) | One-to-many relationship to `paymentCollectionItemDetail`. |
-
----
 
 ### Key Fields Explained
 
@@ -65,8 +61,6 @@ The flow is as follows:
 This status is automatically updated by the system whenever a linked `Payment` record's status changes. For example, when a `Payment` moves to `Succeeded`, the system recalculates the total paid amount for the corresponding `PaymentCollectionItem` and updates its status accordingly.
 -   **`paymentCollectionItemDetails` (Inverse Relation):** This field represents the "one-to-many" side of the relationship, linking one `Payment` transaction to the multiple fee items it covers. You do not create this field directly. When you define the `many-to-one` relationship from the `PaymentCollectionItemDetail` model back to the `Payment` model, SolidX automatically adds this `paymentCollectionItemDetails` field. For example, a single payment of $100 could be linked to two detail records: $70 for "Tuition Fee" and $30 for "Bus Fee".
 
----
-
 ### Creation Steps
 
 If you are following the manual "Guided Tour", follow these steps to create the `Payment` model in the App Builder.
@@ -80,15 +74,12 @@ If you are following the manual "Guided Tour", follow these steps to create the 
 4.  Click **Add Field** and create each field exactly as defined in the table above.
 5.  Click **Save**.
 
----
-
 > **For the Fast Track: Model Metadata**
 > The JSON block below contains the complete metadata definition for the **Payment** model.
 > 
 > This definition is structured with top-level properties for the model itself (like `singularName`, `pluralName`, `tableName`) and a `fields` array that defines every attribute you see in the table above.
 > 
 > You can use this metadata as part of the "Fast Track" approach by including it in the main `fees-portal-metadata.json` file.
-
 <details>
 <summary>&emsp; View Metadata JSON</summary>
 
@@ -352,5 +343,4 @@ If you are following the manual "Guided Tour", follow these steps to create the 
   ]
 }
 ```
-
 </details>

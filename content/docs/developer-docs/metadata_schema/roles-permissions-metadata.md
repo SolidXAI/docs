@@ -11,7 +11,6 @@ items_attributes_doc: "#roles-permissions-metadata-attributes"
 solidx_concerns: [add_new_role_with_permission, modify_role]
 ---
 
-# Roles & Permissions
 > **Where it lives**  
 > **JSON Pointer:** `/roles`  
 > **JSONPath:** `$.roles`  

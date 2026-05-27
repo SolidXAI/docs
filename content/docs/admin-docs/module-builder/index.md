@@ -2,10 +2,6 @@
 title: Module Builder
 ---
 
-# Module Builder
-
-## Introduction
-
 The **Module Builder** is a core module of **SolidX** that empowers you to create and manage your application's **data models** and **user interfaces**. With the Module Builder, you can accelerate development, simplify management, and build enterprise applications with **minimal coding**.
 
 ![SolidX Admin Dashboard](/img/admin-docs/module-builder/module-create-form.png)
@@ -53,21 +49,13 @@ Hypothetical **School Management System**:
 
 <img src="/img/admin-docs/module-builder/module-model-eg-image.png" alt="SolidX Module Diagram" width="300" height="auto" />
 
-> This approach gives you a **clean, maintainable, and semantically rich model** of your domain — all without writing backend code.  
->  **SolidX automatically generates a feature-rich REST API** for your domain model, enabling advanced enterprise workflows.
+> This approach gives you a **clean, maintainable, and semantically rich model** of your domain — all without writing backend code. **SolidX automatically generates a feature-rich REST API** for your domain model, enabling advanced enterprise workflows.
 
 ## Key Features
 
-You can explore the **core functionality** of the Module Builder via the cards below:
-
-<div>
-
-<div>
-  
+You can explore the **core functionality** of the Module Builder below:
 
 ### Model Builder
-
-</div>
 
 Define and manage your **data models** through an intuitive interface:
 
@@ -75,23 +63,10 @@ Define and manage your **data models** through an intuitive interface:
 - **Models**: Efficiently define data structures aligned to your business requirements. [Learn More](./model-management.md)
 - **Fields**: Configure different field types to structure data effectively. [Learn More](./field-management.md)
 
-</div>
-
-<div></div>
-
-<div>
-
-<div>
-  
-
 ### Layout Editor
-
-</div>
 
 Arrange models & fields to generate **powerful, metadata-driven admin UIs**. Features include:
 
--  **Menu Items**: Define navigational elements.
--  **Views**: Create custom perspectives (List, Kanban, Form).
--  **Custom Actions**: Add extra functionalities triggered by users.
-
-</div>
+- **Menu Items**: Define navigational elements.
+- **Views**: Create custom perspectives (List, Kanban, Form).
+- **Custom Actions**: Add extra functionalities triggered by users.

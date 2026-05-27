@@ -5,8 +5,6 @@ summary: Explains the Solid Registry as SolidX's central discovery and configura
 keywords: [backend, solid registry, customization, metadata]
 ---
 
-# Solid Registry Overview
-
 The **Solid Registry** is the central **discovery and configuration hub** of your SolidX application.  
 It acts both as a **cache** and a **metadata manager**, providing:
 

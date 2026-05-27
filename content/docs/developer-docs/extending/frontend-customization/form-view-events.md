@@ -41,12 +41,8 @@ Place your handler(s) under your admin extensions folder. A common convention is
 Here’s a concise example that:
 - Listens to **any form event**
 - On `onFieldChange` of `title`, shows a hidden node and injects a **character count** into form data
-
 <details>
-  <summary>
-    
-    `bookFormViewChangeHandler.ts`
-  </summary>
+  <summary>`bookFormViewChangeHandler.ts`</summary>
 
 ```ts
 import { SolidViewLayoutManager } from "@solidstarters/solid-core-ui";
@@ -92,12 +88,8 @@ export default handleBookFormViewChange;
 ## Registering the Handler
 
 Register each exported function with an **alias** in `solid-extensions.ts`:
-
 <details>
-  <summary>
-    
-    `solid-extensions.ts`
-  </summary>
+  <summary>`solid-extensions.ts`</summary>
 
 ```ts
 import handleBookFormViewChange from "./bookFormViewChangeHandler";
@@ -111,12 +103,8 @@ registerExtensionFunction("bookFormViewChangeHandler", handleBookFormViewChange)
 ## Using Handlers in a Layout
 
 Reference your handler **aliases** in the layout JSON for the form view.
-
 <details>
-  <summary>
-    
-    `module-metadata/&lt;module-name&gt;/&lt;module-name&gt;-metadata.json`
-  </summary>
+  <summary>`module-metadata/&lt;module-name&gt;/&lt;module-name&gt;-metadata.json`</summary>
 
 ```json
 {
@@ -147,12 +135,8 @@ Reference your handler **aliases** in the layout JSON for the form view.
 ## Event Payload (Types)
 
 Handlers receive a **`SolidUiEvent`** payload.
-
 <details>
-  <summary>
-    
-    `SolidUiEvent`
-  </summary>
+  <summary>`SolidUiEvent`</summary>
 
 ```ts
 export type SolidUiEvent = {
@@ -199,8 +183,6 @@ return {
 - **“Node not found”** → Ensure the **node ID** you pass to `updateNodeAttributes` actually exists in your layout tree.
 - **“Nothing happens on change”** → Confirm your **alias** in the layout matches the one passed to `registerExtensionFunction`.
 - **“Handlers fight each other”** → Centralize model logic in a single file, or partition clearly by event and document the contract.
-
----
 
 ## See Also
 

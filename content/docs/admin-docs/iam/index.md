@@ -2,8 +2,6 @@
 title: IAM
 ---
 
-# IAM
-
 SOLID's IAM system provides comprehensive user, role, and permission management to secure your application.
 
 ## Overview
@@ -18,158 +16,124 @@ The IAM system consists of several key components:
 
 ## Components
 
-### [Users](./users.md)
+### Users
 
-<div>
-  Manage user accounts and profiles:
-   - User creation and invitation
-   - Profile management
-   - Account settings
-   - Access control
-</div>
+Manage user accounts and profiles:
+- User creation and invitation
+- Profile management
+- Account settings
+- Access control
 
-### [Roles](./roles.md)
+→ [Users documentation](./users.md)
 
-<div>
-  Define and manage user roles:
-    - Role creation
-    - Permission assignment
-    - Role hierarchy
-    - Access levels
-</div>
+### Roles
 
-### [Permissions](./permissions.md)
+Define and manage user roles:
+- Role creation
+- Permission assignment
+- Role hierarchy
+- Access levels
 
-<div>
-    Control access to system features:
-     - Automatic permission discovery
-     - Permission grouping
-     - Custom permissions
-     - Permission inheritance
-</div>
+→ [Roles documentation](./roles.md)
 
-### [Record Rules](./record-rules.md)
+### Permissions
 
-<div>
-    Configure data-level security:
-     - Record-level access control
-     - Dynamic rules
-     - User-based filters
-     - Role-based filters
-</div>
+Control access to system features:
+- Automatic permission discovery
+- Permission grouping
+- Custom permissions
+- Permission inheritance
 
-### [Authentication Providers](/docs/developer-docs/rest-apis/authentication/oauth-authentication/)
+→ [Permissions documentation](./permissions.md)
 
-<div>
-    Multiple authentication methods:
-      - Password-based
-      - OTP (passwordless)
-      - OAuth providers:
-        - Google
-        - Meta/Facebook
-        - LinkedIn
-        - Twitter/X
-      - Custom providers 
-</div>
+### Record Rules
+
+Configure data-level security:
+- Record-level access control
+- Dynamic rules
+- User-based filters
+- Role-based filters
+
+→ [Record Rules documentation](./record-rules.md)
+
+### Authentication Providers
+
+Multiple authentication methods:
+- Password-based
+- OTP (passwordless)
+- OAuth providers: Google, Meta/Facebook, LinkedIn, Twitter/X
+- Custom providers
+
+→ [Authentication Providers](/docs/developer-docs/rest-apis/authentication/oauth-authentication/)
 
 ## Key Features
-<div>
 
-  <div>
-    User Management
-    <ul>
-      <li>User registration</li>
-      <li>Profile management</li>
-      <li>Password policies</li>
-      <li>Account recovery</li>
-      <li>Session management</li>
-    </ul>
-  </div>
+**User Management**
+- User registration
+- Profile management
+- Password policies
+- Account recovery
+- Session management
 
-  <div>
-    Access Control
-    <ul>
-      <li>Role-based access</li>
-      <li>Permission management</li>
-      <li>Record-level security</li>
-      <li>API authentication</li>
-      <li>Token management</li>
-    </ul>
-  </div>
+**Access Control**
+- Role-based access
+- Permission management
+- Record-level security
+- API authentication
+- Token management
 
-  <div>
-    Authentication
-    <ul>
-      <li>Multiple auth methods</li>
-      <li>Social login</li>
-      <li>Two-factor auth</li>
-      <li>Single sign-on</li>
-      <li>JWT tokens</li>
-    </ul>
-  </div>
+**Authentication**
+- Multiple auth methods
+- Social login
+- Two-factor auth
+- Single sign-on
+- JWT tokens
 
-  <div>
-    Security Features
-    <ul>
-      <li>Password hashing</li>
-      <li>Session management</li>
-      <li>Token expiration</li>
-      <li>Audit logging</li>
-      <li>Security policies</li>
-    </ul>
-  </div>
-
-</div>
+**Security Features**
+- Password hashing
+- Session management
+- Token expiration
+- Audit logging
+- Security policies
 
 ## Best Practices
+
 <details>
-  <summary>
-    
-    User Management
-  </summary>
-  <ul>
-    <li>Implement strong password policies</li>
-    <li>Enable account recovery</li>
-    <li>Monitor user activity</li>
-    <li>Regular access reviews</li>
-  </ul>
+<summary>User Management</summary>
+
+- Implement strong password policies
+- Enable account recovery
+- Monitor user activity
+- Regular access reviews
+
 </details>
 
 <details>
-  <summary>
-    
-    Role Design
-  </summary>
-  <ul>
-    <li>Follow principle of least privilege</li>
-    <li>Create role hierarchies</li>
-    <li>Document role purposes</li>
-    <li>Regular role audits</li>
-  </ul>
+<summary>Role Design</summary>
+
+- Follow principle of least privilege
+- Create role hierarchies
+- Document role purposes
+- Regular role audits
+
 </details>
 
 <details>
-  <summary>
-    
-    Permissions
-  </summary>
-  <ul>
-    <li>Group related permissions</li>
-    <li>Regular permission reviews</li>
-    <li>Document permission usage</li>
-    <li>Monitor permission changes</li>
-  </ul>
+<summary>Permissions</summary>
+
+- Group related permissions
+- Regular permission reviews
+- Document permission usage
+- Monitor permission changes
+
 </details>
 
 <details>
-  <summary>
-    
-    Security
-  </summary>
-  <ul>
-    <li>Enable audit logging</li>
-    <li>Monitor failed logins</li>
-    <li>Regular security reviews</li>
-    <li>Incident response plan</li>
-  </ul>
+<summary>Security</summary>
+
+- Enable audit logging
+- Monitor failed logins
+- Regular security reviews
+- Incident response plan
+
 </details>

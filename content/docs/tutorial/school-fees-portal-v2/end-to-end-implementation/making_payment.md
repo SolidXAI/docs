@@ -2,8 +2,6 @@
 title: Making Payment (Student Portal)
 ---
 
-# Making Payment (Student Portal)
-
 ## Overview
 
 This document provides comprehensive documentation for the **Student Payment Flow** in the school fees portal. This use case enables students and parents to view pending fees, make online payments through an integrated payment gateway, and track payment history through a dedicated student portal.
@@ -62,8 +60,6 @@ This document provides comprehensive documentation for the **Student Payment Flo
 7. **Technical Implementation** - API endpoints, request/response formats
 8. **Complete Workflow** - Step-by-step process from login to payment
 
----
-
 ## Roles Involved
 
 ### Student/Parent (Primary User)
@@ -95,8 +91,6 @@ This document provides comprehensive documentation for the **Student Payment Flo
 - Send payment reminders
 - Update payment statuses
 - Process webhook callbacks from payment gateway
-
----
 
 ## Data Models Involved
 
@@ -238,8 +232,6 @@ This document provides comprehensive documentation for the **Student Payment Flo
 - Calculate total amounts paid across all transactions
 - Support refund processing
 
----
-
 ## Prerequisites for Making Payments
 
 Before students can make payments through the portal, ensure the following prerequisites are met:
@@ -296,8 +288,6 @@ Before students can make payments through the portal, ensure the following prere
   - Configured to call backend APIs
   - CORS settings allow cross-origin requests
   - Hosted on separate port/domain
-
----
 
 ## Student Payment Workflow
 
@@ -466,8 +456,6 @@ Content-Type: application/json
 - Student is redirected to dashboard
 - Token is stored for future requests
 
----
-
 ### Phase 2: View Pending Payments (Dashboard)
 
 #### Step 5: Load Student Profile and Institute Data
@@ -632,8 +620,6 @@ Status: Pending
 - Overdue items are highlighted
 - Late fees are calculated and displayed
 - Part payment option is clearly indicated
-
----
 
 ### Phase 3: Initiate Payment
 
@@ -856,8 +842,6 @@ WHERE id = 1001
   - Credit/Debit Card
   - Net Banking
 - Student completes payment
-
----
 
 ### Phase 4: Payment Processing (Webhook Callback)
 
@@ -1113,8 +1097,6 @@ https://stmary-edu.antpay.live/dashboard?paymentStatus=failed&txnId=TXN987654321
 - Student receives failure notification
 - Student can initiate new payment for same fees
 
----
-
 ### Phase 5: View Payment History
 
 #### Step 12: Access Payment History
@@ -1229,8 +1211,6 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
 - All payment collection items included
 - Data is accurate and complete
 - File can be opened in Excel/Google Sheets
-
----
 
 ## Automated Systems
 
@@ -1378,8 +1358,6 @@ Computed Updates:
 ```
 
 **Location:** [solid-api/src/fees-portal/computed-providers/payment-collection-item-amount-provider.ts](../solid-api/src/fees-portal/computed-providers/payment-collection-item-amount-provider.ts)
-
----
 
 ### 2. Scheduled Jobs
 
@@ -1639,8 +1617,6 @@ St. Mary's School
 
 **Location:** [solid-api/src/fees-portal/scheduled-jobs/send-email-schedule-jobs.service.ts](../solid-api/src/fees-portal/scheduled-jobs/send-email-schedule-jobs.service.ts)
 
----
-
 ## Technical Implementation Details
 
 ### API Endpoints Summary
@@ -1889,8 +1865,6 @@ ADD COLUMN otpExpiresAt TIMESTAMP,
 ADD COLUMN token TEXT;
 ```
 
----
-
 ## Security Considerations
 
 ### 1. Authentication Security
@@ -2003,8 +1977,6 @@ async verifyOtp(@Body() dto: VerifyOtpDto) {
   // ...
 }
 ```
-
----
 
 ## Best Practices
 
@@ -2122,8 +2094,6 @@ if (error.message === 'Invalid OTP') {
 // Bad: Technical error messages
 showError(error.message) // "Token validation failed at line 42"
 ```
-
----
 
 ## Troubleshooting
 
@@ -2365,8 +2335,6 @@ docker logs solid-api | grep "sendEmail" | tail -20
 docker logs solid-api | grep "Mswipe" | tail -20
 ```
 
----
-
 ## FAQ
 
 ### General Questions
@@ -2439,8 +2407,6 @@ A:
 3. Check job execution logs
 4. Verify payment is past due date
 5. Manually run late fee calculator job
-
----
 
 ## Summary
 

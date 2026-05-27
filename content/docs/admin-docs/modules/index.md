@@ -2,44 +2,32 @@
 title: Modules
 ---
 
-# Modules
-
 Apps in SOLID are modular units that encapsulate specific functionality and expose RESTful API endpoints, services, and user interfaces. Each app represents a logical unit of functionality that can be managed independently.
 
 ## Key Concepts
 
-<div>
-<div>
-  
-
-### Modularity
-</div>
-
+**Modularity**
 - Self-contained functionality
 - Independent deployment
 - Reusable components
 - Pluggable architecture
-</div>
 
-<div>
-<div>
-  
-
-### Features
-</div>
-
+**Features**
 - **RESTful APIs**: Auto-generated endpoints for data access
 - **Admin Interface**: Built-in UI for data management
 - **Swagger Documentation**: Interactive API documentation
 - **Menu Integration**: Automatic menu structure generation
-</div>
 
 ## Components
 
-### [API Documentation](../../developer-docs/rest-apis/swagger-documentation)
+### API Documentation
+
+→ [API Documentation](../../developer-docs/rest-apis/swagger-documentation)
+
 Comprehensive API documentation with Swagger/OpenAPI integration.
 
 ### Admin Interface
+
 - [Menu Structure](./menu-structure.md)
 - [List View](./list-view.md)
 - [Kanban View](./kanban-view.md)
@@ -48,53 +36,41 @@ Comprehensive API documentation with Swagger/OpenAPI integration.
 ## Best Practices
 
 <details>
-  <summary>
-    
-    App Organization
-  </summary>
-  <ul>
-    <li>Keep apps focused and single-purpose</li>
-    <li>Follow consistent naming conventions</li>
-    <li>Document dependencies clearly</li>
-    <li>Maintain clear boundaries between apps</li>
-  </ul>
+<summary>App Organization</summary>
+
+- Keep apps focused and single-purpose
+- Follow consistent naming conventions
+- Document dependencies clearly
+- Maintain clear boundaries between apps
+
 </details>
 
 <details>
-  <summary>
-    
-    API Design
-  </summary>
-  <ul>
-    <li>Follow RESTful principles</li>
-    <li>Version your APIs</li>
-    <li>Implement proper error handling</li>
-    <li>Include comprehensive documentation</li>
-  </ul>
+<summary>API Design</summary>
+
+- Follow RESTful principles
+- Version your APIs
+- Implement proper error handling
+- Include comprehensive documentation
+
 </details>
 
 <details>
-  <summary>
-    
-    Security
-  </summary>
-  <ul>
-    <li>Implement proper authentication</li>
-    <li>Define granular permissions</li>
-    <li>Validate all inputs</li>
-    <li>Log security events</li>
-  </ul>
+<summary>Security</summary>
+
+- Implement proper authentication
+- Define granular permissions
+- Validate all inputs
+- Log security events
+
 </details>
 
 <details>
-  <summary>
-    
-    Performance
-  </summary>
-  <ul>
-    <li>Optimize database queries</li>
-    <li>Implement caching where appropriate</li>
-    <li>Monitor API usage</li>
-    <li>Handle rate limiting</li>
-  </ul>
+<summary>Performance</summary>
+
+- Optimize database queries
+- Implement caching where appropriate
+- Monitor API usage
+- Handle rate limiting
+
 </details>

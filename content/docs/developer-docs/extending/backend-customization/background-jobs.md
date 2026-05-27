@@ -37,12 +37,8 @@ SolidX supports both:
 
 Specify the queue name and broker type in an options object.
 Below is an example configuration for a database-backed queue for sending emails.
-
 <details>
- <summary>
-    
-     `email-queue-options-database.ts`
-  </summary>
+ <summary>`email-queue-options-database.ts`</summary>
 
 ```ts
 import { BrokerType } from "src/interfaces";
@@ -62,12 +58,8 @@ export default {
 ### 2. Configure a Publisher
 
 We need to create a publisher class which extends the appropriate base publisher class based on the broker type and specify the queue options.
-
 <details>
- <summary>
-    
-    `email-queue-publisher-database.ts`  
-</summary>
+ <summary>`email-queue-publisher-database.ts`</summary>
 
 ```ts
 import { Injectable } from "@nestjs/common";
@@ -93,7 +85,6 @@ export class EmailQueuePublisherDatabase extends DatabasePublisher<any> {
   }
 }
 ```
-
 </details>
 
   In the near future, you need not create a publisher. Only subscriber needs to be created.
@@ -102,12 +93,8 @@ export class EmailQueuePublisherDatabase extends DatabasePublisher<any> {
 
 Subscribers process messages from the queue. They house the actual job processing logic.
 Below is an example subscriber that sends emails using the SMTP service.
-
 <details>
- <summary>
-    
-    `email-queue-subscriber-database.ts`  
-</summary>
+ <summary>`email-queue-subscriber-database.ts`</summary>
 
 ```ts
 import { Injectable } from "@nestjs/common";
@@ -141,7 +128,6 @@ export class EmailQueueSubscriberDatabase extends DatabaseSubscriber<any> {
   }
 }
 ```
-
 </details>
 
 <div>

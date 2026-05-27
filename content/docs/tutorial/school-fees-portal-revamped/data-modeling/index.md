@@ -2,11 +2,6 @@
 title: Data Modeling
 ---
 
---- 
-sidebar_position: 3
----
-
-# Data Modeling
 In this step, we will design the data model for our school fees portal. This is the most critical part of building the application, where we define the structure of our data. We'll use SolidX's **App Builder**, a powerful visual tool within the admin panel, to do this.
 
 ## Core Concepts of the App Builder
@@ -141,7 +136,6 @@ The JSON file below contains the complete definition for the module, including a
 1.  **Copy the JSON:** Copy the entire JSON content from the section below and paste it into the metadata file(`solid-api/module-metadata/fees-portal/fees-portal-metadata.json`).
 
 ### Module Metadata JSON
-
 <details>
 <summary>&emsp; View Module Metadata JSON</summary>
 
@@ -2170,7 +2164,6 @@ The JSON file below contains the complete definition for the module, including a
   }
 }
 ```
-
 </details>
 
 2.  **Run the seed command:** Navigate to your backend directory in your terminal and run the `solid seed` command.

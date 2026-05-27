@@ -2,8 +2,6 @@
 title: Payment Collection Item Model
 ---
 
-# Payment Collection Item Model
-
 **Business Purpose:** Represents a single, specific fee owed by a student. This is the most granular level of the fee structure, linking a student to a fee type for a specific amount and due date.
 
 **Fields:**
@@ -27,8 +25,6 @@ title: Payment Collection Item Model
 | `totalAmountToBePaid` | [`computed`](../../../admin-docs/module-builder/field-management#computed) | The total amount including late fees. |
 | `mode` | [`shortText`](../../../admin-docs/module-builder/field-management#short-text) | The mode of payment. |
 
----
-
 ### Key Fields Explained
 
 -   **Relations (`student`, `paymentCollection`, etc.):** This model is the hub of our application, connecting all the major entities for a single transaction.
@@ -37,8 +33,6 @@ title: Payment Collection Item Model
     -   The `PaymentCollectionItemAmountProvider` is a piece of custom logic that listens for changes in the related `PaymentCollectionItemDetail` model.
     -   When a payment is made (i.e., a new "detail" record is created), this provider automatically runs, sums up the payments, and updates the `amountPaid` and `status` fields on this record. This keeps your data consistent without any effort.
 -   **`paymentCollectionItemDetails` (Inverse Relation):** This field represents the "one-to-many" side of the relationship between a `PaymentCollectionItem` and its `PaymentCollectionItemDetails`. You do not create this field directly. When you define the `many-to-one` relationship from the `PaymentCollectionItemDetail` model back to `PaymentCollectionItem`, SolidX automatically adds this `paymentCollectionItemDetails` field, which holds a list of all payment breakdown records for this specific fee item.
-
----
 
 ### Creation Steps
 
@@ -53,15 +47,12 @@ If you are following the manual "Guided Tour", follow these steps to create the 
 4.  Click **Add Field** and create each field exactly as defined in the table above.
 5.  Click **Save**.
 
----
-
 > **For the Fast Track: Model Metadata**
 > The JSON block below contains the complete metadata definition for the **Payment Collection Item** model.
 > 
 > This definition is structured with top-level properties for the model itself (like `singularName`, `pluralName`, `tableName`) and a `fields` array that defines every attribute you see in the table above.
 > 
 > You can use this metadata as part of the "Fast Track" approach by including it in the main `fees-portal-metadata.json` file.
-
 <details>
 <summary>&emsp; View Metadata JSON</summary>
 
@@ -437,5 +428,4 @@ If you are following the manual "Guided Tour", follow these steps to create the 
   ]
 }
 ```
-
 </details>

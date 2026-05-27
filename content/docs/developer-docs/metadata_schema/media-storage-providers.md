@@ -11,7 +11,6 @@ items_attributes_doc: "#media-storage-providers-metadata-attributes"
 solidx_concerns: []
 ---
 
-# Media Storage
 > **Where it lives**  
 > **JSON Pointer:** `/mediaStorageProviders`  
 > **JSONPath:** `$.mediaStorageProviders`  

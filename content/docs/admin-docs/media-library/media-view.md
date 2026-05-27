@@ -2,8 +2,6 @@
 title: Media View
 ---
 
-# Media View
-
 The Media View provides an intuitive interface for managing and organizing your media files, similar to popular file management systems.
 
 ## Interface Overview
@@ -171,12 +169,8 @@ The Media View provides an intuitive interface for managing and organizing your 
 </div>
 
 ## Best Practices
-
 <details>
-  <summary>
-    
-    Organization
-  </summary>
+  <summary>Organization</summary>
   <ul>
     <li>Use clear folder names</li>
     <li>Maintain consistent structure</li>
@@ -184,12 +178,8 @@ The Media View provides an intuitive interface for managing and organizing your 
     <li>Update metadata regularly</li>
   </ul>
 </details>
-
 <details>
-  <summary>
-    
-    Performance
-  </summary>
+  <summary>Performance</summary>
   <ul>
     <li>Optimize file sizes</li>
     <li>Use appropriate formats</li>
@@ -197,12 +187,8 @@ The Media View provides an intuitive interface for managing and organizing your 
     <li>Regular cleanup</li>
   </ul>
 </details>
-
 <details>
-  <summary>
-    
-    Security
-  </summary>
+  <summary>Security</summary>
   <ul>
     <li>Set proper permissions</li>
     <li>Use secure sharing</li>
@@ -210,12 +196,8 @@ The Media View provides an intuitive interface for managing and organizing your 
     <li>Regular audits</li>
   </ul>
 </details>
-
 <details>
-  <summary>
-    
-    Workflow
-  </summary>
+  <summary>Workflow</summary>
   <ul>
     <li>Document naming conventions</li>
     <li>Define folder structure</li>

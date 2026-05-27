@@ -4,8 +4,6 @@ description: Information about the create endpoint of the REST API, including us
 summary: This document details the create endpoints in SolidX's REST API, covering single record creation, bulk record creation, and record creation with media files. It provides comprehensive examples including HTTP headers (Content-Type and Authorization), request body structures, and sample responses for each scenario. The create endpoints support both JSON payloads for standard data and multipart/form-data for media uploads. All endpoints require proper create permissions and JWT bearer authentication for security.
 ---
 
-#  Create Endpoint Overview
-
 This section provides information about the SolidX **create REST endpoints**, including how to use them, what parameters they accept, and what responses they return.
 
 SolidX supports both single record creation and bulk record creation.
@@ -22,12 +20,8 @@ Authorization: Bearer <token>
   ###  Request Body
 
 `POST /api/fee-type`
-
 <details>
- <summary>
-    
-     Request Body
-  </summary>
+ <summary>Request Body</summary>
 
 ```json
 {
@@ -39,14 +33,9 @@ Authorization: Bearer <token>
   "latePaymentFees": 0
 }
 ```
-
 </details>
-
 <details>
- <summary>
-    
-     Sample Request
-  </summary>
+ <summary>Sample Request</summary>
 
 ```json
 {
@@ -55,14 +44,9 @@ Authorization: Bearer <token>
   "partPaymentAllowed": true
 }
 ```
-
 </details>
-
 <details>
- <summary>
-    
-     Sample Response
-  </summary>
+ <summary>Sample Response</summary>
 
 ```json
 {
@@ -98,7 +82,6 @@ Authorization: Bearer <token>
   }
 }
 ```
-
 </details>
 
 ##  Bulk Record Creation
@@ -108,12 +91,8 @@ To create multiple records at once:
   ###  Request
 
 `POST /api/fee-type/bulk`
-
 <details>
- <summary>
-    
-     Sample Bulk Request
-  </summary>
+ <summary>Sample Bulk Request</summary>
 
 ```json
 [
@@ -124,7 +103,6 @@ To create multiple records at once:
   }
 ]
 ```
-
 </details>
 
 ##  Creating a Record with Media
@@ -138,12 +116,8 @@ POST /api/fee-type
 Content-Type: multipart/form-data
 Authorization: Bearer <token>
 ```
-
 <details>
- <summary>
-    
-     Multipart Form Data Example
-  </summary>
+ <summary>Multipart Form Data Example</summary>
 
 ```http
 --boundary
@@ -161,7 +135,6 @@ Content-Type: image/png
 <binary data>
 --boundary--
 ```
-
 </details>
 
  Ensure the user has the appropriate **create permission** for the model.  

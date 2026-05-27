@@ -3,8 +3,6 @@ title: Extending Users
 icon: "user-plus"
 ---
 
-# Extending Users
-
 ## Extending the SolidX user model  
 
 You can extend the built-in **SolidX User** model to attach additional fields or relationships required by your application. Follow the steps below to do this from the **App Builder**:

@@ -843,7 +843,6 @@ Two custom buttons are added to the form:
 #### Complete Institute Form Layout JSON
 
 Below is the complete form layout JSON for the Institute model. To apply this layout, replace your institute form layout JSON with the following:
-
 <details>
 <summary>Click to expand the complete JSON layout</summary>
 ```json
@@ -1351,12 +1350,9 @@ The institute relation is hidden (`visible: false`):
 - Prevents users from accidentally assigning fees to wrong institute
 - Simplifies form interface
 
----
-
 #### Complete Fee Type Form Layout JSON
 
 Below is the complete form layout JSON for the Fee Type model. You can use this to replace the entire form layout in the metadata:
-
 <details>
 <summary>Click to expand the complete JSON layout</summary>
 ```json

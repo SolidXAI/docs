@@ -2,8 +2,6 @@
 title: Views and Layouts
 ---
 
-# Views and Layouts
-
 ### Customizing Views: The Institute Form Example
 
 SolidX allows you to fully customize the layout of your forms and lists using a flexible JSON-based view definition. This means you can arrange fields, create tabs, and define complex structures directly within your module metadata, without writing any frontend code.
@@ -33,7 +31,6 @@ The `layout` object within a view definition uses a hierarchical structure:
 **Institute Form View Layout Snippet:**
 
 Below is the layout JSON for the `institute-form-view`. This example demonstrates how fields are organized into tabs like "Institutes", "Payment Gateway Details", "Support", "Fee Types", and "Institute Users". You can just paste this layout directly in metadata JSON under layout object of `institute-form-view`.
-
 <details>
 <summary>&emsp; View JSON</summary>
 

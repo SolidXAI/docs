@@ -11,7 +11,6 @@ items_attributes_doc: "#view-metadata-attributes"
 solidx_concerns: [update_layout, add_field_to_existing_layout, remove_field_from_existing_layout, modify_layout_field_attribute]
 ---
 
-# View Metadata
 > **Where it lives**  
 > **JSON Pointer:** `/views`  
 > **JSONPath:** `$.views`  
@@ -25,16 +24,10 @@ Views define UI presentation of models and automatically generate:
 
 > **How to read this page**: Each code sample below is preceded by a short explanation of what the snippet configures and how it affects the generated UI.
 
----
-
 ## Example: Fee Portal List/Form Views
 **What this shows:** A combined example of a **list** view and a **form** view for an *Institute* model inside a *Fees Portal* module. The list section demonstrates pagination, search and row actions. The form section demonstrates the hierarchical layout (sheet → notebook → page → row → column → field) and how to attach a form handler.
-
 <details>
-  <summary>
-    
-    View Schema (List + Form)
-  </summary>
+  <summary>View Schema (List + Form)</summary>
 
 ```json
 { // List View for Institute Model
@@ -172,8 +165,6 @@ Views define UI presentation of models and automatically generate:
 ```
 </details>
 
----
-
 ## View Configurations
 
 <span style={{marginLeft: 8}}>List View</span>
@@ -182,12 +173,8 @@ List views display records in tabular format with advanced features like search,
 
 ### 1) Basic List View Structure
 **What this shows:** The minimal configuration for a list view. Connect to a module/model and define a `layout` with `attrs` (behavior) and `children` (columns).
-
 <details>
-<summary>
-  
-  List View Structure
-</summary>
+<summary>List View Structure</summary>
 
 ```json
 {
@@ -212,12 +199,8 @@ List views display records in tabular format with advanced features like search,
 
 ### 2) List View Attributes
 **What this shows:** How to toggle pagination and CRUD actions from the list, and how to restrict actions to specific roles.
-
 <details>
-<summary>
-  
-  List View Attributes
-</summary>
+<summary>List View Attributes</summary>
 
 ```json
 "attrs": {
@@ -238,12 +221,8 @@ List views display records in tabular format with advanced features like search,
 
 ### 3) List View Field Configuration
 **What this shows:** Each item in `children` is a column. Control sort, filter and search participation; `viewWidget` customizes how the value renders.
-
 <details>
-<summary>
-  
-  Field Configuration
-</summary>
+<summary>Field Configuration</summary>
 
 ```json
 "children": [
@@ -279,20 +258,14 @@ List views display records in tabular format with advanced features like search,
 ```
 </details>
 
----
-
 <span style={{marginLeft: 8}}>Form View</span>
 
 Form views handle data entry and editing with complex layout structures using sheets, notebooks, and pages.
 
 ### 1) Basic Form View Structure
 **What this shows:** A `form` view with a base layout and optional `onFormLayoutLoad` handler. `children` will hold sheets/notebooks/pages/rows/columns/fields.
-
 <details>
-<summary>
-  
-  Form View Structure
-</summary>
+<summary>Form View Structure</summary>
 
 ```json
 {
@@ -318,12 +291,8 @@ Form views handle data entry and editing with complex layout structures using sh
 
 ### 2) Form View Attributes
 **What this shows:** Configure visual details and attach custom buttons that trigger actions or popups.
-
 <details>
-<summary>
-  
-  Form View Attributes
-</summary>
+<summary>Form View Attributes</summary>
 
 ```json
 "attrs": {
@@ -363,12 +332,8 @@ Form
 
 #### Sheet Component
 **What this shows:** A top-level container for your form sections.
-
 <details>
-<summary>
-  
-  Sheet Component
-</summary>
+<summary>Sheet Component</summary>
 
 ```json
 {
@@ -383,12 +348,8 @@ Form
 
 #### Notebook Component (Tabs)
 **What this shows:** A tab container that groups multiple pages.
-
 <details>
-<summary>
-  
-  Notebook Component
-</summary>
+<summary>Notebook Component</summary>
 
 ```json
 {
@@ -403,12 +364,8 @@ Form
 
 #### Page Component (Individual Tab)
 **What this shows:** A single tab with its own content.
-
 <details>
-<summary>
-  
-  Page Component
-</summary>
+<summary>Page Component</summary>
 
 ```json
 {
@@ -423,12 +380,8 @@ Form
 
 #### Row Component (Horizontal Layout)
 **What this shows:** A horizontal group of columns.
-
 <details>
-<summary>
-  
-  Row Component
-</summary>
+<summary>Row Component</summary>
 
 ```json
 {
@@ -443,12 +396,8 @@ Form
 
 #### Column Component (Vertical Container)
 **What this shows:** A vertical container with optional label and grid classes.
-
 <details>
-<summary>
-  
-  Column Component
-</summary>
+<summary>Column Component</summary>
 
 ```json
 {
@@ -467,12 +416,8 @@ Form
 
 #### Field Component (Form Input)
 **What this shows:** A single form input with view/edit widget overrides.
-
 <details>
-<summary>
-  
-  Field Component
-</summary>
+<summary>Field Component</summary>
 
 ```json
 {
@@ -490,12 +435,8 @@ Form
 
 #### Complete Form Layout Example
 **What this shows:** A full, multi-tab form bringing together all components.
-
 <details>
-<summary>
-  
-  Complete Form Layout Example
-</summary>
+<summary>Complete Form Layout Example</summary>
 
 ```json
 {
@@ -564,20 +505,14 @@ Form
 ```
 </details>
 
----
-
 <span style={{marginLeft: 8}}>Kanban View</span>
 
 Kanban views display records as cards with drag-and-drop functionality.
 
 ### 1) Basic Kanban View Structure
 **What this shows:** Declares a `kanban` view and the places where swimlane and card configuration live.
-
 <details>
-<summary>
-  
-  Kanban View Structure
-</summary>
+<summary>Kanban View Structure</summary>
 
 ```json
 {
@@ -602,12 +537,8 @@ Kanban views display records as cards with drag-and-drop functionality.
 
 ### 2) Kanban View Attributes
 **What this shows:** Controls lane count, records per lane, the grouping field, and drag-and-drop.
-
 <details>
-<summary>
-  
-  Kanban View Attributes
-</summary>
+<summary>Kanban View Attributes</summary>
 
 ```json
 "attrs": {
@@ -626,12 +557,8 @@ Kanban views display records as cards with drag-and-drop functionality.
 
 ### 3) Kanban Card Template
 **What this shows:** Maps model fields to parts of the card: header, content, badges.
-
 <details>
-<summary>
-  
-  Kanban Card Template
-</summary>
+<summary>Kanban Card Template</summary>
 
 ```json
 "children": [
@@ -648,8 +575,6 @@ Kanban views display records as cards with drag-and-drop functionality.
 ```
 </details>
 
----
-
 ## View RBAC
 
 Views support role-based access control (RBAC) to restrict actions and field-level permissions based on user roles.
@@ -657,12 +582,8 @@ Views support role-based access control (RBAC) to restrict actions and field-lev
 <span style={{marginLeft: 8}}>Role-Based View Actions</span>
 
 **What this shows:** Limit visibility of list-level actions (import/export/layout customization) to specific roles.
-
 <details>
-  <summary>
-    
-    View Actions
-  </summary>
+  <summary>View Actions</summary>
 
 ```json
 "configureViewActions": {
@@ -677,12 +598,8 @@ Views support role-based access control (RBAC) to restrict actions and field-lev
 <span style={{marginLeft: 8}}>Field-Level Permissions in Views</span>
 
 **What this shows:** Hide or show sensitive fields per role.
-
 <details>
-  <summary>
-    
-    Field-Level Permissions
-  </summary>
+  <summary>Field-Level Permissions</summary>
 
 ```json
 {
@@ -695,19 +612,13 @@ Views support role-based access control (RBAC) to restrict actions and field-lev
 ```
 </details>
 
----
-
 <span style={{marginLeft: 8}}>View Widgets</span>
 
 Views support custom widgets to enhance field display and editing experiences. List view supports `viewWidget` and form views support `viewWidget` (view mode) and `editWidget` (edit mode).
 
 **What this shows:** Override default rendering/editing of a field using specific named widgets.
-
 <details>
-  <summary>
-    
-    Custom View Widgets
-  </summary>
+  <summary>Custom View Widgets</summary>
 
 ```json
 {
@@ -725,8 +636,6 @@ Views support custom widgets to enhance field display and editing experiences. L
 - List View Widgets: [List View Widgets](/docs/developer-docs/extending/frontend-customization/list-view-field-widgets)
 - Form View / Edit Widgets: [Form View Widgets](/docs/developer-docs/extending/frontend-customization/form-view-field-widgets)
 
----
-
 <span style={{marginLeft: 8}}>View Event Handlers (TODO)</span>
 
 **What this shows:** Hook into lifecycle events to preprocess layout/data or react to user input.
@@ -739,18 +648,12 @@ Views support custom widgets to enhance field display and editing experiences. L
 
 Further reference: [Event Handlers Documentation](../extending/frontend-customization/form-view-events)
 
----
-
 <span style={{marginLeft: 8}}>View Layout Responsive Design</span>
 
 ### CSS Grid Classes
 **What this shows:** Use grid utility classes to control width across breakpoints.
-
 <details>
-  <summary>
-    
-    CSS Grid Classes
-  </summary>
+  <summary>CSS Grid Classes</summary>
 
 ```json
 {
@@ -764,8 +667,6 @@ Further reference: [Event Handlers Documentation](../extending/frontend-customiz
 - `col-12`: Full width on all screens
 - `col-md-6`: Half width on medium screens and up
 - `col-lg-4`: Third width on large screens and up
-
----
 
 ## View Metadata Attributes
 
@@ -807,15 +708,9 @@ User key of the module this view belongs to.
 User key of the model this view is associated with.  
 **Default:** N/A    
 
----
-
 ## Best Practices
-
 <details>
-  <summary>
-    
-    Layout Organization
-  </summary>
+  <summary>Layout Organization</summary>
   <ul>
     <li><strong>Use logical grouping</strong>: Group related fields in columns with descriptive labels</li>
     <li><strong>Progressive disclosure</strong>: Use tabs (notebooks) for complex forms</li>
@@ -823,24 +718,16 @@ User key of the model this view is associated with.
     <li><strong>Field ordering</strong>: Place important fields first, follow logical workflow</li>
   </ul>
 </details>
-
 <details>
-  <summary>
-    
-    Security Considerations
-  </summary>
+  <summary>Security Considerations</summary>
   <ul>
     <li><strong>Role-based access</strong>: Configure view actions based on user roles</li>
     <li><strong>Field-level security</strong>: Hide sensitive fields from unauthorized users</li>
     <li><strong>Audit trails</strong>: Enable audit tracking for sensitive operations</li>
   </ul>
 </details>
-
 <details>
-  <summary>
-    
-    Performance Optimization
-  </summary>
+  <summary>Performance Optimization</summary>
   <ul>
     <li><strong>Pagination</strong>: Always enable pagination for large datasets</li>
     <li><strong>Field selection</strong>: Only display necessary fields in list views</li>

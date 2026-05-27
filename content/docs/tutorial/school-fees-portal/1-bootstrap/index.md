@@ -2,7 +2,6 @@
 title: 1. Create Solid App
 ---
 
-# 1. Create Solid App
 In this step, we'll initialize a new SolidX project using the official starter CLI.
 
 SolidX provides a powerful CLI tool to scaffold a full-stack multi-tenant SaaS application with a backend API and frontend UI, pre-wired for PostgreSQL, authentication, and data modeling.

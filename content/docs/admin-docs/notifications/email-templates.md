@@ -3,10 +3,6 @@ title: Email Templates
 description: Learn how to create and manage email templates in SOLID, including dynamic content
 ---
 
-  Work in Progress - This document is currently being updated. Some sections may be incomplete or subject to change.
-
-# Email Templates
-
 Email Templates in SOLID allow you to create and manage HTML/Text based email templates with dynamic content and attachments.
 
 ## Template Creation
@@ -224,12 +220,8 @@ Child template:
 ```
 
 ## Best Practices
-
 <details>
-  <summary>
-    
-    Design
-  </summary>
+  <summary>Design</summary>
   <ul>
     <li>Use responsive layouts</li>
     <li>Test across email clients</li>
@@ -238,12 +230,8 @@ Child template:
     <li>Follow email standards</li>
   </ul>
 </details>
-
 <details>
-  <summary>
-    
-    Content
-  </summary>
+  <summary>Content</summary>
   <ul>
     <li>Clear subject lines</li>
     <li>Consistent branding</li>
@@ -252,12 +240,8 @@ Child template:
     <li>Valid links</li>
   </ul>
 </details>
-
 <details>
-  <summary>
-    
-    Variables
-  </summary>
+  <summary>Variables</summary>
   <ul>
     <li>Document all variables</li>
     <li>Provide defaults when possible</li>
@@ -266,12 +250,8 @@ Child template:
     <li>Use clear naming</li>
   </ul>
 </details>
-
 <details>
-  <summary>
-    
-    Testing
-  </summary>
+  <summary>Testing</summary>
   <ul>
     <li>Test all variables</li>
     <li>Check responsiveness</li>

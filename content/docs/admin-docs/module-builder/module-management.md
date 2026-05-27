@@ -2,8 +2,6 @@
 title: Modules
 ---
 
-# Modules
-
 When creating a new module in SolidX, you're defining a core building block of your application. A module is a logical container that groups together related models and functionality under a unified domain or feature area.
 
 ## Creating a Module

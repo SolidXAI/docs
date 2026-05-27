@@ -2,8 +2,6 @@
 title: Roles
 ---
 
-# Roles
-
 Roles in SolidX provide a way to group permissions and manage access control at a high level. Each role represents a set of permissions that can be assigned to users.
 
 ## Role Management
@@ -14,94 +12,58 @@ Below are some typical roles you can find in SOLID:
 
 ### System Roles
 
-<div>
+**Administrator**
+- Full system access
+- User management
 
-  <div>
-    Administrator
-    <ul>
-      <li>Full system access</li>
-      <li>User management</li>
-    </ul>
-  </div>
-
-  <div>
-    User
-    <ul>
-      <li>Basic system access</li>
-      <li>Profile management</li>
-      <li>Limited model permission</li>
-    </ul>
-  </div>
-
-</div>
+**User**
+- Basic system access
+- Profile management
+- Limited model permission
 
 ### Custom Roles
 
 Examples of common custom roles:
 
-<div>
+**Content Manager**
+- Content creation
+- Content editing
 
-  <div>
-    Content Manager
-    <ul>
-      <li>Content creation</li>
-      <li>Content editing</li>
-    </ul>
-  </div>
-
-  <div>
-    Viewer
-    <ul>
-      <li>Read-only access</li>
-      <li>Report viewing</li>
-      <li>Basic dashboards</li>
-    </ul>
-  </div>
-
-</div>
+**Viewer**
+- Read-only access
+- Report viewing
+- Basic dashboards
 
 ### Permission Categories
 
-<div>
+**Model Resource Permissions**
+- CRUD operations
+- Import/Export
 
-  <div>
-    Model Resource Permissions
-    <ul>
-      <li>CRUD operations</li>
-      <li>Import/Export</li>
-    </ul>
-  </div>
-
-  <div>
-    Administrative Permissions
-    <ul>
-      <li>User management</li>
-      <li>Role management</li>
-      <li>System settings</li>
-    </ul>
-  </div>
-
-</div>
+**Administrative Permissions**
+- User management
+- Role management
+- System settings
 
 ### Creating a New Role
 
-_Figure 1: Creating a New Role_
+*Figure 1: Creating a New Role*
 
 ![Creating a New Role](/img/admin-docs/iam/roles/role-name.png)
 
-_Figure 2: Assigning Role Permissions_
+*Figure 2: Assigning Role Permissions*
 
 ![Assigning Role Permissions](/img/admin-docs/iam/roles/role-permissions.png)
 
-_Figure 3: Assigning Users to Role_
+*Figure 3: Assigning Users to Role*
 
 ![Assigning Users to Role](/img/admin-docs/iam/roles/role-users.png)
 
-_Figure 4: Assigning Menu Items to Role_
+*Figure 4: Assigning Menu Items to Role*
 
 ![Assigning Menu Items to Role](/img/admin-docs/iam/roles/role-menus.png)
 
-_Figure 5: View Roles list_
+*Figure 5: View Roles list*
 
 ![View Roles list](/img/admin-docs/iam/roles/role-list.png)
 
@@ -120,24 +82,18 @@ _Figure 5: View Roles list_
 ## Best Practices
 
 <details>
-  <summary>
-    
-    Role Assignment
-  </summary>
-  <ul>
-    <li>Assign minimum necessary roles</li>
-    <li>Regular access reviews</li>
-    <li>Document role assignments</li>
-  </ul>
+<summary>Role Assignment</summary>
+
+- Assign minimum necessary roles
+- Regular access reviews
+- Document role assignments
+
 </details>
 
 <details>
-  <summary>
-    
-    Maintenance
-  </summary>
-  <ul>
-    <li>Archive unused roles</li>
-    <li>Monitor role changes</li>
-  </ul>
+<summary>Maintenance</summary>
+
+- Archive unused roles
+- Monitor role changes
+
 </details>

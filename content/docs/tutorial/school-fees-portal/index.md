@@ -5,8 +5,6 @@ summary: TODO
 keywords: [TODO]
 ---
 
-# School Fees Portal
-
 ## Introduction
 
 Building a Fee Collection Platform for Educational Institutions

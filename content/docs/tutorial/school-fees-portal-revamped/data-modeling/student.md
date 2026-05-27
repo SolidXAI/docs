@@ -2,8 +2,6 @@
 title: Student Model
 ---
 
-# Student Model
-
 **Business Purpose:** Represents a student in an institute. This model stores personal and contact information for the student and their parent/guardian, and it includes fields to facilitate a separate login portal for them.
 
 **Fields:**
@@ -24,8 +22,6 @@ title: Student Model
 | `token` | [`longText`](../../../admin-docs/module-builder/field-management#long-text) | Authentication token for the student/parent session. |
 | `studentLoginId` | [`computed`](../../../admin-docs/module-builder/field-management#computed) | A unique login ID for the student, computed from their name. |
 
----
-
 ### Key Fields Explained
 
 -   **`otp`, `otpExpiresAt`, `token`:** These fields are not for the admin panel. They are specifically designed to support the separate, student-facing payment portal. The workflow is:
@@ -36,8 +32,6 @@ title: Student Model
 -   **`payments` (Inverse Relation):** This field represents the "one-to-many" side of the relationship between a `Student` and their `Payments`. You do not need to create this field yourself. When you define the `many-to-one` relationship from the `Payment` model back to the `Student` model, SolidX will automatically add this `payments` field, which holds a list of all payment records associated with the student.
 
 > To generate `studentLoginId` please refer use cases section of this tutorial.
-
----
 
 ### Creation Steps
 
@@ -52,15 +46,12 @@ If you are following the manual "Guided Tour", follow these steps to create the 
 4.  Click **Add Field** and create each field exactly as defined in the table above.
 5.  Click **Save**.
 
----
-
 > **For the Fast Track: Model Metadata**
 > The JSON block below contains the complete metadata definition for the **Student** model.
 > 
 > This definition is structured with top-level properties for the model itself (like `singularName`, `pluralName`, `tableName`) and a `fields` array that defines every attribute you see in the table above.
 > 
 > You can use this metadata as part of the "Fast Track" approach by including it in the main `fees-portal-metadata.json` file.
-
 <details>
 <summary>&emsp; View Metadata JSON</summary>
 
@@ -346,5 +337,4 @@ If you are following the manual "Guided Tour", follow these steps to create the 
   ]
 }
 ```
-
 </details>
