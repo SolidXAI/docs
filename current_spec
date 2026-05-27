@@ -1,0 +1,13 @@
+# scheduled jobs
+1. Have a look at the scheduler service class to understand how to schedule a job i.e (/Users/oswald/projects/Solid_Starters/solid-core-module/src/services/scheduled-jobs/scheduler.service.ts)
+2. Also have a look at the scheduled job related documentation pages i.e
+ - docs/developer-docs/extending/backend-customization/scheduled-jobs (talks about how to configure a scheduled job in your module)
+ - docs/developer-docs/metadata_schema/scheduled-jobs (talks about the metadata schema for a scheduled job and explains the different attributes of the scheduled job metadata)
+
+With this understanding, can you first form an opinion and tell me what you think
+
+
+
+The fix: use metadata.tableName (TypeORM's canonical table name) to look up the ModelMetadata record, with the existing singularName lookup as a fallback. Since we always read model.singularName after the lookup, coModelName will always get the correct value regardless of what metadata.name contains.
+
+The change applies in four places — shouldTrackAudit in the subscriber, and all three audit methods in the service.
