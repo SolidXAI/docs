@@ -771,9 +771,9 @@ No additional core list or tree widgets are currently registered specifically fo
 
 ### Field Rendering: `many-to-one`
 
-In list and tree views, `many-to-one` renders as a single related value.
+In list and tree views, `many-to-one` renders as one related record.
 
-By default, the list column uses `DefaultRelationManyToOneListWidget`, which displays the related record's user key and opens the related form in a new tab when the cell is interactive.
+By default, the column uses `DefaultRelationManyToOneListWidget`, which displays the related value as an interactive text cell. When the column is enabled, the cell can open the related record directly.
 
 <Tabs>
 <TabItem value="list-manytoone-default" label="Default rendering">
@@ -783,7 +783,7 @@ By default, the list column uses `DefaultRelationManyToOneListWidget`, which dis
 | Default list widget | `DefaultRelationManyToOneListWidget` |
 | Widget selection | Applied automatically when `viewWidget` is not provided |
 | Typical field-node attrs | `name`, `label`, `sortable`, `filterable`, `isSearchable`, `disabled` |
-| Relevant widget-level attrs | `coModelFieldToDisplay` |
+| Relevant widget-level attrs | `coModelFieldToDisplay`, `disabled` |
 
 <details>
 <summary><strong>Show default example</strong></summary>
@@ -816,7 +816,7 @@ By default, the list column uses `DefaultRelationManyToOneListWidget`, which dis
 
 | Attr | Purpose |
 | --- | --- |
-| No extra attrs | This widget derives the avatar label from the related model's user key field and renders an avatar badge instead of the default text link. |
+| No extra attrs | This widget derives the avatar label from the related record and renders the relation as an avatar badge instead of the default text cell. |
 
 </TabItem>
 <TabItem value="list-manytoone-avatar-example" label="Example">
@@ -845,7 +845,7 @@ By default, the list column uses `DefaultRelationManyToOneListWidget`, which dis
 
 In list and tree views, `one-to-many` renders as a compact summary of the related collection.
 
-By default, the list column uses `DefaultRelationOneToManyListWidget`, which shows the first related label and a `+N` indicator when additional related records are present.
+By default, the column uses `DefaultRelationOneToManyListWidget`, which shows the first related label and a `+N` indicator when additional related records are present.
 
 <Tabs>
 <TabItem value="list-onetomany-default" label="Default rendering">
@@ -865,7 +865,8 @@ By default, the list column uses `DefaultRelationOneToManyListWidget`, which sho
   "type": "field",
   "attrs": {
     "name": "questionPossibleAnswersMaster",
-    "displayName": "Possible Response"
+    "label": "Possible Response",
+    "isSearchable": true
   }
 }
 ```
@@ -884,7 +885,7 @@ No additional core list or tree widgets are currently registered specifically fo
 
 In list and tree views, `many-to-many` renders as a compact summary of the related membership set.
 
-By default, the list column uses `DefaultRelationManyToManyListWidget`, which shows the first related label and a `+N` indicator when additional related records are present.
+By default, the column uses `DefaultRelationManyToManyListWidget`, which shows the first related label and a `+N` indicator when additional related records are present.
 
 <Tabs>
 <TabItem value="list-manytomany-default" label="Default rendering">
@@ -927,7 +928,7 @@ By default, the list column uses `DefaultRelationManyToManyListWidget`, which sh
 
 | Attr | Purpose |
 | --- | --- |
-| No extra attrs | This widget derives avatar labels from the related model's user key field and renders the first related record as an avatar with a `+N` count for the rest. |
+| No extra attrs | This widget derives avatar labels from the related records and renders the first related record as an avatar with a `+N` count for the remainder. |
 
 </TabItem>
 <TabItem value="list-manytomany-avatar-example" label="Example">
@@ -953,7 +954,7 @@ By default, the list column uses `DefaultRelationManyToManyListWidget`, which sh
 
 In list and tree views, `mediaSingle` renders as a thumbnail or file-style preview for the stored asset.
 
-By default, the list column uses `DefaultMediaSingleListWidget`, which shows an image/video/audio preview when possible and falls back to a file icon or download behavior for document-style assets.
+By default, the column uses `DefaultMediaSingleListWidget`, which shows an inline preview for image, audio, and video assets and falls back to a file-style preview for document-heavy uploads.
 
 <Tabs>
 <TabItem value="list-mediasingle-default" label="Default rendering">
@@ -994,7 +995,7 @@ No additional core list or tree widgets are currently registered specifically fo
 
 In list and tree views, `mediaMultiple` renders as a preview of the first asset plus a count for the remaining items.
 
-By default, the list column uses `DefaultMediaMultipleListWidget`, which can open media in the lightbox, download document-style files, and show the full collection on demand.
+By default, the column uses `DefaultMediaMultipleListWidget`, which shows the lead asset, adds a `+N` count when more files are present, and supports preview or download flows depending on the media type.
 
 <Tabs>
 <TabItem value="list-mediamultiple-default" label="Default rendering">
@@ -1030,17 +1031,17 @@ No additional core list or tree widgets are currently registered specifically fo
 
 ### Field Rendering: `computed`
 
-In list and tree views, `computed` does not use its own dedicated list widget family.
+In list and tree views, `computed` does not use a dedicated widget family of its own.
 
-Instead, the list column delegates to the existing scalar renderers based on `computedFieldValueType`, such as text, numeric, boolean, date, or datetime columns.
+Instead, SolidX renders the field using the same column style that would normally be used for the computed value type, such as text, numeric, boolean, date, or datetime.
 
 <Tabs>
 <TabItem value="list-computed-default" label="Default rendering">
 
 | Concern | How it works |
 | --- | --- |
-| Default list widget | Delegated from `SolidComputedColumn` based on `computedFieldValueType` |
-| Widget selection | Text-like values use the short-text column path; numeric values use the numeric column path; date-like and boolean values use their matching scalar columns |
+| Default list widget | No dedicated computed widget; rendering is delegated by `computedFieldValueType` |
+| Widget selection | Text-like values use the text-column path; numeric values use the numeric-column path; date-like and boolean values use their matching scalar-column paths |
 | Typical field-node attrs | `name`, `label`, `sortable`, `filterable`, `isSearchable` |
 | Relevant field attrs | `computedFieldValueType` |
 
@@ -2058,7 +2059,7 @@ No additional core form widgets are currently registered specifically for `selec
 
 ### Field Rendering: `many-to-one`
 
-By default, `many-to-one` renders as an autocomplete-based relation picker in edit mode and as a plain related label in view mode.
+By default, `many-to-one` renders as an autocomplete-based relation picker in edit mode and as a simple related-value display in view mode.
 
 The default edit path uses `DefaultRelationManyToOneFormEditWidget`. The default view path uses `DefaultRelationManyToOneFormViewWidget`.
 
@@ -2149,7 +2150,7 @@ The default edit path uses `DefaultRelationManyToOneFormEditWidget`. The default
 
 | Attr | Purpose |
 | --- | --- |
-| No extra attrs | This widget derives avatar labels from the related model's user key field and renders the relation in a badge-style view mode. |
+| No extra attrs | This widget renders the related value as an avatar-style badge in view mode. |
 
 </TabItem>
 <TabItem value="form-manytoone-avatar-example" label="Example">
@@ -2160,8 +2161,7 @@ The default edit path uses `DefaultRelationManyToOneFormEditWidget`. The default
   "attrs": {
     "label": "Organisation",
     "name": "client",
-    "viewWidget": "SolidRelationFieldAvatarFormWidget",
-    "visible": false
+    "viewWidget": "SolidRelationFieldAvatarFormWidget"
   }
 }
 ```
@@ -2256,7 +2256,7 @@ The default edit path uses `DefaultRelationOneToManyFormEditWidget`. The default
 
 ### Field Rendering: `many-to-many`
 
-By default, `many-to-many` renders as a relation picker in edit mode and as an embedded list-style relation browser in view mode.
+By default, `many-to-many` renders as a relation picker in edit mode and as a list-style relation browser in view mode.
 
 The default edit path uses `DefaultRelationManyToManyAutoCompleteFormEditWidget`. The default view path uses `DefaultRelationManyToManyListFormEditWidget`.
 
@@ -2345,7 +2345,7 @@ Example coming soon..
 
 ### Field Rendering: `mediaSingle`
 
-By default, `mediaSingle` renders as a single-file upload and preview experience in edit mode and as a preview/download surface in view mode.
+By default, `mediaSingle` renders as a single-file upload and preview experience in edit mode and as a preview or download surface in view mode.
 
 The default edit path uses `DefaultMediaSingleFormEditWidget`. The default view path uses `DefaultMediaSingleFormViewWidget`.
 
@@ -2367,9 +2367,7 @@ The default edit path uses `DefaultMediaSingleFormEditWidget`. The default view 
 {
   "type": "field",
   "attrs": {
-    "name": "logo",
-    "disabled": false,
-    "showLabel": false
+    "name": "logo"
   }
 }
 ```
@@ -2386,7 +2384,7 @@ No additional core form widgets are currently registered specifically for `media
 
 ### Field Rendering: `mediaMultiple`
 
-By default, `mediaMultiple` renders as a multi-file upload and preview experience in edit mode and as a gallery-style preview/download surface in view mode.
+By default, `mediaMultiple` renders as a multi-file upload and preview experience in edit mode and as a gallery-style preview or download surface in view mode.
 
 The default edit path uses `DefaultMediaMultipleFormEditWidget`. The default view path uses `DefaultMediaMultipleFormViewWidget`.
 
@@ -2425,19 +2423,19 @@ No additional core form widgets are currently registered specifically for `media
 
 ### Field Rendering: `computed`
 
-By default, `computed` renders as a read-only field and is hidden entirely while a new record is still being created.
+By default, `computed` renders as a read-only field and is hidden while a new record is still being created.
 
-The default edit and view path both use `DefaultComputedFormWidget`.
+The default experience uses the built-in computed-field renderer for both edit and view modes.
 
 <Tabs>
 <TabItem value="form-computed-default" label="Default rendering">
 
 | Concern | How it works |
 | --- | --- |
-| Default edit widget | `DefaultComputedFormWidget` |
-| Default view widget | `DefaultComputedFormWidget` |
+| Default edit widget | Built-in computed renderer |
+| Default view widget | Built-in computed renderer |
 | Widget selection | Applied automatically when `editWidget` or `viewWidget` is not provided |
-| Typical field-node attrs | `name`, `label`, `description`, `showLabel` |
+| Typical field-node attrs | `name`, `label`, `description`, `showLabel`, `readonly` |
 | Relevant field attrs | `computedFieldValueType`, `computedFieldValueProvider`, `computedFieldTriggerConfig` |
 
 <details>

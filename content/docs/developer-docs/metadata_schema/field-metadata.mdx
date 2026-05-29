@@ -2148,7 +2148,7 @@ For `computed`, SolidX does not apply ordinary end-user field validation.
 
 Two important behaviors to note:
 
-- the backend computed-field CRUD manager skips field-level validation and returns no direct validation errors for submitted input
+- the backend computed-field flow does not apply ordinary user-input validation and therefore returns no direct field errors for submitted values
 - generated forms treat the field as read-only and optional because the value is not expected to be provided by the user
 
 This is by design: correctness comes from provider logic and trigger configuration rather than from normal user-input validation rules.
@@ -2205,14 +2205,7 @@ Attrs such as `private`, `enableAuditTracking`, `isSystem`, `isPrimaryKey`, and 
     }
   ],
   "computedFieldValueProvider": "ConcatEntityComputedFieldProvider",
-  "computedFieldValueProviderCtxt": "{
-  "fields": [
-    "feeType",
-    "institute.instituteName"
-  ],
-  "separator": "-",
-  "slugify": true
-}",
+  "computedFieldValueProviderCtxt": "{\"fields\":[\"feeType\",\"institute.instituteName\"],\"separator\":\"-\",\"slugify\":true}",
   "required": true,
   "unique": true,
   "index": false,
