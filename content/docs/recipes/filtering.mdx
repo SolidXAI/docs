@@ -58,7 +58,11 @@ When several fields are passed, they are implicitly combined with **`$and`**.
 | `$and` | Joins the filters in an "and" expression |
 | `$not` | Joins the filters in a "not" expression |
 
-> 💡 **Tip:** `$and`, `$or`, and `$not` can be nested inside one another for complex logic.
+<Callout type="tip" title="Tip">
+
+`$and`, `$or`, and `$not` can be nested inside one another for complex logic.
+
+</Callout>
 
 ---
 
@@ -169,7 +173,11 @@ populateGroup?: boolean;     // Fetch actual records per group
 groupFilter?: BasicFilterDto; // Pagination/sorting within each group
 ```
 
-> The examples below use a **PincodeMaster** model that has many-to-one `state` and `city` relations and a `createdAt` timestamp.
+<Callout type="info" title="Prerequisite">
+
+The examples below use a **PincodeMaster** model that has many-to-one `state` and `city` relations and a `createdAt` timestamp.
+
+</Callout>
 
 ### Group by basics
 
@@ -214,7 +222,11 @@ You can combine relation and scalar fields:
 
 Group names are ordered to match the `groupBy` array: state → city → pincode.
 
-> Joins from filters are reused when possible; otherwise the necessary joins are created automatically.
+<Callout type="info">
+
+Joins from filters are reused when possible; otherwise the necessary joins are created automatically.
+
+</Callout>
 
 ### Date granularity
 
@@ -355,7 +367,9 @@ const result = await pincodeMasterService.find({
 
 ### Caveats
 
-> **Warning**
+<Callout type="warning" title="Warning">
 
-> - **`populateGroup` is not supported when grouping on relation fields** (e.g., `state.name`, `city.name`). Use it only for scalar group-by fields. For relation-based groups, fetch group metadata first, then retrieve records in a separate call using the group key as a filter.
-> - **Sort behavior with date bucket keys:** For date group keys with granularity/format (e.g., `createdAt:month:YYYY`), the sort parser treats the last segment as the sort order. Results may vary by database driver and may not sort as expected in all cases.
+- **`populateGroup` is not supported when grouping on relation fields** (e.g., `state.name`, `city.name`). Use it only for scalar group-by fields. For relation-based groups, fetch group metadata first, then retrieve records in a separate call using the group key as a filter.
+- **Sort behavior with date bucket keys:** For date group keys with granularity/format (e.g., `createdAt:month:YYYY`), the sort parser treats the last segment as the sort order. Results may vary by database driver and may not sort as expected in all cases.
+
+</Callout>

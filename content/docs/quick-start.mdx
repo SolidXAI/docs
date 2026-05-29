@@ -52,9 +52,11 @@ docker run -d \
 
 Remember these credentials. The scaffolding prompts will ask for them.
 
-> **Warning**
+<Callout type="warning" title="Warning">
 
-> The username (`solidx_app_user`), password (`strongpassword`), and database name (`solidx_app_db`) shown above are provided only for quick reference and a fast first run. **You are expected to change them to values of your own choosing** before using this in any real environment. Replace them in the `docker run` command above (and in the scaffolding inputs in Step 2) with credentials you control.
+The username (`solidx_app_user`), password (`strongpassword`), and database name (`solidx_app_db`) shown above are provided only for quick reference and a fast first run. **You are expected to change them to values of your own choosing** before using this in any real environment. Replace them in the `docker run` command above (and in the scaffolding inputs in Step 2) with credentials you control.
+
+</Callout>
 
 ### Step 2: Scaffold the project
 
@@ -84,9 +86,11 @@ Run the interactive scaffolding and enter your credentials when prompted:
 npx @solidxai/solidctl@latest create-app
 ```
 
-> **Info**
+<Callout type="info" title="Info">
 
-> The `create-app` command installs all npm dependencies for both backend and frontend. This is a one-time cost; subsequent commands like `build` and `seed` are much faster.
+The `create-app` command installs all npm dependencies for both backend and frontend. This is a one-time cost; subsequent commands like `build` and `seed` are much faster.
+
+</Callout>
 
 ### Step 3: Build and seed
 
@@ -123,9 +127,11 @@ That's it. Your SolidX project is running. Start building modules via the admin 
 
 Paste the prompt below into your AI coding assistant (Claude Code, Cursor Agent, Codex CLI, Windsurf, etc.) from the directory where you want the project created.
 
-> **Info**
+<Callout type="info" title="Info">
 
-> The prompt is self-contained. Your AI agent will check prerequisites, set up the database if needed, and run all the commands. You only need to provide your PostgreSQL credentials if you already have an instance running on port 5432. Otherwise the agent spins one up via Docker with default credentials.
+The prompt is self-contained. Your AI agent will check prerequisites, set up the database if needed, and run all the commands. You only need to provide your PostgreSQL credentials if you already have an instance running on port 5432. Otherwise the agent spins one up via Docker with default credentials.
+
+</Callout>
 
 ```
 Set up a new SolidX project for me. Follow these steps in order. Do not skip any step. Report status after each step.

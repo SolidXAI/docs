@@ -28,15 +28,21 @@ To try out SolidX on your local machine, ensure you have the following prerequis
   - Recommended: **8 GB RAM** (for a smoother experience)
 - **Disk**: **5 GB free space**
 
-> SolidX itself is lightweight and does not require significant memory.  
-> The requirements above are intended for a smooth local development experience,
-> especially when running development tools and containers.
+<Callout type="info">
+
+SolidX itself is lightweight and does not require significant memory.  
+The requirements above are intended for a smooth local development experience,
+especially when running development tools and containers.
+
+</Callout>
 
 ## Database Setup
 
-> **[Already have PostgreSQL?]**
+<Callout type="info" title="Already have PostgreSQL?">
 
-> If you already have a PostgreSQL database installed and running on your system, you can skip this section and proceed directly to [SolidX Scaffolding Script](#solidx-scaffolding-script). Just make sure you have your database connection details (host, port, username, password, and database name) ready for the scaffolding step.
+If you already have a PostgreSQL database installed and running on your system, you can skip this section and proceed directly to [SolidX Scaffolding Script](#solidx-scaffolding-script). Just make sure you have your database connection details (host, port, username, password, and database name) ready for the scaffolding step.
+
+</Callout>
 
 SolidX requires a relational database to store application data / metadata. Currently supported databases include **PostgreSQL**, **MSSQL**, and **MySQL**.
 
@@ -80,14 +86,16 @@ docker run -d \
   -v solidx_pgdata:/var/lib/postgresql/data \
   postgres:17
 ```
-> **Info**
+<Callout type="info" title="Info">
 
-> Above step initializes an empty database with the specified credentials and configuration and starts the PostgreSQL server in a Docker container. 
+Above step initializes an empty database with the specified credentials and configuration and starts the PostgreSQL server in a Docker container.
 
-> PostgreSQL data will be stored in the Docker volume **solidx_pgdata** which is specified using the `-v` flag. This is useful for the following reasons:
-> 	- Data persists across container restarts
-> 	- Removing the container does not delete the data
-> 	- Removing the volume deletes all stored data
+PostgreSQL data will be stored in the Docker volume **solidx_pgdata** which is specified using the `-v` flag. This is useful for the following reasons:
+- Data persists across container restarts
+- Removing the container does not delete the data
+- Removing the volume deletes all stored data
+
+</Callout>
 
 #### Step 3: Verify the Container Is Running
 Check the list of running containers.
@@ -126,23 +134,28 @@ docker start SolidX_DB
 ```
 
 
-> **Warning**
+<Callout type="warning" title="Warning">
 
->  - Running PostgreSQL using Docker is recommended for local development and testing environments.
->  - For production deployments, it is advised to use a managed PostgreSQL service or a carefully maintained database setup with proper backups, monitoring, and high availability.
-> **Tip**
+- Running PostgreSQL using Docker is recommended for local development and testing environments.
+- For production deployments, it is advised to use a managed PostgreSQL service or a carefully maintained database setup with proper backups, monitoring, and high availability.
 
->  - If you want to reset the database and start afresh, you can remove the Docker volume storing the data.
-> ```bash
-> # Stop the container first
-> docker stop SolidX_DB
-> # Remove the container
-> docker rm SolidX_DB
-> # Then remove the volume
-> # Warning: This deletes all data in the database!
-> docker volume rm solidx_pgdata
-> ```
->  - Then you can re-run the container using the command in Step 2 to create a fresh database.
+</Callout>
+
+<Callout type="tip" title="Tip">
+
+- If you want to reset the database and start afresh, you can remove the Docker volume storing the data.
+```bash
+# Stop the container first
+docker stop SolidX_DB
+# Remove the container
+docker rm SolidX_DB
+# Then remove the volume
+# Warning: This deletes all data in the database!
+docker volume rm solidx_pgdata
+```
+- Then you can re-run the container using the command in Step 2 to create a fresh database.
+
+</Callout>
 
 ## SolidX Scaffolding Script
 
@@ -153,7 +166,11 @@ To create a new SolidX application, run:
 ```bash
 npx @solidxai/solidctl@latest create-app
 ```
-> `npx`, bundled with Node.js, runs packages directly without requiring a global install — ensuring you always use the latest version of `solidctl`.
+<Callout type="info">
+
+`npx`, bundled with Node.js, runs packages directly without requiring a global install — ensuring you always use the latest version of `solidctl`.
+
+</Callout>
 
 ### What `create-app` Does
 Launches an interactive setup that produces a **fully working, end-to-end application**.
@@ -178,9 +195,11 @@ Specifically, it:
    - **npx @solidxai/solidctl@latest build** — Builds both the frontend and backend, and updates the CLI to point to the latest codebase.
    - **npx @solidxai/solidctl@latest upgrade** — Upgrade SolidX dependencies to their latest stable versions.
 
-> **Tip**
+<Callout type="tip" title="Tip">
 
-> See the full [solidctl Command Reference](../../developer-docs/solidctl-commands.md) for details on all available commands.
+See the full [solidctl Command Reference](../../developer-docs/solidctl-commands.md) for details on all available commands.
+
+</Callout>
 
 ### Prerequisites
 
@@ -261,9 +280,11 @@ Run `npx @solidxai/solidctl@latest create-app` as described [above](#solidx-scaf
 9. **Sync Database Schema**: Choose whether to automatically synchronize the database schema.
  - Options: `Yes`, `No`
  - Default: `Yes`
-> **Warning**
+<Callout type="warning" title="Warning">
 
->   This option is not recommended for production environments, since it modifies the database schema automatically. It is advisable to manage database migrations manually in production.
+This option is not recommended for production environments, since it modifies the database schema automatically. It is advisable to manage database migrations manually in production.
+
+</Callout>
 ### Frontend Configuration Prompts
 10. **Admin Panel Port**: Enter the port for the admin panel frontend.
    - Default: `3001`
@@ -272,18 +293,20 @@ Run `npx @solidxai/solidctl@latest create-app` as described [above](#solidx-scaf
 ![Bootstrapping SolidX](/img/tutorial/school-fees-portal-v2/bootstrapping_solidx.png)
 *Screenshot showing the bootstrapping process in the terminal*
 
-> **[Troubleshooting]**
+<Callout type="info" title="Troubleshooting">
 
-> **Verbose logging** — Add `--verbose` for detailed output when diagnosing failures:
-> ```bash
-> npx @solidxai/solidctl@latest create-app --verbose
-> ```
+**Verbose logging** — Add `--verbose` for detailed output when diagnosing failures:
+```bash
+npx @solidxai/solidctl@latest create-app --verbose
+```
 
-> **Package resolution errors** — Clear the npm cache and retry:
-> ```bash
-> npm cache clean --force
-> npx @solidxai/solidctl@latest create-app
-> ```
+**Package resolution errors** — Clear the npm cache and retry:
+```bash
+npm cache clean --force
+npx @solidxai/solidctl@latest create-app
+```
+
+</Callout>
 
 
 ## Bootstrapping Application Metadata
@@ -298,23 +321,27 @@ npx @solidxai/solidctl@latest build
 npx @solidxai/solidctl@latest seed
 ```
 
-> **Warning**
+<Callout type="warning" title="Warning">
 
-> If you skipped the Docker setup and are using an existing local PostgreSQL instance, make sure you have **manually created the target database** before running the seed command. You can do this using a database client (e.g. DBeaver, pgAdmin) or via the `psql` CLI:
-> ```sql
-> CREATE DATABASE solidx_app_db;
-> ```
+If you skipped the Docker setup and are using an existing local PostgreSQL instance, make sure you have **manually created the target database** before running the seed command. You can do this using a database client (e.g. DBeaver, pgAdmin) or via the `psql` CLI:
+```sql
+CREATE DATABASE solidx_app_db;
+```
+
+</Callout>
 
 The `build` command compiles both the frontend and backend, and ensures the CLI points to the latest codebase. The `seed` command then reads predefined JSON files containing the necessary metadata for a SolidX application and populates the database accordingly.
 
 The seed process also creates a `super admin` user, if one does not already exist.
 
-> **[Seed command failing?]**
+<Callout type="info" title="Seed command failing?">
 
-> If the seed command fails, you can re-run it with `--verbose` for detailed output to help diagnose the issue:
-> ```bash
-> npx @solidxai/solidctl@latest seed --verbose
-> ```
+If the seed command fails, you can re-run it with `--verbose` for detailed output to help diagnose the issue:
+```bash
+npx @solidxai/solidctl@latest seed --verbose
+```
+
+</Callout>
 
 ### Seeding in Action
 ![Seeding SolidX Metadata](/img/tutorial/school-fees-portal-v2/seeding_solidx.png)
@@ -359,9 +386,11 @@ After logging in, you will be redirected to the default landing page of the admi
 
 Your SolidX environment is now configured and the admin panel is accessible.
 
-> **Info**
+<Callout type="info" title="Info">
 
-> Throughout the rest of this tutorial, we will refer to the root directory of your project (i.e. `school-fees-portal/`) as **`<consuming-project-root>`**.
+Throughout the rest of this tutorial, we will refer to the root directory of your project (i.e. `school-fees-portal/`) as **`<consuming-project-root>`**.
+
+</Callout>
 
 You're ready to build a fully functional **school fees portal** application using the SolidX App Builder. No coding required—just visual configuration to create entities, relationships, workflows, and business logic.
 

@@ -16,10 +16,13 @@ solidx_concerns: [create_model_with_fields, add_field_to_a_model, remove_field_f
 
 
 # Model Metadata
-> **Where it lives**  
-> **JSON Pointer:** `/moduleMetadata/models`  
-> **JSONPath:** `$.moduleMetadata.models`  
-> **Parent:** `moduleMetadata` in the root of the metadata file
+<Callout type="info" title="Where it lives">
+
+**JSON Pointer:** `/moduleMetadata/models`
+**JSONPath:** `$.moduleMetadata.models`
+**Parent:** `moduleMetadata` in the root of the metadata file
+
+</Callout>
 
 ## Overview
 
@@ -154,9 +157,11 @@ Users keys are used in the UI to reference a model record. Examples include:
 
 **Default:** N/A
 
-> **Info**
+<Callout type="info" title="Info">
 
-> User keys should be unique and stable (i.e., should not change over time) for a model. If a model is used in relations, it is mandatory to have a unique user key field defined for it for the functionality to work correctly.
+User keys should be unique and stable (i.e., should not change over time) for a model. If a model is used in relations, it is mandatory to have a unique user key field defined for it for the functionality to work correctly.
+
+</Callout>
 
 ### `isChild` *(boolean, required)*
 Indicates if the model is a child model (i.e., an extension of another model).  

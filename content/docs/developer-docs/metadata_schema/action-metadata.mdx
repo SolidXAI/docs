@@ -14,10 +14,13 @@ solidx_concerns: [add_custom_menu_action_combo]
 
 
 # Action Metadata
-> **Where it lives**  
-> **JSON Pointer:** `/actions`  
-> **JSONPath:** `$.actions`  
-> **Parent:** Root of the metadata file
+<Callout type="info" title="Where it lives">
+
+**JSON Pointer:** `/actions`
+**JSONPath:** `$.actions`
+**Parent:** Root of the metadata file
+
+</Callout>
 
 ## Overview
 Actions define what happens when users interact with UI elements like menu items, buttons, or links. They connect the frontend to backend functionality and determine how data is displayed or processed.
@@ -34,10 +37,11 @@ Key Configuration Points:
 
 3. **Custom Actions**: Custom actions can optionally be displayed as modal dialogs. If the action is a custom action, the `customComponent` attribute must be provided to specify the path to the custom frontend component. The `customIsModal` attribute indicates if the component should be displayed as a modal dialog.
 
-'> **Note**
+<Callout type="note" title="Note">
 
-''> In case a custom action is not associated with a model, the model user key can be left blank.
-'
+In case a custom action is not associated with a model, the model user key can be left blank.
+
+</Callout>
 
 ### Action Types
 1. **Solid Actions**: Standard CRUD operations using SolidX's built-in views

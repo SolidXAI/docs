@@ -7,9 +7,11 @@ keywords: [institute activation, portal deployment, DNS configuration, multi-ten
 concerns: Infrastructure provisioning, domain management, activation workflow
 ---
 
-> **Warning**
+<Callout type="warning" title="Warning">
 
-> The activation functionality requires a Unix-based operating system (e.g., Ubuntu, macOS). It is not supported on Windows as it depends on Nginx site management via `/etc/nginx/` and DNS configuration via `/etc/hosts`.
+The activation functionality requires a Unix-based operating system (e.g., Ubuntu, macOS). It is not supported on Windows as it depends on Nginx site management via `/etc/nginx/` and DNS configuration via `/etc/hosts`.
+
+</Callout>
 
 ### Overview
 
@@ -109,9 +111,11 @@ The portal domain is automatically constructed as:
 
 This feature introduces two custom controller endpoints — activate and deactivate — that are not part of standard CRUD. You need to explicitly grant Institute Admin access to these endpoints.
 
-> **Info**
+<Callout type="info" title="Info">
 
-> Super Admin is granted all permissions by default. No role configuration needed.
+Super Admin is granted all permissions by default. No role configuration needed.
+
+</Callout>
 
 #### Institute Admin
 
@@ -125,9 +129,11 @@ On the existing **`Institute Admin`** role, grant the following additional permi
 
 - **Institute** — The activate and deactivate actions trigger real infrastructure changes (DNS records, Nginx virtual hosts). They are intentionally separate from the standard update permission so that access can be granted independently from general profile editing.
 
-> **Reference Documentation**
+<Callout type="info" title="Reference Documentation">
 
-> 📋 For step-by-step instructions on editing a role and assigning permissions in SolidX, see [Role Management](../../../admin-docs/iam/roles.md).
+📋 For step-by-step instructions on editing a role and assigning permissions in SolidX, see [Role Management](../../../admin-docs/iam/roles.md).
+
+</Callout>
 
 ### Prerequisites for Activation
 

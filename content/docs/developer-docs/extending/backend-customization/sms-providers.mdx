@@ -15,10 +15,11 @@ SolidX ships with three built-in SMS providers: **TwilioSMSService**, **Msg91SMS
 
 If you prefer a different provider, SolidX exposes **clean abstractions** so you can implement your own without coupling business logic to a specific vendor.
 
-'> **Note**
+<Callout type="note" title="Note">
 
-''> While you can store SMS templates in SolidX, most providers (including Msg91) require you to **register and pre‑approve** transactional templates on their platform before you can use them.
-'
+While you can store SMS templates in SolidX, most providers (including Msg91) require you to **register and pre‑approve** transactional templates on their platform before you can use them.
+
+</Callout>
 
 ---
 
@@ -81,9 +82,11 @@ export class NotificationService {
 
 Sends transactional SMS via [Msg91's](https://msg91.com/) `/flow` API endpoint.
 
-> **Caution**
+<Callout type="caution" title="Caution">
 
-> `sendSMS()` is **not supported** — calling it throws an error. You must use `sendSMSUsingTemplate()` with a template that has a `smsProviderTemplateId` matching a pre-approved Msg91 template.
+`sendSMS()` is **not supported** — calling it throws an error. You must use `sendSMSUsingTemplate()` with a template that has a `smsProviderTemplateId` matching a pre-approved Msg91 template.
+
+</Callout>
 
 **Supports:**
 - `sendSMSUsingTemplate()` — posts template params as `recipients` to the Msg91 flow endpoint
@@ -115,10 +118,11 @@ export class OrderService {
 }
 ```
 
-'> **Note**
+<Callout type="note" title="Note">
 
-''> The template named `"order-confirmation"` must exist in SolidX and its `smsProviderTemplateId` must match a pre-approved template on the Msg91 platform.
-'
+The template named `"order-confirmation"` must exist in SolidX and its `smsProviderTemplateId` must match a pre-approved template on the Msg91 platform.
+
+</Callout>
 
 ---
 
@@ -126,9 +130,11 @@ export class OrderService {
 
 Sends OTP SMS via [Msg91's](https://msg91.com/) dedicated `/otp` endpoint. Intended for one-time password delivery flows.
 
-> **Caution**
+<Callout type="caution" title="Caution">
 
-> `sendSMS()` is **not supported** — calling it throws an error. You must use `sendSMSUsingTemplate()` with a template that includes an `otp` parameter and a valid `smsProviderTemplateId`.
+`sendSMS()` is **not supported** — calling it throws an error. You must use `sendSMSUsingTemplate()` with a template that includes an `otp` parameter and a valid `smsProviderTemplateId`.
+
+</Callout>
 
 **Supports:**
 - `sendSMSUsingTemplate()` — passes `otp`, `template_id`, `mobile`, and `authkey` as URL query params to the Msg91 OTP endpoint
@@ -379,4 +385,8 @@ export interface ISMS {
 | 2️⃣ | Register it in your module |
 | 3️⃣ | Use `SmsServiceFactory` to send template-based SMS |
 
-> With this setup, you keep provider specifics isolated, while reusing SolidX's queueing, templating, and configuration patterns.
+<Callout type="info">
+
+With this setup, you keep provider specifics isolated, while reusing SolidX's queueing, templating, and configuration patterns.
+
+</Callout>
