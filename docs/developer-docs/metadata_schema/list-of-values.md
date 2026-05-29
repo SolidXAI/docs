@@ -93,9 +93,6 @@ To utilize the defined list of values in a dynamic selection field, you can conf
                         "unique": false,
                         "index": false,
                         "private": false,
-                        "encrypt": false,
-                        "encryptionType": null,
-                        "decryptWhen": null,
                         "columnName": null,
                         "isUserKey": false,
                         "enableAuditTracking": true,
@@ -140,4 +137,3 @@ Defines the order in which the values are displayed.
 
 ### `moduleUserKey` *(string, optional)*
 The user key of the module to which this list of values is associated. This helps in scoping the LOV to a specific module.
-

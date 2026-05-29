@@ -1,7 +1,7 @@
 ---
 title: Fields
-description: Overview of the field metadata schema used in SolidX.
-summary: This comprehensive document details field metadata in SolidX, which treats fields as semantic attributes that define how users interact with data in the admin interface. It covers extensive field types including numeric (integer, bigInteger, decimal), text (shortText, longText, richText), temporal (date, dateTime, time), boolean, JSON, media (singleMedia, multipleMedia), specialized types (email, GUID, computed fields), selection fields (static and dynamic), and relation fields (manyToOne, oneToMany, manyToMany). Each field type includes configuration options for validation, default values, encryption, indexing, uniqueness, privacy, and audit tracking, with detailed examples and attribute documentation.
+description: Field metadata schema used in SolidX.
+summary: Field metadata defines the semantic contract of each model field in SolidX. This page focuses on field-level attributes and how they influence validation, persistence, filtering, relations, computed values, and other runtime behavior.
 sidebar_position: 3
 json_pointer: "/moduleMetadata/models/fields"
 jsonpath: "$.moduleMetadata.models[*].fields[*]"
@@ -12,643 +12,1223 @@ items_attributes_doc: "#field-metadata-attributes"
 solidx_concerns: [add_field_to_a_model, remove_field_from_a_model, create_model_with_fields]
 ---
 
-import { IoIosArrowForward } from "react-icons/io";
-import { FaCheckCircle } from "react-icons/fa";
-import { MdNumbers, MdTextFields, MdCalendarMonth, MdMerge, MdPhotoLibrary,MdSecurity, MdCheckBox, MdFunctions,MdCheckCircle,MdCancel,MdRule } from "react-icons/md";
-import { RiSettings3Line,RiShieldKeyholeLine } from "react-icons/ri";     
-import { BiData,BiBookContent} from "react-icons/bi";             
-import { InfoBox } from '@site/src/common/InfoBox';
-import { WarningBox } from '@site/src/common/WarningBox';
-
-
-
 # Field Metadata
 > **Where it lives**  
 > **JSON Pointer:** `/moduleMetadata/models/fields`  
 > **JSONPath:** `$.moduleMetadata.models[*].fields[*]`  
-> **Parent:** `models` in the `moduleMetadata` of the root of the metadata file
+> **Parent:** `models` inside `moduleMetadata`
 
 ## Overview
 
-Every SolidX model is composed of fields. Fields in SolidX go over and above the standard fields one expects, instead we treat fields as semantic attributes with relevance to how the users interact with that data in our admin interface. 
+Field metadata defines what a field is.
 
-<div className="tips-box information-box">
-  <h4 className="card-headear-wrapper">
-    Mental Model
-  </h4>
-  <p>
-    In SolidX, a field is not just a database column. A field carries meaning that the platform uses across validation, generated UI, API behavior, filtering, relations, and user experience.
-  </p>
-  <ul>
-    <li>Choose a field type based on business semantics, not just storage format.</li>
-    <li>Assume field metadata will influence both backend and frontend behavior.</li>
-    <li>Treat field configuration as part of the user experience, not only the schema.</li>
-  </ul>
-  <p>
-    So the intuition is: <strong>fields are semantic contracts that shape how data is stored, shown, and interacted with</strong>.
-  </p>
-</div>
+It is the source of truth for the field's semantic type, validation rules, storage intent, relation behavior, computed value configuration, and platform-level flags such as privacy, auditing, and system ownership.
 
-👉 For a conceptual overview of fields supported in a model, see [Field Management Documentation](../../admin-docs/module-builder/field-management.md).
+If you are deciding how a field should behave as part of a model, this is the page to use.
 
+If you are deciding how that field should appear in a form, list, or tree view, use [View Metadata](./view-metadata.md).
 
-### Example: Institute + Fee Type Model fields
-<details open>
- <summary className="card-title ">
-    <!-- <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" /> -->
-    Field Schema
-  </summary>
+## What Belongs On This Page
 
-```json
-{
-  "moduleMetadata": {
-    ..., // Module metadata 
-    "models": [ // Model metadata array
-      { // Institute model metadata
-        "singularName": "institute",
-        "pluralName": "institutes",
-        "displayName": "Institute",
-        "description": "Institute records",
-        "dataSource": "default",
-        "dataSourceType": "postgres",
-        "tableName": "fees_portal_institute",
-        "userKeyFieldUserKey": "instituteName",
-        "isChild": false,
-        "enableAuditTracking": true,
-        "enableSoftDelete": false,
-        "draftPublishWorkflow": false,
-        "internationalisation": false,
-        "fields": [ // Institute model fields metadata
-          {
-            "name": "instituteName",
-            "displayName": "Institute Name",
-            "description": null,
-            "type": "shortText",
-            "ormType": "varchar",
-            "isSystem": false,
-            "defaultValue": null,
-            "min": null,
-            "max": null,
-            "required": true,
-            "unique": true,
-            "index": true,
-            "private": false,
-            "encrypt": false,
-            "encryptionType": null,
-            "decryptWhen": null,
-            "columnName": null,
-            "isUserKey": true,
-            "enableAuditTracking": false
-          },
-          ..., // Other fields
-        ]
-      },
-      { // Fee Type model metadata
-        "singularName": "feeType",
-        "pluralName": "feeTypes",
-        "displayName": "Fee Type",
-        "description": "Fee Type records",
-        "dataSource": "default",
-        "dataSourceType": "postgres",
-        "tableName": "fees_portal_fee_type",
-        "userKeyFieldUserKey": "feeTypeUserKey",
-        "isChild": false,
-        "enableAuditTracking": true,
-        "enableSoftDelete": false,
-        "draftPublishWorkflow": false,
-        "internationalisation": false,
-        "fields": [ // Fee Type model fields metadata
-          {
-            "name": "institute",
-            "displayName": "Institute",
-            "description": null,
-            "type": "relation",
-            "ormType": "integer",
-            "isSystem": false,
-            "relationType": "many-to-one",
-            "relationCoModelFieldName": "feeTypes",
-            "relationCreateInverse": true,
-            "relationCoModelSingularName": "institute",
-            "relationCoModelColumnName": null,
-            "relationModelModuleName": "fees-portal",
-            "relationCascade": "cascade",
-            "required": true,
-            "unique": false,
-            "index": false,
-            "private": false,
-            "encrypt": false,
-            "encryptionType": null,
-            "decryptWhen": null,
-            "columnName": null,
-            "relationJoinTableName": null,
-            "isRelationManyToManyOwner": null,
-            "relationFieldFixedFilter": "",
-            "enableAuditTracking": false
-          },
-          ... // Other fields
-        ]
-      },
-      ..., // Other models
-    ]
-  },
-  ... // Other metadata
-}
-```
-</details>
+Use this page to answer questions such as:
 
+- Which attrs can be authored on a field definition?
+- Which of those attrs are meaningful for a specific field type?
+- How does SolidX validate the field at runtime?
+- How does the field participate in persistence and filtering?
+- Which attrs are structural, and which are cross-cutting platform flags?
 
-##  Field Type (`type`)  
+This page explains the authored field contract and how that contract affects runtime behavior across validation, persistence, and querying.
 
-> **This is the most important attribute of a field.**  
-> It determines the **behavior, validation, storage, and UI options** for the field.  
+## Field Metadata Attributes
 
+The full field metadata schema spans many field types, but most attrs fall into a few consistent families:
 
+| Attribute family | What it controls |
+| --- | --- |
+| Identity | Field naming and user-facing labels such as `name`, `displayName`, and `description` |
+| Type and storage | Semantic type and persistence hints such as `type`, `ormType`, `columnName`, `defaultValue`, `min`, `max`, and `length` |
+| Validation | Runtime constraints such as `required`, `regexPattern`, and `regexPatternNotMatchingErrorMsg` |
+| Query and lookup | Attributes that shape how a field is used in filtering, search, or as a business key, such as `index` and `isUserKey` |
+| Security and auditing | Attributes such as `private` and `enableAuditTracking` |
+| Lifecycle and ownership | Attributes such as `isSystem`, `isMarkedForRemoval`, and `isPrimaryKey` |
+| Specialized behavior | Relation, selection, media, and computed-field attrs that apply only to the matching field families |
 
-  <h3 className=" card-headear-wrapper">
-    <MdNumbers size={24}  />
+The per-field sections below are the authoritative reference for when each attr matters.
 
-###  Numeric Types
-</h3>
+## Field Types
 
-| Value    | Reference | Example |
-|----------|------------|---------|
-| `int`    | [Integer Field](../../admin-docs/module-builder/field-management#integer) | [See Example](#int) |
-| `bigint` | [BigInt Field](../../admin-docs/module-builder/field-management#big-integer) | [See Example](#bigint-todo) |
-| `decimal`| [Decimal Field](../../admin-docs/module-builder/field-management#decimal) | [See Example](#decimal) |
+### `shortText`
 
+Use `shortText` for short scalar strings such as names, titles, identifiers, labels, codes, and other compact text values.
 
+In SolidX, `shortText` is a string-backed field. It supports length and pattern validation, persists as scalar text, and participates naturally in text-oriented filtering and search flows.
 
-  <h3 className=" card-headear-wrapper">
-    <MdTextFields size={24}  />
+#### Attribute Reference
 
-###  Text Types
-</h3>
+| Attr | Required | Purpose | Notes for `shortText` |
+| --- | --- | --- | --- |
+| `name` | Yes | Internal field key | Used as the request, response, and persistence key |
+| `displayName` | Yes | Human-readable label | Used in generated UI and validation messaging |
+| `description` | No | Help text for the field | Exposed to metadata-driven UI and tooling |
+| `type` | Yes | Semantic field type | Must be `shortText` |
+| `ormType` | No | Persistence-layer storage hint | Commonly `varchar` for short text |
+| `defaultValue` | No | Default value for metadata-driven consumers | Used by generated form initialization when no existing value is present |
+| `required` | No | Marks the field as mandatory | Enforced in generated forms and in backend CRUD validation |
+| `min` | No | Minimum length | Enforced in generated form validation |
+| `max` | No | Maximum length | Enforced in generated form validation and used as the effective backend length limit |
+| `length` | No | Generic storage-length attribute | Not the primary runtime length constraint for `shortText`; use `max` when you need validation-level length enforcement |
+| `regexPattern` | No | Pattern constraint | Enforced in generated forms and in backend validation |
+| `regexPatternNotMatchingErrorMsg` | No | Custom regex validation message | Used by generated form validation; backend validation currently returns a generic regex error |
+| `unique` | No | Uniqueness intent | Relevant to generated schema and persistence constraints rather than to field-level validation alone |
+| `index` | No | Indexing intent | Useful for frequently filtered or searched fields |
+| `columnName` | No | Physical column override | Overrides the generated column name |
+| `private` | No | Visibility flag | Signals that the field should not be exposed in ordinary read flows |
+| `isUserKey` | No | Human-facing record identifier flag | Often used when a model needs a stable business identifier rather than a numeric id |
+| `enableAuditTracking` | No | Audit-tracking flag | Marks the field for field-level auditing concerns |
+| `isSystem` | No | Platform-owned field flag | Distinguishes framework-managed fields from business-authored fields |
+| `isMarkedForRemoval` | No | Lifecycle flag | Used during metadata evolution and cleanup |
+| `isPrimaryKey` | No | Primary-key flag | Important when the field doubles as the model's primary identifier |
 
-| Value       | Reference | Example |
-|-------------|-----------|---------|
-| `shortText` | [Short Text Field](../../admin-docs/module-builder/field-management#short-text) | [See Example](#shorttext) |
-| `longText`  | [Long Text Field](../../admin-docs/module-builder/field-management#long-text) | [See Example](#longtext) |
-| `richText`  | [Rich Text Field](../../admin-docs/module-builder/field-management#rich-text) | [See Example](#richtext) |
-| `json`      | [JSON Field](../../admin-docs/module-builder/field-management#json) | [See Example](#json) |
+#### Runtime Behavior
 
+##### Validation
 
+For `shortText`, SolidX validates in two places:
 
-  <h3 className=" card-headear-wrapper">
-    <FaCheckCircle size={20}  />
+1. The generated form layer validates `required`, `min`, `max`, and `regexPattern`.
+2. The backend validation layer checks requiredness, string type, maximum length, and regex compliance.
 
-### Boolean
-</h3>
+Two important behaviors to note:
 
-| Value     | Reference | Example |
-|-----------|-----------|---------|
-| `boolean` | [Boolean Field](../../admin-docs/module-builder/field-management#boolean) | [See Example](#boolean) |
+- `max` is the effective length limit enforced by backend validation
+- `min` is enforced in generated form validation
 
+##### Persistence
 
+`shortText` is persisted as a scalar string field.
 
-  <h3 className=" card-headear-wrapper">
-    <MdCalendarMonth size={22}  />
+The submitted value is validated and then stored without field-specific transformation.
 
-### Date / Time Types
-</h3>
+Attrs such as `ormType`, `columnName`, `unique`, and `index` are therefore best understood as persistence and schema intent. They shape how the field is represented in the generated model and storage layer, even when they are not enforced by the validation rules described above.
 
-| Value     | Reference | Example |
-|-----------|-----------|---------|
-| `date`    | [Date Field](../../admin-docs/module-builder/field-management#date) | [See Example](#date) |
-| `datetime`| [Datetime Field](../../admin-docs/module-builder/field-management#datetime) | [See Example](#datetime) |
-| `time`    | [Time Field](../../admin-docs/module-builder/field-management#time) | [See Example](#time-todo) |
+##### Filtering And Querying
 
+Because `shortText` is a scalar textual field, it works naturally with the standard text-oriented filter operators available in SolidX, including:
 
+- equality and inequality
+- `in` and `notIn`
+- `contains` and `notContains`
+- case-insensitive contains variants
+- `startsWith` and `endsWith`
+- null and not-null checks
 
-  <h3 className=" card-headear-wrapper">
-    <MdMerge size={24}  />
+This makes `shortText` a natural fit for searchable list views, user keys, codes, names, and other text-oriented query flows.
 
-###  Relation Types
-</h3>
+##### Security, Auditing, And Platform Flags
 
-| Value         | Reference | Example |
-|---------------|-----------| --------|
-| `many-to-one`   | [Many To One](../../admin-docs/module-builder/field-management#1-many-to-one) | [See Example](#many-to-one-relation-child--parent) |
-| `one-to-many`   | [One To Many](../../admin-docs/module-builder/field-management#3-one-to-many) | [See Example](#one-to-many-relation-parent--children) |
-| `many-to-many`  | [Many To Many](../../admin-docs/module-builder/field-management#2-many-to-many) | [See Example](#many-to-many-relation) |
+Attrs such as `private`, `enableAuditTracking`, `isSystem`, and `isPrimaryKey` are part of the field contract even though they are broader than validation alone. They communicate platform-level intent that other parts of SolidX rely on.
 
-
-  <h3 className=" card-headear-wrapper">
-    <MdPhotoLibrary size={24}  />
-
-###  Media Types
-</h3>
-
-| Value         | Reference | Example |
-|---------------|-----------| --------|
-| `mediaSingle`   | [Single Media Field](../../admin-docs/module-builder/field-management#single-media) | [See Example](#mediasingle) |
-| `mediaMultiple` | [Multiple Media Field](../../admin-docs/module-builder/field-management#multiple-media) | [See Example](#mediamultiple) |
-
-
-
-  <h3 className=" card-headear-wrapper">
-    <MdSecurity size={22}  />
-
-###  Specialized Types
-</h3>
-
-| Value     | Reference | Example |
-|-----------|-----------|---------|
-| `email`   | [Email Field](../../admin-docs/module-builder/field-management#email) | [See Example](#email) |
-| `password`| [Password Field](../../admin-docs/module-builder/field-management#password) | [See Example](#password) |
-
-
-
-  <h3 className=" card-headear-wrapper">
-    <MdCheckBox size={20}  />
-
-###  Selection Types
-</h3>
-
-| Value            | Reference | Example |
-|------------------|-----------|---------|
-| `selectionStatic`  | [Static Selection Field](../../admin-docs/module-builder/field-management#static-selection) | [See Example](#selectionstatic) |
-| `selectionDynamic` | [Dynamic Selection Field](../../admin-docs/module-builder/field-management#dynamic-selection) | [See Example](#selectiondynamic) |
-
-
-
-  <h3 className=" card-headear-wrapper">
-    <MdFunctions size={24}  />
-
-###  Computed
-</h3>
-| Value      | Reference | Example |
-|------------|-----------|---------|
-| `computed` | [Computed Field](../../admin-docs/module-builder/field-management#computed) | [See Example](#computed-1) |
-
-
-## Field Metadata Examples
-  <h3 className=" card-headear-wrapper">
-    <MdNumbers size={24}  />
-
-###  Numeric Types
-</h3>
-
-#### int
-**Purpose**: For whole numbers (positive/negative)  
-**Database**: `integer` column  
-**UI Component**: Number input field  
-**Use Cases**: Counts, quantities, IDs, rankings
+#### Example
 
 ```json
 {
-  "name": "studentCount",
-  "displayName": "Student Count",
-  "type": "int",
-  "ormType": "integer",
-  "min": 0,
-  "max": 10000,
-  "defaultValue": 0,
-  "required": true
-}
-```
-**Key Properties**:
-- `min`: Lower bound
-- `max`: Upper bound
-- `defaultValue`: Initial value on create
-
-
-#### decimal
-**Purpose**: For decimal/floating point numbers  
-**Database**: `decimal` column  
-**UI Component**: Decimal input field  
-**Use Cases**: Prices, percentages, measurements, financial amounts
-
-```json
-{
-  "name": "feeAmount",
-  "displayName": "Fee Amount",
-  "type": "decimal",
-  "ormType": "decimal",
-  "min": 0,
-  "max": 100000,
-  "defaultValue": "0.00",
-  "required": true,
-}
-```
-**Key Properties**:
-- `min`: Lower bound
-- `max`: Upper bound
-- `defaultValue`: Initial value on create
-
-#### bigint (TODO)
-
-  <h3 className=" card-headear-wrapper">
-    <MdTextFields size={24}  />
-
-###  Text Types
-</h3>
-
-
-#### shortText
-**Purpose**: For shorter text content (typically up to 1000 characters)  
-**Database**: `varchar` column  
-**UI Component**: Text input field  
-**Use Cases**: Names, titles, identifiers, short descriptions
-
-```json
-{
-  "name": "instituteName",
-  "displayName": "Institute Name",
+  "name": "bankUserId",
+  "displayName": "Bank User ID",
+  "description": "Bank UserId (MER followed by customer CIF)",
   "type": "shortText",
   "ormType": "varchar",
-  "min": null,
-  "max": 256,
+  "defaultValue": null,
   "required": true,
-  "unique": true,
+  "min": 9,
+  "max": 16,
+  "regexPattern": null,
+  "regexPatternNotMatchingErrorMsg": null,
+  "unique": false,
   "index": true,
-  "isUserKey": true
+  "columnName": null,
+  "private": false,
+  "isUserKey": false,
+  "enableAuditTracking": true,
+  "isSystem": false,
+  "isMarkedForRemoval": false,
+  "isPrimaryKey": false
 }
 ```
 
-**Key Properties**:
-- `min`/`max`: Character limits
-- `unique`: Enforce uniqueness
-- `index`: Database performance optimization
-- `isUserKey`: Use as record identifier
+This is a representative `shortText` field because it combines a clear business purpose with required validation, explicit length limits, and index intent.
 
-#### longText
-**Purpose**: For multi-line text content of any length  
-**Database**: `text` column  
-**UI Component**: Textarea field  
-**Use Cases**: Descriptions, comments, notes, multi-paragraph content
+For rendering, widgets, and layout attrs related to `shortText`, see [View Metadata](./view-metadata.md).
+
+### `longText`
+
+Use `longText` for extended text such as descriptions, notes, instructions, configuration blobs stored as text, or any other content that benefits from a multiline editing experience.
+
+In SolidX, `longText` is a string-backed field intended for larger textual values. It supports pattern validation, persists as scalar text, and participates in the same text-oriented filtering and search flows as other scalar text fields.
+
+#### Attribute Reference
+
+| Attr | Required | Purpose | Notes for `longText` |
+| --- | --- | --- | --- |
+| `name` | Yes | Internal field key | Used as the request, response, and persistence key |
+| `displayName` | Yes | Human-readable label | Used in generated UI and validation messaging |
+| `description` | No | Help text for the field | Exposed to metadata-driven UI and tooling |
+| `type` | Yes | Semantic field type | Must be `longText` |
+| `ormType` | No | Persistence-layer storage hint | Commonly `text` for multiline content |
+| `defaultValue` | No | Default value for metadata-driven consumers | Used by generated form initialization when no existing value is present |
+| `required` | No | Marks the field as mandatory | Enforced in generated forms and in backend validation |
+| `min` | No | Minimum length | Enforced in generated form validation |
+| `max` | No | Maximum length | Enforced in generated form validation |
+| `length` | No | Generic storage-length attribute | Not used as the primary runtime length control for `longText` |
+| `regexPattern` | No | Pattern constraint | Enforced in generated forms and in backend validation |
+| `regexPatternNotMatchingErrorMsg` | No | Custom regex validation message | Used by generated form validation; backend validation currently returns a generic regex error |
+| `unique` | No | Uniqueness intent | Relevant to generated schema and persistence constraints rather than to field-level validation alone |
+| `index` | No | Indexing intent | Useful when long-text values participate in targeted query flows |
+| `columnName` | No | Physical column override | Overrides the generated column name |
+| `private` | No | Visibility flag | Signals that the field should not be exposed in ordinary read flows |
+| `isUserKey` | No | Human-facing record identifier flag | Uncommon for `longText`, but still part of the field contract |
+| `enableAuditTracking` | No | Audit-tracking flag | Marks the field for field-level auditing concerns |
+| `isSystem` | No | Platform-owned field flag | Distinguishes framework-managed fields from business-authored fields |
+| `isMarkedForRemoval` | No | Lifecycle flag | Used during metadata evolution and cleanup |
+| `isPrimaryKey` | No | Primary-key flag | Technically possible, though uncommon for multiline text fields |
+
+#### Runtime Behavior
+
+##### Validation
+
+For `longText`, SolidX validates in two places:
+
+1. The generated form layer validates `required`, `min`, `max`, and `regexPattern`.
+2. The backend validation layer checks requiredness, string type, and regex compliance.
+
+Two important behaviors to note:
+
+- `min` and `max` are enforced in generated form validation
+- backend validation does not currently enforce `min` or `max` for `longText`
+
+##### Persistence
+
+`longText` is persisted as a scalar text field.
+
+The submitted value is validated and then stored without field-specific transformation.
+
+Attrs such as `ormType`, `columnName`, `unique`, and `index` are therefore best understood as persistence and schema intent. They shape how the field is represented in the generated model and storage layer, even when they are not enforced by the validation rules described above.
+
+##### Filtering And Querying
+
+Because `longText` is a scalar textual field, it works naturally with the standard text-oriented filter operators available in SolidX, including:
+
+- equality and inequality
+- `in` and `notIn`
+- `contains` and `notContains`
+- case-insensitive contains variants
+- `startsWith` and `endsWith`
+- null and not-null checks
+
+This makes `longText` suitable for description-style filters, notes, instructions, and text-driven administrative search flows.
+
+##### Security, Auditing, And Platform Flags
+
+Attrs such as `private`, `enableAuditTracking`, `isSystem`, and `isPrimaryKey` are part of the field contract even though they are broader than validation alone. They communicate platform-level intent that other parts of SolidX rely on.
+
+#### Example
 
 ```json
 {
   "name": "description",
   "displayName": "Description",
+  "description": null,
   "type": "longText",
   "ormType": "text",
-  "regexPattern": "^[a-zA-Z0-9\\s]*$",
-  "regexPatternNotMatchingErrorMsg": "Only alphanumeric characters and spaces allowed",
-  "min": 10,
-  "max": 5000,
-  "required": false
+  "isSystem": false,
+  "regexPattern": "",
+  "regexPatternNotMatchingErrorMsg": "Invalid regex pattern",
+  "defaultValue": null,
+  "min": null,
+  "max": null,
+  "required": true,
+  "unique": false,
+  "index": false,
+  "private": false,
+  "columnName": null,
+  "enableAuditTracking": false
 }
 ```
 
-**Key Properties**:
-- `regexPattern`: Validation pattern
-- `regexPatternNotMatchingErrorMsg`: Custom validation error message
-- Supports longer content than `shortText`
+This is a representative `longText` field because it shows the usual multiline text contract: semantic text storage, optional regex support, and standard required handling.
 
-#### richText
-**Purpose**: For formatted text with HTML support  
-**Database**: `text` column  
-**UI Component**: Rich text editor (HTML)  
-**Use Cases**: Content with formatting, FAQs, policies, documentation
+For rendering, widgets, and layout attrs related to `longText`, see [View Metadata](./view-metadata.md).
+
+### `richText`
+
+Use `richText` for formatted content such as article bodies, policy text, message templates, or any other field where users need headings, emphasis, lists, links, or other rich formatting.
+
+In SolidX, `richText` is a string-backed field that stores formatted content as text. It supports pattern validation, persists as scalar text, and participates in the same text-oriented filtering and search flows as other scalar text fields.
+
+#### Attribute Reference
+
+| Attr | Required | Purpose | Notes for `richText` |
+| --- | --- | --- | --- |
+| `name` | Yes | Internal field key | Used as the request, response, and persistence key |
+| `displayName` | Yes | Human-readable label | Used in generated UI and validation messaging |
+| `description` | No | Help text for the field | Exposed to metadata-driven UI and tooling |
+| `type` | Yes | Semantic field type | Must be `richText` |
+| `ormType` | No | Persistence-layer storage hint | Commonly `text` for formatted content |
+| `defaultValue` | No | Default value for metadata-driven consumers | Used by generated form initialization when no existing value is present |
+| `required` | No | Marks the field as mandatory | Enforced in generated forms and in backend validation |
+| `min` | No | Minimum length | Enforced in generated form validation |
+| `max` | No | Maximum length | Enforced in generated form validation |
+| `length` | No | Generic storage-length attribute | Not used as the primary runtime length control for `richText` |
+| `regexPattern` | No | Pattern constraint | Enforced in generated forms and in backend validation |
+| `regexPatternNotMatchingErrorMsg` | No | Custom regex validation message | Used by generated form validation; backend validation currently returns a generic regex error |
+| `unique` | No | Uniqueness intent | Relevant to generated schema and persistence constraints rather than to field-level validation alone |
+| `index` | No | Indexing intent | Useful when rich-text values participate in targeted query flows |
+| `columnName` | No | Physical column override | Overrides the generated column name |
+| `private` | No | Visibility flag | Signals that the field should not be exposed in ordinary read flows |
+| `isUserKey` | No | Human-facing record identifier flag | Uncommon for `richText`, but still part of the field contract |
+| `enableAuditTracking` | No | Audit-tracking flag | Marks the field for field-level auditing concerns |
+| `isSystem` | No | Platform-owned field flag | Distinguishes framework-managed fields from business-authored fields |
+| `isMarkedForRemoval` | No | Lifecycle flag | Used during metadata evolution and cleanup |
+| `isPrimaryKey` | No | Primary-key flag | Technically possible, though uncommon for rich formatted content |
+
+#### Runtime Behavior
+
+##### Validation
+
+For `richText`, SolidX validates in two places:
+
+1. The generated form layer validates `required`, `min`, `max`, and `regexPattern`.
+2. The backend validation layer checks requiredness, string type, and regex compliance.
+
+Two important behaviors to note:
+
+- `min` and `max` are enforced in generated form validation
+- backend validation does not currently enforce `min` or `max` for `richText`
+
+##### Persistence
+
+`richText` is persisted as a scalar text field.
+
+The submitted value is validated and then stored without field-specific transformation.
+
+Attrs such as `ormType`, `columnName`, `unique`, and `index` are therefore best understood as persistence and schema intent. They shape how the field is represented in the generated model and storage layer, even when they are not enforced by the validation rules described above.
+
+##### Filtering And Querying
+
+Because `richText` is a scalar textual field, it works naturally with the standard text-oriented filter operators available in SolidX, including:
+
+- equality and inequality
+- `in` and `notIn`
+- `contains` and `notContains`
+- case-insensitive contains variants
+- `startsWith` and `endsWith`
+- null and not-null checks
+
+This makes `richText` suitable for administrative search and text-driven query flows, even though end-user presentation is usually richer than plain text.
+
+##### Security, Auditing, And Platform Flags
+
+Attrs such as `private`, `enableAuditTracking`, `isSystem`, and `isPrimaryKey` are part of the field contract even though they are broader than validation alone. They communicate platform-level intent that other parts of SolidX rely on.
+
+#### Example
 
 ```json
 {
-  "name": "privacyPolicy",
-  "displayName": "Privacy Policy",
+  "name": "content",
+  "displayName": "Content",
+  "description": null,
   "type": "richText",
   "ormType": "text",
+  "isSystem": false,
   "required": false,
+  "unique": false,
+  "index": false,
+  "private": false,
+  "columnName": null
 }
 ```
 
-**Key Properties**:
-- Supports HTML formatting
-- No length restrictions
-- Rich editing capabilities in UI
+This is a representative `richText` field because it captures the typical contract: formatted content stored as text and rendered through the rich-text form experience.
 
-<h3 className=" card-headear-wrapper">
-    <FaCheckCircle size={20}  />
+For rendering, widgets, and layout attrs related to `richText`, see [View Metadata](./view-metadata.md).
 
-### Boolean
-</h3>
+### `json`
 
-#### 1. boolean
-**Purpose**: For true/false values  
-**Database**: `boolean` column  
-**UI Component**: Checkbox or toggle switch  
-**Use Cases**: Flags, settings, yes/no options, status indicators
+Use `json` for structured values that should be stored and transported as JSON rather than as free-form text.
 
-```json
-{
-  "name": "isActive",
-  "displayName": "Is Active",
-  "type": "boolean",
-  "ormType": "boolean",
-  "defaultValue": true,
-  "required": true
-}
-```
+This field type is appropriate when the value is naturally object- or array-shaped and should remain machine-structured instead of being treated as plain text or formatted rich content.
 
-**Key Properties**:
-- `defaultValue`: `true` or `false`
-- Simple on/off state management
+In SolidX, `json` is a structured data field with JSON-specific backend validation. It is intended for persisted JSON payloads, metadata blocks, configuration objects, and other structured content.
 
-<h3 className=" card-headear-wrapper">
-    <MdCalendarMonth size={22}  />
+#### Attribute Reference
 
-### Date / Time Types
-</h3>
+| Attr | Required | Purpose | Notes for `json` |
+| --- | --- | --- | --- |
+| `name` | Yes | Internal field key | Used as the request, response, and persistence key |
+| `displayName` | Yes | Human-readable label | Used in generated UI and validation messaging |
+| `description` | No | Help text for the field | Exposed to metadata-driven UI and tooling |
+| `type` | Yes | Semantic field type | Must be `json` |
+| `ormType` | No | Persistence-layer storage hint | Common values include `simple-json` and `jsonb`, depending on storage needs |
+| `defaultValue` | No | Default value for metadata-driven consumers | Used by generated form initialization when no existing value is present |
+| `required` | No | Marks the field as mandatory | Enforced in generated forms and in backend validation |
+| `unique` | No | Uniqueness intent | Relevant to generated schema and persistence constraints rather than to field-level validation alone |
+| `index` | No | Indexing intent | Useful only when the underlying storage/query model supports the intended access pattern |
+| `columnName` | No | Physical column override | Overrides the generated column name |
+| `private` | No | Visibility flag | Signals that the field should not be exposed in ordinary read flows |
+| `isUserKey` | No | Human-facing record identifier flag | Uncommon for `json`, but still part of the field contract |
+| `enableAuditTracking` | No | Audit-tracking flag | Marks the field for field-level auditing concerns |
+| `isSystem` | No | Platform-owned field flag | Distinguishes framework-managed fields from business-authored fields |
+| `isMarkedForRemoval` | No | Lifecycle flag | Used during metadata evolution and cleanup |
+| `isPrimaryKey` | No | Primary-key flag | Technically possible, though uncommon for structured JSON values |
 
-#### date
-**Purpose**: For date values only (no time)  
-**Database**: `date` column  
-**UI Component**: Date picker  
-**Use Cases**: Birth dates, deadlines, event dates
+#### Runtime Behavior
 
-```json
-{
-  "name": "dueDate",
-  "displayName": "Due Date",
-  "type": "date",
-  "ormType": "date",
-  "required": true,
-  "defaultValue": null
-}
-```
+##### Validation
 
-#### datetime
-**Purpose**: For date and time values  
-**Database**: `timestamp` column  
-**UI Component**: DateTime picker  
-**Use Cases**: Created/updated timestamps, scheduled events, appointments
+For `json`, SolidX validates in two places:
 
-```json
-{
-  "name": "registeredAt",
-  "displayName": "Registered At",
-  "type": "datetime",
-  "ormType": "timestamp",
-  "required": true,
-  "enableAuditTracking": true
-}
-```
+1. The generated form layer checks requiredness.
+2. The backend validation layer checks requiredness and validates that the submitted value is valid JSON.
 
-#### time (TODO)
+One important behavior to note:
 
-<h3 className=" card-headear-wrapper">
-    <MdMerge size={24}  />
+- unlike text-based field types, the backend validator explicitly checks whether the submitted value is valid JSON rather than only checking its scalar type
 
-###  Relation Types
-</h3>
+##### Persistence
 
-**Purpose**: Establish relationships between models  
-**Database**: Foreign key columns or junction tables  
-**UI Component**: Related record selector  
-**Use Cases**: Parent-child relationships, data linking
+`json` is persisted as structured JSON data according to the configured `ormType`.
 
-**Supported Types** i.e attribute (`relationType`):
- - `many-to-one`: Many records link to one parent (e.g., Orders → Customer)
- - `one-to-many`: One record has many children (e.g., Customer → Orders)
- - `many-to-many`: Many records link to many others via a junction table (e.g., Students ↔ Courses)
+The submitted value is validated and then stored without field-specific transformation in the CRUD manager itself.
 
-#### Many-to-One Relation (Child → Parent)
-```json
-{
-  "name": "institute",
-  "displayName": "Institute",
-  "type": "relation",
-  "relationType": "many-to-one",
-  "relationCoModelSingularName": "institute",
-  "relationCoModelColumnName": null,
-  "relationModelModuleName": "fees-portal",
-  "relationCascade": "cascade",
-  "required": true
-}
-```
+Attrs such as `ormType`, `columnName`, `unique`, and `index` are therefore best understood as persistence and schema intent. They shape how the field is represented in the generated model and storage layer, even when they are not enforced by the validation rules described above.
 
-#### One-to-Many Relation (Parent → Children)
-```json
-{
-  "name": "feeTypes",
-  "displayName": "Fee Types",
-  "type": "relation",
-  "relationType": "one-to-many",
-  "relationCoModelSingularName": "feeType",
-  "relationCoModelFieldName": "institute",
-  "relationCoModelColumnName": "instituteId",
-  "relationModelModuleName": "fees-portal",
-  "relationCreateInverse": true
-}
-```
+##### Filtering And Querying
 
-#### Many-to-Many Relation
-```json
-{
-  "name": "categories",
-  "displayName": "Categories",
-  "type": "relation",
-  "relationType": "many-to-many",
-  "relationCoModelSingularName": "category",
-  "relationModelModuleName": "fees-portal",
-  "relationJoinTableName": "fee_category_junction",
-  "isRelationManyToManyOwner": true,
-  "relationCreateInverse": true
-}
-```
+`json` is structurally different from scalar text and numeric fields.
 
-**Key Properties**:
-- `relationType`:  "one-to-many", "many-to-one", "many-to-many"
-- `relationCoModelSingularName`: Target model name
-- `relationCoModelColumnName`: Foreign key column name
-- `relationJoinTableName`: Junction table for many-to-many
-- `relationCascade`: Cascade behavior for deletes
-- `relationCreateInverse`: Auto-create inverse relationship
+At the field-contract level, it can participate in standard persistence and retrieval flows, but JSON-aware filtering behavior depends heavily on the storage model and the query path being used. For this reason, JSON fields should be treated more conservatively than ordinary scalar fields when designing search and list experiences.
 
-Give an example of inverse vs non-inverse relation creation (TODO)
+##### Security, Auditing, And Platform Flags
 
-<h3 className=" card-headear-wrapper">
-    <MdPhotoLibrary size={24}  />
+Attrs such as `private`, `enableAuditTracking`, `isSystem`, and `isPrimaryKey` are part of the field contract even though they are broader than validation alone. They communicate platform-level intent that other parts of SolidX rely on.
 
-###  Media Types
-</h3>
-
-
-#### mediaSingle
-**Purpose**: Single file/image upload  
-**UI Component**: File upload with preview  
-**Use Cases**: Profile pictures, logos, single documents
-
-```json
-{
-  "name": "logo",
-  "displayName": "Logo",
-  "type": "mediaSingle",
-  "mediaTypes": ["image"],
-  "mediaMaxSizeKb": 5120,
-  "mediaStorageProviderUserKey": "default-aws-s3",
-  "required": true
-}
-```
-
-#### mediaMultiple
-**Purpose**: Multiple file uploads  
-**UI Component**: Multi-file upload with gallery  
-**Use Cases**: Photo galleries, document collections, attachments
-
-```json
-{
-  "name": "documents",
-  "displayName": "Documents",
-  "type": "mediaMultiple",
-  "mediaTypes": ["image", "document", "pdf"],
-  "mediaMaxSizeKb": 10240,
-  "mediaStorageProviderUserKey": "default-aws-s3",
-  "required": false
-}
-```
-
-**Key Properties**:
-- `mediaTypes`: Array of allowed file types
-- `mediaMaxSizeKb`: Maximum file size per file
-- `mediaStorageProviderUserKey`: [Storage configuration reference](../../admin-docs/media-library/storage-providers.md)
-
-<h3 className=" card-headear-wrapper">
-    <MdSecurity size={22}  />
-
-###  Specialized Types
-</h3>
-
-#### email
-**Purpose**: Email addresses with validation  
-**Database**: `varchar`  
-**UI Component**: Email input field  
-**Use Cases**: User contact information, notifications
-
-```json
-{
-  "name": "email",
-  "displayName": "Email Address",
-  "type": "email",
-  "ormType": "varchar",
-  "required": true,
-  "unique": true,
-  "index": true
-}
-```
-
-#### json
-**Purpose**: Store complex JSON data structures  
-**Database**: `text`/`jsonb`  
-**UI Component**: JSON editor or code field  
-**Use Cases**: Flexible data structures, API responses, configurations
+#### Example
 
 ```json
 {
   "name": "metadata",
   "displayName": "Metadata",
   "type": "json",
-  "ormType": "jsonb",
+  "ormType": "simple-json",
   "required": false,
-  "defaultValue": "{}"
+  "unique": false,
+  "index": false,
+  "private": false
 }
 ```
 
-#### password
-**Purpose**: Secure password storage with hashing  
-**Database**: `varchar` (hashed)  
-**UI Component**: Password input field  
-**Use Cases**: User authentication, secure credentials
+This is a representative `json` field because it shows the core contract clearly: structured data storage, JSON-specific validation, and a persistence-oriented `ormType`.
+
+For rendering, widgets, and layout attrs related to `json`, see [View Metadata](./view-metadata.md).
+
+### `int`
+
+Use `int` for whole-number values where fractional precision is not required.
+
+This field type is appropriate for counts, sequence numbers, rankings, durations measured as whole units, and other numeric values that should behave like integers rather than as free-form text.
+
+In SolidX, `int` is a scalar whole-number field. It supports numeric requiredness and numeric bounds, persists as an integer-style value, and participates naturally in numeric filtering, sorting, and reporting flows.
+
+#### Attribute Reference
+
+| Attr | Required | Purpose | Notes for `int` |
+| --- | --- | --- | --- |
+| `name` | Yes | Internal field key | Used as the request, response, and persistence key |
+| `displayName` | Yes | Human-readable label | Used in generated UI and validation messaging |
+| `description` | No | Help text for the field | Exposed to metadata-driven UI and tooling |
+| `type` | Yes | Semantic field type | Must be `int` |
+| `ormType` | No | Persistence-layer storage hint | Commonly `int` or `integer` |
+| `defaultValue` | No | Default value for metadata-driven consumers | Used by generated form initialization when no existing value is present |
+| `min` | No | Minimum numeric value | Enforced in generated forms and in backend CRUD validation |
+| `max` | No | Maximum numeric value | Enforced in generated forms and in backend CRUD validation |
+| `required` | No | Marks the field as mandatory | Enforced in generated forms and in backend CRUD validation |
+| `unique` | No | Uniqueness intent | Relevant to generated schema and persistence constraints rather than to field-level validation alone |
+| `index` | No | Indexing intent | Useful when the value is frequently sorted or filtered |
+| `columnName` | No | Physical column override | Overrides the generated column name |
+| `private` | No | Visibility flag | Signals that the field should not be exposed in ordinary read flows |
+| `isUserKey` | No | Human-facing record identifier flag | Rare for `int`, but still part of the field contract |
+| `enableAuditTracking` | No | Audit-tracking flag | Useful when numeric changes should be tracked explicitly |
+| `isSystem` | No | Platform-owned field flag | Distinguishes framework-managed fields from business-authored fields |
+| `isMarkedForRemoval` | No | Lifecycle flag | Used during metadata evolution and cleanup |
+| `isPrimaryKey` | No | Primary-key flag | Common for identity-style integer fields |
+
+#### Runtime Behavior
+
+##### Validation
+
+For `int`, SolidX validates in two places:
+
+1. The generated form layer validates requiredness and numeric bounds using a number-aware schema.
+2. The backend validation layer checks requiredness, integer shape, and numeric bounds.
+
+Three important behaviors to note:
+
+- `int` expects whole-number values rather than decimal values
+- `min` and `max` represent numeric bounds, not string length
+- `int` does not use text-oriented attrs such as `length` or `regexPattern`
+
+##### Persistence
+
+`int` is persisted as a scalar integer-style value.
+
+The submitted value is validated and then stored without field-specific transformation in the CRUD manager itself.
+
+Attrs such as `ormType`, `columnName`, `unique`, and `index` are therefore best understood as persistence and schema intent. They shape how the field is represented in the generated model and storage layer, even when they are not enforced by the validation rules described above.
+
+##### Filtering And Querying
+
+Because `int` represents a numeric scalar, it works naturally with numeric sorting, exact-match filtering, and bounded comparisons.
+
+Typical use cases include:
+
+- sorting records by sequence or rank
+- filtering by counts and operational thresholds
+- reporting on durations, quantities, or other whole-number metrics
+
+In practice, `int` is the natural choice when business meaning depends on numeric ordering rather than on text search.
+
+##### Security, Auditing, And Platform Flags
+
+Attrs such as `private`, `enableAuditTracking`, `isSystem`, and `isPrimaryKey` are part of the field contract even though they are broader than validation alone. They communicate platform-level intent that other parts of SolidX rely on.
+
+#### Example
+
+```json
+{
+  "name": "totalCopies",
+  "displayName": "Total Copies",
+  "description": null,
+  "type": "int",
+  "ormType": "integer",
+  "defaultValue": null,
+  "min": 1,
+  "max": null,
+  "required": true,
+  "unique": false,
+  "index": false,
+  "private": false,
+  "columnName": null,
+  "enableAuditTracking": true,
+  "isPrimaryKey": false
+}
+```
+
+This is a representative `int` field because it shows the common contract clearly: a persisted whole-number value, a numeric minimum bound, and a business rule where fractional precision would not make sense.
+
+For rendering, widgets, and layout attrs related to `int`, see [View Metadata](./view-metadata.md).
+
+### `bigint`
+
+Use `bigint` for whole-number values that may exceed the normal range or intent of ordinary integer fields.
+
+This field type is appropriate for large identifiers, large-duration counters, imported legacy numeric keys, and other whole-number values that should remain integers but may need a larger persistence footprint.
+
+In SolidX, `bigint` is a large whole-number field. It is intended for persisted integer-like values with a bigger numeric envelope than `int`, while still participating in the same broad category of numeric filtering and sorting flows.
+
+#### Attribute Reference
+
+| Attr | Required | Purpose | Notes for `bigint` |
+| --- | --- | --- | --- |
+| `name` | Yes | Internal field key | Used as the request, response, and persistence key |
+| `displayName` | Yes | Human-readable label | Used in generated UI and validation messaging |
+| `description` | No | Help text for the field | Exposed to metadata-driven UI and tooling |
+| `type` | Yes | Semantic field type | Must be `bigint` |
+| `ormType` | No | Persistence-layer storage hint | Commonly `bigint` |
+| `defaultValue` | No | Default value for metadata-driven consumers | Used by generated form initialization when no existing value is present |
+| `required` | No | Marks the field as mandatory | Enforced in generated forms and in backend CRUD validation |
+| `unique` | No | Uniqueness intent | Relevant to generated schema and persistence constraints rather than to field-level validation alone |
+| `index` | No | Indexing intent | Useful when the value is frequently sorted or filtered |
+| `columnName` | No | Physical column override | Overrides the generated column name |
+| `private` | No | Visibility flag | Signals that the field should not be exposed in ordinary read flows |
+| `isUserKey` | No | Human-facing record identifier flag | Common for legacy or external numeric identifiers |
+| `enableAuditTracking` | No | Audit-tracking flag | Useful when large numeric values should be tracked explicitly |
+| `isSystem` | No | Platform-owned field flag | Distinguishes framework-managed fields from business-authored fields |
+| `isMarkedForRemoval` | No | Lifecycle flag | Used during metadata evolution and cleanup |
+| `isPrimaryKey` | No | Primary-key flag | Common for imported or legacy numeric identities |
+
+#### Runtime Behavior
+
+##### Validation
+
+For `bigint`, SolidX validates requiredness and numeric shape at the CRUD boundary, and generated forms reuse the same whole-number editing experience used for `int`.
+
+Two important behaviors to note:
+
+- backend validation accepts string or number inputs and coerces them into a bigint-aware value before applying the numeric checks
+- the generated UI currently reuses the integer field path, so very large values should be reviewed carefully when they may exceed JavaScript safe-integer handling
+
+##### Persistence
+
+`bigint` is intended to persist a large whole-number value.
+
+The submitted value is validated and then stored without field-specific transformation in the CRUD manager itself.
+
+Attrs such as `ormType`, `columnName`, `unique`, and `index` are therefore best understood as persistence and schema intent. They shape how the field is represented in the generated model and storage layer, even when they are not enforced by the validation rules described above.
+
+##### Filtering And Querying
+
+Because `bigint` remains a numeric scalar, it fits the same broad query patterns as `int`.
+
+Typical use cases include:
+
+- sorting by imported numeric identifiers
+- exact lookup by large request or transaction keys
+- operational reporting on large-duration counters and legacy numeric values
+
+In practice, `bigint` is most useful where whole-number semantics matter but ordinary integer assumptions are too small or too implementation-specific.
+
+##### Security, Auditing, And Platform Flags
+
+Attrs such as `private`, `enableAuditTracking`, `isSystem`, and `isPrimaryKey` are part of the field contract even though they are broader than validation alone. They communicate platform-level intent that other parts of SolidX rely on.
+
+#### Example
+
+```json
+{
+  "name": "timeRequestInMillisecond",
+  "displayName": "Time Request In Millisecond",
+  "description": null,
+  "type": "bigint",
+  "ormType": "bigint",
+  "defaultValue": null,
+  "required": false,
+  "unique": false,
+  "index": false,
+  "private": false,
+  "columnName": "TimeReqInMillsec",
+  "enableAuditTracking": true,
+  "isPrimaryKey": false
+}
+```
+
+This is a representative `bigint` field because it shows the intended contract clearly: a persisted large whole-number value, a bigint-specific storage hint, and a business metric that should remain numeric rather than textual.
+
+For rendering, widgets, and layout attrs related to `bigint`, see [View Metadata](./view-metadata.md).
+
+### `decimal`
+
+Use `decimal` for numeric values where fractional precision matters.
+
+This field type is appropriate for amounts, rates, balances, measurements, and other numeric values that should support decimal precision rather than only whole-number input.
+
+In SolidX, `decimal` is a scalar numeric field. It supports numeric requiredness and numeric bounds, persists as a decimal-style value, and participates naturally in numeric filtering, sorting, and reporting flows.
+
+#### Attribute Reference
+
+| Attr | Required | Purpose | Notes for `decimal` |
+| --- | --- | --- | --- |
+| `name` | Yes | Internal field key | Used as the request, response, and persistence key |
+| `displayName` | Yes | Human-readable label | Used in generated UI and validation messaging |
+| `description` | No | Help text for the field | Exposed to metadata-driven UI and tooling |
+| `type` | Yes | Semantic field type | Must be `decimal` |
+| `ormType` | No | Persistence-layer storage hint | Commonly `decimal`, `numeric`, or another precision-aware database type |
+| `defaultValue` | No | Default value for metadata-driven consumers | Used by generated form initialization when no existing value is present |
+| `min` | No | Minimum numeric value | Enforced in generated forms and in backend CRUD validation |
+| `max` | No | Maximum numeric value | Enforced in generated forms and in backend CRUD validation |
+| `required` | No | Marks the field as mandatory | Enforced in generated forms and in backend CRUD validation |
+| `unique` | No | Uniqueness intent | Relevant to generated schema and persistence constraints rather than to field-level validation alone |
+| `index` | No | Indexing intent | Useful when the value is frequently sorted or filtered |
+| `columnName` | No | Physical column override | Overrides the generated column name |
+| `private` | No | Visibility flag | Signals that the field should not be exposed in ordinary read flows |
+| `isUserKey` | No | Human-facing record identifier flag | Rare for `decimal`, but still part of the field contract |
+| `enableAuditTracking` | No | Audit-tracking flag | Useful when precision-sensitive values should be tracked explicitly |
+| `isSystem` | No | Platform-owned field flag | Distinguishes framework-managed fields from business-authored fields |
+| `isMarkedForRemoval` | No | Lifecycle flag | Used during metadata evolution and cleanup |
+| `isPrimaryKey` | No | Primary-key flag | Technically possible, though uncommon for a decimal field |
+
+#### Runtime Behavior
+
+##### Validation
+
+For `decimal`, SolidX validates in two places:
+
+1. The generated form layer validates requiredness and numeric bounds using a number-aware schema.
+2. The backend validation layer checks requiredness, numeric shape, and numeric bounds.
+
+Three important behaviors to note:
+
+- `decimal` accepts numeric values with fractional precision
+- `min` and `max` represent numeric bounds, not string length
+- `decimal` does not use text-oriented attrs such as `length` or `regexPattern`
+
+##### Persistence
+
+`decimal` is persisted as a scalar precision-aware numeric value.
+
+The submitted value is validated and then stored without field-specific transformation in the CRUD manager itself.
+
+Attrs such as `ormType`, `columnName`, `unique`, and `index` are therefore best understood as persistence and schema intent. They shape how the field is represented in the generated model and storage layer, even when they are not enforced by the validation rules described above.
+
+##### Filtering And Querying
+
+Because `decimal` represents a numeric scalar, it works naturally with sorting, exact-match filtering, and bounded comparisons.
+
+Typical use cases include:
+
+- filtering records by amount thresholds
+- sorting balances, prices, or rates
+- reporting on numeric values where fractional precision matters
+
+In practice, `decimal` is the natural choice whenever business meaning depends on numeric precision rather than on textual formatting.
+
+##### Security, Auditing, And Platform Flags
+
+Attrs such as `private`, `enableAuditTracking`, `isSystem`, and `isPrimaryKey` are part of the field contract even though they are broader than validation alone. They communicate platform-level intent that other parts of SolidX rely on.
+
+#### Example
+
+```json
+{
+  "name": "latePaymentFees",
+  "displayName": "Late Payment Fees",
+  "description": null,
+  "type": "decimal",
+  "ormType": "decimal",
+  "defaultValue": "0",
+  "min": null,
+  "max": null,
+  "required": false,
+  "unique": false,
+  "index": false,
+  "private": false,
+  "columnName": null,
+  "enableAuditTracking": true
+}
+```
+
+This is a representative `decimal` field because it shows the common contract clearly: a persisted precision-aware numeric value, a decimal-oriented storage hint, and a default that fits amount-style workflows.
+
+For rendering, widgets, and layout attrs related to `decimal`, see [View Metadata](./view-metadata.md).
+
+### `boolean`
+
+Use `boolean` for fields that represent a binary state such as enabled or disabled, active or inactive, approved or not approved, or any other yes-or-no decision.
+
+In SolidX, `boolean` is a scalar true-or-false field. It is intended for toggles, switches, flags, and simple state markers that should be stored and queried as boolean data rather than as text.
+
+#### Attribute Reference
+
+| Attr | Required | Purpose | Notes for `boolean` |
+| --- | --- | --- | --- |
+| `name` | Yes | Internal field key | Used as the request, response, and persistence key |
+| `displayName` | Yes | Human-readable label | Used in generated UI and validation messaging |
+| `description` | No | Help text for the field | Exposed to metadata-driven UI and tooling |
+| `type` | Yes | Semantic field type | Must be `boolean` |
+| `ormType` | No | Persistence-layer storage hint | Commonly `boolean` |
+| `defaultValue` | No | Default value for metadata-driven consumers | Often used to initialize generated form state for a new record |
+| `required` | No | Marks the field as mandatory | Enforced in generated forms and in backend CRUD validation |
+| `unique` | No | Uniqueness intent | Usually uncommon for `boolean`, but still part of the field contract |
+| `index` | No | Indexing intent | Useful when the flag is frequently used in filtering |
+| `columnName` | No | Physical column override | Overrides the generated column name |
+| `private` | No | Visibility flag | Signals that the field should not be exposed in ordinary read flows |
+| `isUserKey` | No | Human-facing record identifier flag | Uncommon for `boolean`, but still part of the field contract |
+| `enableAuditTracking` | No | Audit-tracking flag | Useful when state changes should be tracked explicitly |
+| `isSystem` | No | Platform-owned field flag | Distinguishes framework-managed fields from business-authored fields |
+| `isMarkedForRemoval` | No | Lifecycle flag | Used during metadata evolution and cleanup |
+| `isPrimaryKey` | No | Primary-key flag | Technically possible, though rarely appropriate for a boolean field |
+
+#### Runtime Behavior
+
+##### Validation
+
+For `boolean`, SolidX validates in two places:
+
+1. The generated form layer validates requiredness using a boolean-aware schema.
+2. The backend validation layer checks requiredness and boolean type.
+
+Two important behaviors to note:
+
+- `boolean` does not use text-oriented attrs such as `min`, `max`, `length`, or `regexPattern`
+- at the CRUD boundary, the runtime value is treated as a true-or-false field rather than as free-form text
+
+##### Persistence
+
+`boolean` is persisted as a scalar boolean field.
+
+The submitted value is validated and then stored without any field-specific persistence transformation.
+
+Attrs such as `ormType`, `columnName`, `unique`, and `index` are therefore best understood as persistence and schema intent. They shape how the field is represented in the generated model and storage layer, even when they are not enforced by the validation rules described above.
+
+##### Filtering And Querying
+
+Because `boolean` represents a binary state, it is most useful in exact-match style filtering and operational list views.
+
+Typical use cases include:
+
+- filtering records by enabled versus disabled state
+- separating approved and unapproved records
+- narrowing operational queues by simple flags such as duplicate, active, verified, or system-owned
+
+In practice, `boolean` fits best where users need to quickly slice a dataset by state rather than search inside a textual value.
+
+##### Security, Auditing, And Platform Flags
+
+Attrs such as `private`, `enableAuditTracking`, `isSystem`, and `isPrimaryKey` are part of the field contract even though they are broader than validation alone. They communicate platform-level intent that other parts of SolidX rely on.
+
+#### Example
+
+```json
+{
+  "name": "isPBLEnabled",
+  "displayName": "PBL",
+  "description": null,
+  "type": "boolean",
+  "ormType": "boolean",
+  "defaultValue": "true",
+  "required": false,
+  "unique": false,
+  "index": false,
+  "private": false,
+  "columnName": null,
+  "enableAuditTracking": true,
+  "isSystem": false
+}
+```
+
+This is a representative `boolean` field because it captures the common contract clearly: a persisted state flag, an explicit storage intent, and a default value used by metadata-driven experiences.
+
+For rendering, widgets, and layout attrs related to `boolean`, see [View Metadata](./view-metadata.md).
+
+### `date`
+
+Use `date` for calendar dates where the day matters but the time of day does not.
+
+This field type is appropriate for values such as date of joining, approval date, effective date, due date, or any other business date that should be treated as a date rather than as free-form text.
+
+In SolidX, `date` is a scalar date field. It is intended for persisted calendar values and participates naturally in date-oriented filtering and reporting flows.
+
+#### Attribute Reference
+
+| Attr | Required | Purpose | Notes for `date` |
+| --- | --- | --- | --- |
+| `name` | Yes | Internal field key | Used as the request, response, and persistence key |
+| `displayName` | Yes | Human-readable label | Used in generated UI and validation messaging |
+| `description` | No | Help text for the field | Exposed to metadata-driven UI and tooling |
+| `type` | Yes | Semantic field type | Must be `date` |
+| `ormType` | No | Persistence-layer storage hint | Commonly `date` |
+| `defaultValue` | No | Default value for metadata-driven consumers | Used by generated form initialization when no existing value is present |
+| `required` | No | Marks the field as mandatory | Enforced in generated forms and in backend CRUD validation |
+| `unique` | No | Uniqueness intent | Usually uncommon, but still part of the field contract |
+| `index` | No | Indexing intent | Useful when the date is frequently used in filtering or sorting |
+| `columnName` | No | Physical column override | Overrides the generated column name |
+| `private` | No | Visibility flag | Signals that the field should not be exposed in ordinary read flows |
+| `isUserKey` | No | Human-facing record identifier flag | Rare for `date`, but still part of the field contract |
+| `enableAuditTracking` | No | Audit-tracking flag | Useful when date changes should be tracked explicitly |
+| `isSystem` | No | Platform-owned field flag | Distinguishes framework-managed fields from business-authored fields |
+| `isMarkedForRemoval` | No | Lifecycle flag | Used during metadata evolution and cleanup |
+| `isPrimaryKey` | No | Primary-key flag | Technically possible, though uncommon for a date field |
+
+#### Runtime Behavior
+
+##### Validation
+
+For `date`, SolidX validates in two places:
+
+1. The generated form layer validates requiredness using a date-aware schema.
+2. The backend validation layer checks requiredness and date type.
+
+Two important behaviors to note:
+
+- `date` does not use text-oriented attrs such as `min`, `max`, `length`, or `regexPattern`
+- the same CRUD validation path is also reused for `datetime`, so date-like fields share a common backend date-validation contract
+
+##### Persistence
+
+`date` is persisted as a scalar date value.
+
+The submitted value is validated and then stored without any field-specific persistence transformation in the CRUD manager itself.
+
+Attrs such as `ormType`, `columnName`, `unique`, and `index` are therefore best understood as persistence and schema intent. They shape how the field is represented in the generated model and storage layer, even when they are not enforced by the validation rules described above.
+
+##### Filtering And Querying
+
+Because `date` represents a calendar value, it is well suited to time-oriented filtering and reporting.
+
+Typical use cases include:
+
+- sorting records by chronology
+- filtering records by a specific day
+- narrowing datasets by effective date, approval date, or joining date
+
+In practice, `date` works best where users need consistent calendar semantics rather than free-form text search.
+
+##### Security, Auditing, And Platform Flags
+
+Attrs such as `private`, `enableAuditTracking`, `isSystem`, and `isPrimaryKey` are part of the field contract even though they are broader than validation alone. They communicate platform-level intent that other parts of SolidX rely on.
+
+#### Example
+
+```json
+{
+  "name": "doj",
+  "displayName": "DOJ",
+  "description": "date of joining",
+  "type": "date",
+  "ormType": "date",
+  "defaultValue": null,
+  "required": false,
+  "unique": false,
+  "index": false,
+  "private": false,
+  "columnName": null,
+  "enableAuditTracking": true,
+  "isSystem": false
+}
+```
+
+This is a representative `date` field because it captures the typical contract clearly: a persisted calendar value, a date-specific storage intent, and a business use case that benefits from consistent date handling.
+
+For rendering, widgets, and layout attrs related to `date`, see [View Metadata](./view-metadata.md).
+
+### `datetime`
+
+Use `datetime` for values where both the calendar date and the time of day matter.
+
+This field type is appropriate for timestamps such as approval time, publication time, expiry time, login events, and other business events that should preserve both date and time semantics.
+
+In SolidX, `datetime` is a scalar date-time field. It is intended for persisted timestamp-style values and participates naturally in time-oriented filtering, sorting, and reporting flows.
+
+#### Attribute Reference
+
+| Attr | Required | Purpose | Notes for `datetime` |
+| --- | --- | --- | --- |
+| `name` | Yes | Internal field key | Used as the request, response, and persistence key |
+| `displayName` | Yes | Human-readable label | Used in generated UI and validation messaging |
+| `description` | No | Help text for the field | Exposed to metadata-driven UI and tooling |
+| `type` | Yes | Semantic field type | Must be `datetime` |
+| `ormType` | No | Persistence-layer storage hint | Commonly `datetime` or `timestamp` |
+| `defaultValue` | No | Default value for metadata-driven consumers | Used by generated form initialization when no existing value is present |
+| `required` | No | Marks the field as mandatory | Enforced in generated forms and in backend CRUD validation |
+| `unique` | No | Uniqueness intent | Usually uncommon, but still part of the field contract |
+| `index` | No | Indexing intent | Useful when the timestamp is frequently used in filtering or sorting |
+| `columnName` | No | Physical column override | Overrides the generated column name |
+| `private` | No | Visibility flag | Signals that the field should not be exposed in ordinary read flows |
+| `isUserKey` | No | Human-facing record identifier flag | Rare for `datetime`, but still part of the field contract |
+| `enableAuditTracking` | No | Audit-tracking flag | Useful when timestamp changes should be tracked explicitly |
+| `isSystem` | No | Platform-owned field flag | Distinguishes framework-managed fields from business-authored fields |
+| `isMarkedForRemoval` | No | Lifecycle flag | Used during metadata evolution and cleanup |
+| `isPrimaryKey` | No | Primary-key flag | Technically possible, though uncommon for a datetime field |
+
+#### Runtime Behavior
+
+##### Validation
+
+For `datetime`, SolidX validates in two places:
+
+1. The generated form layer validates requiredness using a date-aware schema.
+2. The backend validation layer checks requiredness and date type through the shared date-time validation path.
+
+Two important behaviors to note:
+
+- `datetime` does not use text-oriented attrs such as `min`, `max`, `length`, or `regexPattern`
+- the same CRUD validation path is currently shared with `date`, so both field types rely on the same backend date-validation contract
+
+##### Persistence
+
+`datetime` is persisted as a scalar timestamp-like value.
+
+The submitted value is validated and then stored without any field-specific persistence transformation in the CRUD manager itself.
+
+Attrs such as `ormType`, `columnName`, `unique`, and `index` are therefore best understood as persistence and schema intent. They shape how the field is represented in the generated model and storage layer, even when they are not enforced by the validation rules described above.
+
+##### Filtering And Querying
+
+Because `datetime` represents a timestamp-like value, it is well suited to chronological reporting and operational history flows.
+
+Typical use cases include:
+
+- ordering records by event time
+- filtering by publication, approval, or execution time
+- presenting audit-style timelines and process timestamps
+
+In practice, `datetime` is the natural choice whenever time-of-day matters as much as the date itself.
+
+##### Security, Auditing, And Platform Flags
+
+Attrs such as `private`, `enableAuditTracking`, `isSystem`, and `isPrimaryKey` are part of the field contract even though they are broader than validation alone. They communicate platform-level intent that other parts of SolidX rely on.
+
+#### Example
+
+```json
+{
+  "name": "startTime",
+  "displayName": "Start Time",
+  "description": null,
+  "type": "datetime",
+  "ormType": "datetime",
+  "defaultValue": null,
+  "required": false,
+  "unique": false,
+  "index": false,
+  "private": false,
+  "columnName": "StartTime",
+  "enableAuditTracking": true,
+  "isSystem": false
+}
+```
+
+This is a representative `datetime` field because it captures the common contract clearly: a persisted timestamp, a timestamp-oriented storage intent, and a business use case that benefits from time-aware presentation and sorting.
+
+For rendering, widgets, and layout attrs related to `datetime`, see [View Metadata](./view-metadata.md).
+
+### `time`
+
+Use `time` for clock-time values where the time of day matters but the calendar date does not.
+
+This field type is appropriate for business hours, schedule boundaries, opening and closing times, and other values that should behave like times rather than full timestamps.
+
+In SolidX, `time` has clear UI support as a time-oriented field in forms and views. It is intended for persisted clock-time values, but its backend CRUD support is currently less complete than `date` and `datetime`.
+
+#### Attribute Reference
+
+| Attr | Required | Purpose | Notes for `time` |
+| --- | --- | --- | --- |
+| `name` | Yes | Internal field key | Used as the request, response, and persistence key |
+| `displayName` | Yes | Human-readable label | Used in generated UI and validation messaging |
+| `description` | No | Help text for the field | Exposed to metadata-driven UI and tooling |
+| `type` | Yes | Semantic field type | Must be `time` |
+| `ormType` | No | Persistence-layer storage hint | Commonly `time` |
+| `defaultValue` | No | Default value for metadata-driven consumers | Used by generated form initialization when no existing value is present |
+| `required` | No | Marks the field as mandatory | Enforced in generated forms |
+| `unique` | No | Uniqueness intent | Usually uncommon, but still part of the field contract |
+| `index` | No | Indexing intent | Useful when the time value participates in sorting or filtering |
+| `columnName` | No | Physical column override | Overrides the generated column name |
+| `private` | No | Visibility flag | Signals that the field should not be exposed in ordinary read flows |
+| `isUserKey` | No | Human-facing record identifier flag | Rare for `time`, but still part of the field contract |
+| `enableAuditTracking` | No | Audit-tracking flag | Useful when time changes should be tracked explicitly |
+| `isSystem` | No | Platform-owned field flag | Distinguishes framework-managed fields from business-authored fields |
+| `isMarkedForRemoval` | No | Lifecycle flag | Used during metadata evolution and cleanup |
+| `isPrimaryKey` | No | Primary-key flag | Technically possible, though uncommon for a time field |
+
+#### Runtime Behavior
+
+##### Validation
+
+For `time`, SolidX currently validates requiredness in the generated form layer using a date-like schema.
+
+One important behavior to note:
+
+- core UI support for `time` is present, but `crud.service.ts` does not currently route `SolidFieldType.time` through a dedicated backend field manager, so the backend runtime contract is not yet as complete as the contracts for `date` and `datetime`
+
+##### Persistence
+
+`time` is intended to persist a clock-time value.
+
+At the UI layer, the selected time is normalized into a submitted value during form-data generation. At the backend layer, the field contract is present, but the dedicated CRUD-manager path is not currently wired in the same way as other mature scalar field types.
+
+Attrs such as `ormType`, `columnName`, `unique`, and `index` should therefore be understood as persistence and schema intent, with the current implementation maturity taken into account.
+
+##### Filtering And Querying
+
+Because `time` represents a clock-time value, it is most useful for schedule-style displays and ordering within a business day.
+
+Typical use cases include:
+
+- start and end times for scheduled jobs
+- opening and closing times
+- time-only display in generated forms and reports
+
+In practice, `time` is best used where the UI experience is valuable today and the backend behavior is known and reviewed as part of implementation.
+
+##### Security, Auditing, And Platform Flags
+
+Attrs such as `private`, `enableAuditTracking`, `isSystem`, and `isPrimaryKey` are part of the field contract even though they are broader than validation alone. They communicate platform-level intent that other parts of SolidX rely on.
+
+#### Example
+
+```json
+{
+  "name": "startTime",
+  "displayName": "Start Time",
+  "description": null,
+  "type": "time",
+  "ormType": "time",
+  "required": false,
+  "unique": false,
+  "index": false,
+  "private": false,
+  "columnName": null,
+  "isSystem": false
+}
+```
+
+This is a representative `time` field because it shows the intended contract clearly: a clock-time value with a dedicated UI experience and a time-specific storage intent.
+
+For rendering, widgets, and layout attrs related to `time`, see [View Metadata](./view-metadata.md).
+
+### `email`
+
+Use `email` for values that should represent an email address rather than general free-form text.
+
+This field type is appropriate for customer emails, notification targets, login identifiers, contact addresses, and other values that should follow email-specific validation expectations.
+
+In SolidX, `email` is a string-backed field with email-aware backend validation. It persists as scalar text and participates naturally in text-oriented search, filtering, and lookup flows.
+
+#### Attribute Reference
+
+| Attr | Required | Purpose | Notes for `email` |
+| --- | --- | --- | --- |
+| `name` | Yes | Internal field key | Used as the request, response, and persistence key |
+| `displayName` | Yes | Human-readable label | Used in generated UI and validation messaging |
+| `description` | No | Help text for the field | Exposed to metadata-driven UI and tooling |
+| `type` | Yes | Semantic field type | Must be `email` |
+| `ormType` | No | Persistence-layer storage hint | Commonly `varchar` |
+| `defaultValue` | No | Default value for metadata-driven consumers | Used by generated form initialization when no existing value is present |
+| `required` | No | Marks the field as mandatory | Enforced in generated forms and in backend CRUD validation |
+| `min` | No | Minimum length | Enforced in generated form validation |
+| `max` | No | Maximum length | Enforced in generated form validation and in backend validation |
+| `regexPattern` | No | Pattern constraint | Can further restrict acceptable email shapes beyond the core email validator |
+| `regexPatternNotMatchingErrorMsg` | No | Custom regex validation message | Used by generated form validation; backend validation currently returns a generic regex error |
+| `unique` | No | Uniqueness intent | Relevant to generated schema and persistence constraints rather than to field-level validation alone |
+| `index` | No | Indexing intent | Useful when the email address participates in search or lookup flows |
+| `columnName` | No | Physical column override | Overrides the generated column name |
+| `private` | No | Visibility flag | Signals that the field should not be exposed in ordinary read flows |
+| `isUserKey` | No | Human-facing record identifier flag | Useful when email also acts as a user-facing identifier |
+| `enableAuditTracking` | No | Audit-tracking flag | Marks the field for field-level auditing concerns |
+| `isSystem` | No | Platform-owned field flag | Distinguishes framework-managed fields from business-authored fields |
+| `isMarkedForRemoval` | No | Lifecycle flag | Used during metadata evolution and cleanup |
+| `isPrimaryKey` | No | Primary-key flag | Technically possible, though uncommon for an email field |
+
+#### Runtime Behavior
+
+##### Validation
+
+For `email`, SolidX validates in two places:
+
+1. The generated form layer validates requiredness, `min`, `max`, and `regexPattern`.
+2. The backend validation layer checks requiredness, email shape, maximum length, and regex compliance.
+
+Three important behaviors to note:
+
+- backend validation uses an email-aware validator even when no custom regex is authored
+- generated form validation relies on `regexPattern` when stricter email-format checks are needed
+- `max` defaults to the email-safe core limit when it is not authored explicitly
+
+##### Persistence
+
+`email` is persisted as a scalar text field.
+
+The submitted value is validated and then stored without any field-specific persistence transformation.
+
+Attrs such as `ormType`, `columnName`, `unique`, and `index` are therefore best understood as persistence and schema intent. They shape how the field is represented in the generated model and storage layer, even when they are not enforced by the validation rules described above.
+
+##### Filtering And Querying
+
+Because `email` is a scalar textual field, it works naturally with the standard text-oriented filter operators available in SolidX.
+
+Typical use cases include:
+
+- exact lookup by email address
+- partial search in operational lists
+- identifying records by a stable contact identifier
+
+In practice, `email` combines the searchability of text with stronger validation expectations than a generic short string.
+
+##### Security, Auditing, And Platform Flags
+
+Attrs such as `private`, `enableAuditTracking`, `isSystem`, and `isPrimaryKey` are part of the field contract even though they are broader than validation alone. They communicate platform-level intent that other parts of SolidX rely on.
+
+#### Example
+
+```json
+{
+  "name": "payByLinkCustomerEmailAddress",
+  "displayName": "Pay By Link Customer Email Address",
+  "description": null,
+  "type": "email",
+  "ormType": "varchar",
+  "regexPattern": "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$",
+  "regexPatternNotMatchingErrorMsg": "Invalid regex pattern",
+  "required": false,
+  "unique": false,
+  "index": false,
+  "private": false,
+  "columnName": null,
+  "enableAuditTracking": false,
+  "isSystem": false
+}
+```
+
+This is a representative `email` field because it shows the email-specific validation intent clearly while still behaving like a persisted scalar string field.
+
+For rendering, widgets, and layout attrs related to `email`, see [View Metadata](./view-metadata.md).
+
+### `password`
+
+Use `password` for secret values that should be authored securely, validated strongly, and stored as hashes rather than plain text.
+
+This field type is appropriate for authentication secrets and other credential-like values that should never be displayed or persisted as ordinary scalar text.
+
+In SolidX, `password` is a security-sensitive string-backed field. It supports requiredness, length constraints, pattern validation, confirmation matching, and hashing before persistence when a password value is supplied.
+
+#### Attribute Reference
+
+| Attr | Required | Purpose | Notes for `password` |
+| --- | --- | --- | --- |
+| `name` | Yes | Internal field key | Used as the request, response, and persistence key |
+| `displayName` | Yes | Human-readable label | Used in generated UI and validation messaging |
+| `description` | No | Help text for the field | Exposed to metadata-driven UI and tooling |
+| `type` | Yes | Semantic field type | Must be `password` |
+| `ormType` | No | Persistence-layer storage hint | Commonly `varchar` with a storage length sized for hashes |
+| `defaultValue` | No | Default value for metadata-driven consumers | Rare in practice for secure passwords |
+| `required` | No | Marks the field as mandatory | Enforced on create flows; update flows can omit the value when no password change is intended |
+| `min` | No | Minimum length | Enforced in generated forms and in backend validation |
+| `max` | No | Maximum length | Enforced in generated forms and in backend validation |
+| `regexPattern` | No | Pattern constraint | Used for password-strength style requirements |
+| `regexPatternNotMatchingErrorMsg` | No | Custom regex validation message | Used by generated form validation; backend validation currently returns a generic password-regex error |
+| `unique` | No | Uniqueness intent | Usually not meaningful for passwords, but still part of the field contract |
+| `index` | No | Indexing intent | Typically avoided for password fields |
+| `columnName` | No | Physical column override | Overrides the generated column name |
+| `private` | No | Visibility flag | Especially relevant for password-like secrets |
+| `enableAuditTracking` | No | Audit-tracking flag | Should be considered carefully for secret-bearing fields |
+| `isSystem` | No | Platform-owned field flag | Distinguishes framework-managed fields from business-authored fields |
+| `isMarkedForRemoval` | No | Lifecycle flag | Used during metadata evolution and cleanup |
+| `isPrimaryKey` | No | Primary-key flag | Not a practical choice for password fields |
+
+#### Runtime Behavior
+
+##### Validation
+
+For `password`, SolidX validates in two places:
+
+1. The generated form layer validates requiredness, `min`, `max`, regex compliance, and password-confirmation matching.
+2. The backend validation layer checks string type, password-strength regex compliance, `min`, `max`, and password-confirmation matching.
+
+Three important behaviors to note:
+
+- backend requiredness is applied on create rather than on ordinary update flows
+- password confirmation is treated as part of the contract when a password value is supplied
+- when no custom regex is authored, the backend falls back to a strong-password default pattern
+
+##### Persistence
+
+`password` is not intended to persist as raw text.
+
+When a password value is supplied, the password manager hashes it before persistence and also records the active password scheme and hash version metadata used by the hashing service.
+
+Attrs such as `ormType`, `columnName`, `unique`, and `index` should therefore be understood carefully in the context of hashed secret storage rather than ordinary text persistence.
+
+##### Filtering And Querying
+
+`password` is not intended for ordinary filtering, search, or list presentation.
+
+In practice, password fields are authored and updated through controlled form flows rather than surfaced in searchable operational views.
+
+##### Security, Auditing, And Platform Flags
+
+Attrs such as `private`, `enableAuditTracking`, and `isSystem` matter more here than for most scalar field types because the field carries secret-like data. Documentation and implementation should continue to treat password values as highly sensitive.
+
+#### Example
 
 ```json
 {
@@ -656,777 +1236,232 @@ Give an example of inverse vs non-inverse relation creation (TODO)
   "displayName": "Password",
   "type": "password",
   "ormType": "varchar",
-  "min": 8,
-  "max": 128,
-  "required": true,
-  "regexPattern": "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$",
+  "length": 512,
+  "required": false,
+  "unique": false,
+  "index": false,
+  "private": false,
+  "isSystem": true
 }
 ```
 
-<h3 className=" card-headear-wrapper">
-    <MdCheckBox size={20}  />
+This is a representative `password` field because it captures the typical secret-field contract clearly: string input, secure validation expectations, and persistence sized for hashed storage rather than raw display.
 
-###  Selection Types
-</h3>
+For rendering, widgets, and layout attrs related to `password`, see [View Metadata](./view-metadata.md).
 
-#### selectionStatic
-**Purpose**: Dropdown with predefined options  
-**Database**: `varchar` column  
-**UI Component**: Dropdown/select field  
-**Use Cases**: Status options, categories, fixed lists
+### `selectionStatic`
+
+Use `selectionStatic` when a field should allow users to choose from a fixed, authored set of values.
+
+This field type is appropriate when the option set is known in advance and should travel with the metadata itself rather than being fetched from another model or service at runtime.
+
+In SolidX, `selectionStatic` is a constrained scalar or multi-value selection field. It stores authored option values, validates submissions against the allowed set, and uses the metadata-defined mapping between stored values and human-readable labels.
+
+#### Attribute Reference
+
+| Attr | Required | Purpose | Notes for `selectionStatic` |
+| --- | --- | --- | --- |
+| `name` | Yes | Internal field key | Used as the request, response, and persistence key |
+| `displayName` | Yes | Human-readable label | Used in generated UI and validation messaging |
+| `description` | No | Help text for the field | Exposed to metadata-driven UI and tooling |
+| `type` | Yes | Semantic field type | Must be `selectionStatic` |
+| `ormType` | No | Persistence-layer storage hint | Commonly `varchar` for single-select values |
+| `defaultValue` | No | Default stored value | Should use the stored value token, not the human-readable label |
+| `selectionStaticValues` | Yes | Authored option set | Each entry follows the `value:label` pattern |
+| `selectionValueType` | Yes | Type of the stored value | Core support currently expects `string` or `int` |
+| `isMultiSelect` | No | Multi-select flag | Allows the field to accept more than one authored value |
+| `required` | No | Marks the field as mandatory | Enforced in generated forms and in backend CRUD validation |
+| `unique` | No | Uniqueness intent | Usually uncommon, but still part of the field contract |
+| `index` | No | Indexing intent | Useful when the selection is frequently used in filtering |
+| `columnName` | No | Physical column override | Overrides the generated column name |
+| `private` | No | Visibility flag | Signals that the field should not be exposed in ordinary read flows |
+| `isUserKey` | No | Human-facing record identifier flag | Rare for `selectionStatic`, but still part of the field contract |
+| `enableAuditTracking` | No | Audit-tracking flag | Useful when changes in selected state should be tracked |
+| `isSystem` | No | Platform-owned field flag | Distinguishes framework-managed fields from business-authored fields |
+| `isMarkedForRemoval` | No | Lifecycle flag | Used during metadata evolution and cleanup |
+| `isPrimaryKey` | No | Primary-key flag | Technically possible, though uncommon for a static selection field |
+
+#### Runtime Behavior
+
+##### Validation
+
+For `selectionStatic`, SolidX validates in two places:
+
+1. The generated form layer validates requiredness and the expected selection shape.
+2. The backend validation layer checks requiredness, stored value type, and whether the submitted value belongs to the authored option set.
+
+Three important behaviors to note:
+
+- `selectionStaticValues` defines the allowed set using `value:label` entries, where the left-hand side is the stored value and the right-hand side is the display label
+- `selectionValueType` controls how the submitted value is interpreted at validation time
+- when `isMultiSelect` is enabled, the backend accepts an array or a JSON-stringified array and validates each submitted value against the authored set
+
+##### Persistence
+
+`selectionStatic` persists the stored value token rather than the human-readable label.
+
+For single-select fields, that typically means a scalar value such as `Draft` or `active`. For multi-select fields, the value is treated as a collection of authored stored values.
+
+Attrs such as `ormType`, `columnName`, `unique`, and `index` are therefore best understood as persistence and schema intent. They shape how the field is represented in the generated model and storage layer, even when they are not enforced by the validation rules described above.
+
+##### Filtering And Querying
+
+Because `selectionStatic` stores a constrained set of known values, it is well suited to operational filtering and reporting.
+
+Typical use cases include:
+
+- filtering by status, stage, type, or category
+- segmenting records by workflow state
+- narrowing records by authored option sets such as day of week, product type, or review outcome
+
+In practice, `selectionStatic` is most valuable where consistency matters more than free-form input.
+
+##### Security, Auditing, And Platform Flags
+
+Attrs such as `private`, `enableAuditTracking`, `isSystem`, and `isPrimaryKey` are part of the field contract even though they are broader than validation alone. They communicate platform-level intent that other parts of SolidX rely on.
+
+#### Example
 
 ```json
 {
-  "name": "latePaymentFeesType",
-  "displayName": "Late Payment Fees Type",
+  "name": "status",
+  "displayName": "Status",
+  "description": "Status of the application",
   "type": "selectionStatic",
   "ormType": "varchar",
+  "defaultValue": "Draft",
   "selectionStaticValues": [
-    "None:None",
-    "Percent:Percent",
-    "Absolute:Absolute"
+    "Draft:Draft",
+    "With Checker:With Checker",
+    "Approved:Approved",
+    "Rejected:Rejected",
+    "Discrepancy:Discrepancy"
   ],
   "selectionValueType": "string",
-  "defaultValue": "None",
-  "required": true
+  "isMultiSelect": false,
+  "required": false,
+  "unique": false,
+  "index": true,
+  "private": false,
+  "columnName": null,
+  "enableAuditTracking": true,
+  "isSystem": false
 }
 ```
 
-**Format**: `"value:label"` where value is stored in DB, label is displayed in UI
+This is a representative `selectionStatic` field because it shows the authored option set, the stored-value contract, and a common status-style use case that benefits from indexing and consistent querying.
 
-#### selectionDynamic
-**Purpose**: Dropdown populated from API/database query  
-**Database**: `varchar` column  
-**UI Component**: Dynamic dropdown field  
-**Use Cases**: Related data, user lists, dynamic categories
+For rendering, widgets, and layout attrs related to `selectionStatic`, see [View Metadata](./view-metadata.md).
+
+### `selectionDynamic`
+
+Use `selectionDynamic` when a field should allow users to choose from a provider-backed option set that is resolved at runtime.
+
+This field type is appropriate when the available options depend on a list-of-values provider, a model-backed provider, or other runtime context that cannot be authored as a fixed metadata array.
+
+In SolidX, `selectionDynamic` is a constrained provider-backed selection field. It stores submitted provider values, validates the submitted value type, and can optionally validate the selected value against the active provider during save.
+
+#### Attribute Reference
+
+| Attr | Required | Purpose | Notes for `selectionDynamic` |
+| --- | --- | --- | --- |
+| `name` | Yes | Internal field key | Used as the request, response, and persistence key |
+| `displayName` | Yes | Human-readable label | Used in generated UI and validation messaging |
+| `description` | No | Help text for the field | Exposed to metadata-driven UI and tooling |
+| `type` | Yes | Semantic field type | Must be `selectionDynamic` |
+| `ormType` | No | Persistence-layer storage hint | Commonly `varchar` for provider-backed string values |
+| `selectionDynamicProvider` | Yes | Provider name | Identifies the runtime selection provider used to resolve valid options |
+| `selectionDynamicProviderCtxt` | Yes | Provider context | JSON-serialized provider context passed into the runtime provider |
+| `selectionValueType` | Yes | Type of the stored value | Core support currently expects `string` or `int` |
+| `isMultiSelect` | No | Multi-select flag | Allows the field to accept more than one provider-backed value |
+| `required` | No | Marks the field as mandatory | Enforced in generated forms and in backend CRUD validation |
+| `unique` | No | Uniqueness intent | Usually uncommon, but still part of the field contract |
+| `index` | No | Indexing intent | Useful when the selected provider value participates in filtering or lookup |
+| `columnName` | No | Physical column override | Overrides the generated column name |
+| `private` | No | Visibility flag | Signals that the field should not be exposed in ordinary read flows |
+| `isUserKey` | No | Human-facing record identifier flag | Rare for `selectionDynamic`, but still part of the field contract |
+| `enableAuditTracking` | No | Audit-tracking flag | Useful when provider-backed state changes should be tracked |
+| `isSystem` | No | Platform-owned field flag | Distinguishes framework-managed fields from business-authored fields |
+| `isMarkedForRemoval` | No | Lifecycle flag | Used during metadata evolution and cleanup |
+| `isPrimaryKey` | No | Primary-key flag | Technically possible, though uncommon for a dynamic selection field |
+
+#### Runtime Behavior
+
+##### Validation
+
+For `selectionDynamic`, SolidX validates in two places:
+
+1. The generated form layer validates requiredness and the expected selection shape.
+2. The backend validation layer checks requiredness, stored value type, and provider-backed value validity.
+
+Three important behaviors to note:
+
+- `selectionDynamicProvider` chooses the provider used to resolve valid options at runtime
+- `selectionDynamicProviderCtxt` is JSON-decoded before validation and can shape provider behavior
+- when the provider context sets `validateOnSave` to `false`, save-time provider validation is skipped and only the value-type contract is enforced
+
+##### Persistence
+
+`selectionDynamic` persists the stored provider value rather than the provider's human-readable label.
+
+For single-select fields, that typically means a scalar provider value. For multi-select fields, the value is treated as a collection of provider-backed stored values.
+
+Attrs such as `ormType`, `columnName`, `unique`, and `index` are therefore best understood as persistence and schema intent. They shape how the field is represented in the generated model and storage layer, even when they are not enforced by the validation rules described above.
+
+##### Filtering And Querying
+
+Because `selectionDynamic` stores constrained provider-backed values, it is well suited to operational filtering and provider-driven workflows.
+
+Typical use cases include:
+
+- choosing values from a list-of-values provider
+- selecting records from a provider-backed business catalog
+- narrowing workflows based on provider-defined state or category values
+
+In practice, `selectionDynamic` is most useful when the option set must remain dynamic without giving up structured persistence.
+
+##### Security, Auditing, And Platform Flags
+
+Attrs such as `private`, `enableAuditTracking`, `isSystem`, and `isPrimaryKey` are part of the field contract even though they are broader than validation alone. They communicate platform-level intent that other parts of SolidX rely on.
+
+#### Example
 
 ```json
 {
-  "name": "studentId",
-  "displayName": "Student",
+  "name": "couponVenueType",
+  "displayName": "Coupon Venue Type",
+  "description": null,
   "type": "selectionDynamic",
   "ormType": "varchar",
-  "selectionDynamicProvider": "StudentListProvider",
-  "selectionDynamicProviderCtxt": "{\"filters\": {\"isActive\": true}}",
-  "required": true
+  "selectionDynamicProvider": "ListOfValuesSelectionProvider",
+  "selectionDynamicProviderCtxt": "{\"type\": \"COUPON_VENUE_TYPE\", \"validateOnSave\": false}",
+  "selectionValueType": "string",
+  "required": false,
+  "unique": false,
+  "index": false,
+  "private": false,
+  "columnName": null,
+  "isSystem": false
 }
 ```
 
-**Key Properties**:
-- `selectionDynamicProvider`: Provider class responsible for returning the dynamic dropdown options
-- `selectionDynamicProviderCtxt`: JSON context/config passed to the provider
+This is a representative `selectionDynamic` field because it shows the core dynamic-selection contract clearly: provider-backed values, provider context, and a runtime-resolved option set.
 
-<h3 className=" card-headear-wrapper">
-    <MdFunctions size={24}  />
+For rendering, widgets, and layout attrs related to `selectionDynamic`, see [View Metadata](./view-metadata.md).
 
-###  Computed
-</h3>
+### `many-to-one`
 
-#### 1. computed
-**Purpose**: Auto-calculated values from other fields  
-**Database**: `varchar`/`decimal`/etc. (based on result type)  
-**UI Component**: Read-only display field  
-**Use Cases**: Calculated totals, formatted names, derived values
+### `one-to-many`
 
-```json
-{
-  "name": "fullName",
-  "displayName": "Full Name",
-  "type": "computed",
-  "ormType": "varchar",
-  "computedFieldValueType": "string",
-  "computedFieldTriggerConfig": [
-    {
-      "modelName": "student",
-      "moduleName": "fees-portal",
-      "operations": ["before-insert", "before-update"]
-    }
-  ],
-  "computedFieldValueProvider": "ConcatEntityComputedFieldProvider",
-  "computedFieldValueProviderCtxt": "{\"fields\":[\"firstName\",\"lastName\"],\"separator\":\" \"}",
-  "required": true
-}
-```
+### `many-to-many`
 
-**Key Properties**:
-- `computedFieldValueType`: Result data type
-- `computedFieldTriggerConfig`: When to recalculate
-- `computedFieldValueProvider`: Computation service provider class
-- `computedFieldValueProviderCtxt`: JSON configuration for provider
+### `mediaSingle`
 
+### `mediaMultiple`
 
-## Common Field Metadata Attributes
-All field types support these common properties:
+### `computed`
 
-<h3 className=" card-headear-wrapper">
-    <RiSettings3Line size={24}  />
+## See Also
 
-### Core Properties
-</h3>
-
-- `name`: Internal field reference (camelCase)
-- `displayName`: User-friendly UI label
-- `description`: Optional documentation
-- `type`: Field type identifier
-- `ormType`: Database column type
-- `isSystem`: System-managed field flag
-- `required`: Mandatory field flag
-- `unique`: Uniqueness constraint
-- `index`: Database index creation
-- `private`: Hidden from UI flag (Not yet implemented)
-- `defaultValue`: Default field value
-
-<h3 className=" card-headear-wrapper">
-    <RiShieldKeyholeLine size={24}  />
-
-### Security Properties
-</h3>
-
-- `encrypt`: Enable field encryption (Not yet implemented)
-- `encryptionType`: Encryption method (AES, bcrypt, etc.) (Not yet implemented)
-- `decryptWhen`: When to decrypt ("always", "admin_only", "never") (Not yet implemented)
-
-<h3 className=" card-headear-wrapper">
-    <BiData size={24}  />
-
-### Database Properties
-</h3>
-
-- `columnName`: Custom database column name
-- `enableAuditTracking`: Include in audit logs
-
-<h3 className=" card-headear-wrapper">
-    <MdRule size={24}  />
-
-### Validation Properties
-</h3>
-
-- `min`/`max`: Value/length constraints
-- `regexPattern`: Custom validation pattern
-- `regexPatternNotMatchingErrorMsg`: Custom error message
-
-##  Field Metadata Attributes
-
-### `name` *(string, required)*
-Name of the field (column/property).  
-**Default:** N/A
-
-
-
-### `displayName` *(string, required)*
-Human-readable label for UI and docs.  
-**Default:** N/A
-
-
-
-### `description` *(string, optional)*
-Short help/purpose text shown in UI or docs.  
-**Default:** N/A
-
-
-
-### `type` *(SolidFieldType, required)*
-Refer to [Field Type](#field-type-type) section above.
-
-**Default:** N/A
-
-
-
-### `modelId` *(number, optional)*
-Numeric id of the owning model (internal linkage).  
-**Default:** N/A
-
-
-
-### `ormType` *(PSQLType, optional)*
-Override database column type based on dataSourcetype and field type. Use only when the default mapping from `type` is insufficient.
-
-| **Field Type**       | **Postgres (PSQLType)**                                 | **MSSQL (MSSQLType)**                            |
-|----------------------|---------------------------------------------------------|--------------------------------------------------|
-| int                  | `integer`                                               | `int`                                            |
-| bigint               | `bigint`                                                | `bigint`                                         |
-| decimal              | `decimal`                                               | `numeric`, `decimal`                             |
-| shortText            | `varchar`                                               | `varchar`, `nvarchar`                            |
-| longText             | `text`                                                  | `nvarchar`                                       |
-| richText             | `text`                                                  | `nvarchar`                                       |
-| json                 | `simplejson`, `json`, `jsonb`                           | `simplejson`, `nvarchar`                         |
-| boolean              | `boolean`                                               | `bit`                                            |
-| date                 | `date`                                                  | `date`                                           |
-| datetime             | `timestamp`, `timestamptz`                              | `datetime`, `datetime2`                          |
-| time                 | `time`, `timestamp`, `timestamptz`                      | `time`                                           |
-| relation             | `integer`                                               | `int`                                            |
-| mediaSingle          | `varchar`                                               | `varchar`                                        |
-| mediaMultiple        | `varchar`                                               | `varchar`                                        |
-| email                | `varchar`                                               | `nvarchar`                                       |
-| password             | `varchar`                                               | `nvarchar`                                       |
-| selectionStatic      | `varchar`                                               | `nvarchar`                                       |
-| selectionDynamic     | `varchar`                                               | `nvarchar`                                       |
-| computed             | `varchar`                                               | `nvarchar`                                       |
-| uuid                 | `varchar`                                               | `uniqueidentifier`                               |
-
-<!-- Override database column type. Use only when the default mapping from `type` is insufficient.  
-**Values:** 
-- integer
-- decimal
-- bigint
-- varchar
-- text
-- boolean
-- timestamp
-- timestamptz
-- time
-- date
-- json
-- jsonb  
-**Default:** Derived from `type` -->
-
-<!-- --- -->
-
-<!-- ### `length` *(number, optional)*
-Max length/size where relevant.  
-**Applies to:** shortText, longText, richText, json  
-**Default:** N/A -->
-
-
-
-### `defaultValue` *(string, optional)*
-Literal default value applied on create.  
-**Default:** N/A
-
-
-
-### `regexPattern` *(string, optional)*
-Validation pattern for textual inputs.  
-**Applies to:** shortText, longText, email, password  
-**Default:** N/A
-
-
-
-### `regexPatternNotMatchingErrorMsg` *(string, optional)*
-Custom error message when `regexPattern` fails.  
-**Default:** N/A
-
-
-
-### `required` *(boolean, optional)*
-Marks field as mandatory.  
-**Default:** false
-
-
-
-### `unique` *(boolean, optional)*
-Enforces uniqueness.  
-**Default:** false
-
-
-
-### `encrypt` *(boolean, optional)*
-Enable symmetric encryption-at-rest for this field.  
-**Default:** false
-
-
-
-<InfoBox>
- Feature coming soon!
-</InfoBox>
-
-
-
-### `encryptionType` *(enum, optional)*
-Only if `encrypt = true`.  
-**Values:** 
-- aes-128
-- aes-256  
-**Default:** aes-256 (recommended)
-
-
-
-<InfoBox>
- Feature coming soon!
-</InfoBox>
-
-
-
-### `decryptWhen` *(enum, optional)*
-Only if `encrypt = true`. Controls when plaintext is produced.  
-**Values:** 
-- before-transit
-- after-transit  
-**Default:** after-transit
-
-
-<InfoBox>
- Feature coming soon!
-</InfoBox>
-
-
-
-### `index` *(boolean, optional)*
-Add an index for search/sort (where supported).  
-**Not applicable to:** richText, longText  
-**Default:** false
-
-
-
-### `max` *(number, optional)*
-Upper bound (number/date) or maximum length (text/json).  
-**Applies to:** shortText, longText, richText, json, int, decimal, date, datetime, time  
-**Default:** N/A
-
-
-
-### `min` *(number, optional)*
-Lower bound (number/date) or minimum length (text/json).  
-**Applies to:** shortText, longText, richText, json, int, decimal, date, datetime, time  
-**Default:** N/A
-
-
-
-### `private` *(boolean, optional)*
-Exclude from default listings/exports; require elevated access.  
-**Default:** false
-
-
-<InfoBox>
- Feature coming soon!
-</InfoBox>
-
-
-
-### `mediaTypes` *(MediaType[], optional)*
-Allowlist of media categories.  
-**Applies to:** mediaSingle, mediaMultiple  
-**Values:** 
-- image
-- audio
-- video
-- file  
-**Default:** All sensible for the field type
-
-
-
-### `mediaMaxSizeKb` *(number, optional)*
-Max upload size per item in kilobytes.  
-**Applies to:** mediaSingle, mediaMultiple  
-**Default:** N/A
-
-
-
-### `mediaStorageProviderId` *(number, optional)*
-Numeric id of configured media storage provider.  
-**Applies to:** mediaSingle, mediaMultiple  
-**Default:** Module/provider default
-
-
-
-### `mediaStorageProviderUserKey` *(string, optional)*
-Name/userKey of configured media storage provider.  
-**Applies to:** mediaSingle, mediaMultiple  
-**Default:** default-filesystem
-
-
-
-
-
-<InfoBox>
-  By default, SolidX applications gets seeded with 2 media storage providers i.e default-filesystem and default-aws-s3. You can create more providers as per your requirements. You can refer to the [Storage Provider Documentation](../../admin-docs/media-library/storage-providers.md) for more details.
-</InfoBox>
-
-
-
-
-### `relationType` *(RelationType, optional)*
-Kind of relation.  
-**Applies to:** relation  
-**Values:** 
-- many-to-one
-- many-to-many
-- one-to-many  
-**Default:** N/A
-
-
-
-### `relationCoModelSingularName` *(string, optional)*
-`singularName` of the related co-model.  
-**Applies to:** relation  
-**Default:** N/A
-
-
-
-### `relationCreateInverse` *(boolean, optional)*
-Generate inverse side on co-model.  
-**Applies to:** relation  
-**Default:** false
-
-
-
-
-
-
-
-
-<WarningBox>
-  Currently we auto-create the inverse side of the field metadata on the co-model. In future releases, we will get rid of the inverse field auto-creation and instead have the user explicitly create the inverse field on the co-model. This is to ensure that the user has full control on how the inverse field is created on the co-model and keep things explicit and simple
-</WarningBox>
-
-
-
-### `relationCascade` *(CascadeType, optional)*
-Only if `type = relation` and `relationCreateInverse = true`.
-Cascade behavior for persistence i.e (create/update) and deletion.  
-**Applies to:** relation  
-**Values:** 
-- set null
-- restrict
-- cascade  
-**Default:** restrict (recommended explicitness)
-
-
-
-### `relationModelModuleName` *(string, optional)*
-Only if `type = relation` and `relationCreateInverse = true` and the related co-model lives in a **different module**.
-Module name if the related co-model lives in a **different module**.  
-**Applies to:** relation  
-**Default:** Current module
-
-
-
-### `relationCoModelFieldName` *(string, mandatory for many-to-many)*
-Only if `type = relation` and `relationCreateInverse = true`.
-For m2m or cross-model relations, the other side's field name.  
-Auto-inferred for many-to-one but required for many-to-many.
-**Applies to:** relation  
-**Default:** Auto-inferred for many-to-one
-
-
-
-### `isRelationManyToManyOwner` *(boolean, mandatory for many-to-many)*
-Only if `type = relation` and `relationType = many-to-many`.
-Marks this side as the **owner** of the many-to-many.
-At least one side must be the owner, otherwise the many-to-many relation will not work.  
-**Applies to:** relation (many-to-many)  
-**Default:** false
-
-
-
-
-
-<InfoBox>
-  TODO: change default to true in future releases
-</InfoBox>
-
-### `relationFieldFixedFilter` *(string, optional)*
-Fixed filter (JSON) applied when fetching related records from the admin ui. This can be used to apply static as well as dynamic filters when we want to conditionally filter the values shown for the related records
-
-The filter is a JSON object of schema type BasicFilterDto:
-<details open>
- <summary className="card-title ">
-    <!-- <IoIosArrowForward size={20} style={{ marginRight: "8px" }} className="rotatable" /> -->
-    Filter schema
-  </summary>
-
-```ts
-export enum SoftDeleteFilter {
-    INCLUSIVE = "inclusive",
-    EXCLUSIVE = "exclusive",
-}
-
-export class BasicFilterDto extends PaginationQueryDto {
-
-    @IsOptional()
-    @ApiProperty({ description: "Fields" })
-    readonly fields?: string[];
-
-    @IsOptional()
-    @ApiProperty({ description: "sort" })
-    readonly sort?: string[];
-
-    @IsOptional()
-    @ApiProperty({ description: "groupBy" })
-    readonly groupBy?: string[];
-
-
-    @IsOptional()
-    @ApiProperty({ description: "populate" })
-    readonly populate?: string[];
-
-
-    @IsOptional()
-    @ApiProperty({ description: "populateMedia" })
-    readonly populateMedia?: string[];
-
-    @IsOptional()
-    @IsEnum(SoftDeleteFilter)
-    @ApiProperty({
-        description: "showSoftDeleted",
-        enum: SoftDeleteFilter,
-    })
-    readonly showSoftDeleted?: SoftDeleteFilter;
-
-    @IsOptional()
-    @ApiProperty({ description: "populateGroup" })
-    readonly populateGroup?: boolean;
-
-    @IsOptional()
-    @ApiProperty({ description: "groupFilter" })
-    groupFilter?: BasicFilterDto
-
-    @IsOptional()
-    @ApiProperty({ description: "locale" })
-    readonly locale?: string;
-
-    @IsOptional()
-    @ApiProperty({ description: "status publish draft" })
-    readonly status?: string;
-}
-
-export class PaginationQueryDto {
-    constructor(limit: number, offset: number) {
-        this.limit = limit;
-        this.offset = offset;
-    }
-
-    @IsOptional()
-    @Type(() => Number)
-    @IsPositive()
-    limit?: number = 10;
-
-    @IsOptional()
-    @Type(() => Number)
-    @IsInt()
-    @Min(0)
-    offset?: number = 0;
-
-    @IsOptional()
-    filters?: Record<string, any>;
-}
-```
-</details>
-
-**Applies to:** relation  
-**Default:** N/A
-
-
-
-### `selectionDynamicProvider` *(string, optional)*
-Provider identifier for loading dynamic options.
-**Applies to:** selectionDynamic  
-**Default:** N/A
-
-
-
-### `selectionDynamicProviderCtxt` *(string, optional)*
-Context/config passed to the dynamic provider.
-**Applies to:** selectionDynamic  
-**Default:** N/A
-
-
-
-### `selectionStaticValues` *(string[], optional)*
-List of static options in `key:Label` format.  
-**Applies to:** selectionStatic  
-**Default:** N/A
-
-
-
-### `selectionValueType` *(enum, optional)*
-Primitive type of selection values.  
-**Applies to:** selectionStatic, selectionDynamic  
-**Values:** 
-- string
-- int  
-**Default:** string
-
-
-
-### `computedFieldValueProvider` *(string, optional)*
-Provider/class that computes the field value.  
-**Applies to:** computed  
-**Default:** N/A
-
-
-
-### `computedFieldValueProviderCtxt` *(string, optional)*
-Context/config passed to the computed value provider.  
-**Applies to:** computed  
-**Default:** N/A
-
-
-
-### `computedFieldValueType` *(enum, optional)*
-Declared output type of the computed field.  
-**Applies to:** computed  
-**Values:** 
-- string
-- int
-- decimal
-- boolean
-- date
-- datetime  
-**Default:** string
-
-
-
-### `computedFieldTriggerConfig` *(array of objects, optional)*
-Operations that trigger compute and the trigger model/module to attach to. This is useful when the computed field depends on relations or other models and needs to be re-computed when those models change.
-<!-- <summary> Config schema</summary> -->
-**Config schema**
-
-``` tsx
-export class ComputedFieldTriggerConfig {
-  moduleName: string; // Name of the module which should trigger the computed field re-evaluation
-  modelName: string; // Name of the model which should trigger the computed field re-evaluation
-  operations: ComputedFieldTriggerOperation[]; // List of operations on the model, when computed field should be re-evaluated
-}
-```
-**Operations values:** 
-- before-insert
-- after-insert
-- before-update
-- after-update
-- before-delete
-- after-delete  
-**Applies to:** computed  
-**Default:** N/A
-
-
-
-<!-- ### `uuid` *(string, optional)*
-Explicit UUID for this field definition (rarely needed).  
-**Default:** Auto-generated -->
-
-
-
-### `isSystem` *(boolean, optional)*
-System fields are excluded from code generation (hand-written code assumed).  
-**Default:** false
-
-
-
-### `isMarkedForRemoval` *(boolean, optional)*
-Soft-removal flag for the field definition. Fields marked for removal are excluded from code generation.
-**Default:** false
-
-
-<InfoBox>
- This flag enables the code builder to identify fields that need to be deleted from the codebase. They are deleted after code generation is complete.  
-</InfoBox>
-
-
-### `columnName` *(string, optional)*
-Override database column name.  
-**Default:** Derived from `name`
-
-
-
-### `relationCoModelColumnName` *(string, optional)*
-Override co-model's column name for relation bindings.  
-**Applies to:** relation  
-**Default:** Auto-generated/inferred
-
-
-
-### `isUserKey` *(boolean, optional)*
-Marks this field as the **user key** (friendly identifier).
-
-Further Reference:
-- [Model User Keys Explained](./model-metadata.md#userkeyfielduserkey-string-optional-ie-the-user-key-field-name) 
-
-**Default:** false
-
-
-
-### `relationJoinTableName` *(string, optional)*
-Custom join table name for many-to-many.  
-**Applies to:** relation (many-to-many)  
-**Default:** Auto-generated
-
-
-
-### `enableAuditTracking` *(boolean, optional)*
-Track create/update/delete for this field in audit logs.  
-**Default:** false
-
-
-
-### `isMultiSelect` *(boolean, optional)*
-Allow multiple selected values (UI + storage impact).  
-**Applies to:** selection fields and some primitives depending on UI policy  
-**Default:** false
-
-
-
-## Implementation Notes & Gotchas
-
-- **`ormType` vs `type`** — Prefer defaults derived from `type`. Override `ormType` only when you need a specific DB type (e.g., `jsonb` instead of `json`).  
-- **`unique` + `index`** — `unique` usually implies an index; still set `index: true` for frequent filter columns that aren’t unique.  
-<!-- - **Encryption** — Prefer `aes-256` unless you have legacy constraints. Keep `decryptWhen: after-transit` to minimize plaintext exposure between services.   -->
-<!-- - **Privacy** — `private: true` hides in default listings/exports but does not bypass access control; combine with security rules where needed.   -->
-- **User key** — Set `isUserKey: true` on the one field that identifies a record best for humans (e.g., `instituteName`).  
-- **Selection fields** — Ensure storage matches UI: arrays for multi-select; validate that `selectionValueType` aligns with downstream consumers.  
-- **Relations** — Always specify `relationCascade` explicitly; implicit defaults differ across ORMs/DBs. For many-to-many, define the **owner** side to control join-table updates.  
-- **Computed** — Providers should be idempotent and side‑effect free. For pre-compute operations e.g (before-insert, before-update, before-delete), provider needs to set the value on the entity object directly i.e (since in pre-compute operations, the assumption is that the computed field entity and the triggering entity are the same). For post-compute operations e.g (after-insert, after-update, after-delete), provider needs to use the entity manager in the provider implementation to update the entity since in post-compute operations, the assumption is that the computed field entity and the triggering entity can be different.
-- **Media** — Validate MIME and size server-side. `mediaTypes` is an allowlist, not a guarantee of safety. Consider thumbnailing and antivirus for file uploads.
-
-<h2 className=" card-headear-wrapper">
-    <BiBookContent size={24} style={{ marginRight: "10px" }} />
-
-## Cheat Sheet
-</h2>
-
-
-```
-┌─────────────────────────────────────┐
-│           DATA TYPE?                │
-├─────────────────────────────────────┤
-│ TEXT:                              │
-│ ├── Short (< 1000 chars) → shortText │
-│ ├── Long/Multi-line → longText      │
-│ └── Formatted/HTML → richText       │
-├─────────────────────────────────────┤
-│ NUMBERS:                           │
-│ ├── Whole numbers → int             │
-│ └── Decimals → decimal              │
-├─────────────────────────────────────┤
-│ CHOICES:                           │
-│ ├── Fixed options → selectionStatic │
-│ └── Dynamic data → selectionDynamic │
-├─────────────────────────────────────┤
-│ RELATIONSHIPS:                     │
-│ ├── One-to-One → relation           │
-│ ├── One-to-Many → relation          │
-│ ├── Many-to-One → relation          │
-│ └── Many-to-Many → relation         │
-├─────────────────────────────────────┤
-│ FILES:                             │
-│ ├── Single file → mediaSingle       │
-│ └── Multiple files → mediaMultiple  │
-├─────────────────────────────────────┤
-│ CALCULATED:                        │
-│ └── Auto-computed → computed        │
-├─────────────────────────────────────┤
-│ SPECIAL:                           │
-│ ├── True/False → boolean           │
-│ ├── Date only → date               │
-│ ├── Date+Time → datetime           │
-│ ├── Password → password            │
-│ ├── Email → email                  │
-│ ├── Phone → phone                  │
-│ └── Complex data → json            │
-└─────────────────────────────────────┘
-```
-
-
-<!-- ## Quick Matrix (What applies where?)
-
-| Aspect                | Text(short/long/rich)                 | Number(int/decimal/bigint) | Date/time | Relation | Media | Selection | Computed |
-|-----------------------|------------------------                |-----------------------------|-----------|---------|-------|-----------|----------|
-| `length`              | <MdCheckCircle className="icon-yes" />                     | <MdCancel className="icon-no" />                           | <MdCancel className="icon-no" />         | <MdCancel className="icon-no" />       | <MdCancel className="icon-no" />     | <MdCancel className="icon-no" />         | <MdCancel className="icon-no" />        |
-| `min` / `max`         | <MdCheckCircle className="icon-yes" />                           | <span className="table-icon-with-text"> <MdCheckCircle className="icon-yes" /> (range) </span>                    | <span className="table-icon-with-text"> <MdCheckCircle className="icon-yes" /> (bounds) </span>  | <MdCancel className="icon-no" />      | <MdCancel className="icon-no" />     | <MdCancel className="icon-no" />         | <MdCancel className="icon-no" />        |
-| `regexPattern`        | <MdCheckCircle className="icon-yes" />                                   | <MdCancel className="icon-no" />                           | <MdCancel className="icon-no" />         | <MdCancel className="icon-no" />       | <MdCancel className="icon-no" />     | <MdCancel className="icon-no" />         | <MdCancel className="icon-no" />        |
-| `media*`              | <MdCancel className="icon-no" />                                    | <MdCancel className="icon-no" />                           | <MdCancel className="icon-no" />         | <MdCancel className="icon-no" />       | <MdCheckCircle className="icon-yes" />     | <MdCancel className="icon-no" />         | <MdCancel className="icon-no" />        |
-| `relation*`           | <MdCancel className="icon-no" />                                     | <MdCancel className="icon-no" />                           | <MdCancel className="icon-no" />         | <MdCheckCircle className="icon-yes" />       | <MdCancel className="icon-no" />     | <MdCancel className="icon-no" />         | <MdCancel className="icon-no" />        |
-| `selection*`          | <MdCancel className="icon-no" />                                    | <MdCancel className="icon-no" />                           | <MdCancel className="icon-no" />         | <MdCancel className="icon-no" />       | <MdCancel className="icon-no" />     | <MdCheckCircle className="icon-yes" />         | <MdCancel className="icon-no" />        |
-| `computed*`           | <MdCancel className="icon-no" />                                     | <MdCancel className="icon-no" />                           | <MdCancel className="icon-no" />         | <MdCancel className="icon-no" />       | <MdCancel className="icon-no" />     | <MdCancel className="icon-no" />         | <MdCheckCircle className="icon-yes" />        |
-| `encrypt`/`private`   | <MdCheckCircle className="icon-yes" />                                    | <MdCheckCircle className="icon-yes" />                            | <MdCheckCircle className="icon-yes" />         | (id only)| file meta| values   | output   |
-| `index`               | <span className="table-icon-with-text"> <MdCheckCircle className="icon-yes" /> (except rich/long) </span>                    | <MdCheckCircle className="icon-yes" />                            | <MdCheckCircle className="icon-yes" />         | <MdCheckCircle className="icon-yes" />       | <MdCancel className="icon-no" />     | <MdCheckCircle className="icon-yes" />         | <span className="table-icon-with-text"> <MdCheckCircle className="icon-yes" /> (virtual) </span>     | -->
+- [View Metadata](./view-metadata.md)
+- [Model Metadata](./model-metadata.md)
