@@ -31,34 +31,18 @@ SolidX provides a comprehensive password-based authentication mechanism with the
 
 Allows users to create a new account.
 
-  <h3 className=" ">
-    
-
 ###  Environment Variables
-</h3>
-
 
 - `IAM_PASSWORD_REGISTRATION_ENABLED`: Enables/disables registration.
 - `IAM_ALLOW_PUBLIC_REGISTRATION`: Allows public registration when set to `true`.
 
-
-<h3 className=" ">
-    
-
 ###  Headers
-</h3>
 
   ```http
   Content-Type: application/json
   ```
 
-  <h3 className=" ">
-    
-
 ###  Request Body
-  </h3>
-
-
 
 ```json
 {
@@ -71,11 +55,7 @@ Allows users to create a new account.
 }
 ```
 
-  <h3 className=" ">
-    
-
 ###  Response Body
-  </h3>
 
 
 ```json
@@ -92,7 +72,11 @@ Allows users to create a new account.
 }
 ```
 
->  **Note**: The response body can be optimized. It currently includes sensitive data like passwords.
+<Callout type="note" title="Note">
+
+The response body can be optimized. It currently includes sensitive data like passwords.
+
+</Callout>
 
 
 
@@ -100,30 +84,18 @@ Allows users to create a new account.
 
 Log in and receive access and refresh tokens.
 
-  <h3 className=" ">
-    
-
-###  Environment Variables  
-</h3>
+###  Environment Variables
 
 - `IAM_JWT_ACCESS_TOKEN_TTL`: TTL for access tokens (default: 60 mins).
 - `IAM_JWT_REFRESH_TOKEN_TTL`: TTL for refresh tokens (default: 1 day).
 
-<h3 className=" ">
-    
-
 ###  Headers
-</h3>
 
 ```http
 Content-Type: application/json
 ```
 
-  <h3 className=" ">
-    
-
 ###  Request Body
-  </h3>
 
 ```json
 {
@@ -133,11 +105,7 @@ Content-Type: application/json
 }
 ```
 
-  <h3 className=" ">
-    
-
 ###  Response Body
-  </h3>
 
 ```json
 {
@@ -159,21 +127,13 @@ Content-Type: application/json
 
 Refresh the access token using a valid refresh token.
 
-<h3 className=" ">
-    
-
 ###  Headers
-</h3>
 
 ```http
 Content-Type: application/json
 ```
 
-<h3 className=" ">
-    
-
 ###  Request Body
-  </h3>
 
 ```json
 {
@@ -181,11 +141,7 @@ Content-Type: application/json
 }
 ```
 
-  <h3 className=" ">
-    
-
 ###  Response Body
-  </h3>
 
 ```json
 {
@@ -200,31 +156,19 @@ Content-Type: application/json
 
 Initiates and confirms password reset flow.
 
-  <h3 className=" ">
-    
-
 ###  Environment Variables
-</h3>
 
 - `IAM_OTP_EXPIRY`: OTP expiry time (default: 10 mins).
 
 
-  <h3 className=" ">
-    
-
 ###  Initiate Request
-</h3>
 
 ```http
 POST /api/iam/initiate/forgot-password
 ```
 
 
-<h3 className=" ">
-    
-
 ###  Headers
-</h3>
 
 
 ```http
@@ -276,11 +220,7 @@ POST /api/iam/confirm/forgot-password
 
 ##  5. Change Password
 
-<h3 className=" ">
-    
-
 ###  Request Body
-  </h3>
   
 ```http
 POST /api/iam/change-password

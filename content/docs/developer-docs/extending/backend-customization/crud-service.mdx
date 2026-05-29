@@ -13,7 +13,11 @@ The **CRUD Service** is the backbone of data management in **SolidX**. It standa
 
 This document explains how to **extend** the `CRUDService<T>` for your models and how **clients** (controllers, other services) can call each **public API**. Every section first **explains what the example demonstrates**, followed by a **collapsible code block** you can copy‑paste.
 
-> The generated service classes for SolidX models already extend the CRUD service. You can also extend it manually for your own modules.
+<Callout type="info">
+
+The generated service classes for SolidX models already extend the CRUD service. You can also extend it manually for your own modules.
+
+</Callout>
 
 ---
 
@@ -80,7 +84,11 @@ export class PersonService extends CRUDService<Person> {
 ```
 </details>
 
-> Any subclass automatically inherits all CRUD methods and can call `this.repo`, `this.entityManager`, etc. Internal services like `ModelMetadataService`, `CrudHelperService`, and `DiscoveryService` are resolved lazily by the base class via `ModuleRef` — you do not need to inject or forward them.
+<Callout type="info">
+
+Any subclass automatically inherits all CRUD methods and can call `this.repo`, `this.entityManager`, etc. Internal services like `ModelMetadataService`, `CrudHelperService`, and `DiscoveryService` are resolved lazily by the base class via `ModuleRef` — you do not need to inject or forward them.
+
+</Callout>
 
 ---
 
@@ -236,7 +244,11 @@ await personService.delete(12 /*, context? */);
 
 **What this shows:** How to list entities with pagination, selective fields, relation population, media population, sorting, grouping, and optional filter expressions. The return value includes a `meta` block with paging info.
 
-> For the full list of filter operators and examples, see the [Filtering Data](../../../recipes/filtering.md) recipe.
+<Callout type="info">
+
+For the full list of filter operators and examples, see the [Filtering Data](../../../recipes/filtering.md) recipe.
+
+</Callout>
 
 <details open>
 <summary>Show code</summary>
@@ -278,7 +290,11 @@ console.log(result.records);  // Entity[] with optional `_media` key added
 
 **What this shows:** How to fetch one entity by ID with relations populated and media URLs resolved into the non-persistent `_media` key.
 
-> The `query` parameter accepts the same filter syntax as `find()`. See the [Filtering Data](../../../recipes/filtering) recipe for all available operators.
+<Callout type="info">
+
+The `query` parameter accepts the same filter syntax as `find()`. See the [Filtering Data](../../../recipes/filtering) recipe for all available operators.
+
+</Callout>
 
 <details open>
 <summary>Show code</summary>

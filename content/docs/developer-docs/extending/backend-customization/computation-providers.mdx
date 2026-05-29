@@ -38,8 +38,12 @@ The trigger timing determines which interface your provider implements and how t
 | **Before** | `before-insert`, `before-update`, `before-delete` | `preComputeValue()` | Synchronously, in the same transaction | Value depends only on the triggering entity |
 | **After** | `after-insert`, `after-update`, `after-delete` | `postComputeAndSaveValue()` | Asynchronously, via a [background job](./background-jobs) | Value depends on related records or requires additional writes |
 
-> For `before-*` triggers, `modelName` in the trigger config must match the model that owns the computed field.  
-> For `after-*` triggers, `modelName` can be any model — related or otherwise.
+<Callout type="info">
+
+For `before-*` triggers, `modelName` in the trigger config must match the model that owns the computed field.  
+For `after-*` triggers, `modelName` can be any model — related or otherwise.
+
+</Callout>
 
 ---
 

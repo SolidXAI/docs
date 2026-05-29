@@ -11,9 +11,11 @@ This use case enables **students and parents** to view pending fees, make online
 
 We will be creating a separate frontend application for the student portal that interacts with the SolidX backend APIs. The portal will use a custom OTP-based authentication mechanism to allow students to log in without traditional user accounts.
 
-> **Note: No SolidX RBAC Configuration Required**
->
-> The student portal uses custom token-based authentication — not SolidX's role-based access control. Students are not SolidX users and have no admin portal access. All backend endpoints used by the student portal are secured via custom JWT tokens issued after OTP verification.
+<Callout type="warning" title="Note: No SolidX RBAC Configuration Required">
+
+The student portal uses custom token-based authentication — not SolidX's role-based access control. Students are not SolidX users and have no admin portal access. All backend endpoints used by the student portal are secured via custom JWT tokens issued after OTP verification.
+
+</Callout>
 
 ### Key Features
 
@@ -100,13 +102,19 @@ A single payment transaction initiated by a student through the payment gateway.
 
 </div>
 
-> A Payment record is created with `paymentStatus: "Pending"` before the student is redirected to Stripe. Status is updated to `"Succeeded"` or `"Failed"` via the callback endpoints after Stripe confirms the outcome.
+<Callout type="info" title="Note">
 
-> **Info**
+A Payment record is created with `paymentStatus: "Pending"` before the student is redirected to Stripe. Status is updated to `"Succeeded"` or `"Failed"` via the callback endpoints after Stripe confirms the outcome.
 
-> Creating this model completes two relations that were deferred in [Initiate Payment](./initiate_payment.md):
-> - **Field 7** (`student`, Many-to-One, Create Inverse: Yes) auto-creates the `payments` field on the **Student** model.
-> - **Field 9** (`paymentCollectionItemDetails`, One-to-Many, Create Inverse: Yes) auto-creates the `payment` field on the **Payment Collection Item Detail** model.
+</Callout>
+
+<Callout type="info" title="Info">
+
+Creating this model completes two relations that were deferred in [Initiate Payment](./initiate_payment.md):
+- **Field 7** (`student`, Many-to-One, Create Inverse: Yes) auto-creates the `payments` field on the **Student** model.
+- **Field 9** (`paymentCollectionItemDetails`, One-to-Many, Create Inverse: Yes) auto-creates the `payment` field on the **Payment Collection Item Detail** model.
+
+</Callout>
 
 ## Payment Gateway Integration (Stripe)
 
@@ -155,7 +163,11 @@ We will implement the payment gateway flow in two parts:
 | `/api/payment/checkout/success` | GET | Public | Handle Stripe redirect after successful payment |
 | `/api/payment/checkout/cancel` | GET | Public | Handle Stripe redirect after cancelled payment |
 
-> **Note:** The `initiate-checkout` endpoint requires student authentication via a JWT token. The authentication mechanism (OTP-based login, JWT generation, and the `@StudentAuth()` guard) is covered in detail in the [Student Payment Workflow](#student-payment-workflow) section later in this document.
+<Callout type="info" title="Note">
+
+The `initiate-checkout` endpoint requires student authentication via a JWT token. The authentication mechanism (OTP-based login, JWT generation, and the `@StudentAuth()` guard) is covered in detail in the [Student Payment Workflow](#student-payment-workflow) section later in this document.
+
+</Callout>
 
 ### API Flow & Expected Outcomes
 
@@ -503,11 +515,14 @@ async generatePaymentGatewayLink(
 }
 ```
 
-> **What this method creates in the database:**
-> - **1 Payment record** — Tracks the overall transaction with amount, status, and Stripe session/invoice IDs
-> - **N PaymentCollectionItemDetail records** — One per selected fee item, each recording how much of that specific fee is being paid in this transaction
->
-> Both are created with `paymentStatus: "Pending"` before the student is redirected to Stripe. The callback endpoints update these records after Stripe confirms the outcome.
+<Callout type="info" title="What this method creates in the database">
+
+- **1 Payment record** — Tracks the overall transaction with amount, status, and Stripe session/invoice IDs
+- **N PaymentCollectionItemDetail records** — One per selected fee item, each recording how much of that specific fee is being paid in this transaction
+
+Both are created with `paymentStatus: "Pending"` before the student is redirected to Stripe. The callback endpoints update these records after Stripe confirms the outcome.
+
+</Callout>
 
 ---
 
@@ -959,7 +974,11 @@ Content-Type: application/json
 }
 ```
 
-> **Note:** The `studentLoginId` is extracted from the JWT token by the `@StudentAuth()` guard and attached to the request. The `totalAmount` (50000) is computed server-side as the sum of the `amountMap` values. This prevents client-side tampering with either field.
+<Callout type="info" title="Note">
+
+The `studentLoginId` is extracted from the JWT token by the `@StudentAuth()` guard and attached to the request. The `totalAmount` (50000) is computed server-side as the sum of the `amountMap` values. This prevents client-side tampering with either field.
+
+</Callout>
 
 **API Response:**
 ```json
@@ -976,9 +995,11 @@ The backend validates the items, creates a `Payment` record and `PaymentCollecti
 - Stripe Checkout session created successfully
 - Session ID stored in Payment record
 
-> **Important: Stripe Handles the Entire Payment Flow**
+<Callout type="warning" title="Important: Stripe Handles the Entire Payment Flow">
 
-> Once the frontend redirects the student to the Stripe Checkout URL, **your application is no longer involved in the payment process**. Stripe's hosted page handles everything — displaying the payment amount, collecting card details, processing the transaction, and showing success/error states. After the student completes (or cancels) the payment, **Stripe automatically redirects them back to your backend** using the `success_url` or `cancel_url` configured during session creation. Your backend then processes the callback and redirects the student to the portal dashboard with the appropriate status.
+Once the frontend redirects the student to the Stripe Checkout URL, **your application is no longer involved in the payment process**. Stripe's hosted page handles everything — displaying the payment amount, collecting card details, processing the transaction, and showing success/error states. After the student completes (or cancels) the payment, **Stripe automatically redirects them back to your backend** using the `success_url` or `cancel_url` configured during session creation. Your backend then processes the callback and redirects the student to the portal dashboard with the appropriate status.
+
+</Callout>
 
 
 ### Phase 4: Payment Processing (Redirect Callback)
@@ -1120,7 +1141,11 @@ async handlePaymentCallback(data: any) {
 }
 ```
 
-> **Note:** Saving each `PaymentCollectionItemDetail` triggers the `PaymentCollectionItemAmountProvider` computed field, which automatically recalculates `amountPaid`, `amountPending`, and `status` on the parent `PaymentCollectionItem`. This is how fee items transition from "Pending" to "Partially Paid" or "Fully Paid" without explicit status logic in this method.
+<Callout type="info" title="Note">
+
+Saving each `PaymentCollectionItemDetail` triggers the `PaymentCollectionItemAmountProvider` computed field, which automatically recalculates `amountPaid`, `amountPending`, and `status` on the parent `PaymentCollectionItem`. This is how fee items transition from "Pending" to "Partially Paid" or "Fully Paid" without explicit status logic in this method.
+
+</Callout>
 
 After the service returns, the controller redirects the student back to the portal dashboard:
 
@@ -2420,7 +2445,11 @@ const downloadStudentFeeReport = async () => {
 };
 ```
 
-> **Note:** This is one of the few places where `axios` is used directly instead of RTK Query. RTK Query doesn't natively support binary blob responses, so `axios` with `responseType: "blob"` is used for file downloads.
+<Callout type="info" title="Note">
+
+This is one of the few places where `axios` is used directly instead of RTK Query. RTK Query doesn't natively support binary blob responses, so `axios` with `responseType: "blob"` is used for file downloads.
+
+</Callout>
 
 ### Frontend Summary
 
@@ -2881,9 +2910,11 @@ DPS Delhi
 
 **Location:** [solid-api/src/fees-portal/scheduled-jobs/send-email-schedule-jobs.service.ts]
 
-> **Info**
+<Callout type="info" title="Info">
 
-> For more information on how scheduled jobs work in SolidX — including configuration, registration, frequency options, and the job lifecycle — refer to the [Scheduled Jobs](/docs/developer-docs/extending/backend-customization/scheduled-jobs) documentation.
+For more information on how scheduled jobs work in SolidX — including configuration, registration, frequency options, and the job lifecycle — refer to the [Scheduled Jobs](/docs/developer-docs/extending/backend-customization/scheduled-jobs) documentation.
+
+</Callout>
 
 
 ## Technical Implementation Details

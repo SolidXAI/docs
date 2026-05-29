@@ -24,12 +24,14 @@ This feature is exclusively operated by **Institute Admins** — they upload the
 
 This section describes the data models you need to implement this feature, along with step-by-step instructions to create them in SolidX.
 
-> **New to the Module Builder?**
+<Callout type="info" title="New to the Module Builder?">
 
-> If you're unfamiliar with how modules, models, and fields work in SolidX, we recommend reviewing the [Module Builder](../../../admin-docs/module-builder/) documentation first. It covers:
-> - [Module Management](../../../admin-docs/module-builder/module-management) - Creating and configuring modules
-> - [Model Management](../../../admin-docs/module-builder/model-management) - Creating models and understanding model settings
-> - [Field Management](../../../admin-docs/module-builder/field-management) - Understanding field types and configuration options
+If you're unfamiliar with how modules, models, and fields work in SolidX, we recommend reviewing the [Module Builder](../../../admin-docs/module-builder/) documentation first. It covers:
+- [Module Management](../../../admin-docs/module-builder/module-management) - Creating and configuring modules
+- [Model Management](../../../admin-docs/module-builder/model-management) - Creating models and understanding model settings
+- [Field Management](../../../admin-docs/module-builder/field-management) - Understanding field types and configuration options
+
+</Callout>
 
 #### How These Models Connect
 
@@ -151,11 +153,17 @@ Individual students enrolled at your institution whose parents/guardians will re
 | 12 | `token` | Token | [Long Text](../../../admin-docs/module-builder/field-management#long-text) | No | — |
 </div>
 
-> Students are automatically created (or updated) when you upload a payment collection Excel file — matched by Student ID. Students can log in to the portal using their `studentLoginId` and OTP.
+<Callout type="info" title="Note">
 
-> **Info**
+Students are automatically created (or updated) when you upload a payment collection Excel file — matched by Student ID. Students can log in to the portal using their `studentLoginId` and OTP.
 
-> The `payments` (One-to-Many → `payment`) field is not added here because the `payment` model does not exist yet. It is auto-created when you add the `student` field on the Payment model in [Student Payment Portal](./making_payment.md) (field 7, Create Inverse: Yes).
+</Callout>
+
+<Callout type="info" title="Info">
+
+The `payments` (One-to-Many → `payment`) field is not added here because the `payment` model does not exist yet. It is auto-created when you add the `student` field on the Payment model in [Student Payment Portal](./making_payment.md) (field 7, Create Inverse: Yes).
+
+</Callout>
 
 <details id="studentloginid-provider-context" open>
 <summary>studentLoginId — Full provider context JSON</summary>
@@ -203,7 +211,11 @@ A batch of fee collection requests sent to multiple students at once (e.g., "Q1 
 | 6 | `paymentFile` | Payment File | [Media (Single)](../../../admin-docs/module-builder/field-management#single-media) | Yes | file<br/>max 5120 KB<br/>default-filesystem |
 </div>
 
-> The `paymentCollectionItems` relation is added in [Step 5](#5-adding-relation-fields) after the `paymentCollectionItem` model exists. Deleting a Payment Collection cascades to all its Payment Collection Items via that relation.
+<Callout type="info" title="Note">
+
+The `paymentCollectionItems` relation is added in [Step 5](#5-adding-relation-fields) after the `paymentCollectionItem` model exists. Deleting a Payment Collection cascades to all its Payment Collection Items via that relation.
+
+</Callout>
 
 <details id="paymentcollectionid-provider-context" open>
 <summary>paymentCollectionId — Full provider context JSON</summary>
@@ -260,8 +272,12 @@ An individual payment request for one student for one fee type within a collecti
 | 15 | `feeType` | Fee Type | [Relation](../../../admin-docs/module-builder/field-management#relation) | Yes | Many-to-One → `feeType` (fees-portal)<br/>Create Inverse: No<br/>Cascade<br/>Index<br/>Audit |
 </div>
 
-> **Payment Modes:** Choose `PG` when parents will pay online (initial status: `Pending`); choose `CASH` when payment has already been collected offline (initial status: `Fully Paid`).
-> The `paymentCollectionItemDetails` relation is added in [Step 5](#5-adding-relation-fields) after the `paymentCollectionItemDetail` model exists.
+<Callout type="info" title="Payment Modes">
+
+Choose `PG` when parents will pay online (initial status: `Pending`); choose `CASH` when payment has already been collected offline (initial status: `Fully Paid`).
+The `paymentCollectionItemDetails` relation is added in [Step 5](#5-adding-relation-fields) after the `paymentCollectionItemDetail` model exists.
+
+</Callout>
 
 ---
 
@@ -300,9 +316,11 @@ Individual payment transactions recorded against a payment collection item — t
 | 6 | `paymentCollectionItem` | Payment Collection Item | [Relation](../../../admin-docs/module-builder/field-management#relation) | Yes | Many-to-One → `paymentCollectionItem` (fees-portal)<br/>Inverse field: `paymentCollectionItemDetails`<br/>Create Inverse: Yes<br/>Cascade<br/>Index<br/>Audit |
 </div>
 
-> **Info**
+<Callout type="info" title="Info">
 
-> The `payment` (Many-to-One → `payment`) field is not added here because the `payment` model does not exist yet. It is auto-created when you add the `paymentCollectionItemDetails` field on the Payment model in [Student Payment Portal](./making_payment.md) (field 9, Create Inverse: Yes).
+The `payment` (Many-to-One → `payment`) field is not added here because the `payment` model does not exist yet. It is auto-created when you add the `paymentCollectionItemDetails` field on the Payment model in [Student Payment Portal](./making_payment.md) (field 9, Create Inverse: Yes).
+
+</Callout>
 
 ---
 
@@ -310,9 +328,11 @@ Individual payment transactions recorded against a payment collection item — t
 
 Now that all four models exist, return to the following models and add the deferred relation fields.
 
-> **Info**
+<Callout type="info" title="Info">
 
-> SolidX requires the co-model to already exist before you can create a relation pointing to it. The two One-to-Many fields below reference models that were not yet created when their parent models were built.
+SolidX requires the co-model to already exist before you can create a relation pointing to it. The two One-to-Many fields below reference models that were not yet created when their parent models were built.
+
+</Callout>
 
 **Payment Collection — add field 7:**
 
@@ -334,31 +354,41 @@ Now that all four models exist, return to the following models and add the defer
 
 </div>
 
-> The `payments` field on Student and the `payment` field on Payment Collection Item Detail are handled automatically in [Student Payment Portal](./making_payment.md) when the `payment` model is created (via Create Inverse: Yes on fields 7 and 9 respectively).
+<Callout type="info" title="Note">
 
-> **Quick Reference**
+The `payments` field on Student and the `payment` field on Payment Collection Item Detail are handled automatically in [Student Payment Portal](./making_payment.md) when the `payment` model is created (via Create Inverse: Yes on fields 7 and 9 respectively).
 
-> For a handy summary of field types and configuration options used in this tutorial, see:
-> - 📚 [Field Type Reference](../common/field-types.md) - Quick-reference table of field types and their key attributes
-> - ⚙️ [Configuration Notes](../common/configuration-notes.md) - Quick tips on relations, cascading, audit tracking, and more
+</Callout>
 
-> For comprehensive documentation, refer to the [Module Builder](../../../admin-docs/module-builder/) section.
+<Callout type="info" title="Quick Reference">
+
+For a handy summary of field types and configuration options used in this tutorial, see:
+- 📚 [Field Type Reference](../common/field-types.md) - Quick-reference table of field types and their key attributes
+- ⚙️ [Configuration Notes](../common/configuration-notes.md) - Quick tips on relations, cascading, audit tracking, and more
+
+For comprehensive documentation, refer to the [Module Builder](../../../admin-docs/module-builder/) section.
+
+</Callout>
 
 ### Generating APIs and UI Components
 
 Once you've created the data models, you'll need to generate the REST APIs and UI components.
 
-> **Reference Documentation**
+<Callout type="info" title="Reference Documentation">
 
-> 📋 For detailed step-by-step instructions, see [Generating APIs and UI Components](../common/code-generation.md)
+📋 For detailed step-by-step instructions, see [Generating APIs and UI Components](../common/code-generation.md)
+
+</Callout>
 
 ### Creating Roles & Permissions
 
 With the models and APIs in place, configure who can access them. Permissions are granted per model and map directly to the controller methods generated in the previous step.
 
-> **Info**
+<Callout type="info" title="Info">
 
-> Super Admin is granted all permissions by default. No role configuration needed.
+Super Admin is granted all permissions by default. No role configuration needed.
+
+</Callout>
 
 #### Institute Admin
 
@@ -378,9 +408,11 @@ On the existing **`Institute Admin`** role, grant the following additional permi
 - **Payment Collection Item** — Items are generated automatically by the Excel upload; Institute Admin never creates them manually. `cancelMany` allows bulk-cancelling items when a collection needs to be voided.
 - **Payment Collection Item Detail** — Purely a read-only view for Institute Admin; details are recorded by the payment gateway callback process, not manually.
 
-> **Reference Documentation**
+<Callout type="info" title="Reference Documentation">
 
-> 📋 For step-by-step instructions on editing a role and assigning permissions in SolidX, see [Role Management](../../../admin-docs/iam/roles.md).
+📋 For step-by-step instructions on editing a role and assigning permissions in SolidX, see [Role Management](../../../admin-docs/iam/roles.md).
+
+</Callout>
 
 ### Implementing Custom Business Logic
 
@@ -916,9 +948,11 @@ async computeFieldValue(entity: PaymentCollectionItemDetail) {
 
 The payment collection feature uses two scheduled jobs to automate late fee calculation and email reminders.
 
-> **Reference Documentation**
+<Callout type="info" title="Reference Documentation">
 
-> 📋 For detailed information about scheduled jobs configuration, properties, and best practices, see [Scheduled Jobs](/docs/developer-docs/extending/backend-customization/scheduled-jobs)
+📋 For detailed information about scheduled jobs configuration, properties, and best practices, see [Scheduled Jobs](/docs/developer-docs/extending/backend-customization/scheduled-jobs)
+
+</Callout>
 
 **Job 1: Late Fee Calculator**
 
@@ -1023,42 +1057,46 @@ for (const [studentId, items] of Object.entries(groupedByStudent)) {
 }
 ```
 
-> **Implementation Order**
+<Callout type="info" title="Implementation Order">
 
-> Follow this sequence when implementing custom business logic:
-> 1. Create validation service method (`feeTypeValidation`)
-> 2. Implement template generation service
-> 3. Create event subscriber for Excel processing
-> 4. Implement student creation/update logic
-> 5. Implement payment item creation logic
-> 6. Implement email notification logic
-> 7. Create computed field provider for amount calculations
-> 8. Set up scheduled jobs for late fees and reminders
-> 9. Test end-to-end flow with sample Excel file
+Follow this sequence when implementing custom business logic:
+1. Create validation service method (`feeTypeValidation`)
+2. Implement template generation service
+3. Create event subscriber for Excel processing
+4. Implement student creation/update logic
+5. Implement payment item creation logic
+6. Implement email notification logic
+7. Create computed field provider for amount calculations
+8. Set up scheduled jobs for late fees and reminders
+9. Test end-to-end flow with sample Excel file
 
-> **Info**
+</Callout>
 
-> All Excel file operations in this feature use the centralized `ExcelService` for consistency:
+<Callout type="info" title="Info">
 
-> **Key Methods Used:**
-> - **`readExcelFromStreamNonStreaming()`**: For validation and processing Excel files
->   - Returns `{ headers: string[], rows: Record<string, any>[] }`
->   - Handles complex cell types (rich text, formulas, dates)
->   - Provides clean object-based access using column headers as keys
+All Excel file operations in this feature use the centralized `ExcelService` for consistency:
 
-> - **`createExcelStream()`**: For generating templates
->   - Accepts custom headers array
->   - Creates downloadable Excel files with proper formatting
+**Key Methods Used:**
+- **`readExcelFromStreamNonStreaming()`**: For validation and processing Excel files
+  - Returns `{ headers: string[], rows: Record<string, any>[] }`
+  - Handles complex cell types (rich text, formulas, dates)
+  - Provides clean object-based access using column headers as keys
 
-> **Benefits:**
-> - Consistent data normalization across the application
-> - Automatic handling of Excel-specific data types
-> - Built-in support for streaming large files
-> - Clean, maintainable code without low-level ExcelJS complexity
-> - Reusable service for all import/export operations
+- **`createExcelStream()`**: For generating templates
+  - Accepts custom headers array
+  - Creates downloadable Excel files with proper formatting
 
-> **Alternative Approach:**
-> For very large files that may cause memory issues, consider using `readExcelInPagesFromStream()` which returns an async generator for processing rows in chunks. However, for typical payment collection files (hundreds to thousands of rows), `readExcelFromStreamNonStreaming()` provides better performance and simpler code.
+**Benefits:**
+- Consistent data normalization across the application
+- Automatic handling of Excel-specific data types
+- Built-in support for streaming large files
+- Clean, maintainable code without low-level ExcelJS complexity
+- Reusable service for all import/export operations
+
+**Alternative Approach:**
+For very large files that may cause memory issues, consider using `readExcelInPagesFromStream()` which returns an async generator for processing rows in chunks. However, for typical payment collection files (hundreds to thousands of rows), `readExcelFromStreamNonStreaming()` provides better performance and simpler code.
+
+</Callout>
 
 ### Customizing the UI
 
@@ -1485,9 +1523,11 @@ The customizations follow these principles:
 
 These customizations transform the auto-generated UI into an intuitive payment collection workflow that minimizes errors and maximizes efficiency.
 
-> **Applying Your Customizations**
+<Callout type="info" title="Applying Your Customizations">
 
-> Now that you have the customized layout JSONs ready, follow the steps in [Applying View Customizations](../common/applying-view-customizations.md) to apply them via the Layout Builder.
+Now that you have the customized layout JSONs ready, follow the steps in [Applying View Customizations](../common/applying-view-customizations.md) to apply them via the Layout Builder.
+
+</Callout>
 
 ### Excel File Format and Requirements
 
@@ -1637,14 +1677,16 @@ Here's how a complete Excel file should look:
 - Each non-zero amount creates one item
 - Zero or empty amounts are skipped
 
-> **Testing Recommendation**
+<Callout type="tip" title="Testing Recommendation">
 
-> Before uploading payment collections for all students:
-> 1. Create a test Excel with 2-3 students
-> 2. Use different scenarios: PG mode, CASH mode, multiple fee types
-> 3. Upload and verify results
-> 4. Check emails were sent correctly
-> 5. Once verified, proceed with full batch
+Before uploading payment collections for all students:
+1. Create a test Excel with 2-3 students
+2. Use different scenarios: PG mode, CASH mode, multiple fee types
+3. Upload and verify results
+4. Check emails were sent correctly
+5. Once verified, proceed with full batch
+
+</Callout>
 
 ### Payment Collection Workflow
 

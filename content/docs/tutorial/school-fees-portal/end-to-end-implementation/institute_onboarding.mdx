@@ -21,9 +21,11 @@ This feature is configured by the **Super Admin** and subsequently managed by **
 
 This section describes the three models you need to implement for institute onboarding, along with step-by-step instructions to create them in SolidX.
 
-> **New to the Module Builder?**
+<Callout type="info" title="New to the Module Builder?">
 
-> If you're unfamiliar with how modules, models, and fields work in SolidX, review the [Module Builder](../../../admin-docs/module-builder/) documentation first — it covers [Module Management](../../../admin-docs/module-builder/module-management), [Model Management](../../../admin-docs/module-builder/model-management), and [Field Management](../../../admin-docs/module-builder/field-management).
+If you're unfamiliar with how modules, models, and fields work in SolidX, review the [Module Builder](../../../admin-docs/module-builder/) documentation first — it covers [Module Management](../../../admin-docs/module-builder/module-management), [Model Management](../../../admin-docs/module-builder/model-management), and [Field Management](../../../admin-docs/module-builder/field-management).
+
+</Callout>
 
 #### How These Models Connect
 
@@ -95,7 +97,11 @@ Represents your educational institution — the top-level entity that owns fee t
 
 </div>
 
-> The relation fields (`feeTypes` and `instituteUsers`) are added in [Step 4](#4-adding-relation-fields-to-institute) after the co-models exist. Deleting an Institute cascades to all its fee types and users via those relations.
+<Callout type="info" title="Note">
+
+The relation fields (`feeTypes` and `instituteUsers`) are added in [Step 4](#4-adding-relation-fields-to-institute) after the co-models exist. Deleting an Institute cascades to all its fee types and users via those relations.
+
+</Callout>
 
 ---
 
@@ -135,7 +141,11 @@ Represents a category of fees collected by an institution (e.g. Tuition, Bus, Ho
 
 </div>
 
-> Two institutes can each have a "Tuition Fees" entry. A single institute cannot have two entries with the same name — `feeTypeUserKey` (field 6) enforces this by concatenating the fee type name and institute name into a unique slug.
+<Callout type="info" title="Note">
+
+Two institutes can each have a "Tuition Fees" entry. A single institute cannot have two entries with the same name — `feeTypeUserKey` (field 6) enforces this by concatenating the fee type name and institute name into a unique slug.
+
+</Callout>
 
 <details id="feetypeuserkey-provider-context" open>
 <summary>feeTypeUserKey — Full provider context JSON</summary>
@@ -156,9 +166,11 @@ Represents a category of fees collected by an institution (e.g. Tuition, Bus, Ho
 
 Represents an administrative staff member who manages a single institution's portal. Extends SolidX's built-in User model, inheriting standard fields (email, password, first name, last name).
 
-> **Info**
+<Callout type="info" title="Info">
 
-> The child model adds only the institute-specific fields below, without duplicating standard user fields. For a deeper look — including overriding user creation logic — see [Extending Users](../../../developer-docs/extending/backend-customization/extending-users).
+The child model adds only the institute-specific fields below, without duplicating standard user fields. For a deeper look — including overriding user creation logic — see [Extending Users](../../../developer-docs/extending/backend-customization/extending-users).
+
+</Callout>
 
 ##### Model Configuration
 
@@ -195,9 +207,11 @@ Represents an administrative staff member who manages a single institution's por
 
 Now that both `feeType` and `instituteUser` models exist, return to the **Institute** model and add the following two relation fields.
 
-> **Info**
+<Callout type="info" title="Info">
 
-> SolidX requires the co-model to already exist before you can create a relation pointing to it. Adding these fields now ensures `feeType` and `instituteUser` are in place and selectable.
+SolidX requires the co-model to already exist before you can create a relation pointing to it. Adding these fields now ensures `feeType` and `instituteUser` are in place and selectable.
+
+</Callout>
 
 <div style={{overflowX: 'auto'}}>
 
@@ -208,31 +222,41 @@ Now that both `feeType` and `instituteUser` models exist, return to the **Instit
 
 </div>
 
-> Deleting an Institute cascades to all its fee types and users (via fields 20 and 21).
+<Callout type="info" title="Note">
 
-> **Quick Reference**
+Deleting an Institute cascades to all its fee types and users (via fields 20 and 21).
 
-> For a handy summary of field types and configuration options used in this tutorial, see:
-> - 📚 [Field Type Reference](../common/field-types.md) - Quick-reference table of field types and their key attributes
-> - ⚙️ [Configuration Notes](../common/configuration-notes.md) - Quick tips on relations, cascading, audit tracking, and more
+</Callout>
 
-> For comprehensive documentation, refer to the [Module Builder](../../../admin-docs/module-builder/) section.
+<Callout type="info" title="Quick Reference">
+
+For a handy summary of field types and configuration options used in this tutorial, see:
+- 📚 [Field Type Reference](../common/field-types.md) - Quick-reference table of field types and their key attributes
+- ⚙️ [Configuration Notes](../common/configuration-notes.md) - Quick tips on relations, cascading, audit tracking, and more
+
+For comprehensive documentation, refer to the [Module Builder](../../../admin-docs/module-builder/) section.
+
+</Callout>
 
 ### Generating APIs and UI Components
 
 Once you've created the data models, you'll need to generate the REST APIs and UI components.
 
-> **Reference Documentation**
+<Callout type="info" title="Reference Documentation">
 
-> 📋 For detailed step-by-step instructions, see [Generating APIs and UI Components](../common/code-generation.md)
+📋 For detailed step-by-step instructions, see [Generating APIs and UI Components](../common/code-generation.md)
+
+</Callout>
 
 ### Creating Roles & Permissions
 
 With the models and APIs in place, configure who can access them. Permissions are granted per model and map directly to the controller methods generated in the previous step.
 
-> **Info**
+<Callout type="info" title="Info">
 
-> Super Admin is granted all permissions by default. No role configuration needed.
+Super Admin is granted all permissions by default. No role configuration needed.
+
+</Callout>
 
 #### Institute Admin
 
@@ -250,9 +274,11 @@ Create a role named exactly **`Institute Admin`** and grant the following permis
 - **Fee Type** — Institute Admin has full control over their institute's fee structure, including bulk-creating fee types at setup time (`insertMany`) and bulk-deleting them when restructuring (`deleteMany`).
 - **Institute User** — Institute Admin can invite staff individually or in bulk (`insertMany`), but cannot delete user accounts — individually or in bulk — as that is a destructive action reserved for Super Admin.
 
-> **Reference Documentation**
+<Callout type="info" title="Reference Documentation">
 
-> 📋 For step-by-step instructions on creating a role and assigning permissions in SolidX, see [Role Management](../../../admin-docs/iam/roles.md).
+📋 For step-by-step instructions on creating a role and assigning permissions in SolidX, see [Role Management](../../../admin-docs/iam/roles.md).
+
+</Callout>
 
 ### Customizing the UI
 
@@ -1123,9 +1149,11 @@ The customizations follow these principles:
 
 These customizations transform the auto-generated UI into a polished, user-friendly interface tailored to the fees portal domain.
 
-> **Applying Your Customizations**
+<Callout type="info" title="Applying Your Customizations">
 
-> Now that you have the customized layout JSONs ready, follow the steps in [Applying View Customizations](../common/applying-view-customizations.md) to apply them via the Layout Builder.
+Now that you have the customized layout JSONs ready, follow the steps in [Applying View Customizations](../common/applying-view-customizations.md) to apply them via the Layout Builder.
+
+</Callout>
 
 ### Data Setup
 

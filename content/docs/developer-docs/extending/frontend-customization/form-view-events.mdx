@@ -24,10 +24,12 @@ SolidX currently supports these form view events:
 2. **`onFieldChange`** - fires whenever a field **value changes**.
 3. **`onFieldBlur`** - fires when a field **loses focus**.
 
-> **Tip**
+<Callout type="tip" title="Tip">
 
-> If your handler mutates layout and/or data, return the appropriate flags:
-> `layoutChanged: true` and/or `dataChanged: true`. Without these flags, changes are ignored.
+If your handler mutates layout and/or data, return the appropriate flags:
+`layoutChanged: true` and/or `dataChanged: true`. Without these flags, changes are ignored.
+
+</Callout>
 
 ## Form Load Execution Behavior
 
@@ -114,13 +116,17 @@ const handleBookFormViewChange = (event: SolidUiEvent) => {
 export default handleBookFormViewChange;
 ```
 
-> **Info**
+<Callout type="info" title="Info">
 
-> If you set `dataChanged: true`, return the full `newFormData` object, not just the modified field.
+If you set `dataChanged: true`, return the full `newFormData` object, not just the modified field.
 
-> **Tip**
+</Callout>
 
-> Keep model concerns together. Use a single file (for example `bookFormViewChangeHandler.ts`) for form-view event logic for that model.
+<Callout type="tip" title="Tip">
+
+Keep model concerns together. Use a single file (for example `bookFormViewChangeHandler.ts`) for form-view event logic for that model.
+
+</Callout>
 
 ## Registering the Handler
 
@@ -233,10 +239,12 @@ return {
 
 ## Deprecated Load Events (Compatibility Only)
 
-> **Warning**
+<Callout type="warning" title="Warning">
 
-> `onFormLayoutLoad` and `onFormDataLoad` are deprecated for new development.
-> Prefer `onFormLoad` as the single load lifecycle hook.
+`onFormLayoutLoad` and `onFormDataLoad` are deprecated for new development.
+Prefer `onFormLoad` as the single load lifecycle hook.
+
+</Callout>
 
 These legacy hooks are still executed for backward compatibility, but new implementations should migrate to `onFormLoad`.
 
