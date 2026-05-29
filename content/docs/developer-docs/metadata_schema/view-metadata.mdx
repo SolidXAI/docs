@@ -116,7 +116,7 @@ These attrs belong to the layout node, not to the field metadata entity:
 | `isSearchable` | Includes the field in global search flows |
 | `viewWidget` | Selects a custom list or tree widget |
 
-### Field Rendering: `shortText`
+### `shortText`
 
 By default, `shortText` renders as a standard text column.
 
@@ -221,7 +221,7 @@ Example coming soon..
 </TabItem>
 </Tabs>
 
-### Field Rendering: `longText`
+### `longText`
 
 In list and tree views, `longText` reuses the standard text-column path.
 
@@ -261,7 +261,7 @@ The supported alternative widgets for `longText` are form-specific and are docum
 </TabItem>
 </Tabs>
 
-### Field Rendering: `richText`
+### `richText`
 
 In list and tree views, `richText` reuses the standard text-column path.
 
@@ -302,7 +302,7 @@ No additional list or tree widgets are currently registered specifically for `ri
 
 
 
-### Field Rendering: `json`
+### `json`
 
 Core form rendering is supported for `json`, but list and tree support is currently limited.
 
@@ -340,7 +340,7 @@ No dedicated core list or tree widgets are currently registered specifically for
 
 
 
-### Field Rendering: `int`
+### `int`
 
 By default, `int` renders as a numeric column that reuses the shared text-style cell widget while preserving numeric table alignment.
 
@@ -379,7 +379,7 @@ No additional core list or tree widgets are currently registered specifically fo
 
 
 
-### Field Rendering: `bigint`
+### `bigint`
 
 In list and tree views, `bigint` currently reuses the same numeric column path used for `int`.
 
@@ -417,7 +417,7 @@ No additional core list or tree widgets are currently registered specifically fo
 
 
 
-### Field Rendering: `decimal`
+### `decimal`
 
 By default, `decimal` renders as a numeric column that reuses the shared text-style cell widget while preserving numeric table alignment.
 
@@ -458,7 +458,7 @@ No additional core list or tree widgets are currently registered specifically fo
 
 
 
-### Field Rendering: `boolean`
+### `boolean`
 
 By default, `boolean` renders as a compact true-or-false column.
 
@@ -498,7 +498,7 @@ No additional core list or tree widgets are currently registered specifically fo
 
 
 
-### Field Rendering: `date`
+### `date`
 
 By default, `date` renders as a date-formatted column rather than as plain text.
 
@@ -537,7 +537,7 @@ No additional core list or tree widgets are currently registered specifically fo
 
 
 
-### Field Rendering: `datetime`
+### `datetime`
 
 By default, `datetime` renders as a formatted date-time column rather than as plain text.
 
@@ -576,7 +576,7 @@ No additional core list or tree widgets are currently registered specifically fo
 
 
 
-### Field Rendering: `time`
+### `time`
 
 In list and tree views, `time` currently reuses the standard text-column path.
 
@@ -615,7 +615,7 @@ No additional core list or tree widgets are currently registered specifically fo
 
 
 
-### Field Rendering: `email`
+### `email`
 
 In list and tree views, `email` reuses the standard text-column path.
 
@@ -654,7 +654,7 @@ No additional core list or tree widgets are currently registered specifically fo
 
 
 
-### Field Rendering: `password`
+### `password`
 
 Core list and tree rendering should not be assumed for `password`.
 
@@ -692,7 +692,7 @@ No additional core list or tree widgets are currently registered specifically fo
 
 
 
-### Field Rendering: `selectionStatic`
+### `selectionStatic`
 
 By default, `selectionStatic` renders as a text-style column whose visible value is derived from the authored option labels.
 
@@ -731,7 +731,7 @@ No additional core list or tree widgets are currently registered specifically fo
 
 
 
-### Field Rendering: `selectionDynamic`
+### `selectionDynamic`
 
 By default, `selectionDynamic` renders as a text-style column whose visible value comes directly from the data returned for the row.
 
@@ -769,7 +769,7 @@ No additional core list or tree widgets are currently registered specifically fo
 
 
 
-### Field Rendering: `many-to-one`
+### `many-to-one`
 
 In list and tree views, `many-to-one` renders as one related record.
 
@@ -841,7 +841,7 @@ By default, the column uses `DefaultRelationManyToOneListWidget`, which displays
 </TabItem>
 </Tabs>
 
-### Field Rendering: `one-to-many`
+### `one-to-many`
 
 In list and tree views, `one-to-many` renders as a compact summary of the related collection.
 
@@ -881,7 +881,7 @@ No additional core list or tree widgets are currently registered specifically fo
 </TabItem>
 </Tabs>
 
-### Field Rendering: `many-to-many`
+### `many-to-many`
 
 In list and tree views, `many-to-many` renders as a compact summary of the related membership set.
 
@@ -950,7 +950,7 @@ By default, the column uses `DefaultRelationManyToManyListWidget`, which shows t
 </TabItem>
 </Tabs>
 
-### Field Rendering: `mediaSingle`
+### `mediaSingle`
 
 In list and tree views, `mediaSingle` renders as a thumbnail or file-style preview for the stored asset.
 
@@ -991,7 +991,7 @@ No additional core list or tree widgets are currently registered specifically fo
 </TabItem>
 </Tabs>
 
-### Field Rendering: `mediaMultiple`
+### `mediaMultiple`
 
 In list and tree views, `mediaMultiple` renders as a preview of the first asset plus a count for the remaining items.
 
@@ -1029,7 +1029,7 @@ No additional core list or tree widgets are currently registered specifically fo
 </TabItem>
 </Tabs>
 
-### Field Rendering: `computed`
+### `computed`
 
 In list and tree views, `computed` does not use a dedicated widget family of its own.
 
@@ -1110,7 +1110,7 @@ These attrs belong to the layout node, not to the field metadata entity:
 | `viewWidget` | Selects the widget used in view mode |
 | `autoComplete` | Controls the browser autocomplete behavior for text-style edit widgets that support it |
 
-### Field Rendering: `shortText`
+### `shortText`
 
 By default, `shortText` renders as a standard single-line text input in edit mode and as plain text in view mode.
 
@@ -1231,7 +1231,7 @@ The default edit renderer is `DefaultShortTextFormEditWidget`, and the default v
 </TabItem>
 </Tabs>
 
-### Field Rendering: `longText`
+### `longText`
 
 By default, `longText` renders as a multiline text area in edit mode and as a default read-only text display in view mode.
 
@@ -1405,7 +1405,7 @@ The default edit renderer is `DefaultLongTextFormEditWidget`.
 </TabItem>
 </Tabs>
 
-### Field Rendering: `richText`
+### `richText`
 
 By default, `richText` renders as a rich-text editor in edit mode and as formatted HTML content in view mode.
 
@@ -1445,7 +1445,7 @@ No additional form widgets are currently registered specifically for `richText`.
 
 
 
-### Field Rendering: `json`
+### `json`
 
 By default, `json` renders in forms using a JSON-oriented code editor in both edit and view modes.
 
@@ -1484,7 +1484,7 @@ No additional core form widgets are currently registered specifically for `json`
 
 
 
-### Field Rendering: `int`
+### `int`
 
 By default, `int` renders as a number input in edit mode and as a plain numeric read-only value in view mode.
 
@@ -1552,7 +1552,7 @@ No additional core form view widgets are currently registered specifically for `
 
 
 
-### Field Rendering: `bigint`
+### `bigint`
 
 By default, `bigint` reuses the same whole-number editing experience as `int`.
 
@@ -1591,7 +1591,7 @@ No additional core form widgets are currently registered specifically for `bigin
 
 
 
-### Field Rendering: `decimal`
+### `decimal`
 
 By default, `decimal` renders as a number input in edit mode and as a plain numeric read-only value in view mode.
 
@@ -1630,7 +1630,7 @@ No additional core form widgets are currently registered specifically for `decim
 
 
 
-### Field Rendering: `boolean`
+### `boolean`
 
 By default, `boolean` renders as a checkbox-style control in edit mode and as a readable true-or-false value in view mode.
 
@@ -1728,7 +1728,7 @@ No additional core form view widgets are currently registered specifically for `
 
 
 
-### Field Rendering: `date`
+### `date`
 
 By default, `date` renders as a date picker in edit mode and as a formatted date in view mode.
 
@@ -1770,7 +1770,7 @@ No additional core form widgets are currently registered specifically for `date`
 
 
 
-### Field Rendering: `datetime`
+### `datetime`
 
 By default, `datetime` renders as a date-time picker in edit mode and as a formatted date-time value in view mode.
 
@@ -1810,7 +1810,7 @@ No additional core form widgets are currently registered specifically for `datet
 
 
 
-### Field Rendering: `time`
+### `time`
 
 By default, `time` renders as a time-only picker in edit mode and as a formatted time value in view mode.
 
@@ -1849,7 +1849,7 @@ No additional core form widgets are currently registered specifically for `time`
 
 
 
-### Field Rendering: `email`
+### `email`
 
 By default, `email` renders as an email-oriented input in edit mode and as plain read-only text in view mode.
 
@@ -1888,7 +1888,7 @@ No additional core form widgets are currently registered specifically for `email
 
 
 
-### Field Rendering: `password`
+### `password`
 
 By default, `password` uses two different edit experiences depending on context and a masked read-only view.
 
@@ -1928,7 +1928,7 @@ No additional core form widgets are currently registered specifically for `passw
 
 
 
-### Field Rendering: `selectionStatic`
+### `selectionStatic`
 
 By default, `selectionStatic` renders as an autocomplete-driven picker in edit mode and as the authored label in view mode.
 
@@ -2018,7 +2018,7 @@ No additional core form view widgets are currently registered specifically for `
 
 
 
-### Field Rendering: `selectionDynamic`
+### `selectionDynamic`
 
 By default, `selectionDynamic` renders as a provider-backed autocomplete in edit mode and as the current selected label or value in view mode.
 
@@ -2057,7 +2057,7 @@ No additional core form widgets are currently registered specifically for `selec
 
 
 
-### Field Rendering: `many-to-one`
+### `many-to-one`
 
 By default, `many-to-one` renders as an autocomplete-based relation picker in edit mode and as a simple related-value display in view mode.
 
@@ -2172,7 +2172,7 @@ The default edit path uses `DefaultRelationManyToOneFormEditWidget`. The default
 </TabItem>
 </Tabs>
 
-### Field Rendering: `one-to-many`
+### `one-to-many`
 
 By default, `one-to-many` renders as an embedded child-collection manager in both edit and view modes.
 
@@ -2254,7 +2254,7 @@ The default edit path uses `DefaultRelationOneToManyFormEditWidget`. The default
 </TabItem>
 </Tabs>
 
-### Field Rendering: `many-to-many`
+### `many-to-many`
 
 By default, `many-to-many` renders as a relation picker in edit mode and as a list-style relation browser in view mode.
 
@@ -2343,7 +2343,7 @@ Example coming soon..
 </TabItem>
 </Tabs>
 
-### Field Rendering: `mediaSingle`
+### `mediaSingle`
 
 By default, `mediaSingle` renders as a single-file upload and preview experience in edit mode and as a preview or download surface in view mode.
 
@@ -2382,7 +2382,7 @@ No additional core form widgets are currently registered specifically for `media
 </TabItem>
 </Tabs>
 
-### Field Rendering: `mediaMultiple`
+### `mediaMultiple`
 
 By default, `mediaMultiple` renders as a multi-file upload and preview experience in edit mode and as a gallery-style preview or download surface in view mode.
 
@@ -2421,7 +2421,7 @@ No additional core form widgets are currently registered specifically for `media
 </TabItem>
 </Tabs>
 
-### Field Rendering: `computed`
+### `computed`
 
 By default, `computed` renders as a read-only field and is hidden while a new record is still being created.
 
