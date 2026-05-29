@@ -19,9 +19,11 @@ To use Microsoft OAuth, you must register an application in the Microsoft Entra 
 ### 1. Register an Application
 
 1.  Log in to the [Microsoft Entra admin center](https://entra.microsoft.com/) (formerly Azure Portal).
+    ![Microsoft for Developers Landing Page](/img/oauth/microsoft/microsoft-entra-page.png)
 2.  Click on **App registrations**.
 3.  Click **New registration**.
 4.  Enter a name for your application (e.g., `SolidCore-App`).
+    ![Microsoft for Developers Landing Page](/img/oauth/microsoft/app-registration-page.png)
 5.  Choose the **Supported account types** (e.g., "Accounts in any organizational directory and personal Microsoft accounts").
 6.  In the **Redirect URI** section, select **Web** and enter your callback URL:
     - Development: `http://localhost:3000/api/iam/microsoft/connect/callback`

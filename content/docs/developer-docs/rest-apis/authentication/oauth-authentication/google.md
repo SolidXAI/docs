@@ -19,6 +19,7 @@ To use Google OAuth, you must create and configure an app on the Google Cloud Co
 ### 1. Create a Google Cloud Project
 
 1.  Go to the [Google Cloud Console](https://console.cloud.google.com/).
+    ![Google Developers Landing Page](/img/oauth/google/google-console.png)
 2.  Click **Select a Project** and then **New Project**.
 3.  Enter a project name and click **Create**.
 4.  Wait for the project to be created and select it.

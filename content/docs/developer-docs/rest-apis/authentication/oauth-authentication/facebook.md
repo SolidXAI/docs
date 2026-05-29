@@ -19,10 +19,13 @@ To use Facebook OAuth, you must create and configure an app on the Meta for Deve
 ### 1. Create a Facebook App
 
 1.  Log in to the [Meta for Developers](https://developers.facebook.com/) portal.
+    ![Meta for Developers Landing Page](/img/oauth/facebook/meta-login-page.png)
 2.  Click on **My Apps** and then click **Create App**.
 3.  Select an app type (e.g., "Allow people to log in with their Facebook account").
 4.  Enter an app name and contact email.
+    ![Meta for Developers Landing Page](/img/oauth/facebook/create-app-screen.png)
 5.  Click **Create App**.
+    ![Meta for Developers Landing Page](/img/oauth/facebook/final-app-screen.png)
 
 ### 2. Configure Facebook Login
 
