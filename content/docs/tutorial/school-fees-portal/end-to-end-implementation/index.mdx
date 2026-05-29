@@ -7,6 +7,8 @@ keywords: [TODO]
 concerns: TODO
 ---
 
+import { Building2, Globe, FileSpreadsheet, CreditCard } from 'lucide-react';
+
 ## Overview
 
 This guide walks you through building a complete Fees Portal from scratch using SolidX. You'll learn how to configure data models, set up user roles, establish relationships between entities, for every key feature of the platform.
@@ -87,9 +89,19 @@ The Fees Portal is built incrementally — one feature at a time. Each feature i
 
 Here's the sequence we'll follow:
 
-1. **[Institute Onboarding](./institute_onboarding.md)** — Register an institute, configure fee types, invite admin users, and set up branding for the student portal.
-2. **[Activate Institute Portal](./activate_institute.md)** — Provision DNS and web server configuration to make an institute's student portal live and accessible.
-3. **[Initiate Payment Collection](./initiate_payment.md)** — Upload a bulk Excel file to generate payment requests for multiple students across multiple fee types in one go.
-4. **[Student Payment Portal](./making_payment.md)** — Allow students and parents to view dues, make online payments via Stripe, and track payment history through a dedicated portal.
+<Cards>
+  <Card icon={<Building2 />} title="Institute Onboarding" href="./institute_onboarding.md">
+    Register an institute, configure fee types, invite admin users, and set up branding for the student portal.
+  </Card>
+  <Card icon={<Globe />} title="Activate Institute Portal" href="./activate_institute.md">
+    Provision DNS and web server configuration to make an institute's student portal live and accessible.
+  </Card>
+  <Card icon={<FileSpreadsheet />} title="Initiate Payment Collection" href="./initiate_payment.md">
+    Upload a bulk Excel file to generate payment requests for multiple students across multiple fee types in one go.
+  </Card>
+  <Card icon={<CreditCard />} title="Student Payment Portal" href="./making_payment.md">
+    Allow students and parents to view dues, make online payments via Stripe, and track payment history through a dedicated portal.
+  </Card>
+</Cards>
 
 Let's begin with the foundation — **Institute Onboarding**.
