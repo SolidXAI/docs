@@ -26,7 +26,7 @@ It is the source of truth for the field's semantic type, validation rules, stora
 
 If you are deciding how a field should behave as part of a model, this is the page to use.
 
-If you are deciding how that field should appear in a form, list, or tree view, use [View Metadata](./view-metadata.md).
+If you are deciding how that field should appear in a form, list, or tree view, use [View Metadata](./view-metadata).
 
 ## What Belongs On This Page
 
@@ -64,7 +64,8 @@ Use `shortText` for short scalar strings such as names, titles, identifiers, lab
 
 In SolidX, `shortText` is a string-backed field. It supports length and pattern validation, persists as scalar text, and participates naturally in text-oriented filtering and search flows.
 
-#### Attribute Reference
+<Tabs>
+<TabItem value="attribute-reference" label="Attribute reference">
 
 | Attr | Required | Purpose | Notes for `shortText` |
 | --- | --- | --- | --- |
@@ -90,9 +91,8 @@ In SolidX, `shortText` is a string-backed field. It supports length and pattern 
 | `isMarkedForRemoval` | No | Lifecycle flag | Used during metadata evolution and cleanup |
 | `isPrimaryKey` | No | Primary-key flag | Important when the field doubles as the model's primary identifier |
 
-#### Runtime Behavior
-
-##### Validation
+</TabItem>
+<TabItem value="validation" label="Validation">
 
 For `shortText`, SolidX validates in two places:
 
@@ -104,7 +104,8 @@ Two important behaviors to note:
 - `max` is the effective length limit enforced by backend validation
 - `min` is enforced in generated form validation
 
-##### Persistence
+</TabItem>
+<TabItem value="persistence" label="Persistence">
 
 `shortText` is persisted as a scalar string field.
 
@@ -112,7 +113,8 @@ The submitted value is validated and then stored without field-specific transfor
 
 Attrs such as `ormType`, `columnName`, `unique`, and `index` are therefore best understood as persistence and schema intent. They shape how the field is represented in the generated model and storage layer, even when they are not enforced by the validation rules described above.
 
-##### Filtering And Querying
+</TabItem>
+<TabItem value="filtering-and-querying" label="Filtering & querying">
 
 Because `shortText` is a scalar textual field, it works naturally with the standard text-oriented filter operators available in SolidX, including:
 
@@ -125,11 +127,13 @@ Because `shortText` is a scalar textual field, it works naturally with the stand
 
 This makes `shortText` a natural fit for searchable list views, user keys, codes, names, and other text-oriented query flows.
 
-##### Security, Auditing, And Platform Flags
+</TabItem>
+<TabItem value="platform-flags" label="Platform flags">
 
 Attrs such as `private`, `enableAuditTracking`, `isSystem`, and `isPrimaryKey` are part of the field contract even though they are broader than validation alone. They communicate platform-level intent that other parts of SolidX rely on.
 
-#### Example
+</TabItem>
+<TabItem value="example" label="Example">
 
 ```json
 {
@@ -158,7 +162,10 @@ Attrs such as `private`, `enableAuditTracking`, `isSystem`, and `isPrimaryKey` a
 
 This is a representative `shortText` field because it combines a clear business purpose with required validation, explicit length limits, and index intent.
 
-For rendering, widgets, and layout attrs related to `shortText`, see [View Metadata](./view-metadata.md).
+</TabItem>
+</Tabs>
+
+For rendering, widgets, and layout attrs related to `shortText`, see [View Metadata](./view-metadata).
 
 ### `longText`
 
@@ -166,7 +173,8 @@ Use `longText` for extended text such as descriptions, notes, instructions, conf
 
 In SolidX, `longText` is a string-backed field intended for larger textual values. It supports pattern validation, persists as scalar text, and participates in the same text-oriented filtering and search flows as other scalar text fields.
 
-#### Attribute Reference
+<Tabs>
+<TabItem value="attribute-reference" label="Attribute reference">
 
 | Attr | Required | Purpose | Notes for `longText` |
 | --- | --- | --- | --- |
@@ -192,9 +200,8 @@ In SolidX, `longText` is a string-backed field intended for larger textual value
 | `isMarkedForRemoval` | No | Lifecycle flag | Used during metadata evolution and cleanup |
 | `isPrimaryKey` | No | Primary-key flag | Technically possible, though uncommon for multiline text fields |
 
-#### Runtime Behavior
-
-##### Validation
+</TabItem>
+<TabItem value="validation" label="Validation">
 
 For `longText`, SolidX validates in two places:
 
@@ -206,7 +213,8 @@ Two important behaviors to note:
 - `min` and `max` are enforced in generated form validation
 - backend validation does not currently enforce `min` or `max` for `longText`
 
-##### Persistence
+</TabItem>
+<TabItem value="persistence" label="Persistence">
 
 `longText` is persisted as a scalar text field.
 
@@ -214,7 +222,8 @@ The submitted value is validated and then stored without field-specific transfor
 
 Attrs such as `ormType`, `columnName`, `unique`, and `index` are therefore best understood as persistence and schema intent. They shape how the field is represented in the generated model and storage layer, even when they are not enforced by the validation rules described above.
 
-##### Filtering And Querying
+</TabItem>
+<TabItem value="filtering-and-querying" label="Filtering & querying">
 
 Because `longText` is a scalar textual field, it works naturally with the standard text-oriented filter operators available in SolidX, including:
 
@@ -227,11 +236,13 @@ Because `longText` is a scalar textual field, it works naturally with the standa
 
 This makes `longText` suitable for description-style filters, notes, instructions, and text-driven administrative search flows.
 
-##### Security, Auditing, And Platform Flags
+</TabItem>
+<TabItem value="platform-flags" label="Platform flags">
 
 Attrs such as `private`, `enableAuditTracking`, `isSystem`, and `isPrimaryKey` are part of the field contract even though they are broader than validation alone. They communicate platform-level intent that other parts of SolidX rely on.
 
-#### Example
+</TabItem>
+<TabItem value="example" label="Example">
 
 ```json
 {
@@ -257,7 +268,10 @@ Attrs such as `private`, `enableAuditTracking`, `isSystem`, and `isPrimaryKey` a
 
 This is a representative `longText` field because it shows the usual multiline text contract: semantic text storage, optional regex support, and standard required handling.
 
-For rendering, widgets, and layout attrs related to `longText`, see [View Metadata](./view-metadata.md).
+</TabItem>
+</Tabs>
+
+For rendering, widgets, and layout attrs related to `longText`, see [View Metadata](./view-metadata).
 
 ### `richText`
 
@@ -265,7 +279,8 @@ Use `richText` for formatted content such as article bodies, policy text, messag
 
 In SolidX, `richText` is a string-backed field that stores formatted content as text. It supports pattern validation, persists as scalar text, and participates in the same text-oriented filtering and search flows as other scalar text fields.
 
-#### Attribute Reference
+<Tabs>
+<TabItem value="attribute-reference" label="Attribute reference">
 
 | Attr | Required | Purpose | Notes for `richText` |
 | --- | --- | --- | --- |
@@ -291,9 +306,8 @@ In SolidX, `richText` is a string-backed field that stores formatted content as 
 | `isMarkedForRemoval` | No | Lifecycle flag | Used during metadata evolution and cleanup |
 | `isPrimaryKey` | No | Primary-key flag | Technically possible, though uncommon for rich formatted content |
 
-#### Runtime Behavior
-
-##### Validation
+</TabItem>
+<TabItem value="validation" label="Validation">
 
 For `richText`, SolidX validates in two places:
 
@@ -305,7 +319,8 @@ Two important behaviors to note:
 - `min` and `max` are enforced in generated form validation
 - backend validation does not currently enforce `min` or `max` for `richText`
 
-##### Persistence
+</TabItem>
+<TabItem value="persistence" label="Persistence">
 
 `richText` is persisted as a scalar text field.
 
@@ -313,7 +328,8 @@ The submitted value is validated and then stored without field-specific transfor
 
 Attrs such as `ormType`, `columnName`, `unique`, and `index` are therefore best understood as persistence and schema intent. They shape how the field is represented in the generated model and storage layer, even when they are not enforced by the validation rules described above.
 
-##### Filtering And Querying
+</TabItem>
+<TabItem value="filtering-and-querying" label="Filtering & querying">
 
 Because `richText` is a scalar textual field, it works naturally with the standard text-oriented filter operators available in SolidX, including:
 
@@ -326,11 +342,13 @@ Because `richText` is a scalar textual field, it works naturally with the standa
 
 This makes `richText` suitable for administrative search and text-driven query flows, even though end-user presentation is usually richer than plain text.
 
-##### Security, Auditing, And Platform Flags
+</TabItem>
+<TabItem value="platform-flags" label="Platform flags">
 
 Attrs such as `private`, `enableAuditTracking`, `isSystem`, and `isPrimaryKey` are part of the field contract even though they are broader than validation alone. They communicate platform-level intent that other parts of SolidX rely on.
 
-#### Example
+</TabItem>
+<TabItem value="example" label="Example">
 
 ```json
 {
@@ -350,7 +368,10 @@ Attrs such as `private`, `enableAuditTracking`, `isSystem`, and `isPrimaryKey` a
 
 This is a representative `richText` field because it captures the typical contract: formatted content stored as text and rendered through the rich-text form experience.
 
-For rendering, widgets, and layout attrs related to `richText`, see [View Metadata](./view-metadata.md).
+</TabItem>
+</Tabs>
+
+For rendering, widgets, and layout attrs related to `richText`, see [View Metadata](./view-metadata).
 
 ### `json`
 
@@ -360,7 +381,8 @@ This field type is appropriate when the value is naturally object- or array-shap
 
 In SolidX, `json` is a structured data field with JSON-specific backend validation. It is intended for persisted JSON payloads, metadata blocks, configuration objects, and other structured content.
 
-#### Attribute Reference
+<Tabs>
+<TabItem value="attribute-reference" label="Attribute reference">
 
 | Attr | Required | Purpose | Notes for `json` |
 | --- | --- | --- | --- |
@@ -381,9 +403,8 @@ In SolidX, `json` is a structured data field with JSON-specific backend validati
 | `isMarkedForRemoval` | No | Lifecycle flag | Used during metadata evolution and cleanup |
 | `isPrimaryKey` | No | Primary-key flag | Technically possible, though uncommon for structured JSON values |
 
-#### Runtime Behavior
-
-##### Validation
+</TabItem>
+<TabItem value="validation" label="Validation">
 
 For `json`, SolidX validates in two places:
 
@@ -394,7 +415,8 @@ One important behavior to note:
 
 - unlike text-based field types, the backend validator explicitly checks whether the submitted value is valid JSON rather than only checking its scalar type
 
-##### Persistence
+</TabItem>
+<TabItem value="persistence" label="Persistence">
 
 `json` is persisted as structured JSON data according to the configured `ormType`.
 
@@ -402,17 +424,20 @@ The submitted value is validated and then stored without field-specific transfor
 
 Attrs such as `ormType`, `columnName`, `unique`, and `index` are therefore best understood as persistence and schema intent. They shape how the field is represented in the generated model and storage layer, even when they are not enforced by the validation rules described above.
 
-##### Filtering And Querying
+</TabItem>
+<TabItem value="filtering-and-querying" label="Filtering & querying">
 
 `json` is structurally different from scalar text and numeric fields.
 
 At the field-contract level, it can participate in standard persistence and retrieval flows, but JSON-aware filtering behavior depends heavily on the storage model and the query path being used. For this reason, JSON fields should be treated more conservatively than ordinary scalar fields when designing search and list experiences.
 
-##### Security, Auditing, And Platform Flags
+</TabItem>
+<TabItem value="platform-flags" label="Platform flags">
 
 Attrs such as `private`, `enableAuditTracking`, `isSystem`, and `isPrimaryKey` are part of the field contract even though they are broader than validation alone. They communicate platform-level intent that other parts of SolidX rely on.
 
-#### Example
+</TabItem>
+<TabItem value="example" label="Example">
 
 ```json
 {
@@ -429,7 +454,10 @@ Attrs such as `private`, `enableAuditTracking`, `isSystem`, and `isPrimaryKey` a
 
 This is a representative `json` field because it shows the core contract clearly: structured data storage, JSON-specific validation, and a persistence-oriented `ormType`.
 
-For rendering, widgets, and layout attrs related to `json`, see [View Metadata](./view-metadata.md).
+</TabItem>
+</Tabs>
+
+For rendering, widgets, and layout attrs related to `json`, see [View Metadata](./view-metadata).
 
 ### `int`
 
@@ -439,7 +467,8 @@ This field type is appropriate for counts, sequence numbers, rankings, durations
 
 In SolidX, `int` is a scalar whole-number field. It supports numeric requiredness and numeric bounds, persists as an integer-style value, and participates naturally in numeric filtering, sorting, and reporting flows.
 
-#### Attribute Reference
+<Tabs>
+<TabItem value="attribute-reference" label="Attribute reference">
 
 | Attr | Required | Purpose | Notes for `int` |
 | --- | --- | --- | --- |
@@ -462,9 +491,8 @@ In SolidX, `int` is a scalar whole-number field. It supports numeric requirednes
 | `isMarkedForRemoval` | No | Lifecycle flag | Used during metadata evolution and cleanup |
 | `isPrimaryKey` | No | Primary-key flag | Common for identity-style integer fields |
 
-#### Runtime Behavior
-
-##### Validation
+</TabItem>
+<TabItem value="validation" label="Validation">
 
 For `int`, SolidX validates in two places:
 
@@ -477,7 +505,8 @@ Three important behaviors to note:
 - `min` and `max` represent numeric bounds, not string length
 - `int` does not use text-oriented attrs such as `length` or `regexPattern`
 
-##### Persistence
+</TabItem>
+<TabItem value="persistence" label="Persistence">
 
 `int` is persisted as a scalar integer-style value.
 
@@ -485,7 +514,8 @@ The submitted value is validated and then stored without field-specific transfor
 
 Attrs such as `ormType`, `columnName`, `unique`, and `index` are therefore best understood as persistence and schema intent. They shape how the field is represented in the generated model and storage layer, even when they are not enforced by the validation rules described above.
 
-##### Filtering And Querying
+</TabItem>
+<TabItem value="filtering-and-querying" label="Filtering & querying">
 
 Because `int` represents a numeric scalar, it works naturally with numeric sorting, exact-match filtering, and bounded comparisons.
 
@@ -497,11 +527,13 @@ Typical use cases include:
 
 In practice, `int` is the natural choice when business meaning depends on numeric ordering rather than on text search.
 
-##### Security, Auditing, And Platform Flags
+</TabItem>
+<TabItem value="platform-flags" label="Platform flags">
 
 Attrs such as `private`, `enableAuditTracking`, `isSystem`, and `isPrimaryKey` are part of the field contract even though they are broader than validation alone. They communicate platform-level intent that other parts of SolidX rely on.
 
-#### Example
+</TabItem>
+<TabItem value="example" label="Example">
 
 ```json
 {
@@ -525,7 +557,10 @@ Attrs such as `private`, `enableAuditTracking`, `isSystem`, and `isPrimaryKey` a
 
 This is a representative `int` field because it shows the common contract clearly: a persisted whole-number value, a numeric minimum bound, and a business rule where fractional precision would not make sense.
 
-For rendering, widgets, and layout attrs related to `int`, see [View Metadata](./view-metadata.md).
+</TabItem>
+</Tabs>
+
+For rendering, widgets, and layout attrs related to `int`, see [View Metadata](./view-metadata).
 
 ### `bigint`
 
@@ -535,7 +570,8 @@ This field type is appropriate for large identifiers, large-duration counters, i
 
 In SolidX, `bigint` is a large whole-number field. It is intended for persisted integer-like values with a bigger numeric envelope than `int`, while still participating in the same broad category of numeric filtering and sorting flows.
 
-#### Attribute Reference
+<Tabs>
+<TabItem value="attribute-reference" label="Attribute reference">
 
 | Attr | Required | Purpose | Notes for `bigint` |
 | --- | --- | --- | --- |
@@ -556,9 +592,8 @@ In SolidX, `bigint` is a large whole-number field. It is intended for persisted 
 | `isMarkedForRemoval` | No | Lifecycle flag | Used during metadata evolution and cleanup |
 | `isPrimaryKey` | No | Primary-key flag | Common for imported or legacy numeric identities |
 
-#### Runtime Behavior
-
-##### Validation
+</TabItem>
+<TabItem value="validation" label="Validation">
 
 For `bigint`, SolidX validates requiredness and numeric shape at the CRUD boundary, and generated forms reuse the same whole-number editing experience used for `int`.
 
@@ -567,7 +602,8 @@ Two important behaviors to note:
 - backend validation accepts string or number inputs and coerces them into a bigint-aware value before applying the numeric checks
 - the generated UI currently reuses the integer field path, so very large values should be reviewed carefully when they may exceed JavaScript safe-integer handling
 
-##### Persistence
+</TabItem>
+<TabItem value="persistence" label="Persistence">
 
 `bigint` is intended to persist a large whole-number value.
 
@@ -575,7 +611,8 @@ The submitted value is validated and then stored without field-specific transfor
 
 Attrs such as `ormType`, `columnName`, `unique`, and `index` are therefore best understood as persistence and schema intent. They shape how the field is represented in the generated model and storage layer, even when they are not enforced by the validation rules described above.
 
-##### Filtering And Querying
+</TabItem>
+<TabItem value="filtering-and-querying" label="Filtering & querying">
 
 Because `bigint` remains a numeric scalar, it fits the same broad query patterns as `int`.
 
@@ -587,11 +624,13 @@ Typical use cases include:
 
 In practice, `bigint` is most useful where whole-number semantics matter but ordinary integer assumptions are too small or too implementation-specific.
 
-##### Security, Auditing, And Platform Flags
+</TabItem>
+<TabItem value="platform-flags" label="Platform flags">
 
 Attrs such as `private`, `enableAuditTracking`, `isSystem`, and `isPrimaryKey` are part of the field contract even though they are broader than validation alone. They communicate platform-level intent that other parts of SolidX rely on.
 
-#### Example
+</TabItem>
+<TabItem value="example" label="Example">
 
 ```json
 {
@@ -613,7 +652,10 @@ Attrs such as `private`, `enableAuditTracking`, `isSystem`, and `isPrimaryKey` a
 
 This is a representative `bigint` field because it shows the intended contract clearly: a persisted large whole-number value, a bigint-specific storage hint, and a business metric that should remain numeric rather than textual.
 
-For rendering, widgets, and layout attrs related to `bigint`, see [View Metadata](./view-metadata.md).
+</TabItem>
+</Tabs>
+
+For rendering, widgets, and layout attrs related to `bigint`, see [View Metadata](./view-metadata).
 
 ### `decimal`
 
@@ -623,7 +665,8 @@ This field type is appropriate for amounts, rates, balances, measurements, and o
 
 In SolidX, `decimal` is a scalar numeric field. It supports numeric requiredness and numeric bounds, persists as a decimal-style value, and participates naturally in numeric filtering, sorting, and reporting flows.
 
-#### Attribute Reference
+<Tabs>
+<TabItem value="attribute-reference" label="Attribute reference">
 
 | Attr | Required | Purpose | Notes for `decimal` |
 | --- | --- | --- | --- |
@@ -646,9 +689,8 @@ In SolidX, `decimal` is a scalar numeric field. It supports numeric requiredness
 | `isMarkedForRemoval` | No | Lifecycle flag | Used during metadata evolution and cleanup |
 | `isPrimaryKey` | No | Primary-key flag | Technically possible, though uncommon for a decimal field |
 
-#### Runtime Behavior
-
-##### Validation
+</TabItem>
+<TabItem value="validation" label="Validation">
 
 For `decimal`, SolidX validates in two places:
 
@@ -661,7 +703,8 @@ Three important behaviors to note:
 - `min` and `max` represent numeric bounds, not string length
 - `decimal` does not use text-oriented attrs such as `length` or `regexPattern`
 
-##### Persistence
+</TabItem>
+<TabItem value="persistence" label="Persistence">
 
 `decimal` is persisted as a scalar precision-aware numeric value.
 
@@ -669,7 +712,8 @@ The submitted value is validated and then stored without field-specific transfor
 
 Attrs such as `ormType`, `columnName`, `unique`, and `index` are therefore best understood as persistence and schema intent. They shape how the field is represented in the generated model and storage layer, even when they are not enforced by the validation rules described above.
 
-##### Filtering And Querying
+</TabItem>
+<TabItem value="filtering-and-querying" label="Filtering & querying">
 
 Because `decimal` represents a numeric scalar, it works naturally with sorting, exact-match filtering, and bounded comparisons.
 
@@ -681,11 +725,13 @@ Typical use cases include:
 
 In practice, `decimal` is the natural choice whenever business meaning depends on numeric precision rather than on textual formatting.
 
-##### Security, Auditing, And Platform Flags
+</TabItem>
+<TabItem value="platform-flags" label="Platform flags">
 
 Attrs such as `private`, `enableAuditTracking`, `isSystem`, and `isPrimaryKey` are part of the field contract even though they are broader than validation alone. They communicate platform-level intent that other parts of SolidX rely on.
 
-#### Example
+</TabItem>
+<TabItem value="example" label="Example">
 
 ```json
 {
@@ -708,7 +754,10 @@ Attrs such as `private`, `enableAuditTracking`, `isSystem`, and `isPrimaryKey` a
 
 This is a representative `decimal` field because it shows the common contract clearly: a persisted precision-aware numeric value, a decimal-oriented storage hint, and a default that fits amount-style workflows.
 
-For rendering, widgets, and layout attrs related to `decimal`, see [View Metadata](./view-metadata.md).
+</TabItem>
+</Tabs>
+
+For rendering, widgets, and layout attrs related to `decimal`, see [View Metadata](./view-metadata).
 
 ### `boolean`
 
@@ -716,7 +765,8 @@ Use `boolean` for fields that represent a binary state such as enabled or disabl
 
 In SolidX, `boolean` is a scalar true-or-false field. It is intended for toggles, switches, flags, and simple state markers that should be stored and queried as boolean data rather than as text.
 
-#### Attribute Reference
+<Tabs>
+<TabItem value="attribute-reference" label="Attribute reference">
 
 | Attr | Required | Purpose | Notes for `boolean` |
 | --- | --- | --- | --- |
@@ -737,9 +787,8 @@ In SolidX, `boolean` is a scalar true-or-false field. It is intended for toggles
 | `isMarkedForRemoval` | No | Lifecycle flag | Used during metadata evolution and cleanup |
 | `isPrimaryKey` | No | Primary-key flag | Technically possible, though rarely appropriate for a boolean field |
 
-#### Runtime Behavior
-
-##### Validation
+</TabItem>
+<TabItem value="validation" label="Validation">
 
 For `boolean`, SolidX validates in two places:
 
@@ -751,7 +800,8 @@ Two important behaviors to note:
 - `boolean` does not use text-oriented attrs such as `min`, `max`, `length`, or `regexPattern`
 - at the CRUD boundary, the runtime value is treated as a true-or-false field rather than as free-form text
 
-##### Persistence
+</TabItem>
+<TabItem value="persistence" label="Persistence">
 
 `boolean` is persisted as a scalar boolean field.
 
@@ -759,7 +809,8 @@ The submitted value is validated and then stored without any field-specific pers
 
 Attrs such as `ormType`, `columnName`, `unique`, and `index` are therefore best understood as persistence and schema intent. They shape how the field is represented in the generated model and storage layer, even when they are not enforced by the validation rules described above.
 
-##### Filtering And Querying
+</TabItem>
+<TabItem value="filtering-and-querying" label="Filtering & querying">
 
 Because `boolean` represents a binary state, it is most useful in exact-match style filtering and operational list views.
 
@@ -771,11 +822,13 @@ Typical use cases include:
 
 In practice, `boolean` fits best where users need to quickly slice a dataset by state rather than search inside a textual value.
 
-##### Security, Auditing, And Platform Flags
+</TabItem>
+<TabItem value="platform-flags" label="Platform flags">
 
 Attrs such as `private`, `enableAuditTracking`, `isSystem`, and `isPrimaryKey` are part of the field contract even though they are broader than validation alone. They communicate platform-level intent that other parts of SolidX rely on.
 
-#### Example
+</TabItem>
+<TabItem value="example" label="Example">
 
 ```json
 {
@@ -797,7 +850,10 @@ Attrs such as `private`, `enableAuditTracking`, `isSystem`, and `isPrimaryKey` a
 
 This is a representative `boolean` field because it captures the common contract clearly: a persisted state flag, an explicit storage intent, and a default value used by metadata-driven experiences.
 
-For rendering, widgets, and layout attrs related to `boolean`, see [View Metadata](./view-metadata.md).
+</TabItem>
+</Tabs>
+
+For rendering, widgets, and layout attrs related to `boolean`, see [View Metadata](./view-metadata).
 
 ### `date`
 
@@ -807,7 +863,8 @@ This field type is appropriate for values such as date of joining, approval date
 
 In SolidX, `date` is a scalar date field. It is intended for persisted calendar values and participates naturally in date-oriented filtering and reporting flows.
 
-#### Attribute Reference
+<Tabs>
+<TabItem value="attribute-reference" label="Attribute reference">
 
 | Attr | Required | Purpose | Notes for `date` |
 | --- | --- | --- | --- |
@@ -828,9 +885,8 @@ In SolidX, `date` is a scalar date field. It is intended for persisted calendar 
 | `isMarkedForRemoval` | No | Lifecycle flag | Used during metadata evolution and cleanup |
 | `isPrimaryKey` | No | Primary-key flag | Technically possible, though uncommon for a date field |
 
-#### Runtime Behavior
-
-##### Validation
+</TabItem>
+<TabItem value="validation" label="Validation">
 
 For `date`, SolidX validates in two places:
 
@@ -842,7 +898,8 @@ Two important behaviors to note:
 - `date` does not use text-oriented attrs such as `min`, `max`, `length`, or `regexPattern`
 - the same CRUD validation path is also reused for `datetime`, so date-like fields share a common backend date-validation contract
 
-##### Persistence
+</TabItem>
+<TabItem value="persistence" label="Persistence">
 
 `date` is persisted as a scalar date value.
 
@@ -850,7 +907,8 @@ The submitted value is validated and then stored without any field-specific pers
 
 Attrs such as `ormType`, `columnName`, `unique`, and `index` are therefore best understood as persistence and schema intent. They shape how the field is represented in the generated model and storage layer, even when they are not enforced by the validation rules described above.
 
-##### Filtering And Querying
+</TabItem>
+<TabItem value="filtering-and-querying" label="Filtering & querying">
 
 Because `date` represents a calendar value, it is well suited to time-oriented filtering and reporting.
 
@@ -862,11 +920,13 @@ Typical use cases include:
 
 In practice, `date` works best where users need consistent calendar semantics rather than free-form text search.
 
-##### Security, Auditing, And Platform Flags
+</TabItem>
+<TabItem value="platform-flags" label="Platform flags">
 
 Attrs such as `private`, `enableAuditTracking`, `isSystem`, and `isPrimaryKey` are part of the field contract even though they are broader than validation alone. They communicate platform-level intent that other parts of SolidX rely on.
 
-#### Example
+</TabItem>
+<TabItem value="example" label="Example">
 
 ```json
 {
@@ -888,7 +948,10 @@ Attrs such as `private`, `enableAuditTracking`, `isSystem`, and `isPrimaryKey` a
 
 This is a representative `date` field because it captures the typical contract clearly: a persisted calendar value, a date-specific storage intent, and a business use case that benefits from consistent date handling.
 
-For rendering, widgets, and layout attrs related to `date`, see [View Metadata](./view-metadata.md).
+</TabItem>
+</Tabs>
+
+For rendering, widgets, and layout attrs related to `date`, see [View Metadata](./view-metadata).
 
 ### `datetime`
 
@@ -898,7 +961,8 @@ This field type is appropriate for timestamps such as approval time, publication
 
 In SolidX, `datetime` is a scalar date-time field. It is intended for persisted timestamp-style values and participates naturally in time-oriented filtering, sorting, and reporting flows.
 
-#### Attribute Reference
+<Tabs>
+<TabItem value="attribute-reference" label="Attribute reference">
 
 | Attr | Required | Purpose | Notes for `datetime` |
 | --- | --- | --- | --- |
@@ -919,9 +983,8 @@ In SolidX, `datetime` is a scalar date-time field. It is intended for persisted 
 | `isMarkedForRemoval` | No | Lifecycle flag | Used during metadata evolution and cleanup |
 | `isPrimaryKey` | No | Primary-key flag | Technically possible, though uncommon for a datetime field |
 
-#### Runtime Behavior
-
-##### Validation
+</TabItem>
+<TabItem value="validation" label="Validation">
 
 For `datetime`, SolidX validates in two places:
 
@@ -933,7 +996,8 @@ Two important behaviors to note:
 - `datetime` does not use text-oriented attrs such as `min`, `max`, `length`, or `regexPattern`
 - the same CRUD validation path is currently shared with `date`, so both field types rely on the same backend date-validation contract
 
-##### Persistence
+</TabItem>
+<TabItem value="persistence" label="Persistence">
 
 `datetime` is persisted as a scalar timestamp-like value.
 
@@ -941,7 +1005,8 @@ The submitted value is validated and then stored without any field-specific pers
 
 Attrs such as `ormType`, `columnName`, `unique`, and `index` are therefore best understood as persistence and schema intent. They shape how the field is represented in the generated model and storage layer, even when they are not enforced by the validation rules described above.
 
-##### Filtering And Querying
+</TabItem>
+<TabItem value="filtering-and-querying" label="Filtering & querying">
 
 Because `datetime` represents a timestamp-like value, it is well suited to chronological reporting and operational history flows.
 
@@ -953,11 +1018,13 @@ Typical use cases include:
 
 In practice, `datetime` is the natural choice whenever time-of-day matters as much as the date itself.
 
-##### Security, Auditing, And Platform Flags
+</TabItem>
+<TabItem value="platform-flags" label="Platform flags">
 
 Attrs such as `private`, `enableAuditTracking`, `isSystem`, and `isPrimaryKey` are part of the field contract even though they are broader than validation alone. They communicate platform-level intent that other parts of SolidX rely on.
 
-#### Example
+</TabItem>
+<TabItem value="example" label="Example">
 
 ```json
 {
@@ -979,7 +1046,10 @@ Attrs such as `private`, `enableAuditTracking`, `isSystem`, and `isPrimaryKey` a
 
 This is a representative `datetime` field because it captures the common contract clearly: a persisted timestamp, a timestamp-oriented storage intent, and a business use case that benefits from time-aware presentation and sorting.
 
-For rendering, widgets, and layout attrs related to `datetime`, see [View Metadata](./view-metadata.md).
+</TabItem>
+</Tabs>
+
+For rendering, widgets, and layout attrs related to `datetime`, see [View Metadata](./view-metadata).
 
 ### `time`
 
@@ -989,7 +1059,8 @@ This field type is appropriate for business hours, schedule boundaries, opening 
 
 In SolidX, `time` has clear UI support as a time-oriented field in forms and views. It is intended for persisted clock-time values, but its backend CRUD support is currently less complete than `date` and `datetime`.
 
-#### Attribute Reference
+<Tabs>
+<TabItem value="attribute-reference" label="Attribute reference">
 
 | Attr | Required | Purpose | Notes for `time` |
 | --- | --- | --- | --- |
@@ -1010,9 +1081,8 @@ In SolidX, `time` has clear UI support as a time-oriented field in forms and vie
 | `isMarkedForRemoval` | No | Lifecycle flag | Used during metadata evolution and cleanup |
 | `isPrimaryKey` | No | Primary-key flag | Technically possible, though uncommon for a time field |
 
-#### Runtime Behavior
-
-##### Validation
+</TabItem>
+<TabItem value="validation" label="Validation">
 
 For `time`, SolidX currently validates requiredness in the generated form layer using a date-like schema.
 
@@ -1020,7 +1090,8 @@ One important behavior to note:
 
 - core UI support for `time` is present, but `crud.service.ts` does not currently route `SolidFieldType.time` through a dedicated backend field manager, so the backend runtime contract is not yet as complete as the contracts for `date` and `datetime`
 
-##### Persistence
+</TabItem>
+<TabItem value="persistence" label="Persistence">
 
 `time` is intended to persist a clock-time value.
 
@@ -1028,7 +1099,8 @@ At the UI layer, the selected time is normalized into a submitted value during f
 
 Attrs such as `ormType`, `columnName`, `unique`, and `index` should therefore be understood as persistence and schema intent, with the current implementation maturity taken into account.
 
-##### Filtering And Querying
+</TabItem>
+<TabItem value="filtering-and-querying" label="Filtering & querying">
 
 Because `time` represents a clock-time value, it is most useful for schedule-style displays and ordering within a business day.
 
@@ -1040,11 +1112,13 @@ Typical use cases include:
 
 In practice, `time` is best used where the UI experience is valuable today and the backend behavior is known and reviewed as part of implementation.
 
-##### Security, Auditing, And Platform Flags
+</TabItem>
+<TabItem value="platform-flags" label="Platform flags">
 
 Attrs such as `private`, `enableAuditTracking`, `isSystem`, and `isPrimaryKey` are part of the field contract even though they are broader than validation alone. They communicate platform-level intent that other parts of SolidX rely on.
 
-#### Example
+</TabItem>
+<TabItem value="example" label="Example">
 
 ```json
 {
@@ -1064,7 +1138,10 @@ Attrs such as `private`, `enableAuditTracking`, `isSystem`, and `isPrimaryKey` a
 
 This is a representative `time` field because it shows the intended contract clearly: a clock-time value with a dedicated UI experience and a time-specific storage intent.
 
-For rendering, widgets, and layout attrs related to `time`, see [View Metadata](./view-metadata.md).
+</TabItem>
+</Tabs>
+
+For rendering, widgets, and layout attrs related to `time`, see [View Metadata](./view-metadata).
 
 ### `email`
 
@@ -1074,7 +1151,8 @@ This field type is appropriate for customer emails, notification targets, login 
 
 In SolidX, `email` is a string-backed field with email-aware backend validation. It persists as scalar text and participates naturally in text-oriented search, filtering, and lookup flows.
 
-#### Attribute Reference
+<Tabs>
+<TabItem value="attribute-reference" label="Attribute reference">
 
 | Attr | Required | Purpose | Notes for `email` |
 | --- | --- | --- | --- |
@@ -1099,9 +1177,8 @@ In SolidX, `email` is a string-backed field with email-aware backend validation.
 | `isMarkedForRemoval` | No | Lifecycle flag | Used during metadata evolution and cleanup |
 | `isPrimaryKey` | No | Primary-key flag | Technically possible, though uncommon for an email field |
 
-#### Runtime Behavior
-
-##### Validation
+</TabItem>
+<TabItem value="validation" label="Validation">
 
 For `email`, SolidX validates in two places:
 
@@ -1114,7 +1191,8 @@ Three important behaviors to note:
 - generated form validation relies on `regexPattern` when stricter email-format checks are needed
 - `max` defaults to the email-safe core limit when it is not authored explicitly
 
-##### Persistence
+</TabItem>
+<TabItem value="persistence" label="Persistence">
 
 `email` is persisted as a scalar text field.
 
@@ -1122,7 +1200,8 @@ The submitted value is validated and then stored without any field-specific pers
 
 Attrs such as `ormType`, `columnName`, `unique`, and `index` are therefore best understood as persistence and schema intent. They shape how the field is represented in the generated model and storage layer, even when they are not enforced by the validation rules described above.
 
-##### Filtering And Querying
+</TabItem>
+<TabItem value="filtering-and-querying" label="Filtering & querying">
 
 Because `email` is a scalar textual field, it works naturally with the standard text-oriented filter operators available in SolidX.
 
@@ -1134,11 +1213,13 @@ Typical use cases include:
 
 In practice, `email` combines the searchability of text with stronger validation expectations than a generic short string.
 
-##### Security, Auditing, And Platform Flags
+</TabItem>
+<TabItem value="platform-flags" label="Platform flags">
 
 Attrs such as `private`, `enableAuditTracking`, `isSystem`, and `isPrimaryKey` are part of the field contract even though they are broader than validation alone. They communicate platform-level intent that other parts of SolidX rely on.
 
-#### Example
+</TabItem>
+<TabItem value="example" label="Example">
 
 ```json
 {
@@ -1161,7 +1242,10 @@ Attrs such as `private`, `enableAuditTracking`, `isSystem`, and `isPrimaryKey` a
 
 This is a representative `email` field because it shows the email-specific validation intent clearly while still behaving like a persisted scalar string field.
 
-For rendering, widgets, and layout attrs related to `email`, see [View Metadata](./view-metadata.md).
+</TabItem>
+</Tabs>
+
+For rendering, widgets, and layout attrs related to `email`, see [View Metadata](./view-metadata).
 
 ### `password`
 
@@ -1171,7 +1255,8 @@ This field type is appropriate for authentication secrets and other credential-l
 
 In SolidX, `password` is a security-sensitive string-backed field. It supports requiredness, length constraints, pattern validation, confirmation matching, and hashing before persistence when a password value is supplied.
 
-#### Attribute Reference
+<Tabs>
+<TabItem value="attribute-reference" label="Attribute reference">
 
 | Attr | Required | Purpose | Notes for `password` |
 | --- | --- | --- | --- |
@@ -1195,9 +1280,8 @@ In SolidX, `password` is a security-sensitive string-backed field. It supports r
 | `isMarkedForRemoval` | No | Lifecycle flag | Used during metadata evolution and cleanup |
 | `isPrimaryKey` | No | Primary-key flag | Not a practical choice for password fields |
 
-#### Runtime Behavior
-
-##### Validation
+</TabItem>
+<TabItem value="validation" label="Validation">
 
 For `password`, SolidX validates in two places:
 
@@ -1210,7 +1294,8 @@ Three important behaviors to note:
 - password confirmation is treated as part of the contract when a password value is supplied
 - when no custom regex is authored, the backend falls back to a strong-password default pattern
 
-##### Persistence
+</TabItem>
+<TabItem value="persistence" label="Persistence">
 
 `password` is not intended to persist as raw text.
 
@@ -1218,17 +1303,20 @@ When a password value is supplied, the password manager hashes it before persist
 
 Attrs such as `ormType`, `columnName`, `unique`, and `index` should therefore be understood carefully in the context of hashed secret storage rather than ordinary text persistence.
 
-##### Filtering And Querying
+</TabItem>
+<TabItem value="filtering-and-querying" label="Filtering & querying">
 
 `password` is not intended for ordinary filtering, search, or list presentation.
 
 In practice, password fields are authored and updated through controlled form flows rather than surfaced in searchable operational views.
 
-##### Security, Auditing, And Platform Flags
+</TabItem>
+<TabItem value="platform-flags" label="Platform flags">
 
 Attrs such as `private`, `enableAuditTracking`, and `isSystem` matter more here than for most scalar field types because the field carries secret-like data. Documentation and implementation should continue to treat password values as highly sensitive.
 
-#### Example
+</TabItem>
+<TabItem value="example" label="Example">
 
 ```json
 {
@@ -1247,7 +1335,10 @@ Attrs such as `private`, `enableAuditTracking`, and `isSystem` matter more here 
 
 This is a representative `password` field because it captures the typical secret-field contract clearly: string input, secure validation expectations, and persistence sized for hashed storage rather than raw display.
 
-For rendering, widgets, and layout attrs related to `password`, see [View Metadata](./view-metadata.md).
+</TabItem>
+</Tabs>
+
+For rendering, widgets, and layout attrs related to `password`, see [View Metadata](./view-metadata).
 
 ### `selectionStatic`
 
@@ -1257,7 +1348,8 @@ This field type is appropriate when the option set is known in advance and shoul
 
 In SolidX, `selectionStatic` is a constrained scalar or multi-value selection field. It stores authored option values, validates submissions against the allowed set, and uses the metadata-defined mapping between stored values and human-readable labels.
 
-#### Attribute Reference
+<Tabs>
+<TabItem value="attribute-reference" label="Attribute reference">
 
 | Attr | Required | Purpose | Notes for `selectionStatic` |
 | --- | --- | --- | --- |
@@ -1281,9 +1373,8 @@ In SolidX, `selectionStatic` is a constrained scalar or multi-value selection fi
 | `isMarkedForRemoval` | No | Lifecycle flag | Used during metadata evolution and cleanup |
 | `isPrimaryKey` | No | Primary-key flag | Technically possible, though uncommon for a static selection field |
 
-#### Runtime Behavior
-
-##### Validation
+</TabItem>
+<TabItem value="validation" label="Validation">
 
 For `selectionStatic`, SolidX validates in two places:
 
@@ -1296,7 +1387,8 @@ Three important behaviors to note:
 - `selectionValueType` controls how the submitted value is interpreted at validation time
 - when `isMultiSelect` is enabled, the backend accepts an array or a JSON-stringified array and validates each submitted value against the authored set
 
-##### Persistence
+</TabItem>
+<TabItem value="persistence" label="Persistence">
 
 `selectionStatic` persists the stored value token rather than the human-readable label.
 
@@ -1304,7 +1396,8 @@ For single-select fields, that typically means a scalar value such as `Draft` or
 
 Attrs such as `ormType`, `columnName`, `unique`, and `index` are therefore best understood as persistence and schema intent. They shape how the field is represented in the generated model and storage layer, even when they are not enforced by the validation rules described above.
 
-##### Filtering And Querying
+</TabItem>
+<TabItem value="filtering-and-querying" label="Filtering & querying">
 
 Because `selectionStatic` stores a constrained set of known values, it is well suited to operational filtering and reporting.
 
@@ -1316,11 +1409,13 @@ Typical use cases include:
 
 In practice, `selectionStatic` is most valuable where consistency matters more than free-form input.
 
-##### Security, Auditing, And Platform Flags
+</TabItem>
+<TabItem value="platform-flags" label="Platform flags">
 
 Attrs such as `private`, `enableAuditTracking`, `isSystem`, and `isPrimaryKey` are part of the field contract even though they are broader than validation alone. They communicate platform-level intent that other parts of SolidX rely on.
 
-#### Example
+</TabItem>
+<TabItem value="example" label="Example">
 
 ```json
 {
@@ -1351,7 +1446,10 @@ Attrs such as `private`, `enableAuditTracking`, `isSystem`, and `isPrimaryKey` a
 
 This is a representative `selectionStatic` field because it shows the authored option set, the stored-value contract, and a common status-style use case that benefits from indexing and consistent querying.
 
-For rendering, widgets, and layout attrs related to `selectionStatic`, see [View Metadata](./view-metadata.md).
+</TabItem>
+</Tabs>
+
+For rendering, widgets, and layout attrs related to `selectionStatic`, see [View Metadata](./view-metadata).
 
 ### `selectionDynamic`
 
@@ -1361,7 +1459,8 @@ This field type is appropriate when the available options depend on a list-of-va
 
 In SolidX, `selectionDynamic` is a constrained provider-backed selection field. It stores submitted provider values, validates the submitted value type, and can optionally validate the selected value against the active provider during save.
 
-#### Attribute Reference
+<Tabs>
+<TabItem value="attribute-reference" label="Attribute reference">
 
 | Attr | Required | Purpose | Notes for `selectionDynamic` |
 | --- | --- | --- | --- |
@@ -1385,9 +1484,8 @@ In SolidX, `selectionDynamic` is a constrained provider-backed selection field. 
 | `isMarkedForRemoval` | No | Lifecycle flag | Used during metadata evolution and cleanup |
 | `isPrimaryKey` | No | Primary-key flag | Technically possible, though uncommon for a dynamic selection field |
 
-#### Runtime Behavior
-
-##### Validation
+</TabItem>
+<TabItem value="validation" label="Validation">
 
 For `selectionDynamic`, SolidX validates in two places:
 
@@ -1400,7 +1498,8 @@ Three important behaviors to note:
 - `selectionDynamicProviderCtxt` is JSON-decoded before validation and can shape provider behavior
 - when the provider context sets `validateOnSave` to `false`, save-time provider validation is skipped and only the value-type contract is enforced
 
-##### Persistence
+</TabItem>
+<TabItem value="persistence" label="Persistence">
 
 `selectionDynamic` persists the stored provider value rather than the provider's human-readable label.
 
@@ -1408,7 +1507,8 @@ For single-select fields, that typically means a scalar provider value. For mult
 
 Attrs such as `ormType`, `columnName`, `unique`, and `index` are therefore best understood as persistence and schema intent. They shape how the field is represented in the generated model and storage layer, even when they are not enforced by the validation rules described above.
 
-##### Filtering And Querying
+</TabItem>
+<TabItem value="filtering-and-querying" label="Filtering & querying">
 
 Because `selectionDynamic` stores constrained provider-backed values, it is well suited to operational filtering and provider-driven workflows.
 
@@ -1420,11 +1520,13 @@ Typical use cases include:
 
 In practice, `selectionDynamic` is most useful when the option set must remain dynamic without giving up structured persistence.
 
-##### Security, Auditing, And Platform Flags
+</TabItem>
+<TabItem value="platform-flags" label="Platform flags">
 
 Attrs such as `private`, `enableAuditTracking`, `isSystem`, and `isPrimaryKey` are part of the field contract even though they are broader than validation alone. They communicate platform-level intent that other parts of SolidX rely on.
 
-#### Example
+</TabItem>
+<TabItem value="example" label="Example">
 
 ```json
 {
@@ -1447,21 +1549,684 @@ Attrs such as `private`, `enableAuditTracking`, `isSystem`, and `isPrimaryKey` a
 
 This is a representative `selectionDynamic` field because it shows the core dynamic-selection contract clearly: provider-backed values, provider context, and a runtime-resolved option set.
 
-For rendering, widgets, and layout attrs related to `selectionDynamic`, see [View Metadata](./view-metadata.md).
+</TabItem>
+</Tabs>
+
+For rendering, widgets, and layout attrs related to `selectionDynamic`, see [View Metadata](./view-metadata).
 
 ### `many-to-one`
 
+Use `many-to-one` when each record should point to one record in another model, while that related model can be referenced by many records.
+
+This relation subtype is appropriate for parent-child lookups such as `student -> institute`, `invoice -> customer`, or `ticket -> assignee`.
+
+In SolidX, `many-to-one` is authored as a `relation` field with `relationType: "many-to-one"`. It persists a single related reference, validates incoming relation identifiers or user keys, and resolves the related entity before persistence.
+
+<Tabs>
+<TabItem value="attribute-reference" label="Attribute reference">
+
+| Attr | Required | Purpose | Notes for `many-to-one` |
+| --- | --- | --- | --- |
+| `name` | Yes | Internal field key | Used as the logical relation name and as the base for generated request fields such as `<name>Id` and `<name>UserKey` |
+| `displayName` | Yes | Human-readable label | Used in generated UI and validation messaging |
+| `description` | No | Help text for the field | Exposed to metadata-driven UI and tooling |
+| `type` | Yes | Semantic field family | Must be `relation` |
+| `relationType` | Yes | Relation subtype | Must be `many-to-one` |
+| `ormType` | No | Persistence-layer storage hint | Commonly an integer-style foreign-key column |
+| `relationCoModelSingularName` | Yes | Related model name | Identifies the model this field points to |
+| `relationModelModuleName` | Yes | Related module name | Identifies the module that owns the related model |
+| `relationCoModelFieldName` | No | Inverse field name on the related model | Useful when the inverse relation is created or referenced explicitly |
+| `relationCoModelColumnName` | No | Related-side column override | Overrides the generated related column name when needed |
+| `relationCreateInverse` | No | Inverse-generation flag | When `true`, metadata generation may create the inverse relation on the related model |
+| `relationCascade` | No | Cascade intent | Common values include `cascade`, `restrict`, and `set null` |
+| `relationFieldFixedFilter` | No | Relation option filter | JSON-templated filter applied when resolving candidate records in metadata-driven UI |
+| `required` | No | Mandatory relation flag | Enforced in generated forms and in backend CRUD validation |
+| `unique` | No | Uniqueness intent | Makes the foreign-key reference behave more like a one-to-one constraint at the persistence level |
+| `index` | No | Indexing intent | Useful for frequently filtered or joined relations |
+| `columnName` | No | Physical column override | Overrides the generated local column name |
+| `private` | No | Visibility flag | Signals that the relation should not be exposed in ordinary read flows |
+| `enableAuditTracking` | No | Audit-tracking flag | Useful when changes to the linked record should be tracked |
+| `isSystem` | No | Platform-owned field flag | Distinguishes framework-managed relations from business-authored relations |
+| `isMarkedForRemoval` | No | Lifecycle flag | Used during metadata evolution and cleanup |
+| `isPrimaryKey` | No | Primary-key flag | Rare for a relation field, but still part of the field contract |
+
+</TabItem>
+<TabItem value="validation" label="Validation">
+
+For `many-to-one`, SolidX validates in two places:
+
+1. The generated form layer validates requiredness and ensures the user selects a valid related record from the relation control.
+2. The backend validation layer accepts either `<fieldName>Id` or `<fieldName>UserKey`, checks requiredness, validates the identifier shape, and verifies that user-key based resolution is possible.
+
+Three important behaviors to note:
+
+- the request contract accepts either an integer-style id or the related model's user key
+- required validation fails only when both the id and the user key are absent
+- if a user key is submitted, the related model must expose a user-key field that can be used for lookup
+
+</TabItem>
+<TabItem value="persistence" label="Persistence">
+
+`many-to-one` persists a single related reference.
+
+Before persistence, SolidX resolves the submitted id or user key into the related entity and assigns that entity to the DTO. Once resolved, the relation is stored using the configured foreign-key mapping.
+
+Attrs such as `ormType`, `columnName`, `relationCoModelColumnName`, `unique`, and `index` are therefore best understood as persistence and schema intent. They shape how the relation is represented in the generated model and storage layer, even when they are not enforced by the validation rules described above.
+
+</TabItem>
+<TabItem value="filtering-and-querying" label="Filtering & querying">
+
+Because `many-to-one` points to a single related record, it is a natural fit for relation-aware filters and joins.
+
+Typical use cases include:
+
+- filtering child records by a parent entity such as institute, branch, or customer
+- populating related records in form and list flows
+- using the related model's user key as the display or search value in metadata-driven UI
+
+In practice, `many-to-one` is the relation subtype most often used for simple lookup-style business relationships.
+
+</TabItem>
+<TabItem value="platform-flags" label="Platform flags">
+
+Attrs such as `private`, `enableAuditTracking`, `isSystem`, and `isPrimaryKey` are part of the field contract even though they are broader than validation alone. They communicate platform-level intent that other parts of SolidX rely on.
+
+</TabItem>
+<TabItem value="example" label="Example">
+
+```json
+{
+  "name": "institute",
+  "displayName": "Institute",
+  "description": null,
+  "type": "relation",
+  "ormType": "integer",
+  "isSystem": false,
+  "relationType": "many-to-one",
+  "relationCoModelFieldName": "feeTypes",
+  "relationCreateInverse": true,
+  "relationCoModelSingularName": "institute",
+  "relationCoModelColumnName": null,
+  "relationModelModuleName": "fees-portal",
+  "relationCascade": "cascade",
+  "required": true,
+  "unique": false,
+  "index": false,
+  "private": false,
+  "columnName": null,
+  "relationJoinTableName": null,
+  "isRelationManyToManyOwner": null,
+  "relationFieldFixedFilter": "",
+  "enableAuditTracking": true
+}
+```
+
+This is a representative `many-to-one` field because it shows the core lookup contract clearly: a single related model, an authored inverse field name, required relation validation, and standard persistence intent.
+
+</TabItem>
+</Tabs>
+
+For rendering, widgets, and layout attrs related to `many-to-one`, see [View Metadata](./view-metadata).
+
 ### `one-to-many`
+
+Use `one-to-many` when one record should own or expose a collection of records from another model.
+
+This relation subtype is appropriate for parent-child collections such as `question -> possible answers`, `report -> daily logs`, or `employee -> detail rows`.
+
+In SolidX, `one-to-many` is authored as a `relation` field with `relationType: "one-to-many"`. It represents a collection-shaped relation, uses command-driven mutation semantics in backend CRUD flows, and is often paired with embedded list or inline create experiences in metadata-driven UI.
+
+<Tabs>
+<TabItem value="attribute-reference" label="Attribute reference">
+
+| Attr | Required | Purpose | Notes for `one-to-many` |
+| --- | --- | --- | --- |
+| `name` | Yes | Internal field key | Used as the logical collection name and as the base for generated command fields such as `<name>Command` and `<name>Ids` |
+| `displayName` | Yes | Human-readable label | Used in generated UI and validation messaging |
+| `description` | No | Help text for the field | Exposed to metadata-driven UI and tooling |
+| `type` | Yes | Semantic field family | Must be `relation` |
+| `relationType` | Yes | Relation subtype | Must be `one-to-many` |
+| `ormType` | No | Persistence-layer storage hint | Commonly an integer-style relation mapping |
+| `relationCoModelSingularName` | Yes | Child model name | Identifies the model that will appear many times under the current record |
+| `relationModelModuleName` | Yes | Child module name | Identifies the module that owns the child model |
+| `relationCoModelFieldName` | Yes | Inverse field name on the child model | Tells SolidX which child-side field points back to the current parent |
+| `relationCoModelColumnName` | No | Child-side column override | Overrides the generated child-side column name when needed |
+| `relationCreateInverse` | No | Inverse-generation flag | When `true`, metadata generation may create the inverse relation on the child model |
+| `relationCascade` | No | Cascade intent | Common values include `cascade`, `restrict`, and `set null` |
+| `relationFieldFixedFilter` | No | Relation option filter | JSON-templated filter applied when building metadata-driven relation experiences |
+| `required` | No | Mandatory collection flag | Enforced in generated forms and in backend CRUD validation |
+| `unique` | No | Uniqueness intent | Uncommon, but still part of the field contract |
+| `index` | No | Indexing intent | Useful when child rows are retrieved frequently through relation-oriented queries |
+| `columnName` | No | Physical column override | Overrides the generated local column name when relevant |
+| `private` | No | Visibility flag | Signals that the relation should not be exposed in ordinary read flows |
+| `enableAuditTracking` | No | Audit-tracking flag | Useful when changes to the collection membership or child rows should be tracked |
+| `isSystem` | No | Platform-owned field flag | Distinguishes framework-managed relations from business-authored relations |
+| `isMarkedForRemoval` | No | Lifecycle flag | Used during metadata evolution and cleanup |
+| `isPrimaryKey` | No | Primary-key flag | Rare for a collection relation, but still part of the field contract |
+
+</TabItem>
+<TabItem value="validation" label="Validation">
+
+For `one-to-many`, SolidX validates the relation using command-style mutation semantics.
+
+The generated form layer validates requiredness and collection shape. The backend CRUD layer validates the command field and then expects one of two payload styles:
+
+- for `create`, `update`, and `delete`, the payload is array-shaped and submitted through the relation value field itself
+- for `set`, `link`, and `unlink`, the payload is submitted through `<fieldName>Ids`
+
+Three important behaviors to note:
+
+- `<fieldName>Command` controls how the relation should be processed
+- `clear` is a special command that removes all linked children without requiring ids or child payloads
+- `link` and `unlink` are update-only operations because they need an existing parent record id
+
+</TabItem>
+<TabItem value="persistence" label="Persistence">
+
+`one-to-many` persists a collection of related child records or links, depending on the chosen command.
+
+In create and update flows, SolidX can create new child entities, preload and update existing child entities, delete child entities, replace the current collection, or perform differential link and unlink operations against an existing parent record.
+
+This makes `one-to-many` more operationally expressive than scalar fields: it is not just a stored value, but a mutation surface for managing a related collection.
+
+</TabItem>
+<TabItem value="filtering-and-querying" label="Filtering & querying">
+
+`one-to-many` is usually queried as a populated child collection rather than as a simple scalar field.
+
+Typical use cases include:
+
+- rendering child rows inside embedded forms or detail pages
+- loading child collections through relation-aware populate flows
+- applying parent-scoped filters so that only the current record's children are shown or edited
+
+In practice, `one-to-many` works best when the relation is treated as a managed collection rather than as a list-search field.
+
+</TabItem>
+<TabItem value="platform-flags" label="Platform flags">
+
+Attrs such as `private`, `enableAuditTracking`, `isSystem`, and `isPrimaryKey` are part of the field contract even though they are broader than validation alone. They communicate platform-level intent that other parts of SolidX rely on.
+
+</TabItem>
+<TabItem value="example" label="Example">
+
+```json
+{
+  "name": "questionPossibleAnswersMaster",
+  "displayName": "Possible Response",
+  "description": "QuestionPossibleAnswersMaster",
+  "type": "relation",
+  "ormType": "integer",
+  "isSystem": false,
+  "relationType": "one-to-many",
+  "relationCoModelFieldName": "questionMaster",
+  "relationCreateInverse": true,
+  "relationCoModelSingularName": "questionPossibleAnswerMaster",
+  "relationCoModelColumnName": null,
+  "relationModelModuleName": "sapphire",
+  "relationCascade": "cascade",
+  "required": false,
+  "unique": false,
+  "index": false,
+  "private": false,
+  "columnName": null,
+  "relationJoinTableName": null,
+  "isRelationManyToManyOwner": null,
+  "relationFieldFixedFilter": null,
+  "enableAuditTracking": true
+}
+```
+
+This is a representative `one-to-many` field because it shows the parent-to-collection contract clearly: a named child model, an explicit child-side inverse field, and the collection semantics needed for embedded CRUD flows.
+
+</TabItem>
+</Tabs>
+
+For rendering, widgets, and layout attrs related to `one-to-many`, see [View Metadata](./view-metadata).
 
 ### `many-to-many`
 
+Use `many-to-many` when records on both sides of the relationship can be linked to many records on the other side.
+
+This relation subtype is appropriate for relationships such as `question -> domains`, `user -> roles`, or `survey -> respondents`.
+
+In SolidX, `many-to-many` is authored as a `relation` field with `relationType: "many-to-many"`. It persists links through a join-style relation, supports command-driven mutation semantics, and distinguishes between owner-side and inverse-side relation metadata.
+
+<Tabs>
+<TabItem value="attribute-reference" label="Attribute reference">
+
+| Attr | Required | Purpose | Notes for `many-to-many` |
+| --- | --- | --- | --- |
+| `name` | Yes | Internal field key | Used as the logical relation name and as the base for generated command fields such as `<name>Command` and `<name>Ids` |
+| `displayName` | Yes | Human-readable label | Used in generated UI and validation messaging |
+| `description` | No | Help text for the field | Exposed to metadata-driven UI and tooling |
+| `type` | Yes | Semantic field family | Must be `relation` |
+| `relationType` | Yes | Relation subtype | Must be `many-to-many` |
+| `ormType` | No | Persistence-layer storage hint | Commonly an integer-style relation mapping |
+| `relationCoModelSingularName` | Yes | Related model name | Identifies the model on the other side of the relation |
+| `relationModelModuleName` | Yes | Related module name | Identifies the module that owns the related model |
+| `relationCoModelFieldName` | No | Inverse field name on the related model | Important when the relation is authored or operated from the inverse side |
+| `relationJoinTableName` | No | Join-table override | Overrides the generated join table name when needed |
+| `isRelationManyToManyOwner` | Yes | Owner-side flag | Determines whether the current field owns the relation mapping or represents the inverse side |
+| `relationCreateInverse` | No | Inverse-generation flag | When `true`, metadata generation may create the inverse relation automatically |
+| `relationCascade` | No | Cascade intent | Common values include `cascade`, `restrict`, and `set null` |
+| `relationFieldFixedFilter` | No | Relation option filter | JSON-templated filter applied when resolving relation candidates in metadata-driven UI |
+| `required` | No | Mandatory relation flag | Enforced in generated forms and in backend CRUD validation |
+| `unique` | No | Uniqueness intent | Usually uncommon for many-to-many relations |
+| `index` | No | Indexing intent | Useful when the relation is frequently traversed through join queries |
+| `columnName` | No | Physical column override | Overrides the generated local column name when relevant |
+| `private` | No | Visibility flag | Signals that the relation should not be exposed in ordinary read flows |
+| `enableAuditTracking` | No | Audit-tracking flag | Useful when relation membership changes should be tracked |
+| `isSystem` | No | Platform-owned field flag | Distinguishes framework-managed relations from business-authored relations |
+| `isMarkedForRemoval` | No | Lifecycle flag | Used during metadata evolution and cleanup |
+| `isPrimaryKey` | No | Primary-key flag | Rare for a many-to-many relation, but still part of the field contract |
+
+</TabItem>
+<TabItem value="validation" label="Validation">
+
+For `many-to-many`, SolidX validates the relation using the same command-style mutation pattern used for collection relations.
+
+The generated form layer validates requiredness and collection shape. The backend CRUD layer validates the command field, then expects one of two payload styles:
+
+- for `create`, `update`, and `delete`, the payload is array-shaped and submitted through the relation value field itself
+- for `set`, `link`, and `unlink`, the payload is submitted through `<fieldName>Ids` on the owner side, or through the resolved inverse field name on the inverse side
+
+Three important behaviors to note:
+
+- `<fieldName>Command` determines how the relation should be mutated
+- owner-side versus inverse-side metadata affects which effective field names are used internally
+- `link` and `unlink` are update-only operations because they need an existing parent record id
+
+</TabItem>
+<TabItem value="persistence" label="Persistence">
+
+`many-to-many` persists relation membership through a join-style mapping.
+
+In create and update flows, SolidX can create related entities, update or delete related entities, replace the current relation set, or perform differential link and unlink operations against existing records.
+
+The owner-side flag matters here: it determines which side is responsible for the primary relation mapping and how CRUD operations resolve the effective field names.
+
+</TabItem>
+<TabItem value="filtering-and-querying" label="Filtering & querying">
+
+`many-to-many` is most valuable when records need to be segmented or navigated through shared tags, categories, permissions, or memberships.
+
+Typical use cases include:
+
+- tagging records with multiple domains or categories
+- assigning users, reviewers, or approvers to the same business record
+- traversing relation membership through join-aware list and detail experiences
+
+In practice, `many-to-many` is best treated as a managed membership surface rather than as a scalar search field.
+
+</TabItem>
+<TabItem value="platform-flags" label="Platform flags">
+
+Attrs such as `private`, `enableAuditTracking`, `isSystem`, and `isPrimaryKey` are part of the field contract even though they are broader than validation alone. They communicate platform-level intent that other parts of SolidX rely on.
+
+</TabItem>
+<TabItem value="example" label="Example">
+
+```json
+{
+  "name": "domains",
+  "displayName": "Domains",
+  "description": "Domains",
+  "type": "relation",
+  "ormType": "integer",
+  "isSystem": false,
+  "relationType": "many-to-many",
+  "relationCoModelFieldName": null,
+  "relationCreateInverse": false,
+  "relationCoModelSingularName": "domain",
+  "relationCoModelColumnName": null,
+  "relationModelModuleName": "sapphire",
+  "relationCascade": "cascade",
+  "required": false,
+  "unique": false,
+  "index": false,
+  "private": false,
+  "columnName": null,
+  "relationJoinTableName": null,
+  "isRelationManyToManyOwner": true,
+  "relationFieldFixedFilter": null,
+  "enableAuditTracking": true
+}
+```
+
+This is a representative `many-to-many` field because it shows the shared-membership contract clearly: a co-model, owner-side metadata, and the join-oriented semantics used by relation-heavy business workflows.
+
+</TabItem>
+</Tabs>
+
+For rendering, widgets, and layout attrs related to `many-to-many`, see [View Metadata](./view-metadata).
+
 ### `mediaSingle`
+
+Use `mediaSingle` when a field should hold exactly one uploaded media asset such as a logo, profile image, signed document, or generated file.
+
+This field type is appropriate when the business meaning is singular: one photo, one file, one attachment slot, or one primary media asset.
+
+In SolidX, `mediaSingle` is an upload-backed field. It validates the incoming file collection, checks size and media-type constraints, persists media through the media subsystem, and exposes the stored asset back through the record's `_media` payload.
+
+<Tabs>
+<TabItem value="attribute-reference" label="Attribute reference">
+
+| Attr | Required | Purpose | Notes for `mediaSingle` |
+| --- | --- | --- | --- |
+| `name` | Yes | Internal field key | Used as the multipart field name and as the metadata key for the stored media slot |
+| `displayName` | Yes | Human-readable label | Used in generated UI and validation messaging |
+| `description` | No | Help text for the field | Exposed to metadata-driven UI and tooling |
+| `type` | Yes | Semantic field type | Must be `mediaSingle` |
+| `ormType` | No | Persistence-layer storage hint | Commonly `varchar` for stored media references |
+| `mediaTypes` | No | Allowed media families | Core media validation understands `image`, `audio`, `video`, and `file` |
+| `mediaMaxSizeKb` | No | Maximum file size in KB | Enforced by backend CRUD validation for single-file uploads |
+| `mediaStorageProviderUserKey` | No | Storage-provider selector | Chooses the authored storage provider used for the field's uploaded asset |
+| `required` | No | Mandatory upload flag | Enforced on create when no media file is supplied |
+| `unique` | No | Uniqueness intent | Usually uncommon, but still part of the field contract |
+| `index` | No | Indexing intent | Rare for media fields because querying usually happens through business attrs rather than media slots |
+| `columnName` | No | Physical column override | Overrides the generated local column name |
+| `private` | No | Visibility flag | Signals that the media slot should not be exposed in ordinary read flows |
+| `enableAuditTracking` | No | Audit-tracking flag | Useful when changes to the uploaded asset should be tracked |
+| `isSystem` | No | Platform-owned field flag | Distinguishes framework-managed media fields from business-authored fields |
+| `isMarkedForRemoval` | No | Lifecycle flag | Used during metadata evolution and cleanup |
+| `isPrimaryKey` | No | Primary-key flag | Rare for a media field, but still part of the field contract |
+
+</TabItem>
+<TabItem value="validation" label="Validation">
+
+For `mediaSingle`, SolidX validates the uploaded file collection in the backend CRUD layer.
+
+Three important behaviors to note:
+
+- on create, a required `mediaSingle` field must receive exactly one uploaded file
+- if more than one file is submitted, validation fails because the field is single-valued
+- when `mediaMaxSizeKb` or `mediaTypes` are authored, the backend validates the uploaded file against those constraints
+
+On update, required validation is intentionally more permissive so that existing media can remain in place when no replacement file is uploaded.
+
+</TabItem>
+<TabItem value="persistence" label="Persistence">
+
+`mediaSingle` persists through the media subsystem rather than behaving like an ordinary scalar text field.
+
+The uploaded file is stored using the configured storage provider and is then associated back to the business record under the field's media slot. In record responses, the field's asset is typically surfaced through `_media.<fieldName>` rather than through the plain scalar field value alone.
+
+This makes `mediaSingle` a hybrid field contract: metadata is authored on the field, but the underlying persistence flow is handled by the platform's media layer.
+
+</TabItem>
+<TabItem value="filtering-and-querying" label="Filtering & querying">
+
+`mediaSingle` is usually not used as a direct filter field.
+
+Typical use cases include:
+
+- displaying a primary asset such as a logo or cover image in a list or form
+- opening, previewing, or downloading the uploaded file in metadata-driven UI
+- populating media payloads alongside the rest of the business record
+
+In practice, media fields are usually queried for display and retrieval rather than for text- or number-style filtering.
+
+</TabItem>
+<TabItem value="platform-flags" label="Platform flags">
+
+Attrs such as `private`, `enableAuditTracking`, `isSystem`, and `isPrimaryKey` are part of the field contract even though they are broader than validation alone. They communicate platform-level intent that other parts of SolidX rely on.
+
+</TabItem>
+<TabItem value="example" label="Example">
+
+```json
+{
+  "name": "logo",
+  "displayName": "Logo",
+  "description": null,
+  "type": "mediaSingle",
+  "ormType": "varchar",
+  "isSystem": false,
+  "mediaTypes": [
+    "image"
+  ],
+  "mediaMaxSizeKb": 5120,
+  "required": false,
+  "unique": false,
+  "index": false,
+  "private": false,
+  "columnName": null,
+  "mediaStorageProviderUserKey": "default-aws-s3"
+}
+```
+
+This is a representative `mediaSingle` field because it shows the usual single-asset contract clearly: one authored slot, an allowed media family, a size limit, and an explicit storage provider.
+
+</TabItem>
+</Tabs>
+
+For rendering, widgets, and layout attrs related to `mediaSingle`, see [View Metadata](./view-metadata).
 
 ### `mediaMultiple`
 
+Use `mediaMultiple` when a field should hold a collection of uploaded assets rather than a single file.
+
+This field type is appropriate for attachment galleries, supporting documents, invoice bundles, or any workflow where multiple files belong to the same record.
+
+In SolidX, `mediaMultiple` is an upload-backed collection field. It persists multiple uploaded assets through the media subsystem and exposes the stored asset list back through the record's `_media` payload.
+
+<Tabs>
+<TabItem value="attribute-reference" label="Attribute reference">
+
+| Attr | Required | Purpose | Notes for `mediaMultiple` |
+| --- | --- | --- | --- |
+| `name` | Yes | Internal field key | Used as the multipart field name and as the metadata key for the stored media collection |
+| `displayName` | Yes | Human-readable label | Used in generated UI and validation messaging |
+| `description` | No | Help text for the field | Exposed to metadata-driven UI and tooling |
+| `type` | Yes | Semantic field type | Must be `mediaMultiple` |
+| `ormType` | No | Persistence-layer storage hint | Commonly `varchar` for stored media references |
+| `mediaTypes` | No | Allowed media families | Intended to constrain the collection to families such as `image`, `audio`, `video`, and `file` |
+| `mediaMaxSizeKb` | No | Maximum file size in KB | Intended to constrain individual uploads in the collection |
+| `mediaStorageProviderUserKey` | No | Storage-provider selector | Chooses the authored storage provider used for the uploaded assets |
+| `required` | No | Mandatory upload flag | Enforced on create when no files are supplied |
+| `unique` | No | Uniqueness intent | Usually uncommon, but still part of the field contract |
+| `index` | No | Indexing intent | Rare for media collections because querying usually happens through business attrs rather than media slots |
+| `columnName` | No | Physical column override | Overrides the generated local column name |
+| `private` | No | Visibility flag | Signals that the media collection should not be exposed in ordinary read flows |
+| `enableAuditTracking` | No | Audit-tracking flag | Useful when changes to the attachment collection should be tracked |
+| `isSystem` | No | Platform-owned field flag | Distinguishes framework-managed media fields from business-authored fields |
+| `isMarkedForRemoval` | No | Lifecycle flag | Used during metadata evolution and cleanup |
+| `isPrimaryKey` | No | Primary-key flag | Rare for a media collection, but still part of the field contract |
+
+</TabItem>
+<TabItem value="validation" label="Validation">
+
+For `mediaMultiple`, SolidX validates requiredness in the backend CRUD layer.
+
+Two important behaviors to note:
+
+- on create, a required `mediaMultiple` field must receive at least one uploaded file
+- unlike `mediaSingle`, the current backend implementation does not yet apply the same file-type and file-size checks to every uploaded file in the collection
+
+That second behavior is important operationally: `mediaTypes` and `mediaMaxSizeKb` express the intended contract for the field, but collection-level enforcement is not yet as complete as it is for `mediaSingle`.
+
+</TabItem>
+<TabItem value="persistence" label="Persistence">
+
+`mediaMultiple` persists through the media subsystem rather than behaving like an ordinary scalar field.
+
+Each uploaded file is stored using the configured storage provider and then associated back to the business record under the field's media collection slot. In record responses, the collection is typically surfaced through `_media.<fieldName>`.
+
+This makes `mediaMultiple` a natural fit for document bundles, image sets, and attachment-heavy workflows.
+
+</TabItem>
+<TabItem value="filtering-and-querying" label="Filtering & querying">
+
+`mediaMultiple` is usually not used as a direct filter field.
+
+Typical use cases include:
+
+- previewing the first item in the collection in list views
+- opening the full media bundle in a dialog or lightbox-driven experience
+- downloading document-style attachments from the record detail view
+
+In practice, media collections are queried for retrieval and presentation rather than for scalar-style filtering.
+
+</TabItem>
+<TabItem value="platform-flags" label="Platform flags">
+
+Attrs such as `private`, `enableAuditTracking`, `isSystem`, and `isPrimaryKey` are part of the field contract even though they are broader than validation alone. They communicate platform-level intent that other parts of SolidX rely on.
+
+</TabItem>
+<TabItem value="example" label="Example">
+
+```json
+{
+  "name": "payByLinkInvoiceFile",
+  "displayName": "Pay By Link Invoice File",
+  "description": null,
+  "type": "mediaMultiple",
+  "ormType": "varchar",
+  "isSystem": false,
+  "mediaTypes": [
+    "image",
+    "file"
+  ],
+  "mediaMaxSizeKb": 20480,
+  "required": false,
+  "unique": false,
+  "index": false,
+  "private": false,
+  "columnName": null,
+  "mediaStorageProviderUserKey": "default-filesystem"
+}
+```
+
+This is a representative `mediaMultiple` field because it shows the collection-style media contract clearly: multiple attachments, a mixed allowed-media policy, and a storage-provider-backed upload slot.
+
+</TabItem>
+</Tabs>
+
+For rendering, widgets, and layout attrs related to `mediaMultiple`, see [View Metadata](./view-metadata).
+
 ### `computed`
+
+Use `computed` when a field's value should be derived by the platform rather than authored directly by the user.
+
+This field type is appropriate for generated transaction ids, derived external ids, slugs, concatenated business keys, counters, and other values that should be computed consistently from runtime context.
+
+In SolidX, `computed` is a provider-backed field. It does not rely on end-user input, can invoke a named computed-field provider during CRUD flows, and can also be deferred to trigger-driven subscriber flows when trigger configuration is authored.
+
+<Tabs>
+<TabItem value="attribute-reference" label="Attribute reference">
+
+| Attr | Required | Purpose | Notes for `computed` |
+| --- | --- | --- | --- |
+| `name` | Yes | Internal field key | Used as the persisted column key and as the provider target field |
+| `displayName` | Yes | Human-readable label | Used in generated UI and metadata tooling |
+| `description` | No | Help text for the field | Exposed to metadata-driven UI and tooling |
+| `type` | Yes | Semantic field type | Must be `computed` |
+| `ormType` | No | Persistence-layer storage hint | Commonly `varchar`, but should match the authored computed value type |
+| `computedFieldValueType` | Yes | Computed value shape | Core support currently includes `string`, `int`, `decimal`, `boolean`, `date`, and `datetime` |
+| `computedFieldValueProvider` | Yes | Provider name | Identifies the computed-field provider responsible for generating the value |
+| `computedFieldValueProviderCtxt` | No | Provider context | JSON-serialized provider configuration passed into the provider at runtime |
+| `computedFieldTriggerConfig` | No | Trigger-driven execution config | Defines when computation should be delegated to subscriber-style event flows instead of inline CRUD computation |
+| `required` | No | Requiredness flag | Usually `true` from a business perspective, but not treated like ordinary user-input validation |
+| `unique` | No | Uniqueness intent | Common for generated external ids, codes, and slugs |
+| `index` | No | Indexing intent | Useful when the computed value is used for lookup or filtering |
+| `columnName` | No | Physical column override | Overrides the generated local column name |
+| `private` | No | Visibility flag | Signals that the computed field should not be exposed in ordinary read flows |
+| `isUserKey` | No | Human-facing record identifier flag | Common when the computed value serves as a generated business identifier |
+| `enableAuditTracking` | No | Audit-tracking flag | Useful when computed changes should be recorded explicitly |
+| `isSystem` | No | Platform-owned field flag | Distinguishes framework-managed computed fields from business-authored fields |
+| `isMarkedForRemoval` | No | Lifecycle flag | Used during metadata evolution and cleanup |
+| `isPrimaryKey` | No | Primary-key flag | Uncommon, but still part of the field contract |
+
+</TabItem>
+<TabItem value="validation" label="Validation">
+
+For `computed`, SolidX does not apply ordinary end-user field validation.
+
+Two important behaviors to note:
+
+- the backend computed-field CRUD manager skips field-level validation and returns no direct validation errors for submitted input
+- generated forms treat the field as read-only and optional because the value is not expected to be provided by the user
+
+This is by design: correctness comes from provider logic and trigger configuration rather than from normal user-input validation rules.
+
+</TabItem>
+<TabItem value="persistence" label="Persistence">
+
+`computed` persists as an ordinary column value after the platform computes it.
+
+In inline CRUD flows, SolidX parses `computedFieldValueProviderCtxt`, resolves the named provider, asks that provider to compute the field value, and then assigns the result to the DTO before persistence.
+
+There are two cases where inline computation is intentionally skipped:
+
+- partial updates
+- fields that define `computedFieldTriggerConfig`, because those are expected to be handled by trigger-driven subscriber flows instead
+
+</TabItem>
+<TabItem value="filtering-and-querying" label="Filtering & querying">
+
+Once computed, the field behaves like any other persisted scalar of the authored `computedFieldValueType`.
+
+Typical use cases include:
+
+- filtering or searching by generated transaction ids and external ids
+- sorting or reporting on derived numeric or date values
+- exposing stable business keys that are derived automatically rather than entered manually
+
+In practice, `computed` is best understood as a generated persisted field rather than as a transient view-only value.
+
+</TabItem>
+<TabItem value="platform-flags" label="Platform flags">
+
+Attrs such as `private`, `enableAuditTracking`, `isSystem`, `isPrimaryKey`, and `isUserKey` are part of the field contract even though they are broader than validation alone. They communicate platform-level intent that other parts of SolidX rely on.
+
+</TabItem>
+<TabItem value="example" label="Example">
+
+```json
+{
+  "name": "feeTypeUserKey",
+  "displayName": "Fee Type User Key",
+  "description": "Concatenation of fee type and institute name",
+  "type": "computed",
+  "ormType": "varchar",
+  "isSystem": false,
+  "computedFieldValueType": "string",
+  "computedFieldTriggerConfig": [
+    {
+      "modelName": "feeType",
+      "moduleName": "fees-portal",
+      "operations": [
+        "before-insert"
+      ]
+    }
+  ],
+  "computedFieldValueProvider": "ConcatEntityComputedFieldProvider",
+  "computedFieldValueProviderCtxt": "{
+  "fields": [
+    "feeType",
+    "institute.instituteName"
+  ],
+  "separator": "-",
+  "slugify": true
+}",
+  "required": true,
+  "unique": true,
+  "index": false,
+  "private": false,
+  "columnName": null,
+  "isUserKey": true
+}
+```
+
+This is a representative `computed` field because it shows the full provider-backed contract clearly: an authored value type, a named provider, provider context, trigger configuration, and a generated business key outcome.
+
+</TabItem>
+</Tabs>
+
+For rendering, widgets, and layout attrs related to `computed`, see [View Metadata](./view-metadata).
 
 ## See Also
 
-- [View Metadata](./view-metadata.md)
-- [Model Metadata](./model-metadata.md)
+- [View Metadata](./view-metadata)
+- [Model Metadata](./model-metadata)

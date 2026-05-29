@@ -35,7 +35,7 @@ This page is the primary reference for:
 - widget-specific attrs
 - real metadata examples for `form`, `list`, and `tree` rendering
 
-For field semantics, validation intent, persistence behavior, and field-level attrs, see [Field Metadata](./field-metadata.md).
+For field semantics, validation intent, persistence behavior, and field-level attrs, see [Field Metadata](./field-metadata).
 
 ## How To Read This Page
 
@@ -119,8 +119,8 @@ By default, `shortText` renders as a standard text column.
 
 The default list renderer is `DefaultTextListWidget`, which is used automatically when no custom `viewWidget` is set. This default path also respects the list-level `truncateAfter` attr, so it is the main way to control truncation for long textual values in list and tree views.
 
-
-
+<Tabs>
+<TabItem value="list-shorttext-default" label="Default rendering">
 
 | Concern | How it works |
 | --- | --- |
@@ -144,8 +144,8 @@ The default list renderer is `DefaultTextListWidget`, which is used automaticall
 
 </details>
 
-
-
+</TabItem>
+<TabItem value="list-shorttext-alternative" label="Alternative widgets">
 
 | Widget | Use when | Extra attrs |
 | --- | --- | --- |
@@ -153,17 +153,17 @@ The default list renderer is `DefaultTextListWidget`, which is used automaticall
 | `SolidShortTextAvatarWidget` | The column should display an avatar-style badge next to the value | `initialsKey` when the row value is object-shaped |
 | `SolidShortTextFieldImageListWidget` | The stored value is an image URL and the column should render a thumbnail | None |
 
-#### `MaskedShortTextListViewWidget`
+**`MaskedShortTextListViewWidget`**
 
-
-
+<Tabs>
+<TabItem value="list-shorttext-masked-attrs" label="Extra attrs">
 
 | Attr | Purpose |
 | --- | --- |
 | No extra attrs | This widget simply replaces the visible value with a same-length masked string. |
 
-
-
+</TabItem>
+<TabItem value="list-shorttext-masked-example" label="Example">
 
 ```json
 {
@@ -178,45 +178,45 @@ The default list renderer is `DefaultTextListWidget`, which is used automaticall
 }
 ```
 
+</TabItem>
+</Tabs>
 
+**`SolidShortTextAvatarWidget`**
 
-
-#### `SolidShortTextAvatarWidget`
-
-
-
+<Tabs>
+<TabItem value="list-shorttext-avatar-attrs" label="Extra attrs">
 
 | Attr | Purpose |
 | --- | --- |
 | `initialsKey` | When the rendered row value is an object rather than a plain string, this attr tells the widget which nested property should be used to compute the visible label and avatar initials. |
 
-
-
+</TabItem>
+<TabItem value="list-shorttext-avatar-example" label="Example">
 
 Example coming soon..
 
+</TabItem>
+</Tabs>
 
+**`SolidShortTextFieldImageListWidget`**
 
-
-#### `SolidShortTextFieldImageListWidget`
-
-
-
+<Tabs>
+<TabItem value="list-shorttext-image-attrs" label="Extra attrs">
 
 | Attr | Purpose |
 | --- | --- |
 | No extra attrs | This widget treats the field value as an image URL, renders a thumbnail, and opens the image in the built-in lightbox on click. |
 
-
-
+</TabItem>
+<TabItem value="list-shorttext-image-example" label="Example">
 
 Example coming soon..
 
+</TabItem>
+</Tabs>
 
-
-
-
-
+</TabItem>
+</Tabs>
 
 ### Field Rendering: `longText`
 
@@ -224,8 +224,8 @@ In list and tree views, `longText` reuses the standard text-column path.
 
 Unlike form rendering, `longText` does not currently have dedicated list or tree widgets of its own. It behaves like a text column and relies on the same shared truncation and search mechanics as other text-style scalar fields.
 
-
-
+<Tabs>
+<TabItem value="list-longtext-default" label="Default rendering">
 
 | Concern | How it works |
 | --- | --- |
@@ -248,15 +248,15 @@ Unlike form rendering, `longText` does not currently have dedicated list or tree
 
 </details>
 
-
-
+</TabItem>
+<TabItem value="list-longtext-alternative" label="Alternative widgets">
 
 No additional list or tree widgets are currently registered specifically for `longText`.
 
 The supported alternative widgets for `longText` are form-specific and are documented under **Form View > `longText`** below.
 
-
-
+</TabItem>
+</Tabs>
 
 ### Field Rendering: `richText`
 
@@ -768,15 +768,300 @@ No additional core list or tree widgets are currently registered specifically fo
 
 ### Field Rendering: `many-to-one`
 
+In list and tree views, `many-to-one` renders as a single related value.
+
+By default, the list column uses `DefaultRelationManyToOneListWidget`, which displays the related record's user key and opens the related form in a new tab when the cell is interactive.
+
+<Tabs>
+<TabItem value="list-manytoone-default" label="Default rendering">
+
+| Concern | How it works |
+| --- | --- |
+| Default list widget | `DefaultRelationManyToOneListWidget` |
+| Widget selection | Applied automatically when `viewWidget` is not provided |
+| Typical field-node attrs | `name`, `label`, `sortable`, `filterable`, `isSearchable`, `disabled` |
+| Relevant widget-level attrs | `coModelFieldToDisplay` |
+
+<details>
+<summary><strong>Show default example</strong></summary>
+
+```json
+{
+  "type": "field",
+  "attrs": {
+    "name": "institute",
+    "sortable": true,
+    "filterable": true,
+    "isSearchable": true
+  }
+}
+```
+
+</details>
+
+</TabItem>
+<TabItem value="list-manytoone-alternative" label="Alternative widgets">
+
+| Widget | Use when | Extra attrs |
+| --- | --- | --- |
+| `SolidManyToOneRelationAvatarListWidget` | The related value should render as an avatar badge instead of as a text link | None |
+
+**`SolidManyToOneRelationAvatarListWidget`**
+
+<Tabs>
+<TabItem value="list-manytoone-avatar-attrs" label="Extra attrs">
+
+| Attr | Purpose |
+| --- | --- |
+| No extra attrs | This widget derives the avatar label from the related model's user key field and renders an avatar badge instead of the default text link. |
+
+</TabItem>
+<TabItem value="list-manytoone-avatar-example" label="Example">
+
+```json
+{
+  "type": "field",
+  "attrs": {
+    "viewWidget": "SolidManyToOneRelationAvatarListWidget",
+    "label": "Client",
+    "name": "client",
+    "isSearchable": true,
+    "searchField": "client.nameOfBusiness",
+    "searchMatchMode": "$contains"
+  }
+}
+```
+
+</TabItem>
+</Tabs>
+
+</TabItem>
+</Tabs>
+
 ### Field Rendering: `one-to-many`
+
+In list and tree views, `one-to-many` renders as a compact summary of the related collection.
+
+By default, the list column uses `DefaultRelationOneToManyListWidget`, which shows the first related label and a `+N` indicator when additional related records are present.
+
+<Tabs>
+<TabItem value="list-onetomany-default" label="Default rendering">
+
+| Concern | How it works |
+| --- | --- |
+| Default list widget | `DefaultRelationOneToManyListWidget` |
+| Widget selection | Applied automatically when `viewWidget` is not provided |
+| Typical field-node attrs | `name`, `label`, `sortable`, `filterable`, `isSearchable` |
+| Relevant widget-level attrs | `coModelFieldToDisplay` |
+
+<details>
+<summary><strong>Show default example</strong></summary>
+
+```json
+{
+  "type": "field",
+  "attrs": {
+    "name": "questionPossibleAnswersMaster",
+    "displayName": "Possible Response"
+  }
+}
+```
+
+</details>
+
+</TabItem>
+<TabItem value="list-onetomany-alternative" label="Alternative widgets">
+
+No additional core list or tree widgets are currently registered specifically for `one-to-many`.
+
+</TabItem>
+</Tabs>
 
 ### Field Rendering: `many-to-many`
 
+In list and tree views, `many-to-many` renders as a compact summary of the related membership set.
+
+By default, the list column uses `DefaultRelationManyToManyListWidget`, which shows the first related label and a `+N` indicator when additional related records are present.
+
+<Tabs>
+<TabItem value="list-manytomany-default" label="Default rendering">
+
+| Concern | How it works |
+| --- | --- |
+| Default list widget | `DefaultRelationManyToManyListWidget` |
+| Widget selection | Applied automatically when `viewWidget` is not provided |
+| Typical field-node attrs | `name`, `label`, `sortable`, `filterable`, `isSearchable` |
+| Relevant widget-level attrs | `coModelFieldToDisplay` |
+
+<details>
+<summary><strong>Show default example</strong></summary>
+
+```json
+{
+  "type": "field",
+  "attrs": {
+    "name": "domains",
+    "isSearchable": true,
+    "searchField": "domains.name",
+    "searchMatchMode": "$contains"
+  }
+}
+```
+
+</details>
+
+</TabItem>
+<TabItem value="list-manytomany-alternative" label="Alternative widgets">
+
+| Widget | Use when | Extra attrs |
+| --- | --- | --- |
+| `SolidManyToManyRelationAvatarListWidget` | The relation membership should render as avatar badges instead of as plain text | None |
+
+**`SolidManyToManyRelationAvatarListWidget`**
+
+<Tabs>
+<TabItem value="list-manytomany-avatar-attrs" label="Extra attrs">
+
+| Attr | Purpose |
+| --- | --- |
+| No extra attrs | This widget derives avatar labels from the related model's user key field and renders the first related record as an avatar with a `+N` count for the rest. |
+
+</TabItem>
+<TabItem value="list-manytomany-avatar-example" label="Example">
+
+```json
+{
+  "type": "field",
+  "attrs": {
+    "name": "respondentUser",
+    "viewWidget": "SolidManyToManyRelationAvatarListWidget",
+    "isSearchable": true
+  }
+}
+```
+
+</TabItem>
+</Tabs>
+
+</TabItem>
+</Tabs>
+
 ### Field Rendering: `mediaSingle`
+
+In list and tree views, `mediaSingle` renders as a thumbnail or file-style preview for the stored asset.
+
+By default, the list column uses `DefaultMediaSingleListWidget`, which shows an image/video/audio preview when possible and falls back to a file icon or download behavior for document-style assets.
+
+<Tabs>
+<TabItem value="list-mediasingle-default" label="Default rendering">
+
+| Concern | How it works |
+| --- | --- |
+| Default list widget | `DefaultMediaSingleListWidget` |
+| Widget selection | Applied automatically when `viewWidget` is not provided |
+| Typical field-node attrs | `name`, `label`, `sortable`, `filterable`, `isSearchable` |
+| Relevant field attrs | `mediaTypes`, `mediaMaxSizeKb`, `mediaStorageProviderUserKey` |
+
+<details>
+<summary><strong>Show default example</strong></summary>
+
+```json
+{
+  "type": "field",
+  "attrs": {
+    "name": "logo",
+    "sortable": true,
+    "filterable": true,
+    "isSearchable": true
+  }
+}
+```
+
+</details>
+
+</TabItem>
+<TabItem value="list-mediasingle-alternative" label="Alternative widgets">
+
+No additional core list or tree widgets are currently registered specifically for `mediaSingle`.
+
+</TabItem>
+</Tabs>
 
 ### Field Rendering: `mediaMultiple`
 
+In list and tree views, `mediaMultiple` renders as a preview of the first asset plus a count for the remaining items.
+
+By default, the list column uses `DefaultMediaMultipleListWidget`, which can open media in the lightbox, download document-style files, and show the full collection on demand.
+
+<Tabs>
+<TabItem value="list-mediamultiple-default" label="Default rendering">
+
+| Concern | How it works |
+| --- | --- |
+| Default list widget | `DefaultMediaMultipleListWidget` |
+| Widget selection | Applied automatically when `viewWidget` is not provided |
+| Typical field-node attrs | `name`, `label`, `sortable`, `filterable`, `isSearchable` |
+| Relevant field attrs | `mediaTypes`, `mediaMaxSizeKb`, `mediaStorageProviderUserKey` |
+
+<details>
+<summary><strong>Show default example</strong></summary>
+
+```json
+{
+  "type": "field",
+  "attrs": {
+    "name": "payByLinkInvoiceFile"
+  }
+}
+```
+
+</details>
+
+</TabItem>
+<TabItem value="list-mediamultiple-alternative" label="Alternative widgets">
+
+No additional core list or tree widgets are currently registered specifically for `mediaMultiple`.
+
+</TabItem>
+</Tabs>
+
 ### Field Rendering: `computed`
+
+In list and tree views, `computed` does not use its own dedicated list widget family.
+
+Instead, the list column delegates to the existing scalar renderers based on `computedFieldValueType`, such as text, numeric, boolean, date, or datetime columns.
+
+<Tabs>
+<TabItem value="list-computed-default" label="Default rendering">
+
+| Concern | How it works |
+| --- | --- |
+| Default list widget | Delegated from `SolidComputedColumn` based on `computedFieldValueType` |
+| Widget selection | Text-like values use the short-text column path; numeric values use the numeric column path; date-like and boolean values use their matching scalar columns |
+| Typical field-node attrs | `name`, `label`, `sortable`, `filterable`, `isSearchable` |
+| Relevant field attrs | `computedFieldValueType` |
+
+<details>
+<summary><strong>Show default example</strong></summary>
+
+```json
+{
+  "type": "field",
+  "attrs": {
+    "name": "transactionId"
+  }
+}
+```
+
+</details>
+
+</TabItem>
+<TabItem value="list-computed-alternative" label="Alternative widgets">
+
+No additional core list or tree widgets are currently registered specifically for `computed`.
+
+</TabItem>
+</Tabs>
 
 ## Tree View
 
@@ -827,8 +1112,8 @@ By default, `shortText` renders as a standard single-line text input in edit mod
 
 The default edit renderer is `DefaultShortTextFormEditWidget`, and the default view renderer is `DefaultShortTextFormViewWidget`.
 
-
-
+<Tabs>
+<TabItem value="form-shorttext-default" label="Default rendering">
 
 | Concern | How it works |
 | --- | --- |
@@ -852,8 +1137,8 @@ The default edit renderer is `DefaultShortTextFormEditWidget`, and the default v
 
 </details>
 
-
-
+</TabItem>
+<TabItem value="form-shorttext-alternative" label="Alternative widgets">
 
 | Widget | Use when | Extra attrs |
 | --- | --- | --- |
@@ -861,17 +1146,17 @@ The default edit renderer is `DefaultShortTextFormEditWidget`, and the default v
 | `MaskedShortTextFormViewWidget` | The value should stay masked in view mode | None |
 | `SolidShortTextFieldAvatarWidget` | The value should be displayed in view mode with an avatar-style badge | None |
 
-#### `MaskedShortTextFormEditWidget`
+**`MaskedShortTextFormEditWidget`**
 
-
-
+<Tabs>
+<TabItem value="form-shorttext-masked-edit-attrs" label="Extra attrs">
 
 | Attr | Purpose |
 | --- | --- |
 | `autoComplete` | Passed through to the underlying password-style input so browser autocomplete can be enabled, disabled, or tuned for secret-like values. |
 
-
-
+</TabItem>
+<TabItem value="form-shorttext-masked-edit-example" label="Example">
 
 ```json
 {
@@ -884,20 +1169,20 @@ The default edit renderer is `DefaultShortTextFormEditWidget`, and the default v
 }
 ```
 
+</TabItem>
+</Tabs>
 
+**`MaskedShortTextFormViewWidget`**
 
-
-#### `MaskedShortTextFormViewWidget`
-
-
-
+<Tabs>
+<TabItem value="form-shorttext-masked-view-attrs" label="Extra attrs">
 
 | Attr | Purpose |
 | --- | --- |
 | No extra attrs | This widget renders the same field label as the default view widget, but masks the visible value instead of showing it directly. |
 
-
-
+</TabItem>
+<TabItem value="form-shorttext-masked-view-example" label="Example">
 
 ```json
 {
@@ -910,20 +1195,20 @@ The default edit renderer is `DefaultShortTextFormEditWidget`, and the default v
 }
 ```
 
+</TabItem>
+</Tabs>
 
+**`SolidShortTextFieldAvatarWidget`**
 
-
-#### `SolidShortTextFieldAvatarWidget`
-
-
-
+<Tabs>
+<TabItem value="form-shorttext-avatar-attrs" label="Extra attrs">
 
 | Attr | Purpose |
 | --- | --- |
 | No extra attrs | This widget derives avatar initials directly from the field value and renders the value with an avatar-style badge in view mode. |
 
-
-
+</TabItem>
+<TabItem value="form-shorttext-avatar-example" label="Example">
 
 ```json
 {
@@ -936,11 +1221,11 @@ The default edit renderer is `DefaultShortTextFormEditWidget`, and the default v
 }
 ```
 
+</TabItem>
+</Tabs>
 
-
-
-
-
+</TabItem>
+</Tabs>
 
 ### Field Rendering: `longText`
 
@@ -950,8 +1235,8 @@ The default edit renderer is `DefaultLongTextFormEditWidget`.
 
 `longText` supports richer form-side rendering than list-side rendering. Depending on the chosen widget, it can be edited as plain multiline text, as a structured JSON editor, or as a code editor.
 
-
-
+<Tabs>
+<TabItem value="form-longtext-default" label="Default rendering">
 
 | Concern | How it works |
 | --- | --- |
@@ -975,8 +1260,8 @@ The default edit renderer is `DefaultLongTextFormEditWidget`.
 
 </details>
 
-
-
+</TabItem>
+<TabItem value="form-longtext-alternative" label="Alternative widgets">
 
 | Widget | Use when | Extra attrs |
 | --- | --- | --- |
@@ -984,18 +1269,18 @@ The default edit renderer is `DefaultLongTextFormEditWidget`.
 | `DynamicJsonEditorFormViewWidget` | The value is stored as text but should render as structured read-only JSON content | `jsonSchema` |
 | `CodeEditorFormEditWidget` | The value should be edited in a code-oriented editor rather than a plain textarea | `editorLanguage`, `height`, `fontSize` |
 
-#### `DynamicJsonEditorFormEditWidget`
+**`DynamicJsonEditorFormEditWidget`**
 
-
-
+<Tabs>
+<TabItem value="form-longtext-json-edit-attrs" label="Extra attrs">
 
 | Attr | Purpose |
 | --- | --- |
 | `jsonSchema` | Required. Defines the structure that the widget uses to render each JSON entry and choose the correct embedded input controls. |
 | `jsonSchemaShowPreview` | Optional. When `true`, shows a live JSON preview beneath the structured editor. |
 
-
-
+</TabItem>
+<TabItem value="form-longtext-json-edit-example" label="Example">
 
 ```json
 {
@@ -1032,20 +1317,20 @@ The default edit renderer is `DefaultLongTextFormEditWidget`.
 }
 ```
 
+</TabItem>
+</Tabs>
 
+**`DynamicJsonEditorFormViewWidget`**
 
-
-#### `DynamicJsonEditorFormViewWidget`
-
-
-
+<Tabs>
+<TabItem value="form-longtext-json-view-attrs" label="Extra attrs">
 
 | Attr | Purpose |
 | --- | --- |
 | `jsonSchema` | Required. Defines how the widget should interpret and render the stored JSON value in structured read-only mode. |
 
-
-
+</TabItem>
+<TabItem value="form-longtext-json-view-example" label="Example">
 
 ```json
 {
@@ -1082,13 +1367,13 @@ The default edit renderer is `DefaultLongTextFormEditWidget`.
 }
 ```
 
+</TabItem>
+</Tabs>
 
+**`CodeEditorFormEditWidget`**
 
-
-#### `CodeEditorFormEditWidget`
-
-
-
+<Tabs>
+<TabItem value="form-longtext-code-edit-attrs" label="Extra attrs">
 
 | Attr | Purpose |
 | --- | --- |
@@ -1096,8 +1381,8 @@ The default edit renderer is `DefaultLongTextFormEditWidget`.
 | `height` | Controls the visible editor height. Defaults to `200px`. |
 | `fontSize` | Controls the editor font size. Defaults to `14px`. |
 
-
-
+</TabItem>
+<TabItem value="form-longtext-code-edit-example" label="Example">
 
 ```json
 {
@@ -1110,11 +1395,11 @@ The default edit renderer is `DefaultLongTextFormEditWidget`.
 }
 ```
 
+</TabItem>
+</Tabs>
 
-
-
-
-
+</TabItem>
+</Tabs>
 
 ### Field Rendering: `richText`
 
@@ -1233,7 +1518,7 @@ The default edit path uses `DefaultIntegerFormEditWidget`. The default view path
 | --- | --- | --- |
 | `SolidIntegerSliderStyleFormEditWidget` | The integer should be chosen from a bounded range instead of typed manually | No widget-specific attrs; the widget relies on the field metadata `min` and `max` values |
 
-#### `SolidIntegerSliderStyleFormEditWidget`
+**`SolidIntegerSliderStyleFormEditWidget`**
 
 
 
@@ -1381,7 +1666,7 @@ The default edit path resolves through the `booleanCheckbox` alias to `SolidBool
 | `DefaultBooleanFormEditWidget` | The field should render as an explicit yes-or-no segmented choice instead of as a checkbox | `trueLabel`, `falseLabel` |
 | `SolidBooleanSwitchStyleFormEditWidget` | The field should render as a switch-style control | None |
 
-#### `DefaultBooleanFormEditWidget`
+**`DefaultBooleanFormEditWidget`**
 
 
 
@@ -1409,7 +1694,7 @@ The default edit path resolves through the `booleanCheckbox` alias to `SolidBool
 
 
 
-#### `SolidBooleanSwitchStyleFormEditWidget`
+**`SolidBooleanSwitchStyleFormEditWidget`**
 
 
 
@@ -1678,7 +1963,7 @@ The default edit path uses `DefaultSelectionStaticAutocompleteFormEditWidget`. T
 | `SolidSelectionStaticRadioFormEditWidget` | The option set is small and should be shown as explicit radio choices | None |
 | `SolidSelectionStaticSelectButtonFormEditWidget` | The field should render as segmented selection buttons instead of an autocomplete | None |
 
-#### `SolidSelectionStaticRadioFormEditWidget`
+**`SolidSelectionStaticRadioFormEditWidget`**
 
 
 
@@ -1697,7 +1982,7 @@ Example coming soon..
 
 
 
-#### `SolidSelectionStaticSelectButtonFormEditWidget`
+**`SolidSelectionStaticSelectButtonFormEditWidget`**
 
 
 
@@ -1770,15 +2055,410 @@ No additional core form widgets are currently registered specifically for `selec
 
 ### Field Rendering: `many-to-one`
 
+By default, `many-to-one` renders as an autocomplete-based relation picker in edit mode and as a plain related label in view mode.
+
+The default edit path uses `DefaultRelationManyToOneFormEditWidget`. The default view path uses `DefaultRelationManyToOneFormViewWidget`.
+
+<Tabs>
+<TabItem value="form-manytoone-default" label="Default rendering">
+
+| Concern | How it works |
+| --- | --- |
+| Default edit widget | `DefaultRelationManyToOneFormEditWidget` |
+| Default view widget | `DefaultRelationManyToOneFormViewWidget` |
+| Widget selection | Applied automatically when `editWidget` or `viewWidget` is not provided |
+| Typical field-node attrs | `name`, `label`, `description`, `showLabel`, `disabled`, `readonly` |
+| Relevant widget-level attrs | `coModelFieldToDisplay`, `autocompleteMatchMode`, `whereClause`, `inlineCreate`, `inlineCreateLayout`, `inlineCreateAutoSave` |
+
+<details>
+<summary><strong>Show default example</strong></summary>
+
+```json
+{
+  "type": "field",
+  "attrs": {
+    "name": "institute"
+  }
+}
+```
+
+</details>
+
+</TabItem>
+<TabItem value="form-manytoone-alternative" label="Alternative widgets">
+
+| Widget | Use when | Extra attrs |
+| --- | --- | --- |
+| `PseudoRelationManyToOneFormWidget` | The field should behave like a custom cross-model lookup rather than a standard metadata relation | `parentModelName`, `childModelName`, `parentFieldName`, `childFieldName`, `parentModuleName`, `childModuleName`, `parentFieldLabels`, `parentSearchFields`, `whereClause`, `inlineCreateLayout`, `inlineCreateAutoSave` |
+| `SolidRelationFieldAvatarFormWidget` | The related value should render as avatar badges in view mode | None |
+
+**`PseudoRelationManyToOneFormWidget`**
+
+<Tabs>
+<TabItem value="form-manytoone-pseudo-attrs" label="Extra attrs">
+
+| Attr | Purpose |
+| --- | --- |
+| `parentModelName` | Identifies the lookup model used to drive the pseudo relation search experience. |
+| `childModelName` | Identifies the model being edited from the current form context. |
+| `parentFieldName` | The field on the lookup model that supplies the stored or displayed value. |
+| `childFieldName` | The target field on the child model that should receive the selected value. |
+| `parentModuleName` | Module name for the lookup model. |
+| `childModuleName` | Module name for the child model. |
+| `parentFieldLabels` | Optional list of lookup-model fields to combine into the visible autocomplete label. |
+| `parentSearchFields` | Optional list of lookup-model fields to search across instead of only the default parent field. |
+| `whereClause` | Optional JSON-templated filter applied while resolving autocomplete candidates. |
+| `inlineCreateLayout` | Optional embedded create layout used by the inline create dialog. |
+| `inlineCreateAutoSave` | Controls whether the inline create dialog auto-saves the created relation record. |
+
+</TabItem>
+<TabItem value="form-manytoone-pseudo-example" label="Example">
+
+```json
+{
+  "type": "field",
+  "attrs": {
+    "name": "assignedTo",
+    "label": "Assigned To",
+    "viewWidget": "PseudoRelationManyToOneFormWidget",
+    "editWidget": "PseudoRelationManyToOneFormWidget",
+    "parentModelName": "employee",
+    "childModelName": "frmsLead",
+    "parentFieldName": "employeeName",
+    "childFieldName": "assignedTo",
+    "childModuleName": "frms",
+    "parentModuleName": "peoples",
+    "parentFieldLabels": [
+      "employeeId",
+      "employeeName"
+    ]
+  }
+}
+```
+
+</TabItem>
+</Tabs>
+
+**`SolidRelationFieldAvatarFormWidget`**
+
+<Tabs>
+<TabItem value="form-manytoone-avatar-attrs" label="Extra attrs">
+
+| Attr | Purpose |
+| --- | --- |
+| No extra attrs | This widget derives avatar labels from the related model's user key field and renders the relation in a badge-style view mode. |
+
+</TabItem>
+<TabItem value="form-manytoone-avatar-example" label="Example">
+
+```json
+{
+  "type": "field",
+  "attrs": {
+    "label": "Organisation",
+    "name": "client",
+    "viewWidget": "SolidRelationFieldAvatarFormWidget",
+    "visible": false
+  }
+}
+```
+
+</TabItem>
+</Tabs>
+
+</TabItem>
+</Tabs>
+
 ### Field Rendering: `one-to-many`
+
+By default, `one-to-many` renders as an embedded child-collection manager in both edit and view modes.
+
+The default edit path uses `DefaultRelationOneToManyFormEditWidget`. The default view path uses `DefaultRelationOneToManyFormViewWidget`.
+
+<Tabs>
+<TabItem value="form-onetomany-default" label="Default rendering">
+
+| Concern | How it works |
+| --- | --- |
+| Default edit widget | `DefaultRelationOneToManyFormEditWidget` |
+| Default view widget | `DefaultRelationOneToManyFormViewWidget` |
+| Widget selection | Applied automatically when `editWidget` or `viewWidget` is not provided |
+| Typical field-node attrs | `name`, `label`, `description`, `showLabel`, `disabled`, `readonly` |
+| Relevant widget-level attrs | `whereClause`, `inlineListLayout`, `inlineCreateLayout`, `inlineCreateAutoSave` |
+
+<details>
+<summary><strong>Show default example</strong></summary>
+
+```json
+{
+  "type": "field",
+  "attrs": {
+    "name": "questionPossibleAnswersMaster"
+  }
+}
+```
+
+</details>
+
+</TabItem>
+<TabItem value="form-onetomany-alternative" label="Alternative widgets">
+
+| Widget | Use when | Extra attrs |
+| --- | --- | --- |
+| `PseudoRelationOneToManyFormWidget` | The collection should be managed through a custom embedded list/create flow rather than through a standard metadata relation field | `parentModelName`, `childModelName`, `parentFieldName`, `childFieldName`, `parentModuleName`, `childModuleName`, `whereClause`, `inlineListLayout`, `inlineCreateLayout`, `inlineCreateAutoSave` |
+
+**`PseudoRelationOneToManyFormWidget`**
+
+<Tabs>
+<TabItem value="form-onetomany-pseudo-attrs" label="Extra attrs">
+
+| Attr | Purpose |
+| --- | --- |
+| `parentModelName` | Identifies the parent model whose form is hosting the pseudo collection. |
+| `childModelName` | Identifies the related child model rendered in the embedded list. |
+| `parentFieldName` | Parent-side field whose value should be used to scope the child collection. |
+| `childFieldName` | Child-side field used to bind each child record back to the parent record. |
+| `parentModuleName` | Module name for the parent model. |
+| `childModuleName` | Module name for the child model. |
+| `whereClause` | Optional JSON filter merged into the embedded child list query. |
+| `inlineListLayout` | Optional custom list layout used when rendering the embedded child collection. |
+| `inlineCreateLayout` | Optional custom form layout used when creating or editing child records inline. |
+| `inlineCreateAutoSave` | Controls whether inline child forms save automatically. |
+
+</TabItem>
+<TabItem value="form-onetomany-pseudo-example" label="Example">
+
+```json
+{
+  "type": "custom",
+  "attrs": {
+    "name": "employeeDetails",
+    "widget": "PseudoRelationOneToManyFormWidget",
+    "parentModelName": "employee",
+    "childModelName": "employeeDetail",
+    "parentFieldName": "employeeId",
+    "childFieldName": "employeeId",
+    "inlineCreate": "false",
+    "childModuleName": "peoples",
+    "parentModuleName": "peoples"
+  }
+}
+```
+
+</TabItem>
+</Tabs>
+
+</TabItem>
+</Tabs>
 
 ### Field Rendering: `many-to-many`
 
+By default, `many-to-many` renders as a relation picker in edit mode and as an embedded list-style relation browser in view mode.
+
+The default edit path uses `DefaultRelationManyToManyAutoCompleteFormEditWidget`. The default view path uses `DefaultRelationManyToManyListFormEditWidget`.
+
+<Tabs>
+<TabItem value="form-manytomany-default" label="Default rendering">
+
+| Concern | How it works |
+| --- | --- |
+| Default edit widget | `DefaultRelationManyToManyAutoCompleteFormEditWidget` |
+| Default view widget | `DefaultRelationManyToManyListFormEditWidget` |
+| Widget selection | Applied automatically when `editWidget` or `viewWidget` is not provided |
+| Typical field-node attrs | `name`, `label`, `description`, `showLabel`, `disabled`, `readonly` |
+| Relevant widget-level attrs | `autocompleteMatchMode`, `whereClause`, `inlineCreate`, `inlineListLayout`, `inlineCreateLayout`, `inlineCreateAutoSave` |
+
+<details>
+<summary><strong>Show default example</strong></summary>
+
+```json
+{
+  "type": "field",
+  "attrs": {
+    "name": "domains"
+  }
+}
+```
+
+</details>
+
+</TabItem>
+<TabItem value="form-manytomany-alternative" label="Alternative widgets">
+
+| Widget | Use when | Extra attrs |
+| --- | --- | --- |
+| `DefaultRelationManyToManyCheckBoxFormEditWidget` | The full option set is small enough to render comfortably as a checkbox matrix | `whereClause`, `inlineCreate` |
+| `DefaultRelationManyToManyListFormEditWidget` | The relation should be managed through an embedded list with explicit link, unlink, create, and edit actions | `whereClause`, `inlineListLayout`, `inlineCreateLayout`, `inlineCreateAutoSave` |
+
+**`DefaultRelationManyToManyCheckBoxFormEditWidget`**
+
+<Tabs>
+<TabItem value="form-manytomany-checkbox-attrs" label="Extra attrs">
+
+| Attr | Purpose |
+| --- | --- |
+| `whereClause` | Optional JSON-templated filter used when loading the full checkbox option set. |
+| `inlineCreate` | When enabled, shows the inline create affordance for creating new related records directly from the widget. |
+
+</TabItem>
+<TabItem value="form-manytomany-checkbox-example" label="Example">
+
+```json
+{
+  "type": "field",
+  "attrs": {
+    "name": "users",
+    "editWidget": "DefaultRelationManyToManyCheckBoxFormEditWidget",
+    "showLabel": false
+  }
+}
+```
+
+</TabItem>
+</Tabs>
+
+**`DefaultRelationManyToManyListFormEditWidget`**
+
+<Tabs>
+<TabItem value="form-manytomany-list-attrs" label="Extra attrs">
+
+| Attr | Purpose |
+| --- | --- |
+| `whereClause` | Optional JSON filter merged into the embedded relation list query. |
+| `inlineListLayout` | Optional custom list layout used for the embedded relation list. |
+| `inlineCreateLayout` | Optional custom form layout used when creating or editing related records inline. |
+| `inlineCreateAutoSave` | Controls whether inline create/edit dialogs auto-save related records. |
+
+</TabItem>
+<TabItem value="form-manytomany-list-example" label="Example">
+
+Example coming soon..
+
+</TabItem>
+</Tabs>
+
+</TabItem>
+</Tabs>
+
 ### Field Rendering: `mediaSingle`
+
+By default, `mediaSingle` renders as a single-file upload and preview experience in edit mode and as a preview/download surface in view mode.
+
+The default edit path uses `DefaultMediaSingleFormEditWidget`. The default view path uses `DefaultMediaSingleFormViewWidget`.
+
+<Tabs>
+<TabItem value="form-mediasingle-default" label="Default rendering">
+
+| Concern | How it works |
+| --- | --- |
+| Default edit widget | `DefaultMediaSingleFormEditWidget` |
+| Default view widget | `DefaultMediaSingleFormViewWidget` |
+| Widget selection | Applied automatically when `editWidget` or `viewWidget` is not provided |
+| Typical field-node attrs | `name`, `label`, `description`, `showLabel`, `disabled`, `readonly` |
+| Relevant field attrs | `mediaTypes`, `mediaMaxSizeKb`, `mediaStorageProviderUserKey` |
+
+<details>
+<summary><strong>Show default example</strong></summary>
+
+```json
+{
+  "type": "field",
+  "attrs": {
+    "name": "logo",
+    "disabled": false,
+    "showLabel": false
+  }
+}
+```
+
+</details>
+
+</TabItem>
+<TabItem value="form-mediasingle-alternative" label="Alternative widgets">
+
+No additional core form widgets are currently registered specifically for `mediaSingle`.
+
+</TabItem>
+</Tabs>
 
 ### Field Rendering: `mediaMultiple`
 
+By default, `mediaMultiple` renders as a multi-file upload and preview experience in edit mode and as a gallery-style preview/download surface in view mode.
+
+The default edit path uses `DefaultMediaMultipleFormEditWidget`. The default view path uses `DefaultMediaMultipleFormViewWidget`.
+
+<Tabs>
+<TabItem value="form-mediamultiple-default" label="Default rendering">
+
+| Concern | How it works |
+| --- | --- |
+| Default edit widget | `DefaultMediaMultipleFormEditWidget` |
+| Default view widget | `DefaultMediaMultipleFormViewWidget` |
+| Widget selection | Applied automatically when `editWidget` or `viewWidget` is not provided |
+| Typical field-node attrs | `name`, `label`, `description`, `showLabel`, `disabled`, `readonly` |
+| Relevant field attrs | `mediaTypes`, `mediaMaxSizeKb`, `mediaStorageProviderUserKey` |
+
+<details>
+<summary><strong>Show default example</strong></summary>
+
+```json
+{
+  "type": "field",
+  "attrs": {
+    "name": "payByLinkInvoiceFile"
+  }
+}
+```
+
+</details>
+
+</TabItem>
+<TabItem value="form-mediamultiple-alternative" label="Alternative widgets">
+
+No additional core form widgets are currently registered specifically for `mediaMultiple`.
+
+</TabItem>
+</Tabs>
+
 ### Field Rendering: `computed`
+
+By default, `computed` renders as a read-only field and is hidden entirely while a new record is still being created.
+
+The default edit and view path both use `DefaultComputedFormWidget`.
+
+<Tabs>
+<TabItem value="form-computed-default" label="Default rendering">
+
+| Concern | How it works |
+| --- | --- |
+| Default edit widget | `DefaultComputedFormWidget` |
+| Default view widget | `DefaultComputedFormWidget` |
+| Widget selection | Applied automatically when `editWidget` or `viewWidget` is not provided |
+| Typical field-node attrs | `name`, `label`, `description`, `showLabel` |
+| Relevant field attrs | `computedFieldValueType`, `computedFieldValueProvider`, `computedFieldTriggerConfig` |
+
+<details>
+<summary><strong>Show default example</strong></summary>
+
+```json
+{
+  "type": "field",
+  "attrs": {
+    "name": "transactionId",
+    "readonly": true
+  }
+}
+```
+
+</details>
+
+</TabItem>
+<TabItem value="form-computed-alternative" label="Alternative widgets">
+
+No additional core form widgets are currently registered specifically for `computed`.
+
+</TabItem>
+</Tabs>
 
 ## Best Practices
 
@@ -1808,5 +2488,5 @@ They remain important view families, but they do not currently need the same per
 
 ## See Also
 
-- [Field Metadata](./field-metadata.md)
-- [Model Metadata](./model-metadata.md)
+- [Field Metadata](./field-metadata)
+- [Model Metadata](./model-metadata)
