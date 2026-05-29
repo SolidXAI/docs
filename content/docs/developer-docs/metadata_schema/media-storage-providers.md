@@ -1,5 +1,6 @@
 ---
-title: Media Storage Providers Metadata
+title: Storage Providers
+icon: "hard-drive"
 description: Metadata schema for defining media storage providers in SolidX applications.
 summary: This document explains media storage provider metadata in SolidX, which supports multiple storage options for media files including local filesystem and AWS S3. The metadata includes provider name and type attributes. Default providers (default-filesystem and default-aws-s3) are automatically seeded and don't require explicit JSON configuration. For AWS S3, sensitive credentials (access key, secret key) must be provided via environment variables rather than in JSON for security. The document references the admin documentation for conceptual understanding and provides configuration examples for different storage provider types.
 json_pointer: "/mediaStorageProviders"
@@ -11,6 +12,10 @@ items_attributes_doc: "#media-storage-providers-metadata-attributes"
 solidx_concerns: []
 ---
 
+
+
+
+# Media Storage
 > **Where it lives**  
 > **JSON Pointer:** `/mediaStorageProviders`  
 > **JSONPath:** `$.mediaStorageProviders`  
@@ -40,7 +45,9 @@ For a conceptual overview of media storage providers in SolidX, refer to the [St
 
 ```
 
+
 For the media storage provider `default-aws-s3`, you need to provide the following environment variables in your `.env` file or deployment environment:
+<br/>
 
 ```bash
 S3_AWS_ACCESS_KEY=<YOUR_ACCESS_KEY>    # Only in env, not JSON (for security)
@@ -49,7 +56,10 @@ S3_AWS_REGION_NAME=<YOUR_AWS_REGION>   # Can also be specified in JSON
 S3_BUCKET_NAME=<YOUR_BUCKET_NAME>      # Can also be specified in JSON
 ```
 
+
+
 ## Media Storage Providers Metadata Attributes
+
 
 ### `name` *(string, required, unique)*
 Name of the media storage provider (column/property).

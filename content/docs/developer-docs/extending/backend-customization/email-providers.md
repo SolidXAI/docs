@@ -1,10 +1,13 @@
 ---
 title: Email Providers
+icon: "mail"
 description: Learn how to create and configure custom email providers in SolidX.
 summary: Guide to creating custom email providers beyond the built-in SMTP provider. Covers implementing the `IMail` interface with `@MailProvider()` decorator, using `EmailTemplateService` for templates, `PublisherFactory` for background job queuing, methods for synchronous/asynchronous sending with and without templates, handling attachments, API-based service integration (e.g., third-party email APIs), and proper error handling for email delivery.
 keywords: [backend, email providers, customization]
 solidx_concerns: [new_email_provider]
 ---
+
+# 📧 Email Providers
 
 ## 🧩 Overview
 
@@ -12,6 +15,8 @@ SolidX provides an `SMTP` email provider out of the box, which supports sending 
 However, there may be cases where you need to create your own provider — for example, to send emails using a **third‑party API service**.
 
 To make this easy, SolidX offers abstractions that help you implement your own provider while keeping the code **clean, testable, and decoupled**.
+
+
 
 ## ⚙️ Steps to Create a Custom Email Provider
 
@@ -39,7 +44,7 @@ import {
   MailProvider, 
   PublisherFactory, 
   QueueMessage 
-} from "@solidstarters/solid-core";
+} from "@solidxai/core";
 import * as Handlebars from "handlebars";
 
 @Injectable()
@@ -138,6 +143,8 @@ export class CustomNotifyApiEmailService implements IMail {
 }
 ```
 
+
+
 ### 2. Register Your Custom Provider
 
 ```ts title="app.module.ts"
@@ -150,6 +157,8 @@ import { CustomNotifyApiEmailService } from "./custom-notify-api-email.service";
 export class AppModule {}
 ```
 
+
+
 ### 3. Use the `MailFactory` to Send Emails
 
 You can now use `MailFactory` to send emails either **via templates** or **manually**.
@@ -157,7 +166,7 @@ You can now use `MailFactory` to send emails either **via templates** or **manua
 #### ✅ Example: Using an Email Template
 
 ```ts
-import { MailFactory } from "@solidstarters/solid-core";   
+import { MailFactory } from "@solidxai/core";   
 ...
 constructor(private readonly mailFactory: MailFactory) {}
 ...
@@ -180,7 +189,7 @@ await mailService.sendEmailUsingTemplate(
 #### ✉️ Example: Sending a Manual Email (Without Template)
 
 ```ts
-import { MailFactory } from "@solidstarters/solid-core";   
+import { MailFactory } from "@solidxai/core";   
 ...
 constructor(private readonly mailFactory: MailFactory) {}
 ...
@@ -192,6 +201,8 @@ await mailService.sendEmail(
   false // send synchronously
 );
 ```
+
+
 
 ## 🧠 Interface Definition
 
@@ -231,6 +242,8 @@ export interface IMail<TResponse = unknown> {
 
 > 💡 **Recommendation:** Use email templates for better separation of content and logic. It allows you to modify templates without changing your backend code.
 
+
+
 ## ✅ Summary
 
 | Step | Description |
@@ -239,4 +252,5 @@ export interface IMail<TResponse = unknown> {
 | 2️⃣ | Decorate it with `@MailProvider()` |
 | 3️⃣ | Register it in your module |
 | 4️⃣ | Use `MailFactory` to send emails (template or manual) |
+
 

@@ -1,22 +1,33 @@
 ---
-title: Dynamic Selection Providers
+title: Dynamic Dropdowns
+icon: "list-filter"
 description: Learn how to create dynamic selection providers to customize the selection options in your application.
 summary: Explains creating dynamic selection providers for runtime option fetching from databases or APIs, replacing static lists. Covers field metadata configuration with `selectionDynamicProvider` and `selectionDynamicProviderCtxt`, implementing `ISelectionProvider` interface with `values()` method, provider registration, context handling, multi-select support, and examples like `StockApiSelectionProvider` for live exchange data. Highlights built-in `ListOfValuesSelectionProvider` for database queries.
 keywords: [backend, dynamic selection, providers, customization]
-solidx_concerns: [dynamic_selection_provider]
+solidx_concerns: [backend.custom_dynamic_selection_providers, dynamic_selection_provider]
 ---
+
+
+
+# Dynamic Selection Providers
 
 Dynamic selection providers let you **fetch options at runtime**, rather than relying on static lists.  
 They are useful when options need to come from a database, an API, or some logic that changes based on context.  
 
 For example, you might want to populate a dropdown with **stock symbols fetched from a live exchange API**, or with **filtered database values**.
 
+---
+
 ## 1. Example Field Metadata
 
 Here’s an example field configuration using a custom provider named `StockApiSelectionProvider`.  
 The `selectionDynamicProviderCtxt` specifies which fields from the API response should be used as labels and values.
-<details>
- <summary>Example Configuration</summary>
+
+<details open>
+ <summary>
+    
+    Example Configuration
+</summary>
 
 ```json
 {
@@ -39,34 +50,45 @@ The `selectionDynamicProviderCtxt` specifies which fields from the API response 
   "isMultiSelect": true
 }
 ```
+
 </details>
 
-<div>
-  Tip
 
-- Use the built-in **`ListOfValuesSelectionProvider`** when you just need to fetch options from your database.  
+<Callout type="info" title="Tip">
+  - SolidX ships with built-in providers for common use cases — see [Built-in Selection Providers](../reference/built-in-selection-providers) for details on **`ListOfValuesSelectionProvider`** and **`PseudoForeignKeySelectionProvider`**.
 - Create a **custom provider** when the logic for fetching or filtering is more complex, or when data comes from an external source like an API.
-</div>
+</Callout>
+
+
+---
 
 ## 2. Creating the Provider
 
 Your provider class must implement the `ISelectionProvider` interface.  
 The most important method is `values()`, which fetches and returns the available options.
 
-  The `value()` method is deprecated. It can simply throw a `NotImplementedException` and is kept only for backward compatibility.
-<details>
- <summary>Example: `StockApiSelectionProvider`</summary>
+
+  The <code>value()</code> method is deprecated. It can simply throw a <code>NotImplementedException</code> and is kept only for backward compatibility.
+
+
+<br/>
+
+<details open>
+ <summary>
+    
+    Example: <code>StockApiSelectionProvider</code>
+</summary>
 
 ```ts
 import { Injectable, Logger } from "@nestjs/common";
-import { HttpService } from "@solidstarters/solid-core";
+import { HttpService } from "@nestjs/axios";
 import { lastValueFrom } from "rxjs";
-import { SelectionProvider } from "@solidstarters/solid-core";
+import { SelectionProvider } from "@solidxai/core";
 import {
   ISelectionProvider,
   ISelectionProviderContext,
   ISelectionProviderValues,
-} from "../interfaces";
+} from "@solidxai/core";
 
 interface StockApiSelectionProviderContext extends ISelectionProviderContext {
   labelField: string; // Field to use as label
@@ -130,6 +152,8 @@ export class StockApiSelectionProvider
 ```
 </details>
 
+---
+
 ## 3. Registering the Provider
 
 Since providers are standard NestJS providers, register them in the module where they should be available.
@@ -143,11 +167,17 @@ Since providers are standard NestJS providers, register them in the module where
 })
 ```
 
+---
+
 ## 4. Interfaces
 
 Below are the core interfaces used when implementing a dynamic selection provider.
-<details>
- <summary>`ISelectionProvider` Interface</summary>
+
+<details open>
+ <summary>
+    
+    <code>ISelectionProvider</code> Interface
+</summary>
 
 ```ts
 export interface ISelectionProvider<T extends ISelectionProviderContext> {

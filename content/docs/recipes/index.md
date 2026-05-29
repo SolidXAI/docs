@@ -1,16 +1,21 @@
 ---
 title: Recipes
+icon: "book-open"
 ---
 
-Welcome to the SolidX Recipes section! These are practical, how-to guides for common tasks and customizations in SolidX.
+# Recipes
+
+Practical how-to guides for common SolidX tasks. Each recipe focuses on a single topic you can apply to your own project.
 
 | Recipe | Description |
 |--------|-------------|
-| [Additional Datasources](./additional-datasources.md) | Add additional data sources to your application |
-| [Computed Fields](./computed-fields.md) | Automatically calculate field values based on other data |
-| [Sending Emails](./email.md) | Configure and send emails using SMTP or Elastic Email |
-| [Extending Users](./extending-users.md) | Customize the user model for your application |
-| [SolidX Handlers](./handlers.md) | Add custom logic and behavior to forms, lists, or pages |
-| [Media Providers](./media-providers.md) | Configure media storage providers |
-| [Queues](./queue.md) | Implement background jobs using SolidX's queue system |
-| [Soft Delete](./soft-delete.md) | Configure soft delete functionality on your models |
+| [Additional Datasources](./additional-datasources) | Connect to extra databases beyond the default datasource |
+| [Computed Fields](./computed-fields) | Derive field values automatically from other data |
+| [Email](./email) | Send transactional emails from your application |
+| [Extending Users](./extending-users) | Add custom fields and behaviour to the built-in User model |
+| [Filtering Data](./filtering) | Use filter operators to query records via the REST API or CRUD service |
+| [Filtering Relation Field Options](./relation-field-filtering) | Restrict the options shown in a relation field dropdown using field-level and layout-level filters |
+| [Handlers](./handlers) | Hook into lifecycle events with handler functions |
+| [Media Providers](./media-providers) | Configure storage backends for file uploads |
+| [Queue](./queue) | Process background jobs with the queue system |
+| [Soft Delete](./soft-delete) | Archive and recover records instead of permanently deleting them |

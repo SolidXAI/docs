@@ -1,0 +1,11 @@
+{
+  "title": "Common",
+  "icon": "file-text",
+  "pages": [
+    "index",
+    "configuration-notes",
+    "field-types",
+    "code-generation",
+    "applying-view-customizations"
+  ]
+}

@@ -3,6 +3,8 @@ title: Soft Delete
 icon: "trash-2"
 ---
 
+# Soft Delete
+
 TODO: Create the recipe describing everything around soft delete functionality 
 
 a. Configuring a model to be soft delete aware. 

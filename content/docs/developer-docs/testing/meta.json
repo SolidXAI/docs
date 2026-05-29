@@ -1,0 +1,13 @@
+{
+  "title": "Testing",
+  "icon": "test-tube",
+  "pages": [
+    "index",
+    "architecture",
+    "vocabulary",
+    "authoring-scenarios",
+    "workflow",
+    "api-testing",
+    "ui-testing"
+  ]
+}

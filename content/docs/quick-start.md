@@ -1,9 +1,11 @@
 ---
 title: Quick Start
+icon: "rocket"
 description: "Get a SolidX project running in under 10 minutes, manually or let your AI agent do it."
 summary: "Two paths to a working SolidX project. Manual mode walks you through every step. Agentic mode gives you a copy-paste prompt for Claude Code, Cursor, Codex, or any AI coding assistant."
-icon: "rocket"
 ---
+
+# Quick Start
 
 Get a SolidX project running in under 10 minutes.
 
@@ -13,6 +15,8 @@ Two modes are available:
 - **Agentic mode**: you paste a prompt into your AI coding assistant (Claude Code, Cursor, Codex CLI, etc.) and it handles the entire setup automatically.
 
 Both paths produce the same result: a working SolidX project with backend and frontend.
+
+---
 
 ## Prerequisites
 
@@ -24,6 +28,8 @@ Both paths produce the same result: a working SolidX project with backend and fr
 | **Python** | 3.11+ | Agent & MCP only | `python3 --version` |
 
 Node.js and a PostgreSQL database are the only hard requirements. Docker is the easiest way to get PostgreSQL running if you don't already have one. Python is only needed if you plan to use the SolidX AI Agent or MCP server.
+
+---
 
 ## Mode 1: Manual
 
@@ -45,6 +51,10 @@ docker run -d \
 ```
 
 Remember these credentials. The scaffolding prompts will ask for them.
+
+> **Warning**
+
+> The username (`solidx_app_user`), password (`strongpassword`), and database name (`solidx_app_db`) shown above are provided only for quick reference and a fast first run. **You are expected to change them to values of your own choosing** before using this in any real environment. Replace them in the `docker run` command above (and in the scaffolding inputs in Step 2) with credentials you control.
 
 ### Step 2: Scaffold the project
 
@@ -74,8 +84,8 @@ Run the interactive scaffolding and enter your credentials when prompted:
 npx @solidxai/solidctl@latest create-app
 ```
 
-> **Scaffolding takes 5-10 minutes**
->
+> **Info**
+
 > The `create-app` command installs all npm dependencies for both backend and frontend. This is a one-time cost; subsequent commands like `build` and `seed` are much faster.
 
 ### Step 3: Build and seed
@@ -107,12 +117,14 @@ Open the admin panel at `http://localhost:3001` and log in:
 
 That's it. Your SolidX project is running. Start building modules via the admin panel, or extend the generated code directly.
 
+---
+
 ## Mode 2: Agentic
 
 Paste the prompt below into your AI coding assistant (Claude Code, Cursor Agent, Codex CLI, Windsurf, etc.) from the directory where you want the project created.
 
-> **How this works**
->
+> **Info**
+
 > The prompt is self-contained. Your AI agent will check prerequisites, set up the database if needed, and run all the commands. You only need to provide your PostgreSQL credentials if you already have an instance running on port 5432. Otherwise the agent spins one up via Docker with default credentials.
 
 ```
@@ -122,16 +134,18 @@ First, ask me for the project name I want to use.
 
 Prerequisite checks:
 - Verify Node.js 22+ is installed. If missing, install it via nvm (curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash && source ~/.nvm/nvm.sh && nvm install 22). If nvm is also missing and cannot be installed, stop and tell me to install Node.js 22+ manually.
-- Verify Docker is installed and running (docker info). If Docker is missing, stop and tell me to install Docker Desktop.
 
 Database setup:
 - Check if something is already listening on port 5432 (e.g. lsof -i :5432 or netstat).
-- If port 5432 is FREE:
-  - Run: docker run -d --name SolidX_DB -e POSTGRES_USER=solidx_app_user -e POSTGRES_PASSWORD=strongpassword -e POSTGRES_DB=solidx_app_db -p 5432:5432 -v solidx_pgdata:/var/lib/postgresql/data postgres:17
-  - Use these DB credentials in the next step: host=localhost, port=5432, user=solidx_app_user, password=strongpassword, database=solidx_app_db
-- If port 5432 is OCCUPIED (existing PostgreSQL):
+- If port 5432 is OCCUPIED (assume an existing native or remote PostgreSQL instance is already running):
+  - Do NOT check for or require Docker. Skip Docker entirely for this setup.
   - Ask me for the database host, port, username, password, and database name.
   - Use the credentials I provide in the next step.
+- If port 5432 is FREE (no existing PostgreSQL):
+  - Verify Docker is installed and running (docker info). Docker is only required in this case (when there is no native PostgreSQL on port 5432). If Docker is missing, stop and tell me to install Docker Desktop.
+  - Ask me whether I want to use the default reference credentials (user=solidx_app_user, password=strongpassword, database=solidx_app_db) or provide my own. The defaults are for quick reference only and I am expected to change them for any real use. Use whichever values I confirm.
+  - Run: docker run -d --name SolidX_DB -e POSTGRES_USER=<DB_USER> -e POSTGRES_PASSWORD=<DB_PASSWORD> -e POSTGRES_DB=<DB_NAME> -p 5432:5432 -v solidx_pgdata:/var/lib/postgresql/data postgres:17
+  - Use these DB credentials in the next step: host=localhost, port=5432, and the user/password/database I confirmed above.
 
 Project scaffold (this step takes 5-10 minutes; npm installs all dependencies for both backend and frontend):
 - Run: npx @solidxai/solidctl@latest create-app --name <PROJECT_NAME> --no-interactive --db-client PostgreSQL --db-host <DB_HOST> --db-port <DB_PORT> --db-name <DB_NAME> --db-username <DB_USER> --db-password <DB_PASSWORD>
@@ -155,6 +169,8 @@ Final verification:
 
 Your AI agent will execute all the steps and report back when the project is ready to use.
 
+---
+
 ## Optional: SolidX AI Agent
 
 Once your project is running, you can start the SolidX AI agent to build modules, models, and features through natural language.
@@ -165,7 +181,7 @@ Once your project is running, you can start the SolidX AI agent to build modules
 npx @solidxai/solidctl@latest agent start
 ```
 
-The agent auto-installs its Python package into `~/.solidx/venv` on first run if `solidx-agent` is not already in PATH. Open the Chat UI at `http://localhost:8765`.
+The agent auto-installs its Python package into `~/.solidx/venv` on first run if `solidx-agent` is not already in PATH. Open the Chat UI at `http://localhost:8768`.
 
 ### Run a single task (CLI)
 
@@ -179,6 +195,8 @@ Options:
 |---|---|---|
 | `-m, --mode` | `native` | Tool mode: `native` or `mcp` |
 | `-l, --log-level` | `INFO` | Logging level |
+
+---
 
 ## Optional: MCP Server
 
@@ -230,6 +248,8 @@ http://localhost:9000/mcp
 
 Include the header `solidx-api-key: sldx_...` on every request.
 
+---
+
 ## Common solidctl Commands
 
 | Command | What it does |
@@ -244,7 +264,9 @@ Include the header `solidx-api-key: sldx_...` on every request.
 | `upgrade` | Upgrade SolidX dependencies |
 | `info --detailed` | Show project info |
 
-Full reference: [solidctl Commands](/docs/developer-docs/solidctl-commands)
+Full reference: [solidctl Commands](developer-docs/solidctl-commands.md)
+
+---
 
 ## Next Steps
 

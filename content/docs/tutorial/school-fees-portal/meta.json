@@ -2,9 +2,10 @@
   "title": "School Fees Portal",
   "icon": "book",
   "pages": [
-    "1-bootstrap",
-    "2-data-model",
-    "3-admin-layout",
-    "4-customisations"
+    "index",
+    "fees_portal_product_overview",
+    "solidx_setup",
+    "common",
+    "end-to-end-implementation"
   ]
 }

@@ -1,5 +1,6 @@
 ---
-title: Admin Docs
+title: Admin Manual
+icon: "shield"
 ---
 
 Welcome to SolidX admin documentation! SolidX is an enterprise-focused, low-code development platform engineered for today's web applications.

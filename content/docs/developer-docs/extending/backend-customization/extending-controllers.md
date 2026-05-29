@@ -1,13 +1,19 @@
 ---
-title: Extending Controllers
+title: Custom Controllers
+icon: "route"
 description: Learn how to extend backend controllers in SolidX.
 summary: Covers extending NestJS controllers in SolidX to add custom endpoints or modify existing ones. Explains adding new methods with HTTP decorators (`@Get()`, `@Post()`), using `@ApiBearerAuth()` for JWT authentication, `@UseInterceptors(AnyFilesInterceptor())` for file uploads, creating DTOs with `@ApiProperty()` for Swagger documentation and validation, delegating business logic to services, and handling multipart/form-data requests with files.
 keywords: [backend, controllers, customization]
-solidx_concerns: [add_controller_endpoint]
+solidx_concerns: [backend.controller_changes, add_controller_endpoint]
 ---
+
+
+# Extending Controllers
 
 In SolidX, **controllers** are responsible for handling incoming requests and returning responses.  
 Customizing controllers allows you to **add new endpoints**, modify existing ones, or introduce business-specific logic into your application.
+
+---
 
 ## Adding a New Endpoint
 
@@ -21,9 +27,15 @@ To add a new endpoint to an existing controller:
 
 You can also create an entirely new controller by adding a new file in the `controllers` directory and defining your custom logic there.
 
+---
+
 ### Example: Extending `InstituteController`
-<details>
-  <summary>Add New Endpoints to `InstituteController`</summary>
+
+<details open>
+  <summary>
+    
+    Add New Endpoints to <code>InstituteController</code>
+  </summary>
 
 ```ts
 // Adds an endpoint to activate the institute portal
@@ -64,14 +76,20 @@ export class CustomPayloadDto {
 
 The first method (`activateInstitute`) handles `POST /activate-institute-portal` requests, while the second (`performCustomLogicUsingBody`) demonstrates handling **multipart/form-data** (files + JSON).
 
+---
+
 ## Permission Auto-Generation
 
-When you run `solid seed`, SolidX scans controllers and their methods to **auto-generate permissions**.  
+
+When you run `npx @solidxai/solidctl@latest seed`, SolidX scans controllers and their methods to **auto-generate permissions**.  
 For example, the method `activateInstitute` in `InstituteController` will generate a permission named:
 
 ```
 InstituteController.activateInstitute
 ```
+
+
+---
 
 ## Related Recipes (TODO)
 

@@ -1,27 +1,48 @@
 ---
-title: Create Endpoint
+title: Create
+icon: "plus-circle"
 description: Information about the create endpoint of the REST API, including usage, parameters, and responses
 summary: This document details the create endpoints in SolidX's REST API, covering single record creation, bulk record creation, and record creation with media files. It provides comprehensive examples including HTTP headers (Content-Type and Authorization), request body structures, and sample responses for each scenario. The create endpoints support both JSON payloads for standard data and multipart/form-data for media uploads. All endpoints require proper create permissions and JWT bearer authentication for security.
 ---
+
+
+
+
+
+#  Create Endpoint Overview
 
 This section provides information about the SolidX **create REST endpoints**, including how to use them, what parameters they accept, and what responses they return.
 
 SolidX supports both single record creation and bulk record creation.
 
+
+
 ##  Creating a Single Record
 
+<h3 className=" ">
+    
+
 ###  Headers
+</h3>
 
 ```http
 Content-Type: application/json
 Authorization: Bearer <token>
 ```
 
-  ###  Request Body
+  <h3 className=" ">
+    
+
+###  Request Body
+  </h3>
 
 `POST /api/fee-type`
-<details>
- <summary>Request Body</summary>
+
+<details open>
+ <summary>
+    
+     Request Body
+  </summary>
 
 ```json
 {
@@ -33,9 +54,14 @@ Authorization: Bearer <token>
   "latePaymentFees": 0
 }
 ```
+
 </details>
-<details>
- <summary>Sample Request</summary>
+
+<details open>
+ <summary>
+    
+     Sample Request
+  </summary>
 
 ```json
 {
@@ -44,9 +70,14 @@ Authorization: Bearer <token>
   "partPaymentAllowed": true
 }
 ```
+
 </details>
-<details>
- <summary>Sample Response</summary>
+
+<details open>
+ <summary>
+    
+     Sample Response
+  </summary>
 
 ```json
 {
@@ -82,17 +113,28 @@ Authorization: Bearer <token>
   }
 }
 ```
+
 </details>
+
+
 
 ##  Bulk Record Creation
 
 To create multiple records at once:
 
-  ###  Request
+  <h3 className=" ">
+    
+
+###  Request 
+  </h3>
 
 `POST /api/fee-type/bulk`
-<details>
- <summary>Sample Bulk Request</summary>
+
+<details open>
+ <summary>
+    
+     Sample Bulk Request
+  </summary>
 
 ```json
 [
@@ -103,21 +145,34 @@ To create multiple records at once:
   }
 ]
 ```
+
 </details>
+
+
 
 ##  Creating a Record with Media
 
 If your model includes media fields (e.g., uploading a logo), use the `multipart/form-data` content type.
 
-  ###  Request with Media
+  <h3 className=" ">
+    
+
+###  Request with Media
+  </h3>
+
 
 ```http
 POST /api/fee-type
 Content-Type: multipart/form-data
 Authorization: Bearer <token>
 ```
-<details>
- <summary>Multipart Form Data Example</summary>
+
+<details open>
+ <summary>
+    
+     Multipart Form Data Example
+  </summary>
+
 
 ```http
 --boundary
@@ -135,7 +190,13 @@ Content-Type: image/png
 <binary data>
 --boundary--
 ```
+
 </details>
+
+
+
+
+
 
  Ensure the user has the appropriate **create permission** for the model.  
   Refer to the [Permissions](../../../admin-docs/iam/permissions.md) section for more information.

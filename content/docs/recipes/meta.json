@@ -7,8 +7,11 @@
     "media-providers",
     "queue",
     "computed-fields",
+    "filtering",
+    "relation-field-filtering",
     "extending-users",
     "handlers",
-    "soft-delete"
+    "soft-delete",
+    "workflow-status"
   ]
 }

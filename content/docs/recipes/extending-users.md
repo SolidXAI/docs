@@ -3,6 +3,8 @@ title: Extending Users
 icon: "user-plus"
 ---
 
+# Extending Users
+
 ## Extending the SolidX user model  
 
 You can extend the built-in **SolidX User** model to attach additional fields or relationships required by your application. Follow the steps below to do this from the **App Builder**:
@@ -25,6 +27,7 @@ You can extend the built-in **SolidX User** model to attach additional fields or
 After extending the SolidX User model, your form view might look like this:
 
 ![Default Login Page](/img/tutorial/school-fees-portal/5-recipes/institute-user-form.png)
+
 
 ### Institute User Form View Layout
 
@@ -206,4 +209,5 @@ Handling both provided and missing passwords:
  If password is not provided: a random password is generated and emailed to the user
 
 This way, you get full authentication and user provisioning using SolidX’s base system with custom fields.
+
 

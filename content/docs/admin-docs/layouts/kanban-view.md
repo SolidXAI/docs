@@ -1,5 +1,6 @@
 ---
 title: Kanban View
+icon: "columns-3"
 ---
 
 ![Kanban View](/img/admin-docs/layouts/kanban-view.png)

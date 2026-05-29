@@ -3,6 +3,7 @@ title: Media Providers
 icon: "image"
 ---
 
+# Media Providers
 Storing files is a commonly repeated activity in any enterprise application, a modern cloud native enterprise application will use a storage provider like AWS S3 for this purpose. SolidX currently supports storing and retrieving files on a traditional filesystem or on AWS S3. 
 
 In the near future we will also support Azure Blob storage. 
@@ -50,6 +51,7 @@ S3_AWS_REGION_NAME=your-region-name
 
 ## Enable Filesystem as a media provider 
 
+
 To store media files on the local **File System**, follow the steps below while configuring your model:
 
 ### Step 1: Select Media Storage Provider
@@ -69,4 +71,5 @@ In your `.env` file, make sure to include the base URL for accessing locally sto
 ```bash
 BASE_URL=http://your-domain.com/media
 ```
+
 

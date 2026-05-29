@@ -1,24 +1,27 @@
 ---
-title: Extending Services
+title: Custom Services
+icon: "wrench"
 description: Learn how to extend backend services in SolidX.
 summary: Explains extending NestJS services in SolidX to implement custom business logic beyond default CRUD operations. Covers creating service methods for domain-specific operations (e.g., activating portals, sending notifications), benefits of separation of concerns, reusability across controllers and scheduled jobs, improved testability, and consistency. Includes examples like `activateInstitutePortal()` with database updates and event publishing.
 keywords: [backend, services, customization]
-solidx_concerns: [add_custom_service_method, using_crud_service_method, add_controller_endpoint]
+solidx_concerns: [backend.service_changes, add_custom_service_method, using_crud_service_method]
 ---
 
 import { KanbanSquare, Redo2, Beaker, CheckCheck } from 'lucide-react';
 
-In SolidX, **services** are responsible for implementing **business logic** and handling **data manipulation**.  
-By extending services, you can introduce custom logic that goes beyond the default CRUD behavior provided by SolidX.  
+# Extending Services
 
-This is especially useful when:  
-- You want to add domain-specific operations (e.g., activating a portal, sending notifications).  
-- You need to encapsulate logic that should be reused across multiple controllers.  
-- You want to keep your **controllers thin** (focused on request/response) while moving logic into **services** (focused on business rules).  
+In SolidX, **services** are responsible for implementing **business logic** and handling **data manipulation**.
+By extending services, you can introduce custom logic that goes beyond the default CRUD behavior provided by SolidX.
+
+This is especially useful when:
+- You want to add domain-specific operations (e.g., activating a portal, sending notifications).
+- You need to encapsulate logic that should be reused across multiple controllers.
+- You want to keep your **controllers thin** (focused on request/response) while moving logic into **services** (focused on business rules).
 
 ## Why Create Service Methods?
 
-Creating methods inside services provides several benefits:  
+Creating methods inside services provides several benefits:
 
 <Cards>
   <Card icon={<KanbanSquare />} title="Separation of Concerns">
@@ -39,9 +42,10 @@ Creating methods inside services provides several benefits:
 
 To add a new method to an existing service:
 
-1. Identify the service you want to extend.  
-2. Add a method in the service class that implements your business logic.  
-3. Update the corresponding controller if you want to expose this functionality via an API endpoint.  
+1. Identify the service you want to extend.
+2. Add a method in the service class that implements your business logic.
+3. Update the corresponding controller if you want to expose this functionality via an API endpoint.
+
 <details>
   <summary>Example: Add `activateInstitutePortal` to `InstituteService`</summary>
 
@@ -66,15 +70,15 @@ export class InstituteService {
 ```
 </details>
 
-This method encapsulates the logic required to **activate an institute's portal**.  
-It could include **database updates, event publishing, or notification sending**.  
+This method encapsulates the logic required to **activate an institute's portal**.
+It could include **database updates, event publishing, or notification sending**.
 
 ## Using Service Methods in Controllers
 
-Once you've created a service method, you can call it from a controller endpoint.  
+Once you've created a service method, you can call it from a controller endpoint.
 This keeps the controller lightweight while delegating heavy logic to the service.
 
-See the [Extending Controllers](./extending-controllers.md) guide for details on adding endpoints.  
+See the [Extending Controllers](./extending-controllers.md) guide for details on adding endpoints.
 
 ### Example: Connecting `activateInstitutePortal` to `InstituteController`
 

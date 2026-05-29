@@ -3,6 +3,9 @@ title: Queues
 icon: "list-ordered"
 ---
 
+
+
+# Queues
 Queues allow any enterprise system to implement scalability allowing long running tasks to be done as background jobs. Queues being a commonly seen pattern in high performance enterprise applications SolidX has an inbuilt abstraction around queues. 
 SolidX uses the following brokers to enable queues 
 
@@ -11,6 +14,7 @@ SolidX uses the following brokers to enable queues
 - Redis 
 
 ## Environment Variables
+
 
 | Variable Name              | Description                                                                 |
 |----------------------------|-------------------------------------------------------------------------|
@@ -21,17 +25,25 @@ SolidX uses the following brokers to enable queues
 
 env
 
+
 ## How To Configure Jobs
 In SolidX a task which has to be run as a background job requires the following components. We will explain all 3 components using a dummy example representing a long running background job.
 
- ### Job Options
+
+ <h3 className=" ">
+    
+
+### Job Options
+  </h3>
+
+
 
 First we create a config object to represent our job, we are essentially only giving a name, specifying which type of broker to use to run this job & most importantly the queue name that will be used. 
 
 Eg. 
 
 ```tsx
-import { BrokerType } from '../../interfaces';
+import { BrokerType } from "@solidxai/core";
 
 const QUEUE_NAME = 'test_queue_db';
 
@@ -43,7 +55,12 @@ export default {
 
 ```
 
- ### Publisher
+ <h3 className=" ">
+    
+
+### Publisher 
+  </h3>
+
 
 The Publisher is responsible for sending messages to the queue. In this example, we create a custom publisher by extending SolidX’s built-in DatabasePublisher class. 
 
@@ -52,10 +69,10 @@ Eg.
 ```tsx
 import { Injectable } from '@nestjs/common';
 import testQueueConfig from './test-queue-options-database';
-import { MqMessageQueueService } from '../../services/mq-message-queue.service';
-import { MqMessageService } from '../../services/mq-message.service';
-import { QueuesModuleOptions } from '../../interfaces';
-import { DatabasePublisher } from 'src/services/queues/database-publisher.service';
+import { MqMessageQueueService } from "@solidxai/core";
+import { MqMessageService } from "@solidxai/core";
+import { QueuesModuleOptions } from "@solidxai/core";
+import { DatabasePublisher } from "@solidxai/core";
 
 @Injectable()
 export class TestQueuePublisherDatabase extends DatabasePublisher<any> {
@@ -75,7 +92,12 @@ export class TestQueuePublisherDatabase extends DatabasePublisher<any> {
 
 ```
 
- ### Subscriber
+
+ <h3 className=" ">
+    
+
+### Subscriber 
+  </h3>
 
 The Subscriber listens to a specific queue and processes incoming messages. In this example, we extend SolidX’s DatabaseSubscriber class.
 
@@ -83,12 +105,12 @@ Eg.
 
 ```tsx
 import { Injectable, Logger } from '@nestjs/common';
-import { QueueMessage } from 'src/interfaces/mq';
+import { QueueMessage } from "@solidxai/core";
 import testQueueConfig from './test-queue-options-database';
-import { MqMessageService } from '../../services/mq-message.service';
-import { MqMessageQueueService } from '../../services/mq-message-queue.service';
-import { QueuesModuleOptions } from "../../interfaces";
-import { DatabaseSubscriber } from 'src/services/queues/database-subscriber.service';
+import { MqMessageService } from "@solidxai/core";
+import { MqMessageQueueService } from "@solidxai/core";
+import { QueuesModuleOptions } from "@solidxai/core";
+import { DatabaseSubscriber } from "@solidxai/core";
 
 @Injectable()
 export class TestQueueSubscriberDatabase extends DatabaseSubscriber<any> {
@@ -124,6 +146,7 @@ export class TestQueueSubscriberDatabase extends DatabaseSubscriber<any> {
 
 ## Publishing Jobs 
 
+
 SolidX internally uses a FactoryPublisher mechanism that automatically selects the appropriate broker (Database or RabbitMQ) based on your .env configuration trigger a background job.
 
 Eg.
@@ -131,9 +154,9 @@ Eg.
 ```tsx
 import { Logger } from '@nestjs/common';
 import { Injectable } from '@nestjs/common';
-import { QueueMessage, QueuePublisher } from 'src/interfaces/mq';
+import { QueueMessage, QueuePublisher } from "@solidxai/core";
 import { classify } from '@angular-devkit/core/src/utils/strings';
-import { SolidIntrospectService } from '../solid-introspect.service';
+import { SolidIntrospectService } from "@solidxai/core";
 
 @Injectable()
 export class PublisherFactory<T> {
@@ -167,6 +190,7 @@ export class PublisherFactory<T> {
     }
 }
 ```
+
 
 ## Admin Interface 
 

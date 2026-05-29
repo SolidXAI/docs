@@ -2,8 +2,6 @@
   "title": "Tutorial",
   "icon": "graduation-cap",
   "pages": [
-    "school-fees-portal",
-    "school-fees-portal-revamped",
-    "school-fees-portal-v2"
+    "school-fees-portal"
   ]
 }

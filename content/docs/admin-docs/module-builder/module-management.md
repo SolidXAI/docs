@@ -1,6 +1,11 @@
 ---
 title: Modules
+icon: "package"
 ---
+
+
+
+# Modules
 
 When creating a new module in SolidX, you're defining a core building block of your application. A module is a logical container that groups together related models and functionality under a unified domain or feature area.
 
@@ -28,6 +33,7 @@ To create a new module:
 
 Once you've entered the above details, saving the module will register it in SolidX and allow you to start defining models within it.
 
+
 ### Generate Module
 
 After creating the module Metadata you need to click on the "Generate Module" action button. 
@@ -40,36 +46,37 @@ You can find this action button in the list view context menu for each row.
 
 After you click on "Generate Module" in the background SolidX does the following. 
 
-1. Makes an entry in the ss_module_metadata table. 
+1. Makes an entry in the ss_module_metadata table. <br />
    This is a solid core table which contains the details that we just entered. 
 
-2. Create the module folder. 
-   A folder is created at this location `<project-root>/solid-api/<module-name>`. 
-   This folder will contain a single file called `<module-name>.module.ts`. 
+2. Create the module folder. <br />
+   A folder is created at this location `<project-root>/solid-api/<module-name>`. <br />
+   This folder will contain a single file called `<module-name>.module.ts`. <br />
    Keeping in line with our design goal of following industry best practices we have simply generated a standard NestJS module.
 
-3. Register the module. 
+3. Register the module. <br />
    Since we are using NestJS modules, SolidX also automatically registers this module in the main app.module.ts file.
+
 
 ## Datasource Configuration
 
 When the SolidX project is bootstrapped by default we expect at-least one data source to be configured. 
 
-This is taken care of when a new project is bootstrapped using `npx @solidstarters/create-solid-app`
+This is taken care of when a new project is bootstrapped using `npx @solidxai/solidctl create-app`
 
 As part of this bootstrapping a default data source is pre-configured in the file `<project-root>/solid-api/src/app-default-database.module.ts`
 
 ```ts
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import * as SolidCoreModuleExports from '@solidstarters/solid-core';
-import { DatasourceType, getDynamicModuleNames, ISolidDatabaseModule, SolidDatabaseModule } from '@solidstarters/solid-core';
+import * as SolidCoreModuleExports from '@solidxai/core';
+import { DatasourceType, getDynamicModuleNames, ISolidDatabaseModule, SolidDatabaseModule } from '@solidxai/core';
 import { WINSTON_MODULE_PROVIDER } from 'nest-winston';
 import { join } from 'path';
 import { getMetadataArgsStorage } from 'typeorm';
 import { SnakeNamingStrategy } from 'typeorm-naming-strategies';
 import { Logger } from 'winston';
-import { WinstonTypeORMLogger } from '@solidstarters/solid-core'; // Assuming you have this custom logger
+import { WinstonTypeORMLogger } from '@solidxai/core'; // Assuming you have this custom logger
 
 function getEntitiesFromExports(exports: Record&lt;string, any&gt;) {
     const metadataStorage = getMetadataArgsStorage();
@@ -122,12 +129,14 @@ export class DefaultDBModule implements ISolidDatabaseModule {
 }
 ```
 
+
 Again in keeping with our design principle of flexibility you can add as many datasources as you like, and have a module use a given datasource as its default datasource. More details on this can be found in the developer docs where we talk about configuring multiple datasources. 
+
 
 ## Related Recipes
 
 Below is a list of recipes that are relevant to module management. 
 
-1. [Additional Datasources](../../recipes/): 
+1. [Additional Datasources](../../recipes/): <br />
    This recipe talks about how you can add additional data sources to your application.
 

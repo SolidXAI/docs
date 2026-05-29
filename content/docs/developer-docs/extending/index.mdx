@@ -1,10 +1,20 @@
 ---
 title: Extending SolidX
+icon: "puzzle-piece"
 description: Guide to extending SolidX with custom code generation and frontend/backend customization.
 summary: This document serves as an overview of SolidX extensibility features, explaining how to build custom functional modules and extend the platform capabilities. It highlights three main customization areas - Generated Code (using the code generation tool to scaffold controllers, services, entities, DTOs, and layout JSON files with default list and form views), Frontend Customization (modifying layout.json for custom list views, form layouts, kanban boards, and UI behaviors), and Backend Customization (extending NestJS backend with custom services, controllers, computed providers, middleware, and business logic).
 ---
 
 import { Cpu, Palette, Server } from 'lucide-react';
+
+<Callout type="info" title="Mental Model">
+  Extending SolidX is about deciding **where to keep the platform default behaviour** and **where to introduce project-specific logic**.
+  - **Generated code** gives you a strong starting structure.
+  - **Frontend customization** lets you tailor the user experience and module-specific UI.
+  - **Backend customization** lets you add domain logic, integrations, and behaviour beyond the generated defaults.
+
+  So the intuition is: SolidX gives you a metadata-driven base, and this section explains the supported places where you should extend it instead of fighting the framework.
+</Callout>
 
 This section outlines how to extend **SolidX** to build your own functional modules, such as a `school-fees-portal`.
 

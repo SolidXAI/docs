@@ -1,98 +1,207 @@
 ---
 title: TypeORM Subscribers
-description: Learn how to create and use TypeORM subscribers in your SolidX application.
-summary: Covers TypeORM subscribers for listening to entity lifecycle events (beforeInsert, afterInsert, beforeUpdate, afterUpdate, beforeRemove, afterRemove, afterLoad, transaction events). Explains creating subscribers implementing `EntitySubscriberInterface` with `@Injectable()` decorator for dependency injection, keeping business logic in dedicated services, registering subscribers in TypeORM configuration, and includes examples like `UserSubscriber` for audit logging. Recommends SolidX computed fields for most use cases.
-keywords: [backend, TypeORM subscribers, customization]
-solidx_concerns: [typeorm_subscribers]
+icon: "webhook"
+description: "Recommended pattern for TypeORM subscribers in SolidX: publish a background job via PublisherFactory from subscriber hooks and execute business logic in queue subscribers."
+summary: Updated guidance for SolidX TypeORM subscribers. Recommends keeping overridden entity hooks thin and always triggering a publisher-subscriber background job pair through PublisherFactory, instead of executing heavy side effects inline. Covers rationale, transaction-boundary safety, implementation pattern, and code examples.
+keywords: [backend, TypeORM subscribers, background jobs, transaction safety]
+solidx_concerns: [backend.typeorm_subscriber, typeorm_subscriber, backend.background_jobs, new_background_job]
 ---
 
-TypeORM **subscribers** are a powerful feature that allow you to listen to and react to various lifecycle events of your entities.  
+# TypeORM Subscribers
 
-They can be used to perform side effects such as logging, auditing, triggering workflows, or maintaining consistency across related entities.  
+## Recommendation (New Standard)
 
-In SolidX, you can create custom subscribers and register them with TypeORM to extend your application’s behavior.
+In SolidX, TypeORM subscriber hooks should **always publish a background job** and return quickly.
 
-> **Tip**
-> For most use cases, prefer using the SolidX **computed fields** / **computed operations** feature, since it uses background jobs for after* hooks operations and has clearer semantics and improved failure handling.
+Do **not** execute heavy business side effects directly inside `afterInsert`, `afterUpdate`, etc.
 
-## Overview
+Preferred flow:
 
-A **subscriber** is a class that implements the `EntitySubscriberInterface` from TypeORM.  
-It listens to events such as:  
+1. TypeORM subscriber hook runs (`afterInsert`, `afterUpdate`, ...)
+2. Hook publishes a queue message through `PublisherFactory`
+3. Queue subscriber processes the actual business logic asynchronously
 
-- `beforeInsert`, `afterInsert`  
-- `beforeUpdate`, `afterUpdate`  
-- `beforeRemove`, `afterRemove`  
-- `afterLoad`  
-- Transaction events (`beforeTransactionStart`, `afterTransactionCommit`, etc.)  
+This publisher-subscriber pair should be your default pattern for subscriber-driven side effects.
 
-**Key Points for Using Subscribers in SolidX:**  
-1. Mark the subscriber with the NestJS `@Injectable()` decorator, just like other providers. This enables dependency injection inside subscribers.  
-2. Keep your **business logic in a dedicated service**, and call the service from the subscriber. This ensures separation of concerns and maintainability.  
+## Why This Is Recommended
 
-## Example: Creating a Subscriber
-Below is an example of a subscriber that listens to `afterInsert` and `afterUpdate` events on a `User` entity. It logs the events and calls a dedicated audit service to handle the business logic.
-<details>
-<summary>user-subscriber.ts</summary>
+This pattern avoids common failure and consistency problems:
+
+- Avoids long-running work inside DB lifecycle hooks
+- Reduces risk around transaction boundaries and lock duration
+- Gives retries/failure tracking through queue infrastructure
+- Improves reliability for external side effects (email/SMS/webhooks/3rd-party APIs)
+- Keeps entity lifecycle hooks deterministic and lightweight
+
+## Anti-Pattern to Avoid
+
+Avoid this in TypeORM subscriber hooks:
+
+- External API calls
+- File processing/OCR/LLM calls
+- Large cross-entity updates
+- Long computations
+
+Do these in queue subscribers instead.
+
+## Implementation Pattern
+
+### 1) Queue payload and options
+
 ```ts
-import { Injectable, Logger } from "@nestjs/common";
+import { BrokerType } from "@solidxai/core";
+
+export interface UserChangedPayload {
+  userId: number;
+  eventType: "created" | "updated";
+}
+
+export default {
+  name: "userChangedQueueRabbitmq",
+  type: BrokerType.RabbitMQ,
+  queueName: "user_changed_queue",
+  prefetch: 5,
+};
+```
+
+### 2) Publisher
+
+```ts
+import { Injectable } from "@nestjs/common";
+import {
+  MqMessageQueueService,
+  MqMessageService,
+  QueuesModuleOptions,
+  RabbitMqPublisher,
+} from "@solidxai/core";
+import userChangedQueueOptions, { UserChangedPayload } from "./user-changed-queue-options";
+
+@Injectable()
+export class UserChangedPublisher extends RabbitMqPublisher<UserChangedPayload> {
+  constructor(
+    protected readonly mqMessageService: MqMessageService,
+    protected readonly mqMessageQueueService: MqMessageQueueService
+  ) {
+    super(mqMessageService, mqMessageQueueService);
+  }
+
+  options(): QueuesModuleOptions {
+    return {
+      ...userChangedQueueOptions,
+    };
+  }
+}
+```
+
+### 3) TypeORM subscriber (hook only publishes via `PublisherFactory`)
+
+```ts
+import { Injectable } from "@nestjs/common";
 import { EventSubscriber, EntitySubscriberInterface, InsertEvent, UpdateEvent } from "typeorm";
+import { PublisherFactory } from "@solidxai/core";
 import { User } from "../entities/user.entity";
-import { UserAuditService } from "../services/user-audit.service";
+import { UserChangedPayload } from "../background-jobs/user-changed-queue-options";
 
 @Injectable()
 @EventSubscriber()
 export class UserSubscriber implements EntitySubscriberInterface<User> {
-  private readonly logger = new Logger(UserSubscriber.name);
-
-  constructor(private readonly auditService: UserAuditService) {}
+  constructor(
+    private readonly publisherFactory: PublisherFactory<UserChangedPayload>
+  ) {}
 
   listenTo() {
     return User;
   }
 
   async afterInsert(event: InsertEvent<User>) {
-    if (!event.entity) return; // always check entity presence
-    this.logger.debug(`User created: ${event.entity.id}`);
-    await this.auditService.logCreation(event.entity);
+    if (!event.entity?.id) return;
+    await this.publisherFactory.publish(
+      {
+        payload: {
+          userId: event.entity.id,
+          eventType: "created",
+        },
+        parentEntity: "user",
+        parentEntityId: event.entity.id,
+      },
+      "UserChangedPublisher"
+    );
   }
 
   async afterUpdate(event: UpdateEvent<User>) {
-    if (!event.entity) return;
-    this.logger.debug(`User updated: ${event.entity.id}`);
-    await this.auditService.logUpdate(event.entity);
+    const id = (event.entity as User | undefined)?.id;
+    if (!id) return;
+    await this.publisherFactory.publish(
+      {
+        payload: {
+          userId: id,
+          eventType: "updated",
+        },
+        parentEntity: "user",
+        parentEntityId: id,
+      },
+      "UserChangedPublisher"
+    );
   }
 }
 ```
-</details>
 
-### Registering the Subscriber
-<details>
-<summary>myModule.module.ts</summary>
+### 4) Queue subscriber (business logic runs here)
+
 ```ts
-@Module({
-  imports: [TypeOrmModule.forFeature([User])],
-  providers: [UserSubscriber, UserAuditService],
-})
-export class MyModule {}
+import { Injectable } from "@nestjs/common";
+import {
+  MqMessageQueueService,
+  MqMessageService,
+  QueueMessage,
+  QueuesModuleOptions,
+  RabbitMqSubscriber,
+} from "@solidxai/core";
+import userChangedQueueOptions, { UserChangedPayload } from "./user-changed-queue-options";
+
+@Injectable()
+export class UserChangedJobSubscriber extends RabbitMqSubscriber<UserChangedPayload> {
+  constructor(
+    readonly mqMessageService: MqMessageService,
+    readonly mqMessageQueueService: MqMessageQueueService
+  ) {
+    super(mqMessageService, mqMessageQueueService);
+  }
+
+  options(): QueuesModuleOptions {
+    return {
+      ...userChangedQueueOptions,
+    };
+  }
+
+  async subscribe(message: QueueMessage<UserChangedPayload>) {
+    const { userId, eventType } = message.payload;
+    // Real side effects: notify, sync, call external APIs, etc.
+    return { success: true, userId, eventType };
+  }
+}
 ```
-</details>
 
-## Best Practices
+## Practical Rules
 
-✅ **Inject services** into your subscriber (via `@Injectable`) instead of embedding business logic directly.  
-✅ **Entity checks** Check if (!event.entity) return; in subscribers, except when you are absolutely sure the entity will always be there (like afterInsert).  
-✅ **Avoid global state** inside subscribers, as it can cause inconsistent behavior across requests.  
-✅ **Use `queryRunner.data`** to safely share data between hooks in the same transaction.  
+- Keep TypeORM hook methods minimal and side-effect free except queue publish.
+- Publish via `PublisherFactory`; do not inject broker-specific publisher classes in subscriber hooks.
+- Prefer logical publisher names (`UserChangedPublisher`) and let the factory resolve broker-specific implementations.
+- Pass identifiers and minimal context in queue payloads.
+- Do not pass full mutable entity graphs in queue messages.
+- Keep retry/error logic in queue subscriber infrastructure.
+- Use `prefetch` and worker replicas to scale processing throughput.
 
-## Gotchas
+## Registration
 
-⚠️ Transaction hooks (`beforeTransactionStart`, `afterTransactionCommit`) are **not entity-specific**. You may need to check the entity type before using them.  
-⚠️ Be careful with **performance** — heavy logic in subscribers can slow down inserts/updates. Offload work to background jobs if needed.  
+Register TypeORM subscriber + publisher classes + queue subscriber classes as providers in your module.
+Publishing call sites should depend on `PublisherFactory`.
 
-> **Note**
-> TypeORM transaction hooks are not entity specific.
+## Notes
 
-## References
+- You can still use TypeORM hooks for lightweight in-memory data preparation, but not heavy side effects.
+- If in doubt, publish and process asynchronously.
 
-- [TypeORM Docs: Subscribers](https://typeorm.io/listeners-and-subscribers)  
+## See Also
+
+- [Background Jobs](./background-jobs.md)

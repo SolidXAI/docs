@@ -1,14 +1,17 @@
 ---
-title: Extending Repositories
+title: Custom Repositories
+icon: "database"
 description: Learn how to extend functionality in repositories in your application.
 summary: Details extending repositories inheriting from `SolidBaseRepository<T>` with metadata-aware TypeORM behavior and security rule enforcement via `SecurityRuleRepository`. Covers creating custom query methods using overridden `find`/`findOne` (security-scoped), using QueryBuilder for complex joins, centralizing business-specific queries, composable data access patterns, and examples like `findActiveByInstitute()`. Emphasizes separation between data access and business logic for maintainability and testability.
 keywords: [backend, repositories, customization]
-solidx_concerns: [extending_repository, add_custom_service_method, add_controller_endpoint]
+solidx_concerns: [backend.repository_changes, extending_repository]
 ---
+
+# Extending Repositories
 
 ## Overview
 
-[Generated repositories](../code-generation/codegen-structure#repository) inherit from `SolidBaseRepository<T>`, which already:
+[Generated repositories](../code-generation#repository) inherit from `SolidBaseRepository<T>`, which already:
 - wraps TypeORM with metadata-aware behavior,
 - enforces query-level access control via `SecurityRuleRepository`,
 - provides contextual access with `RequestContextService`, and
@@ -23,17 +26,20 @@ Extending repositories lets you:
 - reuse the same queries across multiple services, and
 - maintain a clean separation between *data access* and *business logic*.
 
+---
+
 ## Step-by-step: add a custom method
 
 ### 1) Add a method using `find`
 
 Most cases can be expressed with `find`/`findOne` since they’re already security-scoped.
-<details>
-  <summary>Repository: add custom find-based method</summary>
+
+<details open>
+  <summary><strong>Repository: add custom find-based method</strong></summary>
 
 ```ts
 import { Injectable } from '@nestjs/common';
-import { RequestContextService, SecurityRuleRepository, SolidBaseRepository } from '@solidstarters/solid-core';
+import { RequestContextService, SecurityRuleRepository, SolidBaseRepository } from '@solidxai/core';
 import { DataSource } from 'typeorm';
 import { FeeType } from '../entities/fee-type.entity';
 
@@ -71,11 +77,14 @@ export class FeeTypeRepository extends SolidBaseRepository<FeeType> {
 ```
 </details>
 
+---
+
 ### 2) Add a method using Query Builder
 
 For more complex cases (aggregations, raw joins, advanced conditions), fall back to `createQueryBuilder()`.
-<details>
-  <summary>Repository: add query builder method</summary>
+
+<details open>
+  <summary><strong>Repository: add query builder method</strong></summary>
 
 ```ts
 async totalsByCategory(instituteId: number) {
@@ -93,9 +102,12 @@ async totalsByCategory(instituteId: number) {
 ```
 </details>
 
+---
+
 ### 3) Consume your custom repository methods
-<details>
-  <summary>Service: use find-based and query builder methods</summary>
+
+<details open>
+  <summary><strong>Service: use find-based and query builder methods</strong></summary>
 
 ```ts
 import { Injectable } from '@nestjs/common';
@@ -116,6 +128,8 @@ export class FeesService {
 ```
 </details>
 
+---
+
 ## Best practices
 
 - **Prefer `find` / `findOne` / `findAndCount`** when possible. They are overridden in `SolidBaseRepository` to remain security-aware and easier to read.
@@ -124,9 +138,12 @@ export class FeesService {
 - **Return typed results** (entities for reads, raw objects for aggregates).
 - **Unit-test repository methods** to validate filtering, ordering, and joins.
 
+---
+
 ## Quick reference
-<details>
-  <summary>Example: security-aware find</summary>
+
+<details open>
+  <summary><strong>Example: security-aware find</strong></summary>
 
 ```ts
 await feeTypeRepo.find({
@@ -136,8 +153,9 @@ await feeTypeRepo.find({
 });
 ```
 </details>
-<details>
-  <summary>Example: fallback to query builder</summary>
+
+<details open>
+  <summary><strong>Example: fallback to query builder</strong></summary>
 
 ```ts
 await feeTypeRepo.totalsByCategory(1);

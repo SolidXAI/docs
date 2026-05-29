@@ -1,0 +1,1116 @@
+---
+title: Activate Institute
+icon: "power"
+description: Learn how to activate an institute's fee portal and make it live for students and parents.
+summary: Complete guide to activating institute portals with automatic DNS and web server configuration
+keywords: [institute activation, portal deployment, DNS configuration, multi-tenant setup]
+concerns: Infrastructure provisioning, domain management, activation workflow
+---
+
+> **Warning**
+
+> The activation functionality requires a Unix-based operating system (e.g., Ubuntu, macOS). It is not supported on Windows as it depends on Nginx site management via `/etc/nginx/` and DNS configuration via `/etc/hosts`.
+
+### Overview
+
+The Activate Institute functionality provisions the infrastructure needed to make an institute's fee portal accessible to students and parents. This is an **Institute Admin** action — once the Super Admin has onboarded the institute, the Institute Admin triggers activation to make their portal live.
+
+This feature automates the creation of DNS records and web server configurations, transforming an inactive institute into a live, operational fee collection portal.
+
+**Key Features:**
+- Automatic subdomain creation based on institute's hosted page prefix
+- Dynamic Nginx virtual host configuration
+- Automated DNS record management (CNAME creation)
+- Status-based UI controls (activate/deactivate toggle)
+- Audit trail of all activation/deactivation events
+- Confirmation dialogs to prevent accidental changes
+- Support for both production (Route53) and local (hosts file) DNS management
+
+### What "Activating" an Institute Means
+
+Activation is a multi-step infrastructure provisioning process that:
+
+1. **Creates a Subdomain**: Constructs a unique domain name for the institute (e.g., `delhi.dpsschools.edu.in`)
+2. **Configures Web Server**: Creates and enables an Nginx virtual host to serve the portal
+3. **Sets Up DNS**: Creates a DNS CNAME record pointing to the portal infrastructure
+4. **Updates Status**: Changes the institute's status from "InActive" to "Active"
+5. **Creates Audit Trail**: Logs the activation event with timestamp and live domain link
+
+**Important:** This is not just a database status change - it actually provisions real infrastructure that makes the portal accessible on the internet.
+
+### Data Models
+
+This section describes the data model used for institute activation.
+
+#### Institute Model
+
+**What it represents:** An educational institution that uses the fee portal platform to collect payments from students.
+
+##### Fields
+
+The following fields of the Institute model are relevant to activation:
+
+<div style={{overflowX: 'auto'}}>
+
+| # | Field | Required? | Notes |
+|---|-------|-----------|-------|
+| 1 | `status` | Yes | Default: `InActive`. Controls the activation lifecycle — `InActive` or `Active`. |
+| 2 | `hostedPagePrefix` | Yes | Unique subdomain prefix used to construct the institute's portal domain (e.g. `"delhi"` → `delhi.<base-domain>`). Must be alphanumeric/hyphens only and unique across all institutes. |
+| 3 | `supportEmail` | Yes | Email address for portal support inquiries. |
+| 4 | `supportMobile` | Yes | Phone number for portal support. |
+| 5 | `paymentGatewayMerchantId` | Yes | Merchant identifier for the payment gateway. |
+| 6 | `paymentGatewayAccessKey` | Yes | API access key for the payment gateway. |
+| 7 | `paymentGatewayAccessSecret` | Yes | Secret key for the payment gateway. |
+
+</div>
+
+##### Status Field — State Machine
+
+The `status` field controls the activation lifecycle:
+
+**Possible Values:**
+- `"InActive"` (default): Institute portal is not accessible, infrastructure not provisioned
+- `"Active"`: Institute portal is live and accessible to students/parents
+
+**State Transitions:**
+```
+New Institute Creation → Status: "InActive"
+                              ↓
+                    Institute Admin clicks "Activate"
+                              ↓
+                    Infrastructure Provisioning
+                              ↓
+                         Status: "Active"
+                              ↓
+                    Institute Admin clicks "Deactivate"
+                              ↓
+                    Infrastructure Removal
+                              ↓
+                         Status: "InActive"
+```
+
+##### Domain Name Construction
+
+The portal domain is automatically constructed as:
+```
+{hostedPagePrefix}.{EDU_BASE_DOMAIN}
+```
+
+**Examples:**
+- Hosted Page Prefix: `"delhi"` → Domain: `delhi.dpsschools.edu.in`
+- Hosted Page Prefix: `"navi-mumbai"` → Domain: `navi-mumbai.dpsschools.edu.in`
+
+**Important:** The `hostedPagePrefix` must be:
+- Unique across all institutes in the system
+- Valid for use in DNS (alphanumeric and hyphens only)
+- Set before activation (cannot activate without it)
+
+### Creating Roles & Permissions
+
+This feature introduces two custom controller endpoints — activate and deactivate — that are not part of standard CRUD. You need to explicitly grant Institute Admin access to these endpoints.
+
+> **Info**
+
+> Super Admin is granted all permissions by default. No role configuration needed.
+
+#### Institute Admin
+
+On the existing **`Institute Admin`** role, grant the following additional permissions:
+
+| Model | Permissions |
+|-------|-------------|
+| **Institute** | `InstituteController.activateFeePortal` `InstituteController.deactivateFeePortal` |
+
+**Why these permissions?**
+
+- **Institute** — The activate and deactivate actions trigger real infrastructure changes (DNS records, Nginx virtual hosts). They are intentionally separate from the standard update permission so that access can be granted independently from general profile editing.
+
+> **Reference Documentation**
+
+> 📋 For step-by-step instructions on editing a role and assigning permissions in SolidX, see [Role Management](../../../admin-docs/iam/roles.md).
+
+### Prerequisites for Activation
+
+Before activating an institute, ensure the following conditions are met:
+
+#### Institute Configuration
+
+- [ ] **Institute Name** is set and unique
+- [ ] **Hosted Page Prefix** is set and unique (will be used for subdomain)
+- [ ] **Support Email** is configured
+- [ ] **Support Mobile** is configured
+- [ ] **Payment Gateway Merchant ID** is configured
+- [ ] **Payment Gateway Access Key** is configured
+- [ ] **Payment Gateway Access Secret** is configured
+- [ ] **Status** is currently "InActive"
+
+#### Environment Configuration
+
+The following environment variables must be configured on the server:
+
+| Variable | Required | Description | Example |
+|----------|----------|-------------|---------|
+| **EDU_BASE_DOMAIN** | No (has default) | Base domain for all institute portals | `"dpsschools.edu.in"` |
+| **PORTAL_CNAME_DOMAIN** | Yes | CNAME target for DNS records | `"portal.dpsschools.edu.in"` |
+| **DNS_PROVIDER** | No (defaults to "hosts") | DNS management provider | `"route53"` or `"hosts"` |
+| **EDU_FRONTEND_UPSTREAM** | No (has default) | Upstream server for Nginx proxy | `"http://127.0.0.1:3002"` |
+
+**For Live/Production Domains:**
+- [ ] AWS credentials configured (IAM role or environment variables)
+- [ ] Route53 hosted zone ID available
+- [ ] Route53 hosted zone matches `EDU_BASE_DOMAIN`
+
+**For Local Testing (No Real Domain):**
+- [ ] Application has sudo/root privileges to modify `/etc/hosts`
+- [ ] `/etc/hosts` file is writable
+
+#### Server Requirements
+
+- [ ] Nginx installed and running
+- [ ] Application has permissions to create files in `/etc/nginx/sites-available/`
+- [ ] Application has permissions to create symlinks in `/etc/nginx/sites-enabled/`
+- [ ] Application can reload Nginx (`systemctl reload nginx`)
+- [ ] Port 80 is not blocked by firewall
+- [ ] Port 443 is not blocked by firewall (only required if HTTPS/SSL is configured; the default activation creates HTTP-only virtual hosts)
+
+### Activation Workflow
+
+This section provides a step-by-step guide for Institute Admins to activate an institute portal.
+
+#### Phase 1: Pre-Activation Verification
+
+**Step 1: Navigate to Institute Record**
+
+- Login to the Fees Portal admin interface with Institute Admin credentials
+- Navigate to "Fees Portal" module in the sidebar
+- Select "Institutes" from the menu
+- Find the institute you want to activate
+- Click on the institute to open the detail/edit view
+
+**Step 2: Verify Institute Configuration**
+
+Check that all required fields are configured:
+
+**Basic Information:**
+- Institute Name: Filled and descriptive
+- Customer User ID: Set (usually auto-generated)
+- Status: Currently showing "InActive"
+
+**Portal Configuration:**
+- Hosted Page Prefix: Filled with a unique, valid identifier
+  - Good examples: `"delhi"`, `"mumbai"`, `"greenwood-school"`
+  - Bad examples: `"delhi.branch"` (no dots), `"Delhi Branch"` (no spaces), `"school@1"` (no special chars)
+
+**Payment Gateway:**
+- Payment Gateway Merchant ID: Configured
+- Payment Gateway Access Key: Configured
+- Payment Gateway Access Secret: Configured
+
+**Support Contact:**
+- Support Email: Valid email address
+- Support Mobile: Valid phone number
+
+**Step 3: Note the Domain Name**
+
+The portal will be accessible at:
+```
+{hostedPagePrefix}-{EDU_BASE_DOMAIN}
+```
+
+Write down this domain - you'll verify it's accessible after activation.
+
+Example: If `hostedPagePrefix` is `"delhi"` and `EDU_BASE_DOMAIN` is `"dpsschools.edu.in"`, the portal will be at `delhi.dpsschools.edu.in`
+
+#### Phase 2: Activate the Institute
+
+**Step 4: Locate the Activate Button**
+
+In the institute edit view, look for the "Activate Institute" button:
+- Located in the header area of the form
+- Icon: Play button (▶)
+- Label: "Activate Institute"
+- Only visible when status is "InActive"
+
+**Step 5: Initiate Activation**
+
+- Click the "Activate Institute" button
+- A confirmation dialog will appear
+
+**Confirmation Dialog:**
+- Header: "Activate institute ?"
+- Message: "Clicking Ok below will activate and host this institute, are you sure you want to continue?"
+- Buttons: "Ok" and "Cancel"
+
+**Step 6: Confirm Activation**
+
+- Review the confirmation message carefully
+- If you're sure, click "Ok"
+- If you need to double-check configuration, click "Cancel" and return to Step 2
+
+**Step 7: Wait for Provisioning**
+
+After clicking "Ok", the system will:
+
+1. **Construct Domain Name**
+   - Combines `hostedPagePrefix` with base domain
+   - Example: `delhi.dpsschools.edu.in`
+
+2. **Create Nginx Virtual Host**
+   - Creates configuration file: `/etc/nginx/sites-available/{domain}.conf`
+   - Creates symlink: `/etc/nginx/sites-enabled/{domain}.conf`
+   - Configuration includes:
+     - Server listening on port 80
+     - Proxy to frontend upstream
+     - Security headers
+   - Validates configuration: `nginx -t`
+   - Reloads Nginx: `systemctl reload nginx`
+
+3. **Create DNS Record**
+   - Creates CNAME record pointing to `PORTAL_CNAME_DOMAIN`
+   - TTL: 300 seconds (5 minutes)
+   - Provider-specific:
+     - **Route53**: Creates record via AWS API
+     - **Hosts File**: Adds entry to `/etc/hosts`
+
+4. **Update Database**
+   - Sets `status = 'Active'`
+   - Saves institute record
+
+5. **Create Audit Entry**
+   - Posts message to Chatter system
+   - Message includes live domain link
+   - Timestamp and user recorded
+
+**Step 8: Verify Success**
+
+On successful activation:
+- Success toast message appears: "Institute activated successfully."
+- Status field updates to "Active"
+- "Activate Institute" button disappears
+- "Deactivate Institute" button appears (with stop icon ⊗)
+- Form refreshes with updated data
+
+On failure:
+- Error toast message appears: "Failed to activate institute."
+- Check server logs for details
+- Common issues:
+  - Missing `PORTAL_CNAME_DOMAIN` environment variable
+  - Nginx configuration errors
+  - DNS provider connection issues
+  - Insufficient permissions
+
+#### Phase 3: Post-Activation Verification
+
+**Step 9: Check Audit Trail**
+
+- Scroll down to the Chatter/Activity section on the institute record
+- Verify the activation event was logged
+- Message should read:
+  ```
+  ### Institute Activated
+  Institute is now live on domain: <link to domain>
+  ```
+- Click the link to verify it's correct
+
+**Step 10: Verify DNS Configuration**
+
+**For Production (Route53):**
+- Wait 5-10 minutes for DNS propagation
+- Use a DNS lookup tool: `nslookup {domain}` or `dig {domain}`
+- Verify the CNAME record points to `PORTAL_CNAME_DOMAIN`
+
+**For Local Development (Hosts File):**
+- Open `/etc/hosts` file
+- Look for an entry like:
+  ```
+  127.0.0.1  delhi.dpsschools.edu.in # solidx-dns
+  ```
+- Verify the domain is mapped to the correct IP
+
+**Step 11: Verify Nginx Configuration**
+
+SSH into the server and run:
+
+```bash
+# Check configuration file exists
+ls -la /etc/nginx/sites-available/{domain}.conf
+
+# Check symlink exists
+ls -la /etc/nginx/sites-enabled/{domain}.conf
+
+# Verify Nginx configuration is valid
+sudo nginx -t
+
+# Check Nginx is running
+sudo systemctl status nginx
+```
+
+All commands should succeed without errors.
+
+**Step 12: Test Portal Access**
+- Open a web browser
+- Navigate to `http://{domain}` (e.g., `http://delhi.dpsschools.edu.in`)
+- The student portal should load
+
+**Expected Result:**
+- Portal loads successfully
+- No certificate warnings (if HTTPS is configured)
+- Institute branding appears correct
+- No error messages visible
+
+If activation fails or the portal is not accessible, see the [Troubleshooting Reference](#troubleshooting-reference) section for common issues and solutions.
+
+### Deactivating an Institute
+
+If you need to take a portal offline:
+
+#### Deactivation Process
+
+**Step 1: Navigate to Active Institute**
+- Open the institute record
+- Verify status is currently "Active"
+- "Deactivate Institute" button should be visible
+
+**Step 2: Initiate Deactivation**
+- Click "Deactivate Institute" button (⊗ icon)
+- Confirmation dialog appears:
+  - Header: "Deactivate institute?"
+  - Message: "Clicking Ok below will Deactivate this institute, are you sure you want to continue?"
+
+**Step 3: Confirm Deactivation**
+- Click "Ok" to proceed
+- System will:
+  1. Remove Nginx virtual host configuration
+  2. Remove DNS CNAME record
+  3. Set status to "InActive"
+  4. Create audit trail entry
+
+**Step 4: Verify Deactivation**
+- Success message: "institute Deactivated successfully."
+- Status changes to "InActive"
+- "Activate Institute" button reappears
+- Portal becomes inaccessible (404 or connection error)
+
+#### When to Deactivate
+
+**Valid Reasons:**
+- Institute contract ended
+- Switching to different platform
+- Temporary suspension due to payment issues
+- Maintenance or configuration changes needed
+- Institute closure
+
+**Important:** Deactivation only removes infrastructure - it does not delete data. Student records, payment history, and configuration remain in the database and can be reactivated later.
+
+### Technical Implementation Details
+
+This section explains how the activation system works under the hood.
+
+#### Backend Service Implementation
+
+**File:** `solid-api/src/fees-portal/services/institute.service.ts`
+
+**Activation Method:** `activateInstitutePortal(id: number)`
+
+```typescript
+async activateInstitutePortal(id: number) {
+  // 1. Retrieve institute record
+  const institute = await this.findOne(id, {});
+
+  // 2. Construct domain name
+  const baseDoamin = process.env.EDU_BASE_DOMAIN || 'dpsschools.edu.in';
+  const domainName = `${institute.hostedPagePrefix}-${baseDoamin}`;
+
+  // 3. Create Nginx virtual host
+  await this.nginxVirtualHostProvider.makeVirtualHost(domainName);
+
+  // 4. Create DNS CNAME record
+  const portalCnameDomain = process.env.PORTAL_CNAME_DOMAIN;
+  if (!portalCnameDomain) {
+    throw new NotAcceptableException('PORTAL_CNAME_DOMAIN env var not configured');
+  }
+  await this.dns.createCnameRecord(domainName, portalCnameDomain, 300);
+
+  // 5. Update status
+  institute.status = 'Active';
+  await this.repo.save(institute);
+
+  // 6. Create audit entry
+  const postMessageOnActivate: PostChatterMessageDto = {
+    coModelEntityId: institute.id,
+    coModelName: 'institute',
+    messageBody: `
+### Institute Activated
+Institute is now live on domain: <a href="${domainName}" target="_blank" rel="noopener noreferrer">${domainName}</a>
+    `
+  };
+  await this.chatterMessageService.postMessage(postMessageOnActivate);
+
+  return { message: 'Institute activated successfully' };
+}
+```
+
+**Key Points:**
+- Domain name constructed from `hostedPagePrefix` and `EDU_BASE_DOMAIN`
+- Infrastructure provisioning happens before database update
+- If any step fails, exception is thrown (status remains "InActive")
+- Audit trail created after successful activation
+
+**Deactivation Method:** `deActivateInstitutePortal(id: number)`
+
+```typescript
+async deActivateInstitutePortal(id: number) {
+  const institute = await this.findOne(id, {});
+  const baseDoamin = process.env.EDU_BASE_DOMAIN || 'dpsschools.edu.in';
+  const domainName = `${institute.hostedPagePrefix}-${baseDoamin}`;
+
+  // 1. Remove Nginx virtual host
+  await this.nginxVirtualHostProvider.removeVirtualHost(domainName);
+
+  // 2. Remove DNS record
+  const portalCnameDomain = process.env.PORTAL_CNAME_DOMAIN;
+  if (!portalCnameDomain) {
+    throw new NotAcceptableException('PORTAL_CNAME_DOMAIN env var not configured');
+  }
+  await this.dns.removeCnameRecord(domainName, portalCnameDomain);
+
+  // 3. Update status
+  institute.status = 'InActive';
+  await this.repo.save(institute);
+
+  // 4. Create audit entry
+  const postMessageOnDeActivate: PostChatterMessageDto = {
+    coModelEntityId: institute.id,
+    coModelName: 'institute',
+    messageBody: '### Institute De Activated'
+  };
+  await this.chatterMessageService.postMessage(postMessageOnDeActivate);
+
+  return { message: 'Institute de activated successfully' };
+}
+```
+
+#### API Endpoints
+
+**File:** `solid-api/src/fees-portal/controllers/institute.controller.ts`
+
+**Activation Endpoint:**
+```typescript
+@ApiBearerAuth("jwt")
+@Post('activate/:id')
+async activateFeePortal(@Param('id') id: number) {
+  return this.service.activateInstitutePortal(id);
+}
+```
+
+**URL:** `POST /api/institute/activate/{id}`
+
+**Authentication:** Requires JWT Bearer token
+
+**Parameters:**
+- `id` (path parameter): Institute ID to activate
+
+**Response (Success):**
+```json
+{
+  "message": "Institute activated successfully"
+}
+```
+
+**Response (Error):**
+```json
+{
+  "statusCode": 406,
+  "message": "PORTAL_CNAME_DOMAIN env var not configured",
+  "error": "Not Acceptable"
+}
+```
+
+**Deactivation Endpoint:**
+```typescript
+@ApiBearerAuth("jwt")
+@Post('deactivate/:id')
+async deactivateFeePortal(@Param('id') id: number) {
+  return this.service.deActivateInstitutePortal(id);
+}
+```
+
+**URL:** `POST /api/institute/deactivate/{id}`
+
+**Authentication:** Requires JWT Bearer token
+
+**Parameters:**
+- `id` (path parameter): Institute ID to deactivate
+
+**Response:** Same structure as activation endpoint
+
+#### Nginx Virtual Host Provider
+
+**File:** `solid-api/src/fees-portal/services/ubuntu-nginx-virtual-host-provider.ts`
+
+**Purpose:** Manages Nginx server block configurations for institute domains
+
+**Method: `makeVirtualHost(domainName: string)`**
+
+**What It Does:**
+1. Validates domain name syntax (conservative regex for ASCII hostnames)
+2. Renders Nginx server block template with:
+   - Server name: `{domainName}`
+   - Listen: Port 80
+   - Proxy pass: `{EDU_FRONTEND_UPSTREAM}`
+   - Proxy headers: Host, X-Real-IP, X-Forwarded-For, X-Forwarded-Proto
+3. Writes configuration to `/etc/nginx/sites-available/{domainName}.conf`
+4. Creates symlink in `/etc/nginx/sites-enabled/{domainName}.conf`
+5. Tests Nginx configuration: `nginx -t`
+6. Reloads Nginx: `systemctl reload nginx`
+
+**Server Block Template:**
+```nginx
+server {
+    listen 80;
+    server_name {domainName};
+
+    location / {
+        proxy_pass {EDU_FRONTEND_UPSTREAM};
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }
+}
+```
+
+**Method: `removeVirtualHost(domainName: string)`**
+
+**What It Does:**
+1. Removes symlink from `/etc/nginx/sites-enabled/{domainName}.conf`
+2. Removes configuration from `/etc/nginx/sites-available/{domainName}.conf`
+3. Tests Nginx configuration: `nginx -t`
+4. Reloads Nginx: `systemctl reload nginx`
+
+**Error Handling:**
+- Throws exception if domain name is invalid
+- Throws exception if Nginx test fails
+- Throws exception if Nginx reload fails
+- All operations are atomic (rollback on failure)
+
+#### DNS Management - Route53 Provider
+
+**File:** `solid-api/src/fees-portal/services/route53-website-dns.manager.ts`
+
+**Purpose:** Manages DNS CNAME records using AWS Route53
+
+**Method: `createCnameRecord(name: string, value: string, ttl: number)`**
+
+**What It Does:**
+1. Constructs Route53 API request:
+   - Action: UPSERT (create or update)
+   - Type: CNAME
+   - Name: `{name}` (e.g., `delhi.dpsschools.edu.in`)
+   - Value: `{value}` (PORTAL_CNAME_DOMAIN)
+   - TTL: `{ttl}` seconds (default: 300)
+2. Calls Route53 API: `changeResourceRecordSets`
+3. Waits for change to propagate (async)
+
+**Prerequisites:**
+- AWS credentials configured (IAM role or environment variables)
+- Route53 hosted zone ID provided to constructor
+- Hosted zone must match `EDU_BASE_DOMAIN`
+
+**Method: `removeCnameRecord(name: string, value: string)`**
+
+**What It Does:**
+1. Constructs Route53 API request with DELETE action
+2. Calls Route53 API to remove the CNAME record
+3. Waits for change to propagate
+
+#### DNS Management - Hosts File Provider
+
+**File:** `solid-api/src/fees-portal/services/hosts-file-website-dns.manager.ts`
+
+**Purpose:** Manages DNS entries in local `/etc/hosts` file for development
+
+**Method: `createCnameRecord(name: string, value: string, ttl: number)`**
+
+**What It Does:**
+1. Reads `/etc/hosts` file
+2. Checks if entry already exists
+3. If not, appends entry:
+   ```
+   127.0.0.1  {name} # solidx-dns
+   ```
+4. Writes updated content back to `/etc/hosts`
+
+**Method: `removeCnameRecord(name: string, value: string)`**
+
+**What It Does:**
+1. Reads `/etc/hosts` file
+2. Filters out lines containing `{name} # solidx-dns`
+3. Writes filtered content back to `/etc/hosts`
+
+**Prerequisites:**
+- Application runs with sudo/root privileges
+- `/etc/hosts` file is writable
+- File system allows file modification
+
+**Marker System:**
+- All entries tagged with `# solidx-dns` comment
+- Allows safe removal without affecting other entries
+- Prevents duplicate entries
+
+#### DNS Provider Selection
+
+**File:** `solid-api/src/fees-portal/fees-portal.module.ts`
+
+The DNS provider is selected via a factory provider that should be added to the `providers` array in the module:
+
+```typescript
+{
+  provide: WEBSITE_DNS_MANAGER,
+  useFactory: (): IWebsiteDnsManager => {
+    // 'route53' | 'hosts'
+    const which = (process.env.DNS_PROVIDER ?? 'hosts').toLowerCase();
+    if (which === 'route53') {
+      const hostedZoneId = process.env.ROUTE53_HOSTED_ZONE_ID;
+      if (!hostedZoneId) {
+        throw new Error('ROUTE53_HOSTED_ZONE_ID is required when DNS_PROVIDER=route53');
+      }
+      return new Route53WebsiteDnsManager(hostedZoneId);
+    }
+    return new HostsFileWebsiteDnsManager();
+  },
+}
+```
+
+**Logic:**
+- Reads `DNS_PROVIDER` from `process.env` (defaults to `"hosts"` if not set)
+- If `"route53"`: Validates that `ROUTE53_HOSTED_ZONE_ID` is set, then uses `Route53WebsiteDnsManager`
+- If `"hosts"` or not set: Uses `HostsFileWebsiteDnsManager`
+- Case-insensitive comparison
+- Throws an error at startup if Route53 is selected but the hosted zone ID is missing
+
+**Recommended Setup:**
+- **Production:** `DNS_PROVIDER=route53` (ensure `ROUTE53_HOSTED_ZONE_ID` is also set)
+- **Local Development:** `DNS_PROVIDER=hosts` (or omit)
+
+#### UI Components
+
+**Activate Button Component:**
+
+**File:** `solid-ui/app/admin/extensions/headerButtons/activate-portal.tsx`
+
+**Component:** `InstituteActivateById`
+
+```typescript
+export default function InstituteActivateById({ formData, refetch, onClose }: Props) {
+  const session = useSession();
+  const [loading, setLoading] = useState(false);
+
+  const handleActivate = async () => {
+    setLoading(true);
+    try {
+      // Call activation API
+      const response = await fetch(`/api/institute/activate/${formData.id}`, {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${session.data.user.accessToken}`,
+          'Content-Type': 'application/json',
+        },
+      });
+
+      if (!response.ok) throw new Error('Activation failed');
+
+      // Update status in UI
+      await fetch(`/api/institute/${formData.id}`, {
+        method: 'PATCH',
+        headers: {
+          'Authorization': `Bearer ${session.data.user.accessToken}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ status: 'Active' }),
+      });
+
+      toast.success('Institute activated successfully.');
+      onClose();
+      refetch();
+    } catch (error) {
+      toast.error('Failed to activate institute.');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <ConfirmDialog
+      header="Activate institute ?"
+      message="Clicking Ok below will activate and host this institute, are you sure you want to continue?"
+      onConfirm={handleActivate}
+      onCancel={onClose}
+      loading={loading}
+    />
+  );
+}
+```
+
+**Key Features:**
+- Confirmation dialog prevents accidental activation
+- Shows loading state during provisioning
+- Success/error toast notifications
+- Automatic form refresh after activation
+- JWT authentication with session token
+
+**Deactivate Button Component:**
+
+**File:** `solid-ui/app/admin/extensions/headerButtons/deActivate-portal.tsx`
+
+**Component:** `InstituteDeactivateById`
+
+Similar structure to activate button, but:
+- Different confirmation message
+- Calls `/api/institute/deactivate/{id}` endpoint
+- Sets status to "InActive" on success
+
+#### Conditional UI - Edit Handler
+
+**File:** `solid-ui/app/admin/extensions/instituteEditHandler.ts`
+
+```typescript
+const instituteEditHandler = async (event: any) => {
+  const { viewMetadata, formData, fieldsMetadata } = event;
+  const { status } = formData || {};
+
+  const layoutManager = new SolidViewLayoutManager(viewMetadata.layout);
+
+  if(status === "InActive"){
+    layoutManager.updateNodeAttributes("InstituteActivateById", { visible: true });
+    layoutManager.updateNodeAttributes("InstituteDeactivateById", { visible: false });
+  } else if(status === "Active"){
+    layoutManager.updateNodeAttributes("InstituteActivateById", { visible: false });
+    layoutManager.updateNodeAttributes("InstituteDeactivateById", { visible: true });
+  }
+
+  return {
+    layoutChanged: true,
+    dataChanged: false,
+    newLayout: layoutManager.getLayout()
+  };
+};
+
+export default instituteEditHandler;
+```
+
+**Purpose:** Controls button visibility based on current status
+
+**Logic:**
+- When status = "InActive": Show "Activate" button, hide "Deactivate" button
+- When status = "Active": Show "Deactivate" button, hide "Activate" button
+
+**How It Works:**
+- Called when institute form loads
+- Receives current form data (including status)
+- Uses `SolidViewLayoutManager` to update layout
+- Returns modified layout to UI framework
+
+**Benefits:**
+- Prevents invalid actions (can't activate what's already active)
+- Clear visual indication of current state
+- Follows state machine pattern
+
+### UI Configuration
+
+**Button Configuration in Form View:**
+
+Both buttons are configured as header buttons in the institute form view layout:
+
+**Activate Institute Button:**
+```json
+{
+  "attrs": {
+    "label": "Activate Institute",
+    "icon": "pi pi-caret-right",
+    "action": "InstituteActivateById",
+    "customComponentIsSystem": true,
+    "actionInContextMenu": true,
+    "openInPopup": true,
+    "visible": false
+  }
+}
+```
+
+**Deactivate Institute Button:**
+```json
+{
+  "attrs": {
+    "label": "Deactivate Institute",
+    "icon": "pi pi-circle-off",
+    "action": "InstituteDeactivateById",
+    "customComponentIsSystem": true,
+    "actionInContextMenu": true,
+    "openInPopup": true,
+    "visible": false
+  }
+}
+```
+
+**Configuration Properties:**
+- `action`: References the React component name
+- `customComponentIsSystem`: Indicates this is a custom component (not auto-generated)
+- `actionInContextMenu`: Shows button in context menu (right-click/three-dot menu)
+- `openInPopup`: Opens in a modal dialog
+- `visible`: Initially hidden (controlled by edit handler)
+
+### Security Considerations
+
+#### Authentication & Authorization
+
+**Endpoint Security:**
+- All activation/deactivation endpoints require JWT authentication
+- Bearer token must be included in request headers
+
+**Role-Based Access Control:**
+- Only Institute Admin role can activate/deactivate institutes
+- This is enforced by the `InstituteController.activateFeePortal` and `InstituteController.deactivateFeePortal` permissions granted in the [Creating Roles & Permissions](#creating-roles--permissions) section above
+
+#### Audit & Compliance
+
+**Audit Trail:**
+- All activation/deactivation events logged to Chatter
+- Timestamp, user, and action recorded
+- Immutable audit log
+
+**Rollback Capability:**
+- Deactivation removes infrastructure but preserves data
+- Can reactivate institute without data loss
+- Configuration history maintained
+
+### Environment Configuration Reference
+
+This section details all environment variables used by the activation system.
+
+#### Required Environment Variables
+
+**PORTAL_CNAME_DOMAIN**
+- **Description:** Target domain for CNAME records
+- **Required:** Yes
+- **Example:** `"portal.dpsschools.edu.in"`
+- **Used By:** DNS record creation
+- **Impact if Missing:** Activation fails with error
+
+**EDU_BASE_DOMAIN**
+- **Description:** Base domain for institute subdomains
+- **Required:** No
+- **Default:** `"dpsschools.edu.in"`
+- **Example:** `"edu.yourcompany.com"`
+- **Used By:** Domain name construction
+
+**EDU_FRONTEND_UPSTREAM**
+- **Description:** Upstream server for Nginx proxy i.e (the school portal frontend application)
+- **Required:** No
+- **Default:** `"http://127.0.0.1:3002"`
+- **Example:** `"http://localhost:3000"`
+- **Used By:** Nginx virtual host configuration
+
+#### Optional Environment Variables
+
+**DNS_PROVIDER**
+- **Description:** DNS management provider
+- **Required:** No
+- **Default:** `"hosts"`
+- **Allowed Values:** `"route53"`, `"hosts"`
+- **Example:** `"route53"`
+- **Used By:** DNS provider selection
+
+#### Route53-Specific Configuration
+
+**AWS Credentials:**
+- Can be provided via IAM role (recommended) or environment variables
+- Required environment variables:
+  - `AWS_ACCESS_KEY_ID`
+  - `AWS_SECRET_ACCESS_KEY`
+  - `AWS_REGION` (e.g., `"us-east-1"`)
+
+**ROUTE53_HOSTED_ZONE_ID**
+- Provided programmatically to Route53WebsiteDnsManager constructor
+- Must match the hosted zone for `EDU_BASE_DOMAIN`
+- Example: `"Z1234567890ABC"`
+
+#### Example .env Configuration
+
+**Production Setup:**
+```bash
+# Base configuration
+EDU_BASE_DOMAIN=dpsschools.edu.in
+PORTAL_CNAME_DOMAIN=portal.dpsschools.edu.in
+DNS_PROVIDER=route53
+EDU_FRONTEND_UPSTREAM=http://127.0.0.1:3002
+
+# AWS credentials (or use IAM role)
+AWS_ACCESS_KEY_ID=AKIA...
+AWS_SECRET_ACCESS_KEY=...
+AWS_REGION=us-east-1
+
+ROUTE53_HOSTED_ZONE_ID=Z1234567890ABC
+```
+
+**Local Development Setup:**
+```bash
+# Base configuration
+EDU_BASE_DOMAIN=edu.local
+PORTAL_CNAME_DOMAIN=portal.local
+DNS_PROVIDER=hosts
+EDU_FRONTEND_UPSTREAM=http://localhost:3000
+```
+
+### Troubleshooting Reference
+
+#### Common Issues and Solutions
+
+**Issue: Activation button not visible**
+- **Cause:** Status is already "Active" or edit handler not working
+- **Solution:**
+  - Check current status value
+  - Verify edit handler is configured in form view
+  - Check browser console for JavaScript errors
+
+**Issue: "PORTAL_CNAME_DOMAIN env var not configured" error**
+- **Cause:** Missing required environment variable
+- **Solution:**
+  - Add `PORTAL_CNAME_DOMAIN` to `.env` file
+  - Restart API server
+  - Verify value with `echo $PORTAL_CNAME_DOMAIN`
+
+**Issue: Nginx reload fails**
+- **Cause:** Syntax error in configuration or permission issue
+- **Solution:**
+  - Run `sudo nginx -t` to check syntax
+  - Review generated configuration file
+  - Check Nginx error logs: `sudo journalctl -u nginx`
+  - Verify application has permission to reload Nginx
+
+**Issue: DNS record not created (Route53)**
+- **Cause:** Invalid AWS credentials or wrong hosted zone
+- **Solution:**
+  - Verify AWS credentials are valid
+  - Check hosted zone ID matches `EDU_BASE_DOMAIN`
+  - Confirm IAM permissions include `route53:ChangeResourceRecordSets`
+  - Check AWS service status
+
+**Issue: Portal returns 502 Bad Gateway**
+- **Cause:** Frontend upstream not responding
+- **Solution:**
+  - Verify frontend service is running
+  - Check `EDU_FRONTEND_UPSTREAM` is correct
+  - Test upstream directly: `curl http://127.0.0.1:3002`
+  - Check frontend logs for errors
+
+**Issue: Portal loads but shows wrong content**
+- **Cause:** Frontend routing not matching domain to institute
+- **Solution:**
+  - Verify `hostedPagePrefix` is unique
+  - Check frontend routing logic
+  - Clear browser cache
+  - Test in incognito/private window
+
+**Issue: Activation succeeds but portal still inaccessible**
+- **Cause:** DNS propagation delay or browser cache
+- **Solution:**
+  - Wait 10-15 minutes for DNS propagation
+  - Flush local DNS cache
+  - Test from different network/location
+  - Use `nslookup` or `dig` to verify DNS
+
+**Issue: Cannot deactivate institute**
+- **Cause:** Permission issue or configuration locked
+- **Solution:**
+  - Verify you're logged in as Institute Admin
+  - Check if there are active payment collections
+  - Review server logs for specific error
+  - Try deactivating from API directly (debugging)
+
+#### Diagnostic Commands
+
+**Check DNS Resolution:**
+```bash
+# Using nslookup
+nslookup delhi.dpsschools.edu.in
+
+# Using dig
+dig delhi.dpsschools.edu.in
+
+# Check CNAME specifically
+dig CNAME delhi.dpsschools.edu.in
+```
+
+**Check Nginx Configuration:**
+```bash
+# Test configuration syntax
+sudo nginx -t
+
+# View configuration
+cat /etc/nginx/sites-available/delhi.dpsschools.edu.in.conf
+
+# Check if symlink exists
+ls -la /etc/nginx/sites-enabled/ | grep delhi
+
+# Reload Nginx
+sudo systemctl reload nginx
+
+# Check Nginx status
+sudo systemctl status nginx
+```
+
+**Check Application Logs:**
+```bash
+# PM2 logs
+pm2 logs solid-api --lines 100
+
+# Direct log files
+tail -f /var/log/solid-api/error.log
+tail -f /var/log/solid-api/combined.log
+```
+
+**Check Hosts File (Local):**
+```bash
+# View hosts file
+cat /etc/hosts
+
+# Search for specific domain
+cat /etc/hosts | grep delhi
+
+# Check file permissions
+ls -la /etc/hosts
+```
+
+**Test Portal Access:**
+```bash
+# Simple GET request
+curl -I http://delhi.dpsschools.edu.in
+
+# Full response
+curl http://delhi.dpsschools.edu.in
+
+# With verbose output
+curl -v http://delhi.dpsschools.edu.in
+
+# Follow redirects
+curl -L http://delhi.dpsschools.edu.in
+```
+
+### Success Criteria
+
+You've successfully activated an institute when:
+
+- [ ] Status field shows "Active" in database and UI
+- [ ] "Activate Institute" button is hidden
+- [ ] "Deactivate Institute" button is visible
+- [ ] Nginx configuration file exists in sites-available
+- [ ] Symlink exists in sites-enabled
+- [ ] DNS CNAME record created and resolving
+- [ ] Portal accessible at `http://{hostedPagePrefix}-{EDU_BASE_DOMAIN}`
+- [ ] Portal loads without errors
+- [ ] Institute branding appears correctly
+- [ ] Student portal login page accessible
+- [ ] Audit trail entry created in Chatter
+- [ ] Institute Admin notified of activation
+
+**This completes the Activate Institute guide. For questions or issues not covered here, contact the platform development team.**

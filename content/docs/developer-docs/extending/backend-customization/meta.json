@@ -1,6 +1,8 @@
 {
   "title": "Backend Customization",
+  "icon": "wrench",
   "pages": [
+    "index",
     "extending-controllers",
     "extending-services",
     "crud-service",
@@ -13,6 +15,7 @@
     "solid-registry",
     "security-rules",
     "dynamic-selection-providers",
+    "custom-seeders",
     "dashboard-providers",
     "sms-providers",
     "email-providers",

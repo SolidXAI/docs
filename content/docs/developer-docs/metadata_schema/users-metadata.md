@@ -1,5 +1,6 @@
 ---
 title: Users
+icon: "users"
 description: Metadata schema for populating users in SolidX applications.
 summary: This document describes how to populate initial users in SolidX using metadata configuration. Users can be created with attributes including full name, username, email, mobile number, and optional role assignments. If no password is provided, the system auto-generates secure passwords and emails them to the specified addresses. Users are created with the default role specified in the IAM_DEFAULT_ROLE environment variable, or the Public role if not set. The metadata supports specifying multiple roles per user and includes examples of creating users with different configurations.
 json_pointer: "/users"

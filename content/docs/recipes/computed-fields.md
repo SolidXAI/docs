@@ -3,6 +3,8 @@ title: Computed Fields
 icon: "calculator"
 ---
 
+# Computed Fields
+
 In SolidX, Computed Fields are used to automatically calculate field values based on other data. These fields aren’t manually entered by users but are filled during lifecycle events like afterInsert or afterUpdate. They help keep data consistent and reduce manual effort.
 
 ### Creating a Computed Field
@@ -38,7 +40,7 @@ import {
   IEntityPreComputeFieldProvider,
   IEntityPostComputeFieldProvider,
   ComputedFieldMetadata,
-} from '@solidstarters/solid-core';
+} from '@solidxai/core';
 import { kebabCase } from 'lodash';
 import { PaymentCollectionItemDetail } from '../entities/payment-collection-item-detail.entity';
 import { EntityManager } from 'typeorm';

@@ -1,5 +1,6 @@
 {
-  "title": "Authentication APIs",
+  "title": "Authentication",
+  "icon": "key-round",
   "pages": [
     "password-authentication",
     "otp-authentication",

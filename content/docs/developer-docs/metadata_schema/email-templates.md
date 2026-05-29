@@ -1,5 +1,6 @@
 ---
-title: Email Templates
+title: Email
+icon: "mail"
 description: Metadata schema for populating email templates in SolidX applications.
 summary: This document explains email template metadata in SolidX, which enables creation and management of HTML/text-based email templates with dynamic content and attachments. Templates use Handlebars syntax for variable insertion and are stored in separate HTML files referenced by the metadata. Key attributes include template name, display name, body file reference, subject line, description, active status, and template type (text/html). Examples demonstrate configuring templates for payment reminders and OTP verification, including sample HTML template files with dynamic variables, styling, and layout structures. The system supports template file organization in the solid-api/src directory.
 json_pointer: "/emailTemplates"
@@ -11,9 +12,10 @@ items_attributes_doc: "#email-templates-metadata-attributes"
 solidx_concerns: [create/update_email_template, new_email_provider]
 ---
 
-> **Where it lives**  
-> **JSON Pointer:** `/emailTemplates`  
-> **JSONPath:** `$.emailTemplates`  
+# Email Templates
+> **Where it lives**
+> **JSON Pointer:** `/emailTemplates`
+> **JSONPath:** `$.emailTemplates`
 > **Parent:** Root of the metadata file
 
 ## Overview
@@ -21,10 +23,11 @@ Email Templates in `SolidX` allow you to create and manage HTML/Text based email
 
 ### Example: Email Templates Metadata
 Below is an example configuration for two email templates: one for sending payment reminders and another for OTP verification. The body of the email templates is stored in separate HTML files i.e (specified in the `body` attribute)
+
 <details>
 <summary>Email Templates Schema</summary>
 
-``` json
+```json
 {
   ..., // Other metadata
   "emailTemplates": [
@@ -58,10 +61,11 @@ Below are examples of email template files that can be referenced in the `body` 
 This example uses Handlebars syntax for dynamic content insertion.
 
 The variables used in this template (like `{{student.studentName}}`, `{{dueDetails.totalAmountDue}}`, etc.) should correspond to the data structure passed when sending the email.
+
 <details>
   <summary>Email Template File</summary>
 
-``` html
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -117,39 +121,39 @@ The variables used in this template (like `{{student.studentName}}`, `{{dueDetai
   </style>
 </head>
 <body>
-  <div>
-    <div>
-      {{#if companyLogoUrl}}<div><img src="{{companyLogoUrl}}" alt="Company Logo"/></div>{{/if}}
-      {{#with student}}Hey {{studentName}}{{/with}}
-      {{student.institute.instituteName}}
-      <p>{{student.institute.instituteName}} institute is requesting you to pay the due payments of Student ID <span>{{student.studentLoginId}}</span></p>
-      <p>Ref: <span>{{dueDetails.paymentCollections}}</span></p>
+  <div class="email-container">
+    <div class="header-section">
+      {{#if companyLogoUrl}}<div class="logo"><img src="{{companyLogoUrl}}" alt="Company Logo"/></div>{{/if}}
+      {{#with student}}<h1 class="greeting">Hey {{studentName}}</h1>{{/with}}
+      <h2 class="main-message">{{student.institute.instituteName}}</h2>
+      <p class="payment-request">{{student.institute.instituteName}} institute is requesting you to pay the due payments of Student ID <span class="highlight-blue">{{student.studentLoginId}}</span></p>
+      <p class="ref-number">Ref: <span class="highlight-blue">{{dueDetails.paymentCollections}}</span></p>
     </div>
-    <div>
-      Payment Details
-      <div>
-        <div><img src="logo.svg" alt="School Logo"/><span></span></div>
-        <table><tr><td>Total Amount</td><td>₹ {{dueDetails.totalAmountDue}}</td></tr></table>
-        <table><tr><td>Due Date:</td><td>{{dueDetails.createdAt}}</td></tr></table>
-        <table><tr><td>Institution:</td><td>{{student.institute.instituteName}}</td></tr></table>
-        <table><tr><td>Fee Type:</td><td>{{dueDetails.feeTypes}}</td></tr></table>
-        <table><tr><td>Payment Status:</td><td>Pending</td></tr></table>
+    <div class="payment-details-section">
+      <h3 class="section-title">Payment Details</h3>
+      <div class="payment-card">
+        <div class="payment-header"><img src="logo.svg" alt="School Logo" class="payment-logo"/><span class="payment-date"></span></div>
+        <table class="payment-row-table"><tr><td class="payment-label">Total Amount</td><td class="payment-value amount-value">₹ {{dueDetails.totalAmountDue}}</td></tr></table>
+        <table class="payment-row-table"><tr><td class="payment-label">Due Date:</td><td class="payment-value">{{dueDetails.createdAt}}</td></tr></table>
+        <table class="payment-row-table"><tr><td class="payment-label">Institution:</td><td class="payment-value">{{student.institute.instituteName}}</td></tr></table>
+        <table class="payment-row-table"><tr><td class="payment-label">Fee Type:</td><td class="payment-value">{{dueDetails.feeTypes}}</td></tr></table>
+        <table class="payment-row-table"><tr><td class="payment-label">Payment Status:</td><td class="payment-value status-pending">Pending</td></tr></table>
       </div>
-      <a href="{{dueDetails.redirectUrl}}">Pay Now</a>
+      <a href="{{dueDetails.redirectUrl}}" class="pay-button">Pay Now</a>
     </div>
-    <div>
-      Need Assistance?
+    <div class="help-section">
+      <h3 class="help-title">Need Assistance?</h3>
       {{#with student}}
-        <p>If you have any questions, we're just an <a href="mailto:{{student.institute.supportEmail}}">email</a> or <a href="tel:{{student.institute.supportMobile}}">call</a> away.</p>
+        <p class="help-text">If you have any questions, we're just an <a href="mailto:{{student.institute.supportEmail}}" class="help-link">email</a> or <a href="tel:{{student.institute.supportMobile}}" class="help-link">call</a> away.</p>
       {{/with}}
     </div>
-    <div>
-      {{#if companyLogoUrl}}<div><img src="{{companyLogoUrl}}" alt="Company Logo"/></div>{{/if}}
-      <div>
-        <span>Support email: {{student.institute.supportEmail}}</span>
-        <span>Support Mobile: {{student.institute.supportMobile}}</span>
+    <div class="footer-section">
+      {{#if companyLogoUrl}}<div class="logo"><img src="{{companyLogoUrl}}" alt="Company Logo"/></div>{{/if}}
+      <div class="footer-links">
+        <span class="support-value-email">Support email: {{student.institute.supportEmail}}</span>
+        <span class="support-value-email">Support Mobile: {{student.institute.supportMobile}}</span>
       </div>
-      <div>
+      <div class="footer-links">
         <a href="{{dueDetails.redirectUrl}}">FAQ</a> | <a href="{{dueDetails.redirectUrl}}">Privacy Policy</a> | <a href="{{dueDetails.redirectUrl}}">Terms and Conditions</a>
       </div>
     </div>
@@ -174,8 +178,8 @@ This code is valid for 10 minutes. Please do not share this code with anyone.
 
 If you did not attempt to sign up, please disregard this email.
 
-Regards,  
-The {{ solidAppName }} Team  
+Regards,
+The {{ solidAppName }} Team
 
 ```
 </details>
@@ -183,14 +187,15 @@ The {{ solidAppName }} Team
 ### Example : Sending Email Using Template
 
 Below is a code snippet demonstrating how to send an email using the defined email templates via the `MailServiceFactory`. This example shows how to send an OTP verification email to a user.
+
 <details>
 <summary>Email Sending Code Snippet</summary>
 
-``` ts
+```ts
 // Example: sending an email via the MailServiceFactory
 
 import { Injectable } from '@nestjs/common';
-import { MailFactory } from '@solidstarters/solid-core';
+import { MailFactory } from '@solidxai/core';
 
 @Injectable()
 export class MailerExampleService {
@@ -235,7 +240,9 @@ Display name for the email template.
 ####  Further Reference
  -  **Email Body Creation:** [Email Templates Guide](../../admin-docs/notifications/email-templates.md)
 
-Please refer to the [Handlebars Documentation](https://handlebarsjs.com/) for more information on using Handlebars syntax in email templates.
+<Callout type="info">
+  Please refer to the [Handlebars Documentation](https://handlebarsjs.com/) for more information on using Handlebars syntax in email templates.
+</Callout>
 
 ### `subject` *(string, required)*
 Subject line of the email template. It can include dynamic placeholders.

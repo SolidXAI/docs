@@ -1,7 +1,9 @@
 ---
-title: SolidX Handlers
+title: Handlers
 icon: "webhook"
 ---
+
+# SolidX Handlers
 
 SolidX Handlers let you add custom logic and behavior to forms, lists, or pages in the SolidX UI. They’re ideal for things like validations, dynamic field updates, or workflow automation. Handlers work through the SolidX extension system, so you can customize without touching core code.
 
@@ -69,7 +71,7 @@ export default paymentCollectionHandler;
 - After creating handler we have to register this handler in solid-extension.ts file.
 
 ```tsx
-import {registerExtensionFunction } from "@solidstarters/solid-core-ui";
+import {registerExtensionFunction } from "@solidxai/core-ui";
 import ImageGrid12Column from "./admin/extensions/ImageGrid12Column";
 import paymentCollectionHandler from "./admin/extensions/paymentCollectionChangeHandler";
 
@@ -113,4 +115,5 @@ registerExtensionFunction('paymentCollectionHandler', paymentCollectionHandler);
 }
 
 ```
+
 

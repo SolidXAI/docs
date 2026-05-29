@@ -1,33 +1,55 @@
 ---
-title: Update Endpoints
+title: Update
+icon: "pen-line"
 description: Information about the update endpoints of the REST API, including usage, parameters, and responses.
 summary: This document explains the update endpoints in SolidX's REST API, covering both partial updates (PATCH method for updating specific fields) and full updates (PUT method for replacing entire records). It provides detailed examples of updates without media files (using JSON content type) and updates with media files (using multipart/form-data). Each section includes HTTP headers, request formats, sample payloads, and response structures. Both update methods are idempotent and require JWT bearer authentication.
 ---
 
+
+#  Update Endpoints in SolidX
+
 This section provides details about the **Update Endpoints** of the REST API, including usage patterns, headers, request/response formats, and examples of both **partial** and **full** updates.
+
+
 
 ##  Types of Updates
 
 ### 1 Partial Update
 - Method: `PATCH`
 - Purpose: Update specific fields of a record without affecting the rest.
-<details>
-<summary>Example: Update `feeType` Field</summary>
+
+<details open>
+<summary>
+    
+      Example: Update <code>feeType</code> Field
+  </summary>
+
+<h4 className=" ">
+    
 
 ####  Headers
+</h4>
 
 ```http
 Content-Type: application/json
 Authorization: Bearer <token>
 ```
 
- ####  Request
+ <h4 className=" ">
+    
+
+####  Request 
+  </h4>
 
 ```http
 PATCH /api/fee-type/1
 ```
 
- ####  Body
+ <h4 className=" ">
+    
+
+####  Body
+  </h4>
   
 ```json
 {
@@ -35,7 +57,14 @@ PATCH /api/fee-type/1
 }
 ```
 
- ####   Response
+
+
+
+ <h4 className=" ">
+    
+
+####   Response
+  </h4>
   
   ```json
 {
@@ -56,29 +85,48 @@ PATCH /api/fee-type/1
   }
 }
 ```
+
 </details>
+
+
 
 ### 2 Full Update
 - Method: `PUT`
 - Purpose: Replace the entire model with a new object.
 - Idempotent: Yes (repeated calls with the same payload have the same effect).
-<details>
-<summary>Example: Full Update of Fee Type</summary>
+
+<details open>
+<summary>
+    
+      Example: Full Update of Fee Type
+  </summary>
+
+<h4 className=" ">
+    
 
 ####  Headers
+</h4>
 
 ```http
 Content-Type: application/json
 Authorization: Bearer <token>
 ```
 
- ####  Request
+ <h4 className=" ">
+    
+
+####  Request 
+  </h4>
 
 ```http
 PUT /api/fee-type/1
 ```
 
- ####  Body
+ <h4 className=" ">
+    
+
+####  Body
+  </h4>
 
 ```json
 {
@@ -88,7 +136,11 @@ PUT /api/fee-type/1
 }
 ```
 
- ####   Response
+ <h4 className=" ">
+    
+
+####   Response
+  </h4>
   
 ```json
 {
@@ -111,13 +163,21 @@ PUT /api/fee-type/1
   }
 }
 ```
+
 </details>
+
+
 
 ##  Update Without Media
 
 Used when no files (like images or documents) are uploaded.
-<details>
-<summary>Example: JSON-only Update</summary>
+
+<details open>
+<summary>
+    
+       Example: JSON-only Update
+  </summary>
+
 
 ```http
 PATCH /api/institute-user/1
@@ -131,13 +191,20 @@ Authorization: Bearer <token>
   "email": "admin@institute.com"
 }
 ```
+
 </details>
+
+
 
 ##  Update With Media
 
 Used when the request includes file uploads (e.g., profile pictures, attachments).
-<details>
-<summary>Example: Update with Multipart Form Data</summary>
+
+<details open>
+<summary>
+    
+       Example: Update with Multipart Form Data
+</summary>
 
 ```http
 PATCH /api/institute-user/1
@@ -157,5 +224,7 @@ updateDto: {
 }
 files: profile-picture.jpg
 ```
+
 </details>
+
 

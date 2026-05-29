@@ -1,10 +1,17 @@
 ---
-title: Password Authentication
+title: Password
+icon: "key-round"
 description: Information about password-based authentication APIs
 summary: Comprehensive documentation of SolidX password-based authentication APIs. Covers seven endpoints - Register (with environment variables for enabling registration), Authenticate (login with username and password, returns JWT tokens), Refresh Tokens (obtain new tokens using refresh token), Forgot Password (password reset flow), Change Password (for authenticated users), Get User Info (retrieve current user details), and Logout. Includes HTTP headers, request and response formats, error codes, and security considerations.
 ---
 
+
+
+#  Password Authentication
+
 This section covers the password-based authentication APIs available in SolidX.
+
+
 
 ##  Implementation Overview
 
@@ -18,22 +25,40 @@ SolidX provides a comprehensive password-based authentication mechanism with the
 6. **Get User Info**
 7. **Logout**
 
+
+
 ##  1. Register
 
 Allows users to create a new account.
 
-  ###  Environment Variables
+  <h3 className=" ">
+    
+
+###  Environment Variables
+</h3>
+
 
 - `IAM_PASSWORD_REGISTRATION_ENABLED`: Enables/disables registration.
 - `IAM_ALLOW_PUBLIC_REGISTRATION`: Allows public registration when set to `true`.
 
+
+<h3 className=" ">
+    
+
 ###  Headers
+</h3>
 
   ```http
   Content-Type: application/json
   ```
 
-  ###  Request Body
+  <h3 className=" ">
+    
+
+###  Request Body
+  </h3>
+
+
 
 ```json
 {
@@ -46,7 +71,12 @@ Allows users to create a new account.
 }
 ```
 
-  ###  Response Body
+  <h3 className=" ">
+    
+
+###  Response Body
+  </h3>
+
 
 ```json
 {
@@ -64,22 +94,36 @@ Allows users to create a new account.
 
 >  **Note**: The response body can be optimized. It currently includes sensitive data like passwords.
 
+
+
 ##  2. Authenticate
 
 Log in and receive access and refresh tokens.
 
-  ###  Environment Variables
+  <h3 className=" ">
+    
+
+###  Environment Variables  
+</h3>
 
 - `IAM_JWT_ACCESS_TOKEN_TTL`: TTL for access tokens (default: 60 mins).
 - `IAM_JWT_REFRESH_TOKEN_TTL`: TTL for refresh tokens (default: 1 day).
 
+<h3 className=" ">
+    
+
 ###  Headers
+</h3>
 
 ```http
 Content-Type: application/json
 ```
 
-  ###  Request Body
+  <h3 className=" ">
+    
+
+###  Request Body
+  </h3>
 
 ```json
 {
@@ -89,7 +133,11 @@ Content-Type: application/json
 }
 ```
 
-  ###  Response Body
+  <h3 className=" ">
+    
+
+###  Response Body
+  </h3>
 
 ```json
 {
@@ -105,17 +153,27 @@ Content-Type: application/json
 }
 ```
 
+
+
 ##  3. Refresh Tokens
 
 Refresh the access token using a valid refresh token.
 
+<h3 className=" ">
+    
+
 ###  Headers
+</h3>
 
 ```http
 Content-Type: application/json
 ```
 
+<h3 className=" ">
+    
+
 ###  Request Body
+  </h3>
 
 ```json
 {
@@ -123,7 +181,11 @@ Content-Type: application/json
 }
 ```
 
-  ###  Response Body
+  <h3 className=" ">
+    
+
+###  Response Body
+  </h3>
 
 ```json
 {
@@ -132,21 +194,38 @@ Content-Type: application/json
 }
 ```
 
+
+
 ##  4. Forgot Password
 
 Initiates and confirms password reset flow.
 
-  ###  Environment Variables
+  <h3 className=" ">
+    
+
+###  Environment Variables
+</h3>
 
 - `IAM_OTP_EXPIRY`: OTP expiry time (default: 10 mins).
 
-  ###  Initiate Request
+
+  <h3 className=" ">
+    
+
+###  Initiate Request
+</h3>
 
 ```http
 POST /api/iam/initiate/forgot-password
 ```
 
+
+<h3 className=" ">
+    
+
 ###  Headers
+</h3>
+
 
 ```http
 Content-Type: application/json
@@ -193,9 +272,15 @@ POST /api/iam/confirm/forgot-password
 }
 ```
 
+
+
 ##  5. Change Password
 
+<h3 className=" ">
+    
+
 ###  Request Body
+  </h3>
   
 ```http
 POST /api/iam/change-password
@@ -211,6 +296,8 @@ POST /api/iam/change-password
   "newPassword": "[NEW_PASSWORD]"
 }
 ```
+
+
 
 ##  6. Get User Info
 
@@ -239,6 +326,8 @@ Authorization: Bearer <ACCESS_TOKEN>
   "refreshToken": "<REFRESH_TOKEN>"
 }
 ```
+
+
 
 ##  7. Logout
 

@@ -5,10 +5,11 @@
     "prerequisites",
     "installation",
     "project-structure",
+    "solidctl-commands",
     "metadata_schema",
-    "database-seeding",
     "extending",
     "rest-apis",
+    "testing",
     "going-live"
   ]
 }

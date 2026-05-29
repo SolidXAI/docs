@@ -1,5 +1,6 @@
 ---
-title: Module Metadata Schema
+title: Modules
+icon: "package"
 description: Overview of the module metadata schema used in SolidX.
 summary: This document explains the module metadata schema in SolidX, which represents the top-level building blocks for organizing applications. A module groups related models and functionality under a unified domain (like a Fees Portal module). The metadata includes properties such as module name, display name, description, default data source, menu icon, sequence number, and system flag. Examples demonstrate configuring module metadata for applications, and the document references the admin documentation for conceptual understanding of module management and the hierarchical relationship where modules contain models which contain fields.
 json_pointer: "/moduleMetadata"
@@ -9,6 +10,10 @@ items_type: object
 items_attributes_doc: "#module-metadata-attributes"
 solidx_concerns: [create_module]
 ---
+
+
+
+#  Module Metadata
 
 > **Where it lives**  
 > **JSON Pointer:** `/moduleMetadata`  
@@ -20,12 +25,25 @@ solidx_concerns: [create_module]
 When creating a new module in SolidX, you're defining a **core building block** of your application.  
 A module groups together related models and functionality under a **unified domain**.
 
+<Callout type="info" title="Mental Model">
+
+  A module is the top-level business boundary in SolidX. It is not just a folder or namespace. It is the container that tells the platform which models, views, menu entries, and behaviors belong to one domain.
+  - Start by asking: what business capability are we modelling?
+    - Put closely related models inside the same module.
+    - Use the module to define the identity of that domain inside the app.
+  So the intuition is: <strong>a module is the platform's unit of business ownership</strong>.
+
+</Callout>
+
 👉 For a conceptual overview of what a module is, see [Module Management Documentation](../../admin-docs/module-builder/module-management.md).
 
 ###  Example: Fees Portal Module
 Below is a module metadata example for a "Fees Portal" module that tracks fee collection requests.
-<details>
-  <summary>Module Schema</summary>
+<details open>
+  <summary>
+    
+    Module Schema
+  </summary>
 
 ```json
 {
@@ -44,36 +62,57 @@ Below is a module metadata example for a "Fees Portal" module that tracks fee co
 ```
 </details>
 
+
+
   The defaultDataSource is set to "default" here, which refers to the default data source configured in your SolidX instance. This is the TypeORM data source configured in your app-default.database.ts in your project `solid-api` src folder.
 
-  ## Module Metadata Attributes
+
+
+  <h2 className=" ">
+    
+
+## Module Metadata Attributes
+</h2>
+
 
 ### `name` *(string, required, unique)*
 Unique identifier for the module (lowercase, underscores/dashes).  
 Used internally by the system and in the API (e.g., `"sales"`).  
 **Default:** N/A
 
+
+
 ### `displayName` *(string, required)*
 Human-readable name shown in the admin panel’s navigation and UI  
 (e.g., `"Sales Management"`).  
 **Default:** N/A
 
+
+
 ### `description` *(string, optional)*
 Short summary of what the module represents or its purpose.  
 **Default:** N/A
 
+
+
 ### `defaultDataSource` *(string, optional)*
 Default data source (from a predefined list) used to read/write data.  
 **Default:** N/A
+
+
 
 ### `menuSequenceNumber` *(number, optional)*
 Order in which the module appears in the sidebar/navigation menu  
 (lower numbers appear earlier).  
 **Default:** N/A
 
+
+
 ### `isSystem` *(boolean, required)*
 Marks this as a **system module** (cannot be deleted).  
 **Default:** `false`
+
+
 
 ### `menuIconUrl` *(string, optional)*
 Path/URL of an icon to represent the module in the navigation pane.  

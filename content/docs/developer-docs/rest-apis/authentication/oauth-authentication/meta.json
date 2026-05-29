@@ -1,4 +1,10 @@
 {
   "title": "OAuth Authentication",
-  "pages": []
+  "icon": "shield-check",
+  "pages": [
+    "index",
+    "google",
+    "facebook",
+    "microsoft"
+  ]
 }

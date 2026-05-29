@@ -1,22 +1,168 @@
 ---
 title: SMS Providers
+icon: "smartphone"
 description: Learn how to create and configure custom SMS providers in SolidX.
-summary: Introduction to creating and configuring custom SMS providers in SolidX for sending text messages via third-party services. Implementation details pending future documentation updates.
+summary: Overview of the built-in SMS providers shipped with SolidX (Twilio, Msg91 transactional, Msg91 OTP) and how to implement a custom SMS provider using the ISMS interface.
 keywords: [backend, sms providers, customization]
 solidx_concerns: [new_sms_provider]
 ---
 
+
+
 ## Overview
 
-SolidX ships with an SMS provider that uses **Msg91** for sending messages. It supports both **synchronous** sending and **asynchronous** (queued/background) delivery.
-It includes flows for **transactional** SMS and **OTP** SMS (Msg91 offers distinct APIs for each).
+SolidX ships with three built-in SMS providers: **TwilioSMSService**, **Msg91SMSService**, and **Msg91OTPService**. All support both **synchronous** sending and **asynchronous** (queued/background) delivery.
 
-Configure your Msg91 credentials in your `.env` to use the built‑in provider.
+If you prefer a different provider, SolidX exposes **clean abstractions** so you can implement your own without coupling business logic to a specific vendor.
 
-If you prefer another provider, SolidX exposes **clean abstractions** so you can implement your own provider without coupling business logic to a specific vendor.
+'> **Note**
 
-> **Note**
-> While you can store SMS templates in SolidX, most providers (including Msg91) require you to **register and pre‑approve** transactional templates on their platform before you can use them.
+''> While you can store SMS templates in SolidX, most providers (including Msg91) require you to **register and pre‑approve** transactional templates on their platform before you can use them.
+'
+
+---
+
+## 📦 Default SMS Providers
+
+SolidX includes three providers out of the box. Each is decorated with `@SmsProvider()`, which registers it for auto-discovery by `SmsServiceFactory`.
+
+| Provider | Class | Use case |
+|---|---|---|
+| Twilio | `TwilioSMSService` | General-purpose SMS via Twilio API |
+| Msg91 Transactional | `Msg91SMSService` | Transactional SMS via Msg91 flow API |
+| Msg91 OTP | `Msg91OTPService` | OTP delivery via Msg91 OTP API |
+
+---
+
+### `TwilioSMSService`
+
+Sends SMS via the [Twilio](https://www.twilio.com/) SDK. It is the only built-in provider that supports **plain text messages** via `sendSMS()` in addition to template-based messages.
+
+**Supports:**
+- `sendSMS()` — sends a raw text body directly
+- `sendSMSUsingTemplate()` — renders a Handlebars template and sends the result
+- Comma-separated recipients in the `to` field
+- Synchronous and queued async delivery
+
+**Required settings:**
+
+| Setting key | Description |
+|---|---|
+| `twilioAccountSid` | Your Twilio Account SID |
+| `twilioAuthToken` | Your Twilio Auth Token |
+| `twilioNumber` | The Twilio phone number to send from |
+
+**Example:**
+
+```ts
+import { TwilioSMSService } from "@solidxai/core";
+
+export class NotificationService {
+  constructor(private readonly smsService: TwilioSMSService) {}
+
+  async sendWelcome(mobile: string, firstName: string) {
+    // Raw text — supported only by Twilio
+    await this.smsService.sendSMS(mobile, `Welcome, ${firstName}!`, false);
+
+    // Or using a pre-configured template
+    await this.smsService.sendSMSUsingTemplate(
+      mobile,
+      "welcome-sms",
+      { firstName, appName: process.env.SOLID_APP_NAME },
+      false
+    );
+  }
+}
+```
+
+---
+
+### `Msg91SMSService`
+
+Sends transactional SMS via [Msg91's](https://msg91.com/) `/flow` API endpoint.
+
+> **Caution**
+
+> `sendSMS()` is **not supported** — calling it throws an error. You must use `sendSMSUsingTemplate()` with a template that has a `smsProviderTemplateId` matching a pre-approved Msg91 template.
+
+**Supports:**
+- `sendSMSUsingTemplate()` — posts template params as `recipients` to the Msg91 flow endpoint
+- Synchronous and queued async delivery
+
+**Required settings:**
+
+| Setting key | Description |
+|---|---|
+| `msg91SmsApiKey` | Your Msg91 API auth key |
+| `msg91SmsUrl` | Base URL for the Msg91 API |
+
+**Example:**
+
+```ts
+import { Msg91SMSService } from "@solidxai/core";
+
+export class OrderService {
+  constructor(private readonly smsService: Msg91SMSService) {}
+
+  async sendOrderConfirmation(mobile: string, orderId: string, customerName: string) {
+    await this.smsService.sendSMSUsingTemplate(
+      mobile,
+      "order-confirmation",
+      { orderId, customerName },
+      false
+    );
+  }
+}
+```
+
+'> **Note**
+
+''> The template named `"order-confirmation"` must exist in SolidX and its `smsProviderTemplateId` must match a pre-approved template on the Msg91 platform.
+'
+
+---
+
+### `Msg91OTPService`
+
+Sends OTP SMS via [Msg91's](https://msg91.com/) dedicated `/otp` endpoint. Intended for one-time password delivery flows.
+
+> **Caution**
+
+> `sendSMS()` is **not supported** — calling it throws an error. You must use `sendSMSUsingTemplate()` with a template that includes an `otp` parameter and a valid `smsProviderTemplateId`.
+
+**Supports:**
+- `sendSMSUsingTemplate()` — passes `otp`, `template_id`, `mobile`, and `authkey` as URL query params to the Msg91 OTP endpoint
+- Synchronous and queued async delivery
+
+**Required settings:**
+
+| Setting key | Description |
+|---|---|
+| `msg91SmsApiKey` | Your Msg91 API auth key |
+| `msg91SmsUrl` | Base URL for the Msg91 API |
+
+**Example:**
+
+The usage pattern is identical to `Msg91SMSService` — inject the service and call `sendSMSUsingTemplate()`. The key difference is that your template params must include an `otp` field, which gets forwarded as a query parameter to Msg91's OTP endpoint.
+
+```ts
+import { Msg91OTPService } from "@solidxai/core";
+
+export class AuthService {
+  constructor(private readonly smsService: Msg91OTPService) {}
+
+  async sendLoginOtp(mobile: string, otp: string) {
+    await this.smsService.sendSMSUsingTemplate(
+      mobile,
+      "otp-on-login",
+      { otp },
+      false
+    );
+  }
+}
+```
+
+---
 
 ## ⚙️ Steps to Create a Custom SMS Provider
 
@@ -27,29 +173,33 @@ It implements the `ISMS` interface, uses `SmsTemplateService` for template handl
 
 All your custom SMS I/O (API calls, provider SDKs, etc.) should be coded inside **`sendSMSSynchronously()`**.
 The rest (template rendering, queueing) is reusable across providers.
-<details>
-<summary>**Show code: `custom-sms.service.ts`**</summary>
+
+<details open>
+<summary><strong>Show code: <code>custom-sms.service.ts</code></strong></summary>
 
 ```ts
-import { Logger } from "@nestjs/common";
-import { ConfigType } from "@nestjs/config";
+import { Injectable, Logger } from "@nestjs/common";
 import Handlebars from "handlebars";
-import commonConfig from "src/config/common.config";
-import { QueueMessage } from "src/interfaces/mq";
-import { SmsTemplateService } from "../sms-template.service";
-import { ISMS } from "../../interfaces";
-import { PublisherFactory } from "../queues/publisher-factory.service";
+import { QueueMessage } from "@solidxai/core";
+import { SmsTemplateService } from "@solidxai/core";
+import { ISMS } from "@solidxai/core";
+import { PublisherFactory } from "@solidxai/core";
+import { SettingService } from "@solidxai/core";
+import { SmsProvider } from "@solidxai/core";
+import type { SolidCoreSetting } from "@solidxai/core";
 
 /**
  * Example Custom SMS Service
  *
  * Replace the dummy implementation in `sendSMSSynchronously()` with your provider logic.
  */
+@Injectable()
+@SmsProvider()
 export class CustomSMSService implements ISMS {
   protected readonly logger = new Logger(CustomSMSService.name);
 
   constructor(
-    protected readonly commonConfiguration: ConfigType<typeof commonConfig>,
+    protected readonly settingService: SettingService,
     protected readonly smsPublisher: string,
     protected readonly publisherFactory: PublisherFactory<any>,
     protected readonly smsTemplateService: SmsTemplateService
@@ -106,7 +256,7 @@ export class CustomSMSService implements ISMS {
       await this.sendSMSAsynchronously(message);
     } else if (
       shouldQueueSms === false &&
-      this.commonConfiguration.shouldQueueSms === true
+      this.settingService.getConfigValue<SolidCoreSetting>("shouldQueueSms") === true
     ) {
       await this.sendSMSAsynchronously(message);
     } else {
@@ -141,30 +291,38 @@ export class CustomSMSService implements ISMS {
 ```
 </details>
 
+---
+
 ### 2) Register Your Custom Provider
-<details>
-<summary>**Show code: `app.module.ts`**</summary>
+
+Your service must be decorated with `@SmsProvider()` (shown above) — this is what `SmsServiceFactory` uses to auto-discover the active provider. You also need to register it as a NestJS provider in your module.
+
+<details open>
+<summary><strong>Show code: <code>app.module.ts</code></strong></summary>
 
 ```ts
 import { Module } from "@nestjs/common";
 import { CustomSMSService } from "./custom-sms.service";
 
 @Module({
-  providers: [CustomSMSService], // register your custom provider
+  providers: [CustomSMSService],
   exports: [CustomSMSService],
 })
 export class AppModule {}
 ```
 </details>
 
+---
+
 ### 3) Use the `SmsServiceFactory` to Send SMS
 
 You can now use `SmsServiceFactory` to send SMS via **templates** (recommended).
-<details>
-<summary>**Show code: `usage-example.ts`**</summary>
+
+<details open>
+<summary><strong>Show code: <code>usage-example.ts</code></strong></summary>
 
 ```ts
-import { SmsServiceFactory } from "@solidstarters/solid-core";
+import { SmsServiceFactory } from "@solidxai/core";
 
 export class SomeService {
   constructor(private readonly smsServiceFactory: SmsServiceFactory) {}
@@ -180,18 +338,22 @@ export class SomeService {
         mobileVerificationTokenOnLogin: user.mobileVerificationTokenOnLogin,
         firstName: user.username,
         fullName: user.fullName ? user.fullName : user.username,
-      }
+      },
+      false
     );
   }
 }
 ```
 </details>
 
+---
+
 ## 🧠 Interface Definition
 
 Your custom service must implement the `ISMS` interface:
-<details>
-<summary>**Show code: `interfaces.ts`**</summary>
+
+<details open>
+<summary><strong>Show code: <code>interfaces.ts</code></strong></summary>
 
 ```ts
 export interface ISMS {
@@ -207,12 +369,14 @@ export interface ISMS {
 ```
 </details>
 
+---
+
 ## ✅ Summary
 
 | Step | What you do |
 |---|---|
-| 1️⃣ | Implement `CustomSMSService` (implements `ISMS`) |
+| 1️⃣ | Implement `CustomSMSService` (implements `ISMS`, decorated with `@SmsProvider()`) |
 | 2️⃣ | Register it in your module |
 | 3️⃣ | Use `SmsServiceFactory` to send template-based SMS |
 
-> With this setup, you keep provider specifics isolated, while reusing SolidX’s queueing, templating, and configuration patterns.
+> With this setup, you keep provider specifics isolated, while reusing SolidX's queueing, templating, and configuration patterns.

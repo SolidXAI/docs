@@ -1,0 +1,11 @@
+{
+  "title": "End-to-End Implementation",
+  "icon": "route",
+  "pages": [
+    "index",
+    "institute_onboarding",
+    "activate_institute",
+    "initiate_payment",
+    "making_payment"
+  ]
+}

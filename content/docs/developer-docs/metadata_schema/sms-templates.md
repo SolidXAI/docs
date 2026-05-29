@@ -1,5 +1,6 @@
 ---
-title: SMS Templates
+title: SMS
+icon: "smartphone"
 
 description: Metadata schema for populating SMS templates in SolidX applications.
 summary: This document describes SMS template metadata in SolidX, which allows creation and management of SMS templates with dynamic content using Handlebars syntax. Templates are stored in separate text files referenced by the metadata and support variables for personalization. Key attributes include template name, display name, body file reference, description, SMS provider template ID, active status, and type (text). The document provides examples of OTP login templates with dynamic variable substitution, file organization guidelines, and links to implementing custom SMS providers for integration with external SMS services like Twilio or AWS SNS.
@@ -11,20 +12,27 @@ items_type: "object"
 items_attributes_doc: "#email-templates-metadata-attributes"
 solidx_concerns: [create/update_sms_template, new_sms_provider]
 
----
 
+
+---
+# SMS Templates
 > **Where it lives**  
 > **JSON Pointer:** `/smsTemplates`  
 > **JSONPath:** `$.smsTemplates`  
 > **Parent:** Root of the metadata file
+
+
 
 ## Overview
 SMS Templates in SOLID allow you to create and manage SMS templates with dynamic content.
 
 ### Example: SMS Templates Metadata
 Below is an example of configuring an SMS template which sends an OTP when a user logs in.
-<details>
-  <summary>SMS Templates Schema</summary>
+<details open>
+  <summary>
+    
+    SMS Templates Schema
+  </summary>
 
 ``` json
 {
@@ -47,8 +55,11 @@ Below is an example of configuring an SMS template which sends an OTP when a use
 
 ### Example : SMS Template File
 Below is an example of the content of the SMS template file `otp-on-login-custom.handlebars.txt` referenced in the above metadata. This file contains the actual SMS message with dynamic placeholders.
-<details>
- <summary>SMS Template File</summary>
+<details open>
+ <summary>
+    
+   SMS Template File 
+  </summary>
 
 ```text
 Hi {{ firstName }}, Login to {{ solidAppName }}, using {{ mobileVerificationTokenOnLogin }} as your verification code.
@@ -57,8 +68,11 @@ Hi {{ firstName }}, Login to {{ solidAppName }}, using {{ mobileVerificationToke
 
 ### Example : Sending SMS Using Template (TODO ticket)
 Below is a code snippet demonstrating how to send an SMS using the defined SMS templates via the `SmsServiceFactory`. This example shows how to send an OTP verification SMS to a user.
-<details>
-  <summary>SMS Sending Code Snippet</summary>
+<details open>
+  <summary>
+    
+    SMS Sending Code Snippet
+  </summary>
 
 ``` ts
 import { SmsServiceFactory } from 'your-sms-service';
@@ -79,13 +93,19 @@ async sendOtpSms(user: { mobile: string; firstName?: string; username: string, m
 ```
 </details>
 
+<h2 className=" ">
+    
+
 ## SMS Templates Metadata Attributes
+</h2>
 
 ### `name` *(string, required, unique)*
 Unique name for the sms template. It should be in kebab-case format (e.g., `example-template-name`).
 
+
 ### `displayName` *(string, required)*
 Display name for the sms template.
+
 
 ### `body` *(string, required)*
     - In the metadata json, the filename of the sms template is specified. The templates are searched for in the `module-metadata/<module-name>/sms-templates/` directory of the module.
@@ -94,16 +114,22 @@ Display name for the sms template.
 ####  Further Reference
  -  **SMS Body Creation:** [SMS Templates Guide](../../admin-docs/notifications/sms-templates.md)
 
+
+
   Please refer to the [Handlebars Documentation](https://handlebarsjs.com/) for more information on using Handlebars syntax in email templates.
+
 
 ### `smsProviderTemplateId` *(string, optional)*
 Unique identifier for the SMS template from the SMS provider (e.g., Twilio, Nexmo). This ID is used to reference the template when sending SMS messages through the provider's API.
 
+
 ### `description` *(string, optional)*
 A brief description of the SMS template.
 
+
 ### `active` *(boolean, optional)*
 Indicates whether the SMS template is active. Defaults to `true`.
+
 
 ### `type` *(string, optional)*
 Type of the SMS template. Currently supports `text` only.

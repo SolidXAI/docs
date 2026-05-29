@@ -1,7 +1,8 @@
 ---
-title: View Metadata
-description: Metadata schema for defining views in SolidX applications — with explanations before each code snippet.
-summary: This document explains view metadata in SolidX, which defines UI presentations of models and automatically generates list views (tabular displays with search, filter, pagination), form views (input forms for create/edit operations), and kanban views (card-based displays with drag-and-drop). Each example below now starts with a short “What this shows” explanation.
+title: Views
+icon: "layout-grid"
+description: Metadata schema for defining generated UI views in SolidX.
+summary: View metadata defines how SolidX renders forms, lists, trees, cards, and kanban boards. This page is the primary home for layout attrs, field-node attrs, widget selection, and widget-specific rendering behavior.
 json_pointer: "/views"
 jsonpath: "$.views"
 parent_component: root
@@ -11,719 +12,1801 @@ items_attributes_doc: "#view-metadata-attributes"
 solidx_concerns: [update_layout, add_field_to_existing_layout, remove_field_from_existing_layout, modify_layout_field_attribute]
 ---
 
+import { LayoutGrid, Shield, Gauge } from 'lucide-react';
+
+# View Metadata
 > **Where it lives**  
 > **JSON Pointer:** `/views`  
 > **JSONPath:** `$.views`  
-> **Parent:** Root of the metadata file
+> **Parent:** Root of the metadata document
 
 ## Overview
-Views define UI presentation of models and automatically generate:
-- **List Views:** Tabular display with search, filter, pagination
-- **Form Views:** Input forms for create/edit operations
-- **Kanban Views:** Card-based display with drag-and-drop
 
-> **How to read this page**: Each code sample below is preceded by a short explanation of what the snippet configures and how it affects the generated UI.
+View metadata defines how SolidX presents models and fields to end users.
 
-## Example: Fee Portal List/Form Views
-**What this shows:** A combined example of a **list** view and a **form** view for an *Institute* model inside a *Fees Portal* module. The list section demonstrates pagination, search and row actions. The form section demonstrates the hierarchical layout (sheet → notebook → page → row → column → field) and how to attach a form handler.
-<details>
-  <summary>View Schema (List + Form)</summary>
+If field metadata answers "what does this field mean?", view metadata answers "how should this field appear here?"
+
+This page is the primary reference for:
+
+- top-level view records
+- layout attrs
+- field-node attrs inside layouts
+- widget selection through `editWidget` and `viewWidget`
+- widget-specific attrs
+- real metadata examples for `form`, `list`, and `tree` rendering
+
+For field semantics, validation intent, persistence behavior, and field-level attrs, see [Field Metadata](./field-metadata.md).
+
+## How To Read This Page
+
+SolidX has multiple view families, but not all of them need the same kind of documentation.
+
+- `form` and `list` are the primary homes for field widget documentation
+- `tree` reuses the same field-column widgets as `list`
+- `card` and `kanban` are driven more by card composition and card widgets than by per-field widget catalogs
+
+That is why the field list is repeated here by view family. The field contract lives on the field metadata page; the rendering contract lives here.
+
+## Common View Shape
+
+Every view record follows the same top-level pattern:
 
 ```json
-{ // List View for Institute Model
-  "name": "institute-list-view",
-  "displayName": "Institute",
+{
+  "name": "application-list-view",
+  "displayName": "Applications",
   "type": "list",
   "context": "{}",
-  "moduleUserKey": "fees-portal",
-  "modelUserKey": "institute",
+  "moduleUserKey": "merchant-onboarding",
+  "modelUserKey": "application",
   "layout": {
     "type": "list",
-    "attrs": {
-      "pagination": true,
-      "pageSizeOptions": [10, 25, 50],
-      "enableGlobalSearch": true,
-      "create": true,
-      "edit": true,
-      "delete": true,
-      "rowButtons": [
-        {
-          "attrs": {
-            "className": "",
-            "label": "Enable",
-            "action": "ActivatePortal",
-            "icon": "pi",
-            "actionInContextMenu": false,
-            "customComponentIsSystem": true,
-            "openInPopup": true,
-            "closable": true
-          }
-        }
-      ],
-      "configureViewActions": {
-        "import": { "roles": ["Admin", "Mswipe Admin"] }
-      },
-      "children": [
-        {
-          "type": "field",
-          "attrs": {
-            "name": "id",
-            "sortable": true,
-            "filterable": true,
-            "isSearchable": true
-          }
-        }
-      ]
-    }
-  }
-},
-{ // Form View for Institute Model
-  "name": "institute-form-view",
-  "displayName": "Institute",
-  "type": "form",
-  "context": "{}",
-  "moduleUserKey": "fees-portal",
-  "modelUserKey": "institute",
-  "layout": {
-    "type": "form",
-    "attrs": {
-      "name": "form-1",
-      "label": "Institute",
-      "className": "grid",
-      "formButtons": [
-        {
-          "attrs": {
-            "className": "",
-            "label": "Preview",
-            "action": "PreviewPortal",
-            "icon": "pi",
-            "actionInContextMenu": true,
-            "openInPopup": true,
-            "customComponentIsSystem": true,
-            "closable": true
-          }
-        }
-      ]
-    },
-    "onFormLayoutLoad": "instituteEditHandler",
-    "children": [
-      {
-        "type": "sheet",
-        "attrs": { "name": "sheet-1" },
-        "children": [
-          {
-            "type": "notebook",
-            "attrs": { "name": "notebook-1" },
-            "children": [
-              {
-                "type": "page",
-                "attrs": { "name": "page-1", "label": "Institutes" },
-                "children": [
-                  {
-                    "type": "row",
-                    "attrs": { "name": "sheet-1" },
-                    "children": [
-                      {
-                        "type": "column",
-                        "attrs": {
-                          "name": "group-1",
-                          "label": "Institutes Basic",
-                          "className": "col-6"
-                        },
-                        "children": [
-                          { "type": "field", "attrs": { "name": "instituteName" } }
-                        ]
-                      },
-                      {
-                        "type": "column",
-                        "attrs": {
-                          "name": "group-1",
-                          "label": "Institutes Contact",
-                          "className": "col-6"
-                        },
-                        "children": [
-                          {
-                            "type": "field",
-                            "attrs": {
-                              "name": "instituteAddress",
-                              "disabled": false
-                            }
-                          }
-                        ]
-                      }
-                    ]
-                  }
-                ]
-              }
-            ]
-          }
-        ]
-      }
-    ]
+    "attrs": {},
+    "children": []
   }
 }
 ```
-</details>
 
-## View Configurations
+## View Metadata Attributes
 
-<span style={{marginLeft: 8}}>List View</span>
+| Attr | Purpose |
+| --- | --- |
+| `name` | Internal identifier for the view record |
+| `displayName` | User-facing label for the view |
+| `type` | View family such as `form`, `list`, `tree`, `card`, or `kanban` |
+| `context` | Optional serialized context used by the view |
+| `moduleUserKey` | Module that owns the view |
+| `modelUserKey` | Model rendered by the view |
+| `layout` | The actual layout tree, including layout attrs and child nodes |
+| `onFieldChange` | Optional field-change workflow hooks for form-driven experiences |
+| `onFormLayoutLoad` | Optional hooks that run when a form layout loads |
 
-List views display records in tabular format with advanced features like search, filtering, and pagination.
+## List View
 
-### 1) Basic List View Structure
-**What this shows:** The minimal configuration for a list view. Connect to a module/model and define a `layout` with `attrs` (behavior) and `children` (columns).
+Use `list` when users need a tabular view over many records.
+
+### Common `list` Layout Attrs
+
+| Attr | Purpose |
+| --- | --- |
+| `pagination` | Enables paginated browsing |
+| `pageSizeOptions` | Controls the selectable page sizes |
+| `enableGlobalSearch` | Enables global search across searchable columns |
+| `create` | Enables create actions from the list screen |
+| `edit` | Enables edit actions from the list screen |
+| `delete` | Enables delete actions from the list screen |
+| `rowButtons` | Adds custom row-level actions |
+| `headerButtons` | Adds custom list-level actions |
+| `allowedViews` | Lets users switch between compatible view families |
+| `truncateAfter` | Truncates text-like cell output after a character count and shows the full value in the cell tooltip |
+
+### Common `list` Field-Node Attrs
+
+These attrs belong to the layout node, not to the field metadata entity:
+
+| Attr | Purpose |
+| --- | --- |
+| `name` | Chooses the field to render |
+| `label` | Overrides the default column header |
+| `sortable` | Enables sorting for the column |
+| `filterable` | Enables column-level filtering |
+| `isSearchable` | Includes the field in global search flows |
+| `viewWidget` | Selects a custom list or tree widget |
+
+### Field Rendering: `shortText`
+
+By default, `shortText` renders as a standard text column.
+
+The default list renderer is `DefaultTextListWidget`, which is used automatically when no custom `viewWidget` is set. This default path also respects the list-level `truncateAfter` attr, so it is the main way to control truncation for long textual values in list and tree views.
+
+
+
+
+| Concern | How it works |
+| --- | --- |
+| Default widget | `DefaultTextListWidget` |
+| Widget selection | Applied automatically when `viewWidget` is not provided |
+| Typical field-node attrs | `name`, `label`, `sortable`, `filterable`, `isSearchable` |
+| Relevant layout attrs | `truncateAfter`, `enableGlobalSearch` |
+
 <details>
-<summary>List View Structure</summary>
-
-```json
-{
-  "name": "institute-list-view",
-  "displayName": "Institute",
-  "type": "list",
-  "context": "{}",
-  "moduleUserKey": "fees-portal",
-  "modelUserKey": "institute",
-  "layout": {
-    "type": "list",
-    "attrs": {
-      // List view attributes
-    },
-    "children": [
-      // Field configurations
-    ]
-  }
-}
-```
-</details>
-
-### 2) List View Attributes
-**What this shows:** How to toggle pagination and CRUD actions from the list, and how to restrict actions to specific roles.
-<details>
-<summary>List View Attributes</summary>
-
-```json
-"attrs": {
-  "pagination": true,
-  "pageSizeOptions": [10, 25, 50],
-  "enableGlobalSearch": true,
-  "create": true,
-  "edit": true,
-  "delete": true,
-  "import": { "roles": ["Admin"] },
-  "showArchived": { "roles": ["Admin"] },
-  "export": { "roles": ["Admin", "Institute Admin"] },
-  "customizeLayout": { "roles": ["Admin"] },
-  "saveCustomFilter": { "roles": ["Admin"] }
-}
-```
-</details>
-
-### 3) List View Field Configuration
-**What this shows:** Each item in `children` is a column. Control sort, filter and search participation; `viewWidget` customizes how the value renders.
-<details>
-<summary>Field Configuration</summary>
-
-```json
-"children": [
-  {
-    "type": "field",
-    "attrs": {
-      "name": "instituteName",
-      "sortable": true,
-      "filterable": true,
-      "isSearchable": true
-    }
-  },
-  {
-    "type": "field",
-    "attrs": {
-      "name": "logo",
-      "sortable": true,
-      "filterable": true,
-      "isSearchable": true
-    }
-  },
-  {
-    "type": "field",
-    "attrs": {
-      "name": "paymentGatewayAccessSecret",
-      "viewWidget": "maskedShortTextList",
-      "sortable": true,
-      "filterable": true,
-      "isSearchable": true
-    }
-  }
-]
-```
-</details>
-
-<span style={{marginLeft: 8}}>Form View</span>
-
-Form views handle data entry and editing with complex layout structures using sheets, notebooks, and pages.
-
-### 1) Basic Form View Structure
-**What this shows:** A `form` view with a base layout and optional `onFormLayoutLoad` handler. `children` will hold sheets/notebooks/pages/rows/columns/fields.
-<details>
-<summary>Form View Structure</summary>
-
-```json
-{
-  "name": "institute-form-view",
-  "displayName": "Institute",
-  "type": "form",
-  "context": "{}",
-  "moduleUserKey": "fees-portal",
-  "modelUserKey": "institute",
-  "layout": {
-    "type": "form",
-    "attrs": {
-      // Form view attributes
-    },
-    "onFormLayoutLoad": "instituteEditHandler",
-    "children": [
-      // Layout components (sheets, notebooks, etc.)
-    ]
-  }
-}
-```
-</details>
-
-### 2) Form View Attributes
-**What this shows:** Configure visual details and attach custom buttons that trigger actions or popups.
-<details>
-<summary>Form View Attributes</summary>
-
-```json
-"attrs": {
-  "name": "form-1",
-  "label": "Institute",
-  "className": "grid",
-  "formButtons": [
-    {
-      "attrs": {
-        "className": "",
-        "label": "Preview",
-        "action": "PreviewPortal",
-        "icon": "pi",
-        "actionInContextMenu": true,
-        "openInPopup": true,
-        "customComponentIsSystem": true,
-        "closable": true
-      }
-    }
-  ]
-}
-```
-</details>
-
-### 3) Form Layout Components Hierarchy
-**What this shows:** How layout blocks nest to build rich, organized forms.
-
-```
-Form
-└── Sheet (top-level container)
-    └── Notebook (tab container)
-        └── Page (individual tab)
-            └── Row (horizontal layout)
-                └── Column (vertical container)
-                    └── Field (input component)
-```
-
-#### Sheet Component
-**What this shows:** A top-level container for your form sections.
-<details>
-<summary>Sheet Component</summary>
-
-```json
-{
-  "type": "sheet",
-  "attrs": { "name": "sheet-1" },
-  "children": [
-    // Notebook or Row components
-  ]
-}
-```
-</details>
-
-#### Notebook Component (Tabs)
-**What this shows:** A tab container that groups multiple pages.
-<details>
-<summary>Notebook Component</summary>
-
-```json
-{
-  "type": "notebook",
-  "attrs": { "name": "notebook-1" },
-  "children": [
-    // Page components (tabs)
-  ]
-}
-```
-</details>
-
-#### Page Component (Individual Tab)
-**What this shows:** A single tab with its own content.
-<details>
-<summary>Page Component</summary>
-
-```json
-{
-  "type": "page",
-  "attrs": { "name": "page-1", "label": "Institutes" },
-  "children": [
-    // Row components
-  ]
-}
-```
-</details>
-
-#### Row Component (Horizontal Layout)
-**What this shows:** A horizontal group of columns.
-<details>
-<summary>Row Component</summary>
-
-```json
-{
-  "type": "row",
-  "attrs": { "name": "row-1" },
-  "children": [
-    // Column components
-  ]
-}
-```
-</details>
-
-#### Column Component (Vertical Container)
-**What this shows:** A vertical container with optional label and grid classes.
-<details>
-<summary>Column Component</summary>
-
-```json
-{
-  "type": "column",
-  "attrs": {
-    "name": "column-1",
-    "label": "Institutes Basic",
-    "className": "col-6"
-  },
-  "children": [
-    // Field components
-  ]
-}
-```
-</details>
-
-#### Field Component (Form Input)
-**What this shows:** A single form input with view/edit widget overrides.
-<details>
-<summary>Field Component</summary>
+<summary><strong>Show default example</strong></summary>
 
 ```json
 {
   "type": "field",
   "attrs": {
-    "name": "instituteName",
-    "disabled": false,
-    "showLabel": true,
-    "viewWidget": "default",
-    "editWidget": "default"
+    "name": "bankUserId",
+    "isSearchable": true
   }
 }
 ```
+
 </details>
 
-#### Complete Form Layout Example
-**What this shows:** A full, multi-tab form bringing together all components.
-<details>
-<summary>Complete Form Layout Example</summary>
 
-```json
-{
-  "type": "form",
-  "attrs": {
-    "name": "form-1",
-    "label": "Institute",
-    "className": "grid"
-  },
-  "onFormLayoutLoad": "instituteEditHandler",
-  "children": [
-    {
-      "type": "sheet",
-      "attrs": { "name": "sheet-1" },
-      "children": [
-        {
-          "type": "notebook",
-          "attrs": { "name": "notebook-1" },
-          "children": [
-            {
-              "type": "page",
-              "attrs": { "name": "page-1", "label": "Institutes" },
-              "children": [
-                {
-                  "type": "row",
-                  "attrs": { "name": "row-1" },
-                  "children": [
-                    {
-                      "type": "column",
-                      "attrs": {
-                        "name": "column-1",
-                        "label": "Institutes Basic",
-                        "className": "col-6"
-                      },
-                      "children": [
-                        { "type": "field", "attrs": { "name": "instituteName" } },
-                        { "type": "field", "attrs": { "name": "description" } }
-                      ]
-                    },
-                    {
-                      "type": "column",
-                      "attrs": {
-                        "name": "column-2",
-                        "label": "Institutes Contact",
-                        "className": "col-6"
-                      },
-                      "children": [
-                        { "type": "field", "attrs": { "name": "instituteAddress", "disabled": false } }
-                      ]
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              "type": "page",
-              "attrs": { "name": "page-2", "label": "Payment Gateway Details" },
-              "children": []
-            }
-          ]
-        }
-      ]
-    }
-  ]
-}
-```
-</details>
 
-<span style={{marginLeft: 8}}>Kanban View</span>
 
-Kanban views display records as cards with drag-and-drop functionality.
+| Widget | Use when | Extra attrs |
+| --- | --- | --- |
+| `MaskedShortTextListViewWidget` | The column should hide the underlying value and show a masked version instead | None |
+| `SolidShortTextAvatarWidget` | The column should display an avatar-style badge next to the value | `initialsKey` when the row value is object-shaped |
+| `SolidShortTextFieldImageListWidget` | The stored value is an image URL and the column should render a thumbnail | None |
 
-### 1) Basic Kanban View Structure
-**What this shows:** Declares a `kanban` view and the places where swimlane and card configuration live.
-<details>
-<summary>Kanban View Structure</summary>
+#### `MaskedShortTextListViewWidget`
 
-```json
-{
-  "name": "task-kanban-view",
-  "displayName": "Task Board",
-  "type": "kanban",
-  "context": "{}",
-  "moduleUserKey": "fees-portal",
-  "modelUserKey": "task",
-  "layout": {
-    "type": "kanban",
-    "attrs": {
-      // Kanban view attributes
-    },
-    "children": [
-      // Card template configuration
-    ]
-  }
-}
-```
-</details>
 
-### 2) Kanban View Attributes
-**What this shows:** Controls lane count, records per lane, the grouping field, and drag-and-drop.
-<details>
-<summary>Kanban View Attributes</summary>
 
-```json
-"attrs": {
-  "swimlanesCount": 10,
-  "recordsInSwimlane": 5,
-  "enableGlobalSearch": true,
-  "create": true,
-  "edit": true,
-  "delete": true,
-  "groupBy": "status",
-  "draggable": true,
-  "allowedViews": ["list", "kanban"]
-}
-```
-</details>
 
-### 3) Kanban Card Template
-**What this shows:** Maps model fields to parts of the card: header, content, badges.
-<details>
-<summary>Kanban Card Template</summary>
+| Attr | Purpose |
+| --- | --- |
+| No extra attrs | This widget simply replaces the visible value with a same-length masked string. |
 
-```json
-"children": [
-  {
-    "type": "cardTemplate",
-    "attrs": { "name": "task-card" },
-    "children": [
-      { "type": "field", "attrs": { "name": "title", "displayType": "header" } },
-      { "type": "field", "attrs": { "name": "description", "displayType": "content" } },
-      { "type": "field", "attrs": { "name": "priority", "displayType": "badge" } }
-    ]
-  }
-]
-```
-</details>
 
-## View RBAC
 
-Views support role-based access control (RBAC) to restrict actions and field-level permissions based on user roles.
-
-<span style={{marginLeft: 8}}>Role-Based View Actions</span>
-
-**What this shows:** Limit visibility of list-level actions (import/export/layout customization) to specific roles.
-<details>
-  <summary>View Actions</summary>
-
-```json
-"configureViewActions": {
-  "import": { "roles": ["Admin", "Manager"] },
-  "export": { "roles": ["Admin", "Manager", "User"] },
-  "customizeLayout": { "roles": ["Admin"] },
-  "saveCustomFilter": { "roles": ["Admin", "Manager"] }
-}
-```
-</details>
-
-<span style={{marginLeft: 8}}>Field-Level Permissions in Views</span>
-
-**What this shows:** Hide or show sensitive fields per role.
-<details>
-  <summary>Field-Level Permissions</summary>
 
 ```json
 {
   "type": "field",
   "attrs": {
-    "name": "salary",
-    "roles": ["Admin", "HR"]
-  }
-}
-```
-</details>
-
-<span style={{marginLeft: 8}}>View Widgets</span>
-
-Views support custom widgets to enhance field display and editing experiences. List view supports `viewWidget` and form views support `viewWidget` (view mode) and `editWidget` (edit mode).
-
-**What this shows:** Override default rendering/editing of a field using specific named widgets.
-<details>
-  <summary>Custom View Widgets</summary>
-
-```json
-{
-  "type": "field",
-  "attrs": {
-    "name": "password",
+    "name": "paymentGatewayAccessSecret",
     "viewWidget": "maskedShortTextList",
+    "sortable": true,
+    "filterable": true,
+    "isSearchable": true
+  }
+}
+```
+
+
+
+
+#### `SolidShortTextAvatarWidget`
+
+
+
+
+| Attr | Purpose |
+| --- | --- |
+| `initialsKey` | When the rendered row value is an object rather than a plain string, this attr tells the widget which nested property should be used to compute the visible label and avatar initials. |
+
+
+
+
+Example coming soon..
+
+
+
+
+#### `SolidShortTextFieldImageListWidget`
+
+
+
+
+| Attr | Purpose |
+| --- | --- |
+| No extra attrs | This widget treats the field value as an image URL, renders a thumbnail, and opens the image in the built-in lightbox on click. |
+
+
+
+
+Example coming soon..
+
+
+
+
+
+
+
+### Field Rendering: `longText`
+
+In list and tree views, `longText` reuses the standard text-column path.
+
+Unlike form rendering, `longText` does not currently have dedicated list or tree widgets of its own. It behaves like a text column and relies on the same shared truncation and search mechanics as other text-style scalar fields.
+
+
+
+
+| Concern | How it works |
+| --- | --- |
+| Default widget | `DefaultTextListWidget` |
+| Widget selection | Applied automatically through the shared text-column path |
+| Typical field-node attrs | `name`, `label`, `sortable`, `filterable`, `isSearchable` |
+| Relevant layout attrs | `truncateAfter`, `enableGlobalSearch` |
+
+<details>
+<summary><strong>Show default example</strong></summary>
+
+```json
+{
+  "type": "field",
+  "attrs": {
+    "name": "description"
+  }
+}
+```
+
+</details>
+
+
+
+
+No additional list or tree widgets are currently registered specifically for `longText`.
+
+The supported alternative widgets for `longText` are form-specific and are documented under **Form View > `longText`** below.
+
+
+
+
+### Field Rendering: `richText`
+
+In list and tree views, `richText` reuses the standard text-column path.
+
+It does not currently have dedicated list or tree widgets of its own. In these views, it behaves like a text column and relies on the same shared truncation and search mechanics as other text-style scalar fields.
+
+
+
+
+| Concern | How it works |
+| --- | --- |
+| Default widget | `DefaultTextListWidget` |
+| Widget selection | Applied automatically through the shared text-column path |
+| Typical field-node attrs | `name`, `label`, `sortable`, `filterable`, `isSearchable` |
+| Relevant layout attrs | `truncateAfter`, `enableGlobalSearch` |
+
+<details>
+<summary><strong>Show default example</strong></summary>
+
+```json
+{
+  "type": "field",
+  "attrs": {
+    "name": "content",
+    "label": "Content",
+    "sortable": true,
+    "filterable": true
+  }
+}
+```
+
+</details>
+
+
+
+
+No additional list or tree widgets are currently registered specifically for `richText`.
+
+
+
+
+### Field Rendering: `json`
+
+Core form rendering is supported for `json`, but list and tree support is currently limited.
+
+The core list-column dispatch does not currently include a dedicated `json` renderer, so JSON fields should not be assumed to have the same out-of-the-box list support as scalar text fields.
+
+
+
+
+| Concern | How it works |
+| --- | --- |
+| Default widget | No dedicated core list widget is currently wired for `json` |
+| Widget selection | No core `json` list-column path is currently registered in list dispatch |
+| Typical field-node attrs | `name`, `label`, `sortable`, `filterable`, `isSearchable` |
+| Relevant layout attrs | None specific to `json` at the core list level |
+
+<details>
+<summary><strong>Show example from metadata</strong></summary>
+
+```json
+{
+  "type": "field",
+  "attrs": {
+    "name": "deviceRecognitionVerdict"
+  }
+}
+```
+
+</details>
+
+
+
+
+No dedicated core list or tree widgets are currently registered specifically for `json`.
+
+
+
+
+### Field Rendering: `int`
+
+By default, `int` renders as a numeric column that reuses the shared text-style cell widget while preserving numeric table alignment.
+
+The core list-column path routes `int` through `SolidIntColumn`, which applies numeric cell styling and then renders values through `DefaultTextListWidget` unless a custom `viewWidget` is provided.
+
+
+
+
+| Concern | How it works |
+| --- | --- |
+| Default widget | `DefaultTextListWidget` through the shared numeric column path |
+| Widget selection | Applied automatically when `viewWidget` is not provided |
+| Typical field-node attrs | `name`, `label`, `sortable`, `filterable`, `isSearchable` |
+| Relevant layout attrs | `truncateAfter`, `enableGlobalSearch` |
+
+<details>
+<summary><strong>Show default example</strong></summary>
+
+```json
+{
+  "type": "field",
+  "attrs": {
+    "name": "pageCount",
+    "label": "Page Count"
+  }
+}
+```
+
+</details>
+
+
+
+
+No additional core list or tree widgets are currently registered specifically for `int`.
+
+
+
+
+### Field Rendering: `bigint`
+
+In list and tree views, `bigint` currently reuses the same numeric column path used for `int`.
+
+The core list-column path routes `bigint` through `SolidBigintColumn`, which delegates to `SolidIntColumn`. As a result, `bigint` receives numeric table alignment but still renders through `DefaultTextListWidget` by default.
+
+
+
+
+| Concern | How it works |
+| --- | --- |
+| Default widget | `DefaultTextListWidget` through the shared numeric column path |
+| Widget selection | Applied automatically when `viewWidget` is not provided |
+| Typical field-node attrs | `name`, `label`, `sortable`, `filterable`, `isSearchable` |
+| Relevant layout attrs | `truncateAfter`, `enableGlobalSearch` |
+
+<details>
+<summary><strong>Show default example</strong></summary>
+
+```json
+{
+  "type": "field",
+  "attrs": {
+    "name": "id"
+  }
+}
+```
+
+</details>
+
+
+
+
+No additional core list or tree widgets are currently registered specifically for `bigint`.
+
+
+
+
+### Field Rendering: `decimal`
+
+By default, `decimal` renders as a numeric column that reuses the shared text-style cell widget while preserving numeric table alignment.
+
+The core list-column path routes `decimal` through `SolidDecimalColumn`, which delegates to the same numeric column implementation used for `int`. This means decimal values inherit the standard text-cell rendering behavior unless a custom `viewWidget` is provided.
+
+
+
+
+| Concern | How it works |
+| --- | --- |
+| Default widget | `DefaultTextListWidget` through the shared numeric column path |
+| Widget selection | Applied automatically when `viewWidget` is not provided |
+| Typical field-node attrs | `name`, `label`, `sortable`, `filterable`, `isSearchable` |
+| Relevant layout attrs | `truncateAfter`, `enableGlobalSearch` |
+
+<details>
+<summary><strong>Show default example</strong></summary>
+
+```json
+{
+  "type": "field",
+  "attrs": {
+    "name": "latePaymentFees",
+    "sortable": true,
+    "filterable": true,
+    "isSearchable": true
+  }
+}
+```
+
+</details>
+
+
+
+
+No additional core list or tree widgets are currently registered specifically for `decimal`.
+
+
+
+
+### Field Rendering: `boolean`
+
+By default, `boolean` renders as a compact true-or-false column.
+
+The default list renderer is `DefaultBooleanListWidget`, which turns the stored boolean value into readable output such as `Yes` and `No`. This default path is also where column-level label overrides such as `trueLabel` and `falseLabel` are applied.
+
+
+
+
+| Concern | How it works |
+| --- | --- |
+| Default widget | `DefaultBooleanListWidget` |
+| Widget selection | Applied automatically when `viewWidget` is not provided |
+| Typical field-node attrs | `name`, `label`, `sortable`, `filterable`, `isSearchable`, `trueLabel`, `falseLabel` |
+| Relevant layout attrs | `enableGlobalSearch` when the list experience needs a global search bar, though boolean fields are typically more useful in filters than in keyword search |
+
+<details>
+<summary><strong>Show default example</strong></summary>
+
+```json
+{
+  "type": "field",
+  "attrs": {
+    "name": "isDuplicate",
+    "trueLabel": "Duplicate",
+    "falseLabel": "Not-Duplicate"
+  }
+}
+```
+
+</details>
+
+
+
+
+No additional core list or tree widgets are currently registered specifically for `boolean`.
+
+
+
+
+### Field Rendering: `date`
+
+By default, `date` renders as a date-formatted column rather than as plain text.
+
+The default list renderer is `DefaultDateListWidget`, which delegates value formatting to the shared date-view component. At the list level, formatting is controlled through the layout `format` attr.
+
+
+
+
+| Concern | How it works |
+| --- | --- |
+| Default widget | `DefaultDateListWidget` |
+| Widget selection | Applied automatically when `viewWidget` is not provided |
+| Typical field-node attrs | `name`, `label`, `sortable`, `filterable`, `isSearchable` |
+| Relevant layout attrs | `format`, `enableGlobalSearch` |
+
+<details>
+<summary><strong>Show default example</strong></summary>
+
+```json
+{
+  "type": "field",
+  "attrs": {
+    "name": "doj",
+    "sortable": true
+  }
+}
+```
+
+</details>
+
+
+
+
+No additional core list or tree widgets are currently registered specifically for `date`.
+
+
+
+
+### Field Rendering: `datetime`
+
+By default, `datetime` renders as a formatted date-time column rather than as plain text.
+
+The default list renderer is `DefaultDateTimeListWidget`, which delegates value formatting to the shared date-view component with time display enabled. At the list level, formatting is controlled through the layout `format` attr.
+
+
+
+
+| Concern | How it works |
+| --- | --- |
+| Default widget | `DefaultDateTimeListWidget` |
+| Widget selection | Applied automatically when `viewWidget` is not provided |
+| Typical field-node attrs | `name`, `label`, `sortable`, `filterable`, `isSearchable` |
+| Relevant layout attrs | `format`, `enableGlobalSearch` |
+
+<details>
+<summary><strong>Show default example</strong></summary>
+
+```json
+{
+  "type": "field",
+  "attrs": {
+    "name": "startTime",
+    "format": "DD/MM/YYYY HH:mm:ss"
+  }
+}
+```
+
+</details>
+
+
+
+
+No additional core list or tree widgets are currently registered specifically for `datetime`.
+
+
+
+
+### Field Rendering: `time`
+
+In list and tree views, `time` currently reuses the standard text-column path.
+
+The core list-column dispatch sends `time` fields through a dedicated column wrapper, but that wrapper falls back to `DefaultTextListWidget`. As a result, `time` currently behaves more like a text field in list and tree views than like a dedicated time-only renderer.
+
+
+
+
+| Concern | How it works |
+| --- | --- |
+| Default widget | `DefaultTextListWidget` through the shared text-column path |
+| Widget selection | Applied automatically when `viewWidget` is not provided |
+| Typical field-node attrs | `name`, `label`, `sortable`, `filterable`, `isSearchable`, `format` |
+| Relevant layout attrs | `truncateAfter`, `enableGlobalSearch` |
+
+<details>
+<summary><strong>Show default example</strong></summary>
+
+```json
+{
+  "type": "field",
+  "attrs": {
+    "name": "startTime",
+    "format": "DD/MM/YYYY HH:mm:ss"
+  }
+}
+```
+
+</details>
+
+
+
+
+No additional core list or tree widgets are currently registered specifically for `time`.
+
+
+
+
+### Field Rendering: `email`
+
+In list and tree views, `email` reuses the standard text-column path.
+
+The core list-column dispatch sends `email` fields through the same shared renderer used for text-like scalar fields. This means email addresses inherit the standard truncation, search, and text-cell behavior rather than using a dedicated email-specific list widget.
+
+
+
+
+| Concern | How it works |
+| --- | --- |
+| Default widget | `DefaultTextListWidget` through the shared text-column path |
+| Widget selection | Applied automatically when `viewWidget` is not provided |
+| Typical field-node attrs | `name`, `label`, `sortable`, `filterable`, `isSearchable` |
+| Relevant layout attrs | `truncateAfter`, `enableGlobalSearch` |
+
+<details>
+<summary><strong>Show default example</strong></summary>
+
+```json
+{
+  "type": "field",
+  "attrs": {
+    "name": "email",
+    "isSearchable": true
+  }
+}
+```
+
+</details>
+
+
+
+
+No additional core list or tree widgets are currently registered specifically for `email`.
+
+
+
+
+### Field Rendering: `password`
+
+Core list and tree rendering should not be assumed for `password`.
+
+The core list-column dispatch does not currently include a dedicated password renderer, and password fields are generally not intended for ordinary list presentation.
+
+
+
+
+| Concern | How it works |
+| --- | --- |
+| Default widget | No dedicated core list widget is currently wired for `password` |
+| Widget selection | No core `password` list-column path is currently registered in list dispatch |
+| Typical field-node attrs | `name`, `label`, `sortable`, `filterable`, `isSearchable` |
+| Relevant layout attrs | None specific to `password` at the core list level |
+
+<details>
+<summary><strong>Show example from metadata</strong></summary>
+
+```json
+{
+  "type": "field",
+  "attrs": {
+    "name": "password"
+  }
+}
+```
+
+</details>
+
+
+
+
+No additional core list or tree widgets are currently registered specifically for `password`.
+
+
+
+
+### Field Rendering: `selectionStatic`
+
+By default, `selectionStatic` renders as a text-style column whose visible value is derived from the authored option labels.
+
+The list path uses `DefaultTextListWidget` through the shared text-column renderer. For single-select values, that shared renderer maps stored values to their human-readable labels using `selectionStaticValues`, so list and tree views show the authored label rather than the raw stored token.
+
+
+
+
+| Concern | How it works |
+| --- | --- |
+| Default widget | `DefaultTextListWidget` through the shared selection-static column path |
+| Widget selection | Applied automatically when `viewWidget` is not provided |
+| Typical field-node attrs | `name`, `label`, `sortable`, `filterable`, `isSearchable` |
+| Relevant layout attrs | `truncateAfter`, `enableGlobalSearch` |
+
+<details>
+<summary><strong>Show default example</strong></summary>
+
+```json
+{
+  "type": "field",
+  "attrs": {
+    "name": "status",
+    "isSearchable": true
+  }
+}
+```
+
+</details>
+
+
+
+
+No additional core list or tree widgets are currently registered specifically for `selectionStatic`.
+
+
+
+
+### Field Rendering: `selectionDynamic`
+
+By default, `selectionDynamic` renders as a text-style column whose visible value comes directly from the data returned for the row.
+
+Unlike `selectionStatic`, the core list path does not perform provider lookups or label mapping at render time. The shared text widget simply displays the current row value as supplied by the dataset.
+
+
+
+
+| Concern | How it works |
+| --- | --- |
+| Default widget | `DefaultTextListWidget` through the shared selection-dynamic column path |
+| Widget selection | Applied automatically when `viewWidget` is not provided |
+| Typical field-node attrs | `name`, `label`, `sortable`, `filterable`, `isSearchable` |
+| Relevant layout attrs | `truncateAfter`, `enableGlobalSearch` |
+
+<details>
+<summary><strong>Show default example</strong></summary>
+
+```json
+{
+  "type": "field",
+  "attrs": {
+    "name": "couponVenueType"
+  }
+}
+```
+
+</details>
+
+
+
+
+No additional core list or tree widgets are currently registered specifically for `selectionDynamic`.
+
+
+
+
+### Field Rendering: `many-to-one`
+
+### Field Rendering: `one-to-many`
+
+### Field Rendering: `many-to-many`
+
+### Field Rendering: `mediaSingle`
+
+### Field Rendering: `mediaMultiple`
+
+### Field Rendering: `computed`
+
+## Tree View
+
+Use `tree` when the same dataset needs to be understood hierarchically.
+
+Tree views reuse the same field-column widgets as list views. In practice, that means the `shortText` widget coverage documented in the `list` section above also applies to `tree` unless a tree-specific renderer is introduced later.
+
+## Form View
+
+Use `form` when users are creating, editing, or inspecting a single record.
+
+### Common `form` Layout Attrs
+
+| Attr | Purpose |
+| --- | --- |
+| `name` | Internal layout identifier |
+| `label` | Optional layout-level label |
+| `className` | Grid and spacing classes applied to layout containers |
+| `workflowField` | Workflow control field for workflow-driven forms |
+| `workflowFieldUpdateEnabled` | Controls whether the workflow field can change |
+| `disabled` | Disables the entire form layout |
+| `readonly` | Makes the entire form layout read-only |
+| `showAddFormButton` | Shows or hides the create button |
+| `showEditFormButton` | Shows or hides the edit button |
+| `showDeleteFormButton` | Shows or hides the delete button |
+| `formButtons` | Adds custom form-level actions |
+
+### Common `form` Field-Node Attrs
+
+These attrs belong to the layout node, not to the field metadata entity:
+
+| Attr | Purpose |
+| --- | --- |
+| `name` | Chooses the field to render |
+| `label` | Overrides the default field label |
+| `description` | Overrides the default help text |
+| `className` | Controls field placement in the grid |
+| `showLabel` | Hides or shows the rendered field label |
+| `disabled` | Disables the field at the layout level |
+| `readonly` | Makes the field read-only at the layout level |
+| `editWidget` | Selects the widget used in edit mode |
+| `viewWidget` | Selects the widget used in view mode |
+| `autoComplete` | Controls the browser autocomplete behavior for text-style edit widgets that support it |
+
+### Field Rendering: `shortText`
+
+By default, `shortText` renders as a standard single-line text input in edit mode and as plain text in view mode.
+
+The default edit renderer is `DefaultShortTextFormEditWidget`, and the default view renderer is `DefaultShortTextFormViewWidget`.
+
+
+
+
+| Concern | How it works |
+| --- | --- |
+| Default edit widget | `DefaultShortTextFormEditWidget` |
+| Default view widget | `DefaultShortTextFormViewWidget` |
+| Widget selection | Applied automatically when `editWidget` or `viewWidget` is not provided |
+| Typical field-node attrs | `name`, `label`, `description`, `className`, `showLabel`, `disabled`, `readonly` |
+| Relevant widget-level attrs | `autoComplete` on the default edit widget |
+
+<details>
+<summary><strong>Show default example</strong></summary>
+
+```json
+{
+  "type": "field",
+  "attrs": {
+    "name": "bankUserId"
+  }
+}
+```
+
+</details>
+
+
+
+
+| Widget | Use when | Extra attrs |
+| --- | --- | --- |
+| `MaskedShortTextFormEditWidget` | The value should be edited like a password-style secret input | `autoComplete` |
+| `MaskedShortTextFormViewWidget` | The value should stay masked in view mode | None |
+| `SolidShortTextFieldAvatarWidget` | The value should be displayed in view mode with an avatar-style badge | None |
+
+#### `MaskedShortTextFormEditWidget`
+
+
+
+
+| Attr | Purpose |
+| --- | --- |
+| `autoComplete` | Passed through to the underlying password-style input so browser autocomplete can be enabled, disabled, or tuned for secret-like values. |
+
+
+
+
+```json
+{
+  "type": "field",
+  "attrs": {
+    "name": "paymentGatewayAccessSecret",
+    "viewWidget": "maskedShortTextForm",
     "editWidget": "maskedShortTextEdit"
   }
 }
 ```
-</details>
 
-#### Further Reference
-- List View Widgets: [List View Widgets](/docs/developer-docs/extending/frontend-customization/list-view-field-widgets)
-- Form View / Edit Widgets: [Form View Widgets](/docs/developer-docs/extending/frontend-customization/form-view-field-widgets)
 
-<span style={{marginLeft: 8}}>View Event Handlers (TODO)</span>
 
-**What this shows:** Hook into lifecycle events to preprocess layout/data or react to user input.
 
-- `onFormLayoutLoad`: Executed when form loads
-- `onFormDataLoad`: Executed after form data is loaded
-- `onFieldChange`: Triggered on field value changes
-- `onFieldBlur`: Executed when a field loses focus
-- `onCustomWidgetRender`: Called when a custom widget is rendered
+#### `MaskedShortTextFormViewWidget`
 
-Further reference: [Event Handlers Documentation](../extending/frontend-customization/form-view-events)
 
-<span style={{marginLeft: 8}}>View Layout Responsive Design</span>
 
-### CSS Grid Classes
-**What this shows:** Use grid utility classes to control width across breakpoints.
-<details>
-  <summary>CSS Grid Classes</summary>
+
+| Attr | Purpose |
+| --- | --- |
+| No extra attrs | This widget renders the same field label as the default view widget, but masks the visible value instead of showing it directly. |
+
+
+
 
 ```json
 {
-  "type": "column",
-  "attrs": { "className": "col-12 col-md-6 col-lg-4" }
+  "type": "field",
+  "attrs": {
+    "name": "paymentGatewayAccessSecret",
+    "viewWidget": "maskedShortTextForm",
+    "editWidget": "maskedShortTextEdit"
+  }
 }
 ```
+
+
+
+
+#### `SolidShortTextFieldAvatarWidget`
+
+
+
+
+| Attr | Purpose |
+| --- | --- |
+| No extra attrs | This widget derives avatar initials directly from the field value and renders the value with an avatar-style badge in view mode. |
+
+
+
+
+```json
+{
+  "type": "field",
+  "attrs": {
+    "label": "Vendor Name",
+    "name": "name",
+    "viewWidget": "SolidShortTextFieldAvatarWidget"
+  }
+}
+```
+
+
+
+
+
+
+
+### Field Rendering: `longText`
+
+By default, `longText` renders as a multiline text area in edit mode and as a default read-only text display in view mode.
+
+The default edit renderer is `DefaultLongTextFormEditWidget`.
+
+`longText` supports richer form-side rendering than list-side rendering. Depending on the chosen widget, it can be edited as plain multiline text, as a structured JSON editor, or as a code editor.
+
+
+
+
+| Concern | How it works |
+| --- | --- |
+| Default edit widget | `DefaultLongTextFormEditWidget` |
+| Default view widget | Plain read-only text display |
+| Widget selection | Applied automatically when `editWidget` or `viewWidget` is not provided |
+| Typical field-node attrs | `name`, `label`, `description`, `className`, `showLabel`, `disabled`, `readonly` |
+| Relevant widget-level attrs | None beyond the standard field-node attrs |
+
+<details>
+<summary><strong>Show default example</strong></summary>
+
+```json
+{
+  "type": "field",
+  "attrs": {
+    "name": "description"
+  }
+}
+```
+
 </details>
 
-#### Layout Breakpoints
-- `col-12`: Full width on all screens
-- `col-md-6`: Half width on medium screens and up
-- `col-lg-4`: Third width on large screens and up
 
-## View Metadata Attributes
 
-### `name` *(string, required, unique)*
-Name of the view (used for referencing).  
-**Default:** N/A
 
-### `displayName` *(string, required)*
-Display name of the view (shown in the UI).  
-**Default:** N/A
+| Widget | Use when | Extra attrs |
+| --- | --- | --- |
+| `DynamicJsonEditorFormEditWidget` | The value is stored as text but authored as a structured JSON array or object | `jsonSchema`, `jsonSchemaShowPreview` |
+| `DynamicJsonEditorFormViewWidget` | The value is stored as text but should render as structured read-only JSON content | `jsonSchema` |
+| `CodeEditorFormEditWidget` | The value should be edited in a code-oriented editor rather than a plain textarea | `editorLanguage`, `height`, `fontSize` |
 
-### `type` *(string, required)*
-Type of view. Supported types:
-- `list`: List view for displaying multiple records in a tabular format.
-- `form`: Form view for creating/editing a single record.
-- `kanban`: Kanban view for visualizing records as cards in columns.
-**Default:** N/A
+#### `DynamicJsonEditorFormEditWidget`
 
-### `context` *(JSON, optional)*
-JSON object defining context-specific parameters for the view.  
-**Default:** N/A
 
-### `layout` *(JSON, required)*
-Defines the **layout and structure** of the view. Controls how fields, widgets, buttons, and other UI elements are organized.  
-**Default:** N/A
 
-#### Further Reference
-- **List View:** [List View Layout Attributes](../../admin-docs/layouts/list-view#list-view-attributes-type-list)  
-- **Form View:** [Form View Layout Attributes](../../admin-docs/layouts/form-view)  
-- **Kanban View:** [Kanban View Layout Attributes](../../admin-docs/layouts/kanban-view#kanban-view-attributes) 
 
-  Each view type has its own expected `layout` schema. Use the links above to understand required keys, optional properties, and usage examples.
+| Attr | Purpose |
+| --- | --- |
+| `jsonSchema` | Required. Defines the structure that the widget uses to render each JSON entry and choose the correct embedded input controls. |
+| `jsonSchemaShowPreview` | Optional. When `true`, shows a live JSON preview beneath the structured editor. |
 
-### `moduleUserKey` *(string, optional)*
-User key of the module this view belongs to.  
-**Default:** N/A
 
-### `modelUserKey` *(string, optional)*
-User key of the model this view is associated with.  
-**Default:** N/A    
+
+
+```json
+{
+  "type": "field",
+  "attrs": {
+    "name": "templateFields",
+    "editWidget": "jsonEditor",
+    "viewWidget": "jsonViewer",
+    "jsonSchemaShowPreview": false,
+    "jsonSchema": {
+      "name": {
+        "required": true,
+        "type": "string"
+      },
+      "displayName": {
+        "required": true,
+        "type": "string"
+      },
+      "datatype": {
+        "required": true,
+        "type": "selectionStatic",
+        "allowedValues": [
+          "string",
+          "numeric",
+          "datetime"
+        ]
+      },
+      "description": {
+        "required": true,
+        "type": "longText"
+      }
+    }
+  }
+}
+```
+
+
+
+
+#### `DynamicJsonEditorFormViewWidget`
+
+
+
+
+| Attr | Purpose |
+| --- | --- |
+| `jsonSchema` | Required. Defines how the widget should interpret and render the stored JSON value in structured read-only mode. |
+
+
+
+
+```json
+{
+  "type": "field",
+  "attrs": {
+    "name": "templateFields",
+    "editWidget": "jsonEditor",
+    "viewWidget": "jsonViewer",
+    "jsonSchemaShowPreview": false,
+    "jsonSchema": {
+      "name": {
+        "required": true,
+        "type": "string"
+      },
+      "displayName": {
+        "required": true,
+        "type": "string"
+      },
+      "datatype": {
+        "required": true,
+        "type": "selectionStatic",
+        "allowedValues": [
+          "string",
+          "numeric",
+          "datetime"
+        ]
+      },
+      "description": {
+        "required": true,
+        "type": "longText"
+      }
+    }
+  }
+}
+```
+
+
+
+
+#### `CodeEditorFormEditWidget`
+
+
+
+
+| Attr | Purpose |
+| --- | --- |
+| `editorLanguage` | Sets the language mode used by the code editor, such as `json` or `ts`. |
+| `height` | Controls the visible editor height. Defaults to `200px`. |
+| `fontSize` | Controls the editor font size. Defaults to `14px`. |
+
+
+
+
+```json
+{
+  "type": "field",
+  "attrs": {
+    "name": "defaultValue",
+    "editWidget": "codeEditor",
+    "editorLanguage": "json"
+  }
+}
+```
+
+
+
+
+
+
+
+### Field Rendering: `richText`
+
+By default, `richText` renders as a rich-text editor in edit mode and as formatted HTML content in view mode.
+
+The supported `richText` widget surface is intentionally simple at the moment: one default edit widget and one default view widget.
+
+
+
+
+| Concern | How it works |
+| --- | --- |
+| Default edit widget | `DefaultRichTextFormEditWidget` |
+| Default view widget | `DefaultRichTextFormViewWidget` |
+| Widget selection | Applied automatically when `editWidget` or `viewWidget` is not provided |
+| Typical field-node attrs | `name`, `label`, `description`, `className`, `showLabel`, `disabled`, `readonly` |
+| Relevant widget-level attrs | None beyond the standard field-node attrs |
+
+<details>
+<summary><strong>Show default example</strong></summary>
+
+```json
+{
+  "type": "field",
+  "attrs": {
+    "name": "content",
+    "label": "content"
+  }
+}
+```
+
+</details>
+
+
+
+
+No additional form widgets are currently registered specifically for `richText`.
+
+
+
+
+### Field Rendering: `json`
+
+By default, `json` renders in forms using a JSON-oriented code editor in both edit and view modes.
+
+The supported core `json` widget surface is intentionally simple at the moment: one default edit widget and one default view widget.
+
+
+
+
+| Concern | How it works |
+| --- | --- |
+| Default edit widget | `DefaultJsonFormEditWidget` |
+| Default view widget | `DefaultJsonFormViewWidget` |
+| Widget selection | Applied automatically when `editWidget` or `viewWidget` is not provided |
+| Typical field-node attrs | `name`, `label`, `description`, `className`, `showLabel`, `readonly` |
+| Relevant widget-level attrs | `height`, `fontSize` |
+
+<details>
+<summary><strong>Show default example</strong></summary>
+
+```json
+{
+  "type": "field",
+  "attrs": {
+    "name": "metadata"
+  }
+}
+```
+
+</details>
+
+
+
+
+No additional core form widgets are currently registered specifically for `json`.
+
+
+
+
+### Field Rendering: `int`
+
+By default, `int` renders as a number input in edit mode and as a plain numeric read-only value in view mode.
+
+The default edit path uses `DefaultIntegerFormEditWidget`. The default view path uses `DefaultIntegerFormViewWidget`.
+
+
+
+
+| Concern | How it works |
+| --- | --- |
+| Default edit widget | `DefaultIntegerFormEditWidget` |
+| Default view widget | `DefaultIntegerFormViewWidget` |
+| Widget selection | Applied automatically when `editWidget` or `viewWidget` is not provided |
+| Typical field-node attrs | `name`, `label`, `showLabel`, `disabled`, `readonly`, `autoComplete` |
+| Relevant field attrs | `min`, `max`, `required` |
+
+<details>
+<summary><strong>Show default example</strong></summary>
+
+```json
+{
+  "type": "field",
+  "attrs": {
+    "name": "pageCount"
+  }
+}
+```
+
+</details>
+
+
+
+
+| Widget | Use when | Extra attrs |
+| --- | --- | --- |
+| `SolidIntegerSliderStyleFormEditWidget` | The integer should be chosen from a bounded range instead of typed manually | No widget-specific attrs; the widget relies on the field metadata `min` and `max` values |
+
+#### `SolidIntegerSliderStyleFormEditWidget`
+
+
+
+
+| Attr | Purpose |
+| --- | --- |
+| No widget-specific attrs | This widget renders the field as a slider and relies on the field metadata `min` and `max` values to determine the selectable range. When bounds are not authored, the current implementation falls back to its own default range. |
+
+
+
+
+```json
+{
+  "type": "field",
+  "attrs": {
+    "name": "weightage",
+    "editWidget": "integerSlider"
+  }
+}
+```
+
+
+
+
+No additional core form view widgets are currently registered specifically for `int`.
+
+
+
+
+### Field Rendering: `bigint`
+
+By default, `bigint` reuses the same whole-number editing experience as `int`.
+
+The form field factory currently routes `bigint` through `SolidIntegerField`, so the default edit path uses `DefaultIntegerFormEditWidget` and the default view path uses `DefaultIntegerFormViewWidget`.
+
+
+
+
+| Concern | How it works |
+| --- | --- |
+| Default edit widget | `DefaultIntegerFormEditWidget` |
+| Default view widget | `DefaultIntegerFormViewWidget` |
+| Widget selection | Applied automatically when `editWidget` or `viewWidget` is not provided |
+| Typical field-node attrs | `name`, `label`, `showLabel`, `disabled`, `readonly`, `autoComplete` |
+| Relevant field attrs | `required` |
+
+<details>
+<summary><strong>Show default example</strong></summary>
+
+```json
+{
+  "type": "field",
+  "attrs": {
+    "name": "id"
+  }
+}
+```
+
+</details>
+
+
+
+
+No additional core form widgets are currently registered specifically for `bigint`.
+
+
+
+
+### Field Rendering: `decimal`
+
+By default, `decimal` renders as a number input in edit mode and as a plain numeric read-only value in view mode.
+
+The default edit path uses `DefaultDecimalFormEditWidget`. The default view path uses `DefaultDecimalFormViewWidget`.
+
+
+
+
+| Concern | How it works |
+| --- | --- |
+| Default edit widget | `DefaultDecimalFormEditWidget` |
+| Default view widget | `DefaultDecimalFormViewWidget` |
+| Widget selection | Applied automatically when `editWidget` or `viewWidget` is not provided |
+| Typical field-node attrs | `name`, `label`, `showLabel`, `disabled`, `readonly` |
+| Relevant field attrs | `min`, `max`, `required` |
+
+<details>
+<summary><strong>Show default example</strong></summary>
+
+```json
+{
+  "type": "field",
+  "attrs": {
+    "name": "latePaymentFees"
+  }
+}
+```
+
+</details>
+
+
+
+
+No additional core form widgets are currently registered specifically for `decimal`.
+
+
+
+
+### Field Rendering: `boolean`
+
+By default, `boolean` renders as a checkbox-style control in edit mode and as a readable true-or-false value in view mode.
+
+The default edit path resolves through the `booleanCheckbox` alias to `SolidBooleanCheckboxStyleFormEditWidget`. The default view path uses `DefaultBooleanFormViewWidget`.
+
+
+
+
+| Concern | How it works |
+| --- | --- |
+| Default edit widget | `SolidBooleanCheckboxStyleFormEditWidget` via the `booleanCheckbox` alias |
+| Default view widget | `DefaultBooleanFormViewWidget` |
+| Widget selection | Applied automatically when `editWidget` or `viewWidget` is not provided |
+| Typical field-node attrs | `name`, `label`, `showLabel`, `disabled`, `readonly`, `checkboxLabel`, `trueLabel`, `falseLabel` |
+| Relevant layout attrs | `disabled`, `readonly` |
+
+<details>
+<summary><strong>Show default example</strong></summary>
+
+```json
+{
+  "type": "field",
+  "attrs": {
+    "name": "isPBLEnabled",
+    "checkboxLabel": "IS PBL Enabled"
+  }
+}
+```
+
+</details>
+
+
+
+
+| Widget | Use when | Extra attrs |
+| --- | --- | --- |
+| `DefaultBooleanFormEditWidget` | The field should render as an explicit yes-or-no segmented choice instead of as a checkbox | `trueLabel`, `falseLabel` |
+| `SolidBooleanSwitchStyleFormEditWidget` | The field should render as a switch-style control | None |
+
+#### `DefaultBooleanFormEditWidget`
+
+
+
+
+| Attr | Purpose |
+| --- | --- |
+| `trueLabel` | Replaces the default `True` label in the segmented control with a business-friendly positive-state label. |
+| `falseLabel` | Replaces the default `False` label in the segmented control with a business-friendly negative-state label. |
+
+
+
+
+```json
+{
+  "type": "field",
+  "attrs": {
+    "name": "discrepencyClear",
+    "editWidget": "booleanSelectbox",
+    "trueLabel": "Yes",
+    "falseLabel": "No"
+  }
+}
+```
+
+
+
+
+#### `SolidBooleanSwitchStyleFormEditWidget`
+
+
+
+
+| Attr | Purpose |
+| --- | --- |
+| No extra attrs | This widget focuses on the control style rather than on additional configuration. It renders the field as a switch while still respecting the standard boolean field-node attrs such as `label`, `disabled`, and `readonly`. |
+
+
+
+
+```json
+{
+  "type": "field",
+  "attrs": {
+    "name": "accessToSystem",
+    "editWidget": "SolidBooleanSwitchStyleFormEditWidget"
+  }
+}
+```
+
+
+
+
+No additional core form view widgets are currently registered specifically for `boolean`.
+
+
+
+
+### Field Rendering: `date`
+
+By default, `date` renders as a date picker in edit mode and as a formatted date in view mode.
+
+The default edit path uses `DefaultDateFormEditWidget`. The default view path uses `DefaultDateFormViewWidget`.
+
+
+
+
+| Concern | How it works |
+| --- | --- |
+| Default edit widget | `DefaultDateFormEditWidget` |
+| Default view widget | `DefaultDateFormViewWidget` |
+| Widget selection | Applied automatically when `editWidget` or `viewWidget` is not provided |
+| Typical field-node attrs | `name`, `label`, `showLabel`, `disabled`, `readonly`, `placeholder`, `format` |
+| Relevant layout attrs | `disabled`, `readonly` |
+
+<details>
+<summary><strong>Show default example</strong></summary>
+
+```json
+{
+  "type": "field",
+  "attrs": {
+    "name": "dateOfApproval",
+    "label": "Date of Approval",
+    "format": "DD/MM/YYYY HH:mm:ss",
+    "className": "col-6"
+  }
+}
+```
+
+</details>
+
+
+
+
+No additional core form widgets are currently registered specifically for `date`.
+
+
+
+
+### Field Rendering: `datetime`
+
+By default, `datetime` renders as a date-time picker in edit mode and as a formatted date-time value in view mode.
+
+The default edit path uses `DefaultDateTimeFormEditWidget`. The default view path uses `DefaultDateTimeFormViewWidget`.
+
+
+
+
+| Concern | How it works |
+| --- | --- |
+| Default edit widget | `DefaultDateTimeFormEditWidget` |
+| Default view widget | `DefaultDateTimeFormViewWidget` |
+| Widget selection | Applied automatically when `editWidget` or `viewWidget` is not provided |
+| Typical field-node attrs | `name`, `label`, `showLabel`, `disabled`, `readonly`, `placeholder`, `format` |
+| Relevant layout attrs | `disabled`, `readonly` |
+
+<details>
+<summary><strong>Show default example</strong></summary>
+
+```json
+{
+  "type": "field",
+  "attrs": {
+    "name": "startTime",
+    "format": "DD/MM/YYYY HH:mm:ss"
+  }
+}
+```
+
+</details>
+
+
+
+
+No additional core form widgets are currently registered specifically for `datetime`.
+
+
+
+
+### Field Rendering: `time`
+
+By default, `time` renders as a time-only picker in edit mode and as a formatted time value in view mode.
+
+The default edit path uses `DefaultTimeFormEditWidget`. The default view path uses `DefaultTimeFormViewWidget`.
+
+
+
+
+| Concern | How it works |
+| --- | --- |
+| Default edit widget | `DefaultTimeFormEditWidget` |
+| Default view widget | `DefaultTimeFormViewWidget` |
+| Widget selection | Applied automatically when `editWidget` or `viewWidget` is not provided |
+| Typical field-node attrs | `name`, `label`, `showLabel`, `disabled`, `readonly`, `format` |
+| Relevant layout attrs | `disabled`, `readonly` |
+
+<details>
+<summary><strong>Show default example</strong></summary>
+
+```json
+{
+  "type": "field",
+  "attrs": {
+    "name": "startTime"
+  }
+}
+```
+
+</details>
+
+
+
+
+No additional core form widgets are currently registered specifically for `time`.
+
+
+
+
+### Field Rendering: `email`
+
+By default, `email` renders as an email-oriented input in edit mode and as plain read-only text in view mode.
+
+The default edit path uses `DefaultEmailFormEditWidget`. The default read-only display follows the shared plain-text view path used for text-like scalar fields.
+
+
+
+
+| Concern | How it works |
+| --- | --- |
+| Default edit widget | `DefaultEmailFormEditWidget` |
+| Default view behavior | Plain read-only text display |
+| Widget selection | Applied automatically when `editWidget` or `viewWidget` is not provided |
+| Typical field-node attrs | `name`, `label`, `showLabel`, `disabled`, `readonly`, `autoComplete` |
+| Relevant field attrs | `max`, `regexPattern`, `regexPatternNotMatchingErrorMsg` |
+
+<details>
+<summary><strong>Show default example</strong></summary>
+
+```json
+{
+  "type": "field",
+  "attrs": {
+    "name": "payByLinkCustomerEmailAddress"
+  }
+}
+```
+
+</details>
+
+
+
+
+No additional core form widgets are currently registered specifically for `email`.
+
+
+
+
+### Field Rendering: `password`
+
+By default, `password` uses two different edit experiences depending on context and a masked read-only view.
+
+When a record is being created, the default create path uses `DefaultPasswordFormCreateWidget`, which includes password and confirm-password inputs. When an existing record is being edited, the default edit path uses `DefaultPasswordFormEditWidget`, which opens a controlled change-password dialog. The default view path uses `DefaultPasswordFormViewWidget`.
+
+
+
+
+| Concern | How it works |
+| --- | --- |
+| Default create widget | `DefaultPasswordFormCreateWidget` |
+| Default edit widget | `DefaultPasswordFormEditWidget` |
+| Default view widget | `DefaultPasswordFormViewWidget` |
+| Widget selection | Applied automatically when `createWidget`, `editWidget`, or `viewWidget` is not provided |
+| Typical field-node attrs | `name`, `label`, `showLabel`, `disabled`, `readonly`, `createWidget`, `editWidget`, `viewWidget` |
+| Relevant field attrs | `min`, `max`, `regexPattern`, `regexPatternNotMatchingErrorMsg` |
+
+<details>
+<summary><strong>Show default example</strong></summary>
+
+```json
+{
+  "type": "field",
+  "attrs": {
+    "name": "password"
+  }
+}
+```
+
+</details>
+
+
+
+
+No additional core form widgets are currently registered specifically for `password`.
+
+
+
+
+### Field Rendering: `selectionStatic`
+
+By default, `selectionStatic` renders as an autocomplete-driven picker in edit mode and as the authored label in view mode.
+
+The default edit path uses `DefaultSelectionStaticAutocompleteFormEditWidget`. The default view path uses `DefaultSelectionStaticFormViewWidget`.
+
+
+
+
+| Concern | How it works |
+| --- | --- |
+| Default edit widget | `DefaultSelectionStaticAutocompleteFormEditWidget` |
+| Default view widget | `DefaultSelectionStaticFormViewWidget` |
+| Widget selection | Applied automatically when `editWidget` or `viewWidget` is not provided |
+| Typical field-node attrs | `name`, `label`, `showLabel`, `disabled`, `readonly`, `multiSelect` |
+| Relevant field attrs | `selectionStaticValues`, `selectionValueType`, `isMultiSelect` |
+
+<details>
+<summary><strong>Show default example</strong></summary>
+
+```json
+{
+  "type": "field",
+  "attrs": {
+    "name": "type"
+  }
+}
+```
+
+</details>
+
+
+
+
+| Widget | Use when | Extra attrs |
+| --- | --- | --- |
+| `SolidSelectionStaticRadioFormEditWidget` | The option set is small and should be shown as explicit radio choices | None |
+| `SolidSelectionStaticSelectButtonFormEditWidget` | The field should render as segmented selection buttons instead of an autocomplete | None |
+
+#### `SolidSelectionStaticRadioFormEditWidget`
+
+
+
+
+| Attr | Purpose |
+| --- | --- |
+| No extra attrs | This widget focuses on presentation rather than on additional configuration. It renders the authored options as radio choices and relies on the standard field-node attrs such as `label`, `disabled`, and `readonly`. |
+
+Important note: this widget supports single-select only. When `multiSelect` or `isMultiSelect` is enabled, the widget reports that the render mode is not supported.
+
+
+
+
+Example coming soon..
+
+
+
+
+#### `SolidSelectionStaticSelectButtonFormEditWidget`
+
+
+
+
+| Attr | Purpose |
+| --- | --- |
+| No extra attrs | This widget renders the authored options as segmented selection buttons and relies on the standard field-node attrs such as `label`, `disabled`, and `readonly`. |
+
+Important note: this widget supports single-select only. When `multiSelect` or `isMultiSelect` is enabled, the widget reports that the render mode is not supported.
+
+
+
+
+```json
+{
+  "type": "field",
+  "attrs": {
+    "name": "enableSeo",
+    "editWidget": "SolidSelectionStaticSelectButtonFormEditWidget"
+  }
+}
+```
+
+
+
+
+No additional core form view widgets are currently registered specifically for `selectionStatic`.
+
+
+
+
+### Field Rendering: `selectionDynamic`
+
+By default, `selectionDynamic` renders as a provider-backed autocomplete in edit mode and as the current selected label or value in view mode.
+
+The default edit path uses `DefaultSelectionDynamicFormEditWidget`. The default view path uses `DefaultSelectionDynamicFormViewWidget`.
+
+
+
+
+| Concern | How it works |
+| --- | --- |
+| Default edit widget | `DefaultSelectionDynamicFormEditWidget` |
+| Default view widget | `DefaultSelectionDynamicFormViewWidget` |
+| Widget selection | Applied automatically when `editWidget` or `viewWidget` is not provided |
+| Typical field-node attrs | `name`, `label`, `description`, `showLabel`, `disabled`, `readonly`, `multiSelect`, `whereClause` |
+| Relevant field attrs | `selectionDynamicProvider`, `selectionDynamicProviderCtxt`, `selectionValueType`, `isMultiSelect` |
+
+<details>
+<summary><strong>Show default example</strong></summary>
+
+```json
+{
+  "type": "field",
+  "attrs": {
+    "name": "couponVenueType"
+  }
+}
+```
+
+</details>
+
+
+
+
+No additional core form widgets are currently registered specifically for `selectionDynamic`.
+
+
+
+
+### Field Rendering: `many-to-one`
+
+### Field Rendering: `one-to-many`
+
+### Field Rendering: `many-to-many`
+
+### Field Rendering: `mediaSingle`
+
+### Field Rendering: `mediaMultiple`
+
+### Field Rendering: `computed`
 
 ## Best Practices
 
 <Cards>
-  <Card title="Layout Organization">
+  <Card icon={<LayoutGrid />} title="Layout Organization">
     - **Use logical grouping**: Group related fields in columns with descriptive labels
     - **Progressive disclosure**: Use tabs (notebooks) for complex forms
     - **Responsive design**: Use appropriate grid classes for different screen sizes
     - **Field ordering**: Place important fields first, follow logical workflow
   </Card>
-  <Card title="Security Considerations">
+  <Card icon={<Shield />} title="Security Considerations">
     - **Role-based access**: Configure view actions based on user roles
     - **Field-level security**: Hide sensitive fields from unauthorized users
     - **Audit trails**: Enable audit tracking for sensitive operations
   </Card>
-  <Card title="Performance Optimization">
+  <Card icon={<Gauge />} title="Performance Optimization">
     - **Pagination**: Always enable pagination for large datasets
     - **Field selection**: Only display necessary fields in list views
   </Card>
 </Cards>
+
+## Card And Kanban Views
+
+`card` and `kanban` views are usually documented at the card-composition level rather than at the individual field-widget level.
+
+They remain important view families, but they do not currently need the same per-field widget catalog that `list`, `tree`, and `form` need.
+
+## See Also
+
+- [Field Metadata](./field-metadata.md)
+- [Model Metadata](./model-metadata.md)

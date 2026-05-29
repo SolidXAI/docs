@@ -1,186 +1,159 @@
 ---
 title: Custom Views
-description: Learn how to create custom views in the frontend of your application.
-summary: Explains creating custom pages in SolidX frontend applications. Covers creating custom view components in the extensions folder, registering them using `registerExtensionComponent`, embedding custom views in form layouts using JSON configuration (notebooks, pages, custom widgets), accessing form data and metadata via props, and building specialized UI like `BookSimilarTitles` for displaying related data with filtering and action handlers.
-keywords: [custom views, frontend customization, custom actions, custom components]
-solidx_concerns: [ add_full_custom_ui, add_custom_menu_action_combo,create_custom_widget]
+icon: "layout-grid"
+description: Clarifies how to choose between metadata-driven custom widgets and bespoke route-level pages.
+summary: "Clarifies how to choose between metadata-driven custom UI in `admin-layout` and bespoke route-level UI in `custom-layout`. Includes module-based location, manifest registration, and API usage conventions."
+keywords: [custom views, frontend customization, custom widgets, custom pages]
+solidx_concerns: [frontend.custom_pages, add_full_custom_ui, create_custom_widget]
 ---
 
-##  Overview
-Custom views allow you to create **custom pages** in the frontend of your application.  
-They can be embedded into form views or used to build specialized UI.
+## Overview
 
-## Steps to Create a Custom Page in a Form View
+In older discussions, "custom view" is used for two different patterns:
 
-1. **Create the custom view component**  
-   Place it inside your extensions folder:  
-    `solid-ui/app/admin/extensions/BookSimilarTitles.tsx`
+1. Metadata-driven custom UI blocks inside form/list layouts.
+2. Fully bespoke route pages with independent layout/navigation.
 
-2. **Register the custom view**  
-   Register it in `solid-ui/app/admin/extensions/index.ts` using `registerExtensionComponent`.
-<details>
- <summary>Code: Registering the Component</summary>
+Use the correct implementation path below.
 
-```typescript
-registerExtensionComponent("BookSimilarTitles", BookSimilarTitles);
+## Decision Guide
+
+### Use Custom Widget (metadata-driven form-view block)
+
+Choose this when UI is rendered inside an existing form-view layout node with `type: "custom"` and should remain inside the generated Solid form flow.
+
+- Location: `solid-ui/src/<module-name>/admin-layout/<model-name>/extension-components/`
+- Registration: `<module-name>.ui-module.ts` via `extensionComponents`
+- Metadata wiring: layout JSON `type: "custom"`, `attrs.widget: "<registered-name>"`
+
+Use this path for:
+
+- form-view custom widgets rendered through `type: "custom"`
+- form buttons
+- list buttons
+- row actions
+- field widgets
+- kanban card widgets
+
+### Use Custom Page (bespoke routing)
+
+Choose this when you need a dedicated page shell, route group, or custom navigation unrelated to metadata widgets.
+
+- Location: `solid-ui/src/<module-name>/custom-layout/<layout-reference>/...`
+- Route wiring: register route trees in `<module-name>.ui-module.ts` under `routes.extraRoutes`
+- App wiring: keep `solid-ui/src/AppRoutes.tsx` thin and let it consume `solidUiModuleRuntime.routes`
+- Do not place full custom pages under `solid-ui/src/<module-name>/admin-layout/...`
+
+See [Bespoke Frontend UI](./bespoke-frontend-ui.md) for the full route-level pattern.
+
+## API Convention for Both Paths
+
+For frontend API calls, Solid supports both of these patterns:
+
+1. Direct Solid HTTP helpers from `@solidxai/core-ui`
+2. Module-owned Redux / RTK Query integration under `solid-ui/src/<module-name>/redux/`
+
+### Option A: Solid HTTP Helpers
+
+Use:
+
+- `solidGet`, `solidPost`, `solidPut`, `solidPatch`, `solidDelete`, `solidAxios`
+
+Guidelines:
+
+- Pass endpoint paths like `/resource` (no hardcoded `/api` prefix).
+- Prefer context data (`params`, `formik.values`, route params) instead of hardcoded IDs.
+- Handle loading, success, and error explicitly.
+- For filter-heavy requests, use `qs.stringify(..., { encodeValuesOnly: true })` or Axios `params`.
+
+### Option B: Redux / RTK Query
+
+If the consuming app prefers store-backed integration, place RTK Query APIs under:
+
+```text
+solid-ui/src/<module-name>/redux/
 ```
-</details>
 
-3. **Add the custom view to the form layout**  
-   You can embed the custom widget in your form JSON layout.
-<details>
- <summary>Code: Form Layout Example</summary>
+Then register reducers and middleware in `<module-name>.ui-module.ts`.
+
+Choose this when you want:
+
+- shared API state
+- caching and invalidation
+- generated hooks
+- a more structured app-wide API layer
+
+See [Redux Module Integration](./redux-module-integration.md) for the full pattern.
+
+## Example: Metadata Custom Widget
+
+```tsx
+import { solidGet } from "@solidxai/core-ui";
+import { useEffect, useState } from "react";
+import type { SolidFormWidgetProps } from "@solidxai/core-ui";
+
+export function BookSimilarTitles({ formData }: SolidFormWidgetProps) {
+  const [rows, setRows] = useState<any[]>([]);
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    const title = formData?.title;
+    if (!title) return;
+
+    const run = async () => {
+      setLoading(true);
+      try {
+        const query = encodeURIComponent(String(title));
+        const resp = await solidGet(`/books/similar?title=${query}`);
+        setRows(resp?.data?.data?.records || []);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    run();
+  }, [formData?.title]);
+
+  if (loading) return <div>Loading...</div>;
+  return <div>Found: {rows.length}</div>;
+}
+```
+
+Registration:
+
+```ts
+import { ExtensionComponentTypes, type SolidUiModule } from "@solidxai/core-ui";
+import { BookSimilarTitles } from "./admin-layout/book/extension-components/BookSimilarTitles";
+
+const libraryUiModule = {
+  name: "library",
+  extensionComponents: [
+    {
+      name: "BookSimilarTitles",
+      component: BookSimilarTitles,
+      type: ExtensionComponentTypes.formWidget,
+    },
+  ],
+} satisfies SolidUiModule;
+
+export default libraryUiModule;
+```
+
+Layout usage:
 
 ```json
 {
-  "name": "book-form-view",
-  "type": "form",
-  "layout": {
-    "type": "form",
-    "attrs": {
-      "name": "form-1",
-      "label": "Book"
-    },
-    "children": [
-      {
-        "type": "sheet",
-        "attrs": { "name": "sheet-1" },
-        "children": [
-          {
-            "type": "notebook",
-            "attrs": { "name": "notebook-1" },  
-            "children": [
-              {
-                "type": "page",
-                "attrs": { "name": "page-1", "label": "General Info" },
-                "children": [
-                  {
-                    "type": "row",
-                    "attrs": { "name": "page-1-row-1" },
-                    "children": [ ... ]
-                  }
-                ]
-              },
-              {
-                "type": "page",
-                "attrs": { "name": "page-5", "label": "Similar Titles", "visible": true },
-                "children": [
-                  {
-                    "type": "custom",
-                    "attrs": {
-                      "name": "page-5-custom-1",
-                      "widget": "BookSimilarTitles"
-                    }
-                  }
-                ]
-              }
-            ]
-          }
-        ]
-      }
-    ]
+  "type": "custom",
+  "attrs": {
+    "name": "book-similar-widget",
+    "widget": "BookSimilarTitles"
   }
 }
 ```
-</details>
 
-##  Example: `BookSimilarTitles` Component
-<details>
- <summary>Code: BookSimilarTitles.tsx</summary>
+## See Also
 
-```typescript
-"use client";
-
-import Image from "next/image";
-import { useEffect, useState } from "react";
-import { SolidFormWidgetProps } from '@solidstarters/solid-core-ui';
-
-const BookSimilarTitles = ({ formData, field, fieldsMetadata, viewMetadata }: SolidFormWidgetProps) => {
-    const [books, setBooks] = useState<any[]>([]);
-
-    useEffect(() => {
-        const myHeaders = new Headers();
-        myHeaders.append("Authorization", "[PASSWORD]");
-
-        const requestOptions = { method: "GET", headers: myHeaders };
-
-        async function fetchBookData() {
-            try {
-                const title = formData['title'];
-                console.log(`Fetching similar titles for ${title}`);
-
-                const endpoint = `https://www.googleapis.com/books/v1/volumes?q=${title}&maxResults=40`;
-                const response = await fetch(encodeURI(endpoint), requestOptions);
-                const result = await response.json();
-                console.log(`Loaded similar titles from Google Books API`, result);
-                setBooks(result.items);
-            } catch (error) {
-                console.error(error);
-            }
-        }
-
-        fetchBookData();
-    }, []);
-
-    return (
-        <div>
-            <div style={{ minWidth: "30vw" }}>
-                {books.map((book, index) => (
-                    <div key={index} style={{ width: "100px", height: "100px" }}>
-                        <a target="_blank" href={book.volumeInfo.infoLink}>
-                            
-                        </a>
-                    </div>
-                ))}
-            </div>
-        </div>
-    );
-};
-
-export default BookSimilarTitles;
-```
-</details>
-
-##  How It Works
-
-1. SolidX loads the **custom view component** when the form is rendered.  
-2. The **custom view** is injected into the form layout at the specified location.  
-3. The custom view receives props of type `SolidFormWidgetProps`.  
-<details>
- <summary>Code: Props Types</summary>
-
-```tsx
-export type SolidFormWidgetProps = {
-    field: any;
-    formData: Record<string, any>;  // Comes from Formik
-    viewMetadata: SolidView;
-    fieldsMetadata: FieldsMetadata;
-    formViewData: any;
-};
-
-export type SolidView = CommonEntity & {
-    name: string;
-    displayName: string;
-    type: string;
-    context: string;
-    layout: LayoutNode;
-    model: Model;
-    module: Module;
-};
-
-export type FieldMetadata = CommonEntity & {
-    id: number;
-    name: string;
-    displayName: string;
-    [key: string]: any; // Flexible for extra key-value pairs
-};
-```
-</details>
-
-4. The custom view can render any UI components and access:  
-   - **Form data**  
-   - **Field metadata**  
-   - **View metadata**  
-   - **Other properties**
-
- With this approach, you can **extend SolidX forms with powerful custom views**.
+- [Custom Widgets](./custom-widgets.md)
+- [Bespoke Frontend UI](./bespoke-frontend-ui.md)
+- [Solid HTTP API](./solid-http-api.md)
+- [Redux Module Integration](./redux-module-integration.md)

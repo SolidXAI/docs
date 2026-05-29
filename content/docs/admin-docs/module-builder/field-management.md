@@ -1,5 +1,6 @@
 ---
 title: Fields
+icon: "type"
 ---
 
 Every SolidX model is composed of fields. Fields in SolidX go over and above the standard fields one expects, instead we treat fields as semantic attributes with relevance to how the users interact with that data in our admin interface. 

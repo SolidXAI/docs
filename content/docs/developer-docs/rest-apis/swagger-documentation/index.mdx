@@ -1,10 +1,13 @@
 ---
-title: Swagger Documentation
+title: Swagger
+icon: "book-open"
 description: This section provides details on how to access and use the Swagger documentation for SolidX REST APIs.
 summary: This document provides comprehensive information about accessing and using SolidX's auto-generated Swagger/OpenAPI documentation. It explains how to access the documentation at the /api/docs endpoint, authenticate using JWT tokens via the login endpoint, and utilize the standard RESTful endpoints automatically generated for each resource. The documentation covers query parameters for filtering, sorting, pagination, population, and field selection, provides example requests for common operations, explains the standardized error handling format with common HTTP status codes, and outlines best practices for authentication, request optimization, error handling, and API documentation maintenance.
 ---
 
 import { Shield, Zap, AlertTriangle, BookOpen } from 'lucide-react';
+
+# API Documentation
 
 SOLID automatically generates comprehensive API documentation for all your endpoints using Swagger/OpenAPI specification. This documentation provides developers with an interactive interface to explore and test the APIs.
 
@@ -37,7 +40,7 @@ POST /api/auth/login
 
 # Response
 {
-  "token": "eyJhbGciOiJIUzI1NiIs...",
+  "token": "***********************",
   "user": {
     "id": 1,
     "email": "user@example.com",
@@ -77,13 +80,13 @@ The list endpoint supports various query parameters:
 
 ### Example Requests
 
- #### List Records with Filtering
-  
+#### List Records with Filtering
+
 ```bash
 GET /api/posts?filters[status]=published&sort=created_at:desc
 ```
 
- #### Create Record
+#### Create Record
 
 ```bash
 POST /api/posts
@@ -94,7 +97,7 @@ POST /api/posts
 }
 ```
 
- #### Update Record
+#### Update Record
 
 ```bash
 PUT /api/posts/1
@@ -122,7 +125,7 @@ All API errors follow a consistent format:
 }
 ```
 
-  ### Common Error Codes
+### Common Error Codes
 
 | Code | Description |
 |------|-------------|
@@ -136,29 +139,28 @@ All API errors follow a consistent format:
 ## Best Practices
 
 <Cards>
-  <Card title="Authentication">
+  <Card icon={<Shield />} title="Authentication">
     - Always use HTTPS
     - Keep tokens secure
     - Implement token refresh
     - Handle token expiration
   </Card>
-  <Card title="Request Optimization">
+  <Card icon={<Zap />} title="Request Optimization">
     - Use field selection
     - Implement pagination
     - Optimize queries
     - Cache responses
   </Card>
-  <Card title="Error Handling">
+  <Card icon={<AlertTriangle />} title="Error Handling">
     - Validate input data
     - Return meaningful errors
     - Log API errors
     - Handle rate limiting
   </Card>
-  <Card title="Documentation">
+  <Card icon={<BookOpen />} title="Documentation">
     - Keep examples up-to-date
     - Document all parameters
     - Include response examples
     - Note any limitations
   </Card>
 </Cards>
-

@@ -1,110 +1,183 @@
 ---
-title: Form View Events
+title: Form Events
+icon: "zap"
 description: Learn how to create event listeners for form view events in your frontend application.
-summary: Explains creating event listeners for SolidX form view events to extend frontend functionality. Covers supported events (onFormLayoutLoad, onFormDataLoad, onFieldChange, onFieldBlur, onCustomWidgetRender), registering handlers using `registerExtensionFunction`, accessing event data (type, modifiedField, modifiedFieldValue, formData, viewMetadata, fieldsMetadata), modifying UI layout dynamically with `SolidViewLayoutManager`, returning changes (layoutChanged, dataChanged, newFormData, newLayout), and examples like character count tracking.
-solidx_concerns: [add_change_handler_function, onlayoutload_handler_function, ondataload_handler_function]
+summary: "Explains creating function extensions for SolidX form view events. Covers supported events (`onFormLoad`, `onFieldChange`, `onFieldBlur`), module-based file location, manifest registration, event payloads, and returning layout/data updates. Includes a dedicated deprecated section for `onFormLayoutLoad` and `onFormDataLoad`."
+solidx_concerns: [frontend.extensions.form_event_listeners, add_change_handler_function, onlayoutload_handler_function, ondataload_handler_function]
 ---
 
 ## Overview
 
 Form view **function extensions** let you react to lifecycle events in a SolidX form. Use them to:
+
 - Read or mutate **form data** (via Formik)
 - Adjust the **layout dynamically** (hide/show/move fields) with `SolidViewLayoutManager`
 - Coordinate with **custom widgets** rendered in the form (see [Form View Field Widgets](./form-view-field-widgets.md))
 
-You author **listener functions**, register them with `registerExtensionFunction`, and reference them in your **form view layout JSON**.
+You author **listener functions**, register them in the owning UI module manifest, and reference them in your **form view layout JSON**.
 
-## Supported Events
+## Supported Events (Current)
 
 SolidX currently supports these form view events:
 
-1. **`onFormLayoutLoad`** – fires when the **layout** is loaded. Great for conditional visibility and structure tweaks.
-2. **`onFormDataLoad`** – fires when **data** is loaded (edit mode fetch, or defaults for create). Perfect for setting derived values.
-3. **`onFieldChange`** – fires whenever a field **value changes**. Ideal for cascading logic and live calculations.
-4. **`onFieldBlur`** – fires when a field **loses focus**. Good for validations or light reflows.
-5. **`onCustomWidgetRender`** – fires when a **custom widget** is rendered. Useful for last‑mile UI polish.
+1. **`onFormLoad`** - unified form-load lifecycle event (recommended for all load-time logic).
+2. **`onFieldChange`** - fires whenever a field **value changes**.
+3. **`onFieldBlur`** - fires when a field **loses focus**.
 
 > **Tip**
-> If your handler **mutates layout and/or data**, return the appropriate flags: `layoutChanged: true` and/or `dataChanged: true`. Without these flags, changes are ignored.
+
+> If your handler mutates layout and/or data, return the appropriate flags:
+> `layoutChanged: true` and/or `dataChanged: true`. Without these flags, changes are ignored.
+
+## Form Load Execution Behavior
+
+Inside `SolidFormView`, form-load handlers run with a working layout/data context and are committed once at the end.
+
+Current execution sequence:
+
+1. `onFormLayoutLoad` (legacy compatibility hook)
+2. `onFormDataLoad` (legacy compatibility hook)
+3. `onFormLoad` (recommended unified hook)
+4. Commit final `workingLayout` and `workingFormData` to React state
+
+This means `onFormLoad` sees the latest working layout/data and is the best place for load-time logic moving forward.
 
 ## Project Structure & File Paths
 
-Place your handler(s) under your admin extensions folder. A common convention is **one handler file per model**.
+#### Form Event Functions
+
+- Scope: form-view event listeners for a specific `<module, model>` pair.
+- Mandatory listener location:
+  - `solid-ui/src/<module-name>/admin-layout/<model-name>/extension-functions/`
+- Do not place form-event listeners in generic folders when module/model is known.
+
+Default file selection for form event changes:
+
+1. Create or update a TS/TSX listener inside:
+   - `solid-ui/src/<module-name>/admin-layout/<model-name>/extension-functions/`
+2. Register the listener in the owning UI module manifest:
+   - `solid-ui/src/<module-name>/<module-name>.ui-module.ts`
+3. Keep the registration name aligned with layout metadata event references (`onFormLoad`, `onFieldChange`, `onFieldBlur`).
+
+Example structure:
 
 ```bash
-/solid-ui/app/admin/extensions/bookFormViewChangeHandler.ts
-/solid-ui/app/admin/extensions/solid-extensions.ts   # registration
+solid-ui/src/
+└── merchant-onboarding/
+    ├── admin-layout/
+    │   └── application/
+    │       └── extension-functions/
+    │           └── applicationFormViewChangeHandler.ts
+    └── merchant-onboarding.ui-module.ts
 ```
 
 ## Creating a Handler
 
-Here’s a concise example that:
-- Listens to **any form event**
-- On `onFieldChange` of `title`, shows a hidden node and injects a **character count** into form data
-<details>
-  <summary>`bookFormViewChangeHandler.ts`</summary>
+Here is a concise example that:
+
+- Handles `onFormLoad` for load-time setup
+- Handles `onFieldChange` for reactive logic
+- Uses one function for all form events
 
 ```ts
-import { SolidViewLayoutManager } from "@solidstarters/solid-core-ui";
-// import types if available in your project:
-// import { SolidUiEvent } from "@solidstarters/solid-core-ui/dist/types/...";
+import { SolidViewLayoutManager } from "@solidxai/core-ui";
 
 const handleBookFormViewChange = (event: SolidUiEvent) => {
   const { type, modifiedField, modifiedFieldValue, formData, viewMetadata } = event;
-
-  // Work with the *current* layout
   const layoutManager = new SolidViewLayoutManager(viewMetadata.layout);
 
-  if (type === "onFieldChange" && modifiedField === "title") {
-    const title = modifiedFieldValue;
-    // Reveal a UI node (e.g., a caption area) by nodeId configured in your layout
-    layoutManager.updateNodeAttributes("page-1-row-1-div-1-div-1-title-custom", { visible: true });
-
+  // Preferred load-time hook
+  if (type === "onFormLoad") {
+    layoutManager.updateNodeAttributes("book-advanced-section", { visible: false });
     return {
-      layoutChanged: true,                 // you changed layout; tell SolidX
-      dataChanged: true,                   // you changed data; tell SolidX
-      newFormData: {
-        ...formData,
-        // Below is the new field we are injecting, which can be accessed in a custom widget
-        ctxtTitleAlphabetCount: title ? String(title).length : 0,
-      },
-      newLayout: layoutManager.getLayout() // hand back the updated layout
+      layoutChanged: true,
+      newLayout: layoutManager.getLayout(),
     };
   }
 
-  // For events you don't handle, return nothing.
-  // You can also return { layoutChanged: false, dataChanged: false } explicitly.
+  // Field change example
+  if (type === "onFieldChange" && modifiedField === "title") {
+    layoutManager.updateNodeAttributes("title-caption-node", { visible: true });
+
+    return {
+      layoutChanged: true,
+      dataChanged: true,
+      newFormData: {
+        ...formData,
+        ctxtTitleAlphabetCount: modifiedFieldValue ? String(modifiedFieldValue).length : 0,
+      },
+      newLayout: layoutManager.getLayout(),
+    };
+  }
 };
 
 export default handleBookFormViewChange;
 ```
-</details>
+
 > **Info**
-> If you are setting dataChanged to true, ensure you return the full newFormData object, not just the modified field.
+
+> If you set `dataChanged: true`, return the full `newFormData` object, not just the modified field.
 
 > **Tip**
-> **Keep model concerns together.** Use a single file (e.g., `bookFormViewChangeHandler.ts`) for all form‑view event logic for that model. It makes maintenance and onboarding much easier.
+
+> Keep model concerns together. Use a single file (for example `bookFormViewChangeHandler.ts`) for form-view event logic for that model.
 
 ## Registering the Handler
 
-Register each exported function with an **alias** in `solid-extensions.ts`:
-<details>
-  <summary>`solid-extensions.ts`</summary>
+Register each exported function in the owning module manifest:
 
 ```ts
-import handleBookFormViewChange from "./bookFormViewChangeHandler";
-import { registerExtensionFunction } from "@solidstarters/solid-core-ui";
+import { ExtensionFunctionTypes, type SolidUiModule } from "@solidxai/core-ui";
+import handleBookFormViewChange from "./admin-layout/book/extension-functions/bookFormViewChangeHandler";
 
-registerExtensionFunction("bookFormViewChangeHandler", handleBookFormViewChange);
-// Add more registrations as needed…
+const libraryUiModule = {
+  name: "library",
+  extensionFunctions: [
+    {
+      name: "bookFormViewChangeHandler",
+      fn: handleBookFormViewChange,
+      type: ExtensionFunctionTypes.onFormLoad,
+    },
+    {
+      name: "bookFormViewChangeHandler",
+      fn: handleBookFormViewChange,
+      type: ExtensionFunctionTypes.onFieldChange,
+    },
+    {
+      name: "bookFormViewChangeHandler",
+      fn: handleBookFormViewChange,
+      type: ExtensionFunctionTypes.onFieldBlur,
+    },
+  ],
+} satisfies SolidUiModule;
+
+export default libraryUiModule;
 ```
-</details>
 
-## Using Handlers in a Layout
+## Extension Function Types
 
-Reference your handler **aliases** in the layout JSON for the form view.
-<details>
-  <summary>`module-metadata/&lt;module-name&gt;/&lt;module-name&gt;-metadata.json`</summary>
+When registering functions, specify the lifecycle event type using `ExtensionFunctionTypes` from `@solidxai/core-ui`.
+
+```ts
+export const ExtensionFunctionTypes = {
+  onFieldChange: "onFieldChange",
+  onFieldBlur: "onFieldBlur",
+  onFormDataLoad: "onFormDataLoad",
+  onFormLayoutLoad: "onFormLayoutLoad",
+  onFormLoad: "onFormLoad",
+  onListLoad: "onListLoad",
+  onBeforeListDataLoad: "onBeforeListDataLoad",
+  onTreeLoad: "onTreeLoad",
+  onBeforeTreeDataLoad: "onBeforeTreeDataLoad",
+  afterLogin: "afterLogin",
+  beforeLogout: "beforeLogout",
+  onApplicationMount: "onApplicationMount",
+} as const;
+```
+
+## Using Handlers in Layout Metadata
+
+Reference your handler name in the layout JSON:
 
 ```json
 {
@@ -112,80 +185,105 @@ Reference your handler **aliases** in the layout JSON for the form view.
   "layout": {
     "type": "form",
 
-    // Lifecycle hooks:
-    "onFormLayoutLoad": "bookFormViewChangeHandler",
-    "onFormDataLoad": "bookFormViewChangeHandler",
-
-    // Field-level hooks:
+    "onFormLoad": "bookFormViewChangeHandler",
     "onFieldChange": "bookFormViewChangeHandler",
-    "onFieldBlur": "bookFormViewChangeHandler",
-
-    // Widget render hook:
-    "onCustomWidgetRender": "bookFormViewChangeHandler"
-
-    // ...rest of your layout tree (children, rows, fields, etc.)
+    "onFieldBlur": "bookFormViewChangeHandler"
   }
 }
 ```
-</details>
 
-> **Note**
-> Your handler can be **one function** that switches on `event.type`, or **multiple functions** registered under different aliases. Choose whichever keeps the code clearer for your team.
+'> **Note**
+
+''> Your handler can be one function that switches on `event.type`, or multiple functions registered under different names.
+'
 
 ## Event Payload (Types)
 
-Handlers receive a **`SolidUiEvent`** payload.
-<details>
-  <summary>`SolidUiEvent`</summary>
+Handlers receive a `SolidUiEvent` payload.
 
 ```ts
 export type SolidUiEvent = {
-  type: SolidUiEvents;                 // e.g., "onFieldChange"
-  modifiedField?: string;              // e.g., "title"
-  modifiedFieldValue?: any;            // e.g., "The Pragmatic Programmer"
-  formData: Record<string, any>;       // current Formik values
-  viewMetadata: SolidView;             // includes the current layout
-  fieldsMetadata: FieldsMetadata;      // field definitions & constraints
-  formViewLayout: LayoutNode;          // shorthand to the current layout node
+  type: SolidUiEvents;            // e.g., "onFormLoad", "onFieldChange"
+  modifiedField?: string;
+  modifiedFieldValue?: any;
+  queryParams?: any;
+  formData: Record<string, any>;  // current Formik values
+  viewMetadata: SolidView;        // includes the current layout
+  fieldsMetadata: FieldsMetadata; // field definitions & constraints
+  formViewLayout: LayoutNode;     // current working layout
 };
 ```
-</details>
 
 ## Returning Changes
 
-Your handler may optionally return an object to **apply mutations**:
+Your handler may optionally return an object to apply mutations:
 
 ```ts
 return {
-  layoutChanged: boolean,      // did you alter layout?
-  dataChanged: boolean,        // did you alter form data?
-  // if dataChanged is true, provide newFormData
-  // The new form data can now be accessed by both In-built and Custom Widgets
-  newFormData?: Record<string, any>,  
+  layoutChanged: boolean,
+  dataChanged: boolean,
+  newFormData?: Record<string, any>,
   newLayout?: LayoutNode
 };
 ```
 
 - If you touch **layout**, set `layoutChanged: true` and return `newLayout`.
 - If you touch **data**, set `dataChanged: true` and return `newFormData`.
-- If you touch **both**, set **both** flags and return both payloads.
+- If you touch both, set both flags and return both payloads.
+
+## Deprecated Load Events (Compatibility Only)
+
+> **Warning**
+
+> `onFormLayoutLoad` and `onFormDataLoad` are deprecated for new development.
+> Prefer `onFormLoad` as the single load lifecycle hook.
+
+These legacy hooks are still executed for backward compatibility, but new implementations should migrate to `onFormLoad`.
+
+Legacy metadata pattern:
+
+```json
+{
+  "layout": {
+    "onFormLayoutLoad": "bookFormViewChangeHandler",
+    "onFormDataLoad": "bookFormViewChangeHandler"
+  }
+}
+```
+
+Recommended metadata pattern:
+
+```json
+{
+  "layout": {
+    "onFormLoad": "bookFormViewChangeHandler"
+  }
+}
+```
+
+Migration guidance:
+
+1. Move load-time layout logic from `onFormLayoutLoad` into `onFormLoad`.
+2. Move load-time data shaping logic from `onFormDataLoad` into `onFormLoad`.
+3. Keep `onFieldChange` and `onFieldBlur` unchanged.
+4. Remove deprecated hooks from metadata once migration is complete.
 
 ## Common Patterns
 
-- **Conditional sections:** During `onFormLayoutLoad`, hide or show layout nodes based on defaults or permissions.
-- **Derived fields:** On `onFieldChange`, compute totals, taxes, or dependent values from other fields, then return `newFormData`.
-- **Async validations:** Use `onFieldBlur` to kick off lightweight checks (e.g., uniqueness). For heavy work, prefer server‑side validation.
-- **Safety first:** Avoid deep mutations of `viewMetadata.layout` directly; use `SolidViewLayoutManager`. Always return flags correctly.
+- **Conditional sections:** During `onFormLoad`, hide/show layout nodes based on defaults, permissions, or query context.
+- **Derived fields:** On `onFieldChange`, compute dependent values and return `newFormData`.
+- **Async validations:** Use `onFieldBlur` for lightweight checks. For heavy validation, prefer server-side logic.
+- **Safety first:** Avoid deep mutation of layout objects directly; use `SolidViewLayoutManager`.
 
 ## Troubleshooting
-- **“My changes aren’t applied”** → Verify you set `layoutChanged`/`dataChanged` appropriately.
-- **On load layout changes not applied** → Ensure you have used `onFormLayoutLoad` and not `onFormDataLoad`, if you are trying to change the layout on load.
-- **“Node not found”** → Ensure the **node ID** you pass to `updateNodeAttributes` actually exists in your layout tree.
-- **“Nothing happens on change”** → Confirm your **alias** in the layout matches the one passed to `registerExtensionFunction`.
-- **“Handlers fight each other”** → Centralize model logic in a single file, or partition clearly by event and document the contract.
+
+- **My changes are not applied** -> Verify `layoutChanged`/`dataChanged` flags and corresponding payloads are returned.
+- **Load-time logic is not running** -> Ensure the layout has `onFormLoad` and the handler name matches the registered manifest entry.
+- **Node not found** -> Verify the node ID passed to `updateNodeAttributes` exists in the layout tree.
+- **Nothing happens on change** -> Confirm `onFieldChange` is mapped and the handler checks the correct field name.
 
 ## See Also
 
-- [Form View Field Widgets](./form-view-field-widgets.md) — build custom view/edit widgets and reference them via `viewWidget`/`editWidget`.
-- [Module Metadata Schema](../../metadata_schema/index.md) — details on form view layout JSON and node attributes.
-
+- [Form View Field Widgets](./form-view-field-widgets.md) - build custom view/edit widgets and reference them via `viewWidget`/`editWidget`.
+- [Layout Manager](./layout-manager.md) - manipulate view layouts safely with `SolidViewLayoutManager`.
+- [Module Metadata Schema](../../metadata_schema/index.md) - details on form-view layout JSON and node attributes.

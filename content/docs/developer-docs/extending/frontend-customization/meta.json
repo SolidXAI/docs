@@ -1,15 +1,23 @@
 {
   "title": "Frontend Customization",
+  "icon": "palette",
   "pages": [
+    "index",
     "form-view-events",
     "custom-widgets",
     "form-view-buttons",
-    "kanban-field-widgets",
+    "kanban-card-widget",
     "list-view-buttons",
     "form-view-field-widgets",
     "list-view-field-widgets",
+    "list-view-events",
     "custom-views",
     "solid-entity-api",
-    "layout-manager"
+    "solid-http-api",
+    "list-view-api",
+    "layout-manager",
+    "redux-module-integration",
+    "bespoke-frontend-ui",
+    "extension-ui-guidelines"
   ]
 }

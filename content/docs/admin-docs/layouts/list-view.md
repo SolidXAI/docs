@@ -1,5 +1,6 @@
 ---
 title: List View
+icon: "table"
 ---
 
 ![List View](/img/admin-docs/layouts/list-view.png)

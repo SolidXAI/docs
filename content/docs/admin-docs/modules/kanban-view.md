@@ -1,5 +1,6 @@
 ---
 title: Kanban View
+icon: "columns-3"
 ---
 
 The Kanban View in SolidX is a powerful, metadata-driven interface that presents model records in a kanban format. It is auto-generated based on the model and field definitions and is fully configurable through a structured JSON layout.

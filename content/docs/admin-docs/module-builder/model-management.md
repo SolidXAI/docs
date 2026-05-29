@@ -1,5 +1,6 @@
 ---
 title: Models
+icon: "database"
 ---
 
 SolidX Models represent the structure of your data within a module. Each model defines a specific type of data, all attributes / fields that a model is made of & its relationships with other models.
@@ -39,7 +40,7 @@ Soft delete is a way to "hide" records instead of permanently removing them from
 
 To enable this, click on the checkbox under "Configurations".
 
-<!-- TODO: Create a link to the soft delete recipe that will include screenshots of how soft delete actually works, mention recovery, querying with soft-deleted records etc. -->
+
 
 ### Audit Tracking
 
@@ -54,7 +55,7 @@ Comprehensive tracking of record changes:
 - Field-level change history
 - Custom audit events
 
-<!-- TODO: Create a link to the audit tracking recipe that will include screenshots of how entries are made visible on the chatter window, filtering / searching in chatter, also demonstrate a custom audit event. -->
+
 
 ### Internationalization
 
@@ -64,7 +65,7 @@ Internationalization supports:
 - Editing content of the model in multiple languages
 - Fetching this content easily using our API
 
-<!-- TODO: Create a link to the internationalization recipe that will include screenshots of how exactly one is supposed to work with internationalization. -->
+
 
 ## Fields
 
@@ -84,7 +85,7 @@ When a new model is created, SolidX generates a bunch of boilerplate code linked
 
 To see the impact of what happens when we generate the code linked to a model metadata, you can view our [developer documentation](../../developer-docs/index.md).
 
-<!-- TODO: Create the structure of the developer documentation and provide link here. -->
+
 
 ### Related Recipes
 

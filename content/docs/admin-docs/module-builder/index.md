@@ -1,6 +1,12 @@
 ---
 title: Module Builder
+icon: "blocks"
 ---
+
+
+# Module Builder
+
+## Introduction
 
 The **Module Builder** is a core module of **SolidX** that empowers you to create and manage your application's **data models** and **user interfaces**. With the Module Builder, you can accelerate development, simplify management, and build enterprise applications with **minimal coding**.
 
@@ -47,26 +53,28 @@ Hypothetical **School Management System**:
     - `phone_number` (Text)
     - `nationality` (**selectionDynamic → fetch from country API**)
 
-<img src="/img/admin-docs/module-builder/module-model-eg-image.png" alt="SolidX Module Diagram" width="300" height="auto" />
+<br />
 
-> This approach gives you a **clean, maintainable, and semantically rich model** of your domain — all without writing backend code. **SolidX automatically generates a feature-rich REST API** for your domain model, enabling advanced enterprise workflows.
+<img src="/img/admin-docs/module-builder/module-model-eg-image.png" alt="SolidX Module Diagram" width="300" height="auto" />
+<br />
+<br />
+
+> This approach gives you a **clean, maintainable, and semantically rich model** of your domain — all without writing backend code.  
+>  **SolidX automatically generates a feature-rich REST API** for your domain model, enabling advanced enterprise workflows.
 
 ## Key Features
 
-You can explore the **core functionality** of the Module Builder below:
+You can explore the **core functionality** of the Module Builder via the cards below:
 
-### Model Builder
-
-Define and manage your **data models** through an intuitive interface:
-
-- **Modules**: Organize your app into logical modules for clean architecture. [Learn More](./module-management.md)
-- **Models**: Efficiently define data structures aligned to your business requirements. [Learn More](./model-management.md)
-- **Fields**: Configure different field types to structure data effectively. [Learn More](./field-management.md)
-
-### Layout Editor
-
-Arrange models & fields to generate **powerful, metadata-driven admin UIs**. Features include:
-
-- **Menu Items**: Define navigational elements.
-- **Views**: Create custom perspectives (List, Kanban, Form).
-- **Custom Actions**: Add extra functionalities triggered by users.
+<Cards>
+  <Card title="Model Builder">
+    - **Modules**: Organize your app into logical modules for clean architecture. [Learn More](./module-management.md)
+    - **Models**: Efficiently define data structures aligned to your business requirements. [Learn More](./model-management.md)
+    - **Fields**: Configure different field types to structure data effectively. [Learn More](./field-management.md)
+  </Card>
+  <Card title="Layout Editor">
+    - **Menu Items**: Define navigational elements.
+    - **Views**: Create custom perspectives (List, Kanban, Form).
+    - **Custom Actions**: Add extra functionalities triggered by users.
+  </Card>
+</Cards>

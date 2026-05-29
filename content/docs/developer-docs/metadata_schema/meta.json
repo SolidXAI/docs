@@ -2,6 +2,7 @@
   "title": "Metadata Schema",
   "icon": "file-json-2",
   "pages": [
+    "index",
     "module-metadata",
     "model-metadata",
     "field-metadata",
@@ -13,6 +14,7 @@
     "email-templates",
     "sms-templates",
     "media-storage-providers",
+    "predefined-searches",
     "scheduled-jobs",
     "security-rules",
     "list-of-values"

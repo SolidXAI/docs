@@ -4,6 +4,7 @@
   "pages": [
     "code-generation",
     "backend-customization",
-    "frontend-customization"
+    "frontend-customization",
+    "reference"
   ]
 }

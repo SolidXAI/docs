@@ -1,10 +1,13 @@
 ---
 title: WhatsApp Providers
+icon: "message-circle"
 description: Learn how to create and configure custom WhatsApp providers in SolidX.
 summary: Guide to creating custom WhatsApp providers beyond the built-in Msg91 provider. Covers implementing `IWhatsAppTransport` interface with `@WhatsAppProvider()` decorator, `sendWhatsAppMessage()` method accepting phone number, templateId, and parameters, synchronous/asynchronous message sending via background jobs, using `PublisherFactory` for queuing, and integration with third-party WhatsApp APIs. Notes that template management is handled by external providers (Twilio, Msg91), not SolidX.
 keywords: [backend, whatsapp providers, customization]
 solidx_concerns: [new_whatsapp_provider]
 ---
+
+# 📧 WhatsApp Providers
 
 ## 🧩 Overview
 
@@ -14,10 +17,13 @@ However, there may be cases where you need to create your own provider — for e
 
 To make this easy, SolidX offers abstractions that help you implement your own provider while keeping the code **clean, testable, and decoupled**.
 
-> **Note**
-> For whatsapp messages, there is no need to keep a separate template management in SolidX, since most whatsapp providers (e.g., Twilio, Msg91, etc) have their own template management system. 
-> 
-> So SolidX allows you to send whatsapp messages using the `templateId` and `parameters` as configured in your whatsapp provider platform. Here the templateId is the external templateId from your whatsapp provider platform.
+'> **Note**
+
+''> For whatsapp messages, there is no need to keep a separate template management in SolidX, since most whatsapp providers (e.g., Twilio, Msg91, etc) have their own template management system. 
+''> 
+''> So SolidX allows you to send whatsapp messages using the `templateId` and `parameters` as configured in your whatsapp provider platform. Here the templateId is the external templateId from your whatsapp provider platform.
+'
+
 
 ## ⚙️ Steps to Create a Custom WhatsApp Provider
 
@@ -35,11 +41,11 @@ Below is a sample implementation of a custom WhatsApp provider using a hypotheti
 import { HttpService } from '@nestjs/axios';
 import { Inject, Injectable, Logger } from '@nestjs/common';
 import { ConfigType } from '@nestjs/config';
-import commonConfig from 'src/config/common.config';
-import { QueueMessage } from 'src/interfaces/mq';
-import { IWhatsAppTransport } from "../../interfaces";
-import { PublisherFactory } from '../queues/publisher-factory.service';
-import { WhatsAppProvider } from 'src/decorators/whatsapp-provider.decorator';
+import commonConfig from "@solidxai/core";
+import { QueueMessage } from "@solidxai/core";
+import { IWhatsAppTransport } from "@solidxai/core";
+import { PublisherFactory } from "@solidxai/core";
+import { WhatsAppProvider } from "@solidxai/core";
 
 @Injectable()
 @WhatsAppProvider()
@@ -88,6 +94,8 @@ export class CustomWhatsAppService implements IWhatsAppTransport {
 
 ```
 
+
+
 ### 2. Register Your Custom Provider
 
 ```ts title="app.module.ts"
@@ -100,6 +108,8 @@ import { CustomWhatsAppService } from "./custom-whatsapp.service";
 export class AppModule {}
 ```
 
+
+
 ### 3. Use the `WhatsAppFactory` to Send WhatsApp Messages 
 
 You can now use `WhatsAppFactory` to send WhatsApp messages either **via templates** or **manually**.
@@ -107,7 +117,7 @@ You can now use `WhatsAppFactory` to send WhatsApp messages either **via templat
 #### ✅ Example: Sending a WhatsApp Message 
 
 ```ts
-import { WhatsAppFactory } from "@solidstarters/solid-core";   
+import { WhatsAppFactory } from "@solidxai/core";   
 ...
 constructor(private readonly whatsappFactory: WhatsAppFactory) {}
 ...
@@ -134,6 +144,7 @@ export interface IWhatsAppTransport {
   ): Promise<any>;
 }
 ```
+
 
 ## ✅ Summary
 

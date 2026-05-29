@@ -1,8 +1,12 @@
 ---
-title: Recover Endpoint
+title: Recover
+icon: "rotate-ccw"
 description: Information about the recover endpoint of the REST API, including usage, parameters, and responses
 summary: This document explains the recover endpoints in SolidX's REST API, which allow restoration of soft-deleted records. It covers both single record recovery (by ID) and bulk recovery (using an array of IDs) operations. The documentation provides complete examples including HTTP headers, request formats, and sample responses. It also notes a known issue where the response may still contain deletedAt and deletedTracker fields even though the record is successfully recovered in the database, which is expected to be fixed in future releases.
 ---
+
+
+#  Recover Endpoint
 
 ##  Overview
 The recover endpoint allows you to restore one or more records that have been soft-deleted in your application.
@@ -11,22 +15,39 @@ This documentation includes usage examples for:
 - Recovering a single record by ID
 - Recovering records in bulk
 
+
+
 ##  Recover a Single Record
 
+<h3 className=" ">
+    
+
 ###  Headers
+</h3>
 
 ```http
 Content-Type: application/json
 Authorization: Bearer <token>
 ```
 
- ###  Sample Request
+
+ <h3 className=" ">
+    
+
+###  Sample Request
+  </h3>
+
 
 ```http
 POST /api/fee-type/recover/{id}
 ```
 
- ###  Sample Response
+
+ <h3 className=" ">
+    
+
+###  Sample Response
+  </h3>
 
 ```json
 {
@@ -55,28 +76,46 @@ POST /api/fee-type/recover/{id}
 
 >  **Known Issue**: Although the record is successfully recovered in the database, the response may still contain `deletedAt` and `deletedTracker`. This is expected to be fixed in upcoming releases.
 
+
+
 ##  Bulk Recovery of Records
 
+<h3 className=" ">
+    
+
 ###  Headers
+</h3>
 
 ```http
 Content-Type: application/json
 Authorization: Bearer <token>
 ```
 
- ###  Sample Request
+ <h3 className=" ">
+    
+
+###  Sample Request
+  </h3>
 
 ```http
 POST /api/fee-type/recover/bulk
 ```
 
- ###  Sample Body
+ <h3 className=" ">
+    
+
+###  Sample Body
+  </h3>
 
 ```json
 [1, 2, 3]  // Array of record IDs to recover
 ```
 
- ###  Sample Response
+ <h3 className=" ">
+    
+
+###  Sample Response
+  </h3>
 
 ```json
 {
@@ -105,5 +144,6 @@ POST /api/fee-type/recover/bulk
   ]
 }
 ```
+
 
 >  **Known Issue**: Similar to single record recovery, the response may still include `deletedAt` and `deletedTracker` fields for recovered records. This is expected to be resolved in future updates.

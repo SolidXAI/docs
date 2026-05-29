@@ -1,6 +1,7 @@
 ---
-title: List of Values
-description: Metadata schema for defining list of values in SolidX applications.
+title : List of Values
+icon: "list"
+description : Metadata schema for defining list of values in SolidX applications.
 summary: This document describes list of values (LOV) metadata in SolidX, which defines predefined value sets for use in dropdowns and selection fields throughout the application. Each LOV entry includes type (category), value (internal identifier), display text (shown to users), description, default flag, sequence number for ordering, and associated module reference. Examples demonstrate configuring industry types (Healthcare, Information Technology) and regulatory bodies (FCA, SEC, PRA, CBI) with proper sequencing. The metadata ensures data consistency, improves user experience, and provides centralized management of commonly used value lists across the application.
 json_pointer: "/listOfValues"
 jsonpath: "$.listOfValues"
@@ -11,6 +12,9 @@ items_attributes_doc: "#list-of-values-metadata-attributes"
 solidx_concerns: [add_lov_record]
 ---
 
+
+
+# List of Values
 > **Where it lives**  
 > **JSON Pointer:** `/listOfValues`  
 > **JSONPath:** `$.listOfValues`  
@@ -88,9 +92,6 @@ To utilize the defined list of values in a dynamic selection field, you can conf
                         "unique": false,
                         "index": false,
                         "private": false,
-                        "encrypt": false,
-                        "encryptionType": null,
-                        "decryptWhen": null,
                         "columnName": null,
                         "isUserKey": false,
                         "enableAuditTracking": true,
@@ -103,12 +104,17 @@ To utilize the defined list of values in a dynamic selection field, you can conf
 }
 ```
 
+
+
     ListOfValuesSelectionProvider is a built-in selection provider that fetches values from the `listOfValues` metadata based on the specified `type`. The `selectionDynamicProviderCtxt` contains a JSON string with the `type` key to filter the LOV entries.
+
 
 ####  Further Reference
  -  Understanding Dynamic Selection Fields: See [Dynamic Selection Fields Documentation](../../admin-docs/module-builder/field-management#dynamic-selection)
+ -  Built-in Selection Providers: See [Built-in Selection Providers](../extending/reference/built-in-selection-providers) for full documentation on `ListOfValuesSelectionProvider` and `PseudoForeignKeySelectionProvider`
 
 ### List of Values Metadata Attributes
+
 
 ### `type` *(string, required)*
 Type/category of the list of values (e.g., INDUSTRY, COUNTRY, STATUS).
@@ -130,4 +136,3 @@ Defines the order in which the values are displayed.
 
 ### `moduleUserKey` *(string, optional)*
 The user key of the module to which this list of values is associated. This helps in scoping the LOV to a specific module.
-

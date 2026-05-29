@@ -1,5 +1,6 @@
 ---
 title: Security Rules
+icon: "lock"
 description: Metadata schema for defining security rules in SolidX applications.
 summary: This document explains security rules metadata in SolidX, which controls data access at the model level to ensure only authorized users can view sensitive information. Each rule includes a name, description, associated role, target model, and security rule configuration with filter conditions. The filter configuration supports complex query structures using operators like $eq with dynamic values such as $activeUserId for user-specific data filtering. Examples demonstrate restricting fee type visibility to institute users through relational filtering across associated models. The document links to detailed guides on creating and managing security rules in the backend customization section.
 json_pointer: "/securityRules"
@@ -11,13 +12,27 @@ items_attributes_doc: "#security-rules-metadata-attributes"
 solidx_concerns: [add/update_security_record_rule]
 ---
 
+# Security Rules
 > **Where it lives**  
 > **JSON Pointer:** `/securityRules`  
 > **JSONPath:** `$.securityRules`  
 > **Parent:** Root of the metadata file
 
+
+
+
 ## Overview
 Security rules are crucial for controlling access to data in SolidX. By defining these rules, you can restrict visibility at the model level and ensure that only authorized users can access sensitive information.
+
+<Callout type="info" title="Mental Model">
+
+  Roles and permissions decide whether a user can invoke an action at all. Security rules answer a second question: which records should that user actually be able to see or act on?
+  - Use permissions for action-level access.
+    - Use security rules for record-level visibility and filtering.
+    - Treat security rules as business visibility policy encoded in metadata.
+  So the intuition is: <strong>security rules are the row-level guardrails layered on top of role-based access</strong>.
+
+</Callout>
 
 For a guide on how to create and manage security rules in SolidX, refer to the [Creating Security Rules](../extending/backend-customization/security-rules).
 
@@ -49,7 +64,13 @@ For a guide on how to create and manage security rules in SolidX, refer to the [
 }
 ```
 
+<h2 className=" ">
+    
+
 ## Security Rules Metadata Attributes
+</h2>
+
+
 
 ### `name` *(string, required, unique)*
 Name of the security rule.
@@ -71,11 +92,15 @@ Contains a json object with a `filters` key that defines the filtering logic. Th
 ####  Further Reference
  -  Understanding Filters: See [Filters Documentation](../rest-apis/retrieve) for details on constructing filter objects.
 
-<div>
-  Tip
-Verify if the security rules are working as expected by making API calls with the filters defined in the security rules.
 
-<span> For example: </span>
+
+
+
+<Callout type="info" title="Tip">
+  Verify if the security rules are working as expected by making API calls with the filters defined in the security rules.
+
+ For example: 
+
 
 ```http
 /GET api/v1/feeType
@@ -83,4 +108,4 @@ Verify if the security rules are working as expected by making API calls with th
 =$activeUserId
 ```
 
-</div>
+</Callout>
