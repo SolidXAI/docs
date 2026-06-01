@@ -1,0 +1,100 @@
+---
+title: Frontend Dashboard Widget Extension Contract
+description: Understand default dashboard rendering and how to register custom dashboard widgets in solid-core-ui.
+summary: This guide explains the dashboard widget extension type, runtime props contract, default widget set, and custom component registration model in the frontend.
+---
+
+# Frontend Dashboard Widget Extension Contract
+
+Dashboard widgets are rendered through the SolidX extension registry, not hard-coded page-level branches.
+
+## Extension Type
+
+`solid-core-ui` defines a dedicated extension type:
+
+- `dashboardWidget`
+
+This is declared in:
+
+- `src/types/extension-registry.ts`
+
+## Widget Props Contract
+
+Dashboard widget components receive:
+
+- `definition`: widget metadata definition
+- `runtime`: backend provider runtime payload (envelope)
+- `variables`: currently applied dashboard variable values
+
+Type:
+
+```ts
+export type DashboardWidgetComponentProps = {
+  definition: any;
+  runtime: any;
+  variables: Record<string, any>;
+};
+```
+
+## Default Widget Set
+
+Framework default widgets currently include:
+
+- `DefaultDashboardKpiWidget`
+- `DefaultDashboardLineChartWidget`
+- `DefaultDashboardBarChartWidget`
+- `DefaultDashboardPieChartWidget`
+- `DefaultDashboardTableWidget`
+- `DefaultDashboardUnknownWidget`
+
+Registered in:
+
+- `src/helpers/registry.ts`
+
+## Rendering Resolution Model
+
+At runtime, rendering follows this order:
+
+1. If metadata provides explicit component override (`componentName`), resolve it.
+2. Else derive default renderer from widget type/runtime payload.
+3. If no renderer is found, use `DefaultDashboardUnknownWidget`.
+
+This makes custom rendering **optional** while preserving consistent baseline behavior.
+
+## Custom Widget Registration Example
+
+```ts
+import { registerExtensionComponent } from "../helpers/registry";
+import { ExtensionComponentTypes } from "../types/extension-registry";
+import { QueueSlaHeatmapWidget } from "./QueueSlaHeatmapWidget";
+
+registerExtensionComponent(
+  "QueueSlaHeatmapWidget",
+  QueueSlaHeatmapWidget,
+  ExtensionComponentTypes.dashboardWidget,
+);
+```
+
+Metadata binding:
+
+```json
+{
+  "id": "queue-sla-heatmap",
+  "name": "Queue SLA Heatmap",
+  "type": "customChart",
+  "dataProvider": "MqDashboardQueueSlaHeatmapProvider",
+  "componentName": "QueueSlaHeatmapWidget"
+}
+```
+
+## Charting Layer
+
+Default chart widgets use Apache ECharts through an adapter/mapper pattern.
+
+Current mapper location:
+
+- `src/components/core/dashboard/mappers/echartsOptionMapper`
+
+Recommendation:
+- keep metadata/provider payloads renderer-agnostic when possible,
+- map into ECharts options in frontend renderer components.

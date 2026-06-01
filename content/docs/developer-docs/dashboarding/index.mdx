@@ -1,0 +1,55 @@
+---
+title: Dashboarding
+icon: "layout-dashboard"
+description: Build metadata-driven dashboards in SolidX using backend data providers, frontend widget extensions, and user-specific layouts.
+summary: This section explains the complete SolidX dashboarding architecture, including metadata authoring, provider registration, runtime APIs, widget rendering contracts, Gridstack layout persistence, and practical templates for creating new widgets end to end.
+sidebar_position: 2.6
+---
+
+# Dashboarding
+
+SolidX dashboarding is a **metadata-driven framework capability** for building operational and analytical dashboard experiences without hard-coding each screen.
+
+It is designed around four principles:
+
+- metadata-first dashboard definitions,
+- backend provider-driven data resolution,
+- frontend extension-driven widget rendering,
+- and per-user layout personalization.
+
+## Architecture Snapshot
+
+> Add the architecture screenshot in the placeholder below.
+
+![Dashboard Architecture Placeholder](/img/dashboarding/dashboard-architecture-overview.png)
+
+## What This Section Covers
+
+- [Dashboard Metadata Authoring Guide](./dashboard-metadata-authoring-guide.mdx): how to define dashboards, variables, widgets, and default layouts in module metadata.
+- [Build a Custom Dashboard Widget Provider](./build-a-custom-dashboard-widget-provider.mdx): backend provider contract, registration pattern, and implementation workflow.
+- [Frontend Dashboard Widget Extension Contract](./frontend-dashboard-widget-extension-contract.mdx): default widget pipeline, extension registration, and custom component override model.
+- [Agent-Ready Templates](./agent-ready-templates.mdx): copy-paste templates and a practical checklist to create widgets end to end.
+
+## Current Runtime Route and API Model
+
+UI route:
+
+- `/admin/core/:moduleName/dashboard/:dashboardName`
+
+Runtime API surface:
+
+- `GET /dashboard/:moduleName/:dashboardName/definition`
+- `POST /dashboard/:moduleName/:dashboardName/data`
+- `POST /dashboard/:moduleName/:dashboardName/widgets/:widgetName/data`
+- `GET /dashboard/:moduleName/:dashboardName/variable-options/:variableName`
+- `GET /dashboard/:moduleName/:dashboardName/layout`
+- `PUT /dashboard/:moduleName/:dashboardName/layout`
+
+All runtime dashboard APIs are JWT-protected.
+
+<Callout type="info" title="Source of Truth">
+
+Dashboard definitions are resolved from module metadata JSON (`dashboards` section).
+Only user-specific layout overrides are persisted in the database.
+
+</Callout>

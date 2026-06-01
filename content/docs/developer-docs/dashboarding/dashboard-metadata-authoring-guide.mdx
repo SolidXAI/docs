@@ -1,0 +1,166 @@
+---
+title: Dashboard Metadata Authoring Guide
+description: Define dashboards, variables, widgets, and default layout in SolidX module metadata.
+summary: Learn how to author the `dashboards` section in module metadata, including variable definitions, widget provider binding, layout schema, permissions, and menu/action integration.
+---
+
+# Dashboard Metadata Authoring Guide
+
+Dashboard definitions are authored in module metadata under the root-level `dashboards` key.
+
+## Placement in Metadata
+
+`dashboards` should be a peer of sections such as:
+
+- `actions`
+- `menus`
+- `roles`
+- `users`
+
+## Minimal Dashboard Definition Shape
+
+```json
+{
+  "dashboardSchemaVersion": 1,
+  "name": "queue-health",
+  "displayName": "Queue Health Dashboard",
+  "description": "Operational visibility for queue processing.",
+  "routeName": "queue-health",
+  "routePath": "/admin/dashboard/queue-health",
+  "moduleUserKey": "solid-core",
+  "permissions": [
+    "DashboardController.getDefinition",
+    "DashboardController.getDashboardData",
+    "DashboardController.getVariableOptions",
+    "DashboardController.getLayout",
+    "DashboardController.saveLayout"
+  ],
+  "variables": [],
+  "widgets": [],
+  "defaultLayout": {
+    "engine": "gridstack",
+    "columns": 12,
+    "items": []
+  }
+}
+```
+
+## Variable Authoring
+
+Supported variable patterns used by the framework today:
+
+- `date`
+- `selectionStatic`
+- `selectionDynamic`
+- `isMultiSelect` for selection variables
+
+### Date Variable
+
+```json
+{
+  "name": "date",
+  "label": "Created At",
+  "type": "date",
+  "required": true
+}
+```
+
+The UI supports preset selection (`today`, `last_24_hours`, `last_7_days`, `last_30_days`) and `custom` date range.
+
+### Static Selection Variable
+
+```json
+{
+  "name": "stage",
+  "label": "Stage",
+  "type": "selectionStatic",
+  "isMultiSelect": true,
+  "selectionStaticValues": [
+    "pending:Pending",
+    "failed:Failed",
+    "succeeded:Succeeded"
+  ]
+}
+```
+
+### Dynamic Selection Variable
+
+```json
+{
+  "name": "queueName",
+  "label": "Queue",
+  "type": "selectionDynamic",
+  "selectionConfig": {
+    "providerName": "MqDashboardQueueNameVariableOptionsProvider",
+    "providerContext": {
+      "labelField": "name",
+      "valueField": "name"
+    }
+  }
+}
+```
+
+## Widget Authoring
+
+Each widget binds to a backend provider using `dataProvider`.
+
+```json
+{
+  "id": "kpi-total-messages",
+  "name": "Total Messages",
+  "type": "kpi",
+  "dataProvider": "MqDashboardTotalMessagesKpiProvider",
+  "providerContext": {
+    "metric": "count_total_messages"
+  },
+  "refreshPolicy": {
+    "mode": "interval",
+    "intervalSeconds": 60
+  }
+}
+```
+
+For custom frontend rendering, add `componentName`.
+
+```json
+{
+  "id": "queue-sla-heatmap",
+  "name": "Queue SLA Heatmap",
+  "type": "customChart",
+  "dataProvider": "MqDashboardQueueSlaHeatmapProvider",
+  "componentName": "QueueSlaHeatmapWidget"
+}
+```
+
+## Default Layout Authoring (Gridstack)
+
+```json
+{
+  "engine": "gridstack",
+  "columns": 12,
+  "items": [
+    { "widgetId": "kpi-total-messages", "x": 0, "y": 0, "w": 3, "h": 2 },
+    { "widgetId": "chart-stage-distribution", "x": 3, "y": 0, "w": 6, "h": 4 },
+    { "widgetId": "table-recent-failures", "x": 0, "y": 4, "w": 12, "h": 4 }
+  ]
+}
+```
+
+## Navigation Integration (Actions + Menus)
+
+Dashboards should be exposed via metadata-driven menu/action pairs.
+
+Recommended pattern:
+
+- action type `custom`
+- action path matching dashboard route
+- menu item referencing the action
+
+## Authoring Checklist
+
+1. Define dashboard in `dashboards[]`.
+2. Add permissions for all dashboard runtime endpoints.
+3. Define variables with clear names and labels.
+4. Bind each widget to a valid backend `dataProvider`.
+5. Define a complete `defaultLayout` for all widgets.
+6. Add action/menu entries for discoverable navigation.

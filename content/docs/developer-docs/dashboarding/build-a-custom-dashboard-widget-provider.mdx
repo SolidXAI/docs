@@ -1,0 +1,108 @@
+---
+title: Build a Custom Dashboard Widget Provider
+description: Implement, register, and expose a dashboard widget data provider in solid-core-module.
+summary: This guide explains how to create a backend dashboard widget provider using the SolidX provider contract, decorator, introspection, and registry model.
+---
+
+# Build a Custom Dashboard Widget Provider
+
+Backend providers are the data engine of dashboard widgets. Every dashboard widget should resolve data through a provider.
+
+## Provider Contract
+
+Implement `IDashboardWidgetDataProvider` from `src/interfaces.ts`.
+
+Core methods:
+
+- `name()`
+- `help()`
+- `getData(widgetDefinition, ctxt)`
+
+## Registration Pattern
+
+Use both decorators:
+
+- `@Injectable()`
+- `@DashboardWidgetDataProvider()`
+
+The runtime registration path is:
+
+- decorator metadata -> introspection (`SolidIntrospectService`) -> registry (`SolidRegistry`) -> runtime resolver (`DashboardRuntimeService`)
+
+## Provider Template
+
+```ts
+import { Injectable } from "@nestjs/common";
+import { DashboardWidgetDataProvider } from "src/decorators/dashboard-widget-data-provider.decorator";
+import {
+  IDashboardWidgetDataProvider,
+  IDashboardWidgetDataProviderContext,
+  IDashboardWidgetDataResponseEnvelope,
+} from "src/interfaces";
+
+@DashboardWidgetDataProvider()
+@Injectable()
+export class ExampleDashboardWidgetProvider implements IDashboardWidgetDataProvider {
+  name(): string {
+    return "ExampleDashboardWidgetProvider";
+  }
+
+  help(): string {
+    return "Returns sample widget data.";
+  }
+
+  async getData(
+    widgetDefinition: Record<string, any>,
+    ctxt: IDashboardWidgetDataProviderContext,
+  ): Promise<IDashboardWidgetDataResponseEnvelope<any>> {
+    const now = new Date().toISOString();
+
+    return {
+      meta: {
+        providerName: this.name(),
+        widgetName: ctxt.widgetName,
+        generatedAt: now,
+        durationMs: 0,
+      },
+      data: {
+        value: 42,
+        label: widgetDefinition?.name ?? "Example KPI",
+      },
+    };
+  }
+}
+```
+
+## Bind Provider in Metadata
+
+```json
+{
+  "id": "kpi-example",
+  "name": "Example KPI",
+  "type": "kpi",
+  "dataProvider": "ExampleDashboardWidgetProvider"
+}
+```
+
+## Recommended Implementation Practices
+
+- Use repository-driven queries (prefer security-rule-aware query builders where available).
+- Treat `ctxt.variables` as the source of user-selected filters.
+- Keep response contracts stable for frontend rendering.
+- Return a normalized envelope with `meta` and `data`.
+- Keep provider names explicit and unique.
+
+## Quick Validation Path
+
+1. Start service.
+2. Call definition endpoint and verify widget exists.
+3. Call widget data endpoint:
+
+```bash
+curl -X POST "$BASE_URL/dashboard/<module>/<dashboard>/widgets/<widgetId>/data" \
+  -H "Authorization: Bearer $TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{"variables": {}}'
+```
+
+4. Verify `meta.providerName` and `data` payload shape.

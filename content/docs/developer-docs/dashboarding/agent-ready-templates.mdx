@@ -1,0 +1,187 @@
+---
+title: Agent-Ready Templates
+description: Copy-paste templates and checklists for creating dashboard widgets end to end.
+summary: Use these templates to scaffold dashboard metadata, backend providers, frontend custom widgets, and a reliable delivery checklist for implementation and verification.
+---
+
+# Agent-Ready Templates
+
+This page provides practical templates for rapid dashboard development.
+
+## 1. Reference Dashboard Metadata Template
+
+```json
+{
+  "dashboardSchemaVersion": 1,
+  "name": "example-dashboard",
+  "displayName": "Example Dashboard",
+  "description": "Business overview dashboard.",
+  "routeName": "example-dashboard",
+  "routePath": "/admin/dashboard/example-dashboard",
+  "moduleUserKey": "<module-user-key>",
+  "permissions": [
+    "DashboardController.getDefinition",
+    "DashboardController.getDashboardData",
+    "DashboardController.getVariableOptions",
+    "DashboardController.getLayout",
+    "DashboardController.saveLayout"
+  ],
+  "variables": [
+    {
+      "name": "date",
+      "label": "Created At",
+      "type": "date",
+      "required": true
+    },
+    {
+      "name": "status",
+      "label": "Status",
+      "type": "selectionStatic",
+      "isMultiSelect": true,
+      "selectionStaticValues": [
+        "open:Open",
+        "closed:Closed"
+      ]
+    },
+    {
+      "name": "owner",
+      "label": "Owner",
+      "type": "selectionDynamic",
+      "selectionConfig": {
+        "providerName": "ExampleOwnerVariableOptionsProvider"
+      }
+    }
+  ],
+  "widgets": [
+    {
+      "id": "kpi-total",
+      "name": "Total",
+      "type": "kpi",
+      "dataProvider": "ExampleTotalKpiProvider"
+    },
+    {
+      "id": "chart-status",
+      "name": "Status Distribution",
+      "type": "pieChart",
+      "dataProvider": "ExampleStatusDistributionProvider"
+    }
+  ],
+  "defaultLayout": {
+    "engine": "gridstack",
+    "columns": 12,
+    "items": [
+      { "widgetId": "kpi-total", "x": 0, "y": 0, "w": 3, "h": 2 },
+      { "widgetId": "chart-status", "x": 3, "y": 0, "w": 6, "h": 4 }
+    ]
+  }
+}
+```
+
+## 2. Backend Widget Provider Template
+
+```ts
+@DashboardWidgetDataProvider()
+@Injectable()
+export class ExampleTotalKpiProvider implements IDashboardWidgetDataProvider {
+  name(): string {
+    return "ExampleTotalKpiProvider";
+  }
+
+  help(): string {
+    return "Returns total records for dashboard KPI.";
+  }
+
+  async getData(widgetDefinition: Record<string, any>, ctxt: IDashboardWidgetDataProviderContext) {
+    const total = 0; // replace with repository query
+
+    return {
+      meta: {
+        providerName: this.name(),
+        widgetName: ctxt.widgetName,
+        generatedAt: new Date().toISOString(),
+        durationMs: 0,
+      },
+      data: {
+        label: widgetDefinition?.name ?? "Total",
+        value: total,
+      },
+    };
+  }
+}
+```
+
+## 3. Frontend Custom Widget Template (Optional)
+
+```tsx
+import type { DashboardWidgetComponentProps } from "@solidxai/core-ui";
+
+export function ExampleCustomWidget({ definition, runtime }: DashboardWidgetComponentProps) {
+  const data = runtime?.data ?? {};
+
+  return (
+    <div>
+      <h4>{definition?.displayName ?? definition?.name}</h4>
+      <pre>{JSON.stringify(data, null, 2)}</pre>
+    </div>
+  );
+}
+```
+
+Registration:
+
+```ts
+registerExtensionComponent(
+  "ExampleCustomWidget",
+  ExampleCustomWidget,
+  ExtensionComponentTypes.dashboardWidget,
+);
+```
+
+Metadata binding:
+
+```json
+{
+  "id": "widget-custom",
+  "name": "Custom Widget",
+  "type": "custom",
+  "dataProvider": "ExampleCustomProvider",
+  "componentName": "ExampleCustomWidget"
+}
+```
+
+## 4. End-to-End New Widget Checklist
+
+1. Add or update widget definition in dashboard metadata.
+2. Create backend provider class implementing `IDashboardWidgetDataProvider`.
+3. Decorate provider with `@DashboardWidgetDataProvider()`.
+4. Ensure provider is discoverable in module wiring/build.
+5. Validate provider output envelope (`meta`, `data`).
+6. If needed, create and register custom frontend widget (`dashboardWidget`).
+7. Add/update default layout entry for the widget (`widgetId`, `x/y/w/h`).
+8. Verify dashboard definition endpoint includes the widget.
+9. Verify widget data endpoint returns expected payload.
+10. Verify full dashboard page render.
+11. Verify layout drag/resize + save + refresh roundtrip.
+12. Verify permissions for dashboard runtime endpoints.
+
+## 5. Operational Retest Snippets
+
+```bash
+# Definition
+curl -H "Authorization: Bearer $TOKEN" \
+  "$BASE_URL/dashboard/<module>/<dashboard>/definition"
+
+# Dashboard data batch
+curl -X POST -H "Authorization: Bearer $TOKEN" -H "Content-Type: application/json" \
+  "$BASE_URL/dashboard/<module>/<dashboard>/data" \
+  -d '{"variables":{}}'
+
+# Layout load
+curl -H "Authorization: Bearer $TOKEN" \
+  "$BASE_URL/dashboard/<module>/<dashboard>/layout"
+
+# Layout save
+curl -X PUT -H "Authorization: Bearer $TOKEN" -H "Content-Type: application/json" \
+  "$BASE_URL/dashboard/<module>/<dashboard>/layout" \
+  -d '{"layout":{"engine":"gridstack","columns":12,"items":[]}}'
+```
