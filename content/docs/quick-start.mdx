@@ -92,23 +92,12 @@ The `create-app` command installs all npm dependencies for both backend and fron
 
 </Callout>
 
-### Step 3: Build and seed
+### Step 3: Start the services
+
+Move into the project folder and run a single `solidctl` command to start both the backend API and frontend admin panel in one supervisor:
 
 ```bash
 cd <your-project-name>
-
-npx @solidxai/solidctl@latest build
-npx @solidxai/solidctl@latest seed
-```
-
-- `build` compiles both backend and frontend.
-- `seed` loads platform metadata, default settings, and the super admin user.
-
-### Step 4: Start the services
-
-From the project root, run a single `solidctl` command to start both the backend API and frontend admin panel in one supervisor:
-
-```bash
 npx @solidxai/solidctl@latest start:dev
 ```
 
@@ -158,13 +147,9 @@ Project scaffold (this step takes 5-10 minutes; npm installs all dependencies fo
   (Use the project name I provided, and the DB credentials determined in the database setup step above.)
 - Inform me that scaffolding is in progress and will take several minutes. Do not treat the long-running npm install as a failure. Wait for it to complete.
 
-Build and seed:
-- cd <PROJECT_NAME>
-- npx @solidxai/solidctl@latest build
-- npx @solidxai/solidctl@latest seed
-
 Start the services (single supervisor that runs both backend and frontend):
-- From the project root (<PROJECT_NAME>), run: npx @solidxai/solidctl@latest start:dev
+- cd <PROJECT_NAME>
+- Run: npx @solidxai/solidctl@latest start:dev
 - This starts both solid-api and solid-ui dev processes together. Run it as a background process so you can continue with the verification step.
 
 Final verification:
