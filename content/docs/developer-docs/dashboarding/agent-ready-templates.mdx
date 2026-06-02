@@ -16,16 +16,7 @@ This page provides practical templates for rapid dashboard development.
   "name": "example-dashboard",
   "displayName": "Example Dashboard",
   "description": "Business overview dashboard.",
-  "routeName": "example-dashboard",
-  "routePath": "/admin/dashboard/example-dashboard",
   "moduleUserKey": "<module-user-key>",
-  "permissions": [
-    "DashboardController.getDefinition",
-    "DashboardController.getDashboardData",
-    "DashboardController.getVariableOptions",
-    "DashboardController.getLayout",
-    "DashboardController.saveLayout"
-  ],
   "variables": [
     {
       "name": "date",
@@ -162,7 +153,6 @@ Metadata binding:
 9. Verify widget data endpoint returns expected payload.
 10. Verify full dashboard page render.
 11. Verify layout drag/resize + save + refresh roundtrip.
-12. Verify permissions for dashboard runtime endpoints.
 
 ## 5. Operational Retest Snippets
 

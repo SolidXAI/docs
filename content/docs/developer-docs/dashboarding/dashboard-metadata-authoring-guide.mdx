@@ -1,14 +1,25 @@
 ---
-title: Dashboard Metadata Authoring Guide
+title: Metadata Schema
 description: Define dashboards, variables, widgets, and default layout in SolidX module metadata.
-summary: Learn how to author the `dashboards` section in module metadata, including variable definitions, widget provider binding, layout schema, permissions, and menu/action integration.
+summary: Learn how to author the `dashboards` section in module metadata, including variable definitions, widget provider binding, layout schema, and menu/action integration.
 ---
-
-# Dashboard Metadata Authoring Guide
 
 Dashboard definitions are authored in module metadata under the root-level `dashboards` key.
 
+<Callout type="info" title="Mental Model">
+
+The dashboard schema has a small set of core players:
+- the <strong>dashboard definition</strong> describes the screen itself,
+- <strong>variables</strong> describe the inputs a user can use to filter or parameterise the dashboard,
+- <strong>widgets</strong> describe the individual building blocks on the page,
+- <strong>provider bindings</strong> connect those widgets to backend data,
+- and the <strong>default layout</strong> describes how the widgets should initially be arranged.
+
+</Callout>
+
 ## Placement in Metadata
+
+The `dashboards` block is not a nested widget configuration area or a UI-only document. It is a first-class module metadata section and should be treated as part of the framework contract for the module.
 
 `dashboards` should be a peer of sections such as:
 
@@ -19,22 +30,15 @@ Dashboard definitions are authored in module metadata under the root-level `dash
 
 ## Minimal Dashboard Definition Shape
 
+This is the smallest useful mental model for a dashboard definition. It gives the framework enough information to identify the dashboard, authorize access to it, and render a widget canvas that can later be expanded.
+
 ```json
 {
   "dashboardSchemaVersion": 1,
   "name": "queue-health",
   "displayName": "Queue Health Dashboard",
   "description": "Operational visibility for queue processing.",
-  "routeName": "queue-health",
-  "routePath": "/admin/dashboard/queue-health",
   "moduleUserKey": "solid-core",
-  "permissions": [
-    "DashboardController.getDefinition",
-    "DashboardController.getDashboardData",
-    "DashboardController.getVariableOptions",
-    "DashboardController.getLayout",
-    "DashboardController.saveLayout"
-  ],
   "variables": [],
   "widgets": [],
   "defaultLayout": {
@@ -47,6 +51,8 @@ Dashboard definitions are authored in module metadata under the root-level `dash
 
 ## Variable Authoring
 
+Variables define the inputs the dashboard accepts from the user. They are not just UI controls. They become part of the runtime payload sent to backend providers, so naming and semantics should be chosen carefully.
+
 Supported variable patterns used by the framework today:
 
 - `date`
@@ -55,6 +61,8 @@ Supported variable patterns used by the framework today:
 - `isMultiSelect` for selection variables
 
 ### Date Variable
+
+Use a date variable when widgets need a shared time window. In the current UI, this renders as a preset selector with an optional custom date range.
 
 ```json
 {
@@ -68,6 +76,8 @@ Supported variable patterns used by the framework today:
 The UI supports preset selection (`today`, `last_24_hours`, `last_7_days`, `last_30_days`) and `custom` date range.
 
 ### Static Selection Variable
+
+Use a static selection variable when the option set is known at design time and does not require backend lookup.
 
 ```json
 {
@@ -85,6 +95,8 @@ The UI supports preset selection (`today`, `last_24_hours`, `last_7_days`, `last
 
 ### Dynamic Selection Variable
 
+Use a dynamic selection variable when the option list depends on live data and should be resolved through the existing selection provider pattern.
+
 ```json
 {
   "name": "queueName",
@@ -100,7 +112,11 @@ The UI supports preset selection (`today`, `last_24_hours`, `last_7_days`, `last
 }
 ```
 
+`selectionConfig.providerContext` is passed to the dynamic selection provider and is useful when the provider needs hints about how to shape the output. For example, a provider can use it to decide which field should become the display label and which field should become the persisted value.
+
 ## Widget Authoring
+
+Widgets are the runtime units of a dashboard. Each widget definition tells the framework what kind of widget it is, which backend provider should be invoked, and any provider-specific context needed to resolve the data.
 
 Each widget binds to a backend provider using `dataProvider`.
 
@@ -112,13 +128,15 @@ Each widget binds to a backend provider using `dataProvider`.
   "dataProvider": "MqDashboardTotalMessagesKpiProvider",
   "providerContext": {
     "metric": "count_total_messages"
-  },
-  "refreshPolicy": {
-    "mode": "interval",
-    "intervalSeconds": 60
   }
 }
 ```
+
+`providerContext` is a metadata-authored input passed through to the provider at runtime. It is useful for keeping provider classes reusable. For example:
+
+- a KPI provider can use `providerContext.metric` to decide which aggregate to compute,
+- a chart provider can use `providerContext.bucket` to choose `hour` vs `day`,
+- a table provider can use `providerContext.columns` and `providerContext.sort` to shape the output.
 
 For custom frontend rendering, add `componentName`.
 
@@ -132,7 +150,11 @@ For custom frontend rendering, add `componentName`.
 }
 ```
 
+This is the recommended pattern when the widget still follows the standard backend provider contract, but needs a specialised visual treatment in the UI. The queue SLA heatmap reference implementation is the canonical example of this approach.
+
 ## Default Layout Authoring (Gridstack)
+
+The default layout defines the initial visual arrangement of widgets before any user-specific override is saved. The current layout engine uses a Gridstack-compatible contract.
 
 ```json
 {
@@ -148,6 +170,8 @@ For custom frontend rendering, add `componentName`.
 
 ## Navigation Integration (Actions + Menus)
 
+Dashboards should be discoverable through the same action/menu metadata model used elsewhere in SolidX.
+
 Dashboards should be exposed via metadata-driven menu/action pairs.
 
 Recommended pattern:
@@ -156,11 +180,98 @@ Recommended pattern:
 - action path matching dashboard route
 - menu item referencing the action
 
+The action route should follow the canonical dashboard route pattern defined in [solidRoutes.tsx](/Users/harishpatel/Code/javascript/solid-core-ui/src/routes/solidRoutes.tsx), which is:
+
+- `/admin/core/:moduleName/dashboard/:dashboardName`
+
+Example:
+
+```json
+{
+  "actions": [
+    {
+      "name": "solid-core-queue-health-dashboard-view",
+      "displayName": "Queue Health Dashboard",
+      "type": "custom",
+      "customComponent": "/admin/core/solid-core/dashboard/queue-health"
+    }
+  ],
+  "menus": [
+    {
+      "name": "solid-core-queue-health-dashboard-menu-item",
+      "displayName": "Queue Health",
+      "actionUserKey": "solid-core-queue-health-dashboard-view"
+    }
+  ]
+}
+```
+
+## Widget Permissions
+
+Dashboard widget permissions use SolidX's existing **explicit permission** mechanism. This means dashboard authors must add the required permission entries to module metadata and then assign them to the appropriate roles, just like any other explicit SolidX permission.
+
+The dashboard widget permission format is:
+
+- `dashboard:<dashboard-name>:<widget-pattern>`
+
+Where:
+
+- the first segment is always `dashboard`
+- the second segment is the dashboard name
+- the third segment is the widget matcher
+
+The widget matcher supports:
+
+- exact widget names
+- `*` for all widgets in a dashboard
+- regex-style patterns in the widget segment
+
+Examples from the queue-health reference implementation:
+
+```json
+{
+  "permissions": [
+    "dashboard:queue-health:kpi-.*",
+    "dashboard:queue-health:chart-queue-.*",
+    "dashboard:queue-health:chart-processing-latency-trend"
+  ]
+}
+```
+
+This means:
+
+- `dashboard:queue-health:kpi-.*` authorizes all KPI widgets such as `kpi-total-messages`
+- `dashboard:queue-health:chart-queue-.*` authorizes queue-focused charts such as `chart-queue-wise-failures`, `chart-queue-wise-avg-elapsed`, and `chart-queue-sla-heatmap`
+- `dashboard:queue-health:chart-processing-latency-trend` authorizes one specific widget only
+
+Any widgets not covered by the user's effective permission set will remain visible in the dashboard layout, but they will not resolve data.
+
+## Permission Runtime Behavior
+
+The permission check is enforced on the backend first.
+
+When a user does **not** have permission for a widget:
+
+1. the backend does **not** invoke that widget's data provider at all
+2. the backend returns a normalized unauthorized widget envelope
+3. the frontend still renders the widget card in the grid
+4. the widget body shows a compact `Unauthorized` state
+
+This behavior is intentional because it preserves layout consistency while keeping protected widget data entirely server-side.
+
+To make dashboard permissions effective in a real project:
+
+1. declare the explicit permission strings in module metadata
+2. attach those permissions to one or more roles
+3. assign those roles to users
+
+That flow is standard SolidX RBAC behavior and dashboards follow the same model.
+
 ## Authoring Checklist
 
 1. Define dashboard in `dashboards[]`.
-2. Add permissions for all dashboard runtime endpoints.
-3. Define variables with clear names and labels.
-4. Bind each widget to a valid backend `dataProvider`.
-5. Define a complete `defaultLayout` for all widgets.
-6. Add action/menu entries for discoverable navigation.
+2. Define variables with clear names and labels.
+3. Bind each widget to a valid backend `dataProvider`.
+4. Define a complete `defaultLayout` for all widgets.
+5. Add action/menu entries for discoverable navigation.
+6. Add explicit dashboard widget permissions and bind them to the right roles.

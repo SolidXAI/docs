@@ -1,12 +1,16 @@
 ---
-title: Build a Custom Dashboard Widget Provider
+title: Widget Data Provider
 description: Implement, register, and expose a dashboard widget data provider in solid-core-module.
 summary: This guide explains how to create a backend dashboard widget provider using the SolidX provider contract, decorator, introspection, and registry model.
 ---
 
-# Build a Custom Dashboard Widget Provider
-
 Backend providers are the data engine of dashboard widgets. Every dashboard widget should resolve data through a provider.
+
+<Callout type="info" title="Mental Model">
+
+A widget data provider is the backend counterpart of a dashboard widget. Metadata decides <strong>which</strong> provider should be called, the provider decides <strong>how</strong> to fetch or compute the data, and the frontend widget decides <strong>how</strong> that resolved data should be shown.
+
+</Callout>
 
 ## Provider Contract
 
@@ -83,6 +87,48 @@ export class ExampleDashboardWidgetProvider implements IDashboardWidgetDataProvi
   "dataProvider": "ExampleDashboardWidgetProvider"
 }
 ```
+
+## Reference Implementation: Queue SLA Heatmap
+
+The framework now includes a canonical reference implementation for a fully custom queue-focused widget:
+
+- backend provider: `MqDashboardQueueSlaHeatmapProvider`
+- frontend widget: `QueueSlaHeatmapWidget`
+
+The provider output contract is intentionally explicit:
+
+```json
+{
+  "xCategories": ["2026-06-01T08:00:00.000Z", "2026-06-01T09:00:00.000Z"],
+  "yCategories": ["queue-a", "queue-b"],
+  "points": [
+    [0, 0, 4250.5],
+    [1, 0, 6100.0],
+    [0, 1, 11200.25]
+  ],
+  "tooltipFields": ["avgElapsedMillis", "messageCount", "peakElapsedMillis"],
+  "pointDetails": [
+    {
+      "xIndex": 0,
+      "yIndex": 0,
+      "bucket": "2026-06-01T08:00:00.000Z",
+      "queueName": "queue-a",
+      "avgElapsedMillis": 4250.5,
+      "messageCount": 18,
+      "peakElapsedMillis": 9100
+    }
+  ],
+  "legendThresholds": [
+    { "label": "0-5s", "color": "#22c55e", "lte": 5000 },
+    { "label": "5-15s", "color": "#f59e0b", "gt": 5000, "lte": 15000 }
+  ]
+}
+```
+
+This RI is useful because it shows the recommended split:
+- the provider owns data access and runtime contract design,
+- the frontend widget owns the final visual treatment,
+- and metadata binds the two together.
 
 ## Recommended Implementation Practices
 

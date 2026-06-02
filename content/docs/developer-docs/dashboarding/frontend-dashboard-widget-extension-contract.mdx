@@ -1,12 +1,16 @@
 ---
-title: Frontend Dashboard Widget Extension Contract
+title: Widget UI
 description: Understand default dashboard rendering and how to register custom dashboard widgets in solid-core-ui.
 summary: This guide explains the dashboard widget extension type, runtime props contract, default widget set, and custom component registration model in the frontend.
 ---
 
-# Frontend Dashboard Widget Extension Contract
-
 Dashboard widgets are rendered through the SolidX extension registry, not hard-coded page-level branches.
+
+<Callout type="info" title="Mental Model">
+
+The frontend widget layer is intentionally optional and extensible. Every dashboard widget always needs backend data, but not every widget needs a fully custom UI. If the existing framework widgets are enough, use them. If the visual treatment is special, register a custom dashboard widget component and bind it explicitly in metadata.
+
+</Callout>
 
 ## Extension Type
 
@@ -61,6 +65,10 @@ At runtime, rendering follows this order:
 
 This makes custom rendering **optional** while preserving consistent baseline behavior.
 
+When the backend marks a widget as unauthorized, the frontend does not attempt normal chart or table rendering. Instead, the dashboard page keeps the widget card in the layout and renders a compact `Unauthorized` placeholder inside the card body.
+
+This is important because the unauthorized state is not purely visual. The backend short-circuits provider execution first, and the frontend simply reflects that server-side decision.
+
 ## Custom Widget Registration Example
 
 ```ts
@@ -87,14 +95,14 @@ Metadata binding:
 }
 ```
 
-## Charting Layer
+The queue SLA heatmap reference implementation uses this exact override pattern and is the canonical example of "backend provider required, custom frontend rendering optional."
 
-Default chart widgets use Apache ECharts through an adapter/mapper pattern.
+## Current Scope
 
-Current mapper location:
+The framework currently ships with a default first-party widget set for common dashboard cases such as KPI, chart, and table rendering.
 
-- `src/components/core/dashboard/mappers/echartsOptionMapper`
+It also now includes a first reference implementation for fully custom rendering:
 
-Recommendation:
-- keep metadata/provider payloads renderer-agnostic when possible,
-- map into ECharts options in frontend renderer components.
+- `QueueSlaHeatmapWidget`
+
+This widget still depends on a backend provider contract, but bypasses the framework defaults for rendering so the UI can present a true heatmap experience.

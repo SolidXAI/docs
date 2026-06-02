@@ -1,12 +1,10 @@
 ---
-title: Dashboarding
+title: Intro
 icon: "layout-dashboard"
 description: Build metadata-driven dashboards in SolidX using backend data providers, frontend widget extensions, and user-specific layouts.
 summary: This section explains the complete SolidX dashboarding architecture, including metadata authoring, provider registration, runtime APIs, widget rendering contracts, Gridstack layout persistence, and practical templates for creating new widgets end to end.
 sidebar_position: 2.6
 ---
-
-# Dashboarding
 
 SolidX dashboarding is a **metadata-driven framework capability** for building operational and analytical dashboard experiences without hard-coding each screen.
 
@@ -17,35 +15,30 @@ It is designed around four principles:
 - frontend extension-driven widget rendering,
 - and per-user layout personalization.
 
-## Architecture Snapshot
+The queue health reference dashboard also includes a canonical custom widget example, `QueueSlaHeatmapWidget`, which demonstrates the intended model:
+- backend data providers remain mandatory,
+- custom frontend rendering stays optional,
+- and explicit widget overrides are only introduced when the default framework widget set is not enough.
 
-> Add the architecture screenshot in the placeholder below.
+<Callout type="info" title="Mental Model">
+
+Think of a SolidX dashboard as a composition of four layers:
+- <strong>metadata</strong> defines the dashboard, variables, widgets, and default layout,
+- <strong>backend providers</strong> resolve the actual widget data,
+- <strong>frontend widgets</strong> decide how that data is rendered,
+- and <strong>user layout persistence</strong> personalizes the arrangement without changing the dashboard definition itself.
+
+</Callout>
+
+## Sample Dashboard
 
 ![Dashboard Architecture Placeholder](/img/dashboarding/dashboard-architecture-overview.png)
 
-## What This Section Covers
+## Pages
 
-- [Dashboard Metadata Authoring Guide](./dashboard-metadata-authoring-guide.mdx): how to define dashboards, variables, widgets, and default layouts in module metadata.
-- [Build a Custom Dashboard Widget Provider](./build-a-custom-dashboard-widget-provider.mdx): backend provider contract, registration pattern, and implementation workflow.
-- [Frontend Dashboard Widget Extension Contract](./frontend-dashboard-widget-extension-contract.mdx): default widget pipeline, extension registration, and custom component override model.
-- [Agent-Ready Templates](./agent-ready-templates.mdx): copy-paste templates and a practical checklist to create widgets end to end.
-
-## Current Runtime Route and API Model
-
-UI route:
-
-- `/admin/core/:moduleName/dashboard/:dashboardName`
-
-Runtime API surface:
-
-- `GET /dashboard/:moduleName/:dashboardName/definition`
-- `POST /dashboard/:moduleName/:dashboardName/data`
-- `POST /dashboard/:moduleName/:dashboardName/widgets/:widgetName/data`
-- `GET /dashboard/:moduleName/:dashboardName/variable-options/:variableName`
-- `GET /dashboard/:moduleName/:dashboardName/layout`
-- `PUT /dashboard/:moduleName/:dashboardName/layout`
-
-All runtime dashboard APIs are JWT-protected.
+- [Metadata Schema](./dashboard-metadata-authoring-guide.mdx): how to define dashboards, variables, widgets, layouts, and navigation metadata.
+- [Widget Data Provider](./build-a-custom-dashboard-widget-provider.mdx): how backend providers are implemented, registered, and bound to widgets.
+- [Widget UI](./frontend-dashboard-widget-extension-contract.mdx): how default rendering works and how custom widget components are introduced when needed.
 
 <Callout type="info" title="Source of Truth">
 
