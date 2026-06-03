@@ -60,14 +60,60 @@ Frequency at which the job should run. Supported values include:
 - `Daily`
 - `Weekly`
 - `Monthly`
+- `Custom`
+
+### `cronExpression` *(string, required when `frequency` is `"Custom"`)*
+A standard cron expression that defines the exact schedule for the job. Only evaluated when `frequency` is set to `"Custom"`.
+
+**Format:** `"<minute> <hour> <day-of-month> <month> <day-of-week>"`  
+**Example:** `"0 */2 * * *"` — runs every 2 hours
+
+**Notes:**
+- Expressions are evaluated in **UTC**.
+- The minimum allowed interval is **1 minute**. Expressions resolving to a shorter interval are rejected and fall back to a daily schedule.
+- If the expression is invalid or missing, the platform logs an error and falls back to a 24-hour interval.
+
+### `startTime` *(string \| null, optional)*
+Earliest time of day at which the job is allowed to run, in `HH:MM:SS` format. If the job comes due before this time, the scheduler holds it until the window opens.
+
+**Example:** `"08:00:00"`  
+**Default:** `null` (no lower time boundary)
+
+### `endTime` *(string \| null, optional)*
+Latest time of day at which the job is allowed to run, in `HH:MM:SS` format. If the job comes due after this time, it is skipped for the current cycle.
+
+**Example:** `"18:00:00"`  
+**Default:** `null` (no upper time boundary)
+
+### `startDate` *(string \| null, optional)*
+ISO 8601 date string. The job will not run before this date.
+
+**Example:** `"2025-01-01"`  
+**Default:** `null` (no start boundary)
+
+### `endDate` *(string \| null, optional)*
+ISO 8601 date string. The job will not run after this date.
+
+**Example:** `"2025-12-31"`  
+**Default:** `null` (runs indefinitely)
+
+### `job` *(string, required)*
+The exact class name of the job implementation to execute (case-sensitive). This must match the class decorated with `@ScheduledJobProvider()`.
+
+**Example:** `"LateFeeCalculatorJob"`
 
 ### `dayOfWeek` *(string, mandatory for Weekly frequency)*
 Days of the week on which the job should run (applicable for weekly frequency). This should be a JSON array of day names. Please ensure that the value is a valid JSON array string in stringified format.
 
 **Example:** `["Monday", "Wednesday", "Friday"]`  
 **Applies to:** `Weekly` frequency
+Currently the configuration expects json configuration in stringified format.
 
-  Currently the configuration expects json configuration in stringified format. In future releases, we may support direct array input.
+### `dayOfMonth` *(number \| null, optional)*
+Day of the month on which the job should run. Only enforced when `frequency` is `"Monthly"`.
+
+**Valid range:** `1–31`  
+**Default:** `null`
 
 ### `moduleUserKey` *(string, required)*
 The user key of the module to which this scheduled job belongs. This helps in organizing and managing jobs by module.
