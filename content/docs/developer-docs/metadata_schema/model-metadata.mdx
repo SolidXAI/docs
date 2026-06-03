@@ -71,8 +71,7 @@ Each model is a semantic, configurable data structure that forms the basis of ad
         "enableSoftDelete": false,
         "draftPublishWorkflow": false,
         "internationalisation": false,
-        "isLegacyTable":false,
-        "isLegacyTableWithId":false
+        "legacyTableType":"none"
       },
       { // Child Model Example
         "singularName": "instituteUser",
@@ -88,9 +87,7 @@ Each model is a semantic, configurable data structure that forms the basis of ad
         "enableSoftDelete": false,
         "draftPublishWorkflow": false,
         "internationalisation": false,
-        "isLegacyTable":false,
-        "isLegacyTableWithId":false
-
+        "legacyTableType":"none"
       },
       ... // Other models
     ]
@@ -200,14 +197,17 @@ If set to `true`, the model will support internationalization, allowing records 
 **Default:** `false`
 
 
-### `isLegacyTable` *(boolean, optional)*
-Indicates whether the table uses the legacy internationalization pattern and contains an IDENTITY (auto-increment) primary key.Set this to true only when the SQL DDL in the prompt defines a table with an IDENTITY column.When this is true, isLegacyTableWithId must be false. 
-**Default:** `false`
+### `legacyTableType` *(string, optional)*
+Indicates whether this model maps to a pre-existing legacy table and, if so, how its primary key is managed.
 
+| Value | When to use |
+|---|---|
+| `"none"` | Standard model — not a legacy table. |
+| `"existing_id"` | The legacy table already has its own IDENTITY (auto-increment) primary key column in the SQL DDL. The system will not generate an ID. |
+| `"generated_id"` | The legacy table has no primary key column in the SQL DDL. The system generates and manages the ID. |
 
-### `isLegacyTableWithId` *(boolean, optional)*
-Indicates whether the table uses the legacy internationalization pattern but does not contain any IDENTITY (auto-increment) column.Set this to true only when the SQL DDL in the prompt defines a table without an IDENTITY column.When this is true, isLegacyTable must be false. 
-**Default:** `false`
+When set to `"existing_id"` or `"generated_id"`, at least one field must be marked as `isPrimaryKey: true`.  
+**Default:** `"none"`
 
 <br/>
 <div className="">
