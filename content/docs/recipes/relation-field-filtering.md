@@ -36,10 +36,11 @@ Use `relationFieldFixedFilter` when the restriction is a permanent business rule
 
 ```json
 {
-  "userKey": "assigned-user",
+  "name": "assignedUser",
   "displayName": "Assigned User",
-  "type": "manyToOne",
-  "relationTo": "users",
+  "type": "relation",
+  "relationType": "manyToOne",
+  "relationCoModelSingularName": "users",
   "relationFieldFixedFilter": "{\"department\":{\"id\":{\"$eq\":3}}}"
 }
 ```
@@ -70,8 +71,8 @@ Use `whereClause` when the restriction depends on the context of a specific view
     "children": [
       {
         "type": "field",
-        "fieldId": "assignedUser",
         "attrs": {
+          "name": "assignedUser",
           "whereClause": "{\"status\":{\"$eq\":\"active\"}}"
         }
       }
@@ -90,13 +91,11 @@ A common requirement is to narrow one dropdown based on what the user has select
 
 `whereClause` supports **Handlebars templates**. When SolidX fetches options for the field, it evaluates the template against the current form values before sending the filter to the API. This means the dropdown automatically re-filters whenever the referenced field changes — no handler needed.
 
-Use `{{fieldId}}` for scalar fields and `{{fieldId.id}}` for relation fields (to get the ID of the related record).
-
 ```json
 {
   "type": "field",
-  "fieldId": "assignedUser",
   "attrs": {
+    "name": "assignedUser",
     "whereClause": "{\"department\":{\"id\":{\"$eq\":\"{{department.id}}\"}}}"
   }
 }
@@ -194,10 +193,11 @@ Use this when the restriction applies to every form that shows this field and th
 **Field metadata** (`assigned-user.json`):
 ```json
 {
-  "userKey": "assigned-user",
+  "name": "assignedUser",
   "displayName": "Assigned User",
-  "type": "manyToOne",
-  "relationTo": "users",
+  "type": "relation",
+  "re": "manyToOne",
+  "relationCoModelSingularName": "users",
   "relationFieldFixedFilter": "{\"$and\":[{\"department\":{\"id\":{\"$eq\":3}}},{\"status\":{\"$eq\":\"active\"}}]}"
 }
 ```
@@ -212,8 +212,8 @@ Use this when only a specific form view needs this restriction, or when the depa
 ```json
 {
   "type": "field",
-  "fieldId": "assignedUser",
   "attrs": {
+    "name": "assignedUser",
     "whereClause": "{\"$and\":[{\"department\":{\"id\":{\"$eq\":3}}},{\"status\":{\"$eq\":\"active\"}}]}"
   }
 }
@@ -228,8 +228,8 @@ When the form has a `department` picker, use Handlebars interpolation in `whereC
 ```json
 {
   "type": "field",
-  "fieldId": "assignedUser",
   "attrs": {
+    "name": "assignedUser",
     "whereClause": "{\"$and\":[{\"department\":{\"id\":{\"$eq\":\"{{department.id\"}}}}},{\"status\":{\"$eq\":\"active\"}}]}"
   }
 }
