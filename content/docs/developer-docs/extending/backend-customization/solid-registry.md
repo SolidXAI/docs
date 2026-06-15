@@ -66,7 +66,7 @@ The following components are tracked by the Solid Registry:
 
 **Purpose:** Derive field values dynamically based on logic (e.g., total amount, status based on conditions).  
 **How it works:** Each computed field provider is registered with metadata, making them discoverable by the runtime when evaluating entity fields.  
-**See also:** [Computed Fields](/docs/recipes/computed-fields)
+**See also:** [Computed Fields](/docs/developer-docs/extending/backend-customization/computation-providers)
 
 
 
