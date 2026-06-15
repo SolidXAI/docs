@@ -5,8 +5,6 @@
     "additional-datasources",
     "filtering",
     "relation-field-filtering",
-    "extending-users",
-    "handlers",
     "soft-delete",
     "workflow-status"
   ]

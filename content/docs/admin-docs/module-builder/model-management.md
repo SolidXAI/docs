@@ -91,5 +91,5 @@ To see the impact of what happens when we generate the code linked to a model me
 
 - [Additional Datasources](../../recipes/additional-datasources.md) — Add additional data sources to your application
 - [Soft Delete](../../recipes/soft-delete.md) — Configure soft delete functionality on your models
-- [Custom User Model](../../recipes/extending-users.md) — Create a custom user object while keeping roles and permissions intact
+- [Custom User Model](../../developer-docs/extending/backend-customization/extending-users) — Create a custom user object while keeping roles and permissions intact
 - [Internationalization](../../recipes/) — Create models for multi-lingual content when using SolidX as a headless CMS
