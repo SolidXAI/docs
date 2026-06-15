@@ -3,10 +3,6 @@
   "icon": "chef-hat",
   "pages": [
     "additional-datasources",
-    "email",
-    "media-providers",
-    "queue",
-    "computed-fields",
     "filtering",
     "relation-field-filtering",
     "extending-users",
