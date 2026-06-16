@@ -1,0 +1,123 @@
+---
+title: Module Package Import & Export
+icon: "package-open"
+---
+
+# Module Package Import & Export
+
+SolidX modules can be packaged into portable `.sldx` archives and moved between instances. This lets you share a completed module with other teams, back up your work, or distribute pre-built modules without recreating them from scratch.
+
+A `.sldx` file is a zip archive containing the module's API source files, UI source files, and a `manifest.json` that describes the package structure and records file checksums.
+
+<Callout type="warn" title="Not available in production">
+  Module import and export are disabled when the environment is set to `ENV=prod`. These operations are intended for development and staging environments only.
+</Callout>
+
+---
+
+## Exporting a Module
+
+![Module Metadata list showing the Export Module option in the row context menu](/img/admin-docs/module-builder/module-package-export-menu.png)
+
+1. Navigate to **Solid Core → Module Metadata** in the sidebar.
+2. In the module list, open the **row context menu** (the `⋮` icon) for the module you want to export.
+3. Click **Export Module**.
+4. The browser downloads a file named `{moduleName}.sldx`.
+
+The archive contains:
+
+| Path in archive | Contents |
+|---|---|
+| `manifest.json` | Package metadata, checksums, schema version |
+| `solid-api/src/{moduleName}/` | NestJS API source for the module |
+| `solid-ui/src/{moduleName}/` | React UI source for the module |
+| `solid-api/src/{moduleName}/metadata/{moduleName}-metadata.json` | Module metadata definition |
+
+---
+
+## Importing a Module
+
+![Module Metadata list with the Import Module button](/img/admin-docs/module-builder/module-package-list-view.png)
+
+Import is a four-step wizard. Click **Import Module** in the top-right corner of the Module Metadata list to open it.
+
+### Step 1 — Preview
+
+![Step 1: Upload archive dialog](/img/admin-docs/module-builder/module-package-step1-upload.png)
+
+Upload a `.sldx` archive using the **Browse archive** button. SolidX validates the archive automatically and shows a preview:
+
+- **MODULE** — the module name embedded in the manifest
+- **SOLID-API FILES** — number of API source files in the archive
+- **SOLID-UI FILES** — number of UI source files in the archive
+- **Required markers** — the three key files that must be present for a valid package
+- Full file tree of all archive contents
+
+![Step 1: Archive validated — showing module name, file counts, required markers and file tree](/img/admin-docs/module-builder/module-package-step1-preview.png)
+
+Once validation passes, click **Continue to import** to proceed.
+
+### Step 2 — Import
+
+![Step 2: Import dialog with warning about service restarts](/img/admin-docs/module-builder/module-package-step2-import.png)
+
+SolidX copies the module files into the project directories:
+
+- API files → `solid-api/src/{moduleName}/`
+- UI files → `solid-ui/src/{moduleName}/`
+
+<Callout type="warn" title="Services may restart">
+  Copying new source files can trigger a restart of both the UI and API services. If the popup is dismissed during this step, wait for both services to come back online, then **refresh this page** and reopen the Import Module dialog — the in-progress transaction will be automatically resumed.
+</Callout>
+
+Click **Import Module** to start the file copy.
+
+### Step 3 — Build
+
+![Step 3: Build ready — showing the Build Now button after services restart](/img/admin-docs/module-builder/module-package-step3-build-ready.png)
+
+After the import step and any service restarts, click **Build Now**. SolidX runs two builds in sequence:
+
+```
+solidctl build
+solidctl build --ui-only
+```
+
+![Step 3: Build in progress — running solidctl build and solidctl build --ui-only](/img/admin-docs/module-builder/module-package-step3-build-running.png)
+
+Wait for both builds to report success before moving on. Build output is streamed in the dialog so you can monitor progress.
+
+### Step 4 — Seed
+
+![Step 4: Seed ready — waiting for the Seed button to be clicked](/img/admin-docs/module-builder/module-package-step4-seed.png)
+
+Click **Seed** to load the module's metadata into the database. SolidX runs:
+
+```
+solidctl seed --modules-to-seed {moduleName}
+```
+
+The seed output is displayed in the dialog. A successful run looks like:
+
+```
+solidctl seed --modules-to-seed contact-management [success]
+▸ Selective seeding enabled. Modules to seed: contact-management
+▸ Seeding Metadata for Module: contact-management
+✓ [contact-management] Module/Model/Fields seeded (upserted 30)
+✓ [contact-management] Views seeded (upserted 6)
+✓ [contact-management] Actions seeded (upserted 5)
+✓ [contact-management] Menus seeded (upserted 5)
+...
+```
+
+![Step 4: Seed complete — terminal output showing all metadata seeded successfully](/img/admin-docs/module-builder/module-package-step4-complete.png)
+
+Once seeding completes, click **Reload** to refresh the page. The imported module will appear in the module list.
+
+![Module list after a successful import — the new module is now visible](/img/admin-docs/module-builder/module-package-imported-list.png)
+
+---
+
+## Resuming an Interrupted Import
+
+If the import wizard is closed or the API restarts mid-flow, the transaction is preserved on disk under `.solidx-runtime/module-package-imports/`. The next time you open the Import Module dialog, SolidX detects the active transaction and resumes from where it left off.

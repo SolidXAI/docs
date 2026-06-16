@@ -3,6 +3,7 @@
   "icon": "hammer",
   "pages": [
     "module-management",
+    "module-package-import-export",
     "model-management",
     "field-management"
   ]

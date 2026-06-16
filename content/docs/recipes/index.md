@@ -13,3 +13,4 @@ Practical how-to guides for common SolidX tasks. Each recipe focuses on a single
 | [Filtering Data](./filtering) | Use filter operators to query records via the REST API or CRUD service |
 | [Filtering Relation Field Options](./relation-field-filtering) | Restrict the options shown in a relation field dropdown using field-level and layout-level filters |
 | [Soft Delete](./soft-delete) | Archive and recover records instead of permanently deleting them |
+| [Workflow Status](./workflow-status) | Display and update a record's workflow status directly from its form view |
