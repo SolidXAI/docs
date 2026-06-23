@@ -191,9 +191,9 @@ Specifically, it:
    - Configuration, environment files, and scripts are wired correctly
 
 4. **Other Control Plane CLI Commands**
-   - **solidctl seed** — Seed the database with canonical models, settings, and system users from configuration files.
-   - **solidctl build** — Builds both the frontend and backend, and updates the CLI to point to the latest codebase.
-   - **solidctl upgrade** — Upgrade SolidX dependencies to their latest stable versions.
+   - **solidctl seed** - Seed the database with canonical models, settings, and system users from configuration files.
+   - **solidctl build** - Builds both the frontend and backend, and updates the CLI to point to the latest codebase.
+   - **solidctl upgrade** - Upgrade SolidX dependencies to their latest stable versions.
 
 <Callout type="tip" title="Tip">
 
@@ -295,12 +295,12 @@ This option is not recommended for production environments, since it modifies th
 
 <Callout type="info" title="Troubleshooting">
 
-**Verbose logging** — Add `--verbose` for detailed output when diagnosing failures:
+**Verbose logging** - Add `--verbose` for detailed output when diagnosing failures:
 ```bash
 solidctl create-app --verbose
 ```
 
-**Package resolution errors** — Clear the npm cache and retry:
+**Package resolution errors** - Clear the npm cache and retry:
 ```bash
 npm cache clean --force
 solidctl create-app
@@ -350,13 +350,13 @@ solidctl seed --verbose
 ### Starting the Application
 Once seeding is complete, open **two separate terminal windows** and run the following commands:
 
-**Terminal 1 — Backend API:**
+**Terminal 1 - Backend API:**
 ```bash
 cd school-fees-portal/solid-api
 npm run solidx:dev
 ```
 
-**Terminal 2 — Frontend Admin Panel:**
+**Terminal 2 - Frontend Admin Panel:**
 ```bash
 cd school-fees-portal/solid-ui
 npm run solidx:dev
@@ -392,6 +392,6 @@ Throughout the rest of this tutorial, we will refer to the root directory of you
 
 </Callout>
 
-You're ready to build a fully functional **school fees portal** application using the SolidX App Builder. No coding required—just visual configuration to create entities, relationships, workflows, and business logic.
+You're ready to build a fully functional **school fees portal** application using the SolidX App Builder. No coding required-just visual configuration to create entities, relationships, workflows, and business logic.
 
 Let's start building!

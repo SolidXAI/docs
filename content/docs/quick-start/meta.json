@@ -1,0 +1,9 @@
+{
+  "title": "Getting Started",
+  "icon": "rocket",
+  "pages": [
+    "index",
+    "using-solidx-ai-agent",
+    "using-solidx-mcp-server"
+  ]
+}

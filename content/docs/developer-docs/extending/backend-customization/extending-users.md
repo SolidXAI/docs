@@ -85,7 +85,7 @@ When `isChild: true` and `User` is the parent model, SolidX generates DTOs and a
   </summary>
 
 ```ts
-// Create DTO — extends CreateUserDto so all base user fields are available
+// Create DTO - extends CreateUserDto so all base user fields are available
 export class CreateInstituteUserDto extends CreateUserDto { ... }
 
 // Update DTO
@@ -101,7 +101,7 @@ export class InstituteUser extends User { ... }
 
 ## Registering an Extension User Creation Provider
 
-User creation involves more than a simple insert — password hashing, role assignment, and email notifications all need to run correctly. 
+User creation involves more than a simple insert - password hashing, role assignment, and email notifications all need to run correctly. 
 
 To handle this for your custom user, you need to register an **`ExtensionUserCreationProvider`**. This provider allows you to inject custom logic while creating a custom user
 
@@ -123,7 +123,7 @@ The interface requires three members:
 | Member | Purpose |
 |---|---|
 | `readonly repo` | The repository SolidX uses to save the entity |
-| `buildExtensionEntity(dto)` | Builds and returns the extension entity with its custom fields populated. Base user fields (password, roles, etc.) are handled by SolidX — only set extension-specific columns here. |
+| `buildExtensionEntity(dto)` | Builds and returns the extension entity with its custom fields populated. Base user fields (password, roles, etc.) are handled by SolidX - only set extension-specific columns here. |
 | `roles(dto)` | Returns the roles to assign to the user, derived from the incoming DTO |
 
 <details open>
@@ -188,7 +188,7 @@ export class InstituteUserCreationProvider
 ```
 </details>
 
-`buildExtensionEntity` is responsible only for the extension-specific columns — do not set `username`, `email`, `password`, or other base user fields here. SolidX merges those in during its standard signup flow (password hashing, `activateUserOnRegistration` setting, role initialisation, and notifications).
+`buildExtensionEntity` is responsible only for the extension-specific columns - do not set `username`, `email`, `password`, or other base user fields here. SolidX merges those in during its standard signup flow (password hashing, `activateUserOnRegistration` setting, role initialisation, and notifications).
 
 ### 2. Register the provider in your module
 
@@ -232,7 +232,7 @@ Add `userType` (and any other extension fields) to your test user specs in `<mod
 }
 ```
 
-No extra seeding code is needed — SolidX detects the extension fields and routes through the registered provider automatically.
+No extra seeding code is needed - SolidX detects the extension fields and routes through the registered provider automatically.
 
 ---
 
@@ -243,7 +243,7 @@ No extra seeding code is needed — SolidX detects the extension fields and rout
 3. If extension fields are present, SolidX looks up the registered provider. If no provider is found, an `InternalServerErrorException` is thrown immediately.
 4. `buildExtensionEntity(dto)` is called to obtain the correctly-typed extension entity with its custom columns populated.
 5. `roles(dto)` is called to determine the roles to assign.
-6. SolidX then runs the standard signup flow — password hashing, `activateUserOnRegistration` setting, role initialisation, and notifications — against the prepared entity using the provider's `repo`.
+6. SolidX then runs the standard signup flow - password hashing, `activateUserOnRegistration` setting, role initialisation, and notifications - against the prepared entity using the provider's `repo`.
 7. If no extension fields are present, `signUp` creates a plain `User` as before, and the provider is never consulted.
 
 

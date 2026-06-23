@@ -97,7 +97,7 @@ In order, it:
 Key characteristics:
 
 - data stays close to the module that owns it,
-- loading is metadata-aware and idempotent — existing roles and users are not duplicated,
+- loading is metadata-aware and idempotent - existing roles and users are not duplicated,
 - record inserts behave like upserts,
 - and relations can be resolved using user-key based conventions.
 

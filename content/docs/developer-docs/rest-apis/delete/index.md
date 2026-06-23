@@ -15,7 +15,7 @@ This section explains how to use the **delete endpoints** of the REST API in Sol
 ##  Deleting a Single Record
 
 When soft delete is enabled on a m<summary> Example: Bulk Delete Fee Types</summary>
-odel (like `fee-type`), the record is not permanently removed — instead, the `deletedAt` and `deletedTracker` fields are populated.
+odel (like `fee-type`), the record is not permanently removed - instead, the `deletedAt` and `deletedTracker` fields are populated.
 
 <details open>
  <summary>

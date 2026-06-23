@@ -9,7 +9,7 @@ concerns: TODO
 
 ### Overview
 
-This feature is exclusively operated by **Institute Admins** — they upload the Excel file that generates payment requests for their students. Key capabilities include:
+This feature is exclusively operated by **Institute Admins** - they upload the Excel file that generates payment requests for their students. Key capabilities include:
 
 - Bulk payment collection creation via Excel upload
 - Automatic student record creation and updates
@@ -148,14 +148,14 @@ Individual students enrolled at your institution whose parents/guardians will re
 | 7 | `studentId` | Student Id | [Short Text](../../../admin-docs/module-builder/field-management#short-text) | Yes | Is User Key<br/>Audit |
 | 8 | `institute` | Institute | [Relation](../../../admin-docs/module-builder/field-management#relation) | Yes | Many-to-One → `institute` (fees-portal)<br/>Create Inverse: No<br/>Cascade<br/>Index<br/>Audit |
 | 9 | `studentLoginId` | Student Login Id | [Computed](../../../admin-docs/module-builder/field-management#computed) | Yes | Unique<br/>Type: string<br/>Provider: `AlphaNumExternalIdComputationProvider`<br/>Generates unique alphanumeric login ID from student name, length 5 ([full config ↓](#studentloginid-provider-context))<br/>Trigger: before-insert on `student` (fees-portal)<br/>Audit |
-| 10 | `otp` | OTP | [Short Text](../../../admin-docs/module-builder/field-management#short-text) | No | — |
-| 11 | `otpExpiresAt` | OTP Expires At | [Datetime](../../../admin-docs/module-builder/field-management#datetime) | No | — |
-| 12 | `token` | Token | [Long Text](../../../admin-docs/module-builder/field-management#long-text) | No | — |
+| 10 | `otp` | OTP | [Short Text](../../../admin-docs/module-builder/field-management#short-text) | No | - |
+| 11 | `otpExpiresAt` | OTP Expires At | [Datetime](../../../admin-docs/module-builder/field-management#datetime) | No | - |
+| 12 | `token` | Token | [Long Text](../../../admin-docs/module-builder/field-management#long-text) | No | - |
 </div>
 
 <Callout type="info" title="Note">
 
-Students are automatically created (or updated) when you upload a payment collection Excel file — matched by Student ID. Students can log in to the portal using their `studentLoginId` and OTP.
+Students are automatically created (or updated) when you upload a payment collection Excel file - matched by Student ID. Students can log in to the portal using their `studentLoginId` and OTP.
 
 </Callout>
 
@@ -166,7 +166,7 @@ The `payments` (One-to-Many → `payment`) field is not added here because the `
 </Callout>
 
 <details id="studentloginid-provider-context" open>
-<summary>studentLoginId — Full provider context JSON</summary>
+<summary>studentLoginId - Full provider context JSON</summary>
 
 ```json
 {"dynamicFieldPrefix": "studentName", "length": 5}
@@ -204,7 +204,7 @@ A batch of fee collection requests sent to multiple students at once (e.g., "Q1 
 | # | Name | Display Name | Type | Req? | Key Config |
 |---|------|-------------|------|------|------------|
 | 1 | `name` | Name | [Short Text](../../../admin-docs/module-builder/field-management#short-text) | Yes | Index<br/>Is User Key<br/>Audit |
-| 2 | `description` | Description | [Long Text](../../../admin-docs/module-builder/field-management#long-text) | No | — |
+| 2 | `description` | Description | [Long Text](../../../admin-docs/module-builder/field-management#long-text) | No | - |
 | 3 | `dueDate` | Due Date | [Datetime](../../../admin-docs/module-builder/field-management#datetime) | Yes | Audit |
 | 4 | `paymentCollectionId` | Payment Collection ID | [Computed](../../../admin-docs/module-builder/field-management#computed) | Yes | Unique<br/>Index<br/>Type: string<br/>Provider: `AlphaNumExternalIdComputationProvider`<br/>Generates unique alphanumeric ID from collection name, length 5 ([full config ↓](#paymentcollectionid-provider-context))<br/>Trigger: before-insert on `paymentCollection` (fees-portal)<br/>Audit |
 | 5 | `institute` | Institute | [Relation](../../../admin-docs/module-builder/field-management#relation) | Yes | Many-to-One → `institute` (fees-portal)<br/>Create Inverse: No<br/>Cascade<br/>Index<br/>Audit |
@@ -218,7 +218,7 @@ The `paymentCollectionItems` relation is added in [Step 5](#5-adding-relation-fi
 </Callout>
 
 <details id="paymentcollectionid-provider-context" open>
-<summary>paymentCollectionId — Full provider context JSON</summary>
+<summary>paymentCollectionId - Full provider context JSON</summary>
 
 ```json
 {"dynamicFieldPrefix": "name", "length": 5}
@@ -259,11 +259,11 @@ An individual payment request for one student for one fee type within a collecti
 | 2 | `partPaymentAllowed` | Part Payment Allowed | [Boolean](../../../admin-docs/module-builder/field-management#boolean) | Yes | Default: `false`<br/>Audit |
 | 3 | `status` | Status | [Short Text](../../../admin-docs/module-builder/field-management#short-text) | Yes | Default: `Pending`<br/>Index<br/>Audit |
 | 4 | `amountPaid` | Amount Paid | [Computed](../../../admin-docs/module-builder/field-management#computed) | Yes | Type: Decimal<br/>Provider: `PaymentCollectionItemAmountProvider`<br/>Sums all successful payments for this item (provider context: `{}`)<br/>Trigger: after-update on `paymentCollectionItemDetail`<br/>Audit |
-| 5 | `amountPending` | Amount Pending | [Computed](../../../admin-docs/module-builder/field-management#computed) | Yes | Type: Decimal<br/>Provider: `NoopsEntityComputedFieldProviderService`<br/>Placeholder — actual value is `amountToBePaid - amountPaid` (provider context: `{}`)<br/>Trigger: before-insert on `paymentCollectionItemDetail`<br/>Audit |
+| 5 | `amountPending` | Amount Pending | [Computed](../../../admin-docs/module-builder/field-management#computed) | Yes | Type: Decimal<br/>Provider: `NoopsEntityComputedFieldProviderService`<br/>Placeholder - actual value is `amountToBePaid - amountPaid` (provider context: `{}`)<br/>Trigger: before-insert on `paymentCollectionItemDetail`<br/>Audit |
 | 6 | `isOverdue` | Is Overdue | [Boolean](../../../admin-docs/module-builder/field-management#boolean) | Yes | Default: `false`<br/>Audit |
 | 7 | `overdueByDays` | Overdue By Days | [Integer](../../../admin-docs/module-builder/field-management#integer) | No | Audit |
 | 8 | `lateAmountToBePaid` | Late Amount To Be Paid | [Decimal](../../../admin-docs/module-builder/field-management#decimal) | No | Default: `0`<br/>Audit |
-| 9 | `totalAmountToBePaid` | Total Amount To Be Paid | [Computed](../../../admin-docs/module-builder/field-management#computed) | No | Type: Decimal<br/>Provider: `NoopsEntityComputedFieldProviderService`<br/>Placeholder — actual value is `amountToBePaid + lateAmountToBePaid` (provider context: `{}`)<br/>Trigger: before-insert on `paymentCollectionItemDetail`<br/>Audit |
+| 9 | `totalAmountToBePaid` | Total Amount To Be Paid | [Computed](../../../admin-docs/module-builder/field-management#computed) | No | Type: Decimal<br/>Provider: `NoopsEntityComputedFieldProviderService`<br/>Placeholder - actual value is `amountToBePaid + lateAmountToBePaid` (provider context: `{}`)<br/>Trigger: before-insert on `paymentCollectionItemDetail`<br/>Audit |
 | 10 | `amountToBePaid` | Amount To Be Paid | [Decimal](../../../admin-docs/module-builder/field-management#decimal) | Yes | Audit |
 | 11 | `mode` | Mode | [Short Text](../../../admin-docs/module-builder/field-management#short-text) | Yes | `CASH` or `PG` (Payment Gateway)<br/>Audit |
 | 12 | `student` | Student | [Relation](../../../admin-docs/module-builder/field-management#relation) | Yes | Many-to-One → `student` (fees-portal)<br/>Create Inverse: No<br/>Cascade<br/>Index<br/>Audit |
@@ -283,7 +283,7 @@ The `paymentCollectionItemDetails` relation is added in [Step 5](#5-adding-relat
 
 #### 4. Payment Collection Item Detail Model
 
-Individual payment transactions recorded against a payment collection item — tracks each installment or payment attempt.
+Individual payment transactions recorded against a payment collection item - tracks each installment or payment attempt.
 
 ##### Model Configuration
 
@@ -334,23 +334,23 @@ SolidX requires the co-model to already exist before you can create a relation p
 
 </Callout>
 
-**Payment Collection — add field 7:**
+**Payment Collection - add field 7:**
 
 <div style={{overflowX: 'auto'}}>
 
 | # | Name | Display Name | Type | Req? | Key Config |
 |---|------|-------------|------|------|------------|
-| 7 | `paymentCollectionItems` | Payment Collection Items | [Relation](../../../admin-docs/module-builder/field-management#relation) | — | One-to-Many → `paymentCollectionItem` (fees-portal)<br/>Inverse field: `paymentCollection`<br/>Create Inverse: Yes<br/>Cascade |
+| 7 | `paymentCollectionItems` | Payment Collection Items | [Relation](../../../admin-docs/module-builder/field-management#relation) | - | One-to-Many → `paymentCollectionItem` (fees-portal)<br/>Inverse field: `paymentCollection`<br/>Create Inverse: Yes<br/>Cascade |
 
 </div>
 
-**Payment Collection Item — add field 16:**
+**Payment Collection Item - add field 16:**
 
 <div style={{overflowX: 'auto'}}>
 
 | # | Name | Display Name | Type | Req? | Key Config |
 |---|------|-------------|------|------|------------|
-| 16 | `paymentCollectionItemDetails` | Payment Collection Item Details | [Relation](../../../admin-docs/module-builder/field-management#relation) | — | One-to-Many → `paymentCollectionItemDetail` (fees-portal)<br/>Inverse field: `paymentCollectionItem`<br/>Create Inverse: Yes<br/>Cascade |
+| 16 | `paymentCollectionItemDetails` | Payment Collection Item Details | [Relation](../../../admin-docs/module-builder/field-management#relation) | - | One-to-Many → `paymentCollectionItemDetail` (fees-portal)<br/>Inverse field: `paymentCollectionItem`<br/>Create Inverse: Yes<br/>Cascade |
 
 </div>
 
@@ -403,10 +403,10 @@ On the existing **`Institute Admin`** role, grant the following additional permi
 
 **Why these permissions?**
 
-- **Student** — Institute Admin needs to view student records and make manual corrections. Students are primarily created via Excel upload (`insertMany`) but can also be added individually. No delete, as student records should persist for payment history.
-- **Payment Collection** — Institute Admin creates and manages collection batches. No `insertMany` (collections are always created one at a time with a specific Excel file) and no delete (collections are permanent audit records).
-- **Payment Collection Item** — Items are generated automatically by the Excel upload; Institute Admin never creates them manually. `cancelMany` allows bulk-cancelling items when a collection needs to be voided.
-- **Payment Collection Item Detail** — Purely a read-only view for Institute Admin; details are recorded by the payment gateway callback process, not manually.
+- **Student** - Institute Admin needs to view student records and make manual corrections. Students are primarily created via Excel upload (`insertMany`) but can also be added individually. No delete, as student records should persist for payment history.
+- **Payment Collection** - Institute Admin creates and manages collection batches. No `insertMany` (collections are always created one at a time with a specific Excel file) and no delete (collections are permanent audit records).
+- **Payment Collection Item** - Items are generated automatically by the Excel upload; Institute Admin never creates them manually. `cancelMany` allows bulk-cancelling items when a collection needs to be voided.
+- **Payment Collection Item Detail** - Purely a read-only view for Institute Admin; details are recorded by the payment gateway callback process, not manually.
 
 <Callout type="info" title="Reference Documentation">
 

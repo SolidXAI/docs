@@ -36,7 +36,7 @@ To create a new model:
 
 ### Soft Delete
 
-Soft delete is a way to "hide" records instead of permanently removing them from the system. When you soft delete something — like a user, form, or entry — it doesn't actually get erased from the database. Instead, it's marked as deleted and no longer shown in the app. This helps prevent accidental data loss and makes it possible to restore deleted items if needed later.
+Soft delete is a way to "hide" records instead of permanently removing them from the system. When you soft delete something - like a user, form, or entry - it doesn't actually get erased from the database. Instead, it's marked as deleted and no longer shown in the app. This helps prevent accidental data loss and makes it possible to restore deleted items if needed later.
 
 To enable this, click on the checkbox under "Configurations".
 
@@ -44,7 +44,7 @@ To enable this, click on the checkbox under "Configurations".
 
 ### Audit Tracking
 
-Audit tracking helps you keep a detailed record of everything that happens to your data. It automatically logs who created, updated, or deleted a record — and when they did it. You can also track important business events using custom audit entries. All this information is easily accessible from the form view of each record, where you can filter by date, user, or event type to see exactly what changed and who made the change. This ensures transparency, accountability, and peace of mind.
+Audit tracking helps you keep a detailed record of everything that happens to your data. It automatically logs who created, updated, or deleted a record - and when they did it. You can also track important business events using custom audit entries. All this information is easily accessible from the form view of each record, where you can filter by date, user, or event type to see exactly what changed and who made the change. This ensures transparency, accountability, and peace of mind.
 
 To enable this, click on the checkbox under "Configurations".
 
@@ -59,7 +59,7 @@ Comprehensive tracking of record changes:
 
 ### Internationalization
 
-Internationalization lets you manage content in multiple languages within the same model. Each record can have translations linked together — so you can easily create and manage versions of the same entry in different languages. This is especially useful for global apps where users need to see content in their preferred language. Our platform handles the complexity for you, allowing you to switch between languages and manage translations seamlessly from the same interface.
+Internationalization lets you manage content in multiple languages within the same model. Each record can have translations linked together - so you can easily create and manage versions of the same entry in different languages. This is especially useful for global apps where users need to see content in their preferred language. Our platform handles the complexity for you, allowing you to switch between languages and manage translations seamlessly from the same interface.
 
 Internationalization supports:
 - Editing content of the model in multiple languages
@@ -89,7 +89,7 @@ To see the impact of what happens when we generate the code linked to a model me
 
 ### Related Recipes
 
-- [Additional Datasources](../../recipes/additional-datasources.md) — Add additional data sources to your application
-- [Soft Delete](../../recipes/soft-delete.md) — Configure soft delete functionality on your models
-- [Custom User Model](../../developer-docs/extending/backend-customization/extending-users) — Create a custom user object while keeping roles and permissions intact
-- [Internationalization](../../recipes/) — Create models for multi-lingual content when using SolidX as a headless CMS
+- [Additional Datasources](../../recipes/additional-datasources.md) - Add additional data sources to your application
+- [Soft Delete](../../recipes/soft-delete.md) - Configure soft delete functionality on your models
+- [Custom User Model](../../developer-docs/extending/backend-customization/extending-users) - Create a custom user object while keeping roles and permissions intact
+- [Internationalization](../../recipes/) - Create models for multi-lingual content when using SolidX as a headless CMS

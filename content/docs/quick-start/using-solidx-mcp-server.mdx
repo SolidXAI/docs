@@ -1,0 +1,84 @@
+---
+title: "Using SolidX MCP Server"
+icon: "plug"
+description: "Expose SolidX tools to external AI clients over HTTP with the SolidX MCP server."
+summary: "Start the SolidX MCP server and connect Claude Desktop, Cursor, or Codex CLI. Requires a bootstrapped SolidX project from the main Getting Started guide."
+---
+
+# Using SolidX MCP Server
+
+The MCP server exposes SolidX tools to external AI clients (Claude Desktop, Cursor, Codex CLI, etc.) over HTTP with API-key authentication.
+
+<Callout type="warning" title="Prerequisite: bootstrap a project first">
+
+This guide assumes you have already scaffolded and started a SolidX project using `solidctl create-app` and `solidctl start:dev`, as described in the [main Getting Started guide](/docs/quick-start). The MCP server runs against an existing project's backend - it does not create one.
+
+</Callout>
+
+---
+
+## Start the MCP server
+
+```bash
+solidctl mcp start
+```
+
+Options:
+
+| Flag | Default | Description |
+|---|---|---|
+| `-p, --port` | `9000` | Listen port |
+| `-H, --host` | `0.0.0.0` | Bind address |
+| `--mount-path` | `/mcp` | URL path for the MCP endpoint |
+| `-l, --log-level` | `INFO` | Logging level |
+
+---
+
+## Connect from Claude Desktop
+
+1. Generate an API key in your SolidX admin panel (under IAM → API Keys).
+
+2. Add the server to your Claude Desktop config (`~/Library/Application Support/Claude/claude_desktop_config.json` on macOS):
+
+```json
+{
+  "mcpServers": {
+    "solidx": {
+      "url": "http://localhost:9000/mcp",
+      "headers": {
+        "solidx-api-key": "sldx_..."
+      }
+    }
+  }
+}
+```
+
+3. Restart Claude Desktop. The SolidX tools will appear automatically.
+
+## Connect from Cursor / Codex CLI
+
+Point your MCP client at:
+
+```
+http://localhost:9000/mcp
+```
+
+Include the header `solidx-api-key: sldx_...` on every request.
+
+---
+
+## MCP commands
+
+| Command | What it does |
+|---|---|
+| `mcp start` | Start the MCP server (HTTP) |
+
+Full reference: [solidctl Commands](/docs/developer-docs/solidctl-commands)
+
+---
+
+## Next Steps
+
+- Drive SolidX from your AI client using the exposed tools.
+- Use the built-in agent instead: see [Using SolidX AI Agent](/docs/quick-start/using-solidx-ai-agent).
+- Go deeper: read the [Reference](/docs/developer-docs/) and [Recipes](/docs/recipes/).

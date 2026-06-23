@@ -7,7 +7,7 @@ keywords: [workflow, status, form view, workflowField, workflowFieldUpdateEnable
 
 # Workflow Status on a Form
 
-SolidX can render a **workflow status indicator** at the top of any form view. It reads the current value of a designated status field on the record and displays it visually — making it immediately clear what stage the record is in (e.g. *Pending*, *Active*, *Inactive*).
+SolidX can render a **workflow status indicator** at the top of any form view. It reads the current value of a designated status field on the record and displays it visually - making it immediately clear what stage the record is in (e.g. *Pending*, *Active*, *Inactive*).
 
 When enabled, users can also **click the indicator to change the workflow status** without editing any other form field.
 
@@ -15,7 +15,7 @@ When enabled, users can also **click the indicator to change the workflow status
 
 ## Prerequisites
 
-Before configuring the form view, the model must have a field that holds the workflow state — typically a **selectionStatic** or **selectionDynamic** field (e.g. `status`). This field should be defined in the model metadata and configured with the valid state values your workflow uses.
+Before configuring the form view, the model must have a field that holds the workflow state - typically a **selectionStatic** or **selectionDynamic** field (e.g. `status`). This field should be defined in the model metadata and configured with the valid state values your workflow uses.
 
 ---
 
@@ -66,7 +66,7 @@ Add `workflowField` and optionally `workflowFieldUpdateEnabled` to your form vie
 
 ### Read-only indicator (`workflowFieldUpdateEnabled: false`)
 
-The workflow status is rendered as a visual badge or stepper at the top of the form, reflecting the current value of `workflowField`. The user cannot change it from this UI — updates must go through another mechanism (e.g. a form button or a backend handler).
+The workflow status is rendered as a visual badge or stepper at the top of the form, reflecting the current value of `workflowField`. The user cannot change it from this UI - updates must go through another mechanism (e.g. a form button or a backend handler).
 
 Use this when workflow transitions are controlled by business logic or require additional validation before the status can change.
 
@@ -80,6 +80,6 @@ Use this when workflow transitions are straightforward and do not require extra 
 
 ## Example Use Cases
 
-- **Institute onboarding** — display `Pending → Active → Suspended` states on the institute form, allowing admins to activate or suspend an institute in one click.
-- **Payment collection** — show `Unpaid → Partially Paid → Fully Paid` on a payment record form as a read-only progress indicator driven by a computed field.
-- **Leave requests** — render `Submitted → Approved → Rejected` on an HR form, letting approvers change the status directly.
+- **Institute onboarding** - display `Pending → Active → Suspended` states on the institute form, allowing admins to activate or suspend an institute in one click.
+- **Payment collection** - show `Unpaid → Partially Paid → Fully Paid` on a payment record form as a read-only progress indicator driven by a computed field.
+- **Leave requests** - render `Submitted → Approved → Rejected` on an HR form, letting approvers change the status directly.

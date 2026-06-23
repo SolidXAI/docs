@@ -22,7 +22,7 @@ items_attributes_doc: "#predefined-searches-attributes"
 
 
 ## Overview
-Predefined searches let you configure named search presets that appear in the search dialog on list views. Instead of requiring users to build filters from scratch each time, you can expose a curated set of searches tailored to common workflows — for example, finding all overdue records, filtering by a specific status, or searching within a particular field.
+Predefined searches let you configure named search presets that appear in the search dialog on list views. Instead of requiring users to build filters from scratch each time, you can expose a curated set of searches tailored to common workflows - for example, finding all overdue records, filtering by a specific status, or searching within a particular field.
 
 Each preset is displayed as a selectable option in the list view's search panel. When a user selects one, the associated filter is applied automatically, with any `{{search}}` placeholder replaced by the value the user types in the search input.
 
@@ -90,7 +90,7 @@ The filter expression applied when this search preset is selected. Uses the Soli
 
 **Dynamic placeholder:** Use `{{search}}` anywhere within the filter values to inject the user's live search input at runtime.
 
-**Example — filter by a field containing the search term:**
+**Example - filter by a field containing the search term:**
 ```json
 {
   "$and": [
@@ -103,7 +103,7 @@ The filter expression applied when this search preset is selected. Uses the Soli
 }
 ```
 
-**Example — static filter with no user input:**
+**Example - static filter with no user input:**
 ```json
 {
   "$and": [

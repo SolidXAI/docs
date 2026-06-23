@@ -234,7 +234,7 @@ Read the hierarchy like this:
 
 BDD-style step phases used for readability.
 
-These phases are normalised before execution — the engine treats all four identically.
+These phases are normalised before execution - the engine treats all four identically.
 
 Use `given` for preconditions, `when` for the action under test, `then` for assertions, and `and` to continue the previous phase without repeating it. The choice is a reading aid, not a rule.
 

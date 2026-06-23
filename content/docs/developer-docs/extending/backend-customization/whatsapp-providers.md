@@ -13,7 +13,7 @@ solidx_concerns: [new_whatsapp_provider]
 
 SolidX provides a `Msg91` WhatsApp provider out of the box, which supports sending WhatsApp messages **both synchronously** and **asynchronously** (via background jobs).
 
-However, there may be cases where you need to create your own provider — for example, to send WhatsApp messages using a **third‑party API service**.
+However, there may be cases where you need to create your own provider - for example, to send WhatsApp messages using a **third‑party API service**.
 
 To make this easy, SolidX offers abstractions that help you implement your own provider while keeping the code **clean, testable, and decoupled**.
 

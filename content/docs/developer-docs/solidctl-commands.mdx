@@ -123,8 +123,8 @@ solidctl create-app [options]
 
 | Flag | Default | Description |
 |---|---|---|
-| `--verbose` | — | Show detailed logs during installation |
-| `--no-interactive` | — | Skip all prompts and use defaults or provided flags |
+| `--verbose` | - | Show detailed logs during installation |
+| `--no-interactive` | - | Skip all prompts and use defaults or provided flags |
 | `--name <name>` | `my-solid-app` | Project name |
 | `--api-port <port>` | `3000` | Backend API port |
 | `--db-client <client>` | `PostgreSQL` | Database type: `PostgreSQL` or `MSSQL` |
@@ -237,7 +237,7 @@ solidctl seed [options]
 |---|---|---|
 | `-m, --modules-to-seed [module names]` | all modules | Comma-separated list of module names to seed |
 | `-s, --seeder [seeder name]` | `ModuleMetadataSeederService` | Seeder to run |
-| `--prune` | — | Remove metadata that is no longer present in JSON |
+| `--prune` | - | Remove metadata that is no longer present in JSON |
 
 ### When to use it
 

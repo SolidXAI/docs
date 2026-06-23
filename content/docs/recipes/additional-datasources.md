@@ -6,7 +6,7 @@ description: How to configure and use multiple TypeORM datasources in a SolidX a
 
 # Additional Datasources
 
-SolidX applications sometimes need to connect to more than one database — for example, a legacy system running on a different DB engine, an external analytics store, or a read replica. This recipe walks through the complete pattern for adding a second (or Nth) datasource alongside the default one.
+SolidX applications sometimes need to connect to more than one database - for example, a legacy system running on a different DB engine, an external analytics store, or a read replica. This recipe walks through the complete pattern for adding a second (or Nth) datasource alongside the default one.
 
 ---
 
@@ -67,7 +67,7 @@ export class DefaultDBModule implements ISolidDatabaseModule {
 }
 ```
 
-Additional datasources follow the exact same structure — the only differences are the `name` field, the env var prefix, and the entities list.
+Additional datasources follow the exact same structure - the only differences are the `name` field, the env var prefix, and the entities list.
 
 ---
 
@@ -77,14 +77,14 @@ For each new datasource you need two files:
 
 | File | Purpose |
 |------|---------|
-| `app-{name}-database.module.ts` | NestJS module — registers the connection with the DI container |
-| `typeorm-{name}-datasource.ts` | Standalone `DataSource` — used by the TypeORM CLI for migrations |
+| `app-{name}-database.module.ts` | NestJS module - registers the connection with the DI container |
+| `typeorm-{name}-datasource.ts` | Standalone `DataSource` - used by the TypeORM CLI for migrations |
 
 The examples below use `secondary` as the datasource name. Replace it with whatever makes sense for your project.
 
 ---
 
-### Step 1 — The NestJS Module (`app-secondary-database.module.ts`)
+### Step 1 - The NestJS Module (`app-secondary-database.module.ts`)
 
 ```typescript
 import { Module } from '@nestjs/common';
@@ -114,7 +114,7 @@ import { Logger } from 'winston';
           password: process.env.SECONDARY_DATABASE_PASSWORD,
           database: process.env.SECONDARY_DATABASE_NAME,
 
-          // Leave entities empty here — register them per feature module instead (see Step 3)
+          // Leave entities empty here - register them per feature module instead (see Step 3)
           entities: [],
 
           synchronize: parseBooleanEnv('SECONDARY_DATABASE_SYNCHRONIZE'),
@@ -146,12 +146,12 @@ export class SecondaryDBModule implements ISolidDatabaseModule {
 
 Key points:
 - The `name` in `TypeOrmModule.forRootAsync()` **must match** the string you use everywhere else (`forFeature`, `@InjectDataSource`, migrations).
-- `entities: []` is intentional — see Step 3 for the recommended scoping pattern.
+- `entities: []` is intentional - see Step 3 for the recommended scoping pattern.
 - `@SolidDatabaseModule()` + `implements ISolidDatabaseModule` is required so SolidX's internals can discover and manage the connection.
 
 ---
 
-### Step 2 — Import `SecondaryDBModule` in the Feature Module (Scoping)
+### Step 2 - Import `SecondaryDBModule` in the Feature Module (Scoping)
 
 You do **not** need to register the datasource in `AppModule`. Instead, import `SecondaryDBModule` directly into the feature module that owns that datasource, and declare the entity repositories there with `TypeOrmModule.forFeature`. This keeps the connection and its repositories co-located with the code that uses them.
 
@@ -168,19 +168,19 @@ You do **not** need to register the datasource in `AppModule`. Instead, import `
 export class OrdersModule {}
 ```
 
-Any module that imports `OrdersModule` via `exports` gets access to `OrdersService` — but the repositories themselves stay private to `OrdersModule`. Other modules that also need to query the secondary datasource should import `SecondaryDBModule` and declare their own `TypeOrmModule.forFeature` call.
+Any module that imports `OrdersModule` via `exports` gets access to `OrdersService` - but the repositories themselves stay private to `OrdersModule`. Other modules that also need to query the secondary datasource should import `SecondaryDBModule` and declare their own `TypeOrmModule.forFeature` call.
 
-If multiple unrelated modules need the same datasource, you can still import `SecondaryDBModule` in `AppModule` to ensure the connection is initialised early — but it is not a requirement.
+If multiple unrelated modules need the same datasource, you can still import `SecondaryDBModule` in `AppModule` to ensure the connection is initialised early - but it is not a requirement.
 
 Any entity registered via `forFeature` also needs to be listed in the `entities` array of `SecondaryDBModule` (so TypeORM knows about the schema). Since we left `entities: []` there, you have two options:
 
-**Option A — Explicit list in the datasource module** (recommended for small, stable entity sets):
+**Option A - Explicit list in the datasource module** (recommended for small, stable entity sets):
 ```typescript
 // in app-secondary-database.module.ts, inside useFactory:
 entities: [Order, OrderLine, /* ... */],
 ```
 
-**Option B — Glob path** (useful when many entities are spread across modules):
+**Option B - Glob path** (useful when many entities are spread across modules):
 ```typescript
 entities: [
   join(__dirname, './orders/entities/*.entity.{ts,js}'),
@@ -192,9 +192,9 @@ Either way, an entity must be registered in the datasource **and** in `forFeatur
 
 ---
 
-### Step 3 — Inject the Datasource in Repositories
+### Step 3 - Inject the Datasource in Repositories
 
-Use `@InjectDataSource('secondary')` to get the raw `DataSource` — the standard approach when extending `SolidBaseRepository`:
+Use `@InjectDataSource('secondary')` to get the raw `DataSource` - the standard approach when extending `SolidBaseRepository`:
 
 ```typescript
 // src/orders/repositories/order.repository.ts
@@ -220,9 +220,9 @@ private readonly orderRepo: Repository<Order>
 
 ---
 
-### Step 4 — The Standalone DataSource (`typeorm-secondary-datasource.ts`)
+### Step 4 - The Standalone DataSource (`typeorm-secondary-datasource.ts`)
 
-The TypeORM CLI (`migration:run`, `migration:generate`, etc.) needs a plain `DataSource` instance — it cannot use the NestJS DI container. Create this file alongside the NestJS module:
+The TypeORM CLI (`migration:run`, `migration:generate`, etc.) needs a plain `DataSource` instance - it cannot use the NestJS DI container. Create this file alongside the NestJS module:
 
 ```typescript
 import 'reflect-metadata';
@@ -278,11 +278,11 @@ Follow this naming convention so your datasource is consistently configurable ac
 
 | Variable | Default | Description |
 |----------|---------|-------------|
-| `{PREFIX}_DATABASE_HOST` | — | Database host |
+| `{PREFIX}_DATABASE_HOST` | - | Database host |
 | `{PREFIX}_DATABASE_PORT` | 5432 | Database port |
-| `{PREFIX}_DATABASE_USER` | — | Username |
-| `{PREFIX}_DATABASE_PASSWORD` | — | Password |
-| `{PREFIX}_DATABASE_NAME` | — | Database name |
+| `{PREFIX}_DATABASE_USER` | - | Username |
+| `{PREFIX}_DATABASE_PASSWORD` | - | Password |
+| `{PREFIX}_DATABASE_NAME` | - | Database name |
 | `{PREFIX}_DATABASE_LOGGING` | `false` | Enable query logging |
 | `{PREFIX}_DATABASE_SYNCHRONIZE` | `false` | Auto-sync schema (disable in prod) |
 | `{PREFIX}_DATABASE_POOL_MAX` | `20` | Max connection pool size |

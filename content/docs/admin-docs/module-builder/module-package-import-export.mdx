@@ -41,23 +41,23 @@ The archive contains:
 
 Import is a four-step wizard. Click **Import Module** in the top-right corner of the Module Metadata list to open it.
 
-### Step 1 — Preview
+### Step 1 - Preview
 
 ![Step 1: Upload archive dialog](/img/admin-docs/module-builder/module-package-step1-upload.png)
 
 Upload a `.sldx` archive using the **Browse archive** button. SolidX validates the archive automatically and shows a preview:
 
-- **MODULE** — the module name embedded in the manifest
-- **SOLID-API FILES** — number of API source files in the archive
-- **SOLID-UI FILES** — number of UI source files in the archive
-- **Required markers** — the three key files that must be present for a valid package
+- **MODULE** - the module name embedded in the manifest
+- **SOLID-API FILES** - number of API source files in the archive
+- **SOLID-UI FILES** - number of UI source files in the archive
+- **Required markers** - the three key files that must be present for a valid package
 - Full file tree of all archive contents
 
-![Step 1: Archive validated — showing module name, file counts, required markers and file tree](/img/admin-docs/module-builder/module-package-step1-preview.png)
+![Step 1: Archive validated - showing module name, file counts, required markers and file tree](/img/admin-docs/module-builder/module-package-step1-preview.png)
 
 Once validation passes, click **Continue to import** to proceed.
 
-### Step 2 — Import
+### Step 2 - Import
 
 ![Step 2: Import dialog with warning about service restarts](/img/admin-docs/module-builder/module-package-step2-import.png)
 
@@ -67,14 +67,14 @@ SolidX copies the module files into the project directories:
 - UI files → `solid-ui/src/{moduleName}/`
 
 <Callout type="warn" title="Services may restart">
-  Copying new source files can trigger a restart of both the UI and API services. If the popup is dismissed during this step, wait for both services to come back online, then **refresh this page** and reopen the Import Module dialog — the in-progress transaction will be automatically resumed.
+  Copying new source files can trigger a restart of both the UI and API services. If the popup is dismissed during this step, wait for both services to come back online, then **refresh this page** and reopen the Import Module dialog - the in-progress transaction will be automatically resumed.
 </Callout>
 
 Click **Import Module** to start the file copy.
 
-### Step 3 — Build
+### Step 3 - Build
 
-![Step 3: Build ready — showing the Build Now button after services restart](/img/admin-docs/module-builder/module-package-step3-build-ready.png)
+![Step 3: Build ready - showing the Build Now button after services restart](/img/admin-docs/module-builder/module-package-step3-build-ready.png)
 
 After the import step and any service restarts, click **Build Now**. SolidX runs two builds in sequence:
 
@@ -83,13 +83,13 @@ solidctl build
 solidctl build --ui-only
 ```
 
-![Step 3: Build in progress — running solidctl build and solidctl build --ui-only](/img/admin-docs/module-builder/module-package-step3-build-running.png)
+![Step 3: Build in progress - running solidctl build and solidctl build --ui-only](/img/admin-docs/module-builder/module-package-step3-build-running.png)
 
 Wait for both builds to report success before moving on. Build output is streamed in the dialog so you can monitor progress.
 
-### Step 4 — Seed
+### Step 4 - Seed
 
-![Step 4: Seed ready — waiting for the Seed button to be clicked](/img/admin-docs/module-builder/module-package-step4-seed.png)
+![Step 4: Seed ready - waiting for the Seed button to be clicked](/img/admin-docs/module-builder/module-package-step4-seed.png)
 
 Click **Seed** to load the module's metadata into the database. SolidX runs:
 
@@ -110,11 +110,11 @@ solidctl seed --modules-to-seed contact-management [success]
 ...
 ```
 
-![Step 4: Seed complete — terminal output showing all metadata seeded successfully](/img/admin-docs/module-builder/module-package-step4-complete.png)
+![Step 4: Seed complete - terminal output showing all metadata seeded successfully](/img/admin-docs/module-builder/module-package-step4-complete.png)
 
 Once seeding completes, click **Reload** to refresh the page. The imported module will appear in the module list.
 
-![Module list after a successful import — the new module is now visible](/img/admin-docs/module-builder/module-package-imported-list.png)
+![Module list after a successful import - the new module is now visible](/img/admin-docs/module-builder/module-package-imported-list.png)
 
 ---
 

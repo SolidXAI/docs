@@ -15,7 +15,7 @@ The activation functionality requires a Unix-based operating system (e.g., Ubunt
 
 ### Overview
 
-The Activate Institute functionality provisions the infrastructure needed to make an institute's fee portal accessible to students and parents. This is an **Institute Admin** action — once the Super Admin has onboarded the institute, the Institute Admin triggers activation to make their portal live.
+The Activate Institute functionality provisions the infrastructure needed to make an institute's fee portal accessible to students and parents. This is an **Institute Admin** action - once the Super Admin has onboarded the institute, the Institute Admin triggers activation to make their portal live.
 
 This feature automates the creation of DNS records and web server configurations, transforming an inactive institute into a live, operational fee collection portal.
 
@@ -56,7 +56,7 @@ The following fields of the Institute model are relevant to activation:
 
 | # | Field | Required? | Notes |
 |---|-------|-----------|-------|
-| 1 | `status` | Yes | Default: `InActive`. Controls the activation lifecycle — `InActive` or `Active`. |
+| 1 | `status` | Yes | Default: `InActive`. Controls the activation lifecycle - `InActive` or `Active`. |
 | 2 | `hostedPagePrefix` | Yes | Unique subdomain prefix used to construct the institute's portal domain (e.g. `"delhi"` → `delhi.<base-domain>`). Must be alphanumeric/hyphens only and unique across all institutes. |
 | 3 | `supportEmail` | Yes | Email address for portal support inquiries. |
 | 4 | `supportMobile` | Yes | Phone number for portal support. |
@@ -66,7 +66,7 @@ The following fields of the Institute model are relevant to activation:
 
 </div>
 
-##### Status Field — State Machine
+##### Status Field - State Machine
 
 The `status` field controls the activation lifecycle:
 
@@ -109,7 +109,7 @@ The portal domain is automatically constructed as:
 
 ### Creating Roles & Permissions
 
-This feature introduces two custom controller endpoints — activate and deactivate — that are not part of standard CRUD. You need to explicitly grant Institute Admin access to these endpoints.
+This feature introduces two custom controller endpoints - activate and deactivate - that are not part of standard CRUD. You need to explicitly grant Institute Admin access to these endpoints.
 
 <Callout type="info" title="Info">
 
@@ -127,7 +127,7 @@ On the existing **`Institute Admin`** role, grant the following additional permi
 
 **Why these permissions?**
 
-- **Institute** — The activate and deactivate actions trigger real infrastructure changes (DNS records, Nginx virtual hosts). They are intentionally separate from the standard update permission so that access can be granted independently from general profile editing.
+- **Institute** - The activate and deactivate actions trigger real infrastructure changes (DNS records, Nginx virtual hosts). They are intentionally separate from the standard update permission so that access can be granted independently from general profile editing.
 
 <Callout type="info" title="Reference Documentation">
 

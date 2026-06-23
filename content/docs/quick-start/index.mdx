@@ -1,0 +1,169 @@
+---
+title: Getting Started
+icon: "rocket"
+description: "Get a SolidX project running in under 5 minutes, manually or let your AI agent do it."
+summary: "Two paths to a working SolidX project. Manual mode walks you through every step. Agentic mode gives you a one-line prompt to paste into Claude Code, Cursor, Codex, or any AI coding assistant. The default path uses an embedded zero-config database (PGlite) - no Docker or PostgreSQL required."
+---
+
+## Prerequisites
+
+| Requirement | Version | Required for | Check |
+|---|---|---|---|
+| **Node.js** | 22+ (LTS recommended) | All modes | `node -v` |
+| **Docker** | Latest stable | *Optional* - only if you choose a full external PostgreSQL server instead of the embedded database | `docker --version` |
+| **PostgreSQL** | 14+ | *Optional* - only if you connect to an existing external PostgreSQL instance instead of the embedded database | `psql --version` |
+| **Python** | 3.11+ | Agent & MCP only | `python3 --version` |
+
+Node.js is the only hard requirement. The default embedded path needs nothing else. Docker or PostgreSQL are only needed if you choose the full PostgreSQL path in Step 2. Python is only needed if you plan to use the [SolidX AI Agent](/docs/quick-start/using-solidx-ai-agent) or [MCP server](/docs/quick-start/using-solidx-mcp-server).
+
+<Callout type="warning" title="Embedded vs. full PostgreSQL - when to use which">
+
+The embedded PGlite database is the fastest way to **try out SolidX** - no Docker, no PostgreSQL install, no credentials. It is ideal for evaluation, demos, and local experimentation.
+
+For **production use**, scaffold against a **full PostgreSQL server** instead. PGlite is a single-process in-process engine and is not intended for production workloads, concurrent access from multiple services, or large datasets. Use the full PostgreSQL path (Path B in Step 2) for anything you intend to ship.
+
+</Callout>
+
+---
+
+## Mode 1: Manual
+
+### Step 1: Install solidctl
+
+Install the SolidX CLI globally so it's available from any directory:
+
+```bash
+npm i -g @solidxai/solidctl
+```
+
+Verify the installation:
+
+```bash
+solidctl --version
+```
+
+### Step 2: Scaffold the project
+
+#### Path A: Embedded database (default - fastest way to try SolidX)
+
+Scaffold a project with the embedded PGlite database in a single one-shot command:
+
+```bash
+solidctl create-app --no-interactive --embedded --name my-solid-app
+```
+
+No Docker, no PostgreSQL, and no credentials required. `solidctl` configures and manages the embedded database for you automatically during `create-app`, `build`, `seed`, and `start:dev`.
+
+<details>
+<summary><strong>Path B: Full PostgreSQL server (recommended for production)</strong></summary>
+
+You can connect to an existing PostgreSQL instance or spin one up with Docker.
+
+If you don't already have PostgreSQL running, start a container:
+
+```bash
+docker run -d \
+  --name SolidX_DB \
+  -e POSTGRES_USER=solidx_app_user \
+  -e POSTGRES_PASSWORD=strongpassword \
+  -e POSTGRES_DB=solidx_app_db \
+  -p 5432:5432 \
+  -v solidx_pgdata:/var/lib/postgresql/data \
+  postgres:17
+```
+
+Then scaffold against it:
+
+```bash
+solidctl create-app \
+  --name my-solid-app \
+  --no-interactive \
+  --db-client PostgreSQL \
+  --db-host localhost \
+  --db-port 5432 \
+  --db-name solidx_app_db \
+  --db-username solidx_app_user \
+  --db-password strongpassword
+```
+
+<Callout type="warning" title="Change the default credentials">
+
+The username (`solidx_app_user`), password (`strongpassword`), and database name (`solidx_app_db`) shown above are for a fast first run only. **Change them to values you control** before any real use, and use those same values in the `create-app` command above.
+
+</Callout>
+
+If you have an existing PostgreSQL database, replace the `--db-*` values with your own credentials. Or run the interactive scaffolding and enter your credentials when prompted:
+
+```bash
+solidctl create-app
+```
+
+</details>
+
+<Callout type="info" title="Info">
+
+The `create-app` command installs all npm dependencies for both backend and frontend. This is a one-time cost; subsequent commands like `build` and `seed` are much faster.
+
+</Callout>
+
+### Step 3: Start the services
+
+Move into the project folder and start both the backend API and frontend admin panel in one supervisor:
+
+```bash
+cd my-solid-app && solidctl start:dev
+```
+
+Open the admin panel at `http://localhost:3001` and log in:
+
+| Field | Value |
+|---|---|
+| Username | `sa` |
+| Password | `Admin@3214$` |
+
+That's it. Your SolidX project is running. Start building modules via the admin panel, or extend the generated code directly.
+
+---
+
+## Mode 2: Agentic
+
+Paste the one-line prompt below into your AI coding assistant (Claude Code, Cursor Agent, Codex CLI, Windsurf, etc.) from the directory where you want the project created.
+
+<Callout type="info" title="Info">
+
+The agentic mode always uses the **embedded database** for a zero-config setup - no Docker or PostgreSQL required. The prompt points your agent at a self-contained instruction file that covers prerequisite checks, scaffolding, and service startup.
+
+</Callout>
+
+```text
+Set up a new SolidX project for me. Read and follow every step in https://www.solidxai.com/agentic-install.md and report status after each step.
+```
+
+Your AI agent will execute all the steps and report back when the project is ready to use.
+
+---
+
+## Common solidctl Commands
+
+| Command | What it does |
+|---|---|
+| `create-app` | Scaffold a new project |
+| `build` | Build backend + frontend |
+| `seed` | Load metadata and system user |
+| `generate module` | Regenerate code from metadata |
+| `upgrade` | Upgrade SolidX dependencies |
+| `info --detailed` | Show project info |
+
+Full reference: [solidctl Commands](/docs/developer-docs/solidctl-commands)
+
+---
+
+## Next Steps
+
+- **Build modules** using the admin panel's Module Builder.
+- **Customize layouts**: list views, form views, kanban boards.
+- **Extend the backend**: controllers, services, providers.
+- **Set up IAM**: roles, permissions, record-level security rules.
+- **Go deeper**: read the [Tutorial](/docs/tutorial/), [Reference](/docs/developer-docs/), and [Recipes](/docs/recipes/).
+- **Use the AI agent**: see [Using SolidX AI Agent](/docs/quick-start/using-solidx-ai-agent).
+- **Connect an MCP client**: see [Using SolidX MCP Server](/docs/quick-start/using-solidx-mcp-server).
