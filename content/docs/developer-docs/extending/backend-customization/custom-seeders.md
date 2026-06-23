@@ -99,7 +99,7 @@ Seeders are executed via the CLI using the built-in `seed` command.
 ### Basic Usage
 
 ```bash
-npx @solidxai/solidctl seed --seeder CountrySeederService
+solidctl seed --seeder CountrySeederService
 ```
 
 The `--seeder` (`-s`) flag specifies the **class name** of the seeder to run.
@@ -117,4 +117,4 @@ The `--seeder` (`-s`) flag specifies the **class name** of the seeder to run.
 | 1 | Create a service with a `seed()` method |
 | 2 | Decorate it with `@Injectable()` and `@SolidSeeder` |
 | 3 | Register it in your module's `providers` array |
-| 4 | Run it via `npx @solidxai/solidctl seed --seeder YourSeederService` |
+| 4 | Run it via `solidctl seed --seeder YourSeederService` |

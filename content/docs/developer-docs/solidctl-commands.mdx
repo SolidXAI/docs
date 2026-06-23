@@ -23,17 +23,17 @@ The `solidctl` CLI is the main command-line entry point for working with SolidX 
 Run it from your project root:
 
 ```bash
-npx @solidxai/solidctl@latest <command>
+solidctl <command>
 ```
 
 For help:
 
 ```bash
 # Top-level help
-npx @solidxai/solidctl@latest --help
+solidctl --help
 
 # Command-specific help
-npx @solidxai/solidctl@latest <command> --help
+solidctl <command> --help
 ```
 
 <Callout type="info" title="Info">
@@ -71,39 +71,39 @@ It can help to group the commands mentally before reading the detailed reference
 
 ```bash
 # Scaffold a new project
-npx @solidxai/solidctl@latest create-app
+solidctl create-app
 
 # Build the project
-npx @solidxai/solidctl@latest build
+solidctl build
 
 # Seed metadata, settings, and the system user
-npx @solidxai/solidctl@latest seed
+solidctl seed
 ```
 
 ### Day-to-day development
 
 ```bash
 # Regenerate code from metadata
-npx @solidxai/solidctl@latest generate module
+solidctl generate module
 
 # Build after upgrades or major changes
-npx @solidxai/solidctl@latest build
+solidctl build
 
 # Inspect project information
-npx @solidxai/solidctl@latest info --detailed
+solidctl info --detailed
 ```
 
 ### Testing workflow
 
 ```bash
 # Set up test datasource files and databases
-npx @solidxai/solidctl@latest test data --setup
+solidctl test data --setup
 
 # Seed test data
-npx @solidxai/solidctl@latest test data --load
+solidctl test data --load
 
 # Run module scenarios
-npx @solidxai/solidctl@latest test run --module Fees
+solidctl test run --module Fees
 ```
 
 ## create-app
@@ -116,7 +116,7 @@ Scaffolds a new SolidX project with:
 By default, `create-app` runs interactively. Use `--no-interactive` to skip prompts and rely on flags/defaults instead.
 
 ```bash
-npx @solidxai/solidctl@latest create-app [options]
+solidctl create-app [options]
 ```
 
 ### Options
@@ -147,8 +147,8 @@ npx @solidxai/solidctl@latest create-app [options]
 ### Recommended next steps
 
 ```bash
-npx @solidxai/solidctl@latest build
-npx @solidxai/solidctl@latest seed
+solidctl build
+solidctl seed
 ```
 
 ## build
@@ -156,7 +156,7 @@ npx @solidxai/solidctl@latest seed
 Builds SolidX and sets up the Solid CLI.
 
 ```bash
-npx @solidxai/solidctl@latest build [options]
+solidctl build [options]
 ```
 
 ### Options
@@ -176,7 +176,7 @@ npx @solidxai/solidctl@latest build [options]
 Upgrades SolidX dependencies. By default, this upgrades to the latest **beta** pre-release.
 
 ```bash
-npx @solidxai/solidctl@latest upgrade [options]
+solidctl upgrade [options]
 ```
 
 ### Options
@@ -194,25 +194,25 @@ npx @solidxai/solidctl@latest upgrade [options]
 
 ```bash
 # Upgrade everything to latest beta
-npx @solidxai/solidctl@latest upgrade
+solidctl upgrade
 
 # Upgrade only solid-core
-npx @solidxai/solidctl@latest upgrade --core
+solidctl upgrade --core
 
 # Upgrade only solid-ui
-npx @solidxai/solidctl@latest upgrade --ui
+solidctl upgrade --ui
 
 # Upgrade only solid-code-builder
-npx @solidxai/solidctl@latest upgrade --code-builder
+solidctl upgrade --code-builder
 
 # Upgrade to latest stable
-npx @solidxai/solidctl@latest upgrade --stable
+solidctl upgrade --stable
 
 # Upgrade to a specific pre-release track
-npx @solidxai/solidctl@latest upgrade --tag alpha
+solidctl upgrade --tag alpha
 
 # Preview without changing anything
-npx @solidxai/solidctl@latest upgrade --dry-run
+solidctl upgrade --dry-run
 ```
 
 ### Recommended follow-up
@@ -220,7 +220,7 @@ npx @solidxai/solidctl@latest upgrade --dry-run
 After upgrading, run:
 
 ```bash
-npx @solidxai/solidctl@latest build
+solidctl build
 ```
 
 ## seed
@@ -228,7 +228,7 @@ npx @solidxai/solidctl@latest build
 Seeds metadata and platform-level data into the application.
 
 ```bash
-npx @solidxai/solidctl@latest seed [options]
+solidctl seed [options]
 ```
 
 ### Options
@@ -249,13 +249,13 @@ npx @solidxai/solidctl@latest seed [options]
 
 ```bash
 # Seed everything
-npx @solidxai/solidctl@latest seed
+solidctl seed
 
 # Seed only selected modules
-npx @solidxai/solidctl@latest seed --modules-to-seed Fees,Onboarding
+solidctl seed --modules-to-seed Fees,Onboarding
 
 # Seed and prune removed metadata
-npx @solidxai/solidctl@latest seed --prune
+solidctl seed --prune
 ```
 
 ## info
@@ -263,7 +263,7 @@ npx @solidxai/solidctl@latest seed --prune
 Prints information about the consuming project.
 
 ```bash
-npx @solidxai/solidctl@latest info [options]
+solidctl info [options]
 ```
 
 ### Options
@@ -284,7 +284,7 @@ The `test` command has two main areas:
 For the broader testing architecture, vocabulary, and workflow, see [Testing](./testing/index.md).
 
 ```bash
-npx @solidxai/solidctl@latest test [command]
+solidctl test [command]
 ```
 
 ### test data
@@ -292,7 +292,7 @@ npx @solidxai/solidctl@latest test [command]
 Seeds test data from metadata or manages test datasource setup and teardown.
 
 ```bash
-npx @solidxai/solidctl@latest test data [options]
+solidctl test data [options]
 ```
 
 #### Options
@@ -308,16 +308,16 @@ npx @solidxai/solidctl@latest test data [options]
 
 ```bash
 # Set up test environment
-npx @solidxai/solidctl@latest test data --setup
+solidctl test data --setup
 
 # Load all test data
-npx @solidxai/solidctl@latest test data --load
+solidctl test data --load
 
 # Load only selected modules
-npx @solidxai/solidctl@latest test data --load --modules-to-test Fees,Onboarding
+solidctl test data --load --modules-to-test Fees,Onboarding
 
 # Tear down test environment
-npx @solidxai/solidctl@latest test data --teardown
+solidctl test data --teardown
 ```
 
 ### test run
@@ -325,7 +325,7 @@ npx @solidxai/solidctl@latest test data --teardown
 Runs testing scenarios from module metadata.
 
 ```bash
-npx @solidxai/solidctl@latest test run [options]
+solidctl test run [options]
 ```
 
 #### Options
@@ -349,19 +349,19 @@ npx @solidxai/solidctl@latest test run [options]
 
 ```bash
 # Run all scenarios for a module
-npx @solidxai/solidctl@latest test run --module Fees
+solidctl test run --module Fees
 
 # Run specific scenarios
-npx @solidxai/solidctl@latest test run --module Fees --scenario-ids sc-001,sc-002
+solidctl test run --module Fees --scenario-ids sc-001,sc-002
 
 # Run tagged scenarios only
-npx @solidxai/solidctl@latest test run --module Fees --include-tags smoke
+solidctl test run --module Fees --include-tags smoke
 
 # Run with visible browser and verbose API logs
-npx @solidxai/solidctl@latest test run --module Fees --headless false --print-api-logs true
+solidctl test run --module Fees --headless false --print-api-logs true
 
 # List registered specs
-npx @solidxai/solidctl@latest test run --module Fees --list-specs true
+solidctl test run --module Fees --list-specs true
 ```
 
 ## generate
@@ -369,7 +369,7 @@ npx @solidxai/solidctl@latest test run --module Fees --list-specs true
 Generates code boilerplate from model metadata configurations.
 
 ```bash
-npx @solidxai/solidctl@latest generate [command]
+solidctl generate [command]
 ```
 
 ### Subcommands
@@ -392,7 +392,7 @@ For a deeper explanation of generated structure and the surrounding conventions,
 Runs the SolidX AI agent.
 
 ```bash
-npx @solidxai/solidctl@latest agent [command]
+solidctl agent [command]
 ```
 
 ### Subcommands
@@ -406,11 +406,11 @@ npx @solidxai/solidctl@latest agent [command]
 
 ```bash
 # Show help for the agent command
-npx @solidxai/solidctl@latest agent --help
+solidctl agent --help
 
 # Show help for starting the agent server
-npx @solidxai/solidctl@latest agent start --help
+solidctl agent start --help
 
 # Run a single task
-npx @solidxai/solidctl@latest agent run "summarise project metadata"
+solidctl agent run "summarise project metadata"
 ```

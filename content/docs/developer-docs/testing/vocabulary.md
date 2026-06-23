@@ -66,7 +66,7 @@ In practice, SUT mode usually means:
 The module whose `testing` metadata is being loaded and executed, typically passed through:
 
 ```bash
-npx @solidxai/solidctl@latest test run --module venue
+solidctl test run --module venue
 ```
 
 ### Datasource

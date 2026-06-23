@@ -45,7 +45,7 @@ That usually means supplying:
 Example:
 
 ```bash
-npx @solidxai/solidctl@latest test run --module venue --ui-base-url http://localhost:5173 --headless false
+solidctl test run --module venue --ui-base-url http://localhost:5173 --headless false
 ```
 
 Within scenarios, the UI base URL is available as `${env:TEST_UI_BASE_URL}`.

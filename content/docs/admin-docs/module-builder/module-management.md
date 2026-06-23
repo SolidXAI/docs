@@ -62,7 +62,7 @@ After you click on "Generate Module" in the background SolidX does the following
 
 When the SolidX project is bootstrapped by default we expect at-least one data source to be configured. 
 
-This is taken care of when a new project is bootstrapped using `npx @solidxai/solidctl create-app`
+This is taken care of when a new project is bootstrapped using `solidctl create-app`
 
 As part of this bootstrapping a default data source is pre-configured in the file `<project-root>/solid-api/src/app-default-database.module.ts`
 

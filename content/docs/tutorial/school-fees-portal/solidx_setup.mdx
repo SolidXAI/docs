@@ -164,11 +164,11 @@ SolidX applications are **installed and initialized exclusively** using the offi
 To create a new SolidX application, run:
 
 ```bash
-npx @solidxai/solidctl@latest create-app
+solidctl create-app
 ```
 <Callout type="info">
 
-`npx`, bundled with Node.js, runs packages directly without requiring a global install — ensuring you always use the latest version of `solidctl`.
+`solidctl` is installed globally (e.g. `npm i -g @solidxai/solidctl`) so the command is available directly from any directory.
 
 </Callout>
 
@@ -191,9 +191,9 @@ Specifically, it:
    - Configuration, environment files, and scripts are wired correctly
 
 4. **Other Control Plane CLI Commands**
-   - **npx @solidxai/solidctl@latest seed** — Seed the database with canonical models, settings, and system users from configuration files.
-   - **npx @solidxai/solidctl@latest build** — Builds both the frontend and backend, and updates the CLI to point to the latest codebase.
-   - **npx @solidxai/solidctl@latest upgrade** — Upgrade SolidX dependencies to their latest stable versions.
+   - **solidctl seed** — Seed the database with canonical models, settings, and system users from configuration files.
+   - **solidctl build** — Builds both the frontend and backend, and updates the CLI to point to the latest codebase.
+   - **solidctl upgrade** — Upgrade SolidX dependencies to their latest stable versions.
 
 <Callout type="tip" title="Tip">
 
@@ -257,7 +257,7 @@ npm -v
 The next section walks you through the `create-app` command **step by step**, including each prompt and screenshots for reference.
 
 ## Bootstrapping Your Application
-Run `npx @solidxai/solidctl@latest create-app` as described [above](#solidx-scaffolding-script) and follow the prompts below to configure your application:
+Run `solidctl create-app` as described [above](#solidx-scaffolding-script) and follow the prompts below to configure your application:
 ### Backend Configuration Prompts
 1. **Project Name**: Enter a name for your SolidX application.
  - Example: `school-fees-portal`
@@ -297,13 +297,13 @@ This option is not recommended for production environments, since it modifies th
 
 **Verbose logging** — Add `--verbose` for detailed output when diagnosing failures:
 ```bash
-npx @solidxai/solidctl@latest create-app --verbose
+solidctl create-app --verbose
 ```
 
 **Package resolution errors** — Clear the npm cache and retry:
 ```bash
 npm cache clean --force
-npx @solidxai/solidctl@latest create-app
+solidctl create-app
 ```
 
 </Callout>
@@ -311,14 +311,14 @@ npx @solidxai/solidctl@latest create-app
 
 ## Bootstrapping Application Metadata
 SolidX requires foundational metadata: system models, roles, users, email/SMS templates, dashboards, and lists of values. 
-The `npx @solidxai/solidctl@latest seed` command automates this process by populating the database with all these essentials, making the application ready for immediate use.
+The `solidctl seed` command automates this process by populating the database with all these essentials, making the application ready for immediate use.
 
 To seed the database, navigate to the project root directory and run the `build` command first, then the `seed` command:
 
 ```bash
 cd school-fees-portal
-npx @solidxai/solidctl@latest build
-npx @solidxai/solidctl@latest seed
+solidctl build
+solidctl seed
 ```
 
 <Callout type="warning" title="Warning">
@@ -338,7 +338,7 @@ The seed process also creates a `super admin` user, if one does not already exis
 
 If the seed command fails, you can re-run it with `--verbose` for detailed output to help diagnose the issue:
 ```bash
-npx @solidxai/solidctl@latest seed --verbose
+solidctl seed --verbose
 ```
 
 </Callout>

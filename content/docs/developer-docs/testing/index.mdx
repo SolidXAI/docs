@@ -84,11 +84,11 @@ The operational entry point for testing is `solidctl`.
 The main commands you will use are:
 
 ```bash
-npx @solidxai/solidctl@latest test data --setup
-npx @solidxai/solidctl@latest seed
-npx @solidxai/solidctl@latest test data --load
-npx @solidxai/solidctl@latest test run --module <module-name>
-npx @solidxai/solidctl@latest test data --teardown
+solidctl test data --setup
+solidctl seed
+solidctl test data --load
+solidctl test run --module <module-name>
+solidctl test data --teardown
 ```
 
 For the command reference itself, see [solidctl Reference](../solidctl-commands.md).

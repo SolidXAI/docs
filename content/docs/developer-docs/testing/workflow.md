@@ -23,11 +23,11 @@ The standard flow is:
 These are the canonical commands:
 
 ```bash
-npx @solidxai/solidctl@latest test data --setup
-npx @solidxai/solidctl@latest seed
-npx @solidxai/solidctl@latest test data --load
-npx @solidxai/solidctl@latest test run --module <module-name>
-npx @solidxai/solidctl@latest test data --teardown
+solidctl test data --setup
+solidctl seed
+solidctl test data --load
+solidctl test run --module <module-name>
+solidctl test data --teardown
 ```
 
 ## Step 1: Test Datasource Setup
@@ -35,7 +35,7 @@ npx @solidxai/solidctl@latest test data --teardown
 Command:
 
 ```bash
-npx @solidxai/solidctl@latest test data --setup
+solidctl test data --setup
 ```
 
 This step creates isolated test databases or schemas for the datasources configured in the project.
@@ -55,7 +55,7 @@ This is what moves the project into SUT mode.
 Command:
 
 ```bash
-npx @solidxai/solidctl@latest seed
+solidctl seed
 ```
 
 This seeds the fresh test databases with the metadata required for the platform to function.
@@ -83,7 +83,7 @@ Why this step matters:
 Command:
 
 ```bash
-npx @solidxai/solidctl@latest test data --load
+solidctl test data --load
 ```
 
 This step ingests testing identity and fixture data from module metadata.
@@ -109,7 +109,7 @@ Key characteristics:
 You can also limit the load to certain modules:
 
 ```bash
-npx @solidxai/solidctl@latest test data --load --modules-to-test venue,reports
+solidctl test data --load --modules-to-test venue,reports
 ```
 
 ## Step 4: Run Test Cases
@@ -117,7 +117,7 @@ npx @solidxai/solidctl@latest test data --load --modules-to-test venue,reports
 Command:
 
 ```bash
-npx @solidxai/solidctl@latest test run --module venue --api-base-url http://localhost:3000 --ui-base-url http://localhost:5173 --headless false
+solidctl test run --module venue --api-base-url http://localhost:3000 --ui-base-url http://localhost:5173 --headless false
 ```
 
 This step executes `testing.scenarios` from the selected module metadata.
@@ -133,9 +133,9 @@ The runner:
 Useful variants:
 
 ```bash
-npx @solidxai/solidctl@latest test run --module venue --list-specs true
-npx @solidxai/solidctl@latest test run --module venue --include-tags smoke
-npx @solidxai/solidctl@latest test run --module venue --scenario-ids api-authenticate-success,api-create-states
+solidctl test run --module venue --list-specs true
+solidctl test run --module venue --include-tags smoke
+solidctl test run --module venue --scenario-ids api-authenticate-success,api-create-states
 ```
 
 ## Step 5: Teardown
@@ -143,7 +143,7 @@ npx @solidxai/solidctl@latest test run --module venue --scenario-ids api-authent
 Command:
 
 ```bash
-npx @solidxai/solidctl@latest test data --teardown
+solidctl test data --teardown
 ```
 
 This reverses the SUT setup process.
