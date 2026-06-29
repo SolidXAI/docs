@@ -1,0 +1,75 @@
+---
+title: Connect Through MCP
+description: Generate an API key and connect an MCP-capable client to the SolidX MCP server.
+---
+
+## Connect the Running App to MCP
+
+<Callout type="info" title="What happens in this step">
+
+You are giving your MCP-capable client authenticated access to the running SolidX app through the SolidX MCP server.
+
+</Callout>
+
+## Generate an API Key
+
+After the app is running:
+
+1. Open `http://localhost:3001`.
+2. Go to `IAM -> User`.
+3. Open the admin user.
+4. Enable `Allow API Key Generation`.
+5. Open the `API Keys` tab.
+6. Generate a key.
+7. Copy it immediately and store it safely.
+
+You will not be able to see the full key again later.
+
+![Generate API key in the admin UI](/img/tutorial/todo-app/generate-api-key.png)
+
+## Start the SolidX MCP Server
+
+Run:
+
+```bash
+solidctl mcp start
+```
+
+Endpoint:
+
+```text
+http://localhost:9000/mcp
+```
+
+Required header:
+
+```text
+solidx-api-key: sldx_...
+```
+
+## Client Configuration Note
+
+Claude Desktop, Codex CLI, Cursor, and other MCP-capable clients expose different configuration surfaces, but the integration rule is the same:
+
+- Point the client at `http://localhost:9000/mcp`
+- Send the `solidx-api-key` header
+
+<Callout type="tip" title="Success criteria">
+
+If your client can reach the MCP endpoint and authenticate with the generated API key, you are ready to send the Todo generation prompts.
+
+</Callout>
+
+Official reference:
+
+- [Using the SolidX MCP Server](https://docs.solidxai.com/docs/quick-start/using-solidx-mcp-server)
+
+## Troubleshooting
+
+If the client cannot connect, verify:
+
+- `solidctl start:dev` is running
+- `solidctl mcp start` is running
+- the endpoint is exactly `http://localhost:9000/mcp`
+- the `solidx-api-key` header is present
+- the copied key is still valid

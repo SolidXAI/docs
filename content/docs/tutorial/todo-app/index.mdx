@@ -1,0 +1,107 @@
+---
+title: Todo App with SolidX
+description: Build a working Todo app with SolidX, PostgreSQL, Swagger, and the SolidX MCP workflow.
+---
+
+import { TypeTable } from 'fumadocs-ui/components/type-table';
+
+## Tutorial Overview
+
+This tutorial walks you through the SolidX flow from zero to a working Todo app in few minutes.
+
+<Callout type="info" title="What this tutorial is optimized for">
+
+This is a fast, beginner-first walkthrough.
+
+- You start with PostgreSQL in Docker
+- You scaffold a fresh SolidX app
+- You connect an MCP-capable agent
+- You generate a working Todo module with two prompts
+
+</Callout>
+
+By the end, you will have:
+
+- Started PostgreSQL in Docker
+- Scaffolded a SolidX app
+- Connected an MCP-capable agent to SolidX
+- Generated a working `todo-management` module
+- Verified the generated CRUD API in Swagger
+
+This tutorial is beginner-friendly. It is meant to show the fastest path to a real generated app, built using SolidX.
+
+## Tutorial Flow
+
+<Cards>
+  <Card title="Project Setup" href="./project-setup">
+    Start PostgreSQL in Docker, scaffold the SolidX project, and bring up the admin UI and API locally.
+  </Card>
+  <Card title="Connect Through MCP" href="./connect-mcp">
+    Generate an API key, start the SolidX MCP server, and connect your MCP-capable client.
+  </Card>
+  <Card title="Build the Todo App" href="./build-todo-app">
+    Use two prompts to generate the Todo module, then verify the result in the UI and Swagger.
+  </Card>
+</Cards>
+
+## At a Glance
+
+<Cards>
+  <Card title="Time to Finish">
+    About 5 to 10 minutes if your local Docker, Node.js, and npm setup is already working.
+  </Card>
+  <Card title="What You Will Generate">
+    One `todo-management` module with a `todoItem` model, generated admin views, API routes, and menu wiring.
+  </Card>
+  <Card title="What You Will Use">
+    PostgreSQL, SolidX CLI, Swagger, and an MCP-capable client connected to the SolidX MCP server.
+  </Card>
+</Cards>
+
+## References
+
+- [Final tutorial project on GitHub](https://github.com/SolidXAI/tutorials/tree/main/todo-app)
+
+## Final Project
+
+The final generated app lives in the tutorials repository under `todo-app/`.
+
+<Callout type="tip" title="What to expect">
+
+You are not building a custom UI from scratch in this tutorial.
+
+You will see how a very small prompt surface produces a working module across backend, admin UI, routing, and API layers.
+
+</Callout>
+
+## Todo Model Overview
+
+<TypeTable
+  type={{
+    title: {
+      description: 'Short text field used as the primary Todo label.',
+      type: '`shortText`',
+      required: true,
+    },
+    description: {
+      description: 'Longer free-form notes for the Todo item.',
+      type: '`longText`',
+    },
+    dueDate: {
+      description: 'Optional date for scheduling or deadline tracking.',
+      type: '`date`',
+    },
+    priority: {
+      description: 'Static selection field with `low`, `medium`, and `high` values.',
+      type: '`selectionStatic`',
+      default: '`medium`',
+    },
+    status: {
+      description: 'Static workflow-like field with `pending`, `inProgress`, and `completed`.',
+      type: '`selectionStatic`',
+      default: '`pending`',
+    },
+  }}
+/>
+
+This gives you a small but useful CRUD example covering required fields, long text, dates, and enum-like selections.
