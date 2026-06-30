@@ -1,0 +1,361 @@
+---
+title: Build the Todo App
+icon: "route"
+description: Use two prompts to generate the Todo module, then verify the generated UI and API.
+---
+
+import { Accordion, Accordions } from 'fumadocs-ui/components/accordion';
+import { File, Files, Folder } from 'fumadocs-ui/components/files';
+import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
+import { TypeTable } from 'fumadocs-ui/components/type-table';
+
+## Generate the Todo Module and Model
+
+<Callout type="info" title="Mental model">
+
+You are not hand-writing the first CRUD layer in this tutorial.
+
+You are describing the Todo app at a high level and letting SolidX generate the first working version of the module, UI, and API.
+
+</Callout>
+
+Once your agent is connected to the SolidX MCP server, use these two prompts.
+
+### Prompt 1
+
+```text
+Create a SolidX module called todo-management.
+```
+
+### Prompt 2
+
+```text
+Inside todo-management, create a todoItem model with these fields:
+- title: required short text
+- description: long text
+- dueDate: date
+- priority: static selection with values low, medium, and high; default medium
+- status: static selection with values pending, inProgress, and completed; default pending
+```
+
+## Todo Model Overview
+
+This is the model schema you are asking SolidX to generate with Prompt 2:
+
+<TypeTable
+  type={{
+    title: {
+      description: 'Short text field used as the primary Todo label.',
+      type: '`shortText`',
+      required: true,
+    },
+    description: {
+      description: 'Longer free-form notes for the Todo item.',
+      type: '`longText`',
+    },
+    dueDate: {
+      description: 'Optional date for scheduling or deadline tracking.',
+      type: '`date`',
+    },
+    priority: {
+      description: 'Static selection field with `low`, `medium`, and `high` values.',
+      type: '`selectionStatic`',
+      default: '`medium`',
+    },
+    status: {
+      description: 'Static workflow-like field with `pending`, `inProgress`, and `completed`.',
+      type: '`selectionStatic`',
+      default: '`pending`',
+    },
+  }}
+/>
+
+That is enough to generate the first working version of the app.
+
+## Create Your First Todos in the Admin UI
+
+1. Open `http://localhost:3001`.
+2. Click the top-left menu icon at `Solid Core`.
+3. Switch to `Todo Management`.
+4. Open `Todo Item`.
+5. Start creating Todo items.
+
+You should now see the generated `Todo Item` list view with standard create, edit, and delete controls available from the admin UI.
+
+![Todo Items admin list](/img/tutorial/todo-app/todo-items-admin-list.png)
+
+## What SolidX Generated
+
+<Tabs items={['Views', 'Backend Artifacts', 'Frontend Wiring']} defaultIndex={0}>
+  <Tab value="Views">
+    <Cards>
+      <Card title="List View">
+        Generated with standard CRUD listing behavior for Todo items, including search and table-style browsing.
+      </Card>
+      <Card title="Form View">
+        Generated so you can create and edit Todo items from the admin UI without building a custom form.
+      </Card>
+      <Card title="Tree View">
+        Generated automatically as part of SolidX view scaffolding for the model.
+      </Card>
+    </Cards>
+
+    <TypeTable
+      type={{
+        id: {
+          description: 'Generated identifier shown in the default list view.',
+          type: '`number`',
+        },
+        title: {
+          description: 'Main Todo label and the most important visible field.',
+          type: '`shortText`',
+        },
+        description: {
+          description: 'Long-form note content for each Todo item.',
+          type: '`longText`',
+        },
+        dueDate: {
+          description: 'Date field displayed in generated admin views.',
+          type: '`date`',
+        },
+        priority: {
+          description: 'Static selection field rendered with generated selection controls.',
+          type: '`selectionStatic`',
+        },
+        status: {
+          description: 'Static selection field used to track Todo progress.',
+          type: '`selectionStatic`',
+        },
+      }}
+    />
+  </Tab>
+  <Tab value="Backend Artifacts">
+    <Accordions type="single">
+      <Accordion title="Domain and transport layer">
+        SolidX generated the controller, service, repository, DTOs, and entity for `todoItem`, so the CRUD API is usable immediately.
+
+        <TypeTable
+          type={{
+            controller: {
+              description: 'HTTP CRUD endpoints for the Todo item API.',
+              file: '`solid-api/src/todo-management/controllers/todo-item.controller.ts`',
+            },
+            service: {
+              description: 'Application-layer CRUD logic for Todo items.',
+              file: '`solid-api/src/todo-management/services/todo-item.service.ts`',
+            },
+            repository: {
+              description: 'Persistence access layer for Todo items.',
+              file: '`solid-api/src/todo-management/repositories/todo-item.repository.ts`',
+            },
+            dtos: {
+              description: 'Request payload shapes for create and update operations.',
+              file: '`solid-api/src/todo-management/dtos/create-todo-item.dto.ts`, `solid-api/src/todo-management/dtos/update-todo-item.dto.ts`',
+            },
+            entity: {
+              description: 'Entity definition for the generated Todo model.',
+              file: '`solid-api/src/todo-management/entities/todo-item.entity.ts`',
+            },
+          }}
+        />
+      </Accordion>
+      <Accordion title="Metadata and module wiring">
+        It also generated module metadata and the module registration needed to expose the Todo domain inside the app.
+
+        <TypeTable
+          type={{
+            metadata: {
+              description: 'Model, view, action, and menu metadata for the Todo module.',
+              file: '`solid-api/src/todo-management/metadata/todo-management-metadata.json`',
+            },
+            module: {
+              description: 'Nest module wiring for the generated Todo backend.',
+              file: '`solid-api/src/todo-management/todo-management.module.ts`',
+            },
+          }}
+        />
+      </Accordion>
+      <Accordion title="Why this matters">
+        The generated backend is not just schema output. It is already wired into the application runtime and Swagger surface.
+      </Accordion>
+    </Accordions>
+  </Tab>
+  <Tab value="Frontend Wiring">
+    <Accordions type="single">
+      <Accordion title="Admin navigation">
+        SolidX generated actions and menus so `Todo Management` and `Todo Item` appear in the admin UI without manual route wiring.
+      </Accordion>
+      <Accordion title="UI module registration">
+        The generated frontend module registration makes the admin views available under the SolidX UI layer automatically.
+
+        <TypeTable
+          type={{
+            'UI module': {
+              description: 'Registers the generated Todo module in the SolidX admin frontend.',
+              file: '`solid-ui/src/todo-management/todo-management.ui-module.ts`',
+            },
+          }}
+        />
+      </Accordion>
+      <Accordion title="What you did not have to build">
+        You did not hand-write view registration, CRUD page routing, or the initial form and list setup for the Todo model.
+      </Accordion>
+    </Accordions>
+  </Tab>
+</Tabs>
+
+<Callout type="tip" title="Why this is useful">
+
+This is the key payoff of the SolidX: a very small prompt surface produces a usable admin module, CRUD API, and navigation wiring without manual boilerplate.
+
+</Callout>
+
+## Visual File Map
+
+<Callout type="info" title="Use this when exploring the repo">
+
+The tables above tell you what each generated layer does.
+
+This file map gives you the fastest visual path to the actual generated files inside the project.
+
+</Callout>
+
+<Files>
+  <Folder name="solid-api" defaultOpen>
+    <Folder name="src" defaultOpen>
+      <Folder name="todo-management" defaultOpen>
+        <Folder name="controllers">
+          <File name="todo-item.controller.ts" />
+        </Folder>
+        <Folder name="dtos">
+          <File name="create-todo-item.dto.ts" />
+          <File name="update-todo-item.dto.ts" />
+        </Folder>
+        <Folder name="entities">
+          <File name="todo-item.entity.ts" />
+        </Folder>
+        <Folder name="repositories">
+          <File name="todo-item.repository.ts" />
+        </Folder>
+        <Folder name="services">
+          <File name="todo-item.service.ts" />
+        </Folder>
+        <Folder name="metadata">
+          <File name="todo-management-metadata.json" />
+        </Folder>
+        <File name="todo-management.module.ts" />
+      </Folder>
+    </Folder>
+  </Folder>
+  <Folder name="solid-ui" defaultOpen>
+    <Folder name="src" defaultOpen>
+      <Folder name="todo-management" defaultOpen>
+        <File name="todo-management.ui-module.ts" />
+      </Folder>
+    </Folder>
+  </Folder>
+</Files>
+
+## Verify the Generated API
+
+Open Swagger at `http://localhost:3000/docs`.
+
+Authenticate through `POST /api/iam/authenticate`.
+
+Use:
+
+```json
+{
+  "username": "sa",
+  "password": "Admin@3214$"
+}
+```
+
+Then:
+
+1. Copy the bearer token from the `accessToken` field in the response.
+2. Click `Authorize`.
+3. Paste the token.
+4. Call `GET /api/todo-item`.
+
+SolidX exposes generated REST routes in kebab-case, so the `todoItem` model appears under `/api/todo-item`.
+
+<Callout type="info" title="Expected result">
+
+After authorizing in Swagger, `GET /api/todo-item` should return the Todo Item collection generated by you.
+
+</Callout>
+
+<Callout type="warning" title="If generation did not produce files">
+
+If the prompts return partial output or no module appears:
+
+- verify `solidctl start:dev` is still running
+- verify the MCP client is still connected to `http://localhost:9000/mcp`
+- check the backend and MCP server logs for errors
+- retry the module prompt, then the model prompt
+
+</Callout>
+
+## Some Useful Generated Routes
+
+<Tabs items={['Read', 'Write', 'Delete']} defaultIndex={0}>
+  <Tab value="Read">
+    <TypeTable
+      type={{
+        'GET /api/todo-item': {
+          description: 'Return the Todo Item collection generated by the tutorial.',
+          type: '`collection`',
+        },
+        'GET /api/todo-item/:id': {
+          description: 'Return a single Todo item by its identifier.',
+          type: '`record`',
+        },
+      }}
+    />
+  </Tab>
+  <Tab value="Write">
+    <TypeTable
+      type={{
+        'POST /api/todo-item': {
+          description: 'Create one Todo item.',
+          type: '`create`',
+        },
+        'POST /api/todo-item/bulk': {
+          description: 'Create multiple Todo items in one request.',
+          type: '`bulk create`',
+        },
+        'PUT /api/todo-item/:id': {
+          description: 'Replace a Todo item.',
+          type: '`replace`',
+        },
+        'PATCH /api/todo-item/:id': {
+          description: 'Partially update a Todo item.',
+          type: '`partial update`',
+        },
+      }}
+    />
+  </Tab>
+  <Tab value="Delete">
+    <TypeTable
+      type={{
+        'DELETE /api/todo-item/:id': {
+          description: 'Delete a single Todo item.',
+          type: '`delete`',
+        },
+        'DELETE /api/todo-item/bulk': {
+          description: 'Delete multiple Todo items in one request.',
+          type: '`bulk delete`',
+        },
+      }}
+    />
+  </Tab>
+</Tabs>
+
+<Callout type="tip" title="Summary">
+
+At this point, you have a generated Todo module, a working admin UI, usable CRUD API routes, and a clear file structure, you can extend from here.
+
+</Callout>
+
+Continue to [Next Steps](./next-steps) for a few concrete ways to extend the generated app.

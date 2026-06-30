@@ -1,0 +1,11 @@
+{
+  "title": "Todo App with SolidX",
+  "icon": "check-square",
+  "pages": [
+    "index",
+    "project-setup",
+    "connect-mcp",
+    "build-todo-app",
+    "next-steps"
+  ]
+}
