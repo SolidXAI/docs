@@ -1,15 +1,8 @@
 ---
 title: Connect Through MCP
+icon: "plug"
 description: Generate an API key and connect an MCP-capable client to the SolidX MCP server.
 ---
-
-## Connect the Running App to MCP
-
-<Callout type="info" title="What happens in this step">
-
-You are giving your MCP-capable client authenticated access to the running SolidX app through the SolidX MCP server.
-
-</Callout>
 
 ## Generate an API Key
 
@@ -25,15 +18,20 @@ After the app is running:
 
 You will not be able to see the full key again later.
 
+On screen, you should see the admin user's API key settings area with API key generation enabled and a newly created key entry available to copy.
+
 ![Generate API key in the admin UI](/img/tutorial/todo-app/generate-api-key.png)
 
 ## Start the SolidX MCP Server
 
-Run:
+Run this from inside the generated `todo-app` project directory, the same project you started with `solidctl start:dev`:
 
 ```bash
+cd todo-app
 solidctl mcp start
 ```
+
+Port `9000` is the default MCP server port, so you do not need extra flags unless you want a different port.
 
 Endpoint:
 
@@ -47,9 +45,15 @@ Required header:
 solidx-api-key: sldx_...
 ```
 
+Replace `sldx_...` with your actual generated API key. It is a placeholder showing the expected key format, not a literal value to type.
+
 ## Client Configuration Note
 
-Claude Desktop, Codex CLI, Cursor, and other MCP-capable clients expose different configuration surfaces, but the integration rule is the same:
+For client-specific setup steps for Claude Desktop, Cursor, Codex CLI, and similar MCP clients, see the official guide:
+
+- [Using the SolidX MCP Server](https://docs.solidxai.com/docs/quick-start/using-solidx-mcp-server)
+
+No matter which client you use, the SolidX connection details are the same:
 
 - Point the client at `http://localhost:9000/mcp`
 - Send the `solidx-api-key` header
@@ -60,11 +64,7 @@ If your client can reach the MCP endpoint and authenticate with the generated AP
 
 </Callout>
 
-Official reference:
-
-- [Using the SolidX MCP Server](https://docs.solidxai.com/docs/quick-start/using-solidx-mcp-server)
-
-## Troubleshooting
+<Callout type="warning" title="Troubleshooting">
 
 If the client cannot connect, verify:
 
@@ -73,3 +73,5 @@ If the client cannot connect, verify:
 - the endpoint is exactly `http://localhost:9000/mcp`
 - the `solidx-api-key` header is present
 - the copied key is still valid
+
+</Callout>

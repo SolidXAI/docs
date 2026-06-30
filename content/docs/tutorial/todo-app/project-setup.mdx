@@ -1,11 +1,36 @@
 ---
 title: Project Setup
+icon: "settings"
 description: Scaffold the SolidX Todo app against PostgreSQL and run it locally.
 ---
 
-import { Step, Steps } from 'fumadocs-ui/components/steps';
+## Prerequisites
+
+Install these prerequisites before starting the tutorial:
+
+- Docker Desktop or Docker Engine
+- Node.js 22+
+- `solidctl`
+- Python 3.11+ if you plan to use the MCP flow, because the SolidX MCP server and agent runtime are Python-based
+
+Verify the environment:
+
+```bash
+docker --version
+solidctl --version
+python --version
+```
+
+References:
+
+- [SolidX Quick Start](https://docs.solidxai.com/docs/quick-start)
+- [Using the SolidX MCP Server](https://docs.solidxai.com/docs/quick-start/using-solidx-mcp-server)
 
 ## Set Up the Project
+
+In this page, you will start PostgreSQL, scaffold the Todo app against that database, and verify that the generated backend and admin UI both start correctly.
+
+By the end of this setup flow, you should be ready to generate the Todo module through MCP.
 
 <Callout type="info" title="Outcome">
 
@@ -17,54 +42,6 @@ At the end of this page, you should have:
 - the API and Swagger docs running on port `3000`
 
 </Callout>
-
-## Quick Path
-
-<Steps>
-<Step>
-
-### Start PostgreSQL
-
-Bring up the external PostgreSQL container used by the tutorial.
-
-</Step>
-<Step>
-
-### Scaffold the App
-
-Run `solidctl create-app` and answer the scaffold prompts for the Todo project.
-
-</Step>
-<Step>
-
-### Start SolidX
-
-Run the generated app locally and verify the admin UI and Swagger docs are reachable.
-
-</Step>
-</Steps>
-
-## Before You Start
-
-Install these prerequisites:
-
-- Docker Desktop or Docker Engine
-- Node.js 22+
-- `solidctl`
-- Python 3.11+ if you plan to use the MCP flow
-
-Verify the environment:
-
-```bash
-docker --version
-solidctl --version
-python3 --version
-```
-
-References:
-
-- [SolidX Quick Start](https://docs.solidxai.com/docs/quick-start)
-- [Using the SolidX MCP Server](https://docs.solidxai.com/docs/quick-start/using-solidx-mcp-server)
 
 ## Start PostgreSQL in Docker
 
@@ -96,6 +73,28 @@ Run:
 ```bash
 solidctl create-app
 ```
+
+When `solidctl create-app` asks for database credentials, use the same values from the Docker command above: host `localhost`, port `5432`, database `solidx_app_db`, username `solidx_app_user`, and password `strongpassword`.
+
+For the full scaffold, use these answers:
+
+| Prompt | Value |
+|---|---|
+| `What is the name of your project?` | `todo-app` |
+| `Which SolidX version would you like to use?` | `stable` |
+| `Enter your backend api port` | `3000` |
+| `How do you want to run the database?` | `External (connect to your own PostgreSQL, MySQL or MSSQL)` |
+| `Select your database?` | `PostgreSQL` |
+| `Enter your database host` | `localhost` |
+| `Enter your database port` | `5432` |
+| `Enter your database name` | `solidx_app_db` |
+| `Enter your database username` | `solidx_app_user` |
+| `Enter your database password` | `strongpassword` |
+| `Automatically update database schema when models change? (Not recommended for production)` | `Yes` |
+| `Does this database already exist?` | `Yes` |
+| `Enter your frontend app port` | `3001` |
+
+The scaffold should finish by reporting that the backend and frontend boilerplate are ready, environment files were generated, the build completed, and the database was seeded.
 
 Scaffold the project:
 ![Project scaffold setup](/img/tutorial/todo-app/setup-project-scaffold.png)
