@@ -2,12 +2,12 @@
 title: "Using SolidX MCP Server"
 icon: "plug"
 description: "Expose SolidX tools to external AI clients over HTTP with the SolidX MCP server."
-summary: "Start the SolidX MCP server and connect Claude Desktop, Cursor, or Codex CLI. Requires a bootstrapped SolidX project from the main Getting Started guide."
+summary: "Run solidctl mcp install to wire up Claude Code, Cursor, Codex, or Claude Desktop, restart your agent if needed, then use SolidX tools via MCP (the server starts automatically with solidctl start:dev). Manual config instructions are included as a fallback."
 ---
 
 # Using SolidX MCP Server
 
-The MCP server exposes SolidX tools to external AI clients (Claude Desktop, Cursor, Codex CLI, etc.) over HTTP with API-key authentication.
+The MCP server exposes SolidX tools to external AI clients (Claude Code, Claude Desktop, Cursor, Codex CLI, etc.) over HTTP with API-key authentication.
 
 <Callout type="warning" title="Prerequisite: bootstrap a project first">
 
@@ -17,7 +17,83 @@ This guide assumes you have already scaffolded and started a SolidX project usin
 
 ---
 
+## Connect your AI agent
+
+`solidctl mcp install` detects which supported AI agents are installed on your machine and writes the SolidX MCP server entry into each agent's config automatically. This is a one-time setup step and does not require the MCP server to be running.
+
+Supported agents:
+
+| Agent | What gets detected |
+|---|---|
+| **Claude Code** | CLI (`claude`) and/or config at `~/.claude.json` |
+| **Claude Desktop** | App config at the platform-specific Claude Desktop path |
+| **Cursor** | CLI (`cursor`) and/or config at `~/.cursor/mcp.json` |
+| **Codex** | CLI (`codex`) and/or config at `~/.codex/config.toml` |
+
+### Step 1: Install the MCP entry
+
+From your SolidX project root:
+
+```bash
+solidctl mcp install
+```
+
+The command:
+
+- Reads your project's API key from `~/.solidx/<project>/mcp.json` (created during `solidctl create-app`).
+- Detects which of the supported agents above are present on your machine.
+- Adds a server entry named `solidx-<project>-mcp` to each detected agent's MCP config.
+- Backs up any config file it modifies.
+
+Options:
+
+| Flag | Default | Description |
+|---|---|---|
+| `--project <name>` | Derived from cwd | Consuming project name (kebab-case) |
+| `--api-key <key>` | From `mcp.json` | Override the API key (must start with `sldx_`) |
+| `--url <url>` | `http://localhost:9000/mcp` | MCP server URL |
+| `--name <server>` | `solidx-<project>-mcp` | Override the server entry name |
+| `--agents <list>` | All detected | Comma-separated subset: `claude-code`, `cursor`, `codex`, `claude-desktop` |
+| `--dry-run` | — | Print planned changes without writing anything |
+| `--force` | — | Re-write even when an identical entry already exists |
+
+Examples:
+
+```bash
+# Preview what would change
+solidctl mcp install --dry-run
+
+# Install into Cursor and Codex only
+solidctl mcp install --agents cursor,codex
+
+# Use a new API key generated in the admin panel
+solidctl mcp install --api-key sldx_...
+```
+
+<Callout type="info" title="API key">
+
+During scaffolding, `solidctl create-app` writes an admin API key to `~/.solidx/<project>/mcp.json`. `mcp install` reads that key automatically. If you generated a new key in the admin panel (IAM → API Keys), pass it with `--api-key`.
+
+</Callout>
+
+### Step 2: Restart your agent
+
+If Claude Code, Claude Desktop, Cursor, or Codex was **already open** when you ran `mcp install`, restart it so it picks up the new MCP server entry. Newly launched agents load the updated config automatically.
+
+---
+
 ## Start the MCP server
+
+If your project is already running via `solidctl start:dev` (the default from the [Getting Started guide](/docs/quick-start)), the MCP server is **already running** — `start:dev` supervises the API, UI, and MCP server together.
+
+You only need to start the MCP server separately if you launched the project with a subset of services, for example:
+
+```bash
+solidctl start:dev --api    # API only
+solidctl start:dev --ui     # UI only
+```
+
+In that case, start the MCP server from your SolidX project root:
 
 ```bash
 solidctl mcp start
@@ -32,18 +108,34 @@ Options:
 | `--mount-path` | `/mcp` | URL path for the MCP endpoint |
 | `-l, --log-level` | `INFO` | Logging level |
 
+The server listens at `http://localhost:9000/mcp` by default. Keep it running while your AI client is connected. With the server up, SolidX tools appear in your agent and you can drive the platform from natural language.
+
 ---
 
-## Connect from Claude Desktop
+## Manual MCP configuration
 
-1. Generate an API key in your SolidX admin panel (under IAM → API Keys).
+Use these instructions if `solidctl mcp install` fails, you want to configure a specific agent by hand, or you are using a client that is not supported by the installer.
 
-2. Add the server to your Claude Desktop config (`~/Library/Application Support/Claude/claude_desktop_config.json` on macOS):
+<details>
+<summary><strong>Manual configuration for Claude Code, Claude Desktop, Cursor, and Codex</strong></summary>
+
+You need:
+
+1. An API key — from `~/.solidx/<project>/mcp.json` or generated in the admin panel (IAM → API Keys).
+2. The MCP server running — included by default in `solidctl start:dev`, or started separately with `solidctl mcp start` if you used `--api` or `--ui` only.
+
+Default endpoint: `http://localhost:9000/mcp`  
+Default server entry name: `solidx-<project>-mcp` (replace `<project>` with your project name).
+
+### Claude Code
+
+Add to `~/.claude.json`:
 
 ```json
 {
   "mcpServers": {
-    "solidx": {
+    "solidx-<project>-mcp": {
+      "type": "http",
       "url": "http://localhost:9000/mcp",
       "headers": {
         "solidx-api-key": "sldx_..."
@@ -53,17 +145,70 @@ Options:
 }
 ```
 
-3. Restart Claude Desktop. The SolidX tools will appear automatically.
+Restart Claude Code after saving.
 
-## Connect from Cursor / Codex CLI
+### Claude Desktop
 
-Point your MCP client at:
+Add to your Claude Desktop config (`~/Library/Application Support/Claude/claude_desktop_config.json` on macOS):
 
+```json
+{
+  "mcpServers": {
+    "solidx-<project>-mcp": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "mcp-remote",
+        "http://localhost:9000/mcp/",
+        "--header",
+        "solidx-api-key:sldx_..."
+      ]
+    }
+  }
+}
 ```
-http://localhost:9000/mcp
+
+On Windows, wrap the command in `cmd /c` (see what `solidctl mcp install --dry-run` would write for your platform). Restart Claude Desktop after saving.
+
+### Cursor
+
+Add to `~/.cursor/mcp.json`:
+
+```json
+{
+  "mcpServers": {
+    "solidx-<project>-mcp": {
+      "url": "http://localhost:9000/mcp",
+      "headers": {
+        "solidx-api-key": "sldx_..."
+      }
+    }
+  }
+}
 ```
 
-Include the header `solidx-api-key: sldx_...` on every request.
+Restart Cursor after saving.
+
+### Codex CLI
+
+Add to `~/.codex/config.toml`:
+
+```toml
+[mcp_servers.solidx-<project>-mcp]
+enabled = true
+url = "http://localhost:9000/mcp"
+
+[mcp_servers.solidx-<project>-mcp.http_headers]
+solidx-api-key = "sldx_..."
+```
+
+Restart Codex after saving.
+
+### Other MCP clients
+
+Point your client at `http://localhost:9000/mcp` and include the header `solidx-api-key: sldx_...` on every request.
+
+</details>
 
 ---
 
@@ -71,6 +216,7 @@ Include the header `solidx-api-key: sldx_...` on every request.
 
 | Command | What it does |
 |---|---|
+| `mcp install` | Auto-configure Claude Code, Claude Desktop, Cursor, and Codex |
 | `mcp start` | Start the MCP server (HTTP) |
 
 Full reference: [solidctl Commands](/docs/developer-docs/solidctl-commands)
