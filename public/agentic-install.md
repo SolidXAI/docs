@@ -5,7 +5,7 @@ First, ask me for the project name I want to use. Default to "my-solid-app" if I
 Prerequisite checks:
 
 - Verify Node.js 22+ is installed. If missing, install it via nvm (curl -o- [https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.5/install.sh](https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.5/install.sh) | bash && source ~/.nvm/nvm.sh && nvm install 22). If nvm is also missing and cannot be installed, stop and tell me to install Node.js 22+ manually.
-- Install the SolidX CLI globally: npm i -g @solidxai/solidctl@latest. Verify with `solidctl --version`. If this fails, stop and tell me to install it manually.
+- Install the SolidX CLI globally: npm i -g @solidxai/solidctl@beta. Verify with `solidctl --version`. If this fails, stop and tell me to install it manually.
 - Check whether Docker is installed and the daemon is running (`docker info`).
   - If Docker is running, continue to the database setup step below.
   - If Docker is not installed or not running, ask me whether I have an existing PostgreSQL 14+ instance you can connect to.
