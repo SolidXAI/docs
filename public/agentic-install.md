@@ -1,4 +1,4 @@
-Set up a new SolidX project for me using a full PostgreSQL database. Follow these steps in order. Do not skip any step. Report status after each step.
+Set up a new SolidX project for me using a full PostgreSQL database. Follow these steps in order. Do not skip any step. Keep status updates brief - a short line per step is enough, no need for a detailed recap.
 
 First, ask me for the project name I want to use. Default to "my-solid-app" if I don't specify one. Use this as `<PROJECT_NAME>` in every command below.
 
@@ -44,27 +44,32 @@ Project scaffold (this step takes 5-10 minutes; npm installs all dependencies fo
   ```
   Replace the `--db-*` values with whatever credentials I gave you if I pointed you at an existing instance.
 - Embedded fallback only (if I explicitly asked for it): `solidctl create-app --no-interactive --embedded --name <PROJECT_NAME>`
-- Inform me that scaffolding is in progress and will take several minutes. Do not treat the long-running npm install as a failure. Wait for it to complete.
+- Let me know scaffolding is in progress and may take several minutes. Do not treat the long-running npm install as a failure. Wait for it to complete.
 
 Connect MCP (wires up whichever supported AI clients are installed on my machine - Claude Code, Claude Desktop, Cursor, and Codex):
 
-- cd 
-- Run: `solidctl mcp install`
-- This reads the project's API key from `~/.solidx/<PROJECT_NAME>/mcp.json` and writes a `solidx-<PROJECT_NAME>-mcp` server entry into every detected client's config. Report which client(s) it configured.
+- Run: `cd <PROJECT_NAME> && solidctl mcp install`
+- This reads the project's API key from `~/.solidx/<PROJECT_NAME>/mcp.json` and writes a `solidx-<PROJECT_NAME>-mcp` server entry into every detected client's config. Note which client(s) it configured, to mention in the final summary.
 
 Start the services (a single supervisor runs the backend API, the frontend, and the MCP server together):
 
-- Still inside , run: `solidctl start:dev`
-- Run it as a background process so you can continue with the verification step. This also starts the MCP server - no separate `mcp start` step is needed.
+- Still inside `<PROJECT_NAME>`, run `solidctl start:dev` as a background process so you can continue with the verification step. This also starts the MCP server - no separate `mcp start` step is needed.
+- Confirm the backend API comes up at http://localhost:3000 and the frontend admin panel at http://localhost:3001.
+- Once you've confirmed both are up, **stop this background `start:dev` process** (and any child processes it spawned) before moving on. I will start it again myself per the restart instructions below - leaving your copy running would just fight over the same ports.
 
-Final verification:
+Final summary - give me a short summary here, not a step-by-step recap. Include only:
 
-- Confirm the backend API is reachable at [http://localhost:3000](http://localhost:3000)
-- Confirm the frontend admin panel is reachable at [http://localhost:3001](http://localhost:3001)
-- Report the project directory path, the URLs, the super admin login (username: sa, password: Admin@3214$), and which AI client config(s) `mcp install` updated.
+- The project directory path.
+- The two URLs: API at http://localhost:3000, admin panel at http://localhost:3001.
+- The super admin login: username `sa`, password `Admin@3214$`.
+- Which AI client config(s) `mcp install` updated.
 
-Restart required - tell me this explicitly, in these words or similar:
+Restart required - read this carefully, the order matters:
 
-- "`solidctl mcp install` just updated your MCP configuration, but I can't reload it myself. Please restart me now (this Claude Code / Cursor / Codex session or window) so I pick up the new SolidX MCP tools. You don't need to do anything else afterward - the SolidX MCP server is already running in the background via `solidctl start:dev`."
-- Do not consider the setup incomplete because of this - scaffolding, MCP wiring, and service startup are all done. The restart is only so the current AI session can see the new tools.
-
+- You already stopped the verification copy of `start:dev` in the previous step, so no services are running right now and there's no port conflict.
+- Give me this exact single command to copy and run **myself in my own terminal window** (not something you run in the background), so the project runs independently of this session and survives a restart:
+  ```
+  cd <PROJECT_NAME> && solidctl start:dev
+  ```
+- Then tell me explicitly: "Run the command above in your own terminal to start the project, then restart me (this session/window) so I pick up the new SolidX MCP tools."
+- Do not consider the setup incomplete because of this - scaffolding, MCP wiring, and service startup were all verified. The restart is only so the current AI session can see the new tools, and the command above is what keeps the servers running afterward.
