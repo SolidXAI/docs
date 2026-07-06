@@ -1,6 +1,10 @@
 Set up a new SolidX project for me using a full PostgreSQL database. Follow these steps in order. Do not skip any step. Work through them silently and give me a single report at the end - don't report status after each individual step.
 
-First, ask me for the project name I want to use. Default to "my-solid-app" if I don't specify one. Use this as `<PROJECT_NAME>` in every command below. Once the project directory exists, also resolve its absolute path (e.g. run `pwd` after `cd <PROJECT_NAME>`) and remember it as `<PROJECT_PATH>` - you'll need the absolute path later, since I may run the final command from a terminal with a different working directory.
+Step 1 - Get the project name (do this before anything else):
+
+- Check whether I already specified a project name in my request. If I did, use it as `<PROJECT_NAME>` and move on to the prerequisite checks below.
+- If I did not, generate one yourself instead of asking me or using a placeholder like "my-solid-app": pick a random verb (gerund form, e.g. "shattering", "twisting", "gliding") and a random noun (e.g. "melody", "machine", "phantom"), then join them with a hyphen in lowercase kebab-case, for example `shattering-melody`, `twisting-machine`, or `gliding-phantom`. Use a fresh random pair each time, not always the same examples. Tell me the generated name as part of your final report, don't stop to confirm it with me.
+- Once you have the name and the project directory exists, also resolve its absolute path (e.g. run `pwd` after `cd <PROJECT_NAME>`) and remember it as `<PROJECT_PATH>` - you'll need the absolute path later, since I may run the final command from a terminal with a different working directory.
 
 Prerequisite checks:
 
@@ -59,6 +63,7 @@ Start the services (a single supervisor runs the backend API, the frontend, and 
 
 Final report - this is the only status update I need, give it to me now as a single summary, not a step-by-step recap:
 
+- The project name (`<PROJECT_NAME>`) - call out clearly if you generated it yourself in Step 1.
 - The project directory path (`<PROJECT_PATH>`).
 - The two URLs: API at http://localhost:3000, admin panel at http://localhost:3001.
 - The super admin login: username `sa`, password `Admin@3214$`.
