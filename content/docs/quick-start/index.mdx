@@ -142,14 +142,14 @@ Agentic mode scaffolds against the same **full PostgreSQL** setup recommended fo
 </Callout>
 
 ```text
-Set up a new SolidX project for me. Read and follow every step in https://docs.solidxai.com/agentic-install.md and report status after each step.
+Set up a new SolidX project for me. Read and follow every step in https://docs.solidxai.com/agentic-install.md and give me a single report at the end.
 ```
 
-Your AI agent will execute all the steps, including connecting itself to the SolidX MCP server, and report back when the project is ready to use.
+Your AI agent will execute all the steps, including connecting itself to the SolidX MCP server, and report back once with everything you need when the project is ready to use.
 
 <Callout type="warning" title="Restart your AI client after setup">
 
-`solidctl mcp install` updates your AI client's MCP configuration, but a running session can't reload it on its own. Once your agent reports the project is ready, restart the current Claude Code / Cursor / Codex session or window so it picks up the new SolidX MCP tools. Nothing else is needed afterward - the MCP server is already running via `solidctl start:dev`.
+`solidctl mcp install` updates your AI client's MCP configuration, but a running session can't reload it on its own. Your agent's final report will include a command to start the project yourself in your own terminal - run that first, then restart the current Claude Code / Cursor / Codex session or window so it picks up the new SolidX MCP tools.
 
 </Callout>
 
