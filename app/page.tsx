@@ -6,7 +6,16 @@ export default function HomePage() {
     <main className="flex flex-1 flex-col items-center justify-center px-6 py-20">
       <div className="mb-16 flex flex-col items-center text-center">
         <h1 className="flex items-center gap-3 text-4xl font-bold tracking-tight sm:text-5xl">
-          <img src="/img/NavbarLogo.svg" alt="SolidX" className="h-9 sm:h-11" />
+          <img
+            src="/img/solidx-logo-dark.png"
+            alt="SolidX"
+            className="h-9 sm:h-11 dark:hidden"
+          />
+          <img
+            src="/img/solidx-logo-light.png"
+            alt="SolidX"
+            className="hidden h-9 sm:h-11 dark:block"
+          />
           <span>Docs</span>
         </h1>
         <p className="text-fd-muted-foreground mt-4 max-w-md text-lg">
