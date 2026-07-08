@@ -1,0 +1,53 @@
+---
+title: Next Steps
+icon: "rocket"
+description: Try a few small follow-up changes to extend the generated Todo app.
+---
+
+import { Accordion, Accordions } from 'fumadocs-ui/components/accordion';
+
+## What to Try Next
+
+You now have a working generated Todo module. The next useful step is to make one or two small changes so you can see how SolidX evolves an existing module, not just creates the first version.
+
+## Suggested Follow-Up Changes
+
+<Accordions type="single">
+  <Accordion title="Add a Relation">
+    Add a relation from `todoItem` to a user-like record so each Todo can be assigned to someone.
+
+    This is a useful next step because it introduces relation field metadata, generated relation inputs in the admin UI, and relation-aware API payloads.
+  </Accordion>
+  <Accordion title="Add Validation">
+    Tighten the `title` field or add a simple rule around `dueDate` and status transitions.
+
+    Good examples include requiring a minimum title length, preventing overly long titles, or making `dueDate` required once a Todo moves into a later workflow state.
+  </Accordion>
+  <Accordion title="Regenerate and Verify">
+    Re-run generation if needed, then confirm the updated UI, Swagger schema, and generated files.
+
+    Check the changed field behavior in the admin UI, the updated Swagger schema, and the generated backend files under `solid-api/src/todo-management`.
+  </Accordion>
+</Accordions>
+
+## A Simple Prompt Sequence
+
+<Callout type="tip" title="Concrete experiment">
+
+If you want one practical follow-up exercise, try this prompt sequence:
+
+1. Add an `assignee` relation field to `todoItem`.
+2. Add a minimum length validation rule to `title`.
+3. Regenerate the module artifacts if needed.
+4. Verify the new field and validation behavior in the admin UI and Swagger.
+
+</Callout>
+
+## Keep Exploring
+
+Once you are comfortable with the generated Todo module, continue into the broader SolidX docs for these areas:
+
+- `Metadata and fields`: Learn how models, defaults, validation rules, and field behavior are represented in SolidX metadata.
+- `View customization`: Explore list and form view customization once the generated CRUD baseline is in place.
+- `Backend extension`: Go deeper into controller, service, and provider customization patterns.
+- `Roles and permissions`: Add access control once the Todo module is ready for more realistic usage.

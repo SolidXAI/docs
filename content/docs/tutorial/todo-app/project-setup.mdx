@@ -1,0 +1,180 @@
+---
+title: Project Setup
+icon: "settings"
+description: Scaffold the SolidX Todo app against PostgreSQL and run it locally.
+---
+
+## Prerequisites
+
+Install these prerequisites before starting the tutorial:
+
+- Docker Desktop or Docker Engine
+- Node.js 22+
+- `solidctl`
+- Python 3.13+ if you plan to use the MCP flow, because the SolidX MCP server and agent runtime are Python-based
+
+Verify the environment:
+
+```bash
+docker --version
+solidctl --version
+python --version
+```
+
+References:
+
+- [SolidX Quick Start](https://docs.solidxai.com/docs/quick-start)
+- [Using the SolidX MCP Server](https://docs.solidxai.com/docs/quick-start/using-solidx-mcp-server)
+
+## Set Up the Project
+
+On this page, you will start PostgreSQL, scaffold the Todo app against that database, and verify that the generated backend and admin UI both start correctly.
+
+By the end of this setup flow, you should be ready to generate the Todo module through your MCP-capable agent.
+
+<Callout type="info" title="Outcome">
+
+At the end of this page, you should have:
+
+- PostgreSQL running in Docker
+- a scaffolded `todo-app` project
+- the SolidX admin UI running on `http://localhost:3001`
+- the API and Swagger docs running on port `3000`
+- the SolidX MCP connection installed in your agent
+
+</Callout>
+
+## Start PostgreSQL in Docker
+
+This tutorial uses an external PostgreSQL container:
+
+```bash
+docker run -d \
+  --name SolidX_DB \
+  -e POSTGRES_USER=solidx_app_user \
+  -e POSTGRES_PASSWORD=strongpassword \
+  -e POSTGRES_DB=solidx_app_db \
+  -p 5432:5432 \
+  -v solidx_pgdata:/var/lib/postgresql/data \
+  postgres:17
+```
+
+These values are fine for local tutorial use. Change them for any real environment.
+
+## Scaffold the App
+
+<Callout type="tip" title="Recommended order">
+
+Start PostgreSQL first, then run `solidctl create-app`, then start the generated project with `solidctl start:dev`.
+
+</Callout>
+
+Run:
+
+```bash
+solidctl create-app
+```
+
+When `solidctl create-app` asks for database credentials, use the same values from the Docker command above: host `localhost`, port `5432`, database `solidx_app_db`, username `solidx_app_user`, and password `strongpassword`.
+
+For the full scaffold, use these answers:
+
+| Prompt | Value |
+|---|---|
+| `What is the name of your project?` | `todo-app` |
+| `Which SolidX version would you like to use?` | `stable` |
+| `Enter your backend api port` | `3000` |
+| `How do you want to run the database?` | `External (connect to your own PostgreSQL, MySQL or MSSQL)` |
+| `Select your database?` | `PostgreSQL` |
+| `Enter your database host` | `localhost` |
+| `Enter your database port` | `5432` |
+| `Enter your database name` | `solidx_app_db` |
+| `Enter your database username` | `solidx_app_user` |
+| `Enter your database password` | `strongpassword` |
+| `Automatically update database schema when models change? (Not recommended for production)` | `Yes` |
+| `Does this database already exist?` | `Yes` |
+| `Enter your frontend app port` | `3001` |
+
+The scaffold should finish by reporting that the backend and frontend boilerplate are ready, environment files were generated, the build completed, and the database was seeded.
+
+Scaffold the project:
+![Project scaffold setup](/img/tutorial/todo-app/setup-project-scaffold.png)
+
+## Start the App
+
+```bash
+cd todo-app
+solidctl start:dev
+```
+
+Then sign in to `http://localhost:3001` with:
+
+- Username: `sa`
+- Password: `Admin@3214$`
+
+Available endpoints:
+
+- API: `http://localhost:3000`
+- Swagger: `http://localhost:3000/docs`
+- Admin UI: `http://localhost:3001`
+
+## Connect Your AI Agent
+
+Run this from the same `todo-app` project root:
+
+```bash
+solidctl mcp install
+```
+
+This command detects supported agents on your machine and writes the SolidX MCP server entry into their config automatically.
+
+Supported agents include:
+
+- Claude Code
+- Claude Desktop
+- Cursor
+- Codex
+
+This keeps the MCP setup inside the same flow as project creation, which is the fastest path for this tutorial.
+
+<Callout type="tip" title="About the API key">
+
+During scaffolding, SolidX writes an MCP config file under `~/.solidx/<project>/mcp.json`.
+
+`solidctl mcp install` reads that API key automatically. If you later generate a new key from the admin UI, re-run the command with `--api-key sldx_...`.
+
+</Callout>
+
+You can also confirm this in the admin UI. After installation, the default super admin user already has a generated API key available under the `API Keys` tab:
+
+![Default super admin API key](/img/tutorial/todo-app/default-sa-api-key.png)
+
+After the install completes, restart your client before continuing. Most MCP-capable clients only load new MCP server entries on launch.
+
+<Callout type="warning" title="MCP runtime note">
+
+`solidctl start:dev` already starts the MCP server alongside the API and UI by default.
+
+You only need `solidctl mcp start` separately if you intentionally launched just part of the stack, for example with `solidctl start:dev --api` or `solidctl start:dev --ui`.
+
+In that reduced setup, start MCP manually:
+
+```bash
+solidctl mcp start
+```
+
+</Callout>
+
+Reference:
+
+- [Using the SolidX MCP Server](/docs/quick-start/using-solidx-mcp-server)
+
+<Callout type="info" title="Before moving on">
+
+Only continue after you confirm:
+
+- the admin UI loads and you can sign in with the default super admin account
+- the agent was restarted if needed
+- the SolidX MCP entry is visible in your agent configuration
+
+</Callout>
