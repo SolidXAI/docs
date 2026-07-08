@@ -2,7 +2,7 @@
 title: Getting Started
 icon: "rocket"
 description: "Get a SolidX project running in under 5 minutes, manually or let your AI agent do it."
-summary: "Two paths to a working SolidX project. Manual mode walks you through every step. Agentic mode gives you a one-line prompt to paste into Claude Code, Cursor, Codex, or any AI coding assistant. The default path scaffolds against a full PostgreSQL server; an optional embedded zero-config database (PGlite) path is available for quick local evaluation."
+summary: "Two paths to a working SolidX project. Manual mode walks you through every step. Agentic mode gives you a one-line prompt to paste into Claude Code, Cursor, Codex, or any AI coding assistant. Both paths scaffold against a PostgreSQL server."
 ---
 
 ## Prerequisites
@@ -10,19 +10,11 @@ summary: "Two paths to a working SolidX project. Manual mode walks you through e
 | Requirement | Version | Required for | Check |
 |---|---|---|---|
 | **Node.js** | 22+ (LTS recommended) | All modes | `node -v` |
-| **Docker** | Latest stable | Default manual path - spin up PostgreSQL locally if you do not already have an instance | `docker --version` |
-| **PostgreSQL** | 14+ | Default manual path - connect to an existing instance, or use Docker to start one | `psql --version` |
+| **Docker** | Latest stable | Manual path - spin up PostgreSQL locally if you do not already have an instance | `docker --version` |
+| **PostgreSQL** | 14+ | Manual path - connect to an existing instance, or use Docker to start one | `psql --version` |
 | **Python** | 3.11+ | Agent & MCP only | `python3 --version` |
 
-Node.js is the only hard requirement for all paths. The default PostgreSQL path in Step 2 requires Docker or an existing PostgreSQL instance. The optional embedded path in Step 2 needs nothing else. Python is only needed if you plan to use the [SolidX AI Agent](/docs/quick-start/using-solidx-ai-agent) or [MCP server](/docs/quick-start/using-solidx-mcp-server).
-
-<Callout type="warning" title="Full PostgreSQL vs. embedded - when to use which">
-
-The default **full PostgreSQL path** (Path A in Step 2) is recommended for real development and **any production usage**.
-
-The optional **embedded PGlite path** (Path B in Step 2) is the fastest way to **try out SolidX** - no Docker, no PostgreSQL install, no credentials. It is ideal for evaluation, demos, and local experimentation. PGlite is a single-process in-process engine and is not intended for production workloads, concurrent access from multiple services, or large datasets.
-
-</Callout>
+Node.js is required for all paths. Scaffolding in Step 2 also needs Docker or an existing PostgreSQL instance. Python is only needed if you plan to use the [SolidX AI Agent](/docs/quick-start/using-solidx-ai-agent) or [MCP server](/docs/quick-start/using-solidx-mcp-server).
 
 ---
 
@@ -44,9 +36,7 @@ solidctl --version
 
 ### Step 2: Scaffold the project
 
-#### Path A: Full PostgreSQL server (default - recommended for production)
-
-You can connect to an existing PostgreSQL instance or spin one up with Docker. A full PostgreSQL server is recommended for **any production usage**.
+You can connect to an existing PostgreSQL instance or spin one up with Docker.
 
 If you don't already have PostgreSQL running, start a container:
 
@@ -87,25 +77,6 @@ If you have an existing PostgreSQL database, replace the `--db-*` values with yo
 solidctl create-app
 ```
 
-<details>
-<summary><strong>Path B: Embedded database (optional - fastest way to try SolidX)</strong></summary>
-
-Scaffold a project with the embedded PGlite database in a single one-shot command:
-
-```bash
-solidctl create-app --no-interactive --embedded --name my-solid-app
-```
-
-No Docker, no PostgreSQL, and no credentials required. `solidctl` configures and manages the embedded database for you automatically during `create-app`, `build`, `seed`, and `start:dev`.
-
-<Callout type="info" title="Agent and MCP support in embedded mode">
-
-The [SolidX AI Agent](/docs/quick-start/using-solidx-ai-agent) and [MCP server](/docs/quick-start/using-solidx-mcp-server) are in **early alpha** with embedded mode at the moment. For agent or MCP workflows, use the default full PostgreSQL path (Path A) above.
-
-</Callout>
-
-</details>
-
 <Callout type="info" title="Info">
 
 The `create-app` command installs all npm dependencies for both backend and frontend. This is a one-time cost; subsequent commands like `build` and `seed` are much faster.
@@ -137,7 +108,7 @@ Paste the one-line prompt below into your AI coding assistant (Claude Code, Curs
 
 <Callout type="info" title="Info">
 
-Agentic mode scaffolds against the same **full PostgreSQL** setup recommended for the manual path (spinning up a Docker container automatically, or connecting to an existing instance you point it at), then finishes the job for you: it runs `solidctl mcp install` inside the new project so your AI client's MCP config is wired up automatically, and starts the API, UI, and MCP server together with `solidctl start:dev`. The prompt points your agent at a self-contained instruction file that covers all of this, including a fallback to the embedded database if Docker and PostgreSQL aren't available.
+Agentic mode scaffolds against the same **PostgreSQL** setup as the manual path (spinning up a Docker container automatically, or connecting to an existing instance you point it at), then finishes the job for you: it runs `solidctl mcp install` inside the new project so your AI client's MCP config is wired up automatically, and starts the API, UI, and MCP server together with `solidctl start:dev`. The prompt points your agent at a self-contained instruction file that covers all of this.
 
 </Callout>
 

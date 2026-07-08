@@ -14,9 +14,9 @@ Prerequisite checks:
   - If Docker is running, continue to the database setup step below.
   - If Docker is not installed or not running, ask me whether I have an existing PostgreSQL 14+ instance you can connect to.
     - If yes, collect the host, port, database name, username, and password from me and skip the database setup step below.
-    - If no, **stop here** and tell me to either start/install Docker, point you at an existing PostgreSQL instance, or explicitly ask you to fall back to the embedded PGlite database for a quick trial (note if I choose the embedded fallback: it needs no Docker or credentials, but the [SolidX AI Agent](/docs/quick-start/using-solidx-ai-agent) and [MCP server](/docs/quick-start/using-solidx-mcp-server) are early-alpha with it). Do not proceed until I respond.
+    - If no, **stop here** and tell me to either start/install Docker or point you at an existing PostgreSQL instance. Do not proceed until I respond.
 
-Database setup (skip this step if I gave you an existing PostgreSQL instance, or if I explicitly chose the embedded fallback above):
+Database setup (skip this step if I gave you an existing PostgreSQL instance):
 
 - Use a project-scoped container and volume name so this doesn't collide with other SolidX projects on my machine: `<PROJECT_NAME>_db` and `<PROJECT_NAME>_pgdata`.
 - If a container named `<PROJECT_NAME>_db` already exists (e.g. from a previous run of this prompt), start it if it's stopped and reuse it instead of creating a new one.
@@ -36,7 +36,7 @@ Database setup (skip this step if I gave you an existing PostgreSQL instance, or
 
 Project scaffold (this step takes 5-10 minutes; npm installs all dependencies for both backend and frontend):
 
-- Full PostgreSQL (container you just started or an existing instance you connected to):
+- Scaffold against the PostgreSQL container you just started or an existing instance you connected to:
   ```
   solidctl create-app --no-interactive --name <PROJECT_NAME> \
     --db-client PostgreSQL \
@@ -47,7 +47,6 @@ Project scaffold (this step takes 5-10 minutes; npm installs all dependencies fo
     --db-password strongpassword
   ```
   Replace the `--db-*` values with whatever credentials I gave you if I pointed you at an existing instance.
-- Embedded fallback only (if I explicitly asked for it): `solidctl create-app --no-interactive --embedded --name <PROJECT_NAME>`
 - This step takes 5-10 minutes since it installs npm dependencies for both backend and frontend. Do not treat the long wait as a failure - wait for it to complete before continuing.
 
 Connect MCP (wires up whichever supported AI clients are installed on my machine - Claude Code, Claude Desktop, Cursor, and Codex):
