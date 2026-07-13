@@ -17,6 +17,7 @@ Verify the environment:
 
 ```bash
 docker --version
+node --version
 solidctl --version
 python --version
 ```
@@ -28,7 +29,7 @@ References:
 
 ## Set Up the Project
 
-On this page, you will start PostgreSQL, scaffold the Todo app against that database, and verify that the generated backend and admin UI both start correctly.
+On this page, you will start PostgreSQL, scaffold the Todo app against that database, install the SolidX MCP connection into your agent, and then start the generated backend and admin UI locally.
 
 By the end of this setup flow, you should be ready to generate the Todo module through your MCP-capable agent.
 
@@ -65,7 +66,7 @@ These values are fine for local tutorial use. Change them for any real environme
 
 <Callout type="tip" title="Recommended order">
 
-Start PostgreSQL first, then run `solidctl create-app`, then start the generated project with `solidctl start:dev`.
+Start PostgreSQL first, then run `solidctl create-app`, then run `solidctl mcp install` from the generated project, and only after that start the app with `solidctl start:dev`.
 
 </Callout>
 
@@ -100,10 +101,45 @@ The scaffold should finish by reporting that the backend and frontend boilerplat
 Scaffold the project:
 ![Project scaffold setup](/img/tutorial/todo-app/setup-project-scaffold.png)
 
-## Start the App
+## Connect Your AI Agent
+
+From the generated `todo-app` project root, run:
 
 ```bash
 cd todo-app
+solidctl mcp install
+```
+
+This command finds supported AI clients on your machine and writes the SolidX MCP server entry into their configuration automatically.
+
+Supported agents include:
+
+- Claude Code
+- Claude Desktop
+- Cursor
+- Codex
+
+Run the MCP install before starting the app. The install step prepares your AI client configuration first; after one client restart, `solidctl start:dev` will bring up the API, admin UI, and MCP server together.
+
+<Callout type="tip" title="About the API key">
+
+During scaffolding, SolidX writes an MCP config file under `~/.solidx/<project>/mcp.json`. The install command reads the API key from that file, so you do not need to copy a key manually for the first setup.
+
+If you later generate a new key from the admin UI, re-run the command with `--api-key sldx_...`.
+
+</Callout>
+
+<Callout type="info" title="Restart your client">
+
+After the install completes, restart your AI client before continuing. Most MCP-capable clients load new server entries only when they launch.
+
+</Callout>
+
+## Start the App
+
+After the MCP entry is installed and your AI client has been restarted, start the project from the same `todo-app` root:
+
+```bash
 solidctl start:dev
 ```
 
@@ -118,38 +154,9 @@ Available endpoints:
 - Swagger: `http://localhost:3000/docs`
 - Admin UI: `http://localhost:3001`
 
-## Connect Your AI Agent
-
-Run this from the same `todo-app` project root:
-
-```bash
-solidctl mcp install
-```
-
-This command detects supported agents on your machine and writes the SolidX MCP server entry into their config automatically.
-
-Supported agents include:
-
-- Claude Code
-- Claude Desktop
-- Cursor
-- Codex
-
-This keeps the MCP setup inside the same flow as project creation, which is the fastest path for this tutorial.
-
-<Callout type="tip" title="About the API key">
-
-During scaffolding, SolidX writes an MCP config file under `~/.solidx/<project>/mcp.json`.
-
-`solidctl mcp install` reads that API key automatically. If you later generate a new key from the admin UI, re-run the command with `--api-key sldx_...`.
-
-</Callout>
-
-You can also confirm this in the admin UI. After installation, the default super admin user already has a generated API key available under the `API Keys` tab:
+After signing in, you can verify the API key that MCP uses. The default super admin user already has a generated key under the `API Keys` tab:
 
 ![Default super admin API key](/img/tutorial/todo-app/default-sa-api-key.png)
-
-After the install completes, restart your client before continuing. Most MCP-capable clients only load new MCP server entries on launch.
 
 <Callout type="warning" title="MCP runtime note">
 
@@ -173,8 +180,8 @@ Reference:
 
 Only continue after you confirm:
 
-- the admin UI loads and you can sign in with the default super admin account
 - the agent was restarted if needed
 - the SolidX MCP entry is visible in your agent configuration
+- the admin UI loads and you can sign in with the default super admin account
 
 </Callout>
