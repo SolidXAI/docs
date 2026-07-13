@@ -1,0 +1,58 @@
+---
+title: Todo App with SolidX
+icon: "book-open"
+description: Build a working Todo app with SolidX, PostgreSQL, Swagger, and the SolidX MCP workflow.
+---
+
+## Tutorial Overview
+
+This tutorial walks you through the SolidX flow from zero to a working Todo app in a few minutes.
+
+This is a fast, beginner-first walkthrough. You start with PostgreSQL in Docker, scaffold a fresh SolidX app, install the SolidX MCP connection into your agent, start the app locally, and generate a working Todo module with two prompts.
+
+By the end, you will have:
+
+- Started PostgreSQL in Docker
+- Scaffolded a SolidX app
+- Connected an MCP-capable agent to SolidX
+- Generated a working `todo-management` module
+- Verified the generated CRUD API in Swagger
+- Identified a few concrete follow-up experiments to extend the app
+
+This tutorial is beginner-friendly. It is meant to show the fastest path to a real generated app, built using SolidX.
+
+## Tutorial Flow
+
+<Cards>
+  <Card title="Project Setup" href="/docs/tutorial/todo-app/project-setup">
+    Start PostgreSQL in Docker, scaffold the SolidX project, install the MCP connection into your agent, then bring up the admin UI and API locally.
+  </Card>
+  <Card title="Build the Todo App" href="/docs/tutorial/todo-app/build-todo-app">
+    Use two prompts to generate the Todo module, then verify the result in the UI and Swagger.
+  </Card>
+  <Card title="Next Steps" href="/docs/tutorial/todo-app/next-steps">
+    Extend the generated Todo app with a few practical follow-up exercises.
+  </Card>
+</Cards>
+
+## At a Glance
+
+<Cards>
+  <Card title="Time to Finish">
+    About 5 to 10 minutes if your local Docker, Node.js, and npm setup is already working.
+  </Card>
+  <Card title="What You Will Generate">
+    One `todo-management` module with a `todoItem` model, generated admin views, API routes, and menu wiring.
+  </Card>
+  <Card title="What You Will Use">
+    PostgreSQL, SolidX CLI, Swagger, and an MCP-capable client connected through the SolidX MCP server.
+  </Card>
+  <Card title="Where This Ends">
+    With a working generated module plus a short list of next experiments you can try immediately.
+  </Card>
+</Cards>
+
+## References
+
+- [Final tutorial project on GitHub](https://github.com/SolidXAI/tutorials/tree/main/todo-app)
+- [Using the SolidX MCP Server](https://docs.solidxai.com/docs/quick-start/using-solidx-mcp-server)
