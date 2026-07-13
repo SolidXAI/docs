@@ -10,6 +10,13 @@ This tutorial walks you through the SolidX flow from zero to a working Todo app 
 
 This is a fast, beginner-first walkthrough. You start with PostgreSQL in Docker, scaffold a fresh SolidX app, install the SolidX MCP connection into your agent, start the app locally, and generate a working Todo module with two prompts.
 
+## SolidX Concepts Used Here
+
+- A **module** groups related functionality. In this tutorial, `todo-management` is the module for the Todo feature.
+- A **model** describes the data the app stores. The `todoItem` model defines each Todo and its fields, such as `title` and `status`.
+- **Metadata** is the configuration SolidX uses to generate the initial API and admin UI from your module and model.
+- **MCP** connects your AI agent to the running SolidX app, allowing the agent to use SolidX tools while creating the module and model.
+
 By the end, you will have:
 
 - Started PostgreSQL in Docker

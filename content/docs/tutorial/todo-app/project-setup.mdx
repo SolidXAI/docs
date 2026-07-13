@@ -11,7 +11,13 @@ Install these prerequisites before starting the tutorial:
 - Docker Desktop or Docker Engine
 - Node.js 22+
 - `solidctl`
-- Python 3.13+ if you plan to use the MCP flow, because the SolidX MCP server and agent runtime are Python-based
+- Python 3.11+ if you plan to use the MCP flow, because the SolidX MCP server and agent runtime are Python-based
+
+Install the SolidX CLI if it is not already available:
+
+```bash
+npm install -g @solidxai/solidctl@latest
+```
 
 Verify the environment:
 
@@ -61,6 +67,21 @@ docker run -d \
 ```
 
 These values are fine for local tutorial use. Change them for any real environment.
+
+Wait until PostgreSQL is ready before scaffolding the app:
+
+```bash
+docker exec SolidX_DB pg_isready -U solidx_app_user -d solidx_app_db
+```
+
+Continue only when the command reports that PostgreSQL is accepting connections.
+
+<Callout type="warning" title="If Docker setup fails">
+
+- If Docker reports that `SolidX_DB` already exists, start the existing container with `docker start SolidX_DB`, then run the readiness check above.
+- If port `5432` is already in use, stop the other PostgreSQL service or change the Docker mapping to an available port, such as `-p 5433:5432`. Use that same host port when `solidctl create-app` asks for the database port.
+
+</Callout>
 
 ## Scaffold the App
 
@@ -154,6 +175,12 @@ Available endpoints:
 - Swagger: `http://localhost:3000/docs`
 - Admin UI: `http://localhost:3001`
 
+## Verify the MCP Connection
+
+Open a new session in your restarted AI client. In that client's MCP-server or tools view, confirm that `solidx-todo-app-mcp` is connected and that SolidX tools are available.
+
+Do not continue to the generation prompts until this connection is active. If the server is unavailable, review the [SolidX MCP Server guide](/docs/quick-start/using-solidx-mcp-server) before proceeding.
+
 After signing in, you can verify the API key that MCP uses. The default super admin user already has a generated key under the `API Keys` tab:
 
 ![Default super admin API key](/img/tutorial/todo-app/default-sa-api-key.png)
@@ -181,7 +208,7 @@ Reference:
 Only continue after you confirm:
 
 - the agent was restarted if needed
-- the SolidX MCP entry is visible in your agent configuration
+- `solidx-todo-app-mcp` is connected and SolidX tools are available in your agent
 - the admin UI loads and you can sign in with the default super admin account
 
 </Callout>
