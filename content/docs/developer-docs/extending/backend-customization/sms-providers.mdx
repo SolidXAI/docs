@@ -40,8 +40,8 @@ SolidX includes three providers out of the box. Each is decorated with `@SmsProv
 Sends SMS via the [Twilio](https://www.twilio.com/) SDK. It is the only built-in provider that supports **plain text messages** via `sendSMS()` in addition to template-based messages.
 
 **Supports:**
-- `sendSMS()` — sends a raw text body directly
-- `sendSMSUsingTemplate()` — renders a Handlebars template and sends the result
+- `sendSMS()` - sends a raw text body directly
+- `sendSMSUsingTemplate()` - renders a Handlebars template and sends the result
 - Comma-separated recipients in the `to` field
 - Synchronous and queued async delivery
 
@@ -62,7 +62,7 @@ export class NotificationService {
   constructor(private readonly smsService: TwilioSMSService) {}
 
   async sendWelcome(mobile: string, firstName: string) {
-    // Raw text — supported only by Twilio
+    // Raw text - supported only by Twilio
     await this.smsService.sendSMS(mobile, `Welcome, ${firstName}!`, false);
 
     // Or using a pre-configured template
@@ -84,12 +84,12 @@ Sends transactional SMS via [Msg91's](https://msg91.com/) `/flow` API endpoint.
 
 <Callout type="caution" title="Caution">
 
-`sendSMS()` is **not supported** — calling it throws an error. You must use `sendSMSUsingTemplate()` with a template that has a `smsProviderTemplateId` matching a pre-approved Msg91 template.
+`sendSMS()` is **not supported** - calling it throws an error. You must use `sendSMSUsingTemplate()` with a template that has a `smsProviderTemplateId` matching a pre-approved Msg91 template.
 
 </Callout>
 
 **Supports:**
-- `sendSMSUsingTemplate()` — posts template params as `recipients` to the Msg91 flow endpoint
+- `sendSMSUsingTemplate()` - posts template params as `recipients` to the Msg91 flow endpoint
 - Synchronous and queued async delivery
 
 **Required settings:**
@@ -132,12 +132,12 @@ Sends OTP SMS via [Msg91's](https://msg91.com/) dedicated `/otp` endpoint. Inten
 
 <Callout type="caution" title="Caution">
 
-`sendSMS()` is **not supported** — calling it throws an error. You must use `sendSMSUsingTemplate()` with a template that includes an `otp` parameter and a valid `smsProviderTemplateId`.
+`sendSMS()` is **not supported** - calling it throws an error. You must use `sendSMSUsingTemplate()` with a template that includes an `otp` parameter and a valid `smsProviderTemplateId`.
 
 </Callout>
 
 **Supports:**
-- `sendSMSUsingTemplate()` — passes `otp`, `template_id`, `mobile`, and `authkey` as URL query params to the Msg91 OTP endpoint
+- `sendSMSUsingTemplate()` - passes `otp`, `template_id`, `mobile`, and `authkey` as URL query params to the Msg91 OTP endpoint
 - Synchronous and queued async delivery
 
 **Required settings:**
@@ -149,7 +149,7 @@ Sends OTP SMS via [Msg91's](https://msg91.com/) dedicated `/otp` endpoint. Inten
 
 **Example:**
 
-The usage pattern is identical to `Msg91SMSService` — inject the service and call `sendSMSUsingTemplate()`. The key difference is that your template params must include an `otp` field, which gets forwarded as a query parameter to Msg91's OTP endpoint.
+The usage pattern is identical to `Msg91SMSService` - inject the service and call `sendSMSUsingTemplate()`. The key difference is that your template params must include an `otp` field, which gets forwarded as a query parameter to Msg91's OTP endpoint.
 
 ```ts
 import { Msg91OTPService } from "@solidxai/core";
@@ -301,7 +301,7 @@ export class CustomSMSService implements ISMS {
 
 ### 2) Register Your Custom Provider
 
-Your service must be decorated with `@SmsProvider()` (shown above) — this is what `SmsServiceFactory` uses to auto-discover the active provider. You also need to register it as a NestJS provider in your module.
+Your service must be decorated with `@SmsProvider()` (shown above) - this is what `SmsServiceFactory` uses to auto-discover the active provider. You also need to register it as a NestJS provider in your module.
 
 <details open>
 <summary><strong>Show code: <code>app.module.ts</code></strong></summary>

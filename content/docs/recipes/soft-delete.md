@@ -21,7 +21,7 @@ Set `enableSoftDelete: true` in the model's metadata JSON:
 }
 ```
 
-No service or controller changes needed — the CRUD layer picks this up automatically.
+No service or controller changes needed - the CRUD layer picks this up automatically.
 
 ---
 
@@ -53,18 +53,18 @@ export class Book extends CommonEntity {
 }
 ```
 
-If you add a unique field to a soft-delete-enabled model manually, follow this same pattern — don't use `@Unique` or a single-column unique `@Index`.
+If you add a unique field to a soft-delete-enabled model manually, follow this same pattern - don't use `@Unique` or a single-column unique `@Index`.
 
 ---
 
 ## Runtime Behaviour
 
-**Delete** — calls TypeORM's `softRemove()`, setting `deleted_at` and flipping `deleted_tracker` to `"deleted"`.
+**Delete** - calls TypeORM's `softRemove()`, setting `deleted_at` and flipping `deleted_tracker` to `"deleted"`.
 
 REST: `DELETE /api/{model}/{id}` · `DELETE /api/{model}/bulk`  
 Service: `bookService.delete(id)` · `bookService.deleteMany([id1, id2])`
 
-**Querying archived records** — use `showSoftDeleted` on `find()`:
+**Querying archived records** - use `showSoftDeleted` on `find()`:
 
 ```typescript
 // active only (default)
@@ -73,13 +73,13 @@ await bookService.find({});
 // active + archived
 await bookService.find({ showSoftDeleted: 'inclusive' });
 
-// archived only — e.g. for a trash view
+// archived only - e.g. for a trash view
 await bookService.find({ showSoftDeleted: 'exclusive' });
 ```
 
 The same parameter works on the REST API: `GET /api/book?showSoftDeleted=inclusive`.
 
-**Recover** — clears `deleted_at` and resets `deleted_tracker` to `"not-deleted"`. If a new active record already holds the same unique value as the one being recovered, the service throws a conflict error — resolve the conflict first.
+**Recover** - clears `deleted_at` and resets `deleted_tracker` to `"not-deleted"`. If a new active record already holds the same unique value as the one being recovered, the service throws a conflict error - resolve the conflict first.
 
 ```typescript
 await bookService.recover(id);
@@ -94,4 +94,4 @@ See [Delete endpoint](/docs/developer-docs/rest-apis/delete) and [Recover endpoi
 
 ## UI
 
-When `enableSoftDelete: true`, the list view gains a **"Show Archived Records"** checkbox in the settings (cog) menu. Toggling it sends `showSoftDeleted: "inclusive"` with the list query — archived rows appear greyed out alongside active ones. Each archived row shows a **Recover** icon instead of the usual context menu; selecting multiple archived rows surfaces a bulk **Recover** button in the toolbar.
+When `enableSoftDelete: true`, the list view gains a **"Show Archived Records"** checkbox in the settings (cog) menu. Toggling it sends `showSoftDeleted: "inclusive"` with the list query - archived rows appear greyed out alongside active ones. Each archived row shows a **Recover** icon instead of the usual context menu; selecting multiple archived rows surfaces a bulk **Recover** button in the toolbar.

@@ -3,6 +3,7 @@
   "icon": "chef-hat",
   "pages": [
     "additional-datasources",
+    "customizing-ui-theme",
     "filtering",
     "relation-field-filtering",
     "soft-delete",

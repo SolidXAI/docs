@@ -55,7 +55,7 @@ The `selectionDynamicProviderCtxt` specifies which fields from the API response 
 
 
 <Callout type="info" title="Tip">
-  - SolidX ships with built-in providers for common use cases — see [Built-in Selection Providers](../reference/built-in-selection-providers) for details on **`ListOfValuesSelectionProvider`** and **`PseudoForeignKeySelectionProvider`**.
+  - SolidX ships with built-in providers for common use cases - see [Built-in Selection Providers](../reference/built-in-selection-providers) for details on **`ListOfValuesSelectionProvider`** and **`PseudoForeignKeySelectionProvider`**.
 - Create a **custom provider** when the logic for fetching or filtering is more complex, or when data comes from an external source like an API.
 </Callout>
 
@@ -187,7 +187,7 @@ export interface ISelectionProvider<T extends ISelectionProviderContext> {
   // Unique name of the provider
   name(): string;
 
-  // Deprecated method — throw NotImplementedException
+  // Deprecated method - throw NotImplementedException
   value(optionValue: string, ctxt: T): Promise<ISelectionProviderValues | any>;
 
   // Fetch selection options dynamically

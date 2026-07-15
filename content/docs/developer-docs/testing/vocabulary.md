@@ -66,7 +66,7 @@ In practice, SUT mode usually means:
 The module whose `testing` metadata is being loaded and executed, typically passed through:
 
 ```bash
-npx @solidxai/solidctl@latest test run --module venue
+solidctl test run --module venue
 ```
 
 ### Datasource
@@ -234,7 +234,7 @@ Read the hierarchy like this:
 
 BDD-style step phases used for readability.
 
-These phases are normalised before execution — the engine treats all four identically.
+These phases are normalised before execution - the engine treats all four identically.
 
 Use `given` for preconditions, `when` for the action under test, `then` for assertions, and `and` to continue the previous phase without repeating it. The choice is a reading aid, not a rule.
 

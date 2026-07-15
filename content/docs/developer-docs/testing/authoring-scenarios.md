@@ -57,11 +57,11 @@ Fields:
 - `permissions` (optional): list of permission names to bind to this role
 
 Permission syntax:
-- Exact: `ControllerName.methodName` — binds a single action
-- Wildcard: `ControllerName.*` — binds all actions on that controller
-- Global: `*` — binds every registered permission to the role
+- Exact: `ControllerName.methodName` - binds a single action
+- Wildcard: `ControllerName.*` - binds all actions on that controller
+- Global: `*` - binds every registered permission to the role
 
-Roles are seeded idempotently — created if absent, left unchanged if they already exist.
+Roles are seeded idempotently - created if absent, left unchanged if they already exist.
 
 '> **Note**
 
@@ -90,7 +90,7 @@ Fields:
 - `password` (required): login password
 - `fullName` (optional): display name
 - `mobile` (optional): mobile number
-- `roles` (optional): list of role names to assign — declare these in `testing.roles` first
+- `roles` (optional): list of role names to assign - declare these in `testing.roles` first
 
 Users are skipped if a user with the same username already exists. They are not deleted during teardown.
 
@@ -177,7 +177,7 @@ Steps can be written in two ways.
 }
 ```
 
-The engine normalises both forms before execution — there is no runtime difference between them.
+The engine normalises both forms before execution - there is no runtime difference between them.
 
 Use `given` for setup steps, `when` for the action being tested, `then` for assertions, and `and` to continue the previous phase without repeating it.
 
@@ -297,7 +297,7 @@ Later steps read the token via:
 "Authorization": "Bearer ${res:loginSuccess.bodyJson.data.accessToken}"
 ```
 
-Saving the full response rather than only the token preserves everything the API returns — useful when later steps need other response fields.
+Saving the full response rather than only the token preserves everything the API returns - useful when later steps need other response fields.
 
 ## Scenario Chaining With `util.require`
 

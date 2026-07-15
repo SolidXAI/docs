@@ -9,8 +9,8 @@ keywords: [filters, query, operators, REST API, CRUD service]
 
 SolidX provides a powerful filtering syntax that works consistently across two layers:
 
-- **REST API** — pass filters as query-string parameters when calling the [Retrieve endpoints](../developer-docs/rest-apis/retrieve).
-- **CRUD Service** — pass a `filters` object inside the DTO when calling [`find()`](../developer-docs/extending/backend-customization/crud-service#4-findfilterdto-context) or [`findOne()`](../developer-docs/extending/backend-customization/crud-service#5-findoneid-query-context) from backend code.
+- **REST API** - pass filters as query-string parameters when calling the [Retrieve endpoints](../developer-docs/rest-apis/retrieve).
+- **CRUD Service** - pass a `filters` object inside the DTO when calling [`find()`](../developer-docs/extending/backend-customization/crud-service#4-findfilterdto-context) or [`findOne()`](../developer-docs/extending/backend-customization/crud-service#5-findoneid-query-context) from backend code.
 
 The syntax and available operators are identical in both cases.
 
@@ -70,7 +70,7 @@ When several fields are passed, they are implicitly combined with **`$and`**.
 
 ### Simple filters
 
-**1. Equal match** — Get all active users
+**1. Equal match** - Get all active users
 
 ```ts
 // Service DTO
@@ -80,7 +80,7 @@ filters: { status: { $eq: 'active' } }
 // GET /api/users?filters[status][$eq]=active
 ```
 
-**2. Greater-than & contains** — Get users with age > 25 whose name contains "John"
+**2. Greater-than & contains** - Get users with age > 25 whose name contains "John"
 
 ```ts
 // Service DTO
@@ -93,7 +93,7 @@ filters: {
 // GET /api/users?filters[age][$gt]=25&filters[name][$containsi]=john
 ```
 
-**3. Range query** — Get all high-value paid fee transactions
+**3. Range query** - Get all high-value paid fee transactions
 
 ```ts
 // Service DTO
@@ -108,7 +108,7 @@ filters: {
 
 ### Nested filters
 
-**4. Using `$and`** — Get users aged > 25 AND status = active
+**4. Using `$and`** - Get users aged > 25 AND status = active
 
 ```ts
 // Service DTO
@@ -123,7 +123,7 @@ filters: {
 // GET /api/users?filters[$and][0][age][$gt]=25&filters[$and][1][status][$eq]=active
 ```
 
-**5. Using `$or`** — Get users whose name starts with "A" OR who have role "admin"
+**5. Using `$or`** - Get users whose name starts with "A" OR who have role "admin"
 
 ```ts
 // Service DTO
@@ -138,7 +138,7 @@ filters: {
 // GET /api/users?filters[$or][0][name][$startsWithi]=a&filters[$or][1][role][$eq]=admin
 ```
 
-**6. Combining `$and` with `$or`** — Get active users who are either admins or have age > 30
+**6. Combining `$and` with `$or`** - Get active users who are either admins or have age > 30
 
 ```ts
 filters: {
@@ -162,7 +162,7 @@ filters: {
 
 The `find()` method supports grouping records by one or more fields, with optional aggregation functions. This works via both REST API query strings and the CRUD service DTO.
 
-When grouping is active, the response shape changes — instead of a flat list of records, you receive **group metadata** (and optionally the records within each group).
+When grouping is active, the response shape changes - instead of a flat list of records, you receive **group metadata** (and optionally the records within each group).
 
 The relevant DTO fields are:
 
@@ -184,7 +184,7 @@ The examples below use a **PincodeMaster** model that has many-to-one `state` an
 Pass one or more field names in the `groupBy` array. If no `aggregates` are specified, `COUNT(*)` is applied automatically.
 
 ```ts
-// Service DTO — group by a scalar field
+// Service DTO - group by a scalar field
 const result = await pincodeMasterService.find({
   limit: 200,
   offset: 0,
@@ -202,7 +202,7 @@ The response includes `groupMeta` (one entry per group with group key + aggregat
 Group-by fields can traverse **many-to-one** relations using dot notation. The query builder automatically joins the related table.
 
 ```ts
-// Service DTO — group by state and city
+// Service DTO - group by state and city
 const result = await pincodeMasterService.find({
   limit: 200,
   offset: 0,
@@ -237,7 +237,7 @@ Group date/timestamp fields by a time bucket using the syntax `field:granularity
 **Supported formats:** `MMM`, `MMMM`, `YYYY`, `YYYY-MM`, `YYYY-MM-DD`
 
 ```ts
-// Service DTO — group by month
+// Service DTO - group by month
 const result = await pincodeMasterService.find({
   limit: 200,
   offset: 0,
@@ -269,7 +269,7 @@ Specify aggregate functions using the syntax `field:function` in the `aggregates
 **Supported functions:** `count`, `count_distinct`, `sum`, `avg`, `min`, `max`
 
 ```ts
-// Service DTO — distinct pincodes per state
+// Service DTO - distinct pincodes per state
 const result = await pincodeMasterService.find({
   limit: 200,
   offset: 0,
@@ -284,7 +284,7 @@ const result = await pincodeMasterService.find({
 Multiple aggregates:
 
 ```ts
-// Service DTO — total rows and distinct IDs per state/city group
+// Service DTO - total rows and distinct IDs per state/city group
 const result = await pincodeMasterService.find({
   limit: 200,
   offset: 0,
@@ -308,7 +308,7 @@ Combine date granularity, relations, and aggregates:
 When grouping is active, `sort` and `offset`/`limit` apply to **group rows**, not individual entity rows. `meta.totalRecords` reflects the total number of groups (computed without pagination).
 
 ```ts
-// Service DTO — sort groups alphabetically by state name, paginate to 50 groups
+// Service DTO - sort groups alphabetically by state name, paginate to 50 groups
 const result = await pincodeMasterService.find({
   limit: 50,
   offset: 0,
@@ -344,14 +344,14 @@ const result = await pincodeMasterService.find({
 // GET /api/pincode-master?offset=0&limit=200&groupBy[0]=state.name&populateGroup=true&groupFilter[limit]=10&groupFilter[offset]=0&groupFilter[sort][0]=pincode:ASC
 ```
 
-The response includes a `groupRecords` array — each entry contains the group key, aggregate values, and a nested `records` array with pagination meta.
+The response includes a `groupRecords` array - each entry contains the group key, aggregate values, and a nested `records` array with pagination meta.
 
 ### Combining filters with grouping
 
 All standard filter operators work alongside grouping. Filters are applied **before** grouping, so only matching rows are considered.
 
 ```ts
-// Service DTO — groups only for state "Maharashtra"
+// Service DTO - groups only for state "Maharashtra"
 const result = await pincodeMasterService.find({
   limit: 200,
   offset: 0,

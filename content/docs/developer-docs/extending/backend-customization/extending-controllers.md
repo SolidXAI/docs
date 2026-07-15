@@ -81,7 +81,7 @@ The first method (`activateInstitute`) handles `POST /activate-institute-portal`
 ## Permission Auto-Generation
 
 
-When you run `npx @solidxai/solidctl@latest seed`, SolidX scans controllers and their methods to **auto-generate permissions**.  
+When you run `solidctl seed`, SolidX scans controllers and their methods to **auto-generate permissions**.  
 For example, the method `activateInstitute` in `InstituteController` will generate a permission named:
 
 ```

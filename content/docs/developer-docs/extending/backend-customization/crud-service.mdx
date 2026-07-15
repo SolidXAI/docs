@@ -7,7 +7,7 @@ keywords: [backend, services, CRUD, customization]
 solidx_concerns: [backend.service_changes, using_crud_service_method, add_custom_service_method]
 ---
 
-# CRUD Service — Usage & Extension Guide
+# CRUD Service - Usage & Extension Guide
 
 The **CRUD Service** is the backbone of data management in **SolidX**. It standardizes Create, Read, Update, and Delete operations for any model and adds niceties like permission checks, field-level validation/transformations, media handling, and soft-delete recovery.
 
@@ -24,15 +24,15 @@ The generated service classes for SolidX models already extend the CRUD service.
 ## What You Get Out‑of‑the‑Box
 
 - **Public API** (available on any subclass):  
-  - `create(createDto, files?, context?)` — create a record  
-  - `update(id, updateDto, files?, isPartial?, context?)` — update/patch a record  
-  - `delete(id, context?)` — delete (soft/hard based on model)  
-  - `find(filterDto, context?)` — list with filters, pagination, grouping  
-  - `findOne(id, query, context?)` — fetch 1 by id, with relations/media  
-  - `insertMany(createDtos, filesArray?, context?)` — bulk insert  
-  - `deleteMany(ids, context?)` — bulk delete  
-  - `recover(id, context?)` — unarchive a soft-deleted row  
-  - `recoverMany(ids, context?)` — bulk unarchive
+  - `create(createDto, files?, context?)` - create a record  
+  - `update(id, updateDto, files?, isPartial?, context?)` - update/patch a record  
+  - `delete(id, context?)` - delete (soft/hard based on model)  
+  - `find(filterDto, context?)` - list with filters, pagination, grouping  
+  - `findOne(id, query, context?)` - fetch 1 by id, with relations/media  
+  - `insertMany(createDtos, filesArray?, context?)` - bulk insert  
+  - `deleteMany(ids, context?)` - bulk delete  
+  - `recover(id, context?)` - unarchive a soft-deleted row  
+  - `recoverMany(ids, context?)` - bulk unarchive
 
 - **Metadata‑driven** field managers (validation + transformation per field type)  
 - **Media** storage/retrieval for `mediaSingle` / `mediaMultiple` fields  
@@ -86,7 +86,7 @@ export class PersonService extends CRUDService<Person> {
 
 <Callout type="info">
 
-Any subclass automatically inherits all CRUD methods and can call `this.repo`, `this.entityManager`, etc. Internal services like `ModelMetadataService`, `CrudHelperService`, and `DiscoveryService` are resolved lazily by the base class via `ModuleRef` — you do not need to inject or forward them.
+Any subclass automatically inherits all CRUD methods and can call `this.repo`, `this.entityManager`, etc. Internal services like `ModelMetadataService`, `CrudHelperService`, and `DiscoveryService` are resolved lazily by the base class via `ModuleRef` - you do not need to inject or forward them.
 
 </Callout>
 
@@ -193,7 +193,7 @@ await personService.create(
     // For media: will be taken from `files` below
   },
   [
-    // Express.Multer.File[] — optional
+    // Express.Multer.File[] - optional
     // { fieldname: "fileLocation", ... }, // example media field (mediaSingle)
   ]
   // context is optional when calling manually
@@ -266,7 +266,7 @@ const result = await personService.find(
     populateMedia: ["fileLocation", "attachments"],
     // Sort (ASC by default; use "-" prefix for DESC, depending on your CrudHelperService’s convention)
     sort: ["name"],
-    // Optional grouping — returns meta per group and groupRecords if populateGroup=true
+    // Optional grouping - returns meta per group and groupRecords if populateGroup=true
     groupBy: [],
     populateGroup: false,
     // Optional filters payload interpreted by your CrudHelperService
@@ -323,7 +323,7 @@ console.log(first._full_url); // absolute URL to the file
 
 ### 6) `insertMany(createDtos, filesArray?, context?)`
 
-**What this shows:** How to bulk insert records. The base implementation ignores `filesArray` (kept as `[]`) — add your own override if you need per-row media support.
+**What this shows:** How to bulk insert records. The base implementation ignores `filesArray` (kept as `[]`) - add your own override if you need per-row media support.
 
 <details open>
 <summary>Show code</summary>

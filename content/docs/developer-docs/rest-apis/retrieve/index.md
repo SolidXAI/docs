@@ -10,8 +10,8 @@ solidx_concerns: [frontend.custom_pages, add_full_custom_ui]
 
 The retrieve endpoints allow you to fetch records from the system. There are two endpoints:
 
-- **Find** — retrieve a list of records with filtering, pagination, sorting, and field selection.
-- **FindOne** — retrieve a single record by its ID.
+- **Find** - retrieve a list of records with filtering, pagination, sorting, and field selection.
+- **FindOne** - retrieve a single record by its ID.
 
 ---
 
@@ -31,7 +31,7 @@ Returns a paginated list of records for a given model.
 | `sort` | string[] | Columns to sort by (prefix with `-` for descending, e.g. `sort[0]=-createdAt`) |
 | `populate` | string[] | Relations to load (e.g. `populate[0]=department&populate[1]=roles.permissions`) |
 | `populateMedia` | string[] | Media fields whose URLs should be resolved (e.g. `populateMedia[0]=avatar`) |
-| `filters` | object | Filter expressions — see [Filtering Data](../../../recipes/filtering) for the full syntax and operators |
+| `filters` | object | Filter expressions - see [Filtering Data](../../../recipes/filtering) for the full syntax and operators |
 
 ### Example Request
 

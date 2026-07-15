@@ -20,6 +20,7 @@ These installation instructions are provided as a **guideline**. Environments di
   - <strong>Database:</strong> stores both application data and SolidX metadata.
     - <strong>Git:</strong> versions your code and metadata changes safely.
     - <strong>Node.js + npm:</strong> powers <code>solidctl</code>, dependency installation, and local builds.
+    - <strong>Python 3.13+:</strong> required for the SolidX MCP server and agent tooling.
     - <strong>Supporting CLI tools:</strong> help with the current development workflow such as code generation and asset copying.
   So the intuition is simple: first prepare persistence, then prepare the toolchain, then add the small helper utilities the workflow still depends on.
 
@@ -185,7 +186,48 @@ npm -v
 
 ---
 
-## 4.  Install schematics-cli
+## 4. Python 3.13+
+
+### Why this matters
+
+Python is required if you plan to install or run the **SolidX MCP server** or use the **SolidX agent**. These components are Python-based and depend on features available only in Python 3.13 and above.
+
+If you are only working with the core SolidX application (API + UI), Python is not needed. It becomes a requirement the moment you bring in the MCP server or agent tooling.
+
+<h4>
+
+ On Ubuntu / macOS
+
+</h4>
+
+<Callout type="info">
+
+We recommend using [pyenv](https://github.com/pyenv/pyenv) to manage Python versions, similar to how nvm manages Node.js. This keeps your system Python untouched and lets you switch versions cleanly.
+
+</Callout>
+
+```bash
+# Install pyenv (Ubuntu / macOS)
+curl https://pyenv.run | bash
+
+# Reload shell, then install Python 3.13
+pyenv install 3.13
+pyenv global 3.13
+
+# Validate installation:
+python --version   # should show Python 3.13.x
+pip --version
+```
+
+<Callout type="info" title="Alternative">
+
+On macOS you can also use Homebrew: `brew install python@3.13`. On Ubuntu, use the [deadsnakes PPA](https://launchpad.net/~deadsnakes/+archive/ubuntu/ppa) if 3.13 is not available in the default apt repos.
+
+</Callout>
+
+---
+
+## 5.  Install schematics-cli
 
 ### Why this matters
 
@@ -216,7 +258,7 @@ schematics --version
 
 ---
 
-##  5.  Install copyfiles
+##  6.  Install copyfiles
 
 ### Why this matters
 

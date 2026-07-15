@@ -2,6 +2,7 @@
   "title": "Tutorial",
   "icon": "graduation-cap",
   "pages": [
+    "todo-app",
     "school-fees-portal"
   ]
 }

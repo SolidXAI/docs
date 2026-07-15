@@ -63,7 +63,7 @@ To apply metadata changes made in the JSON file directly, you must sync the data
 1. **Seed metadata into the database**:
 
 ```bash
-npx @solidxai/solidctl@latest seed
+solidctl seed
 ```
 
 This command reads all metadata files and updates the `SolidX` database.
@@ -75,10 +75,10 @@ It is responsible for populating the platform metadata needed by SolidX.
 
 ```bash
 # If your metadata changes involve code generation, prefer regenerating the module:
-npx @solidxai/solidctl@latest generate module
+solidctl generate module
 
 # If you want a smaller, targeted refresh, generate a single model:
-npx @solidxai/solidctl@latest generate model
+solidctl generate model
 ```
 
 This step ensures the generated code reflects the latest metadata.
@@ -87,7 +87,7 @@ Typical cases where this extra step is required:
 - Adding fields to a model
 
 <Callout type="info" title="Tip">
-  Just running the `npx @solidxai/solidctl@latest seed` command is sufficient for most cases, except the ones mentioned above, since the platform reads the metadata directly from the database at runtime.
+  Just running the `solidctl seed` command is sufficient for most cases, except the ones mentioned above, since the platform reads the metadata directly from the database at runtime.
 </Callout>
 
 ### What Gets Seeded

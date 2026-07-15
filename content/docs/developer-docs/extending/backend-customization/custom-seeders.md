@@ -12,7 +12,7 @@ solidx_concerns: []
 
 ## Overview
 
-Seeders in SolidX let you populate your database with initial or test data — things like default roles, lookup values, demo records, or any other data your application needs to function.
+Seeders in SolidX let you populate your database with initial or test data - things like default roles, lookup values, demo records, or any other data your application needs to function.
 
 SolidX ships with built-in seeders (e.g. for permission metadata), but you can create your own custom seeders for any data specific to your project.
 
@@ -90,7 +90,7 @@ import { CountrySeederService } from './seeders/country-seeder.service';
 export class AppModule {}
 ```
 
-That's it — SolidX will automatically discover any provider decorated with `@SolidSeeder` and register it in the `SolidRegistry`.
+That's it - SolidX will automatically discover any provider decorated with `@SolidSeeder` and register it in the `SolidRegistry`.
 
 ## Running a Seeder
 
@@ -99,16 +99,16 @@ Seeders are executed via the CLI using the built-in `seed` command.
 ### Basic Usage
 
 ```bash
-npx @solidxai/solidctl seed --seeder CountrySeederService
+solidctl seed --seeder CountrySeederService
 ```
 
 The `--seeder` (`-s`) flag specifies the **class name** of the seeder to run.
 
 ## How It Works
 
-1. **Discovery** — On application bootstrap, SolidX scans all providers for the `@SolidSeeder` decorator and registers them in the `SolidRegistry`.
-2. **Lookup** — When you run the `seed` CLI command, it looks up the seeder by class name from the registry.
-3. **Execution** — The seeder's `seed()` method is called.
+1. **Discovery** - On application bootstrap, SolidX scans all providers for the `@SolidSeeder` decorator and registers them in the `SolidRegistry`.
+2. **Lookup** - When you run the `seed` CLI command, it looks up the seeder by class name from the registry.
+3. **Execution** - The seeder's `seed()` method is called.
 
 ## Summary
 
@@ -117,4 +117,4 @@ The `--seeder` (`-s`) flag specifies the **class name** of the seeder to run.
 | 1 | Create a service with a `seed()` method |
 | 2 | Decorate it with `@Injectable()` and `@SolidSeeder` |
 | 3 | Register it in your module's `providers` array |
-| 4 | Run it via `npx @solidxai/solidctl seed --seeder YourSeederService` |
+| 4 | Run it via `solidctl seed --seeder YourSeederService` |

@@ -1,0 +1,64 @@
+---
+title: "Using SolidX AI Agent"
+icon: "bot"
+description: "Build modules, models, and features through natural language with the SolidX AI agent."
+summary: "Start the SolidX AI agent server and run tasks in natural language. Requires a bootstrapped SolidX project from the main Getting Started guide."
+---
+
+# Using SolidX AI Agent
+
+Once your SolidX project is running, you can start the SolidX AI agent to build modules, models, and features through natural language.
+
+<Callout type="warning" title="Prerequisite: bootstrap a project first">
+
+This guide assumes you have already scaffolded and started a SolidX project using `solidctl create-app` and `solidctl start:dev`, as described in the [main Getting Started guide](/docs/quick-start). The agent operates on an existing project - it does not create one.
+
+</Callout>
+
+<Callout type="info" title="Python requirement">
+
+The SolidX AI agent requires **Python 3.11+**. Verify with `python3 --version`. On first run, `solidctl agent start` auto-installs the agent's Python package into `~/.solidx/venv` if `solidx-agent` is not already in PATH.
+
+</Callout>
+
+---
+
+## Start the agent server
+
+```bash
+solidctl agent start
+```
+
+Open the Chat UI at `http://localhost:8768`.
+
+## Run a single task (CLI)
+
+```bash
+solidctl agent run "Build a CRM with Lead and Contact models, add name/email/phone fields"
+```
+
+Options:
+
+| Flag | Default | Description |
+|---|---|---|
+| `-m, --mode` | `native` | Tool mode: `native` or `mcp` |
+| `-l, --log-level` | `INFO` | Logging level |
+
+---
+
+## Agent commands
+
+| Command | What it does |
+|---|---|
+| `agent start` | Start the AI agent server |
+| `agent run "<task>"` | Run a single agent task |
+
+Full reference: [solidctl Commands](/docs/developer-docs/solidctl-commands)
+
+---
+
+## Next Steps
+
+- Explore the agent Chat UI at `http://localhost:8768`.
+- Connect an external MCP client to SolidX: see [Using SolidX MCP Server](/docs/quick-start/using-solidx-mcp-server).
+- Go deeper: read the [Reference](/docs/developer-docs/) and [Recipes](/docs/recipes/).

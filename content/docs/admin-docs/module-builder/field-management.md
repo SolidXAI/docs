@@ -105,13 +105,13 @@ TODO: Remove the validations & regex fields from this field.
 
   ### Rich Text
 
-Rich Text fields allow users to input and store formatted content—including bold, italics, lists, links, and more—making them ideal for articles, documentation, or any content that requires styling.
+Rich Text fields allow users to input and store formatted content-including bold, italics, lists, links, and more-making them ideal for articles, documentation, or any content that requires styling.
 
 ![Rich Text](/img/admin-docs/module-builder/rich-text-field.png)
 
   ### JSON
 
-JSON fields are used to store structured data as key-value pairs. They support both json and jsonb storage formats—where jsonb allows efficient indexing and querying, making it ideal for advanced filtering and partial matching of nested data.
+JSON fields are used to store structured data as key-value pairs. They support both json and jsonb storage formats-where jsonb allows efficient indexing and querying, making it ideal for advanced filtering and partial matching of nested data.
 
 ![JSON](/img/admin-docs/module-builder/json-field.png)
 
@@ -305,15 +305,15 @@ Use a SelectionStatic field to store a user's status (Active/Inactive), a priori
 
   ### Dynamic Selection
 
-The SelectionDynamic field provides all the usability of a dropdown or selectable list—just like the SelectionStatic field—but with dynamic, runtime-driven values sourced from backend logic.
+The SelectionDynamic field provides all the usability of a dropdown or selectable list-just like the SelectionStatic field-but with dynamic, runtime-driven values sourced from backend logic.
 
 Key Features:
 - Dynamic Data Source: Values are fetched at runtime from a backend SelectionDynamicProvider, a NestJS service class that implements a standard interface defined by SolidX. This enables integration with external APIs, databases, or complex business rules.
-- Context Support: A JSON object can be passed to the provider to supply runtime context—such as the current user, form data, or other filters—to dynamically control which options are returned.
+- Context Support: A JSON object can be passed to the provider to supply runtime context-such as the current user, form data, or other filters-to dynamically control which options are returned.
 - Type Safety & Flexibility: The returned options follow the familiar label-value format, and the value type can be configured as either a string or integer.
 
 Advanced Use Case Example:
-Let's say you're building an event management app in SolidX. When creating a new session, you want to select a speaker for that session—but only from a list of available speakers who are:
+Let's say you're building an event management app in SolidX. When creating a new session, you want to select a speaker for that session-but only from a list of available speakers who are:
 - Assigned to the same event
 - Not already booked in another session at the same time
 

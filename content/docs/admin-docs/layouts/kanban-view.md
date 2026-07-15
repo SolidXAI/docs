@@ -7,7 +7,7 @@ icon: "columns-3"
 
 The Kanban View in SolidX is a powerful, metadata-driven interface that presents model records grouped by a specific fields in a Kanban format. It is auto-generated based on the model and field definitions and is fully configurable through a structured JSON layout.
 
-Just like the List View, this is also a collection view hence this view supports robust features such as searching, filtering, sorting, pagination, data import/export, and custom actions—making it ideal for managing large collections of data with ease and flexibility. Over and above everything the list view provides, the Kanban view allows one to group the data on a field. The SolidX backend automatically manages grouping creating one swimlane for each distinct group value, the Kanban view is scalable in that it allows you to do pagination within each swimlane, and also if the unique number of groups is very large then pagination against the actual groups also.
+Just like the List View, this is also a collection view hence this view supports robust features such as searching, filtering, sorting, pagination, data import/export, and custom actions-making it ideal for managing large collections of data with ease and flexibility. Over and above everything the list view provides, the Kanban view allows one to group the data on a field. The SolidX backend automatically manages grouping creating one swimlane for each distinct group value, the Kanban view is scalable in that it allows you to do pagination within each swimlane, and also if the unique number of groups is very large then pagination against the actual groups also.
 
 ## JSON Layout
 

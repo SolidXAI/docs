@@ -1,0 +1,152 @@
+---
+title: Getting Started
+icon: "rocket"
+description: "Get a SolidX project running in under 5 minutes, manually or let your AI agent do it."
+summary: "Two paths to a working SolidX project. Manual mode walks you through every step. Agentic mode gives you a one-line prompt to paste into Claude Code, Cursor, Codex, or any AI coding assistant. Both paths scaffold against a PostgreSQL server."
+---
+
+## Prerequisites
+
+| Requirement | Version | Required for | Check |
+|---|---|---|---|
+| **Node.js** | 22+ (LTS recommended) | All modes | `node -v` |
+| **Docker** | Latest stable | Manual path - spin up PostgreSQL locally if you do not already have an instance | `docker --version` |
+| **PostgreSQL** | 14+ | Manual path - connect to an existing instance, or use Docker to start one | `psql --version` |
+| **Python** | 3.11+ | Agent & MCP only | `python3 --version` |
+
+Node.js is required for all paths. Scaffolding in Step 2 also needs Docker or an existing PostgreSQL instance. Python is only needed if you plan to use the [SolidX AI Agent](/docs/quick-start/using-solidx-ai-agent) or [MCP server](/docs/quick-start/using-solidx-mcp-server).
+
+---
+
+## Mode 1: Manual
+
+### Step 1: Install solidctl
+
+Install the SolidX CLI globally so it's available from any directory:
+
+```bash
+npm i -g @solidxai/solidctl@latest
+```
+
+Verify the installation:
+
+```bash
+solidctl --version
+```
+
+### Step 2: Scaffold the project
+
+You can connect to an existing PostgreSQL instance or spin one up with Docker.
+
+If you don't already have PostgreSQL running, start a container:
+
+```bash
+docker run -d \
+  --name SolidX_DB \
+  -e POSTGRES_USER=solidx_app_user \
+  -e POSTGRES_PASSWORD=strongpassword \
+  -e POSTGRES_DB=solidx_app_db \
+  -p 5432:5432 \
+  -v solidx_pgdata:/var/lib/postgresql/data \
+  postgres:17
+```
+
+Then scaffold against it:
+
+```bash
+solidctl create-app \
+  --name my-solid-app \
+  --no-interactive \
+  --db-client PostgreSQL \
+  --db-host localhost \
+  --db-port 5432 \
+  --db-name solidx_app_db \
+  --db-username solidx_app_user \
+  --db-password strongpassword
+```
+
+<Callout type="warning" title="Change the default credentials">
+
+The username (`solidx_app_user`), password (`strongpassword`), and database name (`solidx_app_db`) shown above are for a fast first run only. **Change them to values you control** before any real use, and use those same values in the `create-app` command above.
+
+</Callout>
+
+If you have an existing PostgreSQL database, replace the `--db-*` values with your own credentials. Or run the interactive scaffolding and enter your credentials when prompted:
+
+```bash
+solidctl create-app
+```
+
+<Callout type="info" title="Info">
+
+The `create-app` command installs all npm dependencies for both backend and frontend. This is a one-time cost; subsequent commands like `build` and `seed` are much faster.
+
+</Callout>
+
+### Step 3: Start the services
+
+Move into the project folder and start both the backend API and frontend admin panel in one supervisor:
+
+```bash
+cd my-solid-app && solidctl start:dev
+```
+
+Open the admin panel at `http://localhost:3001` and log in:
+
+| Field | Value |
+|---|---|
+| Username | `sa` |
+| Password | `Admin@3214$` |
+
+That's it. Your SolidX project is running. Start building modules via the admin panel, or extend the generated code directly.
+
+---
+
+## Mode 2: Agentic
+
+Paste the one-line prompt below into your AI coding assistant (Claude Code, Cursor Agent, Codex CLI, Windsurf, etc.) from the directory where you want the project created.
+
+<Callout type="info" title="Info">
+
+Agentic mode scaffolds against the same **PostgreSQL** setup as the manual path (spinning up a Docker container automatically, or connecting to an existing instance you point it at), then finishes the job for you: it runs `solidctl mcp install` inside the new project so your AI client's MCP config is wired up automatically, and starts the API, UI, and MCP server together with `solidctl start:dev`. The prompt points your agent at a self-contained instruction file that covers all of this.
+
+</Callout>
+
+```text
+Set up a new SolidX project for me. Read and follow every step in https://docs.solidxai.com/agentic-install.md and give me a single report at the end.
+```
+
+Your AI agent will execute all the steps, including connecting itself to the SolidX MCP server, and report back once with everything you need when the project is ready to use.
+
+<Callout type="warning" title="Restart your AI client after setup">
+
+`solidctl mcp install` updates your AI client's MCP configuration, but a running session can't reload it on its own. Your agent's final report will include a command to start the project yourself in your own terminal - run that first, then restart the current Claude Code / Cursor / Codex session or window so it picks up the new SolidX MCP tools.
+
+</Callout>
+
+---
+
+## Common solidctl Commands
+
+| Command | What it does |
+|---|---|
+| `create-app` | Scaffold a new project |
+| `build` | Build backend + frontend |
+| `seed` | Load metadata and system user |
+| `generate module` | Regenerate code from metadata |
+| `upgrade` | Upgrade SolidX dependencies |
+| `info --detailed` | Show project info |
+
+Full reference: [solidctl Commands](/docs/developer-docs/solidctl-commands)
+
+---
+
+## Next Steps
+
+- **Build modules** using the admin panel's Module Builder.
+- **Customize layouts**: list views, form views, kanban boards.
+- **Extend the backend**: controllers, services, providers.
+- **Set up IAM**: roles, permissions, record-level security rules.
+- **Go deeper**: read the [Tutorial](/docs/tutorial/), [Reference](/docs/developer-docs/), and [Recipes](/docs/recipes/).
+- **Use the AI agent**: see [Using SolidX AI Agent](/docs/quick-start/using-solidx-ai-agent).
+- **Connect an MCP client**: see [Using SolidX MCP Server](/docs/quick-start/using-solidx-mcp-server).

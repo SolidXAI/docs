@@ -13,7 +13,7 @@ We will be creating a separate frontend application for the student portal that 
 
 <Callout type="warning" title="Note: No SolidX RBAC Configuration Required">
 
-The student portal uses custom token-based authentication — not SolidX's role-based access control. Students are not SolidX users and have no admin portal access. All backend endpoints used by the student portal are secured via custom JWT tokens issued after OTP verification.
+The student portal uses custom token-based authentication - not SolidX's role-based access control. Students are not SolidX users and have no admin portal access. All backend endpoints used by the student portal are secured via custom JWT tokens issued after OTP verification.
 
 </Callout>
 
@@ -59,9 +59,9 @@ The student portal uses custom token-based authentication — not SolidX's role-
 
 The following models from the [Initiate Payment](./initiate_payment.md#data-models) documentation are also used in this workflow:
 
-- **[Student Model](./initiate_payment.md#1-student-model)** — includes authentication fields (OTP, Token) used for portal login
-- **[Payment Collection Item Model](./initiate_payment.md#3-payment-collection-item-model)** — the fee items students view and pay in the portal
-- **[Payment Collection Item Detail Model](./initiate_payment.md#4-payment-collection-item-detail-model)** — tracks how much of each fee was paid per transaction
+- **[Student Model](./initiate_payment.md#1-student-model)** - includes authentication fields (OTP, Token) used for portal login
+- **[Payment Collection Item Model](./initiate_payment.md#3-payment-collection-item-model)** - the fee items students view and pay in the portal
+- **[Payment Collection Item Detail Model](./initiate_payment.md#4-payment-collection-item-detail-model)** - tracks how much of each fee was paid per transaction
 
 ### Payment Model
 
@@ -92,13 +92,13 @@ A single payment transaction initiated by a student through the payment gateway.
 |---|------|-------------|------|------|------------|
 | 1 | `amount` | Amount | [Decimal](../../../admin-docs/module-builder/field-management#decimal) | Yes | Total amount for this payment transaction |
 | 2 | `paymentStatus` | Payment Status | [Short Text](../../../admin-docs/module-builder/field-management#short-text) | Yes | Default: `Pending`<br/>Values: `Pending`, `Succeeded`, `Failed`<br/>Audit |
-| 3 | `stripeSessionId` | Stripe Session ID | [Short Text](../../../admin-docs/module-builder/field-management#short-text) | No | Stripe Checkout Session identifier — populated after session creation |
-| 4 | `stripePaymentIntentId` | Stripe Payment Intent ID | [Short Text](../../../admin-docs/module-builder/field-management#short-text) | No | Stripe Payment Intent identifier — populated from callback |
+| 3 | `stripeSessionId` | Stripe Session ID | [Short Text](../../../admin-docs/module-builder/field-management#short-text) | No | Stripe Checkout Session identifier - populated after session creation |
+| 4 | `stripePaymentIntentId` | Stripe Payment Intent ID | [Short Text](../../../admin-docs/module-builder/field-management#short-text) | No | Stripe Payment Intent identifier - populated from callback |
 | 5 | `stripeInvoiceId` | Stripe Invoice ID | [Short Text](../../../admin-docs/module-builder/field-management#short-text) | No | Internal invoice ID, format: `{instituteName}_P{timestamp}` |
-| 6 | `stripePaymentStatus` | Stripe Payment Status | [Short Text](../../../admin-docs/module-builder/field-management#short-text) | No | Gateway payment status — `complete` or `expired` |
+| 6 | `stripePaymentStatus` | Stripe Payment Status | [Short Text](../../../admin-docs/module-builder/field-management#short-text) | No | Gateway payment status - `complete` or `expired` |
 | 7 | `student` | Student | [Relation](../../../admin-docs/module-builder/field-management#relation) | Yes | Many-to-One → `student` (fees-portal)<br/>Inverse field: `payments`<br/>Create Inverse: Yes<br/>Cascade<br/>Index<br/>Audit |
 | 8 | `institute` | Institute | [Relation](../../../admin-docs/module-builder/field-management#relation) | Yes | Many-to-One → `institute` (fees-portal)<br/>Create Inverse: No<br/>Cascade<br/>Index<br/>Audit |
-| 9 | `paymentCollectionItemDetails` | Payment Collection Item Details | [Relation](../../../admin-docs/module-builder/field-management#relation) | — | One-to-Many → `paymentCollectionItemDetail` (fees-portal)<br/>Inverse field: `payment`<br/>Create Inverse: Yes<br/>Cascade |
+| 9 | `paymentCollectionItemDetails` | Payment Collection Item Details | [Relation](../../../admin-docs/module-builder/field-management#relation) | - | One-to-Many → `paymentCollectionItemDetail` (fees-portal)<br/>Inverse field: `payment`<br/>Create Inverse: Yes<br/>Cascade |
 
 </div>
 
@@ -124,8 +124,8 @@ This section covers the Stripe payment gateway integration used to process stude
 
 We will implement the payment gateway flow in two parts:
 
-1. **API** — Backend endpoints that validate payment requests, create internal records, interact with Stripe, and handle redirect callbacks
-2. **UI** — Frontend components that display fees, collect selections, and redirect students to Stripe Checkout *(covered in a separate section)*
+1. **API** - Backend endpoints that validate payment requests, create internal records, interact with Stripe, and handle redirect callbacks
+2. **UI** - Frontend components that display fees, collect selections, and redirect students to Stripe Checkout *(covered in a separate section)*
 
 **High-level payment flow:**
 
@@ -179,22 +179,22 @@ This is the core payment API. When a student selects fees to pay and clicks "Pro
 
 **Step-by-step flow:**
 
-1. **Authentication** — The student's JWT token is verified and the `studentLoginId` is extracted from it. This means the student identity is derived from the token, not from the request body.
+1. **Authentication** - The student's JWT token is verified and the `studentLoginId` is extracted from it. This means the student identity is derived from the token, not from the request body.
 
-2. **Request body** — The frontend only sends an `amountMap` — a map of payment collection item IDs to the amount the student wants to pay for each. The backend computes the total from this map, preventing client-side tampering.
+2. **Request body** - The frontend only sends an `amountMap` - a map of payment collection item IDs to the amount the student wants to pay for each. The backend computes the total from this map, preventing client-side tampering.
 
-3. **Fetch student and validate items** — Using the `studentLoginId` from the token, the backend fetches the student record (with institute relation). It then fetches the payment collection items by the IDs in the `amountMap` and validates that they belong to this student.
+3. **Fetch student and validate items** - Using the `studentLoginId` from the token, the backend fetches the student record (with institute relation). It then fetches the payment collection items by the IDs in the `amountMap` and validates that they belong to this student.
 
-4. **Generate invoice ID** — A unique invoice ID is generated using the format `{instituteName}_P{timestamp}` (e.g., `"DPS Delhi_P1705329600000"`).
+4. **Generate invoice ID** - A unique invoice ID is generated using the format `{instituteName}_P{timestamp}` (e.g., `"DPS Delhi_P1705329600000"`).
 
-5. **Create Payment record** — The backend creates a `Payment` entity with:
+5. **Create Payment record** - The backend creates a `Payment` entity with:
    - `institute` and `student` relations set
    - `amount` = total computed from `amountMap`
    - `stripeInvoiceId` = generated invoice ID
    - `paymentStatus` = `"Pending"`
    - The payment is saved to the database, generating a `payment.id`
 
-6. **Create PaymentCollectionItemDetail entries** — For **each item** in the `amountMap`, the backend creates a `PaymentCollectionItemDetail` record with:
+6. **Create PaymentCollectionItemDetail entries** - For **each item** in the `amountMap`, the backend creates a `PaymentCollectionItemDetail` record with:
    - `payment` = the Payment entity created above
    - `student` and `institute` relations set
    - `paymentCollectionItem` = the corresponding fee item
@@ -203,11 +203,11 @@ This is the core payment API. When a student selects fees to pay and clicks "Pro
    - `paymentStatus` = `"Pending"`
    - All detail records are saved in a batch
 
-7. **Create Stripe Checkout Session** — The backend calls `paymentGateway.generatePaymentLink()` with the `payment.id` and total amount. The Stripe service creates a Checkout Session and returns the session URL.
+7. **Create Stripe Checkout Session** - The backend calls `paymentGateway.generatePaymentLink()` with the `payment.id` and total amount. The Stripe service creates a Checkout Session and returns the session URL.
 
-8. **Store session ID** — The `stripeSessionId` from the Stripe response is stored back on the Payment record.
+8. **Store session ID** - The `stripeSessionId` from the Stripe response is stored back on the Payment record.
 
-9. **Return URL** — The API returns the Stripe Checkout URL for the frontend to redirect the student.
+9. **Return URL** - The API returns the Stripe Checkout URL for the frontend to redirect the student.
 
 **Expected outcome:**
 - A `Payment` record exists with status `"Pending"` and a valid `stripeSessionId`
@@ -220,14 +220,14 @@ After the student completes payment on the Stripe Checkout page, Stripe redirect
 
 **Step-by-step flow:**
 
-1. **Receive redirect** — Stripe redirects the student's browser to `{BASE_URL}/api/payment/checkout/success?session_id={CHECKOUT_SESSION_ID}`
-2. **Retrieve Stripe session** — The backend calls `stripe.checkout.sessions.retrieve(session_id)` to get the session details, including `payment_status` and `metadata.paymentId`
-3. **Find Payment record** — Using the `paymentId` from the session metadata, the backend finds the internal Payment record with its related student and institute
-4. **Update Payment status** — Sets `stripePaymentStatus` = `"complete"`, `stripePaymentIntentId` from the session, `paymentStatus` = `"Succeeded"`
-5. **Update PaymentCollectionItemDetail statuses** — All detail records linked to this payment are updated to `paymentStatus` = `"Succeeded"`
-6. **Trigger computed field recalculation** — The update to PaymentCollectionItemDetail triggers the `PaymentCollectionItemAmountProvider`, which recalculates `amountPaid`, `amountPending`, and `status` on each PaymentCollectionItem
-7. **Send confirmation email** — A payment confirmation email is sent to the parent's email address
-8. **Redirect to portal** — The student is redirected to `https://{hostedPagePrefix}.{EDU_BASE_DOMAIN}/dashboard?paymentStatus=success&txnId={stripeSessionId}`
+1. **Receive redirect** - Stripe redirects the student's browser to `{BASE_URL}/api/payment/checkout/success?session_id={CHECKOUT_SESSION_ID}`
+2. **Retrieve Stripe session** - The backend calls `stripe.checkout.sessions.retrieve(session_id)` to get the session details, including `payment_status` and `metadata.paymentId`
+3. **Find Payment record** - Using the `paymentId` from the session metadata, the backend finds the internal Payment record with its related student and institute
+4. **Update Payment status** - Sets `stripePaymentStatus` = `"complete"`, `stripePaymentIntentId` from the session, `paymentStatus` = `"Succeeded"`
+5. **Update PaymentCollectionItemDetail statuses** - All detail records linked to this payment are updated to `paymentStatus` = `"Succeeded"`
+6. **Trigger computed field recalculation** - The update to PaymentCollectionItemDetail triggers the `PaymentCollectionItemAmountProvider`, which recalculates `amountPaid`, `amountPending`, and `status` on each PaymentCollectionItem
+7. **Send confirmation email** - A payment confirmation email is sent to the parent's email address
+8. **Redirect to portal** - The student is redirected to `https://{hostedPagePrefix}.{EDU_BASE_DOMAIN}/dashboard?paymentStatus=success&txnId={stripeSessionId}`
 
 **Expected outcome:**
 - Payment record status updated to `"Succeeded"`
@@ -242,13 +242,13 @@ If the student cancels payment on the Stripe Checkout page, Stripe redirects the
 
 **Step-by-step flow:**
 
-1. **Receive redirect** — Stripe redirects to `{BASE_URL}/api/payment/checkout/cancel?session_id={CHECKOUT_SESSION_ID}`
-2. **Retrieve Stripe session** — The backend retrieves the session from Stripe (status will be `"expired"` or `"open"`, not `"complete"`)
-3. **Find Payment record** — Locates the internal Payment record via session metadata
-4. **Update Payment status** — Sets `stripePaymentStatus` = `"expired"`, `paymentStatus` = `"Failed"`
-5. **Update PaymentCollectionItemDetail statuses** — All detail records updated to `paymentStatus` = `"Failed"`
-6. **Send failure email** — A payment failure notification is sent to the parent's email address
-7. **Redirect to portal** — The student is redirected to `https://{hostedPagePrefix}.{EDU_BASE_DOMAIN}/dashboard?paymentStatus=cancelled&txnId={stripeSessionId}`
+1. **Receive redirect** - Stripe redirects to `{BASE_URL}/api/payment/checkout/cancel?session_id={CHECKOUT_SESSION_ID}`
+2. **Retrieve Stripe session** - The backend retrieves the session from Stripe (status will be `"expired"` or `"open"`, not `"complete"`)
+3. **Find Payment record** - Locates the internal Payment record via session metadata
+4. **Update Payment status** - Sets `stripePaymentStatus` = `"expired"`, `paymentStatus` = `"Failed"`
+5. **Update PaymentCollectionItemDetail statuses** - All detail records updated to `paymentStatus` = `"Failed"`
+6. **Send failure email** - A payment failure notification is sent to the parent's email address
+7. **Redirect to portal** - The student is redirected to `https://{hostedPagePrefix}.{EDU_BASE_DOMAIN}/dashboard?paymentStatus=cancelled&txnId={stripeSessionId}`
 
 **Expected outcome:**
 - Payment record status updated to `"Failed"`
@@ -259,7 +259,7 @@ If the student cancels payment on the Stripe Checkout page, Stripe redirects the
 
 ### API Code
 
-Now that we understand the flow, let's look at the code that implements it — starting with the Stripe SDK setup, then the gateway service, and finally the controller and payment service.
+Now that we understand the flow, let's look at the code that implements it - starting with the Stripe SDK setup, then the gateway service, and finally the controller and payment service.
 
 #### Stripe SDK Setup
 
@@ -292,8 +292,8 @@ export interface IPaymentGateway {
 export const PAYMENT_GATEWAY_SERVICE = 'PAYMENT_GATEWAY_SERVICE';
 ```
 
-- `generatePaymentLink()` — Creates a payment session on the gateway and returns a URL to redirect the student
-- `handlePaymentCallback()` — Processes the callback after the student completes (or cancels) payment
+- `generatePaymentLink()` - Creates a payment session on the gateway and returns a URL to redirect the student
+- `handlePaymentCallback()` - Processes the callback after the student completes (or cancels) payment
 
 #### StripeService Implementation
 
@@ -352,10 +352,10 @@ export class StripeService implements IPaymentGateway {
 ```
 
 **Key points:**
-- **Checkout Sessions** — Stripe Checkout handles the entire payment UI on a Stripe-hosted page
-- **Callback via redirect** — After payment, Stripe redirects to `success_url` or `cancel_url` with a `session_id` query parameter. The backend retrieves the session to confirm payment status
-- **Amount in paise** — Stripe expects the smallest currency unit (paise for INR), so the amount is multiplied by 100
-- **Metadata** — The `paymentId` is stored in session metadata to link the Stripe session back to the internal payment record
+- **Checkout Sessions** - Stripe Checkout handles the entire payment UI on a Stripe-hosted page
+- **Callback via redirect** - After payment, Stripe redirects to `success_url` or `cancel_url` with a `session_id` query parameter. The backend retrieves the session to confirm payment status
+- **Amount in paise** - Stripe expects the smallest currency unit (paise for INR), so the amount is multiplied by 100
+- **Metadata** - The `paymentId` is stored in session metadata to link the Stripe session back to the internal payment record
 
 #### Module Configuration
 
@@ -517,8 +517,8 @@ async generatePaymentGatewayLink(
 
 <Callout type="info" title="What this method creates in the database">
 
-- **1 Payment record** — Tracks the overall transaction with amount, status, and Stripe session/invoice IDs
-- **N PaymentCollectionItemDetail records** — One per selected fee item, each recording how much of that specific fee is being paid in this transaction
+- **1 Payment record** - Tracks the overall transaction with amount, status, and Stripe session/invoice IDs
+- **N PaymentCollectionItemDetail records** - One per selected fee item, each recording how much of that specific fee is being paid in this transaction
 
 Both are created with `paymentStatus: "Pending"` before the student is redirected to Stripe. The callback endpoints update these records after Stripe confirms the outcome.
 
@@ -928,7 +928,7 @@ Status: Pending
 
 **Frontend Preparation:**
 
-Build payment request with selected items. Note that the `studentLoginId` is not included in the request body — it is extracted from the JWT token by the `@StudentAuth()` guard. The `totalAmount` is also not sent; the backend computes it from the `amountMap`.
+Build payment request with selected items. Note that the `studentLoginId` is not included in the request body - it is extracted from the JWT token by the `@StudentAuth()` guard. The `totalAmount` is also not sent; the backend computes it from the `amountMap`.
 
 ```javascript
 // Example: Student selects to pay both items in full
@@ -997,7 +997,7 @@ The backend validates the items, creates a `Payment` record and `PaymentCollecti
 
 <Callout type="warning" title="Important: Stripe Handles the Entire Payment Flow">
 
-Once the frontend redirects the student to the Stripe Checkout URL, **your application is no longer involved in the payment process**. Stripe's hosted page handles everything — displaying the payment amount, collecting card details, processing the transaction, and showing success/error states. After the student completes (or cancels) the payment, **Stripe automatically redirects them back to your backend** using the `success_url` or `cancel_url` configured during session creation. Your backend then processes the callback and redirects the student to the portal dashboard with the appropriate status.
+Once the frontend redirects the student to the Stripe Checkout URL, **your application is no longer involved in the payment process**. Stripe's hosted page handles everything - displaying the payment amount, collecting card details, processing the transaction, and showing success/error states. After the student completes (or cancels) the payment, **Stripe automatically redirects them back to your backend** using the `success_url` or `cancel_url` configured during session creation. Your backend then processes the callback and redirects the student to the portal dashboard with the appropriate status.
 
 </Callout>
 
@@ -1061,9 +1061,9 @@ async handleCheckoutCancel(
 }
 ```
 
-**Backend Processing — `handlePaymentCallback`:**
+**Backend Processing - `handlePaymentCallback`:**
 
-The service method handles the entire callback flow — parsing the gateway response, updating records, sending emails, and returning the redirect info:
+The service method handles the entire callback flow - parsing the gateway response, updating records, sending emails, and returning the redirect info:
 
 ```typescript
 // services/payment.service.ts
@@ -1123,7 +1123,7 @@ async handlePaymentCallback(data: any) {
     payment.institute.id, payment, itemDetails, transactionStatus,
   );
 
-  // Step 10f: Return redirect info — controller uses this to redirect student to portal
+  // Step 10f: Return redirect info - controller uses this to redirect student to portal
   if (transactionStatus !== 'success') {
     return {
       hostedPagePrefix: payment.institute.hostedPagePrefix,
@@ -1172,7 +1172,7 @@ If the student cancels payment on the Stripe Checkout page, Stripe redirects to 
 
 1. **Payment record** is updated with `paymentStatus: 'Failed'` (via the `transactionStatus === 'success' ? 'Succeeded' : 'Failed'` check)
 2. **All PaymentCollectionItemDetail records** are updated to `'Failed'` status (the `for` loop sets `detail.paymentStatus = payment.paymentStatus`)
-3. **No computed field recalculation** is triggered for fee amounts — since the item details are saved with `'Failed'` status, the `PaymentCollectionItemAmountProvider` only sums `'Succeeded'` details, so the original `amountPending` remains unchanged
+3. **No computed field recalculation** is triggered for fee amounts - since the item details are saved with `'Failed'` status, the `PaymentCollectionItemAmountProvider` only sums `'Succeeded'` details, so the original `amountPending` remains unchanged
 4. **Failure email** is sent to the parent via `sendPaymentStatusMail` (which handles both success and failure templates based on the `transactionStatus` parameter)
 5. **Student is redirected** to the portal with `?paymentStatus=failed`, where the frontend shows the failure confirmation modal and allows the student to retry
 
@@ -1301,7 +1301,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
 
 ## Student Portal (Frontend Implementation)
 
-Now that we've covered the backend APIs and the step-by-step payment workflow, let's build the student-facing portal — a separate frontend application that students and parents use to log in, view pending fees, make payments, and review payment history.
+Now that we've covered the backend APIs and the step-by-step payment workflow, let's build the student-facing portal - a separate frontend application that students and parents use to log in, view pending fees, make payments, and review payment history.
 
 We'll walk through the UI implementation gradually, following the same flow a student would experience: login → dashboard → payment → history.
 
@@ -1309,12 +1309,12 @@ We'll walk through the UI implementation gradually, following the same flow a st
 
 The student portal is a **Vite + React 14** application using:
 
-- **Vite + React 14** — React framework with App Router
-- **Redux Toolkit (RTK Query)** — State management and API data fetching
-- **Redux Persist** — Persists student and institute data across page refreshes
-- **Bootstrap 5** — Responsive layout and utility classes
-- **PrimeReact** — Toast notifications
-- **Axios** — Used for file download (payment report)
+- **Vite + React 14** - React framework with App Router
+- **Redux Toolkit (RTK Query)** - State management and API data fetching
+- **Redux Persist** - Persists student and institute data across page refreshes
+- **Bootstrap 5** - Responsive layout and utility classes
+- **PrimeReact** - Toast notifications
+- **Axios** - Used for file download (payment report)
 
 **Project structure:**
 
@@ -1507,9 +1507,9 @@ export const persistor = persistStore(store);
 export type RootState = ReturnType<typeof store.getState>;
 ```
 
-**Why Redux Persist?** — The `student` and `institute` slices are persisted to `localStorage`. This means if a student refreshes the page or is redirected back from the payment gateway, their profile and institute branding are instantly available without waiting for API calls.
+**Why Redux Persist?** - The `student` and `institute` slices are persisted to `localStorage`. This means if a student refreshes the page or is redirected back from the payment gateway, their profile and institute branding are instantly available without waiting for API calls.
 
-**Student slice** — stores the logged-in student's profile:
+**Student slice** - stores the logged-in student's profile:
 
 ```typescript
 // store/slices/studentSlice.ts
@@ -1540,7 +1540,7 @@ export const { setStudent, clearStudent } = studentSlice.actions;
 export default studentSlice.reducer;
 ```
 
-**Payment slice** — stores the current payment collections (due or paid):
+**Payment slice** - stores the current payment collections (due or paid):
 
 ```typescript
 // store/slices/studentPaymentSlice.ts
@@ -1587,7 +1587,7 @@ export const { setStudentPayments, clearStudentPayments } = studentPaymentSlice.
 export default studentPaymentSlice.reducer;
 ```
 
-### Step 3: Authentication — Login Page
+### Step 3: Authentication - Login Page
 
 The login flow is a two-step process: validate the student ID, then send and verify an OTP.
 
@@ -2023,10 +2023,10 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
 ```
 
 **Dashboard tabs:**
-- **Due Payments** (`/dashboard`) — Pending fees with payment action
-- **Payment History** (`/dashboard/history`) — Paid/partially paid fees with download option
-- **Transaction Details** (`/dashboard/payments`) — Individual payment transaction records
-- **Cancelled Payments** (`/dashboard/payments/cancelled`) — Failed/cancelled payment attempts
+- **Due Payments** (`/dashboard`) - Pending fees with payment action
+- **Payment History** (`/dashboard/history`) - Paid/partially paid fees with download option
+- **Transaction Details** (`/dashboard/payments`) - Individual payment transaction records
+- **Cancelled Payments** (`/dashboard/payments/cancelled`) - Failed/cancelled payment attempts
 
 ### Step 6: Due Payments Tab (Dashboard Home)
 
@@ -2035,7 +2035,7 @@ This is the main page students see after login. It fetches all unpaid payment co
 #### Fetching Due Payments
 
 ```tsx
-// app/dashboard/page.tsx — data fetching
+// app/dashboard/page.tsx - data fetching
 const student = useSelector((state: RootState) => state.student.data);
 const studentPayments = useSelector((state: RootState) => state.studentPayments.data);
 const [fetchPayments] = useLazyGetStudentPaymentRecordQuery();
@@ -2059,7 +2059,7 @@ The `isPaid: false` parameter tells the backend to return only pending/partially
 Each payment collection (e.g., "Quarter 1 2024 Fees") is displayed as a collapsible section. Inside, each fee item is shown in a table:
 
 ```tsx
-// app/dashboard/page.tsx — rendering
+// app/dashboard/page.tsx - rendering
 const [expandedRefs, setExpandedRefs] = useState<number[]>([]);
 const [editedPayments, setEditedPayments] = useState<Record<number, number>>({});
 
@@ -2083,7 +2083,7 @@ return (
             <small className="text-muted">Created On: {ref.createdOn}</small>
           </div>
 
-          {/* Expanded content — fee items table */}
+          {/* Expanded content - fee items table */}
           {expandedRefs.includes(ref.id) && (
             <div className="payment-ref-content">
               <div className="table-header">
@@ -2120,7 +2120,7 @@ The key UX decision is how the "amount to pay" column behaves based on the `part
 ```tsx
 // Inside each payment item row
 {item.partPaymentAllowed ? (
-  // Editable input — student can enter any amount up to amountPending
+  // Editable input - student can enter any amount up to amountPending
   <div className="currency-input-wrapper">
     <span className="currency-symbol">₹</span>
     <input
@@ -2142,7 +2142,7 @@ The key UX decision is how the "amount to pay" column behaves based on the `part
     />
   </div>
 ) : (
-  // Read-only — must pay the full amount
+  // Read-only - must pay the full amount
   <span className="fw-medium">₹{item.amountPending.toLocaleString()}</span>
 )}
 
@@ -2259,7 +2259,7 @@ const handleMakePayment = async () => {
 When the student is redirected back from the payment gateway, the dashboard reads the `paymentStatus` query parameter and shows a confirmation modal:
 
 ```tsx
-// app/dashboard/page.tsx — payment status handling
+// app/dashboard/page.tsx - payment status handling
 const [paymentStatus, setPaymentStatus] = useState<"success" | "failed" | null>(null);
 
 useEffect(() => {
@@ -2389,7 +2389,7 @@ export default function PaymentHistoryPage() {
         </button>
       </div>
 
-      {/* Payment collections — same expandable structure as Due Payments */}
+      {/* Payment collections - same expandable structure as Due Payments */}
       {/* but filtered for status === 'Fully Paid' or 'Partially Paid' */}
       {studentPayments
         ?.filter((ref) =>
@@ -2479,10 +2479,10 @@ Dashboard (/dashboard):
 ```
 
 **Key architectural decisions:**
-- **Separate frontend application** — Runs on its own port/domain, communicates with the SolidX backend via REST APIs
-- **Redux Persist** — Student and institute data survive page refreshes and payment gateway redirects
-- **RTK Query** — Handles API caching, loading states, and error handling with minimal boilerplate
-- **Multi-tenant support** — Institute branding (logo, support info, legal pages) is loaded based on the subdomain
+- **Separate frontend application** - Runs on its own port/domain, communicates with the SolidX backend via REST APIs
+- **Redux Persist** - Student and institute data survive page refreshes and payment gateway redirects
+- **RTK Query** - Handles API caching, loading states, and error handling with minimal boilerplate
+- **Multi-tenant support** - Institute branding (logo, support info, legal pages) is loaded based on the subdomain
 
 
 ## Background Processing
@@ -2495,7 +2495,7 @@ Dashboard (/dashboard):
 
 **Configuration:**
 
-This configuration is added to the `amountPaid` field definition in the **Payment Collection Item** model's metadata configuration file. The computed field setup for this model was covered in detail in the [Initiate Payment — Payment Collection Item Model - Amount Paid (Computed Field)](./initiate_payment.md#7-computed-field-for-amount-calculations) section.
+This configuration is added to the `amountPaid` field definition in the **Payment Collection Item** model's metadata configuration file. The computed field setup for this model was covered in detail in the [Initiate Payment - Payment Collection Item Model - Amount Paid (Computed Field)](./initiate_payment.md#7-computed-field-for-amount-calculations) section.
 ```json
 {
   "name": "amountPaid",
@@ -2912,7 +2912,7 @@ DPS Delhi
 
 <Callout type="info" title="Info">
 
-For more information on how scheduled jobs work in SolidX — including configuration, registration, frequency options, and the job lifecycle — refer to the [Scheduled Jobs](/docs/developer-docs/extending/backend-customization/scheduled-jobs) documentation.
+For more information on how scheduled jobs work in SolidX - including configuration, registration, frequency options, and the job lifecycle - refer to the [Scheduled Jobs](/docs/developer-docs/extending/backend-customization/scheduled-jobs) documentation.
 
 </Callout>
 
@@ -3008,7 +3008,7 @@ export class StudentAuthGuard implements CanActivate {
 }
 ```
 
-**Key detail:** The guard extracts `studentLoginId` from the JWT payload and attaches it to `request['studentLoginId']`. This means controllers like `initiateCheckout` can derive the student identity from the authenticated token rather than requiring it in the request body — a more secure pattern.
+**Key detail:** The guard extracts `studentLoginId` from the JWT payload and attaches it to `request['studentLoginId']`. This means controllers like `initiateCheckout` can derive the student identity from the authenticated token rather than requiring it in the request body - a more secure pattern.
 
 **Decorator:**
 ```typescript
@@ -3092,12 +3092,12 @@ export class StudentController {
 
 #### Payment Callback Parameters
 
-**GET Request (Stripe redirect — success):**
+**GET Request (Stripe redirect - success):**
 ```
 /api/payment/checkout/success?session_id=cs_test_a1B2c3D4...
 ```
 
-**GET Request (Stripe redirect — cancel):**
+**GET Request (Stripe redirect - cancel):**
 ```
 /api/payment/checkout/cancel?session_id=cs_test_a1B2c3D4...
 ```

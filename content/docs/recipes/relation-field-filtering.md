@@ -7,14 +7,14 @@ keywords: [relation field, filter, whereClause, relationFieldFixedFilter, many-t
 
 # Filtering Relation Field Options
 
-When a form contains a relation field (many-to-one, many-to-many), SolidX fetches all records from the related model to populate the dropdown. In many real-world scenarios you only want to show a **subset** of those records — for example, users who belong to a specific department, or only active records.
+When a form contains a relation field (many-to-one, many-to-many), SolidX fetches all records from the related model to populate the dropdown. In many real-world scenarios you only want to show a **subset** of those records - for example, users who belong to a specific department, or only active records.
 
 SolidX provides two complementary mechanisms for this:
 
 | Mechanism | Where it lives | Scope |
 |---|---|---|
-| `relationFieldFixedFilter` | Field metadata | Applied globally — every form that uses this field |
-| `whereClause` | Layout `attrs` on the field node | Applied per-layout — overrides `relationFieldFixedFilter` when present |
+| `relationFieldFixedFilter` | Field metadata | Applied globally - every form that uses this field |
+| `whereClause` | Layout `attrs` on the field node | Applied per-layout - overrides `relationFieldFixedFilter` when present |
 
 ---
 
@@ -24,13 +24,13 @@ The filter values use the same **SolidX filter operators** (`$eq`, `$in`, `$cont
 
 ---
 
-## `relationFieldFixedFilter` — Global Field-Level Filter
+## `relationFieldFixedFilter` - Global Field-Level Filter
 
 Set this on the field definition in your field metadata JSON. The filter is applied every time this field appears anywhere in the application.
 
 ### When to use
 
-Use `relationFieldFixedFilter` when the restriction is a permanent business rule that applies in every context — for example, a `User` relation field that should always only show users belonging to a specific department.
+Use `relationFieldFixedFilter` when the restriction is a permanent business rule that applies in every context - for example, a `User` relation field that should always only show users belonging to a specific department.
 
 ### Configuration
 
@@ -52,13 +52,13 @@ Use `relationFieldFixedFilter` when the restriction is a permanent business rule
 
 ---
 
-## `whereClause` — Per-Layout Filter
+## `whereClause` - Per-Layout Filter
 
 Set this as an `attrs` property on the field node inside a specific form view layout. It takes priority over `relationFieldFixedFilter` when both are present.
 
 ### When to use
 
-Use `whereClause` when the restriction depends on the context of a specific view — for example, showing only **active** users on an assignment form, while a different form for the same field may show all users.
+Use `whereClause` when the restriction depends on the context of a specific view - for example, showing only **active** users on an assignment form, while a different form for the same field may show all users.
 
 ### Static configuration
 
@@ -85,11 +85,11 @@ Use `whereClause` when the restriction depends on the context of a specific view
 
 ## Filtering Based on Another Form Field
 
-A common requirement is to narrow one dropdown based on what the user has selected in another field on the same form — for example, showing only users who belong to the currently selected department. SolidX supports two approaches for this.
+A common requirement is to narrow one dropdown based on what the user has selected in another field on the same form - for example, showing only users who belong to the currently selected department. SolidX supports two approaches for this.
 
 ### Approach 1: Handlebars interpolation in `whereClause` (no code required)
 
-`whereClause` supports **Handlebars templates**. When SolidX fetches options for the field, it evaluates the template against the current form values before sending the filter to the API. This means the dropdown automatically re-filters whenever the referenced field changes — no handler needed.
+`whereClause` supports **Handlebars templates**. When SolidX fetches options for the field, it evaluates the template against the current form values before sending the filter to the API. This means the dropdown automatically re-filters whenever the referenced field changes - no handler needed.
 
 ```json
 {
@@ -101,9 +101,9 @@ A common requirement is to narrow one dropdown based on what the user has select
 }
 ```
 
-**Behaviour when the referenced field has no value:** if `department` has not been selected yet, the filter evaluates to an empty value and is automatically skipped — the full unfiltered list is shown.
+**Behaviour when the referenced field has no value:** if `department` has not been selected yet, the filter evaluates to an empty value and is automatically skipped - the full unfiltered list is shown.
 
-**Limitation in edit mode:** when the form loads an existing record, the child field already has a selected value. If the user then changes the parent field, the child dropdown re-filters correctly but the previously selected value **is not cleared automatically**. This can leave the form in an inconsistent state — the child field still shows a value that no longer belongs to the new parent. Use Approach 2 (handler) if the form is used for editing existing records.
+**Limitation in edit mode:** when the form loads an existing record, the child field already has a selected value. If the user then changes the parent field, the child dropdown re-filters correctly but the previously selected value **is not cleared automatically**. This can leave the form in an inconsistent state - the child field still shows a value that no longer belongs to the new parent. Use Approach 2 (handler) if the form is used for editing existing records.
 
 Use this approach when:
 - The form is used for creating new records (child field starts empty)
@@ -176,7 +176,7 @@ When both `relationFieldFixedFilter` and `whereClause` are present on the same f
 whereClause (layout attrs)  >  relationFieldFixedFilter (field metadata)
 ```
 
-`whereClause` wins and completely replaces `relationFieldFixedFilter` for that layout — they are not merged.
+`whereClause` wins and completely replaces `relationFieldFixedFilter` for that layout - they are not merged.
 
 ---
 
@@ -186,7 +186,7 @@ whereClause (layout attrs)  >  relationFieldFixedFilter (field metadata)
 
 Because `whereClause` completely replaces `relationFieldFixedFilter` (it does not AND with it), both conditions must be combined **inside a single filter** wherever they need to apply together.
 
-### Option A — Both conditions in `relationFieldFixedFilter` (global, static)
+### Option A - Both conditions in `relationFieldFixedFilter` (global, static)
 
 Use this when the restriction applies to every form that shows this field and the department ID is fixed.
 
@@ -204,7 +204,7 @@ Use this when the restriction applies to every form that shows this field and th
 
 Result: every form showing `assignedUser` will only offer **active users in Department 3**.
 
-### Option B — Both conditions in `whereClause` (per-layout)
+### Option B - Both conditions in `whereClause` (per-layout)
 
 Use this when only a specific form view needs this restriction, or when the department ID must come from another field on the form.
 
@@ -221,9 +221,9 @@ Use this when only a specific form view needs this restriction, or when the depa
 
 Result: only on this form, the dropdown shows **active users in Department 3**. The `relationFieldFixedFilter` (if any) is ignored entirely because `whereClause` is present.
 
-### Option C — Dynamic department from a form field (Handlebars)
+### Option C - Dynamic department from a form field (Handlebars)
 
-When the form has a `department` picker, use Handlebars interpolation in `whereClause` — no handler required:
+When the form has a `department` picker, use Handlebars interpolation in `whereClause` - no handler required:
 
 ```json
 {
@@ -237,7 +237,7 @@ When the form has a `department` picker, use Handlebars interpolation in `whereC
 
 Result: as soon as the admin picks a department, the `assignedUser` dropdown immediately narrows to **active users in that department**. Before any department is selected, all active users are shown.
 
-### Option D — Dynamic department with child field reset (handler)
+### Option D - Dynamic department with child field reset (handler)
 
 When you also want to **clear `assignedUser`** whenever the department changes:
 
@@ -276,6 +276,6 @@ Result: when the admin changes department, `assignedUser` is cleared and the dro
 
 ## Example Use Cases
 
-- **HR module** — an "Assign Reviewer" field that only shows users with the `reviewer` role.
-- **Multi-branch retail** — a "Branch Staff" field on a sales order form that only shows staff belonging to the selected branch (cascading via `formViewChangeHandler`).
-- **Support tickets** — an "Escalate To" field that only shows senior agents (filtered by tier) and only active ones (filtered by status).
+- **HR module** - an "Assign Reviewer" field that only shows users with the `reviewer` role.
+- **Multi-branch retail** - a "Branch Staff" field on a sales order form that only shows staff belonging to the selected branch (cascading via `formViewChangeHandler`).
+- **Support tickets** - an "Escalate To" field that only shows senior agents (filtered by tier) and only active ones (filtered by status).

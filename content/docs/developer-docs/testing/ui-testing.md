@@ -45,7 +45,7 @@ That usually means supplying:
 Example:
 
 ```bash
-npx @solidxai/solidctl@latest test run --module venue --ui-base-url http://localhost:5173 --headless false
+solidctl test run --module venue --ui-base-url http://localhost:5173 --headless false
 ```
 
 Within scenarios, the UI base URL is available as `${env:TEST_UI_BASE_URL}`.
@@ -77,7 +77,7 @@ These are useful for login flows, search flows, forms, and interactive field-bas
 
 Form inputs in SolidX get their `id` from the field's `name` in model metadata.
 
-That means the selector for any form field is `#fieldName` — where `fieldName` matches the field's `name` property in the module metadata.
+That means the selector for any form field is `#fieldName` - where `fieldName` matches the field's `name` property in the module metadata.
 
 For example, a model with a field named `title` will render an input with `id="title"`, so the selector is `#title`.
 
@@ -171,7 +171,7 @@ The standard login flow:
 - navigate to `/auth/login`
 - assert `#identifier` is visible before filling it
 - fill the identifier field with the test user's email
-- assert the password input is visible, then fill it — use `input[type='password']` not `#password`
+- assert the password input is visible, then fill it - use `input[type='password']` not `#password`
 - click the submit button by its label with `button:has-text('Sign In')`
 - assert `.solid-admin-header` is visible to confirm the app has loaded
 - assert the URL contains `/admin`
@@ -188,9 +188,9 @@ Common patterns include:
 
 Practical patterns from real scenarios:
 
-- use `ui.expectVisible` before filling any input — confirms the element is ready
+- use `ui.expectVisible` before filling any input - confirms the element is ready
 - use `#identifier` for the login identifier and `input[type='password']` for the password field
-- use `button:has-text('Sign In')` for the login submit — more readable than a class selector
+- use `button:has-text('Sign In')` for the login submit - more readable than a class selector
 - assert `.solid-admin-header` visibility after login before asserting the URL
 - use `.solid-sidebar-tree-link:has(.solid-sidebar-tree-label:text('ModelName'))` to click a sidebar model link
 - assert `table tbody` visibility to confirm a list view has loaded
@@ -242,7 +242,7 @@ Recommended practices:
 
 SolidX UI components do not use `data-testid`. Selectors fall into three groups.
 
-### ID selectors — form fields
+### ID selectors - form fields
 
 Form inputs get their `id` from the field's `name` in model metadata.
 
@@ -254,7 +254,7 @@ Form inputs get their `id` from the field's `name` in model metadata.
 
 When writing tests for a specific model's form, look up the model's `fields[*].name` values in the metadata to get the correct IDs.
 
-### CSS class selectors — structural and interactive elements
+### CSS class selectors - structural and interactive elements
 
 The project uses stable `solid-*` BEM-style classes:
 
@@ -267,7 +267,7 @@ The project uses stable `solid-*` BEM-style classes:
 .solid-form-section       form content wrapper
 ```
 
-### Playwright extended selectors — text and composition
+### Playwright extended selectors - text and composition
 
 Use Playwright's extended syntax for buttons, menu items, and toasts:
 
@@ -279,7 +279,7 @@ button:has-text('Sign In')                    button by visible label
 div[role='status']:has-text('Invalid Credentials')
 ```
 
-Prefer `button:has-text(...)` over class-based button selectors when the button label is stable — it reads clearly and survives class renames.
+Prefer `button:has-text(...)` over class-based button selectors when the button label is stable - it reads clearly and survives class renames.
 
 ---
 
