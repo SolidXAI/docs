@@ -4,19 +4,21 @@ icon: "terminal"
 description: Reference for the SolidX CLI (`solidctl`) used to scaffold, build, upgrade, inspect, seed, test, generate, and run agent tasks in a SolidX project.
 ---
 
-# solidctl Reference
+## CLI Overview
 
 The `solidctl` CLI is the main command-line entry point for working with SolidX projects.
 
 <Callout type="info" title="Mental Model">
 
-  Think of <code>solidctl</code> as the <strong>operational control surface</strong> for a SolidX project.
-  - <strong>Bootstrap commands</strong> create and build the project.
-    - <strong>Platform commands</strong> seed metadata and inspect project state.
-    - <strong>Development commands</strong> regenerate code and update package versions.
-    - <strong>Testing commands</strong> prepare isolated test environments and run scenarios.
-    - <strong>Agent commands</strong> run the SolidX AI agent.
-  So the intuition is: <strong><code>solidctl</code> is not just a scaffolding command</strong>. It is the main CLI you use across the entire lifecycle of a SolidX app, from project creation to testing and maintenance.
+`solidctl` is the operational control surface for a SolidX project.
+
+- `Bootstrap commands` create and build the project.
+- `Platform commands` seed metadata and inspect project state.
+- `Development commands` regenerate code and update package versions.
+- `Testing commands` prepare isolated test environments and run scenarios.
+- `Agent commands` run the SolidX AI agent.
+
+It is not limited to scaffolding. It is the primary CLI used across project creation, platform maintenance, code generation, testing, and upgrade workflows.
 
 </Callout>
 
@@ -241,9 +243,9 @@ solidctl seed [options]
 
 ### When to use it
 
-- after initial project setup
-- after changing metadata JSON files
-- after upgrades that introduce new platform metadata
+- After initial project setup
+- After changing metadata JSON files
+- After upgrades that introduce new platform metadata
 
 ### Examples
 
@@ -281,7 +283,7 @@ The `test` command has two main areas:
 - `test data` for test data and datasource lifecycle tasks
 - `test run` for scenario execution
 
-For the broader testing architecture, vocabulary, and workflow, see [Testing](./testing/index.md).
+For the broader testing architecture, vocabulary, and workflow, see [Testing](/docs/developer-docs/testing).
 
 ```bash
 solidctl test [command]
@@ -385,7 +387,7 @@ solidctl generate [command]
 - Use `generate model` when you want a smaller, targeted refresh.
 - This command is about metadata-driven code generation, primarily for generated backend structure.
 
-For a deeper explanation of generated structure and the surrounding conventions, see [Code Generation](./extending/code-generation/index.md).
+For a deeper explanation of generated structure and the surrounding conventions, see [Code Generation](/docs/developer-docs/extending/code-generation).
 
 ## agent
 

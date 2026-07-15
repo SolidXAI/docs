@@ -6,13 +6,12 @@ summary: Field metadata defines the semantic contract of each model field in Sol
 json_pointer: "/moduleMetadata/models/fields"
 jsonpath: "$.moduleMetadata.models[*].fields[*]"
 parent_component: models
-type: array,
+type: array
 items_type: "object"
 items_attributes_doc: "#field-metadata-attributes"
 solidx_concerns: [add_field_to_a_model, remove_field_from_a_model, create_model_with_fields]
 ---
 
-# Field Metadata
 <Callout type="info" title="Where it lives">
 
 **JSON Pointer:** `/moduleMetadata/models/fields`
@@ -29,7 +28,7 @@ It is the source of truth for the field's semantic type, validation rules, stora
 
 If you are deciding how a field should behave as part of a model, this is the page to use.
 
-If you are deciding how that field should appear in a form, list, or tree view, use [View Metadata](./view-metadata).
+If you are deciding how that field should appear in a form, list, or tree view, use [View Metadata](/docs/developer-docs/metadata_schema/view-metadata).
 
 ## What Belongs On This Page
 
@@ -121,12 +120,12 @@ Attrs such as `ormType`, `columnName`, `unique`, and `index` are therefore best 
 
 Because `shortText` is a scalar textual field, it works naturally with the standard text-oriented filter operators available in SolidX, including:
 
-- equality and inequality
+- Equality and inequality
 - `in` and `notIn`
 - `contains` and `notContains`
-- case-insensitive contains variants
+- Case-insensitive contains variants
 - `startsWith` and `endsWith`
-- null and not-null checks
+- Null and not-null checks
 
 This makes `shortText` a natural fit for searchable list views, user keys, codes, names, and other text-oriented query flows.
 
@@ -168,7 +167,7 @@ This is a representative `shortText` field because it combines a clear business 
 </TabItem>
 </Tabs>
 
-For rendering, widgets, and layout attrs related to `shortText`, see [View Metadata](./view-metadata).
+For rendering, widgets, and layout attrs related to `shortText`, see [View Metadata](/docs/developer-docs/metadata_schema/view-metadata).
 
 ### `longText`
 
@@ -214,7 +213,7 @@ For `longText`, SolidX validates in two places:
 Two important behaviors to note:
 
 - `min` and `max` are enforced in generated form validation
-- backend validation does not currently enforce `min` or `max` for `longText`
+- Backend validation does not currently enforce `min` or `max` for `longText`
 
 </TabItem>
 <TabItem value="persistence" label="Persistence">
@@ -230,12 +229,12 @@ Attrs such as `ormType`, `columnName`, `unique`, and `index` are therefore best 
 
 Because `longText` is a scalar textual field, it works naturally with the standard text-oriented filter operators available in SolidX, including:
 
-- equality and inequality
+- Equality and inequality
 - `in` and `notIn`
 - `contains` and `notContains`
-- case-insensitive contains variants
+- Case-insensitive contains variants
 - `startsWith` and `endsWith`
-- null and not-null checks
+- Null and not-null checks
 
 This makes `longText` suitable for description-style filters, notes, instructions, and text-driven administrative search flows.
 
@@ -274,7 +273,7 @@ This is a representative `longText` field because it shows the usual multiline t
 </TabItem>
 </Tabs>
 
-For rendering, widgets, and layout attrs related to `longText`, see [View Metadata](./view-metadata).
+For rendering, widgets, and layout attrs related to `longText`, see [View Metadata](/docs/developer-docs/metadata_schema/view-metadata).
 
 ### `richText`
 
@@ -320,7 +319,7 @@ For `richText`, SolidX validates in two places:
 Two important behaviors to note:
 
 - `min` and `max` are enforced in generated form validation
-- backend validation does not currently enforce `min` or `max` for `richText`
+- Backend validation does not currently enforce `min` or `max` for `richText`
 
 </TabItem>
 <TabItem value="persistence" label="Persistence">
@@ -336,12 +335,12 @@ Attrs such as `ormType`, `columnName`, `unique`, and `index` are therefore best 
 
 Because `richText` is a scalar textual field, it works naturally with the standard text-oriented filter operators available in SolidX, including:
 
-- equality and inequality
+- Equality and inequality
 - `in` and `notIn`
 - `contains` and `notContains`
-- case-insensitive contains variants
+- Case-insensitive contains variants
 - `startsWith` and `endsWith`
-- null and not-null checks
+- Null and not-null checks
 
 This makes `richText` suitable for administrative search and text-driven query flows, even though end-user presentation is usually richer than plain text.
 
@@ -374,7 +373,7 @@ This is a representative `richText` field because it captures the typical contra
 </TabItem>
 </Tabs>
 
-For rendering, widgets, and layout attrs related to `richText`, see [View Metadata](./view-metadata).
+For rendering, widgets, and layout attrs related to `richText`, see [View Metadata](/docs/developer-docs/metadata_schema/view-metadata).
 
 ### `json`
 
@@ -416,7 +415,7 @@ For `json`, SolidX validates in two places:
 
 One important behavior to note:
 
-- unlike text-based field types, the backend validator explicitly checks whether the submitted value is valid JSON rather than only checking its scalar type
+- Unlike text-based field types, the backend validator explicitly checks whether the submitted value is valid JSON rather than only checking its scalar type
 
 </TabItem>
 <TabItem value="persistence" label="Persistence">
@@ -460,7 +459,7 @@ This is a representative `json` field because it shows the core contract clearly
 </TabItem>
 </Tabs>
 
-For rendering, widgets, and layout attrs related to `json`, see [View Metadata](./view-metadata).
+For rendering, widgets, and layout attrs related to `json`, see [View Metadata](/docs/developer-docs/metadata_schema/view-metadata).
 
 ### `int`
 
@@ -524,9 +523,9 @@ Because `int` represents a numeric scalar, it works naturally with numeric sorti
 
 Typical use cases include:
 
-- sorting records by sequence or rank
-- filtering by counts and operational thresholds
-- reporting on durations, quantities, or other whole-number metrics
+- Sorting records by sequence or rank
+- Filtering by counts and operational thresholds
+- Reporting on durations, quantities, or other whole-number metrics
 
 In practice, `int` is the natural choice when business meaning depends on numeric ordering rather than on text search.
 
@@ -563,7 +562,7 @@ This is a representative `int` field because it shows the common contract clearl
 </TabItem>
 </Tabs>
 
-For rendering, widgets, and layout attrs related to `int`, see [View Metadata](./view-metadata).
+For rendering, widgets, and layout attrs related to `int`, see [View Metadata](/docs/developer-docs/metadata_schema/view-metadata).
 
 ### `bigint`
 
@@ -602,8 +601,8 @@ For `bigint`, SolidX validates requiredness and numeric shape at the CRUD bounda
 
 Two important behaviors to note:
 
-- backend validation accepts string or number inputs and coerces them into a bigint-aware value before applying the numeric checks
-- the generated UI currently reuses the integer field path, so very large values should be reviewed carefully when they may exceed JavaScript safe-integer handling
+- Backend validation accepts string or number inputs and coerces them into a bigint-aware value before applying the numeric checks
+- The generated UI currently reuses the integer field path, so very large values should be reviewed carefully when they may exceed JavaScript safe-integer handling
 
 </TabItem>
 <TabItem value="persistence" label="Persistence">
@@ -621,9 +620,9 @@ Because `bigint` remains a numeric scalar, it fits the same broad query patterns
 
 Typical use cases include:
 
-- sorting by imported numeric identifiers
-- exact lookup by large request or transaction keys
-- operational reporting on large-duration counters and legacy numeric values
+- Sorting by imported numeric identifiers
+- Exact lookup by large request or transaction keys
+- Operational reporting on large-duration counters and legacy numeric values
 
 In practice, `bigint` is most useful where whole-number semantics matter but ordinary integer assumptions are too small or too implementation-specific.
 
@@ -658,7 +657,7 @@ This is a representative `bigint` field because it shows the intended contract c
 </TabItem>
 </Tabs>
 
-For rendering, widgets, and layout attrs related to `bigint`, see [View Metadata](./view-metadata).
+For rendering, widgets, and layout attrs related to `bigint`, see [View Metadata](/docs/developer-docs/metadata_schema/view-metadata).
 
 ### `decimal`
 
@@ -722,9 +721,9 @@ Because `decimal` represents a numeric scalar, it works naturally with sorting, 
 
 Typical use cases include:
 
-- filtering records by amount thresholds
-- sorting balances, prices, or rates
-- reporting on numeric values where fractional precision matters
+- Filtering records by amount thresholds
+- Sorting balances, prices, or rates
+- Reporting on numeric values where fractional precision matters
 
 In practice, `decimal` is the natural choice whenever business meaning depends on numeric precision rather than on textual formatting.
 
@@ -760,7 +759,7 @@ This is a representative `decimal` field because it shows the common contract cl
 </TabItem>
 </Tabs>
 
-For rendering, widgets, and layout attrs related to `decimal`, see [View Metadata](./view-metadata).
+For rendering, widgets, and layout attrs related to `decimal`, see [View Metadata](/docs/developer-docs/metadata_schema/view-metadata).
 
 ### `boolean`
 
@@ -801,7 +800,7 @@ For `boolean`, SolidX validates in two places:
 Two important behaviors to note:
 
 - `boolean` does not use text-oriented attrs such as `min`, `max`, `length`, or `regexPattern`
-- at the CRUD boundary, the runtime value is treated as a true-or-false field rather than as free-form text
+- At the CRUD boundary, the runtime value is treated as a true-or-false field rather than as free-form text
 
 </TabItem>
 <TabItem value="persistence" label="Persistence">
@@ -819,9 +818,9 @@ Because `boolean` represents a binary state, it is most useful in exact-match st
 
 Typical use cases include:
 
-- filtering records by enabled versus disabled state
-- separating approved and unapproved records
-- narrowing operational queues by simple flags such as duplicate, active, verified, or system-owned
+- Filtering records by enabled versus disabled state
+- Separating approved and unapproved records
+- Narrowing operational queues by simple flags such as duplicate, active, verified, or system-owned
 
 In practice, `boolean` fits best where users need to quickly slice a dataset by state rather than search inside a textual value.
 
@@ -856,7 +855,7 @@ This is a representative `boolean` field because it captures the common contract
 </TabItem>
 </Tabs>
 
-For rendering, widgets, and layout attrs related to `boolean`, see [View Metadata](./view-metadata).
+For rendering, widgets, and layout attrs related to `boolean`, see [View Metadata](/docs/developer-docs/metadata_schema/view-metadata).
 
 ### `date`
 
@@ -899,7 +898,7 @@ For `date`, SolidX validates in two places:
 Two important behaviors to note:
 
 - `date` does not use text-oriented attrs such as `min`, `max`, `length`, or `regexPattern`
-- the same CRUD validation path is also reused for `datetime`, so date-like fields share a common backend date-validation contract
+- The same CRUD validation path is also reused for `datetime`, so date-like fields share a common backend date-validation contract
 
 </TabItem>
 <TabItem value="persistence" label="Persistence">
@@ -917,9 +916,9 @@ Because `date` represents a calendar value, it is well suited to time-oriented f
 
 Typical use cases include:
 
-- sorting records by chronology
-- filtering records by a specific day
-- narrowing datasets by effective date, approval date, or joining date
+- Sorting records by chronology
+- Filtering records by a specific day
+- Narrowing datasets by effective date, approval date, or joining date
 
 In practice, `date` works best where users need consistent calendar semantics rather than free-form text search.
 
@@ -954,7 +953,7 @@ This is a representative `date` field because it captures the typical contract c
 </TabItem>
 </Tabs>
 
-For rendering, widgets, and layout attrs related to `date`, see [View Metadata](./view-metadata).
+For rendering, widgets, and layout attrs related to `date`, see [View Metadata](/docs/developer-docs/metadata_schema/view-metadata).
 
 ### `datetime`
 
@@ -997,7 +996,7 @@ For `datetime`, SolidX validates in two places:
 Two important behaviors to note:
 
 - `datetime` does not use text-oriented attrs such as `min`, `max`, `length`, or `regexPattern`
-- the same CRUD validation path is currently shared with `date`, so both field types rely on the same backend date-validation contract
+- The same CRUD validation path is currently shared with `date`, so both field types rely on the same backend date-validation contract
 
 </TabItem>
 <TabItem value="persistence" label="Persistence">
@@ -1015,9 +1014,9 @@ Because `datetime` represents a timestamp-like value, it is well suited to chron
 
 Typical use cases include:
 
-- ordering records by event time
-- filtering by publication, approval, or execution time
-- presenting audit-style timelines and process timestamps
+- Ordering records by event time
+- Filtering by publication, approval, or execution time
+- Presenting audit-style timelines and process timestamps
 
 In practice, `datetime` is the natural choice whenever time-of-day matters as much as the date itself.
 
@@ -1052,7 +1051,7 @@ This is a representative `datetime` field because it captures the common contrac
 </TabItem>
 </Tabs>
 
-For rendering, widgets, and layout attrs related to `datetime`, see [View Metadata](./view-metadata).
+For rendering, widgets, and layout attrs related to `datetime`, see [View Metadata](/docs/developer-docs/metadata_schema/view-metadata).
 
 ### `time`
 
@@ -1091,7 +1090,7 @@ For `time`, SolidX currently validates requiredness in the generated form layer 
 
 One important behavior to note:
 
-- core UI support for `time` is present, but `crud.service.ts` does not currently route `SolidFieldType.time` through a dedicated backend field manager, so the backend runtime contract is not yet as complete as the contracts for `date` and `datetime`
+- Core UI support for `time` is present, but `crud.service.ts` does not currently route `SolidFieldType.time` through a dedicated backend field manager, so the backend runtime contract is not yet as complete as the contracts for `date` and `datetime`
 
 </TabItem>
 <TabItem value="persistence" label="Persistence">
@@ -1109,9 +1108,9 @@ Because `time` represents a clock-time value, it is most useful for schedule-sty
 
 Typical use cases include:
 
-- start and end times for scheduled jobs
-- opening and closing times
-- time-only display in generated forms and reports
+- Start and end times for scheduled jobs
+- Opening and closing times
+- Time-only display in generated forms and reports
 
 In practice, `time` is best used where the UI experience is valuable today and the backend behavior is known and reviewed as part of implementation.
 
@@ -1144,7 +1143,7 @@ This is a representative `time` field because it shows the intended contract cle
 </TabItem>
 </Tabs>
 
-For rendering, widgets, and layout attrs related to `time`, see [View Metadata](./view-metadata).
+For rendering, widgets, and layout attrs related to `time`, see [View Metadata](/docs/developer-docs/metadata_schema/view-metadata).
 
 ### `email`
 
@@ -1190,8 +1189,8 @@ For `email`, SolidX validates in two places:
 
 Three important behaviors to note:
 
-- backend validation uses an email-aware validator even when no custom regex is authored
-- generated form validation relies on `regexPattern` when stricter email-format checks are needed
+- Backend validation uses an email-aware validator even when no custom regex is authored
+- Generated form validation relies on `regexPattern` when stricter email-format checks are needed
 - `max` defaults to the email-safe core limit when it is not authored explicitly
 
 </TabItem>
@@ -1210,9 +1209,9 @@ Because `email` is a scalar textual field, it works naturally with the standard 
 
 Typical use cases include:
 
-- exact lookup by email address
-- partial search in operational lists
-- identifying records by a stable contact identifier
+- Exact lookup by email address
+- Partial search in operational lists
+- Identifying records by a stable contact identifier
 
 In practice, `email` combines the searchability of text with stronger validation expectations than a generic short string.
 
@@ -1248,7 +1247,7 @@ This is a representative `email` field because it shows the email-specific valid
 </TabItem>
 </Tabs>
 
-For rendering, widgets, and layout attrs related to `email`, see [View Metadata](./view-metadata).
+For rendering, widgets, and layout attrs related to `email`, see [View Metadata](/docs/developer-docs/metadata_schema/view-metadata).
 
 ### `password`
 
@@ -1293,9 +1292,9 @@ For `password`, SolidX validates in two places:
 
 Three important behaviors to note:
 
-- backend requiredness is applied on create rather than on ordinary update flows
-- password confirmation is treated as part of the contract when a password value is supplied
-- when no custom regex is authored, the backend falls back to a strong-password default pattern
+- Backend requiredness is applied on create rather than on ordinary update flows
+- Password confirmation is treated as part of the contract when a password value is supplied
+- When no custom regex is authored, the backend falls back to a strong-password default pattern
 
 </TabItem>
 <TabItem value="persistence" label="Persistence">
@@ -1341,7 +1340,7 @@ This is a representative `password` field because it captures the typical secret
 </TabItem>
 </Tabs>
 
-For rendering, widgets, and layout attrs related to `password`, see [View Metadata](./view-metadata).
+For rendering, widgets, and layout attrs related to `password`, see [View Metadata](/docs/developer-docs/metadata_schema/view-metadata).
 
 ### `selectionStatic`
 
@@ -1388,7 +1387,7 @@ Three important behaviors to note:
 
 - `selectionStaticValues` defines the allowed set using `value:label` entries, where the left-hand side is the stored value and the right-hand side is the display label
 - `selectionValueType` controls how the submitted value is interpreted at validation time
-- when `isMultiSelect` is enabled, the backend accepts an array or a JSON-stringified array and validates each submitted value against the authored set
+- When `isMultiSelect` is enabled, the backend accepts an array or a JSON-stringified array and validates each submitted value against the authored set
 
 </TabItem>
 <TabItem value="persistence" label="Persistence">
@@ -1406,9 +1405,9 @@ Because `selectionStatic` stores a constrained set of known values, it is well s
 
 Typical use cases include:
 
-- filtering by status, stage, type, or category
-- segmenting records by workflow state
-- narrowing records by authored option sets such as day of week, product type, or review outcome
+- Filtering by status, stage, type, or category
+- Segmenting records by workflow state
+- Narrowing records by authored option sets such as day of week, product type, or review outcome
 
 In practice, `selectionStatic` is most valuable where consistency matters more than free-form input.
 
@@ -1452,7 +1451,7 @@ This is a representative `selectionStatic` field because it shows the authored o
 </TabItem>
 </Tabs>
 
-For rendering, widgets, and layout attrs related to `selectionStatic`, see [View Metadata](./view-metadata).
+For rendering, widgets, and layout attrs related to `selectionStatic`, see [View Metadata](/docs/developer-docs/metadata_schema/view-metadata).
 
 ### `selectionDynamic`
 
@@ -1499,7 +1498,7 @@ Three important behaviors to note:
 
 - `selectionDynamicProvider` chooses the provider used to resolve valid options at runtime
 - `selectionDynamicProviderCtxt` is JSON-decoded before validation and can shape provider behavior
-- when the provider context sets `validateOnSave` to `false`, save-time provider validation is skipped and only the value-type contract is enforced
+- When the provider context sets `validateOnSave` to `false`, save-time provider validation is skipped and only the value-type contract is enforced
 
 </TabItem>
 <TabItem value="persistence" label="Persistence">
@@ -1517,9 +1516,9 @@ Because `selectionDynamic` stores constrained provider-backed values, it is well
 
 Typical use cases include:
 
-- choosing values from a list-of-values provider
-- selecting records from a provider-backed business catalog
-- narrowing workflows based on provider-defined state or category values
+- Choosing values from a list-of-values provider
+- Selecting records from a provider-backed business catalog
+- Narrowing workflows based on provider-defined state or category values
 
 In practice, `selectionDynamic` is most useful when the option set must remain dynamic without giving up structured persistence.
 
@@ -1555,7 +1554,7 @@ This is a representative `selectionDynamic` field because it shows the core dyna
 </TabItem>
 </Tabs>
 
-For rendering, widgets, and layout attrs related to `selectionDynamic`, see [View Metadata](./view-metadata).
+For rendering, widgets, and layout attrs related to `selectionDynamic`, see [View Metadata](/docs/developer-docs/metadata_schema/view-metadata).
 
 ### `many-to-one`
 
@@ -1603,9 +1602,9 @@ For `many-to-one`, SolidX validates in two places:
 
 Three important behaviors to note:
 
-- the request contract accepts either an integer-style id or the related model's user key
-- required validation fails only when both the id and the user key are absent
-- if a user key is submitted, the related model must expose a user-key field that can be used for lookup
+- The request contract accepts either an integer-style id or the related model's user key
+- Required validation fails only when both the id and the user key are absent
+- If a user key is submitted, the related model must expose a user-key field that can be used for lookup
 
 </TabItem>
 <TabItem value="persistence" label="Persistence">
@@ -1623,9 +1622,9 @@ Because `many-to-one` points to a single related record, it is a natural fit for
 
 Typical use cases include:
 
-- filtering child records by a parent entity such as institute, branch, or customer
-- populating related records in form and list flows
-- using the related model's user key as the display or search value in metadata-driven UI
+- Filtering child records by a parent entity such as institute, branch, or customer
+- Populating related records in form and list flows
+- Using the related model's user key as the display or search value in metadata-driven UI
 
 In practice, `many-to-one` is the relation subtype most often used for simple lookup-style business relationships.
 
@@ -1669,7 +1668,7 @@ This is a representative `many-to-one` field because it shows the core lookup co
 </TabItem>
 </Tabs>
 
-For rendering, widgets, and layout attrs related to `many-to-one`, see [View Metadata](./view-metadata).
+For rendering, widgets, and layout attrs related to `many-to-one`, see [View Metadata](/docs/developer-docs/metadata_schema/view-metadata).
 
 ### `one-to-many`
 
@@ -1714,8 +1713,8 @@ For `one-to-many`, SolidX validates the relation using command-style mutation se
 
 The generated form layer validates requiredness and collection shape. The backend CRUD layer validates the command field and then expects one of two payload styles:
 
-- for `create`, `update`, and `delete`, the payload is array-shaped and submitted through the relation value field itself
-- for `set`, `link`, and `unlink`, the payload is submitted through `<fieldName>Ids`
+- For `create`, `update`, and `delete`, the payload is array-shaped and submitted through the relation value field itself
+- For `set`, `link`, and `unlink`, the payload is submitted through `<fieldName>Ids`
 
 Three important behaviors to note:
 
@@ -1739,9 +1738,9 @@ This makes `one-to-many` more operationally expressive than scalar fields: it is
 
 Typical use cases include:
 
-- rendering child rows inside embedded forms or detail pages
-- loading child collections through relation-aware populate flows
-- applying parent-scoped filters so that only the current record's children are shown or edited
+- Rendering child rows inside embedded forms or detail pages
+- Loading child collections through relation-aware populate flows
+- Applying parent-scoped filters so that only the current record's children are shown or edited
 
 In practice, `one-to-many` works best when the relation is treated as a managed collection rather than as a list-search field.
 
@@ -1785,7 +1784,7 @@ This is a representative `one-to-many` field because it shows the parent-to-coll
 </TabItem>
 </Tabs>
 
-For rendering, widgets, and layout attrs related to `one-to-many`, see [View Metadata](./view-metadata).
+For rendering, widgets, and layout attrs related to `one-to-many`, see [View Metadata](/docs/developer-docs/metadata_schema/view-metadata).
 
 ### `many-to-many`
 
@@ -1831,13 +1830,13 @@ For `many-to-many`, SolidX validates the relation using the same command-style m
 
 The generated form layer validates requiredness and collection shape. The backend CRUD layer validates the command field, then expects one of two payload styles:
 
-- for `create`, `update`, and `delete`, the payload is array-shaped and submitted through the relation value field itself
-- for `set`, `link`, and `unlink`, the payload is submitted through `<fieldName>Ids` on the owner side, or through the resolved inverse field name on the inverse side
+- For `create`, `update`, and `delete`, the payload is array-shaped and submitted through the relation value field itself
+- For `set`, `link`, and `unlink`, the payload is submitted through `<fieldName>Ids` on the owner side, or through the resolved inverse field name on the inverse side
 
 Three important behaviors to note:
 
 - `<fieldName>Command` determines how the relation should be mutated
-- owner-side versus inverse-side metadata affects which effective field names are used internally
+- Owner-side versus inverse-side metadata affects which effective field names are used internally
 - `link` and `unlink` are update-only operations because they need an existing parent record id
 
 </TabItem>
@@ -1856,9 +1855,9 @@ The owner-side flag matters here: it determines which side is responsible for th
 
 Typical use cases include:
 
-- tagging records with multiple domains or categories
-- assigning users, reviewers, or approvers to the same business record
-- traversing relation membership through join-aware list and detail experiences
+- Tagging records with multiple domains or categories
+- Assigning users, reviewers, or approvers to the same business record
+- Traversing relation membership through join-aware list and detail experiences
 
 In practice, `many-to-many` is best treated as a managed membership surface rather than as a scalar search field.
 
@@ -1902,7 +1901,7 @@ This is a representative `many-to-many` field because it shows the shared-member
 </TabItem>
 </Tabs>
 
-For rendering, widgets, and layout attrs related to `many-to-many`, see [View Metadata](./view-metadata).
+For rendering, widgets, and layout attrs related to `many-to-many`, see [View Metadata](/docs/developer-docs/metadata_schema/view-metadata).
 
 ### `mediaSingle`
 
@@ -1942,9 +1941,9 @@ For `mediaSingle`, SolidX validates the uploaded file collection in the backend 
 
 Three important behaviors to note:
 
-- on create, a required `mediaSingle` field must receive exactly one uploaded file
-- if more than one file is submitted, validation fails because the field is single-valued
-- when `mediaMaxSizeKb` or `mediaTypes` are authored, the backend validates the uploaded file against those constraints
+- On create, a required `mediaSingle` field must receive exactly one uploaded file
+- If more than one file is submitted, validation fails because the field is single-valued
+- When `mediaMaxSizeKb` or `mediaTypes` are authored, the backend validates the uploaded file against those constraints
 
 On update, required validation is intentionally more permissive so that existing media can remain in place when no replacement file is uploaded.
 
@@ -1964,9 +1963,9 @@ This makes `mediaSingle` a hybrid field contract: metadata is authored on the fi
 
 Typical use cases include:
 
-- displaying a primary asset such as a logo or cover image in a list or form
-- opening, previewing, or downloading the uploaded file in metadata-driven UI
-- populating media payloads alongside the rest of the business record
+- Displaying a primary asset such as a logo or cover image in a list or form
+- Opening, previewing, or downloading the uploaded file in metadata-driven UI
+- Populating media payloads alongside the rest of the business record
 
 In practice, media fields are usually queried for display and retrieval rather than for text- or number-style filtering.
 
@@ -2004,7 +2003,7 @@ This is a representative `mediaSingle` field because it shows the usual single-a
 </TabItem>
 </Tabs>
 
-For rendering, widgets, and layout attrs related to `mediaSingle`, see [View Metadata](./view-metadata).
+For rendering, widgets, and layout attrs related to `mediaSingle`, see [View Metadata](/docs/developer-docs/metadata_schema/view-metadata).
 
 ### `mediaMultiple`
 
@@ -2044,8 +2043,8 @@ For `mediaMultiple`, SolidX validates requiredness in the backend CRUD layer.
 
 Two important behaviors to note:
 
-- on create, a required `mediaMultiple` field must receive at least one uploaded file
-- unlike `mediaSingle`, the current backend implementation does not yet apply the same file-type and file-size checks to every uploaded file in the collection
+- On create, a required `mediaMultiple` field must receive at least one uploaded file
+- Unlike `mediaSingle`, the current backend implementation does not yet apply the same file-type and file-size checks to every uploaded file in the collection
 
 That second behavior is important operationally: `mediaTypes` and `mediaMaxSizeKb` express the intended contract for the field, but collection-level enforcement is not yet as complete as it is for `mediaSingle`.
 
@@ -2065,9 +2064,9 @@ This makes `mediaMultiple` a natural fit for document bundles, image sets, and a
 
 Typical use cases include:
 
-- previewing the first item in the collection in list views
-- opening the full media bundle in a dialog or lightbox-driven experience
-- downloading document-style attachments from the record detail view
+- Previewing the first item in the collection in list views
+- Opening the full media bundle in a dialog or lightbox-driven experience
+- Downloading document-style attachments from the record detail view
 
 In practice, media collections are queried for retrieval and presentation rather than for scalar-style filtering.
 
@@ -2106,7 +2105,7 @@ This is a representative `mediaMultiple` field because it shows the collection-s
 </TabItem>
 </Tabs>
 
-For rendering, widgets, and layout attrs related to `mediaMultiple`, see [View Metadata](./view-metadata).
+For rendering, widgets, and layout attrs related to `mediaMultiple`, see [View Metadata](/docs/developer-docs/metadata_schema/view-metadata).
 
 ### `computed`
 
@@ -2148,8 +2147,8 @@ For `computed`, SolidX does not apply ordinary end-user field validation.
 
 Two important behaviors to note:
 
-- the backend computed-field flow does not apply ordinary user-input validation and therefore returns no direct field errors for submitted values
-- generated forms treat the field as read-only and optional because the value is not expected to be provided by the user
+- The backend computed-field flow does not apply ordinary user-input validation and therefore returns no direct field errors for submitted values
+- Generated forms treat the field as read-only and optional because the value is not expected to be provided by the user
 
 This is by design: correctness comes from provider logic and trigger configuration rather than from normal user-input validation rules.
 
@@ -2162,8 +2161,8 @@ In inline CRUD flows, SolidX parses `computedFieldValueProviderCtxt`, resolves t
 
 There are two cases where inline computation is intentionally skipped:
 
-- partial updates
-- fields that define `computedFieldTriggerConfig`, because those are expected to be handled by trigger-driven subscriber flows instead
+- Partial updates
+- Fields that define `computedFieldTriggerConfig`, because those are expected to be handled by trigger-driven subscriber flows instead
 
 </TabItem>
 <TabItem value="filtering-and-querying" label="Filtering & querying">
@@ -2172,9 +2171,9 @@ Once computed, the field behaves like any other persisted scalar of the authored
 
 Typical use cases include:
 
-- filtering or searching by generated transaction ids and external ids
-- sorting or reporting on derived numeric or date values
-- exposing stable business keys that are derived automatically rather than entered manually
+- Filtering or searching by generated transaction ids and external ids
+- Sorting or reporting on derived numeric or date values
+- Exposing stable business keys that are derived automatically rather than entered manually
 
 In practice, `computed` is best understood as a generated persisted field rather than as a transient view-only value.
 
@@ -2220,9 +2219,9 @@ This is a representative `computed` field because it shows the full provider-bac
 </TabItem>
 </Tabs>
 
-For rendering, widgets, and layout attrs related to `computed`, see [View Metadata](./view-metadata).
+For rendering, widgets, and layout attrs related to `computed`, see [View Metadata](/docs/developer-docs/metadata_schema/view-metadata).
 
 ## See Also
 
-- [View Metadata](./view-metadata)
-- [Model Metadata](./model-metadata)
+- [View Metadata](/docs/developer-docs/metadata_schema/view-metadata)
+- [Model Metadata](/docs/developer-docs/metadata_schema/model-metadata)

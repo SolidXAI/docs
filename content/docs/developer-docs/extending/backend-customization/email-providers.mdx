@@ -2,14 +2,12 @@
 title: Email Providers
 icon: "mail"
 description: Learn how to create and configure custom email providers in SolidX.
-summary: Guide to creating custom email providers beyond the built-in SMTP provider. Covers implementing the `IMail` interface with `@MailProvider()` decorator, using `EmailTemplateService` for templates, `PublisherFactory` for background job queuing, methods for synchronous/asynchronous sending with and without templates, handling attachments, API-based service integration (e.g., third-party email APIs), and proper error handling for email delivery.
+summary: Covers `IMail` implementation, provider registration, template-driven sending, background delivery, attachments, and external email-service integration.
 keywords: [backend, email providers, customization]
 solidx_concerns: [new_email_provider]
 ---
 
-# 📧 Email Providers
-
-## 🧩 Overview
+## Overview
 
 SolidX provides an `SMTP` email provider out of the box, which supports sending emails **both synchronously** and **asynchronously** (via background jobs).  
 However, there may be cases where you need to create your own provider - for example, to send emails using a **third‑party API service**.
@@ -18,20 +16,15 @@ To make this easy, SolidX offers abstractions that help you implement your own p
 
 
 
-## ⚙️ Steps to Create a Custom Email Provider
+## Steps to Create a Custom Email Provider
 
 ### 1. Implement a Custom Email Service
 
 Below is a sample implementation of a custom email provider using a hypothetical API‑based service.
 
-It implements the `IMail` interface and is decorated with `@MailProvider()`. 
+It implements the `IMail` interface and is decorated with `@MailProvider()`. It uses `EmailTemplateService` for template handling and `PublisherFactory` for queued delivery.
 
-It uses `EmailTemplateService` for handling email templates and `PublisherFactory` for queuing emails.
-
-This class provies implementation for sending email with and without templates, both synchronously and asynchronously.
-
-All the custom email sending logic (e.g., API calls) should be placed in the `sendEmailSynchronously` method. Rest of the code handles queuing and template rendering, which can be reused across different providers.
-
+This class supports sending email both with and without templates, synchronously or asynchronously. Put your custom email sending logic, such as API calls, in `sendEmailSynchronously()`. The rest of the class handles queueing and template rendering, which can be reused across providers.
 ```ts
 import { HttpService } from "@nestjs/axios";
 import { Inject, Injectable, Logger } from "@nestjs/common";
@@ -163,7 +156,7 @@ export class AppModule {}
 
 You can now use `MailFactory` to send emails either **via templates** or **manually**.
 
-#### ✅ Example: Using an Email Template
+#### Example: Using an Email Template
 
 ```ts
 import { MailFactory } from "@solidxai/core";   
@@ -186,7 +179,7 @@ await mailService.sendEmailUsingTemplate(
 );
 ```
 
-#### ✉️ Example: Sending a Manual Email (Without Template)
+#### Example: Sending a Manual Email (Without Template)
 
 ```ts
 import { MailFactory } from "@solidxai/core";   
@@ -204,7 +197,7 @@ await mailService.sendEmail(
 
 
 
-## 🧠 Interface Definition
+## Interface Definition
 
 The `IMail` interface defines two main methods your provider must implement.
 
@@ -248,13 +241,11 @@ Use email templates for better separation of content and logic. It allows you to
 
 
 
-## ✅ Summary
+## Summary
 
 | Step | Description |
 |------|--------------|
-| 1️⃣ | Create a class implementing `IMail` |
-| 2️⃣ | Decorate it with `@MailProvider()` |
-| 3️⃣ | Register it in your module |
-| 4️⃣ | Use `MailFactory` to send emails (template or manual) |
-
-
+| 1 | Create a class implementing `IMail` |
+| 2 | Decorate it with `@MailProvider()` |
+| 3 | Register it in your module |
+| 4 | Use `MailFactory` to send emails (template or manual) |

@@ -5,6 +5,7 @@
     "index",
     "dashboard-metadata-authoring-guide",
     "build-a-custom-dashboard-widget-provider",
-    "frontend-dashboard-widget-extension-contract"
+    "frontend-dashboard-widget-extension-contract",
+    "agent-ready-templates"
   ]
 }

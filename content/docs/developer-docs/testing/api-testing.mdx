@@ -1,0 +1,288 @@
+---
+title: API Testing
+icon: "code"
+description: Metadata-driven API testing support in SolidX, including steps, auth flow, assertions, and typical patterns.
+summary: Covers the API adapter, common request patterns, authentication flow, assertions, and reusable response-driven scenario design in SolidX.
+---
+
+<Callout type="info" title="Mental Model">
+
+API scenarios are the fast path through the SolidX testing engine.
+
+- `api.request` performs the HTTP work.
+- Assertions validate the last response or a saved resource.
+- `saveAs` lets later steps reuse tokens, ids, and payloads.
+- `util.require` makes cross-scenario dependencies explicit.
+
+</Callout>
+
+SolidX supports automated API testing through the shared testing engine and the API adapter.
+
+API scenarios are a strong fit when you want:
+
+- Fast feedback.
+- Direct backend verification.
+- Stable automation that does not depend on browser rendering.
+- Easy chaining of response-driven workflows.
+
+## How API Testing Works
+
+At runtime:
+
+1. The runner loads `api` or `mixed` scenarios from metadata.
+2. API steps are registered into the step registry.
+3. The API adapter executes HTTP requests.
+4. Responses are stored in the runtime context.
+5. Follow-up assertions or dependent steps use those results.
+
+This makes API testing a first-class part of the same metadata-driven system used for UI testing.
+
+## Core API Operations
+
+### `api.request`
+
+This is the main HTTP execution primitive.
+
+Use it for:
+
+- `GET`, `POST`, `PUT`, `PATCH`, `DELETE`
+- JSON requests
+- Query parameter requests
+- Plain text bodies
+- Multipart form-data uploads
+
+Typical `with` fields:
+
+- `method`
+- `url`
+- `headers`
+- `json`
+- `bodyText`
+- `query`
+- `formData`
+
+The step returns:
+
+- `status`
+- `headers`
+- `bodyText`
+- `bodyJson` when the response is JSON
+- `body` as a convenience alias
+
+It also updates the last API response in the runtime context, which is useful for follow-up assertions.
+
+## Authentication Pattern
+
+The standard pattern for authenticated scenarios is to post to `/api/iam/authenticate` using `api.request`, save the full response as `loginSuccess`, and let dependent scenarios read the token from that resource.
+
+```json
+{
+  "given": {
+    "op": "api.request",
+    "with": {
+      "method": "POST",
+      "url": "${env:TEST_API_BASE_URL}/api/iam/authenticate",
+      "json": {
+        "email": "libTestEditor@test.local",
+        "username": "",
+        "password": "Test@1234"
+      }
+    },
+    "saveAs": "loginSuccess"
+  }
+}
+```
+
+Dependent scenarios typically start with `util.require`, then read the token through `${res:loginSuccess.bodyJson.data.accessToken}`.
+
+<Callout type="info" title="Reusable Login Resource">
+
+Saving the full login response as `loginSuccess` keeps the access token, refresh token, and user payload available for later API or mixed scenarios.
+
+</Callout>
+
+## Assertions Commonly Used With API Steps
+
+- `assert.httpStatus`: Checks the HTTP status of the last API response or a supplied response.
+- `assert.equals`: Verifies strict equality between actual and expected values.
+- `assert.contains`: Verifies one string contains another.
+- `assert.matches`: Verifies a value against a regex.
+- `assert.jsonPath`: Extracts and asserts nested JSON values without requiring a custom spec.
+
+## Typical API Testing Pattern
+
+A common API scenario pattern looks like this:
+
+1. Authenticate and save a bearer token.
+2. Create or fetch a resource.
+3. Assert the status.
+4. Save an id or response body.
+5. Make a follow-up request using saved values.
+6. Assert business behavior.
+
+The `venue` module follows this pattern directly:
+
+- `api-authenticate-success` creates a reusable login response.
+- Later scenarios begin with `util.require` to assert that bootstrap resource exists.
+- Authenticated requests read the token via `${res:loginSuccess.bodyJson.data.accessToken}`.
+- Request bodies are often sourced from `testing.data`.
+
+## Example Flow
+
+<Tabs defaultValue="bootstrap">
+  <TabItem value="bootstrap" label="Bootstrap Scenario">
+
+  ```json
+  {
+    "id": "api-authenticate-success",
+    "type": "api",
+    "tags": ["smoke"],
+    "steps": [
+      {
+        "given": {
+          "op": "api.request",
+          "with": {
+            "method": "POST",
+            "url": "${env:TEST_API_BASE_URL}/api/iam/authenticate",
+            "json": {
+              "email": "libTestEditor@test.local",
+              "username": "",
+              "password": "Test@1234"
+            }
+          },
+          "saveAs": "loginSuccess"
+        }
+      },
+      { "then": { "op": "assert.httpStatus", "with": { "is": 200 } } },
+      { "and": { "op": "assert.contains", "with": { "actual": "${res:loginSuccess.bodyText}", "expected": "accessToken" } } }
+    ]
+  }
+  ```
+
+  </TabItem>
+  <TabItem value="dependent" label="Dependent Scenario">
+
+  ```json
+  {
+    "id": "api-create-example",
+    "type": "api",
+    "steps": [
+      {
+        "given": {
+          "op": "util.require",
+          "with": { "resource": "loginSuccess" }
+        }
+      },
+      {
+        "when": {
+          "op": "api.request",
+          "with": {
+            "method": "POST",
+            "url": "${env:TEST_API_BASE_URL}/api/example",
+            "headers": {
+              "Authorization": "Bearer ${res:loginSuccess.bodyJson.data.accessToken}"
+            },
+            "json": { "name": "Example" }
+          },
+          "saveAs": "example.create"
+        }
+      },
+      {
+        "then": {
+          "op": "assert.httpStatus",
+          "with": { "is": 201 }
+        }
+      }
+    ]
+  }
+  ```
+
+  </TabItem>
+</Tabs>
+
+## Multipart and File Upload Testing
+
+`api.request` also supports multipart form submission.
+
+This is useful for:
+
+- Media upload testing.
+- APIs that mix files and text fields.
+- Metadata-driven creation flows that expect file attachments.
+
+SolidX supports file values such as:
+
+- `file:/absolute/path`
+- `url:https://...`
+
+The `venue` module demonstrates strong real-world patterns here:
+
+- Create a lead with `formData: "${data:lead[\"LeadWithFile\"]._rec}"`.
+- Create a hierarchy import transaction with `formData: "${data:hierarchyImportTransaction[\"HierarchyImportSample\"]._rec}"`.
+
+That keeps file-heavy payloads in `testing.data` while scenarios remain short and focused.
+
+## Query Filter Testing
+
+SolidX API tests are also a good fit for verifying query semantics on list endpoints.
+
+Patterns often include:
+
+- Equality filters with `$eq`
+- Case-insensitive prefix filters with `$startsWithi`
+- Nested relation filters
+- `$or` combinations
+- `$and` combinations
+
+Representative pattern:
+
+```json
+{
+  "when": {
+    "op": "api.request",
+    "with": {
+      "method": "GET",
+      "url": "${env:TEST_API_BASE_URL}/api/state-master",
+      "headers": {
+        "Authorization": "Bearer ${res:loginSuccess.bodyJson.data.accessToken}"
+      },
+      "query": {
+        "filters": {
+          "name": {
+            "$eq": "${data:stateMaster[\"Maharashtra\"].name}"
+          }
+        }
+      }
+    }
+  }
+}
+```
+
+## Good API Testing Practices
+
+Recommended practices:
+
+- Prefer API tests for backend-heavy business logic.
+- Keep auth setup reusable through `saveAs`.
+- Assert both status and response payload shape.
+- Use `assert.jsonPath` when validating nested response data.
+- Keep scenarios independent when possible.
+- Use test data fixtures instead of embedding large payloads in every scenario.
+- Create one reusable authentication bootstrap scenario per module when most API scenarios need auth.
+- Use `util.require` when a scenario intentionally depends on a previously saved auth or setup resource.
+- Use metadata fixtures for expected values in query assertions so payloads and expectations stay aligned.
+
+## When To Prefer API Tests
+
+Prefer API testing when:
+
+- The behavior is backend-centric.
+- Browser rendering is not part of the risk you are validating.
+- The same coverage would be slower or more brittle in UI automation.
+- You want narrow, deterministic feedback on data and permissions.
+
+<Callout type="info" title="Next">
+
+Continue with [UI Testing](/docs/developer-docs/testing/ui-testing).
+
+</Callout>

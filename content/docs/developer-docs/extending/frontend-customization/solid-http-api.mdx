@@ -1,0 +1,181 @@
+---
+title: Solid HTTP API
+icon: "globe"
+description: Learn how to use the Solid HTTP API helpers to interact with backend APIs in your application.
+summary: "Guide to using the `solidAxios` HTTP helpers in SolidX applications. Covers importing and using `solidGet`, `solidPost`, `solidPut`, `solidPatch`, and `solidDelete`, building filter query strings, handling loading and errors, and where these helpers fit in the UI module system."
+solidx_concerns: [frontend.custom_pages, add_full_custom_ui]
+---
+
+## Overview
+
+The Solid HTTP API helpers provide a lightweight way to call backend APIs from custom frontend code.
+
+Use them when you want:
+
+- Direct promise-based API calls
+- Full control over when requests run
+- Custom workflows that do not fit a generated entity API pattern
+
+These helpers are commonly used from:
+
+- Extension components in `admin-layout`
+- Handler logic in `extension-functions`
+- Bespoke route UIs in `custom-layout`
+
+## Helper Overview
+
+```ts
+import { solidAxios, solidGet, solidPost, solidPut, solidPatch, solidDelete } from "@solidxai/core-ui";
+```
+
+`solidAxios` is a preconfigured Axios instance that:
+
+- Uses the configured backend base URL
+- Attaches the access token from session when available
+- Emits global error events on network errors or server failures
+- Normalizes accidental `/api` prefixes in request paths
+
+Convenience exports:
+
+- `solidGet`
+- `solidPost`
+- `solidPut`
+- `solidPatch`
+- `solidDelete`
+
+## Methods and Semantics
+
+<Accordions type="single">
+<Accordion title="solidGet">
+
+Use for reads such as list fetches, detail fetches, or lookup requests.
+
+</Accordion>
+
+<Accordion title="solidPost">
+
+Use for creates, custom actions, or trigger endpoints.
+
+</Accordion>
+
+<Accordion title="solidPut and solidPatch">
+
+Use for full or partial updates.
+
+</Accordion>
+
+<Accordion title="solidDelete">
+
+Use for deletes or delete-like custom endpoints.
+
+</Accordion>
+</Accordions>
+
+## Building Query Strings and Filters
+
+You can either build a query string manually:
+
+```ts
+import qs from "qs";
+
+const query = qs.stringify(
+  {
+    offset: 0,
+    limit: 10,
+    filters: { status: { $eq: "active" } },
+  },
+  { encodeValuesOnly: true }
+);
+
+const resp = await solidGet(`/application-master?${query}`);
+```
+
+or pass `params` through Axios config:
+
+```ts
+const resp = await solidGet("/employee", {
+  params: {
+    filters: { Is_Account_Person: { $eq: true } },
+    limit: 500,
+  },
+});
+```
+
+## Usage Patterns
+
+### Fetch on mount
+
+```tsx
+const [loading, setLoading] = useState(false);
+const [records, setRecords] = useState<any[]>([]);
+
+useEffect(() => {
+  let alive = true;
+
+  const run = async () => {
+    setLoading(true);
+    try {
+      const resp = await solidGet("/payment-otp-payment-reason-vtb");
+      if (alive) setRecords(resp?.data?.data?.records || []);
+    } finally {
+      if (alive) setLoading(false);
+    }
+  };
+
+  run();
+  return () => {
+    alive = false;
+  };
+}, []);
+```
+
+### On-demand fetch
+
+```tsx
+const onSearch = async (qsValue: string) => {
+  const resp = await solidGet(`/application-master?${qsValue}`);
+  setData(resp.data?.data);
+};
+```
+
+### Mutation flow
+
+```tsx
+const onSave = async () => {
+  try {
+    const resp = await solidPost("/application-master/change-status", payload);
+    showToast("success", "Success", resp.data?.message || "Saved");
+  } catch (error: any) {
+    showToast("error", "Error", error?.response?.data?.message || "Save failed");
+  }
+};
+```
+
+## Solid Entity API vs Solid HTTP API
+
+Use **Solid Entity API** when:
+
+- You want generated CRUD hooks with RTK Query caching and auto-refetch
+- Your use case matches standard entity list or detail patterns
+- You want module-owned reducers and middleware under `redux/`
+
+Use **Solid HTTP API** when:
+
+- You need custom multi-step workflows or action endpoints
+- You want direct promise-based control in component logic
+- You are building one-off integration logic in widgets, buttons, dialogs, or bespoke route UIs
+
+Both patterns are supported in the same app. This is a structural choice, not a framework limitation.
+
+## Best Practices
+
+- Handle loading and errors explicitly
+- Use `qs.stringify(..., { encodeValuesOnly: true })` for filter-heavy endpoints
+- Prefer context-derived IDs over hardcoded values
+- Remember there is no automatic cache invalidation; manually refresh where needed
+
+## Related
+
+- [Solid Entity API](/docs/developer-docs/extending/frontend-customization/solid-entity-api)
+- [Redux Module Integration](/docs/developer-docs/extending/frontend-customization/redux-module-integration)
+- [Bespoke Frontend](/docs/developer-docs/extending/frontend-customization/bespoke-frontend-ui)

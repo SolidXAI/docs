@@ -1,6 +1,6 @@
 ---
 title: Form Events
-icon: "zap"
+icon: "radio"
 description: Learn how to create event listeners for form view events in your frontend application.
 summary: "Explains creating function extensions for SolidX form view events. Covers supported events (`onFormLoad`, `onFieldChange`, `onFieldBlur`), module-based file location, manifest registration, event payloads, and returning layout/data updates. Includes a dedicated deprecated section for `onFormLayoutLoad` and `onFormDataLoad`."
 solidx_concerns: [frontend.extensions.form_event_listeners, add_change_handler_function, onlayoutload_handler_function, ondataload_handler_function]
@@ -12,7 +12,7 @@ Form view **function extensions** let you react to lifecycle events in a SolidX 
 
 - Read or mutate **form data** (via Formik)
 - Adjust the **layout dynamically** (hide/show/move fields) with `SolidViewLayoutManager`
-- Coordinate with **custom widgets** rendered in the form (see [Form View Field Widgets](./form-view-field-widgets.md))
+- Coordinate with **custom widgets** rendered in the form (see [Form View Field Widgets](/docs/developer-docs/extending/frontend-customization/form-view-field-widgets))
 
 You author **listener functions**, register them in the owning UI module manifest, and reference them in your **form view layout JSON**.
 
@@ -20,9 +20,17 @@ You author **listener functions**, register them in the owning UI module manifes
 
 SolidX currently supports these form view events:
 
-1. **`onFormLoad`** - unified form-load lifecycle event (recommended for all load-time logic).
-2. **`onFieldChange`** - fires whenever a field **value changes**.
-3. **`onFieldBlur`** - fires when a field **loses focus**.
+<Steps>
+  <Step>
+    **`onFormLoad`** - unified form-load lifecycle event, recommended for all load-time logic.
+  </Step>
+  <Step>
+    **`onFieldChange`** - fires whenever a field **value changes**.
+  </Step>
+  <Step>
+    **`onFieldBlur`** - fires when a field **loses focus**.
+  </Step>
+</Steps>
 
 <Callout type="tip" title="Tip">
 
@@ -37,10 +45,20 @@ Inside `SolidFormView`, form-load handlers run with a working layout/data contex
 
 Current execution sequence:
 
-1. `onFormLayoutLoad` (legacy compatibility hook)
-2. `onFormDataLoad` (legacy compatibility hook)
-3. `onFormLoad` (recommended unified hook)
-4. Commit final `workingLayout` and `workingFormData` to React state
+<Steps>
+  <Step>
+    `onFormLayoutLoad` (legacy compatibility hook).
+  </Step>
+  <Step>
+    `onFormDataLoad` (legacy compatibility hook).
+  </Step>
+  <Step>
+    `onFormLoad` (recommended unified hook).
+  </Step>
+  <Step>
+    Commit final `workingLayout` and `workingFormData` to React state.
+  </Step>
+</Steps>
 
 This means `onFormLoad` sees the latest working layout/data and is the best place for load-time logic moving forward.
 
@@ -55,11 +73,17 @@ This means `onFormLoad` sees the latest working layout/data and is the best plac
 
 Default file selection for form event changes:
 
-1. Create or update a TS/TSX listener inside:
-   - `solid-ui/src/<module-name>/admin-layout/<model-name>/extension-functions/`
-2. Register the listener in the owning UI module manifest:
-   - `solid-ui/src/<module-name>/<module-name>.ui-module.ts`
-3. Keep the registration name aligned with layout metadata event references (`onFormLoad`, `onFieldChange`, `onFieldBlur`).
+<Steps>
+  <Step>
+    Create or update a TS or TSX listener inside `solid-ui/src/<module-name>/admin-layout/<model-name>/extension-functions/`.
+  </Step>
+  <Step>
+    Register the listener in the owning UI module manifest at `solid-ui/src/<module-name>/<module-name>.ui-module.ts`.
+  </Step>
+  <Step>
+    Keep the registration name aligned with layout metadata event references such as `onFormLoad`, `onFieldChange`, and `onFieldBlur`.
+  </Step>
+</Steps>
 
 Example structure:
 
@@ -198,10 +222,11 @@ Reference your handler name in the layout JSON:
 }
 ```
 
-'> **Note**
+<Callout type="note" title="Handler Shape">
 
-''> Your handler can be one function that switches on `event.type`, or multiple functions registered under different names.
-'
+Your handler can be one function that switches on `event.type`, or multiple functions registered under different names.
+
+</Callout>
 
 ## Event Payload (Types)
 
@@ -271,10 +296,20 @@ Recommended metadata pattern:
 
 Migration guidance:
 
-1. Move load-time layout logic from `onFormLayoutLoad` into `onFormLoad`.
-2. Move load-time data shaping logic from `onFormDataLoad` into `onFormLoad`.
-3. Keep `onFieldChange` and `onFieldBlur` unchanged.
-4. Remove deprecated hooks from metadata once migration is complete.
+<Steps>
+  <Step>
+    Move load-time layout logic from `onFormLayoutLoad` into `onFormLoad`.
+  </Step>
+  <Step>
+    Move load-time data shaping logic from `onFormDataLoad` into `onFormLoad`.
+  </Step>
+  <Step>
+    Keep `onFieldChange` and `onFieldBlur` unchanged.
+  </Step>
+  <Step>
+    Remove deprecated hooks from metadata once migration is complete.
+  </Step>
+</Steps>
 
 ## Common Patterns
 
@@ -285,13 +320,13 @@ Migration guidance:
 
 ## Troubleshooting
 
-- **My changes are not applied** -> Verify `layoutChanged`/`dataChanged` flags and corresponding payloads are returned.
-- **Load-time logic is not running** -> Ensure the layout has `onFormLoad` and the handler name matches the registered manifest entry.
-- **Node not found** -> Verify the node ID passed to `updateNodeAttributes` exists in the layout tree.
-- **Nothing happens on change** -> Confirm `onFieldChange` is mapped and the handler checks the correct field name.
+- **My changes are not applied** - Verify `layoutChanged`/`dataChanged` flags and corresponding payloads are returned.
+- **Load-time logic is not running** - Ensure the layout has `onFormLoad` and the handler name matches the registered manifest entry.
+- **Node not found** - Verify the node ID passed to `updateNodeAttributes` exists in the layout tree.
+- **Nothing happens on change** - Confirm `onFieldChange` is mapped and the handler checks the correct field name.
 
 ## See Also
 
-- [Form View Field Widgets](./form-view-field-widgets.md) - build custom view/edit widgets and reference them via `viewWidget`/`editWidget`.
-- [Layout Manager](./layout-manager.md) - manipulate view layouts safely with `SolidViewLayoutManager`.
-- [Module Metadata Schema](../../metadata_schema/index.md) - details on form-view layout JSON and node attributes.
+- [Form View Field Widgets](/docs/developer-docs/extending/frontend-customization/form-view-field-widgets) - build custom view/edit widgets and reference them via `viewWidget`/`editWidget`.
+- [Layout Manager](/docs/developer-docs/extending/frontend-customization/layout-manager) - manipulate view layouts safely with `SolidViewLayoutManager`.
+- [Module Metadata Schema](/docs/developer-docs/metadata_schema) - details on form-view layout JSON and node attributes.

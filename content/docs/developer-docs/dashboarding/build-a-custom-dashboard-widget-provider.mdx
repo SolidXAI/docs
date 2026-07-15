@@ -31,7 +31,7 @@ Use both decorators:
 
 The runtime registration path is:
 
-- decorator metadata -> introspection (`SolidIntrospectService`) -> registry (`SolidRegistry`) -> runtime resolver (`DashboardRuntimeService`)
+- Decorator metadata -> introspection (`SolidIntrospectService`) -> registry (`SolidRegistry`) -> runtime resolver (`DashboardRuntimeService`)
 
 ## Provider Template
 
@@ -92,8 +92,8 @@ export class ExampleDashboardWidgetProvider implements IDashboardWidgetDataProvi
 
 The framework now includes a canonical reference implementation for a fully custom queue-focused widget:
 
-- backend provider: `MqDashboardQueueSlaHeatmapProvider`
-- frontend widget: `QueueSlaHeatmapWidget`
+- Backend provider: `MqDashboardQueueSlaHeatmapProvider`
+- Frontend widget: `QueueSlaHeatmapWidget`
 
 The provider output contract is intentionally explicit:
 
@@ -126,9 +126,9 @@ The provider output contract is intentionally explicit:
 ```
 
 This RI is useful because it shows the recommended split:
-- the provider owns data access and runtime contract design,
-- the frontend widget owns the final visual treatment,
-- and metadata binds the two together.
+- The provider owns data access and runtime contract design.
+- The frontend widget owns the final visual treatment.
+- Metadata binds the two together.
 
 ## Recommended Implementation Practices
 
@@ -140,9 +140,17 @@ This RI is useful because it shows the recommended split:
 
 ## Quick Validation Path
 
-1. Start service.
-2. Call definition endpoint and verify widget exists.
-3. Call widget data endpoint:
+<Steps>
+  <Step>
+    Start service.
+  </Step>
+  <Step>
+    Call the definition endpoint and verify the widget exists.
+  </Step>
+  <Step>
+    Call the widget data endpoint.
+  </Step>
+</Steps>
 
 ```bash
 curl -X POST "$BASE_URL/dashboard/<module>/<dashboard>/widgets/<widgetId>/data" \
@@ -151,4 +159,4 @@ curl -X POST "$BASE_URL/dashboard/<module>/<dashboard>/widgets/<widgetId>/data" 
   -d '{"variables": {}}'
 ```
 
-4. Verify `meta.providerName` and `data` payload shape.
+Then verify `meta.providerName` and the `data` payload shape.

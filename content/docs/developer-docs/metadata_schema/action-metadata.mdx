@@ -2,7 +2,7 @@
 title: Actions
 icon: "zap"
 description: Metadata schema for defining actions in SolidX applications.
-summary: This document defines action metadata in SolidX, which determines what happens when users interact with UI elements like menu items, buttons, or links. Actions connect the frontend to backend functionality and control how data is displayed or processed. The metadata supports two main action types - solid (standard SolidX actions linked to views) and custom (custom component actions with optional modal display). Key attributes include action name, display name, type, domain, context, custom component path, server endpoint, associated view, module, and model. Actions serve as the bridge between user interactions and application responses.
+summary: Covers the metadata used to define SolidX actions, including built-in actions, custom actions, view linkage, routing, and modal behavior.
 json_pointer: "/actions"
 jsonpath: "$.actions"
 parent_component: root
@@ -12,8 +12,6 @@ items_attributes_doc: "#action-metadata-attributes"
 solidx_concerns: [add_custom_menu_action_combo]
 ---
 
-
-# Action Metadata
 <Callout type="info" title="Where it lives">
 
 **JSON Pointer:** `/actions`
@@ -23,39 +21,42 @@ solidx_concerns: [add_custom_menu_action_combo]
 </Callout>
 
 ## Overview
-Actions define what happens when users interact with UI elements like menu items, buttons, or links. They connect the frontend to backend functionality and determine how data is displayed or processed.
+Action metadata defines what happens when a user interacts with a menu item, button, or other clickable UI element in a SolidX application.
 
-Menus, buttons, and links in SolidX applications are associated with actions.
+Menus, buttons, and links resolve to actions. An action is therefore the binding layer between a user interaction and the runtime surface that should open or execute.
 
-When a user clicks on one of these UI elements, the corresponding action is triggered, executing the defined behavior.
+When a user clicks one of these UI elements, the corresponding action is triggered and the defined behavior is executed.
 
-Key Configuration Points:
+### Key Configuration Points
 
-1. **Module and View Association**: All actions need to be linked to a module and a view.
+1. **Module and view association**
+All actions belong to a module. When the action opens a generated SolidX view, it should also reference the relevant `viewUserKey`, and in most cases the matching `modelUserKey`.
 
-2. **Solid Actions**: In case of solid actions, the view user key and model user key is required. Since solid actions are generally linked to standard SolidX views, no custom component path is needed. In case of custom actions, a custom component path i.e (the linked view) is required. 
+2. **`solid` actions**
+Use `solid` actions when the target is a generated SolidX view. In this case, `viewUserKey` and `modelUserKey` are the main linkage fields, and `customComponent` is not needed.
 
-3. **Custom Actions**: Custom actions can optionally be displayed as modal dialogs. If the action is a custom action, the `customComponent` attribute must be provided to specify the path to the custom frontend component. The `customIsModal` attribute indicates if the component should be displayed as a modal dialog.
+3. **`custom` actions**
+Use `custom` actions when the target is a custom frontend surface rather than a generated view. In this case, `customComponent` is required, and `customIsModal` controls whether that component is shown as a modal dialog.
 
 <Callout type="note" title="Note">
 
-In case a custom action is not associated with a model, the model user key can be left blank.
+If a custom action is not associated with a model, `modelUserKey` can be left empty.
 
 </Callout>
 
 ### Action Types
-1. **Solid Actions**: Standard CRUD operations using SolidX's built-in views
-2. **Custom Actions**: Custom components or pages with specific functionality
+1. **`solid` actions**:
+Use `solid` actions for standard SolidX views such as list, form, tree, card, or kanban views.
+
+2. **`custom` actions**:
+Use `custom` actions when the target is a custom frontend component or page rather than a generated SolidX view.
 
 ### Configuration Examples
 
 ### `Solid` Action Example
-Below is an example of a `solid` action configuration, which links to a standard SolidX view for listing institutes.
+Below is a `solid` action that opens a generated institute list view.
 <details open>
-<summary>
-    
- Click to expand
-</summary>
+<summary>Solid action example</summary>
 ```json
 {
     ..., // Other metadata
@@ -80,12 +81,9 @@ Below is an example of a `solid` action configuration, which links to a standard
 </details>
 
 ### `Custom` Action Example
-Below is an example of a `custom` action configuration, which links to a custom frontend component for the fees portal home page.
+Below is a `custom` action that routes into a custom frontend surface for the fees portal home page.
 <details open>
-<summary>
-    
- Click to expand
-  </summary>
+<summary>Custom action example</summary>
 ```json
 {
     ..., // Other metadata
@@ -111,12 +109,9 @@ Below is an example of a `custom` action configuration, which links to a custom 
 
 ## Complete Navigation Structure Example
 
-Here's a complete navigation structure example from the fees-portal, illustrating how menus and actions are defined together:
+This example shows how menu items and actions are authored together inside one module:
 <details open>
-<summary>
-    
- Click to expand
-  </summary>
+<summary>Navigation structure example</summary>
 
 ```json
 {
@@ -161,10 +156,7 @@ Here's a complete navigation structure example from the fees-portal, illustratin
 ```
 </details>
 
-<h2 className=" ">
-    
-## Action Metadata Atributes
-</h2>
+## Action Metadata Attributes
 
 
 ### `name` *(string, required, unique)*
@@ -181,8 +173,8 @@ Display name of the action item (shown in the UI).
 
 ### `type` *(string, required)*
 Type of action. Supported types:
-- `solid`: Standard SolidX action that interacts with SolidX backend services.
-- `custom`: Custom action that uses a custom frontend component. You need to provide the `customComponent` attribute for this type.
+- `solid`: Opens or resolves to a generated SolidX view.
+- `custom`: Custom action that uses a custom frontend component. Provide `customComponent` for this type.
 **Default:** N/A
 
 
@@ -190,8 +182,7 @@ Type of action. Supported types:
 ### `domain` *(JSON, optional)*
 JSON object defining domain-specific parameters for the action.  
 **Default:** N/A
-
---- 
+ 
 
 ### `context` *(JSON, optional)*
 JSON object defining context-specific parameters for the action.  
@@ -230,10 +221,6 @@ User key of the module this action belongs to.
 **Default:** N/A
 
 
-### `modelUserKey` *(string, required)*
-User key of the model this action operates on.  
+### `modelUserKey` *(string, optional)*
+User key of the model this action operates on. This is typically present for `solid` actions and may be empty for custom actions that are not model-bound.  
 **Default:** N/A
-
-
-
-

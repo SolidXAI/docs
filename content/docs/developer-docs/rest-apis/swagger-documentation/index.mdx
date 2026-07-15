@@ -2,61 +2,94 @@
 title: Swagger
 icon: "book-open"
 description: This section provides details on how to access and use the Swagger documentation for SolidX REST APIs.
-summary: This document provides comprehensive information about accessing and using SolidX's auto-generated Swagger/OpenAPI documentation. It explains how to access the documentation at the /api/docs endpoint, authenticate using JWT tokens via the login endpoint, and utilize the standard RESTful endpoints automatically generated for each resource. The documentation covers query parameters for filtering, sorting, pagination, population, and field selection, provides example requests for common operations, explains the standardized error handling format with common HTTP status codes, and outlines best practices for authentication, request optimization, error handling, and API documentation maintenance.
+summary: Explains how to access the generated Swagger documentation, authenticate requests, inspect endpoints, and work with common query parameters and error responses.
 ---
 
-import { Shield, Zap, AlertTriangle, BookOpen } from 'lucide-react';
+## API Documentation
 
-# API Documentation
+SolidX automatically generates API documentation for your endpoints using Swagger and the OpenAPI specification. Swagger UI gives developers an interactive surface to inspect routes, payloads, and auth-protected requests without leaving the browser.
 
-SOLID automatically generates comprehensive API documentation for all your endpoints using Swagger/OpenAPI specification. This documentation provides developers with an interactive interface to explore and test the APIs.
+<Callout type="info" title="Mental Model">
+
+Swagger is the fastest way to inspect what the current backend actually exposes. Treat it as a live contract viewer for generated and extended endpoints, not just a passive reference page.
+
+</Callout>
 
 ## Accessing API Documentation
 
-To access the Swagger documentation:
-
-1. Navigate to your SOLID installation
-2. Go to `/api/docs` endpoint
-3. You'll see the Swagger UI with all available endpoints
+<Steps>
+  <Step>
+    Navigate to your SolidX installation.
+  </Step>
+  <Step>
+    Go to the `/docs` endpoint of your `solid api` runtime.
+  </Step>
+  <Step>
+    You will see the Swagger UI with all available endpoints.
+  </Step>
+</Steps>
 
 ## Authentication
 
-Before using the APIs, you'll need to authenticate:
+Before using the APIs, authenticate and pass the returned bearer token with protected requests:
 
-1. Use the `/api/auth/login` endpoint
-2. Provide your credentials
-3. Receive a JWT token
-4. Use this token in the Authorization header for subsequent requests
+<Steps>
+  <Step>
+    Use the `/api/iam/authenticate` endpoint.
+  </Step>
+  <Step>
+    Provide your credentials.
+  </Step>
+  <Step>
+    Receive a JWT token in the form of an access token.
+  </Step>
+  <Step>
+    Use this token in the Authorization header for subsequent requests.
+  </Step>
+</Steps>
 
 ### Example Authentication Flow
 
-```bash
-# Login request
-POST /api/auth/login
-{
-  "email": "user@example.com",
-  "password": "yourpassword"
-}
+<Tabs defaultValue="request">
+  <TabItem value="request" label="Request">
 
-# Response
-{
-  "token": "***********************",
-  "user": {
-    "id": 1,
+  ```bash
+  POST /api/auth/login
+  {
     "email": "user@example.com",
-    ...
+    "password": "yourpassword"
   }
-}
+  ```
 
-# Using the token
-Authorization: Bearer eyJhbGciOiJIUzI1NiIs...
-```
+  </TabItem>
+  <TabItem value="response" label="Response">
+
+  ```jsonc
+  {
+    "token": "***********************",
+    "user": {
+      "id": 1,
+      "email": "user@example.com"
+      // ...
+    }
+  }
+  ```
+
+  </TabItem>
+  <TabItem value="header" label="Authorization Header">
+
+  ```http
+  Authorization: Bearer eyJhbGciOiJIUzI1NiIs...
+  ```
+
+  </TabItem>
+</Tabs>
 
 ## API Structure
 
 ### Resource Endpoints
 
-Each resource in your SOLID app automatically gets the following RESTful endpoints:
+Each resource in a SolidX app automatically gets the following RESTful endpoints:
 
 | Method | Endpoint | Description |
 |--------|----------|-------------|
@@ -64,6 +97,7 @@ Each resource in your SOLID app automatically gets the following RESTful endpoin
 | GET | `/api/{resource}/{id}` | Get single resource |
 | POST | `/api/{resource}` | Create resource |
 | PUT | `/api/{resource}/{id}` | Update resource |
+| PATCH | `/api/{resource}/{id}` | Partially update resource |
 | DELETE | `/api/{resource}/{id}` | Delete resource |
 
 ### Query Parameters
@@ -80,31 +114,37 @@ The list endpoint supports various query parameters:
 
 ### Example Requests
 
-#### List Records with Filtering
+<Tabs defaultValue="list">
+  <TabItem value="list" label="List Records">
 
-```bash
-GET /api/posts?filters[status]=published&sort=created_at:desc
-```
+  ```http
+  GET /api/posts?filters[status]=published&sort=created_at:desc
+  ```
 
-#### Create Record
+  </TabItem>
+  <TabItem value="create" label="Create Record">
 
-```bash
-POST /api/posts
-{
-  "title": "New Post",
-  "content": "Post content",
-  "status": "draft"
-}
-```
+  ```bash
+  POST /api/posts
+  {
+    "title": "New Post",
+    "content": "Post content",
+    "status": "draft"
+  }
+  ```
 
-#### Update Record
+  </TabItem>
+  <TabItem value="update" label="Update Record">
 
-```bash
-PUT /api/posts/1
-{
-  "status": "published"
-}
-```
+  ```bash
+  PUT /api/posts/1
+  {
+    "status": "published"
+  }
+  ```
+
+  </TabItem>
+</Tabs>
 
 ## Error Handling
 
@@ -138,29 +178,7 @@ All API errors follow a consistent format:
 
 ## Best Practices
 
-<Cards>
-  <Card icon={<Shield />} title="Authentication">
-    - Always use HTTPS
-    - Keep tokens secure
-    - Implement token refresh
-    - Handle token expiration
-  </Card>
-  <Card icon={<Zap />} title="Request Optimization">
-    - Use field selection
-    - Implement pagination
-    - Optimize queries
-    - Cache responses
-  </Card>
-  <Card icon={<AlertTriangle />} title="Error Handling">
-    - Validate input data
-    - Return meaningful errors
-    - Log API errors
-    - Handle rate limiting
-  </Card>
-  <Card icon={<BookOpen />} title="Documentation">
-    - Keep examples up-to-date
-    - Document all parameters
-    - Include response examples
-    - Note any limitations
-  </Card>
-</Cards>
+- **Authentication**: Use HTTPS, keep tokens secure, and verify protected routes with a real bearer token before testing downstream APIs.
+- **Request Optimization**: Use field selection, pagination, relation population, and filter parameters deliberately so large resources stay easy to inspect.
+- **Error Handling**: Use Swagger to validate request shape, inspect error payloads, and confirm that status codes match the intended runtime behavior.
+- **Documentation**: Keep examples aligned with real payloads and use the live docs as the quickest checkpoint after metadata or backend extension changes.

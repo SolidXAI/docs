@@ -3,19 +3,16 @@ title: SMS
 icon: "smartphone"
 
 description: Metadata schema for populating SMS templates in SolidX applications.
-summary: This document describes SMS template metadata in SolidX, which allows creation and management of SMS templates with dynamic content using Handlebars syntax. Templates are stored in separate text files referenced by the metadata and support variables for personalization. Key attributes include template name, display name, body file reference, description, SMS provider template ID, active status, and type (text). The document provides examples of OTP login templates with dynamic variable substitution, file organization guidelines, and links to implementing custom SMS providers for integration with external SMS services like Twilio or AWS SNS.
+summary: Covers the metadata used to define SMS templates in SolidX, including body-file references, provider template IDs, activation flags, and text-template behavior.
 json_pointer: "/smsTemplates"
 jsonpath: "$.smsTemplates"
 parent_component: root
 type: array
 items_type: "object"
-items_attributes_doc: "#email-templates-metadata-attributes"
+items_attributes_doc: "#sms-templates-metadata-attributes"
 solidx_concerns: [create/update_sms_template, new_sms_provider]
-
-
-
 ---
-# SMS Templates
+
 <Callout type="info" title="Where it lives">
 
 **JSON Pointer:** `/smsTemplates`
@@ -24,18 +21,16 @@ solidx_concerns: [create/update_sms_template, new_sms_provider]
 
 </Callout>
 
-
-
 ## Overview
-SMS Templates in SOLID allow you to create and manage SMS templates with dynamic content.
+SMS templates in SolidX let you define and manage text-message templates with dynamic content.
+
+The template body is stored in a separate text file referenced by the `body` field. The file contains the actual SMS message and can include Handlebars placeholders for dynamic values.
 
 ### Example: SMS Templates Metadata
-Below is an example of configuring an SMS template which sends an OTP when a user logs in.
+This example defines an OTP template used during login. The `body` field points to a separate text template file.
+
 <details open>
-  <summary>
-    
-    SMS Templates Schema
-  </summary>
+  <summary>SMS templates schema example</summary>
 
 ``` json
 {
@@ -56,26 +51,22 @@ Below is an example of configuring an SMS template which sends an OTP when a use
 ```
 </details>
 
-### Example : SMS Template File
-Below is an example of the content of the SMS template file `otp-on-login-custom.handlebars.txt` referenced in the above metadata. This file contains the actual SMS message with dynamic placeholders.
+### Example: SMS Template File
+Below is an example of the content of the `otp-on-login-custom.handlebars.txt` file referenced by the metadata above.
+
 <details open>
- <summary>
-    
-   SMS Template File 
-  </summary>
+ <summary>SMS template file example</summary>
 
 ```text
 Hi {{ firstName }}, Login to {{ solidAppName }}, using {{ mobileVerificationTokenOnLogin }} as your verification code.
 ```
 </details>
 
-### Example : Sending SMS Using Template (TODO ticket)
-Below is a code snippet demonstrating how to send an SMS using the defined SMS templates via the `SmsServiceFactory`. This example shows how to send an OTP verification SMS to a user.
+### Example: Sending SMS Using a Template
+This snippet shows how an application service sends an OTP verification message to a user using an authored SMS template via `SmsServiceFactory`.
+
 <details open>
-  <summary>
-    
-    SMS Sending Code Snippet
-  </summary>
+  <summary>SMS sending code example</summary>
 
 ``` ts
 import { SmsServiceFactory } from 'your-sms-service';
@@ -96,11 +87,7 @@ async sendOtpSms(user: { mobile: string; firstName?: string; username: string, m
 ```
 </details>
 
-<h2 className=" ">
-    
-
 ## SMS Templates Metadata Attributes
-</h2>
 
 ### `name` *(string, required, unique)*
 Unique name for the sms template. It should be in kebab-case format (e.g., `example-template-name`).
@@ -111,15 +98,16 @@ Display name for the sms template.
 
 
 ### `body` *(string, required)*
-    - In the metadata json, the filename of the sms template is specified. The templates are searched for in the `module-metadata/<module-name>/sms-templates/` directory of the module.
-    - The body is then replaced with the content of the sms template file. This will include plain text content. The body can include dynamic placeholders using Handlebars syntax (e.g., `{{placeholderName}}`), as shown in the [SMS Template file](#example--sms-template-file) above.
 
-####  Further Reference
- -  **SMS Body Creation:** [SMS Templates Guide](../../admin-docs/notifications/sms-templates.md)
+- In metadata JSON, `body` holds the template filename.
+- SolidX resolves that file from `module-metadata/<module-name>/sms-templates/`.
+- The file content is plain text and can include Handlebars placeholders such as `{{placeholderName}}`.
 
+#### Further Reference
 
+- **SMS Body Creation:** [SMS Templates Guide](/docs/admin-docs/notifications/sms-templates)
 
-  Please refer to the [Handlebars Documentation](https://handlebarsjs.com/) for more information on using Handlebars syntax in email templates.
+Please refer to the [Handlebars Documentation](https://handlebarsjs.com/) for more information on using Handlebars syntax in SMS templates.
 
 
 ### `smsProviderTemplateId` *(string, optional)*

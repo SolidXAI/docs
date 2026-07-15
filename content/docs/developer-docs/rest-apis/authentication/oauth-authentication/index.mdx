@@ -2,57 +2,54 @@
 title: OAuth
 icon: "key-round"
 description: Information about OAuth-based authentication methods
-summary: Simple overview of OAuth authentication in SolidX, including Google, Facebook, Microsoft, LinkedIn, Twitter/X, and custom OAuth providers.
+summary: Covers the OAuth authentication model in SolidX and the supported external identity-provider integrations.
 ---
 
-import { Globe } from 'lucide-react';
+import { Globe, Link as LinkIcon } from 'lucide-react';
 
-# OAuth methods
+## OAuth Providers
 
 SolidX supports several OAuth sign-in methods. You can use built-in providers or connect with other OAuth services.
 
-## Supported OAuth methods
+## Supported OAuth Methods
 
 <Cards>
-  <Card icon={<Globe />} title="Google">
+  <Card icon={<Globe />} title="Google" href="/docs/developer-docs/rest-apis/authentication/oauth-authentication/google">
     A popular Google sign-in option.
-    [Google OAuth guide](./google.md)
   </Card>
-  <Card icon={<Globe />} title="Facebook">
+  <Card icon={<Globe />} title="Facebook" href="/docs/developer-docs/rest-apis/authentication/oauth-authentication/facebook">
     Sign in with Facebook / Meta accounts.
-    [Facebook OAuth guide](./facebook.md)
   </Card>
-  <Card icon={<Globe />} title="Microsoft">
+  <Card icon={<Globe />} title="Microsoft" href="/docs/developer-docs/rest-apis/authentication/oauth-authentication/microsoft">
     Sign in with Microsoft / Entra ID accounts.
-    [Microsoft OAuth guide](./microsoft.md)
   </Card>
-  <Card icon={<Globe />} title="LinkedIn">
+  <Card icon={<LinkIcon />} title="LinkedIn">
     Sign in with LinkedIn accounts.
     LinkedIn support is available as a standard OAuth method.
   </Card>
-  <Card icon={<Globe />} title="Twitter/X">
+  <Card icon={<LinkIcon />} title="Twitter/X">
     Sign in with Twitter / X accounts.
     Twitter/X support is available as a standard OAuth method.
   </Card>
 </Cards>
 
-## A friendly OAuth overview
+## OAuth Overview
 
 OAuth lets users sign in through another service, like Google, Facebook, LinkedIn, or Twitter/X, without storing their password in SolidX.
 
-### Basic flow
+### Basic Flow
 
 - User clicks a provider sign-in button.
 - The app sends the user to the provider.
 - The provider returns the user back to SolidX.
 - SolidX finishes sign-in and opens the app.
 
-### What you usually need
+### Required Provider Values
 
-- A client ID from the provider
-- A client secret or app secret
-- A redirect URL for the login result
-- A few provider settings in the provider console
+- A client ID from the provider.
+- A client secret or app secret.
+- A redirect URL for the login result.
+- Provider settings in the provider console.
 
 ## Want a different provider?
 
@@ -60,6 +57,6 @@ If you want a provider not listed here, use the custom OAuth providers option an
 
 ## Where to go next
 
-- [Facebook OAuth](./facebook.md)
-- [Google OAuth](./google.md)
-- [Microsoft OAuth](./microsoft.md)
+- [Facebook OAuth](/docs/developer-docs/rest-apis/authentication/oauth-authentication/facebook)
+- [Google OAuth](/docs/developer-docs/rest-apis/authentication/oauth-authentication/google)
+- [Microsoft OAuth](/docs/developer-docs/rest-apis/authentication/oauth-authentication/microsoft)

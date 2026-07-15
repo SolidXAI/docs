@@ -5,16 +5,24 @@ description: Learn how to use filter operators to query records via the REST API
 keywords: [filters, query, operators, REST API, CRUD service]
 ---
 
-# Filtering Data
+<Callout type="info" title="Mental Model">
+
+In SolidX, filtering is a shared query contract used by both REST endpoints and backend services.
+
+- Fields define what part of the record is being filtered.
+- Operators define how values are compared.
+- Logical operators such as `$and`, `$or`, and `$not` define how conditions are combined.
+
+Learning the filter shape once lets you use the same query pattern across API calls, service methods, and higher-level data access flows.
+
+</Callout>
 
 SolidX provides a powerful filtering syntax that works consistently across two layers:
 
-- **REST API** - pass filters as query-string parameters when calling the [Retrieve endpoints](../developer-docs/rest-apis/retrieve).
-- **CRUD Service** - pass a `filters` object inside the DTO when calling [`find()`](../developer-docs/extending/backend-customization/crud-service#4-findfilterdto-context) or [`findOne()`](../developer-docs/extending/backend-customization/crud-service#5-findoneid-query-context) from backend code.
+- **REST API** - pass filters as query-string parameters when calling the [Retrieve endpoints](/docs/developer-docs/rest-apis/retrieve).
+- **CRUD Service** - pass a `filters` object inside the DTO when calling [`find()`](/docs/developer-docs/extending/backend-customization/crud-service#4-findfilterdto-context) or [`findOne()`](/docs/developer-docs/extending/backend-customization/crud-service#5-findoneid-query-context) from backend code.
 
 The syntax and available operators are identical in both cases.
-
----
 
 ## Syntax
 
@@ -25,9 +33,11 @@ Each filter targets a **field**, applies an **operator**, and compares against a
 | REST query string | `filters[field][operator]=value` |
 | Service DTO (TypeScript) | `{ field: { $operator: value } }` |
 
+<Callout type="info" title="Default Combination">
+
 When several fields are passed, they are implicitly combined with **`$and`**.
 
----
+</Callout>
 
 ## Available Operators
 
@@ -63,8 +73,6 @@ When several fields are passed, they are implicitly combined with **`$and`**.
 `$and`, `$or`, and `$not` can be nested inside one another for complex logic.
 
 </Callout>
-
----
 
 ## Examples
 
@@ -155,8 +163,6 @@ filters: {
 // REST query string
 // GET /api/users?filters[$and][0][status][$eq]=active&filters[$and][1][$or][0][role][$eq]=admin&filters[$and][1][$or][1][age][$gt]=30
 ```
-
----
 
 ## Grouping & Aggregation
 

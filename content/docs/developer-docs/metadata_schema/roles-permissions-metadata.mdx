@@ -2,7 +2,7 @@
 title: Roles & Permissions
 icon: "shield"
 description: Metadata schema for defining roles and permissions in SolidX applications.
-summary: This document explains roles and permissions metadata in SolidX, which provides role-based access control at a high level. Roles group permissions and can be assigned to users, while permissions are automatically discovered based on controller actions for fine-grained control. Each role has a name and description, with permissions specified as an array of controller method names (e.g., "InstituteController.create", "InstituteController.findMany"). The system includes a default Admin role with all permissions. Examples demonstrate creating custom roles like Institute Admin with specific permission sets for managing institute-related operations.
+summary: Covers the metadata used to define roles, assign permissions, and control high-level access in SolidX.
 json_pointer: "/roles"
 jsonpath: "$.roles"
 parent_component: root
@@ -12,8 +12,6 @@ items_attributes_doc: "#roles-permissions-metadata-attributes"
 solidx_concerns: [add_new_role_with_permission, modify_role]
 ---
 
-
-# Roles & Permissions
 <Callout type="info" title="Where it lives">
 
 **JSON Pointer:** `/roles`
@@ -24,18 +22,19 @@ solidx_concerns: [add_new_role_with_permission, modify_role]
 
 ## Overview
 
-Roles in SolidX provide a way to group permissions and manage access control at a high level. Each role represents a set of permissions that can be assigned to users.
-Permissions in SOLID are automatically discovered based on controller actions and provide fine-grained control over what users can do within the system.
+Roles and permissions define high-level access control in SolidX.
 
-By Default `Admin` role is created with all permissions.
+Permissions are discovered from backend controller methods and represent individual capabilities such as `InstituteController.findMany` or `InstituteController.update`. Roles package those capabilities into reusable access profiles that can be assigned to users.
+
+By default, the `Admin` role is created with all discovered permissions.
 
 <Callout type="info" title="Mental Model">
 
-  Roles and permissions in SolidX work as a two-layer access model. Permissions represent the fine-grained actions the platform knows about, while roles are the business-facing bundles you assign to users.
-  - Think of permissions as capabilities discovered from the backend.
-    - Think of roles as the practical packaging of those capabilities for real users.
-    - Use roles to express job function, not just technical access flags.
-  So the intuition is: <strong>permissions describe what the system can do, and roles describe who should be allowed to do it</strong>.
+Roles and permissions work as a two-layer access model.
+
+- Permissions describe what the system can do. Think of permissions as backend-discovered capabilities.
+- Roles describe who should be allowed to do it. Think of roles as the business-facing grouping of those capabilities.
+- Use roles to express job function, not only technical access flags.
 
 </Callout>
 
@@ -43,7 +42,8 @@ By Default `Admin` role is created with all permissions.
 
 ### Example: Fee Portal Module Roles & Permissions Metadata
 
-<summary> Roles & Permissions Schema </summary>
+<details open>
+<summary>Roles and permissions schema example</summary>
 
 ```json
 {
@@ -68,13 +68,10 @@ By Default `Admin` role is created with all permissions.
   ]
 }
 ```
+</details>
 
-
-<h2 className=" ">
-    
 
 ## Roles & Permissions Metadata Attributes
-</h2>
 
 
 ### `name` _(string, required, unique)_
@@ -96,6 +93,4 @@ An array of permission strings associated with the role. Each permission corresp
 
 
 
-Permissions are automatically discovered based on controller methods in the codebase. So for e.g., if you have a controller for managing institutes with methods like create, the permission `InstituteController.create` will be automatically created.
-
-
+Permissions are discovered from controller methods in the codebase. For example, a controller method such as `InstituteController.create` produces the permission `InstituteController.create`.

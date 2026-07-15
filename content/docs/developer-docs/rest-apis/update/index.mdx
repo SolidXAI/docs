@@ -1,0 +1,201 @@
+---
+title: Update
+icon: "pen-line"
+description: Information about the update endpoints of the REST API, including usage, parameters, and responses.
+summary: This document explains the update endpoints in SolidX's REST API, covering both partial updates (PATCH method for updating specific fields) and full updates (PUT method for replacing entire records). It provides detailed examples of updates without media files (using JSON content type) and updates with media files (using multipart/form-data). Each section includes HTTP headers, request formats, sample payloads, and response structures. Both update methods are idempotent and require JWT bearer authentication.
+---
+
+## Update Endpoints in SolidX
+
+This section provides details about the **Update Endpoints** of the REST API, including usage patterns, headers, request/response formats, and examples of both **partial** and **full** updates.
+
+<Callout type="info" title="Mental Model">
+
+Update endpoints change existing records through either partial or full replacement semantics.
+
+- Use `PATCH` when only selected fields should change.
+- Use `PUT` when the request should represent the full record shape.
+- Use multipart form data when the update includes files.
+
+</Callout>
+
+## Types of Updates
+
+### 1. Partial Update
+- Method: `PATCH`
+- Purpose: Update specific fields of a record without affecting the rest.
+
+### Example: Update `feeType` Field
+
+<Tabs defaultValue="request">
+  <TabItem value="request" label="Request">
+
+  #### Headers
+
+  ```http
+  Content-Type: application/json
+  Authorization: Bearer <token>
+  ```
+
+  #### Request
+
+  ```http
+  PATCH /api/fee-type/1
+  ```
+
+  #### Body
+
+  ```json
+  {
+    "feeType": "tuition"
+  }
+  ```
+
+  </TabItem>
+  <TabItem value="response" label="Response">
+
+  #### Response
+
+  ```json
+  {
+    "statusCode": 200,
+    "message": [],
+    "error": "",
+    "data": {
+      "feeType": "tuition",
+      "partPaymentAllowed": true,
+      "id": 3,
+      "updatedBy": {
+        "fullName": "Default Admin",
+        "email": "admin@example.service.com",
+        "active": true,
+        "id": 1
+      },
+      "updatedAt": "2025-08-06T23:30:10.185Z"
+    }
+  }
+  ```
+
+  </TabItem>
+</Tabs>
+
+### 2. Full Update
+- Method: `PUT`
+- Purpose: Replace the entire model with a new object.
+- Idempotent: Yes (repeated calls with the same payload have the same effect).
+
+### Example: Full Update of Fee Type
+
+<Tabs defaultValue="request">
+  <TabItem value="request" label="Request">
+
+  #### Headers
+
+  ```http
+  Content-Type: application/json
+  Authorization: Bearer <token>
+  ```
+
+  #### Request
+
+  ```http
+  PUT /api/fee-type/1
+  ```
+
+  #### Body
+
+  ```json
+  {
+    "feeType": "tuition",
+    "instituteUserKey": "Don Bosco",
+    "partPaymentAllowed": true
+  }
+  ```
+
+  </TabItem>
+  <TabItem value="response" label="Response">
+
+  #### Response
+  
+  ```json
+  {
+    "statusCode": 200,
+    "message": [],
+    "error": "",
+    "data": {
+      "feeType": "tuition",
+      "partPaymentAllowed": true,
+      "institute": {
+        "instituteName": "Don Bosco",
+        "id": 3
+      },
+      "updatedBy": {
+        "fullName": "Default Admin",
+        "email": "admin@example.service.com",
+        "id": 1
+      },
+      "updatedAt": "2025-08-06T23:30:10.185Z"
+    }
+  }
+  ```
+
+  </TabItem>
+</Tabs>
+
+## Update Without Media
+
+Used when no files, such as images or documents, are uploaded.
+
+### Example: JSON-only Update
+
+<Tabs defaultValue="request">
+  <TabItem value="request" label="Request">
+
+  ```http
+  PATCH /api/institute-user/1
+  Content-Type: application/json
+  Authorization: Bearer <token>
+  ```
+
+  ```json
+  {
+    "userType": "Institute Admin",
+    "email": "admin@institute.com"
+  }
+  ```
+
+  </TabItem>
+</Tabs>
+
+## Update With Media
+
+Used when the request includes file uploads, such as profile pictures or attachments.
+
+### Example: Update with Multipart Form Data
+
+<Tabs defaultValue="request">
+  <TabItem value="request" label="Request">
+
+  ```http
+  PATCH /api/institute-user/1
+  Content-Type: multipart/form-data; boundary=----WebKitFormBoundary
+  Authorization: Bearer <token>
+  ```
+
+  #### Form Fields
+
+  - `updateDto` (as JSON string)
+  - `files` (actual file(s))
+
+  #### Example Payload
+
+  ```text
+  updateDto: {
+    "userType": "Institute Admin",
+    "email": "admin@institute.com"
+  }
+  files: profile-picture.jpg
+  ```
+
+  </TabItem>
+</Tabs>

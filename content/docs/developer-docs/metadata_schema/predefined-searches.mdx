@@ -2,7 +2,7 @@
 title: Predefined Searches
 icon: "search"
 description: Metadata schema for defining predefined searches in SolidX list views.
-summary: This document describes predefined searches metadata in SolidX, which enables configuration of named search presets that appear by default in the search dialog on list views. Each predefined search has a name, an optional description, and a filter expression using query operators. The filters support dynamic placeholders such as {{search}} for user input. Examples demonstrate configuring searches for book titles and availability status. This is useful for surfacing common or business-critical search patterns without requiring users to build filters manually.
+summary: Covers named search presets for SolidX list views, including filter expressions, optional descriptions, and dynamic placeholders such as `{{search}}`.
 json_pointer: "/views/{index}/layout/attrs/predefinedSearches"
 jsonpath: "$.views[*].layout.attrs.predefinedSearches"
 parent_component: views
@@ -11,7 +11,6 @@ items_type: "object"
 items_attributes_doc: "#predefined-searches-attributes"
 ---
 
-# Predefined Searches
 <Callout type="info" title="Where it lives">
 
 **JSON Pointer:** `/views/{index}/layout/attrs/predefinedSearches`
@@ -28,7 +27,8 @@ Each preset is displayed as a selectable option in the list view's search panel.
 
 ## Example: Predefined Searches Metadata
 
-<summary> Predefined Searches Schema </summary>
+<details open>
+<summary>Predefined searches schema example</summary>
 
 ``` json
 {
@@ -72,12 +72,9 @@ Each preset is displayed as a selectable option in the list view's search panel.
   ]
 }
 ```
-
-<h2 className="">
-    
+</details>
 
 ## Predefined Searches Attributes
-</h2>
 
 ### `name` *(string, required, unique within view)*
 The label displayed for this search preset in the search dialog. Users will see this name when selecting a search option from the list.
@@ -117,5 +114,4 @@ The filter expression applied when this search preset is selected. Uses the Soli
 ```
 
 
-  The <code>{"{{search}}"}</code> placeholder is replaced at runtime with whatever the user types in the search input. If no placeholder is used, the filter acts as a static preset that does not depend on user input.
-
+The <code>{"{{search}}"}</code> placeholder is replaced at runtime with the value typed by the user in search input. If no placeholder is used, the filter behaves as a static preset that does not depend on user input.

@@ -1,9 +1,11 @@
 ---
 title: Frontend
 icon: "palette"
-description: Catalog of frontend customization patterns in SolidX.
-summary: "Entry point for metadata-driven extensions and bespoke frontend UIs in SolidX, including module-based file-location rules, manifest registration patterns, and API-call conventions."
+description: Reference for frontend customization patterns in SolidX.
+summary: "Covers metadata-driven UI extensions, custom frontend components, module file-location rules, manifest registration, and frontend integration conventions."
 ---
+
+import { Boxes, Component, Route, Workflow } from 'lucide-react';
 
 ## Frontend Customization Catalog
 
@@ -12,13 +14,31 @@ Use this section as the source of truth for where each customization type belong
 <Callout type="info" title="Mental Model">
 
   The SolidX frontend is designed so that custom UI code stays close to the module that owns the business feature.
-    Instead of scattering custom screens, reducers, and extension widgets across the app, the convention keeps each feature grouped together.
+
   - Use metadata-driven extensions when you are augmenting generated admin screens.
-    - Use bespoke UI when you need full route-level control.
-    - Keep ownership module-local so discovery, registration, and maintenance stay predictable.
-  So the intuition is: <strong>the UI stays flexible because SolidX combines generated structure with module-owned custom code</strong>.
+  - Use bespoke UI when you need full route-level control.
+  - Keep ownership module-local so discovery, registration, and maintenance stay predictable.
+
+  The UI stays flexible because SolidX combines generated structure with module-owned custom code.
 
 </Callout>
+
+## Customization Modes
+
+<Cards>
+  <Card icon={<Component />} title="Metadata-Driven Extensions" href="/docs/developer-docs/extending/frontend-customization/custom-widgets">
+    Use buttons, widgets, and event hooks to extend generated forms, lists, trees, and kanban views without replacing them.
+  </Card>
+  <Card icon={<Route />} title="Bespoke Screens" href="/docs/developer-docs/extending/frontend-customization/bespoke-frontend-ui">
+    Create custom route-level pages when generated admin views are not the right fit for the workflow.
+  </Card>
+  <Card icon={<Workflow />} title="State and API Integration" href="/docs/developer-docs/extending/frontend-customization/redux-module-integration">
+    Register Redux, RTK Query, and Solid HTTP helpers at the module level so custom UI stays composable.
+  </Card>
+  <Card icon={<Boxes />} title="Custom Views" href="/docs/developer-docs/extending/frontend-customization/custom-views">
+    Choose between metadata-driven custom widgets and bespoke route-level pages for frontend customization work.
+  </Card>
+</Cards>
 
 ## UI Module Convention
 
@@ -26,16 +46,19 @@ In the current SolidX frontend model, custom frontend code should be organized i
 
 Recommended structure:
 
-```text
+```bash
 solid-ui/src/
-  <module-name>/
-    admin-layout/
-    custom-layout/
-    redux/
-    <module-name>.ui-module.ts
+├── App.tsx                          # Application shell and providers
+├── AppRoutes.tsx                    # Route composition entry
+├── solid-ui-modules.ts              # Module discovery and runtime aggregation
+├── <module-name>/
+│   ├── admin-layout/                # Metadata-driven admin extensions
+│   ├── custom-layout/               # Bespoke route-level pages and shells
+│   ├── redux/                       # Module-owned reducers, middleware, RTK Query APIs
+│   └── <module-name>.ui-module.ts   # Module manifest for routes and extensions
 ```
 
-Use these responsibilities:
+Use these structure conventions:
 
 - `admin-layout/` for metadata-driven admin extensions such as buttons, event handlers, and widgets
 - `custom-layout/` for bespoke route-level UIs and custom application shells
@@ -59,28 +82,28 @@ Use endpoint paths like `/resource` and do not hardcode `/api` in request paths.
 
 ### Extension Component Types
 
-- [Form View Buttons](./form-view-buttons.md)
-- [List View Buttons](./list-view-buttons.md)
-- [Extension UI Guidelines](./extension-ui-guidelines.md)
-- [Custom Widgets](./custom-widgets.md)
-- [Form View Field Widgets](./form-view-field-widgets.md)
-- [List View Field Widgets](./list-view-field-widgets.md)
-- [Kanban Card Widgets](./kanban-card-widget.md)
+- [Form View Buttons](/docs/developer-docs/extending/frontend-customization/form-view-buttons)
+- [List View Buttons](/docs/developer-docs/extending/frontend-customization/list-view-buttons)
+- [Extension UI Guidelines](/docs/developer-docs/extending/frontend-customization/extension-ui-guidelines)
+- [Custom Widgets](/docs/developer-docs/extending/frontend-customization/custom-widgets)
+- [Form View Field Widgets](/docs/developer-docs/extending/frontend-customization/form-view-field-widgets)
+- [List View Field Widgets](/docs/developer-docs/extending/frontend-customization/list-view-field-widgets)
+- [Kanban Card Widgets](/docs/developer-docs/extending/frontend-customization/kanban-card-widget)
 
 ### Extension Function Types
 
-- [Form View Events](./form-view-events.md)
-- [List View Events](./list-view-events.md)
-- [Layout Manager](./layout-manager.md)
+- [Form View Events](/docs/developer-docs/extending/frontend-customization/form-view-events)
+- [List View Events](/docs/developer-docs/extending/frontend-customization/list-view-events)
+- [Layout Manager](/docs/developer-docs/extending/frontend-customization/layout-manager)
 
 ### Bespoke UI
 
-Use [Bespoke Frontend UI](./bespoke-frontend-ui.md) for full route-level UIs under `solid-ui/src/<module-name>/custom-layout/...`.
+Use [Bespoke Frontend UI](/docs/developer-docs/extending/frontend-customization/bespoke-frontend-ui) for full route-level UIs under `solid-ui/src/<module-name>/custom-layout/...`.
 
 ### Supporting APIs
 
-- [Solid HTTP API](./solid-http-api.md)
-- [Redux Module Integration](./redux-module-integration.md)
-- [Solid Entity API](./solid-entity-api.md)
-- [List View API](./list-view-api.md)
-- [Layout Manager](./layout-manager.md)
+- [Solid HTTP API](/docs/developer-docs/extending/frontend-customization/solid-http-api)
+- [Redux Module Integration](/docs/developer-docs/extending/frontend-customization/redux-module-integration)
+- [Solid Entity API](/docs/developer-docs/extending/frontend-customization/solid-entity-api)
+- [List View API](/docs/developer-docs/extending/frontend-customization/list-view-api)
+- [Layout Manager](/docs/developer-docs/extending/frontend-customization/layout-manager)

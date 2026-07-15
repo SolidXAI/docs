@@ -2,19 +2,43 @@
 title: Backend
 icon: "server"
 description: This section provides an overview of backend customization capabilities in SolidX.
-summary: This document provides an overview of backend customization capabilities in SolidX, covering how developers can extend the NestJS-based backend functionality. Topics include adding custom API endpoints to controllers, modifying and extending existing services with custom business logic, implementing custom providers for specialized functionality, and integrating additional backend features to meet specific application requirements beyond the default CRUD operations.
+summary: Covers controller changes, service extensions, provider implementations, scheduled jobs, and other backend customization points beyond generated CRUD behavior.
 ---
 
-# Overview
-This section provides an overview of backend customization capabilities in SolidX. It covers how to extend the backend functionality, including adding custom endpoints, modifying existing services, adding custom providers, and more.
+import { Blocks, DatabaseZap, Plug, ShieldCheck } from 'lucide-react';
 
+## Overview
+
+This section provides an overview of backend customization capabilities in SolidX.
+
+SolidX generates a large part of the backend foundation for you, but real applications still need project-specific backend work such as custom endpoints, service extensions, providers, security rules, integrations, and background processing.
 <Callout type="info" title="Mental Model">
 
-  SolidX generates a large amount of backend structure for you, but that does not mean the backend is closed for custom work.
-    The generated layer gives you a strong default foundation, while backend customization is where you introduce application-specific behavior.
-  - Use metadata when the requirement is declarative and platform-supported.
-    - Use backend customization when the requirement is business-specific or operationally unique.
-    - Think of this section as the bridge between generated CRUD and a real production backend.
-  So the intuition is: <strong>SolidX gives you the baseline backend quickly, and this section shows where to extend it safely</strong>.
+SolidX generates a significant portion of the backend surface, but the runtime is intentionally open to supported customization.
+
+- The generated layer provides the default structural foundation.
+- Use metadata where the requirement is declarative and already modeled by the platform.
+- Use backend customization where the requirement is business-specific, integration-heavy, or operationally unique.
+
+This section is the bridge between generated CRUD infrastructure and a production backend with domain-specific behavior.
 
 </Callout>
+
+## Backend Capabilities
+
+Use these backend extension areas when the generated CRUD baseline is not enough for the runtime behavior you need.
+
+<Cards>
+  <Card icon={<Blocks />} title="Extend CRUD Safely" href="/docs/developer-docs/extending/backend-customization/crud-service">
+    Add repository methods, service logic, and controller endpoints without breaking generated conventions.
+  </Card>
+  <Card icon={<Plug />} title="Add Providers" href="/docs/developer-docs/extending/backend-customization/dynamic-selection-providers">
+    Introduce email, SMS, WhatsApp, computed-field, dashboard, and dynamic-selection providers at the runtime extension points the platform expects.
+  </Card>
+  <Card icon={<DatabaseZap />} title="Handle Background Work" href="/docs/developer-docs/extending/backend-customization/background-jobs">
+    Use scheduled jobs, background jobs, subscribers, and seeders for workflows that do not belong inside request handlers.
+  </Card>
+  <Card icon={<ShieldCheck />} title="Control Access" href="/docs/developer-docs/extending/backend-customization/security-rules">
+    Apply static or provider-backed security rules when record access depends on user identity, role composition, or business context.
+  </Card>
+</Cards>

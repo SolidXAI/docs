@@ -2,7 +2,7 @@
 title: Modules
 icon: "package"
 description: Overview of the module metadata schema used in SolidX.
-summary: This document explains the module metadata schema in SolidX, which represents the top-level building blocks for organizing applications. A module groups related models and functionality under a unified domain (like a Fees Portal module). The metadata includes properties such as module name, display name, description, default data source, menu icon, sequence number, and system flag. Examples demonstrate configuring module metadata for applications, and the document references the admin documentation for conceptual understanding of module management and the hierarchical relationship where modules contain models which contain fields.
+summary: Covers the top-level metadata used to define a SolidX module, including identity, data-source defaults, menu behavior, and module-level configuration.
 json_pointer: "/moduleMetadata"
 jsonpath: "$.moduleMetadata"
 parent_component: root
@@ -10,10 +10,6 @@ items_type: object
 items_attributes_doc: "#module-metadata-attributes"
 solidx_concerns: [create_module]
 ---
-
-
-
-#  Module Metadata
 
 <Callout type="info" title="Where it lives">
 
@@ -23,30 +19,28 @@ solidx_concerns: [create_module]
 
 </Callout>
 
-##  Overview
+## Overview
 
-When creating a new module in SolidX, you're defining a **core building block** of your application.  
-A module groups together related models and functionality under a **unified domain**.
+Module metadata defines the top-level boundary of a SolidX business domain.
+
+It identifies the module, establishes its default data-source behaviour, and provides the root container under which related models, views, menus, and other metadata records are organized.
 
 <Callout type="info" title="Mental Model">
 
-  A module is the top-level business boundary in SolidX. It is not just a folder or namespace. It is the container that tells the platform which models, views, menu entries, and behaviors belong to one domain.
-  - Start by asking: what business capability are we modelling?
-    - Put closely related models inside the same module.
-    - Use the module to define the identity of that domain inside the app.
-  So the intuition is: <strong>a module is the platform's unit of business ownership</strong>.
+  A module is the top-level business boundary in SolidX. It is not just a folder or namespace.
+
+  - Start by asking which business capability the module owns.
+  - Group closely related models, views, actions, and menus inside that boundary.
+  - Use the module record to establish the identity of that domain across the platform.
 
 </Callout>
 
-👉 For a conceptual overview of what a module is, see [Module Management Documentation](../../admin-docs/module-builder/module-management.md).
+For admin-side authoring workflows, see [Module Management Documentation](/docs/admin-docs/module-builder/module-management).
 
-###  Example: Fees Portal Module
-Below is a module metadata example for a "Fees Portal" module that tracks fee collection requests.
+### Example: Fees Portal Module
+Below is a representative module record for a `fees-portal` domain.
 <details open>
-  <summary>
-    
-    Module Schema
-  </summary>
+  <summary>Module schema example</summary>
 
 ```json
 {
@@ -65,17 +59,11 @@ Below is a module metadata example for a "Fees Portal" module that tracks fee co
 ```
 </details>
 
+In this example, `defaultDataSource` is set to `default`, which points to the default TypeORM data source configured in your `app-default-database.module.ts` in your project `solid-api` src folder.
 
 
-  The defaultDataSource is set to "default" here, which refers to the default data source configured in your SolidX instance. This is the TypeORM data source configured in your app-default.database.ts in your project `solid-api` src folder.
-
-
-
-  <h2 className=" ">
-    
 
 ## Module Metadata Attributes
-</h2>
 
 
 ### `name` *(string, required, unique)*

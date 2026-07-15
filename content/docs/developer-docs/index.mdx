@@ -1,30 +1,66 @@
 ---
 title: Reference
 icon: "code-2"
-description: Comprehensive documentation for SolidX developers.
-summary: Welcome to SolidX developer documentation. SolidX is an enterprise-focused, low-code development platform engineered for modern web applications, providing comprehensive tools for rapid application development with full customization capabilities.
+description: Reference pages covering project structure, metadata, APIs, extension points, testing, and deployment in SolidX.
+summary: Technical reference for how a SolidX application is bootstrapped, structured, generated, extended, tested, and deployed.
 ---
 
-# Developer Docs
+## Developer Docs
 
-Welcome to SolidX admin documentation! SolidX is an enterprise-focused, low-code development platform engineered for today's web applications. 
+Welcome to SolidX developer documentation. SolidX is an enterprise-focused, metadata-driven application platform engineered for modern web applications.
 
-<Callout type="info" title="Mental Model">
+<Callout type="info" title="Mental model">
 
-  The Reference section is best read as a map of the different layers of a SolidX project.
-  - <strong>Setup:</strong> prerequisites, installation, and project structure
-    - <strong>Operations:</strong> CLI usage, seeding, testing, and deployment
-    - <strong>Platform definition:</strong> metadata schema and generated behaviour
-    - <strong>Interfaces:</strong> REST APIs and frontend/backend extension points
-  So the intuition is: this section is not just a pile of isolated docs pages. It is a <strong>reference map for how a SolidX application is built, configured, extended, and operated</strong>.
+The Reference section is best read as a map of the major layers inside a SolidX project.
 
+- `Setup`: prerequisites, installation, and project structure
+- `Operations`: CLI workflows, seeding, testing, and deployment
+- `Platform definition`: metadata schema and generated behaviour
+- `Interfaces`: REST APIs and frontend/backend extension points
+
+This section serves as a technical reference map for how a SolidX application is bootstrapped, configured, generated, extended, and operated.
 </Callout>
 
-This section includes:
+## Project Foundations
 
-- setup and installation guidance,
-- project structure and CLI reference,
-- metadata schema reference,
-- testing architecture and automation workflow,
-- REST API reference,
-- and extension/customization guides.
+Core references for bootstrapping a SolidX workspace and understanding how the project is organized.
+
+<Cards>
+  <Card title="Prerequisites" href="/docs/developer-docs/prerequisites">
+    Establish the local toolchain required for SolidX development, including Node.js, PostgreSQL, Git, Python-based MCP/agent prerequisites, and supporting CLI utilities.
+  </Card>
+  <Card title="Installation" href="/docs/developer-docs/installation">
+    Bootstrap a new SolidX workspace with `solidctl create-app` and understand the initialization flow before moving into application-level work.
+  </Card>
+  <Card title="Project Structure" href="/docs/developer-docs/project-structure">
+    Review how `solid-api`, `solid-ui`, metadata, generated artifacts, and shared SolidX packages fit together within the application workspace.
+  </Card>
+  <Card title="solidctl Commands" href="/docs/developer-docs/solidctl-commands">
+    Use the CLI as the operational control surface for project creation, build, seeding, generation, upgrades, testing, and platform maintenance.
+  </Card>
+</Cards>
+
+## SolidX Platform Reference Areas
+
+Reference pages covering metadata, REST APIs, extension points, dashboards, testing, and production deployment.
+
+<Cards>
+  <Card title="Metadata Schema" href="/docs/developer-docs/metadata_schema">
+    Work with the metadata schema that defines models, fields, views, actions, menus, permissions, templates, and other generated platform behavior.
+  </Card>
+  <Card title="Extending SolidX" href="/docs/developer-docs/extending">
+    Extend the generated system through supported backend and frontend customization points rather than forking or bypassing framework conventions.
+  </Card>
+  <Card title="REST APIs" href="/docs/developer-docs/rest-apis">
+    Review authentication, CRUD conventions, recovery semantics, and Swagger-backed API behavior across generated resources.
+  </Card>
+  <Card title="Dashboarding" href="/docs/developer-docs/dashboarding">
+    Build metadata-driven dashboards, widget providers, and runtime-backed operational reporting surfaces.
+  </Card>
+  <Card title="Testing" href="/docs/developer-docs/testing">
+    Work with the metadata-driven testing system, including scenario authoring, API automation, UI automation, and test workflow orchestration.
+  </Card>
+  <Card title="Going Live" href="/docs/developer-docs/going-live">
+    Prepare SolidX for production deployment across Docker, ECS, and VM-based hosting models with the associated operational considerations.
+  </Card>
+</Cards>

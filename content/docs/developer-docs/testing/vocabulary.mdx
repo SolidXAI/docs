@@ -1,0 +1,334 @@
+---
+title: Vocabulary
+icon: "book-open"
+description: Key terms and concepts used in SolidX testing.
+summary: Defines the core language used across SolidX testing documentation, from SUT preparation to scenario execution and runtime state.
+---
+
+<Callout type="info" title="Mental Model">
+
+The testing vocabulary is easier to learn as a hierarchy than as a flat glossary.
+
+- A project is brought into **SUT mode**.
+- A module contributes **testing metadata**.
+- That metadata defines **data**, **specs**, and **scenarios**.
+- Scenarios are made of **steps**.
+- Steps execute **ops** through adapters and the runtime context.
+- Ops run through adapters, the runtime context, and the resource store
+
+</Callout>
+
+This page defines the core terms used throughout SolidX testing documentation.
+
+## Start Here
+
+At a high level, the structure looks like this:
+
+```bash
+SUT
+└── Module under test
+    └── testing metadata
+        ├── data
+        ├── specs
+        └── scenarios
+            └── steps
+                └── ops
+                    ├── api
+                    ├── ui
+                    ├── assert
+                    ├── util
+                    └── test
+```
+
+The most useful reading order is usually:
+
+- Environment and execution terms.
+- Metadata structure terms.
+- Scenario and step terms.
+- Runtime and execution terms.
+
+<Callout type="info" title="How To Read This Page">
+
+Use this page as a glossary while reading the workflow and authoring guides. The terms are grouped from outer setup concepts down to runtime execution details.
+
+</Callout>
+
+## Level 1: Environment And Execution Scope
+
+### System Under Test (SUT)
+
+The specific SolidX application environment being prepared and exercised by the test workflow.
+
+In practice, SUT mode usually means:
+
+- Isolated test datasources are active.
+- Metadata has been seeded.
+- Test fixtures have been loaded.
+- The app is ready for scenario execution.
+
+### Module Under Test
+
+The module whose `testing` metadata is being loaded and executed, typically passed through:
+
+```bash
+solidctl test run --module venue
+```
+
+### Datasource
+
+A configured database connection used by the application.
+
+The test workflow creates isolated test databases or schemas per datasource.
+
+### Run Name
+
+A generated identifier used during `test data --setup` to distinguish one isolated testing run from another.
+
+It helps name backups, manifests, and test datasources safely.
+
+### Manifest
+
+The file written during test setup that records what was created so teardown can reverse it safely and deterministically.
+
+### Headless
+
+A browser execution mode where UI tests run without showing a visible browser window.
+
+This is common in CI runs.
+
+## Level 2: Metadata Structure
+
+### Testing Metadata
+
+The `testing` section inside module metadata JSON files.
+
+This metadata can define:
+
+- `specs`
+- `roles`
+- `users`
+- `data`
+- `scenarios`
+
+Read this as:
+
+- `testing`: The root testing block for a module.
+- `testing.roles`: Test role definitions with permissions.
+- `testing.users`: Test user definitions with credentials and role assignments.
+- `testing.data`: Reusable fixtures loaded before execution.
+- `testing.specs`: Custom spec registration entry points.
+- `testing.scenarios`: Executable scenario definitions.
+
+### Scenario
+
+An executable testing flow defined in metadata.
+
+A scenario has:
+
+- An `id`.
+- An optional `name`.
+- A `type`.
+- Optional `params`.
+- Optional `tags`.
+- Optional timeout and retry settings.
+- A list of `steps`.
+
+### Scenario Type
+
+The execution mode of a scenario.
+
+Supported values are:
+
+- `api`
+- `ui`
+- `mixed`
+
+### Test Data
+
+Fixture records defined in `testing.data`.
+
+These are loaded into the test database before scenario execution and can also be referenced inside scenarios through interpolation.
+
+In practice, test data often acts as a reusable fixture library for:
+
+- Master data such as states, cities, regions, or products.
+- Relation-driven records expressed through `...UserKey` fields.
+- Upload fixtures where a field value points to `file:/absolute/path`.
+
+### Test Data Index
+
+The in-memory indexed representation of `testing.data` built by the runner.
+
+This powers `${data:...}` lookups during scenario execution.
+
+### Spec
+
+In the SolidX testing context, a spec usually means a custom executable testing unit registered for use through `test.spec`.
+
+This differs from a scenario:
+
+- A scenario is metadata-defined orchestration.
+- A spec is custom code invoked from a scenario.
+
+### Testing Roles
+
+Role definitions declared in `testing.roles`.
+
+Each entry names a role and lists the permissions to bind to it. Permissions can be exact (`ControllerName.methodName`) or wildcard (`ControllerName.*`).
+
+### Testing Users
+
+User definitions declared in `testing.users`.
+
+Each entry provides credentials and an optional list of role names to assign.
+
+### Tag
+
+A label attached to a scenario for filtering and grouping.
+
+Tags make it easy to run only subsets such as:
+
+- `smoke`
+- `regression`
+- `auth`
+
+## Level 3: Scenario Composition
+
+### Step
+
+A single executable unit inside a scenario.
+
+Steps can be written in:
+
+- Phase style using `given`, `when`, `then`, `and`.
+- Flat op style.
+
+Each step ultimately resolves to an operation handler.
+
+### Op
+
+Short for operation.
+
+This is the executable name of a step, for example:
+
+- `api.request`
+- `ui.goto`
+- `assert.equals`
+- `util.sleep`
+- `test.spec`
+
+Read the hierarchy like this:
+
+- A scenario contains steps.
+- A step names an op.
+- An op belongs to a family such as `api`, `ui`, `assert`, `util`, or `test`.
+
+### Given / When / Then / And
+
+BDD-style step phases used for readability.
+
+These phases are normalized before execution. The engine treats all four identically.
+
+Use `given` for preconditions, `when` for the action under test, `then` for assertions, and `and` to continue the previous phase without repeating it.
+
+### saveAs
+
+A step field that stores the result of the step into the resource store.
+
+```json
+{
+  "when": {
+    "op": "api.auth.bearerFromLogin",
+    "with": { "url": "...", "username": "alice", "password": "secret" },
+    "saveAs": "auth.token"
+  }
+}
+```
+
+In real projects, this is often used to save the full authentication response, such as `loginSuccess`, and later read the token from `${res:loginSuccess.bodyJson.data.accessToken}`.
+
+### test.spec
+
+A built-in step operation that executes a registered custom spec.
+
+Use it when built-in operations are not expressive enough.
+
+### util.require
+
+A built-in utility step used to fail fast when a required resource is missing from the resource store.
+
+This is commonly used to make scenario prerequisites explicit, such as requiring `loginSuccess` before attempting authenticated API calls.
+
+## Level 4: Runtime And Execution
+
+### Adapter
+
+A runtime integration layer that connects generic test steps to concrete tooling.
+
+Examples:
+
+- The API adapter executes HTTP requests.
+- The UI adapter uses Playwright for browser automation.
+
+### Playwright Adapter
+
+The UI testing adapter used by SolidX for browser-based E2E testing.
+
+It powers navigation, actions, and assertions against the frontend.
+
+### Resource Store
+
+A shared runtime store used to persist values across steps and scenarios.
+
+Values are written using `saveAs` and later read using `${res:...}` interpolation.
+
+Typical stored values include:
+
+- Auth tokens.
+- Ids.
+- Response objects.
+- Custom spec results.
+
+### Interpolation
+
+The process of resolving dynamic placeholders inside testing metadata before a step executes.
+
+Common token families are:
+
+- `${env:NAME}` reads a value from the test process environment.
+- `${params.foo}` reads a value from the current scenario params.
+- `${res:path.to.value}` reads a value saved into the runtime resource store.
+- `${data:model["recordKey"].field}` reads a value from indexed `testing.data`.
+
+### Reporter
+
+A component that receives lifecycle events from scenario execution and turns them into visible output.
+
+The default reporter is a console reporter.
+
+### Runtime Context
+
+The object shared across step execution.
+
+It includes:
+
+- Scenario metadata.
+- Params.
+- Adapters.
+- Reporter.
+- Resource store.
+- Last API response.
+- Spec registry.
+- Indexed test data.
+
+### Last API Response
+
+The most recent API response stored in the runtime context.
+
+This is especially useful for assertions like `assert.httpStatus`.
+
+<Callout type="info" title="Next">
+
+Continue with [Authoring Scenarios](/docs/developer-docs/testing/authoring-scenarios).
+
+</Callout>

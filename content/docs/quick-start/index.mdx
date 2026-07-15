@@ -5,6 +5,18 @@ description: "Get a SolidX project running in under 5 minutes, manually or let y
 summary: "Two paths to a working SolidX project. Manual mode walks you through every step. Agentic mode gives you a one-line prompt to paste into Claude Code, Cursor, Codex, or any AI coding assistant. Both paths scaffold against a PostgreSQL server."
 ---
 
+<Callout type="info" title="Mental Model">
+
+In SolidX, quick start setup is about choosing how the same project baseline gets created.
+
+- Manual mode gives you direct control over each CLI command.
+- Agentic mode lets an AI assistant follow the setup flow and wire MCP for you.
+- Both paths scaffold against PostgreSQL and end with a running API and admin UI.
+
+The result is a local SolidX project ready for module building, API testing, and extension work.
+
+</Callout>
+
 ## Prerequisites
 
 | Requirement | Version | Required for | Check |
@@ -12,7 +24,7 @@ summary: "Two paths to a working SolidX project. Manual mode walks you through e
 | **Node.js** | 22+ (LTS recommended) | All modes | `node -v` |
 | **Docker** | Latest stable | Manual path - spin up PostgreSQL locally if you do not already have an instance | `docker --version` |
 | **PostgreSQL** | 14+ | Manual path - connect to an existing instance, or use Docker to start one | `psql --version` |
-| **Python** | 3.11+ | Agent & MCP only | `python3 --version` |
+| **Python** | 3.12+ | Agent & MCP only | `python --version` |
 
 Node.js is required for all paths. Scaffolding in Step 2 also needs Docker or an existing PostgreSQL instance. Python is only needed if you plan to use the [SolidX AI Agent](/docs/quick-start/using-solidx-ai-agent) or [MCP server](/docs/quick-start/using-solidx-mcp-server).
 

@@ -1,8 +1,8 @@
 ---
-title : List of Values
+title: List of Values
 icon: "list"
-description : Metadata schema for defining list of values in SolidX applications.
-summary: This document describes list of values (LOV) metadata in SolidX, which defines predefined value sets for use in dropdowns and selection fields throughout the application. Each LOV entry includes type (category), value (internal identifier), display text (shown to users), description, default flag, sequence number for ordering, and associated module reference. Examples demonstrate configuring industry types (Healthcare, Information Technology) and regulatory bodies (FCA, SEC, PRA, CBI) with proper sequencing. The metadata ensures data consistency, improves user experience, and provides centralized management of commonly used value lists across the application.
+description: Metadata schema for defining list of values in SolidX applications.
+summary: Covers the metadata used to define list-of-values entries in SolidX, including type, value, display label, default flag, ordering, and module association.
 json_pointer: "/listOfValues"
 jsonpath: "$.listOfValues"
 parent_component: root
@@ -12,9 +12,6 @@ items_attributes_doc: "#list-of-values-metadata-attributes"
 solidx_concerns: [add_lov_record]
 ---
 
-
-
-# List of Values
 <Callout type="info" title="Where it lives">
 
 **JSON Pointer:** `/listOfValues`
@@ -24,12 +21,13 @@ solidx_concerns: [add_lov_record]
 </Callout>
 
 ## Overview
-List of Values (LOV) are used to define a set of predefined values that can be used in various parts of the SolidX application, such as dropdowns or selection fields. This helps ensure data consistency and improve user experience.
+List of Values (LOV) are used to define a set of predefined values that can be used in various parts of the SolidX application, such as dropdowns or selection fields. This helps ensure data consistency and improves user experience.
 
 ### Example: List of Values Metadata
-Below is an example wherein we define several list of values for different types such as INDUSTRY and REGULATED_BY.
+Below is an example where we define several list of values for different types such as `INDUSTRY` and `REGULATED_BY`.
 
-<summary> List of Values Schema </summary>
+<details open>
+<summary>List of values schema example</summary>
 
 ``` json
 {
@@ -65,6 +63,7 @@ Below is an example wherein we define several list of values for different types
     ]
 }
 ```
+</details>
 
 ### Using the List of Values in Dynamic Selection Fields
 To use the defined list of values in your application, you need to reference them by creating a dynamic selection field in your model.
@@ -107,14 +106,12 @@ To utilize the defined list of values in a dynamic selection field, you can conf
 }
 ```
 
+`ListOfValuesSelectionProvider` is a built-in selection provider that fetches values from the `listOfValues` metadata based on the specified `type`. The `selectionDynamicProviderCtxt` contains a JSON string with the `type` key to filter the LOV entries.
 
+#### Further Reference
 
-    ListOfValuesSelectionProvider is a built-in selection provider that fetches values from the `listOfValues` metadata based on the specified `type`. The `selectionDynamicProviderCtxt` contains a JSON string with the `type` key to filter the LOV entries.
-
-
-####  Further Reference
- -  Understanding Dynamic Selection Fields: See [Dynamic Selection Fields Documentation](../../admin-docs/module-builder/field-management#dynamic-selection)
- -  Built-in Selection Providers: See [Built-in Selection Providers](../extending/reference/built-in-selection-providers) for full documentation on `ListOfValuesSelectionProvider` and `PseudoForeignKeySelectionProvider`
+- Understanding Dynamic Selection Fields: See [Dynamic Selection Fields Documentation](/docs/admin-docs/module-builder/field-management#dynamic-selection)
+- Built-in Selection Providers: See [Built-in Selection Providers](/docs/developer-docs/extending/reference/built-in-selection-providers) for full documentation on `ListOfValuesSelectionProvider` and `PseudoForeignKeySelectionProvider`
 
 ### List of Values Metadata Attributes
 

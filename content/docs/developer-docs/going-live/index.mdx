@@ -5,177 +5,46 @@ description: Guidance on deploying SolidX applications to production environment
 summary: This section provides guidance on deploying SolidX applications to production environments, covering various deployment strategies, configuration steps, and best practices for taking your application from development to live production use.
 ---
 
-
-# Going Live
-
-This section provides guidance on how to deploy your SolidX applications to production. We cover a range of deployment strategies to suit your needs, from traditional virtual machines to modern container-based workflows.
+import { Box, Cloud, PackageOpen, Server } from 'lucide-react';
 
 <Callout type="info" title="Mental Model">
 
-  Going live with SolidX is really about taking a working full-stack project and making it <strong>repeatable, secure, and operable in a real environment</strong>.
-  - You are deploying both the backend and frontend parts of the application.
-    - You are also carrying across environment configuration, database access, and operational concerns such as process management or container orchestration.
-    - The right deployment strategy depends more on your hosting model and team workflow than on SolidX itself.
-  So the intuition is: these guides are not about one “correct” deployment path, but about choosing the production shape that best fits your infrastructure.
+Going live with SolidX is about making a working full-stack application repeatable, secure, and operable in a real environment.
+
+- You are deploying both the backend and frontend parts of the application.
+- You are also carrying across environment configuration, database access, networking, and operational controls.
+- The right deployment path depends more on your infrastructure model and team workflow than on SolidX itself.
+
+These guides are not prescribing one "correct" production shape. They help you choose the deployment model that fits your hosting and operations posture.
 
 </Callout>
 
-<div className="row">
-  <div className="col col--4">
-    <div className="card">
-      <div className="card__header">
-        <h3>
-          
-          &nbsp;Virtual Machine
-        </h3>
-      </div>
-      <div className="card__body">
-        <p>
-          Deploy your application to a traditional virtual machine. This guide covers setting up your environment, configuring a process manager, and using Nginx as a reverse proxy.
-        </p>
-      </div>
-      <div className="card__footer">
-        <a href="/docs/developer-docs/going-live/deploying-to-vm" className="button button--primary button--block">
-          Deploy to VM
-        </a>
-      </div>
-    </div>
-  </div>
-  <div className="col col--4">
-    <div className="card">
-      <div className="card__header">
-        <h3>
-          
-          &nbsp;Amazon ECS
-        </h3>
-      </div>
-      <div className="card__body">
-        <p>
-          Use AWS Fargate to deploy your application in a serverless environment. This guide will walk you through containerizing your app, pushing it to ECR, and setting up your ECS cluster.
-        </p>
-      </div>
-      <div className="card__footer">
-        <a href="/docs/developer-docs/going-live/deploying-to-ecs" className="button button--primary button--block">
-          Deploy to ECS
-        </a>
-      </div>
-    </div>
-  </div>
-  <div className="col col--4">
-    <div className="card">
-      <div className="card__header">
-        <h3>
-          
-          &nbsp;Docker
-        </h3>
-      </div>
-      <div className="card__body">
-        <p>
-          Containerize your application with Docker for a consistent and reproducible deployment. This guide covers multi-stage builds and setting up a production-ready Docker Compose file.
-        </p>
-      </div>
-      <div className="card__footer">
-        <a href="/docs/developer-docs/going-live/deploying-to-docker" className="button button--primary button--block">
-          Deploy with Docker
-        </a>
-      </div>
-    </div>
-  </div>
-</div>
+This section covers the main production deployment shapes used with SolidX, from traditional virtual machines to container-based platforms.
 
----
+## Deployment Paths
 
-## Going Live with a Solid App Template
+<Cards>
+  <Card icon={<PackageOpen />} title="Solid App Template" href="/docs/developer-docs/going-live/solid-app-template">
+    Start from the generated `create-solid-app` project shape and choose between a manual runtime or Docker-based deployment.
+  </Card>
+  <Card icon={<Server />} title="Virtual Machine" href="/docs/developer-docs/going-live/deploying-to-vm">
+    Deploy on a traditional VM with direct control over the host, process management, Nginx, SSL, and runtime operations.
+  </Card>
+  <Card icon={<Cloud />} title="Amazon ECS" href="/docs/developer-docs/going-live/deploying-to-ecs">
+    Run SolidX on AWS Fargate using containers, ECR, task definitions, services, and load balancing.
+  </Card>
+  <Card icon={<Box />} title="Docker" href="/docs/developer-docs/going-live/deploying-to-docker">
+    Containerize the application for a reproducible deployment workflow using Dockerfiles and Docker Compose.
+  </Card>
+</Cards>
 
-This guide provides instructions on how to deploy a Solid application generated from the `create-solid-app` template.
+## Choosing the Right Guide
 
-We will cover two approaches: a manual deployment and an advanced deployment using Docker.
+Use the guides based on the operational model you want:
 
-### Manual Deployment
+- Start with **Solid App Template** when you want the deployment paths explained from the generated project structure.
+- Choose **Virtual Machine** when your team wants direct control over Linux, process management, reverse proxying, and TLS setup.
+- Choose **Docker** when you want a portable runtime definition and a reproducible way to move the same application shape across environments.
+- Choose **Amazon ECS** when you want container-based deployment on AWS without managing the underlying servers directly.
 
-This approach involves building the frontend and backend applications and running them as separate processes.
-
-#### Prerequisites
-
-*   Node.js and npm installed on your server.
-*   A database (e.g., PostgreSQL, MongoDB) running and accessible from your server.
-
-#### Steps
-
-1.  **Clone your project:**
-    ```bash
-    git clone <your-project-repository>
-    cd <your-project-directory>
-    ```
-
-2.  **Set up the backend:**
-    *   Navigate to the `solid-api` directory:
-        ```bash
-        cd solid-api
-        ```
-    *   Install dependencies:
-        ```bash
-        npm install
-        ```
-    *   Create a `.env` file and configure your database connection and other environment variables. You can use `.env.example` as a reference.
-    *   Build the application:
-        ```bash
-        npm run build
-        ```
-    *   Run the application:
-        ```bash
-        npm run start:prod
-        ```
-
-3.  **Set up the frontend:**
-    *   Navigate to the `solid-ui` directory:
-        ```bash
-        cd ../solid-ui
-        ```
-    *   Install dependencies:
-        ```bash
-        npm install
-        ```
-    *   Create a `.env` file and configure your API URL and other environment variables.
-    *   Build the application:
-        ```bash
-        npm run build
-        ```
-    *   Run the application:
-        ```bash
-        npm run start
-        ```
-
-Your Solid application should now be running. You may want to use a process manager like `pm2` to keep the applications running in the background.
-
-### Advanced Deployment (Docker)
-
-This approach uses Docker to containerize the frontend and backend applications.
-
-#### Prerequisites
-
-*   Docker and Docker Compose installed on your server.
-
-#### Steps
-
-1.  **Clone your project:**
-    ```bash
-    git clone <your-project-repository>
-    cd <your-project-directory>
-    ```
-
-2.  **Configure your environment:**
-    *   Create a `.env` file in the root of your project and configure your database connection, API URL, and other environment variables. The `docker-compose.yml` file is set up to use this file.
-
-3.  **Build and run the containers:**
-    ```bash
-    docker-compose up -d --build
-    ```
-
-This command will build the Docker images for the `solid-api` and `solid-ui` applications and run them in the background.
-
-Your Solid application is now running and accessible on the ports specified in your `docker-compose.yml` file.
-
----
-
-Explore the guides to find the deployment strategy that best fits your project's needs. Each guide provides a step-by-step walkthrough to get your SolidX application up and running in a production environment.
+Each guide assumes you already have a working SolidX project and are now deciding how to run it safely in production.

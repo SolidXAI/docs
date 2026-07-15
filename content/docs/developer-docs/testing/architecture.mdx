@@ -1,0 +1,266 @@
+---
+title: Architecture
+icon: "blocks"
+description: Testing architecture in SolidX, including the engine, adapters, registries, steps, and reporters.
+summary: Explains how the SolidX testing engine turns module metadata into executable API, UI, and mixed scenarios through shared runtime infrastructure.
+---
+
+<Callout type="info" title="Mental Model">
+
+Think about SolidX testing as a layered execution pipeline.
+
+- `testing` metadata defines what should run.
+- The runner prepares the runtime, adapters, and registries.
+- The engine executes normalized steps against the shared context.
+- Adapters talk to HTTP services or the browser.
+
+This separation is what lets SolidX support API and UI testing without duplicating the core orchestration model.
+
+</Callout>
+
+SolidX testing is implemented as a shared execution engine with pluggable adapters and step registries.
+
+The architecture is designed so API and UI tests can use the same scenario format, interpolation rules, reporting flow, and runtime context.
+
+## High-Level Structure
+
+The main testing implementation lives under `solid-core-module/src/testing/`.
+
+```bash
+src/testing/
+├── contracts/    # Metadata and runtime context types
+├── core/         # Engine, interpolation, resource store, registries
+├── adapters/     # API adapter and Playwright UI adapter
+├── steps/        # Built-in operations grouped by domain
+├── reporter/     # Reporting types and console reporter
+└── runner/       # Metadata execution and lifecycle helpers
+```
+
+## Main Building Blocks
+
+Quick reference:
+
+- **Runner:** Turns testing metadata into an executable test session.
+- **Engine:** Executes normalized scenario steps against the shared runtime context.
+- **Step Registry:** Maps operation names such as `api.request` or `ui.goto` to their handlers.
+- **Adapters:** Bridge generic scenario steps to concrete tools such as HTTP execution and Playwright.
+- **Reporter:** Consumes scenario and step lifecycle events and turns them into visible output.
+- **Resource Store:** Persists values between steps through `saveAs` and `${res:...}` interpolation.
+
+### Testing Metadata
+
+Testing starts from module metadata under the `testing` key.
+
+That metadata describes:
+
+- Test fixtures.
+- Scenarios.
+- Optional testing roles and users.
+- Optional custom test spec registrars.
+
+This makes testing part of the application's metadata model rather than something external to it.
+
+### Runner
+
+The runner turns metadata into an executable test session.
+
+Its main responsibilities are:
+
+- Build the step registry.
+- Register built-in step families.
+- Load and filter scenarios.
+- Build the test data index.
+- Create the runtime context.
+- Initialize adapters.
+- Invoke the engine for each scenario.
+
+This orchestration is centered in `runner/run-from-metadata.ts`.
+
+<Callout type="info" title="Code Entry Point">
+
+When tracing execution in code, start from `runner/run-from-metadata.ts`, then follow how the runner builds the registry, context, adapters, and engine.
+
+</Callout>
+
+### Testing Engine
+
+The `TestingEngine` is the shared executor.
+
+The engine is responsible for:
+
+- Receiving a scenario and a runtime context.
+- Applying retries and scenario timeouts.
+- Normalizing `given` / `when` / `then` / `and` blocks into executable steps.
+- Interpolating step values before execution.
+- Invoking the correct step handler.
+- Storing results in the resource store when `saveAs` is used.
+- Emitting lifecycle events to the reporter.
+
+The engine is the common orchestration layer for every scenario type.
+
+### Step Registry
+
+The step registry maps operation names such as:
+
+- `api.request`
+- `ui.goto`
+- `assert.httpStatus`
+- `util.sleep`
+- `test.spec`
+
+to their corresponding handlers.
+
+Built-in registrations are grouped by domain:
+
+- API steps.
+- UI steps.
+- Assert steps.
+- Util steps.
+- Test-spec steps.
+
+### Adapters
+
+Adapters bridge generic scenario steps to concrete execution tools.
+
+#### API Adapter
+
+The API adapter uses Axios-style HTTP execution and powers operations such as:
+
+- `api.request`
+- `api.auth.bearerFromLogin`
+
+#### UI Adapter
+
+The UI adapter is Playwright-based and powers operations such as:
+
+- Navigation.
+- Form filling.
+- Clicks.
+- Assertions on visibility, text, and URL.
+
+This is how SolidX supports frontend E2E testing without embedding browser logic directly into the engine itself.
+
+### Reporter
+
+Reporters consume lifecycle events such as:
+
+- Scenario start.
+- Step start.
+- Step end.
+- Scenario end.
+
+The built-in reporter is a console reporter, but the architecture already supports additional reporters later.
+
+### Resource Store
+
+The resource store is the shared runtime object used to persist values between steps.
+
+For example, it can hold:
+
+- An auth token returned by one step.
+- A created record id.
+- A custom test spec result.
+- Any intermediate response referenced later.
+
+Steps write to the store using `saveAs`, and later steps read those values through `${res:...}` interpolation.
+
+## Shared Runtime Context
+
+Every scenario executes with a runtime context that contains:
+
+- Scenario id and scenario type.
+- Resolved params.
+- The shared resource store.
+- API and UI adapters.
+- The last API response.
+- The reporter.
+- The spec registry.
+- Indexed test data.
+- Runtime options such as API log printing.
+
+This shared context is what allows API steps, UI steps, assertions, and custom specs to cooperate cleanly.
+
+## Scenario Types
+
+SolidX currently supports these scenario types:
+
+- `api`
+- `ui`
+- `mixed`
+
+`mixed` is especially useful when a workflow crosses both layers, for example:
+
+- Authenticate through an API step.
+- Create data through an API step.
+- Verify the result through a UI step.
+
+## Built-In Step Families
+
+Built-in steps are registered from these domains:
+
+- `api`
+- `ui`
+- `assert`
+- `util`
+- `test`
+
+This gives SolidX a good balance between standardization for common testing needs and extensibility when a project needs custom logic.
+
+## Custom Specs
+
+When built-in steps are not enough, SolidX provides `test.spec` as an escape hatch.
+
+Custom specs:
+
+- Are registered through `testing.specs`.
+- Are resolved through the spec registry.
+- Receive the shared runtime context plus free-form input.
+- Return structured results that can be saved and reused.
+
+The `venue` module shows this pattern clearly:
+
+- `testing.specs` points to `testing/register-test-specs.js`.
+- That registrar maps a stable id such as `venue.customHealth`.
+- A scenario invokes `test.spec`.
+- The spec receives `ctx` and `input`.
+- It can read previously saved resources from `ctx.resources`.
+
+That pattern is useful when built-in steps are almost enough, but a project still needs domain-specific verification logic.
+
+## UI Lifecycle
+
+The runner starts the Playwright adapter only when a scenario requires UI execution.
+
+That means:
+
+- Pure API runs do not pay the browser startup cost.
+- UI scenarios still run within the same framework.
+- Browser lifecycle is handled centrally by the runner.
+
+## Mental Model
+
+The cleanest way to reason about the architecture is:
+
+- Metadata defines what to test.
+- The runner prepares the runtime.
+- The engine executes the scenario.
+- Adapters talk to the outside world.
+- The resource store carries state between steps.
+- Reporters make the run visible.
+
+## Scenario Chaining
+
+In real projects, a common execution pattern looks like this:
+
+- One scenario saves a reusable bootstrap resource such as `loginSuccess`.
+- Later scenarios assert that dependency with `util.require`.
+- Those scenarios interpolate the saved result via `${res:...}`.
+- Custom specs can read the same saved resource through the runtime context.
+
+That is how SolidX supports lightweight scenario chaining without needing a separate dependency graph.
+
+<Callout type="info" title="Next">
+
+Continue with [Workflow](/docs/developer-docs/testing/workflow).
+
+</Callout>

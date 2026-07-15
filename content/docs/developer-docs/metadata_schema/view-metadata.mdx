@@ -14,7 +14,6 @@ solidx_concerns: [update_layout, add_field_to_existing_layout, remove_field_from
 
 import { LayoutGrid, Shield, Gauge } from 'lucide-react';
 
-# View Metadata
 <Callout type="info" title="Where it lives">
 
 **JSON Pointer:** `/views`
@@ -27,18 +26,18 @@ import { LayoutGrid, Shield, Gauge } from 'lucide-react';
 
 View metadata defines how SolidX presents models and fields to end users.
 
-If field metadata answers "what does this field mean?", view metadata answers "how should this field appear here?"
+If field metadata answers "what does this field mean?", view metadata answers "how should this field appear in this runtime surface?"
 
 This page is the primary reference for:
 
-- top-level view records
-- layout attrs
-- field-node attrs inside layouts
-- widget selection through `editWidget` and `viewWidget`
-- widget-specific attrs
-- real metadata examples for `form`, `list`, and `tree` rendering
+- Top-level view records
+- Layout attrs
+- Field-node attrs inside layouts
+- Widget selection through `editWidget` and `viewWidget`
+- Widget-specific attrs
+- Real metadata examples for `form`, `list`, and `tree` rendering
 
-For field semantics, validation intent, persistence behavior, and field-level attrs, see [Field Metadata](./field-metadata).
+For field semantics, validation intent, persistence behavior, and field-level attrs, see [Field Metadata](/docs/developer-docs/metadata_schema/field-metadata).
 
 ## How To Read This Page
 
@@ -267,8 +266,8 @@ In list and tree views, `richText` reuses the standard text-column path.
 
 It does not currently have dedicated list or tree widgets of its own. In these views, it behaves like a text column and relies on the same shared truncation and search mechanics as other text-style scalar fields.
 
-
-
+<Tabs>
+<TabItem value="list-richtext-default" label="Default rendering">
 
 | Concern | How it works |
 | --- | --- |
@@ -294,13 +293,10 @@ It does not currently have dedicated list or tree widgets of its own. In these v
 
 </details>
 
-
-
-
 No additional list or tree widgets are currently registered specifically for `richText`.
 
-
-
+</TabItem>
+</Tabs>
 
 ### `json`
 
@@ -308,8 +304,8 @@ Core form rendering is supported for `json`, but list and tree support is curren
 
 The core list-column dispatch does not currently include a dedicated `json` renderer, so JSON fields should not be assumed to have the same out-of-the-box list support as scalar text fields.
 
-
-
+<Tabs>
+<TabItem value="list-json-default" label="Default rendering">
 
 | Concern | How it works |
 | --- | --- |
@@ -332,13 +328,10 @@ The core list-column dispatch does not currently include a dedicated `json` rend
 
 </details>
 
-
-
-
 No dedicated core list or tree widgets are currently registered specifically for `json`.
 
-
-
+</TabItem>
+</Tabs>
 
 ### `int`
 
@@ -346,8 +339,8 @@ By default, `int` renders as a numeric column that reuses the shared text-style 
 
 The core list-column path routes `int` through `SolidIntColumn`, which applies numeric cell styling and then renders values through `DefaultTextListWidget` unless a custom `viewWidget` is provided.
 
-
-
+<Tabs>
+<TabItem value="list-int-default" label="Default rendering">
 
 | Concern | How it works |
 | --- | --- |
@@ -371,13 +364,10 @@ The core list-column path routes `int` through `SolidIntColumn`, which applies n
 
 </details>
 
-
-
-
 No additional core list or tree widgets are currently registered specifically for `int`.
 
-
-
+</TabItem>
+</Tabs>
 
 ### `bigint`
 
@@ -385,8 +375,8 @@ In list and tree views, `bigint` currently reuses the same numeric column path u
 
 The core list-column path routes `bigint` through `SolidBigintColumn`, which delegates to `SolidIntColumn`. As a result, `bigint` receives numeric table alignment but still renders through `DefaultTextListWidget` by default.
 
-
-
+<Tabs>
+<TabItem value="list-bigint-default" label="Default rendering">
 
 | Concern | How it works |
 | --- | --- |
@@ -409,13 +399,10 @@ The core list-column path routes `bigint` through `SolidBigintColumn`, which del
 
 </details>
 
-
-
-
 No additional core list or tree widgets are currently registered specifically for `bigint`.
 
-
-
+</TabItem>
+</Tabs>
 
 ### `decimal`
 
@@ -423,8 +410,8 @@ By default, `decimal` renders as a numeric column that reuses the shared text-st
 
 The core list-column path routes `decimal` through `SolidDecimalColumn`, which delegates to the same numeric column implementation used for `int`. This means decimal values inherit the standard text-cell rendering behavior unless a custom `viewWidget` is provided.
 
-
-
+<Tabs>
+<TabItem value="list-decimal-default" label="Default rendering">
 
 | Concern | How it works |
 | --- | --- |
@@ -450,13 +437,10 @@ The core list-column path routes `decimal` through `SolidDecimalColumn`, which d
 
 </details>
 
-
-
-
 No additional core list or tree widgets are currently registered specifically for `decimal`.
 
-
-
+</TabItem>
+</Tabs>
 
 ### `boolean`
 
@@ -464,8 +448,8 @@ By default, `boolean` renders as a compact true-or-false column.
 
 The default list renderer is `DefaultBooleanListWidget`, which turns the stored boolean value into readable output such as `Yes` and `No`. This default path is also where column-level label overrides such as `trueLabel` and `falseLabel` are applied.
 
-
-
+<Tabs>
+<TabItem value="list-boolean-default" label="Default rendering">
 
 | Concern | How it works |
 | --- | --- |
@@ -490,13 +474,10 @@ The default list renderer is `DefaultBooleanListWidget`, which turns the stored 
 
 </details>
 
-
-
-
 No additional core list or tree widgets are currently registered specifically for `boolean`.
 
-
-
+</TabItem>
+</Tabs>
 
 ### `date`
 
@@ -504,8 +485,8 @@ By default, `date` renders as a date-formatted column rather than as plain text.
 
 The default list renderer is `DefaultDateListWidget`, which delegates value formatting to the shared date-view component. At the list level, formatting is controlled through the layout `format` attr.
 
-
-
+<Tabs>
+<TabItem value="list-date-default" label="Default rendering">
 
 | Concern | How it works |
 | --- | --- |
@@ -529,13 +510,10 @@ The default list renderer is `DefaultDateListWidget`, which delegates value form
 
 </details>
 
-
-
-
 No additional core list or tree widgets are currently registered specifically for `date`.
 
-
-
+</TabItem>
+</Tabs>
 
 ### `datetime`
 
@@ -543,8 +521,8 @@ By default, `datetime` renders as a formatted date-time column rather than as pl
 
 The default list renderer is `DefaultDateTimeListWidget`, which delegates value formatting to the shared date-view component with time display enabled. At the list level, formatting is controlled through the layout `format` attr.
 
-
-
+<Tabs>
+<TabItem value="list-datetime-default" label="Default rendering">
 
 | Concern | How it works |
 | --- | --- |
@@ -568,13 +546,10 @@ The default list renderer is `DefaultDateTimeListWidget`, which delegates value 
 
 </details>
 
-
-
-
 No additional core list or tree widgets are currently registered specifically for `datetime`.
 
-
-
+</TabItem>
+</Tabs>
 
 ### `time`
 
@@ -582,8 +557,8 @@ In list and tree views, `time` currently reuses the standard text-column path.
 
 The core list-column dispatch sends `time` fields through a dedicated column wrapper, but that wrapper falls back to `DefaultTextListWidget`. As a result, `time` currently behaves more like a text field in list and tree views than like a dedicated time-only renderer.
 
-
-
+<Tabs>
+<TabItem value="list-time-default" label="Default rendering">
 
 | Concern | How it works |
 | --- | --- |
@@ -607,13 +582,10 @@ The core list-column dispatch sends `time` fields through a dedicated column wra
 
 </details>
 
-
-
-
 No additional core list or tree widgets are currently registered specifically for `time`.
 
-
-
+</TabItem>
+</Tabs>
 
 ### `email`
 
@@ -621,8 +593,8 @@ In list and tree views, `email` reuses the standard text-column path.
 
 The core list-column dispatch sends `email` fields through the same shared renderer used for text-like scalar fields. This means email addresses inherit the standard truncation, search, and text-cell behavior rather than using a dedicated email-specific list widget.
 
-
-
+<Tabs>
+<TabItem value="list-email-default" label="Default rendering">
 
 | Concern | How it works |
 | --- | --- |
@@ -646,13 +618,10 @@ The core list-column dispatch sends `email` fields through the same shared rende
 
 </details>
 
-
-
-
 No additional core list or tree widgets are currently registered specifically for `email`.
 
-
-
+</TabItem>
+</Tabs>
 
 ### `password`
 
@@ -660,8 +629,8 @@ Core list and tree rendering should not be assumed for `password`.
 
 The core list-column dispatch does not currently include a dedicated password renderer, and password fields are generally not intended for ordinary list presentation.
 
-
-
+<Tabs>
+<TabItem value="list-password-default" label="Default rendering">
 
 | Concern | How it works |
 | --- | --- |
@@ -684,13 +653,10 @@ The core list-column dispatch does not currently include a dedicated password re
 
 </details>
 
-
-
-
 No additional core list or tree widgets are currently registered specifically for `password`.
 
-
-
+</TabItem>
+</Tabs>
 
 ### `selectionStatic`
 
@@ -698,8 +664,8 @@ By default, `selectionStatic` renders as a text-style column whose visible value
 
 The list path uses `DefaultTextListWidget` through the shared text-column renderer. For single-select values, that shared renderer maps stored values to their human-readable labels using `selectionStaticValues`, so list and tree views show the authored label rather than the raw stored token.
 
-
-
+<Tabs>
+<TabItem value="list-selectionstatic-default" label="Default rendering">
 
 | Concern | How it works |
 | --- | --- |
@@ -723,13 +689,10 @@ The list path uses `DefaultTextListWidget` through the shared text-column render
 
 </details>
 
-
-
-
 No additional core list or tree widgets are currently registered specifically for `selectionStatic`.
 
-
-
+</TabItem>
+</Tabs>
 
 ### `selectionDynamic`
 
@@ -737,8 +700,8 @@ By default, `selectionDynamic` renders as a text-style column whose visible valu
 
 Unlike `selectionStatic`, the core list path does not perform provider lookups or label mapping at render time. The shared text widget simply displays the current row value as supplied by the dataset.
 
-
-
+<Tabs>
+<TabItem value="list-selectiondynamic-default" label="Default rendering">
 
 | Concern | How it works |
 | --- | --- |
@@ -761,13 +724,10 @@ Unlike `selectionStatic`, the core list path does not perform provider lookups o
 
 </details>
 
-
-
-
 No additional core list or tree widgets are currently registered specifically for `selectionDynamic`.
 
-
-
+</TabItem>
+</Tabs>
 
 ### `many-to-one`
 
@@ -872,9 +832,6 @@ By default, the column uses `DefaultRelationOneToManyListWidget`, which shows th
 ```
 
 </details>
-
-</TabItem>
-<TabItem value="list-onetomany-alternative" label="Alternative widgets">
 
 No additional core list or tree widgets are currently registered specifically for `one-to-many`.
 
@@ -983,9 +940,6 @@ By default, the column uses `DefaultMediaSingleListWidget`, which shows an inlin
 
 </details>
 
-</TabItem>
-<TabItem value="list-mediasingle-alternative" label="Alternative widgets">
-
 No additional core list or tree widgets are currently registered specifically for `mediaSingle`.
 
 </TabItem>
@@ -1021,9 +975,6 @@ By default, the column uses `DefaultMediaMultipleListWidget`, which shows the le
 
 </details>
 
-</TabItem>
-<TabItem value="list-mediamultiple-alternative" label="Alternative widgets">
-
 No additional core list or tree widgets are currently registered specifically for `mediaMultiple`.
 
 </TabItem>
@@ -1058,9 +1009,6 @@ Instead, SolidX renders the field using the same column style that would normall
 ```
 
 </details>
-
-</TabItem>
-<TabItem value="list-computed-alternative" label="Alternative widgets">
 
 No additional core list or tree widgets are currently registered specifically for `computed`.
 
@@ -1411,8 +1359,8 @@ By default, `richText` renders as a rich-text editor in edit mode and as formatt
 
 The supported `richText` widget surface is intentionally simple at the moment: one default edit widget and one default view widget.
 
-
-
+<Tabs>
+<TabItem value="form-richtext-default" label="Default rendering">
 
 | Concern | How it works |
 | --- | --- |
@@ -1437,13 +1385,10 @@ The supported `richText` widget surface is intentionally simple at the moment: o
 
 </details>
 
-
-
-
 No additional form widgets are currently registered specifically for `richText`.
 
-
-
+</TabItem>
+</Tabs>
 
 ### `json`
 
@@ -1451,8 +1396,8 @@ By default, `json` renders in forms using a JSON-oriented code editor in both ed
 
 The supported core `json` widget surface is intentionally simple at the moment: one default edit widget and one default view widget.
 
-
-
+<Tabs>
+<TabItem value="form-json-default" label="Default rendering">
 
 | Concern | How it works |
 | --- | --- |
@@ -1476,13 +1421,10 @@ The supported core `json` widget surface is intentionally simple at the moment: 
 
 </details>
 
-
-
-
 No additional core form widgets are currently registered specifically for `json`.
 
-
-
+</TabItem>
+</Tabs>
 
 ### `int`
 
@@ -1490,8 +1432,8 @@ By default, `int` renders as a number input in edit mode and as a plain numeric 
 
 The default edit path uses `DefaultIntegerFormEditWidget`. The default view path uses `DefaultIntegerFormViewWidget`.
 
-
-
+<Tabs>
+<TabItem value="form-int-default" label="Default rendering">
 
 | Concern | How it works |
 | --- | --- |
@@ -1515,8 +1457,8 @@ The default edit path uses `DefaultIntegerFormEditWidget`. The default view path
 
 </details>
 
-
-
+</TabItem>
+<TabItem value="form-int-alternative" label="Alternative widgets">
 
 | Widget | Use when | Extra attrs |
 | --- | --- | --- |
@@ -1544,13 +1486,10 @@ The default edit path uses `DefaultIntegerFormEditWidget`. The default view path
 }
 ```
 
-
-
-
 No additional core form view widgets are currently registered specifically for `int`.
 
-
-
+</TabItem>
+</Tabs>
 
 ### `bigint`
 
@@ -1558,8 +1497,8 @@ By default, `bigint` reuses the same whole-number editing experience as `int`.
 
 The form field factory currently routes `bigint` through `SolidIntegerField`, so the default edit path uses `DefaultIntegerFormEditWidget` and the default view path uses `DefaultIntegerFormViewWidget`.
 
-
-
+<Tabs>
+<TabItem value="form-bigint-default" label="Default rendering">
 
 | Concern | How it works |
 | --- | --- |
@@ -1583,13 +1522,10 @@ The form field factory currently routes `bigint` through `SolidIntegerField`, so
 
 </details>
 
-
-
-
 No additional core form widgets are currently registered specifically for `bigint`.
 
-
-
+</TabItem>
+</Tabs>
 
 ### `decimal`
 
@@ -1597,8 +1533,8 @@ By default, `decimal` renders as a number input in edit mode and as a plain nume
 
 The default edit path uses `DefaultDecimalFormEditWidget`. The default view path uses `DefaultDecimalFormViewWidget`.
 
-
-
+<Tabs>
+<TabItem value="form-decimal-default" label="Default rendering">
 
 | Concern | How it works |
 | --- | --- |
@@ -1622,13 +1558,10 @@ The default edit path uses `DefaultDecimalFormEditWidget`. The default view path
 
 </details>
 
-
-
-
 No additional core form widgets are currently registered specifically for `decimal`.
 
-
-
+</TabItem>
+</Tabs>
 
 ### `boolean`
 
@@ -1636,8 +1569,8 @@ By default, `boolean` renders as a checkbox-style control in edit mode and as a 
 
 The default edit path resolves through the `booleanCheckbox` alias to `SolidBooleanCheckboxStyleFormEditWidget`. The default view path uses `DefaultBooleanFormViewWidget`.
 
-
-
+<Tabs>
+<TabItem value="form-boolean-default" label="Default rendering">
 
 | Concern | How it works |
 | --- | --- |
@@ -1662,8 +1595,8 @@ The default edit path resolves through the `booleanCheckbox` alias to `SolidBool
 
 </details>
 
-
-
+</TabItem>
+<TabItem value="form-boolean-alternative" label="Alternative widgets">
 
 | Widget | Use when | Extra attrs |
 | --- | --- | --- |
@@ -1720,13 +1653,10 @@ The default edit path resolves through the `booleanCheckbox` alias to `SolidBool
 }
 ```
 
-
-
-
 No additional core form view widgets are currently registered specifically for `boolean`.
 
-
-
+</TabItem>
+</Tabs>
 
 ### `date`
 
@@ -1734,8 +1664,8 @@ By default, `date` renders as a date picker in edit mode and as a formatted date
 
 The default edit path uses `DefaultDateFormEditWidget`. The default view path uses `DefaultDateFormViewWidget`.
 
-
-
+<Tabs>
+<TabItem value="form-date-default" label="Default rendering">
 
 | Concern | How it works |
 | --- | --- |
@@ -1762,13 +1692,10 @@ The default edit path uses `DefaultDateFormEditWidget`. The default view path us
 
 </details>
 
-
-
-
 No additional core form widgets are currently registered specifically for `date`.
 
-
-
+</TabItem>
+</Tabs>
 
 ### `datetime`
 
@@ -1776,8 +1703,8 @@ By default, `datetime` renders as a date-time picker in edit mode and as a forma
 
 The default edit path uses `DefaultDateTimeFormEditWidget`. The default view path uses `DefaultDateTimeFormViewWidget`.
 
-
-
+<Tabs>
+<TabItem value="form-datetime-default" label="Default rendering">
 
 | Concern | How it works |
 | --- | --- |
@@ -1802,13 +1729,10 @@ The default edit path uses `DefaultDateTimeFormEditWidget`. The default view pat
 
 </details>
 
-
-
-
 No additional core form widgets are currently registered specifically for `datetime`.
 
-
-
+</TabItem>
+</Tabs>
 
 ### `time`
 
@@ -1816,8 +1740,8 @@ By default, `time` renders as a time-only picker in edit mode and as a formatted
 
 The default edit path uses `DefaultTimeFormEditWidget`. The default view path uses `DefaultTimeFormViewWidget`.
 
-
-
+<Tabs>
+<TabItem value="form-time-default" label="Default rendering">
 
 | Concern | How it works |
 | --- | --- |
@@ -1841,13 +1765,10 @@ The default edit path uses `DefaultTimeFormEditWidget`. The default view path us
 
 </details>
 
-
-
-
 No additional core form widgets are currently registered specifically for `time`.
 
-
-
+</TabItem>
+</Tabs>
 
 ### `email`
 
@@ -1855,8 +1776,8 @@ By default, `email` renders as an email-oriented input in edit mode and as plain
 
 The default edit path uses `DefaultEmailFormEditWidget`. The default read-only display follows the shared plain-text view path used for text-like scalar fields.
 
-
-
+<Tabs>
+<TabItem value="form-email-default" label="Default rendering">
 
 | Concern | How it works |
 | --- | --- |
@@ -1880,13 +1801,10 @@ The default edit path uses `DefaultEmailFormEditWidget`. The default read-only d
 
 </details>
 
-
-
-
 No additional core form widgets are currently registered specifically for `email`.
 
-
-
+</TabItem>
+</Tabs>
 
 ### `password`
 
@@ -1894,8 +1812,8 @@ By default, `password` uses two different edit experiences depending on context 
 
 When a record is being created, the default create path uses `DefaultPasswordFormCreateWidget`, which includes password and confirm-password inputs. When an existing record is being edited, the default edit path uses `DefaultPasswordFormEditWidget`, which opens a controlled change-password dialog. The default view path uses `DefaultPasswordFormViewWidget`.
 
-
-
+<Tabs>
+<TabItem value="form-password-default" label="Default rendering">
 
 | Concern | How it works |
 | --- | --- |
@@ -1920,13 +1838,10 @@ When a record is being created, the default create path uses `DefaultPasswordFor
 
 </details>
 
-
-
-
 No additional core form widgets are currently registered specifically for `password`.
 
-
-
+</TabItem>
+</Tabs>
 
 ### `selectionStatic`
 
@@ -1934,8 +1849,8 @@ By default, `selectionStatic` renders as an autocomplete-driven picker in edit m
 
 The default edit path uses `DefaultSelectionStaticAutocompleteFormEditWidget`. The default view path uses `DefaultSelectionStaticFormViewWidget`.
 
-
-
+<Tabs>
+<TabItem value="form-selectionstatic-default" label="Default rendering">
 
 | Concern | How it works |
 | --- | --- |
@@ -1959,8 +1874,8 @@ The default edit path uses `DefaultSelectionStaticAutocompleteFormEditWidget`. T
 
 </details>
 
-
-
+</TabItem>
+<TabItem value="form-selectionstatic-alternative" label="Alternative widgets">
 
 | Widget | Use when | Extra attrs |
 | --- | --- | --- |
@@ -2010,13 +1925,10 @@ Important note: this widget supports single-select only. When `multiSelect` or `
 }
 ```
 
-
-
-
 No additional core form view widgets are currently registered specifically for `selectionStatic`.
 
-
-
+</TabItem>
+</Tabs>
 
 ### `selectionDynamic`
 
@@ -2024,8 +1936,8 @@ By default, `selectionDynamic` renders as a provider-backed autocomplete in edit
 
 The default edit path uses `DefaultSelectionDynamicFormEditWidget`. The default view path uses `DefaultSelectionDynamicFormViewWidget`.
 
-
-
+<Tabs>
+<TabItem value="form-selectiondynamic-default" label="Default rendering">
 
 | Concern | How it works |
 | --- | --- |
@@ -2049,13 +1961,10 @@ The default edit path uses `DefaultSelectionDynamicFormEditWidget`. The default 
 
 </details>
 
-
-
-
 No additional core form widgets are currently registered specifically for `selectionDynamic`.
 
-
-
+</TabItem>
+</Tabs>
 
 ### `many-to-one`
 
@@ -2374,9 +2283,6 @@ The default edit path uses `DefaultMediaSingleFormEditWidget`. The default view 
 
 </details>
 
-</TabItem>
-<TabItem value="form-mediasingle-alternative" label="Alternative widgets">
-
 No additional core form widgets are currently registered specifically for `mediaSingle`.
 
 </TabItem>
@@ -2412,9 +2318,6 @@ The default edit path uses `DefaultMediaMultipleFormEditWidget`. The default vie
 ```
 
 </details>
-
-</TabItem>
-<TabItem value="form-mediamultiple-alternative" label="Alternative widgets">
 
 No additional core form widgets are currently registered specifically for `mediaMultiple`.
 
@@ -2453,9 +2356,6 @@ The default experience uses the built-in computed-field renderer for both edit a
 
 </details>
 
-</TabItem>
-<TabItem value="form-computed-alternative" label="Alternative widgets">
-
 No additional core form widgets are currently registered specifically for `computed`.
 
 </TabItem>
@@ -2489,5 +2389,5 @@ They remain important view families, but they do not currently need the same per
 
 ## See Also
 
-- [Field Metadata](./field-metadata)
-- [Model Metadata](./model-metadata)
+- [Field Metadata](/docs/developer-docs/metadata_schema/field-metadata)
+- [Model Metadata](/docs/developer-docs/metadata_schema/model-metadata)

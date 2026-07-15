@@ -1,0 +1,26 @@
+---
+title: Dashboard Providers
+icon: "layout-dashboard"
+description: Create custom dashboard providers to return the data for rendering dashboard widgets.
+summary: Overview of dashboard providers in SolidX and where to look next when building custom dashboard widget data sources.
+keywords: [backend, dashboard, providers, customization]
+solidx_concerns: [create/update_dashboard_widget]
+---
+
+Dashboard providers are responsible for fetching and returning the data and UI options that power dashboard widgets.
+
+<Callout type="info" title="Guide Status">
+  This page is currently a short reference while the full implementation guide is being expanded.
+</Callout>
+
+For the current dashboard implementation flow, start with the dashboarding guides below:
+
+- [Dashboard Metadata Authoring Guide](/docs/developer-docs/dashboarding/dashboard-metadata-authoring-guide)
+- [Build a Custom Dashboard Widget Provider](/docs/developer-docs/dashboarding/build-a-custom-dashboard-widget-provider)
+- [Frontend Dashboard Widget Extension Contract](/docs/developer-docs/dashboarding/frontend-dashboard-widget-extension-contract)
+
+If you are extending dashboard behavior from the backend side, the key implementation concerns are:
+
+- Selecting the provider contract to implement
+- Shaping the returned widget data consistently
+- Keeping provider output aligned with the frontend widget expectations

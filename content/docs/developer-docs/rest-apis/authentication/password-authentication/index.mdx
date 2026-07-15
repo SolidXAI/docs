@@ -2,18 +2,24 @@
 title: Password
 icon: "key-round"
 description: Information about password-based authentication APIs
-summary: Comprehensive documentation of SolidX password-based authentication APIs. Covers seven endpoints - Register (with environment variables for enabling registration), Authenticate (login with username and password, returns JWT tokens), Refresh Tokens (obtain new tokens using refresh token), Forgot Password (password reset flow), Change Password (for authenticated users), Get User Info (retrieve current user details), and Logout. Includes HTTP headers, request and response formats, error codes, and security considerations.
+summary: Covers register, authenticate, refresh-token, forgot-password, change-password, user-info, and logout endpoints for password-based authentication.
 ---
 
-
-
-#  Password Authentication
+## Password Authentication
 
 This section covers the password-based authentication APIs available in SolidX.
 
+<Callout type="info" title="Mental Model">
 
+Password authentication establishes a SolidX session from user credentials and then keeps that session active through access and refresh tokens.
 
-##  Implementation Overview
+- Registration creates the user account when public registration is enabled.
+- Authentication exchanges credentials for tokens.
+- Refresh, password reset, user info, and logout manage the lifecycle of that session.
+
+</Callout>
+
+## Implementation Overview
 
 SolidX provides a comprehensive password-based authentication mechanism with the following endpoints:
 
@@ -25,258 +31,303 @@ SolidX provides a comprehensive password-based authentication mechanism with the
 6. **Get User Info**
 7. **Logout**
 
+<Callout type="info" title="Token Lifecycle">
 
+The authenticate endpoint returns access and refresh tokens. Use the access token for protected API calls, and use the refresh token when the access token expires.
 
-##  1. Register
+</Callout>
+
+## 1. Register
 
 Allows users to create a new account.
 
-###  Environment Variables
+### Environment Variables
 
 - `IAM_PASSWORD_REGISTRATION_ENABLED`: Enables/disables registration.
 - `IAM_ALLOW_PUBLIC_REGISTRATION`: Allows public registration when set to `true`.
 
-###  Headers
+<Tabs defaultValue="request">
+  <TabItem value="request" label="Request">
+
+  ### Headers
 
   ```http
   Content-Type: application/json
   ```
 
-###  Request Body
+  ### Request Body
 
-```json
-{
-  "fullName": "string",
-  "username": "string",
-  "email": "[EMAIL]",
-  "password": "[PASSWORD]",
-  "mobile": "string",
-  "roles": ["string"]
-}
-```
+  ```json
+  {
+    "fullName": "string",
+    "username": "string",
+    "email": "[EMAIL]",
+    "password": "[PASSWORD]",
+    "mobile": "string",
+    "roles": ["string"]
+  }
+  ```
 
-###  Response Body
+  </TabItem>
+  <TabItem value="response" label="Response">
 
+  ### Response Body
 
-```json
-{
-  "fullName": "string",
-  "username": "string",
-  "email": "[EMAIL]",
-  "mobile": "string",
-  "forcePasswordChange": true,
-  "roles": [...],
-  "id": 0,
-  "createdAt": "...",
-  "updatedAt": "..."
-}
-```
+  ```json
+  {
+    "fullName": "string",
+    "username": "string",
+    "email": "[EMAIL]",
+    "mobile": "string",
+    "forcePasswordChange": true,
+    "roles": [...],
+    "id": 0,
+    "createdAt": "...",
+    "updatedAt": "..."
+  }
+  ```
 
-<Callout type="note" title="Note">
+  </TabItem>
+</Tabs>
+
+<Callout type="warning" title="Response Note">
 
 The response body can be optimized. It currently includes sensitive data like passwords.
 
 </Callout>
 
-
-
-##  2. Authenticate
+## 2. Authenticate
 
 Log in and receive access and refresh tokens.
 
-###  Environment Variables
+### Environment Variables
 
 - `IAM_JWT_ACCESS_TOKEN_TTL`: TTL for access tokens (default: 60 mins).
 - `IAM_JWT_REFRESH_TOKEN_TTL`: TTL for refresh tokens (default: 1 day).
 
-###  Headers
+<Tabs defaultValue="request">
+  <TabItem value="request" label="Request">
 
-```http
-Content-Type: application/json
-```
+  ### Headers
 
-###  Request Body
+  ```http
+  Content-Type: application/json
+  ```
 
-```json
-{
-  "email": "[EMAIL]",
-  "username": "[EMAIL]",
-  "password": "[PASSWORD]"
-}
-```
+  ### Request Body
 
-###  Response Body
+  ```json
+  {
+    "email": "[EMAIL]",
+    "username": "[EMAIL]",
+    "password": "[PASSWORD]"
+  }
+  ```
 
-```json
-{
-  "data": {
+  </TabItem>
+  <TabItem value="response" label="Response">
+
+  ### Response Body
+
+  ```json
+  {
+    "data": {
+      "user": {
+        "email": "[EMAIL]",
+        "username": "[EMAIL]",
+        "roles": ["Admin", "Internal User"]
+      },
+      "accessToken": "<ACCESS_TOKEN>",
+      "refreshToken": "<REFRESH_TOKEN>"
+    }
+  }
+  ```
+
+  </TabItem>
+</Tabs>
+
+## 3. Refresh Tokens
+
+Refresh the access token using a valid refresh token.
+
+<Tabs defaultValue="request">
+  <TabItem value="request" label="Request">
+
+  ### Headers
+
+  ```http
+  Content-Type: application/json
+  ```
+
+  ### Request Body
+
+  ```json
+  {
+    "refreshToken": "<REFRESH_TOKEN>"
+  }
+  ```
+
+  </TabItem>
+  <TabItem value="response" label="Response">
+
+  ### Response Body
+
+  ```json
+  {
+    "accessToken": "<NEW_ACCESS_TOKEN>",
+    "refreshToken": "<NEW_REFRESH_TOKEN>"
+  }
+  ```
+
+  </TabItem>
+</Tabs>
+
+## 4. Forgot Password
+
+Initiates and confirms password reset flow.
+
+### Environment Variables
+
+- `IAM_OTP_EXPIRY`: OTP expiry time (default: 10 mins).
+
+<Tabs defaultValue="initiate">
+  <TabItem value="initiate" label="Initiate">
+
+  ### Request
+
+  ```http
+  POST /api/iam/initiate/forgot-password
+  ```
+
+  ### Headers
+
+  ```http
+  Content-Type: application/json
+  ```
+
+  ### Request Body
+
+  ```json
+  {
+    "email": "[EMAIL]",
+    "username": "string"
+  }
+  ```
+
+  ### Response Body
+
+  ```json
+  {
+    "status": "success",
+    "message": "Password reset token sent",
+    "data": {
+      "user": {
+        "email": "[EMAIL]",
+        "username": "string"
+      }
+    }
+  }
+  ```
+
+  </TabItem>
+  <TabItem value="confirm" label="Confirm">
+
+  ### Request
+
+  ```http
+  POST /api/iam/confirm/forgot-password
+  ```
+
+  ### Request Body
+
+  ```json
+  {
+    "username": "string",
+    "email": "[EMAIL]",
+    "verificationToken": "string",
+    "password": "[NEW_PASSWORD]"
+  }
+  ```
+
+  </TabItem>
+</Tabs>
+
+## 5. Change Password
+
+<Tabs defaultValue="request">
+  <TabItem value="request" label="Request">
+
+  ### Request
+  
+  ```http
+  POST /api/iam/change-password
+  ```
+
+  ### Request Body
+
+  ```json
+  {
+    "id": 0,
+    "email": "[EMAIL]",
+    "currentPassword": "[CURRENT_PASSWORD]",
+    "newPassword": "[NEW_PASSWORD]"
+  }
+  ```
+
+  </TabItem>
+</Tabs>
+
+## 6. Get User Info
+
+Retrieve logged-in user info.
+
+<Tabs defaultValue="request">
+  <TabItem value="request" label="Request">
+
+  ```http
+  GET /api/iam/me
+  ```
+
+  ### Headers
+
+  ```http
+  Authorization: Bearer <ACCESS_TOKEN>
+  ```
+
+  </TabItem>
+  <TabItem value="response" label="Response">
+
+  ### Response Body
+
+  ```json
+  {
     "user": {
       "email": "[EMAIL]",
       "username": "[EMAIL]",
-      "roles": ["Admin", "Internal User"]
+      "roles": ["Admin"]
     },
     "accessToken": "<ACCESS_TOKEN>",
     "refreshToken": "<REFRESH_TOKEN>"
   }
-}
-```
+  ```
 
+  </TabItem>
+</Tabs>
 
-
-##  3. Refresh Tokens
-
-Refresh the access token using a valid refresh token.
-
-###  Headers
-
-```http
-Content-Type: application/json
-```
-
-###  Request Body
-
-```json
-{
-  "refreshToken": "<REFRESH_TOKEN>"
-}
-```
-
-###  Response Body
-
-```json
-{
-  "accessToken": "<NEW_ACCESS_TOKEN>",
-  "refreshToken": "<NEW_REFRESH_TOKEN>"
-}
-```
-
-
-
-##  4. Forgot Password
-
-Initiates and confirms password reset flow.
-
-###  Environment Variables
-
-- `IAM_OTP_EXPIRY`: OTP expiry time (default: 10 mins).
-
-
-###  Initiate Request
-
-```http
-POST /api/iam/initiate/forgot-password
-```
-
-
-###  Headers
-
-
-```http
-Content-Type: application/json
-```
-
-#### Request Body
-
-```json
-{
-  "email": "[EMAIL]",
-  "username": "string"
-}
-```
-
-#### Response Body
-
-```json
-{
-  "status": "success",
-  "message": "Password reset token sent",
-  "data": {
-    "user": {
-      "email": "[EMAIL]",
-      "username": "string"
-    }
-  }
-}
-```
-
-###  Confirm Request
-
-```http
-POST /api/iam/confirm/forgot-password
-```
-
-#### Request Body
-
-```json
-{
-  "username": "string",
-  "email": "[EMAIL]",
-  "verificationToken": "string",
-  "password": "[NEW_PASSWORD]"
-}
-```
-
-
-
-##  5. Change Password
-
-###  Request Body
-  
-```http
-POST /api/iam/change-password
-```
-
-#### Request Body
-
-```json
-{
-  "id": 0,
-  "email": "[EMAIL]",
-  "currentPassword": "[CURRENT_PASSWORD]",
-  "newPassword": "[NEW_PASSWORD]"
-}
-```
-
-
-
-##  6. Get User Info
-
-Retrieve logged-in user info.
-
-```http
-GET /api/iam/me
-```
-
-#### Headers
-
-```http
-Authorization: Bearer <ACCESS_TOKEN>
-```
-
-#### Response Body
-
-```json
-{
-  "user": {
-    "email": "[EMAIL]",
-    "username": "[EMAIL]",
-    "roles": ["Admin"]
-  },
-  "accessToken": "<ACCESS_TOKEN>",
-  "refreshToken": "<REFRESH_TOKEN>"
-}
-```
-
-
-
-##  7. Logout
+## 7. Logout
 
 Invalidate the current session.
 
-#### Response Body
+<Tabs defaultValue="response">
+  <TabItem value="response" label="Response">
 
-```json
-{
-  "message": "Logout successful"
-}
-```
+  ### Response Body
+
+  ```json
+  {
+    "message": "Logout successful"
+  }
+  ```
+
+  </TabItem>
+</Tabs>

@@ -1,45 +1,53 @@
 ---
 title: Code Generation
 icon: "code"
-description: Understand generated backend code in SolidX, how the CLI updates it, and the frontend conventions followed by solid-ui modules.
-summary: This page explains how SolidX code generation works across the project. It covers the generated structure in `solid-api`, how CLI commands such as `refresh-model` update generated backend code from metadata, and the conventions used in `solid-ui` for registering project-specific modules, routes, reducers, middleware, extension components, and custom pages. It is intended as the single reference page for generated structure and related conventions.
+description: Understand generated backend code in SolidX, how the CLI updates it, and the frontend conventions followed by `solid-ui` modules.
+summary: Covers generated backend structure in `solid-api`, CLI regeneration flows, and the conventions used by `solid-ui` modules for routes, reducers, middleware, and extensions.
 ---
 
-import { Box, Database, ToggleLeft, Terminal } from 'lucide-react';
+import { ToggleLeft, Terminal } from 'lucide-react';
 
-# Code Generation
+## Generated Backend and Frontend Conventions
 
 SolidX uses metadata to generate and maintain large parts of the backend application in `solid-api`.
 
-The frontend in `solid-ui` is different: it is **not** scaffolded model-by-model in the same way, but it does follow a clear set of conventions so project-specific UI modules can be discovered and registered dynamically.
+The frontend in `solid-ui` is different. It is **not** scaffolded model-by-model in the same way, but it does follow a clear set of conventions so project-specific UI modules can be discovered and registered dynamically.
 
-This page gives you the complete picture in one place:
+This page explains what SolidX generates in `solid-api`, how the CLI keeps generated backend code aligned with metadata, and how `solid-ui` should be structured so it plugs cleanly into `@solidxai/core-ui`.
 
-- what gets generated in `solid-api`,
-- how the CLI updates generated backend code,
-- and how `solid-ui` should be structured so it plugs cleanly into `@solidxai/core-ui`.
+<Callout type="info" title="Mental Model">
+
+The backend is metadata-owned scaffolding that SolidX can regenerate safely. The frontend is convention-driven and expects module-owned structure so routes, widgets, reducers, and extension code can be discovered consistently.
+
+</Callout>
 
 ## What Is Generated vs What Is Conventional?
 
-<Cards>
-  <Card icon={<Box />} title="solid-api (Generated)">
-    Metadata drives the creation and maintenance of:
-    - NestJS module wiring
-    - Controllers
-    - Services
-    - DTOs
-    - Entities
-    - Repositories
-    - Model-related layout metadata
-  </Card>
-  <Card icon={<Database />} title="solid-ui (Convention-driven)">
-    Projects follow a convention-based structure:
-    - App bootstrap lives in `src/`
-    - Feature folders define project-specific UI modules
-    - `*.ui-module.ts` files are discovered dynamically
-    - Each UI module contributes routes, Redux pieces, extension functions, and extension components
-  </Card>
-</Cards>
+<Tabs defaultValue="generated">
+  <TabItem value="generated" label="solid-api (Generated)">
+
+  Metadata drives the creation and maintenance of:
+
+  - NestJS module wiring
+  - Controllers
+  - Services
+  - DTOs
+  - Entities
+  - Repositories
+  - Model-related layout metadata
+
+  </TabItem>
+  <TabItem value="conventional" label="solid-ui (Convention-driven)">
+
+  Projects follow a convention-based structure:
+
+  - App bootstrap lives in `src/`
+  - Feature folders define project-specific UI modules
+  - `*.ui-module.ts` files are discovered dynamically
+  - Each UI module contributes routes, Redux pieces, extension functions, and extension components
+
+  </TabItem>
+</Tabs>
 
 ## solid-api Generated Structure
 
@@ -79,77 +87,85 @@ solid-api/
 │           └── fee-type.service.ts
 ```
 
-### Controller
+<Tabs defaultValue="controller">
+  <TabItem value="controller" label="Controller">
 
-Generated controllers expose the REST API surface for the model. They typically include:
+  Generated controllers expose the REST API surface for the model. They typically include:
 
-- create and bulk-create endpoints,
-- full update and partial update endpoints,
-- read endpoints for single records and filtered lists,
-- soft delete and recovery endpoints,
-- auth decorators,
-- Swagger decorators,
-- and file upload handling where required by field metadata.
+  - Create and bulk-create endpoints
+  - Full update and partial update endpoints
+  - Read endpoints for single records and filtered lists
+  - Soft delete and recovery endpoints
+  - Auth decorators
+  - Swagger decorators
+  - File upload handling where required by field metadata
 
-In practice, the controller is the generated HTTP layer for a model.
+  In practice, the controller is the generated HTTP layer for a model.
 
-### Service
+  </TabItem>
+  <TabItem value="service" label="Service">
 
-Generated services usually extend `CRUDService<T>` from `@solidxai/core`.
+  Generated services usually extend `CRUDService<T>` from `@solidxai/core`.
 
-That gives each model a metadata-aware service layer with:
+  That gives each model a metadata-aware service layer with:
 
-- standard CRUD behavior,
-- query parsing,
-- soft delete and recovery support,
-- media/file handling,
-- and integration with module/model metadata services.
+  - Standard CRUD behavior
+  - Query parsing
+  - Soft delete and recovery support
+  - Media/file handling
+  - Integration with module/model metadata services
 
-This is the generated business layer that sits between the controller and the repository.
+  This is the generated business layer that sits between the controller and the repository.
 
-### DTOs
+  </TabItem>
+  <TabItem value="dtos" label="DTOs">
 
-Each model gets a create and update DTO.
+  Each model gets a create and update DTO.
 
-- The create DTO represents the required and optional data for creation.
-- The update DTO mirrors the same fields but generally treats them as optional and includes the record `id`.
-- Validation decorators and Swagger decorators are generated from field configuration.
+  - The create DTO represents the required and optional data for creation
+  - The update DTO mirrors the same fields but generally treats them as optional and includes the record `id`
+  - Validation decorators and Swagger decorators are generated from field configuration
 
-These files are directly affected when fields are added, removed, or their types change.
+  These files are directly affected when fields are added, removed, or their types change.
 
-### Entity
+  </TabItem>
+  <TabItem value="entity" label="Entity">
 
-The generated entity maps model metadata into a TypeORM entity.
+  The generated entity maps model metadata into a TypeORM entity.
 
-This includes:
+  This includes:
 
-- column definitions,
-- relation decorators such as `@ManyToOne`,
-- nullability,
-- indexes,
-- uniqueness constraints,
-- and inherited common fields such as audit and soft-delete support.
+  - Column definitions
+  - Relation decorators such as `@ManyToOne`
+  - Nullability
+  - Indexes
+  - Uniqueness constraints
+  - Inherited common fields such as audit and soft-delete support
 
-This is the database-facing representation of the model.
+  This is the database-facing representation of the model.
 
-### Repository
+  </TabItem>
+  <TabItem value="repository" label="Repository">
 
-Generated repositories inherit from `SolidBaseRepository<T>` and provide the data-access layer for the model.
+  Generated repositories inherit from `SolidBaseRepository<T>` and provide the data-access layer for the model.
 
-They already come with:
+  They already come with:
 
-- metadata-aware TypeORM behavior,
-- security-rule aware queries,
-- request-context integration,
-- and a clean place to add project-specific query methods later.
+  - Metadata-aware TypeORM behavior
+  - Security-rule aware queries
+  - Request-context integration
+  - A clean place to add project-specific query methods later
+
+  </TabItem>
+</Tabs>
 
 ## How Field Changes Affect Generated Files
 
 One useful way to think about code generation is this:
 
-- module metadata defines the model,
-- model metadata defines the fields,
-- field changes flow into generated backend files.
+- Module metadata defines the model.
+- Model metadata defines the fields.
+- Field changes flow into generated backend files.
 
 When you add or modify a field, SolidX typically updates:
 
@@ -164,9 +180,9 @@ solid-api/src/<module>/
 
 Examples:
 
-- adding a new string field usually adds validation decorators to both DTOs and a matching column in the entity,
-- changing a field from text to number updates the DTO validation decorators and the entity column type,
-- adding a relation field changes both entity decorators and the expected DTO shape.
+- Adding a new string field usually adds validation decorators to both DTOs and a matching column in the entity.
+- Changing a field from text to number updates the DTO validation decorators and the entity column type.
+- Adding a relation field changes both entity decorators and the expected DTO shape.
 
 ## Layout Metadata Generated Alongside Models
 
@@ -174,14 +190,14 @@ Although `solid-ui` itself is not generated the same way, model generation often
 
 Typical generated layout metadata includes:
 
-- list view layout definitions,
-- form view layout definitions,
-- column/filter/search configuration,
-- and default field placement for forms.
+- List view layout definitions.
+- Form view layout definitions.
+- Column/filter/search configuration.
+- Default field placement for forms.
 
 Those layouts define how generated admin screens behave, even though the project-specific React code in `solid-ui` is maintained separately.
 
-Refer to [Layout Editor](../../../admin-docs/layouts/index.md), [List View](../../../admin-docs/layouts/list-view.md), and [Form View](../../../admin-docs/layouts/form-view.md) for the UI-side explanation of those layouts.
+Refer to [Layout Editor](/docs/admin-docs/layouts), [List View](/docs/admin-docs/layouts/list-view), and [Form View](/docs/admin-docs/layouts/form-view) for the UI-side explanation of those layouts.
 
 ## CLI Commands That Affect Generated Backend Code
 
@@ -196,11 +212,12 @@ The SolidX code builder can be triggered from the admin experience or from the C
     ```
 
     Use when:
-    - a module has been added
-    - multiple models in a module have changed
-    - fields have changed
-    - generated files have fallen out of sync with metadata
-    - or you want the safest full refresh path
+
+    - A module has been added
+    - Multiple models in a module have changed
+    - Fields have changed
+    - Generated files have fallen out of sync with metadata
+    - You want the safest full refresh path
   </Card>
   <Card icon={<Terminal />} title="generate model (Targeted Refresh)">
     Refreshes a single model and its related models.
@@ -210,13 +227,14 @@ The SolidX code builder can be triggered from the admin experience or from the C
     ```
 
     Use when:
-    - only one model has changed
-    - you want a faster refresh than regenerating the full module
-    - or you are iterating on one model repeatedly during development
+
+    - Only one model has changed
+    - You want a faster refresh than regenerating the full module
+    - You are iterating on one model repeatedly during development
   </Card>
 </Cards>
 
-For the latest command syntax and supported options, see [solidctl Reference](../../solidctl-commands.md).
+For the latest command syntax and supported options, see [solidctl Reference](/docs/developer-docs/solidctl-commands).
 
 ## How To Think About CLI Impact
 
@@ -234,13 +252,13 @@ When you need project-specific behavior, prefer extending or customizing in the 
 
 Related docs:
 
-- [Custom Repositories](../backend-customization/extending-repositories.md)
-- [Custom Services](../backend-customization/extending-services.md)
-- [Custom Controllers](../backend-customization/extending-controllers.md)
+- [Custom Repositories](/docs/developer-docs/extending/backend-customization/extending-repositories)
+- [Custom Services](/docs/developer-docs/extending/backend-customization/extending-services)
+- [Custom Controllers](/docs/developer-docs/extending/backend-customization/extending-controllers)
 
 ## solid-ui Structure and Conventions
 
-Even though SolidX does not auto-generate app-specific React modules in the same way, `solid-ui` still follows a predictable structure. Repeating this here is intentional, because understanding the backend generation story is much easier when you can also see how the frontend plugs into it.
+Even though SolidX does not auto-generate app-specific React modules in the same way, `solid-ui` still follows a predictable structure. Understanding the backend generation story is much easier when you can also see how the frontend plugs into it.
 
 ### High-Level Structure
 
@@ -273,11 +291,11 @@ This mounts the React application.
 
 This is the main application shell. It typically wires together:
 
-- the router,
-- store provider,
-- theme and layout providers,
-- application event listeners,
-- and the route tree.
+- The router.
+- Store provider.
+- Theme and layout providers.
+- Application event listeners.
+- The route tree.
 
 #### `src/AppRoutes.tsx`
 
@@ -304,12 +322,12 @@ Each project-specific frontend module typically exports a default object from a 
 
 That module can contribute:
 
-- extra routes,
-- extension components,
-- extension functions,
-- reducers,
-- middleware,
-- and any other runtime pieces expected by `@solidxai/core-ui`.
+- Extra routes.
+- Extension components.
+- Extension functions.
+- Reducers.
+- Middleware.
+- Any other runtime pieces expected by `@solidxai/core-ui`.
 
 Conceptually, a UI module is the frontend equivalent of a project feature package.
 
@@ -332,55 +350,63 @@ src/venue/
 
 ### What Belongs in Each Folder?
 
-#### `*.ui-module.ts`
+<Tabs defaultValue="module">
+  <TabItem value="module" label="*.ui-module.ts">
 
-This is the registration file for the frontend module. It usually defines:
+  This is the registration file for the frontend module. It usually defines:
 
-- module name,
-- extra routes,
-- extension components,
-- extension functions,
-- reducers,
-- and middleware.
+  - Module name
+  - Extra routes
+  - Extension components
+  - Extension functions
+  - Reducers
+  - Middleware
 
-#### `admin-layout/`
+  </TabItem>
+  <TabItem value="admin" label="admin-layout/">
 
-Use this for code that extends or customizes generated admin screens.
+  Use this for code that extends or customizes generated admin screens.
 
-Typical examples:
+  Typical examples:
 
-- custom list header actions,
-- form widgets,
-- form load handlers,
-- field change handlers,
-- model-specific admin behavior.
+  - Custom list header actions
+  - Form widgets
+  - Form load handlers
+  - Field change handlers
+  - Model-specific admin behavior
 
-#### `custom-layout/`
+  </TabItem>
+  <TabItem value="custom" label="custom-layout/">
 
-Use this for pages that are fully custom and not just tweaks to generated admin screens.
+  Use this for pages that are fully custom and not just tweaks to generated admin screens.
 
-Typical examples:
+  Typical examples:
 
-- dashboards,
-- login overrides,
-- landing pages,
-- custom home screens,
-- or business-specific workflows.
+  - Dashboards
+  - Login overrides
+  - Landing pages
+  - Custom home screens
+  - Business-specific workflows
 
-#### `redux/`
+  </TabItem>
+  <TabItem value="redux" label="redux/">
 
-Use this for RTK Query APIs and other Redux logic owned by the module.
+  Use this for RTK Query APIs and other Redux logic owned by the module.
 
-These reducers and middleware are commonly surfaced through the module registration file so the app shell can compose them into the global store.
+  These reducers and middleware are commonly surfaced through the module registration file so the app shell can compose them into the global store.
 
-#### `utils/`
+  </TabItem>
+  <TabItem value="utils" label="utils/">
 
-Use this for module-specific utilities such as:
+  Use this for module-specific utilities such as:
 
-- export helpers,
-- data-formatting helpers,
-- display helpers,
-- and small reusable module-level functions.
+  - Export helpers
+  - Data-formatting helpers
+  - Display helpers
+  - Small reusable module-level functions
+
+  </TabItem>
+</Tabs>
 
 ## Recommended Mental Model
 
@@ -388,11 +414,11 @@ The cleanest way to think about the two apps together is:
 
 - `solid-api` is metadata-driven and heavily generated,
 - `solid-ui` is convention-driven and manually extended,
-- generated layouts and APIs connect the two,
-- and project-specific customization lives in extension points around that generated core.
+- Generated layouts and APIs connect the two,
+- Project-specific customization lives in extension points around that generated core.
 
 That division is important:
 
-- backend generation gives you consistency and speed,
-- frontend module conventions give you flexibility,
-- and the shared `@solidxai/core-ui` runtime keeps the UI pluggable.
+- Backend generation gives you consistency and speed.
+- Frontend module conventions give you flexibility.
+- The shared `@solidxai/core-ui` runtime keeps the UI pluggable.

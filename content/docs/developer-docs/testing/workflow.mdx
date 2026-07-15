@@ -1,0 +1,243 @@
+---
+title: Workflow
+icon: "git-branch"
+description: End-to-end workflow for setting up SolidX for automated testing, loading data, running tests, and tearing down safely.
+summary: Describes the operational sequence for preparing a SolidX project for testing, executing scenarios, and cleaning up the environment safely.
+---
+
+<Callout type="info" title="Mental Model">
+
+The testing workflow exists to create a trustworthy system under test, not just to execute assertions.
+
+- `--setup` isolates datasources.
+- `seed` restores the metadata model the platform depends on.
+- `--load` creates users, roles, and fixture records from module metadata.
+- `test run` executes scenarios against that prepared environment.
+- `--teardown` returns the workspace to its normal state.
+
+</Callout>
+
+This page describes the end-to-end operational workflow for running automated tests in SolidX.
+
+The goal is to bring the application into **SUT mode**: a clean, isolated **system under test** with predictable metadata, predictable test data, and safe cleanup afterward.
+
+<Callout type="warning" title="Environment Safety">
+
+Always treat `--setup` and `--teardown` as a pair. Setup rewrites datasource targets for an isolated run, and teardown restores the normal local environment.
+
+</Callout>
+
+## Canonical Workflow
+
+These are the standard commands:
+
+```bash
+solidctl test data --setup
+solidctl seed
+solidctl test data --load
+solidctl test run --module <module-name>
+solidctl test data --teardown
+```
+
+<Steps>
+  <Step>
+    Create isolated test datasources with `solidctl test data --setup`.
+  </Step>
+  <Step>
+    Seed platform metadata with `solidctl seed`.
+  </Step>
+  <Step>
+    Load testing roles, users, and fixtures with `solidctl test data --load`.
+  </Step>
+  <Step>
+    Execute `testing.scenarios` with `solidctl test run`.
+  </Step>
+  <Step>
+    Tear everything down with `solidctl test data --teardown`.
+  </Step>
+</Steps>
+
+## Step 1: Test Datasource Setup
+
+```bash
+solidctl test data --setup
+```
+
+This step creates isolated test databases or schemas for the datasources configured in the project.
+
+What happens here:
+
+- A unique run name is generated.
+- `.env` is backed up.
+- Datasource database names are rewritten to test-specific names.
+- Fresh databases or schemas are created.
+- A manifest is written so teardown can reverse the process safely.
+
+This is what moves the project into SUT mode.
+
+## Step 2: Seed Metadata
+
+```bash
+solidctl seed
+```
+
+This seeds the fresh test databases with the metadata required for the platform to function.
+
+That includes:
+
+- Models.
+- Fields.
+- Views.
+- Actions.
+- Roles.
+- Permissions.
+- Users.
+- Settings.
+- Other platform metadata.
+
+Why this step matters:
+
+- Test data loading depends on model metadata being present.
+- Security and identity setup depend on seeded metadata.
+- Scenario execution assumes the metadata model already exists.
+
+## Step 3: Load Test Data
+
+```bash
+solidctl test data --load
+```
+
+This step ingests testing identity and fixture data from module metadata.
+
+In order, it:
+
+- Creates test roles from `testing.roles` and binds their permissions.
+- Creates test users from `testing.users`.
+- Loads fixture records from `testing.data` into the test databases.
+
+Key characteristics:
+
+- Data stays close to the module that owns it.
+- Loading is metadata-aware and idempotent.
+- Existing roles and users are not duplicated.
+- Record inserts behave like upserts.
+- Relations can be resolved using user-key based conventions.
+
+<Callout type="warning" title="Ordering Requirement">
+
+Run `solidctl seed` before `solidctl test data --load`.
+
+Controller permissions are registered during seeding, so role binding can fail if the platform metadata is not already present in the database.
+
+</Callout>
+
+You can also limit the load to specific modules:
+
+```bash
+solidctl test data --load --modules-to-test venue,reports
+```
+
+## Step 4: Run Test Cases
+
+```bash
+solidctl test run --module venue --api-base-url http://localhost:3000 --ui-base-url http://localhost:5173 --headless false
+```
+
+This step executes `testing.scenarios` from the selected module metadata.
+
+The runner:
+
+- Filters scenarios by ids or tags if requested.
+- Registers built-in and custom step handlers.
+- Creates adapters.
+- Runs API, UI, or mixed scenarios.
+- Reports results through the configured reporter.
+
+Useful variants:
+
+```bash
+solidctl test run --module venue --list-specs true
+solidctl test run --module venue --include-tags smoke
+solidctl test run --module venue --scenario-ids api-authenticate-success,api-create-states
+```
+
+## Step 5: Teardown
+
+```bash
+solidctl test data --teardown
+```
+
+This reverses the SUT setup process.
+
+It typically:
+
+- Restores `.env` from its backup.
+- Deletes test datasource backups and manifests.
+- Drops the test databases or schemas that were created.
+- Returns the local environment to its normal state.
+
+This step matters because it keeps local development environments clean and prevents test databases from accumulating over time.
+
+## Why This Workflow Exists
+
+SolidX testing is intentionally workflow-heavy because the platform is metadata-driven.
+
+Good automated testing is not only about running assertions. It also depends on:
+
+- Predictable metadata.
+- Clean test datasources.
+- Deterministic fixture loading.
+- Safe cleanup.
+
+The setup/load/run/teardown pattern ensures the system under test is isolated enough to be trustworthy.
+
+## Local Development vs CI
+
+<Tabs defaultValue="local">
+  <TabItem value="local" label="Local Development">
+
+  Local development usually emphasizes:
+
+  - Running tests against local API and UI servers.
+  - Inspecting UI behavior in headed browser mode.
+  - Iterating on a narrow set of scenarios.
+
+  </TabItem>
+  <TabItem value="ci" label="CI">
+
+  CI usually emphasizes:
+
+  - Deterministic setup.
+  - Full teardown.
+  - Headless browser execution.
+  - Module-scoped or tag-scoped runs.
+
+  </TabItem>
+</Tabs>
+
+## Recommended SOP
+
+For most teams, the safest operating procedure is:
+
+1. Run `solidctl test data --setup`.
+2. Run `solidctl seed`.
+3. Run `solidctl test data --load`.
+4. Start the application servers if needed.
+5. Run `solidctl test run`.
+6. Finish with `solidctl test data --teardown`.
+
+## Common Failure Modes
+
+Typical problems usually come from one of these:
+
+- Skipping `seed` before loading test data.
+- Pointing `--api-base-url` or `--ui-base-url` at the wrong server.
+- Forgetting that UI tests require a running frontend.
+- Stale `.env` values after interrupted runs.
+- Running scenarios that depend on data that was never loaded.
+
+<Callout type="info" title="Next">
+
+Continue with [Vocabulary](/docs/developer-docs/testing/vocabulary).
+
+</Callout>

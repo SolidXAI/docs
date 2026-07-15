@@ -1,36 +1,49 @@
 ---
 title: Installation
 icon: "download"
-description: Overview of how to initialize a SolidX project with links to the full step-by-step tutorial.
-summary: This document provides a quick overview of installing SolidX using `solidctl create-app`. It explains the installation flow at a high level, then shows the command used to scaffold a new project containing both `solid-api` and `solid-ui`, along with a link to a full guided tutorial.
+description: Overview of how to initialize a SolidX project with `solidctl create-app`, with links to the full step-by-step tutorial.
+summary: Explains how `solidctl create-app` initializes a SolidX workspace and links to the current setup guides.
 ---
 
-#  Installing SolidX
+## Project Bootstrap
 
-Installing `SolidX` is a breeze with our [`solidctl create-app`](https://www.npmjs.com/package/@solidxai/solidctl) workflow.  
+SolidX installation starts by bootstrapping a new project with [`solidctl create-app`](https://www.npmjs.com/package/@solidxai/solidctl).
 
 <Callout type="info" title="Mental Model">
 
-  Installing SolidX is really a <strong>project bootstrap</strong> step, not just a package installation step.
-  - <strong><code>create-app</code></strong> scaffolds a new SolidX application workspace.
-    - That workspace includes both <code>solid-api</code> and <code>solid-ui</code>.
-    - You then build the project, seed metadata, and start development from there.
-  So the intuition is: <strong>you are creating a working SolidX project skeleton</strong>, not merely adding a dependency to an existing folder.
+Installing SolidX is a project bootstrap step, not a library-install step.
+
+- `create-app` scaffolds a complete SolidX application workspace.
+- That workspace contains both `solid-api` and `solid-ui`.
+- You then build the project, seed metadata, and continue into development from there.
+
+The key point is that SolidX creates a working project skeleton, not just a dependency added to an existing folder.
 
 </Callout>
 
-##  Quick Overview
-- Run the command below to initialize your SolidX project:  
+## Bootstrap Flow
 
-  ```bash
-  solidctl create-app
-  ```
+Run the command below to initialize your SolidX project:
 
-- Answer a few simple prompts to configure your project.
-- This scaffolds a new project with both backend and frontend applications.
-- After scaffolding, the usual next steps are to build the project and seed metadata.
-- Customize SolidX to fit your needs!
+```bash
+solidctl create-app
+```
 
-##  Step-by-Step Tutorial
+<Steps>
+  <Step>
+    Run `solidctl create-app` and supply the required project, database, and runtime configuration values.
+  </Step>
+  <Step>
+    The command scaffolds both `solid-api` backend and `solid-ui` frontend inside a single SolidX workspace.
+  </Step>
+  <Step>
+    After scaffolding, start the generated project, validate the admin UI and API surfaces, and then move into application-specific modeling and extension work.
+  </Step>
+</Steps>
+
+## Step-By-Step Tutorial
+
 For complete step-by-step installation guidance, including environment setup and configuration, follow the dedicated tutorial:
--  [Bootstrap SolidX for School Fees Portal](/docs/tutorial/school-fees-portal/index.md)
+
+- [Quick Start](/docs/quick-start)
+- [Todo App with SolidX](/docs/tutorial/todo-app)
