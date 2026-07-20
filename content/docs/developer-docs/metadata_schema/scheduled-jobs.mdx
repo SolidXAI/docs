@@ -2,7 +2,7 @@
 title: Scheduled Jobs
 icon: "clock"
 description: Metadata schema for defining scheduled jobs in SolidX applications.
-summary: This document describes scheduled jobs metadata in SolidX, which enables configuration of recurring tasks such as sending notifications, cleaning up records, data synchronization, or regular maintenance. The metadata includes schedule name, active status flag, frequency specification, days of week when the job should run, the job class name to execute, and associated module reference. Examples demonstrate configuring late fee calculation jobs that run at specified intervals. The document links to detailed guides on creating and managing scheduled jobs in the backend customization section.
+summary: Covers the metadata used to define recurring jobs in SolidX, including schedule name, frequency, active state, execution class, and module association.
 json_pointer: "/scheduledJobs"
 jsonpath: "$.scheduledJobs"
 parent_component: root
@@ -21,13 +21,15 @@ solidx_concerns: [add_scheduled_job]
 </Callout>
 
 ## Overview
-Scheduled jobs in SolidX allow you to run recurring tasks such as sending notifications, cleaning up records, syncing data, or performing regular maintenance.
+Scheduled jobs in SolidX let you run recurring background tasks such as sending notifications, cleaning up records, syncing data, or performing regular maintenance.
 
-For a guide on how to create and manage scheduled jobs in SolidX, refer to the [Creating Scheduled Jobs](/docs/developer-docs/extending/backend-customization/scheduled-jobs).
+Use this metadata to register the job class, define execution frequency, and control when the job is allowed to run. For a guide on how to create and manage scheduled jobs in SolidX, refer to the [Creating Scheduled Jobs](/docs/developer-docs/extending/backend-customization/scheduled-jobs).
 
 ## Example: Scheduled Jobs Metadata
+This example configures a scheduled job for late fee calculation.
 
-<summary> Scheduled Jobs Schema </summary>
+<details open>
+<summary>Scheduled jobs schema example</summary>
 
 ``` json
 {
@@ -43,6 +45,7 @@ For a guide on how to create and manage scheduled jobs in SolidX, refer to the [
   ]
 }
 ```
+</details>
 
 ## Scheduled Jobs Metadata Attributes
 
@@ -102,12 +105,12 @@ The exact class name of the job implementation to execute (case-sensitive). This
 
 **Example:** `"LateFeeCalculatorJob"`
 
-### `dayOfWeek` *(string, mandatory for Weekly frequency)*
-Days of the week on which the job should run (applicable for weekly frequency). This should be a JSON array of day names. Please ensure that the value is a valid JSON array string in stringified format.
+### `dayOfWeek` *(string, required for `Weekly` frequency)*
+Days of the week on which the job should run. This value should be provided as a JSON array of day names in stringified format.
 
 **Example:** `["Monday", "Wednesday", "Friday"]`  
 **Applies to:** `Weekly` frequency
-Currently the configuration expects json configuration in stringified format.
+Currently this configuration expects a stringified JSON array.
 
 ### `dayOfMonth` *(number \| null, optional)*
 Day of the month on which the job should run. Only enforced when `frequency` is `"Monthly"`.

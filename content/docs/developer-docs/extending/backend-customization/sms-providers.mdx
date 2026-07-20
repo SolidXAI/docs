@@ -2,11 +2,10 @@
 title: SMS Providers
 icon: "smartphone"
 description: Learn how to create and configure custom SMS providers in SolidX.
-summary: Overview of the built-in SMS providers shipped with SolidX (Twilio, Msg91 transactional, Msg91 OTP) and how to implement a custom SMS provider using the ISMS interface.
+summary: Covers the built-in SMS providers shipped with SolidX and the implementation model for custom providers using the `ISMS` interface.
 keywords: [backend, sms providers, customization]
 solidx_concerns: [new_sms_provider]
 ---
-
 
 
 ## Overview
@@ -15,7 +14,7 @@ SolidX ships with three built-in SMS providers: **TwilioSMSService**, **Msg91SMS
 
 If you prefer a different provider, SolidX exposes **clean abstractions** so you can implement your own without coupling business logic to a specific vendor.
 
-<Callout type="note" title="Note">
+<Callout type="info" title="Note">
 
 While you can store SMS templates in SolidX, most providers (including Msg91) require you to **register and pre‑approve** transactional templates on their platform before you can use them.
 
@@ -23,7 +22,7 @@ While you can store SMS templates in SolidX, most providers (including Msg91) re
 
 ---
 
-## 📦 Default SMS Providers
+## Default SMS Providers
 
 SolidX includes three providers out of the box. Each is decorated with `@SmsProvider()`, which registers it for auto-discovery by `SmsServiceFactory`.
 
@@ -40,8 +39,8 @@ SolidX includes three providers out of the box. Each is decorated with `@SmsProv
 Sends SMS via the [Twilio](https://www.twilio.com/) SDK. It is the only built-in provider that supports **plain text messages** via `sendSMS()` in addition to template-based messages.
 
 **Supports:**
-- `sendSMS()` - sends a raw text body directly
-- `sendSMSUsingTemplate()` - renders a Handlebars template and sends the result
+- `sendSMS()` - Sends a raw text body directly
+- `sendSMSUsingTemplate()` - Renders a Handlebars template and sends the result
 - Comma-separated recipients in the `to` field
 - Synchronous and queued async delivery
 
@@ -82,7 +81,7 @@ export class NotificationService {
 
 Sends transactional SMS via [Msg91's](https://msg91.com/) `/flow` API endpoint.
 
-<Callout type="caution" title="Caution">
+<Callout type="warning" title="Caution">
 
 `sendSMS()` is **not supported** - calling it throws an error. You must use `sendSMSUsingTemplate()` with a template that has a `smsProviderTemplateId` matching a pre-approved Msg91 template.
 
@@ -118,7 +117,7 @@ export class OrderService {
 }
 ```
 
-<Callout type="note" title="Note">
+<Callout type="info" title="Note">
 
 The template named `"order-confirmation"` must exist in SolidX and its `smsProviderTemplateId` must match a pre-approved template on the Msg91 platform.
 
@@ -130,7 +129,7 @@ The template named `"order-confirmation"` must exist in SolidX and its `smsProvi
 
 Sends OTP SMS via [Msg91's](https://msg91.com/) dedicated `/otp` endpoint. Intended for one-time password delivery flows.
 
-<Callout type="caution" title="Caution">
+<Callout type="warning" title="Caution">
 
 `sendSMS()` is **not supported** - calling it throws an error. You must use `sendSMSUsingTemplate()` with a template that includes an `otp` parameter and a valid `smsProviderTemplateId`.
 
@@ -170,7 +169,7 @@ export class AuthService {
 
 ---
 
-## ⚙️ Steps to Create a Custom SMS Provider
+## Steps to Create a Custom SMS Provider
 
 ### 1) Implement a Custom SMS Service
 
@@ -277,7 +276,7 @@ export class CustomSMSService implements ISMS {
   }
 
   async sendSMSSynchronously(message: QueueMessage<any>): Promise<any> {
-    // 🧩 TODO: Add your custom SMS provider integration here.
+    // Add your custom SMS provider integration here.
     // e.g., call Twilio/Nexmo/your in‑house gateway API.
     this.logger.log(
       `Sending SMS synchronously to ${message.payload.to} using custom provider...`
@@ -354,7 +353,7 @@ export class SomeService {
 
 ---
 
-## 🧠 Interface Definition
+## Interface Definition
 
 Your custom service must implement the `ISMS` interface:
 
@@ -377,13 +376,13 @@ export interface ISMS {
 
 ---
 
-## ✅ Summary
+## Summary
 
 | Step | What you do |
 |---|---|
-| 1️⃣ | Implement `CustomSMSService` (implements `ISMS`, decorated with `@SmsProvider()`) |
-| 2️⃣ | Register it in your module |
-| 3️⃣ | Use `SmsServiceFactory` to send template-based SMS |
+| 1 | Implement `CustomSMSService` (implements `ISMS`, decorated with `@SmsProvider()`) |
+| 2 | Register it in your module |
+| 3 | Use `SmsServiceFactory` to send template-based SMS |
 
 <Callout type="info">
 

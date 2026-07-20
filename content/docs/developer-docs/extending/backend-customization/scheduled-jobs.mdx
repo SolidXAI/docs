@@ -1,16 +1,13 @@
 ---
 title: Scheduled Jobs
 icon: "clock"
-description: Learn how to write the scheduled jobs in your SolidX application.
-summary: Explains creating scheduled jobs in SolidX for recurring tasks like notifications, cleanup, syncing, or maintenance. Covers implementing `IScheduledJob` interface with `@ScheduledJobProvider()` decorator, registering job services in modules, defining job metadata with schedule name, frequency, days of week, job class name, and module reference. Includes examples like `HelloWorldJobService` and late fee calculation jobs.
+description: Learn how to create scheduled jobs in your SolidX application.
+summary: Covers `IScheduledJob` implementation, job-provider registration, module wiring, and the metadata required to schedule recurring backend work.
 keywords: [backend, scheduled jobs, customization]
 solidx_concerns: [backend.scheduled_jobs, add_scheduled_job]
 ---
 
-
-
-
-#  Creating Scheduled Jobs
+## Creating Scheduled Jobs
 
 Scheduled jobs in SolidX allow you to run recurring tasks such as sending notifications, cleaning up records, syncing data, or performing regular maintenance.
 
@@ -22,11 +19,7 @@ For the full metadata schema reference, see [Scheduled Jobs Metadata](/docs/deve
 
 </Callout>
 
-<h4>
-  
-
-##  Adding a New Scheduled Job
-</h4>
+## Adding a New Scheduled Job
 
 Follow these steps to define and use a custom scheduled job:
 
@@ -182,20 +175,32 @@ When the built-in frequencies aren't precise enough, set `frequency` to `"Custom
 - If the expression is invalid or missing, the platform logs an error and falls back to a 24-hour interval.
 
 
-  Use a tool like <a href="https://crontab.guru" target="_blank">crontab.guru</a> to build and validate your cron expressions before adding them to metadata.
+Use a tool like [crontab.guru](https://crontab.guru) to build and validate your cron expressions before adding them to metadata.
 
 
 ---
 
 ## How It Works
 
-The SolidX scheduler runs an internal polling loop every minute (powered by `@Cron(CronExpression.EVERY_MINUTE)` under the hood). On each tick it:
+The SolidX scheduler runs an internal polling loop every minute, powered by `@Cron(CronExpression.EVERY_MINUTE)` under the hood. On each tick it:
 
-1. **Fetches due jobs** - queries all active jobs where `nextRunAt ≤ now` or `nextRunAt` is null (newly created jobs that haven't run yet).
-2. **Applies scheduling gates** - each job is checked against `startDate`/`endDate` (date range), `startTime`/`endTime` (time-of-day window), `dayOfWeek` (for Weekly), and `dayOfMonth` (for Monthly) before being allowed to execute.
-3. **Guards against overlap** - if a job is still running from a previous tick it is skipped, preventing concurrent duplicate executions.
-4. **Dispatches execution** - the job's `execute(job)` method is called with the full `ScheduledJob` entity, giving the handler access to all metadata.
-5. **Updates tracking fields** - after a successful run, `lastRunAt` is stamped and `nextRunAt` is computed based on the configured frequency, so the scheduler knows exactly when to pick it up next.
+<Steps>
+  <Step>
+    **Fetches due jobs** - queries all active jobs where `nextRunAt ≤ now` or `nextRunAt` is null, for newly created jobs that have not run yet.
+  </Step>
+  <Step>
+    **Applies scheduling gates** - checks each job against `startDate`/`endDate` (date range), `startTime`/`endTime` (time-of-day window), `dayOfWeek` (for Weekly), and `dayOfMonth` (for Monthly) before allowing it to execute.
+  </Step>
+  <Step>
+    **Guards against overlap** - skips the job if it is still running from a previous tick, preventing concurrent duplicate executions.
+  </Step>
+  <Step>
+    **Dispatches execution** - calls the job's `execute(job)` method with the full `ScheduledJob` entity, giving the handler access to all metadata.
+  </Step>
+  <Step>
+    **Updates tracking fields** - stamps `lastRunAt` after a successful run and computes `nextRunAt` based on the configured frequency, so the scheduler knows exactly when to pick it up next.
+  </Step>
+</Steps>
 
 ### Environment Control
 

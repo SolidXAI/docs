@@ -2,7 +2,7 @@
 title: Storage Providers
 icon: "hard-drive"
 description: Metadata schema for defining media storage providers in SolidX applications.
-summary: This document explains media storage provider metadata in SolidX, which supports multiple storage options for media files including local filesystem and AWS S3. The metadata includes provider name and type attributes. Default providers (default-filesystem and default-aws-s3) are automatically seeded and don't require explicit JSON configuration. For AWS S3, sensitive credentials (access key, secret key) must be provided via environment variables rather than in JSON for security. The document references the admin documentation for conceptual understanding and provides configuration examples for different storage provider types.
+summary: Covers the metadata used to define media storage providers in SolidX, including local filesystem and AWS S3-backed configurations.
 json_pointer: "/mediaStorageProviders"
 jsonpath: "$.mediaStorageProviders"
 parent_component: root
@@ -12,10 +12,6 @@ items_attributes_doc: "#media-storage-providers-metadata-attributes"
 solidx_concerns: []
 ---
 
-
-
-
-# Media Storage
 <Callout type="info" title="Where it lives">
 
 **JSON Pointer:** `/mediaStorageProviders`
@@ -25,11 +21,15 @@ solidx_concerns: []
 </Callout>
 
 ## Overview
-SOLID supports multiple storage providers for media files, offering flexibility in how and where your media assets are stored.
-For a conceptual overview of media storage providers in SolidX, refer to the [Storage Providers](../../admin-docs/media-library/storage-providers.md).
+SolidX supports multiple storage providers for media files, giving you flexibility in how and where uploaded assets are stored.
+
+This section is used to register storage backends such as the local filesystem or AWS S3. For admin-side authoring workflows, refer to the [Storage Providers](/docs/admin-docs/media-library/storage-providers).
 
 ## Example: Media Storage Providers Metadata
-<summary> Media Storage Providers Schema </summary>
+This example shows two common storage providers: a local filesystem provider and an AWS S3 provider.
+
+<details open>
+<summary>Media storage providers schema example</summary>
 
 ``` json
 {
@@ -47,10 +47,9 @@ For a conceptual overview of media storage providers in SolidX, refer to the [St
 }
 
 ```
+</details>
 
-
-For the media storage provider `default-aws-s3`, you need to provide the following environment variables in your `.env` file or deployment environment:
-<br/>
+For the `default-aws-s3` provider, supply the following environment variables in `.env` or in the deployment environment:
 
 ```bash
 S3_AWS_ACCESS_KEY=<YOUR_ACCESS_KEY>    # Only in env, not JSON (for security)

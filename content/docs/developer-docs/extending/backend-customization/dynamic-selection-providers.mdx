@@ -2,14 +2,12 @@
 title: Dynamic Dropdowns
 icon: "list-filter"
 description: Learn how to create dynamic selection providers to customize the selection options in your application.
-summary: Explains creating dynamic selection providers for runtime option fetching from databases or APIs, replacing static lists. Covers field metadata configuration with `selectionDynamicProvider` and `selectionDynamicProviderCtxt`, implementing `ISelectionProvider` interface with `values()` method, provider registration, context handling, multi-select support, and examples like `StockApiSelectionProvider` for live exchange data. Highlights built-in `ListOfValuesSelectionProvider` for database queries.
+summary: Covers provider-backed runtime option resolution, field metadata wiring, `ISelectionProvider` implementation, provider context, and registration.
 keywords: [backend, dynamic selection, providers, customization]
 solidx_concerns: [backend.custom_dynamic_selection_providers, dynamic_selection_provider]
 ---
 
-
-
-# Dynamic Selection Providers
+## Overview
 
 Dynamic selection providers let you **fetch options at runtime**, rather than relying on static lists.  
 They are useful when options need to come from a database, an API, or some logic that changes based on context.  
@@ -24,10 +22,7 @@ Here’s an example field configuration using a custom provider named `StockApiS
 The `selectionDynamicProviderCtxt` specifies which fields from the API response should be used as labels and values.
 
 <details open>
- <summary>
-    
-    Example Configuration
-</summary>
+ <summary>Example Configuration</summary>
 
 ```json
 {
@@ -55,29 +50,21 @@ The `selectionDynamicProviderCtxt` specifies which fields from the API response 
 
 
 <Callout type="info" title="Tip">
-  - SolidX ships with built-in providers for common use cases - see [Built-in Selection Providers](../reference/built-in-selection-providers) for details on **`ListOfValuesSelectionProvider`** and **`PseudoForeignKeySelectionProvider`**.
-- Create a **custom provider** when the logic for fetching or filtering is more complex, or when data comes from an external source like an API.
+  - SolidX ships with built-in providers for common use cases - see [Built-in Selection Providers](/docs/developer-docs/extending/reference/built-in-selection-providers) for details on **`ListOfValuesSelectionProvider`** and **`PseudoForeignKeySelectionProvider`**.
+  - Create a **custom provider** when the logic for fetching or filtering is more complex, or when data comes from an external source like an API.
 </Callout>
-
-
----
 
 ## 2. Creating the Provider
 
 Your provider class must implement the `ISelectionProvider` interface.  
 The most important method is `values()`, which fetches and returns the available options.
 
-
+<Callout type="note" title="Deprecated Method">
   The <code>value()</code> method is deprecated. It can simply throw a <code>NotImplementedException</code> and is kept only for backward compatibility.
-
-
-<br/>
+</Callout>
 
 <details open>
- <summary>
-    
-    Example: <code>StockApiSelectionProvider</code>
-</summary>
+ <summary>Example: <code>StockApiSelectionProvider</code></summary>
 
 ```ts
 import { Injectable, Logger } from "@nestjs/common";
@@ -152,8 +139,6 @@ export class StockApiSelectionProvider
 ```
 </details>
 
----
-
 ## 3. Registering the Provider
 
 Since providers are standard NestJS providers, register them in the module where they should be available.
@@ -167,17 +152,12 @@ Since providers are standard NestJS providers, register them in the module where
 })
 ```
 
----
-
 ## 4. Interfaces
 
 Below are the core interfaces used when implementing a dynamic selection provider.
 
 <details open>
- <summary>
-    
-    <code>ISelectionProvider</code> Interface
-</summary>
+ <summary><code>ISelectionProvider</code> Interface</summary>
 
 ```ts
 export interface ISelectionProvider<T extends ISelectionProviderContext> {

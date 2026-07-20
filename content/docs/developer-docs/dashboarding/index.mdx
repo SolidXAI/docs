@@ -1,44 +1,59 @@
 ---
-title: Intro
+title: Dashboarding
 icon: "layout-dashboard"
 description: Build metadata-driven dashboards in SolidX using backend data providers, frontend widget extensions, and user-specific layouts.
-summary: This section explains the complete SolidX dashboarding architecture, including metadata authoring, provider registration, runtime APIs, widget rendering contracts, Gridstack layout persistence, and practical templates for creating new widgets end to end.
+summary: Covers dashboard metadata, backend widget providers, frontend widget registration, layout persistence, and implementation patterns for dashboard features.
 sidebar_position: 2.6
 ---
 
-SolidX dashboarding is a **metadata-driven framework capability** for building operational and analytical dashboard experiences without hard-coding each screen.
+import { Database, ServerCog, PanelsTopLeft, FileCode2 } from 'lucide-react';
 
-It is designed around four principles:
+## Dashboard Overview
 
-- metadata-first dashboard definitions,
-- backend provider-driven data resolution,
-- frontend extension-driven widget rendering,
-- and per-user layout personalization.
+SolidX dashboarding is a metadata-driven system for building operational and analytical dashboards without hard-coding each screen.
 
-The queue health reference dashboard also includes a canonical custom widget example, `QueueSlaHeatmapWidget`, which demonstrates the intended model:
-- backend data providers remain mandatory,
-- custom frontend rendering stays optional,
-- and explicit widget overrides are only introduced when the default framework widget set is not enough.
+The dashboarding model is organized around four layers:
+
+- Metadata-defined dashboard composition.
+- Backend provider-driven data resolution.
+- Frontend extension-driven widget rendering.
+- Per-user layout personalization.
+
+The queue health reference dashboard also includes a representative custom widget example, `QueueSlaHeatmapWidget`, which shows the intended model:
+- Backend data providers remain mandatory.
+- Custom frontend rendering stays optional.
+- Explicit widget overrides are only introduced when the default framework widget set is not enough.
 
 <Callout type="info" title="Mental Model">
 
-Think of a SolidX dashboard as a composition of four layers:
-- <strong>metadata</strong> defines the dashboard, variables, widgets, and default layout,
-- <strong>backend providers</strong> resolve the actual widget data,
-- <strong>frontend widgets</strong> decide how that data is rendered,
-- and <strong>user layout persistence</strong> personalizes the arrangement without changing the dashboard definition itself.
+SolidX dashboarding is composed of four layers:
+- Metadata defines the dashboard, variables, widgets, and default layout.
+- Backend providers resolve widget data at runtime.
+- Frontend widgets determine the rendering contract.
+- User layout persistence personalizes arrangement without mutating the dashboard definition itself.
 
 </Callout>
 
+## Dashboard Capabilities
+
+<Cards>
+  <Card icon={<Database />} title="Dashboard Metadata" href="/docs/developer-docs/dashboarding/dashboard-metadata-authoring-guide">
+    Define dashboards, variables, widgets, layout items, and navigation metadata from the platform side.
+  </Card>
+  <Card icon={<ServerCog />} title="Widget Data Provider" href="/docs/developer-docs/dashboarding/build-a-custom-dashboard-widget-provider">
+    Implement and register backend providers that resolve the runtime data required by each widget.
+  </Card>
+  <Card icon={<PanelsTopLeft />} title="Widget UI" href="/docs/developer-docs/dashboarding/frontend-dashboard-widget-extension-contract">
+    Understand the frontend rendering contract and when custom widget components are necessary.
+  </Card>
+  <Card icon={<FileCode2 />} title="Implementation Templates" href="/docs/developer-docs/dashboarding/agent-ready-templates">
+    Use the templates as implementation starting points for dashboard-related backend and frontend work.
+  </Card>
+</Cards>
+
 ## Sample Dashboard
 
-![Dashboard Architecture Placeholder](/img/dashboarding/dashboard-architecture-overview.png)
-
-## Pages
-
-- [Metadata Schema](./dashboard-metadata-authoring-guide.mdx): how to define dashboards, variables, widgets, layouts, and navigation metadata.
-- [Widget Data Provider](./build-a-custom-dashboard-widget-provider.mdx): how backend providers are implemented, registered, and bound to widgets.
-- [Widget UI](./frontend-dashboard-widget-extension-contract.mdx): how default rendering works and how custom widget components are introduced when needed.
+![Dashboard architecture overview](/img/dashboarding/dashboard-architecture-overview.png)
 
 <Callout type="info" title="Source of Truth">
 

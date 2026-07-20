@@ -2,77 +2,75 @@
 title: Recover
 icon: "rotate-ccw"
 description: Information about the recover endpoint of the REST API, including usage, parameters, and responses
-summary: This document explains the recover endpoints in SolidX's REST API, which allow restoration of soft-deleted records. It covers both single record recovery (by ID) and bulk recovery (using an array of IDs) operations. The documentation provides complete examples including HTTP headers, request formats, and sample responses. It also notes a known issue where the response may still contain deletedAt and deletedTracker fields even though the record is successfully recovered in the database, which is expected to be fixed in future releases.
+summary: Covers single-record and bulk recovery endpoints, request format, responses, and current behavior for restoring soft-deleted records.
 ---
 
+## Recover Soft-Deleted Records
 
-#  Recover Endpoint
-
-##  Overview
 The recover endpoint allows you to restore one or more records that have been soft-deleted in your application.
 
 This documentation includes usage examples for:
-- Recovering a single record by ID
-- Recovering records in bulk
+- Recovering a single record by ID.
+- Recovering records in bulk.
+
+<Callout type="info" title="Mental Model">
+
+Recover endpoints are the companion to soft delete. They restore records that are no longer visible in active query results but still exist in the database.
+
+</Callout>
 
 
 
-##  Recover a Single Record
+## Recover a Single Record
 
-<h3 className=" ">
-    
+<Tabs defaultValue="request">
+  <TabItem value="request" label="Request">
 
-###  Headers
-</h3>
+  ### Headers
 
-```http
-Content-Type: application/json
-Authorization: Bearer <token>
-```
+  ```http
+  Content-Type: application/json
+  Authorization: Bearer <token>
+  ```
 
+  ### Sample Request
 
- <h3 className=" ">
-    
+  ```http
+  POST /api/fee-type/recover/{id}
+  ```
 
-###  Sample Request
-  </h3>
+  </TabItem>
+  <TabItem value="response" label="Response">
 
+  ### Sample Response
 
-```http
-POST /api/fee-type/recover/{id}
-```
-
-
- <h3 className=" ">
-    
-
-###  Sample Response
-  </h3>
-
-```json
-{
-  "statusCode": 200,
-  "message": [],
-  "error": "",
-  "data": {
-    "message": "Record successfully recovered",
+  ```json
+  {
+    "statusCode": 200,
+    "message": [],
+    "error": "",
     "data": {
-      "partPaymentAllowed": true,
-      "id": 3,
-      "createdAt": "2025-08-06T23:30:10.185Z",
-      "updatedAt": "2025-08-07T00:06:18.418Z",
-      "deletedAt": "2025-08-07T00:06:18.378Z",
-      "deletedTracker": "Thu Aug 07 2025 11:06:18 GMT+0530 (India Standard Time)",
-      "publishedAt": null,
-      "localeName": null,
-      "defaultEntityLocaleId": null,
-      "feeType": "tuition",
-      "latePaymentFeesType": null,
-      "latePaymentFees": null
+      "message": "Record successfully recovered",
+      "data": {
+        "partPaymentAllowed": true,
+        "id": 3,
+        "createdAt": "2025-08-06T23:30:10.185Z",
+        "updatedAt": "2025-08-07T00:06:18.418Z",
+        "deletedAt": "2025-08-07T00:06:18.378Z",
+        "deletedTracker": "Thu Aug 07 2025 11:06:18 GMT+0530 (India Standard Time)",
+        "publishedAt": null,
+        "localeName": null,
+        "defaultEntityLocaleId": null,
+        "feeType": "tuition",
+        "latePaymentFeesType": null,
+        "latePaymentFees": null
+      }
     }
   }
-}
-```
+  ```
+
+  </TabItem>
+</Tabs>
 
 <Callout type="warning" title="Known Issue">
 
@@ -80,54 +78,42 @@ Although the record is successfully recovered in the database, the response may 
 
 </Callout>
 
+## Bulk Recovery of Records
 
+<Tabs defaultValue="request">
+  <TabItem value="request" label="Request">
 
-##  Bulk Recovery of Records
+  ### Headers
 
-<h3 className=" ">
-    
+  ```http
+  Content-Type: application/json
+  Authorization: Bearer <token>
+  ```
 
-###  Headers
-</h3>
+  ### Sample Request
 
-```http
-Content-Type: application/json
-Authorization: Bearer <token>
-```
+  ```http
+  POST /api/fee-type/recover/bulk
+  ```
 
- <h3 className=" ">
-    
+  ### Sample Body
 
-###  Sample Request
-  </h3>
+  ```jsonc
+  [1, 2, 3]  // Array of record IDs to recover
+  ```
 
-```http
-POST /api/fee-type/recover/bulk
-```
+  </TabItem>
+  <TabItem value="response" label="Response">
 
- <h3 className=" ">
-    
+  ### Sample Response
 
-###  Sample Body
-  </h3>
-
-```json
-[1, 2, 3]  // Array of record IDs to recover
-```
-
- <h3 className=" ">
-    
-
-###  Sample Response
-  </h3>
-
-```json
-{
-  "statusCode": 200,
-  "message": ["3 records successfully recovered"],
-  "error": "",
-  "data": [
-    {
+  ```jsonc
+  {
+    "statusCode": 200,
+    "message": ["3 records successfully recovered"],
+    "error": "",
+    "data": [
+      {
         "message": "Record successfully recovered",
         "data": {
           "partPaymentAllowed": true,
@@ -143,11 +129,14 @@ POST /api/fee-type/recover/bulk
           "latePaymentFeesType": null,
           "latePaymentFees": null
         }
-    },
-    ...,
-  ]
-}
-```
+      }
+      // ...
+    ]
+  }
+  ```
+
+  </TabItem>
+</Tabs>
 
 
 <Callout type="warning" title="Known Issue">

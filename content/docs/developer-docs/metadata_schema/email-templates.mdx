@@ -2,7 +2,7 @@
 title: Email
 icon: "mail"
 description: Metadata schema for populating email templates in SolidX applications.
-summary: This document explains email template metadata in SolidX, which enables creation and management of HTML/text-based email templates with dynamic content and attachments. Templates use Handlebars syntax for variable insertion and are stored in separate HTML files referenced by the metadata. Key attributes include template name, display name, body file reference, subject line, description, active status, and template type (text/html). Examples demonstrate configuring templates for payment reminders and OTP verification, including sample HTML template files with dynamic variables, styling, and layout structures. The system supports template file organization in the solid-api/src directory.
+summary: Covers the metadata used to define email templates in SolidX, including body-file references, subject lines, activation flags, and template types.
 json_pointer: "/emailTemplates"
 jsonpath: "$.emailTemplates"
 parent_component: root
@@ -12,7 +12,6 @@ items_attributes_doc: "#email-templates-metadata-attributes"
 solidx_concerns: [create/update_email_template, new_email_provider]
 ---
 
-# Email Templates
 <Callout type="info" title="Where it lives">
 
 **JSON Pointer:** `/emailTemplates`
@@ -22,10 +21,12 @@ solidx_concerns: [create/update_email_template, new_email_provider]
 </Callout>
 
 ## Overview
-Email Templates in `SolidX` allow you to create and manage HTML/Text based email templates with dynamic content and attachments.
+Email templates in SolidX let you define and manage HTML or plain-text email templates used by the platform. Each template record includes the template name, display name, body file, subject line, activation state, and template type.
+
+The body content is stored in a separate template file referenced by the `body` field. These files can include Handlebars placeholders so runtime data can be injected when the email is sent.
 
 ### Example: Email Templates Metadata
-Below is an example configuration for two email templates: one for sending payment reminders and another for OTP verification. The body of the email templates is stored in separate HTML files i.e (specified in the `body` attribute)
+This example defines two email templates: one for payment reminders and one for OTP verification. In both cases, the `body` field points to a separate template file.
 
 <details>
 <summary>Email Templates Schema</summary>
@@ -57,7 +58,7 @@ Below is an example configuration for two email templates: one for sending payme
 ```
 </details>
 
-### Example : Email Template File
+### Example: Email Template File
 
 Below are examples of email template files that can be referenced in the `body` attribute of the email template metadata.
 
@@ -166,7 +167,7 @@ The variables used in this template (like `{{student.studentName}}`, `{{dueDetai
 ```
 </details>
 <details>
- <summary>Email Template File (Text)</summary>
+ <summary>Text email template example</summary>
 
 ```tsx
 Hi {{ fullName }},
@@ -187,7 +188,7 @@ The {{ solidAppName }} Team
 ```
 </details>
 
-### Example : Sending Email Using Template
+### Example: Sending Email Using a Template
 
 Below is a code snippet demonstrating how to send an email using the defined email templates via the `MailServiceFactory`. This example shows how to send an OTP verification email to a user.
 
@@ -237,11 +238,14 @@ Unique name for the email template. It should be in kebab-case format (e.g., `ex
 Display name for the email template.
 
 ### `body` *(string, required)*
-    - In the metadata json, the filename of the email template is specified. The templates are searched for in the `module-metadata/<module-name>/email-templates/` directory of the module.
-    - The body is then replaced with the content of the email template file. This can include HTML or plain text content. The body can include dynamic placeholders using Handlebars syntax (e.g., `{{placeholderName}}`), as shown in the [Email Template file](#example--email-template-file) above.
 
-####  Further Reference
- -  **Email Body Creation:** [Email Templates Guide](../../admin-docs/notifications/email-templates.md)
+- In metadata JSON, `body` holds the template filename.
+- SolidX resolves that file from `module-metadata/<module-name>/email-templates/`.
+- The file content can be HTML or plain text and can include Handlebars placeholders such as `{{placeholderName}}`.
+
+#### Further Reference
+
+- **Email Body Creation:** [Email Templates Guide](/docs/admin-docs/notifications/email-templates)
 
 <Callout type="info">
   Please refer to the [Handlebars Documentation](https://handlebarsjs.com/) for more information on using Handlebars syntax in email templates.

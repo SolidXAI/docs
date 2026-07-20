@@ -1,13 +1,13 @@
 ---
 title: CRUD Service
 icon: "database"
-description: Learn how to create and customize CRUD services in your application.
+description: Reference for creating and customizing CRUD services in SolidX.
 summary: Guide to creating and customizing CRUD services in SolidX applications for managing data layer operations, including methods for create, read, update, and delete functionality with business logic integration.
 keywords: [backend, services, CRUD, customization]
 solidx_concerns: [backend.service_changes, using_crud_service_method, add_custom_service_method]
 ---
 
-# CRUD Service - Usage & Extension Guide
+## Overview
 
 The **CRUD Service** is the backbone of data management in **SolidX**. It standardizes Create, Read, Update, and Delete operations for any model and adds niceties like permission checks, field-level validation/transformations, media handling, and soft-delete recovery.
 
@@ -18,8 +18,6 @@ This document explains how to **extend** the `CRUDService<T>` for your models an
 The generated service classes for SolidX models already extend the CRUD service. You can also extend it manually for your own modules.
 
 </Callout>
-
----
 
 ## What You Get Out‑of‑the‑Box
 
@@ -39,8 +37,6 @@ The generated service classes for SolidX models already extend the CRUD service.
 - **Computed fields** & **relations** handled consistently  
 - **Soft delete** & **recovery** flows supported  
 - **Permission checks** via `CrudHelperService`
-
----
 
 ## Extending the CRUD Service
 
@@ -90,8 +86,6 @@ Any subclass automatically inherits all CRUD methods and can call `this.repo`, `
 
 </Callout>
 
----
-
 ## DTOs You’ll Use When Reading
 
 **What this shows:** The shape of pagination & filtering DTOs your **clients** pass to `find`/`findOne`. You can extend or narrow these DTOs in your own app, but the base service already understands them via `CrudHelperService`.
@@ -126,8 +120,6 @@ locale?: string;
 status?: string; // publish | draft (when draft/publish workflow is enabled)
 ```
 </details>
-
----
 
 ## Permissions & Context
 
@@ -170,11 +162,12 @@ export interface ActiveUserData {
 ```
 </details>
 
----
-
-## CrudService API (with Examples )
+## CrudService API (with Examples)
 
 Below are **explained** examples for each method. Read the **explanation** first, then expand the **closeable** snippet.
+
+<Tabs defaultValue="single-write">
+  <TabItem value="single-write" label="Single-Record Writes">
 
 ### 1) `create(createDto, files?, context?)`
 
@@ -237,8 +230,8 @@ await personService.update(
 await personService.delete(12 /*, context? */);
 ```
 </details>
-
----
+  </TabItem>
+  <TabItem value="querying" label="Querying">
 
 ### 4) `find(filterDto, context?)`
 
@@ -246,7 +239,7 @@ await personService.delete(12 /*, context? */);
 
 <Callout type="info">
 
-For the full list of filter operators and examples, see the [Filtering Data](../../../recipes/filtering.md) recipe.
+For the full list of filter operators and examples, see the [Filtering Data](/docs/recipes/filtering) recipe.
 
 </Callout>
 
@@ -284,15 +277,13 @@ console.log(result.records);  // Entity[] with optional `_media` key added
 ```
 </details>
 
----
-
 ### 5) `findOne(id, query, context?)`
 
 **What this shows:** How to fetch one entity by ID with relations populated and media URLs resolved into the non-persistent `_media` key.
 
 <Callout type="info">
 
-The `query` parameter accepts the same filter syntax as `find()`. See the [Filtering Data](../../../recipes/filtering) recipe for all available operators.
+The `query` parameter accepts the same filter syntax as `find()`. See the [Filtering Data](/docs/recipes/filtering) recipe for all available operators.
 
 </Callout>
 
@@ -318,8 +309,8 @@ const first = (entity as any)["_media"]["fileLocation"][0] as MediaWithFullUrl;
 console.log(first._full_url); // absolute URL to the file
 ```
 </details>
-
----
+  </TabItem>
+  <TabItem value="bulk" label="Bulk Operations">
 
 ### 6) `insertMany(createDtos, filesArray?, context?)`
 
@@ -355,8 +346,8 @@ console.log(saved.length); // 2
 await personService.deleteMany([101, 102, 103]);
 ```
 </details>
-
----
+  </TabItem>
+  <TabItem value="recovery" label="Recovery">
 
 ### 8) `recover(id, context?)`
 
@@ -385,8 +376,8 @@ const res = await personService.recoverMany([101, 102, 103]);
 console.log(res.recoveredIds); // [101, 102, 103]
 ```
 </details>
-
----
+  </TabItem>
+</Tabs>
 
 ## Media Population Cheat‑Sheet
 
@@ -453,8 +444,6 @@ console.log(media._full_url);
 ```
 </details>
 
----
-
 ## Filters & Grouping Tips
 
 **What this shows:** How `filters`, `groupBy`, and `showSoftDeleted` affect results. Your `CrudHelperService` defines the exact grammar for `filters` and grouping, so adjust the payload to match your implementation.
@@ -491,16 +480,12 @@ console.log(response);
 ```
 </details>
 
----
-
 ## Best Practices
 
 - Prefer `find({ fields: [...] })` to limit selected columns on heavy entities.
 - Use `isPartial = true` for PATCH-like updates; otherwise the service assumes a PUT-like update.
 - When adding media fields to models, configure a `MediaStorageProvider` in metadata.
 - Keep custom logic (side effects, complex computed values) in  **Computation Providers** preferably or **TypeORM Subscribers** if necessary.
-
----
 
 ## Summary
 

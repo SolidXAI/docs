@@ -1,14 +1,11 @@
 ---
-title: Computed Fields
+title: Computation Providers
 icon: "calculator"
 description: Learn how to extend the backend with custom computation providers.
-summary: Explains SolidX computed fields powered by computation providers for automatic value derivation (e.g., totals, full names, age). Covers metadata configuration including `computedFieldTriggerConfig` for specifying triggers (before/after insert/update/remove operations), `computedFieldValueProvider` class implementation, `IEntityPreComputeFieldProvider` and `IEntityPostComputeFieldProvider` interfaces, provider registration, and examples like `PaymentCollectionItemAmountProvider` for calculating amounts based on related records.
+summary: Covers computed-field providers, trigger configuration, provider interfaces, registration, and runtime value derivation in the SolidX backend.
 keywords: [backend, computation providers, customization]
 solidx_concerns: [backend.custom_computed_fields, add_computed_field_provider, create_model_with_fields, add_field_to_a_model]
 ---
-
-
-# Computation Providers
 
 ## Overview
 
@@ -20,12 +17,14 @@ A **computation provider** is the TypeScript class that implements the derivatio
 
 <Callout type="info" title="Mental Model">
 
-  Think of a computed field as a spreadsheet formula applied to a database record. You define the formula once (in the provider), declare which events should re-evaluate it (in the trigger config), and the platform handles execution automatically.
-  - The <strong>computed field</strong> in metadata is the contract - it declares <em>what</em> to compute and <em>when</em>.
-    - The <strong>computation provider</strong> is the class that contains the logic - it receives the triggering entity and computes the new value.
-    - <strong>Before operations</strong> run synchronously in the same transaction and are ideal when the value depends only on the entity itself.
-    - <strong>After operations</strong> run asynchronously after the save and are ideal when the value depends on related records or requires cross-entity writes.
-  So the intuition is: <strong>declare what triggers recomputation and write the logic once - SolidX handles when and how it runs.</strong>
+  SolidX can derive field values at runtime, but the derivation logic must be explicitly modeled and registered.
+
+  - The computed field metadata declares which field is derived and which events should trigger recomputation.
+  - The computation provider contains the runtime logic that produces or persists the derived value.
+  - Use before operations when the value depends only on the triggering entity inside the current transaction.
+  - Use after operations when the value depends on related records or requires additional writes after persistence.
+
+  This page is the bridge between computed-field metadata and the backend logic that keeps derived values consistent at runtime.
 
 </Callout>
 
@@ -36,7 +35,7 @@ The trigger timing determines which interface your provider implements and how t
 | Timing | Operations | Method called | How it runs | When to use |
 |---|---|---|---|---|
 | **Before** | `before-insert`, `before-update`, `before-delete` | `preComputeValue()` | Synchronously, in the same transaction | Value depends only on the triggering entity |
-| **After** | `after-insert`, `after-update`, `after-delete` | `postComputeAndSaveValue()` | Asynchronously, via a [background job](./background-jobs) | Value depends on related records or requires additional writes |
+| **After** | `after-insert`, `after-update`, `after-delete` | `postComputeAndSaveValue()` | Asynchronously, via a [background job](/docs/developer-docs/extending/backend-customization/background-jobs) | Value depends on related records or requires additional writes |
 
 <Callout type="info">
 
@@ -45,9 +44,10 @@ For `after-*` triggers, `modelName` can be any model - related or otherwise.
 
 </Callout>
 
----
-
 ## Configuration
+
+<Steps>
+  <Step>
 
 ### Step 1 - Define the field in metadata
 
@@ -59,9 +59,7 @@ Add the field to your model's metadata with `"type": "computed"` and specify:
 **Example scenario:** `paymentCollectionItemDetail` records represent individual payment transactions. When a detail is inserted or updated (i.e., a payment comes in), the parent `paymentCollectionItem` needs its aggregate totals recalculated - `amountPaid`, `amountPending`, `totalAmountToBePaid`, and `status`. Since this involves writing to a related parent entity, `after-*` operations are the right choice here.
 
 <details open>
-  <summary>
-    Example: <code>amountPaid</code> computed field on <code>paymentCollectionItemDetail</code>
-  </summary>
+  <summary>Example: <code>amountPaid</code> computed field on <code>paymentCollectionItemDetail</code></summary>
 
 ```json
 {
@@ -92,8 +90,8 @@ Add the field to your model's metadata with `"type": "computed"` and specify:
 
 Computed field configurations are loaded from the database and cached in the Solid Registry at startup. Any changes require a server restart to take effect.
 
-
----
+  </Step>
+  <Step>
 
 ### Step 2 - Implement the provider
 
@@ -102,9 +100,7 @@ Implement `IEntityPreComputeFieldProvider` for before operations, or `IEntityPos
 **In this example**, `PaymentCollectionItemAmountProvider` implements `IEntityPostComputeFieldProvider` because it needs to query all related detail records and write aggregated totals back to the parent - work that can only happen after the triggering detail has been saved.
 
 <details open>
-  <summary>
-    Example: <code>PaymentCollectionItemAmountProvider</code>
-  </summary>
+  <summary>Example: <code>PaymentCollectionItemAmountProvider</code></summary>
 
 ```ts
 import { Injectable } from '@nestjs/common';
@@ -191,7 +187,8 @@ export class PaymentCollectionItemAmountProvider
 
 </details>
 
----
+  </Step>
+  <Step>
 
 ### Step 3 - Register the provider
 
@@ -203,6 +200,9 @@ Register the provider as a NestJS provider in the module it belongs to.
   providers: [PaymentCollectionItemAmountProvider],
 })
 ```
+
+  </Step>
+</Steps>
 
 ---
 
@@ -239,7 +239,7 @@ export interface IEntityPostComputeFieldProvider<TTriggerEntity, TContext>
 }
 ```
 
-- Runs **asynchronously** after the entity is saved, via a [background job](./background-jobs).
+- Runs **asynchronously** after the entity is saved, via a [background job](/docs/developer-docs/extending/backend-customization/background-jobs).
 - Returns `void` - **you are responsible for all persistence**. The platform does not set or save any field value on your behalf.
 - Use this when the computation needs to **query related records**, or when the result must be **written to a different entity** (like rolling up child totals to a parent).
 - The `modelName` in `computedFieldTriggerConfig` can be **any model** - it does not need to be the model that owns the computed field.
@@ -261,10 +261,10 @@ export interface IEntityComputedFieldProvider {
 
 1. `ComputedEntityFieldSubscriber` listens to `insert`, `update`, and `delete` events across all entities.
 2. On a **before** event - `preComputeValue()` runs synchronously. The returned value is set on the entity and persisted in the same transaction.
-3. On an **after** event - `postComputeAndSaveValue()` is queued as a [background job](./background-jobs) and runs asynchronously. The `ComputedFieldEvaluationSubscriber` handles persistence once the job completes.
+3. On an **after** event - `postComputeAndSaveValue()` is queued as a [background job](/docs/developer-docs/extending/backend-customization/background-jobs) and runs asynchronously. The `ComputedFieldEvaluationSubscriber` handles persistence once the job completes.
 
 ---
 
 ## Built-in Providers
 
-SolidX ships with several providers for common patterns - generating IDs, concatenating fields, and no-op placeholders. See [Built-in Computation Providers](../reference/built-in-computation-providers) for the full reference with configuration examples and sample outputs.
+SolidX ships with several providers for common patterns - generating IDs, concatenating fields, and no-op placeholders. See [Built-in Computation Providers](/docs/developer-docs/extending/reference/built-in-computation-providers) for the full reference with configuration examples and sample outputs.

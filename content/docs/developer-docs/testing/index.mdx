@@ -6,75 +6,99 @@ summary: This section explains how testing works in SolidX across metadata-drive
 sidebar_position: 2.5
 ---
 
-# Testing
-
-SolidX provides a **metadata-driven testing system** that supports:
-
-- automated API testing,
-- automated frontend end-to-end testing using Playwright,
-- shared assertions and utility steps,
-- managed test data setup and teardown,
-- and CLI-driven workflows for bringing the application into **system under test (SUT)** mode.
-
-The important idea is that API and UI tests are not treated as two unrelated systems. They run through a shared testing engine and a shared scenario model, while using different adapters underneath.
-
 <Callout type="info" title="Mental Model">
 
-  SolidX testing is best understood as a <strong>single metadata-driven test system</strong> with multiple execution modes.
-  - <strong>Metadata</strong> defines fixtures, scenarios, and custom specs.
-    - <strong>The workflow</strong> prepares the system under test through setup, seed, load, run, and teardown.
-    - <strong>The engine</strong> executes API, UI, or mixed scenarios through shared primitives.
-  So the intuition is: API testing, UI testing, and test data management are all parts of the same testing architecture, not separate disconnected tools.
+SolidX testing is a single metadata-driven system with multiple execution modes.
+
+- `testing` metadata defines fixtures, custom specs, users, roles, and scenarios.
+- The workflow prepares the system under test through setup, seed, load, run, and teardown.
+- The engine executes `api`, `ui`, and `mixed` scenarios through shared runtime primitives.
+
+The important distinction is that API testing and UI testing are different adapters on top of the same testing model, not two unrelated frameworks.
 
 </Callout>
 
+SolidX provides a **metadata-driven testing system** that supports:
+
+- Automated API testing.
+- Automated frontend end-to-end testing using Playwright.
+- Shared assertions and utility steps.
+- Managed test data setup and teardown.
+- CLI-driven workflows for bringing the application into **system under test (SUT)** mode.
+
+The important idea is that API and UI tests are not treated as two unrelated systems. They run through a shared testing engine and a shared scenario model, while using different adapters underneath.
+
 ## What This Section Covers
 
-This Testing section is split into a few focused pages:
-
-- [Architecture](./architecture.md): how the testing engine, adapters, steps, registries, and reporters fit together
-- [Workflow](./workflow.md): the end-to-end SOP for setup, seed, load, run, and teardown
-- [Vocabulary](./vocabulary.md): the key terms used in SolidX testing
-- [Authoring Scenarios](./authoring-scenarios.md): how to write `testing` metadata
-- [API Testing](./api-testing.md): API automation patterns and supported primitives
-- [UI Testing](./ui-testing.md): Playwright-based E2E testing patterns and supported primitives
+<Cards>
+  <Card title="Architecture" href="/docs/developer-docs/testing/architecture">
+    Understand how the engine, adapters, step registry, runtime context, and reporter fit together.
+  </Card>
+  <Card title="Workflow" href="/docs/developer-docs/testing/workflow">
+    Follow the operational sequence for setup, seeding, fixture loading, execution, and teardown.
+  </Card>
+  <Card title="Vocabulary" href="/docs/developer-docs/testing/vocabulary">
+    Learn the terms used across scenarios, runtime primitives, and testing operations.
+  </Card>
+  <Card title="Authoring Scenarios" href="/docs/developer-docs/testing/authoring-scenarios">
+    Write `testing` metadata, structure scenarios, and compose reusable steps.
+  </Card>
+  <Card title="API Testing" href="/docs/developer-docs/testing/api-testing">
+    Use the API adapter, shared assertions, and response-driven workflows effectively.
+  </Card>
+  <Card title="UI Testing" href="/docs/developer-docs/testing/ui-testing">
+    Use Playwright-backed UI automation inside the shared SolidX testing engine.
+  </Card>
+</Cards>
 
 ## Read This In Order
 
 If you are new to SolidX testing, the best reading order is:
 
-1. [Workflow](./workflow.md)
-2. [Vocabulary](./vocabulary.md)
-3. [Architecture](./architecture.md)
-4. [Authoring Scenarios](./authoring-scenarios.md)
-5. [API Testing](./api-testing.md)
-6. [UI Testing](./ui-testing.md)
+1. [Workflow](/docs/developer-docs/testing/workflow)
+2. [Vocabulary](/docs/developer-docs/testing/vocabulary)
+3. [Architecture](/docs/developer-docs/testing/architecture)
+4. [Authoring Scenarios](/docs/developer-docs/testing/authoring-scenarios)
+5. [API Testing](/docs/developer-docs/testing/api-testing)
+6. [UI Testing](/docs/developer-docs/testing/ui-testing)
 
 ## What SolidX Testing Looks Like In Practice
 
 A typical test run looks like this:
 
-1. Create isolated test datasources with `test data --setup`
-2. Seed metadata into the fresh databases
-3. Load test fixtures from module metadata
-4. Run API and/or UI scenarios
-5. Tear everything down and restore the original environment
+<Steps>
+  <Step>
+    Create isolated test datasources with `solidctl test data --setup`.
+  </Step>
+  <Step>
+    Seed metadata into the fresh databases with `solidctl seed`.
+  </Step>
+  <Step>
+    Load test fixtures, roles, and users from module metadata with `solidctl test data --load`.
+  </Step>
+  <Step>
+    Run API and/or UI scenarios through the shared testing engine.
+  </Step>
+  <Step>
+    Tear everything down and restore the original environment with `solidctl test data --teardown`.
+  </Step>
+</Steps>
 
 At runtime, the testing engine:
 
-- loads `testing.scenarios` from module metadata,
-- filters scenarios by id or tag,
-- registers built-in API, UI, assert, util, and custom spec steps,
-- interpolates environment variables, params, test data, and saved resources,
-- and executes each scenario through the shared engine.
+- Loads `testing.scenarios` from module metadata.
+- Filters scenarios by id or tag.
+- Registers built-in API, UI, assert, util, and custom spec steps.
+- Interpolates environment variables, params, test data, and saved resources.
+- Executes each scenario through the shared engine.
 
 ## Where Testing Configuration Lives
 
 Testing support is declared in module metadata under the `testing` key. That metadata can contain:
 
-- `specs` for custom test spec registration,
-- `roles` and `users` for testing-oriented identity setup,
-- `data` for test fixtures,
+- `specs` for custom test spec registration.
+- `roles` and `users` for testing-oriented identity setup.
+- `data` for test fixtures.
 - `scenarios` for executable test flows.
 
 ## Operational Entry Point
@@ -91,4 +115,4 @@ solidctl test run --module <module-name>
 solidctl test data --teardown
 ```
 
-For the command reference itself, see [solidctl Reference](../solidctl-commands.md).
+For the command reference itself, see [solidctl Reference](/docs/developer-docs/solidctl-commands).

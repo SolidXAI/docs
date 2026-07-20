@@ -2,20 +2,16 @@
 title: Models
 icon: "database"
 description: Overview of the model metadata schema used in SolidX.
-summary: This document details the model metadata schema in SolidX, where models represent data structures (entities/tables) within modules. Each model is a semantic, configurable structure that defines specific data types, their attributes, and relationships with other models. Key properties include singular/plural names, display name, data source configuration, table name, soft delete settings, audit logging, internationalization support, exportability, and user key field designation. The metadata also specifies which fields serve as unique identifiers for records and controls various behavioral aspects like draft-publish workflows.
+summary: Covers the metadata used to define SolidX models, including naming, table mapping, data-source configuration, lifecycle flags, and runtime behavior.
 json_pointer: "/moduleMetadata/models"
 jsonpath: "$.moduleMetadata.models"
 parent_component: moduleMetadata
-type: array,
+type: array
 items_type: "object"
 items_attributes_doc: "#model-metadata-attributes"
 solidx_concerns: [create_model_with_fields, add_field_to_a_model, remove_field_from_a_model]
 ---
 
-
-
-
-# Model Metadata
 <Callout type="info" title="Where it lives">
 
 **JSON Pointer:** `/moduleMetadata/models`
@@ -26,31 +22,28 @@ solidx_concerns: [create_model_with_fields, add_field_to_a_model, remove_field_f
 
 ## Overview
 
-SolidX Models represent the structure of your data within a module. Each model defines a specific type of data, all attributes / fields that a model is made of & its relationships with other models.
+Model metadata defines the strcuture of data that exist inside a SolidX module.
 
-Each model is a semantic, configurable data structure that forms the basis of adding custom business logic.
+Each model establishes persistence, naming, lifecycle behaviour, and runtime flags for one business entity. Generated APIs, layouts, permissions, relations, and code-generation flows all build on that model definition.
 
 <Callout type="info" title="Mental Model">
 
-  If a module is a business domain, a model is one important noun inside that domain. Models do more than define storage. They become the anchor for generated APIs, permissions, layouts, relations, and backend behavior.
-  - Think in terms of business records such as venue, institute, fee type, or booking.
-    - Use model metadata to express identity, persistence, and lifecycle behavior.
-    - Choose model boundaries carefully because many platform features build on top of them.
-  So the intuition is: <strong>a model is the platform's unit of record and behavior inside a module</strong>.
+  If a module is a business domain, a model is one business record type inside that domain.
+
+  - Think in terms of records such as `venue`, `institute`, `feeType`, or `booking`.
+  - Use model metadata to express identity, persistence, and lifecycle behaviour.
+  - Choose model boundaries carefully because many platform features build on top of them.
 
 </Callout>
 
-👉 For a conceptual overview of what a model is, see [Model Management Documentation](/docs/admin-docs/module-builder/model-management).
+For admin-side authoring workflows, see [Model Management Documentation](/docs/admin-docs/module-builder/model-management).
 
 
 
 
 ### Example: Institute Model
 <details open>
-  <summary>
-    
-    Model Schema
-  </summary>
+  <summary>Model schema example</summary>
 
 ```json
 {
@@ -94,15 +87,11 @@ Each model is a semantic, configurable data structure that forms the basis of ad
   },
   ... // Other metadata
 }
-``` 
+```
 </details>
 
 
-  <h2 className=" ">
-    
-
-##  Model Metadata Attributes
-</h2>
+## Model Metadata Attributes
 
 ### `singularName` *(string, required, unique)*
 Unique identifier for the model (lowercase, underscores/dashes).  
@@ -209,13 +198,6 @@ Indicates whether this model maps to a pre-existing legacy table and, if so, how
 When set to `"existing_id"` or `"generated_id"`, at least one field must be marked as `isPrimaryKey: true`.  
 **Default:** `"none"`
 
-<br/>
-<div className="">
-  
+## Related Recipes
 
-##  Related Recipes (TODO)
-
-</div>
-
-👉 [Model Type Recipes](../../admin-docs/module-builder/model-management#related-recipes)  
-**Default:** `false`
+👉 [Model Type Recipes](/docs/admin-docs/module-builder/model-management#related-recipes)  

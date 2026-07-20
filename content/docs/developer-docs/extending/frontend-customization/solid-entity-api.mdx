@@ -1,0 +1,154 @@
+---
+title: Solid Entity API
+icon: "database"
+description: Learn how to use the Solid Entity API to interact with entities in your application.
+summary: "Guide to using the Solid Entity API for managing entities in SolidX applications. Covers generated RTK Query CRUD APIs, common query and mutation flows, caching and invalidation behavior, and where these APIs fit in the UI module system."
+solidx_concerns: [frontend.custom_pages, add_full_custom_ui]
+---
+
+## Overview
+
+`createSolidEntityApi` provides a consistent RTK Query surface for common CRUD operations across entities in SolidX applications.
+
+Use it when you want:
+
+- Generated query and mutation hooks
+- RTK Query caching and invalidation
+- A reusable module-owned API layer under `solid-ui/src/<module-name>/redux/`
+
+This pattern fits especially well with the new UI module system, where each module can own its own reducers, middleware, and API clients.
+
+## Recommended Location in Module-Based UIs
+
+Place entity APIs under:
+
+- `solid-ui/src/<module-name>/redux/`
+
+Then register the generated reducer and middleware through:
+
+- `solid-ui/src/<module-name>/<module-name>.ui-module.ts`
+
+See also: [Redux Module Integration](/docs/developer-docs/extending/frontend-customization/redux-module-integration)
+
+## Factory Overview
+
+```ts
+export const createSolidEntityApi = (entityName: string) => {
+  const kebabEntityName = kebabCase(entityName);
+
+  return createApi({
+    reducerPath: `genericSolid${entityName}Api`,
+    baseQuery: baseQueryWithAuth,
+    tagTypes: [entityName],
+    endpoints: (builder) => ({
+      getSolidEntities: builder.query({}),
+      getSolidEntityById: builder.query({}),
+      createSolidEntity: builder.mutation({}),
+      updateSolidEntity: builder.mutation({}),
+      patchUpdateSolidEntity: builder.mutation({}),
+      deleteSolidEntity: builder.mutation({}),
+      deleteMultipleSolidEntities: builder.mutation({}),
+      recoverSolidEntity: builder.mutation({}),
+      recoverSolidEntityById: builder.query({}),
+    }),
+  });
+};
+```
+
+## Endpoints and Semantics
+
+<Accordions type="single">
+<Accordion title="getSolidEntities">
+
+- Method: GET
+- Use for list fetches, pagination, filtering, sorting, and grouping
+- Cache key is based on the query argument, typically the serialized query string
+
+</Accordion>
+
+<Accordion title="getSolidEntityById">
+
+- Method: GET
+- Use for entity detail fetches by ID
+
+</Accordion>
+</Accordions>
+
+### Mutations
+
+Mutations invalidate the relevant RTK Query tags so detail and list queries refresh automatically.
+
+- `createSolidEntity`
+- `updateSolidEntity`
+- `patchUpdateSolidEntity`
+- `deleteSolidEntity`
+- `deleteMultipleSolidEntities`
+- `recoverSolidEntity`
+- `recoverSolidEntityById`
+
+## Building Query Strings
+
+Recommended serialization:
+
+```ts
+import qs from "qs";
+
+const queryData = {
+  limit: 10,
+  offset: 0,
+  filters: { status: { $eq: "active" } },
+};
+
+const queryString = qs.stringify(queryData, { encodeValuesOnly: true });
+```
+
+## Hook Usage Examples
+
+### Find many
+
+```tsx
+const qsValue = useMemo(() => qs.stringify(filtersObj, { encodeValuesOnly: true }), [filtersObj]);
+const { data, isLoading, isFetching, refetch } = useGetSolidEntitiesQuery(qsValue);
+```
+
+### Conditional fetch
+
+```tsx
+const { data } = useGetSolidEntitiesQuery(qsValue, { skip: !qsValue });
+```
+
+### Lazy fetch
+
+```tsx
+const [trigger, { data, isFetching }] = useLazyGetSolidEntitiesQuery();
+```
+
+### Mutations
+
+```tsx
+const [createEntity] = useCreateSolidEntityMutation();
+await createEntity(payload);
+```
+
+## When To Use It
+
+Use Solid Entity API when:
+
+- Your use case matches standard entity list and detail patterns
+- You want caching and invalidation automatically handled by RTK Query
+- The module benefits from shared API state
+
+Prefer direct HTTP helpers when the workflow is custom, multi-step, or not entity-shaped. See [Solid HTTP API](/docs/developer-docs/extending/frontend-customization/solid-http-api).
+
+## Best Practices
+
+- Keep serialization stable so cache keys remain predictable
+- Use `LIST` invalidation for collection refreshes
+- Invalidate both record and list tags on update or delete
+- Keep generated APIs close to the owning module
+
+## Related
+
+- [Redux Module Integration](/docs/developer-docs/extending/frontend-customization/redux-module-integration)
+- [Solid HTTP API](/docs/developer-docs/extending/frontend-customization/solid-http-api)
+- [Bespoke Frontend](/docs/developer-docs/extending/frontend-customization/bespoke-frontend-ui)

@@ -2,7 +2,7 @@
 title: Users
 icon: "users"
 description: Metadata schema for populating users in SolidX applications.
-summary: This document describes how to populate initial users in SolidX using metadata configuration. Users can be created with attributes including full name, username, email, mobile number, and optional role assignments. If no password is provided, the system auto-generates secure passwords and emails them to the specified addresses. Users are created with the default role specified in the IAM_DEFAULT_ROLE environment variable, or the Public role if not set. The metadata supports specifying multiple roles per user and includes examples of creating users with different configurations.
+summary: Covers the metadata used to create initial users in SolidX, including identity fields, role assignment, and default-password behavior.
 json_pointer: "/users"
 jsonpath: "$.users"
 parent_component: root
@@ -21,12 +21,15 @@ solidx_concerns: []
 </Callout>
 
 ## Overview
-We can populate some initial users in the system using the `users` metadata. These users will be created with the default role that is specified in the environment variable `IAM_DEFAULT_ROLE` or `Public` role if the environment variable is not set.
+Use the `users` metadata section to populate initial user accounts in the platform.
 
-### Example: Fee Portal Module Users Metadata
-Below is an example of how to initialize users using the metadata configuration. The below example creates two users, "John Doe" and "Jane Smith", with their respective details. Since no passwords are provided, the system will auto-generate secure passwords for these users and mail them to the specified email addresses.
+Each user record can define identity fields such as full name, username, email, mobile number, and optional role assignments. If no roles are specified for a user, SolidX assigns the role defined by `IAM_DEFAULT_ROLE`. If that environment variable is not set, the `Public` role is used.
 
-<summary> Users Schema </summary>
+### Example: Seeded Users
+The example below creates two users with their basic account details. Because no passwords are provided, SolidX generates secure passwords and sends them to the configured email addresses.
+
+<details open>
+<summary>Users schema example</summary>
 
 ``` json
 {
@@ -48,6 +51,7 @@ Below is an example of how to initialize users using the metadata configuration.
   ]
 }
 ```
+</details>
 
 ## Users Metadata Attributes
 
@@ -69,4 +73,5 @@ Mobile number of the user.
 List of roles to be assigned to the user. If not provided, the user will be assigned the default role specified in the environment variable `IAM_DEFAULT_ROLE` or `Public` role if the  environment variable is not set. Also note, if roles are provided and the `IAM_DEFAULT_ROLE` is present, it will be added to the list of roles assigned to the user.
 
 ## Further Reference
-- [Users Management](../../admin-docs/iam/users.md)
+
+- [Users Management](/docs/admin-docs/iam/users)

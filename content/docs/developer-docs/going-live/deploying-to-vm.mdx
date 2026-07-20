@@ -5,23 +5,25 @@ description: A step-by-step guide to deploying SolidX applications on Ubuntu vir
 summary: This comprehensive guide walks through deploying SolidX applications on Ubuntu virtual machines. It covers cloning the repository, configuring environment variables, verifying backend and frontend operation, deploying with PM2 process manager (including config files and deploy scripts), database seeding with the rebuild script, and setting up Nginx as a reverse proxy with SSL certificates via Certbot. The guide also includes firewall configuration, virtual host setup, log rotation setup, and automatic restart configuration for production-ready deployment.
 ---
 
-
-# Deploying to a Virtual Machine
-
-This guide provides a comprehensive walkthrough for deploying your SolidX application to a virtual machine (VM). We will cover everything from setting up your environment to deploying and securing your application.
-
 <Callout type="info" title="Mental Model">
 
-  VM deployment is the most explicit hosting model in this section. You manage the machine, the processes, the reverse proxy, and the operating-system-level concerns yourself.
-  - Choose this path when you want maximum control over the host.
-    - Expect to manage process lifecycle, networking, SSL, logs, and patching.
-    - This is often the easiest model to reason about if your team is comfortable with Linux operations.
-  So the intuition is: <strong>a VM gives you the most control, but also the most operational responsibility</strong>.
+VM deployment is the most explicit hosting model in this section.
+
+- You manage the machine, the processes, the reverse proxy, and the operating-system-level concerns directly.
+- Choose this path when your team wants maximum control over the host.
+- Expect to handle process lifecycle, networking, SSL, logs, and patching yourself.
+
+A VM gives you the most control, but it also gives you the most operational responsibility.
 
 </Callout>
 
+This guide provides a comprehensive walkthrough for deploying your SolidX application to a virtual machine (VM). We will cover everything from setting up your environment to deploying and securing your application.
 
-  Before you begin, ensure you have completed the **[Prerequisites](/docs/developer-docs/prerequisites)** guide on your VM. This includes installing **Node.js**, **Git**, and **PostgreSQL**, and setting up your initial database user.
+<Callout type="note" title="Prerequisite">
+
+Before you begin, complete the [Prerequisites](/docs/developer-docs/prerequisites) guide on the VM. That includes installing Node.js, Git, PostgreSQL, and the required base tooling.
+
+</Callout>
 
 
 ## 1. Environment Preparation
@@ -41,6 +43,7 @@ sudo systemctl enable nginx
 ```
 
 #### PM2
+
 Install PM2 globally to manage your application processes.
 
 ```bash
@@ -51,10 +54,7 @@ sudo npm install -g pm2
 
 We will deploy the application in the `/opt/gitco` directory.
 
-<h3 className="">
-    
-    &nbsp;Prepare Directory and Clone Repository
-</h3>
+### Prepare Directory and Clone Repository
 
 Create the deployment directory and set the appropriate permissions (replace `your_user` with your Ubuntu username):
 
@@ -65,74 +65,83 @@ cd /opt/gitco
 git clone <your_repository_url> .
 ```
 
-<h3 className="">
-    
-    &nbsp;Configure Environment Variables
-</h3>
+### Configure Environment Variables
 
 Your application will need environment variables for configuration. Create `.env` files for both the backend and frontend.
 
-**Backend (`solid-api/.env`):**
-```bash
-# Server Configuration
-PORT=3000
+<Tabs defaultValue="api">
+  <TabItem value="api" label="Backend">
 
-# Database Configuration
-DB_HOST=localhost
-DB_PORT=5432
-DB_USER=your_db_user
-DB_PASSWORD=your_db_password
-DB_NAME=your_db_name
+  **Backend (`solid-api/.env`):**
 
-# JWT Configuration
-JWT_SECRET=your_jwt_secret
-```
+  ```bash
+  # Server Configuration
+  PORT=3000
 
-**Frontend (`solid-ui/.env`):**
-```bash
-NEXT_PUBLIC_API_URL=http://localhost:3000
-```
+  # Database Configuration
+  DB_HOST=localhost
+  DB_PORT=5432
+  DB_USER=your_db_user
+  DB_PASSWORD=your_db_password
+  DB_NAME=your_db_name
 
+  # JWT Configuration
+  JWT_SECRET=your_jwt_secret
+  ```
 
-  It is crucial to keep your `.env` files secure and out of version control. Add `.env` to your `.gitignore` file.
+  </TabItem>
+  <TabItem value="ui" label="Frontend">
+
+  **Frontend (`solid-ui/.env`):**
+
+  ```bash
+  NEXT_PUBLIC_API_URL=http://localhost:3000
+  ```
+
+  </TabItem>
+</Tabs>
+
+<Callout type="warning" title="Security">
+
+Keep `.env` files secure and out of version control. Add `.env` to your `.gitignore`.
+
+</Callout>
 
 
 ## 3. Running the Application Manually
 
-Before automating the deployment, let's run the backend and frontend manually to ensure everything is set up correctly.
+Before automating the deployment, verify that both applications build correctly on the server.
 
-<h3 className="">
-    
-    &nbsp;Verify Backend
-</h3>
+<Tabs defaultValue="api">
+  <TabItem value="api" label="Verify Backend">
 
-```bash
-cd /opt/gitco/solid-api
-npm install
-npm run build
-```
-The `solid-api` directory will be served using PM2 and Nginx. In this step, we verify that the project builds successfully on the server, ensuring it’s ready for deployment and further automation.
+  ```bash
+  cd /opt/gitco/solid-api
+  npm install
+  npm run build
+  ```
 
-<h3 className="">
-    
-    &nbsp;Verify Frontend
-</h3>
+  `solid-api` will eventually run behind PM2 and Nginx. This step confirms the backend builds cleanly on the server.
 
-```bash
-cd /opt/gitco/solid-ui
-npm install
-npm run build
-```
-Verify that the `dist` directory is created successfully. Note that for `solid-ui`, we serve the directory directly via Nginx without using PM2.
+  </TabItem>
+  <TabItem value="ui" label="Verify Frontend">
+
+  ```bash
+  cd /opt/gitco/solid-ui
+  npm install
+  npm run build
+  ```
+
+  Verify that the `dist` directory is created successfully. The frontend will be served directly by Nginx as static files.
+
+  </TabItem>
+</Tabs>
 
 ## 4. Deploying the Backend with PM2
 
 PM2 will keep your backend application running and handle restarts.
 
-<h3 className="">
-    
-    &nbsp;Create PM2 Configuration File
-</h3>
+### Create PM2 Configuration File
 
 Create a `pm2.config.js` file for the backend.
 
@@ -154,10 +163,7 @@ module.exports = {
 };
 ```
 
-<h3 className="">
-    
-    &nbsp;Start Backend with PM2
-</h3>
+### Start Backend With PM2
 
 ```bash
 cd /opt/gitco/solid-api
@@ -170,10 +176,7 @@ You can check the status of your applications with `pm2 list`.
 
 Nginx will act as a reverse proxy for your backend and serve your frontend as static files.
 
-<h3 className="">
-    
-    &nbsp;Configure Firewall
-</h3>
+### Configure Firewall
 
 ```bash
 sudo ufw allow 'Nginx Full'
@@ -181,109 +184,114 @@ sudo ufw allow OpenSSH
 sudo ufw enable
 ```
 
-<h3 className="">
-    
-    &nbsp;Create Nginx Virtual Host Files
-</h3>
+### Create Nginx Virtual Host Files
 
 Create separate configuration files for your API and UI.
 
-**Backend (`/etc/nginx/sites-available/api.your_domain.com`):**
-```nginx
-server {
-  listen 80;
-  server_name api.your_domain.com;
+<Tabs defaultValue="api">
+  <TabItem value="api" label="Backend API">
 
-  location / {
-    proxy_pass http://localhost:3000;
-    proxy_http_version 1.1;
-    proxy_set_header Upgrade $http_upgrade;
-    proxy_set_header Connection 'upgrade';
-    proxy_set_header Host $host;
-    proxy_cache_bypass $http_upgrade;
-    proxy_set_header X-Real-IP $remote_addr;
-    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-    proxy_set_header X-Forwarded-Proto $scheme;
+  **Backend (`/etc/nginx/sites-available/api.your_domain.com`):**
+
+  ```nginx
+  server {
+    listen 80;
+    server_name api.your_domain.com;
+
+    location / {
+      proxy_pass http://localhost:3000;
+      proxy_http_version 1.1;
+      proxy_set_header Upgrade $http_upgrade;
+      proxy_set_header Connection 'upgrade';
+      proxy_set_header Host $host;
+      proxy_cache_bypass $http_upgrade;
+      proxy_set_header X-Real-IP $remote_addr;
+      proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+      proxy_set_header X-Forwarded-Proto $scheme;
+    }
   }
-}
-```
+  ```
 
-**Frontend (`/etc/nginx/sites-available/your_domain.com`):**
-```nginx
-server {
-  listen 80;
-  server_name your_domain.com;
+  </TabItem>
+  <TabItem value="ui" label="Frontend UI">
 
-  # Vite build output
-  root /opt/gitco/solid-ui/dist;
-  index index.html;
+  **Frontend (`/etc/nginx/sites-available/your_domain.com`):**
 
-  # ----------------------------
-  # Basic security + hardening
-  # ----------------------------
-  add_header X-Content-Type-Options "nosniff" always;
-  add_header X-Frame-Options "SAMEORIGIN" always;
-  add_header Referrer-Policy "strict-origin-when-cross-origin" always;
+  ```nginx
+  server {
+    listen 80;
+    server_name your_domain.com;
 
-  # ----------------------------
-  # Compression (blazing fast)
-  # ----------------------------
-  gzip on;
-  gzip_comp_level 5;
-  gzip_min_length 1024;
-  gzip_vary on;
-  gzip_proxied any;
-  gzip_types
-    text/plain
-    text/css
-    text/javascript
-    application/javascript
-    application/json
-    application/xml
-    application/rss+xml
-    application/atom+xml
-    image/svg+xml
-    font/ttf
-    font/otf
-    application/vnd.ms-fontobject;
+    # Vite build output
+    root /opt/gitco/solid-ui/dist;
+    index index.html;
 
-  # ----------------------------
-  # Cache strategy
-  # ----------------------------
+    # ----------------------------
+    # Basic security + hardening
+    # ----------------------------
+    add_header X-Content-Type-Options "nosniff" always;
+    add_header X-Frame-Options "SAMEORIGIN" always;
+    add_header Referrer-Policy "strict-origin-when-cross-origin" always;
 
-  # 1) Hashed build assets (Vite typically outputs /assets/* with content hashes)
-  location ^~ /assets/ {
-    try_files $uri =404;
-    expires 365d;
-    add_header Cache-Control "public, max-age=31536000, immutable" always;
-    access_log off;
+    # ----------------------------
+    # Compression (blazing fast)
+    # ----------------------------
+    gzip on;
+    gzip_comp_level 5;
+    gzip_min_length 1024;
+    gzip_vary on;
+    gzip_proxied any;
+    gzip_types
+      text/plain
+      text/css
+      text/javascript
+      application/javascript
+      application/json
+      application/xml
+      application/rss+xml
+      application/atom+xml
+      image/svg+xml
+      font/ttf
+      font/otf
+      application/vnd.ms-fontobject;
+
+    # ----------------------------
+    # Cache strategy
+    # ----------------------------
+
+    # 1) Hashed build assets (Vite typically outputs /assets/* with content hashes)
+    location ^~ /assets/ {
+      try_files $uri =404;
+      expires 365d;
+      add_header Cache-Control "public, max-age=31536000, immutable" always;
+      access_log off;
+    }
+
+    # 2) Other static files (fonts/images/icons/etc.)
+    location ~* \.(?:js|css|png|jpg|jpeg|gif|webp|svg|ico|woff2?|ttf|eot|map)$ {
+      try_files $uri =404;
+      expires 30d;
+      add_header Cache-Control "public, max-age=2592000" always;
+      access_log off;
+    }
+
+    # 3) Do NOT cache index.html (so new deployments take effect immediately)
+    location = /index.html {
+      expires -1;
+      add_header Cache-Control "no-store, no-cache, must-revalidate, proxy-revalidate, max-age=0" always;
+    }
+
+    # SPA fallback
+    location / {
+      try_files $uri $uri/ /index.html;
+    }
   }
+  ```
 
-  # 2) Other static files (fonts/images/icons/etc.)
-  location ~* \.(?:js|css|png|jpg|jpeg|gif|webp|svg|ico|woff2?|ttf|eot|map)$ {
-    try_files $uri =404;
-    expires 30d;
-    add_header Cache-Control "public, max-age=2592000" always;
-    access_log off;
-  }
+  </TabItem>
+</Tabs>
 
-  # 3) Do NOT cache index.html (so new deployments take effect immediately)
-  location = /index.html {
-    expires -1;
-    add_header Cache-Control "no-store, no-cache, must-revalidate, proxy-revalidate, max-age=0" always;
-  }
-
-  # SPA fallback
-  location / {
-    try_files $uri $uri/ /index.html;
-  }
-}
-```
-
-<h3 className="">
-    
-    &nbsp;Enable Virtual Hosts
-</h3>
+### Enable Virtual Hosts
 
 ```bash
 sudo ln -s /etc/nginx/sites-available/api.your_domain.com /etc/nginx/sites-enabled/
@@ -297,19 +305,13 @@ sudo systemctl restart nginx
 
 Secure your application by enabling HTTPS with SSL certificates from Let's Encrypt.
 
-<h3 className="">
-    
-    &nbsp;Install Certbot
-</h3>
+### Install Certbot
 
 ```bash
 sudo apt install certbot python3-certbot-nginx -y
 ```
 
-<h3 className="">
-    
-    &nbsp;Obtain SSL Certificates
-</h3>
+### Obtain SSL Certificates
 
 ```bash
 sudo certbot --nginx -d your_domain.com -d api.your_domain.com
@@ -321,48 +323,56 @@ Certbot will automatically update your Nginx configuration to use the SSL certif
 
 Here are some additional steps to ensure your application runs smoothly in production.
 
-<h3 className="">
-    
-    &nbsp;Automatic Restart on Reboot
-</h3>
+### Automatic Restart on Reboot
 
 To ensure your applications restart after a server reboot, run:
+
 ```bash
 pm2 save
 pm2 startup
 ```
 
-<h3 className="">
-    
-    &nbsp;Log Management
-</h3>
+### Log Management
 
 PM2 can manage your backend application's logs. To view logs, run:
+
 ```bash
 pm2 logs solidx-api
 ```
 
 Nginx logs can be viewed at:
+
 ```bash
 sudo tail -f /var/log/nginx/access.log
 sudo tail -f /var/log/nginx/error.log
 ```
 
 For log rotation, you can use `pm2-logrotate` for PM2 logs:
+
 ```bash
 pm2 install pm2-logrotate
 pm2 set pm2-logrotate:max_size 10M
 pm2 set pm2-logrotate:compress true
 ```
 
-<h3 className="">
-    
-    &nbsp;Monitoring
-</h3>
+### Monitoring
 
 You can monitor your application's resource usage with:
+
 ```bash
 pm2 monit
 ```
 
-Congratulations! You have successfully deployed and secured your SolidX application on a VM.
+<Callout type="info" title="Production Checklist">
+
+Before calling the VM deployment production-ready, confirm:
+
+- PM2 restarts correctly after reboot.
+- Nginx configuration validates cleanly.
+- SSL certificates are active and renew successfully.
+- Logs are rotated and monitored.
+- The database, API, and frontend all use the correct production environment values.
+
+</Callout>
+
+You have successfully deployed and secured your SolidX application on a VM.

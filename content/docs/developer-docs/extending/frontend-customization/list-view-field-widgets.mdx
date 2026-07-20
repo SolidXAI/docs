@@ -1,6 +1,6 @@
 ---
 title: List Column Widgets
-icon: "puzzle-piece"
+icon: "columns-3"
 description: Learn how to create list column widgets for the frontend of your application.
 summary: "Guide to customizing list field display in SolidX using built-in or custom widgets. Covers module-based file location, manifest registration, `viewWidget` wiring, `SolidListFieldWidgetProps`, and examples like score widgets with aliases."
 solidx_concerns: [frontend.extensions.custom_widgets, create_custom_list_field_widget]
@@ -14,8 +14,8 @@ They are configured with the `viewWidget` attribute in list view layout JSON.
 
 You can use either:
 
-- built-in widgets provided by `@solidxai/core-ui`
-- custom widgets registered through the owning UI module manifest
+- Built-in widgets provided by `@solidxai/core-ui`
+- Custom widgets registered through the owning UI module manifest
 
 For example, to display a user's name with an avatar, you can use the built-in `SolidShortTextAvatarWidget`.
 
@@ -150,10 +150,20 @@ export default libraryUiModule;
 
 ## How It Works
 
-1. SolidX loads the list view layout.
-2. It checks fields with a `viewWidget` attribute.
-3. The registered widget component is resolved by name or alias.
-4. The widget is rendered for each row with props of type `SolidListFieldWidgetProps`.
+<Steps>
+  <Step>
+    SolidX loads the list view layout.
+  </Step>
+  <Step>
+    It checks fields with a `viewWidget` attribute.
+  </Step>
+  <Step>
+    The registered widget component is resolved by name or alias.
+  </Step>
+  <Step>
+    The widget is rendered for each row with props of type `SolidListFieldWidgetProps`.
+  </Step>
+</Steps>
 
 ```tsx
 export type SolidListFieldWidgetProps = {
@@ -181,15 +191,15 @@ Use `solidGet`, `solidPost`, `solidPut`, `solidPatch`, `solidDelete`, or `solidA
 
 ### Option B: Redux / RTK Query
 
-If the widget participates in wider shared state, place RTK Query APIs, reducers, and middleware under:
+Use this option when the list field widget belongs to a module-owned API strategy and should participate in shared cached state, invalidation, or coordinated refresh flows.
 
-- `solid-ui/src/<module-name>/redux/`
+Place RTK Query APIs, reducers, and middleware under `solid-ui/src/<module-name>/redux/`, and register them through the same module manifest.
 
-and register them through the same module manifest.
+See [Redux Module Integration](/docs/developer-docs/extending/frontend-customization/redux-module-integration) for the full module-owned pattern.
 
 ## Related
 
-- [Form View Field Widgets](./form-view-field-widgets.md)
-- [Kanban Card Widget](./kanban-card-widget.md)
-- [Custom Widgets](./custom-widgets.md)
-- [Redux Module Integration](./redux-module-integration.md)
+- [Form View Field Widgets](/docs/developer-docs/extending/frontend-customization/form-view-field-widgets)
+- [Kanban Card Widget](/docs/developer-docs/extending/frontend-customization/kanban-card-widget)
+- [Custom Widgets](/docs/developer-docs/extending/frontend-customization/custom-widgets)
+- [Redux Module Integration](/docs/developer-docs/extending/frontend-customization/redux-module-integration)

@@ -1,0 +1,148 @@
+---
+title: Solid App Template
+icon: "package-open"
+description: Deployment starting points for applications generated from the create-solid-app template.
+summary: Explains how to take a generated SolidX application live from the template structure, covering manual backend/frontend deployment and the Docker-based path.
+---
+
+## Template Deployment Overview
+
+This guide explains how to deploy a Solid application generated from the `create-solid-app` template.
+
+The template gives you two practical starting paths:
+
+- Manual deployment, where the backend and frontend are built and run as separate processes.
+- Docker deployment, where the backend and frontend are packaged as containers and run through Docker Compose or a container platform.
+
+<Callout type="info" title="Mental Model">
+
+The generated template already separates the deployment concerns for `solid-api` and `solid-ui`.
+
+- `solid-api` is the backend runtime.
+- `solid-ui` is the frontend application.
+- The root project can coordinate environment values and Docker-based execution.
+
+Use this page to understand the template-level deployment shape before choosing a VM, Docker, or ECS guide.
+
+</Callout>
+
+## Manual Deployment
+
+This approach involves building the frontend and backend applications and running them as separate processes.
+
+### Prerequisites
+
+- Node.js and npm installed on your server.
+- A database such as PostgreSQL or MongoDB running and accessible from your server.
+
+### Clone Your Project
+
+```bash
+git clone <your-project-repository>
+cd <your-project-directory>
+```
+
+### Set Up the Backend
+
+Navigate to the `solid-api` directory:
+
+```bash
+cd solid-api
+```
+
+Install dependencies:
+
+```bash
+npm install
+```
+
+Create a `.env` file and configure your database connection and other environment variables. You can use `.env.example` as a reference.
+
+Build the application:
+
+```bash
+npm run build
+```
+
+Run the application:
+
+```bash
+npm run start:prod
+```
+
+### Set Up the Frontend
+
+Navigate to the `solid-ui` directory:
+
+```bash
+cd ../solid-ui
+```
+
+Install dependencies:
+
+```bash
+npm install
+```
+
+Create a `.env` file and configure your API URL and other environment variables.
+
+Build the application:
+
+```bash
+npm run build
+```
+
+Run the application:
+
+```bash
+npm run start
+```
+
+<Callout type="info" title="Process Management">
+
+For a long-running production server, use a process manager such as PM2 to keep the backend process alive and restart it after server reboots.
+
+</Callout>
+
+## Docker Deployment
+
+This approach uses Docker to containerize the frontend and backend applications.
+
+### Prerequisites
+
+- Docker and Docker Compose installed on your server.
+
+### Clone Your Project
+
+```bash
+git clone <your-project-repository>
+cd <your-project-directory>
+```
+
+### Configure Your Environment
+
+Create a `.env` file in the root of your project and configure your database connection, API URL, and other environment variables.
+
+The `docker-compose.yml` file is set up to use this root `.env` file.
+
+<Callout type="warning" title="Secrets">
+
+Do not commit real `.env` files. Keep production credentials out of source control and out of container images.
+
+</Callout>
+
+### Build and Run the Containers
+
+```bash
+docker-compose up -d --build
+```
+
+This command builds the Docker images for the `solid-api` and `solid-ui` applications and runs them in the background.
+
+Your Solid application is now running and accessible on the ports specified in your `docker-compose.yml` file.
+
+## Where to Go Next
+
+- Use [Virtual Machine](/docs/developer-docs/going-live/deploying-to-vm) for a full host-level production setup with PM2, Nginx, and SSL.
+- Use [Docker](/docs/developer-docs/going-live/deploying-to-docker) for a deeper container deployment walkthrough.
+- Use [Amazon ECS](/docs/developer-docs/going-live/deploying-to-ecs) when the Dockerized application should run on AWS Fargate.

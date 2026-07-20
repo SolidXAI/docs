@@ -9,11 +9,11 @@ Dashboard definitions are authored in module metadata under the root-level `dash
 <Callout type="info" title="Mental Model">
 
 The dashboard schema has a small set of core players:
-- the <strong>dashboard definition</strong> describes the screen itself,
-- <strong>variables</strong> describe the inputs a user can use to filter or parameterise the dashboard,
-- <strong>widgets</strong> describe the individual building blocks on the page,
-- <strong>provider bindings</strong> connect those widgets to backend data,
-- and the <strong>default layout</strong> describes how the widgets should initially be arranged.
+- The <strong>dashboard definition</strong> describes the screen itself.
+- <strong>Variables</strong> describe the inputs a user can use to filter or parameterise the dashboard.
+- <strong>Widgets</strong> describe the individual building blocks on the page.
+- <strong>Provider bindings</strong> connect those widgets to backend data.
+- The <strong>default layout</strong> describes how the widgets should initially be arranged.
 
 </Callout>
 
@@ -134,9 +134,9 @@ Each widget binds to a backend provider using `dataProvider`.
 
 `providerContext` is a metadata-authored input passed through to the provider at runtime. It is useful for keeping provider classes reusable. For example:
 
-- a KPI provider can use `providerContext.metric` to decide which aggregate to compute,
-- a chart provider can use `providerContext.bucket` to choose `hour` vs `day`,
-- a table provider can use `providerContext.columns` and `providerContext.sort` to shape the output.
+- A KPI provider can use `providerContext.metric` to decide which aggregate to compute.
+- A chart provider can use `providerContext.bucket` to choose `hour` vs `day`.
+- A table provider can use `providerContext.columns` and `providerContext.sort` to shape the output.
 
 For custom frontend rendering, add `componentName`.
 
@@ -176,11 +176,11 @@ Dashboards should be exposed via metadata-driven menu/action pairs.
 
 Recommended pattern:
 
-- action type `custom`
-- action path matching dashboard route
-- menu item referencing the action
+- Action type `custom`
+- Action path matching dashboard route
+- Menu item referencing the action
 
-The action route should follow the canonical dashboard route pattern defined in [solidRoutes.tsx](/Users/harishpatel/Code/javascript/solid-core-ui/src/routes/solidRoutes.tsx), which is:
+The action route should follow the canonical dashboard route pattern:
 
 - `/admin/core/:moduleName/dashboard/:dashboardName`
 
@@ -216,15 +216,15 @@ The dashboard widget permission format is:
 
 Where:
 
-- the first segment is always `dashboard`
-- the second segment is the dashboard name
-- the third segment is the widget matcher
+- The first segment is always `dashboard`
+- The second segment is the dashboard name
+- The third segment is the widget matcher
 
 The widget matcher supports:
 
-- exact widget names
+- Exact widget names
 - `*` for all widgets in a dashboard
-- regex-style patterns in the widget segment
+- Regex-style patterns in the widget segment
 
 Examples from the queue-health reference implementation:
 
@@ -252,26 +252,58 @@ The permission check is enforced on the backend first.
 
 When a user does **not** have permission for a widget:
 
-1. the backend does **not** invoke that widget's data provider at all
-2. the backend returns a normalized unauthorized widget envelope
-3. the frontend still renders the widget card in the grid
-4. the widget body shows a compact `Unauthorized` state
+<Steps>
+  <Step>
+    The backend does **not** invoke that widget's data provider at all.
+  </Step>
+  <Step>
+    The backend returns a normalized unauthorized widget envelope.
+  </Step>
+  <Step>
+    The frontend still renders the widget card in the grid.
+  </Step>
+  <Step>
+    The widget body shows a compact `Unauthorized` state.
+  </Step>
+</Steps>
 
 This behavior is intentional because it preserves layout consistency while keeping protected widget data entirely server-side.
 
 To make dashboard permissions effective in a real project:
 
-1. declare the explicit permission strings in module metadata
-2. attach those permissions to one or more roles
-3. assign those roles to users
+<Steps>
+  <Step>
+    Declare the explicit permission strings in module metadata.
+  </Step>
+  <Step>
+    Attach those permissions to one or more roles.
+  </Step>
+  <Step>
+    Assign those roles to users.
+  </Step>
+</Steps>
 
 That flow is standard SolidX RBAC behavior and dashboards follow the same model.
 
 ## Authoring Checklist
 
-1. Define dashboard in `dashboards[]`.
-2. Define variables with clear names and labels.
-3. Bind each widget to a valid backend `dataProvider`.
-4. Define a complete `defaultLayout` for all widgets.
-5. Add action/menu entries for discoverable navigation.
-6. Add explicit dashboard widget permissions and bind them to the right roles.
+<Steps>
+  <Step>
+    Define the dashboard in `dashboards[]`.
+  </Step>
+  <Step>
+    Define variables with clear names and labels.
+  </Step>
+  <Step>
+    Bind each widget to a valid backend `dataProvider`.
+  </Step>
+  <Step>
+    Define a complete `defaultLayout` for all widgets.
+  </Step>
+  <Step>
+    Add action and menu entries for discoverable navigation.
+  </Step>
+  <Step>
+    Add explicit dashboard widget permissions and bind them to the right roles.
+  </Step>
+</Steps>

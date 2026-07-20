@@ -1,6 +1,6 @@
 ---
 title: Form Field Widgets
-icon: "puzzle-piece"
+icon: "form-input"
 description: Learn how to create form view field widgets for the frontend of your application.
 summary: "Details built-in and custom form view field widgets in SolidX. Covers module-based file location, manifest registration, `editWidget` and `viewWidget` wiring, `SolidFormFieldWidgetProps`, validation concerns, and examples such as slider widgets with aliases."
 solidx_concerns: [frontend.extensions.custom_widgets, create_custom_form_field_widget]
@@ -11,15 +11,15 @@ solidx_concerns: [frontend.extensions.custom_widgets, create_custom_form_field_w
 Form view field widgets let you customize how fields are displayed inside a form view.
 They support both:
 
-- **edit mode** via `editWidget`
-- **view mode** via `viewWidget`
+- **Edit mode** via `editWidget`
+- **View mode** via `viewWidget`
 
 You can use either:
 
-- **built-in widgets** provided by the framework, or
-- **custom widgets** that you create and register through the owning UI module manifest.
+- **Built-in widgets** provided by the framework, or
+- **Custom widgets** that you create and register through the owning UI module manifest.
 
-Example: display an integer field `score` as a slider using the built-in `integerSlider` widget.
+Example: Display an integer field `score` as a slider using the built-in `integerSlider` widget.
 
 ```json
 {
@@ -49,6 +49,9 @@ In the above example, the `editWidget` attribute specifies the widget to use in 
 ## Built-in Widgets
 
 SolidX ships with a set of pre-built widgets for many field types. You can reference these directly in the layout JSON without writing or registering any code.
+
+<Tabs defaultValue="edit-widgets">
+<TabItem value="edit-widgets" label="Edit Widgets">
 
 ### Edit Widgets (`editWidget`)
 
@@ -94,6 +97,9 @@ Used in edit mode via the `editWidget` attribute on a form field.
 
 </div>
 
+</TabItem>
+<TabItem value="view-widgets" label="View Widgets">
+
 ### View Widgets (`viewWidget`)
 
 Used in read-only mode via the `viewWidget` attribute on a form field.
@@ -125,6 +131,9 @@ Used in read-only mode via the `viewWidget` attribute on a form field.
 | `relation.one2many` | Read-only embedded table for one-to-many | `DefaultRelationOneToManyFormViewWidget` | - |
 
 </div>
+
+</TabItem>
+</Tabs>
 
 ## Creating a Custom Widget
 
@@ -235,12 +244,27 @@ solid-api/module-metadata/<module-name>/<module-name>-metadata.json
 
 ## How It Works
 
-1. SolidX loads the form layout in edit mode.
-2. It identifies fields with an `editWidget` or `viewWidget`.
-3. It resolves the registered widget component by name or alias.
-4. The widget is rendered with props of type `SolidFormFieldWidgetProps`.
-5. The widget applies your custom rendering logic.
-6. Default widgets are also rendered using the same mechanism.
+<Steps>
+  <Step>
+    SolidX loads the form layout in edit mode.
+  </Step>
+  <Step>
+    It identifies fields with an `editWidget` or `viewWidget`.
+  </Step>
+  <Step>
+    It resolves the registered widget component by name or alias.
+  </Step>
+  <Step>
+    The widget is rendered with props of type `SolidFormFieldWidgetProps`.
+  </Step>
+  <Step>
+    The widget applies your custom rendering logic.
+  </Step>
+</Steps>
+
+<Callout type="info" title="Built-in and Custom Widgets Share the Same Rendering Path">
+  Default widgets are also rendered using the same mechanism.
+</Callout>
 
 ## Widget Props Contract
 
@@ -266,10 +290,10 @@ export type SolidFieldProps = {
 
 Guidance:
 
-- use `fieldContext.fieldMetadata` for field constraints and display metadata
-- use `fieldContext.field` for layout attributes such as label and widget choice
-- use `formik.values` and `formik.setFieldValue(...)` for form state changes
-- respect `readOnly`, validation, and required-state behavior
+- Use `fieldContext.fieldMetadata` for field constraints and display metadata
+- Use `fieldContext.field` for layout attributes such as label and widget choice
+- Use `formik.values` and `formik.setFieldValue(...)` for form state changes
+- Respect `readOnly`, validation, and required-state behavior
 
 ## View Widgets (Read-Only Mode)
 
@@ -309,16 +333,14 @@ Use `solidGet`, `solidPost`, `solidPut`, `solidPatch`, `solidDelete`, or `solidA
 
 ### Option B: Redux / RTK Query
 
-If the widget participates in a wider module-owned data flow, place RTK Query APIs, reducers, and middleware under:
+Use this option when the form field widget belongs to a module-owned API strategy and should participate in shared cached state, invalidation, or coordinated refresh flows.
 
-- `solid-ui/src/<module-name>/redux/`
+Place RTK Query APIs, reducers, and middleware under `solid-ui/src/<module-name>/redux/`, and register them through the same module manifest.
 
-and register them through the same UI module manifest.
-
-See also: [Redux Module Integration](./redux-module-integration.md) and [Solid HTTP API](./solid-http-api.md)
+See [Redux Module Integration](/docs/developer-docs/extending/frontend-customization/redux-module-integration) for the full module-owned pattern. For direct API helpers, see [Solid HTTP API](/docs/developer-docs/extending/frontend-customization/solid-http-api).
 
 ## Related
 
-- [List View Field Widgets](./list-view-field-widgets.md) - built-in and custom widgets for list column display
-- [Kanban Card Widget](./kanban-card-widget.md) - widgets for kanban card fields
-- [Custom Widgets](./custom-widgets.md) - general guide to registering extension components
+- [List View Field Widgets](/docs/developer-docs/extending/frontend-customization/list-view-field-widgets) - built-in and custom widgets for list column display
+- [Kanban Card Widget](/docs/developer-docs/extending/frontend-customization/kanban-card-widget) - widgets for kanban card fields
+- [Custom Widgets](/docs/developer-docs/extending/frontend-customization/custom-widgets) - general guide to registering extension components
