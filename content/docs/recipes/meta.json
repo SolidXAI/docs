@@ -5,6 +5,7 @@
     "additional-datasources",
     "customizing-ui-theme",
     "filtering",
+    "module-metadata-seeder-events",
     "relation-field-filtering",
     "soft-delete",
     "workflow-status"
