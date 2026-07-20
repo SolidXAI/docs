@@ -2,7 +2,7 @@
 title: Module Metadata Seeder Events
 icon: "radio"
 description: Listen to module metadata seeder lifecycle events from a consuming SolidX project.
-summary: Shows how core emits `module-metadata-seeder.started` and `module-metadata-seeder.finished`, and how a consuming project like mswipe-erp-solidx can register optional NestJS event listeners for those named events.
+summary: Shows how core emits `module-metadata-seeder.started` and `module-metadata-seeder.finished`, and how a consuming SolidX project can register optional NestJS event listeners for those named events.
 keywords: [seeder, events, nestjs, event-emitter, metadata, recipe]
 ---
 
@@ -44,13 +44,13 @@ The payload includes:
 - `pruneMetadata`
 - `seedGlobalMetadata`
 
-## Consuming From `mswipe-erp-solidx`
+## Consuming From Your App
 
-`mswipe-erp-solidx/solid-api` already imports `EventEmitterModule.forRoot()` in [app.module.ts](/home/abhishekpandit/Abhishek/Projects/mswipe-erp-solidx/solid-api/src/app.module.ts), so it can register listeners directly.
+Import `EventEmitterModule.forRoot()` once in your application's root module, then register any listeners you need.
 
 Create a listener:
 
-```ts title="solid-api/src/listeners/module-metadata-seeder.listener.ts"
+```ts title="src/listeners/module-metadata-seeder.listener.ts"
 import { Injectable, Logger } from '@nestjs/common';
 import { OnEvent } from '@nestjs/event-emitter';
 import {
@@ -81,7 +81,7 @@ export class ModuleMetadataSeederListener {
 
 Register the listener in the consuming module:
 
-```ts title="solid-api/src/app.module.ts"
+```ts title="src/app.module.ts"
 import { ModuleMetadataSeederListener } from './listeners/module-metadata-seeder.listener';
 
 @Module({
@@ -95,7 +95,7 @@ export class AppModule {}
 
 ## Notes
 
-- Import `EventEmitterModule.forRoot()` once in the consuming app's root module. `mswipe-erp-solidx` already does this.
+- Import `EventEmitterModule.forRoot()` once in the consuming app's root module.
 - Listener registration is optional. If no listener is registered, seeding behavior is unchanged.
 - The `finished` event is emitted for both successful and failed runs. Check `payload.success`.
 - The payload exposes normalized seed options, which is a better contract than raw CLI argv because the seeder can also be invoked from code, not only from `solidctl`.
