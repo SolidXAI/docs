@@ -1,0 +1,10 @@
+{
+  "title": "Run Tests",
+  "icon": "play-circle",
+  "pages": [
+    "index",
+    "manual-runs",
+    "run-details",
+    "failure-artifacts"
+  ]
+}

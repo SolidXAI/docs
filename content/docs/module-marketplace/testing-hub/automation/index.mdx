@@ -1,0 +1,29 @@
+---
+title: Keep Tests Running
+icon: "clock"
+description: Schedule important tests and keep the right people informed without relying on manual reminders.
+---
+
+import { CalendarClock, Mail, Webhook } from 'lucide-react';
+
+
+Customer journeys should not only be tested when someone remembers. Testing Hub can run them automatically and notify the people who need to know the result.
+
+<Cards>
+  <Card icon={<CalendarClock />} title="Schedule tests" href="/docs/module-marketplace/testing-hub/automation/schedules">
+    Choose when your customer journeys should be tested automatically.
+  </Card>
+  <Card icon={<Mail />} title="Choose notifications" href="/docs/module-marketplace/testing-hub/automation/notifications">
+    Decide who should hear about a result and when.
+  </Card>
+  <Card icon={<Webhook />} title="Send results to other tools" href="/docs/module-marketplace/testing-hub/automation/webhooks">
+    Send a test result to tools your team already uses, such as Slack or Teams.
+  </Card>
+</Cards>
+
+## When automatic tests help most
+
+- Every morning, so the team starts the day with a current health view.
+- Before a regular release review.
+- After a busy period for customer activity.
+- For the small group of journeys that are most important to the business.

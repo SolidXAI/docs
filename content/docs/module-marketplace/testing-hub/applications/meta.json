@@ -1,0 +1,10 @@
+{
+  "title": "Applications",
+  "icon": "layout-grid",
+  "pages": [
+    "index",
+    "register-an-application",
+    "tags",
+    "team-and-users"
+  ]
+}

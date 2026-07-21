@@ -1,0 +1,10 @@
+{
+  "title": "Scheduling & Automation",
+  "icon": "clock",
+  "pages": [
+    "index",
+    "schedules",
+    "notifications",
+    "webhooks"
+  ]
+}
