@@ -4,9 +4,11 @@
   "pages": [
     "mental-model",
     "getting-started",
-    "applications",
-    "running-tests",
-    "automation",
+    "add-product",
+    "author-scenarios",
+    "run-tests",
+    "understand-test-result",
+    "scheduling-and-automation",
     "dashboard"
   ]
 }
