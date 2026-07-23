@@ -1,20 +1,24 @@
 ---
-title: How Testing Hub Fits Your Application
+title: How Test Hub Fits Your Application
 icon: "book-open"
-description: A simple mental model for using Testing Hub to test customer journeys.
+description: A simple mental model for using Test Hub to test customer journeys.
 ---
 
 
-Testing Hub follows the same simple cycle your team already uses when preparing a release: decide what matters, test it, understand the result, and act when needed.
+Test Hub follows the same simple cycle your team already uses when preparing a release: decide what matters, test it, understand the result, and act when needed.
+
+<Callout type="info" title="Built on SolidX's Core Testing Framework">
+  Test Hub runs your tests using **SolidX's Core Testing Framework** — the same metadata-driven engine that powers automated API and browser (Playwright) testing across SolidX. Test Hub adds the product experience on top: registering applications, authoring scenarios with the MCP AI assistant, running them, and reading results. To understand the underlying framework, see [SolidX Core Testing Framework](https://docs.solidxai.com/docs/developer-docs/testing).
+</Callout>
 
 ## The mental model
 
-| In Testing Hub | What it means for your application |
+| In Test Hub | What it means for your application |
 |---|---|
 | **Application** | The website, service, or area of your business that you want to test. |
 | **Customer journey** | An important task someone must be able to complete, such as signing in or placing an order. |
 | **Test scenario** | A saved test for one customer journey, created with the MCP AI assistant. For example: confirm that a customer can sign in. |
-| **Test run** | The occasion when Testing Hub runs one or more selected test scenarios. |
+| **Test run** | The occasion when Test Hub runs one or more selected test scenarios. |
 | **Result** | A clear record of which customer journeys passed and which failed. |
 
 ## A typical release flow
