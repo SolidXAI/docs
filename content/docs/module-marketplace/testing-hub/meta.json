@@ -1,0 +1,14 @@
+{
+  "title": "Testing Hub",
+  "icon": "flask-conical",
+  "pages": [
+    "mental-model",
+    "getting-started",
+    "add-product",
+    "author-scenarios",
+    "run-tests",
+    "understand-test-result",
+    "scheduling-and-automation",
+    "dashboard"
+  ]
+}
