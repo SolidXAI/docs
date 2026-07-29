@@ -228,7 +228,9 @@ Each executable step can include:
 - `saveAs`: Save the step result into the resource store.
 - `name`: Optional reporting label.
 - `spec`: Custom spec id for `test.spec`.
-- `timeoutMs`: Per-step timeout override.
+- `timeoutMs`: A limit on how long the whole step may take.
+
+`timeoutMs` here is not the same as `timeoutMs` inside a UI step's `with` block. Use this one to bound a step that could hang, such as `api.request`. Use the one inside `with` to control how long a UI step waits for an element, because it reports which selector it was waiting for. See [Timeouts and Waiting](/docs/developer-docs/testing/timeouts).
 
 ## Interpolation
 

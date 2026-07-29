@@ -60,6 +60,8 @@ Within scenarios, the UI base URL is available as `${env:TEST_UI_BASE_URL}`.
 
 If a scenario includes UI execution, the browser lifecycle is managed by the test runner.
 
+UI steps wait up to 30 seconds for an element before failing. If that is not right for your application, see [Timeouts and Waiting](/docs/developer-docs/testing/timeouts) for how to change it.
+
 ## Core UI Operations
 
 ### Navigation
@@ -198,7 +200,7 @@ Practical patterns from real scenarios:
 - Use `.solid-sidebar-tree-link:has(.solid-sidebar-tree-label:text('ModelName'))` to click a sidebar model link.
 - Assert `table tbody` visibility to confirm a list view has loaded.
 
-`util.sleep` can be useful while stabilizing a new flow, but over time it is better to rely on stronger URL or visibility-based assertions wherever possible.
+Avoid `util.sleep` for waiting. UI steps already wait for elements on their own, so a fixed delay only slows the run down. If a step needs more time, raise its `timeoutMs` instead — see [Timeouts and Waiting](/docs/developer-docs/testing/timeouts).
 
 ## Mixed Scenarios
 

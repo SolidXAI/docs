@@ -1,0 +1,135 @@
+---
+title: Timeouts and Waiting
+icon: "timer"
+description: How long test steps wait before failing, and how to change it when the defaults are not right for your application.
+summary: Practical guide to the three timeout settings available when authoring SolidX test scenarios. Explains which one to use for a slow screen, a hanging API call, or a long flow, with examples and a symptom-to-fix reference.
+---
+
+Your tests already wait. A step that looks for a button waits for it to appear, and continues the moment it does. You do not need to add waiting to a scenario for it to work.
+
+This page is for when the defaults are not right: a screen that takes longer than expected, an API call that hangs, or a flow that should never run past a certain point.
+
+## Which Timeout Do I Need?
+
+There are three settings, and confusingly all three are called `timeoutMs`. What matters is **where you put it**.
+
+| Where you put it | What it controls | Use it when |
+|---|---|---|
+| Inside a UI step's `with` | How long that step waits for an element | A screen is slow to load, or you want one step to give up quickly |
+| Next to `op` on a step | A limit on the whole step | An API call or custom spec might hang |
+| Next to `id` on the scenario | A limit on the whole scenario | A long flow should never exceed a total time |
+
+If you are unsure, you almost certainly want the first one.
+
+<Callout type="info" title="A timeout is a limit, not a delay">
+
+Setting `timeoutMs` to 90 seconds does not make your test take 90 seconds. It means the step is *allowed* up to 90 seconds before it gives up. A step that succeeds in half a second still takes half a second.
+
+So raising a timeout costs you nothing on a passing test. You only ever wait the full amount when something is genuinely wrong.
+
+</Callout>
+
+## Waiting Longer For A Slow Screen
+
+This is the common case. Put `timeoutMs` inside the step's `with`, next to the selector:
+
+```json
+{
+  "then": {
+    "op": "ui.expectVisible",
+    "with": {
+      "selector": ".solid-report-grid",
+      "timeoutMs": 90000
+    }
+  }
+}
+```
+
+It works the same way on any UI step:
+
+```json
+{ "given": { "op": "ui.goto",  "with": { "url": "/reports", "timeoutMs": 60000 } } },
+{ "when":  { "op": "ui.click", "with": { "selector": "#run-report", "timeoutMs": 15000 } } },
+{ "and":   { "op": "ui.fill",  "with": { "selector": "#search", "value": "widgets", "timeoutMs": 5000 } } }
+```
+
+Use a **higher** value when a particular screen is genuinely slow — a report that takes a minute to build, a dashboard with a lot of data. Use a **lower** value when you want a step to fail quickly rather than waiting the full default.
+
+## Failing Fast When Something Hangs
+
+API steps and custom specs have no time limit of their own. If the server never responds, the step waits forever and your test run never finishes.
+
+To bound them, put `timeoutMs` next to `op`, not inside `with`:
+
+```json
+{
+  "when": {
+    "op": "api.request",
+    "timeoutMs": 30000,
+    "with": {
+      "method": "POST",
+      "url": "${env:BASE_URL}/api/reports/generate"
+    }
+  }
+}
+```
+
+This is the one case where the step-level setting is the right choice. For UI steps, always prefer the `with` form — see below.
+
+## Capping A Whole Scenario
+
+To limit an entire flow rather than a single step, put `timeoutMs` on the scenario itself, alongside `id` and `steps`:
+
+```json
+{
+  "id": "ui-bulk-import-flow",
+  "name": "Import a large file and verify the result",
+  "type": "ui",
+  "timeoutMs": 300000,
+  "steps": [ ]
+}
+```
+
+Useful as a safety net in CI, so a single misbehaving scenario cannot stall the whole run. Note that if the scenario also has `retries`, the budget applies to each attempt, so total time can be a multiple of it.
+
+<Callout type="warning" title="Keep the scenario limit generous">
+
+If a scenario's `timeoutMs` is lower than what its steps are allowed, the scenario limit runs out first. You then get a message saying the scenario ran too long, instead of the more useful one telling you which element the test was waiting for.
+
+Either leave the scenario limit off, or set it comfortably above the time your steps need.
+
+</Callout>
+
+## Changing The Default For Every Test
+
+UI steps wait 30 seconds by default. To change that for a whole run:
+
+```bash
+solidctl test run --module library-management --ui-timeout-ms 60000
+```
+
+Or set `UI_TIMEOUT_MS` in the environment, which is usually easier in CI.
+
+For a permanent default, go to **Settings → Testing Settings** in the admin screen and set **UI Test Default Timeout**. There is a matching **UI Test Navigation Timeout** that applies only to page loads, so you can be generous about pages loading while staying strict about elements appearing.
+
+The most specific setting always wins. A `timeoutMs` on a step beats the run flag, which beats the setting.
+
+## Common Situations
+
+| What you are seeing | What to do |
+|---|---|
+| One screen is slow, the rest are fine | Add `with.timeoutMs` to the step that waits for that screen |
+| Every screen is slow on CI, fine locally | Set `UI_TIMEOUT_MS` in the CI environment, leave the scenario alone |
+| A test run hangs and never finishes | Add step-level `timeoutMs` to your `api.request` steps |
+| A step fails but the message only names the operation | You have a step-level or scenario-level limit firing first; raise it so the element message comes through |
+| You want a broken selector reported quickly | Lower `with.timeoutMs` on that step |
+| A URL check fails right after clicking a link | `ui.expectUrl` checks immediately and does not wait. Assert that something on the new page is visible first, then check the URL |
+| You are tempted to add `util.sleep` so a step has time | Do not. UI steps already wait. If more time is needed, raise that step's `with.timeoutMs` |
+
+## Troubleshooting
+
+**My `timeoutMs` seems to be ignored.** It must be a plain number. If you write `"timeoutMs": "${env:SLOW_TIMEOUT}"`, the value arrives as text rather than a number and is discarded without an error. Use a number directly, or set the run-wide value with `UI_TIMEOUT_MS` instead.
+
+**The failure message does not tell me which element failed.** A scenario-level or step-level limit fired before the element wait did. Remove or raise it, then run again.
+
+**A step now takes 30 seconds to fail when it used to fail immediately.** The step is waiting the full timeout because its selector never matches. The timeout is not the problem — the selector is. Check it against the running application before raising the limit.

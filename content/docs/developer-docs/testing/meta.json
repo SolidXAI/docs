@@ -8,6 +8,7 @@
     "authoring-scenarios",
     "workflow",
     "api-testing",
-    "ui-testing"
+    "ui-testing",
+    "timeouts"
   ]
 }

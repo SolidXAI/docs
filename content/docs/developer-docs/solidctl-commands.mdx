@@ -344,6 +344,8 @@ solidctl test run [options]
 | `--api-base-url [url]` | API base URL; defaults to `process.env.BASE_URL` |
 | `--ui-base-url [url]` | UI base URL; defaults to `process.env.FRONTEND_BASE_URL` |
 | `--headless [true\|false]` | Run UI browser in headless mode; default `true` |
+| `--ui-timeout-ms [number]` | Default wait for UI steps in ms; defaults to `process.env.UI_TIMEOUT_MS`, then the `uiTestDefaultTimeoutMs` setting, then `30000`. See [Timeouts and Waiting](/docs/developer-docs/testing/timeouts) |
+| `--ui-navigation-timeout-ms [number]` | Default wait for `ui.goto` in ms; defaults to `process.env.UI_NAVIGATION_TIMEOUT_MS`, then the `uiTestNavigationTimeoutMs` setting, then `--ui-timeout-ms` |
 | `--timeout-ms [number]` | Default scenario timeout in milliseconds |
 | `--retries [number]` | Default scenario retries |
 
