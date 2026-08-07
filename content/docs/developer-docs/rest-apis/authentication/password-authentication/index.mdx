@@ -19,6 +19,51 @@ Password authentication establishes a SolidX session from user credentials and t
 
 </Callout>
 
+## Authentication Path
+
+<figure className="not-prose my-6">
+  <img
+    src="/img/authentication/shared-authentication-architecture-light.png"
+    alt="SolidX authentication architecture showing password and OTP entry points leading to IAM, tokens, and protected REST APIs"
+    className="w-full rounded-lg border border-fd-border bg-white dark:hidden"
+  />
+  <img
+    src="/img/authentication/shared-authentication-architecture-dark.png"
+    alt="SolidX authentication architecture showing password and OTP entry points leading to IAM, tokens, and protected REST APIs"
+    className="hidden w-full rounded-lg border border-fd-border bg-[#0f172a] dark:block"
+  />
+  <figcaption className="mt-2 text-sm text-fd-muted-foreground">
+    Password authentication establishes a SolidX IAM session from user-managed credentials.
+  </figcaption>
+</figure>
+
+In a password-based flow, your application collects the user's email or username and password, then sends them to `POST /api/iam/authenticate`. If the credentials are valid, SolidX IAM returns two tokens:
+
+- `accessToken`: Send this with each protected API request in the `Authorization: Bearer <ACCESS_TOKEN>` header.
+- `refreshToken`: Use this only to request a new access token when the current one expires. Treat it as a long-lived secret. For browser apps, prefer a secure, `HttpOnly`, `SameSite` cookie when your architecture can set it server-side, or another storage pattern that is not exposed to arbitrary JavaScript. Avoid treating refresh tokens like normal application state.
+
+When a protected REST API receives the bearer token, SolidX validates it, identifies the user, loads the user's roles, and makes that authenticated context available to the API request.
+
+## Password Sign-In Flow
+
+<figure className="not-prose my-6">
+  <img
+    src="/img/authentication/password-auth-sequence-light.png"
+    alt="Password authentication sequence: register user, authenticate with password, call protected API with bearer token, and refresh tokens"
+    className="w-full rounded-lg border border-fd-border bg-white dark:hidden"
+  />
+  <img
+    src="/img/authentication/password-auth-sequence-dark.png"
+    alt="Password authentication sequence: register user, authenticate with password, call protected API with bearer token, and refresh tokens"
+    className="hidden w-full rounded-lg border border-fd-border bg-[#0f172a] dark:block"
+  />
+  <figcaption className="mt-2 text-sm text-fd-muted-foreground">
+    The password flow starts with registration, exchanges credentials for tokens, and uses refresh tokens to continue the session.
+  </figcaption>
+</figure>
+
+The diagram above illustrates the standard password-authentication lifecycle. After a user account exists, the application submits the user's credentials to SolidX IAM. A successful authentication response returns an access token for protected API requests and a refresh token for renewing the session through the refresh endpoint.
+
 ## Implementation Overview
 
 SolidX provides a comprehensive password-based authentication mechanism with the following endpoints:
@@ -41,9 +86,14 @@ The authenticate endpoint returns access and refresh tokens. Use the access toke
 
 Allows users to create a new account.
 
+### Endpoint
+
+```http
+POST /api/iam/register
+```
+
 ### Environment Variables
 
-- `IAM_PASSWORD_REGISTRATION_ENABLED`: Enables/disables registration.
 - `IAM_ALLOW_PUBLIC_REGISTRATION`: Allows public registration when set to `true`.
 
 <Tabs defaultValue="request">
@@ -100,6 +150,12 @@ The response body can be optimized. It currently includes sensitive data like pa
 
 Log in and receive access and refresh tokens.
 
+### Endpoint
+
+```http
+POST /api/iam/authenticate
+```
+
 ### Environment Variables
 
 - `IAM_JWT_ACCESS_TOKEN_TTL`: TTL for access tokens (default: 60 mins).
@@ -150,6 +206,12 @@ Log in and receive access and refresh tokens.
 
 Refresh the access token using a valid refresh token.
 
+### Endpoint
+
+```http
+POST /api/iam/refresh-tokens
+```
+
 <Tabs defaultValue="request">
   <TabItem value="request" label="Request">
 
@@ -182,6 +244,10 @@ Refresh the access token using a valid refresh token.
   </TabItem>
 </Tabs>
 
+## What Happens After Login?
+
+After successful password authentication, the client receives an access token and refresh token. Use the access token in the `Authorization: Bearer <ACCESS_TOKEN>` header for protected APIs. Use the refresh token only with the refresh endpoint, and store it as a sensitive credential rather than regular client-side state.
+
 ## 4. Forgot Password
 
 Initiates and confirms password reset flow.
@@ -190,14 +256,18 @@ Initiates and confirms password reset flow.
 
 - `IAM_OTP_EXPIRY`: OTP expiry time (default: 10 mins).
 
-<Tabs defaultValue="initiate">
-  <TabItem value="initiate" label="Initiate">
+### 4.1 Initiate Forgot Password
 
-  ### Request
+Starts the password reset process and sends a reset token to the user.
 
-  ```http
-  POST /api/iam/initiate/forgot-password
-  ```
+### Endpoint
+
+```http
+POST /api/iam/initiate/forgot-password
+```
+
+<Tabs defaultValue="request">
+  <TabItem value="request" label="Request">
 
   ### Headers
 
@@ -213,6 +283,9 @@ Initiates and confirms password reset flow.
     "username": "string"
   }
   ```
+
+  </TabItem>
+  <TabItem value="response" label="Response">
 
   ### Response Body
 
@@ -230,12 +303,25 @@ Initiates and confirms password reset flow.
   ```
 
   </TabItem>
-  <TabItem value="confirm" label="Confirm">
+</Tabs>
 
-  ### Request
+### 4.2 Confirm Forgot Password
+
+Completes the password reset process with the verification token and new password.
+
+### Endpoint
+
+```http
+POST /api/iam/confirm/forgot-password
+```
+
+<Tabs defaultValue="request">
+  <TabItem value="request" label="Request">
+
+  ### Headers
 
   ```http
-  POST /api/iam/confirm/forgot-password
+  Content-Type: application/json
   ```
 
   ### Request Body
@@ -254,13 +340,21 @@ Initiates and confirms password reset flow.
 
 ## 5. Change Password
 
+Changes the password for an existing user.
+
+### Endpoint
+
+```http
+POST /api/iam/change-password
+```
+
 <Tabs defaultValue="request">
   <TabItem value="request" label="Request">
 
-  ### Request
-  
+  ### Headers
+
   ```http
-  POST /api/iam/change-password
+  Content-Type: application/json
   ```
 
   ### Request Body
@@ -281,12 +375,14 @@ Initiates and confirms password reset flow.
 
 Retrieve logged-in user info.
 
+### Endpoint
+
+```http
+GET /api/iam/me
+```
+
 <Tabs defaultValue="request">
   <TabItem value="request" label="Request">
-
-  ```http
-  GET /api/iam/me
-  ```
 
   ### Headers
 
@@ -317,6 +413,12 @@ Retrieve logged-in user info.
 ## 7. Logout
 
 Invalidate the current session.
+
+### Endpoint
+
+```http
+POST /api/iam/logout
+```
 
 <Tabs defaultValue="response">
   <TabItem value="response" label="Response">
