@@ -239,6 +239,7 @@ Before each step runs, the engine resolves interpolation tokens.
 Supported token families include:
 
 - `${env:NAME}` for environment variables.
+- `${secret:key}` for credentials held in the secret store.
 - `${params.foo}` for scenario params.
 - `${res:path.to.value}` for saved runtime resources.
 - `${data:modelUserKey["recUserKeyValue"].field}` for test data lookups.
@@ -274,6 +275,42 @@ Examples:
   }
 }
 ```
+
+## Referencing Secrets
+
+Use `${secret:key}` when a scenario needs a credential — an API key, a password, a bearer token — instead of putting the value in metadata or passing it through an environment variable.
+
+The key is the secret's key exactly as stored. Dots are part of the key, not a path:
+
+```json
+{
+  "when": {
+    "op": "api.request",
+    "with": {
+      "method": "POST",
+      "url": "${env:API_BASE_URL}/api/orders",
+      "headers": {
+        "Authorization": "Bearer ${secret:payments.apiKey}"
+      }
+    }
+  }
+}
+```
+
+How secrets differ from `${env:...}`:
+
+- **They are resolved on the server, from the store.** A run request cannot supply or override a secret value, so a scenario always uses the credential the store holds.
+- **They keep their declared type.** A secret stored as `json` resolves to an object and one stored as `number` to a number, when the token is the entire value. Inside a longer string it is converted to text, as any token is.
+- **Only what you reference is resolved.** The engine scans the scenarios selected for the run and fetches just those keys — a scenario never receives secrets belonging to another scenario in the same run.
+- **A missing secret fails the run before any scenario starts**, rather than failing mid-suite. The same applies to a secret whose status is not `active`, which makes deactivating a secret an effective way to revoke it.
+
+<Callout type="warning" title="Do not reference production credentials yet">
+
+Resolved secret values are not currently redacted from test output. They can appear in console output, API logs, captured response bodies, error details, and the run events sent to Test Hub — which stores them.
+
+Reference secrets belonging to test environments until output redaction ships.
+
+</Callout>
 
 ## Referencing Test Data
 

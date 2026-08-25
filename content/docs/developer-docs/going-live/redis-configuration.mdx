@@ -1,0 +1,64 @@
+---
+title: Redis
+icon: "database"
+description: Recommended Redis memory settings for SolidX applications in production.
+summary: SolidX uses Redis as its cache and session store when REDIS_HOST and REDIS_PORT are configured. This guide covers the two memory settings worth setting explicitly in production, and why the defaults are a poor fit for a session store.
+---
+
+<Callout type="info" title="Mental Model">
+
+Redis holds SolidX sessions, not just cache.
+
+- Evicting a session key logs a user out; evicting a cache key only costs a database round trip.
+- Redis ships with no memory ceiling, so the default failure mode is the host running out of memory rather than Redis shedding load.
+
+</Callout>
+
+SolidX uses Redis when `REDIS_HOST` and `REDIS_PORT` are set, and falls back to an in-process cache otherwise. The in-process fallback is not suitable for more than one instance, since refresh tokens and sessions would not be shared between them.
+
+## Recommended Settings
+
+```
+maxmemory 2gb
+maxmemory-policy volatile-lru
+```
+
+Set `maxmemory` to roughly 70–80% of the memory available to Redis, leaving headroom for its own overhead and fragmentation. The exact figure matters less than setting one at all.
+
+### Why these values
+
+**`maxmemory`** — Redis defaults to no limit. Without a ceiling it grows until the host runs out and the process is killed, losing every session at once. With a ceiling, Redis sheds load in a controlled way instead.
+
+**`volatile-lru`** — evicts only keys that carry an expiry, discarding the least recently used first. All SolidX session and refresh-token keys carry a TTL, so under pressure the oldest sessions are dropped while cached metadata is left intact.
+
+<Callout type="warn">
+
+`maxmemory-policy` only takes effect once `maxmemory` is reached. Setting the policy alone changes nothing.
+
+</Callout>
+
+## Applying Them
+
+```bash
+# redis.conf — persists across restarts
+maxmemory 2gb
+maxmemory-policy volatile-lru
+
+# a running instance — CONFIG REWRITE persists it to redis.conf
+redis-cli CONFIG SET maxmemory 2gb
+redis-cli CONFIG SET maxmemory-policy volatile-lru
+redis-cli CONFIG REWRITE
+
+# docker compose
+command: redis-server --maxmemory 2gb --maxmemory-policy volatile-lru
+```
+
+On managed Redis such as ElastiCache or Azure Cache, these are parameter group or portal settings rather than a config file. ElastiCache derives `maxmemory` from the node size, so only the policy needs choosing.
+
+## Verifying
+
+```bash
+redis-cli info memory | grep -E "used_memory_human|maxmemory_human|maxmemory_policy"
+```
+
+A `maxmemory_human` of `0B` means no ceiling is configured.

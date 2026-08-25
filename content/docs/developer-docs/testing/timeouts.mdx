@@ -112,6 +112,15 @@ Or set `UI_TIMEOUT_MS` in the environment, which is usually easier in CI.
 
 For a permanent default, go to **Settings → Testing Settings** in the admin screen and set **UI Test Default Timeout**. There is a matching **UI Test Navigation Timeout** that applies only to page loads, so you can be generous about pages loading while staying strict about elements appearing.
 
+If you provision environments from configuration rather than by hand, you can set the starting value for those two settings before seeding:
+
+```bash
+COMMON_UI_TEST_DEFAULT_TIMEOUT_MS=60000
+COMMON_UI_TEST_NAVIGATION_TIMEOUT_MS=90000
+```
+
+These apply the first time the settings are created. After that the stored value is what counts, so change it in the admin screen rather than in configuration.
+
 The most specific setting always wins. A `timeoutMs` on a step beats the run flag, which beats the setting.
 
 ## Common Situations
@@ -123,7 +132,7 @@ The most specific setting always wins. A `timeoutMs` on a step beats the run fla
 | A test run hangs and never finishes | Add step-level `timeoutMs` to your `api.request` steps |
 | A step fails but the message only names the operation | You have a step-level or scenario-level limit firing first; raise it so the element message comes through |
 | You want a broken selector reported quickly | Lower `with.timeoutMs` on that step |
-| A URL check fails right after clicking a link | `ui.expectUrl` checks immediately and does not wait. Assert that something on the new page is visible first, then check the URL |
+| A URL check fails right after clicking a link | `ui.expectUrl` waits for the URL to change, so give it more room with `timeoutMs` if the page is slow to navigate |
 | You are tempted to add `util.sleep` so a step has time | Do not. UI steps already wait. If more time is needed, raise that step's `with.timeoutMs` |
 
 ## Troubleshooting

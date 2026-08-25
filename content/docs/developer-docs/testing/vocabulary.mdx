@@ -296,9 +296,18 @@ The process of resolving dynamic placeholders inside testing metadata before a s
 Common token families are:
 
 - `${env:NAME}` reads a value from the test process environment.
+- `${secret:key}` reads a credential from the secret store.
 - `${params.foo}` reads a value from the current scenario params.
 - `${res:path.to.value}` reads a value saved into the runtime resource store.
 - `${data:model["recordKey"].field}` reads a value from indexed `testing.data`.
+
+### Secret
+
+A credential held in the SolidX secret store and referenced from a scenario as `${secret:key}`.
+
+Unlike `${env:...}` values, secrets are never supplied by the caller of a test run. They are resolved on the server from the store, decrypted only for the duration of the run, and returned with the type declared on the secret — a `json` secret resolves to an object, a `number` to a number.
+
+Only the secrets a scenario actually references are resolved, and a scenario never receives secrets referenced by other scenarios in the same run.
 
 ### Reporter
 

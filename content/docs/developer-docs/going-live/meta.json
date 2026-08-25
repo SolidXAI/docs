@@ -6,6 +6,7 @@
     "solid-app-template",
     "deploying-to-vm",
     "deploying-to-ecs",
-    "deploying-to-docker"
+    "deploying-to-docker",
+    "redis-configuration"
   ]
 }

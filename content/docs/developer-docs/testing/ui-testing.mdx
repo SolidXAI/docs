@@ -20,6 +20,28 @@ SolidX supports frontend end-to-end testing through a Playwright-based UI adapte
 
 This lets browser-level automation run through the same metadata-driven testing engine used for API testing.
 
+## Prerequisites
+
+UI scenarios need a Chromium build. SolidX fetches it for you, so there is no manual setup step.
+
+The first test run that selects a UI scenario downloads Chromium (around 150MB) before the run starts, then reuses it on every later run. Runs filtered to API-only scenarios never trigger the download, and neither do projects without UI scenarios — so trying SolidX out costs you nothing until you actually write a UI test.
+
+Applications running Test Hub do not wait for that first run. Test Hub warms the browser up as it starts, so the download is usually finished long before anyone triggers a run. Installing Test Hub is itself the signal that you intend to run UI tests, so there is nothing to configure.
+
+That warm-up never blocks startup — the app boots and serves requests while the download proceeds in the background, and stopping the app cancels a download still in progress. If the warm-up fails, it is logged as a warning and the browser is fetched on the first UI run instead.
+
+<Callout type="note" title="Nothing is downloaded at install time">
+
+`npm install` never fetches a browser. An application without Test Hub that never runs UI scenarios will not download Chromium at all.
+
+</Callout>
+
+<Callout type="warning" title="Docker">
+
+Browsers install to `~/.cache/ms-playwright` on Linux and `~/Library/Caches/ms-playwright` on macOS. A multi-stage build that installs as `root` but runs the app as another user will not find the binary at runtime. Set `PLAYWRIGHT_BROWSERS_PATH` to a shared location in both stages to avoid this.
+
+</Callout>
+
 ## How UI Testing Works
 
 At runtime:
