@@ -117,9 +117,10 @@ showSoftDeleted?: "inclusive" | "exclusive";
 populateGroup?: boolean;
 groupFilter?: BasicFilterDto;
 locale?: string;
-status?: string; // publish | draft (when draft/publish workflow is enabled)
 ```
 </details>
+
+Draft/publish filtering (when enabled on the model) goes through `filters`, not a top-level shortcut - see [Draft & Publish Workflow](/docs/recipes/draft-publish#querying).
 
 ## Permissions & Context
 

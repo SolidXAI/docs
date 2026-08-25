@@ -1,0 +1,170 @@
+---
+title: Internationalisation
+icon: "languages"
+description: Let a model's records be translated into multiple locales, each independently editable.
+keywords: [i18n, internationalisation, locale, localeName, defaultEntityLocaleId, applicableLocales]
+---
+
+<Callout type="info" title="Mental Model">
+
+In SolidX, a translatable record is one logical entity spread across several physical rows - one per locale - linked back to a shared default-locale root.
+
+- Each locale's row has its own id and is edited independently.
+- Nothing is auto-translated - every locale is filled in by hand.
+- The set of available locales is global, not scoped per model.
+
+</Callout>
+
+SolidX can let a model's records exist in more than one language. Each translation is its own row in the same table, linked back to the original ("default locale") row.
+
+## Enabling Internationalisation
+
+Set `internationalisation: true` in the model's metadata JSON:
+
+```json
+{
+  "modelName": "book",
+  "internationalisation": true
+}
+```
+
+<Callout type="warning" title="Model-Creation-Time Only (UI)">
+
+In the model builder UI this can only be turned on when the model is first created - it's disabled once the model already exists. There's no server-side block against flipping it later via the API directly, but see [Caveats](#caveats) before doing that.
+
+</Callout>
+
+## Locales Are Global, Not Per-Model
+
+The list of available locales isn't configured per model - it's one shared list for the whole system, stored in the `Locale` entity (table `ss_locale`):
+
+```typescript
+@Entity("ss_locale")
+export class Locale extends CommonEntity {
+  @Index({ unique: true }) @Column({ type: "varchar" }) locale: string;     // e.g. "en", "fr"
+  @Index() @Column({ type: "varchar" }) displayName: string;                 // e.g. "English"
+  @Index() @Column({ default: true }) isDefault: boolean;
+}
+```
+
+Manage it via `POST` / `PATCH` / `DELETE /locale`, seed it once at bootstrap through the app's metadata JSON, or manage it from the admin UI - the **Solid Core** module has its own **Locale** menu item (a regular list/form view over the `Locale` model) where you can add, edit, or remove locales without touching the API or metadata JSON directly.
+
+```json
+"locales": [
+  { "locale": "en", "displayName": "English", "isDefault": true }
+]
+```
+
+<Callout type="note" title="Exactly One Default Locale">
+
+Exactly one locale must be marked `isDefault: true` - the service rejects setting a second one. Any model with `internationalisation: true` becomes translatable into every locale currently in this table; there's no way to restrict a model to a subset of locales.
+
+</Callout>
+
+## Database Impact
+
+Every entity extending `CommonEntity` already has both columns, whether or not `internationalisation` is enabled:
+
+| Column | Meaning |
+|---|---|
+| `locale_name` | The locale code this row's content is written in (e.g. `"en"`, `"fr"`). |
+| `default_entity_locale_id` | The id of the default-locale row for this logical record. `null` on the default-locale row itself; set on every translation row. |
+
+So one "logical record" is the set of rows where `id === X OR defaultEntityLocaleId === X`, for the default-locale root id `X` - one row per locale, independent primary keys, independently editable.
+
+<Callout type="warning" title="Onboarding an Existing Table">
+
+If you're onboarding an **existing** table via datasource introspection instead of creating a fresh model, these two columns don't exist yet and need a migration (`locale_name varchar(255) null`, `default_entity_locale_id int null`) before you can enable the flag.
+
+</Callout>
+
+## Runtime Behaviour
+
+<Tabs defaultValue="create">
+  <TabItem value="create" label="Creating a Translation">
+
+  There's no separate "create translation" endpoint - it's a normal create call whose payload includes `localeName` and `defaultEntityLocaleId`:
+
+  ```typescript
+  // French translation of book #1
+  await bookService.create({
+    localeName: "fr",
+    defaultEntityLocaleId: 1,
+    title: "Le Petit Prince",
+    // ...
+  });
+  ```
+
+  If you omit `localeName` on create, it defaults to the system's default locale - so creating the very first (root) record needs no locale-specific input at all.
+
+  <Callout type="note" title="Nothing Is Pre-Filled">
+
+  Creating a translation doesn't clone field values from the default-locale record - every field is entered from scratch for that locale.
+
+  </Callout>
+
+  </TabItem>
+  <TabItem value="read" label="Reading">
+
+  `find()` (list) always scopes to one locale - the default locale unless the request passes `locale`:
+
+  ```typescript
+  await bookService.find({});                // default locale's rows only
+  await bookService.find({ locale: "fr" });   // French rows only
+  ```
+
+  `findOne(id)` (get-by-id) isn't locale-filtered - the id already identifies one specific locale's row.
+
+  </TabItem>
+  <TabItem value="delete" label="Deleting & Recovering">
+
+  Deleting the **default-locale root row** cascades and [soft-deletes](/docs/recipes/soft-delete) all of its translations too. Deleting a translation row directly only deletes that one row.
+
+  <Callout type="warning" title="Recover Doesn't Mirror This">
+
+  Recovering a deleted root row does not bring its translations back - they stay soft-deleted independently and need recovering one by one.
+
+  </Callout>
+
+  </TabItem>
+</Tabs>
+
+### `applicableLocales`
+
+The form/list view-metadata response includes one entry per system locale, telling the frontend which locales already have a translation for the current record:
+
+```typescript
+{
+  locale: "fr",
+  displayName: "French",
+  isDefault: "no",
+  defaultEntityLocaleId: 1,   // the root id, same on every entry
+  entityId: 4,                 // this locale's row id, or null if no translation exists yet
+}
+```
+
+## UI
+
+- The form's side panel gets an **Info** tab (next to Audit Trail) with a locale dropdown, populated from `applicableLocales`. It's disabled while creating the first (default-locale) record. This tab is shared with [Draft & Publish](/docs/recipes/draft-publish) - it appears whenever either feature is enabled, and shows Published At/By plus a status pill too when draft/publish is also on.
+- Switching locale **navigates** - it doesn't edit inline. Picking a locale with an existing translation routes to that record's form (`?locale=fr&...`); picking one with none yet (`entityId: null`) routes to a genuinely blank create form (`/form/new?locale=fr&defaultEntityLocaleId=1`).
+- The list view shows one locale at a time (the default locale, or whatever `locale` is active via the URL or a filter) - there's no built-in locale switcher on the list itself. Add a filter on `localeName` in the generic filter panel if you need one.
+
+## Combining with Draft & Publish
+
+Both flags can be enabled together. Each locale gets its **own, fully independent** version chain:
+
+- Creating a translation starts a new chain rooted at that translation's own id, unrelated to the default-locale record's chain.
+- Editing a published translation copies `localeName` and `defaultEntityLocaleId` forward onto the new draft version, so the new version stays correctly tagged to its locale and its root - only the draft/publish columns reset.
+- Publishing, unpublishing, or drafting one locale has zero effect on any other locale's publish state.
+
+If your model has both features and a unique business key, the composite unique index needs all three columns - see [Draft & Publish Workflow](/docs/recipes/draft-publish#database-impact):
+
+```typescript
+@Index(["demoCode", "localeName", "publishedTracker"], { unique: true })
+```
+
+## Caveats
+
+- **Locales are global.** You can't scope a model to a subset of locales - every i18n-enabled model is translatable into all of them.
+- **The UI only lets you enable i18n at model-creation time.** Flipping the flag on an existing model via the API leaves its existing rows with `localeName: null`, which won't match the locale filter `find()` applies - they become invisible in list views (though still fetchable directly by id) until you backfill `localeName` on them.
+- **Delete cascades to translations, recover doesn't.** See [Deleting & Recovering](#deleting--recovering) - recovering the root row leaves its translations soft-deleted.

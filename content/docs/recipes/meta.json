@@ -8,6 +8,8 @@
     "module-metadata-seeder-events",
     "relation-field-filtering",
     "soft-delete",
-    "workflow-status"
+    "workflow-status",
+    "draft-publish",
+    "internationalisation"
   ]
 }

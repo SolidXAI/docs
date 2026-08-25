@@ -29,6 +29,8 @@ To create a new model:
 | Plural Name | Plural name of the model, used for internal purposes like API endpoints etc. |
 | Table Name | By default table names are generated automatically based on the singular name of the model, you can choose to specify a different name if required. |
 | Enable Soft Delete | If you would like to support soft delete functionality on a model. |
+| Enable Draft & Publish Workflow | If you would like records to go through a draft/publish workflow instead of being live the moment they're saved. |
+| Is Internationalisation Enabled | If you would like records to support translations in multiple languages. Can only be set when the model is first created. |
 | Is Child | Sometimes you want to create an extension of an existing model, especially in IAM you might want to extend the user model to create your own definition of a user object. |
 | Enable Audit Tracking | If you would like to audit all data mutations that happen on this model. |
 
@@ -39,6 +41,19 @@ To create a new model:
 Soft delete is a way to "hide" records instead of permanently removing them from the system. When you soft delete something - like a user, form, or entry - it doesn't actually get erased from the database. Instead, it's marked as deleted and no longer shown in the app. This helps prevent accidental data loss and makes it possible to restore deleted items if needed later.
 
 To enable this, click on the checkbox under "Configurations".
+
+
+
+### Draft & Publish Workflow
+
+Draft & Publish lets you work on changes to a record without affecting what your users currently see. Every edit to a live record creates a new draft version alongside it - the published version stays exactly as it is until you choose to publish the draft. Every past version stays available as read-only history, so nothing is ever lost.
+
+To enable this, click on the checkbox under "Configurations".
+
+Draft & Publish supports:
+- Editing a live record without changing what's publicly visible
+- Publishing a draft to make it live, or unpublishing to roll back to the previous version
+- Viewing the full history of every version a record has gone through
 
 
 
@@ -89,7 +104,8 @@ To see the impact of what happens when we generate the code linked to a model me
 
 ### Related Recipes
 
-- [Additional Datasources](../../recipes/additional-datasources.md) - Add additional data sources to your application
-- [Soft Delete](../../recipes/soft-delete.md) - Configure soft delete functionality on your models
+- [Additional Datasources](../../recipes/additional-datasources.mdx) - Add additional data sources to your application
+- [Soft Delete](../../recipes/soft-delete.mdx) - Configure soft delete functionality on your models
 - [Custom User Model](../../developer-docs/extending/backend-customization/extending-users) - Create a custom user object while keeping roles and permissions intact
-- [Internationalization](../../recipes/) - Create models for multi-lingual content when using SolidX as a headless CMS
+- [Internationalization](../../recipes/internationalisation.mdx) - Create models for multi-lingual content when using SolidX as a headless CMS
+- [Draft & Publish Workflow](../../recipes/draft-publish.mdx) - Version records as drafts and publish them live
