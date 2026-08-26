@@ -1,0 +1,357 @@
+---
+title: Settings Providers
+icon: "sliders-horizontal"
+description: Learn how to declare your application's configuration in code and expose it on the admin Settings screen by registering a custom settings provider.
+summary: Covers the `ISettingsProvider` contract, the full `SettingDefinition` field surface, `SettingLevel` semantics for persistence and exposure, seeding behaviour, encrypted settings, typed setting keys, and NestJS registration.
+keywords: [backend, settings, configuration, providers, customization]
+solidx_concerns: [backend.new_settings_provider, new_settings_provider]
+---
+
+## Overview
+
+A settings provider declares configuration in **code**, and SolidX turns that declaration
+into rows in the database and controls on the admin Settings screen. You describe each
+setting once — its key, default value, who may see or change it, and how it should be
+rendered — and the platform handles seeding, persistence, encryption, and the UI.
+
+The split is the important part:
+
+- **Code owns the schema.** Which settings exist, their defaults, levels, groups, and
+  control types come from your provider on every boot.
+- **The database owns the value.** Once an administrator edits a setting, that value wins.
+
+This means adding a setting is an ordinary code change that applies itself on the next
+restart, with no migration to write.
+
+<Callout type="info" title="Mental Model">
+
+Think of a settings provider as the schema, and the database as a sparse override layer.
+
+- Every provider's `getSettings()` is merged into one flat map at startup.
+- Values stored in the database are layered on top of the declared defaults.
+- The merged result is cached in memory and read through `SettingService.getConfigValue()`.
+
+</Callout>
+
+---
+
+## 1. Creating the Provider
+
+Your class implements `ISettingsProvider` and carries the `@SettingsProvider()` decorator
+so the Solid Registry discovers it at startup.
+
+<details open>
+ <summary><strong>Show code: <code>library-settings.provider.ts</code></strong></summary>
+
+```ts
+import { Injectable } from "@nestjs/common";
+import { SettingsProvider, SettingLevel } from "@solidxai/core";
+import type { ISettingsProvider, SettingDefinition } from "@solidxai/core";
+
+const getLibrarySettings = () =>
+  [
+    {
+      moduleName: "library",
+      key: "libraryMaxActiveLoans",
+      value: parseInt(process.env.LIBRARY_MAX_ACTIVE_LOANS ?? "5", 10),
+      level: SettingLevel.SystemAdminEditable,
+      label: "Maximum Active Loans",
+      group: "library-settings",
+      sortOrder: 10,
+      controlType: "numeric",
+      helpText:
+        "How many books a single member may have on loan at one time.",
+    },
+    {
+      moduleName: "library",
+      key: "libraryOverdueReminderEnabled",
+      value: true,
+      level: SettingLevel.SystemAdminEditable,
+      label: "Send Overdue Reminders",
+      group: "library-settings",
+      sortOrder: 20,
+      controlType: "boolean",
+      helpText: "Emails members when a loan passes its due date.",
+    },
+    {
+      moduleName: "library",
+      key: "libraryCatalogueApiKey",
+      value: process.env.LIBRARY_CATALOGUE_API_KEY,
+      level: SettingLevel.SystemEnv,
+    },
+  ] as const satisfies SettingDefinition[];
+
+// Derives a union of every key above: "libraryMaxActiveLoans" | ...
+export type LibrarySetting = ReturnType<
+  typeof getLibrarySettings
+>[number]["key"];
+
+@SettingsProvider()
+@Injectable()
+export class LibrarySettingsProvider implements ISettingsProvider {
+  getSettings() {
+    return getLibrarySettings();
+  }
+}
+```
+</details>
+
+<Callout type="info" title="Why the `as const satisfies` wrapper">
+
+`satisfies SettingDefinition[]` type-checks every entry, while `as const` keeps the
+literal key strings so the `LibrarySetting` union can be derived from them. You get
+autocomplete and typo protection when reading settings back. SolidX core declares its own
+settings exactly this way.
+
+</Callout>
+
+---
+
+## 2. Registering the Provider
+
+Settings providers are standard NestJS providers. Register the class in the module where
+it lives.
+
+```ts
+// library.module.ts
+@Module({
+  ...
+  providers: [LibrarySettingsProvider],
+  ...
+})
+```
+
+Restart the application. On boot, eligible settings are seeded into the database and the
+settings cache is rebuilt.
+
+---
+
+## 3. Choosing a Level
+
+`SettingLevel` is the most consequential field on a definition. It decides **persistence,
+API exposure, and editability at once**.
+
+| Level | Seeded to the database? | Returned to the admin UI? | Editable in the UI? | Use it for |
+| --- | --- | --- | --- | --- |
+| `SystemEnv` | No | **Never** | No | Secrets and credentials — API keys, JWT secrets, passwords |
+| `SystemAdminReadonly` | No | Yes | No | Deployment facts an admin should see but not change — base URLs, active provider names |
+| `SystemAdminEditable` | Yes | Yes | Yes | Ordinary tunable configuration — the common case |
+| `InternalUser` | Yes | No *(per-user endpoint)* | Yes | Per-user preferences rather than system-wide config |
+
+Two consequences worth internalising:
+
+- **`SystemEnv` and `SystemAdminReadonly` are never persisted.** They are resolved from
+  your provider — and therefore from the environment — on every boot. Changing the env var
+  and restarting is the only way to change them, which is exactly what you want for
+  secrets and deployment wiring.
+- **Only `SystemAdminEditable` and `InternalUser` are seeded**, because only they can ever
+  be overridden. Attempting to update a `SystemEnv` or `SystemAdminReadonly` key through
+  the admin API is rejected.
+
+---
+
+## 4. The `SettingDefinition` Fields
+
+| Field | Required | Purpose |
+| --- | --- | --- |
+| `moduleName` | ✅ | Links the setting to a module for grouping. Must match an existing module metadata name. |
+| `key` | ✅ | Unique identifier used to read the value back. **Globally unique — see the gotcha below.** |
+| `value` | ✅ | The default. Used until an administrator overrides it. |
+| `level` | ✅ | Persistence, exposure, and editability. See the table above. |
+| `encrypted` | | Encrypts the value at rest. Requires `APP_ENCRYPTION_KEY`. |
+| `label` | | Display name on the Settings screen. Derived from `key` if omitted. |
+| `description` | | Longer explanatory text. |
+| `helpText` | | Inline guidance shown beside the control. |
+| `placeholder` | | Placeholder text for the input. |
+| `group` | | Free-form group name; settings are grouped and sorted by it alphabetically. |
+| `sortOrder` | | Position within the group. Settings without one sort last. |
+| `controlType` | | Which control to render. Inferred from the value's type if omitted. |
+| `options` | | `{ label, value }` list — required for `selectionStatic`. |
+| `settingsWidget` | | Frontend widget name — required when `controlType` is `custom`. |
+
+### Control types
+
+`shortText` · `longText` · `numeric` · `boolean` · `date` · `datetime` · `mediaSingle` ·
+`selectionStatic` · `custom`
+
+---
+
+## 5. Reading a Setting
+
+Inject `SettingService` and read through `getConfigValue`, passing your derived key union
+as the type argument so typos are caught at compile time.
+
+```ts
+import { Injectable } from "@nestjs/common";
+import { SettingService } from "@solidxai/core";
+import type { LibrarySetting } from "./library-settings.provider";
+
+@Injectable()
+export class LoanService {
+  constructor(private readonly settingService: SettingService) {}
+
+  private maxActiveLoans(): number {
+    return this.settingService.getConfigValue<LibrarySetting>(
+      "libraryMaxActiveLoans",
+    );
+  }
+}
+```
+
+To accept both your keys and core's, union the two types:
+
+```ts
+import type { SolidCoreSetting } from "@solidxai/core";
+
+this.settingService.getConfigValue<LibrarySetting | SolidCoreSetting>("baseUrl");
+```
+
+Reads are served from an in-memory cache, so this is cheap. The cache is rebuilt at
+startup and again after any successful settings update.
+
+---
+
+## 6. Gotchas
+
+<Callout type="warning" title="Setting keys share one global namespace - always prefix yours">
+
+`moduleName` is **not** part of a setting's identity. Uniqueness is enforced on `key`
+alone, across every provider in the application. A collision throws during bootstrap and
+**the application will not start**.
+
+SolidX core already owns some very generic keys:
+
+`secret` · `audience` · `issuer` · `clientID` · `clientSecret` · `callbackURL` ·
+`redirectURL` · `favicon` · `copyright` · `baseUrl` · `uploadDir` · `dateFormat`
+
+Prefix every key you declare with your module name — `libraryMaxActiveLoans`, not
+`maxActiveLoans`. This is the single most common way to break a SolidX application on
+first use of this feature.
+
+</Callout>
+
+<Callout type="warning" title="Seeded values are written once and never overwritten">
+
+Once a setting has been seeded, **changing its default in code has no effect on that
+environment**. The seeder inserts missing rows only; it will not update the value of a row
+that already exists.
+
+Later boots do reconcile `level`, `encrypted`, and `moduleName` on existing rows — but
+never `value`. To change an already-deployed default you must update the setting through
+the admin UI or the API, not in code.
+
+Because of this, avoid defaults that depend on an environment variable being parsed
+correctly at first boot. Validate and fall back rather than storing `NaN` forever:
+
+```ts
+const parsed = Number(process.env.LIBRARY_MAX_ACTIVE_LOANS);
+const value = Number.isFinite(parsed) && parsed > 0 ? parsed : 5;
+```
+
+</Callout>
+
+<Callout type="warning" title="`moduleName` must match an existing module">
+
+The seeder looks up module metadata by `moduleName`. If no module with that name exists,
+the link is **silently dropped** — the setting is still created, but it is not associated
+with a module. Use the same module name that appears in your module metadata.
+
+</Callout>
+
+<Callout type="note" title="Encryption needs a key, and viewing needs a permission">
+
+`encrypted: true` only takes effect when `APP_ENCRYPTION_KEY` is set. Without it, the
+value is stored **as-is** and a warning is logged at startup — it does not fail loudly, so
+check your logs.
+
+Encrypted settings are also withheld from the admin Settings response unless the user
+holds the `settings:view_encrypted` permission.
+
+</Callout>
+
+<Callout type="note" title="An unknown key returns `null`, not an error">
+
+`getConfigValue()` returns `null` for a key it does not recognise — indistinguishable from
+a setting that is genuinely unset. A typo fails silently at runtime. This is why the typed
+key union in step 1 is worth the small amount of ceremony.
+
+</Callout>
+
+<Callout type="note" title="`controlType: 'custom'` needs a matching frontend widget">
+
+Set `settingsWidget` to the name of an extension component registered with type
+`settingsWidget` on the frontend. Without it the Settings screen has nothing to render.
+See [Custom Widgets](/docs/developer-docs/extending/frontend-customization/custom-widgets)
+for registering one.
+
+</Callout>
+
+---
+
+## 7. Interfaces
+
+<details open>
+ <summary><code>ISettingsProvider</code> and <code>SettingDefinition</code></summary>
+
+```ts
+export enum SettingLevel {
+  SystemEnv = "system-env",
+  SystemAdminReadonly = "system-admin-readonly",
+  SystemAdminEditable = "system-admin-editable",
+  InternalUser = "internal-user",
+}
+
+export type SettingControlType =
+  | "shortText"
+  | "longText"
+  | "numeric"
+  | "boolean"
+  | "date"
+  | "datetime"
+  | "mediaSingle"
+  | "selectionStatic"
+  | "custom";
+
+export interface SettingOption {
+  label: string;
+  value: string | number | boolean;
+}
+
+export interface SettingDefinition<T = any> {
+  moduleName: string;
+  key: string;
+  value: T;
+  level: SettingLevel;
+  encrypted?: boolean;
+  label?: string;
+  description?: string;
+  helpText?: string;
+  placeholder?: string;
+  group?: string;
+  sortOrder?: number;
+  controlType?: SettingControlType;
+  options?: SettingOption[];
+  settingsWidget?: string;
+}
+
+export interface ISettingsProvider {
+  getSettings(): SettingDefinition[];
+}
+```
+</details>
+
+---
+
+## Summary
+
+| Step | What you do |
+| --- | --- |
+| 1 | Declare settings with `as const satisfies SettingDefinition[]` and derive a key union |
+| 2 | Prefix every key with your module name to avoid a bootstrap-fatal collision |
+| 3 | Choose a `SettingLevel` — it decides persistence, exposure, and editability together |
+| 4 | Implement `ISettingsProvider` and decorate with `@SettingsProvider()` and `@Injectable()` |
+| 5 | Add the class to your module's `providers` array |
+| 6 | Restart, then read values via `SettingService.getConfigValue<YourSetting>()` |
+
+**See also:** [Solid Registry](/docs/developer-docs/extending/backend-customization/solid-registry) ·
+[Error Code Providers](/docs/developer-docs/extending/backend-customization/error-code-providers)

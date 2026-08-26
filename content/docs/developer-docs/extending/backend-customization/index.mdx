@@ -5,7 +5,7 @@ description: This section provides an overview of backend customization capabili
 summary: Covers controller changes, service extensions, provider implementations, scheduled jobs, and other backend customization points beyond generated CRUD behavior.
 ---
 
-import { Blocks, DatabaseZap, Plug, ShieldCheck } from 'lucide-react';
+import { Blocks, CircleAlert, DatabaseZap, Plug, ShieldCheck, SlidersHorizontal } from 'lucide-react';
 
 ## Overview
 
@@ -40,5 +40,11 @@ Use these backend extension areas when the generated CRUD baseline is not enough
   </Card>
   <Card icon={<ShieldCheck />} title="Control Access" href="/docs/developer-docs/extending/backend-customization/security-rules">
     Apply static or provider-backed security rules when record access depends on user identity, role composition, or business context.
+  </Card>
+  <Card icon={<SlidersHorizontal />} title="Declare Configuration" href="/docs/developer-docs/extending/backend-customization/settings-providers">
+    Define your application's settings in code and expose them on the admin Settings screen with the right level, grouping, and control type.
+  </Card>
+  <Card icon={<CircleAlert />} title="Map Errors to Codes" href="/docs/developer-docs/extending/backend-customization/error-code-providers">
+    Translate raw exceptions into stable, client-facing error codes with safe messages and the correct HTTP status.
   </Card>
 </Cards>

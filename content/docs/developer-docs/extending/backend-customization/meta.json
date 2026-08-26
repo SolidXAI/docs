@@ -19,6 +19,8 @@
     "dashboard-providers",
     "sms-providers",
     "email-providers",
-    "whatsapp-providers"
+    "whatsapp-providers",
+    "settings-providers",
+    "error-code-providers"
   ]
 }

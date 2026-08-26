@@ -2,7 +2,7 @@
 title: Solid Registry
 icon: "box"
 description: Learn how to extend and use the Solid Registry in your SolidX application.
-summary: Explains the Solid Registry as SolidX's central discovery and configuration hub, acting as a cache and metadata manager. Provides fast component lookups, application-wide consistency for rules/modules/providers, and extensibility via decorator-based auto-discovery. Covers the registry pattern (Decorator → Interface → Implementation → Registry → Consumer), registered components including error code providers, selection providers, computed field providers, scheduled jobs, email/SMS/WhatsApp providers, and security rules.
+summary: Explains the Solid Registry as SolidX's central discovery and configuration hub, acting as a cache and metadata manager. Provides fast component lookups, application-wide consistency for rules/modules/providers, and extensibility via decorator-based auto-discovery. Covers the registry pattern (Decorator → Interface → Implementation → Registry → Consumer), registered components including error code providers, settings providers, selection providers, computed field providers, scheduled jobs, email/SMS/WhatsApp providers, and security rules.
 keywords: [backend, solid registry, customization, metadata]
 ---
 
@@ -93,6 +93,18 @@ The following components are tracked by the Solid Registry:
 **Purpose:** Supply data sources for dashboard questions (charts, KPIs, summaries).  
 **How it works:** Providers can query APIs, databases, or aggregates. The registry makes them available for dynamic dashboard rendering.  
 **See also:** [Dashboard Questions](/docs/developer-docs/extending/backend-customization/solid-registry)
+
+### Error Code Providers
+
+**Purpose:** Translate raw exceptions into stable, client-facing error codes with a safe message and HTTP status.  
+**How it works:** Each `@ErrorCodeProvider` class contributes rules into one merged, priority-sorted chain. The exception filter resolves every unhandled error through that chain, so the code a client receives is consistent across the application.  
+**See also:** [Error Code Providers](/docs/developer-docs/extending/backend-customization/error-code-providers)
+
+### Settings Providers
+
+**Purpose:** Declare application configuration in code and surface it on the admin Settings screen.  
+**How it works:** Each `@SettingsProvider` class returns setting definitions that the registry merges into a single schema. Values stored in the database are layered on top, and the result is cached for fast lookup at runtime.  
+**See also:** [Settings Providers](/docs/developer-docs/extending/backend-customization/settings-providers)
 
 
 

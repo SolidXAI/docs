@@ -1,0 +1,293 @@
+---
+title: Error Code Providers
+icon: "circle-alert"
+description: Learn how to map raw exceptions to stable, client-facing error codes by registering a custom error code provider.
+summary: Covers the `IErrorCodeProvider` contract, `ErrorRule` matching and priority ordering, the response envelope returned by the exception filter, NestJS registration, and the reserved priority bands used by SolidX core.
+keywords: [backend, error codes, error handling, providers, customization]
+solidx_concerns: [backend.new_error_code_provider, new_error_code_provider]
+---
+
+## Overview
+
+Every unhandled exception in a SolidX application passes through a single exception
+filter. Rather than leaking a raw database or driver message to the client, the filter
+asks the **error mapper** to translate the exception into a **stable error code** with a
+safe display message and an HTTP status.
+
+Error code providers are how you contribute your own translations. A provider is a class
+that returns a list of **rules**; each rule is a predicate over the error text plus the
+code and metadata to use when it matches.
+
+This gives your frontend something reliable to branch on. Instead of parsing
+`"duplicate key value violates unique constraint \"uq_member_email\""`, the client
+receives `errorCode: "library-member-email-taken"` and can show the right message in the
+right language.
+
+<Callout type="info" title="Mental Model">
+
+Think of error mapping as a prioritised rule chain shared by the whole application.
+
+- Every registered provider contributes rules into one flat, merged list.
+- The list is sorted by `priority`, highest first, and the **first rule that matches wins**.
+- SolidX core registers a catch-all at the very bottom, so mapping always produces a code.
+
+</Callout>
+
+---
+
+## 1. What the Client Receives
+
+The exception filter returns this envelope for every error:
+
+```json
+{
+  "statusCode": 409,
+  "statusCodeMessage": "Conflict",
+  "message": "A member with this email address already exists.",
+  "errorCode": "library-member-email-taken",
+  "error": "A member with this email address already exists.",
+  "data": {}
+}
+```
+
+`errorCode` is the field your frontend should branch on. `message` and `error` both carry
+the rule's `meta.message` — they are duplicated for backward compatibility.
+
+---
+
+## 2. Creating the Provider
+
+Your class implements `IErrorCodeProvider` and carries the `@ErrorCodeProvider()`
+decorator so the Solid Registry discovers it at startup.
+
+<details open>
+ <summary><strong>Show code: <code>library-error-codes.provider.ts</code></strong></summary>
+
+```ts
+import { Injectable } from "@nestjs/common";
+import { ErrorCodeProvider } from "@solidxai/core";
+import type { ErrorMeta, ErrorRule, IErrorCodeProvider } from "@solidxai/core";
+
+@ErrorCodeProvider()
+@Injectable()
+export class LibraryErrorCodesProvider implements IErrorCodeProvider {
+  name(): string {
+    return "LibraryErrorCodesProvider";
+  }
+
+  rules(): ReadonlyArray<ErrorRule> {
+    return [
+      {
+        code: "library-member-email-taken",
+        priority: 200,
+        // The haystack is already lowercased - match on the constraint name,
+        // which is specific enough that nothing else can trip this rule.
+        match: (txt) => txt.includes("uq_member_email"),
+        meta: {
+          message: "A member with this email address already exists.",
+          httpStatus: 409,
+        },
+      },
+      {
+        code: "library-loan-limit-reached",
+        priority: 200,
+        match: (txt) => txt.includes("loan_limit_exceeded"),
+        meta: {
+          message: "This member has reached the maximum number of active loans.",
+          httpStatus: 422,
+        },
+      },
+    ];
+  }
+
+  // Optional. Lets callers resolve metadata for a code without a matching exception.
+  resolve(code: string): ErrorMeta | undefined {
+    return this.rules().find((rule) => rule.code === code)?.meta;
+  }
+}
+```
+</details>
+
+---
+
+## 3. Registering the Provider
+
+Error code providers are standard NestJS providers. Register the class in the module
+where it lives — the registry discovers it from there.
+
+```ts
+// library.module.ts
+@Module({
+  ...
+  providers: [LibraryErrorCodesProvider],
+  ...
+})
+```
+
+No further wiring is needed. Restart the application for the registry to pick it up.
+
+---
+
+## 4. How Matching Works
+
+1. Every registered provider's `rules()` are collected into one flat list.
+2. The list is sorted by `priority` **descending**. A rule with no `priority` defaults to `0`.
+3. Each rule's `match()` is called in that order with the combined error text.
+4. The **first** rule to return `true` supplies the code. Nothing after it is consulted.
+5. If nothing matches, the code is `solidx-unknown-error`.
+
+The text passed to `match()` is built from the exception's **message, stack trace, and a
+JSON dump of the error object**, joined together and **converted to lowercase**.
+
+---
+
+## 5. Reserved Priority Bands
+
+SolidX core occupies these priorities. Choose a band that puts your rules where you
+actually want them relative to core's.
+
+| Priority | Owner | Covers |
+| --- | --- | --- |
+| `200+` | **Available for your app** | Recommended band for application-specific rules |
+| `120` | Core | MPIN lock, revoke, invalid, format, predictability |
+| `110` | Core | Session invalid, session expired |
+| `100` | Core | MCP server unreachable |
+| `95` | Core | Filesystem resource not found |
+| `90` | Core | Duplicate key, foreign key violation |
+| `0` | *default* | Any rule that omits `priority` |
+| `-1` | Core | `solidx-unknown-error` catch-all |
+
+<Callout type="warning" title="Put domain rules above core's database rules">
+
+Core's rule at priority `90` maps **every** unique-constraint violation to the generic
+`solidx-db-duplicate-key`. A rule that recognises one specific constraint must sit above
+it — otherwise the generic rule matches first and yours never runs. The example above
+uses `200` for exactly this reason.
+
+</Callout>
+
+---
+
+## 6. Gotchas
+
+<Callout type="warning" title="The error text is already lowercased">
+
+`match()` receives text that has already been converted to lowercase. A needle containing
+uppercase characters can never match. If you are matching against a constant, lowercase
+it explicitly:
+
+```ts
+match: (txt) => txt.includes(MY_MESSAGES.LOAN_LIMIT.toLowerCase()),
+```
+
+</Callout>
+
+<Callout type="warning" title="Match on something distinctive">
+
+The haystack includes the **full stack trace and a JSON dump of the error object**, not
+just the message. A rule like `txt.includes("user")` will match on file paths in the
+stack trace of completely unrelated errors. Anchor on constraint names, error class
+names, or driver codes — never on common English words.
+
+</Callout>
+
+<Callout type="warning" title="Never register a second catch-all">
+
+Core already has `solidx-unknown-error` at priority `-1` with `match: () => true`. Adding
+another always-true rule produces behaviour that depends on provider discovery order,
+which you do not control. If you want to change the fallback message, override the
+existing code rather than adding a rule.
+
+</Callout>
+
+<Callout type="warning" title="Duplicate codes are not detected">
+
+Nothing checks whether two providers contribute the same `code`. When metadata is looked
+up, the **first rule with that code in priority order** wins. Redefining a core code such
+as `solidx-db-duplicate-key` therefore silently changes its message and status
+application-wide. Prefix your codes with your module name to avoid collisions.
+
+</Callout>
+
+<Callout type="note" title="`meta.httpStatus` does not always apply">
+
+The filter resolves the response status in this order:
+
+1. The status of a deliberately thrown `HttpException` (e.g. `new NotFoundException()`).
+2. A `status` / `statusCode` property carried by the raw error.
+3. The matched rule's `meta.httpStatus`.
+
+So a rule that matches an exception you threw yourself keeps **your** status — but
+`meta.message` still replaces the message the client sees. If you need the rule's status
+to apply, throw a plain `Error`, not an `HttpException`.
+
+</Callout>
+
+<Callout type="note" title="A throwing rule is skipped, not fatal">
+
+If `match()` throws, the error mapper logs a warning and moves to the next rule. A buggy
+rule degrades matching rather than bringing down request handling — but it fails
+silently, so check your logs if a rule never seems to fire.
+
+</Callout>
+
+---
+
+## 7. Interfaces
+
+<details open>
+ <summary><code>IErrorCodeProvider</code> and <code>ErrorRule</code></summary>
+
+```ts
+export type ErrorCode = string;
+
+export type ErrorMeta = {
+  message: string;
+  httpStatus?: number;
+};
+
+export type ErrorRule = {
+  /** Canonical error code. Keep them kebab-case for consistency. */
+  code: ErrorCode;
+  /** Higher runs earlier. Defaults to 0 if not provided. */
+  priority?: number;
+  /** Return true if this rule matches the combined error text. */
+  match: (combinedErrorText: string) => boolean;
+  /** Display + HTTP mapping for this code. */
+  meta: ErrorMeta;
+};
+
+export interface IErrorCodeProvider {
+  /** Used for registry identity & logs */
+  name(): string;
+
+  /**
+   * Return all rules this provider contributes.
+   * These will be merged with other providers' rules, then sorted by priority.
+   */
+  rules(): ReadonlyArray<ErrorRule>;
+
+  /**
+   * Optional fallback meta for codes this provider owns.
+   * If omitted, the mapper relies on the rule.meta of the first matching rule.
+   */
+  resolve?(code: ErrorCode): ErrorMeta | undefined;
+}
+```
+</details>
+
+---
+
+## Summary
+
+| Step | What you do |
+| --- | --- |
+| 1 | Create a class implementing `IErrorCodeProvider` |
+| 2 | Decorate it with `@ErrorCodeProvider()` and `@Injectable()` |
+| 3 | Return rules from `rules()` with a distinctive lowercase `match()` |
+| 4 | Use priority `200+` so domain rules beat core's generic database rules |
+| 5 | Add the class to your module's `providers` array |
+| 6 | Restart the application, then branch on `errorCode` in the frontend |
+
+**See also:** [Solid Registry](/docs/developer-docs/extending/backend-customization/solid-registry) ·
+[Settings Providers](/docs/developer-docs/extending/backend-customization/settings-providers)
