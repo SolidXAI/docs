@@ -40,7 +40,7 @@ Password authentication establishes a SolidX session from user credentials and t
 In a password-based flow, your application collects the user's email or username and password, then sends them to `POST /api/iam/authenticate`. If the credentials are valid, SolidX IAM returns two tokens:
 
 - `accessToken`: Send this with each protected API request in the `Authorization: Bearer <ACCESS_TOKEN>` header.
-- `refreshToken`: Use this only to request a new access token when the current one expires. Treat it as a long-lived secret. For browser apps, prefer a secure, `HttpOnly`, `SameSite` cookie when your architecture can set it server-side, or another storage pattern that is not exposed to arbitrary JavaScript. Avoid treating refresh tokens like normal application state.
+- `refreshToken`: Use this only to request a new access token when the current one expires. Treat it as a long-lived secret. SolidX returns both tokens in the JSON response body. Store the refresh token as a sensitive credential, not as regular client-side application state.
 
 When a protected REST API receives the bearer token, SolidX validates it, identifies the user, loads the user's roles, and makes that authenticated context available to the API request.
 
@@ -175,7 +175,7 @@ POST /api/iam/authenticate
   ```json
   {
     "email": "[EMAIL]",
-    "username": "[EMAIL]",
+    "username": "",
     "password": "[PASSWORD]"
   }
   ```
@@ -243,10 +243,6 @@ POST /api/iam/refresh-tokens
 
   </TabItem>
 </Tabs>
-
-## What Happens After Login?
-
-After successful password authentication, the client receives an access token and refresh token. Use the access token in the `Authorization: Bearer <ACCESS_TOKEN>` header for protected APIs. Use the refresh token only with the refresh endpoint, and store it as a sensitive credential rather than regular client-side state.
 
 ## 4. Forgot Password
 
@@ -336,6 +332,21 @@ POST /api/iam/confirm/forgot-password
   ```
 
   </TabItem>
+  <TabItem value="response" label="Response">
+
+  ### Response Body
+
+  ```json
+  {
+    "status": "success",
+    "message": "Forgot password confirmed.",
+    "error": "",
+    "errorCode": "",
+    "data": {}
+  }
+  ```
+
+  </TabItem>
 </Tabs>
 
 ## 5. Change Password
@@ -355,6 +366,7 @@ POST /api/iam/change-password
 
   ```http
   Content-Type: application/json
+  Authorization: Bearer <ACCESS_TOKEN>
   ```
 
   ### Request Body
@@ -420,16 +432,40 @@ Invalidate the current session.
 POST /api/iam/logout
 ```
 
-<Tabs defaultValue="response">
+<Tabs defaultValue="request">
+  <TabItem value="request" label="Request">
+
+  ### Headers
+
+  ```http
+  Content-Type: application/json
+  ```
+
+  ### Request Body
+
+  ```json
+  {
+    "refreshToken": "<REFRESH_TOKEN>",
+    "allDevices": false
+  }
+  ```
+
+  `refreshToken` is required. Set `allDevices` to `true` to revoke refresh tokens for every device belonging to the user. Omit it or set it to `false` to sign out only the session that issued this refresh token.
+
+  </TabItem>
   <TabItem value="response" label="Response">
 
   ### Response Body
 
   ```json
   {
-    "message": "Logout successful"
+    "message": "Logged out successfully"
   }
   ```
 
   </TabItem>
 </Tabs>
+
+## What Happens After Login?
+
+After successful password authentication, the client receives an access token and refresh token in the JSON response. Use the access token in the `Authorization: Bearer <ACCESS_TOKEN>` header for protected APIs. Use the refresh token only with the refresh endpoint, and store it as a sensitive credential rather than regular client-side state.
