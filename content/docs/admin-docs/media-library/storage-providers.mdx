@@ -8,12 +8,18 @@ import { HardDrive, Cloud } from 'lucide-react';
 
 SOLID supports multiple storage providers for media files, offering flexibility in how and where your media assets are stored.
 
+In your current setup, users generally work with three provider options:
+- `private-filesystem`
+- `default-filesystem`
+- `default-aws-s3`
+
 ## Supported Providers
 
 <Cards>
-  <Card icon={<HardDrive />} title="Local Filesystem">
+  <Card icon={<HardDrive />} title="Filesystem Providers">
     - **Description**: Store files directly on the server's filesystem
-    - **Use Case**: Development environments, small applications
+    - **Use Case**: Development environments, internal deployments, local/private file storage
+    - **Common Options**: `default-filesystem` and `private-filesystem`
     - **Configuration**:
     ```json
     {
@@ -28,6 +34,7 @@ SOLID supports multiple storage providers for media files, offering flexibility 
   <Card icon={<Cloud />} title="Amazon S3">
     - **Description**: Store files in Amazon S3 buckets
     - **Use Case**: Production environments, scalable applications
+    - **Common Option**: `default-aws-s3`
     - **Configuration**:
     ```json
     {
@@ -42,6 +49,14 @@ SOLID supports multiple storage providers for media files, offering flexibility 
     ```
   </Card>
 </Cards>
+
+## Which Option Should The User Pick?
+
+- Choose `private-filesystem` when the file must stay private on local storage.
+- Choose `default-filesystem` for normal filesystem uploads.
+- Choose `default-aws-s3` when the file should be stored in S3.
+
+If you want private local-file behavior, the media field should use `private-filesystem`.
 
 ## Best Practices
 <Cards>

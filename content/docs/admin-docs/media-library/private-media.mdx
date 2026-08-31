@@ -1,0 +1,121 @@
+---
+title: Private Media
+icon: "shield"
+description: Store sensitive files behind signed, time-limited access instead of permanent public URLs.
+---
+
+import { Link2, Settings2, Shield, Upload } from 'lucide-react';
+
+Private Media is designed for files that should be available inside your SolidX application, but should not be exposed through a permanent public URL.
+
+Typical examples include contracts, KYC documents, employee records, internal reports, invoices, private PDFs, and sensitive images.
+
+## Available Provider Options
+
+In the current setup, users typically see these three provider choices:
+
+| Provider | Type | Typical Use |
+| --- | --- | --- |
+| `private-filesystem` | filesystem | private local file storage |
+| `default-filesystem` | filesystem | normal local file storage |
+| `default-aws-s3` | aws-s3 | S3-based file storage |
+
+## What Makes Media Private?
+
+For local private files, the user must select the **`private-filesystem`** provider on the media field.
+
+That is the provider intended for private filesystem storage. If the field uses `default-filesystem` or `default-aws-s3`, the file follows that provider's behavior instead.
+
+When a private provider is used:
+- users still upload files in the normal way
+- the file is still attached to the record like any other media field
+- SolidX returns a short-lived signed access URL instead of a stable public file path
+- access stays controlled by SolidX or the underlying storage provider
+
+## Public Vs Private
+
+| Type | Best For | URL Behavior | Examples |
+| --- | --- | --- | --- |
+| Public media | open assets | direct reusable URL | logos, banners, product gallery images |
+| Private media | restricted assets | expiring signed URL | contracts, reports, identity documents |
+
+## How To Set It Up
+
+### 1. Choose The Correct Provider
+
+Go to `Media Library` -> `Storage Providers` and review the available providers.
+
+In your current setup, the important choices are:
+- `private-filesystem` for private local files
+- `default-filesystem` for regular local files
+- `default-aws-s3` for S3 files
+
+If you want private filesystem behavior, select **`private-filesystem`**.
+
+This is the provider where private local-file handling is expected, and this is the one that should be treated as non-public.
+
+### 2. Assign The Provider To A Media Field
+
+Go to `App Builder` -> `Model`, open your model, then add or edit a `Single Media` or `Multiple Media` field.
+
+In the field configuration, select the correct **Media Storage Provider**:
+- choose `private-filesystem` for private local files
+- choose `default-filesystem` for standard local files
+- choose `default-aws-s3` for S3-backed files
+
+### 3. Use The Form Normally
+
+End users do not need a special upload flow. They upload files through the same form field UI they already use for public files.
+
+SolidX stores the file with the selected provider and keeps it linked to the record.
+
+## What End Users Will Notice
+
+<Cards>
+  <Card icon={<Upload />} title="Upload Stays Familiar">
+    Users upload private files through the same media field UI used for regular files.
+  </Card>
+  <Card icon={<Shield />} title="Links Are Temporary">
+    The app returns a short-lived access URL instead of exposing the raw file location.
+  </Card>
+  <Card icon={<Link2 />} title="Copied Links Expire">
+    If someone copies a private media link, it should stop working after the configured expiry time.
+  </Card>
+  <Card icon={<Settings2 />} title="Preview Is Still Supported">
+    Private files can still be previewed or downloaded in the app, while access remains controlled.
+  </Card>
+</Cards>
+
+## How SolidX Handles It
+
+- When the field uses `private-filesystem`, SolidX serves files through its protected media download route instead of exposing the raw file path.
+- The default private local directory is `media-private-files-storage`.
+- `default-filesystem` is the normal filesystem option.
+- `default-aws-s3` is the S3 option.
+- If a provider is configured for private access, SolidX returns an expiring signed URL instead of a permanent public URL.
+- If no custom expiry is set, the signed URL expiry defaults to `60` minutes.
+
+## Important Note
+
+Do not confuse **private media** with the general field-level **Private** option.
+
+- **Private media** controls how the uploaded file is stored and served.
+- **Field Private** controls whether the field is hidden from API read responses.
+
+They can be used together, but they solve different problems.
+
+## When To Use Private Media
+
+Use private media when the file:
+- contains personal, confidential, or regulated information
+- should only be available to authenticated users
+- should not be reachable from a permanent public URL
+- needs time-limited access links
+
+Avoid private media for assets that must be embedded publicly, such as logos, marketing banners, or open downloads.
+
+## Related Docs
+
+- [Storage Providers](./storage-providers.md)
+- [Media View](./media-view.md)
+- [Fields](../module-builder/field-management.md)

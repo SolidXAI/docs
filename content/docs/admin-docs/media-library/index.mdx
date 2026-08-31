@@ -3,7 +3,7 @@ title: Media Library
 icon: "folder"
 ---
 
-import { FolderKanban, FolderTree, Image, Shield } from 'lucide-react';
+import { FolderKanban, FolderTree, Image, Lock, Shield } from 'lucide-react';
 
 The Media Library in SOLID provides a centralized system for managing all your media assets with support for multiple storage providers.
 
@@ -39,6 +39,15 @@ A powerful interface for:
   - Google Cloud Storage
   - SFTP
 
+### Private Media
+
+→ [Private Media documentation](./private-media.md)
+
+Use private media when files must stay protected inside the application:
+- signed, time-limited access URLs
+- separate private filesystem or private S3 storage
+- better fit for contracts, KYC files, reports, and internal documents
+
 ## Features
 
 <Cards>
@@ -67,6 +76,12 @@ A powerful interface for:
     - Folder-level access
     - Share links
     - Download controls
+  </Card>
+  <Card icon={<Lock />} title="Private Media">
+    - Signed access URLs
+    - Expiring download links
+    - Private filesystem support
+    - Private S3 support
   </Card>
 </Cards>
 

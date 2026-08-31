@@ -2,6 +2,7 @@
   "title": "Media Library",
   "icon": "image",
   "pages": [
+    "private-media",
     "media-view",
     "storage-providers"
   ]
