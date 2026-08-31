@@ -4,9 +4,6 @@ icon: "smartphone"
 description: Information about OTP-based authentication APIs
 summary: Details SolidX OTP-based authentication mechanism with comprehensive API documentation. Covers two-step registration (Initiate Registration sends OTP to email/mobile with customizable validationSources, Confirm Registration verifies OTP) and two-step login (Initiate Login sends OTP, Confirm Login verifies and returns JWT tokens). Includes environment variables for OTP expiry, validation sources, request/response formats, error handling, and transactional override options.
 ---
-  
-
-
 
 ## OTP Authentication
 
@@ -22,14 +19,52 @@ OTP authentication verifies identity with short-lived codes instead of a passwor
 
 </Callout>
 
+## Authentication Path
+
+<figure className="not-prose my-6">
+  <img
+    src="/img/authentication/shared-authentication-architecture-light.png"
+    alt="SolidX authentication architecture showing password and OTP entry points leading to IAM, tokens, and protected REST APIs"
+    className="w-full rounded-lg border border-fd-border bg-white dark:hidden"
+  />
+  <img
+    src="/img/authentication/shared-authentication-architecture-dark.png"
+    alt="SolidX authentication architecture showing password and OTP entry points leading to IAM, tokens, and protected REST APIs"
+    className="hidden w-full rounded-lg border border-fd-border bg-[#0f172a] dark:block"
+  />
+  <figcaption className="mt-2 text-sm text-fd-muted-foreground">
+    OTP authentication is a passwordless entry point into the SolidX IAM session model.
+  </figcaption>
+</figure>
+
+The OTP endpoints handle delivery and verification of a short-lived code. After the code is confirmed, SolidX IAM returns access and refresh tokens for the authenticated session.
+
+## OTP Sign-In Flow
+
+<figure className="not-prose my-6">
+  <img
+    src="/img/authentication/otp-auth-sequence-light.png"
+    alt="OTP authentication sequence: initiate OTP login, send code through email or SMS, confirm OTP, receive tokens, and call protected APIs"
+    className="w-full rounded-lg border border-fd-border bg-white dark:hidden"
+  />
+  <img
+    src="/img/authentication/otp-auth-sequence-dark.png"
+    alt="OTP authentication sequence: initiate OTP login, send code through email or SMS, confirm OTP, receive tokens, and call protected APIs"
+    className="hidden w-full rounded-lg border border-fd-border bg-[#0f172a] dark:block"
+  />
+  <figcaption className="mt-2 text-sm text-fd-muted-foreground">
+    OTP login is a two-step flow: initiate code delivery, then confirm the code to receive tokens and user details.
+  </figcaption>
+</figure>
+
+The diagram above illustrates the standard OTP authentication lifecycle. The application starts login by requesting OTP delivery for an email address or mobile number, then confirms the login with the code provided by the user. A successful confirmation response returns an access token for protected API requests and a refresh token for renewing the session through the refresh endpoint.
+
 ## Implementation Overview
 
 SolidX provides a comprehensive OTP-based authentication mechanism with the following endpoints:
 
 1. **Register**
 2. **Login**
-
-
 
 ## 1. Register
 
@@ -44,13 +79,11 @@ The registration process is divided into two steps:
 
 The `validationSources` field in the request body specifies which sources (`email`, `mobile`) should be validated. This can be customized via environment variables or overridden via the `transactional` flag in the request.
 
+#### Endpoint
 
-### Endpoint
-
-```
+```http
 POST /api/iam/otp/register/initiate
 ```
-
 
 ### Environment Variables
 
@@ -95,7 +128,9 @@ POST /api/iam/otp/register/initiate
 
 ### 1.2 Confirm Registration
 
-```
+#### Endpoint
+
+```http
 POST /api/iam/otp/register/confirm
 ```
 
@@ -141,9 +176,9 @@ Allows users to log in using username, email, or mobile through OTP.
 
 Similar to registration, the `validationSources` and environment variables control OTP delivery.
 
-### Endpoint
+#### Endpoint
 
-```
+```http
 POST /api/iam/otp/login/initiate
 ```
 
@@ -187,7 +222,9 @@ POST /api/iam/otp/login/initiate
 
 ### 2.2 Confirm Login
 
-```
+#### Endpoint
+
+```http
 POST /api/iam/otp/login/confirm
 ```
 
@@ -232,3 +269,7 @@ POST /api/iam/otp/login/confirm
 
   </TabItem>
 </Tabs>
+
+## What Happens After Login?
+
+After successful OTP authentication, the client receives an access token and refresh token. Use the access token in the `Authorization: Bearer <ACCESS_TOKEN>` header for protected APIs. Use the refresh token only with the refresh endpoint, and store it as a sensitive credential rather than regular client-side state.

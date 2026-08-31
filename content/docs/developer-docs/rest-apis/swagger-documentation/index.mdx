@@ -53,10 +53,15 @@ Before using the APIs, authenticate and pass the returned bearer token with prot
 <Tabs defaultValue="request">
   <TabItem value="request" label="Request">
 
-  ```bash
-  POST /api/auth/login
+  ```http
+  POST /api/iam/authenticate
+  Content-Type: application/json
+  ```
+
+  ```json
   {
     "email": "user@example.com",
+    "username": "user@example.com",
     "password": "yourpassword"
   }
   ```
@@ -66,11 +71,14 @@ Before using the APIs, authenticate and pass the returned bearer token with prot
 
   ```jsonc
   {
-    "token": "***********************",
-    "user": {
-      "id": 1,
-      "email": "user@example.com"
-      // ...
+    "data": {
+      "user": {
+        "id": 1,
+        "email": "user@example.com"
+        // ...
+      },
+      "accessToken": "***********************",
+      "refreshToken": "***********************"
     }
   }
   ```
