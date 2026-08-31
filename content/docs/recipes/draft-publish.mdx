@@ -1,0 +1,208 @@
+---
+title: Draft & Publish Workflow
+icon: "history"
+description: Let editors save work as drafts, publish a version live, and keep prior versions as recoverable history.
+keywords: [draft, publish, unpublish, versioning, isPublished, isLatest, publishedTracker]
+---
+
+<Callout type="info" title="Mental Model">
+
+In SolidX, draft/publish turns every edit into a new version instead of an in-place overwrite.
+
+- The published version stays live and untouched while a draft is being worked on.
+- Every version of a record is linked into one chain - nothing is ever lost.
+- Publishing swaps which version is live; unpublishing rolls back to whatever was live before it.
+
+</Callout>
+
+SolidX can version a model's records instead of overwriting them in place. Editing a published record creates a new draft version alongside it - the previously published version stays live and untouched until the new draft is explicitly published.
+
+## Enabling Draft & Publish
+
+Set `draftPublishWorkflow: true` in the model's metadata JSON:
+
+```json
+{
+  "modelName": "book",
+  "draftPublishWorkflow": true
+}
+```
+
+<Callout type="info" title="Automatic CRUD Support">
+
+No service or controller changes needed - the CRUD layer picks this up automatically, the same way [Soft Delete](/docs/recipes/soft-delete) does.
+
+</Callout>
+
+<Callout type="warning" title="Legacy Tables Aren't Supported">
+
+The model's entity must extend `CommonEntity`. Legacy tables onboarded via datasource introspection (`LegacyCommonEntityWithExistingId` / `LegacyCommonEntityWithGeneratedId`) don't have the versioning columns and can't use this feature.
+
+</Callout>
+
+<Callout type="warning" title="Enabling On An Existing Model Needs Codegen">
+
+Turning this flag on for a model that already exists requires re-running code generation - that's what scaffolds the `/publish` and `/unpublish` endpoints (and the paired permissions below) onto the model's controller. The flag alone doesn't add them.
+
+</Callout>
+
+## Database Impact
+
+`CommonEntity` already declares five columns for this:
+
+| Column | TypeORM decorator | Meaning |
+|---|---|---|
+| `published_at` | `@Column`, nullable | When this specific version last went live. Cleared when the version becomes a draft again. |
+| `is_published` | `@Column`, default `false` | `true` on at most one version per chain - whichever version is currently served as "published". |
+| `is_latest` | `@Column`, default `true` | `true` on exactly one version per chain - the most recently created/edited version. |
+| `initial_entity_version_id` | `@Column`, nullable | Set to the record's own id right after its first save. Every later version copied from it shares this same value - this is what links versions into a chain. |
+| `published_tracker` | `@Column`, default `"na"` | A uniqueness helper, same idea as `deleted_tracker` in [Soft Delete](/docs/recipes/soft-delete). |
+
+<Callout type="note" title="Why `publishedTracker` Exists">
+
+A unique business key (a slug, a code) can only appear once per active row - but a draft/publish chain deliberately keeps several rows alive for the same logical record at once (one published, others archived or draft). A plain unique index on that key would reject the second row outright.
+
+`publishedTracker` solves this the same way `deletedTracker` solves it for soft delete: the currently published version always holds the fixed value `"na"`; every other version in the chain holds a distinct value derived from its own id (`version:{id}`).
+
+</Callout>
+
+Include it in your unique index instead of a bare unique column:
+
+```typescript
+@Entity('draft_workflow_demo')
+@Index(["demoCode", "publishedTracker"], { unique: true })
+export class DraftWorkflowDemo extends CommonEntity {
+  @Column({ type: "varchar" })
+  demoCode: string;
+  // ...
+}
+```
+
+## The Version Chain
+
+Every version of a record shares one `initialEntityVersionId`. A chain of three versions might look like:
+
+| id | isLatest | isPublished | publishedAt | Status |
+|---|---|---|---|---|
+| 26 | `false` | `false` | set | Archived |
+| 27 | `false` | `false` | set | Archived |
+| 28 | `true` | `true` | set | Published |
+
+Status is derived, not stored, from three fields:
+
+- **Published** - `isPublished === true`.
+- **Archived** - `publishedAt` is set (it was live at some point) and `isLatest === false` (a newer version has since superseded it).
+- **Draft** - anything else: a version that's never been published, or the current version mid-edit.
+
+## Runtime Behaviour
+
+<Tabs defaultValue="create">
+  <TabItem value="create" label="Create">
+
+  New records always start the same way, applied automatically:
+
+  ```typescript
+  isLatest: true
+  isPublished: false
+  publishedAt: null
+  publishedTracker: "na"
+  ```
+
+  </TabItem>
+  <TabItem value="update" label="Update">
+
+  Only the latest version of a chain can be updated - `PUT`/`PATCH` on an archived version (`isLatest: false`) returns a 400: `Only the latest version of {model} can be updated.`
+
+  If the latest version is also the **published** one, an update never mutates it in place. The CRUD layer transparently:
+
+  1. Copies the published row into a new version (every column except id, timestamps, audit fields, and the draft/publish columns above - plus every relation that isn't one-to-many),
+  2. Applies only the fields you actually submitted on top of that copy,
+  3. Marks the copy `isLatest: true, isPublished: false, publishedAt: null`,
+  4. Clones any `mediaSingle`/`mediaMultiple` field values onto the new version.
+
+  The previously published row is untouched and stays live until the new draft is explicitly published.
+
+  </TabItem>
+  <TabItem value="publish" label="Publish / Unpublish">
+
+  ```
+  POST /api/{model}/{id}/publish
+  POST /api/{model}/{id}/unpublish
+  ```
+
+  ```typescript
+  await bookService.publishRecord(id);
+  await bookService.unpublishRecord(id);
+  ```
+
+  Both require the target to be the latest version of its chain (same 400 as update), and:
+
+  - **Publish** - archives every other version in the chain (`isPublished: false`, each given its own `publishedTracker`), then marks the target `isPublished: true` with a fresh `publishedAt`.
+  - **Unpublish** - un-publishes the target (`isPublished: false`, `publishedAt` cleared) and restores whichever sibling in the chain was *most recently published* (highest `publishedAt`, ties broken by id) back to `isPublished: true` - with a **fresh** `publishedAt` of its own, not its original historical timestamp.
+
+  <Callout type="warning" title="Unpublish Is a Rollback, Not a Takedown">
+
+  If the chain has publish history, unpublishing the live version brings back whatever was published before it - it does not, by itself, remove the record from public view. If no earlier published version exists in the chain, unpublishing simply leaves nothing published.
+
+  </Callout>
+
+  <Callout type="info" title="Permissions">
+
+  Publish and unpublish are separate permissions - `{Model}Controller.publish` and `{Model}Controller.unpublish` - generated as a pair whenever `draftPublishWorkflow` is enabled. The backend assumes this pairing always holds, so don't grant one without the other.
+
+  </Callout>
+
+  </TabItem>
+  <TabItem value="delete" label="Delete">
+
+  A currently published version can't be deleted - `DELETE` returns a 400 asking you to unpublish it or publish another draft first. Deleting the *latest* (non-published) version automatically promotes the next most recent version in the chain to `isLatest`.
+
+  </TabItem>
+  <TabItem value="recover" label="Recover">
+
+  Recovering a [soft-deleted](/docs/recipes/soft-delete) version always makes the recovered row `isLatest: true` and every other version in its chain `isLatest: false` - regardless of whether a newer version already exists and was latest before the recover. Recovering an old version can silently demote today's actual latest draft.
+
+  Bulk-recovering several deleted versions from the same chain at once doesn't error, but whichever one is processed last wins `isLatest` - and that processing order isn't guaranteed to match the order of ids you passed in.
+
+  </TabItem>
+  <TabItem value="query" label="Querying">
+
+  `find()` scopes results to `isLatest: true` by default. That default is skipped when the request already filters on `isLatest` or `initialEntityVersionId`, or asks for the published view - so:
+
+  ```typescript
+  // Admin/editor views - latest version of every chain (default, no extra filter needed)
+  await bookService.find({});
+
+  // Public/live API - whichever version is currently published, even if a newer draft exists
+  await bookService.find({ filters: { isPublished: { $eq: true } } });
+
+  // Full version history for one chain
+  await bookService.find({ filters: { initialEntityVersionId: { $eq: chainId } } });
+  ```
+
+  </TabItem>
+</Tabs>
+
+## UI
+
+**Form view** - when `draftPublishWorkflow` is enabled:
+
+- The form header gains **Publish**/**Unpublish** actions with a confirm dialog.
+- A status pill (Draft / Published / Archived) renders in the notebook tab bar.
+- A read-only **Version History** tab is automatically appended to the form's layout, listing every version in the chain with its status, audit info, and a link to open any version - except when the chain has exactly one version (a fresh record that's never been edited or published), in which case the tab renders "No versions found" rather than listing that single row.
+- Fields on an archived (non-latest) version render read-only, since only the latest version can be edited.
+- An **Info** tab showing Created/Updated At/By plus Published At/By and the status pill is shared with [Internationalisation](/docs/recipes/internationalisation) - it appears whenever either feature is enabled on the model, not only draft/publish.
+
+**List view**:
+
+- Edit/delete row actions are hidden for archived rows (`isLatest: false`) - they can't be mutated.
+- The built-in `PublishedStatusListViewWidget` (registered as the default widget on boolean/date columns) shows a Published/Unpublished pill from `isPublished` alone - it doesn't distinguish Draft from Archived the way the Version History tab does.
+- Global search seeds a system saved filter, **Published Versions**, on draft/publish-enabled models: `{ isPublished: true, isLatest: { $in: [true, false] } }`. This surfaces published rows regardless of whether they're also the latest version - i.e. it includes a version restored by an unpublish that's since been superseded by a newer draft.
+
+## Caveats
+
+- **Legacy tables don't support this.** Models introspected from a pre-existing table don't have the versioning columns - `draftPublishWorkflow` can't be enabled on them.
+- **Unique indexes must include `publishedTracker`.** A bare unique column will reject the second (archived/draft) row in a chain - see [Database Impact](#database-impact).
+- **Unpublish rolls back, it doesn't take down.** Once a chain has publish history, there's currently no single action that leaves a chain with nothing published other than unpublishing repeatedly.
+- **Recovering an old version can demote today's latest.** See the Recover tab above - recovering any version in a chain forces it back to `isLatest: true`, even if a newer version already exists.
+- **Enabling on an existing model needs a codegen run.** Flipping `draftPublishWorkflow: true` on a model that already exists doesn't add the `/publish` and `/unpublish` endpoints by itself - regenerate the model's code so those two routes get scaffolded onto its controller.

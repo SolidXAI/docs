@@ -76,12 +76,81 @@ type SolidListViewHandle = {
     saved_filter_predicate?: any;
     predefined_search_predicate?: any;
   }) => void;
+  applySavedFilter: (name: string, variables?: Record<string, any>) => boolean;
   setPagination: (nextFirst: number, nextRows: number) => void;
   setSort: (nextMultiSortMeta: { field: string; order: 1 | -1 }[]) => void;
   setShowArchived: (value: boolean) => void;
   getState: () => any;
 };
 ```
+
+`applySavedFilter` looks up a `savedFilters` metadata entry by `name`, resolves its `filterQueryJson` tokens (see below), and applies it through the same state the built-in saved-filter dropdown uses — so a call to it shows up as a removable `"Saved: <name>"` pill in the global search bar, and `getState().filterPredicates.saved_filter_name` reflects it afterwards. It returns `false` (and logs an error) if the filter can't be found, or if any of its variables couldn't be resolved.
+
+## Saved Filters & Unbound Variables
+
+A `savedFilters` metadata entry's `filterQueryJson` can contain string tokens shaped `"$name"` in place of a literal value:
+
+```json
+{
+  "name": "Tasks Created By Me",
+  "modelUserKey": "task",
+  "viewUserKey": "task-list-view",
+  "filterQueryJson": {
+    "$or": [{ "createdBy": { "$eq": "$activeUserId" } }]
+  }
+}
+```
+
+Two kinds of token:
+
+- **`$activeUserId`** - resolved automatically from the current session's `user.id`. No caller input needed; this is the only token the built-in saved-filter dropdown can apply on a plain click.
+- **Any other `$name`** (e.g. `$priorityValues`, `$employeeId`) - an **unbound variable**. It must be supplied via the `variables` argument to `applySavedFilter`/`applySavedFilterByName`, or the apply fails with a `missing variables` error.
+
+```json
+{
+  "name": "Filter By Priority",
+  "modelUserKey": "task",
+  "viewUserKey": "task-list-view",
+  "filterQueryJson": {
+    "$or": [{ "priority": { "$in": "$priorityValues" } }]
+  }
+}
+```
+
+```ts
+listView.applySavedFilter("Filter By Priority", { priorityValues: ["High", "Urgent"] });
+```
+
+### Why unbound filters don't appear in the plain saved-filter dropdown
+
+The built-in saved-filter list (rendered from the search bar) deliberately excludes any saved filter with unbound variables - clicking it there would have no way to collect the variable's value, so the apply would just fail. This is intentional, not a bug to route around.
+
+To make an unbound-variable filter selectable, build a small `listHeaderAction` component (see [List View Buttons](/docs/developer-docs/extending/frontend-customization/list-view-buttons)) that collects or resolves the value itself, then calls `applySavedFilter` directly:
+
+```ts
+import { getListView, getRegisteredListViewIds, getSession } from "@solidxai/core-ui";
+
+const applyMyPriorityFilter = async (params: { moduleName: string; modelName: string }, priorityValues: string[]) => {
+  const prefix = `page:${params.moduleName}:${params.modelName}:`;
+  const listId = getRegisteredListViewIds().find((id) => id.startsWith(prefix));
+  const listView = listId ? getListView(listId) : undefined;
+  if (!listView) return;
+
+  listView.applySavedFilter("Filter By Priority", { priorityValues });
+};
+```
+
+For a value that needs an async lookup (e.g. the current user's linked employee record) rather than direct user input, resolve it with `getSession()` first:
+
+```ts
+const session = await getSession();
+const employee = await resolveActiveEmployee(session); // your own lookup
+if (employee?.employeeId) {
+  listView.applySavedFilter("Tickets Assigned To Me", { employeeId: employee.employeeId });
+}
+```
+
+See [List View Events](/docs/developer-docs/extending/frontend-customization/list-view-events#applying-a-saved-filter-as-the-default-on-first-load) for the safe way to auto-apply one of these on list load, without needing a button click.
 
 ## Typical External Usage
 

@@ -167,6 +167,7 @@ Reference the handler name in list layout JSON:
 ```ts
 export type SolidBeforeListDataLoad = {
   type: SolidUiEvents;
+  isInitialLoad?: boolean;
   fieldsMetadata: FieldsMetadata;
   viewMetadata: SolidView;
   listViewLayout: ListLayoutType;
@@ -183,6 +184,7 @@ export type SolidBeforeListDataLoad = {
 ```ts
 export type SolidLoadList = {
   type: SolidUiEvents;
+  isInitialLoad?: boolean;
   listData: any[];
   fieldsMetadata: FieldsMetadata;
   totalRecords: number;
@@ -194,6 +196,8 @@ export type SolidLoadList = {
   params?: SolidListViewParams;
 };
 ```
+
+`isInitialLoad` is `true` only for the very first time the event fires for a given list mount - `SolidListView` flips an internal ref to `false` synchronously, before the handler even runs, so every subsequent call (including one triggered by the handler's own side effects) sees `false`. This is what makes the pattern below safe.
 
 ## Returning Changes
 
@@ -216,6 +220,52 @@ Usage rules:
 - For `onListLoad`, return `dataChanged: true` with `newListData` to replace records.
 - For layout mutations, return `layoutChanged: true` with `newLayout`.
 
+## Applying a Saved Filter as the Default on First Load
+
+`onBeforeListDataLoad` doesn't have to return `SolidListUiEventResponse` at all - a handler can return `void` and instead reach into the list's own imperative handle to apply a **saved filter** (including one with [unbound variables](/docs/developer-docs/extending/frontend-customization/list-view-api#saved-filters--unbound-variables)) as the default view. This is the only way to auto-apply an unbound-variable saved filter without a button click, since resolving its variables may need an async lookup the plain saved-filter dropdown has no way to trigger on its own.
+
+The key to doing this safely is the `isInitialLoad` guard: `applySavedFilter` triggers a refetch, which re-runs `onBeforeListDataLoad` - without a guard, that second call would apply the filter again, triggering another refetch, forever. Gating on `event.isInitialLoad !== true` means the second (and every later) invocation returns immediately, since the ref backing it has already flipped to `false`.
+
+```ts
+import {
+  getListView,
+  getRegisteredListViewIds,
+  type SolidBeforeListDataLoad,
+} from "@solidxai/core-ui";
+import { getActiveEmployee } from "../../../common/helpers"; // your own session -> domain-record lookup
+
+const SAVED_FILTER_NAME = "Tickets Assigned To Me";
+
+const ticketListDefaultAssignedToMe = async (event: SolidBeforeListDataLoad): Promise<void> => {
+  // Only ever act on the very first load for this mount - every later call is a no-op.
+  if (event.isInitialLoad !== true) return;
+
+  const prefix = `page:${event.params?.moduleName}:${event.params?.modelName}:`;
+  const listId = getRegisteredListViewIds().find((id) => id.startsWith(prefix));
+  const listView = listId ? getListView(listId) : undefined;
+  if (!listView) return;
+
+  // Don't clobber a filter the user (or a restored session) already applied.
+  const predicates = listView.getState().filterPredicates;
+  const hasExistingFilter = [
+    "custom_filter_predicate",
+    "search_predicate",
+    "saved_filter_predicate",
+    "predefined_search_predicate",
+  ].some((key) => predicates?.[key] != null);
+  if (hasExistingFilter) return;
+
+  const employee = await getActiveEmployee(event.session);
+  if (!employee?.employeeId) return;
+
+  listView.applySavedFilter(SAVED_FILTER_NAME, { employeeId: employee.employeeId });
+};
+
+export default ticketListDefaultAssignedToMe;
+```
+
+Register and reference this handler exactly like any other `onBeforeListDataLoad` function (see above). Because it applies the filter via `applySavedFilter` rather than a raw `newFilter` bake-in, it shows up as a normal, removable `"Saved: Tickets Assigned To Me"` pill in the search bar the moment it applies - no extra payload or rendering work needed on top of what's described here.
+
 ## Common Patterns
 
 - Pre-filtering by tenant, role, or context in `onBeforeListDataLoad`
@@ -232,6 +282,7 @@ Usage rules:
 
 ## See Also
 
+- [List API](/docs/developer-docs/extending/frontend-customization/list-view-api)
 - [List View Buttons](/docs/developer-docs/extending/frontend-customization/list-view-buttons)
 - [List View Field Widgets](/docs/developer-docs/extending/frontend-customization/list-view-field-widgets)
 - [Form View Events](/docs/developer-docs/extending/frontend-customization/form-view-events)
