@@ -9,10 +9,10 @@ solidx_concerns: [backend.new_login_extension_provider, new_login_extension_prov
 
 ## Overview
 
-Users in a SolidX application often also exist in another system of record - Salesforce,
-an HR platform, a customer identity provider. That system's idea of whether the user is
-still active can drift from SolidX's own `active` flag: someone disabled in Salesforce
-stays able to log in here until an admin manually deactivates them too.
+Users in a SolidX application often also exist in another system of record - a CRM, an
+HR platform, a customer identity provider. That system's idea of whether the user is
+still active can drift from SolidX's own `active` flag: someone disabled there stays
+able to log in here until an admin manually deactivates them in SolidX too.
 
 A **login extension provider** closes that gap. It is a class you register that runs
 after SolidX has already verified the user's password or OTP, and before a token is
@@ -104,12 +104,10 @@ export interface ILoginExtensionProvider<
   help(): string;
   /** Higher runs first. Defaults to 0. */
   priority?: number;
-  /** Deadline applied to `supports` and `verifyLogin` individually. Defaults to 5000ms. */
+  /** Deadline for `verifyLogin`. Defaults to 5000ms. */
   timeoutMs?: number;
   /** What happens if `verifyLogin` throws or times out. Defaults to `fail-closed`. */
   failurePolicy?: LoginExtensionFailurePolicy;
-  /** Return false to skip this attempt entirely. Defaults to true. */
-  supports?(user: TUser, ctxt: TContext): boolean | Promise<boolean>;
   /** Return `{ allow: false }` to deny. */
   verifyLogin(user: TUser, ctxt: TContext): Promise<ILoginExtensionResult>;
 }
@@ -120,16 +118,17 @@ export interface ILoginExtensionProvider<
 
 ## 3. Writing a Provider
 
-The example below models a real Salesforce check: it looks up the user by email via
-Salesforce's REST query API and denies the login if the matching record's `IsActive`
-field is `false`.
+The example below looks the user up by email in an external directory over HTTP and
+denies the login when that directory reports the account as inactive. Point it at
+whichever system holds your user status - swap the URL, the auth header, and the shape
+of the response you read.
 
 <details open>
-<summary><strong>Show code: <code>salesforce-login-extension.provider.ts</code></strong></summary>
+<summary><strong>Show code: <code>external-user-status-login-extension.provider.ts</code></strong></summary>
 
 ```ts
 import { HttpService } from "@nestjs/axios";
-import { Injectable, Logger } from "@nestjs/common";
+import { Injectable } from "@nestjs/common";
 import {
   ILoginExtensionContext,
   ILoginExtensionProvider,
@@ -138,52 +137,54 @@ import {
   User,
 } from "@solidxai/core";
 
+/** The slice of the external directory's response this provider relies on. */
+interface ExternalDirectoryUser {
+  id: string;
+  active: boolean;
+}
+
 /**
- * Denies login for a user whose matching Salesforce record has IsActive = false.
- * Skips users with no email to correlate on.
+ * Denies login for a user whose matching record in the external directory is
+ * marked inactive. Skips users with no email to correlate on.
  */
 @LoginExtensionProvider()
 @Injectable()
-export class SalesforceUserStatusLoginExtensionProvider
+export class ExternalUserStatusLoginExtensionProvider
   implements ILoginExtensionProvider
 {
-  private readonly logger = new Logger(
-    SalesforceUserStatusLoginExtensionProvider.name,
-  );
-
-  /** Never let a Salesforce outage lock everyone out of this app. */
+  /** Never let an outage in the external system lock everyone out of this app. */
   readonly failurePolicy = "fail-open";
   readonly timeoutMs = 4000;
 
   constructor(private readonly httpService: HttpService) {}
 
   name(): string {
-    return "SalesforceUserStatusLoginExtensionProvider";
+    return "ExternalUserStatusLoginExtensionProvider";
   }
 
   help(): string {
-    return "Denies login when the matching Salesforce User record is inactive.";
-  }
-
-  supports(user: User): boolean {
-    return !!user?.email;
+    return "Denies login when the matching external directory record is inactive.";
   }
 
   async verifyLogin(
     user: User,
     ctxt: ILoginExtensionContext,
   ): Promise<ILoginExtensionResult> {
-    const record = await this.fetchSalesforceUser(user.email);
+    // No email means nothing to correlate on, so this provider has no opinion.
+    if (!user?.email) return { allow: true };
 
-    // Unknown to Salesforce is not the same as disabled. This provider allows
-    // it, which is the conservative choice for a partially-synced directory.
+    const record = await this.fetchDirectoryUser(user.email);
+
+    // Unknown to the external system is not the same as disabled. This
+    // provider allows it, which is the conservative choice for a directory
+    // that is only partially synced. Invert it if yours is authoritative.
     if (!record) return { allow: true };
 
-    if (record.IsActive === false) {
+    if (record.active === false) {
       return {
         allow: false,
         // Operator-facing only - never sent to the client.
-        reason: `${user.email} is inactive in Salesforce (attempt=${ctxt.attemptId})`,
+        reason: `${user.email} is inactive in the external directory (attempt=${ctxt.attemptId})`,
       };
     }
 
@@ -196,25 +197,26 @@ export class SalesforceUserStatusLoginExtensionProvider
    * this method silently answering "active" for a system it could not
    * reach.
    */
-  private async fetchSalesforceUser(
+  private async fetchDirectoryUser(
     email: string,
-  ): Promise<{ Id: string; IsActive: boolean } | undefined> {
-    const soql = `SELECT Id, IsActive FROM User WHERE Username = '${email.replace(/'/g, "\\'")}'`;
+  ): Promise<ExternalDirectoryUser | undefined> {
     const response = await this.httpService.axiosRef.get(
-      `${process.env.SALESFORCE_INSTANCE_URL}/services/data/v60.0/query`,
+      `${process.env.EXTERNAL_DIRECTORY_BASE_URL}/users`,
       {
-        params: { q: soql },
-        headers: { Authorization: `Bearer ${process.env.SALESFORCE_ACCESS_TOKEN}` },
+        params: { email },
+        headers: {
+          Authorization: `Bearer ${process.env.EXTERNAL_DIRECTORY_API_TOKEN}`,
+        },
       },
     );
-    return response.data?.records?.[0];
+    return response.data?.users?.[0];
   }
 }
 ```
 </details>
 
-The comment on `fetchSalesforceUser` matters more than anything else in this file: if you
-wrap that call in a `try/catch` that swallows the error, an unreachable Salesforce
+The comment on `fetchDirectoryUser` matters more than anything else in this file: if you
+wrap that call in a `try/catch` that swallows the error, an unreachable directory
 silently becomes "everyone is active", and the entire point of the failure policy is
 defeated.
 
@@ -228,10 +230,10 @@ Registry from wherever you declare them - no separate registration call is neede
 ```ts
 // app.module.ts
 import { Module } from "@nestjs/common";
-import { SalesforceUserStatusLoginExtensionProvider } from "./salesforce-login-extension.provider";
+import { ExternalUserStatusLoginExtensionProvider } from "./external-user-status-login-extension.provider";
 
 @Module({
-  providers: [SalesforceUserStatusLoginExtensionProvider],
+  providers: [ExternalUserStatusLoginExtensionProvider],
 })
 export class AppModule {}
 ```
@@ -274,7 +276,7 @@ With no `errorCode`/`message` set, a denial surfaces to the client as:
 |---|---|
 | No provider registered | No-op - login is unaffected |
 | `verifyLogin` returns `{ allow: false }` | `401 solidx-login-denied-by-extension` - always denies |
-| `supports` or `verifyLogin` throws or exceeds `timeoutMs` | `fail-closed` (default): `503 solidx-login-extension-unavailable`. `fail-open`: logged and skipped |
+| `verifyLogin` throws or exceeds `timeoutMs` | `fail-closed` (default): `503 solidx-login-extension-unavailable`. `fail-open`: logged and skipped |
 
 Both `failurePolicy` and `timeoutMs` are declared on your provider - there is no global
 setting for either. This mirrors every other extension point in SolidX
@@ -286,7 +288,7 @@ check is the one who knows whether it must be mandatory, not a runtime admin tog
 If a provider is misconfigured and starts denying every login, recovering means removing
 it from your module's `providers` array (or fixing and redeploying it) - not flipping a
 setting. Providers that should never be able to lock your product out should declare
-`failurePolicy: "fail-open"`, as the Salesforce example above does.
+`failurePolicy: "fail-open"`, as the example above does.
 
 </Callout>
 
