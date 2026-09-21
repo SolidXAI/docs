@@ -1,0 +1,327 @@
+---
+title: Login Extension Providers
+icon: "user-check"
+description: Learn how to run custom checks against a third-party system during login by registering a login extension provider.
+summary: Covers the `ILoginExtensionProvider` contract, where the chain runs relative to the password and OTP login flows, denying a login with a structured result, per-provider failure policy and timeouts, priority ordering, and the paths the chain deliberately does not cover.
+keywords: [backend, authentication, login, providers, customization]
+solidx_concerns: [backend.new_login_extension_provider, new_login_extension_provider]
+---
+
+## Overview
+
+Users in a SolidX application often also exist in another system of record - a CRM, an
+HR platform, a customer identity provider. That system's idea of whether the user is
+still active can drift from SolidX's own `active` flag: someone disabled there stays
+able to log in here until an admin manually deactivates them in SolidX too.
+
+A **login extension provider** closes that gap. It is a class you register that runs
+after SolidX has already verified the user's password or OTP, and before a token is
+issued. It can call out to your external system and, based on the answer, deny the
+login. It cannot do anything else to the outcome.
+
+<Callout type="info" title="Mental Model">
+
+- The chain runs only **after** the primary credential has already been proven.
+- A provider can only **deny** a login that would otherwise have succeeded - never grant one.
+- With **no provider registered**, login behaves exactly as it did before this feature existed.
+
+</Callout>
+
+---
+
+## 1. Where the Chain Runs
+
+The chain is invoked from two places in the login flow: after a correct password, and
+after a correct OTP. Both are **after** the credential check and **before** any token is
+minted.
+
+| Flow | Hooked? |
+|---|---|
+| Password login (`POST /iam/authenticate`) | Yes |
+| OTP login (`POST /iam/otp/login/confirm`) | Yes |
+
+<Callout type="warning" title="Not covered">
+
+The chain does **not** run on OAuth login (Google, Facebook, Microsoft, Microsoft Active
+Directory), MPIN login, OTP *initiate*, refresh-token exchange, SSO code exchange, or
+API-key token exchange. A user your provider would deny can still reach the platform
+through any of these paths. If that matters for your use case, treat this as a partial
+control today, not a complete one.
+
+OTP initiate is left out deliberately, not by oversight: at that point the caller has
+only supplied an identifier, nothing has been proven yet. Calling your external system
+there would turn an unauthenticated endpoint into a way to probe whether an identifier
+exists and what its status is in that system - an enumeration oracle. The accepted
+trade-off is that a disabled user still receives an OTP, and is denied one step later,
+at confirm.
+
+</Callout>
+
+---
+
+## 2. The Contract
+
+Implement `ILoginExtensionProvider` and decorate the class with
+`@LoginExtensionProvider()` so the Solid Registry discovers it at startup - the same
+discovery mechanism used by every other provider type in SolidX.
+
+<details open>
+<summary><strong>Show code: <code>interfaces.ts</code></strong></summary>
+
+```ts
+export enum LoginExtensionChannel {
+  PASSWORD = "password",
+  OTP = "otp",
+}
+
+export type LoginExtensionFailurePolicy = "fail-open" | "fail-closed";
+
+export interface ILoginExtensionContext {
+  /** Which entry point is asking. */
+  channel: LoginExtensionChannel;
+  /** Correlates the log lines emitted for one attempt. */
+  attemptId: string;
+  /** When the attempt reached the extension chain. */
+  startedAt: Date;
+}
+
+export interface ILoginExtensionResult {
+  /** `false` denies the login. Anything else allows it. */
+  allow: boolean;
+  /** Operator-facing reason, written to the server log only. */
+  reason?: string;
+  /** Canonical client-facing code - see "Denying a Login" below. */
+  errorCode?: ErrorCode;
+  /** Client-facing message. */
+  message?: string;
+}
+
+export interface ILoginExtensionProvider<
+  TUser extends User = User,
+  TContext extends ILoginExtensionContext = ILoginExtensionContext,
+> {
+  name(): string;
+  help(): string;
+  /** Higher runs first. Defaults to 0. */
+  priority?: number;
+  /** Deadline for `verifyLogin`. Defaults to 5000ms. */
+  timeoutMs?: number;
+  /** What happens if `verifyLogin` throws or times out. Defaults to `fail-closed`. */
+  failurePolicy?: LoginExtensionFailurePolicy;
+  /** Return `{ allow: false }` to deny. */
+  verifyLogin(user: TUser, ctxt: TContext): Promise<ILoginExtensionResult>;
+}
+```
+</details>
+
+---
+
+## 3. Writing a Provider
+
+The example below looks the user up by email in an external directory over HTTP and
+denies the login when that directory reports the account as inactive. Point it at
+whichever system holds your user status - swap the URL, the auth header, and the shape
+of the response you read.
+
+<details open>
+<summary><strong>Show code: <code>external-user-status-login-extension.provider.ts</code></strong></summary>
+
+```ts
+import { HttpService } from "@nestjs/axios";
+import { Injectable } from "@nestjs/common";
+import {
+  ILoginExtensionContext,
+  ILoginExtensionProvider,
+  ILoginExtensionResult,
+  LoginExtensionProvider,
+  User,
+} from "@solidxai/core";
+
+/** The slice of the external directory's response this provider relies on. */
+interface ExternalDirectoryUser {
+  id: string;
+  active: boolean;
+}
+
+/**
+ * Denies login for a user whose matching record in the external directory is
+ * marked inactive. Skips users with no email to correlate on.
+ */
+@LoginExtensionProvider()
+@Injectable()
+export class ExternalUserStatusLoginExtensionProvider
+  implements ILoginExtensionProvider
+{
+  /** Never let an outage in the external system lock everyone out of this app. */
+  readonly failurePolicy = "fail-open";
+  readonly timeoutMs = 4000;
+
+  constructor(private readonly httpService: HttpService) {}
+
+  name(): string {
+    return "ExternalUserStatusLoginExtensionProvider";
+  }
+
+  help(): string {
+    return "Denies login when the matching external directory record is inactive.";
+  }
+
+  async verifyLogin(
+    user: User,
+    ctxt: ILoginExtensionContext,
+  ): Promise<ILoginExtensionResult> {
+    // No email means nothing to correlate on, so this provider has no opinion.
+    if (!user?.email) return { allow: true };
+
+    const record = await this.fetchDirectoryUser(user.email);
+
+    // Unknown to the external system is not the same as disabled. This
+    // provider allows it, which is the conservative choice for a directory
+    // that is only partially synced. Invert it if yours is authoritative.
+    if (!record) return { allow: true };
+
+    if (record.active === false) {
+      return {
+        allow: false,
+        // Operator-facing only - never sent to the client.
+        reason: `${user.email} is inactive in the external directory (attempt=${ctxt.attemptId})`,
+      };
+    }
+
+    return { allow: true };
+  }
+
+  /**
+   * Deliberately does not catch. A transport failure must surface as a
+   * thrown error so the failure policy above decides what happens - not
+   * this method silently answering "active" for a system it could not
+   * reach.
+   */
+  private async fetchDirectoryUser(
+    email: string,
+  ): Promise<ExternalDirectoryUser | undefined> {
+    const response = await this.httpService.axiosRef.get(
+      `${process.env.EXTERNAL_DIRECTORY_BASE_URL}/users`,
+      {
+        params: { email },
+        headers: {
+          Authorization: `Bearer ${process.env.EXTERNAL_DIRECTORY_API_TOKEN}`,
+        },
+      },
+    );
+    return response.data?.users?.[0];
+  }
+}
+```
+</details>
+
+The comment on `fetchDirectoryUser` matters more than anything else in this file: if you
+wrap that call in a `try/catch` that swallows the error, an unreachable directory
+silently becomes "everyone is active", and the entire point of the failure policy is
+defeated.
+
+---
+
+## 4. Registering It
+
+Login extension providers are standard NestJS providers, discovered by the Solid
+Registry from wherever you declare them - no separate registration call is needed.
+
+```ts
+// app.module.ts
+import { Module } from "@nestjs/common";
+import { ExternalUserStatusLoginExtensionProvider } from "./external-user-status-login-extension.provider";
+
+@Module({
+  providers: [ExternalUserStatusLoginExtensionProvider],
+})
+export class AppModule {}
+```
+
+Restart the application for the registry to pick it up. You can register any number of
+providers - each runs in `priority` order, and any one of them can deny the login.
+
+---
+
+## 5. Denying a Login
+
+Prefer returning `{ allow: false, reason }` over throwing. A structured result is what
+lets SolidX tell "your system says this user is disabled" apart from "your system did
+not respond" - which is exactly the distinction the failure policy acts on.
+
+<Callout type="warning" title="Caution">
+
+If you set a custom `errorCode` or `message` on the result, register a matching
+`IErrorCodeProvider` rule for it in your own module. Without one, the global exception
+filter will not recognize your code and the client falls back to the generic
+`solidx-unknown-error`. See [Error Code Providers](/docs/developer-docs/extending/backend-customization/error-code-providers).
+
+</Callout>
+
+With no `errorCode`/`message` set, a denial surfaces to the client as:
+
+```json
+{
+  "statusCode": 401,
+  "errorCode": "solidx-login-denied-by-extension",
+  "message": "Login was denied by an external verification check."
+}
+```
+
+---
+
+## 6. Failure Policy and Timeouts
+
+| State | Behavior |
+|---|---|
+| No provider registered | No-op - login is unaffected |
+| `verifyLogin` returns `{ allow: false }` | `401 solidx-login-denied-by-extension` - always denies |
+| `verifyLogin` throws or exceeds `timeoutMs` | `fail-closed` (default): `503 solidx-login-extension-unavailable`. `fail-open`: logged and skipped |
+
+Both `failurePolicy` and `timeoutMs` are declared on your provider - there is no global
+setting for either. This mirrors every other extension point in SolidX
+(`IExtensionUserCreationProvider`, `ISelectionProvider`, and the rest): the author of the
+check is the one who knows whether it must be mandatory, not a runtime admin toggle.
+
+<Callout type="warning" title="There is no runtime kill switch">
+
+If a provider is misconfigured and starts denying every login, recovering means removing
+it from your module's `providers` array (or fixing and redeploying it) - not flipping a
+setting. Providers that should never be able to lock your product out should declare
+`failurePolicy: "fail-open"`, as the example above does.
+
+</Callout>
+
+---
+
+## 7. Ordering
+
+When more than one provider is registered, they run in descending `priority` order
+(default `0`), and the first one to deny wins. Put fast, local checks ahead of slow,
+remote ones so a login fails cheaply where possible.
+
+---
+
+## 8. Known Gaps
+
+- **OAuth, MPIN, refresh, SSO exchange, and API-key exchange are not hooked.** See the
+  table under [Where the Chain Runs](#1-where-the-chain-runs).
+- **OTP initiate is not hooked**, to avoid an enumeration oracle - see the callout above.
+- **Enrichment is out of scope.** A provider can only allow or deny; it cannot currently
+  update the user's roles or permissions from the external system's answer.
+
+---
+
+## Summary
+
+| Step | What you do |
+|---|---|
+| 1 | Implement `ILoginExtensionProvider` |
+| 2 | Decorate the class with `@LoginExtensionProvider()` and `@Injectable()` |
+| 3 | Return `{ allow: false, reason }` from `verifyLogin` to deny a login |
+| 4 | Set `failurePolicy` and `timeoutMs` to match how critical the check is |
+| 5 | Add the class to your module's `providers` array and restart |
+
+**See also:** [Solid Registry](/docs/developer-docs/extending/backend-customization/solid-registry) ·
+[Error Code Providers](/docs/developer-docs/extending/backend-customization/error-code-providers) ·
+[Authentication](/docs/developer-docs/rest-apis/authentication)

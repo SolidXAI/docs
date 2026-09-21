@@ -2,7 +2,7 @@
 title: Solid Registry
 icon: "box"
 description: Learn how to extend and use the Solid Registry in your SolidX application.
-summary: Explains the Solid Registry as SolidX's central discovery and configuration hub, acting as a cache and metadata manager. Provides fast component lookups, application-wide consistency for rules/modules/providers, and extensibility via decorator-based auto-discovery. Covers the registry pattern (Decorator → Interface → Implementation → Registry → Consumer), registered components including error code providers, settings providers, selection providers, computed field providers, scheduled jobs, email/SMS/WhatsApp providers, and security rules.
+summary: Explains the Solid Registry as SolidX's central discovery and configuration hub, acting as a cache and metadata manager. Provides fast component lookups, application-wide consistency for rules/modules/providers, and extensibility via decorator-based auto-discovery. Covers the registry pattern (Decorator → Interface → Implementation → Registry → Consumer), registered components including error code providers, settings providers, selection providers, computed field providers, scheduled jobs, email/SMS/WhatsApp providers, login extension providers, and security rules.
 keywords: [backend, solid registry, customization, metadata]
 ---
 
@@ -105,6 +105,12 @@ The following components are tracked by the Solid Registry:
 **Purpose:** Declare application configuration in code and surface it on the admin Settings screen.  
 **How it works:** Each `@SettingsProvider` class returns setting definitions that the registry merges into a single schema. Values stored in the database are layered on top, and the result is cached for fast lookup at runtime.  
 **See also:** [Settings Providers](/docs/developer-docs/extending/backend-customization/settings-providers)
+
+### Login Extension Providers
+
+**Purpose:** Run custom checks - typically against a third-party system - after a user's password or OTP has been verified, and before a token is issued.  
+**How it works:** Each `@LoginExtensionProvider` class is run in priority order during login. Any provider can deny the login; none can grant one. With no provider registered, login is unaffected.  
+**See also:** [Login Extension Providers](/docs/developer-docs/extending/backend-customization/login-extension-providers)
 
 
 
