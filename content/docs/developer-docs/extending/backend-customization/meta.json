@@ -21,6 +21,7 @@
     "email-providers",
     "whatsapp-providers",
     "settings-providers",
-    "error-code-providers"
+    "error-code-providers",
+    "login-extension-providers"
   ]
 }
