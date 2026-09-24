@@ -49,6 +49,7 @@ This page intentionally documents the most commonly used commands and skips a fe
 | Command | Description |
 |---|---|
 | [`create-app`](#create-app) | Scaffold a new SolidX project. |
+| [`setup-app`](#setup-app) | Set up an already-bootstrapped SolidX project you've just cloned. |
 | [`build`](#build) | Build the project and set up the Solid CLI. |
 | [`upgrade`](#upgrade) | Upgrade SolidX package dependencies. |
 | [`seed`](#seed) | Install or refresh seeded metadata and platform settings. |
@@ -61,7 +62,7 @@ This page intentionally documents the most commonly used commands and skips a fe
 
 It can help to group the commands mentally before reading the detailed reference:
 
-- **Bootstrap:** `create-app`, `build`
+- **Bootstrap:** `create-app`, `setup-app`, `build`
 - **Platform lifecycle:** `seed`, `info`
 - **Development workflow:** `generate`, `upgrade`
 - **Testing workflow:** `test`
@@ -80,6 +81,13 @@ solidctl build
 
 # Seed metadata, settings, and the system user
 solidctl seed
+```
+
+### Cloned an existing project
+
+```bash
+# Install, configure, build, seed, and start in one command
+solidctl setup-app
 ```
 
 ### Day-to-day development
@@ -151,6 +159,60 @@ solidctl create-app [options]
 ```bash
 solidctl build
 solidctl seed
+```
+
+## setup-app
+
+Sets up an **already-bootstrapped** SolidX project you've just cloned — the counterpart to `create-app` for a project that already exists rather than one being scaffolded from scratch. Infers the project name and UI port from `solid-api`/`solid-ui`'s `package.json`, prompts only for the database connection, then installs dependencies, writes `.env`, verifies or creates the database, builds, seeds, and starts the dev servers.
+
+```bash
+solidctl setup-app [options]
+```
+
+### Options
+
+| Flag | Default | Description |
+|---|---|---|
+| `--no-start` | - | Skip starting the dev servers after setup |
+| `--no-interactive` | - | Skip all prompts and use defaults or provided flags |
+| `--verbose` | - | Show detailed logs during installation |
+| `--skip-install` | - | Skip `npm install` for `solid-api` and `solid-ui` |
+| `--skip-build` | - | Skip the build step |
+| `--skip-seed` | - | Skip the seed step |
+| `--force-env` | - | Regenerate `.env` files even if they already exist |
+| `--db-client <client>` | `PostgreSQL` | Database type: `PostgreSQL`, `MySQL`, or `MSSQL` |
+| `--db-host <host>` | `localhost` | Database host |
+| `--db-port <port>` | `5432` / `3306` / `1433` | Database port |
+| `--db-name <name>` | `solidx_app_db` | Database name |
+| `--db-username <username>` | `solidx_app_user` | Database username |
+| `--db-password <password>` | `strongpassword` | Database password |
+
+### What it does
+
+1. Reads project name and UI port from `package.json` — no prompt needed for either.
+2. Writes `solid-api/.env` and `solid-ui/.env`:
+   - If `solid-api/.env` already exists, it's left untouched (pass `--force-env` to regenerate).
+   - If `solid-api/.env.example` exists, its non-secret values are carried over and only the gaps (and the database password) are prompted for.
+   - Otherwise, only the database connection is prompted for. Project-specific settings the template doesn't know about (RabbitMQ, OAuth, SMTP, Redis, etc.) aren't inferred and need to be added manually afterward.
+3. Verifies the database exists, or creates it.
+4. Installs dependencies for `solid-api` and `solid-ui`.
+5. Builds the project and sets up the Solid CLI, same as `solidctl build`.
+6. Seeds metadata, settings, and the system user, same as `solidctl seed`.
+7. Starts the dev servers, same as `solidctl start:dev`, unless `--no-start` was passed.
+
+### Notes
+
+- Requires both `solid-api/package.json` and `solid-ui/package.json` to define a `solidx:dev` script. If either is missing — a project that predates that script — `setup-app` fails fast and names the exact line to add.
+- The API template currently ships only a PostgreSQL driver. Selecting `MySQL` or `MSSQL` still runs setup end to end, but `solid-api` is likely to fail to boot until that's addressed upstream; `setup-app` warns when this happens.
+
+### Examples
+
+```bash
+# From a freshly cloned SolidX project
+solidctl setup-app
+
+# Non-interactive, e.g. in CI
+solidctl setup-app --no-interactive --db-password "$DB_PASSWORD" --no-start
 ```
 
 ## build
