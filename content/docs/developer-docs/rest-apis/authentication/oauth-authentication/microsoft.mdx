@@ -21,7 +21,7 @@ To use Microsoft OAuth, you must register an application in the Microsoft Entra 
 3.  Click **New registration**.
 4.  Enter a name for your application (e.g., `SolidCore-App`).
     ![Microsoft for Developers Landing Page](/img/oauth/microsoft/app-registration-page.png)
-5.  Choose the **Supported account types** (e.g., "Accounts in any organizational directory and personal Microsoft accounts").
+5.  Choose the **Supported account types** (e.g., "Any Entra ID Tenant + Personal Microsoft accounts").
 6.  In the **Redirect URI** section, select **Web** and enter your callback URL:
     - Development: `http://localhost:3000/api/iam/microsoft/connect/callback`
     - Production: `https://your-api-domain.com/api/iam/microsoft/connect/callback`
@@ -49,30 +49,43 @@ Add the following environment variables to your `.env` file:
 # Microsoft OAuth Configuration
 IAM_MICROSOFT_OAUTH_CLIENT_ID=your-application-id
 IAM_MICROSOFT_OAUTH_CLIENT_SECRET=your-client-secret
-IAM_MICROSOFT_OAUTH_TENANT_ID=common
+IAM_MICROSOFT_OAUTH_TENANT_ID=your-tenant-id
 IAM_MICROSOFT_OAUTH_CALLBACK_URL=http://localhost:3000/api/iam/microsoft/connect/callback
-IAM_MICROSOFT_OAUTH_REDIRECT_URL=http://localhost:4200/auth/microsoft/callback
+IAM_MICROSOFT_OAUTH_REDIRECT_URL=http://localhost:3001/auth/initiate-microsoft-oauth
 ```
 
 ## Authentication Flow
 
+<figure className="not-prose my-6">
+  <img
+    src="/img/oauth/microsoft/microsoft-oauth-sequence-light.png"
+    alt="Microsoft OAuth authentication flow showing user sign-in, consent, callback authorization code, token exchange, and session creation"
+    className="w-full rounded-lg border border-fd-border bg-white dark:hidden"
+  />
+  <img
+    src="/img/oauth/microsoft/microsoft-oauth-sequence-dark.png"
+    alt="Microsoft OAuth authentication flow showing user sign-in, consent, callback authorization code, token exchange, and session creation"
+    className="hidden w-full rounded-lg border border-fd-border bg-[#0f172a] dark:block"
+  />
+</figure>
+
 <Steps>
   <Step>
-    **User clicks the Microsoft sign-in button** in the application.
+    **The user selects “Sign in with Microsoft”** in your application.
   </Step>
   <Step>
-    **The application redirects to Microsoft's login page** for authentication.
+    **Your application redirects the user to Microsoft's authorization page.**
   </Step>
   <Step>
-    **User logs in with their Microsoft account** and grants the application permission to access their email and profile.
+    **The user signs in with Microsoft and grants the requested permissions.**
   </Step>
   <Step>
-    **Microsoft sends back a confirmation** that the user is authenticated.
+    **Microsoft redirects to the configured callback URL** with an authorization code.
   </Step>
   <Step>
-    **The application receives the confirmation** and creates an internal session for that user.
+    **SolidX exchanges the authorization code with Microsoft** and retrieves the user's identity information.
   </Step>
   <Step>
-    **The application logs the user in** and grants access to the app.
+    **SolidX establishes an authenticated session** and redirects the user back to your application.
   </Step>
 </Steps>
