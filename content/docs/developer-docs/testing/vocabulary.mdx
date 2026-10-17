@@ -259,6 +259,16 @@ A built-in utility step used to fail fast when a required resource is missing fr
 
 This is commonly used to make scenario prerequisites explicit, such as requiring `loginSuccess` before attempting authenticated API calls.
 
+### util.random
+
+A built-in utility step that returns one [random value](#random-test-data), so `saveAs` can keep it.
+
+```json
+{ "given": { "op": "util.random", "with": { "generator": "emailAddress", "args": { "domain": "acme.test" } }, "saveAs": "newEmail" } },
+{ "when": { "op": "ui.fill", "with": { "selector": "#email", "value": "${res:newEmail}" } } },
+{ "then": { "op": "ui.expectText", "with": { "selector": ".profile-email", "equals": "${res:newEmail}" } } }
+```
+
 ## Level 4: Runtime And Execution
 
 ### Adapter
@@ -300,6 +310,29 @@ Common token families are:
 - `${params.foo}` reads a value from the current scenario params.
 - `${res:path.to.value}` reads a value saved into the runtime resource store.
 - `${data:model["recordKey"].field}` reads a value from indexed `testing.data`.
+- `${random:generator}` generates a realistic value that is not repeated within the run. See [Random Test Data](#random-test-data).
+
+### Random Test Data
+
+Values generated during a run, for fields the application under test keeps unique: an email address, a phone number, a PAN, an invoice number. A literal value works once and then fails on the next run with "already exists". Generated values look like real input, and none is repeated within one run.
+
+A `${random:...}` token gives a new value each time it is resolved. Arguments go in brackets, as plain text: `${random:emailAddress(domain=acme.test, digits=0)}`.
+
+| Generator | Arguments (default first) | Example |
+|---|---|---|
+| `firstName`, `lastName` | `locale`: `any`, `in`, `gb`, `us` | `Priya`, `Sharma` |
+| `emailAddress` | `domain`: `example.com`; `format`: `first.last`, `firstlast`, `first_last`, `flast`, `random`; `digits`: `4` (0 to 8); `length`: `10` (for `random`) | `priya.sharma4821@example.com` |
+| `indianMobileNo` | `format`: `digits`, `national`, `e164`, `international` | `9876543210`, `+91 98765 43210` |
+| `britishMobileNo` | `format` as above; `fictional`: `false` | `07912345678`, `+44 7912 345678` |
+| `americanMobileNo` | `format` as above; `fictional`: `false` | `4152345678`, `(415) 234-5678` |
+| `panNo` | `holderType`: `P`, `C`, `H`, `F`, `A`, `T`, `B`, `L`, `J`, `G` | `ABCPK1234Z` |
+| `invoiceId` | `prefix`: `INV`; `separator`: `-`, `/`, `_`, `none`; `length`: `8` (4 to 20); `date`: `none`, `yyyy`, `yyyymm`, `yyyymmdd` | `INV-00482913` |
+
+Every generator also takes `unique=false`, which allows repeats.
+
+To use one value in several steps, generate it with [util.random](#utilrandom) and read it back with `${res:...}`.
+
+Generated phone numbers may belong to real people. If the application sends SMS, run it against a test provider, or pass `fictional=true` for the UK (07700 900000 to 900999) or the US (555-0100 to 555-0199). India has no such range.
 
 ### Secret
 
