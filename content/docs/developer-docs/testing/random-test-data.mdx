@@ -1,0 +1,461 @@
+---
+title: Random Test Data
+icon: "dices"
+description: Generate realistic emails, names, phone numbers, PAN numbers, invoice IDs and dates in test scenarios, and use the current date and time, without repeating a value within a run.
+summary: Reference for the random data generators and the current date and time available in SolidX test scenarios. Lists every generator, every argument and its allowed values, how to reuse one generated value across steps, how duplicates are avoided in a run, and what each error message means.
+---
+
+A test that creates a user with the email `test@example.com` passes once. On the next run the application answers "already exists" and the test fails, although nothing is wrong.
+
+Random test data fixes this. A scenario asks for a value, and gets one that looks like real input and has not been used earlier in the run.
+
+There are seven generators: `firstName`, `lastName`, `emailAddress`, `mobileNo`, `panNo`, `date` and `invoiceId`. A separate token, `${now:...}`, gives the current date and time; see [The Current Date And Time](#the-current-date-and-time).
+
+## Two Ways To Use A Generator
+
+### Inline, when a value is used once
+
+Write the generator as a `${random:...}` token wherever a value goes:
+
+```json
+{
+  "when": {
+    "op": "api.request",
+    "with": {
+      "method": "POST",
+      "url": "/api/customers",
+      "json": {
+        "name": "${random:firstName} ${random:lastName}",
+        "email": "${random:emailAddress(domain=acme.test)}",
+        "mobile": "${random:mobileNo(country=in, format=e164)}",
+        "pan": "${random:panNo}"
+      }
+    }
+  }
+}
+```
+
+**Every token gives a new value.** Two identical tokens in one scenario give two different values.
+
+### With `util.random` and `saveAs`, when a value is used again
+
+To type a value in one step and check it in another, generate it once and keep it:
+
+```json
+{ "given": { "op": "util.random", "with": { "generator": "emailAddress", "args": { "domain": "acme.test" } }, "saveAs": "newEmail" } },
+{ "when":  { "op": "ui.fill", "with": { "selector": "#email", "value": "${res:newEmail}" } } },
+{ "and":   { "op": "ui.click", "with": { "selector": "button[type=submit]" } } },
+{ "then":  { "op": "ui.expectText", "with": { "selector": ".profile-email", "equals": "${res:newEmail}" } } }
+```
+
+`${res:newEmail}` always gives back the value generated in the first step.
+
+<Callout type="warning" title="A common mistake">
+
+Writing `${random:emailAddress}` in both the fill step and the check step generates two different addresses, so the check fails. If a value appears in more than one place, use `util.random`.
+
+</Callout>
+
+| You need the value | Use |
+|---|---|
+| Once (a field that must be unique, and nothing checks it later) | `${random:...}` inline |
+| Again later (typed, then checked; created, then searched for; registered, then logged in with) | `util.random` with `saveAs`, then `${res:...}` |
+
+Both forms take the same arguments and share one record of used values, so neither can repeat a value the other already gave.
+
+## Writing Arguments
+
+Inline, arguments go in brackets after the generator name, as `name=value` pairs separated by commas:
+
+```text
+${random:invoiceId(prefix=PO, separator=/, length=6)}
+```
+
+- **Simple values are written bare:** letters, digits and `. - / _ + : @`. That covers `PO`, `6`, `acme.test`, `e164`, `-18y` and `09:00-18:00`.
+- **Anything else goes in quotes:** a space, comma, bracket, `|` or `}`. Use single quotes, because double quotes must be escaped inside JSON: `${now:date(format='D MMM, YYYY')}`. A backslash writes the quote itself: `'it\'s'`. Without quotes, the step fails and shows the quoted form to write.
+- An empty value is allowed: `prefix=` means no prefix.
+- Spaces around names and values are ignored.
+- Argument names are case sensitive (`holderType`, not `holdertype`). Allowed option values such as `e164` or `GB` are matched without regard to case.
+
+With `util.random`, arguments go in an `args` object, and numbers and booleans can be real JSON values:
+
+```json
+{ "op": "util.random", "with": { "generator": "invoiceId", "args": { "prefix": "PO", "separator": "/", "length": 6 } } }
+```
+
+Both forms give the same result. A pipe transform works on an inline token like any other, for example `${random:invoiceId(date=yyyymm) | match:-(\d+)$}`.
+
+Every generator also takes `unique`, which is `true` by default. See [No Repeats In A Run](#no-repeats-in-a-run).
+
+## firstName and lastName
+
+Names from fixed lists of common given names and surnames.
+
+| Argument | Allowed values | Default | Meaning |
+|---|---|---|---|
+| `locale` | `any`, `in`, `gb`, `us` | `any` | Whose names to draw from: India, Great Britain, the United States, or all three mixed |
+
+| Token | Example result |
+|---|---|
+| `${random:firstName}` | `Isla` |
+| `${random:firstName(locale=in)}` | `Priya` |
+| `${random:lastName(locale=gb)}` | `Thompson` |
+| `${random:lastName(locale=us)}` | `Rodriguez` |
+
+Each locale has 50 first names and 50 last names. With `any`, there are 150 first names and 123 last names (some surnames are common to two locales). A run that asks for more distinct names than the list holds fails with a message saying so; see [Error Messages](#error-messages).
+
+## emailAddress
+
+An address built from a random first name and last name, with digits after the name part.
+
+| Argument | Allowed values | Default | Meaning |
+|---|---|---|---|
+| `domain` | A domain name such as `acme.test` | `example.com` | What comes after the `@`. Written in lowercase |
+| `format` | `first.last`, `firstlast`, `first_last`, `flast`, `random` | `first.last` | How the part before the `@` is built |
+| `digits` | A whole number from 0 to 8 | `4` | How many random digits to add after the name. Not used with `format=random` |
+| `length` | A whole number from 4 to 64 | `10` | Length of the part before the `@`, for `format=random` only |
+
+| `format` | Token | Example result |
+|---|---|---|
+| `first.last` | `${random:emailAddress}` | `priya.sharma4821@example.com` |
+| `firstlast` | `${random:emailAddress(format=firstlast)}` | `priyasharma4821@example.com` |
+| `first_last` | `${random:emailAddress(format=first_last)}` | `priya_sharma4821@example.com` |
+| `flast` | `${random:emailAddress(format=flast)}` | `psharma4821@example.com` |
+| `random` | `${random:emailAddress(format=random, length=12)}` | `k3x9m2v7q1ab@example.com` |
+
+Other examples:
+
+| Token | Example result |
+|---|---|
+| `${random:emailAddress(domain=acme.test)}` | `oliver.walker0318@acme.test` |
+| `${random:emailAddress(domain=acme.test, digits=0)}` | `oliver.walker@acme.test` |
+| `${random:emailAddress(digits=8)}` | `emma.clark90417263@example.com` |
+
+- The default domain, `example.com`, is reserved for documentation, so mail sent to it is never delivered. Use your own domain only when the application checks it, and only if you control the mailbox or the domain does not deliver.
+- Names are reduced to lowercase letters, so `D'Souza` becomes `dsouza`.
+- **Why digits matter:** there are about 18,000 first and last name pairs, so a run does not repeat an address, but many runs will. The four digits after the name keep addresses distinct from one run to the next, which matters when the application keeps users from earlier runs. With `digits=0` and an application that keeps its data, expect a clash after a few hundred runs.
+
+## mobileNo
+
+A mobile phone number for India, Great Britain or the United States.
+
+| Argument | Allowed values | Default | Meaning |
+|---|---|---|---|
+| `country` | `in`, `gb`, `us` | `in` | Whose numbers to generate |
+| `format` | `digits`, `national`, `e164`, `international` | `digits` | How the number is written |
+| `fictional` | `true`, `false` | `false` | Use numbers set aside for fiction. Only for `gb` and `us` |
+
+### Formats
+
+| `country` | `digits` | `national` | `e164` | `international` |
+|---|---|---|---|---|
+| `in` | `9876543210` | `98765 43210` | `+919876543210` | `+91 98765 43210` |
+| `gb` | `07912345678` | `07912 345678` | `+447912345678` | `+44 7912 345678` |
+| `us` | `4152345678` | `(415) 234-5678` | `+14152345678` | `+1 415-234-5678` |
+
+Pick the format the field accepts. A field that wants 10 digits needs `digits`, and one that stores the country code needs `e164`.
+
+| Token | Example result |
+|---|---|
+| `${random:mobileNo}` | `9876543210` |
+| `${random:mobileNo(format=e164)}` | `+919876543210` |
+| `${random:mobileNo(country=gb, format=national)}` | `07912 345678` |
+| `${random:mobileNo(country=us, format=international)}` | `+1 415-234-5678` |
+
+### What makes a number valid
+
+| Country | Rule |
+|---|---|
+| India | 10 digits, starting with 6, 7, 8 or 9 |
+| Great Britain | `07` followed by 9 digits, in the ranges used for mobiles. The `070` (personal numbers) and `076` (pagers) ranges are not used |
+| United States | A real area code (from a list of 40), an exchange starting 2 to 9, never ending in `11` (service codes) and never `555`, then 4 digits |
+
+### Fictional numbers
+
+Generated numbers look real, so one may belong to a real person. If the application sends an SMS or calls the number, either run it against a test provider, or ask for numbers set aside for fiction:
+
+| `country` | Range used with `fictional=true` | How many |
+|---|---|---|
+| `gb` | `07700 900000` to `07700 900999`, Ofcom's range for drama | 1,000 |
+| `us` | `555-0100` to `555-0199` in each area code | 100 for each of 40 area codes, 4,000 in all |
+| `in` | None. India has no such range | `fictional=true` is an error |
+
+A run can use each fictional number only once, so the UK's 1,000 numbers are the most one run can ask for. See [No Repeats In A Run](#no-repeats-in-a-run).
+
+## panNo
+
+An Indian Permanent Account Number, such as `ABCPK1234Z`.
+
+| Argument | Allowed values | Default | Meaning |
+|---|---|---|---|
+| `holderType` | `P`, `C`, `H`, `F`, `A`, `T`, `B`, `L`, `J`, `G` | `P` | Who holds the PAN. Becomes the 4th letter |
+
+| `holderType` | The holder is |
+|---|---|
+| `P` | A person |
+| `C` | A company |
+| `H` | A Hindu undivided family |
+| `F` | A firm |
+| `A` | An association of persons |
+| `T` | A trust |
+| `B` | A body of individuals |
+| `L` | A local authority |
+| `J` | An artificial juridical person |
+| `G` | The government |
+
+| Token | Example result |
+|---|---|
+| `${random:panNo}` | `ABCPK1234Z` |
+| `${random:panNo(holderType=C)}` | `QRSCT5678M` |
+
+The shape is three letters, the holder type, one letter, four digits (never `0000`), and one letter. The last letter is a check letter. Its rule is not published, so it is random. A PAN generated here passes a format check but will not pass a service that verifies it with the Income Tax Department.
+
+## date
+
+A date, or a date and time, picked at random from a range: a date of birth, a joining date in the past year, a due date next month, an appointment slot.
+
+### Common cases
+
+| Need | Token | Example result |
+|---|---|---|
+| Date of birth, aged 18 to 60 | `${random:date(from=-60y, to=-18y)}` | `1987-04-12` |
+| The same, written 12/04/1987 | `${random:date(from=-60y, to=-18y, format=DD/MM/YYYY)}` | `12/04/1987` |
+| A date in the past year | `${random:date(from=-1y, to=today)}` | `2026-02-09` |
+| A due date in the next 30 days | `${random:date(from=today, to=+30d)}` | `2026-11-03` |
+| A date in a fixed period | `${random:date(from=2026-04-01, to=2027-03-31)}` | `2026-12-09` |
+| A slot in business hours, next two weeks | `${random:date(from=today, to=+14d, time=09:00-18:00)}` | `2026-10-22 14:05` |
+| A time in the next two hours | `${random:date(from=now, to=now+2h, time=random)}` | `2026-10-17 15:58` |
+| A date written as 9 Feb, 2026 | `${random:date(from=-1y, to=today, format='D MMM, YYYY')}` | `9 Feb, 2026` |
+
+For the current date itself (today, a week from today, yesterday), use [`${now:...}`](#the-current-date-and-time).
+
+### Points in time
+
+`from` and `to` (and the `offset` of [`now:`](#the-current-date-and-time)) use the same notation: a base, then shifts.
+
+| Part | Meaning | Example |
+|---|---|---|
+| `today` | The current day | `today` |
+| `now` | The current moment | `now` |
+| `YYYY-MM-DD` | A fixed date | `2026-10-17` |
+| A shift | `+` or `-`, a number and a unit | `-18y`, `+30d`, `+1d+2h` |
+
+With no base, a shift counts from the start of today. Shifts can be combined and are applied left to right.
+
+| Unit | Means |
+|---|---|
+| `y` | Years |
+| `m` | Months. A month shift stops at the end of a shorter month: 31 January + 1m is 28 February |
+| `w` | Weeks |
+| `d` | Days |
+| `h` | Hours |
+| `min` | Minutes |
+| `s` | Seconds |
+
+In `from`, `to` and `offset`, `now` and shifts in `h`, `min` or `s` mean an exact moment. Anything else (`today`, a fixed date, shifts in `y`, `m`, `w` or `d`) means the whole day, so `to=today` includes all of today. A shift with no base counts from the start of today, so a time ahead of the current moment is written with the base: `to=now+2h`, not `to=+2h`.
+
+That is why `from=now, to=now+2h` gives a time in the next two hours, while `from=today, to=today, time=random` can give a time earlier today.
+
+### Arguments
+
+| Argument | Allowed values | Default | Meaning |
+|---|---|---|---|
+| `from` | A [point](#points-in-time) | `-1y` | Where the range starts |
+| `to` | A [point](#points-in-time) | `+1y` | Where the range ends |
+| `time` | `none`, `random`, or a window such as `09:00-18:00` | `none` | The time of day (below) |
+| `format` | A [dayjs pattern](#formatting-dates), `iso` or `epoch` | `YYYY-MM-DD`, or `YYYY-MM-DD HH:mm` when `time` is not `none` | How the value is written |
+| `tz` | `local`, `utc`, or a zone such as `Asia/Kolkata` | `local` | The time zone the dates are in |
+| `unique` | `true`, `false` | **`false`** | Whether a date can repeat in the run |
+
+**`unique` is `false` here**, unlike the other generators. A year has only 365 days, so forcing no repeats would fail a long run after a few hundred dates, and a date is rarely a field the application keeps unique. Pass `unique=true` when a date must be distinct. The run then uses each day of the range once, and fails when the days run out.
+
+### Time of day
+
+| `time` | Gives | Example result |
+|---|---|---|
+| `none` | A day at midnight. Only the date shows with the default format | `2026-10-14` |
+| `random` | Any moment in the range | `2026-10-14 17:42` |
+| `09:00-18:00` | A random day in the range, at a random minute inside the window, ends included | `2026-10-14 11:27` |
+
+A window applies to whole days. With `from=now` the window is not trimmed to start after the current moment.
+
+## invoiceId
+
+An invoice or order number made of a prefix, an optional date, and random digits.
+
+| Argument | Allowed values | Default | Meaning |
+|---|---|---|---|
+| `prefix` | Up to 10 letters or digits. Empty for none | `INV` | What the number starts with |
+| `separator` | `-`, `/`, `_`, `none` | `-` | What goes between the parts |
+| `length` | A whole number from 4 to 20 | `8` | How many random digits end the number |
+| `date` | `none`, `yyyy`, `yyyymm`, `yyyymmdd`, `yyyymmddhhmm`, `yyyymmddhhmmss` | `none` | The date or time to include, from the moment the value is generated |
+
+### The date
+
+The date is taken from the machine running the test, in its local time, at the moment the value is generated. The value shown is for 17 October 2026 at 14:32:05.
+
+| `date` | Adds | Example result |
+|---|---|---|
+| `none` | Nothing | `INV-00482913` |
+| `yyyy` | Year | `INV-2026-00482913` |
+| `yyyymm` | Year and month | `INV-202610-00482913` |
+| `yyyymmdd` | Year, month and day | `INV-20261017-00482913` |
+| `yyyymmddhhmm` | Date, hour (24-hour) and minute | `INV-202610171432-00482913` |
+| `yyyymmddhhmmss` | Date, hour, minute and second | `INV-20261017143205-00482913` |
+
+A date or time makes it clear when a test record was made, and makes the numbers sort by time. It does not make them unique: the random digits do that, so two numbers made in the same second still differ.
+
+### More examples
+
+| Token | Example result |
+|---|---|
+| `${random:invoiceId(prefix=PO, separator=/, length=6)}` | `PO/482913` |
+| `${random:invoiceId(prefix=BILL, separator=/, date=yyyymmdd, length=5)}` | `BILL/20261017/48291` |
+| `${random:invoiceId(prefix=, date=yyyy)}` | `2026-00482913` |
+| `${random:invoiceId(prefix=INV, separator=none, length=4)}` | `INV4829` |
+| `${random:invoiceId(separator=_, date=yyyymm)}` | `INV_202610_00482913` |
+
+## The Current Date And Time
+
+`${now:...}` gives the current moment, optionally shifted. It is not random: the same instant gives the same value. Use it when a value must be relative to the day the test runs: a due date next week, an expiry date yesterday to check a validation message, or today's date in a form.
+
+```text
+${now:<kind>(offset=…, format=…, tz=…)}
+```
+
+| Kind | Default format | Example result |
+|---|---|---|
+| `date` | `YYYY-MM-DD` | `2026-10-17` |
+| `time` | `HH:mm:ss` | `14:46:15` |
+| `datetime` | `YYYY-MM-DD HH:mm:ss` | `2026-10-17 14:46:15` |
+
+ISO 8601 and epoch milliseconds are formats, not kinds: `${now:datetime(format=iso)}` gives `2026-10-17T14:46:15+05:30` (`…Z` with `tz=utc`), and `${now:datetime(format=epoch)}` gives `1792228575000`.
+
+| Argument | Allowed values | Default | Meaning |
+|---|---|---|---|
+| `offset` | `0`, or shifts as in [Points In Time](#points-in-time) | `0` | How far from the current moment |
+| `format` | A [dayjs pattern](#formatting-dates), `iso` or `epoch` | The kind's default | Overrides how the value is written |
+| `tz` | `local`, `utc`, or a zone such as `Asia/Kolkata` | `local` | The time zone |
+
+| Token | Example result |
+|---|---|
+| `${now:date}` | `2026-10-17` |
+| `${now:date(offset=+7d)}` | `2026-10-24` |
+| `${now:date(offset=-1d, format=DD/MM/YYYY)}` | `16/10/2026` |
+| `${now:date(offset=+1m, format=DD-MMM-YYYY)}` | `17-Nov-2026` |
+| `${now:datetime(offset=+2h)}` | `2026-10-17 16:46:15` |
+| `${now:time(format=HH:mm)}` | `14:46` |
+| `${now:datetime(tz=utc, format=iso)}` | `2026-10-17T09:16:15Z` |
+| `${now:datetime(offset=+1d, format=epoch)}` | `1792314975000` |
+
+### Time zones
+
+`local` is the machine running the test. A date near midnight can differ between zones, which is a common reason for tests that fail only at certain hours. When the application compares dates in one zone, set `tz` to it.
+
+### One value used twice
+
+Two `${now:...}` tokens can differ by a second. To type a timestamp and check it later, take it once with `util.now`:
+
+```json
+{ "given": { "op": "util.now", "with": { "kind": "datetime" }, "saveAs": "startedAt" } },
+{ "when":  { "op": "ui.fill", "with": { "selector": "#start", "value": "${res:startedAt}" } } },
+{ "then":  { "op": "ui.expectText", "with": { "selector": ".start-time", "equals": "${res:startedAt}" } } }
+```
+
+`util.now` takes `kind` (`date`, `time` or `datetime`; default `date`) and an `args` object with `offset`, `format` and `tz`. Use `${res:startedAt}` wherever the value is needed again.
+
+## Formatting Dates
+
+`format` is a [dayjs](https://day.js.org/docs/en/display/format) pattern, the same as moment. Common patterns, for 17 October 2026 at 14:46:15:
+
+| Pattern | Result |
+|---|---|
+| `YYYY-MM-DD` | `2026-10-17` |
+| `DD/MM/YYYY` | `17/10/2026` |
+| `MM/DD/YYYY` | `10/17/2026` |
+| `DD-MMM-YYYY` | `17-Oct-2026` |
+| `D MMMM YYYY` | `17 October 2026` |
+| `dddd` | `Saturday` |
+| `DD-MM-YYYY HH:mm` | `17-10-2026 14:46` |
+| `hh:mm A` | `02:46 PM` |
+| `HH:mm:ss` | `14:46:15` |
+| `D MMM YYYY [at] HH:mm` | `17 Oct 2026 at 14:46` |
+
+| Token | Means |
+|---|---|
+| `YYYY`, `YY` | Year, four or two digits |
+| `MM`, `MMM`, `MMMM` | Month as `10`, `Oct`, `October` |
+| `DD`, `D` | Day of the month, with or without a leading zero |
+| `ddd`, `dddd` | Weekday as `Sat`, `Saturday` |
+| `HH`, `hh`, `A` | Hour in 24-hour or 12-hour form, and AM or PM |
+| `mm`, `ss` | Minutes, seconds |
+| `[text]` | Text written as it is |
+
+Two shortcuts are not patterns: `iso` (ISO 8601 with the zone, as in `2026-10-17T14:46:15+05:30`) and `epoch` (milliseconds).
+
+<Callout type="warning" title="Case matters">
+
+`MM` is the month and `mm` is minutes. Patterns from Java or C# such as `dd/mm/yyyy` do not work in dayjs, and dayjs would print nonsense without complaint (`Sa/46/yyyy`). So these slips are refused, with the token to use instead: `yyyy` (use `YYYY`), `dd` (use `DD`), and `mm` with no hour (use `MM`).
+
+</Callout>
+
+A pattern with a space or comma must be quoted: `format='D MMM, YYYY'`.
+
+## No Repeats In A Run
+
+Each test run keeps a record of the values it has given out, for each generator. Before returning a value, a generator checks the record, so **no value is given twice in one run, across all of its scenarios**. The inline token and `util.random` share the record. A new run starts with an empty record.
+
+How it checks depends on the generator:
+
+- **Short fixed lists** (names, and the fictional UK and US numbers): the generator picks only from values not yet used. A value cannot repeat, and when the list is used up the step fails with a message saying so.
+- **Large spaces** (emails, phone numbers, PANs, invoice numbers): the generator makes a value, and if it was used already makes another, up to 200 times. With millions of possible values this almost never happens. If it does, the step fails rather than returning a repeat.
+
+Two details:
+
+- **A phone number counts as used whatever its format.** `9876543210` and `+91 98765 43210` are the same number, so one cannot come back as the other.
+- **Arguments do not split the record.** `firstName(locale=in)` and `firstName(locale=any)` share one record, so neither returns a name the other already gave.
+- **`unique=false`** turns the check off for that call, for example `${random:firstName(unique=false)}`. The value is still recorded, so a later unique call will not repeat it.
+
+### What this does not cover
+
+- **Other runs.** A later run starts with an empty record and can repeat an earlier run's value. For emails the digits after the name make this unlikely. For the others the number of possible values is large but not unlimited.
+- **Runs at the same time.** Two runs going at once do not share a record.
+- **Data that is already in the application.** A value you typed into a scenario, or a record left from an earlier run, is not known to the generator.
+
+If the application rejects a value as a duplicate across runs, give the value a part that changes every run: use `invoiceId` with `date=yyyymmddhhmmss`, or an email with more `digits`.
+
+## Error Messages
+
+A generator that cannot give a value fails the step with a message that says what to change.
+
+| Message | Cause and fix |
+|---|---|
+| `Unknown random generator "phone". Use one of: firstName, lastName, emailAddress, mobileNo, panNo, date, invoiceId` | The name is not one of the seven. Fix the spelling |
+| `random:panNo does not take "length". It takes: holderType, unique` | An argument the generator does not have. Use one from the list in the message |
+| `random:mobileNo "format" must be one of: digits, national, e164, international (got "dotted")` | The value is not allowed. Use one from the message |
+| `random:mobileNo "country" must be one of: in, gb, us (got "xx")` | The same, for `country` |
+| `random:invoiceId "length" must be a whole number from 4 to 20 (got "3")` | A number outside its range, or not a whole number |
+| `random:emailAddress "domain" must be a domain such as example.com (got "not a domain")` | The domain is not a valid name |
+| `random:invoiceId "prefix" must be up to 10 letters or digits (got "INV-")` | The prefix has other characters or is too long. Put the dash in `separator` |
+| `random:mobileNo "fictional" must be true or false (got "yes")` | A true or false argument given something else |
+| `random:mobileNo "fictional" works only for country gb or us; India has no range reserved for fiction` | `fictional=true` with `country=in`, or with no country. Choose `gb` or `us`, or drop `fictional` |
+| `random:firstName has used all 50 of its values in this run. Pass unique=false to allow repeats.` | The run asked for more distinct values than the generator has. Pass `unique=false`, or use `locale=any` for more names |
+| `random:emailAddress found no value unused in this run after 200 tries (N used). Pass unique=false to allow repeats.` | The value space is nearly used up. Allow more room (more `digits`, a longer `length`), or pass `unique=false` |
+| `random:date "from" (2027-01-01) is after "to" (2026-01-01)` | The range is backwards. Swap them |
+| `random:date "from" must be a date such as today, now, 2026-10-17, -18y or +1d+2h (got "soon")` | The point is not in the notation. See [Points In Time](#points-in-time) |
+| `random:date "from" is not a real date (got "2026-13-45")` | The date does not exist |
+| `random:date "time" must be none, random or a window such as 09:00-18:00 (got "noon")` | Use `none`, `random` or a `HH:mm-HH:mm` window |
+| `random:date "time" window 18:00-09:00 ends before it starts` | Swap the two times |
+| `random:date "format" uses "yyyy", which dayjs does not know. Use YYYY for the year (YY for two digits)` | A Java or C# pattern. Use the token in the message |
+| `random:date "format" uses "dd", which dayjs reads as the short weekday (Sa). Use DD for the day of the month` | The same, for the day |
+| `random:date "format" uses "mm" with no hour, which dayjs reads as minutes. Use MM for the month` | The same, for the month |
+| `random:date "tz" must be local, utc or an IANA time zone such as Asia/Kolkata (got "Mars/Olympus")` | The zone name is not known. The same message appears for `now:` |
+| `Unknown now kind "day". Use one of: date, time, datetime` | `${now:...}` takes `date`, `time` or `datetime`. For ISO or epoch, use `format=iso` or `format=epoch` |
+| `now:date "offset" must be 0 or terms such as +7d, -1m or +1d+2h (got "tomorrow")` | The offset is not shifts. See [Points In Time](#points-in-time) |
+| `now:date "format" must be quoted: format='D MMM YYYY'` | The value has a space or punctuation. Put it in quotes, as the message shows |
+| `Unclosed quote in "now:date(format='D MMM)"` | A quote was opened and not closed |
+| `Invalid random token "random:email address". Write random:<generator> or random:<generator>(name=value, ...)` | The token is malformed. Check the name and the brackets |
+| `Invalid argument "C" in "random:panNo(C)". Write name=value` | An argument without a name. Write `holderType=C` |
+| `Argument "length" is given twice in "random:invoiceId(length=6, length=8)"` | The same argument is written twice |
+| `Missing "generator" in step.with for op "util.random"` | `util.random` needs a `generator` |
+| `"args" must be an object for op "util.random", e.g. { "domain": "acme.test" }` | `args` is a list or a string. Write an object. The same applies to `util.now` |

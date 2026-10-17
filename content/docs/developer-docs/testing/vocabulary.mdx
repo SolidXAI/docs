@@ -259,6 +259,16 @@ A built-in utility step used to fail fast when a required resource is missing fr
 
 This is commonly used to make scenario prerequisites explicit, such as requiring `loginSuccess` before attempting authenticated API calls.
 
+### util.random
+
+A built-in utility step that returns one [random value](#random-test-data), so `saveAs` can keep it.
+
+```json
+{ "given": { "op": "util.random", "with": { "generator": "emailAddress", "args": { "domain": "acme.test" } }, "saveAs": "newEmail" } },
+{ "when": { "op": "ui.fill", "with": { "selector": "#email", "value": "${res:newEmail}" } } },
+{ "then": { "op": "ui.expectText", "with": { "selector": ".profile-email", "equals": "${res:newEmail}" } } }
+```
+
 ## Level 4: Runtime And Execution
 
 ### Adapter
@@ -300,6 +310,16 @@ Common token families are:
 - `${params.foo}` reads a value from the current scenario params.
 - `${res:path.to.value}` reads a value saved into the runtime resource store.
 - `${data:model["recordKey"].field}` reads a value from indexed `testing.data`.
+- `${random:generator}` generates a realistic value that is not repeated within the run. See [Random Test Data](#random-test-data).
+- `${now:date}` reads the current date or time, optionally shifted: `${now:date(offset=+7d)}`. See [Random Test Data](/docs/developer-docs/testing/random-test-data#the-current-date-and-time).
+
+### Random Test Data
+
+Values generated during a run, for fields the application under test keeps unique: an email address, a phone number, a PAN, an invoice number. A literal value works once and then fails on the next run with "already exists". Generated values look like real input, and none is repeated within one run.
+
+There are seven generators: `firstName`, `lastName`, `emailAddress`, `mobileNo`, `panNo`, `date` and `invoiceId`. A `${random:...}` token gives a new value each time it is resolved: `${random:mobileNo(country=gb, format=e164)}`. To use one value in several steps, generate it with [util.random](#utilrandom) and read it back with `${res:...}`.
+
+Every generator, argument and allowed value is on the [Random Test Data](/docs/developer-docs/testing/random-test-data) page.
 
 ### Secret
 
