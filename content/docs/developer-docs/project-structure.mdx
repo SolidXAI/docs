@@ -83,6 +83,11 @@ Use the tabs below to inspect the two main application runtimes in a standard So
     - `main-cli.ts` is the entry point for SolidX CLI-driven backend commands.
     - `app.module.ts` contains the application module configuration.
     - `app-default-database.module.ts` contains the default database configuration.
+  - `media-files-storage/` and `media-files-storage-private/`
+    - Hold uploaded media for the `fileSystem` media storage provider. Public media is served at `/media-files-storage/`; private media is only available through the token-protected download endpoint.
+    - Both folders live under `AB_MEDIA_FILE_STORAGE_ROOT`, which defaults to the API's working directory. Set it to an absolute path, such as a mounted EFS volume (`/mnt/efs`), to store media elsewhere.
+    - `AB_MEDIA_FILE_STORAGE_DIR` is the name of the public folder (default `media-files-storage`), not a path. The private folder is `<name>-private`. Public URLs always use `/media-files-storage/`, whatever the folder is called.
+    - When moving to a new root, copy both existing folders into it first. The temporary upload folder (`AB_MEDIA_UPLOAD_DIR`) can stay on local disk.
 
   #### SolidX Backend Packages
 

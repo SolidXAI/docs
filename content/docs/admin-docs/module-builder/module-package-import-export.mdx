@@ -7,7 +7,9 @@ icon: "package-open"
 
 SolidX modules can be packaged into portable `.sldx` archives and moved between instances. This lets you share a completed module with other teams, back up your work, or distribute pre-built modules without recreating them from scratch.
 
-A `.sldx` file is a zip archive containing the module's API source files, UI source files, and a `manifest.json` that describes the package structure and records file checksums.
+A `.sldx` file is a zip archive containing the module's API source files, UI source files, and a `manifest.json` that describes the package structure, the module version, and records file checksums.
+
+You can also drop a newer `.sldx` onto a module that is already installed to [update it](#updating-a-module), and every export carries a [version](#module-versions) so you can see what is being replaced before you approve it.
 
 <Callout type="warn" title="Not available in production">
   Module import and export are disabled when the environment is set to `ENV=prod`. These operations are intended for development and staging environments only.
@@ -21,17 +23,47 @@ A `.sldx` file is a zip archive containing the module's API source files, UI sou
 
 1. Navigate to **Solid Core → Module Metadata** in the sidebar.
 2. In the module list, open the **row context menu** (the `⋮` icon) for the module you want to export.
-3. Click **Export Module**.
-4. The browser downloads a file named `{moduleName}.sldx`.
+3. Click **Export Module**. A dialog opens showing the module's current version.
+4. Choose the version to export (see [Module versions](#module-versions)).
+5. Click **Export v{version}**. The browser downloads a file named `{moduleName}-v{version}.sldx`.
 
 The archive contains:
 
 | Path in archive | Contents |
 |---|---|
-| `manifest.json` | Package metadata, checksums, schema version |
+| `manifest.json` | Package metadata, module version, checksums, schema version |
 | `solid-api/src/{moduleName}/` | NestJS API source for the module |
 | `solid-ui/src/{moduleName}/` | React UI source for the module |
 | `solid-api/src/{moduleName}/metadata/{moduleName}-metadata.json` | Module metadata definition |
+
+### Module versions
+
+Each module has an optional [semver](https://semver.org) version, for example `1.2.0`. It is stored in the module's metadata file, right after the module name:
+
+```json
+{
+  "moduleMetadata": {
+    "name": "contact-management",
+    "version": "1.2.0",
+    "displayName": "Contact Management"
+  }
+}
+```
+
+The installed version is shown in the **Version** column of the Module Metadata list. It is read-only in the module form because the metadata file owns it. A module that has never been exported or imported from a versioned package has no version and shows as **unversioned**.
+
+The export dialog depends on whether the module already has a version:
+
+| Module state | What the dialog offers |
+|---|---|
+| Has a version | **Keep** exports the current version. **Patch**, **Minor** and **Major** raise the version before exporting (`1.2.0` becomes `1.2.1`, `1.3.0` or `2.0.0`). The dialog previews the file name. |
+| Unversioned | Asks for an initial version (default `1.0.0`). Use a semver value such as `1.0.0`. |
+
+<Callout type="info" title="Exporting changes a file in your project">
+  When the version changes, SolidX writes it into the module's metadata file (`solid-api/src/{moduleName}/metadata/{moduleName}-metadata.json`) and into the module record, then packages the module. Commit the metadata file so the version in your repository matches the `.sldx` you shared.
+</Callout>
+
+Packages created with `solidctl module export` or `solidctl release` carry the version from the module repository's `package.json` in the same `manifest.json` field, and they can be imported or used to update a module in exactly the same way.
 
 ---
 
@@ -40,6 +72,10 @@ The archive contains:
 ![Module Metadata list with the Import Module button](/img/admin-docs/module-builder/module-package-list-view.png)
 
 Import is a four-step wizard. Click **Import Module** in the top-right corner of the Module Metadata list to open it.
+
+<Callout type="info" title="Module already installed?">
+  If the uploaded package is for a module that already exists in the project, the wizard switches to update mode automatically. See [Updating a Module](#updating-a-module).
+</Callout>
 
 ### Step 1 - Preview
 
@@ -118,6 +154,86 @@ Once seeding completes, click **Reload** to refresh the page. The imported modul
 
 ---
 
-## Resuming an Interrupted Import
+## Updating a Module
 
-If the import wizard is closed or the API restarts mid-flow, the transaction is preserved on disk under `.solidx-runtime/module-package-imports/`. The next time you open the Import Module dialog, SolidX detects the active transaction and resumes from where it left off.
+Use an update to replace an installed module with a newer (or different) `.sldx` of the same module. The wizard has the same four steps as an import: **Preview**, **Update**, **Build** and **Seed**.
+
+There are two ways to start one:
+
+- Open the **row context menu** (the `⋮` icon) for the module in the Module Metadata list and click **Update Module**. The uploaded package must be for that module; a package for a different module fails validation.
+- Click **Import Module** and upload a package for a module that is already installed. The wizard detects this and becomes an update.
+
+### Step 1 - Preview
+
+Upload the `.sldx` file. SolidX unpacks it, checks every file against the checksums in `manifest.json` (a corrupted or edited package is rejected), and compares it with the installed module.
+
+**Version change** shows the installed version, the package version, and a badge:
+
+| Badge | Installed | Package | Meaning |
+|---|---|---|---|
+| Upgrade | `1.0.0` | `1.1.0` | The package is newer. |
+| First versioned release | unversioned | `1.0.0` | The module had no version; this is its first one. |
+| Reinstall | `1.1.0` | `1.1.0` | Same version. The warning says whether the content is identical or different. |
+| Downgrade | `1.1.0` | `1.0.0` | The package is older than what is installed. |
+| Unversioned package | `1.1.0` or unversioned | none | The package has no version. After the update the module is unversioned. |
+
+**Files that will change** lists, for `solid-api` and `solid-ui` separately, how many files are:
+
+- `+` added: in the package but not in your project
+- `~` modified: in both, with different contents
+- `−` removed: in your project but not in the package. These are deleted by the update.
+
+It also shows how many files are unchanged. Click a row to see the file names. The comparison is by file contents, so it shows which files differ, not the lines that changed. A version change on its own does not count as a modified metadata file.
+
+If the package content is identical to what is installed, the preview says so.
+
+### Step 2 - Update
+
+Click **Update to v{version}**. Clicking the button approves the version shown in the preview. For a **Reinstall**, **Downgrade**, **Unversioned package** or identical content, you must first tick the acknowledgement checkbox in the preview, because these replace the module with something that is not a straightforward upgrade.
+
+<Callout type="warn" title="The update replaces the module folders">
+  `solid-api/src/{moduleName}/` and `solid-ui/src/{moduleName}/` are replaced with the package contents. Files the new version does not have are deleted, and any local changes inside these folders are kept only in the backup.
+</Callout>
+
+SolidX then:
+
+1. Backs up the current folders to `.solidx-runtime/module-package-backups/{transactionId}/`.
+2. Replaces the folders with the package contents.
+3. Writes the package version into the module's metadata file.
+
+As with an import, the UI and API may restart. If the popup closes, wait for both services, refresh the Module Metadata page, and the wizard reopens where you left off.
+
+If the module changed between the preview and the update (for example the version in the metadata file changed), the update is rejected. Upload the package again to refresh the preview.
+
+### Step 3 - Build
+
+Click **Build Now**, as for an import. SolidX runs `solidctl build` and `solidctl build --ui-only`.
+
+### Step 4 - Seed
+
+Click **Seed** to load the updated metadata into the database. In an update, the step has an extra option:
+
+- **Remove metadata this module no longer defines (prune)**: runs `solidctl seed --modules-to-seed {moduleName} --prune`. Views, menus, actions and similar metadata that the new version dropped are removed. This also removes permissions for endpoints that no longer exist. Leave it off if you want to keep anything that is no longer in the package.
+
+After seeding, the **Version** column shows the new version.
+
+### Restoring the previous version
+
+Every update keeps a backup of the folders it replaced, so you can go back.
+
+- **While the wizard is open**, a **Restore v{version}** button appears on the Build and Seed steps (it reads **Restore unversioned** if the old module had no version).
+- **After the update is finished**, open the module's row context menu and click **Restore Previous Version**. It restores the module's most recent update backup that has not been restored yet.
+
+Restoring puts the backed-up folders back. Then, as with an update, the services restart; refresh the page and run **Build** and **Seed** again (prune is switched on for that seed).
+
+<Callout type="warn" title="Restore changes the database schema">
+  When the API restarts, the database schema is synced to the restored code. Columns that the newer version added are dropped along with their data, and tables it added are left in place. Back up the database first if the module holds data you care about. Restore puts back code, not data.
+</Callout>
+
+A backup is deleted together with its transaction: seven days after the update finishes (set `SOLIDX_MODULE_PACKAGE_RETENTION_DAYS` to change this), or 24 hours after it was last touched if the update was never completed. **Clear Package Runtime** removes all backups immediately.
+
+---
+
+## Resuming an Interrupted Import or Update
+
+If the wizard is closed or the API restarts mid-flow, the transaction is preserved on disk under `.solidx-runtime/module-package-imports/`. The next time you open the Module Metadata list, SolidX detects the active transaction and resumes from where it left off. This applies to imports, updates and restores.
