@@ -243,6 +243,8 @@ Supported token families include:
 - `${params.foo}` for scenario params.
 - `${res:path.to.value}` for saved runtime resources.
 - `${data:modelUserKey["recUserKeyValue"].field}` for test data lookups.
+- `${random:generator}` for generated values such as emails, phone numbers and dates, never repeated within a run. See [Random Test Data](/docs/developer-docs/testing/random-test-data).
+- `${now:date}` for the current date or time, optionally shifted: `${now:date(offset=+7d)}`.
 
 <Callout type="info" title="Interpolation Rule">
 
