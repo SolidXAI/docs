@@ -269,6 +269,40 @@ A built-in utility step that returns one [random value](#random-test-data), so `
 { "then": { "op": "ui.expectText", "with": { "selector": ".profile-email", "equals": "${res:newEmail}" } } }
 ```
 
+### util.script
+
+A built-in utility step that runs a short TypeScript function and returns its result, so `saveAs` can keep it.
+
+Use it for what a token cannot do: find an item by a condition, combine two responses, or reshape a value for the next request. A fixed path such as `${res:books.bodyJson.records.0.id}` or a regex (`| match:`) needs no script.
+
+Tokens go in `input`, code goes in `script`. The script sees only `input`, so everything it needs from the run (saved results, params, test data, secrets, random or current values) is listed there as a token:
+
+```json
+{ "when": { "op": "api.request", "with": { "method": "GET", "url": "${env:API_BASE_URL}/api/book" }, "saveAs": "books" } },
+{ "and": {
+    "op": "util.script",
+    "with": {
+      "input": { "records": "${res:books.bodyJson.records}", "title": "${params.title}" },
+      "script": [
+        "const book = input.records.find((b: any) => b.title === input.title);",
+        "if (!book) throw new Error(`No book titled ${input.title}`);",
+        "return book.id;"
+      ]
+    },
+    "saveAs": "bookId"
+} },
+{ "then": { "op": "api.request", "with": { "method": "DELETE", "url": "${env:API_BASE_URL}/api/book/${res:bookId}" } } }
+```
+
+- A value in `input` that is exactly one token keeps its type: `"${res:books.bodyJson.records}"` arrives as a list, and `"${res:r.status}"` as a number. A token inside text (`"id-${res:r.status}"`) is text.
+- A token written inside `script` is refused, because `${...}` there is a JavaScript template literal. Template literals are otherwise left alone.
+- The script runs synchronously: no `await`, `require`, timers or network. It gets a copy of `input`, so it cannot change a saved result, and it stops after the step's `timeoutMs` (5000 by default, 30000 at most). Nothing else in the runner runs meanwhile, so keep scripts small.
+- It must return data when the step has `saveAs`. The result is saved as JSON, so a date comes back as ISO text. A throw fails the step, so a script without `saveAs` can act as a custom check.
+- `console.log` and its siblings are collected and attached to the step's report, also when the script fails.
+- TypeScript is compiled with the project's `typescript` package; where that is not installed, write plain JavaScript.
+- The script is given only text, which keeps the runner's `process` out of its reach, but Node's `vm` is not a guaranteed security boundary. Treat a script as code run by whoever can change the scenario file.
+- For I/O, async work or logic shared between scenarios, write a [test.spec](#testspec) instead.
+
 ## Level 4: Runtime And Execution
 
 ### Adapter
@@ -298,6 +332,8 @@ Typical stored values include:
 - Ids.
 - Response objects.
 - Custom spec results.
+
+To derive a new value from saved results, such as one id picked out of a response list, use [util.script](#utilscript).
 
 ### Interpolation
 
