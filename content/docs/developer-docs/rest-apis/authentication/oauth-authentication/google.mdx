@@ -16,7 +16,7 @@ To use Google OAuth, you must create and configure an app on the Google Cloud Co
 ### 1. Create a Google Cloud Project
 
 1.  Go to the [Google Cloud Console](https://console.cloud.google.com/).
-    ![Google Developers Landing Page](/img/oauth/google/google-console.png)
+    ![Google Cloud Console project selector](/img/oauth/google/google-cloud.png)
 2.  Click **Select a Project** and then **New Project**.
 3.  Enter a project name and click **Create**.
 4.  Wait for the project to be created and select it.
@@ -30,18 +30,19 @@ To use Google OAuth, you must create and configure an app on the Google Cloud Co
 ### 3. Create OAuth Credentials
 
 1.  Navigate to **APIs & Services** > **Credentials**.
-2.  Click **Create Credentials** and select **OAuth 2.0 Client ID**.
-3.  Choose **Web application** as the application type.
-4.  Add your authorized redirect URIs:
-    - Development: `https://localhost:3000/api/iam/google/connect/callback`
+2.  Click **Create Credentials** and select **OAuth Client ID**.
+3.  If prompted, configure the OAuth consent screen by providing the required information (application name, support email, etc.) and save it.
+4.  Inside **OAuth Client ID** setup, choose **Web application** as the application type.
+5.  Add your authorized redirect URIs:
+    - Development: `http://localhost:3000/api/iam/google/connect/callback`
     - Production: `https://your-api-domain.com/api/iam/google/connect/callback`
-5.  Click **Create**.
+6.  Click **Create**.
 
 ### 4. Get Client ID and Client Secret
 
 1.  After creation, a dialog will appear with your **Client ID** and **Client Secret**.
 2.  Copy both values and store them securely.
-3.  You can also view these at any time in the **OAuth 2.0 Client IDs** section.
+3.  You can view Client IDs anytime in the OAuth 2.0 Client IDs section and create new client secrets as needed.
 
 ## Configuration (Environment Variables)
 
@@ -51,29 +52,42 @@ Add the following environment variables to your `.env` file:
 # Google OAuth Configuration
 IAM_GOOGLE_OAUTH_CLIENT_ID=your-client-id
 IAM_GOOGLE_OAUTH_CLIENT_SECRET=your-client-secret
-IAM_GOOGLE_OAUTH_CALLBACK_URL=https://localhost:3000/api/iam/google/connect/callback
-IAM_GOOGLE_OAUTH_REDIRECT_URL=https://localhost:4200/auth/google/callback
+IAM_GOOGLE_OAUTH_CALLBACK_URL=http://localhost:3000/api/iam/google/connect/callback
+IAM_GOOGLE_OAUTH_REDIRECT_URL=http://localhost:3001/auth/initiate-google-oauth
 ```
 
 ## Authentication Flow
 
+<figure className="not-prose my-6">
+  <img
+    src="/img/oauth/google/google-oauth-sequence-light.png"
+    alt="Google OAuth authentication flow showing user sign-in, consent, callback authorization code, token exchange, and session creation"
+    className="w-full rounded-lg border border-fd-border bg-white dark:hidden"
+  />
+  <img
+    src="/img/oauth/google/google-oauth-sequence-dark.png"
+    alt="Google OAuth authentication flow showing user sign-in, consent, callback authorization code, token exchange, and session creation"
+    className="hidden w-full rounded-lg border border-fd-border bg-[#0f172a] dark:block"
+  />
+</figure>
+
 <Steps>
   <Step>
-    **User clicks the Google sign-in button** in the application.
+    **The user selects “Sign in with Google”** in your application.
   </Step>
   <Step>
-    **The application redirects to Google's login page** for authentication.
+    **Your application redirects the user to Google's authorization page.**
   </Step>
   <Step>
-    **User logs in with their Google account** and grants the application permission to access their email and profile.
+    **The user signs in to Google and grants the requested permissions.**
   </Step>
   <Step>
-    **Google sends back a confirmation** that the user is authenticated.
+    **Google redirects to the configured callback URL** with an authorization code.
   </Step>
   <Step>
-    **The application receives the confirmation** and creates an internal session for that user.
+    **SolidX exchanges the authorization code with Google** and retrieves the user's identity information.
   </Step>
   <Step>
-    **The application logs the user in** and grants access to the app.
+    **SolidX establishes an authenticated session** and redirects the user back to your application.
   </Step>
 </Steps>
