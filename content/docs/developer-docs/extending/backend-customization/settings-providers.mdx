@@ -27,9 +27,10 @@ restart, with no migration to write.
 
 Think of a settings provider as the schema, and the database as a sparse override layer.
 
-- Every provider's `getSettings()` is merged into one flat map at startup.
+- Every provider's `getSettings()` is merged into one map at startup. For a namespaced
+  provider, SolidX turns each local key into a canonical `<namespace>:<key>` identity.
 - Values stored in the database are layered on top of the declared defaults.
-- The merged result is cached in memory and read through `SettingService.getConfigValue()`.
+- The merged result is cached in memory and read through `SettingService`.
 
 </Callout>
 
@@ -37,8 +38,9 @@ Think of a settings provider as the schema, and the database as a sparse overrid
 
 ## 1. Creating the Provider
 
-Your class implements `ISettingsProvider` and carries the `@SettingsProvider()` decorator
-so the Solid Registry discovers it at startup.
+Your class implements `ISettingsProvider` and carries the `@SettingsProvider(namespace)`
+decorator so the Solid Registry discovers it at startup. Use a stable, lowercase
+namespace for every new custom provider.
 
 <details open>
  <summary><strong>Show code: <code>library-settings.provider.ts</code></strong></summary>
@@ -52,7 +54,7 @@ const getLibrarySettings = () =>
   [
     {
       moduleName: "library",
-      key: "libraryMaxActiveLoans",
+      key: "maxActiveLoans",
       value: parseInt(process.env.LIBRARY_MAX_ACTIVE_LOANS ?? "5", 10),
       level: SettingLevel.SystemAdminEditable,
       label: "Maximum Active Loans",
@@ -64,7 +66,7 @@ const getLibrarySettings = () =>
     },
     {
       moduleName: "library",
-      key: "libraryOverdueReminderEnabled",
+      key: "overdueReminderEnabled",
       value: true,
       level: SettingLevel.SystemAdminEditable,
       label: "Send Overdue Reminders",
@@ -75,18 +77,18 @@ const getLibrarySettings = () =>
     },
     {
       moduleName: "library",
-      key: "libraryCatalogueApiKey",
+      key: "catalogueApiKey",
       value: process.env.LIBRARY_CATALOGUE_API_KEY,
       level: SettingLevel.SystemEnv,
     },
   ] as const satisfies SettingDefinition[];
 
-// Derives a union of every key above: "libraryMaxActiveLoans" | ...
+// Derives a union of local keys: "maxActiveLoans" | ...
 export type LibrarySetting = ReturnType<
   typeof getLibrarySettings
 >[number]["key"];
 
-@SettingsProvider()
+@SettingsProvider("library")
 @Injectable()
 export class LibrarySettingsProvider implements ISettingsProvider {
   getSettings() {
@@ -102,6 +104,14 @@ export class LibrarySettingsProvider implements ISettingsProvider {
 literal key strings so the `LibrarySetting` union can be derived from them. You get
 autocomplete and typo protection when reading settings back. SolidX core declares its own
 settings exactly this way.
+
+</Callout>
+
+<Callout type="info" title="Provider namespaces prevent key collisions">
+
+SolidX resolves `maxActiveLoans` to `library:maxActiveLoans` for the cache,
+database, and admin API. Declare only the local key; do not include the namespace or `:`
+yourself. Different namespaces may safely declare the same local key.
 
 </Callout>
 
@@ -155,7 +165,7 @@ Two consequences worth internalising:
 | Field | Required | Purpose |
 | --- | --- | --- |
 | `moduleName` | ✅ | Links the setting to a module for grouping. Must match an existing module metadata name. |
-| `key` | ✅ | Unique identifier used to read the value back. **Globally unique — see the gotcha below.** |
+| `key` | ✅ | Local identifier. It must be unique within the provider namespace and must not contain `:`. |
 | `value` | ✅ | The default. Used until an administrator overrides it. |
 | `level` | ✅ | Persistence, exposure, and editability. See the table above. |
 | `encrypted` | | Encrypts the value at rest. Requires `APP_ENCRYPTION_KEY`. |
@@ -178,8 +188,8 @@ Two consequences worth internalising:
 
 ## 5. Reading a Setting
 
-Inject `SettingService` and read through `getConfigValue`, passing your derived key union
-as the type argument so typos are caught at compile time.
+Inject `SettingService` and pass the local key and provider namespace to
+`getConfigValue()`. The derived local-key union catches typos at compile time.
 
 ```ts
 import { Injectable } from "@nestjs/common";
@@ -192,18 +202,11 @@ export class LoanService {
 
   private maxActiveLoans(): number {
     return this.settingService.getConfigValue<LibrarySetting>(
-      "libraryMaxActiveLoans",
+      "maxActiveLoans",
+      "library",
     );
   }
 }
-```
-
-To accept both your keys and core's, union the two types:
-
-```ts
-import type { SolidCoreSetting } from "@solidxai/core";
-
-this.settingService.getConfigValue<LibrarySetting | SolidCoreSetting>("baseUrl");
 ```
 
 Reads are served from an in-memory cache, so this is cheap. The cache is rebuilt at
@@ -213,20 +216,20 @@ startup and again after any successful settings update.
 
 ## 6. Gotchas
 
-<Callout type="warning" title="Setting keys share one global namespace - always prefix yours">
+<Callout type="warning" title="Use a stable namespace for every new custom provider">
 
-`moduleName` is **not** part of a setting's identity. Uniqueness is enforced on `key`
-alone, across every provider in the application. A collision throws during bootstrap and
-**the application will not start**.
+The namespace is part of the persisted identity. Use a stable lowercase name such as
+`library`. Two namespaces may use the same local key, but duplicate effective keys such
+as `library:clientID` still fail during settings initialization.
 
-SolidX core already owns some very generic keys:
+</Callout>
 
-`secret` · `audience` · `issuer` · `clientID` · `clientSecret` · `callbackURL` ·
-`redirectURL` · `favicon` · `copyright` · `baseUrl` · `uploadDir` · `dateFormat`
+<Callout type="warning" title="Adding a namespace to an existing provider requires a data migration">
 
-Prefix every key you declare with your module name — `libraryMaxActiveLoans`, not
-`maxActiveLoans`. This is the single most common way to break a SolidX application on
-first use of this feature.
+The legacy `@SettingsProvider()` form remains supported. Adding a namespace later does
+not rename existing database rows: seeding creates the new effective key with its default
+value. Migrate old keys first when values must be preserved; delete and reseed only when
+resetting them to defaults is intentional.
 
 </Callout>
 
@@ -273,7 +276,7 @@ holds the `settings:view_encrypted` permission.
 
 `getConfigValue()` returns `null` for a key it does not recognise — indistinguishable from
 a setting that is genuinely unset. A typo fails silently at runtime. This is why the typed
-key union in step 1 is worth the small amount of ceremony.
+local-key union in step 1 is worth the small amount of ceremony.
 
 </Callout>
 
@@ -346,12 +349,12 @@ export interface ISettingsProvider {
 
 | Step | What you do |
 | --- | --- |
-| 1 | Declare settings with `as const satisfies SettingDefinition[]` and derive a key union |
-| 2 | Prefix every key with your module name to avoid a bootstrap-fatal collision |
+| 1 | Choose a stable provider namespace and pass it to `@SettingsProvider(namespace)` |
+| 2 | Declare local keys with `as const satisfies SettingDefinition[]` and derive a key union |
 | 3 | Choose a `SettingLevel` — it decides persistence, exposure, and editability together |
-| 4 | Implement `ISettingsProvider` and decorate with `@SettingsProvider()` and `@Injectable()` |
+| 4 | Implement `ISettingsProvider` and add `@Injectable()` |
 | 5 | Add the class to your module's `providers` array |
-| 6 | Restart, then read values via `SettingService.getConfigValue<YourSetting>()` |
+| 6 | Restart, then read values via `SettingService.getConfigValue<YourSetting>(key, namespace)` |
 
 **See also:** [Solid Registry](/docs/developer-docs/extending/backend-customization/solid-registry) ·
 [Error Code Providers](/docs/developer-docs/extending/backend-customization/error-code-providers)
