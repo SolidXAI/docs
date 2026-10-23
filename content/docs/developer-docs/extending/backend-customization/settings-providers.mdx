@@ -188,8 +188,8 @@ Two consequences worth internalising:
 
 ## 5. Reading a Setting
 
-Inject `SettingService`, scope it to your provider namespace with `forModule()`, and pass
-your derived local-key union so typos are caught at compile time.
+Inject `SettingService` and pass the local key and provider namespace to
+`getConfigValue()`. The derived local-key union catches typos at compile time.
 
 ```ts
 import { Injectable } from "@nestjs/common";
@@ -201,9 +201,10 @@ export class LoanService {
   constructor(private readonly settingService: SettingService) {}
 
   private maxActiveLoans(): number {
-    return this.settingService
-      .forModule("library")
-      .get<LibrarySetting>("maxActiveLoans");
+    return this.settingService.getConfigValue<LibrarySetting>(
+      "maxActiveLoans",
+      "library",
+    );
   }
 }
 ```
@@ -273,10 +274,9 @@ holds the `settings:view_encrypted` permission.
 
 <Callout type="note" title="An unknown key returns `null`, not an error">
 
-`getConfigValue()` and `forModule().get()` return `null` for a key they do not recognise —
-indistinguishable from a setting that is genuinely unset. A typo fails silently at
-runtime. This is why the typed local-key union in step 1 is worth the small amount of
-ceremony.
+`getConfigValue()` returns `null` for a key it does not recognise — indistinguishable from
+a setting that is genuinely unset. A typo fails silently at runtime. This is why the typed
+local-key union in step 1 is worth the small amount of ceremony.
 
 </Callout>
 
@@ -354,7 +354,7 @@ export interface ISettingsProvider {
 | 3 | Choose a `SettingLevel` — it decides persistence, exposure, and editability together |
 | 4 | Implement `ISettingsProvider` and add `@Injectable()` |
 | 5 | Add the class to your module's `providers` array |
-| 6 | Restart, then read values via `SettingService.forModule(namespace).get<YourSetting>()` |
+| 6 | Restart, then read values via `SettingService.getConfigValue<YourSetting>(key, namespace)` |
 
 **See also:** [Solid Registry](/docs/developer-docs/extending/backend-customization/solid-registry) ·
 [Error Code Providers](/docs/developer-docs/extending/backend-customization/error-code-providers)
