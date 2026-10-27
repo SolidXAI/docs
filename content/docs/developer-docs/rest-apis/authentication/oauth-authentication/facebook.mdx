@@ -18,7 +18,7 @@ To use Facebook OAuth, you must create and configure an app on the Meta for Deve
 1.  Log in to the [Meta for Developers](https://developers.facebook.com/) portal.
     ![Meta for Developers Landing Page](/img/oauth/facebook/meta-login-page.png)
 2.  Click on **My Apps** and then click **Create App**.
-3.  Select an app type (e.g., "Allow people to log in with their Facebook account").
+3.  In the app-creation wizard, select the **Authenticate and request data from users with Facebook Login** use case.
 4.  Enter an app name and contact email.
     ![Meta for Developers Landing Page](/img/oauth/facebook/create-app-screen.png)
 5.  Click **Create App**.
@@ -26,14 +26,16 @@ To use Facebook OAuth, you must create and configure an app on the Meta for Deve
 
 ### 2. Configure Facebook Login
 
-1.  In the app dashboard, find **Facebook Login** and click **Set Up**.
-2.  Select **Web** (WWW) as the platform.
-3.  Enter your site URL (e.g., `https://localhost:3000`).
-4.  Navigate to **Facebook Login** > **Settings** in the left sidebar.
-5.  In the **Valid OAuth Redirect URIs** field, enter your callback URL:
-    - Development: `https://localhost:3000/api/iam/facebook/connect/callback`
+Facebook does not accept `localhost` for this configuration. For local development, start an ngrok tunnel for your application and use the active HTTPS ngrok URL in the Meta dashboard and environment variables below.
+
+1.  In the app dashboard, open **Use cases** and select **Authenticate and request data from users with Facebook Login**.
+2.  Click **Customize** for the Facebook Login use case.
+3.  In the use-case settings, add your callback URL under the redirect URI configuration:
+    - Development (ngrok): `https://<your-ngrok-domain>.ngrok-free.dev/api/iam/facebook/connect/callback`
     - Production: `https://your-api-domain.com/api/iam/facebook/connect/callback`
-6.  Click **Save Changes**.
+4.  Confirm that the `email` and `public_profile` permissions are enabled.
+5.  Open **App settings** > **Basic** and add your ngrok URL to **App domains** (for example, `https://<your-ngrok-domain>.ngrok-free.dev`). Do not include a callback path.
+6.  Save the changes.
 
 ### 3. Get App ID and App Secret
 
@@ -49,29 +51,42 @@ Add the following environment variables to your `.env` file:
 # Facebook OAuth Configuration
 IAM_FACEBOOK_OAUTH_CLIENT_ID=your-app-id
 IAM_FACEBOOK_OAUTH_CLIENT_SECRET=your-app-secret
-IAM_FACEBOOK_OAUTH_CALLBACK_URL=https://localhost:3000/api/iam/facebook/connect/callback
-IAM_FACEBOOK_OAUTH_REDIRECT_URL=https://localhost:3000/auth/facebook/callback
+IAM_FACEBOOK_OAUTH_CALLBACK_URL=https://<your-ngrok-domain>.ngrok-free.dev/api/iam/facebook/connect/callback
+IAM_FACEBOOK_OAUTH_REDIRECT_URL=http://localhost:3001/auth/initiate-facebook-oauth
 ```
 
 ## Authentication Flow
 
+<figure className="not-prose my-6">
+  <img
+    src="/img/oauth/facebook/facebook-oauth-sequence-light.png"
+    alt="Facebook OAuth authentication flow showing user sign-in, consent, callback authorization code, token exchange, and session creation"
+    className="w-full rounded-lg border border-fd-border bg-white dark:hidden"
+  />
+  <img
+    src="/img/oauth/facebook/facebook-oauth-sequence-dark.png"
+    alt="Facebook OAuth authentication flow showing user sign-in, consent, callback authorization code, token exchange, and session creation"
+    className="hidden w-full rounded-lg border border-fd-border bg-[#0f172a] dark:block"
+  />
+</figure>
+
 <Steps>
   <Step>
-    **User clicks the Facebook sign-in button** in the application.
+    **The user selects “Sign in with Facebook”** in your application.
   </Step>
   <Step>
-    **The application redirects to Facebook's login page** for authentication.
+    **Your application redirects the user to Facebook's authorization page.**
   </Step>
   <Step>
-    **User logs in with their Facebook account** and grants the application permission to access their email and profile.
+    **The user signs in to Facebook and grants the requested permissions.**
   </Step>
   <Step>
-    **Facebook sends back a confirmation** that the user is authenticated.
+    **Facebook redirects to the configured callback URL** with an authorization code.
   </Step>
   <Step>
-    **The application receives the confirmation** and creates an internal session for that user.
+    **SolidX exchanges the authorization code with Facebook** and retrieves the user's identity information.
   </Step>
   <Step>
-    **The application logs the user in** and grants access to the app.
+    **SolidX establishes an authenticated session** and redirects the user back to your application.
   </Step>
 </Steps>
