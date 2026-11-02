@@ -25,7 +25,7 @@ You can also drop a newer `.sldx` onto a module that is already installed to [up
 2. In the module list, open the **row context menu** (the `⋮` icon) for the module you want to export.
 3. Click **Export Module**. A dialog opens showing the module's current version.
 4. Choose the version to export (see [Module versions](#module-versions)).
-5. Click **Export v{version}**. The browser downloads a file named `{moduleName}-v{version}.sldx`.
+5. Click **Export `v{version}`**. The browser downloads a file named `{moduleName}-v{version}.sldx`.
 
 The archive contains:
 
@@ -189,7 +189,7 @@ If the package content is identical to what is installed, the preview says so.
 
 ### Step 2 - Update
 
-Click **Update to v{version}**. Clicking the button approves the version shown in the preview. For a **Reinstall**, **Downgrade**, **Unversioned package** or identical content, you must first tick the acknowledgement checkbox in the preview, because these replace the module with something that is not a straightforward upgrade.
+Click **Update to `v{version}`**. Clicking the button approves the version shown in the preview. For a **Reinstall**, **Downgrade**, **Unversioned package** or identical content, you must first tick the acknowledgement checkbox in the preview, because these replace the module with something that is not a straightforward upgrade.
 
 <Callout type="warn" title="The update replaces the module folders">
   `solid-api/src/{moduleName}/` and `solid-ui/src/{moduleName}/` are replaced with the package contents. Files the new version does not have are deleted, and any local changes inside these folders are kept only in the backup.
@@ -221,7 +221,7 @@ After seeding, the **Version** column shows the new version.
 
 Every update keeps a backup of the folders it replaced, so you can go back.
 
-- **While the wizard is open**, a **Restore v{version}** button appears on the Build and Seed steps (it reads **Restore unversioned** if the old module had no version).
+- **While the wizard is open**, a **Restore `v{version}`** button appears on the Build and Seed steps (it reads **Restore unversioned** if the old module had no version).
 - **After the update is finished**, open the module's row context menu and click **Restore Previous Version**. It restores the module's most recent update backup that has not been restored yet.
 
 Restoring puts the backed-up folders back. Then, as with an update, the services restart; refresh the page and run **Build** and **Seed** again (prune is switched on for that seed).
