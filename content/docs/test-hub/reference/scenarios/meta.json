@@ -1,0 +1,10 @@
+{
+  "title": "Scenarios",
+  "pages": [
+    "discover-review-and-author-scenarios",
+    "write-ui-scenarios",
+    "write-api-scenarios",
+    "manage-and-refine-scenarios"
+  ],
+  "icon": "list-checks"
+}

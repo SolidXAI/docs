@@ -19,14 +19,13 @@ export default function HomePage() {
           <span>Docs</span>
         </h1>
         <p className="text-fd-muted-foreground mt-4 max-w-md text-lg">
-          Everything you need to build, extend, and manage applications on the
-          SolidX platform.
+          Documentation for the SolidX platform and Test Hub.
         </p>
         <Link
-          href="/docs/quick-start"
+          href="/docs/solidx/quick-start"
           className="mt-8 inline-flex items-center gap-2 rounded-full bg-fd-primary px-7 py-3.5 text-base font-semibold text-fd-primary-foreground shadow-md transition-all hover:opacity-90 hover:shadow-lg active:scale-[0.97]"
         >
-          Quick-Start
+          SolidX Quick Start
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="18"
@@ -45,21 +44,20 @@ export default function HomePage() {
       </div>
       <div className="grid max-w-5xl grid-cols-1 gap-8 md:grid-cols-2">
         <Link
-          href="/docs/admin-docs"
+          href="/docs/solidx"
           className="group border-fd-border hover:bg-fd-accent/50 rounded-xl border p-8 transition-all hover:-translate-y-0.5 hover:shadow-md"
         >
           <div className="flex items-center gap-2">
             <span className="bg-fd-primary/10 text-fd-primary inline-flex size-8 items-center justify-center rounded-lg text-lg font-bold">
-              A
+              S
             </span>
-            <h2 className="text-2xl font-semibold">Admin</h2>
+            <h2 className="text-2xl font-semibold">SolidX</h2>
           </div>
           <p className="text-fd-muted-foreground mt-4 mb-6 leading-relaxed">
-            A complete guide for administrators and business users to install,
-            configure, and manage applications in SolidX — without writing code.
+            Build, extend, and manage applications on the SolidX platform.
           </p>
           <span className="text-fd-primary group-hover:gap-3 inline-flex items-center gap-2 font-medium transition-all">
-            Get Started
+            Explore SolidX docs
             <span className="text-lg transition-transform group-hover:translate-x-0.5">
               →
             </span>
@@ -67,7 +65,7 @@ export default function HomePage() {
           <div className="mt-6 overflow-hidden rounded-lg border">
             <Image
               src="/img/homeImage-11.png"
-              alt="Admin illustration"
+              alt="SolidX application interface"
               width={500}
               height={300}
               className="w-full transition-transform duration-300 group-hover:scale-[1.02]"
@@ -76,30 +74,28 @@ export default function HomePage() {
         </Link>
 
         <Link
-          href="/docs/developer-docs"
+          href="/docs/test-hub/getting-started/quickstart"
           className="group border-fd-border hover:bg-fd-accent/50 rounded-xl border p-8 transition-all hover:-translate-y-0.5 hover:shadow-md"
         >
           <div className="flex items-center gap-2">
             <span className="bg-fd-primary/10 text-fd-primary inline-flex size-8 items-center justify-center rounded-lg text-lg font-bold">
-              D
+              T
             </span>
-            <h2 className="text-2xl font-semibold">Dev Docs</h2>
+            <h2 className="text-2xl font-semibold">Test Hub</h2>
           </div>
           <p className="text-fd-muted-foreground mt-4 mb-6 leading-relaxed">
-            Dive into SolidX&apos;s low-code engine and learn how to extend,
-            customize, and integrate enterprise applications using APIs, code
-            hooks, and reusable components.
+            Discover, run, and investigate application tests.
           </p>
           <span className="text-fd-primary group-hover:gap-3 inline-flex items-center gap-2 font-medium transition-all">
-            Explore Docs
+            Explore Test Hub docs
             <span className="text-lg transition-transform group-hover:translate-x-0.5">
               →
             </span>
           </span>
           <div className="mt-6 overflow-hidden rounded-lg border">
             <Image
-              src="/img/homeImage-22.png"
-              alt="Dev Docs illustration"
+              src="/img/test-hub/dashboard-overview.png"
+              alt="Test Hub dashboard"
               width={500}
               height={300}
               className="w-full transition-transform duration-300 group-hover:scale-[1.02]"

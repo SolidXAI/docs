@@ -1,0 +1,27 @@
+---
+title: PR scans and merge checks
+description: Inspect repository changes before merge.
+icon: git-pull-request
+---
+
+PR scans examine source changes and report findings before they merge. They complement UI and API runs, which check the behavior of a running application.
+
+## Enable scanning
+
+Connect the application's repository, then open **Source Code → Security Scanning** and enable **Scan pull requests**. The Git account needs the pull-request, status-check, and webhook permissions described in **Git Accounts → Add**. Test Hub registers a webhook with the repository provider. The provider must be able to reach the configured webhook URL; a laptop's `localhost` address is not reachable from a hosted Git provider.
+
+To require the security check before merging, enable **Block merges when the scan fails** in the same panel. This requires additional repository administration permission. Confirm that the panel reports the merge gate as enforced, then open a test pull request to verify the scan and check result. Review the failure threshold under **Advanced settings**.
+
+## Review the result
+
+A PR scan reports findings against the changed source. Open the finding to inspect the affected file and evidence. Confirm whether the issue is real in the application context, then fix or triage it in the repository. Rerun the scan after the change so the pull request reflects the new revision.
+
+<Callout type="warning" title="Check merge gate enforcement">
+  **Scan pull requests** does not block merging on its own. If the merge gate panel says enforcement could not be configured, check the repository permissions and provider settings before relying on it.
+</Callout>
+
+{/* Screenshot: PR scan summary with an affected file; hide private repository details. */}
+
+<Callout type="tip" title="Keep behavioral checks separate">
+  A source scan can identify risks in a code change. Use UI and API scenarios to check important behavior in the running application.
+</Callout>

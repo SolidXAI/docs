@@ -1,0 +1,9 @@
+{
+  "title": "Getting started",
+  "pages": [
+    "quickstart",
+    "solidx-ai-agent",
+    "solidx-mcp"
+  ],
+  "icon": "compass"
+}

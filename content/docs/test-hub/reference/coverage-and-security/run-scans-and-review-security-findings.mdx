@@ -1,0 +1,21 @@
+---
+title: Run scans and review security findings
+description: Inspect source findings for a connected application.
+icon: shield-alert
+---
+
+Connect the intended repository and branch before scanning. On the application's **Security** tab, choose **Run Security Scan** and wait for the result. Review each finding's location, severity, and evidence, then confirm whether it applies to the deployed application.
+
+The application's **Application** tab has a **Scan dependencies** switch in its Security panel. Code and committed-secret checks always run; dependency advisories are optional. Rerun the scan after a relevant fix or source update.
+
+## Triage a finding
+
+Inspect the file or dependency named in the result and check whether the affected code is reachable in the deployed application. Assign the finding to the repository owner, record the decision, and verify a fix with a new scan. Treat any exposed credential as compromised and rotate it in the service that issued it; deleting a committed value does not revoke it.
+
+The **Security** tab shows application scan results. Pull-request scans are configured separately under **Source Code → Security Scanning**; use those to review changes before merge.
+
+{/* Screenshot: Security tab with a completed scan and one expanded finding; conceal secret material. */}
+
+<Callout type="tip" title="Pair scans with application tests">
+  Source findings do not replace UI and API scenarios for authentication, authorization, or business behavior in the running application.
+</Callout>

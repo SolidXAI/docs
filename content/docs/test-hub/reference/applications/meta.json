@@ -1,0 +1,9 @@
+{
+  "title": "Applications",
+  "pages": [
+    "add-and-manage-an-application",
+    "connect-source-code",
+    "configure-secrets-and-sign-in"
+  ],
+  "icon": "app-window"
+}

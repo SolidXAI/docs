@@ -1,0 +1,33 @@
+---
+title: Run a test suite
+description: Choose the scenarios and execution options for a Test Hub run.
+icon: play
+---
+
+A run executes authored scenarios for one application and records their results. Review the saved tests in **Scenarios** first; Discovery proposals cannot run.
+
+## Start a run
+
+Select **Start Run** on the application page. The dialog lets you choose:
+
+| Option | Effect |
+| --- | --- |
+| **Viewport** | Desktop, mobile, or custom dimensions. |
+| **Scenario tags** | Limit the run to matching authored scenarios. Leave empty to run all. |
+| **Capture failure artifacts** | Keep available evidence when a scenario fails. |
+| **Record API logs** | Include API request and response logs. |
+| **Show browser window** | Display the Chromium runner while UI tests execute. |
+
+The last three options are under **Advanced options**. Choose **Run** after checking that the application URL and required test account are available to the runner.
+
+{/* Screenshot: Start Run dialog with viewport, scenario tags, and Advanced options visible. */}
+
+## Follow progress
+
+Open **Runs** to see the active run and its completed history. Read the final counts only after execution ends: **Passed**, **Failed**, and **Not executed** are distinct outcomes. If the run stops after a failure, later scenarios may be not executed.
+
+<Callout type="warning" title="A partial run is not a passing suite">
+  A scenario marked **Not executed** has no test result. Review the earlier failure and the **Stop run on first test scenario failure** setting before interpreting the suite total.
+</Callout>
+
+Open a completed run to inspect scenario steps and available evidence. See [Review results and investigate failures](/docs/test-hub/reference/test-runs/review-results-and-investigate-failures).

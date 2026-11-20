@@ -1,0 +1,56 @@
+---
+title: Use Test Hub through SolidX MCP
+description: Connect a coding agent to discover and author scenarios in your SolidX project.
+icon: plug
+---
+
+The project's **SolidX MCP server** exposes Test Hub tools to a connected coding agent such as Codex. There is no separate Test Hub MCP server. Use the coding agent to request discovery or authoring, then review the result in the Test Hub portal. For supported clients and connection details, see [Using SolidX MCP Server](/docs/solidx/quick-start/using-solidx-mcp-server).
+
+## Connect your coding agent
+
+From the SolidX project directory, run:
+
+```bash
+solidctl mcp install
+```
+
+The command registers the project's server with supported coding agents found on your machine. Start the project with `solidctl start:dev` so the API and MCP service are available, then restart the coding agent so it loads the new connection. If you have more than one SolidX project, check the server name before making changes.
+
+{/* Screenshot: Installation output with the project-specific MCP server name and detected coding agent. */}
+
+## Use Test Hub from the coding agent
+
+First register the target in **Applications → New Application**. The wizard collects its URL, optional credentials, and optional repository. Name the application in your requests so the coding agent uses the intended Test Hub record.
+
+<Tabs defaultValue="discover">
+  <TabItem value="discover" label="Discover">
+    Ask for proposals without authoring them yet:
+
+    ```text
+    In Test Hub, discover UI and API scenarios for <application name>'s main workflows.
+    ```
+
+    Open the application's **Discovery** tab and review the proposals against its actual routes and behavior. Deselect duplicates and cases that need unavailable roles or data.
+  </TabItem>
+  <TabItem value="author" label="Author">
+    After reviewing the proposals, ask the coding agent to save the selected cases:
+
+    ```text
+    Author the selected Test Hub scenarios for <application name>.
+    ```
+
+    Open **Scenarios** in the portal and inspect the saved steps. If fewer scenarios appear than you selected, read the agent's response for missing credentials or other prerequisites.
+  </TabItem>
+</Tabs>
+
+{/* Screenshot: Discovery proposals in the portal and a saved scenario after authoring. Use separate readable crops. */}
+
+<Callout type="info" title="Review proposals before running tests">
+  Discovery adds proposals to **Discovery**. Authoring saves the selected proposals as runnable tests in **Scenarios**.
+</Callout>
+
+## Run and inspect
+
+Choose **Start Run** in the portal. The dialog includes all authored scenarios by default; select scenario tags to narrow the suite. Choose a viewport and review artifact and API-log options under **Advanced options**. Inspect the completed result in **Runs**, including failed steps and available evidence.
+
+If no proposals or scenarios appear, confirm that the coding agent loaded the MCP connection after restart, that the correct SolidX project is running, and that the request targeted the correct application. Check the tools exposed by the SolidX MCP server in your coding agent.

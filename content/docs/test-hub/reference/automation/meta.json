@@ -1,0 +1,10 @@
+{
+  "title": "Automation",
+  "pages": [
+    "schedule-test-runs",
+    "email-and-webhook-notifications",
+    "pr-scans-and-merge-checks",
+    "run-suites-through-the-api"
+  ],
+  "icon": "timer"
+}

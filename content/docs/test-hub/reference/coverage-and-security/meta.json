@@ -1,0 +1,8 @@
+{
+  "title": "Coverage and security",
+  "pages": [
+    "measure-coverage-and-find-gaps",
+    "run-scans-and-review-security-findings"
+  ],
+  "icon": "shield-check"
+}

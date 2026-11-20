@@ -1,0 +1,25 @@
+---
+title: Write UI scenarios
+description: Test visible user outcomes in the browser.
+icon: monitor
+---
+
+A UI scenario needs a starting page, a user action, and a result the browser can verify. Keep each scenario focused on one task rather than combining unrelated features.
+
+| Part | Example |
+| --- | --- |
+| Start | Open the ticket list as a signed-in agent. |
+| Action | Create a ticket with valid details. |
+| Assertion | The new ticket appears with the saved title and status. |
+
+Use visible labels or stable test identifiers where possible. After navigation or form submission, verify the expected result; a successful click alone does not show that the action worked. Give test records recognizable values. Avoid relying on data created by another scenario unless the suite is designed to share state.
+
+## Make failures easier to diagnose
+
+Keep the setup, action, and expected result together so a failed step identifies what went wrong. To verify that a record was saved, reload or reopen it and check its values. For search and filters, check both matching results and the empty state when each behavior matters.
+
+If the application is responsive, choose a viewport that matches the behavior being tested. A desktop run does not establish that the same navigation works on mobile.
+
+{/* Screenshot: Expanded UI scenario showing navigation, action, and assertion steps. */}
+
+If an element cannot be found, inspect the failed run's screenshot or recording. Check for sign-in redirects, loading states, and changed controls before editing the scenario.

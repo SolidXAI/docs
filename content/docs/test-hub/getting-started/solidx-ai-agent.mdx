@@ -1,0 +1,45 @@
+---
+title: Use Test Hub with the SolidX AI Agent
+description: Discover and author scenarios from the agent inside your SolidX portal.
+icon: bot
+---
+
+The SolidX AI Agent works inside your portal. In Test Hub, it can inspect a registered application, propose UI and API tests, and author the proposals you approve. This page covers the Test Hub workflow; [Using SolidX AI Agent](/docs/solidx/quick-start/using-solidx-ai-agent) covers agent installation and general setup.
+
+## Prepare the connection
+
+Start the agent from your SolidX project with `solidctl agent start` and keep it running. Register the application in Test Hub before asking for scenarios. Connect its repository if you want the agent to inspect routes and behavior in the code. Provide a dedicated test account for tests that require sign-in.
+
+The agent panel asks for a **SolidX API key** on first sign-in. Generate it under **Solid Core → API Keys**. This key authenticates the agent to the SolidX project; it is separate from the credentials used to sign in to the application under test.
+
+<Callout type="warning" title="Keep test credentials out of prompts">
+  Enter a test account in the application wizard or add encrypted keys on **Secret Keys**. Do not paste passwords into chat or scenario steps.
+</Callout>
+
+## Discover scenarios
+
+Open the registered application and the **SolidX Agent** panel. For example, ask:
+
+```text
+Discover UI and API test scenarios for this application's main workflows.
+```
+
+The agent returns candidate scenarios in chat. Open their outlines to check the target route, expected result, and whether the test environment has the necessary role and data. Deselect duplicates or cases you cannot run yet. The same proposals are available on the application's **Discovery** tab.
+
+{/* Screenshot: Agent proposal list with a readable UI candidate, API candidate, and selection controls. */}
+
+## Author and verify
+
+Select **Author selected** in the agent's proposal list. The agent writes the scenarios and reports anything it could not author. In **Scenarios**, compare the saved titles with the proposals you selected and expand a scenario to inspect its steps, assertions, and secret references.
+
+<Callout type="tip" title="If fewer scenarios appear than you selected">
+  Read the agent's response for missing credentials or other prerequisites. Resolve the issue, then author the remaining proposals.
+</Callout>
+
+## Run the suite
+
+Choose **Start Run** on the application page. Without a scenario tag filter, Test Hub runs all authored scenarios. Use a tag to limit the set, choose a viewport, and review **Advanced options** before starting. The **Runs** tab shows the result and available failure evidence.
+
+{/* Screenshot: Authored scenario with expanded steps beside a completed run result. */}
+
+If the panel cannot connect, confirm the agent process is running and the portal points to its service. After a configuration change, restart the affected service. For connection and run symptoms, see [Troubleshooting](/docs/test-hub/help/troubleshooting).

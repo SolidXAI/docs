@@ -1,11 +1,4 @@
 {
-  "title": "SolidX Docs",
-  "pages": [
-    "quick-start",
-    "developer-docs",
-    "recipes",
-    "tutorial",
-    "admin-docs",
-    "product-modules"
-  ]
+  "title": "Documentation",
+  "pages": ["solidx", "test-hub"]
 }

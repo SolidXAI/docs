@@ -1,0 +1,21 @@
+---
+title: Measure coverage and find gaps
+description: Compare your UI and API scenarios with application routes.
+icon: chart-column
+---
+
+On the application's **Source Code** tab, choose **Run Code Coverage**. The SolidX AI Agent compares authored scenarios with the UI and API routes in the connected repository. Review the reported gaps alongside recent run results to decide which routes need tests.
+
+| Source | What it shows |
+| --- | --- |
+| Route coverage | UI and API routes matched to authored scenarios in the connected source. |
+| Authored scenarios | Behaviors the saved UI and API tests are written to check. |
+| Run results | Scenarios that ran, passed, or failed in the selected environment. |
+
+Prioritize untested behavior by customer impact and how often the code changes. Add or update a scenario for an important workflow, run it, and confirm that it checks the expected result.
+
+{/* Screenshot: Source Code tab with a Code Coverage result and an uncovered area. */}
+
+<Callout type="info" title="Coverage is not a run result">
+  A route matched to a scenario has not necessarily been executed successfully. Check the run history to see which scenarios passed or failed.
+</Callout>

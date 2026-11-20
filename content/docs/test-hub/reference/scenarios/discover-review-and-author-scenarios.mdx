@@ -1,0 +1,27 @@
+---
+title: Discover, review, and author scenarios
+description: Review proposed tests and save them as UI and API scenarios.
+icon: search-check
+---
+
+Discovery proposes tests for you to review. Authoring saves the proposals you select in **Scenarios**. Before authoring, remove duplicates and proposals that require accounts or data you do not have.
+
+## Discover candidates
+
+Open the application's **Discovery** tab and choose **Discover Scenarios**, or ask the SolidX AI Agent or a coding agent connected through SolidX MCP. A request for the application's main UI and API workflows is a useful starting point. The Discovery page groups proposals by area and offers **All**, **Proposed**, and **Authored** filters.
+
+## Review before authoring
+
+Open each proposal and check the page or API route, expected result, source-code evidence, and account or data needed to run it. Select tests with a clear expected result. Deselect duplicates and proposals that depend on unavailable roles or data that may change between runs.
+
+{/* Screenshot: Discovery candidate list with one UI and one API proposal, plus an expanded outline. */}
+
+## Author the selection
+
+In the in-portal agent's proposal list, choose **Author selected**. The Discovery page has an **Author all** control for its current selection. A coding agent connected through SolidX MCP can also author the reviewed proposals. When the agent finishes, open **Scenarios** and inspect the saved names, steps, assertions, and secret references.
+
+<Callout type="warning" title="Selection is not a saved test">
+  A proposal cannot run until it is authored and appears in **Scenarios**. If fewer scenarios were saved than requested, read the agent's response for missing credentials or another blocked prerequisite.
+</Callout>
+
+Run a small tagged subset when the suite is large. **Start Run** includes all authored scenarios by default and uses the selected tags to narrow the run. See [Run a test suite](/docs/test-hub/reference/test-runs/run-a-test-suite).

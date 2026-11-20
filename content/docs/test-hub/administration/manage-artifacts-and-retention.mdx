@@ -1,0 +1,28 @@
+---
+title: Manage artifacts and retention
+description: Set how long Test Hub keeps runs and their evidence.
+icon: archive
+---
+
+Open **Settings** to configure run and artifact retention separately. Each setting offers **2 weeks**, **1 month**, **3 months**, **6 months**, and **1 year**. Choose periods that allow enough time to investigate failures and meet your data retention requirements.
+
+| Setting | Effect |
+| --- | --- |
+| **Run retention** | How long run records remain available. |
+| **Artifact retention** | How long captured evidence remains available. |
+| **Record video** | Keeps a whole-run browser recording for a failed UI run. |
+| **Stop run on first test scenario failure** | Leaves later scenarios not executed after a failure. |
+
+For an individual run, **Start Run → Advanced options** controls failure artifacts, API logs, and whether the browser window is visible. Review what the test account may expose in screenshots, logs, and recordings before increasing retention.
+
+## Choose an evidence policy
+
+Screenshots capture the browser state; API logs record request details. A recording can help when the timing or sequence of browser actions matters. Consider the storage cost and sensitive data in each artifact type before enabling it for every run.
+
+Before shortening retention, preserve any evidence needed for an open investigation.
+
+<Callout type="warning" title="Artifacts can expose application data">
+  Browser recordings, screenshots, API bodies, and console output can contain personal or confidential test data. Prefer dedicated demo or staging accounts and restrict artifact access.
+</Callout>
+
+{/* Screenshot: Test Hub Settings showing retention and recording controls. */}

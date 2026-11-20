@@ -1,0 +1,21 @@
+---
+title: Manage and refine scenarios
+description: Keep authored tests aligned with the application.
+icon: list-filter
+---
+
+The application's **Scenarios** tab is the inventory of tests that can run. Search by name or tag, filter by **UI** or **API**, and expand a scenario to review its steps and assertions. Use a small, consistent set of tags for workflows or risk areas; those same tags can narrow a run.
+
+## Update a scenario when the application changes
+
+When a UI control or API contract changes, expand the scenario and use **View source JSON** to locate its definition. Update the affected steps through the SolidX Agent or in the scenario source file, then validate the file and confirm the updated scenario still appears in **Scenarios**. Run a suite or tagged subset containing it before relying on it in a schedule.
+
+Keep the expected user outcome intact while changing technical details. Remove duplicate cases that check the same behavior with the same data.
+
+## Keep a suite readable
+
+Use titles that describe the behavior and expected outcome, such as “Reject an invalid customer email,” rather than a route or ticket number alone. Tags should identify a meaningful workflow, risk area, or release subset. Avoid adding a new tag for each scenario; a small shared vocabulary makes run filters useful.
+
+After a change, compare the authored scenario with the current application. Check that secret references still resolve and that the scenario does not rely on a record created by an unrelated test. Use a manual run to confirm the updated steps before the next scheduled execution.
+
+{/* Screenshot: Scenario list filtered by tag with one case expanded to show its steps and View source JSON control. */}

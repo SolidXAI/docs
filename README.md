@@ -1,41 +1,19 @@
-# Website
+# SolidX documentation
 
-This website is built using [Docusaurus](https://docusaurus.io/), a modern static website generator.
+This Next.js site uses Fumadocs to serve two documentation sections:
 
-### Installation
+- **SolidX:** `/docs/solidx`
+- **Test Hub:** `/docs/test-hub`
 
-```
-$ yarn
-```
+Their root folders in `content/docs` define the sidebar switcher. Each folder has a `meta.json` with `"root": true` and an `index.mdx` landing page. Add new pages inside the appropriate folder and list them in its `meta.json`.
 
-### Local Development
+Previous SolidX URLs under `/docs/quick-start`, `/docs/developer-docs`, `/docs/recipes`, `/docs/tutorial`, and `/docs/admin-docs`, plus the old Test Hub URLs under `/docs/product-modules/test-hub`, redirect to the corresponding section. Keep these redirects in `next.config.mjs` when reorganizing pages.
 
-```
-$ yarn start
-```
+## Run locally
 
-This command starts a local development server and opens up a browser window. Most changes are reflected live without having to restart the server.
-
-### Build
-
-```
-$ yarn build
+```bash
+npm ci
+npm run dev
 ```
 
-This command generates static content into the `build` directory and can be served using any static contents hosting service.
-
-### Deployment
-
-Using SSH:
-
-```
-$ USE_SSH=true yarn deploy
-```
-
-Not using SSH:
-
-```
-$ GIT_USER=<Your GitHub username> yarn deploy
-```
-
-If you are using GitHub pages for hosting, this command is a convenient way to build the website and push to the `gh-pages` branch.
+The development server uses port 3003. Run `npm run build` before publishing.

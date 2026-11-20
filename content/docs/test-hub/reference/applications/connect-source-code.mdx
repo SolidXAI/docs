@@ -1,0 +1,25 @@
+---
+title: Connect source code
+description: Give Test Hub access to the routes and behavior behind your application.
+icon: git-branch
+---
+
+A repository connection lets Test Hub inspect the application's routes and behavior when proposing tests. It also supports code coverage and source-based security checks. Source code may differ from the deployed application, so review proposals against the running application before authoring.
+
+## Select the repository
+
+Choose a Git account, repository, and branch in the application's **Repository** wizard stage. You can skip that stage and connect later from **Source Code**. After connecting, the tab shows the selected repository, branch, commit, and sync status. Use **Sync** after relevant source changes.
+
+{/* Screenshot: Source Code tab with repository, branch, commit, and Sync control. */}
+
+## Add a Git account
+
+If the account is not listed, open **Git Accounts → Add**. The form supports GitHub, GitLab, Gitea, and AWS CodeCommit. Give the account a name, select a provider, and enter its access token. The token is encrypted and will not be shown again.
+
+For GitHub source sync, the form calls for repository **Contents: Read-only** access. Pull request scans, comments, checks, webhooks, and merge blocking need additional permissions identified in that form. Grant the permissions required for the workflows you intend to use.
+
+<Callout type="tip" title="Match source to deployment">
+  Select the branch used for the deployed application when possible. If cloning fails, confirm the account can read the repository and the branch still exists.
+</Callout>
+
+Next, [discover scenarios](/docs/test-hub/reference/scenarios/discover-review-and-author-scenarios) and compare the proposals with the application's live UI and API.

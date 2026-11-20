@@ -1,0 +1,27 @@
+---
+title: Troubleshooting
+description: Diagnose setup, discovery, and run failures.
+icon: life-buoy
+---
+
+Check the target URL, project services, and test account before changing a failed scenario. Connection or sign-in failures can prevent the scenario from reaching the action it was meant to test.
+
+<Accordions type="single">
+  <Accordion title="The application URL cannot be reached">
+    Open the configured application and API URLs from the runner's environment. A local address works only when the runner can reach the same machine and port.
+  </Accordion>
+  <Accordion title="The SolidX AI Agent is disconnected">
+    Confirm `solidctl agent start` is running and the configured agent service responds. Restart the affected SolidX service after changing agent settings. If panel sign-in fails, check that the SolidX API key is active for this project.
+  </Accordion>
+  <Accordion title="The coding agent cannot see SolidX MCP tools">
+    Run `solidctl mcp install` in the intended project and restart the coding agent. Confirm that the project services are running and that the agent loaded the server for the correct project.
+  </Accordion>
+  <Accordion title="Discovery has proposals, but Scenarios is empty">
+    Proposals are not saved tests. Use **Author selected** in the agent's proposal list or the authoring control in **Discovery**. If only some scenarios appear, read the agent's response for missing credentials or other prerequisites.
+  </Accordion>
+  <Accordion title="A run has failed or not-executed cases">
+    Open the first failed scenario and inspect its step and available evidence. Confirm that the runner could reach and sign in to the application. **Not executed** means the test never ran; check earlier failures and the stop-on-first-failure setting.
+  </Accordion>
+</Accordions>
+
+{/* Screenshot: Failed run with the first failing step and error detail; conceal credentials and private URLs. */}

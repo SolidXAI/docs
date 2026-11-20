@@ -1,0 +1,25 @@
+---
+title: Run suites through the API
+description: Start an authored application suite through the Test Hub API.
+icon: terminal
+---
+
+Test Hub provides an HTTP endpoint for starting a registered application's authored scenarios. The portal's **Start Run** action uses this endpoint. `solidctl test run` runs SolidX module tests, not Test Hub application suites.
+
+## Start a run
+
+Use the API URL of the SolidX project that hosts Test Hub and the registered application's ID. The API key must belong to a user permitted to start runs.
+
+```bash
+curl --fail-with-body --request POST \
+  "$SOLIDX_API_URL/test-hub/applications/$TEST_HUB_APPLICATION_ID/run" \
+  --header "solidx-api-key: $SOLIDX_API_KEY" \
+  --header 'Content-Type: application/json' \
+  --data '{"headless":true}'
+```
+
+The response includes a `testRunId`. This confirms that the run started, not that its scenarios passed.
+
+## Check the result
+
+Open the application's **Runs** tab to check the final status and scenario results.

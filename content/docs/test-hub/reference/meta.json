@@ -1,0 +1,11 @@
+{
+  "title": "Reference",
+  "pages": [
+    "applications",
+    "scenarios",
+    "test-runs",
+    "automation",
+    "coverage-and-security"
+  ],
+  "icon": "book-open"
+}

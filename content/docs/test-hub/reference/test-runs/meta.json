@@ -1,0 +1,8 @@
+{
+  "title": "Test runs",
+  "pages": [
+    "run-a-test-suite",
+    "review-results-and-investigate-failures"
+  ],
+  "icon": "play-circle"
+}

@@ -1,0 +1,23 @@
+---
+title: FAQ and limitations
+description: Answers to common Test Hub questions.
+icon: message-circle-question
+---
+
+<Accordions type="single">
+  <Accordion title="Can Test Hub test an application built outside SolidX?">
+    Yes. Register it as **Non-SolidX**. For a web application, enter its application URL and, when needed, an API base URL. The runner still needs network access and any required test credentials.
+  </Accordion>
+  <Accordion title="Are Discovery proposals runnable tests?">
+    No. Review and author the proposals first. Saved tests appear in **Scenarios**; proposals remain in **Discovery**.
+  </Accordion>
+  <Accordion title="Can I use a coding agent instead of the in-portal agent?">
+    Yes. Connect the coding agent to the project's SolidX MCP server. Test Hub tools are part of that server; there is no separate Test Hub MCP server.
+  </Accordion>
+  <Accordion title="Does a passing run prove the entire application works?">
+    No. It reports the scenarios that ran in that environment. Review untested features separately.
+  </Accordion>
+  <Accordion title="Can Test Hub run against localhost?">
+    Yes, when the runner can reach that same machine and port. A remotely hosted runner cannot use your laptop's localhost address directly.
+  </Accordion>
+</Accordions>

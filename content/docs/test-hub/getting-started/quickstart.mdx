@@ -1,0 +1,62 @@
+---
+title: Your first test suite
+description: Register an application, review scenarios, and inspect a run.
+icon: rocket
+---
+
+This guide shows how to register an application, create tests, and review the first run. For your first suite, select a few tests for core actions such as sign-in and record creation. Run those tests before adding more scenarios so you can check that the application URL and test account work.
+
+## Before you begin
+
+| Requirement | Why it matters |
+| --- | --- |
+| A running Test Hub portal | You will create the application and review results there. |
+| A reachable application URL | The runner must be able to open the target. |
+| A dedicated test account, if the app requires sign-in | Tests must be able to sign in on every run. |
+| Repository access, optional | Source code can make discovery more specific. |
+
+<Callout type="warning" title="Check the URL from the runner">
+  An address that works in your browser may not work from a remote runner. Use `localhost` only when the runner can reach that same machine and port.
+</Callout>
+
+## Register the application
+
+Open **Applications → New Application**. The wizard has three stages:
+
+| Stage | What to enter |
+| --- | --- |
+| **Basics** | Name, optional description, **Web** or **Mobile**, **SolidX native** or **Non-SolidX**, and the application URL. For a web app, add an **API Base URL** if API tests need one. |
+| **Credentials** | Choose password or OTP sign-in for a test account, or **Skip for now**. |
+| **Repository** | Select a Git account, repository, and branch, or skip this stage. |
+
+Finish the wizard to save the application. Its **Application** tab then shows the target URLs and settings; **Source Code** shows the repository if you connected one.
+
+{/* Screenshot: Basics stage with the Web/Mobile, platform, and URL controls. */}
+
+## Discover and review
+
+On the application's **Discovery** tab, choose **Discover Scenarios**. You can ask the in-portal agent:
+
+```text
+Discover UI and API test scenarios for this application's main workflows.
+```
+
+Open the proposals and check the page or API route, expected result, and required account or data. Deselect duplicates and tests you cannot run with the available accounts and data. Discovery stores proposals for review; it does not create runnable tests.
+
+## Author the tests
+
+Use **Author selected** in the agent's proposal list. The **Discovery** page also has an authoring control for its selected proposals. When authoring finishes, open **Scenarios** and expand a saved scenario to check its steps and assertions. The number saved can be lower than the number requested if a proposal needs a missing credential or another prerequisite; read the agent's response before trying again.
+
+{/* Screenshot: A selected UI and API proposal, followed by one expanded authored scenario. */}
+
+## Run and inspect
+
+Choose **Start Run**. Select a viewport and review **Advanced options** for failure artifacts, API logs, and a visible browser. With no scenario tags selected, the dialog runs all authored scenarios; choose tags to limit the run. Open **Runs** to follow progress, then open the completed run to inspect passed, failed, and not-executed counts.
+
+<Callout type="tip" title="A useful first result">
+  Open at least one scenario's steps. If it failed, inspect the error and available evidence before changing the test. **Not executed** means the scenario has no pass or fail result.
+</Callout>
+
+{/* Screenshot: Completed run with summary counts and one expanded scenario. */}
+
+Once the suite runs reliably, [schedule it](/docs/test-hub/reference/automation/schedule-test-runs) or explore [pull request scans](/docs/test-hub/reference/automation/pr-scans-and-merge-checks).

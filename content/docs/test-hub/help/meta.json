@@ -1,0 +1,8 @@
+{
+  "title": "Help",
+  "pages": [
+    "troubleshooting",
+    "faq-and-limitations"
+  ],
+  "icon": "circle-help"
+}

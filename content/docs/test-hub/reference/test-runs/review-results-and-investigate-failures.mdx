@@ -1,0 +1,24 @@
+---
+title: Review results and investigate failures
+description: Use the failed step and captured evidence to understand a run.
+icon: clipboard-check
+---
+
+Open a completed entry in the application's **Runs** tab. The summary shows passed, failed, and not-executed scenarios separately.
+
+## Find the first failure
+
+Open a failed scenario and expand its steps. Read the failing assertion and the actual response or browser state. When the run captured a screenshot or video, use it to see what the runner saw at that point. Whole-run video is available for failed UI runs when **Record video** is enabled in Test Hub **Settings**.
+
+{/* Screenshot: Failed scenario with the failing step and available evidence visible. */}
+
+## Decide what to change
+
+| Evidence | Check next |
+| --- | --- |
+| Timeout or missing element | Current page, sign-in redirect, loading state, and selector. |
+| Unexpected API response | Endpoint, request data, authorization, and deployed version. |
+| Wrong application data | Test account, seed data, and whether another scenario changed it. |
+| Later cases not executed | Earlier failure and the stop-on-first-failure setting. |
+
+After identifying the cause, fix the application, scenario, or test environment. Rerun the suite or a tagged subset, then compare the result with the previous run.

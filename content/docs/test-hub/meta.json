@@ -1,0 +1,13 @@
+{
+  "title": "Test Hub",
+  "description": "Test Hub documentation",
+  "icon": "flask-conical",
+  "root": true,
+  "pages": [
+    "getting-started",
+    "reference",
+    "administration",
+    "help",
+    "release-notes"
+  ]
+}

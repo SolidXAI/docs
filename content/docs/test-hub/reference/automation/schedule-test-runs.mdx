@@ -1,0 +1,23 @@
+---
+title: Schedule test runs
+description: Run an authored suite on a recurring schedule.
+icon: calendar-clock
+---
+
+Schedule a suite after a manual run succeeds reliably with the same application URL, credentials, and data. Scheduled runs execute without your browser session, so the runner must be able to reach the target on its own.
+
+## Create the schedule
+
+Open **Schedules → Add** and choose the application. Leave **Scenario tags** empty for all authored scenarios, or select tags for a smaller suite. Choose a desktop, mobile, or custom viewport, then configure **Repeat**.
+
+| Repeat option | Use it for |
+| --- | --- |
+| Every few minutes or hourly | Frequent checks in a stable test environment. |
+| Daily, weekly, or monthly | Recurring regression checks at a chosen time. |
+| Custom | An interval outside the presets. |
+
+Check the preview of upcoming runs, leave **Active** on, and choose **Create schedule**. Open the first scheduled result to verify that the environment and test account worked without manual intervention.
+
+{/* Screenshot: Schedule form showing application, tags, recurrence, and next-run preview. */}
+
+Use [notifications](/docs/test-hub/reference/automation/email-and-webhook-notifications) so failures reach an owner. Revisit the schedule after changing the deployment URL, sign-in method, or suite contents.

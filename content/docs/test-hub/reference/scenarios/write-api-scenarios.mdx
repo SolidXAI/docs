@@ -1,0 +1,29 @@
+---
+title: Write API scenarios
+description: Check endpoint behavior, access, and data contracts.
+icon: braces
+---
+
+An API scenario sends a request and checks the response that matters. That may be a status code, a returned field, an authorization boundary, or a change verified by a later request.
+
+## Choose the assertions
+
+| Check | Example outcome |
+| --- | --- |
+| Success | Creating a valid record returns its ID and retrievable details. |
+| Validation | Invalid input returns the expected rejection without changing data. |
+| Authorization | A request without the required session cannot read protected data. |
+
+Use the application's API base URL and the correct authentication method. When UI and API share an origin, the API base URL may match the application URL; still check the endpoint path separately. Use identifiable test data and avoid assertions that depend on unrelated records already in the environment.
+
+## Cover the contract, not only the status code
+
+A `200` or `201` response shows that the request completed, but it does not prove that the returned record has the right fields or that a later read sees the saved value. For a create flow, assert the identifier and key fields, then retrieve the record where practical. For rejection cases, assert the error and confirm that invalid input did not create or modify data.
+
+Keep authorization cases separate from validation cases so a failure points to one cause. A protected endpoint should be checked both with the intended account and without the required session when that boundary matters.
+
+{/* Screenshot: Expanded API scenario with request and response assertions; hide credentials. */}
+
+<Callout type="tip" title="Use separate test data">
+  Use isolated identifiers for created records and clean them up when the application supports it. Do not place tokens or passwords directly in steps; reference application secret keys.
+</Callout>

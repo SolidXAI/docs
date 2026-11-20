@@ -1,0 +1,39 @@
+---
+title: Add and manage an application
+description: Register the target and understand its application settings.
+icon: app-window
+---
+
+Each Test Hub application stores a target URL, optional repository and test credentials, scenarios, and run history. Register a separate application for an environment with a different URL or test account.
+
+## Create an application
+
+Choose **Applications → New Application**. The wizard saves the record when you finish its three stages:
+
+| Stage | Configuration |
+| --- | --- |
+| **Basics** | Name, optional description, **Web** or **Mobile**, **SolidX native** or **Non-SolidX**, and the application URL. A web application can also have an optional **API Base URL**. |
+| **Credentials** | Password or OTP sign-in for a test account, or **Skip for now**. |
+| **Repository** | Git account, repository, and branch, or **Skip repository**. |
+
+UI and API are scenario types within a web application; they are not application types in this wizard. If UI and API use the same origin, the API base URL can match the application URL. A selected repository is cloned when the application is created.
+
+{/* Screenshot: Basics stage showing the Web/Mobile, platform, and URL fields. */}
+
+<Callout type="warning" title="Use a URL the runner can reach">
+  A remote runner cannot use your laptop's `localhost` address directly. Confirm reachability from the environment that will execute the tests.
+</Callout>
+
+## Work with the application
+
+| Tab | What you can do |
+| --- | --- |
+| **Application** | Review URLs, platform, tags, notifications, and security options. |
+| **Secret Keys** | Review credentials saved during setup or add values later if a test needs them. |
+| **Source Code** | Review or sync the repository and run code coverage. |
+| **Discovery** | Review proposed scenarios before authoring. |
+| **Scenarios** | Inspect saved tests and their steps. |
+| **Runs** | Start a run and inspect its history and evidence. |
+| **Security** | Start a security scan and review findings. |
+
+For the next setup tasks, see [Configure secrets and sign-in](/docs/test-hub/reference/applications/configure-secrets-and-sign-in) and [Connect source code](/docs/test-hub/reference/applications/connect-source-code).

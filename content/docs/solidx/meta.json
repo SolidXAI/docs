@@ -1,0 +1,14 @@
+{
+  "title": "SolidX",
+  "description": "Build and manage applications on SolidX",
+  "icon": "layers-3",
+  "root": true,
+  "pages": [
+    "quick-start",
+    "developer-docs",
+    "recipes",
+    "tutorial",
+    "admin-docs",
+    "product-modules"
+  ]
+}

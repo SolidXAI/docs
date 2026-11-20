@@ -1,0 +1,8 @@
+{
+  "title": "Administration",
+  "pages": [
+    "manage-users",
+    "manage-artifacts-and-retention"
+  ],
+  "icon": "settings-2"
+}

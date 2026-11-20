@@ -1,0 +1,26 @@
+---
+title: Email and webhook notifications
+description: Route run outcomes to the people and systems that need them.
+icon: bell-ring
+---
+
+Open the application's **Application** tab and find **Notifications**. The panel provides **Webhook**, **Notify on Failure**, and **Notify on Success** controls. Turn on **Webhook** to configure its endpoint; the outcome switches determine which completed runs send notifications to the webhook and selected users.
+
+Start with failure notifications. Turn on success notifications if recipients also need confirmation that a run passed. After configuring a webhook, complete a run that matches the selected notification setting and confirm the event reaches an endpoint you control.
+
+## Decide what should trigger a message
+
+| Outcome setting | Typical use |
+| --- | --- |
+| **Notify on Failure** | Alert an owner when a completed run contains a failure. |
+| **Notify on Success** | Confirm an important scheduled or release run completed. |
+
+Send notifications only to people who need to act on them. For frequently scheduled suites, consider sending failure notifications without a message for every successful run. Open the linked run to inspect the failing scenario before assigning the issue.
+
+If a webhook does not arrive, confirm that the run completed and that the configured endpoint is reachable from the Test Hub service. A successful run without a matching notification setting will not exercise that notification path.
+
+{/* Screenshot: Application Notifications panel with endpoint tokens and private URLs concealed. */}
+
+<Callout type="warning" title="Protect notification endpoints">
+  Treat webhook URLs and authentication headers as secrets. Limit access to the notification settings and rotate credentials if they are exposed.
+</Callout>
